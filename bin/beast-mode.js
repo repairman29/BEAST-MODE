@@ -9,7 +9,7 @@
  */
 
 const { Command } = require('commander');
-const chalk = require('chalk');
+const chalk = require('chalk').default || require('chalk');
 const ora = require('ora');
 const path = require('path');
 const fs = require('fs-extra');
