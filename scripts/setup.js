@@ -6,6 +6,8 @@
  */
 
 const fs = require('fs-extra');
+const { createLogger } = require('../utils/logger');
+const log = createLogger('setup');
 const path = require('path');
 const { execSync } = require('child_process');
 const readline = require('readline');
@@ -24,22 +26,22 @@ function ask(question) {
 }
 
 async function setup() {
-    console.log('⚔️  BEAST MODE Setup');
-    console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-    console.log('');
+    log.info('⚔️  BEAST MODE Setup');
+    log.info('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+    log.info('');
 
     const cwd = process.cwd();
     const projectName = path.basename(cwd);
 
-    console.log(`Setting up BEAST MODE in: ${projectName}`);
-    console.log('');
+    log.info(`Setting up BEAST MODE in: ${projectName}`);
+    log.info('');
 
     // Check if already initialized
     const configPath = path.join(cwd, '.beast-mode.json');
     if (await fs.pathExists(configPath)) {
         const overwrite = await ask('BEAST MODE is already initialized. Overwrite? (y/N): ');
         if (overwrite !== 'y' && overwrite !== 'yes') {
-            console.log('Setup cancelled.');
+            log.info('Setup cancelled.');
             rl.close();
             return;
         }
@@ -66,7 +68,7 @@ async function setup() {
 
     rl.close();
 
-    console.log('\n🔧 Configuring BEAST MODE...');
+    log.info('\n🔧 Configuring BEAST MODE...');
 
     // Create configuration
     const config = {
@@ -99,7 +101,7 @@ async function setup() {
     };
 
     // Create directories
-    console.log('📁 Creating directories...');
+    log.info('📁 Creating directories...');
     await fs.ensureDir(path.join(cwd, '.beast-mode'));
     await fs.ensureDir(path.join(cwd, '.beast-mode', 'cache'));
     await fs.ensureDir(path.join(cwd, '.beast-mode', 'plugins'));
@@ -108,7 +110,7 @@ async function setup() {
     await fs.ensureDir(path.join(cwd, '.beast-mode', 'reports'));
 
     // Write configuration
-    console.log('⚙️  Writing configuration...');
+    log.info('⚙️  Writing configuration...');
     await fs.writeJson(configPath, config, { spaces: 2 });
 
     // Create .beast-mode-ignore
@@ -131,30 +133,30 @@ build/
     await fs.writeFile(ignorePath, ignoreContent);
 
     // Initialize components
-    console.log('🚀 Initializing components...');
+    log.info('🚀 Initializing components...');
 
     if (enableMarketplace) {
-        console.log('  📦 Setting up marketplace...');
+        log.info('  📦 Setting up marketplace...');
         // Initialize marketplace directories and config
     }
 
     if (enableAnalytics) {
-        console.log('  🔮 Setting up predictive analytics...');
+        log.info('  🔮 Setting up predictive analytics...');
         // Initialize analytics models and data structures
     }
 
     if (enableOptimization) {
-        console.log('  👥 Setting up team optimization...');
+        log.info('  👥 Setting up team optimization...');
         // Initialize optimization algorithms and baselines
     }
 
     if (enableKnowledge) {
-        console.log('  🧠 Setting up knowledge management...');
+        log.info('  🧠 Setting up knowledge management...');
         // Initialize knowledge graph and search indexes
     }
 
     // Create sample configuration files
-    console.log('📝 Creating sample configurations...');
+    log.info('📝 Creating sample configurations...');
 
     // Quality configuration
     const qualityConfig = {
@@ -204,25 +206,26 @@ build/
         await fs.writeJson(path.join(cwd, '.beast-mode', 'analytics.json'), analyticsConfig, { spaces: 2 });
     }
 
-    console.log('\n✅ BEAST MODE setup complete!');
-    console.log('');
-    console.log('🎯 Next steps:');
-    console.log('  1. Run "beast-mode quality check" to verify setup');
-    console.log('  2. Run "beast-mode dashboard" to launch the web interface');
-    console.log('  3. Run "beast-mode marketplace browse" to explore plugins');
-    console.log('');
-    console.log('📚 Documentation: https://beast-mode.dev/docs');
-    console.log('💬 Community: https://discord.gg/beast-mode');
-    console.log('');
-    console.log('⚔️  BEAST MODE is now active in your project!');
-    console.log('🏆 Ready to transform your development economics!');
+    log.info('\n✅ BEAST MODE setup complete!');
+    log.info('');
+    log.info('🎯 Next steps:');
+    log.info('  1. Run "beast-mode quality check" to verify setup');
+    log.info('  2. Run "beast-mode dashboard" to launch the web interface');
+    log.info('  3. Run "beast-mode marketplace browse" to explore plugins');
+    log.info('');
+    log.info('📚 Documentation: https://beast-mode.dev/docs');
+    log.info('💬 Community: https://discord.gg/beast-mode');
+    log.info('');
+    log.info('⚔️  BEAST MODE is now active in your project!');
+    log.info('🏆 Ready to transform your development economics!');
 }
 
 if (require.main === module) {
     setup().catch((error) => {
-        console.error('❌ Setup failed:', error.message);
+        log.error('❌ Setup failed:', error.message);
         process.exit(1);
     });
 }
 
 module.exports = { setup };
+

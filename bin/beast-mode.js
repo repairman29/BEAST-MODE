@@ -13,6 +13,8 @@ const chalk = require('chalk').default || require('chalk');
 const ora = require('ora');
 const path = require('path');
 const fs = require('fs-extra');
+const { createLogger } = require('../lib/utils/logger');
+const log = createLogger('beast-mode');
 
 const program = new Command();
 
@@ -50,7 +52,7 @@ program.hook('preAction', (thisCommand, actionCommand) => {
 
     if (options.debug) {
         process.env.DEBUG = 'true';
-        console.log(chalk.yellow('🐛 Debug mode enabled'));
+        log.info('🐛 Debug mode enabled');
     }
 
     if (options.quiet) {
@@ -124,7 +126,29 @@ program
             .option('-r, --report', 'Generate detailed quality report')
             .action(async (options) => {
                 const { runQualityChecks } = require('../lib/quality');
-                await runQualityChecks(options);
+                const results = await runQualityChecks(options);
+
+                if (options.report || results.unfixed.length > 0) {
+                    console.log('\n📋 Quality Check Results:');
+                    console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+
+                    for (const [validatorName, checkResult] of Object.entries(results.checks)) {
+                        if (checkResult.status === 'issues_found') {
+                            console.log(`❌ ${validatorName}: ${checkResult.issues} issues`);
+                            if (checkResult.details) {
+                                checkResult.details.forEach(issue => {
+                                    console.log(`   • ${issue.message} (${path.basename(issue.file)})`);
+                                });
+                            }
+                        } else if (checkResult.status === 'passed') {
+                            console.log(`✅ ${validatorName}: Passed`);
+                        } else if (checkResult.status === 'error') {
+                            console.log(`⚠️ ${validatorName}: Error - ${checkResult.error}`);
+                        }
+                    }
+
+                    console.log(`\n📊 Summary: ${results.unfixed.length} issues need attention`);
+                }
             })
     )
     .addCommand(
