@@ -1,169 +1,25 @@
 {
-  "name": "@beast-mode/quality",
+  "name": "beast-mode-website",
   "version": "1.0.0",
-  "description": "BEAST MODE: Enterprise Quality Intelligence & Marketplace Platform - The world's most advanced AI-powered development ecosystem",
-  "main": "lib/index.js",
-  "bin": {
-    "beast-mode": "./bin/beast-mode.js",
-    "beast": "./bin/beast-mode.js"
-  },
+  "description": "BEAST MODE - Enterprise Quality Intelligence Platform Website",
+  "private": true,
   "scripts": {
-    "start": "node lib/index.js",
-    "dev": "node lib/index.js --dev",
-    "test": "jest",
-    "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage",
-    "lint": "eslint lib scripts test",
-    "lint:fix": "eslint lib scripts test --fix",
-    "build": "echo 'Build completed - linting and testing skipped for publishing'",
-    "docs": "jsdoc -c jsdoc.conf.json",
-    "marketplace": "npm run marketplace:init && npm run marketplace:start",
-    "intelligence": "npm run intelligence:init && npm run intelligence:start",
-    "quality": "npm run quality:init && npm run quality:start",
-    "marketplace:init": "node scripts/marketplace-init.js",
-    "marketplace:start": "node scripts/marketplace-start.js",
-    "intelligence:init": "node scripts/intelligence-init.js",
-    "intelligence:start": "node scripts/intelligence-start.js",
-    "quality:init": "node scripts/quality-init.js",
-    "quality:start": "node scripts/quality-start.js",
-    "dashboard": "node scripts/dashboard.js",
-    "predict": "node scripts/predict.js",
-    "optimize": "node scripts/optimize.js",
-    "marketplace:plugin": "node lib/marketplace/plugin-marketplace.js",
-    "marketplace:integration": "node lib/marketplace/integration-marketplace.js",
-    "marketplace:discovery": "node lib/marketplace/tool-discovery.js",
-    "marketplace:monetization": "node lib/marketplace/monetization-programs.js",
-    "intelligence:organization": "node lib/intelligence/organization-quality-intelligence.js",
-    "intelligence:analytics": "node lib/intelligence/predictive-development-analytics.js",
-    "intelligence:optimization": "node lib/intelligence/automated-team-optimization.js",
-    "intelligence:knowledge": "node lib/intelligence/enterprise-knowledge-management.js",
-    "quality:check": "node scripts/quality-check.js",
-    "quality:fix": "node scripts/quality-fix.js",
-    "quality:score": "node scripts/quality-score.js",
-    "install:plugin": "node scripts/install-plugin.js",
-    "create:integration": "node scripts/create-integration.js",
-    "deploy": "npm run build && npm run test && npm run docs",
-    "release": "npm version patch && npm publish",
-    "setup": "node scripts/setup.js"
-  },
-  "keywords": [
-    "ai",
-    "quality-assurance",
-    "code-quality",
-    "developer-tools",
-    "enterprise",
-    "marketplace",
-    "predictive-analytics",
-    "team-optimization",
-    "knowledge-management",
-    "automation",
-    "intelligence",
-    "monetization"
-  ],
-  "author": "BEAST MODE Team",
-  "license": "SEE LICENSE IN LICENSE.md",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/beast-mode/beast-mode.git"
-  },
-  "bugs": {
-    "url": "https://github.com/beast-mode/beast-mode/issues"
-  },
-  "homepage": "https://beast-mode.dev",
-  "engines": {
-    "node": ">=18.0.0",
-    "npm": ">=8.0.0"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
   },
   "dependencies": {
-    "axios": "^1.6.0",
-    "bcryptjs": "^2.4.3",
-    "chalk": "^5.3.0",
-    "commander": "^12.0.0",
-    "compression": "^1.7.0",
-    "cors": "^2.8.0",
-    "crypto-js": "^4.2.0",
-    "dotenv": "^16.3.0",
-    "express": "^4.18.0",
-    "fs-extra": "^11.2.0",
-    "glob": "^10.5.0",
-    "helmet": "^7.1.0",
-    "inquirer": "^9.2.0",
-    "jsonwebtoken": "^9.0.0",
-    "lodash": "^4.17.0",
-    "moment": "^2.30.0",
-    "node-cache": "^5.1.0",
-    "node-cron": "^3.0.0",
-    "nodemailer": "^7.0.12",
-    "ora": "^8.0.0",
-    "rate-limiter-flexible": "^3.0.0",
-    "socket.io": "^4.7.0",
-    "stripe": "^14.0.0",
-    "uuid": "^9.0.0",
-    "winston": "^3.11.0"
+    "next": "^14.2.35",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "eslint": "^8.56.0",
-    "husky": "^8.0.0",
-    "jest": "^29.7.0",
-    "jsdoc": "^4.0.0",
-    "lint-staged": "^15.2.0",
-    "nodemon": "^3.0.0",
-    "prettier": "^3.2.0",
-    "supertest": "^6.3.0"
-  },
-  "peerDependencies": {
+    "@tailwindcss/postcss": "^4.1.18",
+    "autoprefixer": "^10.4.23",
     "eslint": "^8.0.0",
-    "typescript": "^5.0.0"
-  },
-  "optionalDependencies": {
-    "@stripe/stripe-js": "^3.0.0",
-    "@supabase/supabase-js": "^2.39.0",
-    "firebase-admin": "^12.0.0"
-  },
-  "files": [
-    "lib",
-    "bin",
-    "scripts",
-    "templates",
-    "README.md",
-    "LICENSE.md",
-    "CHANGELOG.md"
-  ],
-  "publishConfig": {
-    "registry": "https://registry.npmjs.org/"
-  },
-  "funding": {
-    "type": "opencollective",
-    "url": "https://opencollective.com/beast-mode"
-  },
-  "beastMode": {
-    "version": "1.0.0",
-    "capabilities": [
-      "quality-intelligence",
-      "predictive-analytics",
-      "team-optimization",
-      "knowledge-management",
-      "plugin-marketplace",
-      "integration-marketplace",
-      "tool-discovery",
-      "monetization-platform"
-    ],
-    "supportedLanguages": [
-      "javascript",
-      "typescript",
-      "python",
-      "java",
-      "csharp",
-      "go",
-      "rust",
-      "php"
-    ],
-    "enterpriseFeatures": [
-      "multi-repo-support",
-      "team-analytics",
-      "enterprise-licensing",
-      "custom-integrations",
-      "dedicated-support"
-    ]
+    "eslint-config-next": "14.0.0",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^4.1.18"
   }
 }

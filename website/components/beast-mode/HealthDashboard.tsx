@@ -105,7 +105,7 @@ function HealthDashboard() {
     );
   }
 
-  const { isMonitoring, lastCheck, components, alerts, history } = healthData;
+  const { isMonitoring, lastCheck, components = {}, alerts, history } = healthData || {};
   const overallStatus = history && history.length > 0 ? history[history.length - 1].overall : 'unknown';
 
   return (
@@ -151,7 +151,7 @@ function HealthDashboard() {
             </div>
             <div className="text-sm text-holo-cyan/70">Components</div>
             <div className="text-sm text-holo-cyan">
-              {Object.values(components).filter(c => c.status === 'healthy').length} Healthy
+              {Object.values(components).filter((c: any) => c.status === 'healthy').length} Healthy
             </div>
           </div>
 
@@ -226,10 +226,7 @@ function HealthDashboard() {
               {component.status !== 'healthy' && (
                 <div className="mt-3">
                   <HudButton
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      triggerSelfHealing(name);
-                    }}
+                    onClick={() => triggerSelfHealing(name)}
                     size="sm"
                     disabled={healingInProgress}
                     className="w-full"
@@ -348,13 +345,13 @@ function HealthDashboard() {
       )}
 
       {/* Status Bar */}
-      <StatusBar>
+      <div className="mt-2">
         <span className="text-xs text-holo-cyan/70">
           🔍 Last health check: {lastCheck ? new Date(lastCheck).toLocaleString() : 'Never'} |
           🔔 Alerts: {alerts.length} |
           🤖 Auto-refresh: {autoRefresh ? 'ON' : 'OFF'}
         </span>
-      </StatusBar>
+      </div>
     </div>
   );
 }

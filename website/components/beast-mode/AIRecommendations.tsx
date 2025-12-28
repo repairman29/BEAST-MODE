@@ -318,12 +318,12 @@ function AIRecommendations() {
       )}
 
       {/* Status Bar */}
-      <StatusBar>
+      <div className="mt-2">
         <span className="text-xs text-holo-cyan/70">
           🤖 AI Recommendations | 📊 {recommendations.length} total recommendations |
           🎯 Confidence threshold: 70% | 🔄 Last updated: {new Date().toLocaleTimeString()}
         </span>
-      </StatusBar>
+      </div>
     </div>
   );
 }
