@@ -1,5 +1,4 @@
 {
-  "rootDirectory": "website",
   "framework": "nextjs",
   "regions": ["iad1"],
   "headers": [
