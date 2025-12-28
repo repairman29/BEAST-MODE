@@ -230,32 +230,63 @@ const beastMode = new BeastMode({
 - **📊 Real-Time Monitoring**
 - **🚀 Enterprise Scalability**
 
-## 🤝 Contributing
+## 🚀 Getting Started
 
-We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
-
-### Development Setup
+### For Users (Installing BEAST MODE)
 
 ```bash
+npm install @beast-mode/core
+```
+
+### For Developers (Contributing to BEAST MODE)
+
+```bash
+# Clone the repository
 git clone https://github.com/repairman29/BEAST-MODE.git
 cd BEAST-MODE
+
+# Set up environment variables
+cp ENVIRONMENT_SETUP.md .env.local
+# Edit .env.local with your API keys
+
+# Install dependencies
 npm install
-npm run build
-npm test
+
+# Start development
+npm run dev
 ```
 
-### Running AI Services
+### Running AI Services Locally
 
 ```bash
-# Start Oracle AI (Port 3006)
-npm run oracle:start
+# Start individual AI services
+npm run oracle:start      # Port 3006
+npm run code-roach:start  # Port 3007
+npm run daisy-chain:start # Port 3008
 
-# Start Code Roach (Port 3007)
-npm run code-roach:start
-
-# Start Daisy Chain (Port 3008)
-npm run daisy-chain:start
+# Or start all services
+npm run services:start
 ```
+
+## 🛡️ Open Source Business Model
+
+**BEAST MODE is proudly open source while protecting our business interests.**
+
+### Why Open Source?
+- **Trust & Transparency**: Developers can audit our code
+- **Community Building**: Contributors improve the platform
+- **Standards Compliance**: Industry best practices
+- **SEO & Discovery**: Public code helps marketing
+
+### What's Protected?
+- **API Keys & Secrets**: Never in code (see [Environment Setup](ENVIRONMENT_SETUP.md))
+- **Business Logic**: Proprietary algorithms and optimizations
+- **Future Features**: Advanced capabilities remain private
+- **Pricing Strategy**: Competitive advantages protected
+- **Brand Assets**: Trademarks and visual identity
+
+### Commercial Licensing
+While the core is MIT-licensed, commercial features and enterprise support are available. See [Licensing](LICENSE.md) and [Pricing](PRICING.md) for details.
 
 ## 📄 License
 
