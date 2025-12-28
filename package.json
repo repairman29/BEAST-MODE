@@ -1,0 +1,93 @@
+{
+  "name": "@beast-mode/core",
+  "version": "1.0.0",
+  "description": "BEAST MODE - Neural Intelligence Development Ecosystem. AI-powered code analysis, deployment orchestration, and development intelligence.",
+  "main": "lib/index.js",
+  "module": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "bin": {
+    "beast-mode": "./bin/beast-mode.js"
+  },
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "build": "node scripts/build.js",
+    "lint": "eslint lib/**/*.js",
+    "lint:fix": "eslint lib/**/*.js --fix",
+    "docs": "jsdoc lib/**/*.js -d docs",
+    "prepublishOnly": "npm run test && npm run lint && npm run build",
+    "release": "npm version patch && npm publish",
+    "release:minor": "npm version minor && npm publish",
+    "release:major": "npm version major && npm publish"
+  },
+  "keywords": [
+    "ai",
+    "artificial-intelligence",
+    "development-tools",
+    "code-analysis",
+    "deployment",
+    "automation",
+    "neural-networks",
+    "machine-learning",
+    "developer-tools",
+    "productivity",
+    "ci-cd",
+    "testing",
+    "quality-assurance",
+    "orchestration"
+  ],
+  "author": "BEAST MODE <support@beastmode.dev>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/repairman29/BEAST-MODE.git"
+  },
+  "bugs": {
+    "url": "https://github.com/repairman29/BEAST-MODE/issues"
+  },
+  "homepage": "https://beastmode.dev",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "axios": "^1.6.0",
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1",
+    "helmet": "^8.1.0",
+    "joi": "^18.0.2",
+    "jsonwebtoken": "^9.0.3",
+    "uuid": "^13.0.0",
+    "winston": "^3.11.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.8",
+    "@types/node": "^20.9.0",
+    "eslint": "^8.0.0",
+    "jest": "^29.7.0",
+    "jsdoc": "^4.0.2",
+    "typescript": "^5.2.2"
+  },
+  "peerDependencies": {
+    "openai": "^4.0.0",
+    "stripe": "^14.0.0"
+  },
+  "peerDependenciesMeta": {
+    "openai": {
+      "optional": true
+    },
+    "stripe": {
+      "optional": true
+    }
+  },
+  "files": [
+    "lib/",
+    "bin/",
+    "README.md",
+    "LICENSE.md",
+    "CHANGELOG.md"
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
+}
