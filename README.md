@@ -2,9 +2,12 @@
 
 **The world's most advanced AI-powered development ecosystem**
 
+*Built by a solo developer, empowering developers worldwide*
+
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![npm version](https://badge.fury.io/js/%40beast-mode%2Fcore.svg)](https://badge.fury.io/js/%40beast-mode%2Fcore)
 [![TypeScript](https://img.shields.io/badge/TypeScript-Ready-blue.svg)](https://www.typescriptlang.org/)
+[![Pricing](https://img.shields.io/badge/Pricing-Freemium-brightgreen.svg)](https://beastmode.dev/pricing)
 
 ## ⚡ What is BEAST MODE?
 
@@ -23,6 +26,25 @@ BEAST MODE is a comprehensive JavaScript/TypeScript library that brings the powe
 | **Marketplace AI** | Plugin Intelligence | Smart recommendations, usage analytics, monetization |
 | **Quality Engine** | Code Quality Analysis | Comprehensive scoring, improvement suggestions |
 | **Deployment Orchestrator** | Multi-Platform Deployment | Automated deployments, rollback capabilities, scaling |
+
+## 💰 Pricing & Business Model
+
+**Freemium SaaS - Built by a solo developer for developers worldwide**
+
+### Free Forever (MIT License)
+- ✅ **10,000 API calls/month**
+- ✅ **All 9 AI systems**
+- ✅ **Community support**
+- ✅ **Self-hosted deployment**
+
+### Paid Tiers
+- **Developer**: $29/month - 100K calls, priority support
+- **Team**: $99/month - 500K calls, collaboration features
+- **Enterprise**: $299/month - Unlimited usage, white-label
+
+**[View Full Pricing](https://beastmode.dev/pricing)** • **[30-Day Money-Back Guarantee](https://beastmode.dev/terms)**
+
+---
 
 ## 🚀 Quick Start
 

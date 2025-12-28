@@ -1,176 +1,140 @@
-# BEAST MODE Commercial License Agreement
+# BEAST MODE License
 
-**Version 1.0 - Effective Date: December 24, 2025**
+## Overview
 
-## 1. Definitions
+BEAST MODE is a dual-licensed product designed for both individual developers and enterprise teams.
 
-- **"BEAST MODE"** refers to the BEAST MODE Enterprise Quality Intelligence & Marketplace Platform software and related services.
-- **"Licensee"** refers to the individual or entity purchasing this license.
-- **"Licensor"** refers to BEAST MODE Inc., the provider of BEAST MODE.
-- **"Software"** refers to the BEAST MODE software, documentation, and any updates provided.
-- **"Effective Date"** refers to the date this license agreement is accepted.
+## 📦 Free Tier (MIT License)
 
-## 2. License Grant
+**For individual developers, open source projects, and small teams:**
 
-### 2.1 Scope of License
+```
+MIT License
 
-Subject to the terms and conditions of this Agreement, Licensor hereby grants Licensee a limited, non-exclusive, non-transferable, revocable license to:
+Copyright (c) 2025 BEAST MODE
 
-- Install and use the Software in accordance with the purchased plan
-- Access BEAST MODE's marketplace and intelligence features
-- Receive updates and patches during the license term
-- Use the Software for commercial purposes as permitted by the plan
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-### 2.2 Restrictions
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 
-Licensee shall not:
-- Copy, modify, or create derivative works of the Software
-- Reverse engineer, decompile, or disassemble the Software
-- Redistribute, sell, or sublicense the Software
-- Use the Software for illegal purposes
-- Circumvent any technical protection measures
-- Exceed the usage limits specified in the purchased plan
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+```
 
-## 3. Pricing and Payment
+### Free Tier Features
+- ✅ Core AI library (9 neural networks)
+- ✅ Basic API access
+- ✅ Community support
+- ✅ Self-hosted deployment
+- ✅ Up to 10,000 API calls/month
+- ✅ Basic analytics dashboard
 
-### 3.1 Pricing Tiers
+## 💰 Commercial License
 
-| Plan | Annual Price | Team Size | Features |
-|------|-------------|-----------|----------|
-| Community | Free | Up to 5 | Basic quality analysis, community marketplace |
-| Professional | $50,000 | Up to 50 | Advanced quality, predictive analytics, priority marketplace |
-| Enterprise | $200,000 | Unlimited | All Professional + custom integrations, white-label, dedicated support |
-| Enterprise Plus | $500,000 | Unlimited | All Enterprise + custom development, on-premise, 24/7 support |
+**For enterprise teams, commercial applications, and high-volume usage:**
 
-### 3.2 Payment Terms
+### Pricing Tiers
 
-- Payment is due annually in advance
-- Late payments incur a 1.5% monthly interest charge
-- All fees are non-refundable except as required by law
-- Price increases are communicated 60 days in advance
+#### **Developer** - $29/month
+- ✅ Everything in Free tier
+- ✅ Advanced analytics
+- ✅ Priority email support
+- ✅ Custom integrations
+- ✅ Up to 100,000 API calls/month
 
-### 3.3 Marketplace Commissions
+#### **Team** - $99/month
+- ✅ Everything in Developer tier
+- ✅ Team collaboration features
+- ✅ Phone/video support
+- ✅ SLA guarantee (99.9% uptime)
+- ✅ Up to 500,000 API calls/month
+- ✅ Advanced security features
 
-For plugin and integration sales through the BEAST MODE marketplace:
-- Platform fee: 10% of transaction value
-- Developer revenue share: 70% of transaction value
-- Licensor retains 20% for platform operations and support
+#### **Enterprise** - $299/month
+- ✅ Everything in Team tier
+- ✅ White-label deployment
+- ✅ Dedicated account manager
+- ✅ Custom AI model training
+- ✅ Unlimited API calls
+- ✅ On-premise deployment option
+- ✅ 24/7 phone support
 
-## 4. Intellectual Property Rights
+#### **Custom Enterprise** - Contact for pricing
+- ✅ Tailored solutions
+- ✅ Custom AI models
+- ✅ Full platform customization
+- ✅ Dedicated infrastructure
+- ✅ Custom SLAs
 
-### 4.1 Ownership
+### Commercial License Terms
 
-The Software and all intellectual property rights therein are owned by Licensor. This Agreement does not transfer any ownership rights to Licensee.
+1. **Usage Rights**: License granted for internal business use only
+2. **Distribution**: No redistribution rights without explicit permission
+3. **Support**: Included based on tier
+4. **Updates**: Access to all updates during subscription period
+5. **Termination**: License terminates upon subscription end
 
-### 4.2 Feedback
+## 🚀 Freemium Model
 
-Licensee may provide feedback, suggestions, or ideas about the Software. Licensor shall own all rights to such feedback and may use it without restriction.
+BEAST MODE operates on a **freemium model**:
 
-### 4.3 Trademarks
+- **Free forever** for individual developers and small projects
+- **Paid upgrades** for teams and enterprises with advanced needs
+- **Fair pricing** based on usage and features
+- **Transparent billing** with no hidden fees
 
-"BEAST MODE" and related trademarks are owned by Licensor. Licensee may not use these marks without prior written permission.
+## 📊 Usage Limits & Billing
 
-## 5. Data Privacy and Security
+### Free Tier Limits
+- 10,000 API calls per month
+- 100 concurrent connections
+- Community support only
+- Standard response times
 
-### 5.1 Data Collection
+### Paid Tier Billing
+- Monthly subscription (cancel anytime)
+- Pay-as-you-go overage ($0.001 per API call)
+- Annual discounts available (2 months free)
+- All major credit cards accepted
 
-BEAST MODE collects usage data, code analysis results, and performance metrics to provide services. Data handling complies with applicable privacy laws.
+## 🤝 Enterprise Agreements
 
-### 5.2 Data Security
+For large organizations requiring:
+- Custom terms and conditions
+- Volume discounts
+- Special licensing arrangements
+- On-premise deployment
 
-Licensor implements industry-standard security measures including:
-- AES-256 encryption for data at rest and in transit
-- SOC 2 Type II compliant infrastructure
-- Regular security audits and penetration testing
-- 99.9% uptime SLA for Enterprise plans
+Please contact: enterprise@beastmode.dev
 
-### 5.3 Data Ownership
+## 📞 Support & Contact
 
-- Licensee retains ownership of their code and data
-- Licensor may use anonymized, aggregated data for product improvement
-- Data export capabilities available for Enterprise plans
+- **Free Tier**: Community forum and GitHub issues
+- **Developer Tier**: Email support within 24 hours
+- **Team Tier**: Phone support + email priority
+- **Enterprise Tier**: Dedicated account manager + 24/7 support
 
-## 6. Support and Maintenance
+## 🔄 License Changes
 
-### 6.1 Support Levels
+BEAST MODE reserves the right to modify licensing terms with 30 days notice. Existing subscribers will be grandfathered under their current terms.
 
-| Plan | Support Channels | Response Time | Hours |
-|------|------------------|---------------|-------|
-| Community | GitHub Issues, Discord | 72 hours | Business hours |
-| Professional | Email, Priority Discord | 24 hours | Business hours |
-| Enterprise | Email, Slack, Phone | 12 hours | Business hours |
-| Enterprise Plus | Dedicated Slack, Phone, 24/7 | 4 hours | 24/7 |
+## 📜 Legal
 
-### 6.2 Maintenance
-
-- Regular updates and security patches included
-- Breaking changes communicated 30 days in advance
-- Emergency security updates deployed within 24 hours
-
-## 7. Warranty and Disclaimer
-
-### 7.1 Warranty
-
-Licensor warrants that the Software will perform substantially as described in the documentation for the term of this Agreement.
-
-### 7.2 Disclaimer
-
-THE SOFTWARE IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND. LICENSOR DISCLAIMS ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
-
-### 7.3 Limitation of Liability
-
-IN NO EVENT SHALL LICENSOR BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, OR CONSEQUENTIAL DAMAGES ARISING FROM USE OF THE SOFTWARE.
-
-## 8. Termination
-
-### 8.1 Termination Rights
-
-Either party may terminate this Agreement:
-- By Licensor: For material breach with 30 days notice
-- By Licensee: At any time with written notice
-
-### 8.2 Effects of Termination
-
-Upon termination:
-- Licensee's access to Software ceases immediately
-- Licensee must delete all copies of the Software
-- Outstanding payments remain due
-- Sections 4, 7, 8, and 9 survive termination
-
-## 9. General Provisions
-
-### 9.1 Governing Law
-
-This Agreement shall be governed by the laws of Delaware, USA.
-
-### 9.2 Entire Agreement
-
-This Agreement constitutes the entire agreement between the parties and supersedes all prior agreements.
-
-### 9.3 Amendments
-
-This Agreement may only be amended in writing signed by both parties.
-
-### 9.4 Severability
-
-If any provision is found unenforceable, the remaining provisions remain in effect.
-
-### 9.5 Force Majeure
-
-Neither party shall be liable for failure to perform due to circumstances beyond reasonable control.
-
-## 10. Contact Information
-
-**BEAST MODE Inc.**
-- Email: legal@beast-mode.dev
-- Address: 123 Innovation Drive, Tech City, TC 12345
-- Phone: 1-800-BEAST-MODE
-
-For sales inquiries: sales@beast-mode.dev
-For support: support@beast-mode.dev
+This license is governed by the laws of [Your Jurisdiction]. All disputes shall be resolved through binding arbitration in [Your Location].
 
 ---
 
-**By installing or using BEAST MODE, you acknowledge that you have read, understood, and agree to be bound by this Commercial License Agreement.**
+**BEAST MODE** - Neural Intelligence for the Future of Development
 
-*Last updated: December 24, 2025*
+*Built by independent developers, for developers worldwide* 🧠⚡
