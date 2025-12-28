@@ -17,7 +17,15 @@
     "docs": "jsdoc lib/**/*.js -d docs",
     "release": "npm version patch && npm publish",
     "release:minor": "npm version minor && npm publish",
-    "release:major": "npm version major && npm publish"
+    "release:major": "npm version major && npm publish",
+    "launch": "node launch.js",
+    "launch:post-npm": "node launch-post-npm.js",
+    "launch:continue": "node continue-launch.js",
+    "vercel:update": "node scripts/vercel-api.js update",
+    "dns:update": "node scripts/porkbun-api.js update",
+    "dev": "cd website && npm run dev",
+    "build:website": "cd website && npm run build",
+    "start:website": "cd website && npm run start"
   },
   "keywords": [
     "ai",

@@ -300,6 +300,105 @@ MIT License - see [LICENSE](LICENSE.md) for details.
 - [ ] **AI Marketplace** - Third-party plugin ecosystem
 - [ ] **Mobile SDK** - React Native and Flutter support
 
+# 🚀 Launch & Deployment
+
+## Automated Launch Script
+
+BEAST MODE includes a comprehensive launch script that handles:
+
+- ✅ NPM package publishing
+- ✅ Vercel project configuration
+- ✅ Domain setup (beast-mode.dev)
+- ✅ DNS record updates
+- ✅ Launch announcements
+
+### Quick Launch
+
+```bash
+# Step 1: Login to NPM
+npm login
+
+# Step 2: Publish to NPM
+npm publish --access public
+
+# Step 3: Complete post-launch setup
+npm run launch:post-npm
+```
+
+This will guide you through the entire launch process!
+
+### Manual Launch Steps
+
+If you prefer to do things manually:
+
+#### 1. Publish to NPM
+
+```bash
+# Login to NPM (if not already)
+npm login
+
+# Publish the package
+npm publish --access public
+```
+
+#### 2. Update Vercel Project
+
+```bash
+# Update Vercel project settings
+npm run vercel:update
+```
+
+Or manually in Vercel dashboard:
+- Go to your `beast-mode` project
+- Settings → Git → Change repository to `repairman29/BEAST-MODE`
+- Settings → Build & Development → Root Directory: `website`
+
+#### 3. Configure Domain
+
+In Vercel project settings:
+- Settings → Domains → Add `beast-mode.dev`
+- Copy the DNS records provided
+
+#### 4. Update DNS Records
+
+```bash
+# Update Porkbun DNS automatically
+npm run dns:update
+```
+
+Or manually in Porkbun:
+Add CNAME records:
+- Host: `@`, Answer: `cname.vercel-dns.com`
+- Host: `www`, Answer: `cname.vercel-dns.com`
+
+### Environment Setup
+
+Copy `env.example` to `.env` and fill in your API keys:
+
+```bash
+cp env.example .env
+# Edit .env with your credentials
+```
+
+Required for launch:
+- `VERCEL_TOKEN` - Get from https://vercel.com/account/tokens
+- `PORKBUN_API_KEY` & `PORKBUN_SECRET_KEY` - From Porkbun account
+
+### API Scripts
+
+BEAST MODE includes CLI tools for API management:
+
+```bash
+# Vercel project management
+npm run vercel:update
+
+# DNS record management
+npm run dns:update
+
+# Check DNS records
+node scripts/porkbun-api.js records beast-mode.dev
+```
+
 ## 📞 Support
 
 - **Documentation**: [docs.beastmode.dev](https://docs.beastmode.dev)
