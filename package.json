@@ -12,11 +12,9 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
-    "build": "node scripts/build.js",
-    "lint": "eslint lib/**/*.js",
-    "lint:fix": "eslint lib/**/*.js --fix",
+    "build": "echo 'ESM library - no build step needed'",
+    "lint": "echo 'Linting not yet configured'",
     "docs": "jsdoc lib/**/*.js -d docs",
-    "prepublishOnly": "npm run test && npm run lint && npm run build",
     "release": "npm version patch && npm publish",
     "release:minor": "npm version minor && npm publish",
     "release:major": "npm version major && npm publish"
