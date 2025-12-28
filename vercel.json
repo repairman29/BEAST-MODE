@@ -1,6 +1,6 @@
 {
-  "buildCommand": "cd beast-mode-website && npm run build",
-  "outputDirectory": "beast-mode-website/.next",
+  "buildCommand": "npm run build",
+  "outputDirectory": ".next",
   "framework": "nextjs",
   "regions": ["iad1"],
   "headers": [
