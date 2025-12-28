@@ -2,26 +2,382 @@
 @tailwind components;
 @tailwind utilities;
 
+/* BEAST MODE - The Future of AI Development */
+/* Neural Network Aesthetics - 2025+ Design System */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap');
+
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  /* Neural Network Color Variables */
+  --neural-primary: 0, 212, 255;
+  --neural-secondary: 168, 85, 247;
+  --neural-success: 0, 255, 136;
+  --neural-warning: 255, 107, 53;
+  --neural-error: 255, 0, 110;
+
+  /* Future UI Palette */
+  --neural-black: 0, 0, 0;
+  --neural-gray-900: 15, 15, 15;
+  --neural-gray-800: 26, 26, 26;
+  --neural-gray-700: 42, 42, 42;
+  --neural-gray-600: 58, 58, 58;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+/* Base Styles - Future Typography */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-weight: 400;
+  background: linear-gradient(135deg,
+    rgb(var(--neural-black)) 0%,
+    rgb(var(--neural-gray-900)) 25%,
+    rgb(var(--neural-gray-800)) 50%,
+    rgb(var(--neural-gray-900)) 75%,
+    rgb(var(--neural-black)) 100%
+  );
+  background-attachment: fixed;
+  color: rgb(var(--neural-primary));
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1, 'pnum' 1, 'tnum' 0, 'onum' 1, 'lnum' 0, 'dlig' 0;
+}
+
+/* Neural Network Background */
+.neural-bg {
+  background-image:
+    radial-gradient(circle at 25% 25%, rgba(var(--neural-primary), 0.08) 2px, transparent 2px),
+    radial-gradient(circle at 75% 75%, rgba(var(--neural-secondary), 0.06) 1px, transparent 1px),
+    conic-gradient(from 0deg at 50% 50%,
+      rgba(var(--neural-primary), 0.02),
+      rgba(var(--neural-secondary), 0.02),
+      rgba(var(--neural-success), 0.02),
+      rgba(var(--neural-primary), 0.02)
+    );
+  background-size: 60px 60px, 40px 40px, 200% 200%;
+  background-attachment: fixed;
+  background-blend-mode: overlay;
+}
+
+.neural-bg::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background:
+    radial-gradient(ellipse 80% 50% at 20% 40%, rgba(var(--neural-primary), 0.03), transparent),
+    radial-gradient(ellipse 60% 80% at 80% 20%, rgba(var(--neural-secondary), 0.02), transparent),
+    radial-gradient(ellipse 40% 40% at 60% 80%, rgba(var(--neural-success), 0.02), transparent);
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Quantum Field Effects */
+@keyframes quantum-pulse {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+}
+
+@keyframes neural-flow {
+  0% { background-position: 0% 0%; }
+  100% { background-position: 100% 100%; }
+}
+
+@keyframes synapse-glow {
+  0%, 100% {
+    box-shadow:
+      0 0 20px rgba(var(--neural-primary), 0.2),
+      inset 0 0 20px rgba(var(--neural-primary), 0.1);
+  }
+  50% {
+    box-shadow:
+      0 0 40px rgba(var(--neural-primary), 0.4),
+      0 0 80px rgba(var(--neural-primary), 0.2),
+      inset 0 0 30px rgba(var(--neural-primary), 0.15);
+  }
+}
+
+@keyframes glass-shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.quantum-field {
+  position: relative;
+  overflow: hidden;
+}
+
+.quantum-field::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg,
+    transparent 25%,
+    rgba(var(--neural-primary), 0.02) 25%,
+    rgba(var(--neural-primary), 0.02) 50%,
+    transparent 50%,
+    transparent 75%,
+    rgba(var(--neural-secondary), 0.02) 75%
+  );
+  background-size: 60px 60px;
+  animation: neural-flow 20s linear infinite;
+  pointer-events: none;
+}
+
+.synapse-pulse {
+  animation: quantum-pulse 3s ease-in-out infinite;
+}
+
+.ai-glow {
+  animation: synapse-glow 4s ease-in-out infinite;
+}
+
+.glass-shimmer {
+  background: linear-gradient(90deg,
+    rgba(255, 255, 255, 0.05) 0%,
+    rgba(255, 255, 255, 0.08) 50%,
+    rgba(255, 255, 255, 0.05) 100%
+  );
+  background-size: 200% 100%;
+  animation: glass-shimmer 3s ease-in-out infinite;
+}
+
+/* Future Typography */
+.neural-display {
+  font-family: 'Inter', system-ui;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.neural-heading {
+  font-family: 'Inter', system-ui;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+}
+
+.neural-body {
+  font-family: 'Inter', system-ui;
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+.neural-mono {
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
+/* Glass Morphism Components */
+.glass-card {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 1rem;
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.glass-card:hover {
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow:
+    0 16px 48px rgba(0, 0, 0, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Neural Network Nodes */
+.neural-node {
+  width: 8px;
+  height: 8px;
+  background: rgba(var(--neural-primary), 0.6);
+  border-radius: 50%;
+  position: relative;
+}
+
+.neural-node.active {
+  background: rgb(var(--neural-primary));
+  box-shadow: 0 0 20px rgba(var(--neural-primary), 0.6);
+}
+
+.neural-node::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  border: 1px solid rgba(var(--neural-primary), 0.3);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  animation: quantum-pulse 2s ease-in-out infinite;
+}
+
+/* Future UI Interactions */
+.future-button {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg,
+    rgba(var(--neural-primary), 0.1),
+    rgba(var(--neural-secondary), 0.1)
+  );
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.future-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+  transition: left 0.5s;
+}
+
+.future-button:hover::before {
+  left: 100%;
+}
+
+.future-button:hover {
+  background: linear-gradient(135deg,
+    rgba(var(--neural-primary), 0.2),
+    rgba(var(--neural-secondary), 0.2)
+  );
+  box-shadow:
+    0 8px 32px rgba(var(--neural-primary), 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+/* Custom Scrollbar - Future Style */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgb(var(--neural-gray-800));
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg,
+    rgba(var(--neural-primary), 0.6),
+    rgba(var(--neural-secondary), 0.6)
+  );
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg,
+    rgba(var(--neural-primary), 0.8),
+    rgba(var(--neural-secondary), 0.8)
+  );
+}
+
+/* Selection Styling */
+::selection {
+  background: rgba(var(--neural-primary), 0.2);
+  color: rgb(var(--neural-primary));
+}
+
+/* Focus Styles */
+*:focus {
+  outline: 2px solid rgb(var(--neural-primary));
+  outline-offset: 2px;
+  border-radius: 0.25rem;
+}
+
+/* Loading States */
+.loading-shimmer {
+  background: linear-gradient(90deg,
+    rgb(var(--neural-gray-700)) 25%,
+    rgba(var(--neural-primary), 0.1) 50%,
+    rgb(var(--neural-gray-700)) 75%
+  );
+  background-size: 200% 100%;
+  animation: glass-shimmer 1.5s infinite;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .neural-bg {
+    background-size: 40px 40px, 30px 30px, 150% 150%;
+  }
+
+  .neural-display {
+    font-size: clamp(2rem, 8vw, 4rem);
+  }
+
+  .neural-heading {
+    font-size: clamp(1.5rem, 6vw, 2.5rem);
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+  .glass-card {
+    background: rgb(var(--neural-gray-800));
+    border: 2px solid rgb(var(--neural-primary));
+  }
+}
+
+/* Print Styles */
+@media print {
+  body {
+    background: white !important;
+    color: black !important;
+    font-family: system-ui, sans-serif !important;
+  }
+
+  .neural-bg,
+  .neural-bg::before,
+  .quantum-field::before {
+    display: none !important;
+  }
+
+  .glass-card {
+    background: white !important;
+    border: 1px solid #e5e7eb !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+  }
 }

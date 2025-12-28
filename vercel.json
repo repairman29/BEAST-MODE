@@ -1,6 +1,5 @@
 {
-  "buildCommand": "cd website && npm run build",
-  "outputDirectory": "website/.next",
+  "rootDirectory": "website",
   "framework": "nextjs",
   "regions": ["iad1"],
   "headers": [
