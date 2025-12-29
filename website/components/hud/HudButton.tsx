@@ -4,7 +4,8 @@ import React from 'react';
 
 interface HudButtonProps {
   children: React.ReactNode;
-  onClick?: () => void;
+  onClick?: (event?: React.MouseEvent<HTMLButtonElement>) => void;
+  type?: 'button' | 'submit' | 'reset';
   variant?: 'primary' | 'secondary' | 'danger' | 'ghost';
   size?: 'sm' | 'md' | 'lg';
   disabled?: boolean;
@@ -19,6 +20,7 @@ interface HudButtonProps {
 export default function HudButton({
   children,
   onClick,
+  type = 'button',
   variant = 'primary',
   size = 'md',
   disabled = false,
@@ -64,6 +66,7 @@ export default function HudButton({
 
   return (
     <button
+      type={type}
       onClick={onClick}
       disabled={disabled}
       className={`${baseStyles} ${variantStyles[variant]} ${sizeStyles[size]} ${className}`}

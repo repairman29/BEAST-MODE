@@ -8,6 +8,9 @@ import NotificationWidget, { Notification } from '../hud/NotificationWidget';
 import ConversationalAI from './ConversationalAI';
 import HealthDashboard from './HealthDashboard';
 import AIRecommendations from './AIRecommendations';
+import MonetizationDashboard from './MonetizationDashboard';
+import MissionDashboard from './MissionDashboard';
+import DeploymentDashboard from './DeploymentDashboard';
 
 /**
  * BEAST MODE Enterprise Dashboard
@@ -43,7 +46,9 @@ function BeastModeDashboardInner() {
       daisyChainStatus: 'operational',
       conversationalAIStatus: 'operational',
       healthMonitorStatus: 'operational',
-      aiSystems: 7,
+      missionGuidanceStatus: 'operational',
+      deploymentOrchestratorStatus: 'operational',
+      aiSystems: 9,
       integrations: 13
     },
     messages: [] as any[],
@@ -51,7 +56,7 @@ function BeastModeDashboardInner() {
   });
 
   const [commandInput, setCommandInput] = useState('');
-  const [currentView, setCurrentView] = useState<'quality' | 'intelligence' | 'marketplace' | 'enterprise' | 'health' | 'ai-recommendations' | null>('quality');
+  const [currentView, setCurrentView] = useState<'quality' | 'intelligence' | 'marketplace' | 'enterprise' | 'health' | 'ai-recommendations' | 'monetization' | 'missions' | 'deployments' | null>('quality');
   const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState(false);
   const [currentTime, setCurrentTime] = useState<string>('--:--:--');
 
@@ -119,6 +124,9 @@ function BeastModeDashboardInner() {
         if (e.key === '4') setCurrentView('enterprise');
         if (e.key === '5') setCurrentView('health');
         if (e.key === '6') setCurrentView('ai-recommendations');
+        if (e.key === '7') setCurrentView('monetization');
+        if (e.key === '8') setCurrentView('missions');
+        if (e.key === '9') setCurrentView('deployments');
         if (e.key === '0') setCurrentView(null); // Minimal HUD
       }
     };
@@ -186,7 +194,7 @@ function BeastModeDashboardInner() {
             />
             <div className="mt-4 text-sm text-holo-amber-dim space-y-2">
               <div>ESC: Close palette</div>
-              <div>1: Quality • 2: Intelligence • 3: Marketplace • 4: Enterprise • 5: Health • 6: AI Recs • 0: Minimal HUD</div>
+              <div>1: Quality • 2: Intelligence • 3: Marketplace • 4: Enterprise • 5: Health • 6: AI Recs • 7: Revenue • 8: Missions • 9: Deploy • 0: Minimal HUD</div>
             </div>
           </HudPanel>
         </div>
@@ -240,6 +248,27 @@ function BeastModeDashboardInner() {
             AI Recs
           </HudButton>
           <HudButton
+            variant={currentView === 'monetization' ? 'primary' : 'ghost'}
+            size="sm"
+            onClick={() => setCurrentView('monetization')}
+          >
+            Revenue
+          </HudButton>
+          <HudButton
+            variant={currentView === 'missions' ? 'primary' : 'ghost'}
+            size="sm"
+            onClick={() => setCurrentView('missions')}
+          >
+            Missions
+          </HudButton>
+          <HudButton
+            variant={currentView === 'deployments' ? 'primary' : 'ghost'}
+            size="sm"
+            onClick={() => setCurrentView('deployments')}
+          >
+            Deploy
+          </HudButton>
+          <HudButton
             variant="ghost"
             size="sm"
             onClick={() => setIsCommandPaletteOpen(true)}
@@ -286,6 +315,18 @@ function BeastModeDashboardInner() {
 
           {currentView === 'ai-recommendations' && (
             <AIRecommendations />
+          )}
+
+          {currentView === 'monetization' && (
+            <MonetizationDashboard />
+          )}
+
+          {currentView === 'missions' && (
+            <MissionDashboard />
+          )}
+
+          {currentView === 'deployments' && (
+            <DeploymentDashboard />
           )}
         </div>
 
@@ -820,8 +861,20 @@ function EnterpriseView({ data }: any) {
               </span>
             </div>
             <div className="flex justify-between">
+              <span>Mission Guidance</span>
+              <span className={`text-${data.missionGuidanceStatus === 'operational' ? 'holo-green' : 'holo-amber'}`}>
+                {data.missionGuidanceStatus === 'operational' ? 'Guiding' : 'Offline'}
+              </span>
+            </div>
+            <div className="flex justify-between">
+              <span>Deployment Orchestrator</span>
+              <span className={`text-${data.deploymentOrchestratorStatus === 'operational' ? 'holo-green' : 'holo-amber'}`}>
+                {data.deploymentOrchestratorStatus === 'operational' ? 'Deploying' : 'Offline'}
+              </span>
+            </div>
+            <div className="flex justify-between">
               <span>AI Systems</span>
-              <span className="text-holo-cyan">{data.aiSystems}/7 Active</span>
+              <span className="text-holo-cyan">{data.aiSystems}/9 Active</span>
             </div>
             <div className="flex justify-between">
               <span>Code Roach</span>

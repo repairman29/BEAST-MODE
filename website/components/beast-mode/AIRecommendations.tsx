@@ -317,12 +317,12 @@ function AIRecommendations() {
         </div>
       )}
 
-      {/* Status Bar */}
-      <div className="mt-2">
-        <span className="text-xs text-holo-cyan/70">
+      {/* Status Info */}
+      <div className="mt-6 p-3 bg-void-surface/50 rounded-lg border border-holo-cyan/20">
+        <div className="text-xs text-holo-cyan/70 text-center">
           🤖 AI Recommendations | 📊 {recommendations.length} total recommendations |
           🎯 Confidence threshold: 70% | 🔄 Last updated: {new Date().toLocaleTimeString()}
-        </span>
+        </div>
       </div>
     </div>
   );
