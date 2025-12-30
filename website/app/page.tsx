@@ -5,11 +5,11 @@ import CallToAction from '../components/landing/CallToAction'
 
 export default function Home() {
   return (
-    <main className="min-h-screen beast-mode-bg">
+    <>
       <HeroSection />
       <FeaturesSection />
       <StatsSection />
       <CallToAction />
-    </main>
+    </>
   )
 }

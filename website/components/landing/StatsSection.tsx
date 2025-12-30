@@ -1,144 +1,84 @@
 "use client";
 
 import React from 'react';
-import HudPanel from '../hud/HudPanel';
+import { Card, CardContent } from '../ui/card';
 
-const features = [
+const metrics = [
+  { value: '<100ms', label: 'Response Time', desc: 'Lightning-fast analysis' },
+  { value: '99.9%', label: 'Uptime SLA', desc: 'Enterprise reliability' },
+  { value: '97%', label: 'Bug Reduction', desc: 'Average improvement' },
+  { value: '10x', label: 'Review Speed', desc: 'Faster than manual' }
+];
+
+const useCases = [
   {
-    label: 'AI Systems',
-    value: '9',
-    description: 'Integrated AI tools for comprehensive code analysis',
-    icon: '🤖'
+    title: 'For Developers',
+    items: [
+      'Automated code quality analysis',
+      'AI-powered bug detection',
+      'Real-time quality scoring',
+      'CLI tools and dashboard'
+    ]
   },
   {
-    label: 'Code Quality',
-    value: 'A+',
-    description: 'Letter grade scoring from A+ to F',
-    icon: '📊'
-  },
-  {
-    label: 'Platforms',
-    value: '4+',
-    description: 'Deploy to Vercel, AWS, Railway, Azure',
-    icon: '🚀'
-  },
-  {
-    label: 'License',
-    value: 'MIT',
-    description: 'Open source with commercial tiers',
-    icon: '⚖️'
-  },
-  {
-    label: 'Validators',
-    value: '10+',
-    description: 'Quality validators for comprehensive analysis',
-    icon: '✓'
-  },
-  {
-    label: 'Node.js',
-    value: '18+',
-    description: 'Modern runtime support with TypeScript',
-    icon: '⚙️'
+    title: 'For Teams',
+    items: [
+      'Centralized quality metrics',
+      'Multi-repository orchestration',
+      'Team collaboration features',
+      'Enterprise security & compliance'
+    ]
   }
 ];
 
 function StatsSection() {
   return (
-    <section id="features-overview" className="py-32 px-6 neural-bg relative">
-      <div className="absolute inset-0 bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900"></div>
+    <section className="py-32 px-6 relative overflow-hidden bg-slate-950">
+      {/* Background */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black via-slate-950 to-black"></div>
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:64px_64px]"></div>
 
-      <div className="max-w-7xl mx-auto relative z-10">
-        {/* Section Header */}
-        <div className="text-center mb-20">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-            Platform Overview
-          </h2>
-          <p className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-            A comprehensive development platform built with modern technologies and open-source principles.
-          </p>
-        </div>
-
-        {/* Features Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
-          {features.map((feature) => (
-            <div
-              key={feature.label}
-              className="glass-card text-center p-8 hover:shadow-xl transition-all duration-300"
-            >
-              {/* Icon */}
-              <div className="w-16 h-16 mx-auto mb-6 rounded-xl bg-gradient-to-br from-neural-primary to-neural-secondary flex items-center justify-center">
-                <span className="text-3xl">{feature.icon}</span>
-              </div>
-
-              {/* Value */}
-              <div className="text-4xl md:text-5xl font-bold mb-3 text-neural-primary">
-                {feature.value}
-              </div>
-
-              {/* Label */}
-              <h3 className="text-xl font-semibold text-white mb-3">
-                {feature.label}
-              </h3>
-
-              {/* Description */}
-              <p className="text-gray-400 text-sm leading-relaxed">
-                {feature.description}
-              </p>
-            </div>
+      <div className="relative max-w-7xl mx-auto">
+        {/* Metrics */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-24">
+          {metrics.map((metric) => (
+            <Card key={metric.label} className="bg-black/50 border-slate-900 text-center hover:border-slate-800 transition-all">
+              <CardContent className="p-8">
+                <div className="text-4xl md:text-5xl font-bold text-gradient-cyan mb-2">
+                  {metric.value}
+                </div>
+                <div className="text-sm font-semibold text-white mb-1">
+                  {metric.label}
+                </div>
+                <div className="text-xs text-slate-500">
+                  {metric.desc}
+                </div>
+              </CardContent>
+            </Card>
           ))}
         </div>
 
         {/* Use Cases */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          <div className="glass-card p-8">
-            <h3 className="text-2xl font-bold text-white mb-4 flex items-center gap-3">
-              <span className="text-3xl">👨‍💻</span>
-              For Developers
-            </h3>
-            <ul className="space-y-3 text-gray-300">
-              <li className="flex items-center gap-2">
-                <span className="text-neural-success">✓</span>
-                Automated code quality analysis and bug detection
-              </li>
-              <li className="flex items-center gap-2">
-                <span className="text-neural-success">✓</span>
-                AI-powered suggestions and optimization
-              </li>
-              <li className="flex items-center gap-2">
-                <span className="text-neural-success">✓</span>
-                CLI tools and dashboard for project management
-              </li>
-              <li className="flex items-center gap-2">
-                <span className="text-neural-success">✓</span>
-                Integration with popular development workflows
-              </li>
-            </ul>
-          </div>
-
-          <div className="glass-card p-8">
-            <h3 className="text-2xl font-bold text-white mb-4 flex items-center gap-3">
-              <span className="text-3xl">🏢</span>
-              For Teams
-            </h3>
-            <ul className="space-y-3 text-gray-300">
-              <li className="flex items-center gap-2">
-                <span className="text-neural-primary">✓</span>
-                Centralized quality metrics and reporting
-              </li>
-              <li className="flex items-center gap-2">
-                <span className="text-neural-primary">✓</span>
-                Multi-repository orchestration
-              </li>
-              <li className="flex items-center gap-2">
-                <span className="text-neural-primary">✓</span>
-                Deployment automation across platforms
-              </li>
-              <li className="flex items-center gap-2">
-                <span className="text-neural-primary">✓</span>
-                Enterprise-ready with flexible licensing
-              </li>
-            </ul>
-          </div>
+          {useCases.map((useCase) => (
+            <Card key={useCase.title} className="bg-black/50 border-slate-900">
+              <CardContent className="p-10">
+                <h3 className="text-2xl font-bold text-white mb-8">
+                  {useCase.title}
+                </h3>
+                <ul className="space-y-4">
+                  {useCase.items.map((item, index) => (
+                    <li key={index} className="flex items-start gap-3 text-slate-300">
+                      <svg className="w-5 h-5 text-cyan-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                      <span className="leading-relaxed">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </CardContent>
+            </Card>
+          ))}
         </div>
       </div>
     </section>

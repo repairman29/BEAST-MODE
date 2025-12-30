@@ -1,9 +1,9 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import HudPanel from '../hud/HudPanel';
-import HudButton from '../hud/HudButton';
-import StatusBar from '../hud/StatusBar';
+import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
+import { Button } from '../ui/button';
+import BeastModeStatusBar from './BeastModeStatusBar';
 import NotificationWidget, { Notification } from '../hud/NotificationWidget';
 import ConversationalAI from './ConversationalAI';
 import HealthDashboard from './HealthDashboard';
@@ -11,6 +11,11 @@ import AIRecommendations from './AIRecommendations';
 import MonetizationDashboard from './MonetizationDashboard';
 import MissionDashboard from './MissionDashboard';
 import DeploymentDashboard from './DeploymentDashboard';
+import GitHubScanForm from './GitHubScanForm';
+import AuthSection from './AuthSection';
+import PricingSection from './PricingSection';
+import SelfImprovement from './SelfImprovement';
+import QuickActions from './QuickActions';
 
 /**
  * BEAST MODE Enterprise Dashboard
@@ -56,7 +61,7 @@ function BeastModeDashboardInner() {
   });
 
   const [commandInput, setCommandInput] = useState('');
-  const [currentView, setCurrentView] = useState<'quality' | 'intelligence' | 'marketplace' | 'enterprise' | 'health' | 'ai-recommendations' | 'monetization' | 'missions' | 'deployments' | null>('quality');
+  const [currentView, setCurrentView] = useState<'quality' | 'intelligence' | 'marketplace' | 'enterprise' | 'health' | 'ai-recommendations' | 'monetization' | 'missions' | 'deployments' | 'github-scan' | 'auth' | 'pricing' | 'self-improve' | null>('quality');
   const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState(false);
   const [currentTime, setCurrentTime] = useState<string>('--:--:--');
 
@@ -151,23 +156,17 @@ function BeastModeDashboardInner() {
   }, []);
 
   return (
-    <div className="relative w-screen h-screen bg-void overflow-hidden font-mono">
+    <div className="relative w-full h-full min-h-screen bg-black overflow-hidden">
       {/* Background ambient effects */}
-      <div className="absolute inset-0 bg-gradient-radial from-holo-amber/5 via-transparent to-transparent pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-b from-black via-slate-950 to-black"></div>
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:64px_64px]"></div>
 
       {/* Status Bar - Always visible */}
-      <StatusBar
-        player={{
-          health: beastModeState.quality.score,
-          maxHealth: 100,
-          shields: beastModeState.intelligence.accuracy,
-          maxShields: 100,
-          credits: beastModeState.marketplace.revenue
-        }}
-        ship={{
-          hull: beastModeState.enterprise.uptime,
-          fuel: beastModeState.intelligence.insights
-        }}
+      <BeastModeStatusBar
+        quality={beastModeState.quality}
+        intelligence={beastModeState.intelligence}
+        enterprise={beastModeState.enterprise}
+        marketplace={beastModeState.marketplace}
       />
 
       {/* Notifications */}
@@ -181,109 +180,163 @@ function BeastModeDashboardInner() {
 
       {/* Command Palette */}
       {isCommandPaletteOpen && (
-        <div className="fixed inset-0 z-50 flex items-start justify-center pt-32 bg-void/80 backdrop-blur-overlay">
-          <HudPanel variant="elevated" corners glow="bright" className="w-full max-w-2xl">
-            <div className="text-holo-amber text-xl mb-4 uppercase tracking-widest">
-              Command Palette
-            </div>
-            <input
-              type="text"
-              placeholder="Type a command or search..."
-              className="w-full bg-void-surface border-b border-holo-amber-faint p-3 text-holo-amber focus:outline-none focus:border-holo-amber"
-              autoFocus
-            />
-            <div className="mt-4 text-sm text-holo-amber-dim space-y-2">
-              <div>ESC: Close palette</div>
-              <div>1: Quality • 2: Intelligence • 3: Marketplace • 4: Enterprise • 5: Health • 6: AI Recs • 7: Revenue • 8: Missions • 9: Deploy • 0: Minimal HUD</div>
-            </div>
-          </HudPanel>
+        <div className="fixed inset-0 z-50 flex items-start justify-center pt-32 bg-black/80 backdrop-blur-md">
+          <Card className="w-full max-w-2xl bg-slate-950 border-slate-800">
+            <CardHeader>
+              <CardTitle className="text-white text-xl mb-4 uppercase tracking-widest">
+                Command Palette
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <input
+                type="text"
+                placeholder="Type a command or search..."
+                className="w-full bg-slate-900 border-b border-slate-700 p-3 text-white focus:outline-none focus:border-cyan-500 transition-colors"
+                autoFocus
+              />
+              <div className="mt-4 text-sm text-slate-400 space-y-2">
+                <div>ESC: Close palette</div>
+                <div>1: Quality • 2: Intelligence • 3: Marketplace • 4: Enterprise • 5: Health • 6: AI Recs • 7: Revenue • 8: Missions • 9: Deploy</div>
+              </div>
+            </CardContent>
+          </Card>
         </div>
       )}
 
       {/* Main Content Area */}
-      <div className="relative h-full flex flex-col pt-4 pb-4">
+      <div className="relative h-full flex flex-col pt-20 pb-16 px-4 overflow-hidden">
 
         {/* Top Quick Actions */}
-        <div className="absolute top-4 left-4 z-40 flex gap-2">
-          <HudButton
-            variant={currentView === 'quality' ? 'primary' : 'ghost'}
+        <div className="absolute top-4 left-4 z-40 flex flex-wrap gap-2 max-w-[calc(100%-280px)]">
+          <Button
+            variant={currentView === 'quality' ? 'default' : 'outline'}
             size="sm"
             onClick={() => setCurrentView('quality')}
+            className={currentView === 'quality' ? 'bg-white text-black hover:bg-slate-100' : 'border-slate-800 text-slate-400 hover:bg-slate-900'}
           >
             Quality
-          </HudButton>
-          <HudButton
-            variant={currentView === 'intelligence' ? 'primary' : 'ghost'}
+          </Button>
+          <Button
+            variant={currentView === 'intelligence' ? 'default' : 'outline'}
             size="sm"
             onClick={() => setCurrentView('intelligence')}
+            className={currentView === 'intelligence' ? 'bg-white text-black hover:bg-slate-100' : 'border-slate-800 text-slate-400 hover:bg-slate-900'}
           >
             Intelligence
-          </HudButton>
-          <HudButton
-            variant={currentView === 'marketplace' ? 'primary' : 'ghost'}
+          </Button>
+          <Button
+            variant={currentView === 'marketplace' ? 'default' : 'outline'}
             size="sm"
             onClick={() => setCurrentView('marketplace')}
+            className={currentView === 'marketplace' ? 'bg-white text-black hover:bg-slate-100' : 'border-slate-800 text-slate-400 hover:bg-slate-900'}
           >
             Marketplace
-          </HudButton>
-          <HudButton
-            variant={currentView === 'enterprise' ? 'primary' : 'ghost'}
+          </Button>
+          <Button
+            variant={currentView === 'enterprise' ? 'default' : 'outline'}
             size="sm"
             onClick={() => setCurrentView('enterprise')}
+            className={currentView === 'enterprise' ? 'bg-white text-black hover:bg-slate-100' : 'border-slate-800 text-slate-400 hover:bg-slate-900'}
           >
             Enterprise
-          </HudButton>
-          <HudButton
-            variant={currentView === 'health' ? 'primary' : 'ghost'}
+          </Button>
+          <Button
+            variant={currentView === 'health' ? 'default' : 'outline'}
             size="sm"
             onClick={() => setCurrentView('health')}
+            className={currentView === 'health' ? 'bg-white text-black hover:bg-slate-100' : 'border-slate-800 text-slate-400 hover:bg-slate-900'}
           >
             Health
-          </HudButton>
-          <HudButton
-            variant={currentView === 'ai-recommendations' ? 'primary' : 'ghost'}
+          </Button>
+          <Button
+            variant={currentView === 'ai-recommendations' ? 'default' : 'outline'}
             size="sm"
             onClick={() => setCurrentView('ai-recommendations')}
+            className={currentView === 'ai-recommendations' ? 'bg-white text-black hover:bg-slate-100' : 'border-slate-800 text-slate-400 hover:bg-slate-900'}
           >
             AI Recs
-          </HudButton>
-          <HudButton
-            variant={currentView === 'monetization' ? 'primary' : 'ghost'}
+          </Button>
+          <Button
+            variant={currentView === 'monetization' ? 'default' : 'outline'}
             size="sm"
             onClick={() => setCurrentView('monetization')}
+            className={currentView === 'monetization' ? 'bg-white text-black hover:bg-slate-100' : 'border-slate-800 text-slate-400 hover:bg-slate-900'}
           >
             Revenue
-          </HudButton>
-          <HudButton
-            variant={currentView === 'missions' ? 'primary' : 'ghost'}
+          </Button>
+          <Button
+            variant={currentView === 'missions' ? 'default' : 'outline'}
             size="sm"
             onClick={() => setCurrentView('missions')}
+            className={currentView === 'missions' ? 'bg-white text-black hover:bg-slate-100' : 'border-slate-800 text-slate-400 hover:bg-slate-900'}
           >
             Missions
-          </HudButton>
-          <HudButton
-            variant={currentView === 'deployments' ? 'primary' : 'ghost'}
+          </Button>
+          <Button
+            variant={currentView === 'deployments' ? 'default' : 'outline'}
             size="sm"
             onClick={() => setCurrentView('deployments')}
+            className={currentView === 'deployments' ? 'bg-white text-black hover:bg-slate-100' : 'border-slate-800 text-slate-400 hover:bg-slate-900'}
           >
             Deploy
-          </HudButton>
-          <HudButton
-            variant="ghost"
+          </Button>
+          <Button
+            variant={currentView === 'github-scan' ? 'default' : 'outline'}
+            size="sm"
+            onClick={() => setCurrentView('github-scan')}
+            className={currentView === 'github-scan' ? 'bg-white text-black hover:bg-slate-100' : 'border-slate-800 text-slate-400 hover:bg-slate-900'}
+          >
+            Scan Repo
+          </Button>
+          <Button
+            variant={currentView === 'auth' ? 'default' : 'outline'}
+            size="sm"
+            onClick={() => setCurrentView('auth')}
+            className={currentView === 'auth' ? 'bg-white text-black hover:bg-slate-100' : 'border-slate-800 text-slate-400 hover:bg-slate-900'}
+          >
+            Sign In
+          </Button>
+          <Button
+            variant={currentView === 'pricing' ? 'default' : 'outline'}
+            size="sm"
+            onClick={() => setCurrentView('pricing')}
+            className={currentView === 'pricing' ? 'bg-white text-black hover:bg-slate-100' : 'border-slate-800 text-slate-400 hover:bg-slate-900'}
+          >
+            Pricing
+          </Button>
+          <Button
+            variant={currentView === 'self-improve' ? 'default' : 'outline'}
+            size="sm"
+            onClick={() => setCurrentView('self-improve')}
+            className={currentView === 'self-improve' ? 'bg-white text-black hover:bg-slate-100' : 'border-slate-800 text-slate-400 hover:bg-slate-900'}
+          >
+            Improve
+          </Button>
+          <Button
+            variant="outline"
             size="sm"
             onClick={() => setIsCommandPaletteOpen(true)}
+            className="border-slate-800 text-slate-400 hover:bg-slate-900"
           >
             ⌘ Palette
-          </HudButton>
+          </Button>
         </div>
 
         {/* Center Content - BEAST MODE Views */}
-        <div className="flex-1 flex items-center justify-center px-4">
+        <div className="flex-1 flex items-center justify-center overflow-y-auto py-4">
           {currentView === null && (
-            <div className="text-center text-holo-amber-faint">
-              <div className="text-6xl mb-4">⚔️</div>
-              <div className="text-sm uppercase tracking-widest">BEAST MODE Active</div>
-              <div className="text-xs mt-2">Press ESC for command palette</div>
+            <div className="w-full max-w-4xl space-y-6">
+              <div className="text-center mb-8">
+                <div className="text-6xl mb-4">⚔️</div>
+                <div className="text-sm uppercase tracking-widest text-white mb-2">BEAST MODE Active</div>
+                <div className="text-xs text-slate-500">Press ESC for command palette</div>
+              </div>
+              <QuickActions
+                onScanRepo={() => setCurrentView('github-scan')}
+                onSignIn={() => setCurrentView('auth')}
+                onPricing={() => setCurrentView('pricing')}
+                onImprove={() => setCurrentView('self-improve')}
+              />
             </div>
           )}
 
@@ -328,24 +381,40 @@ function BeastModeDashboardInner() {
           {currentView === 'deployments' && (
             <DeploymentDashboard />
           )}
+
+          {currentView === 'github-scan' && (
+            <GitHubScanForm />
+          )}
+
+          {currentView === 'auth' && (
+            <AuthSection />
+          )}
+
+          {currentView === 'pricing' && (
+            <PricingSection />
+          )}
+
+          {currentView === 'self-improve' && (
+            <SelfImprovement />
+          )}
         </div>
 
         {/* Bottom Status Line */}
-        <div className="px-4">
-          <div className="flex items-center justify-between text-xs text-holo-amber-faint border-t border-holo-amber-ghost pt-2">
-            <div className="flex gap-6">
+        <div className="absolute bottom-0 left-0 right-0 px-4 pb-4 bg-black/50 backdrop-blur-sm border-t border-slate-800">
+            <div className="flex items-center justify-between text-xs text-slate-400 pt-2">
+            <div className="flex gap-6 flex-wrap">
               <div>
-                <span className="text-holo-amber-ghost">SCORE:</span> {beastModeState.quality.score}/100
+                <span className="text-slate-500">SCORE:</span> <span className="text-white">{beastModeState.quality.score}/100</span>
               </div>
               <div>
-                <span className="text-holo-amber-ghost">ISSUES:</span> {beastModeState.quality.issues}
+                <span className="text-slate-500">ISSUES:</span> <span className="text-white">{beastModeState.quality.issues}</span>
               </div>
               <div>
-                <span className="text-holo-amber-ghost">UPTIME:</span> {beastModeState.enterprise.uptime}%
+                <span className="text-slate-500">UPTIME:</span> <span className="text-white">{beastModeState.enterprise.uptime}%</span>
               </div>
             </div>
             <div>
-              <span className="text-holo-amber-ghost">BEAST:</span> {currentTime}
+              <span className="text-slate-500">BEAST:</span> <span className="text-white">{currentTime}</span>
             </div>
           </div>
         </div>
@@ -528,15 +597,15 @@ function OperationsView({ gameState }: any) {
  */
 function StatLine({ label, value, max }: { label: string; value: number; max: number }) {
   const percentage = (value / max) * 100;
-  const color = percentage > 60 ? 'bg-holo-green' : percentage > 30 ? 'bg-holo-amber' : 'bg-holo-red';
+  const color = percentage > 60 ? 'bg-green-500' : percentage > 30 ? 'bg-amber-500' : 'bg-red-500';
 
   return (
     <div>
-      <div className="flex justify-between text-xs text-holo-amber-faint mb-1">
+      <div className="flex justify-between text-sm text-slate-400 mb-2">
         <span>{label}</span>
-        <span>{value}/{max}</span>
+        <span className="text-white font-semibold">{value}/{max}</span>
       </div>
-      <div className="h-1 bg-void-surface rounded-full overflow-hidden">
+      <div className="h-2 bg-slate-800 rounded-full overflow-hidden">
         <div
           className={`h-full ${color} transition-all duration-300`}
           style={{ width: `${percentage}%` }}
@@ -551,71 +620,77 @@ function StatLine({ label, value, max }: { label: string; value: number; max: nu
  */
 function QualityView({ data }: any) {
   return (
-    <div className="w-full max-w-6xl grid grid-cols-2 gap-4">
+    <div className="w-full max-w-6xl grid grid-cols-1 md:grid-cols-2 gap-6 px-4">
       {/* Quality Score */}
-      <HudPanel corners glow="soft">
-        <div className="text-holo-amber uppercase tracking-widest mb-3 text-sm">
-          Quality Score
-        </div>
-        <div className="text-center">
-          <div className="text-6xl font-bold text-holo-amber mb-2">{data.score}</div>
-          <div className="text-sm text-holo-amber-dim">/100</div>
-        </div>
-        <div className="mt-4 space-y-2">
-          <StatLine label="Issues Found" value={data.issues} max={50} />
-          <StatLine label="Improvements" value={data.improvements} max={20} />
-        </div>
-      </HudPanel>
+      <Card className="bg-slate-950/50 border-slate-900 hover:border-slate-800 transition-all">
+        <CardHeader>
+          <CardTitle className="text-white text-lg mb-4">Quality Score</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="text-center mb-6">
+            <div className="text-6xl font-bold text-gradient-cyan mb-2">{data.score}</div>
+            <div className="text-sm text-slate-500">/100</div>
+          </div>
+          <div className="space-y-3">
+            <StatLine label="Issues Found" value={data.issues} max={50} />
+            <StatLine label="Improvements" value={data.improvements} max={20} />
+          </div>
+        </CardContent>
+      </Card>
 
       {/* Quality Metrics */}
-      <HudPanel corners glow="soft">
-        <div className="text-holo-amber uppercase tracking-widest mb-3 text-sm">
-          Quality Metrics
-        </div>
-        <div className="space-y-3">
-          <div className="flex justify-between">
-            <span className="text-holo-amber-dim">Logger Infra</span>
-            <span className="text-holo-green">25/25 ✓</span>
+      <Card className="bg-slate-950/50 border-slate-900 hover:border-slate-800 transition-all">
+        <CardHeader>
+          <CardTitle className="text-white text-lg mb-4">Quality Metrics</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="space-y-4">
+            <div className="flex justify-between items-center">
+              <span className="text-slate-400">Logger Infra</span>
+              <span className="text-green-400 font-semibold">25/25 ✓</span>
+            </div>
+            <div className="flex justify-between items-center">
+              <span className="text-slate-400">Supabase Safety</span>
+              <span className="text-amber-400 font-semibold">18/20 ⚠</span>
+            </div>
+            <div className="flex justify-between items-center">
+              <span className="text-slate-400">Cross-Platform</span>
+              <span className="text-green-400 font-semibold">20/20 ✓</span>
+            </div>
+            <div className="flex justify-between items-center">
+              <span className="text-slate-400">Oracle Insights</span>
+              <span className="text-cyan-400 font-semibold">🧠 Active</span>
+            </div>
+            <div className="flex justify-between items-center">
+              <span className="text-slate-400">Bug Detection</span>
+              <span className="text-cyan-400 font-semibold">🐛 Active</span>
+            </div>
           </div>
-          <div className="flex justify-between">
-            <span className="text-holo-amber-dim">Supabase Safety</span>
-            <span className="text-holo-amber">18/20 ⚠</span>
-          </div>
-          <div className="flex justify-between">
-            <span className="text-holo-amber-dim">Cross-Platform</span>
-            <span className="text-holo-green">20/20 ✓</span>
-          </div>
-          <div className="flex justify-between">
-            <span className="text-holo-amber-dim">Oracle Insights</span>
-            <span className="text-holo-cyan">🧠 Active</span>
-          </div>
-          <div className="flex justify-between">
-            <span className="text-holo-amber-dim">Bug Detection</span>
-            <span className="text-holo-cyan">🐛 Active</span>
-          </div>
-        </div>
-      </HudPanel>
+        </CardContent>
+      </Card>
 
       {/* Recent Scans */}
-      <HudPanel corners glow="soft" className="col-span-2">
-        <div className="text-holo-amber uppercase tracking-widest mb-3 text-sm">
-          Recent Quality Scans
-        </div>
-        <div className="space-y-2">
-          <div className="flex justify-between items-center">
-            <span>Main Application</span>
-            <span className="text-holo-green">✓ Passed</span>
+      <Card className="col-span-1 md:col-span-2 bg-slate-950/50 border-slate-900 hover:border-slate-800 transition-all">
+        <CardHeader>
+          <CardTitle className="text-white text-lg mb-4">Recent Quality Scans</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="space-y-3">
+            <div className="flex justify-between items-center py-2 border-b border-slate-800">
+              <span className="text-slate-300">Main Application</span>
+              <span className="text-green-400 font-semibold">✓ Passed</span>
+            </div>
+            <div className="flex justify-between items-center py-2 border-b border-slate-800">
+              <span className="text-slate-300">BEAST MODE Core</span>
+              <span className="text-green-400 font-semibold">✓ Passed</span>
+            </div>
+            <div className="flex justify-between items-center py-2">
+              <span className="text-slate-300">Plugin System</span>
+              <span className="text-amber-400 font-semibold">⚠ 2 Issues</span>
+            </div>
           </div>
-          <div className="flex justify-between items-center">
-            <span>BEAST MODE Core</span>
-            <span className="text-holo-green">✓ Passed</span>
-          </div>
-          <div className="flex justify-between items-center">
-            <span>Plugin System</span>
-            <span className="text-holo-amber">⚠ 2 Issues</span>
-          </div>
-        </div>
-      </HudPanel>
+        </CardContent>
+      </Card>
     </div>
   );
 }
