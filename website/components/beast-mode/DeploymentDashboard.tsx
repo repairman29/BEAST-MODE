@@ -31,6 +31,7 @@ function DeploymentDashboard() {
   const [deployments, setDeployments] = useState<Deployment[]>([]);
   const [platforms, setPlatforms] = useState<string[]>([]);
   const [strategies, setStrategies] = useState<string[]>([]);
+  const [platformStatus, setPlatformStatus] = useState<Record<string, string>>({});
   const [isLoading, setIsLoading] = useState(false);
   const [selectedDeployment, setSelectedDeployment] = useState<Deployment | null>(null);
   const [showCreateDeployment, setShowCreateDeployment] = useState(false);
@@ -59,6 +60,9 @@ function DeploymentDashboard() {
       if (response.ok) {
         const data = await response.json();
         setDeployments(data.deployments || []);
+        if (data.platformStatus) {
+          setPlatformStatus(data.platformStatus);
+        }
       }
     } catch (error) {
       console.error('Failed to fetch deployments:', error);
