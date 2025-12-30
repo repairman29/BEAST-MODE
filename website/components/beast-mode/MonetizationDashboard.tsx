@@ -31,6 +31,52 @@ interface AnalyticsData {
     totalRevenue: number;
     monthlyRevenue: number;
   };
+  stripe?: {
+    totalRevenue: number;
+    monthlyRevenue: number;
+    transactions: number;
+    growthRate?: number;
+    note?: string;
+    subscriptions?: {
+      active: number;
+      total: number;
+      churnRate?: number;
+      trialing?: number;
+      canceled?: number;
+      pastDue?: number;
+    };
+    customers?: {
+      total: number;
+      new: number;
+    };
+    plans?: Array<{
+      id: string;
+      name: string;
+      price: number;
+      subscribers: number;
+    }>;
+    recentTransactions?: Array<{
+      id: string;
+      amount: number;
+      customer: string;
+      date: string;
+      status: string;
+    }>;
+    revenueByType?: Record<string, number>;
+    revenueByPlan?: Record<string, number>;
+    conversion?: {
+      rate: number;
+      trials: number;
+      converted: number;
+    };
+    projections?: {
+      nextMonth: number;
+      nextQuarter: number;
+      nextYear: number;
+    };
+    mrr?: number;
+    arr?: number;
+  };
 }
 
 /**
@@ -158,21 +204,24 @@ function MonetizationDashboard() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
           <div className="text-center">
             <div className="text-2xl font-bold text-green-400">
-              {formatCurrency(marketplace.totalRevenue)}
+              {formatCurrency(analytics.stripe?.totalRevenue || marketplace.totalRevenue)}
             </div>
             <div className="text-slate-400 text-sm">Total Revenue</div>
             <div className="text-xs text-green-400">
-              +{metrics.revenue?.growthRate.toFixed(1)}% growth
+              +{(analytics.stripe?.growthRate || metrics.revenue?.growthRate || 0).toFixed(1)}% growth
             </div>
+            {analytics.stripe?.note && (
+              <div className="text-xs text-amber-400 mt-1">{analytics.stripe.note}</div>
+            )}
           </div>
 
           <div className="text-center">
             <div className="text-2xl font-bold text-cyan-400">
-              {formatCurrency(marketplace.monthlyRevenue)}
+              {formatCurrency(analytics.stripe?.monthlyRevenue || marketplace.monthlyRevenue)}
             </div>
             <div className="text-slate-400 text-sm">Monthly Revenue</div>
             <div className="text-xs text-cyan-400">
-              Recurring
+              {analytics.stripe?.subscriptions?.active || 0} active subscriptions
             </div>
           </div>
 
@@ -199,8 +248,70 @@ function MonetizationDashboard() {
         </CardContent>
       </Card>
 
+      {/* Stripe Subscriptions */}
+      {analytics.stripe?.subscriptions && (
+        <Card className="bg-slate-900/90 border-slate-800">
+          <CardHeader>
+            <CardTitle className="text-white text-lg">💳 Stripe Subscriptions</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div className="text-center">
+                <div className="text-2xl font-bold text-green-400">
+                  {analytics.stripe.subscriptions.active}
+                </div>
+                <div className="text-slate-400 text-sm">Active</div>
+              </div>
+              <div className="text-center">
+                <div className="text-2xl font-bold text-amber-400">
+                  {analytics.stripe.subscriptions.trialing}
+                </div>
+                <div className="text-slate-400 text-sm">Trialing</div>
+              </div>
+              <div className="text-center">
+                <div className="text-2xl font-bold text-red-400">
+                  {analytics.stripe.subscriptions.canceled}
+                </div>
+                <div className="text-slate-400 text-sm">Canceled</div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      )}
+
+      {/* Recent Transactions */}
+      {analytics.stripe?.recentTransactions && analytics.stripe.recentTransactions.length > 0 && (
+        <Card className="bg-slate-900/90 border-slate-800">
+          <CardHeader>
+            <CardTitle className="text-white text-lg">📋 Recent Transactions</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-2">
+              {analytics.stripe.recentTransactions.map((tx: any) => (
+                <div key={tx.id} className="flex justify-between items-center p-3 bg-slate-800/50 rounded-lg">
+                  <div>
+                    <div className="text-white text-sm">{tx.description}</div>
+                    <div className="text-xs text-slate-400">
+                      {new Date(tx.created * 1000).toLocaleString()}
+                    </div>
+                  </div>
+                  <div className="text-right">
+                    <div className={`font-semibold ${
+                      tx.status === 'succeeded' ? 'text-green-400' : 'text-amber-400'
+                    }`}>
+                      {formatCurrency(tx.amount)}
+                    </div>
+                    <div className="text-xs text-slate-400 capitalize">{tx.status}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+      )}
+
       {/* Revenue Breakdown */}
-      {metrics.revenue && (
+      {(metrics.revenue || analytics.stripe) && (
         <Card className="bg-slate-900/90 border-slate-800">
           <CardHeader>
             <CardTitle className="text-white text-lg">💵 Revenue Breakdown</CardTitle>
@@ -211,17 +322,20 @@ function MonetizationDashboard() {
             <div>
               <h4 className="text-amber-400 font-semibold mb-3">Revenue by Type</h4>
               <div className="space-y-2">
-                {Object.entries(metrics.revenue.revenueByType).map(([type, amount]) => (
-                  <div key={type} className="flex justify-between items-center">
-                    <span className="text-white capitalize">{type}</span>
-                    <div className="text-right">
-                      <div className="text-green-400 font-semibold">{formatCurrency(amount as number)}</div>
-                      <div className="text-xs text-slate-400">
-                        {((amount as number / metrics.revenue.totalRevenue) * 100).toFixed(1)}%
+                {Object.entries(analytics.stripe?.revenueByType || metrics.revenue?.revenueByType || {}).map(([type, amount]) => {
+                  const total = analytics.stripe?.totalRevenue || metrics.revenue?.totalRevenue || 1;
+                  return (
+                    <div key={type} className="flex justify-between items-center">
+                      <span className="text-white capitalize">{type}</span>
+                      <div className="text-right">
+                        <div className="text-green-400 font-semibold">{formatCurrency(amount as number)}</div>
+                        <div className="text-xs text-slate-400">
+                          {((amount as number / total) * 100).toFixed(1)}%
+                        </div>
                       </div>
                     </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </div>
 
@@ -248,19 +362,19 @@ function MonetizationDashboard() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div className="text-center">
                 <div className="text-xl font-bold text-green-400">
-                  {formatCurrency(metrics.revenue.projections.nextMonth)}
+                  {formatCurrency(analytics.stripe?.projections?.nextMonth || metrics.revenue?.projections?.nextMonth || 0)}
                 </div>
                 <div className="text-slate-400 text-sm">Next Month</div>
               </div>
               <div className="text-center">
                 <div className="text-xl font-bold text-cyan-400">
-                  {formatCurrency(metrics.revenue.projections.nextQuarter)}
+                  {formatCurrency(analytics.stripe?.projections?.nextQuarter || metrics.revenue?.projections?.nextQuarter || 0)}
                 </div>
                 <div className="text-slate-400 text-sm">Next Quarter</div>
               </div>
               <div className="text-center">
                 <div className="text-xl font-bold text-purple-400">
-                  {formatCurrency(metrics.revenue.projections.nextYear)}
+                  {formatCurrency(analytics.stripe?.projections?.nextYear || metrics.revenue?.projections?.nextYear || 0)}
                 </div>
                 <div className="text-slate-400 text-sm">Next Year</div>
               </div>

@@ -47,6 +47,25 @@ export default function GitHubScanForm() {
     });
   };
 
+  const exportReport = (result: ScanResult) => {
+    const report = {
+      repo: result.repo,
+      score: result.score,
+      issues: result.issues,
+      improvements: result.improvements,
+      detectedIssues: result.detectedIssues || [],
+      recommendations: result.recommendations || [],
+      exportedAt: new Date().toISOString()
+    };
+    const blob = new Blob([JSON.stringify(report, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `beast-mode-report-${result.repo.replace('/', '-')}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
   const handleScan = async () => {
     if (!repoUrl.trim()) {
       setError('Please enter a GitHub repository URL');

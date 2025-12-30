@@ -8,6 +8,8 @@ export default function SelfImprovement() {
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [results, setResults] = useState<any>(null);
   const [error, setError] = useState<string | null>(null);
+  const [applyingFixes, setApplyingFixes] = useState<Set<number>>(new Set());
+  const [appliedFixes, setAppliedFixes] = useState<Set<number>>(new Set());
 
   const handleAnalyze = async () => {
     setIsAnalyzing(true);
@@ -29,6 +31,44 @@ export default function SelfImprovement() {
       setError(err.message || 'Failed to analyze');
     } finally {
       setIsAnalyzing(false);
+    }
+  };
+
+  const handleApplyFix = async (recommendation: any, index: number) => {
+    setApplyingFixes(prev => new Set(prev).add(index));
+    
+    try {
+      const response = await fetch('/api/beast-mode/self-improve/apply-fix', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          recommendation,
+          fixType: recommendation.type || recommendation.title
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to apply fix');
+      }
+
+      const result = await response.json();
+      setAppliedFixes(prev => new Set(prev).add(index));
+      
+      // Show success message
+      alert(`✅ Fix applied successfully! ${result.message || ''}`);
+      
+      // Refresh analysis after fix
+      setTimeout(() => {
+        handleAnalyze();
+      }, 2000);
+    } catch (err: any) {
+      alert(`❌ Failed to apply fix: ${err.message}`);
+    } finally {
+      setApplyingFixes(prev => {
+        const newSet = new Set(prev);
+        newSet.delete(index);
+        return newSet;
+      });
     }
   };
 
@@ -179,6 +219,37 @@ export default function SelfImprovement() {
                             <div className="text-cyan-400 text-xs font-mono bg-cyan-500/10 px-2 py-1 rounded mt-2">
                               💡 {rec.action}
                             </div>
+                          )}
+                          {rec.file && (
+                            <div className="text-slate-500 text-xs mt-1">
+                              File: <code className="bg-slate-800 px-1 rounded">{rec.file}</code>
+                            </div>
+                          )}
+                        </div>
+                        <div className="flex-shrink-0">
+                          {appliedFixes.has(idx) ? (
+                            <div className="text-green-400 text-sm flex items-center gap-1">
+                              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                              </svg>
+                              Applied
+                            </div>
+                          ) : (
+                            <Button
+                              onClick={() => handleApplyFix(rec, idx)}
+                              disabled={applyingFixes.has(idx)}
+                              size="sm"
+                              className="bg-green-600 hover:bg-green-700 text-white"
+                            >
+                              {applyingFixes.has(idx) ? (
+                                <span className="flex items-center gap-1">
+                                  <span className="animate-spin w-3 h-3 border-2 border-white border-t-transparent rounded-full"></span>
+                                  Applying...
+                                </span>
+                              ) : (
+                                '🔧 Apply Fix'
+                              )}
+                            </Button>
                           )}
                         </div>
                       </li>
