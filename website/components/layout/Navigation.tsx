@@ -28,8 +28,8 @@ function Navigation() {
             </div>
           </a>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8">
+          {/* Desktop Navigation - Always visible */}
+          <div className="flex items-center gap-8">
             <button
               onClick={() => scrollToSection('features')}
               className="text-slate-400 hover:text-white transition-colors text-sm font-medium"
@@ -47,18 +47,18 @@ function Navigation() {
             </Button>
           </div>
 
-          {/* Mobile Menu Button */}
+          {/* Mobile Menu Button - Hidden on desktop */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden text-slate-400 p-2 hover:text-white hover:bg-slate-900 rounded-lg transition-colors"
+            className="lg:hidden text-slate-400 p-2 hover:text-white hover:bg-slate-900 rounded-lg transition-colors"
           >
             <span className="text-xl">{isMenuOpen ? '×' : '≡'}</span>
           </button>
         </div>
 
-        {/* Mobile Menu */}
+        {/* Mobile Menu - Only show on small screens */}
         {isMenuOpen && (
-          <div className="md:hidden mt-4 pb-4 border-t border-slate-900">
+          <div className="lg:hidden mt-4 pb-4 border-t border-slate-900">
             <div className="flex flex-col gap-4 pt-4">
               <button
                 onClick={() => scrollToSection('features')}

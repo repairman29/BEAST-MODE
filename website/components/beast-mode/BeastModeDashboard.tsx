@@ -16,6 +16,7 @@ import AuthSection from './AuthSection';
 import PricingSection from './PricingSection';
 import SelfImprovement from './SelfImprovement';
 import QuickActions from './QuickActions';
+import Sidebar from './Sidebar';
 
 /**
  * BEAST MODE Enterprise Dashboard
@@ -116,23 +117,61 @@ function BeastModeDashboardInner() {
   // Keyboard shortcuts
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      // ESC: Toggle command palette
-      if (e.key === 'Escape') {
-        setIsCommandPaletteOpen(prev => !prev);
+      // Cmd/Ctrl + K: Open command palette
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault();
+        setIsCommandPaletteOpen(true);
+        return;
       }
 
-      // Number keys: Quick view switching
-      if (!isCommandPaletteOpen && !e.metaKey && !e.ctrlKey) {
-        if (e.key === '1') setCurrentView('quality');
-        if (e.key === '2') setCurrentView('intelligence');
-        if (e.key === '3') setCurrentView('marketplace');
-        if (e.key === '4') setCurrentView('enterprise');
-        if (e.key === '5') setCurrentView('health');
-        if (e.key === '6') setCurrentView('ai-recommendations');
-        if (e.key === '7') setCurrentView('monetization');
-        if (e.key === '8') setCurrentView('missions');
-        if (e.key === '9') setCurrentView('deployments');
-        if (e.key === '0') setCurrentView(null); // Minimal HUD
+      // ESC: Close command palette
+      if (e.key === 'Escape' && isCommandPaletteOpen) {
+        setIsCommandPaletteOpen(false);
+        return;
+      }
+
+      // Number keys: Quick view switching (only when palette is closed and not typing)
+      if (!isCommandPaletteOpen && !e.metaKey && !e.ctrlKey && !e.altKey && document.activeElement?.tagName !== 'INPUT' && document.activeElement?.tagName !== 'TEXTAREA') {
+        if (e.key === '1') {
+          e.preventDefault();
+          setCurrentView('quality');
+        }
+        if (e.key === '2') {
+          e.preventDefault();
+          setCurrentView('intelligence');
+        }
+        if (e.key === '3') {
+          e.preventDefault();
+          setCurrentView('marketplace');
+        }
+        if (e.key === '4') {
+          e.preventDefault();
+          setCurrentView('enterprise');
+        }
+        if (e.key === '5') {
+          e.preventDefault();
+          setCurrentView('health');
+        }
+        if (e.key === '6') {
+          e.preventDefault();
+          setCurrentView('ai-recommendations');
+        }
+        if (e.key === '7') {
+          e.preventDefault();
+          setCurrentView('monetization');
+        }
+        if (e.key === '8') {
+          e.preventDefault();
+          setCurrentView('missions');
+        }
+        if (e.key === '9') {
+          e.preventDefault();
+          setCurrentView('deployments');
+        }
+        if (e.key === '0') {
+          e.preventDefault();
+          setCurrentView(null);
+        }
       }
     };
 
@@ -156,180 +195,99 @@ function BeastModeDashboardInner() {
   }, []);
 
   return (
-    <div className="relative w-full h-full min-h-screen bg-black overflow-hidden">
-      {/* Background ambient effects */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black via-slate-950 to-black"></div>
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:64px_64px]"></div>
-
-      {/* Status Bar - Always visible */}
-      <BeastModeStatusBar
-        quality={beastModeState.quality}
-        intelligence={beastModeState.intelligence}
-        enterprise={beastModeState.enterprise}
-        marketplace={beastModeState.marketplace}
+    <div className="relative w-full h-full min-h-screen bg-black overflow-hidden flex">
+      {/* Sidebar */}
+      <Sidebar
+        currentView={currentView}
+        onViewChange={(view) => setCurrentView(view as typeof currentView)}
+        onCommandPalette={() => setIsCommandPaletteOpen(true)}
       />
-
-      {/* Notifications */}
-      <NotificationWidget
-        notifications={beastModeState.notifications}
-        onDismiss={(id) => setBeastModeState(prev => ({
-          ...prev,
-          notifications: prev.notifications.filter(n => n.id !== id)
-        }))}
-      />
-
-      {/* Command Palette */}
-      {isCommandPaletteOpen && (
-        <div className="fixed inset-0 z-50 flex items-start justify-center pt-32 bg-black/80 backdrop-blur-md">
-          <Card className="w-full max-w-2xl bg-slate-950 border-slate-800">
-            <CardHeader>
-              <CardTitle className="text-white text-xl mb-4 uppercase tracking-widest">
-                Command Palette
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <input
-                type="text"
-                placeholder="Type a command or search..."
-                className="w-full bg-slate-900 border-b border-slate-700 p-3 text-white focus:outline-none focus:border-cyan-500 transition-colors"
-                autoFocus
-              />
-              <div className="mt-4 text-sm text-slate-400 space-y-2">
-                <div>ESC: Close palette</div>
-                <div>1: Quality • 2: Intelligence • 3: Marketplace • 4: Enterprise • 5: Health • 6: AI Recs • 7: Revenue • 8: Missions • 9: Deploy</div>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-      )}
 
       {/* Main Content Area */}
-      <div className="relative h-full flex flex-col pt-20 pb-16 px-4 overflow-hidden">
+      <div className="flex-1 flex flex-col ml-64 transition-all duration-300 ease-in-out relative">
+        {/* Background ambient effects */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black via-slate-950 to-black"></div>
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:64px_64px]"></div>
 
-        {/* Top Quick Actions */}
-        <div className="absolute top-4 left-4 z-40 flex flex-wrap gap-2 max-w-[calc(100%-280px)]">
-          <Button
-            variant={currentView === 'quality' ? 'default' : 'outline'}
-            size="sm"
-            onClick={() => setCurrentView('quality')}
-            className={currentView === 'quality' ? 'bg-white text-black hover:bg-slate-100' : 'border-slate-800 text-slate-400 hover:bg-slate-900'}
+        {/* Status Bar - Always visible */}
+        <BeastModeStatusBar
+          quality={beastModeState.quality}
+          intelligence={beastModeState.intelligence}
+          enterprise={beastModeState.enterprise}
+          marketplace={beastModeState.marketplace}
+        />
+
+        {/* Notifications */}
+        <NotificationWidget
+          notifications={beastModeState.notifications}
+          onDismiss={(id) => setBeastModeState(prev => ({
+            ...prev,
+            notifications: prev.notifications.filter(n => n.id !== id)
+          }))}
+        />
+
+        {/* Command Palette */}
+        {isCommandPaletteOpen && (
+          <div 
+            className="fixed inset-0 z-50 flex items-start justify-center pt-32 bg-black/80 backdrop-blur-md animate-in fade-in duration-200"
+            onClick={(e) => {
+              if (e.target === e.currentTarget) {
+                setIsCommandPaletteOpen(false);
+              }
+            }}
           >
-            Quality
-          </Button>
-          <Button
-            variant={currentView === 'intelligence' ? 'default' : 'outline'}
-            size="sm"
-            onClick={() => setCurrentView('intelligence')}
-            className={currentView === 'intelligence' ? 'bg-white text-black hover:bg-slate-100' : 'border-slate-800 text-slate-400 hover:bg-slate-900'}
-          >
-            Intelligence
-          </Button>
-          <Button
-            variant={currentView === 'marketplace' ? 'default' : 'outline'}
-            size="sm"
-            onClick={() => setCurrentView('marketplace')}
-            className={currentView === 'marketplace' ? 'bg-white text-black hover:bg-slate-100' : 'border-slate-800 text-slate-400 hover:bg-slate-900'}
-          >
-            Marketplace
-          </Button>
-          <Button
-            variant={currentView === 'enterprise' ? 'default' : 'outline'}
-            size="sm"
-            onClick={() => setCurrentView('enterprise')}
-            className={currentView === 'enterprise' ? 'bg-white text-black hover:bg-slate-100' : 'border-slate-800 text-slate-400 hover:bg-slate-900'}
-          >
-            Enterprise
-          </Button>
-          <Button
-            variant={currentView === 'health' ? 'default' : 'outline'}
-            size="sm"
-            onClick={() => setCurrentView('health')}
-            className={currentView === 'health' ? 'bg-white text-black hover:bg-slate-100' : 'border-slate-800 text-slate-400 hover:bg-slate-900'}
-          >
-            Health
-          </Button>
-          <Button
-            variant={currentView === 'ai-recommendations' ? 'default' : 'outline'}
-            size="sm"
-            onClick={() => setCurrentView('ai-recommendations')}
-            className={currentView === 'ai-recommendations' ? 'bg-white text-black hover:bg-slate-100' : 'border-slate-800 text-slate-400 hover:bg-slate-900'}
-          >
-            AI Recs
-          </Button>
-          <Button
-            variant={currentView === 'monetization' ? 'default' : 'outline'}
-            size="sm"
-            onClick={() => setCurrentView('monetization')}
-            className={currentView === 'monetization' ? 'bg-white text-black hover:bg-slate-100' : 'border-slate-800 text-slate-400 hover:bg-slate-900'}
-          >
-            Revenue
-          </Button>
-          <Button
-            variant={currentView === 'missions' ? 'default' : 'outline'}
-            size="sm"
-            onClick={() => setCurrentView('missions')}
-            className={currentView === 'missions' ? 'bg-white text-black hover:bg-slate-100' : 'border-slate-800 text-slate-400 hover:bg-slate-900'}
-          >
-            Missions
-          </Button>
-          <Button
-            variant={currentView === 'deployments' ? 'default' : 'outline'}
-            size="sm"
-            onClick={() => setCurrentView('deployments')}
-            className={currentView === 'deployments' ? 'bg-white text-black hover:bg-slate-100' : 'border-slate-800 text-slate-400 hover:bg-slate-900'}
-          >
-            Deploy
-          </Button>
-          <Button
-            variant={currentView === 'github-scan' ? 'default' : 'outline'}
-            size="sm"
-            onClick={() => setCurrentView('github-scan')}
-            className={currentView === 'github-scan' ? 'bg-white text-black hover:bg-slate-100' : 'border-slate-800 text-slate-400 hover:bg-slate-900'}
-          >
-            Scan Repo
-          </Button>
-          <Button
-            variant={currentView === 'auth' ? 'default' : 'outline'}
-            size="sm"
-            onClick={() => setCurrentView('auth')}
-            className={currentView === 'auth' ? 'bg-white text-black hover:bg-slate-100' : 'border-slate-800 text-slate-400 hover:bg-slate-900'}
-          >
-            Sign In
-          </Button>
-          <Button
-            variant={currentView === 'pricing' ? 'default' : 'outline'}
-            size="sm"
-            onClick={() => setCurrentView('pricing')}
-            className={currentView === 'pricing' ? 'bg-white text-black hover:bg-slate-100' : 'border-slate-800 text-slate-400 hover:bg-slate-900'}
-          >
-            Pricing
-          </Button>
-          <Button
-            variant={currentView === 'self-improve' ? 'default' : 'outline'}
-            size="sm"
-            onClick={() => setCurrentView('self-improve')}
-            className={currentView === 'self-improve' ? 'bg-white text-black hover:bg-slate-100' : 'border-slate-800 text-slate-400 hover:bg-slate-900'}
-          >
-            Improve
-          </Button>
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => setIsCommandPaletteOpen(true)}
-            className="border-slate-800 text-slate-400 hover:bg-slate-900"
-          >
-            ⌘ Palette
-          </Button>
-        </div>
+            <Card className="w-full max-w-2xl bg-slate-950/95 backdrop-blur-xl border-slate-800 shadow-2xl animate-in zoom-in-95 duration-200">
+              <CardHeader>
+                <CardTitle className="text-white text-xl mb-4 uppercase tracking-widest flex items-center gap-2">
+                  <span>⌘</span>
+                  <span>Command Palette</span>
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <input
+                  type="text"
+                  placeholder="Type a command or search..."
+                  className="w-full bg-slate-900/50 border border-slate-700 rounded-lg p-3 text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 transition-all"
+                  autoFocus
+                  onKeyDown={(e) => {
+                    if (e.key === 'Escape') {
+                      setIsCommandPaletteOpen(false);
+                    }
+                  }}
+                />
+                <div className="mt-6 text-sm text-slate-400 space-y-3">
+                  <div className="flex items-center gap-2">
+                    <kbd className="px-2 py-1 bg-slate-800 rounded text-xs">ESC</kbd>
+                    <span>Close palette</span>
+                  </div>
+                  <div className="flex flex-wrap gap-2 items-center">
+                    <span className="text-slate-500">Quick nav:</span>
+                    <kbd className="px-2 py-1 bg-slate-800 rounded text-xs">1</kbd>
+                    <span>Quality</span>
+                    <kbd className="px-2 py-1 bg-slate-800 rounded text-xs">2</kbd>
+                    <span>Intelligence</span>
+                    <kbd className="px-2 py-1 bg-slate-800 rounded text-xs">3</kbd>
+                    <span>Marketplace</span>
+                    <kbd className="px-2 py-1 bg-slate-800 rounded text-xs">⌘B</kbd>
+                    <span>Toggle Sidebar</span>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        )}
 
         {/* Center Content - BEAST MODE Views */}
-        <div className="flex-1 flex items-center justify-center overflow-y-auto py-4">
+        <div className="flex-1 flex items-center justify-center overflow-y-auto py-6 px-6 pt-24 pb-20 custom-scrollbar">
           {currentView === null && (
-            <div className="w-full max-w-4xl space-y-6">
-              <div className="text-center mb-8">
-                <div className="text-6xl mb-4">⚔️</div>
-                <div className="text-sm uppercase tracking-widest text-white mb-2">BEAST MODE Active</div>
-                <div className="text-xs text-slate-500">Press ESC for command palette</div>
+            <div className="w-full max-w-4xl space-y-8 animate-in fade-in duration-300">
+              <div className="text-center mb-12">
+                <div className="text-7xl mb-6 animate-in zoom-in-95 duration-500">⚔️</div>
+                <div className="text-lg uppercase tracking-widest text-white mb-3 font-bold">BEAST MODE Active</div>
+                <div className="text-sm text-slate-400 space-y-1">
+                  <div>Press <kbd className="px-2 py-1 bg-slate-800 rounded text-xs">⌘K</kbd> for command palette</div>
+                  <div>Press <kbd className="px-2 py-1 bg-slate-800 rounded text-xs">⌘B</kbd> to toggle sidebar</div>
+                </div>
               </div>
               <QuickActions
                 onScanRepo={() => setCurrentView('github-scan')}
@@ -400,21 +358,25 @@ function BeastModeDashboardInner() {
         </div>
 
         {/* Bottom Status Line */}
-        <div className="absolute bottom-0 left-0 right-0 px-4 pb-4 bg-black/50 backdrop-blur-sm border-t border-slate-800">
-            <div className="flex items-center justify-between text-xs text-slate-400 pt-2">
-            <div className="flex gap-6 flex-wrap">
-              <div>
-                <span className="text-slate-500">SCORE:</span> <span className="text-white">{beastModeState.quality.score}/100</span>
+        <div className="absolute bottom-0 left-0 right-0 px-6 py-3 bg-black/60 backdrop-blur-md border-t border-slate-800/50">
+          <div className="flex items-center justify-between text-xs text-slate-400">
+            <div className="flex gap-8 flex-wrap">
+              <div className="flex items-center gap-2">
+                <span className="text-slate-500 font-medium">SCORE:</span>
+                <span className="text-white font-semibold">{beastModeState.quality.score}/100</span>
               </div>
-              <div>
-                <span className="text-slate-500">ISSUES:</span> <span className="text-white">{beastModeState.quality.issues}</span>
+              <div className="flex items-center gap-2">
+                <span className="text-slate-500 font-medium">ISSUES:</span>
+                <span className="text-white font-semibold">{beastModeState.quality.issues}</span>
               </div>
-              <div>
-                <span className="text-slate-500">UPTIME:</span> <span className="text-white">{beastModeState.enterprise.uptime}%</span>
+              <div className="flex items-center gap-2">
+                <span className="text-slate-500 font-medium">UPTIME:</span>
+                <span className="text-green-400 font-semibold">{beastModeState.enterprise.uptime}%</span>
               </div>
             </div>
-            <div>
-              <span className="text-slate-500">BEAST:</span> <span className="text-white">{currentTime}</span>
+            <div className="flex items-center gap-2">
+              <span className="text-slate-500 font-medium">BEAST:</span>
+              <span className="text-cyan-400 font-mono font-semibold">{currentTime}</span>
             </div>
           </div>
         </div>

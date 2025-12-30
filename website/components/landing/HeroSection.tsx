@@ -69,7 +69,7 @@ function HeroSection() {
           </div>
 
           {/* Right: Code Example */}
-          <div className="relative">
+          <div className="space-y-6">
             <div className="relative bg-slate-950 border border-slate-800 rounded-xl p-6 md:p-8 shadow-2xl">
               {/* Glow effect */}
               <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-purple-500/5 rounded-xl"></div>
@@ -120,14 +120,16 @@ await beastMode.deployApplication({
               </div>
             </div>
 
-            {/* Floating stats - repositioned to avoid overlap, hidden on mobile */}
-            <div className="hidden md:block absolute -bottom-6 left-4 bg-black border border-slate-800 rounded-xl p-3 md:p-4 shadow-xl z-10 max-w-[140px]">
-              <div className="text-xl md:text-2xl font-bold text-gradient-cyan">97%</div>
-              <div className="text-xs text-slate-500 mt-1">Bug Reduction</div>
-            </div>
-            <div className="hidden md:block absolute -top-6 right-4 bg-black border border-slate-800 rounded-xl p-3 md:p-4 shadow-xl z-10 max-w-[140px]">
-              <div className="text-xl md:text-2xl font-bold text-gradient-purple">10x</div>
-              <div className="text-xs text-slate-500 mt-1">Faster Reviews</div>
+            {/* Stats below the code editor */}
+            <div className="grid grid-cols-2 gap-4">
+              <div className="bg-black border border-slate-800 rounded-xl p-4 shadow-xl">
+                <div className="text-2xl font-bold text-gradient-purple mb-1">10x</div>
+                <div className="text-xs text-slate-500">Faster Reviews</div>
+              </div>
+              <div className="bg-black border border-slate-800 rounded-xl p-4 shadow-xl">
+                <div className="text-2xl font-bold text-gradient-cyan mb-1">97%</div>
+                <div className="text-xs text-slate-500">Bug Reduction</div>
+              </div>
             </div>
           </div>
         </div>

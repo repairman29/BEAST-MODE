@@ -41,6 +41,11 @@ export default function AuthSection() {
       const data = await response.json();
       setUser(data.user);
       localStorage.setItem('beastModeToken', data.token);
+      
+      // Show success message
+      if (data.needsVerification) {
+        alert('Account created! Please check your email to verify your account.');
+      }
     } catch (err: any) {
       setError(err.message || 'Authentication failed');
     } finally {
