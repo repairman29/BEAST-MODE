@@ -31,6 +31,7 @@ interface Recommendation {
 function AIRecommendations() {
   const [recommendations, setRecommendations] = useState<Recommendation[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [expandedRecommendation, setExpandedRecommendation] = useState<string | null>(null);
   const [projectContext, setProjectContext] = useState({
     type: 'web',
     languages: ['javascript', 'typescript'],
@@ -288,15 +289,50 @@ function AIRecommendations() {
               {/* Recommendation Reasons */}
               {rec.reasons && rec.reasons.length > 0 && (
                 <div className="mb-3">
-                  <div className="text-amber-400 text-sm font-semibold mb-1">💡 Why recommended:</div>
-                  <ul className="text-sm text-slate-300 space-y-1">
-                    {rec.reasons.slice(0, 2).map((reason, index) => (
+                  <button
+                    onClick={() => setExpandedRecommendation(expandedRecommendation === rec.pluginId ? null : rec.pluginId)}
+                    className="w-full text-left"
+                  >
+                    <div className="flex items-center justify-between text-amber-400 text-sm font-semibold mb-1">
+                      <span>💡 Why recommended:</span>
+                      <span className="text-xs">
+                        {expandedRecommendation === rec.pluginId ? '▼' : '▶'} {rec.reasons.length} reasons
+                      </span>
+                    </div>
+                  </button>
+                  <ul className={`text-sm text-slate-300 space-y-1 transition-all ${
+                    expandedRecommendation === rec.pluginId ? 'max-h-none' : 'max-h-20 overflow-hidden'
+                  }`}>
+                    {rec.reasons.map((reason, index) => (
                       <li key={index} className="flex items-start gap-2">
                         <span className="text-green-400 mt-1">•</span>
                         <span>{reason}</span>
                       </li>
                     ))}
                   </ul>
+                  {expandedRecommendation === rec.pluginId && (
+                    <div className="mt-2 pt-2 border-t border-slate-800">
+                      <div className="text-xs text-slate-500 mb-1">Match Factors:</div>
+                      <div className="space-y-1">
+                        <div className="text-xs text-slate-400">
+                          • Score: {rec.score}/100
+                        </div>
+                        <div className="text-xs text-slate-400">
+                          • Confidence: {Math.round(rec.confidence * 100)}%
+                        </div>
+                        {rec.plugin.category && (
+                          <div className="text-xs text-slate-400">
+                            • Category match: {rec.plugin.category}
+                          </div>
+                        )}
+                        {rec.plugin.languages.length > 0 && (
+                          <div className="text-xs text-slate-400">
+                            • Language support: {rec.plugin.languages.join(', ')}
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  )}
                 </div>
               )}
 

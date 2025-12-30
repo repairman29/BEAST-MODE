@@ -666,39 +666,37 @@ function StatLine({ label, value, max }: { label: string; value: number; max: nu
  */
 function QualityView({ data }: any) {
   const [latestScan, setLatestScan] = React.useState<any>(null);
+  const [allScans, setAllScans] = React.useState<any[]>([]);
   const [isLoading, setIsLoading] = React.useState(true);
+  const [selectedIssue, setSelectedIssue] = React.useState<any>(null);
+  const [showAllIssues, setShowAllIssues] = React.useState(false);
+  const [showTrends, setShowTrends] = React.useState(false);
 
   React.useEffect(() => {
-    // Load latest scan from localStorage
-    try {
-      const stored = localStorage.getItem('beast-mode-scan-results');
-      if (stored) {
-        const scans = JSON.parse(stored);
-        const completed = scans.find((s: any) => s.status === 'completed');
-        if (completed) {
-          setLatestScan(completed);
-        }
-      }
-    } catch (e) {
-      console.error('Failed to load scan results:', e);
-    } finally {
-      setIsLoading(false);
-    }
-
-    // Listen for new scans
-    const handleStorageChange = () => {
+    // Load all scans from localStorage
+    const loadScans = () => {
       try {
         const stored = localStorage.getItem('beast-mode-scan-results');
         if (stored) {
           const scans = JSON.parse(stored);
-          const completed = scans.find((s: any) => s.status === 'completed');
-          if (completed) {
-            setLatestScan(completed);
+          const completed = scans.filter((s: any) => s.status === 'completed');
+          setAllScans(completed);
+          if (completed.length > 0) {
+            setLatestScan(completed[0]);
           }
         }
       } catch (e) {
         console.error('Failed to load scan results:', e);
+      } finally {
+        setIsLoading(false);
       }
+    };
+
+    loadScans();
+
+    // Listen for new scans
+    const handleStorageChange = () => {
+      loadScans();
     };
 
     window.addEventListener('storage', handleStorageChange);
@@ -854,21 +852,130 @@ function QualityView({ data }: any) {
               </div>
               {latestScan.detectedIssues && latestScan.detectedIssues.length > 0 && (
                 <div className="mt-4 pt-4 border-t border-slate-800">
-                  <div className="text-sm text-slate-400 mb-2">Top Issues:</div>
+                  <div className="flex items-center justify-between mb-3">
+                    <div className="text-sm text-slate-400">
+                      {showAllIssues ? 'All Issues' : 'Top Issues'} ({latestScan.detectedIssues.length})
+                    </div>
+                    {latestScan.detectedIssues.length > 3 && (
+                      <Button
+                        onClick={() => setShowAllIssues(!showAllIssues)}
+                        variant="outline"
+                        size="sm"
+                        className="border-slate-800 text-slate-400 hover:bg-slate-900"
+                      >
+                        {showAllIssues ? 'Show Less' : 'Show All'}
+                      </Button>
+                    )}
+                  </div>
                   <div className="space-y-2">
-                    {latestScan.detectedIssues.slice(0, 3).map((issue: any, idx: number) => (
-                      <div key={idx} className="text-sm text-slate-300">
-                        <span className={`inline-block px-2 py-1 rounded text-xs mr-2 ${
-                          issue.priority === 'high' ? 'bg-red-500/20 text-red-400' :
-                          issue.priority === 'medium' ? 'bg-amber-500/20 text-amber-400' :
-                          'bg-blue-500/20 text-blue-400'
-                        }`}>
-                          {issue.priority}
-                        </span>
-                        {issue.title}
+                    {(showAllIssues ? latestScan.detectedIssues : latestScan.detectedIssues.slice(0, 3)).map((issue: any, idx: number) => (
+                      <div
+                        key={idx}
+                        onClick={() => setSelectedIssue(issue)}
+                        className={`text-sm text-slate-300 p-2 rounded-lg cursor-pointer transition-colors ${
+                          selectedIssue === issue ? 'bg-cyan-500/20 border border-cyan-500/50' : 'hover:bg-slate-800/50'
+                        }`}
+                      >
+                        <div className="flex items-start gap-2">
+                          <span className={`flex-shrink-0 px-2 py-1 rounded text-xs ${
+                            issue.priority === 'high' ? 'bg-red-500/20 text-red-400' :
+                            issue.priority === 'medium' ? 'bg-amber-500/20 text-amber-400' :
+                            'bg-blue-500/20 text-blue-400'
+                          }`}>
+                            {issue.priority}
+                          </span>
+                          <div className="flex-1">
+                            <div className="font-medium">{issue.title}</div>
+                            {selectedIssue === issue && (
+                              <div className="mt-2 text-xs text-slate-400">
+                                {issue.description}
+                                {issue.file && (
+                                  <div className="mt-1 text-slate-500">
+                                    File: <code className="bg-slate-900 px-1 rounded">{issue.file}{issue.line ? `:${issue.line}` : ''}</code>
+                                  </div>
+                                )}
+                              </div>
+                            )}
+                          </div>
+                        </div>
                       </div>
                     ))}
                   </div>
+                </div>
+              )}
+
+              {/* Trend Charts */}
+              {allScans.length > 1 && (
+                <div className="mt-4 pt-4 border-t border-slate-800">
+                  <div className="flex items-center justify-between mb-3">
+                    <div className="text-sm text-slate-400">Quality Trends</div>
+                    <Button
+                      onClick={() => setShowTrends(!showTrends)}
+                      variant="outline"
+                      size="sm"
+                      className="border-slate-800 text-slate-400 hover:bg-slate-900"
+                    >
+                      {showTrends ? 'Hide Trends' : 'Show Trends'}
+                    </Button>
+                  </div>
+                  {showTrends && (
+                    <div className="space-y-4">
+                      {/* Score Trend */}
+                      <div>
+                        <div className="text-xs text-slate-500 mb-2">Quality Score Over Time</div>
+                        <div className="flex items-end gap-2 h-32">
+                          {allScans.slice(0, 10).reverse().map((scan: any, idx: number) => {
+                            const height = (scan.score || 0);
+                            return (
+                              <div key={idx} className="flex-1 flex flex-col items-center">
+                                <div className="w-full bg-slate-800 rounded-t relative group">
+                                  <div
+                                    className={`w-full rounded-t transition-all ${
+                                      height >= 80 ? 'bg-green-500' :
+                                      height >= 60 ? 'bg-amber-500' :
+                                      'bg-red-500'
+                                    }`}
+                                    style={{ height: `${height}%` }}
+                                  >
+                                    <div className="absolute -top-6 left-1/2 -translate-x-1/2 text-xs text-slate-400 opacity-0 group-hover:opacity-100 whitespace-nowrap">
+                                      {scan.score}
+                                    </div>
+                                  </div>
+                                </div>
+                                <div className="text-[10px] text-slate-600 mt-1 truncate w-full text-center">
+                                  {scan.repo.split('/')[1] || 'Repo'}
+                                </div>
+                              </div>
+                            );
+                          })}
+                        </div>
+                      </div>
+
+                      {/* Issues Trend */}
+                      <div>
+                        <div className="text-xs text-slate-500 mb-2">Issues Count Over Time</div>
+                        <div className="flex items-end gap-2 h-24">
+                          {allScans.slice(0, 10).reverse().map((scan: any, idx: number) => {
+                            const maxIssues = Math.max(...allScans.map((s: any) => s.issues || 0), 1);
+                            const height = ((scan.issues || 0) / maxIssues) * 100;
+                            return (
+                              <div key={idx} className="flex-1 flex flex-col items-center">
+                                <div className="w-full bg-slate-800 rounded-t">
+                                  <div
+                                    className="w-full bg-red-500/60 rounded-t"
+                                    style={{ height: `${height}%` }}
+                                  />
+                                </div>
+                                <div className="text-[10px] text-slate-600 mt-1">
+                                  {scan.issues || 0}
+                                </div>
+                              </div>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 </div>
               )}
             </div>
@@ -1469,30 +1576,248 @@ function MarketplaceView({ data }: any) {
  * Enterprise View - Enterprise Features & Analytics
  */
 function EnterpriseView({ data }: any) {
+  const [teams, setTeams] = React.useState([
+    { id: '1', name: 'Engineering', members: 12, repos: 8 },
+    { id: '2', name: 'Product', members: 5, repos: 3 },
+    { id: '3', name: 'Design', members: 4, repos: 2 }
+  ]);
+  const [users, setUsers] = React.useState([
+    { id: '1', email: 'john@example.com', name: 'John Doe', role: 'admin', team: 'Engineering' },
+    { id: '2', email: 'jane@example.com', name: 'Jane Smith', role: 'developer', team: 'Engineering' },
+    { id: '3', email: 'bob@example.com', name: 'Bob Johnson', role: 'viewer', team: 'Product' }
+  ]);
+  const [repos, setRepos] = React.useState([
+    { id: '1', name: 'frontend-app', team: 'Engineering', lastScan: '2024-01-15' },
+    { id: '2', name: 'backend-api', team: 'Engineering', lastScan: '2024-01-14' },
+    { id: '3', name: 'design-system', team: 'Design', lastScan: '2024-01-13' }
+  ]);
+  const [showAddTeam, setShowAddTeam] = React.useState(false);
+  const [showAddUser, setShowAddUser] = React.useState(false);
+  const [showAddRepo, setShowAddRepo] = React.useState(false);
+  const [newTeamName, setNewTeamName] = React.useState('');
+  const [newUserEmail, setNewUserEmail] = React.useState('');
+  const [newUserRole, setNewUserRole] = React.useState('developer');
+  const [newRepoUrl, setNewRepoUrl] = React.useState('');
+
+  const handleAddTeam = () => {
+    if (newTeamName.trim()) {
+      setTeams([...teams, { id: String(teams.length + 1), name: newTeamName, members: 0, repos: 0 }]);
+      setNewTeamName('');
+      setShowAddTeam(false);
+    }
+  };
+
+  const handleAddUser = () => {
+    if (newUserEmail.trim()) {
+      setUsers([...users, { id: String(users.length + 1), email: newUserEmail, name: '', role: newUserRole, team: '' }]);
+      setNewUserEmail('');
+      setNewUserRole('developer');
+      setShowAddUser(false);
+    }
+  };
+
+  const handleAddRepo = () => {
+    if (newRepoUrl.trim()) {
+      const repoName = newRepoUrl.split('/').pop() || newRepoUrl;
+      setRepos([...repos, { id: String(repos.length + 1), name: repoName, team: '', lastScan: 'Never' }]);
+      setNewRepoUrl('');
+      setShowAddRepo(false);
+    }
+  };
+
   return (
-    <div className="w-full max-w-6xl">
-      <Card className="bg-slate-900/90 border-slate-800 mb-4">
-        <div className="text-amber-400 uppercase tracking-widest mb-4 text-lg">
-          Enterprise Dashboard
-        </div>
-        <div className="grid grid-cols-4 gap-4">
-          <div className="text-center">
-            <div className="text-3xl font-bold text-cyan-400">{data.teams}</div>
-            <div className="text-sm text-slate-400">Teams</div>
+    <div className="w-full max-w-6xl space-y-6">
+      {/* Stats Overview */}
+      <Card className="bg-slate-900/90 border-slate-800">
+        <CardHeader>
+          <CardTitle className="text-white text-lg">Enterprise Overview</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="grid grid-cols-4 gap-4">
+            <div className="text-center">
+              <div className="text-3xl font-bold text-cyan-400">{teams.length}</div>
+              <div className="text-sm text-slate-400">Teams</div>
+            </div>
+            <div className="text-center">
+              <div className="text-3xl font-bold text-cyan-400">{repos.length}</div>
+              <div className="text-sm text-slate-400">Repositories</div>
+            </div>
+            <div className="text-center">
+              <div className="text-3xl font-bold text-cyan-400">{users.length}</div>
+              <div className="text-sm text-slate-400">Users</div>
+            </div>
+            <div className="text-center">
+              <div className="text-3xl font-bold text-green-400">{data.uptime}%</div>
+              <div className="text-sm text-slate-400">Uptime</div>
+            </div>
           </div>
-          <div className="text-center">
-            <div className="text-3xl font-bold text-cyan-400">{data.repositories}</div>
-            <div className="text-sm text-slate-400">Repositories</div>
+        </CardContent>
+      </Card>
+
+      {/* Teams Management */}
+      <Card className="bg-slate-900/90 border-slate-800">
+        <CardHeader>
+          <div className="flex items-center justify-between">
+            <CardTitle className="text-white text-lg">Teams</CardTitle>
+            <Button
+              onClick={() => setShowAddTeam(!showAddTeam)}
+              size="sm"
+              className="bg-cyan-600 hover:bg-cyan-700 text-white"
+            >
+              + Add Team
+            </Button>
           </div>
-          <div className="text-center">
-            <div className="text-3xl font-bold text-cyan-400">{data.users}</div>
-            <div className="text-sm text-slate-400">Users</div>
+        </CardHeader>
+        <CardContent>
+          {showAddTeam && (
+            <div className="mb-4 p-4 bg-slate-800/50 rounded-lg border border-slate-700">
+              <input
+                type="text"
+                value={newTeamName}
+                onChange={(e) => setNewTeamName(e.target.value)}
+                placeholder="Team name"
+                className="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-white mb-2"
+                onKeyPress={(e) => e.key === 'Enter' && handleAddTeam()}
+              />
+              <div className="flex gap-2">
+                <Button onClick={handleAddTeam} size="sm" className="bg-green-600 hover:bg-green-700">
+                  Create
+                </Button>
+                <Button onClick={() => { setShowAddTeam(false); setNewTeamName(''); }} size="sm" variant="outline" className="border-slate-700">
+                  Cancel
+                </Button>
+              </div>
+            </div>
+          )}
+          <div className="space-y-2">
+            {teams.map(team => (
+              <div key={team.id} className="flex items-center justify-between p-3 bg-slate-800/30 rounded-lg">
+                <div>
+                  <div className="text-white font-medium">{team.name}</div>
+                  <div className="text-sm text-slate-400">{team.members} members • {team.repos} repos</div>
+                </div>
+                <Button size="sm" variant="outline" className="border-slate-700">
+                  Manage
+                </Button>
+              </div>
+            ))}
           </div>
-          <div className="text-center">
-            <div className="text-3xl font-bold text-green-400">{data.uptime}%</div>
-            <div className="text-sm text-slate-400">Uptime</div>
+        </CardContent>
+      </Card>
+
+      {/* Users Management */}
+      <Card className="bg-slate-900/90 border-slate-800">
+        <CardHeader>
+          <div className="flex items-center justify-between">
+            <CardTitle className="text-white text-lg">Users</CardTitle>
+            <Button
+              onClick={() => setShowAddUser(!showAddUser)}
+              size="sm"
+              className="bg-cyan-600 hover:bg-cyan-700 text-white"
+            >
+              + Invite User
+            </Button>
           </div>
-        </div>
+        </CardHeader>
+        <CardContent>
+          {showAddUser && (
+            <div className="mb-4 p-4 bg-slate-800/50 rounded-lg border border-slate-700">
+              <input
+                type="email"
+                value={newUserEmail}
+                onChange={(e) => setNewUserEmail(e.target.value)}
+                placeholder="user@example.com"
+                className="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-white mb-2"
+              />
+              <select
+                value={newUserRole}
+                onChange={(e) => setNewUserRole(e.target.value)}
+                className="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-white mb-2"
+              >
+                <option value="viewer">Viewer</option>
+                <option value="developer">Developer</option>
+                <option value="admin">Admin</option>
+              </select>
+              <div className="flex gap-2">
+                <Button onClick={handleAddUser} size="sm" className="bg-green-600 hover:bg-green-700">
+                  Invite
+                </Button>
+                <Button onClick={() => { setShowAddUser(false); setNewUserEmail(''); }} size="sm" variant="outline" className="border-slate-700">
+                  Cancel
+                </Button>
+              </div>
+            </div>
+          )}
+          <div className="space-y-2">
+            {users.map(user => (
+              <div key={user.id} className="flex items-center justify-between p-3 bg-slate-800/30 rounded-lg">
+                <div>
+                  <div className="text-white font-medium">{user.name || user.email}</div>
+                  <div className="text-sm text-slate-400">{user.email} • {user.role} {user.team && `• ${user.team}`}</div>
+                </div>
+                <div className="flex gap-2">
+                  <Button size="sm" variant="outline" className="border-slate-700">
+                    Edit
+                  </Button>
+                  <Button size="sm" variant="outline" className="border-red-700 text-red-400 hover:bg-red-500/10">
+                    Remove
+                  </Button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Repositories Management */}
+      <Card className="bg-slate-900/90 border-slate-800">
+        <CardHeader>
+          <div className="flex items-center justify-between">
+            <CardTitle className="text-white text-lg">Repositories</CardTitle>
+            <Button
+              onClick={() => setShowAddRepo(!showAddRepo)}
+              size="sm"
+              className="bg-cyan-600 hover:bg-cyan-700 text-white"
+            >
+              + Add Repository
+            </Button>
+          </div>
+        </CardHeader>
+        <CardContent>
+          {showAddRepo && (
+            <div className="mb-4 p-4 bg-slate-800/50 rounded-lg border border-slate-700">
+              <input
+                type="text"
+                value={newRepoUrl}
+                onChange={(e) => setNewRepoUrl(e.target.value)}
+                placeholder="https://github.com/owner/repo"
+                className="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-white mb-2"
+                onKeyPress={(e) => e.key === 'Enter' && handleAddRepo()}
+              />
+              <div className="flex gap-2">
+                <Button onClick={handleAddRepo} size="sm" className="bg-green-600 hover:bg-green-700">
+                  Add
+                </Button>
+                <Button onClick={() => { setShowAddRepo(false); setNewRepoUrl(''); }} size="sm" variant="outline" className="border-slate-700">
+                  Cancel
+                </Button>
+              </div>
+            </div>
+          )}
+          <div className="space-y-2">
+            {repos.map(repo => (
+              <div key={repo.id} className="flex items-center justify-between p-3 bg-slate-800/30 rounded-lg">
+                <div>
+                  <div className="text-white font-medium">{repo.name}</div>
+                  <div className="text-sm text-slate-400">{repo.team || 'No team'} • Last scan: {repo.lastScan}</div>
+                </div>
+                <Button size="sm" variant="outline" className="border-slate-700">
+                  Scan Now
+                </Button>
+              </div>
+            ))}
+          </div>
+        </CardContent>
       </Card>
 
       <div className="grid grid-cols-2 gap-4">
