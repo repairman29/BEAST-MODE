@@ -35,6 +35,10 @@ function DeploymentDashboard() {
   const [isLoading, setIsLoading] = useState(false);
   const [selectedDeployment, setSelectedDeployment] = useState<Deployment | null>(null);
   const [showCreateDeployment, setShowCreateDeployment] = useState(false);
+  const [showLogs, setShowLogs] = useState<string | null>(null);
+  const [rollbackInProgress, setRollbackInProgress] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [autoRefresh, setAutoRefresh] = useState(true);
   const [newDeployment, setNewDeployment] = useState({
     name: '',
     platform: 'vercel',
@@ -52,7 +56,15 @@ function DeploymentDashboard() {
     fetchDeployments();
     fetchPlatforms();
     fetchStrategies();
-  }, []);
+
+    // Auto-refresh deployments every 5 seconds if enabled
+    if (autoRefresh) {
+      const interval = setInterval(() => {
+        fetchDeployments();
+      }, 5000);
+      return () => clearInterval(interval);
+    }
+  }, [autoRefresh]);
 
   const fetchDeployments = async () => {
     try {
@@ -110,6 +122,7 @@ function DeploymentDashboard() {
         const deployment = await response.json();
         setDeployments(prev => [deployment, ...prev]);
         setShowCreateDeployment(false);
+        setError(null);
         setNewDeployment({
           name: '',
           platform: 'vercel',
@@ -122,11 +135,58 @@ function DeploymentDashboard() {
             serviceType: 'web-service'
           }
         });
+      } else {
+        const errorData = await response.json();
+        setError(errorData.error || 'Failed to create deployment');
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error('Failed to create deployment:', error);
+      setError(error.message || 'Failed to create deployment');
     } finally {
       setIsLoading(false);
+    }
+  };
+
+  const handleRollback = async (deploymentId: string) => {
+    if (!confirm('Are you sure you want to rollback this deployment?')) {
+      return;
+    }
+
+    setRollbackInProgress(deploymentId);
+    setError(null);
+
+    try {
+      const response = await fetch(`/api/beast-mode/deployments/${deploymentId}/rollback`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          reason: 'Manual rollback requested by user'
+        })
+      });
+
+      if (response.ok) {
+        const result = await response.json();
+        // Add rollback deployment to list
+        setDeployments(prev => [result.deployment, ...prev]);
+        // Update original deployment status
+        setDeployments(prev => prev.map(d => 
+          d.id === deploymentId ? { ...d, status: 'rolling_back' } : d
+        ));
+        // Refresh after a moment
+        setTimeout(() => {
+          fetchDeployments();
+        }, 2000);
+      } else {
+        const errorData = await response.json();
+        setError(errorData.error || 'Failed to rollback deployment');
+      }
+    } catch (error: any) {
+      console.error('Rollback failed:', error);
+      setError(error.message || 'Failed to rollback deployment');
+    } finally {
+      setRollbackInProgress(null);
     }
   };
 
@@ -228,7 +288,7 @@ function DeploymentDashboard() {
   };
 
   return (
-    <div className="w-full max-w-7xl space-y-6">
+    <div className="w-full max-w-7xl space-y-6 mx-auto">
       {/* Header */}
       <Card className="bg-slate-900/90 border-slate-800">
         <CardHeader>
@@ -286,7 +346,7 @@ function DeploymentDashboard() {
           )}
 
           {/* Deployment Stats */}
-          <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-6">
             <div className="text-center">
               <div className="text-2xl font-bold text-cyan-400">
                 {deployments.length}
@@ -411,14 +471,88 @@ function DeploymentDashboard() {
                     <span className="text-slate-400">
                       Started: {new Date(deployment.startTime).toLocaleString()}
                     </span>
-                    {deployment.logs && deployment.logs.length > 0 && (
-                      <span className="text-slate-400">
-                        Last: {deployment.logs[deployment.logs.length - 1]?.message}
-                      </span>
-                    )}
+                    <div className="flex gap-2">
+                      {deployment.logs && deployment.logs.length > 0 && (
+                        <Button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setShowLogs(showLogs === deployment.id ? null : deployment.id);
+                          }}
+                          variant="outline"
+                          size="sm"
+                          className="border-slate-800 text-slate-400 hover:bg-slate-900 text-xs"
+                        >
+                          {showLogs === deployment.id ? '📋 Hide Logs' : '📋 View Logs'}
+                        </Button>
+                      )}
+                      {(deployment.status === 'completed' || deployment.status === 'failed') && (
+                        <Button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleRollback(deployment.id);
+                          }}
+                          disabled={rollbackInProgress === deployment.id}
+                          variant="outline"
+                          size="sm"
+                          className="border-amber-500/50 text-amber-400 hover:bg-amber-500/10 text-xs"
+                        >
+                          {rollbackInProgress === deployment.id ? '🔄 Rolling back...' : '↩️ Rollback'}
+                        </Button>
+                      )}
+                    </div>
                   </div>
+
+                  {/* Deployment Logs */}
+                  {showLogs === deployment.id && deployment.logs && (
+                    <div className="mt-4 pt-4 border-t border-slate-800">
+                      <div className="bg-slate-950 rounded-lg p-3 max-h-48 overflow-y-auto">
+                        <div className="text-xs text-slate-400 mb-2">Deployment Logs:</div>
+                        <div className="space-y-1 font-mono text-xs">
+                          {deployment.logs.map((log: any, idx: number) => (
+                            <div key={idx} className="text-slate-300">
+                              <span className="text-slate-500">
+                                [{new Date(log.timestamp).toLocaleTimeString()}]
+                              </span>
+                              {' '}
+                              <span>{log.message}</span>
+                              {log.progress !== undefined && (
+                                <span className="text-cyan-400 ml-2">
+                                  ({log.progress}%)
+                                </span>
+                              )}
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 </div>
               ))}
+            </div>
+          </CardContent>
+        </Card>
+      )}
+
+      {/* Error Display */}
+      {error && (
+        <Card className="bg-red-500/10 border-red-500/50">
+          <CardContent className="pt-6">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <span className="text-2xl">❌</span>
+                <div>
+                  <div className="text-red-400 font-semibold">Error</div>
+                  <div className="text-sm text-red-300 mt-1">{error}</div>
+                </div>
+              </div>
+              <Button
+                onClick={() => setError(null)}
+                variant="ghost"
+                size="sm"
+                className="text-red-400 hover:text-red-300"
+              >
+                ✕
+              </Button>
             </div>
           </CardContent>
         </Card>
@@ -434,28 +568,44 @@ function DeploymentDashboard() {
             {deployments.filter(d => !['deploying', 'initializing'].includes(d.status)).slice(0, 10).map((deployment) => (
               <div
                 key={deployment.id}
-                className="flex items-center justify-between bg-slate-900/30 border border-slate-800 rounded-lg p-3 cursor-pointer hover:border-cyan-500/40 transition-colors"
+                className="flex items-center justify-between bg-slate-900/30 border border-slate-800 rounded-lg p-3 cursor-pointer hover:border-cyan-500/40 transition-colors group"
                 onClick={() => setSelectedDeployment(deployment)}
               >
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-3 flex-1">
                   <span className="text-xl">{getStatusIcon(deployment.status)}</span>
-                  <div>
+                  <div className="flex-1">
                     <div className="text-white font-semibold">{deployment.name}</div>
                     <div className="text-slate-400 text-sm">
                       {getPlatformIcon(deployment.platform)} {deployment.platform} • {deployment.strategy} • {deployment.environment}
                     </div>
                   </div>
                 </div>
-                <div className="text-right">
-                  <div className={`font-semibold ${getStatusColor(deployment.status)}`}>
-                    {deployment.status}
+                <div className="flex items-center gap-3">
+                  <div className="text-right">
+                    <div className={`font-semibold ${getStatusColor(deployment.status)}`}>
+                      {deployment.status}
+                    </div>
+                    <div className="text-slate-400 text-xs">
+                      {deployment.completedAt
+                        ? new Date(deployment.completedAt).toLocaleString()
+                        : new Date(deployment.startTime).toLocaleString()
+                      }
+                    </div>
                   </div>
-                  <div className="text-slate-400 text-xs">
-                    {deployment.completedAt
-                      ? new Date(deployment.completedAt).toLocaleString()
-                      : new Date(deployment.startTime).toLocaleString()
-                    }
-                  </div>
+                  {(deployment.status === 'completed' || deployment.status === 'failed') && (
+                    <Button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleRollback(deployment.id);
+                      }}
+                      disabled={rollbackInProgress === deployment.id}
+                      variant="outline"
+                      size="sm"
+                      className="opacity-0 group-hover:opacity-100 transition-opacity border-amber-500/50 text-amber-400 hover:bg-amber-500/10 text-xs"
+                    >
+                      {rollbackInProgress === deployment.id ? '🔄' : '↩️'}
+                    </Button>
+                  )}
                 </div>
               </div>
             ))}

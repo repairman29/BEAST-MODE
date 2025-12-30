@@ -22,28 +22,12 @@ export default function Sidebar({ currentView, onViewChange, onCommandPalette }:
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
 
   const navigationItems: SidebarItem[] = [
-    // Core Views
-    { id: 'quality', label: 'Quality', icon: '⚡', tooltip: 'Code quality metrics and analysis', category: 'Core' },
-    { id: 'intelligence', label: 'Intelligence', icon: '🧠', tooltip: 'AI insights and predictions', category: 'Core' },
-    { id: 'marketplace', label: 'Marketplace', icon: '📦', tooltip: 'Plugins and integrations', category: 'Core' },
-    { id: 'enterprise', label: 'Enterprise', icon: '🏢', tooltip: 'Team and organization settings', category: 'Core' },
-    
-    // Monitoring
-    { id: 'health', label: 'Health', icon: '💚', tooltip: 'System health dashboard', category: 'Monitoring' },
-    { id: 'ai-recommendations', label: 'AI Recs', icon: '💡', tooltip: 'AI-powered recommendations', category: 'Monitoring' },
-    { id: 'monetization', label: 'Revenue', icon: '💰', tooltip: 'Revenue and monetization metrics', category: 'Monitoring' },
-    
-    // Operations
-    { id: 'missions', label: 'Missions', icon: '🎯', tooltip: 'Active missions and tasks', category: 'Operations' },
-    { id: 'deployments', label: 'Deploy', icon: '🚀', tooltip: 'Deployment orchestrator', category: 'Operations' },
-    
-    // Tools
-    { id: 'github-scan', label: 'Scan Repo', icon: '🔍', tooltip: 'Scan GitHub repositories', category: 'Tools' },
-    { id: 'self-improve', label: 'Improve', icon: '✨', tooltip: 'Self-improvement analysis', category: 'Tools' },
-    
-    // Account
-    { id: 'auth', label: 'Sign In', icon: '👤', tooltip: 'Authentication and account', category: 'Account' },
-    { id: 'pricing', label: 'Pricing', icon: '💳', tooltip: 'View pricing plans', category: 'Account' },
+    // Core Tabs - Unforgettable Experience
+    { id: 'quality', label: 'Quality', icon: '⚡', tooltip: 'Scan your code and see quality score instantly', category: 'Core' },
+    { id: 'intelligence', label: 'Intelligence', icon: '🧠', tooltip: 'Ask questions, get AI recommendations and missions', category: 'Core' },
+    { id: 'marketplace', label: 'Marketplace', icon: '📦', tooltip: 'Find and install plugins for your code', category: 'Core' },
+    { id: 'self-improve', label: 'Improve', icon: '✨', tooltip: 'Auto-fix code issues with one click', category: 'Core' },
+    { id: 'settings', label: 'Settings', icon: '⚙️', tooltip: 'Manage teams, users, and preferences', category: 'Core' },
   ];
 
   const groupedItems = navigationItems.reduce((acc, item) => {

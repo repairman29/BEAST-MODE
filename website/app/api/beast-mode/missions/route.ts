@@ -5,31 +5,22 @@ import { NextRequest, NextResponse } from 'next/server';
  *
  * Mission creation, management, and tracking
  */
+import { missions } from './shared';
+
 export async function GET(request: NextRequest) {
   try {
-    // Check if BEAST MODE mission guidance is available
-    if (!global.beastMode || !global.beastMode.missionGuidance) {
-      return NextResponse.json(
-        { error: 'Mission Guidance not available', missions: [] },
-        { status: 503 }
-      );
-    }
-
-    // Get active missions
-    const missions = global.beastMode.getActiveMissions();
-
     return NextResponse.json({
       missions,
       count: missions.length,
       timestamp: new Date().toISOString()
     });
-
-  } catch (error) {
+  } catch (error: any) {
     console.error('Missions API error:', error);
     return NextResponse.json(
       {
         error: 'Failed to retrieve missions',
-        details: error.message
+        details: error.message,
+        missions: []
       },
       { status: 500 }
     );
@@ -43,18 +34,38 @@ export async function POST(request: NextRequest) {
   try {
     const missionData = await request.json();
 
-    // Check if BEAST MODE mission guidance is available
-    if (!global.beastMode || !global.beastMode.missionGuidance) {
+    if (!missionData.name || !missionData.description) {
       return NextResponse.json(
-        { error: 'Mission Guidance not available' },
-        { status: 503 }
+        { error: 'Mission name and description are required' },
+        { status: 400 }
       );
     }
 
-    // Create new mission
-    const mission = await global.beastMode.createMission(missionData);
+    const newMission = {
+      id: String(missions.length + 1),
+      name: missionData.name,
+      description: missionData.description,
+      type: missionData.type || 'code-refactor',
+      priority: missionData.priority || 'medium',
+      status: 'planning',
+      progress: 0,
+      deadline: missionData.deadline || new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(),
+      tasks: (missionData.objectives || []).filter((obj: string) => obj.trim()).map((obj: string, idx: number) => ({
+        id: String(idx + 1),
+        name: obj,
+        status: 'pending',
+        progress: 0
+      })),
+      createdAt: new Date().toISOString()
+    };
 
-    return NextResponse.json(mission, { status: 201 });
+    missions.push(newMission);
+
+    return NextResponse.json({
+      mission: newMission,
+      message: 'Mission created successfully',
+      timestamp: new Date().toISOString()
+    }, { status: 201 });
 
   } catch (error) {
     console.error('Create Mission API error:', error);

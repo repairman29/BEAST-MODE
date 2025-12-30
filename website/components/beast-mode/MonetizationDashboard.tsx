@@ -171,11 +171,16 @@ function MonetizationDashboard() {
     );
   }
 
-  const { metrics } = analytics.analytics;
-  const { marketplace } = analytics;
+  // Safely extract metrics and marketplace data
+  const metrics = analytics?.analytics?.metrics || {};
+  const marketplace = analytics?.marketplace || {
+    totalPlugins: 0,
+    totalRevenue: 0,
+    monthlyRevenue: 0
+  };
 
   return (
-    <div className="w-full max-w-7xl space-y-6">
+    <div className="w-full max-w-7xl space-y-6 mx-auto">
       {/* Header */}
       <Card className="bg-slate-900/90 border-slate-800">
         <CardHeader>
@@ -201,7 +206,7 @@ function MonetizationDashboard() {
         <CardContent>
 
         {/* Key Metrics */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-6">
           <div className="text-center">
             <div className="text-2xl font-bold text-green-400">
               {formatCurrency(analytics.stripe?.totalRevenue || marketplace.totalRevenue)}
@@ -477,7 +482,7 @@ function MonetizationDashboard() {
             <div>
               <h4 className="text-amber-400 font-semibold mb-3">Most Used</h4>
               <div className="space-y-2">
-                {metrics.plugins.mostUsed.slice(0, 5).map((plugin, index) => (
+                {(metrics.plugins?.mostUsed || []).slice(0, 5).map((plugin, index) => (
                   <div key={plugin.pluginId} className="flex justify-between items-center">
                     <div className="flex items-center gap-2">
                       <span className="text-slate-400">#{index + 1}</span>

@@ -17,6 +17,9 @@ function HealthDashboard() {
   const [selectedComponent, setSelectedComponent] = useState(null);
   const [healingInProgress, setHealingInProgress] = useState(false);
   const [showTrends, setShowTrends] = useState(false);
+  const [alertFilter, setAlertFilter] = useState<'all' | 'critical' | 'warning' | 'info'>('all');
+  const [componentFilter, setComponentFilter] = useState('');
+  const [healingResult, setHealingResult] = useState<any>(null);
 
   useEffect(() => {
     fetchHealthData();
@@ -76,11 +79,24 @@ function HealthDashboard() {
 
       if (response.ok) {
         const result = await response.json();
+        setHealingResult({
+          success: true,
+          message: result.message,
+          component: result.component,
+          timestamp: new Date()
+        });
         // Refresh health data after healing
         await fetchHealthData();
-
-        // Show success notification
-        console.log('Self-healing completed:', result);
+        // Clear result after 5 seconds
+        setTimeout(() => setHealingResult(null), 5000);
+      } else {
+        const error = await response.json();
+        setHealingResult({
+          success: false,
+          message: error.error || 'Healing failed',
+          timestamp: new Date()
+        });
+        setTimeout(() => setHealingResult(null), 5000);
       }
     } catch (error) {
       console.error('Self-healing failed:', error);
@@ -134,9 +150,28 @@ function HealthDashboard() {
 
   const { isMonitoring, lastCheck, components, alerts, history } = healthData;
   const overallStatus = history && history.length > 0 ? history[history.length - 1].overall : 'unknown';
+  
+  // Filter alerts
+  const filteredAlerts = alerts.filter((alert: any) => {
+    if (alertFilter === 'all') return true;
+    return alert.severity === alertFilter;
+  }).sort((a: any, b: any) => {
+    // Sort by severity (critical > warning > info) then by timestamp
+    const severityOrder = { critical: 3, warning: 2, info: 1 };
+    const severityDiff = (severityOrder[b.severity as keyof typeof severityOrder] || 0) - 
+                        (severityOrder[a.severity as keyof typeof severityOrder] || 0);
+    if (severityDiff !== 0) return severityDiff;
+    return new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime();
+  });
+
+  // Filter components
+  const filteredComponents = Object.entries(components).filter(([name]) => {
+    if (!componentFilter) return true;
+    return name.toLowerCase().includes(componentFilter.toLowerCase());
+  });
 
   return (
-    <div className="w-full max-w-6xl space-y-6">
+    <div className="w-full max-w-7xl space-y-6 mx-auto">
       {/* Header */}
       <Card className="bg-slate-900/90 border-slate-800">
         <CardHeader>
@@ -177,7 +212,7 @@ function HealthDashboard() {
         <CardContent>
 
         {/* Overall Status */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-6">
           <div className="text-center">
             <div className={`text-2xl font-bold ${getStatusColor(overallStatus)}`}>
               {getStatusIcon(overallStatus)}
@@ -205,6 +240,9 @@ function HealthDashboard() {
             <div className="text-sm text-slate-400">Active Alerts</div>
             <div className="text-sm text-cyan-400">
               {alerts.filter((a: any) => a.severity === 'critical').length} Critical
+              {alerts.filter((a: any) => a.severity === 'warning').length > 0 && 
+                ` • ${alerts.filter((a: any) => a.severity === 'warning').length} Warning`
+              }
             </div>
           </div>
 
@@ -311,14 +349,54 @@ function HealthDashboard() {
         </Card>
       )}
 
+      {/* Healing Result Notification */}
+      {healingResult && (
+        <Card className={`bg-slate-900/90 border-2 ${
+          healingResult.success ? 'border-green-500/50' : 'border-red-500/50'
+        }`}>
+          <CardContent className="pt-6">
+            <div className="flex items-center gap-3">
+              <span className="text-2xl">{healingResult.success ? '✅' : '❌'}</span>
+              <div className="flex-1">
+                <div className={`font-semibold ${
+                  healingResult.success ? 'text-green-400' : 'text-red-400'
+                }`}>
+                  {healingResult.success ? 'Healing Successful' : 'Healing Failed'}
+                </div>
+                <div className="text-sm text-slate-400 mt-1">
+                  {healingResult.message}
+                </div>
+              </div>
+              <Button
+                onClick={() => setHealingResult(null)}
+                variant="ghost"
+                size="sm"
+                className="text-slate-400 hover:text-white"
+              >
+                ✕
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+      )}
+
       {/* Component Health Grid */}
       <Card className="bg-slate-900/90 border-slate-800">
         <CardHeader>
-          <CardTitle className="text-white text-lg">🔧 Component Health</CardTitle>
+          <div className="flex items-center justify-between">
+            <CardTitle className="text-white text-lg">🔧 Component Health</CardTitle>
+            <input
+              type="text"
+              value={componentFilter}
+              onChange={(e) => setComponentFilter(e.target.value)}
+              placeholder="Search components..."
+              className="bg-slate-950 border border-slate-700 rounded-lg px-3 py-1.5 text-white text-sm placeholder-slate-500 focus:outline-none focus:border-cyan-500 w-48"
+            />
+          </div>
         </CardHeader>
         <CardContent>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {Object.entries(components).map(([name, component]: [string, any]) => (
+          {filteredComponents.map(([name, component]: [string, any]) => (
             <div
               key={name}
               className="bg-slate-900/50 border border-slate-800 rounded-lg p-4 cursor-pointer hover:border-cyan-500/50 transition-colors"
@@ -386,11 +464,35 @@ function HealthDashboard() {
       {alerts.length > 0 && (
         <Card className="bg-slate-900/90 border-slate-800">
           <CardHeader>
-            <CardTitle className="text-white text-lg">🚨 Recent Alerts</CardTitle>
+            <div className="flex items-center justify-between">
+              <CardTitle className="text-white text-lg">🚨 Recent Alerts ({filteredAlerts.length})</CardTitle>
+              <div className="flex gap-2">
+                {(['all', 'critical', 'warning', 'info'] as const).map((filter) => (
+                  <Button
+                    key={filter}
+                    onClick={() => setAlertFilter(filter)}
+                    variant={alertFilter === filter ? 'default' : 'outline'}
+                    size="sm"
+                    className={`text-xs ${
+                      alertFilter === filter
+                        ? 'bg-cyan-500/20 border-cyan-500 text-cyan-400'
+                        : 'border-slate-800 text-slate-400'
+                    }`}
+                  >
+                    {filter === 'all' ? 'All' : filter.charAt(0).toUpperCase() + filter.slice(1)}
+                    {filter !== 'all' && (
+                      <span className="ml-1">
+                        ({alerts.filter((a: any) => a.severity === filter).length})
+                      </span>
+                    )}
+                  </Button>
+                ))}
+              </div>
+            </div>
           </CardHeader>
           <CardContent>
           <div className="space-y-3">
-            {alerts.slice(0, 5).map((alert: any, index: number) => (
+            {filteredAlerts.slice(0, 10).map((alert: any, index: number) => (
               <div
                 key={index}
                 className={`p-3 rounded-lg border-l-4 ${

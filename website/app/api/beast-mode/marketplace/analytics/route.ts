@@ -1,87 +1,88 @@
 import { NextRequest, NextResponse } from 'next/server';
 
 /**
- * BEAST MODE Marketplace Analytics API
- *
- * Provides comprehensive analytics for marketplace usage, revenue, and user behavior
+ * BEAST MODE Plugin Analytics API
+ * 
+ * Tracks plugin usage, performance, and statistics
+ */
+
+declare global {
+  var pluginExecutions: any[] | undefined;
+  var installedPluginsStore: Map<string, Map<string, any>> | undefined;
+}
+
+/**
+ * GET /api/beast-mode/marketplace/analytics
+ * Get plugin analytics
  */
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
-    const timeframe = searchParams.get('timeframe') || '30d';
-    const metrics = searchParams.get('metrics')?.split(',') || [];
+    const userId = searchParams.get('userId') || 'demo-user';
+    const pluginId = searchParams.get('pluginId');
 
-    // Check if marketplace is available
-    if (!global.beastMode || !global.beastMode.marketplace) {
-      return NextResponse.json(
-        { error: 'Marketplace not available' },
-        { status: 503 }
-      );
+    const executions = global.pluginExecutions || [];
+    const installedPluginsStore = global.installedPluginsStore || new Map();
+    const userPlugins = installedPluginsStore.get(userId) || new Map();
+
+    // Filter executions by user and optionally by plugin
+    let filteredExecutions = executions.filter((e: any) => e.userId === userId);
+    if (pluginId) {
+      filteredExecutions = filteredExecutions.filter((e: any) => e.pluginId === pluginId);
     }
 
-    // Get analytics from marketplace
-    const analytics = await global.beastMode.marketplace.getAnalytics(timeframe, metrics);
+    // Calculate analytics
+    const analytics = {
+      totalExecutions: filteredExecutions.length,
+      successfulExecutions: filteredExecutions.filter((e: any) => e.success).length,
+      failedExecutions: filteredExecutions.filter((e: any) => !e.success).length,
+      averageDuration: filteredExecutions.length > 0
+        ? filteredExecutions.reduce((sum: number, e: any) => sum + (e.duration || 0), 0) / filteredExecutions.length
+        : 0,
+      executionsByPlugin: {} as Record<string, number>,
+      executionsByDay: {} as Record<string, number>,
+      installedPlugins: userPlugins.size,
+      enabledPlugins: Array.from(userPlugins.values()).filter((p: any) => p.enabled).length
+    };
 
-    return NextResponse.json({
-      analytics,
-      timestamp: new Date().toISOString(),
-      marketplace: {
-        totalPlugins: global.beastMode.marketplace.availablePlugins?.size || 0,
-        totalRevenue: global.beastMode.marketplace.totalRevenue || 0,
-        monthlyRevenue: global.beastMode.marketplace.monthlyRevenue || 0
-      }
+    // Group by plugin
+    filteredExecutions.forEach((exec: any) => {
+      analytics.executionsByPlugin[exec.pluginId] = (analytics.executionsByPlugin[exec.pluginId] || 0) + 1;
     });
 
-  } catch (error) {
-    console.error('Marketplace Analytics API error:', error);
-    return NextResponse.json(
-      {
-        error: 'Failed to retrieve marketplace analytics',
-        details: error.message
-      },
-      { status: 500 }
-    );
-  }
-}
+    // Group by day
+    filteredExecutions.forEach((exec: any) => {
+      const date = new Date(exec.timestamp).toISOString().split('T')[0];
+      analytics.executionsByDay[date] = (analytics.executionsByDay[date] || 0) + 1;
+    });
 
-/**
- * POST endpoint for tracking marketplace events
- */
-export async function POST(request: NextRequest) {
-  try {
-    const { userId, action, data = {} } = await request.json();
-
-    if (!userId || !action) {
-      return NextResponse.json(
-        { error: 'User ID and action are required' },
-        { status: 400 }
-      );
-    }
-
-    // Check if marketplace is available
-    if (!global.beastMode || !global.beastMode.marketplace) {
-      return NextResponse.json(
-        { error: 'Marketplace not available' },
-        { status: 503 }
-      );
-    }
-
-    // Track the usage event
-    global.beastMode.marketplace.trackUsage(userId, action, data);
+    // Get most used plugins
+    const mostUsedPlugins = Object.entries(analytics.executionsByPlugin)
+      .sort(([, a], [, b]) => (b as number) - (a as number))
+      .slice(0, 10)
+      .map(([id, count]) => ({
+        pluginId: id,
+        executions: count,
+        plugin: userPlugins.get(id) || { name: id }
+      }));
 
     return NextResponse.json({
-      success: true,
-      message: `Tracked ${action} event for user ${userId}`,
+      userId,
+      pluginId: pluginId || 'all',
+      analytics: {
+        ...analytics,
+        mostUsedPlugins,
+        successRate: analytics.totalExecutions > 0
+          ? (analytics.successfulExecutions / analytics.totalExecutions * 100).toFixed(1)
+          : '0.0'
+      },
       timestamp: new Date().toISOString()
     });
 
-  } catch (error) {
-    console.error('Marketplace Tracking API error:', error);
+  } catch (error: any) {
+    console.error('Plugin Analytics API error:', error);
     return NextResponse.json(
-      {
-        error: 'Failed to track marketplace event',
-        details: error.message
-      },
+      { error: 'Failed to fetch analytics', details: error.message },
       { status: 500 }
     );
   }
