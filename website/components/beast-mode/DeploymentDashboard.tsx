@@ -245,6 +245,46 @@ function DeploymentDashboard() {
           </div>
         </CardHeader>
         <CardContent>
+          {/* Platform Connection Status */}
+          {(platformStatus.vercel || platformStatus.railway) && (
+            <div className="mb-4 p-3 bg-slate-800/50 rounded-lg border border-slate-700">
+              <div className="text-sm text-slate-400 mb-2">Platform Connections:</div>
+              <div className="flex gap-4 flex-wrap">
+                {platformStatus.vercel && (
+                  <div className="flex items-center gap-2">
+                    <span className={`w-2 h-2 rounded-full ${
+                      platformStatus.vercel === 'connected' ? 'bg-green-400' : 'bg-red-400'
+                    }`}></span>
+                    <span className="text-sm text-white">Vercel</span>
+                    <span className={`text-xs ${
+                      platformStatus.vercel === 'connected' ? 'text-green-400' : 'text-red-400'
+                    }`}>
+                      {platformStatus.vercel === 'connected' ? 'Connected' : 'Not Connected'}
+                    </span>
+                  </div>
+                )}
+                {platformStatus.railway && (
+                  <div className="flex items-center gap-2">
+                    <span className={`w-2 h-2 rounded-full ${
+                      platformStatus.railway === 'connected' ? 'bg-green-400' : 'bg-red-400'
+                    }`}></span>
+                    <span className="text-sm text-white">Railway</span>
+                    <span className={`text-xs ${
+                      platformStatus.railway === 'connected' ? 'text-green-400' : 'text-red-400'
+                    }`}>
+                      {platformStatus.railway === 'connected' ? 'Connected' : 'Not Connected'}
+                    </span>
+                  </div>
+                )}
+              </div>
+              {(platformStatus.vercel === 'not_connected' || platformStatus.railway === 'not_connected') && (
+                <div className="mt-2 text-xs text-amber-400">
+                  💡 Configure VERCEL_API_TOKEN or RAILWAY_TOKEN in environment variables to enable real deployments
+                </div>
+              )}
+            </div>
+          )}
+
           {/* Deployment Stats */}
           <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
             <div className="text-center">
