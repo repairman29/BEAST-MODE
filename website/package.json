@@ -11,7 +11,14 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "work": "node scripts/work.js",
+    "test": "node scripts/test-features.js",
+    "test:api": "node scripts/test-features.js",
+    "test:ui": "node scripts/test-ui.js",
+    "test:experience": "node scripts/test-experience.js",
+    "test:all": "npm run test:ui && npm run test:experience && npm run test:api",
+    "test:build": "npm run lint && npm run build"
   },
   "dependencies": {
     "@octokit/rest": "^22.0.1",

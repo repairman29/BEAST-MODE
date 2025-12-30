@@ -154,7 +154,7 @@ export default function GitHubScanForm() {
   };
 
   return (
-    <div className="w-full max-w-4xl space-y-6">
+    <div className="w-full max-w-7xl space-y-6 mx-auto">
       <Card className="bg-slate-900/90 border-slate-800">
         <CardHeader>
           <CardTitle className="text-white">Scan GitHub Repository</CardTitle>

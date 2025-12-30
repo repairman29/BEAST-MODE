@@ -138,9 +138,39 @@ function MissionDashboard() {
 
       if (response.ok) {
         await fetchMissions(); // Refresh missions
+      } else {
+        const error = await response.json();
+        alert(error.error || 'Failed to start mission');
       }
     } catch (error) {
       console.error('Failed to start mission:', error);
+      alert('Failed to start mission');
+    }
+  };
+
+  const completeMission = async (missionId: string) => {
+    if (!confirm('Mark this mission as completed?')) return;
+
+    try {
+      const response = await fetch(`/api/beast-mode/missions/${missionId}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          status: 'completed',
+          progress: 100,
+          completedAt: new Date().toISOString()
+        })
+      });
+
+      if (response.ok) {
+        await fetchMissions();
+      } else {
+        const error = await response.json();
+        alert(error.error || 'Failed to complete mission');
+      }
+    } catch (error) {
+      console.error('Failed to complete mission:', error);
+      alert('Failed to complete mission');
     }
   };
 
@@ -268,7 +298,7 @@ function MissionDashboard() {
   };
 
   return (
-    <div className="w-full max-w-7xl space-y-6">
+    <div className="w-full max-w-7xl space-y-6 mx-auto">
       {/* Header */}
       <Card className="bg-slate-900/90 border-slate-800">
         <CardHeader>
@@ -307,7 +337,7 @@ function MissionDashboard() {
         </CardHeader>
         <CardContent>
           {/* Mission Stats */}
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             <div className="text-center">
               <div className="text-2xl font-bold text-cyan-400">
                 {missions.length}
@@ -470,6 +500,18 @@ function MissionDashboard() {
                           className="bg-white text-black hover:bg-slate-100"
                         >
                           🚀 Start
+                        </Button>
+                      )}
+                      {mission.status === 'active' && (
+                        <Button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            completeMission(mission.id);
+                          }}
+                          size="sm"
+                          className="bg-green-600 hover:bg-green-700 text-white"
+                        >
+                          ✅ Complete
                         </Button>
                       )}
                     </div>

@@ -134,7 +134,7 @@ export default function PricingSection() {
   ];
 
   return (
-    <div className="w-full max-w-6xl space-y-6">
+    <div className="w-full max-w-7xl space-y-6 mx-auto">
       <div className="text-center mb-8">
         <h2 className="text-3xl font-bold text-white mb-2">Choose Your Plan</h2>
         <p className="text-slate-400">Start free, upgrade as you grow</p>

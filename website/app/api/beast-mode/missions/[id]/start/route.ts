@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { missions } from '../../shared';
 
 /**
  * Start Mission API
@@ -12,24 +13,29 @@ export async function POST(
   try {
     const missionId = params.id;
 
-    // Check if BEAST MODE mission guidance is available
-    if (!global.beastMode || !global.beastMode.missionGuidance) {
+    const missionIndex = missions.findIndex(m => m.id === missionId);
+    if (missionIndex === -1) {
       return NextResponse.json(
-        { error: 'Mission Guidance not available' },
-        { status: 503 }
+        { error: 'Mission not found' },
+        { status: 404 }
       );
     }
 
-    // Start the mission
-    const mission = await global.beastMode.startMission(missionId);
+    // Update mission status to active
+    missions[missionIndex] = {
+      ...missions[missionIndex],
+      status: 'active',
+      startedAt: new Date().toISOString(),
+      progress: 0
+    };
 
     return NextResponse.json({
-      message: `Mission ${mission.name} started successfully`,
-      mission,
+      message: `Mission ${missions[missionIndex].name} started successfully`,
+      mission: missions[missionIndex],
       timestamp: new Date().toISOString()
     });
 
-  } catch (error) {
+  } catch (error: any) {
     console.error('Start Mission API error:', error);
     return NextResponse.json(
       {

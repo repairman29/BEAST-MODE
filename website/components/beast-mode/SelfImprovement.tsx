@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '../ui/card';
 import { Button } from '../ui/button';
 
 export default function SelfImprovement() {
@@ -35,6 +35,11 @@ export default function SelfImprovement() {
   };
 
   const handleApplyFix = async (recommendation: any, index: number) => {
+    // Ask user about git operations
+    const shouldCommit = confirm('Apply fix and commit changes to git?');
+    const shouldPush = shouldCommit && confirm('Push to remote repository?');
+    const shouldDeploy = shouldPush && confirm('Deploy to production? (This will trigger deployment)');
+
     setApplyingFixes(prev => new Set(prev).add(index));
     
     try {
@@ -43,7 +48,12 @@ export default function SelfImprovement() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           recommendation,
-          fixType: recommendation.type || recommendation.title
+          fixType: recommendation.type || recommendation.title,
+          gitOptions: {
+            commit: shouldCommit,
+            push: shouldPush,
+            deploy: shouldDeploy
+          }
         })
       });
 
@@ -52,15 +62,38 @@ export default function SelfImprovement() {
       }
 
       const result = await response.json();
-      setAppliedFixes(prev => new Set(prev).add(index));
       
-      // Show success message
-      alert(`✅ Fix applied successfully! ${result.message || ''}`);
-      
-      // Refresh analysis after fix
-      setTimeout(() => {
-        handleAnalyze();
-      }, 2000);
+      if (result.success) {
+        setAppliedFixes(prev => new Set(prev).add(index));
+        
+        // Build detailed success message
+        let message = `✅ Fix applied!\n\n`;
+        
+        if (result.filesModified && result.filesModified.length > 0) {
+          message += `Modified ${result.filesModified.length} file(s):\n${result.filesModified.slice(0, 3).map((f: string) => `  • ${f}`).join('\n')}${result.filesModified.length > 3 ? `\n  ... and ${result.filesModified.length - 3} more` : ''}\n\n`;
+        }
+        
+        // Add git information
+        if (result.git) {
+          if (result.git.committed) {
+            message += `📦 Git: ${result.git.message}`;
+            if (result.git.commitHash) {
+              message += `\n   Commit: ${result.git.commitHash.substring(0, 7)}`;
+            }
+          } else if (result.git.error) {
+            message += `\n⚠️ Git: ${result.git.message}`;
+          }
+        }
+        
+        alert(message);
+        
+        // Refresh analysis after fix
+        setTimeout(() => {
+          handleAnalyze();
+        }, 2000);
+      } else {
+        throw new Error(result.error || result.message || 'Failed to apply fix');
+      }
     } catch (err: any) {
       alert(`❌ Failed to apply fix: ${err.message}`);
     } finally {
@@ -73,27 +106,30 @@ export default function SelfImprovement() {
   };
 
   return (
-    <div className="w-full max-w-4xl space-y-6">
+    <div className="w-full max-w-7xl space-y-6 mx-auto pt-4">
       <Card className="bg-slate-900/90 border-slate-800">
         <CardHeader>
-          <CardTitle className="text-white">Self-Improvement Analysis</CardTitle>
+          <CardTitle className="text-white text-lg">✨ Auto-Fix Code Issues</CardTitle>
+          <CardDescription className="text-slate-400">
+            One click fixes common issues automatically. Code fixed. Git committed. You're done. It's like magic, but real. 🪄
+          </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
-          <p className="text-slate-400">
-            Analyze this BEAST MODE website and get AI-powered recommendations for improvements.
-          </p>
           <Button 
             onClick={handleAnalyze}
             disabled={isAnalyzing}
-            className="bg-white text-black hover:bg-slate-100"
+            className="bg-cyan-600 hover:bg-cyan-700 text-white smooth-transition hover-lift button-press disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:transform-none"
           >
             {isAnalyzing ? (
-              <span className="flex items-center gap-2">
-                <span className="animate-spin w-4 h-4 border-2 border-black border-t-transparent rounded-full"></span>
-                Analyzing...
-              </span>
+              <>
+                <span className="animate-spin mr-2">⚡</span>
+                <span className="animate-pulse">Analyzing...</span>
+              </>
             ) : (
-              'Analyze This Site'
+              <>
+                <span className="mr-2">🔍</span>
+                Analyze This Site
+              </>
             )}
           </Button>
         </CardContent>
@@ -239,16 +275,19 @@ export default function SelfImprovement() {
                               onClick={() => handleApplyFix(rec, idx)}
                               disabled={applyingFixes.has(idx)}
                               size="sm"
-                              className="bg-green-600 hover:bg-green-700 text-white"
+                              className="bg-green-600 hover:bg-green-700 text-white smooth-transition hover-lift button-press disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:transform-none"
                             >
                               {applyingFixes.has(idx) ? (
                                 <span className="flex items-center gap-1">
                                   <span className="animate-spin w-3 h-3 border-2 border-white border-t-transparent rounded-full"></span>
-                                  Applying...
+                                  <span className="animate-pulse">Applying...</span>
                                 </span>
                               ) : (
-                                '🔧 Apply Fix'
-                              )}
+                                <>
+                                  <span className="mr-1">🔧</span>
+                                  Apply Fix
+                                </>
+              )}
                             </Button>
                           )}
                         </div>

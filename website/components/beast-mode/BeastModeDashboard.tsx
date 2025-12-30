@@ -4,13 +4,8 @@ import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '../ui/card';
 import { Button } from '../ui/button';
 import NotificationWidget, { Notification } from '../hud/NotificationWidget';
-import ConversationalAI from './ConversationalAI';
-import HealthDashboard from './HealthDashboard';
-import AIRecommendations from './AIRecommendations';
-import MonetizationDashboard from './MonetizationDashboard';
-import MissionDashboard from './MissionDashboard';
-import DeploymentDashboard from './DeploymentDashboard';
-import GitHubScanForm from './GitHubScanForm';
+// Removed unused imports: ConversationalAI, HealthDashboard, AIRecommendations, MonetizationDashboard, MissionDashboard, DeploymentDashboard, GitHubScanForm
+// These features are now consolidated into Quality, Intelligence, Marketplace, and Settings tabs
 import AuthSection from './AuthSection';
 import PricingSection from './PricingSection';
 import SelfImprovement from './SelfImprovement';
@@ -18,6 +13,7 @@ import QuickActions from './QuickActions';
 import Sidebar from './Sidebar';
 import DashboardHeader from './DashboardHeader';
 import FTUEOnboarding from './FTUEOnboarding';
+import PluginManager from './PluginManager';
 import { useUser } from '../../lib/user-context';
 
 /**
@@ -48,7 +44,7 @@ function BeastModeDashboardInner({ initialView }: BeastModeDashboardInnerProps) 
   // Handle initial view from URL params
   useEffect(() => {
     if (initialView) {
-      const validViews = ['quality', 'intelligence', 'marketplace', 'enterprise', 'health', 'ai-recommendations', 'monetization', 'missions', 'deployments', 'github-scan', 'auth', 'pricing', 'self-improve'];
+      const validViews = ['quality', 'intelligence', 'marketplace', 'self-improve', 'settings', 'auth', 'pricing'];
       if (validViews.includes(initialView)) {
         setCurrentView(initialView as typeof currentView);
       }
@@ -93,7 +89,7 @@ function BeastModeDashboardInner({ initialView }: BeastModeDashboardInnerProps) 
   });
 
   const [commandInput, setCommandInput] = useState('');
-  const [currentView, setCurrentView] = useState<'quality' | 'intelligence' | 'marketplace' | 'enterprise' | 'health' | 'ai-recommendations' | 'monetization' | 'missions' | 'deployments' | 'github-scan' | 'auth' | 'pricing' | 'self-improve' | null>(
+  const [currentView, setCurrentView] = useState<'quality' | 'intelligence' | 'marketplace' | 'self-improve' | 'settings' | 'auth' | 'pricing' | null>(
     initialView === 'auth' ? 'auth' : initialView === 'pricing' ? 'pricing' : null
   );
   const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState(false);
@@ -179,27 +175,11 @@ function BeastModeDashboardInner({ initialView }: BeastModeDashboardInnerProps) 
         }
         if (e.key === '4') {
           e.preventDefault();
-          setCurrentView('enterprise');
+          setCurrentView('self-improve');
         }
         if (e.key === '5') {
           e.preventDefault();
-          setCurrentView('health');
-        }
-        if (e.key === '6') {
-          e.preventDefault();
-          setCurrentView('ai-recommendations');
-        }
-        if (e.key === '7') {
-          e.preventDefault();
-          setCurrentView('monetization');
-        }
-        if (e.key === '8') {
-          e.preventDefault();
-          setCurrentView('missions');
-        }
-        if (e.key === '9') {
-          e.preventDefault();
-          setCurrentView('deployments');
+          setCurrentView('settings');
         }
         if (e.key === '0') {
           e.preventDefault();
@@ -254,7 +234,7 @@ function BeastModeDashboardInner({ initialView }: BeastModeDashboardInnerProps) 
       <DashboardHeader user={user} onSignOut={signOut} />
 
       {/* Main Content Area */}
-      <div className="flex-1 flex flex-col ml-64 transition-all duration-300 ease-in-out relative pt-16 z-0">
+      <div className="flex-1 flex flex-col ml-64 transition-all duration-300 ease-in-out relative pt-16 z-0 pb-16">
         {/* Background ambient effects */}
         <div className="absolute inset-0 bg-gradient-to-b from-black via-slate-950 to-black z-0"></div>
         <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:64px_64px] z-0"></div>
@@ -322,7 +302,7 @@ function BeastModeDashboardInner({ initialView }: BeastModeDashboardInnerProps) 
         )}
 
         {/* Center Content - BEAST MODE Views */}
-        <div className="flex-1 flex items-center justify-center overflow-y-auto py-6 px-6 pt-24 pb-20 custom-scrollbar relative z-20">
+        <div className="flex-1 flex items-start justify-center overflow-y-auto py-8 px-6 xl:px-12 pb-20 custom-scrollbar relative z-20" style={{ paddingTop: 'calc(4rem + 1rem)', paddingBottom: 'calc(1.5rem + 3rem)' }}>
           {currentView === null && (
             <div className="w-full max-w-4xl space-y-8 animate-in fade-in duration-300 relative z-30">
               <div className="text-center mb-12">
@@ -334,7 +314,7 @@ function BeastModeDashboardInner({ initialView }: BeastModeDashboardInnerProps) 
                 </div>
               </div>
               <QuickActions
-                onScanRepo={() => setCurrentView('github-scan')}
+                onScanRepo={() => setCurrentView('quality')}
                 onSignIn={() => setCurrentView('auth')}
                 onPricing={() => setCurrentView('pricing')}
                 onImprove={() => setCurrentView('self-improve')}
@@ -343,13 +323,13 @@ function BeastModeDashboardInner({ initialView }: BeastModeDashboardInnerProps) 
           )}
 
           {currentView === 'quality' && (
-            <div className="w-full max-w-6xl relative z-30">
+            <div className="w-full max-w-7xl relative z-30">
               <QualityView data={beastModeState.quality} />
             </div>
           )}
 
           {currentView === 'intelligence' && (
-            <div className="w-full max-w-6xl relative z-30">
+            <div className="w-full max-w-7xl relative z-30">
               <IntelligenceView
                 data={beastModeState.intelligence}
                 messages={beastModeState.messages}
@@ -361,50 +341,14 @@ function BeastModeDashboardInner({ initialView }: BeastModeDashboardInnerProps) 
           )}
 
           {currentView === 'marketplace' && (
-            <div className="w-full max-w-6xl relative z-30">
+            <div className="w-full max-w-7xl relative z-30">
               <MarketplaceView data={beastModeState.marketplace} />
             </div>
           )}
 
-          {currentView === 'enterprise' && (
-            <div className="w-full max-w-6xl relative z-30">
-              <EnterpriseView data={beastModeState.enterprise} />
-            </div>
-          )}
-
-          {currentView === 'health' && (
-            <div className="w-full max-w-6xl relative z-30">
-              <HealthDashboard />
-            </div>
-          )}
-
-          {currentView === 'ai-recommendations' && (
-            <div className="w-full max-w-6xl relative z-30">
-              <AIRecommendations />
-            </div>
-          )}
-
-          {currentView === 'monetization' && (
-            <div className="w-full max-w-6xl relative z-30">
-              <MonetizationDashboard />
-            </div>
-          )}
-
-          {currentView === 'missions' && (
-            <div className="w-full max-w-6xl relative z-30">
-              <MissionDashboard />
-            </div>
-          )}
-
-          {currentView === 'deployments' && (
-            <div className="w-full max-w-6xl relative z-30">
-              <DeploymentDashboard />
-            </div>
-          )}
-
-          {currentView === 'github-scan' && (
-            <div className="w-full max-w-6xl relative z-30">
-              <GitHubScanForm />
+          {currentView === 'settings' && (
+            <div className="w-full max-w-7xl relative z-30">
+              <SettingsView data={beastModeState.enterprise} />
             </div>
           )}
 
@@ -415,22 +359,22 @@ function BeastModeDashboardInner({ initialView }: BeastModeDashboardInnerProps) 
           )}
 
           {currentView === 'pricing' && (
-            <div className="w-full max-w-6xl relative z-30">
+            <div className="w-full max-w-7xl relative z-30">
               <PricingSection />
             </div>
           )}
 
           {currentView === 'self-improve' && (
-            <div className="w-full max-w-6xl relative z-30">
+            <div className="w-full max-w-7xl relative z-30">
               <SelfImprovement />
             </div>
           )}
         </div>
 
         {/* Bottom Status Line */}
-        <div className="absolute bottom-0 left-0 right-0 px-6 py-3 bg-black/60 backdrop-blur-md border-t border-slate-800/50">
-          <div className="flex items-center justify-between text-xs text-slate-400">
-            <div className="flex gap-8 flex-wrap">
+        <div className="fixed bottom-0 left-64 right-0 px-6 py-3 bg-black/90 backdrop-blur-md border-t border-slate-800/50 z-40 shadow-lg">
+          <div className="flex items-center justify-between text-xs text-slate-400 max-w-7xl mx-auto">
+            <div className="flex gap-4 sm:gap-6 md:gap-8 flex-wrap">
               <div className="flex items-center gap-2">
                 <span className="text-slate-500 font-medium">SCORE:</span>
                 <span className="text-white font-semibold">{beastModeState.quality.score}/100</span>
@@ -664,6 +608,14 @@ function QualityView({ data }: any) {
   const [selectedIssue, setSelectedIssue] = React.useState<any>(null);
   const [showAllIssues, setShowAllIssues] = React.useState(false);
   const [showTrends, setShowTrends] = React.useState(false);
+  const [isScanning, setIsScanning] = React.useState(false);
+  const [quickScanRepo, setQuickScanRepo] = React.useState('');
+  const [comparisonScan, setComparisonScan] = React.useState<any>(null);
+  const [showAdvancedScan, setShowAdvancedScan] = React.useState(false);
+  const [advancedScanUrl, setAdvancedScanUrl] = React.useState('');
+  const [favoriteRepos, setFavoriteRepos] = React.useState<string[]>([]);
+  const [expandedScans, setExpandedScans] = React.useState<Set<number>>(new Set());
+  const [scanError, setScanError] = React.useState<string | null>(null);
 
   React.useEffect(() => {
     // Load all scans from localStorage
@@ -703,8 +655,120 @@ function QualityView({ data }: any) {
   }, []);
 
   const handleScanNow = () => {
-    // Navigate to GitHub scan tab
-    window.location.href = '/dashboard?view=github-scan';
+    // Toggle advanced scan form
+    setShowAdvancedScan(!showAdvancedScan);
+  };
+
+  const handleAdvancedScan = async () => {
+    if (!advancedScanUrl.trim()) {
+      setScanError('Please enter a GitHub repository URL');
+      return;
+    }
+
+    // Extract owner/repo from URL
+    const patterns = [
+      /github\.com\/([^\/]+)\/([^\/]+)/,
+      /^([^\/]+)\/([^\/]+)$/,
+      /git@github\.com:([^\/]+)\/([^\/]+)\.git/
+    ];
+
+    let match = null;
+    let owner = '';
+    let repo = '';
+
+    for (const pattern of patterns) {
+      match = advancedScanUrl.match(pattern);
+      if (match) {
+        [, owner, repo] = match;
+        break;
+      }
+    }
+
+    if (!match) {
+      setScanError('Invalid GitHub URL. Format: https://github.com/owner/repo or owner/repo');
+      return;
+    }
+
+    const fullRepo = `${owner}/${repo}`;
+    setScanError(null);
+    setIsScanning(true);
+
+    try {
+      const response = await fetch('/api/github/scan', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ repo: fullRepo, url: advancedScanUrl })
+      });
+
+      if (response.ok) {
+        const result = await response.json();
+        window.dispatchEvent(new Event('storage'));
+        setTimeout(() => {
+          const stored = localStorage.getItem('beast-mode-scan-results');
+          if (stored) {
+            const scans = JSON.parse(stored);
+            const completed = scans.filter((s: any) => s.status === 'completed');
+            setAllScans(completed);
+            if (completed.length > 0) {
+              setLatestScan(completed[0]);
+            }
+          }
+        }, 1000);
+        setAdvancedScanUrl('');
+        setShowAdvancedScan(false);
+        alert(`✅ Scan complete! Quality score: ${result.score}/100`);
+      } else {
+        const error = await response.json();
+        setScanError(error.error || 'Scan failed');
+      }
+    } catch (error: any) {
+      setScanError(error.message || 'Scan failed');
+    } finally {
+      setIsScanning(false);
+    }
+  };
+
+  const handleQuickScan = async () => {
+    if (!quickScanRepo.trim()) {
+      alert('Please enter a repository (owner/repo)');
+      return;
+    }
+
+    setIsScanning(true);
+    try {
+      const response = await fetch('/api/github/scan', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ repo: quickScanRepo.trim(), url: `https://github.com/${quickScanRepo.trim()}` })
+      });
+
+      if (response.ok) {
+        const result = await response.json();
+        // Trigger storage event to refresh
+        window.dispatchEvent(new Event('storage'));
+        // Reload scans
+        setTimeout(() => {
+          const stored = localStorage.getItem('beast-mode-scan-results');
+          if (stored) {
+            const scans = JSON.parse(stored);
+            const completed = scans.filter((s: any) => s.status === 'completed');
+            setAllScans(completed);
+            if (completed.length > 0) {
+              setLatestScan(completed[0]);
+            }
+          }
+        }, 1000);
+        setQuickScanRepo('');
+        alert(`✅ Scan complete! Quality score: ${result.score}/100`);
+      } else {
+        const error = await response.json();
+        alert(`❌ Scan failed: ${error.error || 'Unknown error'}`);
+      }
+    } catch (error: any) {
+      alert(`❌ Scan failed: ${error.message}`);
+    } finally {
+      setIsScanning(false);
+    }
   };
 
   // Use latest scan data if available, otherwise fall back to props
@@ -715,43 +779,248 @@ function QualityView({ data }: any) {
     lastScan: latestScan.timestamp || data.lastScan
   } : data;
 
+  // Calculate score change from previous scan
+  const scoreChange = allScans.length > 1 
+    ? latestScan?.score - allScans[1]?.score 
+    : null;
+
+  // Load favorites on mount
+  React.useEffect(() => {
+    try {
+      const stored = localStorage.getItem('beast-mode-favorite-repos');
+      if (stored) {
+        setFavoriteRepos(JSON.parse(stored));
+      }
+    } catch (e) {
+      console.error('Failed to load favorites:', e);
+    }
+  }, []);
+
+  const toggleFavorite = (repo: string) => {
+    const newFavorites = favoriteRepos.includes(repo)
+      ? favoriteRepos.filter(r => r !== repo)
+      : [...favoriteRepos, repo];
+    setFavoriteRepos(newFavorites);
+    localStorage.setItem('beast-mode-favorite-repos', JSON.stringify(newFavorites));
+  };
+
+  const exportReport = (result: any) => {
+    const report = {
+      repo: result.repo,
+      score: result.score,
+      issues: result.issues,
+      improvements: result.improvements,
+      detectedIssues: result.detectedIssues || [],
+      recommendations: result.recommendations || [],
+      exportedAt: new Date().toISOString()
+    };
+    const blob = new Blob([JSON.stringify(report, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `beast-mode-report-${result.repo.replace('/', '-')}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
   return (
-    <div className="w-full max-w-6xl grid grid-cols-1 md:grid-cols-2 gap-6 px-4">
-      {/* Quality Score */}
-      <Card className="bg-slate-900/90 border-slate-800 hover:border-slate-700 transition-all">
+    <div className="w-full max-w-7xl space-y-6 mx-auto pt-4">
+      {/* Quick Scan Bar */}
+      <Card className="bg-slate-900/90 border-slate-800">
         <CardHeader>
-          <div className="flex items-center justify-between mb-4">
-            <CardTitle className="text-white text-lg">Quality Score</CardTitle>
+          <CardTitle className="text-white text-lg">⚡ Scan Your Code</CardTitle>
+          <CardDescription className="text-slate-400">
+            See your code quality score in 10 seconds. No setup. No configuration. Just paste your GitHub repo and watch the magic happen. ✨
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="pt-6">
+          <div className="flex flex-col sm:flex-row gap-3">
+            <input
+              type="text"
+              value={quickScanRepo}
+              onChange={(e) => setQuickScanRepo(e.target.value)}
+              placeholder="owner/repo (e.g., facebook/react)"
+              className="flex-1 bg-slate-950 border border-slate-700 rounded-lg px-4 py-2 text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500"
+              onKeyPress={(e) => e.key === 'Enter' && handleQuickScan()}
+            />
+            <Button
+              onClick={handleQuickScan}
+              disabled={isScanning || !quickScanRepo.trim()}
+              className="bg-cyan-600 hover:bg-cyan-700 text-white smooth-transition hover-lift button-press disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:transform-none"
+            >
+              {isScanning ? (
+                <>
+                  <span className="animate-spin mr-2">⚡</span>
+                  <span className="animate-pulse">Scanning...</span>
+                </>
+              ) : (
+                <>
+                  <span className="mr-2">🔍</span>
+                  Quick Scan
+                </>
+              )}
+            </Button>
             <Button
               onClick={handleScanNow}
-              size="sm"
-              className="bg-cyan-600 hover:bg-cyan-700 text-white"
+              variant="outline"
+              className="border-slate-700 text-slate-400 hover:bg-slate-900"
             >
-              Scan Now
+              {showAdvancedScan ? 'Hide Advanced' : 'Advanced Scan'}
             </Button>
           </div>
-        </CardHeader>
-        <CardContent>
-          <div className="text-center mb-6">
-            <div className="text-6xl font-bold text-gradient-cyan mb-2">{qualityData.score}</div>
-            <div className="text-sm text-slate-500">/100</div>
-            {latestScan && (
-              <div className="text-xs text-slate-500 mt-2">
-                Last scan: {latestScan.repo}
+          {showAdvancedScan && (
+            <div className="mt-4 pt-4 border-t border-slate-800">
+              <div className="text-sm text-slate-400 mb-2">Full GitHub URL:</div>
+              <div className="flex gap-2">
+                <input
+                  type="text"
+                  value={advancedScanUrl}
+                  onChange={(e) => setAdvancedScanUrl(e.target.value)}
+                  placeholder="https://github.com/owner/repo"
+                  className="flex-1 bg-slate-950 border border-slate-700 rounded-lg px-4 py-2 text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500"
+                  onKeyPress={(e) => e.key === 'Enter' && handleAdvancedScan()}
+                />
+                <Button
+                  onClick={handleAdvancedScan}
+                  disabled={isScanning || !advancedScanUrl.trim()}
+                  className="bg-cyan-600 hover:bg-cyan-700 text-white"
+                >
+                  Scan
+                </Button>
+              </div>
+              {scanError && (
+                <div className="mt-2 text-red-400 text-sm bg-red-500/10 border border-red-500/20 rounded-lg p-2">
+                  {scanError}
+                </div>
+              )}
+            </div>
+          )}
+        </CardContent>
+      </Card>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {/* Quality Score */}
+      <Card className="bg-slate-900/90 border-slate-800 hover:border-slate-700 transition-all h-full">
+        <CardHeader className="pb-6">
+          <div className="flex items-center justify-between mb-2">
+            <CardTitle className="text-white text-xl font-bold">Quality Score</CardTitle>
+            {scoreChange !== null && scoreChange !== 0 && (
+              <div className={`flex items-center gap-1 px-3 py-1 rounded-full text-sm font-semibold ${
+                scoreChange > 0 
+                  ? 'bg-green-500/20 text-green-400' 
+                  : 'bg-red-500/20 text-red-400'
+              }`}>
+                <span>{scoreChange > 0 ? '↑' : '↓'}</span>
+                <span>{Math.abs(scoreChange)}</span>
               </div>
             )}
           </div>
-          <div className="space-y-3">
-            <StatLine label="Issues Found" value={qualityData.issues} max={50} />
-            <StatLine label="Improvements" value={qualityData.improvements} max={20} />
+          {latestScan && (
+            <div className="text-xs text-slate-400">
+              Last scan: <span className="text-slate-300">{latestScan.repo}</span>
+              {latestScan.timestamp && (
+                <> • <span className="text-slate-400">{new Date(latestScan.timestamp).toLocaleDateString()}</span></>
+              )}
+            </div>
+          )}
+        </CardHeader>
+        <CardContent className="pt-0">
+              {/* Large Score Display */}
+              <div className="flex items-center justify-center mb-8">
+                <div className="relative score-reveal">
+              {/* Score Ring */}
+              <svg className="w-40 h-40 transform -rotate-90 score-reveal">
+                <circle
+                  cx="80"
+                  cy="80"
+                  r="70"
+                  stroke="currentColor"
+                  strokeWidth="10"
+                  fill="none"
+                  className="text-slate-800"
+                />
+                <circle
+                  cx="80"
+                  cy="80"
+                  r="70"
+                  stroke="currentColor"
+                  strokeWidth="10"
+                  fill="none"
+                  strokeDasharray={`${(qualityData.score / 100) * 440} 440`}
+                  strokeLinecap="round"
+                  className={`transition-all duration-1000 ease-out ${
+                    qualityData.score >= 80 ? 'text-green-500 pulse-glow' :
+                    qualityData.score >= 60 ? 'text-amber-500' :
+                    'text-red-500'
+                  }`}
+                  style={{ 
+                    strokeDashoffset: 0,
+                    animationDelay: '0.2s'
+                  }}
+                />
+              </svg>
+              {/* Score Number */}
+              <div className="absolute inset-0 flex flex-col items-center justify-center">
+                <div className={`text-5xl font-bold ${
+                  qualityData.score >= 80 ? 'text-green-400' :
+                  qualityData.score >= 60 ? 'text-amber-400' :
+                  'text-red-400'
+                }`}>
+                  {qualityData.score}
+                </div>
+                <div className="text-sm text-slate-500 mt-1">out of 100</div>
+              </div>
+            </div>
           </div>
+
+          {/* Key Metrics Grid */}
+          <div className="grid grid-cols-2 gap-4 pt-6 border-t border-slate-800">
+            <div className="bg-slate-800/30 rounded-lg p-4">
+              <div className="text-xs text-slate-400 mb-1">Issues Found</div>
+              <div className="text-2xl font-bold text-white">{qualityData.issues}</div>
+              <div className="text-xs text-slate-500 mt-1">needs attention</div>
+            </div>
+            <div className="bg-slate-800/30 rounded-lg p-4">
+              <div className="text-xs text-slate-400 mb-1">Improvements</div>
+              <div className="text-2xl font-bold text-cyan-400">{qualityData.improvements}</div>
+              <div className="text-xs text-slate-500 mt-1">available</div>
+            </div>
+          </div>
+
+          {/* Additional Metrics (if available) */}
+          {latestScan?.metrics && (
+            <div className="mt-6 pt-6 border-t border-slate-800">
+              <div className="text-xs text-slate-500 uppercase tracking-wider mb-3">Additional Metrics</div>
+              <div className="space-y-3">
+                <div className="flex justify-between items-center">
+                  <span className="text-slate-400 text-sm">Test Coverage</span>
+                  <span className={`font-semibold text-sm ${
+                    latestScan.metrics.coverage >= 70 ? 'text-green-400' : 'text-amber-400'
+                  }`}>
+                    {latestScan.metrics.coverage || 0}%
+                  </span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-slate-400 text-sm">Maintainability</span>
+                  <span className={`font-semibold text-sm ${
+                    latestScan.metrics.maintainability >= 80 ? 'text-green-400' : 'text-amber-400'
+                  }`}>
+                    {latestScan.metrics.maintainability || 0}/100
+                  </span>
+                </div>
+              </div>
+            </div>
+          )}
         </CardContent>
       </Card>
 
       {/* Quality Metrics */}
-      <Card className="bg-slate-900/90 border-slate-800 hover:border-slate-700 transition-all">
+      <Card className="bg-slate-900/90 border-slate-800 hover:border-slate-700 transition-all h-full">
         <CardHeader>
-          <CardTitle className="text-white text-lg mb-4">Quality Metrics</CardTitle>
+          <CardTitle className="text-white text-lg">Quality Metrics</CardTitle>
+          <CardDescription className="text-slate-400">
+            Detailed metrics from your latest scan
+          </CardDescription>
         </CardHeader>
         <CardContent>
           {latestScan?.metrics ? (
@@ -817,19 +1086,85 @@ function QualityView({ data }: any) {
       {/* Recent Scans */}
       <Card className="col-span-1 md:col-span-2 bg-slate-900/90 border-slate-800 hover:border-slate-800 transition-all">
         <CardHeader>
-          <CardTitle className="text-white text-lg mb-4">Recent Quality Scans</CardTitle>
+          <div className="flex items-center justify-between">
+            <CardTitle className="text-white text-lg">Recent Quality Scans</CardTitle>
+            <div className="flex gap-2">
+              {latestScan && (
+                <Button
+                  onClick={() => exportReport(latestScan)}
+                  variant="outline"
+                  size="sm"
+                  className="border-slate-800 text-slate-400 hover:bg-slate-900"
+                >
+                  📥 Export Latest
+                </Button>
+              )}
+              {allScans.length > 1 && (
+                <Button
+                  onClick={() => setComparisonScan(comparisonScan ? null : allScans[1])}
+                  variant="outline"
+                  size="sm"
+                  className="border-slate-800 text-slate-400 hover:bg-slate-900"
+                >
+                  {comparisonScan ? 'Hide Comparison' : 'Compare with Previous'}
+                </Button>
+              )}
+            </div>
+          </div>
         </CardHeader>
         <CardContent>
           {isLoading ? (
-            <div className="text-center text-slate-500 py-4">
-              <div className="animate-spin mx-auto w-6 h-6 border-2 border-cyan-500 border-t-transparent rounded-full mb-2"></div>
-              Loading scan results...
+            <div className="text-center text-slate-500 py-12">
+              <div className="animate-spin mx-auto w-8 h-8 border-2 border-cyan-500 border-t-transparent rounded-full mb-4"></div>
+              <div className="text-sm">Loading scan results...</div>
             </div>
           ) : latestScan ? (
             <div className="space-y-3">
+              {/* Comparison View */}
+              {comparisonScan && (
+                <div className="mb-4 p-4 bg-slate-800/30 rounded-lg border border-slate-700">
+                  <div className="text-sm text-slate-400 mb-3">Comparison</div>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <div className="text-xs text-slate-500 mb-1">Current Scan</div>
+                      <div className="text-lg font-bold text-white">{latestScan.score}/100</div>
+                      <div className="text-xs text-slate-500">{latestScan.issues} issues</div>
+                    </div>
+                    <div>
+                      <div className="text-xs text-slate-500 mb-1">Previous Scan</div>
+                      <div className="text-lg font-bold text-white">{comparisonScan.score}/100</div>
+                      <div className="text-xs text-slate-500">{comparisonScan.issues} issues</div>
+                    </div>
+                  </div>
+                  <div className="mt-3 pt-3 border-t border-slate-700">
+                    <div className="flex justify-between text-sm">
+                      <span className="text-slate-400">Score Change</span>
+                      <span className={`font-semibold ${scoreChange && scoreChange > 0 ? 'text-green-400' : scoreChange && scoreChange < 0 ? 'text-red-400' : 'text-slate-400'}`}>
+                        {scoreChange !== null ? `${scoreChange > 0 ? '+' : ''}${scoreChange}` : 'N/A'}
+                      </span>
+                    </div>
+                    <div className="flex justify-between text-sm mt-1">
+                      <span className="text-slate-400">Issues Change</span>
+                      <span className={`font-semibold ${(latestScan.issues - comparisonScan.issues) < 0 ? 'text-green-400' : (latestScan.issues - comparisonScan.issues) > 0 ? 'text-red-400' : 'text-slate-400'}`}>
+                        {latestScan.issues - comparisonScan.issues > 0 ? '+' : ''}{latestScan.issues - comparisonScan.issues}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              )}
+
               <div className="flex justify-between items-center py-2 border-b border-slate-800">
-                <div>
-                  <span className="text-slate-300 font-medium">{latestScan.repo}</span>
+                <div className="flex-1">
+                  <div className="flex items-center gap-2">
+                    <span className="text-slate-300 font-medium">{latestScan.repo}</span>
+                    <button
+                      onClick={() => toggleFavorite(latestScan.repo)}
+                      className="text-yellow-400 hover:text-yellow-300"
+                      title={favoriteRepos.includes(latestScan.repo) ? 'Remove from favorites' : 'Add to favorites'}
+                    >
+                      {favoriteRepos.includes(latestScan.repo) ? '⭐' : '☆'}
+                    </button>
+                  </div>
                   <div className="text-xs text-slate-500 mt-1">
                     {latestScan.timestamp ? new Date(latestScan.timestamp).toLocaleString() : 'Recently scanned'}
                   </div>
@@ -973,33 +1308,133 @@ function QualityView({ data }: any) {
               )}
             </div>
           ) : (
-            <div className="text-center text-slate-500 py-8">
-              <div className="text-4xl mb-3">📊</div>
-              <div className="text-sm mb-2">No scans yet</div>
-              <div className="text-xs text-slate-600 mb-4">
-                Scan a GitHub repository to see quality metrics
+            <div className="text-center text-slate-500 py-12 slide-up">
+              <div className="text-6xl mb-4 animate-bounce">📊</div>
+              <div className="text-lg font-semibold text-slate-300 mb-2">No scans yet</div>
+              <div className="text-sm text-slate-400 mb-6">
+                Scan a GitHub repository to see your code quality score and metrics. Your first scan is just one click away! 🚀
               </div>
               <Button
                 onClick={handleScanNow}
-                className="bg-cyan-600 hover:bg-cyan-700 text-white"
+                className="bg-cyan-600 hover:bg-cyan-700 text-white smooth-transition hover-lift button-press"
               >
+                <span className="mr-2">🔍</span>
                 Scan Repository
               </Button>
             </div>
           )}
         </CardContent>
       </Card>
+      </div>
     </div>
   );
 }
 
 /**
- * Intelligence View - AI Insights & Analytics
+ * Intelligence View - AI Insights, Recommendations & Missions
  */
 function IntelligenceView({ data, messages, onCommand, commandInput, setCommandInput }: any) {
   const [conversationMessages, setConversationMessages] = React.useState<any[]>([]);
   const [isProcessing, setIsProcessing] = React.useState(false);
   const [aiInput, setAiInput] = React.useState('');
+  const [recentScans, setRecentScans] = React.useState<any[]>([]);
+  const [activeSection, setActiveSection] = React.useState<'chat' | 'recommendations' | 'missions'>('chat');
+  
+  // AI Recommendations state
+  const [recommendations, setRecommendations] = React.useState<any[]>([]);
+  const [isLoadingRecommendations, setIsLoadingRecommendations] = React.useState(false);
+  const [expandedRecommendation, setExpandedRecommendation] = React.useState<string | null>(null);
+  const [projectContext, setProjectContext] = React.useState({
+    type: 'web',
+    languages: ['javascript', 'typescript'],
+    teamSize: 'small',
+    timeline: 'production',
+    budget: 'medium',
+    qualityScore: 75
+  });
+  const [selectedCategory, setSelectedCategory] = React.useState('all');
+  
+  // Missions state
+  const [missions, setMissions] = React.useState<any[]>([]);
+  const [isLoadingMissions, setIsLoadingMissions] = React.useState(false);
+  const [showCreateMission, setShowCreateMission] = React.useState(false);
+  const [editingMission, setEditingMission] = React.useState<any>(null);
+  const [newMission, setNewMission] = React.useState({
+    name: '',
+    description: '',
+    type: 'code-refactor',
+    priority: 'medium',
+    deadline: '',
+    objectives: ['']
+  });
+
+  // Load recent scans for context
+  React.useEffect(() => {
+    try {
+      const stored = localStorage.getItem('beast-mode-scan-results');
+      if (stored) {
+        const scans = JSON.parse(stored);
+        // Ensure scans is an array
+        if (Array.isArray(scans)) {
+          const completed = scans.filter((s: any) => s && s.status === 'completed').slice(0, 5);
+          setRecentScans(completed);
+        } else {
+          setRecentScans([]);
+        }
+      }
+    } catch (e) {
+      console.error('Failed to load scans:', e);
+      setRecentScans([]);
+    }
+  }, []);
+
+  // Fetch recommendations
+  const fetchRecommendations = async () => {
+    setIsLoadingRecommendations(true);
+    try {
+      const response = await fetch('/api/beast-mode/marketplace/recommendations', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          userId: 'demo-user',
+          projectContext: projectContext
+        })
+      });
+
+      if (response.ok) {
+        const result = await response.json();
+        setRecommendations(result.recommendations || []);
+      }
+    } catch (error) {
+      console.error('Failed to fetch recommendations:', error);
+    } finally {
+      setIsLoadingRecommendations(false);
+    }
+  };
+
+  // Fetch missions
+  const fetchMissions = async () => {
+    setIsLoadingMissions(true);
+    try {
+      const response = await fetch('/api/beast-mode/missions');
+      if (response.ok) {
+        const data = await response.json();
+        setMissions(data.missions || []);
+      }
+    } catch (error) {
+      console.error('Failed to fetch missions:', error);
+    } finally {
+      setIsLoadingMissions(false);
+    }
+  };
+
+  React.useEffect(() => {
+    if (activeSection === 'recommendations') {
+      fetchRecommendations();
+    } else if (activeSection === 'missions') {
+      fetchMissions();
+    }
+  }, [activeSection]);
 
   const exampleQueries = [
     "What's the quality of my code?",
@@ -1026,18 +1461,36 @@ function IntelligenceView({ data, messages, onCommand, commandInput, setCommandI
       timestamp: new Date()
     };
 
-    setConversationMessages(prev => [...prev, userMsg]);
+    // Update state and capture the updated array
+    let updatedMessages: any[] = [];
+    setConversationMessages(prev => {
+      updatedMessages = Array.isArray(prev) ? [...prev, userMsg] : [userMsg];
+      return updatedMessages;
+    });
+    
     setAiInput('');
     setIsProcessing(true);
 
     try {
+      // Ensure arrays are valid before using array methods
+      const conversationHistory = Array.isArray(updatedMessages) 
+        ? updatedMessages.slice(-5).map((m: any) => ({
+            text: m?.text || '',
+            type: m?.type || 'user',
+            intent: m?.intent
+          }))
+        : [];
+      
+      const scanDataForApi = Array.isArray(recentScans) ? recentScans : [];
+
       const response = await fetch('/api/beast-mode/conversation', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           message,
           context: {
-            conversationHistory: conversationMessages.slice(-5),
+            conversationHistory,
+            scanData: scanDataForApi,
             timestamp: new Date().toISOString()
           }
         })
@@ -1053,10 +1506,12 @@ function IntelligenceView({ data, messages, onCommand, commandInput, setCommandI
         id: `ai-${Date.now()}`,
         text: result.response || "I'm analyzing your request. This feature is being enhanced with real AI capabilities.",
         type: 'ai',
-        timestamp: new Date()
+        timestamp: new Date(),
+        intent: result.intent,
+        actionableItems: result.actionableItems
       };
 
-      setConversationMessages(prev => [...prev, aiMsg]);
+      setConversationMessages(prev => Array.isArray(prev) ? [...prev, aiMsg] : [aiMsg]);
     } catch (error) {
       console.error('Conversation error:', error);
       const errorMsg = {
@@ -1065,7 +1520,7 @@ function IntelligenceView({ data, messages, onCommand, commandInput, setCommandI
         type: 'system',
         timestamp: new Date()
       };
-      setConversationMessages(prev => [...prev, errorMsg]);
+      setConversationMessages(prev => Array.isArray(prev) ? [...prev, errorMsg] : [errorMsg]);
     } finally {
       setIsProcessing(false);
     }
@@ -1078,43 +1533,49 @@ function IntelligenceView({ data, messages, onCommand, commandInput, setCommandI
     }
   };
 
-  const displayMessages = conversationMessages.length > 0 ? conversationMessages : messages;
+  const displayMessages = Array.isArray(conversationMessages) && conversationMessages.length > 0 
+    ? conversationMessages 
+    : (Array.isArray(messages) ? messages : []);
 
   return (
-    <div className="w-full max-w-6xl space-y-6">
-      {/* Intelligence Metrics */}
+    <div className="w-full max-w-7xl space-y-6">
+      {/* Your Activity Summary */}
       <Card className="bg-slate-900/90 border-slate-800">
         <CardHeader>
-          <CardTitle className="text-white text-lg uppercase tracking-widest">
-            AI Intelligence Core
-          </CardTitle>
+          <CardTitle className="text-white text-lg">Your Activity</CardTitle>
+          <CardDescription className="text-slate-400">
+            Watch your progress grow: every question, recommendation, and completed mission makes you a better developer. 🚀
+          </CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="grid grid-cols-4 gap-4">
-            <div className="text-center">
-              <div className="text-2xl font-bold text-cyan-400">{data.predictions}</div>
-              <div className="text-xs text-slate-500">Predictions</div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            <div className="text-center bg-slate-800/30 rounded-lg p-4">
+              <div className="text-3xl font-bold text-cyan-400">{conversationMessages.length}</div>
+              <div className="text-xs text-slate-400 mt-1">Questions Asked</div>
             </div>
-            <div className="text-center">
-              <div className="text-2xl font-bold text-cyan-400">{data.insights}</div>
-              <div className="text-xs text-slate-500">Insights</div>
+            <div className="text-center bg-slate-800/30 rounded-lg p-4">
+              <div className="text-3xl font-bold text-purple-400">{recommendations.length}</div>
+              <div className="text-xs text-slate-400 mt-1">Recommendations</div>
             </div>
-            <div className="text-center">
-              <div className="text-2xl font-bold text-cyan-400">{data.optimizations}</div>
-              <div className="text-xs text-slate-500">Optimizations</div>
+            <div className="text-center bg-slate-800/30 rounded-lg p-4">
+              <div className="text-3xl font-bold text-amber-400">{missions.filter((m: any) => m.status === 'completed').length}</div>
+              <div className="text-xs text-slate-400 mt-1">Missions Completed</div>
             </div>
-            <div className="text-center">
-              <div className="text-2xl font-bold text-green-400">{data.accuracy}%</div>
-              <div className="text-xs text-slate-500">Accuracy</div>
+            <div className="text-center bg-slate-800/30 rounded-lg p-4">
+              <div className="text-3xl font-bold text-green-400">{missions.filter((m: any) => m.status === 'active').length}</div>
+              <div className="text-xs text-slate-400 mt-1">Active Missions</div>
             </div>
           </div>
         </CardContent>
       </Card>
 
       {/* AI Conversation */}
-      <Card className="bg-slate-900/90 border-slate-800 w-full h-[60vh] flex flex-col">
+      <Card className="bg-slate-900/90 border-slate-800 w-full h-[70vh] min-h-[500px] flex flex-col">
         <CardHeader>
-          <CardTitle className="text-white text-lg">AI Assistant</CardTitle>
+          <CardTitle className="text-white text-lg">Ask Anything About Your Code</CardTitle>
+          <CardDescription className="text-slate-400">
+            Get answers based on YOUR code. No more Stack Overflow rabbit holes. Just ask, and we'll analyze your actual codebase. 🧠✨
+          </CardDescription>
         </CardHeader>
         <CardContent className="flex-1 flex flex-col overflow-hidden">
           {/* Example Queries */}
@@ -1140,19 +1601,19 @@ function IntelligenceView({ data, messages, onCommand, commandInput, setCommandI
           {/* Messages */}
           <div className="flex-1 overflow-y-auto space-y-3 mb-4 pr-2 custom-scrollbar">
             {displayMessages.length === 0 ? (
-              <div className="text-center text-slate-500 py-12">
-                <div className="text-4xl mb-3">🧠</div>
-                <div className="text-sm">AI Intelligence Core Active</div>
-                <div className="text-xs text-slate-600 mt-2">
-                  Click a query above or type your own question
+              <div className="text-center text-slate-500 py-12 slide-up">
+                <div className="text-6xl mb-4 animate-bounce">🧠</div>
+                <div className="text-lg font-semibold text-slate-300 mb-2">Ask me anything about your code</div>
+                <div className="text-sm text-slate-400 mt-2">
+                  Click a question above or type your own. I'll analyze YOUR code and give you specific answers. No generic advice here! ✨
                 </div>
               </div>
             ) : (
-              displayMessages.map((msg: any) => (
+              Array.isArray(displayMessages) ? displayMessages.map((msg: any, idx: number) => (
                 <div
                   key={msg.id}
                   className={`
-                    p-3 rounded-lg ${
+                    p-3 rounded-lg slide-up smooth-transition hover-lift ${
                       msg.type === 'user' 
                         ? 'bg-cyan-500/10 border-l-4 border-cyan-500 ml-8' 
                         : msg.type === 'ai'
@@ -1160,19 +1621,50 @@ function IntelligenceView({ data, messages, onCommand, commandInput, setCommandI
                         : 'bg-slate-800/50 border-l-4 border-slate-600'
                     }
                   `}
+                  style={{ animationDelay: `${idx * 0.1}s` }}
                 >
-                  <div className={`text-sm leading-relaxed ${
+                  <div className={`text-sm leading-relaxed whitespace-pre-wrap ${
                     msg.type === 'user' ? 'text-cyan-400' : 
                     msg.type === 'ai' ? 'text-white' : 
                     'text-slate-400'
                   }`}>
                     {msg.text}
                   </div>
-                  <div className="text-xs text-slate-500 mt-2">
-                    {msg.timestamp ? new Date(msg.timestamp).toLocaleTimeString() : ''}
+                  {msg.actionableItems && msg.actionableItems.length > 0 && (
+                    <div className="mt-3 pt-3 border-t border-slate-700">
+                      <div className="flex flex-wrap gap-2">
+                        {Array.isArray(msg.actionableItems) ? msg.actionableItems.map((action: string, idx: number) => (
+                          <Button
+                            key={idx}
+                            onClick={() => {
+                              if (action.includes('Quality')) {
+                                window.location.href = '/dashboard?view=quality';
+                              } else if (action.includes('Scan')) {
+                                window.location.href = '/dashboard?view=github-scan';
+                              } else if (action.includes('Recommendations')) {
+                                window.location.href = '/dashboard?view=ai-recommendations';
+                              }
+                            }}
+                            size="sm"
+                            variant="outline"
+                            className="border-slate-700 text-slate-300 hover:bg-slate-800 text-xs"
+                          >
+                            {action}
+                          </Button>
+                        )) : null}
+                      </div>
+                    </div>
+                  )}
+                  <div className="text-xs text-slate-500 mt-2 flex items-center gap-2">
+                    <span>{msg.timestamp ? new Date(msg.timestamp).toLocaleTimeString() : ''}</span>
+                    {msg.intent && msg.intent !== 'general' && (
+                      <span className="px-2 py-0.5 bg-slate-800 rounded text-[10px]">
+                        {msg.intent}
+                      </span>
+                    )}
                   </div>
                 </div>
-              ))
+              )) : null
             )}
             {isProcessing && (
               <div className="bg-purple-500/10 border-l-4 border-purple-500 mr-8 p-3 rounded-lg">
@@ -1191,20 +1683,247 @@ function IntelligenceView({ data, messages, onCommand, commandInput, setCommandI
               value={aiInput}
               onChange={(e) => setAiInput(e.target.value)}
               onKeyPress={handleKeyPress}
-              placeholder="Ask AI for insights..."
+              placeholder="Ask anything... (e.g., 'Why is my code slow?' or 'What should I fix first?')"
               className="flex-1 bg-slate-900 border border-slate-800 px-3 py-2 text-white text-sm focus:outline-none focus:border-cyan-500 transition-colors rounded-lg"
               disabled={isProcessing}
             />
             <Button 
               onClick={() => handleSendMessage()} 
               disabled={!aiInput.trim() || isProcessing}
-              className="bg-white text-black hover:bg-slate-100"
+              className="bg-white text-black hover:bg-slate-100 smooth-transition hover-lift button-press disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:transform-none"
             >
-              {isProcessing ? '⏳' : 'Send'}
+              {isProcessing ? (
+                <>
+                  <span className="animate-spin mr-2">🧠</span>
+                  <span className="animate-pulse">Thinking...</span>
+                </>
+              ) : (
+                <>
+                  <span className="mr-2">✨</span>
+                  Send
+                </>
+              )}
             </Button>
           </div>
+          {recentScans.length > 0 && (
+            <div className="text-xs text-slate-500 mt-2">
+              💡 Context: Using data from {recentScans.length} recent scan(s)
+            </div>
+          )}
         </CardContent>
       </Card>
+
+      {/* AI Recommendations Section */}
+      {activeSection === 'recommendations' && (
+        <div className="space-y-6">
+          <Card className="bg-slate-900/90 border-slate-800">
+            <CardHeader>
+              <div className="flex items-center justify-between">
+                <CardTitle className="text-white text-lg">💡 We'll Tell You Exactly What to Fix</CardTitle>
+                <Button onClick={fetchRecommendations} disabled={isLoadingRecommendations} className="bg-white text-black hover:bg-slate-100">
+                  {isLoadingRecommendations ? '🔄 Analyzing...' : '🔍 Get Recommendations'}
+                </Button>
+              </div>
+            </CardHeader>
+            <CardContent>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
+                <div>
+                  <label className="block text-slate-400 text-sm mb-1">Project Type</label>
+                  <select
+                    value={projectContext.type}
+                    onChange={(e) => setProjectContext(prev => ({ ...prev, type: e.target.value }))}
+                    className="w-full bg-slate-900/80 border border-slate-700 rounded-lg px-3 py-2 text-white text-sm"
+                  >
+                    <option value="web">Web App</option>
+                    <option value="mobile">Mobile App</option>
+                    <option value="api">API Service</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-slate-400 text-sm mb-1">Team Size</label>
+                  <select
+                    value={projectContext.teamSize}
+                    onChange={(e) => setProjectContext(prev => ({ ...prev, teamSize: e.target.value }))}
+                    className="w-full bg-slate-900/80 border border-slate-700 rounded-lg px-3 py-2 text-white text-sm"
+                  >
+                    <option value="solo">Solo</option>
+                    <option value="small">Small (2-5)</option>
+                    <option value="medium">Medium (6-20)</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-slate-400 text-sm mb-1">Timeline</label>
+                  <select
+                    value={projectContext.timeline}
+                    onChange={(e) => setProjectContext(prev => ({ ...prev, timeline: e.target.value }))}
+                    className="w-full bg-slate-900/80 border border-slate-700 rounded-lg px-3 py-2 text-white text-sm"
+                  >
+                    <option value="prototype">Prototype</option>
+                    <option value="mvp">MVP</option>
+                    <option value="production">Production</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-slate-400 text-sm mb-1">Budget</label>
+                  <select
+                    value={projectContext.budget}
+                    onChange={(e) => setProjectContext(prev => ({ ...prev, budget: e.target.value }))}
+                    className="w-full bg-slate-900/80 border border-slate-700 rounded-lg px-3 py-2 text-white text-sm"
+                  >
+                    <option value="free">Free</option>
+                    <option value="low">Low ($)</option>
+                    <option value="medium">Medium ($$)</option>
+                  </select>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          {isLoadingRecommendations ? (
+            <Card className="bg-slate-900/90 border-slate-800">
+              <CardContent className="flex items-center justify-center py-16">
+                <div className="animate-spin w-8 h-8 border-2 border-cyan-500 border-t-transparent rounded-full mr-4"></div>
+                <span className="text-cyan-400 text-sm">Analyzing your project...</span>
+              </CardContent>
+            </Card>
+          ) : recommendations.length === 0 ? (
+            <Card className="bg-slate-900/90 border-slate-800">
+              <CardContent className="text-center py-16">
+                <div className="text-5xl mb-4">🤔</div>
+                <div className="text-lg font-semibold text-slate-300 mb-2">No recommendations yet</div>
+                <div className="text-sm text-slate-400 mb-6">Click "Get Recommendations" to analyze your project and get personalized suggestions</div>
+                <Button onClick={fetchRecommendations} className="bg-cyan-600 hover:bg-cyan-700 text-white">
+                  🔍 Get Recommendations
+                </Button>
+              </CardContent>
+            </Card>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {recommendations.slice(0, 6).map((rec: any) => (
+                <Card key={rec.pluginId} className="bg-slate-900/90 border-slate-800 hover:border-cyan-500/50 transition-colors">
+                  <CardContent className="p-6">
+                    <div className="flex items-start justify-between mb-3">
+                      <div className="flex-1">
+                        <h3 className="text-white font-bold text-lg">{rec.plugin?.name || 'Plugin'}</h3>
+                        <div className="flex items-center gap-2 text-sm text-slate-400 mt-1">
+                          <span className={`px-2 py-1 rounded text-xs ${
+                            rec.plugin?.price === 0 ? 'bg-green-500/20 text-green-400' : 'bg-amber-500/20 text-amber-400'
+                          }`}>
+                            {rec.plugin?.price === 0 ? 'FREE' : `$${rec.plugin?.price}`}
+                          </span>
+                          <span>⭐ {rec.plugin?.rating || 'N/A'}</span>
+                        </div>
+                      </div>
+                      <div className={`text-right ${rec.confidence >= 0.8 ? 'text-green-400' : rec.confidence >= 0.6 ? 'text-amber-400' : 'text-red-400'}`}>
+                        <div className="text-sm font-semibold">{Math.round(rec.confidence * 100)}%</div>
+                      </div>
+                    </div>
+                    <p className="text-slate-300 text-sm mb-3 line-clamp-2">
+                      {rec.plugin?.description || rec.reasons?.[0] || 'Recommended for your project'}
+                    </p>
+                    {rec.reasons && rec.reasons.length > 0 && (
+                      <div className="text-xs text-slate-400">
+                        💡 {rec.reasons.length} reason{rec.reasons.length > 1 ? 's' : ''}
+                      </div>
+                    )}
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* Missions Section */}
+      {activeSection === 'missions' && (
+        <div className="space-y-6">
+          <Card className="bg-slate-900/90 border-slate-800">
+            <CardHeader>
+              <div className="flex items-center justify-between">
+                <CardTitle className="text-white text-lg">🎯 Track Your Improvement Goals</CardTitle>
+                <Button onClick={() => setShowCreateMission(true)} className="bg-white text-black hover:bg-slate-100">
+                  + New Mission
+                </Button>
+              </div>
+            </CardHeader>
+            <CardContent>
+              {isLoadingMissions ? (
+                <div className="flex items-center justify-center py-16">
+                  <div className="animate-spin w-8 h-8 border-2 border-cyan-500 border-t-transparent rounded-full mr-4"></div>
+                  <span className="text-cyan-400 text-sm">Loading missions...</span>
+                </div>
+              ) : missions.length === 0 ? (
+                <div className="text-center py-16 slide-up">
+                  <div className="text-6xl mb-4 animate-bounce">🎯</div>
+                  <div className="text-lg font-semibold text-slate-300 mb-2">No missions yet</div>
+                  <div className="text-sm text-slate-400 mb-6">Create a mission to track what you want to improve. We'll help you get there. Every mission completed makes you a better developer! 🚀</div>
+                  <Button onClick={() => setShowCreateMission(true)} className="bg-cyan-600 hover:bg-cyan-700 text-white smooth-transition hover-lift button-press">
+                    <span className="mr-2">+</span>
+                    Create Mission
+                  </Button>
+                </div>
+              ) : (
+                <div className="space-y-4">
+                  {missions.map((mission: any) => (
+                    <Card key={mission.id} className="bg-slate-800/50 border-slate-700">
+                      <CardContent className="p-4">
+                        <div className="flex items-start justify-between">
+                          <div className="flex-1">
+                            <h3 className="text-white font-semibold mb-1">{mission.name}</h3>
+                            <p className="text-slate-400 text-sm mb-2">{mission.description}</p>
+                            <div className="flex items-center gap-4 text-xs text-slate-500">
+                              <span>Type: {mission.type}</span>
+                              <span>Priority: {mission.priority}</span>
+                              <span>Status: {mission.status}</span>
+                              <span>Progress: {mission.progress || 0}%</span>
+                            </div>
+                          </div>
+                          <div className="flex gap-2">
+                            {mission.status === 'planning' && (
+                              <Button
+                                onClick={async () => {
+                                  try {
+                                    const response = await fetch(`/api/beast-mode/missions/${mission.id}/start`, { method: 'POST' });
+                                    if (response.ok) await fetchMissions();
+                                  } catch (e) { console.error(e); }
+                                }}
+                                size="sm"
+                                className="bg-green-600 hover:bg-green-700"
+                              >
+                                Start
+                              </Button>
+                            )}
+                            {mission.status === 'active' && (
+                              <Button
+                                onClick={async () => {
+                                  if (confirm('Mark as completed?')) {
+                                    try {
+                                      const response = await fetch(`/api/beast-mode/missions/${mission.id}`, {
+                                        method: 'PUT',
+                                        headers: { 'Content-Type': 'application/json' },
+                                        body: JSON.stringify({ status: 'completed', progress: 100 })
+                                      });
+                                      if (response.ok) await fetchMissions();
+                                    } catch (e) { console.error(e); }
+                                  }
+                                }}
+                                size="sm"
+                                className="bg-cyan-600 hover:bg-cyan-700"
+                              >
+                                Complete
+                              </Button>
+                            )}
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              )}
+            </CardContent>
+          </Card>
+        </div>
+      )}
     </div>
   );
 }
@@ -1225,8 +1944,38 @@ function MarketplaceView({ data }: any) {
   const fetchPlugins = async () => {
     setIsLoading(true);
     try {
-      // Use recommendations API to get plugins (marketplace API not available yet)
-      const response = await fetch('/api/beast-mode/marketplace/recommendations', {
+      // Try new plugins API first
+      let response = await fetch('/api/beast-mode/marketplace/plugins');
+      
+      if (response.ok) {
+        const result = await response.json();
+        // Transform plugin registry format to match UI expectations
+        const transformedPlugins = (result.plugins || []).map((plugin: any) => ({
+          pluginId: plugin.id,
+          plugin: {
+            id: plugin.id,
+            name: plugin.name,
+            description: plugin.description,
+            category: plugin.category,
+            price: plugin.price,
+            rating: plugin.rating,
+            downloads: plugin.downloads,
+            tags: plugin.tags || [],
+            languages: plugin.languages || [],
+            icon: plugin.icon,
+            usage: plugin.usage,
+            configSchema: plugin.configSchema
+          },
+          score: 90,
+          confidence: 0.85,
+          reasons: ['Available in marketplace', 'Well maintained', 'Popular choice']
+        }));
+        setPlugins(transformedPlugins);
+        return;
+      }
+      
+      // Fallback to recommendations API
+      response = await fetch('/api/beast-mode/marketplace/recommendations', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -1339,6 +2088,21 @@ function MarketplaceView({ data }: any) {
   const [installingPlugins, setInstallingPlugins] = useState<Set<string>>(new Set());
   const [installedPlugins, setInstalledPlugins] = useState<Set<string>>(new Set());
 
+  // Load installed plugins from localStorage on mount
+  React.useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem('beast-mode-installed-plugins');
+      if (saved) {
+        try {
+          const plugins = JSON.parse(saved);
+          setInstalledPlugins(new Set(plugins));
+        } catch (e) {
+          console.error('Failed to load installed plugins:', e);
+        }
+      }
+    }
+  }, []);
+
   const installPlugin = async (pluginId: string) => {
     if (installingPlugins.has(pluginId) || installedPlugins.has(pluginId)) {
       return;
@@ -1358,13 +2122,17 @@ function MarketplaceView({ data }: any) {
 
       if (response.ok) {
         const result = await response.json();
-        setInstalledPlugins(prev => new Set(prev).add(pluginId));
-        // Show success notification
+        const updated = new Set(installedPlugins).add(pluginId);
+        setInstalledPlugins(updated);
+        
+        // Persist to localStorage
         if (typeof window !== 'undefined') {
+          localStorage.setItem('beast-mode-installed-plugins', JSON.stringify(Array.from(updated)));
+          
           const event = new CustomEvent('beast-mode-notification', {
             detail: {
               type: 'success',
-              message: `Plugin "${pluginId}" installed successfully!`
+              message: `Plugin "${result.plugin?.name || pluginId}" installed successfully!`
             }
           });
           window.dispatchEvent(event);
@@ -1403,13 +2171,13 @@ function MarketplaceView({ data }: any) {
   });
 
   return (
-    <div className="w-full max-w-6xl space-y-6">
+    <div className="w-full max-w-7xl space-y-6 mx-auto">
       {/* Header */}
       <Card className="bg-slate-900/90 border-slate-800">
         <CardHeader>
-          <CardTitle className="text-white text-2xl mb-2">Plugin Marketplace</CardTitle>
+          <CardTitle className="text-white text-lg">📦 Plugin Marketplace</CardTitle>
           <CardDescription className="text-slate-400">
-            Browse and install plugins to enhance your development workflow
+            Find and install plugins for your code. We'll find the tools you need, you click install. It's that simple. 🎯
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -1479,20 +2247,27 @@ function MarketplaceView({ data }: any) {
       {/* Plugin List */}
       {isLoading ? (
         <Card className="bg-slate-900/90 border-slate-800">
-          <CardContent className="pt-6 text-center text-slate-400">
-            Loading plugins...
+          <CardContent className="flex items-center justify-center py-16">
+            <div className="animate-spin w-8 h-8 border-2 border-cyan-500 border-t-transparent rounded-full mr-4"></div>
+            <span className="text-cyan-400 text-sm">Loading plugins...</span>
           </CardContent>
         </Card>
       ) : filteredPlugins.length === 0 ? (
         <Card className="bg-slate-900/90 border-slate-800">
-          <CardContent className="pt-6 text-center text-slate-400">
-            {searchQuery ? 'No plugins found matching your search.' : 'No plugins available in this category.'}
+          <CardContent className="text-center py-16 slide-up">
+            <div className="text-6xl mb-4 animate-bounce">📦</div>
+            <div className="text-lg font-semibold text-slate-300 mb-2">
+              {searchQuery ? 'No plugins found' : 'No plugins in this category'}
+            </div>
+            <div className="text-sm text-slate-400">
+              {searchQuery ? 'Try a different search term - we have amazing plugins waiting for you! 🔍' : 'Try selecting a different category - there's something for everyone! ✨'}
+            </div>
           </CardContent>
         </Card>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {filteredPlugins.map((item) => (
-            <Card key={item.pluginId} className="bg-slate-900/90 border-slate-800 hover:border-cyan-500/50 transition-colors">
+            <Card key={item.pluginId} className="bg-slate-900/90 border-slate-800 hover:border-cyan-500/50 smooth-transition hover-lift">
               <CardHeader>
                 <div className="flex items-start justify-between">
                   <div className="flex-1">
@@ -1549,13 +2324,76 @@ function MarketplaceView({ data }: any) {
         </div>
       )}
 
+      {/* Installed Plugins Section */}
+      <Card className="bg-slate-900/90 border-slate-800">
+        <CardHeader>
+          <CardTitle className="text-white text-lg">⚙️ Installed Plugins</CardTitle>
+          <CardDescription className="text-slate-400">
+            Manage your installed plugins: enable/disable, configure, run, and view usage guides
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <PluginManager />
+        </CardContent>
+      </Card>
+
+      {/* Plugin Development Section */}
+      <Card className="bg-slate-900/90 border-slate-800">
+        <CardHeader>
+          <CardTitle className="text-white text-lg">🚀 Expand the Ecosystem</CardTitle>
+          <CardDescription className="text-slate-400">
+            Create and publish your own plugins to extend BEAST MODE's capabilities
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <div className="bg-slate-950 p-4 rounded-lg border border-slate-800">
+            <h4 className="text-white font-semibold mb-2">Plugin Development Guide</h4>
+            <p className="text-slate-400 text-sm mb-4">
+              Build plugins that integrate seamlessly with BEAST MODE. Our plugin system supports:
+            </p>
+            <ul className="list-disc list-inside space-y-2 text-slate-300 text-sm">
+              <li><strong>Command-based plugins:</strong> Add new CLI commands</li>
+              <li><strong>Quality analyzers:</strong> Custom code quality checks</li>
+              <li><strong>Integrations:</strong> Connect with external tools</li>
+              <li><strong>Automations:</strong> Automate repetitive tasks</li>
+            </ul>
+          </div>
+          
+          <div className="flex gap-2">
+            <Button
+              onClick={() => window.open('https://docs.beastmode.dev/plugins/development', '_blank')}
+              className="bg-cyan-600 hover:bg-cyan-700 text-white"
+            >
+              📚 View Documentation
+            </Button>
+            <Button
+              onClick={() => window.open('https://github.com/repairman29/BEAST-MODE/tree/main/plugins', '_blank')}
+              variant="outline"
+              className="border-slate-700 text-slate-300 hover:bg-slate-800"
+            >
+              💻 Example Plugins
+            </Button>
+            <Button
+              onClick={() => {
+                // Open plugin submission form
+                alert('Plugin submission form coming soon! For now, submit via GitHub: https://github.com/repairman29/BEAST-MODE/issues/new?template=plugin-submission.md');
+              }}
+              variant="outline"
+              className="border-slate-700 text-slate-300 hover:bg-slate-800"
+            >
+              ➕ Submit Plugin
+            </Button>
+          </div>
+        </CardContent>
+      </Card>
+
       {/* Info */}
       <Card className="bg-slate-900/50 border-slate-800">
         <CardContent className="pt-6">
           <div className="text-slate-400 text-sm">
             💡 <strong>Tip:</strong> For personalized plugin recommendations based on your project, check out the{' '}
-            <a href="/dashboard?view=ai-recommendations" className="text-cyan-400 hover:underline">
-              AI Recommendations
+            <a href="/dashboard?view=intelligence" className="text-cyan-400 hover:underline">
+              Intelligence
             </a>{' '}
             tab.
           </div>
@@ -1566,82 +2404,339 @@ function MarketplaceView({ data }: any) {
 }
 
 /**
- * Enterprise View - Enterprise Features & Analytics
+ * Settings View - Teams, Users, Repositories & Preferences
  */
-function EnterpriseView({ data }: any) {
-  const [teams, setTeams] = React.useState([
-    { id: '1', name: 'Engineering', members: 12, repos: 8 },
-    { id: '2', name: 'Product', members: 5, repos: 3 },
-    { id: '3', name: 'Design', members: 4, repos: 2 }
-  ]);
-  const [users, setUsers] = React.useState([
-    { id: '1', email: 'john@example.com', name: 'John Doe', role: 'admin', team: 'Engineering' },
-    { id: '2', email: 'jane@example.com', name: 'Jane Smith', role: 'developer', team: 'Engineering' },
-    { id: '3', email: 'bob@example.com', name: 'Bob Johnson', role: 'viewer', team: 'Product' }
-  ]);
-  const [repos, setRepos] = React.useState([
-    { id: '1', name: 'frontend-app', team: 'Engineering', lastScan: '2024-01-15' },
-    { id: '2', name: 'backend-api', team: 'Engineering', lastScan: '2024-01-14' },
-    { id: '3', name: 'design-system', team: 'Design', lastScan: '2024-01-13' }
-  ]);
+function SettingsView({ data }: any) {
+  const [teams, setTeams] = React.useState<any[]>([]);
+  const [users, setUsers] = React.useState<any[]>([]);
+  const [repos, setRepos] = React.useState<any[]>([]);
+  const [isLoading, setIsLoading] = React.useState(true);
   const [showAddTeam, setShowAddTeam] = React.useState(false);
   const [showAddUser, setShowAddUser] = React.useState(false);
   const [showAddRepo, setShowAddRepo] = React.useState(false);
+  const [editingTeam, setEditingTeam] = React.useState<any>(null);
+  const [editingUser, setEditingUser] = React.useState<any>(null);
+  const [editingRepo, setEditingRepo] = React.useState<any>(null);
   const [newTeamName, setNewTeamName] = React.useState('');
   const [newUserEmail, setNewUserEmail] = React.useState('');
+  const [newUserName, setNewUserName] = React.useState('');
   const [newUserRole, setNewUserRole] = React.useState('developer');
+  const [newUserTeam, setNewUserTeam] = React.useState('');
   const [newRepoUrl, setNewRepoUrl] = React.useState('');
+  const [newRepoTeam, setNewRepoTeam] = React.useState('');
 
-  const handleAddTeam = () => {
-    if (newTeamName.trim()) {
-      setTeams([...teams, { id: String(teams.length + 1), name: newTeamName, members: 0, repos: 0 }]);
-      setNewTeamName('');
-      setShowAddTeam(false);
+  // Fetch data on mount
+  React.useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    setIsLoading(true);
+    try {
+      const [teamsRes, usersRes, reposRes] = await Promise.all([
+        fetch('/api/beast-mode/enterprise/teams'),
+        fetch('/api/beast-mode/enterprise/users'),
+        fetch('/api/beast-mode/enterprise/repos')
+      ]);
+
+      if (teamsRes.ok) {
+        const teamsData = await teamsRes.json();
+        setTeams(teamsData.teams || []);
+      }
+      if (usersRes.ok) {
+        const usersData = await usersRes.json();
+        setUsers(usersData.users || []);
+      }
+      if (reposRes.ok) {
+        const reposData = await reposRes.json();
+        setRepos(reposData.repos || []);
+      }
+    } catch (error) {
+      console.error('Failed to fetch enterprise data:', error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
-  const handleAddUser = () => {
-    if (newUserEmail.trim()) {
-      setUsers([...users, { id: String(users.length + 1), email: newUserEmail, name: '', role: newUserRole, team: '' }]);
-      setNewUserEmail('');
-      setNewUserRole('developer');
-      setShowAddUser(false);
+  const handleAddTeam = async () => {
+    if (!newTeamName.trim()) return;
+    
+    try {
+      const response = await fetch('/api/beast-mode/enterprise/teams', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: newTeamName })
+      });
+
+      if (response.ok) {
+        await fetchData();
+        setNewTeamName('');
+        setShowAddTeam(false);
+      }
+    } catch (error) {
+      console.error('Failed to create team:', error);
+      alert('Failed to create team');
     }
   };
 
-  const handleAddRepo = () => {
-    if (newRepoUrl.trim()) {
-      const repoName = newRepoUrl.split('/').pop() || newRepoUrl;
-      setRepos([...repos, { id: String(repos.length + 1), name: repoName, team: '', lastScan: 'Never' }]);
-      setNewRepoUrl('');
-      setShowAddRepo(false);
+  const handleEditTeam = (team: any) => {
+    setEditingTeam(team);
+    setNewTeamName(team.name);
+    setShowAddTeam(true);
+  };
+
+  const handleUpdateTeam = async () => {
+    if (!editingTeam || !newTeamName.trim()) return;
+
+    try {
+      const response = await fetch('/api/beast-mode/enterprise/teams', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: editingTeam.id, name: newTeamName })
+      });
+
+      if (response.ok) {
+        await fetchData();
+        setEditingTeam(null);
+        setNewTeamName('');
+        setShowAddTeam(false);
+      }
+    } catch (error) {
+      console.error('Failed to update team:', error);
+      alert('Failed to update team');
     }
   };
+
+  const handleDeleteTeam = async (id: string) => {
+    if (!confirm('Are you sure you want to delete this team?')) return;
+
+    try {
+      const response = await fetch(`/api/beast-mode/enterprise/teams?id=${id}`, {
+        method: 'DELETE'
+      });
+
+      if (response.ok) {
+        await fetchData();
+      }
+    } catch (error) {
+      console.error('Failed to delete team:', error);
+      alert('Failed to delete team');
+    }
+  };
+
+  const handleAddUser = async () => {
+    if (!newUserEmail.trim()) return;
+
+    try {
+      const response = await fetch('/api/beast-mode/enterprise/users', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: newUserEmail,
+          name: newUserName,
+          role: newUserRole,
+          team: newUserTeam
+        })
+      });
+
+      if (response.ok) {
+        await fetchData();
+        setNewUserEmail('');
+        setNewUserName('');
+        setNewUserRole('developer');
+        setNewUserTeam('');
+        setShowAddUser(false);
+      } else {
+        const error = await response.json();
+        alert(error.error || 'Failed to invite user');
+      }
+    } catch (error) {
+      console.error('Failed to invite user:', error);
+      alert('Failed to invite user');
+    }
+  };
+
+  const handleEditUser = (user: any) => {
+    setEditingUser(user);
+    setNewUserEmail(user.email);
+    setNewUserName(user.name || '');
+    setNewUserRole(user.role);
+    setNewUserTeam(user.team || '');
+    setShowAddUser(true);
+  };
+
+  const handleUpdateUser = async () => {
+    if (!editingUser) return;
+
+    try {
+      const response = await fetch('/api/beast-mode/enterprise/users', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          id: editingUser.id,
+          email: newUserEmail,
+          name: newUserName,
+          role: newUserRole,
+          team: newUserTeam
+        })
+      });
+
+      if (response.ok) {
+        await fetchData();
+        setEditingUser(null);
+        setNewUserEmail('');
+        setNewUserName('');
+        setNewUserRole('developer');
+        setNewUserTeam('');
+        setShowAddUser(false);
+      }
+    } catch (error) {
+      console.error('Failed to update user:', error);
+      alert('Failed to update user');
+    }
+  };
+
+  const handleDeleteUser = async (id: string) => {
+    if (!confirm('Are you sure you want to remove this user?')) return;
+
+    try {
+      const response = await fetch(`/api/beast-mode/enterprise/users?id=${id}`, {
+        method: 'DELETE'
+      });
+
+      if (response.ok) {
+        await fetchData();
+      }
+    } catch (error) {
+      console.error('Failed to remove user:', error);
+      alert('Failed to remove user');
+    }
+  };
+
+  const handleAddRepo = async () => {
+    if (!newRepoUrl.trim()) return;
+
+    try {
+      const response = await fetch('/api/beast-mode/enterprise/repos', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          url: newRepoUrl,
+          team: newRepoTeam
+        })
+      });
+
+      if (response.ok) {
+        await fetchData();
+        setNewRepoUrl('');
+        setNewRepoTeam('');
+        setShowAddRepo(false);
+      } else {
+        const error = await response.json();
+        alert(error.error || 'Failed to add repository');
+      }
+    } catch (error) {
+      console.error('Failed to add repository:', error);
+      alert('Failed to add repository');
+    }
+  };
+
+  const handleEditRepo = (repo: any) => {
+    setEditingRepo(repo);
+    setNewRepoUrl(repo.url || '');
+    setNewRepoTeam(repo.team || '');
+    setShowAddRepo(true);
+  };
+
+  const handleUpdateRepo = async () => {
+    if (!editingRepo || !newRepoUrl.trim()) return;
+
+    try {
+      const response = await fetch('/api/beast-mode/enterprise/repos', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          id: editingRepo.id,
+          url: newRepoUrl,
+          team: newRepoTeam
+        })
+      });
+
+      if (response.ok) {
+        await fetchData();
+        setEditingRepo(null);
+        setNewRepoUrl('');
+        setNewRepoTeam('');
+        setShowAddRepo(false);
+      } else {
+        const error = await response.json();
+        alert(error.error || 'Failed to update repository');
+      }
+    } catch (error) {
+      console.error('Failed to update repository:', error);
+      alert('Failed to update repository');
+    }
+  };
+
+  const handleDeleteRepo = async (id: string) => {
+    if (!confirm('Are you sure you want to remove this repository?')) return;
+
+    try {
+      const response = await fetch(`/api/beast-mode/enterprise/repos?id=${id}`, {
+        method: 'DELETE'
+      });
+
+      if (response.ok) {
+        await fetchData();
+      }
+    } catch (error) {
+      console.error('Failed to remove repository:', error);
+      alert('Failed to remove repository');
+    }
+  };
+
+  const handleScanRepo = (repo: any) => {
+    // Navigate to quality tab with repo URL
+    window.location.href = `/dashboard?view=quality&repo=${encodeURIComponent(repo.url || repo.name)}`;
+  };
+
+  if (isLoading) {
+    return (
+      <div className="w-full max-w-7xl space-y-6 mx-auto">
+        <Card className="bg-slate-900/90 border-slate-800">
+          <CardContent className="flex items-center justify-center py-12">
+            <div className="animate-spin w-8 h-8 border-2 border-cyan-500 border-t-transparent rounded-full mr-4"></div>
+            <span className="text-cyan-400">Loading enterprise data...</span>
+          </CardContent>
+        </Card>
+      </div>
+    );
+  }
 
   return (
-    <div className="w-full max-w-6xl space-y-6">
+    <div className="w-full max-w-7xl space-y-6 mx-auto">
       {/* Stats Overview */}
       <Card className="bg-slate-900/90 border-slate-800">
         <CardHeader>
-          <CardTitle className="text-white text-lg">Enterprise Overview</CardTitle>
+          <CardTitle className="text-white text-lg">Settings & Organization</CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="grid grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             <div className="text-center">
               <div className="text-3xl font-bold text-cyan-400">{teams.length}</div>
-              <div className="text-sm text-slate-400">Teams</div>
+              <div className="text-sm text-slate-400 mt-1">Teams</div>
             </div>
             <div className="text-center">
               <div className="text-3xl font-bold text-cyan-400">{repos.length}</div>
-              <div className="text-sm text-slate-400">Repositories</div>
+              <div className="text-sm text-slate-400 mt-1">Repositories</div>
             </div>
             <div className="text-center">
               <div className="text-3xl font-bold text-cyan-400">{users.length}</div>
-              <div className="text-sm text-slate-400">Users</div>
+              <div className="text-sm text-slate-400 mt-1">Users</div>
             </div>
             <div className="text-center">
               <div className="text-3xl font-bold text-green-400">{data.uptime}%</div>
-              <div className="text-sm text-slate-400">Uptime</div>
+              <div className="text-sm text-slate-400 mt-1">Uptime</div>
             </div>
           </div>
         </CardContent>
@@ -1650,7 +2745,7 @@ function EnterpriseView({ data }: any) {
       {/* Teams Management */}
       <Card className="bg-slate-900/90 border-slate-800">
         <CardHeader>
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between mb-2">
             <CardTitle className="text-white text-lg">Teams</CardTitle>
             <Button
               onClick={() => setShowAddTeam(!showAddTeam)}
@@ -1660,6 +2755,9 @@ function EnterpriseView({ data }: any) {
               + Add Team
             </Button>
           </div>
+          <CardDescription className="text-slate-400">
+            Organize your team members and repositories
+          </CardDescription>
         </CardHeader>
         <CardContent>
           {showAddTeam && (
@@ -1673,10 +2771,23 @@ function EnterpriseView({ data }: any) {
                 onKeyPress={(e) => e.key === 'Enter' && handleAddTeam()}
               />
               <div className="flex gap-2">
-                <Button onClick={handleAddTeam} size="sm" className="bg-green-600 hover:bg-green-700">
-                  Create
+                <Button 
+                  onClick={editingTeam ? handleUpdateTeam : handleAddTeam} 
+                  size="sm" 
+                  className="bg-green-600 hover:bg-green-700"
+                >
+                  {editingTeam ? 'Update' : 'Create'}
                 </Button>
-                <Button onClick={() => { setShowAddTeam(false); setNewTeamName(''); }} size="sm" variant="outline" className="border-slate-700">
+                <Button 
+                  onClick={() => { 
+                    setShowAddTeam(false); 
+                    setNewTeamName(''); 
+                    setEditingTeam(null);
+                  }} 
+                  size="sm" 
+                  variant="outline" 
+                  className="border-slate-700"
+                >
                   Cancel
                 </Button>
               </div>
@@ -1689,9 +2800,24 @@ function EnterpriseView({ data }: any) {
                   <div className="text-white font-medium">{team.name}</div>
                   <div className="text-sm text-slate-400">{team.members} members • {team.repos} repos</div>
                 </div>
-                <Button size="sm" variant="outline" className="border-slate-700">
-                  Manage
-                </Button>
+                <div className="flex gap-2">
+                  <Button 
+                    onClick={() => handleEditTeam(team)} 
+                    size="sm" 
+                    variant="outline" 
+                    className="border-slate-700"
+                  >
+                    Edit
+                  </Button>
+                  <Button 
+                    onClick={() => handleDeleteTeam(team.id)} 
+                    size="sm" 
+                    variant="outline" 
+                    className="border-red-700 text-red-400 hover:bg-red-500/10"
+                  >
+                    Delete
+                  </Button>
+                </div>
               </div>
             ))}
           </div>
@@ -1701,7 +2827,7 @@ function EnterpriseView({ data }: any) {
       {/* Users Management */}
       <Card className="bg-slate-900/90 border-slate-800">
         <CardHeader>
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between mb-2">
             <CardTitle className="text-white text-lg">Users</CardTitle>
             <Button
               onClick={() => setShowAddUser(!showAddUser)}
@@ -1711,10 +2837,20 @@ function EnterpriseView({ data }: any) {
               + Invite User
             </Button>
           </div>
+          <CardDescription className="text-slate-400">
+            Manage team members and their access levels
+          </CardDescription>
         </CardHeader>
         <CardContent>
           {showAddUser && (
             <div className="mb-4 p-4 bg-slate-800/50 rounded-lg border border-slate-700">
+              <input
+                type="text"
+                value={newUserName}
+                onChange={(e) => setNewUserName(e.target.value)}
+                placeholder="Name (optional)"
+                className="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-white mb-2"
+              />
               <input
                 type="email"
                 value={newUserEmail}
@@ -1731,28 +2867,64 @@ function EnterpriseView({ data }: any) {
                 <option value="developer">Developer</option>
                 <option value="admin">Admin</option>
               </select>
+              <select
+                value={newUserTeam}
+                onChange={(e) => setNewUserTeam(e.target.value)}
+                className="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-white mb-2"
+              >
+                <option value="">No team</option>
+                {teams.map(team => (
+                  <option key={team.id} value={team.name}>{team.name}</option>
+                ))}
+              </select>
               <div className="flex gap-2">
-                <Button onClick={handleAddUser} size="sm" className="bg-green-600 hover:bg-green-700">
-                  Invite
+                <Button 
+                  onClick={editingUser ? handleUpdateUser : handleAddUser} 
+                  size="sm" 
+                  className="bg-green-600 hover:bg-green-700"
+                >
+                  {editingUser ? 'Update' : 'Invite'}
                 </Button>
-                <Button onClick={() => { setShowAddUser(false); setNewUserEmail(''); }} size="sm" variant="outline" className="border-slate-700">
+                <Button 
+                  onClick={() => { 
+                    setShowAddUser(false); 
+                    setNewUserEmail(''); 
+                    setNewUserName('');
+                    setNewUserRole('developer');
+                    setNewUserTeam('');
+                    setEditingUser(null);
+                  }} 
+                  size="sm" 
+                  variant="outline" 
+                  className="border-slate-700"
+                >
                   Cancel
                 </Button>
               </div>
             </div>
           )}
           <div className="space-y-2">
-            {users.map(user => (
-              <div key={user.id} className="flex items-center justify-between p-3 bg-slate-800/30 rounded-lg">
+            {users.map((user, idx) => (
+              <div key={user.id} className="flex items-center justify-between p-3 bg-slate-800/30 rounded-lg slide-up smooth-transition hover-lift" style={{ animationDelay: `${idx * 0.05}s` }}>
                 <div>
                   <div className="text-white font-medium">{user.name || user.email}</div>
                   <div className="text-sm text-slate-400">{user.email} • {user.role} {user.team && `• ${user.team}`}</div>
                 </div>
                 <div className="flex gap-2">
-                  <Button size="sm" variant="outline" className="border-slate-700">
+                  <Button 
+                    onClick={() => handleEditUser(user)} 
+                    size="sm" 
+                    variant="outline" 
+                    className="border-slate-700"
+                  >
                     Edit
                   </Button>
-                  <Button size="sm" variant="outline" className="border-red-700 text-red-400 hover:bg-red-500/10">
+                  <Button 
+                    onClick={() => handleDeleteUser(user.id)} 
+                    size="sm" 
+                    variant="outline" 
+                    className="border-red-700 text-red-400 hover:bg-red-500/10"
+                  >
                     Remove
                   </Button>
                 </div>
@@ -1765,7 +2937,7 @@ function EnterpriseView({ data }: any) {
       {/* Repositories Management */}
       <Card className="bg-slate-900/90 border-slate-800">
         <CardHeader>
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between mb-2">
             <CardTitle className="text-white text-lg">Repositories</CardTitle>
             <Button
               onClick={() => setShowAddRepo(!showAddRepo)}
@@ -1775,6 +2947,9 @@ function EnterpriseView({ data }: any) {
               + Add Repository
             </Button>
           </div>
+          <CardDescription className="text-slate-400">
+            Connect and manage your GitHub repositories
+          </CardDescription>
         </CardHeader>
         <CardContent>
           {showAddRepo && (
@@ -1787,26 +2962,73 @@ function EnterpriseView({ data }: any) {
                 className="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-white mb-2"
                 onKeyPress={(e) => e.key === 'Enter' && handleAddRepo()}
               />
+              <select
+                value={newRepoTeam}
+                onChange={(e) => setNewRepoTeam(e.target.value)}
+                className="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-white mb-2"
+              >
+                <option value="">No team</option>
+                {teams.map(team => (
+                  <option key={team.id} value={team.name}>{team.name}</option>
+                ))}
+              </select>
               <div className="flex gap-2">
-                <Button onClick={handleAddRepo} size="sm" className="bg-green-600 hover:bg-green-700">
-                  Add
+                <Button 
+                  onClick={editingRepo ? handleUpdateRepo : handleAddRepo} 
+                  size="sm" 
+                  className="bg-green-600 hover:bg-green-700"
+                >
+                  {editingRepo ? 'Update' : 'Add'}
                 </Button>
-                <Button onClick={() => { setShowAddRepo(false); setNewRepoUrl(''); }} size="sm" variant="outline" className="border-slate-700">
+                <Button 
+                  onClick={() => { 
+                    setShowAddRepo(false); 
+                    setNewRepoUrl(''); 
+                    setNewRepoTeam('');
+                    setEditingRepo(null);
+                  }} 
+                  size="sm" 
+                  variant="outline" 
+                  className="border-slate-700"
+                >
                   Cancel
                 </Button>
               </div>
             </div>
           )}
           <div className="space-y-2">
-            {repos.map(repo => (
-              <div key={repo.id} className="flex items-center justify-between p-3 bg-slate-800/30 rounded-lg">
+            {repos.map((repo, idx) => (
+              <div key={repo.id} className="flex items-center justify-between p-3 bg-slate-800/30 rounded-lg slide-up smooth-transition hover-lift" style={{ animationDelay: `${idx * 0.05}s` }}>
                 <div>
                   <div className="text-white font-medium">{repo.name}</div>
                   <div className="text-sm text-slate-400">{repo.team || 'No team'} • Last scan: {repo.lastScan}</div>
                 </div>
-                <Button size="sm" variant="outline" className="border-slate-700">
-                  Scan Now
-                </Button>
+                <div className="flex gap-2">
+                  <Button 
+                    onClick={() => handleScanRepo(repo)} 
+                    size="sm" 
+                    variant="outline" 
+                    className="border-slate-700"
+                  >
+                    Scan Now
+                  </Button>
+                  <Button 
+                    onClick={() => handleEditRepo(repo)} 
+                    size="sm" 
+                    variant="outline" 
+                    className="border-slate-700"
+                  >
+                    Edit
+                  </Button>
+                  <Button 
+                    onClick={() => handleDeleteRepo(repo.id)} 
+                    size="sm" 
+                    variant="outline" 
+                    className="border-red-700 text-red-400 hover:bg-red-500/10"
+                  >
+                    Remove
+                  </Button>
+                </div>
               </div>
             ))}
           </div>
@@ -1839,68 +3061,40 @@ function EnterpriseView({ data }: any) {
         </Card>
 
         <Card className="bg-slate-900/90 border-slate-800">
-          <div className="text-amber-400 uppercase tracking-widest mb-3 text-sm">
-            AI Systems Health
-          </div>
-          <div className="space-y-2">
-            <div className="flex justify-between">
-              <span>BEAST MODE Core</span>
-              <span className="text-green-400">Operational</span>
+          <CardHeader>
+            <CardTitle className="text-white text-lg">System Status</CardTitle>
+            <CardDescription className="text-slate-400">
+              Monitor AI systems and integrations health
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-3">
+              <div className="flex justify-between items-center py-2 border-b border-slate-800">
+                <span className="text-slate-300">BEAST MODE Core</span>
+                <span className="text-green-400 font-semibold">✓ Operational</span>
+              </div>
+              <div className="flex justify-between items-center py-2 border-b border-slate-800">
+                <span className="text-slate-300">AI Assistant</span>
+                <span className={`font-semibold ${data.conversationalAIStatus === 'operational' ? 'text-green-400' : 'text-amber-400'}`}>
+                  {data.conversationalAIStatus === 'operational' ? '✓ Ready' : '⚠ Limited'}
+                </span>
+              </div>
+              <div className="flex justify-between items-center py-2 border-b border-slate-800">
+                <span className="text-slate-300">Code Analysis</span>
+                <span className="text-green-400 font-semibold">✓ Active</span>
+              </div>
+              <div className="flex justify-between items-center py-2 border-b border-slate-800">
+                <span className="text-slate-300">Recommendations Engine</span>
+                <span className="text-green-400 font-semibold">✓ Active</span>
+              </div>
+              <div className="flex justify-between items-center py-2">
+                <span className="text-slate-300">Integrations</span>
+                <span className="text-cyan-400 font-semibold">{data.integrations || 0} Connected</span>
+              </div>
             </div>
-            <div className="flex justify-between">
-              <span>Oracle AI</span>
-              <span className={`${data.oracleStatus === 'operational' ? 'text-green-400' : 'text-amber-400'}`}>
-                {data.oracleStatus === 'operational' ? 'Connected' : 'Limited'}
-              </span>
-            </div>
-            <div className="flex justify-between">
-              <span>Daisy Chain</span>
-              <span className={`${data.daisyChainStatus === 'operational' ? 'text-green-400' : 'text-amber-400'}`}>
-                {data.daisyChainStatus === 'operational' ? 'Orchestrating' : 'Limited'}
-              </span>
-            </div>
-            <div className="flex justify-between">
-              <span>Conversational AI</span>
-              <span className={`${data.conversationalAIStatus === 'operational' ? 'text-green-400' : 'text-amber-400'}`}>
-                {data.conversationalAIStatus === 'operational' ? 'Chat Ready' : 'Limited'}
-              </span>
-            </div>
-            <div className="flex justify-between">
-              <span>Health Monitor</span>
-              <span className={`${data.healthMonitorStatus === 'operational' ? 'text-green-400' : 'text-amber-400'}`}>
-                {data.healthMonitorStatus === 'operational' ? 'Monitoring' : 'Offline'}
-              </span>
-            </div>
-            <div className="flex justify-between">
-              <span>Mission Guidance</span>
-              <span className={`${data.missionGuidanceStatus === 'operational' ? 'text-green-400' : 'text-amber-400'}`}>
-                {data.missionGuidanceStatus === 'operational' ? 'Guiding' : 'Offline'}
-              </span>
-            </div>
-            <div className="flex justify-between">
-              <span>Deployment Orchestrator</span>
-              <span className={`${data.deploymentOrchestratorStatus === 'operational' ? 'text-green-400' : 'text-amber-400'}`}>
-                {data.deploymentOrchestratorStatus === 'operational' ? 'Deploying' : 'Offline'}
-              </span>
-            </div>
-            <div className="flex justify-between">
-              <span>AI Systems</span>
-              <span className="text-cyan-400">{data.aiSystems}/9 Active</span>
-            </div>
-            <div className="flex justify-between">
-              <span>Code Roach</span>
-              <span className="text-green-400">Operational</span>
-            </div>
-            <div className="flex justify-between">
-              <span>Integrations</span>
-              <span className="text-cyan-400">{data.integrations} Connected</span>
-            </div>
-          </div>
+          </CardContent>
         </Card>
       </div>
-
-      {/* Conversational AI Interface */}
-      <ConversationalAI />
     </div>
   );
 }
