@@ -2547,6 +2547,7 @@ function MarketplaceView({ data }: any) {
  * Settings View - Teams, Users, Repositories & Preferences
  */
 function SettingsView({ data }: any) {
+  const { user } = useUser();
   const [teams, setTeams] = React.useState<any[]>([]);
   const [users, setUsers] = React.useState<any[]>([]);
   const [repos, setRepos] = React.useState<any[]>([]);
