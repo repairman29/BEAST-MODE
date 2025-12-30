@@ -3,7 +3,6 @@
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '../ui/card';
 import { Button } from '../ui/button';
-import BeastModeStatusBar from './BeastModeStatusBar';
 import NotificationWidget, { Notification } from '../hud/NotificationWidget';
 import ConversationalAI from './ConversationalAI';
 import HealthDashboard from './HealthDashboard';
@@ -260,13 +259,7 @@ function BeastModeDashboardInner({ initialView }: BeastModeDashboardInnerProps) 
         <div className="absolute inset-0 bg-gradient-to-b from-black via-slate-950 to-black z-0"></div>
         <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:64px_64px] z-0"></div>
 
-        {/* Status Bar - Always visible */}
-        <BeastModeStatusBar
-          quality={beastModeState.quality}
-          intelligence={beastModeState.intelligence}
-          enterprise={beastModeState.enterprise}
-          marketplace={beastModeState.marketplace}
-        />
+            {/* Status Bar removed - stats shown in individual tabs instead */}
 
         {/* Notifications */}
         <NotificationWidget

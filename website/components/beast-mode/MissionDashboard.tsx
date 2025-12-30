@@ -40,6 +40,8 @@ function MissionDashboard() {
   const [isLoading, setIsLoading] = useState(false);
   const [selectedMission, setSelectedMission] = useState<Mission | null>(null);
   const [showCreateMission, setShowCreateMission] = useState(false);
+  const [editingMission, setEditingMission] = useState<Mission | null>(null);
+  const [showTemplates, setShowTemplates] = useState(false);
   const [newMission, setNewMission] = useState({
     name: '',
     description: '',
@@ -163,11 +165,107 @@ function MissionDashboard() {
   };
 
   const missionTemplates = [
-    { value: 'code-refactor', label: 'Code Refactoring', description: 'Improve code quality and maintainability' },
-    { value: 'security-audit', label: 'Security Audit', description: 'Comprehensive security review and fixes' },
-    { value: 'performance-optimization', label: 'Performance Optimization', description: 'Optimize application performance' },
-    { value: 'architecture-modernization', label: 'Architecture Modernization', description: 'Modernize legacy architecture' }
+    { 
+      value: 'code-refactor', 
+      label: 'Code Refactoring', 
+      description: 'Improve code quality and maintainability',
+      defaultObjectives: ['Identify code smells', 'Refactor large components', 'Improve test coverage', 'Update documentation']
+    },
+    { 
+      value: 'security-audit', 
+      label: 'Security Audit', 
+      description: 'Comprehensive security review and fixes',
+      defaultObjectives: ['Scan for vulnerabilities', 'Review authentication', 'Check dependencies', 'Implement security headers']
+    },
+    { 
+      value: 'performance-optimization', 
+      label: 'Performance Optimization', 
+      description: 'Optimize application performance',
+      defaultObjectives: ['Profile application', 'Optimize database queries', 'Reduce bundle size', 'Implement caching']
+    },
+    { 
+      value: 'architecture-modernization', 
+      label: 'Architecture Modernization', 
+      description: 'Modernize legacy architecture',
+      defaultObjectives: ['Analyze current architecture', 'Design new architecture', 'Plan migration', 'Execute migration']
+    },
+    {
+      value: 'test-coverage',
+      label: 'Test Coverage Improvement',
+      description: 'Increase test coverage and quality',
+      defaultObjectives: ['Identify untested code', 'Write unit tests', 'Add integration tests', 'Set up CI/CD']
+    },
+    {
+      value: 'documentation',
+      label: 'Documentation Update',
+      description: 'Improve project documentation',
+      defaultObjectives: ['Update README', 'Document APIs', 'Add code comments', 'Create user guides']
+    }
   ];
+
+  const loadTemplate = (templateValue: string) => {
+    const template = missionTemplates.find(t => t.value === templateValue);
+    if (template) {
+      setNewMission({
+        name: template.label,
+        description: template.description,
+        type: template.value,
+        priority: 'medium',
+        deadline: '',
+        objectives: template.defaultObjectives || ['']
+      });
+      setShowTemplates(false);
+    }
+  };
+
+  const editMission = (mission: Mission) => {
+    setEditingMission(mission);
+    setNewMission({
+      name: mission.name,
+      description: mission.description,
+      type: mission.type,
+      priority: mission.priority,
+      deadline: mission.deadline,
+      objectives: mission.tasks?.map(t => t.name) || ['']
+    });
+    setShowCreateMission(true);
+  };
+
+  const updateMission = async () => {
+    if (!editingMission || !newMission.name || !newMission.description) return;
+
+    setIsLoading(true);
+    try {
+      const response = await fetch(`/api/beast-mode/missions/${editingMission.id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ...newMission,
+          objectives: newMission.objectives.filter(obj => obj.trim())
+        })
+      });
+
+      if (response.ok) {
+        await fetchMissions();
+        setShowCreateMission(false);
+        setEditingMission(null);
+        setNewMission({
+          name: '',
+          description: '',
+          type: 'code-refactor',
+          priority: 'medium',
+          deadline: '',
+          objectives: ['']
+        });
+      }
+    } catch (error) {
+      console.error('Failed to update mission:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     <div className="w-full max-w-7xl space-y-6">

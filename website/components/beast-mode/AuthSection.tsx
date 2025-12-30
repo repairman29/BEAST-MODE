@@ -38,6 +38,8 @@ export default function AuthSection({ onAuthSuccess }: AuthSectionProps) {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [showPasswordReset, setShowPasswordReset] = useState(false);
+  const [resetEmail, setResetEmail] = useState('');
+  const [resetSent, setResetSent] = useState(false);
 
   // Sync with user context
   useEffect(() => {
