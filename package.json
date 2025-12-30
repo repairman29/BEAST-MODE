@@ -25,7 +25,11 @@
     "dns:update": "node scripts/porkbun-api.js update",
     "dev": "cd website && npm run dev",
     "build:website": "cd website && npm run build",
-    "start:website": "cd website && npm run start"
+    "start:website": "cd website && npm run start",
+    "mlflow:start": "mlflow ui --port 5000 --host 0.0.0.0",
+    "mlflow:init": "node scripts/setup-mlflow.js",
+    "train:quality": "node scripts/train-quality-model.js",
+    "ml:status": "node scripts/ml-status.js"
   },
   "keywords": [
     "ai",
