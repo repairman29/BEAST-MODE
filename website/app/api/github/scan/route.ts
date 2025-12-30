@@ -269,7 +269,7 @@ export async function POST(request: NextRequest) {
         const issues = detectedIssues.length;
         const improvements = recommendations.length;
 
-        return NextResponse.json({
+        const response = {
           repo,
           url: url || repoData.html_url,
           score: Math.round(score),
