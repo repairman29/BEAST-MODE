@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { fetchRepository, fetchRepositoryContents, octokit } from '../../../../lib/github';
+import cache, { cacheKeys, cacheTTL } from '../../../../lib/cache';
+import queryOptimizer from '../../../../lib/query-optimizer';
 
 /**
  * GitHub Repository Scanning API
@@ -301,7 +303,13 @@ export async function POST(request: NextRequest) {
             defaultBranch: repoData.default_branch
           },
           timestamp: new Date().toISOString()
-        });
+        };
+
+        // Cache the response (30 minutes for scan results)
+        const cacheKey = cacheKeys.scanResult(repo);
+        cache.set(cacheKey, response, cacheTTL.long);
+
+        return NextResponse.json(response);
       } catch (githubError: any) {
         if (githubError.message === 'Repository not found') {
           return NextResponse.json(
@@ -450,7 +458,7 @@ export async function POST(request: NextRequest) {
       message: `Address ${mockOpenIssues} open issues to improve project health`
     });
 
-    return NextResponse.json({
+    const response = {
       repo,
       url,
       score,
@@ -478,7 +486,12 @@ export async function POST(request: NextRequest) {
       },
       timestamp: new Date().toISOString(),
       note: 'Mock data - configure GITHUB_TOKEN for real scanning. Results are deterministic based on repository name.'
-    });
+    };
+
+    // Cache the response (30 minutes for scan results)
+    cache.set(cacheKey, response, cacheTTL.long);
+
+    return NextResponse.json(response);
 
   } catch (error: any) {
     console.error('GitHub scan error:', error);
