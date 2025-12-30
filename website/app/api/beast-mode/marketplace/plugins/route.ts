@@ -20,6 +20,7 @@ const PLUGIN_REGISTRY: Record<string, any> = {
     downloads: 12500,
     icon: '🔍',
     tags: ['linting', 'code-quality', 'javascript', 'typescript'],
+    dependencies: [], // No dependencies
     configSchema: {
       rules: { type: 'object', default: {} },
       extends: { type: 'array', default: ['eslint:recommended'] },
@@ -50,6 +51,7 @@ const PLUGIN_REGISTRY: Record<string, any> = {
     downloads: 8900,
     icon: '🛡️',
     tags: ['typescript', 'type-safety', 'compilation'],
+    dependencies: ['eslint-pro'], // Requires ESLint Pro
     configSchema: {
       strict: { type: 'boolean', default: true },
       noImplicitAny: { type: 'boolean', default: true },
@@ -139,6 +141,7 @@ const PLUGIN_REGISTRY: Record<string, any> = {
     downloads: 9800,
     icon: '📊',
     tags: ['testing', 'coverage', 'jest'],
+    dependencies: ['typescript-guardian'], // Requires TypeScript Guardian
     configSchema: {
       threshold: { type: 'number', default: 80 },
       include: { type: 'array', default: ['**/*.test.ts', '**/*.spec.ts'] }

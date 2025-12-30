@@ -2109,7 +2109,7 @@ function MarketplaceView({ data }: any) {
     }
   }, []);
 
-  const installPlugin = async (pluginId: string) => {
+  const installPlugin = async (pluginId: string, withDependencies = true) => {
     if (installingPlugins.has(pluginId) || installedPlugins.has(pluginId)) {
       return;
     }
@@ -2117,12 +2117,64 @@ function MarketplaceView({ data }: any) {
     setInstallingPlugins(prev => new Set(prev).add(pluginId));
 
     try {
+      const userId = typeof window !== 'undefined' ? localStorage.getItem('beastModeUserId') || 'demo-user' : 'demo-user';
+
+      // Check for dependencies first
+      if (withDependencies) {
+        const depsResponse = await fetch(`/api/beast-mode/marketplace/dependencies?pluginId=${pluginId}&userId=${userId}`);
+        if (depsResponse.ok) {
+          const depsData = await depsResponse.json();
+          
+          if (depsData.conflicts.length > 0 || depsData.missing.length > 0) {
+            throw new Error(
+              `Dependency issues: ${depsData.conflicts.join(', ')} ${depsData.missing.length > 0 ? `Missing: ${depsData.missing.join(', ')}` : ''}`
+            );
+          }
+
+          // If dependencies exist, use dependency installation endpoint
+          if (depsData.dependencies.length > 0) {
+            const response = await fetch('/api/beast-mode/marketplace/dependencies', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                pluginId,
+                userId,
+                autoInstall: true
+              })
+            });
+
+            if (response.ok) {
+              const result = await response.json();
+              const updated = new Set(installedPlugins);
+              updated.add(pluginId);
+              result.installedDependencies?.forEach((depId: string) => updated.add(depId));
+              setInstalledPlugins(updated);
+              
+              // Persist to localStorage
+              if (typeof window !== 'undefined') {
+                localStorage.setItem('beast-mode-installed-plugins', JSON.stringify(Array.from(updated)));
+                
+                const event = new CustomEvent('beast-mode-notification', {
+                  detail: {
+                    type: 'success',
+                    message: result.message || `Plugin "${result.plugin?.name || pluginId}" and ${result.installedDependencies?.length || 0} dependency(ies) installed successfully!`
+                  }
+                });
+                window.dispatchEvent(event);
+              }
+              return;
+            }
+          }
+        }
+      }
+
+      // Fallback to regular installation (no dependencies or dependency check failed)
       const response = await fetch('/api/beast-mode/marketplace/install', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           pluginId,
-          userId: typeof window !== 'undefined' ? localStorage.getItem('beastModeUserId') || 'demo-user' : 'demo-user'
+          userId
         })
       });
 
@@ -2296,6 +2348,18 @@ function MarketplaceView({ data }: any) {
                     </span>
                   ))}
                 </div>
+                {item.plugin.dependencies && item.plugin.dependencies.length > 0 && (
+                  <div className="mb-3 p-2 bg-slate-950 rounded border border-slate-800">
+                    <div className="text-slate-400 text-xs mb-1">📦 Requires:</div>
+                    <div className="flex flex-wrap gap-1">
+                      {item.plugin.dependencies.map((depId: string) => (
+                        <span key={depId} className="px-2 py-1 bg-cyan-500/20 text-cyan-400 text-xs rounded">
+                          {depId}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                )}
                 <div className="flex items-center justify-between">
                   <div className="text-slate-400 text-sm">
                     {item.plugin.price === 0 ? 'Free' : `$${item.plugin.price}/mo`}
@@ -2312,7 +2376,7 @@ function MarketplaceView({ data }: any) {
                       ⭐ Reviews
                     </Button>
                     <Button
-                      onClick={() => installPlugin(item.pluginId)}
+                      onClick={() => installPlugin(item.pluginId, true)}
                       disabled={installingPlugins.has(item.pluginId) || installedPlugins.has(item.pluginId)}
                       className={`${
                         installedPlugins.has(item.pluginId)
