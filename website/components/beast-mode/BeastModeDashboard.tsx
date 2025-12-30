@@ -433,61 +433,64 @@ function ChroniclerView({
   setCommandInput
 }: any) {
   return (
-    <HudPanel variant="elevated" corners glow="medium" className="w-full max-w-4xl h-[70vh] flex flex-col">
+    <Card className="bg-slate-950/50 border-slate-900 w-full max-w-4xl h-[70vh] flex flex-col">
       {/* Header */}
-      <div className="flex items-center justify-between mb-4 pb-3 border-b border-holo-amber-ghost">
-        <div className="text-holo-amber text-lg uppercase tracking-widest">
-          Chronicler AI
-        </div>
-        <div className="text-xs text-holo-amber-faint">
-          {messages.length} messages
-        </div>
-      </div>
-
-      {/* Messages */}
-      <div className="flex-1 overflow-y-auto space-y-3 mb-4 pr-2">
-        {messages.length === 0 ? (
-          <div className="text-center text-holo-amber-dim py-12">
-            <div className="text-4xl mb-3">◈</div>
-            <div className="text-sm">Welcome back, Captain.</div>
-            <div className="text-xs text-holo-amber-faint mt-2">
-              What would you like to do?
-            </div>
+      <CardHeader>
+        <div className="flex items-center justify-between">
+          <CardTitle className="text-white text-lg uppercase tracking-widest">
+            Chronicler AI
+          </CardTitle>
+          <div className="text-xs text-slate-500">
+            {messages.length} messages
           </div>
-        ) : (
-          messages.map((msg: any) => (
-            <div
-              key={msg.id}
-              className={`
-                ${msg.type === 'user' ? 'text-holo-cyan' : ''}
-                ${msg.type === 'ai' ? 'text-holo-amber' : ''}
-                ${msg.type === 'system' ? 'text-holo-amber-dim' : ''}
-                text-sm leading-relaxed
-              `}
-            >
-              <span className="text-holo-amber-ghost text-xs mr-2">
-                {msg.type === 'user' ? '>' : msg.type === 'ai' ? '◈' : '•'}
-              </span>
-              {msg.text}
+        </div>
+      </CardHeader>
+      <CardContent className="flex-1 flex flex-col overflow-hidden">
+        {/* Messages */}
+        <div className="flex-1 overflow-y-auto space-y-3 mb-4 pr-2">
+          {messages.length === 0 ? (
+            <div className="text-center text-slate-500 py-12">
+              <div className="text-4xl mb-3">◈</div>
+              <div className="text-sm">Welcome back.</div>
+              <div className="text-xs text-slate-600 mt-2">
+                What would you like to do?
+              </div>
             </div>
-          ))
-        )}
-      </div>
+          ) : (
+            messages.map((msg: any) => (
+              <div
+                key={msg.id}
+                className={`
+                  ${msg.type === 'user' ? 'text-cyan-400' : ''}
+                  ${msg.type === 'ai' ? 'text-white' : ''}
+                  ${msg.type === 'system' ? 'text-slate-500' : ''}
+                  text-sm leading-relaxed
+                `}
+              >
+                <span className="text-slate-600 text-xs mr-2">
+                  {msg.type === 'user' ? '>' : msg.type === 'ai' ? '◈' : '•'}
+                </span>
+                {msg.text}
+              </div>
+            ))
+          )}
+        </div>
 
-      {/* Command Input */}
-      <form onSubmit={onCommand} className="flex gap-2">
-        <input
-          type="text"
-          value={commandInput}
-          onChange={(e) => setCommandInput(e.target.value)}
-          placeholder="Enter command..."
-          className="flex-1 bg-void-surface border-b border-holo-amber-faint px-3 py-2 text-holo-amber text-sm focus:outline-none focus:border-holo-amber transition-colors"
-        />
-        <HudButton variant="primary">
+        {/* Command Input */}
+        <form onSubmit={onCommand} className="flex gap-2">
+          <input
+            type="text"
+            value={commandInput}
+            onChange={(e) => setCommandInput(e.target.value)}
+            placeholder="Enter command..."
+            className="flex-1 bg-slate-900 border border-slate-800 px-3 py-2 text-white text-sm focus:outline-none focus:border-cyan-500 transition-colors rounded-lg"
+          />
+        <Button type="submit" className="bg-white text-black hover:bg-slate-100">
           Send
-        </HudButton>
+        </Button>
       </form>
-    </HudPanel>
+      </CardContent>
+    </Card>
   );
 }
 
@@ -498,7 +501,7 @@ function TacticalView({ gameState }: any) {
   return (
     <div className="w-full max-w-6xl grid grid-cols-2 gap-4">
       {/* Ship Status */}
-      <HudPanel corners glow="soft">
+      <Card className="bg-slate-950/50 border-slate-900">
         <div className="text-holo-amber uppercase tracking-widest mb-3 text-sm">
           Ship Systems
         </div>
@@ -508,43 +511,47 @@ function TacticalView({ gameState }: any) {
           <StatLine label="Fuel Reserves" value={gameState.ship.fuel} max={100} />
           <StatLine label="Cargo Capacity" value={gameState.ship.cargo} max={100} />
         </div>
-      </HudPanel>
+      </Card>
 
       {/* Weapons */}
-      <HudPanel corners glow="soft">
+      <Card className="bg-slate-950/50 border-slate-900">
         <div className="text-holo-amber uppercase tracking-widest mb-3 text-sm">
           Weapons Array
         </div>
         <div className="space-y-2">
-          <HudButton variant="secondary" className="w-full">
+          <Button variant="outline" className="w-full border-slate-800 text-slate-400 hover:bg-slate-900">
             Plasma Cannon [READY]
-          </HudButton>
-          <HudButton variant="secondary" className="w-full">
+          </Button>
+          <Button variant="outline" className="w-full border-slate-800 text-slate-400 hover:bg-slate-900">
             Missile Bay [ARMED]
-          </HudButton>
-          <HudButton variant="ghost" className="w-full" disabled>
+          </Button>
+          <Button variant="outline" className="w-full border-slate-800 text-slate-500" disabled>
             EMP Device [OFFLINE]
-          </HudButton>
+          </Button>
         </div>
-      </HudPanel>
+      </Card>
 
       {/* Radar */}
-      <HudPanel corners glow="soft" className="col-span-2">
-        <div className="text-holo-amber uppercase tracking-widest mb-3 text-sm">
-          Tactical Radar
-        </div>
-        <div className="aspect-square max-w-md mx-auto bg-void-surface/50 rounded-full relative">
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="text-holo-amber-faint text-xs">
-              NO CONTACTS
+      <Card className="bg-slate-950/50 border-slate-900 col-span-2">
+        <CardHeader>
+          <CardTitle className="text-white uppercase tracking-widest text-sm">
+            Tactical Radar
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="aspect-square max-w-md mx-auto bg-slate-900/50 rounded-full relative">
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="text-slate-500 text-xs">
+                NO CONTACTS
+              </div>
             </div>
+            {/* Radar rings */}
+            <div className="absolute inset-[20%] border border-slate-700 rounded-full" />
+            <div className="absolute inset-[40%] border border-slate-700 rounded-full" />
+            <div className="absolute inset-[60%] border border-slate-700 rounded-full" />
           </div>
-          {/* Radar rings */}
-          <div className="absolute inset-[20%] border border-holo-amber-ghost rounded-full" />
-          <div className="absolute inset-[40%] border border-holo-amber-ghost rounded-full" />
-          <div className="absolute inset-[60%] border border-holo-amber-ghost rounded-full" />
-        </div>
-      </HudPanel>
+        </CardContent>
+      </Card>
     </div>
   );
 }
@@ -555,38 +562,38 @@ function TacticalView({ gameState }: any) {
 function OperationsView({ gameState }: any) {
   return (
     <div className="w-full max-w-6xl">
-      <HudPanel corners glow="medium" className="mb-4">
+      <Card className="bg-slate-950/50 border-slate-900 mb-4">
         <div className="text-holo-amber uppercase tracking-widest mb-4 text-lg">
           Operations Console
         </div>
         <div className="grid grid-cols-3 gap-4">
-          <HudButton variant="primary">Market</HudButton>
-          <HudButton variant="primary">Cargo Hold</HudButton>
-          <HudButton variant="primary">Missions</HudButton>
-          <HudButton variant="secondary">Crew</HudButton>
-          <HudButton variant="secondary">Ship Upgrades</HudButton>
-          <HudButton variant="secondary">Territory</HudButton>
+          <Button className="bg-white text-black hover:bg-slate-100">Market</Button>
+          <Button className="bg-white text-black hover:bg-slate-100">Cargo Hold</Button>
+          <Button className="bg-white text-black hover:bg-slate-100">Missions</Button>
+          <Button variant="outline" className="border-slate-800 text-slate-400 hover:bg-slate-900">Crew</Button>
+          <Button variant="outline" className="border-slate-800 text-slate-400 hover:bg-slate-900">Ship Upgrades</Button>
+          <Button variant="outline" className="border-slate-800 text-slate-400 hover:bg-slate-900">Territory</Button>
         </div>
-      </HudPanel>
+      </Card>
 
       <div className="grid grid-cols-2 gap-4">
-        <HudPanel corners>
+        <Card className="bg-slate-950/50 border-slate-900">
           <div className="text-holo-amber uppercase tracking-widest mb-3 text-sm">
             Active Contracts
           </div>
           <div className="text-sm text-holo-amber-dim">
             No active contracts
           </div>
-        </HudPanel>
+        </Card>
 
-        <HudPanel corners>
+        <Card className="bg-slate-950/50 border-slate-900">
           <div className="text-holo-amber uppercase tracking-widest mb-3 text-sm">
             Economic Alerts
           </div>
           <div className="text-sm text-holo-green">
             Spice prices up 15% in Sector 4
           </div>
-        </HudPanel>
+        </Card>
       </div>
     </div>
   );
@@ -700,81 +707,83 @@ function QualityView({ data }: any) {
  */
 function IntelligenceView({ data, messages, onCommand, commandInput, setCommandInput }: any) {
   return (
-    <HudPanel variant="elevated" corners glow="medium" className="w-full max-w-4xl h-[70vh] flex flex-col">
-      {/* Header */}
-      <div className="flex items-center justify-between mb-4 pb-3 border-b border-holo-amber-ghost">
-        <div className="text-holo-amber text-lg uppercase tracking-widest">
-          AI Intelligence Core
-        </div>
-        <div className="text-xs text-holo-amber-faint">
-          {messages.length} insights • {data.accuracy}% accuracy
-        </div>
-      </div>
-
-      {/* Intelligence Metrics */}
-      <div className="grid grid-cols-4 gap-4 mb-4">
-        <div className="text-center">
-          <div className="text-2xl font-bold text-holo-cyan">{data.predictions}</div>
-          <div className="text-xs text-holo-amber-dim">Predictions</div>
-        </div>
-        <div className="text-center">
-          <div className="text-2xl font-bold text-holo-cyan">{data.insights}</div>
-          <div className="text-xs text-holo-amber-dim">Insights</div>
-        </div>
-        <div className="text-center">
-          <div className="text-2xl font-bold text-holo-cyan">{data.optimizations}</div>
-          <div className="text-xs text-holo-amber-dim">Optimizations</div>
-        </div>
-        <div className="text-center">
-          <div className="text-2xl font-bold text-holo-green">{data.accuracy}%</div>
-          <div className="text-xs text-holo-amber-dim">Accuracy</div>
-        </div>
-      </div>
-
-      {/* Messages */}
-      <div className="flex-1 overflow-y-auto space-y-3 mb-4 pr-2">
-        {messages.length === 0 ? (
-          <div className="text-center text-holo-amber-dim py-12">
-            <div className="text-4xl mb-3">🧠</div>
-            <div className="text-sm">AI Intelligence Core Active</div>
-            <div className="text-xs text-holo-amber-faint mt-2">
-              Ready for analysis and insights
-            </div>
+    <Card className="bg-slate-950/50 border-slate-900 w-full max-w-4xl h-[70vh] flex flex-col">
+      <CardHeader>
+        <div className="flex items-center justify-between">
+          <CardTitle className="text-white text-lg uppercase tracking-widest">
+            AI Intelligence Core
+          </CardTitle>
+          <div className="text-xs text-slate-500">
+            {messages.length} insights • {data.accuracy}% accuracy
           </div>
-        ) : (
-          messages.map((msg: any) => (
-            <div
-              key={msg.id}
-              className={`
-                ${msg.type === 'user' ? 'text-holo-cyan' : ''}
-                ${msg.type === 'ai' ? 'text-holo-amber' : ''}
-                ${msg.type === 'system' ? 'text-holo-amber-dim' : ''}
-                text-sm leading-relaxed
-              `}
-            >
-              <span className="text-holo-amber-ghost text-xs mr-2">
-                {msg.type === 'user' ? '>' : msg.type === 'ai' ? '🧠' : '•'}
-              </span>
-              {msg.text}
-            </div>
-          ))
-        )}
-      </div>
+        </div>
+      </CardHeader>
+      <CardContent className="flex-1 flex flex-col overflow-hidden">
+        {/* Intelligence Metrics */}
+        <div className="grid grid-cols-4 gap-4 mb-4">
+          <div className="text-center">
+            <div className="text-2xl font-bold text-cyan-400">{data.predictions}</div>
+            <div className="text-xs text-slate-500">Predictions</div>
+          </div>
+          <div className="text-center">
+            <div className="text-2xl font-bold text-cyan-400">{data.insights}</div>
+            <div className="text-xs text-slate-500">Insights</div>
+          </div>
+          <div className="text-center">
+            <div className="text-2xl font-bold text-cyan-400">{data.optimizations}</div>
+            <div className="text-xs text-slate-500">Optimizations</div>
+          </div>
+          <div className="text-center">
+            <div className="text-2xl font-bold text-green-400">{data.accuracy}%</div>
+            <div className="text-xs text-slate-500">Accuracy</div>
+          </div>
+        </div>
 
-      {/* Command Input */}
-      <form onSubmit={onCommand} className="flex gap-2">
-        <input
-          type="text"
-          value={commandInput}
-          onChange={(e) => setCommandInput(e.target.value)}
-          placeholder="Ask AI for insights..."
-          className="flex-1 bg-void-surface border-b border-holo-amber-faint px-3 py-2 text-holo-amber text-sm focus:outline-none focus:border-holo-amber transition-colors"
-        />
-        <HudButton variant="primary">
-          Analyze
-        </HudButton>
-      </form>
-    </HudPanel>
+        {/* Messages */}
+        <div className="flex-1 overflow-y-auto space-y-3 mb-4 pr-2">
+          {messages.length === 0 ? (
+            <div className="text-center text-slate-500 py-12">
+              <div className="text-4xl mb-3">🧠</div>
+              <div className="text-sm">AI Intelligence Core Active</div>
+              <div className="text-xs text-slate-600 mt-2">
+                Ready for analysis and insights
+              </div>
+            </div>
+          ) : (
+            messages.map((msg: any) => (
+              <div
+                key={msg.id}
+                className={`
+                  ${msg.type === 'user' ? 'text-cyan-400' : ''}
+                  ${msg.type === 'ai' ? 'text-white' : ''}
+                  ${msg.type === 'system' ? 'text-slate-500' : ''}
+                  text-sm leading-relaxed
+                `}
+              >
+                <span className="text-slate-600 text-xs mr-2">
+                  {msg.type === 'user' ? '>' : msg.type === 'ai' ? '🧠' : '•'}
+                </span>
+                {msg.text}
+              </div>
+            ))
+          )}
+        </div>
+
+        {/* Command Input */}
+        <form onSubmit={onCommand} className="flex gap-2">
+          <input
+            type="text"
+            value={commandInput}
+            onChange={(e) => setCommandInput(e.target.value)}
+            placeholder="Ask AI for insights..."
+            className="flex-1 bg-slate-900 border border-slate-800 px-3 py-2 text-white text-sm focus:outline-none focus:border-cyan-500 transition-colors rounded-lg"
+          />
+          <Button type="submit" className="bg-white text-black hover:bg-slate-100">
+            Analyze
+          </Button>
+        </form>
+      </CardContent>
+    </Card>
   );
 }
 
@@ -784,22 +793,22 @@ function IntelligenceView({ data, messages, onCommand, commandInput, setCommandI
 function MarketplaceView({ data }: any) {
   return (
     <div className="w-full max-w-6xl">
-      <HudPanel corners glow="medium" className="mb-4">
+      <Card className="bg-slate-950/50 border-slate-900 mb-4">
         <div className="text-holo-amber uppercase tracking-widest mb-4 text-lg">
           Plugin Marketplace
         </div>
         <div className="grid grid-cols-3 gap-4">
-          <HudButton variant="primary">Quality Plugins</HudButton>
-          <HudButton variant="primary">Integration Hub</HudButton>
-          <HudButton variant="primary">Tool Discovery</HudButton>
-          <HudButton variant="secondary">Monetization</HudButton>
-          <HudButton variant="secondary">Developer Portal</HudButton>
-          <HudButton variant="secondary">Plugin Analytics</HudButton>
+          <Button className="bg-white text-black hover:bg-slate-100">Quality Plugins</Button>
+          <Button className="bg-white text-black hover:bg-slate-100">Integration Hub</Button>
+          <Button className="bg-white text-black hover:bg-slate-100">Tool Discovery</Button>
+          <Button variant="outline" className="border-slate-800 text-slate-400 hover:bg-slate-900">Monetization</Button>
+          <Button variant="outline" className="border-slate-800 text-slate-400 hover:bg-slate-900">Developer Portal</Button>
+          <Button variant="outline" className="border-slate-800 text-slate-400 hover:bg-slate-900">Plugin Analytics</Button>
         </div>
-      </HudPanel>
+      </Card>
 
       <div className="grid grid-cols-2 gap-4">
-        <HudPanel corners>
+        <Card className="bg-slate-950/50 border-slate-900">
           <div className="text-holo-amber uppercase tracking-widest mb-3 text-sm">
             Marketplace Stats
           </div>
@@ -821,9 +830,9 @@ function MarketplaceView({ data }: any) {
               <span className="text-holo-green">${data.revenue.toLocaleString()}</span>
             </div>
           </div>
-        </HudPanel>
+        </Card>
 
-        <HudPanel corners>
+        <Card className="bg-slate-950/50 border-slate-900">
           <div className="text-holo-amber uppercase tracking-widest mb-3 text-sm">
             Popular Plugins
           </div>
@@ -841,7 +850,7 @@ function MarketplaceView({ data }: any) {
               <span className="text-holo-green">⭐ 4.7</span>
             </div>
           </div>
-        </HudPanel>
+        </Card>
       </div>
     </div>
   );
@@ -853,7 +862,7 @@ function MarketplaceView({ data }: any) {
 function EnterpriseView({ data }: any) {
   return (
     <div className="w-full max-w-6xl">
-      <HudPanel corners glow="medium" className="mb-4">
+      <Card className="bg-slate-950/50 border-slate-900 mb-4">
         <div className="text-holo-amber uppercase tracking-widest mb-4 text-lg">
           Enterprise Dashboard
         </div>
@@ -875,10 +884,10 @@ function EnterpriseView({ data }: any) {
             <div className="text-sm text-holo-amber-dim">Uptime</div>
           </div>
         </div>
-      </HudPanel>
+      </Card>
 
       <div className="grid grid-cols-2 gap-4">
-        <HudPanel corners>
+        <Card className="bg-slate-950/50 border-slate-900">
           <div className="text-holo-amber uppercase tracking-widest mb-3 text-sm">
             Enterprise Features
           </div>
@@ -900,9 +909,9 @@ function EnterpriseView({ data }: any) {
               <span>Dedicated Support</span>
             </div>
           </div>
-        </HudPanel>
+        </Card>
 
-        <HudPanel corners>
+        <Card className="bg-slate-950/50 border-slate-900">
           <div className="text-holo-amber uppercase tracking-widest mb-3 text-sm">
             AI Systems Health
           </div>
@@ -960,7 +969,7 @@ function EnterpriseView({ data }: any) {
               <span className="text-holo-cyan">{data.integrations} Connected</span>
             </div>
           </div>
-        </HudPanel>
+        </Card>
       </div>
 
       {/* Conversational AI Interface */}

@@ -16,7 +16,13 @@ export async function GET(request: NextRequest) {
     }
 
     // Get supported platforms
-    const platforms = global.beastMode.getSupportedPlatforms();
+    const platforms = global.beastMode.getSupportedPlatforms?.() || [
+      'vercel',
+      'railway',
+      'aws',
+      'netlify',
+      'render'
+    ];
 
     return NextResponse.json({
       platforms,
@@ -24,15 +30,15 @@ export async function GET(request: NextRequest) {
       timestamp: new Date().toISOString()
     });
 
-  } catch (error) {
+  } catch (error: any) {
     console.error('Platforms API error:', error);
     return NextResponse.json(
       {
         error: 'Failed to retrieve platforms',
-        details: error.message
+        details: error.message,
+        platforms: ['vercel', 'railway', 'aws', 'netlify', 'render']
       },
       { status: 500 }
     );
   }
 }
-
