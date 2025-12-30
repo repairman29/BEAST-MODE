@@ -2089,7 +2089,7 @@ function MarketplaceView({ data }: any) {
   const [installedPlugins, setInstalledPlugins] = useState<Set<string>>(new Set());
 
   // Load installed plugins from localStorage on mount
-  React.useEffect(() => {
+  useEffect(() => {
     if (typeof window !== 'undefined') {
       const saved = localStorage.getItem('beast-mode-installed-plugins');
       if (saved) {
@@ -2260,7 +2260,7 @@ function MarketplaceView({ data }: any) {
               {searchQuery ? 'No plugins found' : 'No plugins in this category'}
             </div>
             <div className="text-sm text-slate-400">
-              {searchQuery ? 'Try a different search term - we have amazing plugins waiting for you! 🔍' : 'Try selecting a different category - there's something for everyone! ✨'}
+              {searchQuery ? 'Try a different search term - we have amazing plugins waiting for you! 🔍' : "Try selecting a different category - there's something for everyone! ✨"}
             </div>
           </CardContent>
         </Card>
