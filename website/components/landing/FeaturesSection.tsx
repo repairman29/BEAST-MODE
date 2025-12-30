@@ -1,153 +1,128 @@
 "use client";
 
 import React from 'react';
-import HudPanel from '../hud/HudPanel';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card';
 
-const aiSystems = [
+const features = [
   {
-    id: 'oracle',
     title: 'Oracle AI',
-    description: 'Comprehensive code analysis and architectural intelligence',
-    icon: '🔍',
-    gradient: 'from-neural-primary to-neural-secondary',
-    capabilities: ['Code Analysis', 'Architecture Review', 'Performance Insights', 'Security Scanning']
+    description: 'Deep code analysis with architectural insights and security scanning',
+    icon: (
+      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+    ),
+    gradient: 'from-cyan-500 to-blue-500'
   },
   {
-    id: 'code-roach',
     title: 'Code Roach',
-    description: 'Automated bug detection and intelligent code fixing',
-    icon: '🐛',
-    gradient: 'from-neural-secondary to-neural-primary',
-    capabilities: ['Bug Detection', 'Auto-Fix Suggestions', 'Code Optimization', 'Vulnerability Scanning']
+    description: 'Automated bug detection with AI-powered fix suggestions',
+    icon: (
+      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+      </svg>
+    ),
+    gradient: 'from-purple-500 to-pink-500'
   },
   {
-    id: 'daisy-chain',
     title: 'Daisy Chain',
-    description: 'Workflow orchestration and task automation',
-    icon: '⚡',
-    gradient: 'from-neural-success to-neural-primary',
-    capabilities: ['Task Coordination', 'Workflow Automation', 'Process Integration', 'Efficiency Optimization']
+    description: 'Intelligent workflow orchestration and task automation',
+    icon: (
+      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
+      </svg>
+    ),
+    gradient: 'from-green-500 to-emerald-500'
   },
   {
-    id: 'conversational-ai',
-    title: 'Conversational AI',
-    description: 'Natural language interface for code assistance',
-    icon: '💬',
-    gradient: 'from-neural-secondary to-neural-warning',
-    capabilities: ['Natural Language Processing', 'Code Suggestions', 'Documentation Generation', 'Interactive Guidance']
-  },
-  {
-    id: 'health-monitor',
-    title: 'Health Monitor',
-    description: 'Real-time system diagnostics and monitoring',
-    icon: '❤️',
-    gradient: 'from-neural-warning to-neural-success',
-    capabilities: ['System Monitoring', 'Health Diagnostics', 'Performance Tracking', 'Alert Management']
-  },
-  {
-    id: 'marketplace',
-    title: 'Marketplace AI',
-    description: 'Plugin discovery and integration recommendations',
-    icon: '🛍️',
-    gradient: 'from-neural-success to-neural-secondary',
-    capabilities: ['Plugin Discovery', 'Smart Recommendations', 'Usage Analytics', 'Developer Monetization']
-  },
-  {
-    id: 'mission-guidance',
-    title: 'Mission Guidance',
-    description: 'Project planning and success prediction',
-    icon: '🎯',
-    gradient: 'from-neural-primary to-neural-warning',
-    capabilities: ['Project Planning', 'Timeline Optimization', 'Risk Assessment', 'Success Forecasting']
-  },
-  {
-    id: 'quality-engine',
-    title: 'Quality Engine',
-    description: 'Comprehensive code quality analysis and scoring',
-    icon: '📊',
-    gradient: 'from-neural-warning to-neural-primary',
-    capabilities: ['Quality Scoring', 'Issue Detection', 'Grade Assignment', 'Improvement Recommendations']
-  },
-  {
-    id: 'deployment',
     title: 'Deployment Orchestrator',
-    description: 'Multi-platform deployment automation',
-    icon: '🚀',
-    gradient: 'from-neural-primary to-neural-success',
-    capabilities: ['Multi-Platform Deploy', 'Automated Rollback', 'Blue-Green Strategy', 'Deployment Monitoring']
+    description: 'Multi-platform deployment with automated rollback',
+    icon: (
+      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+      </svg>
+    ),
+    gradient: 'from-orange-500 to-red-500'
+  },
+  {
+    title: 'Quality Engine',
+    description: 'Comprehensive quality scoring with actionable recommendations',
+    icon: (
+      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+      </svg>
+    ),
+    gradient: 'from-indigo-500 to-purple-500'
+  },
+  {
+    title: 'Health Monitor',
+    description: 'Real-time system diagnostics and performance tracking',
+    icon: (
+      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+      </svg>
+    ),
+    gradient: 'from-pink-500 to-rose-500'
   }
 ];
 
 function FeaturesSection() {
   return (
-    <section id="features" className="py-32 px-6 neural-bg relative">
-      {/* Neural Field Background */}
-      <div className="absolute inset-0 quantum-field opacity-50"></div>
+    <section id="features" className="py-32 px-6 relative overflow-hidden bg-black">
+      {/* Background */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black via-slate-950 to-black"></div>
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:64px_64px]"></div>
 
-      <div className="max-w-7xl mx-auto relative z-10">
-        {/* Section Header */}
+      <div className="relative max-w-7xl mx-auto">
+        {/* Header */}
         <div className="text-center mb-20">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-            9 Integrated AI Systems
+          <h2 className="text-5xl md:text-6xl font-bold text-white mb-6 tracking-tight">
+            Everything You Need
           </h2>
-          <p className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-            A comprehensive suite of specialized AI systems that work together to analyze, optimize, and automate your development workflow.
+          <p className="text-xl text-slate-400 max-w-2xl mx-auto">
+            Six powerful AI systems working together to analyze, optimize, and deploy your code with confidence.
           </p>
         </div>
 
-        {/* AI Systems Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {aiSystems.map((system, index) => (
-            <div
-              key={system.id}
-              className="group relative glass-card hover:scale-105 transition-all duration-300 cursor-pointer overflow-hidden"
+        {/* Features Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {features.map((feature) => (
+            <Card
+              key={feature.title}
+              className="bg-slate-950/50 border-slate-900 hover:border-slate-800 transition-all hover:shadow-xl hover:shadow-cyan-500/5"
             >
-              <div className="relative p-8">
-                {/* Icon */}
-                <div className={`w-16 h-16 mb-6 rounded-xl bg-gradient-to-br ${system.gradient} flex items-center justify-center shadow-lg`}>
-                  <span className="text-3xl">{system.icon}</span>
+              <CardHeader>
+                <div className={`w-12 h-12 mb-4 rounded-lg bg-gradient-to-br ${feature.gradient} flex items-center justify-center text-white`}>
+                  {feature.icon}
                 </div>
-
-                {/* Title */}
-                <h3 className="text-xl font-semibold text-white mb-3">
-                  {system.title}
-                </h3>
-
-                {/* Description */}
-                <p className="text-gray-400 text-sm mb-6 leading-relaxed">
-                  {system.description}
-                </p>
-
-                {/* Capabilities */}
-                <div className="space-y-2">
-                  {system.capabilities.map((capability, capIndex) => (
-                    <div key={capIndex} className="flex items-center gap-2 text-xs text-gray-500">
-                      <div className="w-1.5 h-1.5 rounded-full bg-neural-primary"></div>
-                      <span>{capability}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
+                <CardTitle className="text-white">{feature.title}</CardTitle>
+                <CardDescription className="text-slate-400">
+                  {feature.description}
+                </CardDescription>
+              </CardHeader>
+            </Card>
           ))}
         </div>
 
-        {/* Bottom CTA */}
-        <div className="text-center mt-20">
-          <div className="glass-card max-w-3xl mx-auto p-8">
-            <h3 className="text-2xl font-bold text-white mb-4">
-              All Systems Working Together
-            </h3>
-            <p className="text-gray-300 mb-6">
-              These 9 AI systems integrate seamlessly to provide comprehensive code quality analysis, automated bug detection, and intelligent deployment orchestration for your entire development lifecycle.
-            </p>
-            <a
-              href="/dashboard"
-              className="inline-block px-8 py-3 bg-gradient-to-r from-neural-primary to-neural-secondary text-white font-semibold rounded-lg hover:shadow-lg transition-all duration-300"
-            >
-              Explore All Features
-            </a>
-          </div>
+        {/* CTA */}
+        <div className="mt-20 text-center">
+          <Card className="bg-slate-950/50 border-slate-900 max-w-2xl mx-auto">
+            <CardHeader>
+              <CardTitle className="text-3xl text-white">All Systems Working Together</CardTitle>
+              <CardDescription className="text-slate-400 text-base">
+                These AI systems integrate seamlessly to provide comprehensive code quality analysis, 
+                automated bug detection, and intelligent deployment orchestration.
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <a
+                href="/dashboard"
+                className="inline-block px-8 py-3 bg-white text-black font-semibold rounded-lg hover:bg-slate-100 transition-colors"
+              >
+                Explore All Features
+              </a>
+            </CardContent>
+          </Card>
         </div>
       </div>
     </section>

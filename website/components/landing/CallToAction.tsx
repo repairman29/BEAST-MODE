@@ -1,8 +1,72 @@
 "use client";
 
 import React, { useState } from 'react';
-import HudButton from '../hud/HudButton';
-import HudPanel from '../hud/HudPanel';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card';
+import { Button } from '../ui/button';
+import { Badge } from '../ui/badge';
+
+const pricingTiers = [
+  {
+    name: 'Free',
+    price: '$0',
+    period: 'forever',
+    description: 'Perfect for individual developers',
+    features: [
+      '10K API calls/month',
+      'All 6 AI systems',
+      'Community support',
+      'MIT License',
+      'Self-hosted option'
+    ],
+    cta: 'Get Started',
+    popular: false
+  },
+  {
+    name: 'Developer',
+    price: '$29',
+    period: '/month',
+    description: 'For professional developers',
+    features: [
+      '100K API calls/month',
+      'Priority support',
+      'Advanced analytics',
+      'Custom integrations',
+      'Email support'
+    ],
+    cta: 'Start Free Trial',
+    popular: false
+  },
+  {
+    name: 'Team',
+    price: '$99',
+    period: '/month',
+    description: 'For growing teams',
+    features: [
+      '500K API calls/month',
+      'Team collaboration',
+      'Shared dashboards',
+      'Multi-repo support',
+      '99.9% SLA guarantee'
+    ],
+    cta: 'Start Free Trial',
+    popular: true
+  },
+  {
+    name: 'Enterprise',
+    price: 'Custom',
+    period: '',
+    description: 'For large organizations',
+    features: [
+      'Unlimited API calls',
+      'White-label options',
+      'Advanced security',
+      'Dedicated support',
+      'Custom SLA'
+    ],
+    cta: 'Contact Sales',
+    popular: false
+  }
+];
 
 function CallToAction() {
   const [email, setEmail] = useState('');
@@ -20,233 +84,141 @@ function CallToAction() {
   };
 
   return (
-    <section className="py-32 px-6 neural-bg relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900"></div>
+    <section className="py-32 px-6 relative overflow-hidden bg-black">
+      {/* Background */}
+      <div className="absolute inset-0 bg-gradient-to-b from-slate-950 via-black to-black"></div>
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:64px_64px]"></div>
 
-      <div className="max-w-7xl mx-auto relative z-10">
-        {/* Pricing Section */}
+      <div className="relative max-w-7xl mx-auto">
+        {/* Pricing Header */}
         <div className="text-center mb-20">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-            Simple, Transparent Pricing
+          <h2 className="text-5xl md:text-6xl font-bold text-white mb-6 tracking-tight">
+            Simple Pricing
           </h2>
-          <p className="text-lg md:text-xl text-gray-300 mb-16 max-w-3xl mx-auto leading-relaxed">
-            Start free and scale as you grow. All plans include access to all 9 AI systems.
+          <p className="text-xl text-slate-400 max-w-2xl mx-auto">
+            Start free and scale as you grow. All plans include access to all AI systems.
           </p>
+        </div>
 
-          {/* Pricing Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
-            {/* Free Tier */}
-            <div className="glass-card p-8 text-left hover:shadow-xl transition-all duration-300">
-              <h3 className="text-2xl font-bold text-white mb-2">Free</h3>
-              <div className="text-4xl font-bold text-neural-primary mb-6">$0</div>
-              <ul className="space-y-3 text-gray-300 mb-8">
-                <li className="flex items-start gap-2">
-                  <span className="text-neural-success mt-1">✓</span>
-                  <span>10K API calls/month</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-neural-success mt-1">✓</span>
-                  <span>All 9 AI systems</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-neural-success mt-1">✓</span>
-                  <span>Community support</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-neural-success mt-1">✓</span>
-                  <span>Open source (MIT)</span>
-                </li>
-              </ul>
-              <a
-                href="/dashboard"
-                className="block w-full px-6 py-3 bg-white/10 text-white text-center font-semibold rounded-lg border border-white/20 hover:bg-white/20 transition-all duration-300"
-              >
-                Get Started
-              </a>
-            </div>
-
-            {/* Developer Tier */}
-            <div className="glass-card p-8 text-left hover:shadow-xl transition-all duration-300">
-              <h3 className="text-2xl font-bold text-white mb-2">Developer</h3>
-              <div className="text-4xl font-bold text-neural-primary mb-6">
-                $29<span className="text-lg text-gray-400">/mo</span>
-              </div>
-              <ul className="space-y-3 text-gray-300 mb-8">
-                <li className="flex items-start gap-2">
-                  <span className="text-neural-success mt-1">✓</span>
-                  <span>100K API calls/month</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-neural-success mt-1">✓</span>
-                  <span>Priority support</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-neural-success mt-1">✓</span>
-                  <span>Advanced analytics</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-neural-success mt-1">✓</span>
-                  <span>Custom integrations</span>
-                </li>
-              </ul>
-              <a
-                href="/dashboard"
-                className="block w-full px-6 py-3 bg-gradient-to-r from-neural-primary to-neural-secondary text-white text-center font-semibold rounded-lg hover:shadow-lg transition-all duration-300"
-              >
-                Start Free Trial
-              </a>
-            </div>
-
-            {/* Team Tier */}
-            <div className="glass-card p-8 text-left hover:shadow-xl transition-all duration-300 border-2 border-neural-primary">
-              <div className="inline-block px-3 py-1 bg-neural-primary text-white text-xs font-bold rounded-full mb-4">
-                POPULAR
-              </div>
-              <h3 className="text-2xl font-bold text-white mb-2">Team</h3>
-              <div className="text-4xl font-bold text-neural-primary mb-6">
-                $99<span className="text-lg text-gray-400">/mo</span>
-              </div>
-              <ul className="space-y-3 text-gray-300 mb-8">
-                <li className="flex items-start gap-2">
-                  <span className="text-neural-success mt-1">✓</span>
-                  <span>500K API calls/month</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-neural-success mt-1">✓</span>
-                  <span>Team collaboration</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-neural-success mt-1">✓</span>
-                  <span>Shared dashboards</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-neural-success mt-1">✓</span>
-                  <span>Multi-repo support</span>
-                </li>
-              </ul>
-              <a
-                href="/dashboard"
-                className="block w-full px-6 py-3 bg-gradient-to-r from-neural-primary to-neural-secondary text-white text-center font-semibold rounded-lg hover:shadow-lg transition-all duration-300"
-              >
-                Start Free Trial
-              </a>
-            </div>
-
-            {/* Enterprise Tier */}
-            <div className="glass-card p-8 text-left hover:shadow-xl transition-all duration-300">
-              <h3 className="text-2xl font-bold text-white mb-2">Enterprise</h3>
-              <div className="text-4xl font-bold text-neural-primary mb-6">
-                $299<span className="text-lg text-gray-400">/mo</span>
-              </div>
-              <ul className="space-y-3 text-gray-300 mb-8">
-                <li className="flex items-start gap-2">
-                  <span className="text-neural-success mt-1">✓</span>
-                  <span>Unlimited API calls</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-neural-success mt-1">✓</span>
-                  <span>White-label options</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-neural-success mt-1">✓</span>
-                  <span>Advanced security</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-neural-success mt-1">✓</span>
-                  <span>Dedicated support</span>
-                </li>
-              </ul>
-              <a
-                href="/dashboard"
-                className="block w-full px-6 py-3 bg-white/10 text-white text-center font-semibold rounded-lg border border-white/20 hover:bg-white/20 transition-all duration-300"
-              >
-                Contact Sales
-              </a>
-            </div>
-          </div>
+        {/* Pricing Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-24">
+          {pricingTiers.map((tier) => (
+            <Card
+              key={tier.name}
+              className={`relative bg-black/50 border-slate-900 hover:border-slate-800 transition-all ${
+                tier.popular ? 'border-cyan-500/50 shadow-xl shadow-cyan-500/10' : ''
+              }`}
+            >
+              {tier.popular && (
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2">
+                  <Badge className="bg-gradient-to-r from-cyan-500 to-purple-500 text-white border-0">
+                    POPULAR
+                  </Badge>
+                </div>
+              )}
+              <CardHeader>
+                <CardTitle className="text-white text-xl">{tier.name}</CardTitle>
+                <div className="flex items-baseline gap-1 mb-2">
+                  <span className="text-5xl font-bold text-gradient-cyan">{tier.price}</span>
+                  <span className="text-slate-500">{tier.period}</span>
+                </div>
+                <CardDescription className="text-slate-400">{tier.description}</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <ul className="space-y-4 mb-8">
+                  {tier.features.map((feature, index) => (
+                    <li key={index} className="flex items-start gap-3 text-slate-300 text-sm">
+                      <svg className="w-5 h-5 text-cyan-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                      <span className="leading-relaxed">{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+                <Button
+                  className={`w-full ${
+                    tier.popular
+                      ? 'bg-white text-black hover:bg-slate-100'
+                      : 'bg-slate-900 hover:bg-slate-800 border border-slate-800'
+                  }`}
+                >
+                  {tier.cta}
+                </Button>
+              </CardContent>
+            </Card>
+          ))}
         </div>
 
         {/* Newsletter */}
-        <div className="glass-card max-w-3xl mx-auto p-10 mb-20 text-center">
-          <h3 className="text-3xl font-bold text-white mb-4">
-            Stay Updated
-          </h3>
-          <p className="text-gray-300 mb-8 leading-relaxed">
-            Get updates about new features, improvements, and best practices for code quality.
-          </p>
-
-          {!isSubscribed ? (
-            <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-4">
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Enter your email"
-                className="flex-1 px-4 py-3 bg-white/5 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-neural-primary"
-                required
-              />
-              <button
-                type="submit"
-                className="px-8 py-3 bg-gradient-to-r from-neural-primary to-neural-secondary text-white font-semibold rounded-lg hover:shadow-lg transition-all duration-300"
-              >
-                Subscribe
-              </button>
-            </form>
-          ) : (
-            <div className="text-center py-4">
-              <div className="text-neural-success text-xl font-bold mb-2">✓ Subscribed!</div>
-              <p className="text-gray-300">Thanks for subscribing. Check your email for updates.</p>
-            </div>
-          )}
-        </div>
+        <Card className="bg-black/50 border-slate-900 max-w-2xl mx-auto mb-24">
+          <CardHeader>
+            <CardTitle className="text-3xl text-white">Stay Updated</CardTitle>
+            <CardDescription className="text-slate-400">
+              Get updates about new features, improvements, and best practices.
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            {!isSubscribed ? (
+              <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-4">
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Enter your email"
+                  className="flex-1 px-4 py-3 bg-slate-950 border border-slate-900 rounded-lg text-white placeholder-slate-600 focus:outline-none focus:border-cyan-500 transition-colors"
+                  required
+                />
+                <Button type="submit" className="bg-white text-black hover:bg-slate-100">
+                  Subscribe
+                </Button>
+              </form>
+            ) : (
+              <div className="text-center py-4">
+                <div className="text-cyan-400 text-lg font-bold mb-2">✓ Subscribed!</div>
+                <p className="text-slate-400">Thanks for subscribing. Check your email for updates.</p>
+              </div>
+            )}
+          </CardContent>
+        </Card>
 
         {/* Final CTA */}
         <div className="text-center">
-          <div className="max-w-3xl mx-auto">
-            <h3 className="text-3xl font-bold text-white mb-6">
-              Ready to Improve Your Code Quality?
-            </h3>
-            <p className="text-lg text-gray-300 mb-8 leading-relaxed">
-              Join developers using BEAST MODE to build better software with AI-powered analysis, automated bug detection, and intelligent quality scoring.
-            </p>
-            <a
-              href="/dashboard"
-              className="inline-block px-12 py-4 bg-gradient-to-r from-neural-primary to-neural-secondary text-white text-lg font-semibold rounded-lg hover:shadow-lg hover:scale-105 transition-all duration-300"
-            >
-              Get Started Free
-            </a>
-          </div>
+          <h3 className="text-4xl font-bold text-white mb-6">
+            Ready to Improve Your Code Quality?
+          </h3>
+          <p className="text-lg text-slate-400 mb-10 max-w-2xl mx-auto">
+            Join developers using BEAST MODE to build better software with AI-powered analysis and automated bug detection.
+          </p>
+          <Button size="lg" className="bg-white text-black hover:bg-slate-100">
+            Get Started Free
+          </Button>
         </div>
 
         {/* Footer */}
-        <footer className="mt-20 pt-12 border-t border-gray-700/50">
+        <footer className="mt-32 pt-12 border-t border-slate-900">
           <div className="flex flex-col md:flex-row justify-between items-center gap-6">
             <div className="flex items-center gap-4">
-              <div className="w-10 h-10 bg-gradient-to-br from-neural-primary to-neural-secondary rounded-xl flex items-center justify-center">
+              <div className="w-10 h-10 bg-gradient-to-br from-cyan-500 to-purple-500 rounded-lg flex items-center justify-center">
                 <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
                 </svg>
               </div>
               <div>
                 <span className="text-xl font-bold text-white">BEAST MODE</span>
-                <div className="text-xs text-gray-500">AI-Powered Code Quality Platform</div>
+                <div className="text-xs text-slate-500">AI-Powered Code Quality Platform</div>
               </div>
             </div>
 
             <div className="flex gap-8 text-sm">
-              <a href="/privacy" className="text-gray-400 hover:text-neural-primary transition-colors">Privacy</a>
-              <a href="/terms" className="text-gray-400 hover:text-neural-primary transition-colors">Terms</a>
-              <a href="/support" className="text-gray-400 hover:text-neural-primary transition-colors">Support</a>
-              <a href="/dashboard" className="text-gray-400 hover:text-neural-primary transition-colors">Dashboard</a>
+              <a href="/privacy" className="text-slate-500 hover:text-white transition-colors">Privacy</a>
+              <a href="/terms" className="text-slate-500 hover:text-white transition-colors">Terms</a>
+              <a href="/support" className="text-slate-500 hover:text-white transition-colors">Support</a>
+              <a href="/dashboard" className="text-slate-500 hover:text-white transition-colors">Dashboard</a>
             </div>
 
             <div className="text-center md:text-right">
-              <div className="text-gray-500 text-sm mb-1">
-                © 2025 BEAST MODE
-              </div>
-              <div className="text-gray-600 text-xs">
-                Open Source (MIT License)
-              </div>
+              <div className="text-slate-500 text-sm mb-1">© 2025 BEAST MODE</div>
+              <div className="text-slate-600 text-xs">Open Source (MIT License)</div>
             </div>
           </div>
         </footer>
