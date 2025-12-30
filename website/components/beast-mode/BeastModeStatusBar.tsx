@@ -86,8 +86,8 @@ export default function BeastModeStatusBar({
   };
 
   return (
-    <div className="fixed top-4 right-4 z-50 w-64 max-w-[calc(100vw-2rem)]">
-      <div className="bg-black/80 backdrop-blur-md border border-slate-800 shadow-xl rounded-lg p-4 space-y-3 max-h-[calc(100vh-2rem)] overflow-y-auto">
+        <div className="fixed top-4 right-4 z-[90] w-64 max-w-[calc(100vw-2rem)] animate-in fade-in slide-in-from-right duration-300">
+      <div className="bg-black/90 backdrop-blur-xl border border-slate-800/50 shadow-2xl rounded-xl p-4 space-y-3 max-h-[calc(100vh-2rem)] overflow-y-auto custom-scrollbar">
         {/* Corner accent */}
         <div className="absolute top-0 right-0 w-3 h-3 border-r border-t border-cyan-500/50 rounded-tr-lg" />
 

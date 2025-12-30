@@ -1,9 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { supabase } from '../../../../lib/supabase';
+import jwt from 'jsonwebtoken';
+
+const JWT_SECRET = process.env.JWT_SECRET || 'beast-mode-secret-change-in-production';
 
 /**
  * Sign In API
  * 
- * Simple authentication (replace with proper auth in production)
+ * Real authentication with Supabase or fallback to simple JWT
  */
 export async function POST(request: NextRequest) {
   try {
@@ -16,15 +20,44 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // TODO: Replace with actual authentication
-    // For now, accept any email/password combination
-    // In production, use:
-    // - Database lookup
-    // - Password hashing (bcrypt)
-    // - JWT token generation
-    // - Session management
+    // Try Supabase auth first
+    if (supabase) {
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email,
+        password
+      });
 
-    const token = Buffer.from(`${email}:${Date.now()}`).toString('base64');
+      if (error) {
+        return NextResponse.json(
+          { error: error.message || 'Invalid email or password' },
+          { status: 401 }
+        );
+      }
+
+      const token = jwt.sign(
+        { userId: data.user.id, email: data.user.email },
+        JWT_SECRET,
+        { expiresIn: '7d' }
+      );
+
+      return NextResponse.json({
+        user: {
+          id: data.user.id,
+          email: data.user.email,
+          name: data.user.user_metadata?.name,
+          plan: data.user.user_metadata?.plan || 'free'
+        },
+        token
+      });
+    }
+
+    // Fallback: Simple mock auth (for development without Supabase)
+    console.warn('Using mock authentication - configure Supabase for production');
+    const token = jwt.sign(
+      { email, userId: `user_${Date.now()}` },
+      JWT_SECRET,
+      { expiresIn: '7d' }
+    );
 
     return NextResponse.json({
       user: {
