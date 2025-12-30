@@ -1,5 +1,6 @@
 import './globals.css'
 import Navigation from '../components/layout/Navigation'
+import { UserProvider } from '../lib/user-context'
 
 export const metadata = {
   title: 'BEAST MODE - Enterprise Quality Intelligence Platform',
@@ -26,8 +27,10 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body className="bg-background text-foreground antialiased">
-        <Navigation />
-        {children}
+        <UserProvider>
+          <Navigation />
+          {children}
+        </UserProvider>
       </body>
     </html>
   )

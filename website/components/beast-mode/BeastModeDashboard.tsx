@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '../ui/card';
 import { Button } from '../ui/button';
 import BeastModeStatusBar from './BeastModeStatusBar';
 import NotificationWidget, { Notification } from '../hud/NotificationWidget';
@@ -17,13 +17,45 @@ import PricingSection from './PricingSection';
 import SelfImprovement from './SelfImprovement';
 import QuickActions from './QuickActions';
 import Sidebar from './Sidebar';
+import DashboardHeader from './DashboardHeader';
+import FTUEOnboarding from './FTUEOnboarding';
+import { useUser } from '../../lib/user-context';
 
 /**
  * BEAST MODE Enterprise Dashboard
  *
  * Advanced quality intelligence & marketplace platform
  */
-function BeastModeDashboardInner() {
+interface BeastModeDashboardInnerProps {
+  initialView?: string | null;
+}
+
+function BeastModeDashboardInner({ initialView }: BeastModeDashboardInnerProps) {
+  const { user, isFirstTime, setUser, signOut, completeOnboarding, isLoading: userLoading } = useUser();
+  const [showOnboarding, setShowOnboarding] = useState(false);
+
+  // Show onboarding for first-time users
+  useEffect(() => {
+    if (!userLoading && isFirstTime && !showOnboarding) {
+      setShowOnboarding(true);
+    }
+  }, [isFirstTime, userLoading, showOnboarding]);
+
+  // Handle auth success from AuthSection
+  const handleAuthSuccess = (userData: any) => {
+    setUser(userData);
+  };
+
+  // Handle initial view from URL params
+  useEffect(() => {
+    if (initialView) {
+      const validViews = ['quality', 'intelligence', 'marketplace', 'enterprise', 'health', 'ai-recommendations', 'monetization', 'missions', 'deployments', 'github-scan', 'auth', 'pricing', 'self-improve'];
+      if (validViews.includes(initialView)) {
+        setCurrentView(initialView as typeof currentView);
+      }
+    }
+  }, [initialView]);
+
   const [beastModeState, setBeastModeState] = useState({
     quality: {
       score: 87,
@@ -62,7 +94,9 @@ function BeastModeDashboardInner() {
   });
 
   const [commandInput, setCommandInput] = useState('');
-  const [currentView, setCurrentView] = useState<'quality' | 'intelligence' | 'marketplace' | 'enterprise' | 'health' | 'ai-recommendations' | 'monetization' | 'missions' | 'deployments' | 'github-scan' | 'auth' | 'pricing' | 'self-improve' | null>('quality');
+  const [currentView, setCurrentView] = useState<'quality' | 'intelligence' | 'marketplace' | 'enterprise' | 'health' | 'ai-recommendations' | 'monetization' | 'missions' | 'deployments' | 'github-scan' | 'auth' | 'pricing' | 'self-improve' | null>(
+    initialView === 'auth' ? 'auth' : initialView === 'pricing' ? 'pricing' : null
+  );
   const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState(false);
   const [currentTime, setCurrentTime] = useState<string>('--:--:--');
 
@@ -196,6 +230,20 @@ function BeastModeDashboardInner() {
 
   return (
     <div className="relative w-full h-full min-h-screen bg-black overflow-hidden flex">
+      {/* FTUE Onboarding */}
+      {showOnboarding && (
+        <FTUEOnboarding
+          onComplete={() => {
+            setShowOnboarding(false);
+            completeOnboarding();
+          }}
+          onSkip={() => {
+            setShowOnboarding(false);
+            completeOnboarding();
+          }}
+        />
+      )}
+
       {/* Sidebar */}
       <Sidebar
         currentView={currentView}
@@ -203,11 +251,14 @@ function BeastModeDashboardInner() {
         onCommandPalette={() => setIsCommandPaletteOpen(true)}
       />
 
+      {/* Dashboard Header */}
+      <DashboardHeader user={user} onSignOut={signOut} />
+
       {/* Main Content Area */}
-      <div className="flex-1 flex flex-col ml-64 transition-all duration-300 ease-in-out relative">
+      <div className="flex-1 flex flex-col ml-64 transition-all duration-300 ease-in-out relative pt-16 z-0">
         {/* Background ambient effects */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black via-slate-950 to-black"></div>
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:64px_64px]"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-black via-slate-950 to-black z-0"></div>
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:64px_64px] z-0"></div>
 
         {/* Status Bar - Always visible */}
         <BeastModeStatusBar
@@ -229,7 +280,7 @@ function BeastModeDashboardInner() {
         {/* Command Palette */}
         {isCommandPaletteOpen && (
           <div 
-            className="fixed inset-0 z-50 flex items-start justify-center pt-32 bg-black/80 backdrop-blur-md animate-in fade-in duration-200"
+            className="fixed inset-0 z-[200] flex items-start justify-center pt-32 bg-black/80 backdrop-blur-md animate-in fade-in duration-200"
             onClick={(e) => {
               if (e.target === e.currentTarget) {
                 setIsCommandPaletteOpen(false);
@@ -278,15 +329,15 @@ function BeastModeDashboardInner() {
         )}
 
         {/* Center Content - BEAST MODE Views */}
-        <div className="flex-1 flex items-center justify-center overflow-y-auto py-6 px-6 pt-24 pb-20 custom-scrollbar">
+        <div className="flex-1 flex items-center justify-center overflow-y-auto py-6 px-6 pt-24 pb-20 custom-scrollbar relative z-20">
           {currentView === null && (
-            <div className="w-full max-w-4xl space-y-8 animate-in fade-in duration-300">
+            <div className="w-full max-w-4xl space-y-8 animate-in fade-in duration-300 relative z-30">
               <div className="text-center mb-12">
                 <div className="text-7xl mb-6 animate-in zoom-in-95 duration-500">⚔️</div>
                 <div className="text-lg uppercase tracking-widest text-white mb-3 font-bold">BEAST MODE Active</div>
-                <div className="text-sm text-slate-400 space-y-1">
-                  <div>Press <kbd className="px-2 py-1 bg-slate-800 rounded text-xs">⌘K</kbd> for command palette</div>
-                  <div>Press <kbd className="px-2 py-1 bg-slate-800 rounded text-xs">⌘B</kbd> to toggle sidebar</div>
+                <div className="text-sm text-slate-300 space-y-1">
+                  <div>Press <kbd className="px-2 py-1 bg-slate-800 rounded text-xs text-white">⌘K</kbd> for command palette</div>
+                  <div>Press <kbd className="px-2 py-1 bg-slate-800 rounded text-xs text-white">⌘B</kbd> to toggle sidebar</div>
                 </div>
               </div>
               <QuickActions
@@ -299,61 +350,87 @@ function BeastModeDashboardInner() {
           )}
 
           {currentView === 'quality' && (
-            <QualityView data={beastModeState.quality} />
+            <div className="w-full max-w-6xl relative z-30">
+              <QualityView data={beastModeState.quality} />
+            </div>
           )}
 
           {currentView === 'intelligence' && (
-            <IntelligenceView
-              data={beastModeState.intelligence}
-              messages={beastModeState.messages}
-              onCommand={handleCommand}
-              commandInput={commandInput}
-              setCommandInput={setCommandInput}
-            />
+            <div className="w-full max-w-6xl relative z-30">
+              <IntelligenceView
+                data={beastModeState.intelligence}
+                messages={beastModeState.messages}
+                onCommand={handleCommand}
+                commandInput={commandInput}
+                setCommandInput={setCommandInput}
+              />
+            </div>
           )}
 
           {currentView === 'marketplace' && (
-            <MarketplaceView data={beastModeState.marketplace} />
+            <div className="w-full max-w-6xl relative z-30">
+              <MarketplaceView data={beastModeState.marketplace} />
+            </div>
           )}
 
           {currentView === 'enterprise' && (
-            <EnterpriseView data={beastModeState.enterprise} />
+            <div className="w-full max-w-6xl relative z-30">
+              <EnterpriseView data={beastModeState.enterprise} />
+            </div>
           )}
 
           {currentView === 'health' && (
-            <HealthDashboard />
+            <div className="w-full max-w-6xl relative z-30">
+              <HealthDashboard />
+            </div>
           )}
 
           {currentView === 'ai-recommendations' && (
-            <AIRecommendations />
+            <div className="w-full max-w-6xl relative z-30">
+              <AIRecommendations />
+            </div>
           )}
 
           {currentView === 'monetization' && (
-            <MonetizationDashboard />
+            <div className="w-full max-w-6xl relative z-30">
+              <MonetizationDashboard />
+            </div>
           )}
 
           {currentView === 'missions' && (
-            <MissionDashboard />
+            <div className="w-full max-w-6xl relative z-30">
+              <MissionDashboard />
+            </div>
           )}
 
           {currentView === 'deployments' && (
-            <DeploymentDashboard />
+            <div className="w-full max-w-6xl relative z-30">
+              <DeploymentDashboard />
+            </div>
           )}
 
           {currentView === 'github-scan' && (
-            <GitHubScanForm />
+            <div className="w-full max-w-6xl relative z-30">
+              <GitHubScanForm />
+            </div>
           )}
 
           {currentView === 'auth' && (
-            <AuthSection />
+            <div className="w-full max-w-md relative z-30">
+              <AuthSection onAuthSuccess={handleAuthSuccess} />
+            </div>
           )}
 
           {currentView === 'pricing' && (
-            <PricingSection />
+            <div className="w-full max-w-6xl relative z-30">
+              <PricingSection />
+            </div>
           )}
 
           {currentView === 'self-improve' && (
-            <SelfImprovement />
+            <div className="w-full max-w-6xl relative z-30">
+              <SelfImprovement />
+            </div>
           )}
         </div>
 
@@ -395,7 +472,7 @@ function ChroniclerView({
   setCommandInput
 }: any) {
   return (
-    <Card className="bg-slate-950/50 border-slate-900 w-full max-w-4xl h-[70vh] flex flex-col">
+    <Card className="bg-slate-900/90 border-slate-800 w-full max-w-4xl h-[70vh] flex flex-col">
       {/* Header */}
       <CardHeader>
         <div className="flex items-center justify-between">
@@ -463,8 +540,8 @@ function TacticalView({ gameState }: any) {
   return (
     <div className="w-full max-w-6xl grid grid-cols-2 gap-4">
       {/* Ship Status */}
-      <Card className="bg-slate-950/50 border-slate-900">
-        <div className="text-holo-amber uppercase tracking-widest mb-3 text-sm">
+      <Card className="bg-slate-900/90 border-slate-800">
+        <div className="text-amber-400 uppercase tracking-widest mb-3 text-sm">
           Ship Systems
         </div>
         <div className="space-y-2 text-sm">
@@ -476,8 +553,8 @@ function TacticalView({ gameState }: any) {
       </Card>
 
       {/* Weapons */}
-      <Card className="bg-slate-950/50 border-slate-900">
-        <div className="text-holo-amber uppercase tracking-widest mb-3 text-sm">
+      <Card className="bg-slate-900/90 border-slate-800">
+        <div className="text-amber-400 uppercase tracking-widest mb-3 text-sm">
           Weapons Array
         </div>
         <div className="space-y-2">
@@ -494,7 +571,7 @@ function TacticalView({ gameState }: any) {
       </Card>
 
       {/* Radar */}
-      <Card className="bg-slate-950/50 border-slate-900 col-span-2">
+      <Card className="bg-slate-900/90 border-slate-800 col-span-2">
         <CardHeader>
           <CardTitle className="text-white uppercase tracking-widest text-sm">
             Tactical Radar
@@ -524,8 +601,8 @@ function TacticalView({ gameState }: any) {
 function OperationsView({ gameState }: any) {
   return (
     <div className="w-full max-w-6xl">
-      <Card className="bg-slate-950/50 border-slate-900 mb-4">
-        <div className="text-holo-amber uppercase tracking-widest mb-4 text-lg">
+      <Card className="bg-slate-900/90 border-slate-800 mb-4">
+        <div className="text-amber-400 uppercase tracking-widest mb-4 text-lg">
           Operations Console
         </div>
         <div className="grid grid-cols-3 gap-4">
@@ -539,20 +616,20 @@ function OperationsView({ gameState }: any) {
       </Card>
 
       <div className="grid grid-cols-2 gap-4">
-        <Card className="bg-slate-950/50 border-slate-900">
-          <div className="text-holo-amber uppercase tracking-widest mb-3 text-sm">
+        <Card className="bg-slate-900/90 border-slate-800">
+          <div className="text-amber-400 uppercase tracking-widest mb-3 text-sm">
             Active Contracts
           </div>
-          <div className="text-sm text-holo-amber-dim">
+          <div className="text-sm text-slate-400">
             No active contracts
           </div>
         </Card>
 
-        <Card className="bg-slate-950/50 border-slate-900">
-          <div className="text-holo-amber uppercase tracking-widest mb-3 text-sm">
+        <Card className="bg-slate-900/90 border-slate-800">
+          <div className="text-amber-400 uppercase tracking-widest mb-3 text-sm">
             Economic Alerts
           </div>
-          <div className="text-sm text-holo-green">
+          <div className="text-sm text-green-400">
             Spice prices up 15% in Sector 4
           </div>
         </Card>
@@ -591,7 +668,7 @@ function QualityView({ data }: any) {
   return (
     <div className="w-full max-w-6xl grid grid-cols-1 md:grid-cols-2 gap-6 px-4">
       {/* Quality Score */}
-      <Card className="bg-slate-950/50 border-slate-900 hover:border-slate-800 transition-all">
+      <Card className="bg-slate-900/90 border-slate-800 hover:border-slate-700 transition-all">
         <CardHeader>
           <CardTitle className="text-white text-lg mb-4">Quality Score</CardTitle>
         </CardHeader>
@@ -608,7 +685,7 @@ function QualityView({ data }: any) {
       </Card>
 
       {/* Quality Metrics */}
-      <Card className="bg-slate-950/50 border-slate-900 hover:border-slate-800 transition-all">
+      <Card className="bg-slate-900/90 border-slate-800 hover:border-slate-700 transition-all">
         <CardHeader>
           <CardTitle className="text-white text-lg mb-4">Quality Metrics</CardTitle>
         </CardHeader>
@@ -639,7 +716,7 @@ function QualityView({ data }: any) {
       </Card>
 
       {/* Recent Scans */}
-      <Card className="col-span-1 md:col-span-2 bg-slate-950/50 border-slate-900 hover:border-slate-800 transition-all">
+      <Card className="col-span-1 md:col-span-2 bg-slate-900/90 border-slate-800 hover:border-slate-800 transition-all">
         <CardHeader>
           <CardTitle className="text-white text-lg mb-4">Recent Quality Scans</CardTitle>
         </CardHeader>
@@ -669,7 +746,7 @@ function QualityView({ data }: any) {
  */
 function IntelligenceView({ data, messages, onCommand, commandInput, setCommandInput }: any) {
   return (
-    <Card className="bg-slate-950/50 border-slate-900 w-full max-w-4xl h-[70vh] flex flex-col">
+    <Card className="bg-slate-900/90 border-slate-800 w-full max-w-4xl h-[70vh] flex flex-col">
       <CardHeader>
         <div className="flex items-center justify-between">
           <CardTitle className="text-white text-lg uppercase tracking-widest">
@@ -750,70 +827,305 @@ function IntelligenceView({ data, messages, onCommand, commandInput, setCommandI
 }
 
 /**
- * Marketplace View - Plugin Ecosystem
+ * Marketplace View - Browse All Plugins
  */
 function MarketplaceView({ data }: any) {
+  const [plugins, setPlugins] = useState<any[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [selectedCategory, setSelectedCategory] = useState('all');
+  const [searchQuery, setSearchQuery] = useState('');
+
+  useEffect(() => {
+    fetchPlugins();
+  }, []);
+
+  const fetchPlugins = async () => {
+    setIsLoading(true);
+    try {
+      // Use recommendations API to get plugins (marketplace API not available yet)
+      const response = await fetch('/api/beast-mode/marketplace/recommendations', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          userId: 'marketplace-browse',
+          projectContext: { type: 'all', languages: [] }
+        })
+      });
+
+      if (response.ok) {
+        const result = await response.json();
+        setPlugins(result.recommendations || []);
+      } else {
+        // Fallback to mock data
+        setPlugins([
+          {
+            pluginId: 'eslint-pro',
+            plugin: {
+              id: 'eslint-pro',
+              name: 'ESLint Pro',
+              description: 'Advanced ESLint rules and auto-fixes for modern JavaScript/TypeScript',
+              category: 'quality',
+              price: 0,
+              rating: 4.8,
+              downloads: 12500,
+              languages: ['javascript', 'typescript'],
+              tags: ['linting', 'code-quality']
+            },
+            score: 95,
+            confidence: 0.92,
+            reasons: ['Improves code quality', 'Widely adopted', 'Active maintenance']
+          },
+          {
+            pluginId: 'typescript-guardian',
+            plugin: {
+              id: 'typescript-guardian',
+              name: 'TypeScript Guardian',
+              description: 'Enhanced TypeScript type checking and strict mode enforcement',
+              category: 'quality',
+              price: 0,
+              rating: 4.9,
+              downloads: 8900,
+              languages: ['typescript'],
+              tags: ['type-safety', 'typescript']
+            },
+            score: 94,
+            confidence: 0.89,
+            reasons: ['Strong type safety', 'Prevents runtime errors', 'Great DX']
+          },
+          {
+            pluginId: 'security-scanner',
+            plugin: {
+              id: 'security-scanner',
+              name: 'Security Scanner',
+              description: 'Automated vulnerability detection and security best practices',
+              category: 'security',
+              price: 0,
+              rating: 4.7,
+              downloads: 15200,
+              languages: ['javascript', 'typescript', 'python'],
+              tags: ['security', 'vulnerability']
+            },
+            score: 91,
+            confidence: 0.87,
+            reasons: ['Critical for production', 'Regular updates', 'Comprehensive checks']
+          },
+          {
+            pluginId: 'prettier-integration',
+            plugin: {
+              id: 'prettier-integration',
+              name: 'Prettier Integration',
+              description: 'Seamless code formatting with Prettier',
+              category: 'integration',
+              price: 0,
+              rating: 4.6,
+              downloads: 21000,
+              languages: ['javascript', 'typescript', 'css', 'json'],
+              tags: ['formatting', 'prettier']
+            },
+            score: 88,
+            confidence: 0.85,
+            reasons: ['Consistent formatting', 'Easy setup', 'Industry standard']
+          },
+          {
+            pluginId: 'test-coverage',
+            plugin: {
+              id: 'test-coverage',
+              name: 'Test Coverage Analyzer',
+              description: 'Track and improve test coverage across your codebase',
+              category: 'quality',
+              price: 0,
+              rating: 4.5,
+              downloads: 6800,
+              languages: ['javascript', 'typescript'],
+              tags: ['testing', 'coverage']
+            },
+            score: 86,
+            confidence: 0.83,
+            reasons: ['Improves reliability', 'Identifies gaps', 'Visual reports']
+          }
+        ]);
+      }
+    } catch (error) {
+      console.error('Failed to fetch plugins:', error);
+      // Keep empty array, will show empty state
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const installPlugin = async (pluginId: string) => {
+    try {
+      const response = await fetch('/api/beast-mode/marketplace/install', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          pluginId,
+          userId: 'demo-user'
+        })
+      });
+
+      if (response.ok) {
+        alert(`Plugin installation initiated! Check your dashboard for status.`);
+      } else {
+        alert('Plugin installation failed. This feature is coming soon!');
+      }
+    } catch (error) {
+      console.error('Failed to install plugin:', error);
+      alert('Plugin installation failed. This feature is coming soon!');
+    }
+  };
+
+  const categories = ['all', 'quality', 'security', 'integration', 'performance', 'devops'];
+  const filteredPlugins = plugins.filter(p => {
+    const matchesCategory = selectedCategory === 'all' || p.plugin.category === selectedCategory;
+    const matchesSearch = searchQuery === '' || 
+      p.plugin.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      p.plugin.description.toLowerCase().includes(searchQuery.toLowerCase());
+    return matchesCategory && matchesSearch;
+  });
+
   return (
-    <div className="w-full max-w-6xl">
-      <Card className="bg-slate-950/50 border-slate-900 mb-4">
-        <div className="text-holo-amber uppercase tracking-widest mb-4 text-lg">
-          Plugin Marketplace
-        </div>
-        <div className="grid grid-cols-3 gap-4">
-          <Button className="bg-white text-black hover:bg-slate-100">Quality Plugins</Button>
-          <Button className="bg-white text-black hover:bg-slate-100">Integration Hub</Button>
-          <Button className="bg-white text-black hover:bg-slate-100">Tool Discovery</Button>
-          <Button variant="outline" className="border-slate-800 text-slate-400 hover:bg-slate-900">Monetization</Button>
-          <Button variant="outline" className="border-slate-800 text-slate-400 hover:bg-slate-900">Developer Portal</Button>
-          <Button variant="outline" className="border-slate-800 text-slate-400 hover:bg-slate-900">Plugin Analytics</Button>
-        </div>
+    <div className="w-full max-w-6xl space-y-6">
+      {/* Header */}
+      <Card className="bg-slate-900/90 border-slate-800">
+        <CardHeader>
+          <CardTitle className="text-white text-2xl mb-2">Plugin Marketplace</CardTitle>
+          <CardDescription className="text-slate-400">
+            Browse and install plugins to enhance your development workflow
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          {/* Search */}
+          <input
+            type="text"
+            placeholder="Search plugins..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-2 text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 mb-4"
+          />
+          
+          {/* Category Filters */}
+          <div className="flex flex-wrap gap-2">
+            {categories.map((cat) => (
+              <Button
+                key={cat}
+                variant={selectedCategory === cat ? 'default' : 'outline'}
+                className={selectedCategory === cat 
+                  ? 'bg-white text-black hover:bg-slate-100' 
+                  : 'border-slate-800 text-slate-400 hover:bg-slate-900'}
+                onClick={() => setSelectedCategory(cat)}
+              >
+                {cat.charAt(0).toUpperCase() + cat.slice(1)}
+              </Button>
+            ))}
+          </div>
+        </CardContent>
       </Card>
 
-      <div className="grid grid-cols-2 gap-4">
-        <Card className="bg-slate-950/50 border-slate-900">
-          <div className="text-holo-amber uppercase tracking-widest mb-3 text-sm">
-            Marketplace Stats
-          </div>
-          <div className="space-y-2">
-            <div className="flex justify-between">
-              <span>Active Plugins</span>
-              <span className="text-holo-cyan">{data.plugins}</span>
-            </div>
-            <div className="flex justify-between">
-              <span>Integrations</span>
-              <span className="text-holo-cyan">{data.integrations}</span>
-            </div>
-            <div className="flex justify-between">
-              <span>Total Downloads</span>
-              <span className="text-holo-cyan">{data.downloads.toLocaleString()}</span>
-            </div>
-            <div className="flex justify-between">
-              <span>Revenue Generated</span>
-              <span className="text-holo-green">${data.revenue.toLocaleString()}</span>
-            </div>
-          </div>
+      {/* Stats */}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <Card className="bg-slate-900/90 border-slate-800">
+          <CardContent className="pt-6">
+            <div className="text-slate-400 text-sm mb-1">Total Plugins</div>
+            <div className="text-2xl font-bold text-white">{plugins.length}</div>
+          </CardContent>
         </Card>
-
-        <Card className="bg-slate-950/50 border-slate-900">
-          <div className="text-holo-amber uppercase tracking-widest mb-3 text-sm">
-            Popular Plugins
-          </div>
-          <div className="space-y-2">
-            <div className="flex justify-between items-center">
-              <span>ESLint Pro</span>
-              <span className="text-holo-green">⭐ 4.8</span>
+        <Card className="bg-slate-900/90 border-slate-800">
+          <CardContent className="pt-6">
+            <div className="text-slate-400 text-sm mb-1">Total Downloads</div>
+            <div className="text-2xl font-bold text-cyan-400">
+              {plugins.reduce((sum, p) => sum + (p.plugin.downloads || 0), 0).toLocaleString()}
             </div>
-            <div className="flex justify-between items-center">
-              <span>TypeScript Guardian</span>
-              <span className="text-holo-green">⭐ 4.9</span>
+          </CardContent>
+        </Card>
+        <Card className="bg-slate-900/90 border-slate-800">
+          <CardContent className="pt-6">
+            <div className="text-slate-400 text-sm mb-1">Avg Rating</div>
+            <div className="text-2xl font-bold text-green-400">
+              {plugins.length > 0 
+                ? (plugins.reduce((sum, p) => sum + (p.plugin.rating || 0), 0) / plugins.length).toFixed(1)
+                : '0.0'}
             </div>
-            <div className="flex justify-between items-center">
-              <span>Security Scanner</span>
-              <span className="text-holo-green">⭐ 4.7</span>
+          </CardContent>
+        </Card>
+        <Card className="bg-slate-900/90 border-slate-800">
+          <CardContent className="pt-6">
+            <div className="text-slate-400 text-sm mb-1">Free Plugins</div>
+            <div className="text-2xl font-bold text-white">
+              {plugins.filter(p => p.plugin.price === 0).length}
             </div>
-          </div>
+          </CardContent>
         </Card>
       </div>
+
+      {/* Plugin List */}
+      {isLoading ? (
+        <Card className="bg-slate-900/90 border-slate-800">
+          <CardContent className="pt-6 text-center text-slate-400">
+            Loading plugins...
+          </CardContent>
+        </Card>
+      ) : filteredPlugins.length === 0 ? (
+        <Card className="bg-slate-900/90 border-slate-800">
+          <CardContent className="pt-6 text-center text-slate-400">
+            {searchQuery ? 'No plugins found matching your search.' : 'No plugins available in this category.'}
+          </CardContent>
+        </Card>
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {filteredPlugins.map((item) => (
+            <Card key={item.pluginId} className="bg-slate-900/90 border-slate-800 hover:border-cyan-500/50 transition-colors">
+              <CardHeader>
+                <div className="flex items-start justify-between">
+                  <div className="flex-1">
+                    <CardTitle className="text-white text-lg mb-1">{item.plugin.name}</CardTitle>
+                    <CardDescription className="text-slate-400 text-sm">
+                      {item.plugin.description}
+                    </CardDescription>
+                  </div>
+                  <div className="ml-4 text-right">
+                    <div className="text-green-400 font-semibold">⭐ {item.plugin.rating}</div>
+                    <div className="text-slate-500 text-xs mt-1">{item.plugin.downloads?.toLocaleString()} downloads</div>
+                  </div>
+                </div>
+              </CardHeader>
+              <CardContent>
+                <div className="flex flex-wrap gap-2 mb-4">
+                  {item.plugin.tags?.slice(0, 3).map((tag: string) => (
+                    <span key={tag} className="px-2 py-1 bg-slate-800 text-slate-300 text-xs rounded">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+                <div className="flex items-center justify-between">
+                  <div className="text-slate-400 text-sm">
+                    {item.plugin.price === 0 ? 'Free' : `$${item.plugin.price}/mo`}
+                  </div>
+                  <Button
+                    onClick={() => installPlugin(item.pluginId)}
+                    className="bg-cyan-500 hover:bg-cyan-600 text-white"
+                  >
+                    Install
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      )}
+
+      {/* Info */}
+      <Card className="bg-slate-900/50 border-slate-800">
+        <CardContent className="pt-6">
+          <div className="text-slate-400 text-sm">
+            💡 <strong>Tip:</strong> For personalized plugin recommendations based on your project, check out the{' '}
+            <a href="/dashboard?view=ai-recommendations" className="text-cyan-400 hover:underline">
+              AI Recommendations
+            </a>{' '}
+            tab.
+          </div>
+        </CardContent>
+      </Card>
     </div>
   );
 }
@@ -824,111 +1136,111 @@ function MarketplaceView({ data }: any) {
 function EnterpriseView({ data }: any) {
   return (
     <div className="w-full max-w-6xl">
-      <Card className="bg-slate-950/50 border-slate-900 mb-4">
-        <div className="text-holo-amber uppercase tracking-widest mb-4 text-lg">
+      <Card className="bg-slate-900/90 border-slate-800 mb-4">
+        <div className="text-amber-400 uppercase tracking-widest mb-4 text-lg">
           Enterprise Dashboard
         </div>
         <div className="grid grid-cols-4 gap-4">
           <div className="text-center">
-            <div className="text-3xl font-bold text-holo-cyan">{data.teams}</div>
-            <div className="text-sm text-holo-amber-dim">Teams</div>
+            <div className="text-3xl font-bold text-cyan-400">{data.teams}</div>
+            <div className="text-sm text-slate-400">Teams</div>
           </div>
           <div className="text-center">
-            <div className="text-3xl font-bold text-holo-cyan">{data.repositories}</div>
-            <div className="text-sm text-holo-amber-dim">Repositories</div>
+            <div className="text-3xl font-bold text-cyan-400">{data.repositories}</div>
+            <div className="text-sm text-slate-400">Repositories</div>
           </div>
           <div className="text-center">
-            <div className="text-3xl font-bold text-holo-cyan">{data.users}</div>
-            <div className="text-sm text-holo-amber-dim">Users</div>
+            <div className="text-3xl font-bold text-cyan-400">{data.users}</div>
+            <div className="text-sm text-slate-400">Users</div>
           </div>
           <div className="text-center">
-            <div className="text-3xl font-bold text-holo-green">{data.uptime}%</div>
-            <div className="text-sm text-holo-amber-dim">Uptime</div>
+            <div className="text-3xl font-bold text-green-400">{data.uptime}%</div>
+            <div className="text-sm text-slate-400">Uptime</div>
           </div>
         </div>
       </Card>
 
       <div className="grid grid-cols-2 gap-4">
-        <Card className="bg-slate-950/50 border-slate-900">
-          <div className="text-holo-amber uppercase tracking-widest mb-3 text-sm">
+        <Card className="bg-slate-900/90 border-slate-800">
+          <div className="text-amber-400 uppercase tracking-widest mb-3 text-sm">
             Enterprise Features
           </div>
           <div className="space-y-2">
             <div className="flex items-center gap-2">
-              <span className="text-holo-green">✓</span>
+              <span className="text-green-400">✓</span>
               <span>SSO Integration</span>
             </div>
             <div className="flex items-center gap-2">
-              <span className="text-holo-green">✓</span>
+              <span className="text-green-400">✓</span>
               <span>Advanced Reporting</span>
             </div>
             <div className="flex items-center gap-2">
-              <span className="text-holo-green">✓</span>
+              <span className="text-green-400">✓</span>
               <span>White-label Solutions</span>
             </div>
             <div className="flex items-center gap-2">
-              <span className="text-holo-green">✓</span>
+              <span className="text-green-400">✓</span>
               <span>Dedicated Support</span>
             </div>
           </div>
         </Card>
 
-        <Card className="bg-slate-950/50 border-slate-900">
-          <div className="text-holo-amber uppercase tracking-widest mb-3 text-sm">
+        <Card className="bg-slate-900/90 border-slate-800">
+          <div className="text-amber-400 uppercase tracking-widest mb-3 text-sm">
             AI Systems Health
           </div>
           <div className="space-y-2">
             <div className="flex justify-between">
               <span>BEAST MODE Core</span>
-              <span className="text-holo-green">Operational</span>
+              <span className="text-green-400">Operational</span>
             </div>
             <div className="flex justify-between">
               <span>Oracle AI</span>
-              <span className={`text-${data.oracleStatus === 'operational' ? 'holo-green' : 'holo-amber'}`}>
+              <span className={`${data.oracleStatus === 'operational' ? 'text-green-400' : 'text-amber-400'}`}>
                 {data.oracleStatus === 'operational' ? 'Connected' : 'Limited'}
               </span>
             </div>
             <div className="flex justify-between">
               <span>Daisy Chain</span>
-              <span className={`text-${data.daisyChainStatus === 'operational' ? 'holo-green' : 'holo-amber'}`}>
+              <span className={`${data.daisyChainStatus === 'operational' ? 'text-green-400' : 'text-amber-400'}`}>
                 {data.daisyChainStatus === 'operational' ? 'Orchestrating' : 'Limited'}
               </span>
             </div>
             <div className="flex justify-between">
               <span>Conversational AI</span>
-              <span className={`text-${data.conversationalAIStatus === 'operational' ? 'holo-green' : 'holo-amber'}`}>
+              <span className={`${data.conversationalAIStatus === 'operational' ? 'text-green-400' : 'text-amber-400'}`}>
                 {data.conversationalAIStatus === 'operational' ? 'Chat Ready' : 'Limited'}
               </span>
             </div>
             <div className="flex justify-between">
               <span>Health Monitor</span>
-              <span className={`text-${data.healthMonitorStatus === 'operational' ? 'holo-green' : 'holo-amber'}`}>
+              <span className={`${data.healthMonitorStatus === 'operational' ? 'text-green-400' : 'text-amber-400'}`}>
                 {data.healthMonitorStatus === 'operational' ? 'Monitoring' : 'Offline'}
               </span>
             </div>
             <div className="flex justify-between">
               <span>Mission Guidance</span>
-              <span className={`text-${data.missionGuidanceStatus === 'operational' ? 'holo-green' : 'holo-amber'}`}>
+              <span className={`${data.missionGuidanceStatus === 'operational' ? 'text-green-400' : 'text-amber-400'}`}>
                 {data.missionGuidanceStatus === 'operational' ? 'Guiding' : 'Offline'}
               </span>
             </div>
             <div className="flex justify-between">
               <span>Deployment Orchestrator</span>
-              <span className={`text-${data.deploymentOrchestratorStatus === 'operational' ? 'holo-green' : 'holo-amber'}`}>
+              <span className={`${data.deploymentOrchestratorStatus === 'operational' ? 'text-green-400' : 'text-amber-400'}`}>
                 {data.deploymentOrchestratorStatus === 'operational' ? 'Deploying' : 'Offline'}
               </span>
             </div>
             <div className="flex justify-between">
               <span>AI Systems</span>
-              <span className="text-holo-cyan">{data.aiSystems}/9 Active</span>
+              <span className="text-cyan-400">{data.aiSystems}/9 Active</span>
             </div>
             <div className="flex justify-between">
               <span>Code Roach</span>
-              <span className="text-holo-green">Operational</span>
+              <span className="text-green-400">Operational</span>
             </div>
             <div className="flex justify-between">
               <span>Integrations</span>
-              <span className="text-holo-cyan">{data.integrations} Connected</span>
+              <span className="text-cyan-400">{data.integrations} Connected</span>
             </div>
           </div>
         </Card>
@@ -943,6 +1255,10 @@ function EnterpriseView({ data }: any) {
 /**
  * Main export - BEAST MODE Dashboard
  */
-export default function BeastModeDashboard() {
-  return <BeastModeDashboardInner />;
+interface BeastModeDashboardProps {
+  initialView?: string | null;
+}
+
+export default function BeastModeDashboard({ initialView }: BeastModeDashboardProps) {
+  return <BeastModeDashboardInner initialView={initialView} />;
 }

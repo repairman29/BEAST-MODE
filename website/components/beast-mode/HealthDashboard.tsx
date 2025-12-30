@@ -1,9 +1,8 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import HudPanel from '../hud/HudPanel';
-import HudButton from '../hud/HudButton';
-import StatusBar from '../hud/StatusBar';
+import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
+import { Button } from '../ui/button';
 
 /**
  * BEAST MODE Health Monitoring & Self-Healing Dashboard
@@ -66,12 +65,12 @@ function HealthDashboard() {
     }
   };
 
-  const getStatusColor = (status) => {
+  const getStatusColor = (status: string) => {
     switch (status) {
-      case 'healthy': return 'text-holo-green';
-      case 'degraded': return 'text-holo-amber';
-      case 'failed': return 'text-holo-red';
-      default: return 'text-holo-cyan';
+      case 'healthy': return 'text-green-400';
+      case 'degraded': return 'text-amber-400';
+      case 'failed': return 'text-red-400';
+      default: return 'text-cyan-400';
     }
   };
 
@@ -86,22 +85,26 @@ function HealthDashboard() {
 
   if (isLoading) {
     return (
-      <HudPanel className="w-full max-w-4xl">
-        <div className="flex items-center justify-center py-8">
-          <div className="animate-spin w-8 h-8 border-2 border-holo-cyan border-t-transparent rounded-full mr-4"></div>
-          <span className="text-holo-cyan">Loading health status...</span>
-        </div>
-      </HudPanel>
+      <Card className="bg-slate-900/90 border-slate-800 w-full max-w-6xl">
+        <CardContent className="flex items-center justify-center py-12">
+          <div className="animate-spin w-8 h-8 border-2 border-cyan-500 border-t-transparent rounded-full mr-4"></div>
+          <span className="text-cyan-400">Loading health status...</span>
+        </CardContent>
+      </Card>
     );
   }
 
   if (!healthData) {
     return (
-      <HudPanel className="w-full max-w-4xl">
-        <div className="text-center py-8">
-          <span className="text-holo-red">❌ Health monitoring unavailable</span>
-        </div>
-      </HudPanel>
+      <Card className="bg-slate-900/90 border-slate-800 w-full max-w-6xl">
+        <CardContent className="text-center py-12">
+          <div className="text-red-400 text-lg mb-2">❌ Health monitoring unavailable</div>
+          <p className="text-slate-400 text-sm">Unable to fetch health data. Please try again later.</p>
+          <Button onClick={fetchHealthData} className="mt-4 bg-white text-black hover:bg-slate-100">
+            Retry
+          </Button>
+        </CardContent>
+      </Card>
     );
   }
 
@@ -111,27 +114,35 @@ function HealthDashboard() {
   return (
     <div className="w-full max-w-6xl space-y-6">
       {/* Header */}
-      <HudPanel>
-        <div className="flex items-center justify-between mb-4">
-          <h2 className="text-holo-cyan font-bold text-xl">🏥 BEAST MODE Health Monitor</h2>
-          <div className="flex gap-2">
-            <HudButton
-              onClick={() => setAutoRefresh(!autoRefresh)}
-              className={autoRefresh ? 'bg-holo-green/20' : ''}
-            >
-              {autoRefresh ? '⏸️ Pause' : '▶️ Resume'}
-            </HudButton>
-            <HudButton onClick={fetchHealthData}>
-              🔄 Refresh
-            </HudButton>
-            <HudButton
-              onClick={() => triggerSelfHealing()}
-              disabled={healingInProgress}
-            >
-              {healingInProgress ? '🔧 Healing...' : '🩹 Heal All'}
-            </HudButton>
+      <Card className="bg-slate-900/90 border-slate-800">
+        <CardHeader>
+          <div className="flex items-center justify-between">
+            <CardTitle className="text-white text-xl">🏥 BEAST MODE Health Monitor</CardTitle>
+            <div className="flex gap-2">
+              <Button
+                onClick={() => setAutoRefresh(!autoRefresh)}
+                variant={autoRefresh ? 'default' : 'outline'}
+                size="sm"
+                className={autoRefresh ? 'bg-green-500/20 border-green-500/50 text-green-400' : ''}
+              >
+                {autoRefresh ? '⏸️ Pause' : '▶️ Resume'}
+              </Button>
+              <Button onClick={fetchHealthData} variant="outline" size="sm" className="border-slate-800">
+                🔄 Refresh
+              </Button>
+              <Button
+                onClick={() => triggerSelfHealing()}
+                disabled={healingInProgress}
+                variant="outline"
+                size="sm"
+                className="border-slate-800"
+              >
+                {healingInProgress ? '🔧 Healing...' : '🩹 Heal All'}
+              </Button>
+            </div>
           </div>
-        </div>
+        </CardHeader>
+        <CardContent>
 
         {/* Overall Status */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
@@ -139,56 +150,60 @@ function HealthDashboard() {
             <div className={`text-2xl font-bold ${getStatusColor(overallStatus)}`}>
               {getStatusIcon(overallStatus)}
             </div>
-            <div className="text-sm text-holo-cyan/70">Overall Status</div>
+            <div className="text-sm text-slate-400">Overall Status</div>
             <div className={`text-sm font-semibold ${getStatusColor(overallStatus)}`}>
               {overallStatus.toUpperCase()}
             </div>
           </div>
 
           <div className="text-center">
-            <div className="text-2xl font-bold text-holo-cyan">
+            <div className="text-2xl font-bold text-cyan-400">
               {Object.keys(components).length}
             </div>
-            <div className="text-sm text-holo-cyan/70">Components</div>
-            <div className="text-sm text-holo-cyan">
+            <div className="text-sm text-slate-400">Components</div>
+            <div className="text-sm text-cyan-400">
               {Object.values(components).filter((c: any) => c.status === 'healthy').length} Healthy
             </div>
           </div>
 
           <div className="text-center">
-            <div className="text-2xl font-bold text-holo-amber">
+            <div className="text-2xl font-bold text-amber-400">
               {alerts.length}
             </div>
-            <div className="text-sm text-holo-cyan/70">Active Alerts</div>
-            <div className="text-sm text-holo-cyan">
-              {alerts.filter(a => a.severity === 'critical').length} Critical
+            <div className="text-sm text-slate-400">Active Alerts</div>
+            <div className="text-sm text-cyan-400">
+              {alerts.filter((a: any) => a.severity === 'critical').length} Critical
             </div>
           </div>
 
           <div className="text-center">
-            <div className="text-2xl font-bold text-holo-purple">
+            <div className="text-2xl font-bold text-purple-400">
               {isMonitoring ? '🟢' : '🔴'}
             </div>
-            <div className="text-sm text-holo-cyan/70">Monitoring</div>
-            <div className="text-sm text-holo-cyan">
+            <div className="text-sm text-slate-400">Monitoring</div>
+            <div className="text-sm text-cyan-400">
               {lastCheck ? new Date(lastCheck).toLocaleTimeString() : 'Never'}
             </div>
           </div>
         </div>
-      </HudPanel>
+        </CardContent>
+      </Card>
 
       {/* Component Health Grid */}
-      <HudPanel>
-        <h3 className="text-holo-cyan font-bold text-lg mb-4">🔧 Component Health</h3>
+      <Card className="bg-slate-900/90 border-slate-800">
+        <CardHeader>
+          <CardTitle className="text-white text-lg">🔧 Component Health</CardTitle>
+        </CardHeader>
+        <CardContent>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {Object.entries(components).map(([name, component]: [string, any]) => (
             <div
               key={name}
-              className="bg-holo-black/30 border border-holo-cyan/30 rounded-lg p-4 cursor-pointer hover:border-holo-cyan/50 transition-colors"
+              className="bg-slate-900/50 border border-slate-800 rounded-lg p-4 cursor-pointer hover:border-cyan-500/50 transition-colors"
               onClick={() => setSelectedComponent(component)}
             >
               <div className="flex items-center justify-between mb-2">
-                <span className="text-holo-cyan font-semibold capitalize">
+                <span className="text-cyan-400 font-semibold capitalize">
                   {name.replace(/([A-Z])/g, ' $1').trim()}
                 </span>
                 <span className={`text-lg ${getStatusColor(component.status)}`}>
@@ -198,7 +213,7 @@ function HealthDashboard() {
 
               <div className="space-y-1 text-sm">
                 <div className="flex justify-between">
-                  <span className="text-holo-cyan/70">Status:</span>
+                  <span className="text-slate-400">Status:</span>
                   <span className={`${getStatusColor(component.status)} font-semibold`}>
                     {component.status}
                   </span>
@@ -206,8 +221,8 @@ function HealthDashboard() {
 
                 {component.responseTime && (
                   <div className="flex justify-between">
-                    <span className="text-holo-cyan/70">Response:</span>
-                    <span className="text-holo-cyan">
+                    <span className="text-slate-400">Response:</span>
+                    <span className="text-cyan-400">
                       {component.responseTime}ms
                     </span>
                   </div>
@@ -215,8 +230,8 @@ function HealthDashboard() {
 
                 {component.consecutiveFailures > 0 && (
                   <div className="flex justify-between">
-                    <span className="text-holo-cyan/70">Failures:</span>
-                    <span className="text-holo-amber">
+                    <span className="text-slate-400">Failures:</span>
+                    <span className="text-amber-400">
                       {component.consecutiveFailures}
                     </span>
                   </div>
@@ -225,116 +240,125 @@ function HealthDashboard() {
 
               {component.status !== 'healthy' && (
                 <div className="mt-3">
-                  <HudButton
+                  <Button
                     onClick={(e) => {
                       e.stopPropagation();
                       triggerSelfHealing(name);
                     }}
                     size="sm"
                     disabled={healingInProgress}
-                    className="w-full"
+                    variant="outline"
+                    className="w-full border-slate-800"
                   >
                     🩹 Heal
-                  </HudButton>
+                  </Button>
                 </div>
               )}
             </div>
           ))}
         </div>
-      </HudPanel>
+        </CardContent>
+      </Card>
 
       {/* Recent Alerts */}
       {alerts.length > 0 && (
-        <HudPanel>
-          <h3 className="text-holo-cyan font-bold text-lg mb-4">🚨 Recent Alerts</h3>
+        <Card className="bg-slate-900/90 border-slate-800">
+          <CardHeader>
+            <CardTitle className="text-white text-lg">🚨 Recent Alerts</CardTitle>
+          </CardHeader>
+          <CardContent>
           <div className="space-y-3">
             {alerts.slice(0, 5).map((alert: any, index: number) => (
               <div
                 key={index}
                 className={`p-3 rounded-lg border-l-4 ${
                   alert.severity === 'critical'
-                    ? 'bg-holo-red/10 border-holo-red'
+                    ? 'bg-red-500/10 border-red-500'
                     : alert.severity === 'warning'
-                    ? 'bg-holo-amber/10 border-holo-amber'
-                    : 'bg-holo-cyan/10 border-holo-cyan'
+                    ? 'bg-amber-500/10 border-amber-500'
+                    : 'bg-cyan-500/10 border-cyan-500'
                 }`}
               >
                 <div className="flex items-center justify-between">
                   <span className={`font-semibold ${
                     alert.severity === 'critical'
-                      ? 'text-holo-red'
+                      ? 'text-red-400'
                       : alert.severity === 'warning'
-                      ? 'text-holo-amber'
-                      : 'text-holo-cyan'
+                      ? 'text-amber-400'
+                      : 'text-cyan-400'
                   }`}>
                     {alert.severity.toUpperCase()}: {alert.component}
                   </span>
-                  <span className="text-xs text-holo-cyan/70">
+                  <span className="text-xs text-slate-400">
                     {new Date(alert.timestamp).toLocaleString()}
                   </span>
                 </div>
-                <div className="text-sm text-holo-cyan mt-1">
+                <div className="text-sm text-slate-300 mt-1">
                   {alert.message}
                 </div>
               </div>
             ))}
           </div>
-        </HudPanel>
+        </CardContent>
+      </Card>
       )}
 
       {/* Component Details Modal */}
       {selectedComponent && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-          <HudPanel className="w-full max-w-2xl max-h-96 overflow-y-auto">
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="text-holo-cyan font-bold text-lg capitalize">
-                {selectedComponent.name.replace(/([A-Z])/g, ' $1').trim()} Details
-              </h3>
-              <HudButton onClick={() => setSelectedComponent(null)}>
-                ✕
-              </HudButton>
-            </div>
+        <div className="fixed inset-0 bg-black/80 backdrop-blur-md flex items-center justify-center z-[200] p-4">
+          <Card className="bg-slate-950 border-slate-800 w-full max-w-2xl max-h-[90vh] overflow-y-auto">
+            <CardHeader>
+              <div className="flex items-center justify-between">
+                <CardTitle className="text-white capitalize">
+                  {selectedComponent.name?.replace(/([A-Z])/g, ' $1').trim() || 'Component'} Details
+                </CardTitle>
+                <Button onClick={() => setSelectedComponent(null)} variant="ghost" size="sm">
+                  ✕
+                </Button>
+              </div>
+            </CardHeader>
+            <CardContent>
 
             <div className="space-y-4">
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <span className="text-holo-cyan/70">Status:</span>
-                  <span className={`ml-2 font-semibold ${getStatusColor(selectedComponent.status)}`}>
+                  <span className="text-slate-400 text-sm">Status:</span>
+                  <div className={`mt-1 font-semibold ${getStatusColor(selectedComponent.status)}`}>
                     {selectedComponent.status}
-                  </span>
+                  </div>
                 </div>
                 <div>
-                  <span className="text-holo-cyan/70">Last Check:</span>
-                  <span className="ml-2 text-holo-cyan">
+                  <span className="text-slate-400 text-sm">Last Check:</span>
+                  <div className="mt-1 text-cyan-400">
                     {selectedComponent.lastCheck ? new Date(selectedComponent.lastCheck).toLocaleString() : 'Never'}
-                  </span>
+                  </div>
                 </div>
                 <div>
-                  <span className="text-holo-cyan/70">Response Time:</span>
-                  <span className="ml-2 text-holo-cyan">
+                  <span className="text-slate-400 text-sm">Response Time:</span>
+                  <div className="mt-1 text-cyan-400">
                     {selectedComponent.responseTime ? `${selectedComponent.responseTime}ms` : 'N/A'}
-                  </span>
+                  </div>
                 </div>
                 <div>
-                  <span className="text-holo-cyan/70">Consecutive Failures:</span>
-                  <span className="ml-2 text-holo-amber">
+                  <span className="text-slate-400 text-sm">Consecutive Failures:</span>
+                  <div className="mt-1 text-amber-400">
                     {selectedComponent.consecutiveFailures || 0}
-                  </span>
+                  </div>
                 </div>
               </div>
 
               {selectedComponent.alerts && selectedComponent.alerts.length > 0 && (
                 <div>
-                  <h4 className="text-holo-cyan font-semibold mb-2">Recent Alerts:</h4>
+                  <h4 className="text-white font-semibold mb-2">Recent Alerts:</h4>
                   <div className="space-y-2">
                     {selectedComponent.alerts.slice(0, 3).map((alert: any, index: number) => (
-                      <div key={index} className="text-sm bg-holo-black/30 p-2 rounded">
+                      <div key={index} className="text-sm bg-slate-900/50 p-3 rounded-lg border border-slate-800">
                         <div className={`font-semibold ${
-                          alert.severity === 'critical' ? 'text-holo-red' : 'text-holo-amber'
+                          alert.severity === 'critical' ? 'text-red-400' : 'text-amber-400'
                         }`}>
                           {alert.type}: {alert.message}
                         </div>
-                        <div className="text-holo-cyan/70 text-xs">
+                        <div className="text-slate-400 text-xs mt-1">
                           {new Date(alert.timestamp).toLocaleString()}
                         </div>
                       </div>
@@ -343,13 +367,14 @@ function HealthDashboard() {
                 </div>
               )}
             </div>
-          </HudPanel>
+            </CardContent>
+          </Card>
         </div>
       )}
 
       {/* Status Info */}
-      <div className="mt-6 p-3 bg-void-surface/50 rounded-lg border border-holo-cyan/20">
-        <div className="text-xs text-holo-cyan/70 text-center">
+      <div className="mt-6 p-3 bg-slate-900/50 rounded-lg border border-slate-800">
+        <div className="text-xs text-slate-400 text-center">
           🔍 Last health check: {lastCheck ? new Date(lastCheck).toLocaleString() : 'Never'} |
           🔔 Alerts: {alerts.length} |
           🤖 Auto-refresh: {autoRefresh ? 'ON' : 'OFF'}

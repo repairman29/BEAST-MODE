@@ -102,7 +102,7 @@ export default function PricingSection() {
         {plans.map((plan) => (
           <Card 
             key={plan.id}
-            className={`bg-slate-950/50 border-slate-900 hover:border-slate-800 transition-all ${
+            className={`bg-slate-900/90 border-slate-800 hover:border-slate-800 transition-all ${
               plan.id === 'developer' ? 'border-cyan-500/50' : ''
             }`}
           >

@@ -1,15 +1,28 @@
 "use client";
 
 import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { Button } from '../ui/button';
 
 function Navigation() {
+  const router = useRouter();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const scrollToSection = (sectionId: string) => {
     document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
     setIsMenuOpen(false);
   };
+
+  const handleGetStarted = () => {
+    router.push('/dashboard?view=auth&action=signup');
+  };
+
+  // Hide navigation on dashboard page
+  const isDashboard = typeof window !== 'undefined' && window.location.pathname === '/dashboard';
+  
+  if (isDashboard) {
+    return null;
+  }
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-sm border-b border-slate-900">
@@ -42,7 +55,11 @@ function Navigation() {
             >
               Dashboard
             </a>
-            <Button variant="default" className="bg-white text-black hover:bg-slate-100">
+            <Button 
+              variant="default" 
+              className="bg-white text-black hover:bg-slate-100"
+              onClick={handleGetStarted}
+            >
               Get Started
             </Button>
           </div>
@@ -72,7 +89,11 @@ function Navigation() {
               >
                 Dashboard
               </a>
-              <Button variant="default" className="bg-white text-black hover:bg-slate-100 w-full">
+              <Button 
+                variant="default" 
+                className="bg-white text-black hover:bg-slate-100 w-full"
+                onClick={handleGetStarted}
+              >
                 Get Started
               </Button>
             </div>

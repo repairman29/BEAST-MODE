@@ -1,9 +1,8 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import HudPanel from '../hud/HudPanel';
-import HudButton from '../hud/HudButton';
-import StatusBar from '../hud/StatusBar';
+import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
+import { Button } from '../ui/button';
 
 interface Recommendation {
   pluginId: string;
@@ -100,9 +99,9 @@ function AIRecommendations() {
   const categories = ['all', ...Array.from(new Set(recommendations.map(r => r.plugin.category)))];
 
   const getConfidenceColor = (confidence: number) => {
-    if (confidence >= 0.8) return 'text-holo-green';
-    if (confidence >= 0.6) return 'text-holo-amber';
-    return 'text-holo-red';
+    if (confidence >= 0.8) return 'text-green-400';
+    if (confidence >= 0.6) return 'text-amber-400';
+    return 'text-red-400';
   };
 
   const getConfidenceLabel = (confidence: number) => {
@@ -114,22 +113,25 @@ function AIRecommendations() {
   return (
     <div className="w-full max-w-7xl space-y-6">
       {/* Header */}
-      <HudPanel>
-        <div className="flex items-center justify-between mb-4">
-          <h2 className="text-holo-cyan font-bold text-xl">🤖 AI Recommendations</h2>
-          <HudButton onClick={fetchRecommendations} disabled={isLoading}>
-            {isLoading ? '🔄 Analyzing...' : '🔍 Get Recommendations'}
-          </HudButton>
-        </div>
+      <Card className="bg-slate-900/90 border-slate-800">
+        <CardHeader>
+          <div className="flex items-center justify-between">
+            <CardTitle className="text-white text-xl">🤖 AI Recommendations</CardTitle>
+            <Button onClick={fetchRecommendations} disabled={isLoading} className="bg-white text-black hover:bg-slate-100">
+              {isLoading ? '🔄 Analyzing...' : '🔍 Get Recommendations'}
+            </Button>
+          </div>
+        </CardHeader>
+        <CardContent>
 
         {/* Project Context */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
           <div>
-            <label className="block text-holo-cyan/70 text-sm mb-1">Project Type</label>
+            <label className="block text-slate-400 text-sm mb-1">Project Type</label>
             <select
               value={projectContext.type}
               onChange={(e) => setProjectContext(prev => ({ ...prev, type: e.target.value }))}
-              className="w-full bg-holo-black/50 border border-holo-cyan/30 rounded px-2 py-1 text-holo-cyan text-sm"
+              className="w-full bg-slate-900/80 border border-slate-700 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-cyan-500"
             >
               <option value="web">Web App</option>
               <option value="mobile">Mobile App</option>
@@ -140,11 +142,11 @@ function AIRecommendations() {
           </div>
 
           <div>
-            <label className="block text-holo-cyan/70 text-sm mb-1">Team Size</label>
+            <label className="block text-slate-400 text-sm mb-1">Team Size</label>
             <select
               value={projectContext.teamSize}
               onChange={(e) => setProjectContext(prev => ({ ...prev, teamSize: e.target.value }))}
-              className="w-full bg-holo-black/50 border border-holo-cyan/30 rounded px-2 py-1 text-holo-cyan text-sm"
+              className="w-full bg-slate-900/80 border border-slate-700 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-cyan-500"
             >
               <option value="solo">Solo Developer</option>
               <option value="small">Small Team (2-5)</option>
@@ -154,11 +156,11 @@ function AIRecommendations() {
           </div>
 
           <div>
-            <label className="block text-holo-cyan/70 text-sm mb-1">Timeline</label>
+            <label className="block text-slate-400 text-sm mb-1">Timeline</label>
             <select
               value={projectContext.timeline}
               onChange={(e) => setProjectContext(prev => ({ ...prev, timeline: e.target.value }))}
-              className="w-full bg-holo-black/50 border border-holo-cyan/30 rounded px-2 py-1 text-holo-cyan text-sm"
+              className="w-full bg-slate-900/80 border border-slate-700 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-cyan-500"
             >
               <option value="prototype">Prototype</option>
               <option value="mvp">MVP</option>
@@ -168,11 +170,11 @@ function AIRecommendations() {
           </div>
 
           <div>
-            <label className="block text-holo-cyan/70 text-sm mb-1">Budget</label>
+            <label className="block text-slate-400 text-sm mb-1">Budget</label>
             <select
               value={projectContext.budget}
               onChange={(e) => setProjectContext(prev => ({ ...prev, budget: e.target.value }))}
-              className="w-full bg-holo-black/50 border border-holo-cyan/30 rounded px-2 py-1 text-holo-cyan text-sm"
+              className="w-full bg-slate-900/80 border border-slate-700 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-cyan-500"
             >
               <option value="free">Free Only</option>
               <option value="low">Low ($)</option>
@@ -181,58 +183,69 @@ function AIRecommendations() {
             </select>
           </div>
         </div>
-      </HudPanel>
+        </CardContent>
+      </Card>
 
       {/* Category Filter */}
-      <HudPanel>
-        <div className="flex flex-wrap gap-2 mb-4">
-          {categories.map(category => (
-            <HudButton
-              key={category}
-              variant={selectedCategory === category ? 'primary' : 'ghost'}
-              size="sm"
-              onClick={() => setSelectedCategory(category)}
-              className="capitalize"
-            >
-              {category}
-            </HudButton>
-          ))}
-        </div>
+      <Card className="bg-slate-900/90 border-slate-800">
+        <CardContent>
+          <div className="flex flex-wrap gap-2 mb-4">
+            {categories.map(category => (
+              <Button
+                key={category}
+                variant={selectedCategory === category ? 'default' : 'outline'}
+                size="sm"
+                onClick={() => setSelectedCategory(category)}
+                className={`capitalize ${
+                  selectedCategory === category 
+                    ? 'bg-white text-black hover:bg-slate-100' 
+                    : 'border-slate-800 text-slate-400 hover:bg-slate-900'
+                }`}
+              >
+                {category}
+              </Button>
+            ))}
+          </div>
 
-        <div className="text-holo-cyan/70 text-sm">
-          Showing {filteredRecommendations.length} recommendations
-          {selectedCategory !== 'all' && ` in ${selectedCategory} category`}
-        </div>
-      </HudPanel>
+          <div className="text-slate-400 text-sm">
+            Showing {filteredRecommendations.length} recommendations
+            {selectedCategory !== 'all' && ` in ${selectedCategory} category`}
+          </div>
+        </CardContent>
+      </Card>
 
       {/* Recommendations Grid */}
       {isLoading ? (
-        <HudPanel>
-          <div className="flex items-center justify-center py-12">
-            <div className="animate-spin w-8 h-8 border-2 border-holo-cyan border-t-transparent rounded-full mr-4"></div>
-            <span className="text-holo-cyan">Analyzing your project and generating recommendations...</span>
-          </div>
-        </HudPanel>
+        <Card className="bg-slate-900/90 border-slate-800">
+          <CardContent className="flex items-center justify-center py-12">
+            <div className="animate-spin w-8 h-8 border-2 border-cyan-500 border-t-transparent rounded-full mr-4"></div>
+            <span className="text-cyan-400">Analyzing your project and generating recommendations...</span>
+          </CardContent>
+        </Card>
       ) : filteredRecommendations.length === 0 ? (
-        <HudPanel>
-          <div className="text-center py-12">
-            <span className="text-holo-amber text-lg">🤔 No recommendations found</span>
-            <div className="text-holo-cyan/70 mt-2">
+        <Card className="bg-slate-900/90 border-slate-800">
+          <CardContent className="text-center py-12">
+            <div className="text-amber-400 text-lg mb-2">🤔 No recommendations found</div>
+            <div className="text-slate-400 text-sm">
               Try adjusting your project context or category filter
             </div>
-          </div>
-        </HudPanel>
+            <Button onClick={fetchRecommendations} className="mt-4 bg-white text-black hover:bg-slate-100">
+              🔍 Get Recommendations
+            </Button>
+          </CardContent>
+        </Card>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredRecommendations.map((rec) => (
-            <HudPanel key={rec.pluginId} className="hover:border-holo-cyan/50 transition-colors">
+            <Card key={rec.pluginId} className="bg-slate-900/90 border-slate-800 hover:border-cyan-500/50 transition-colors">
+              <CardContent className="p-6">
               {/* Plugin Header */}
               <div className="flex items-start justify-between mb-3">
                 <div className="flex-1">
-                  <h3 className="text-holo-cyan font-bold text-lg">{rec.plugin.name}</h3>
-                  <div className="flex items-center gap-2 text-sm text-holo-cyan/70">
+                  <h3 className="text-white font-bold text-lg">{rec.plugin.name}</h3>
+                  <div className="flex items-center gap-2 text-sm text-slate-400 mt-1">
                     <span className={`px-2 py-1 rounded text-xs ${
-                      rec.plugin.price === 0 ? 'bg-holo-green/20 text-holo-green' : 'bg-holo-amber/20 text-holo-amber'
+                      rec.plugin.price === 0 ? 'bg-green-500/20 text-green-400' : 'bg-amber-500/20 text-amber-400'
                     }`}>
                       {rec.plugin.price === 0 ? 'FREE' : `$${rec.plugin.price}`}
                     </span>
@@ -251,22 +264,22 @@ function AIRecommendations() {
               </div>
 
               {/* Description */}
-              <p className="text-holo-cyan/80 text-sm mb-3 line-clamp-2">
+              <p className="text-slate-300 text-sm mb-3 line-clamp-2">
                 {rec.plugin.description}
               </p>
 
               {/* Languages & Category */}
               <div className="flex flex-wrap gap-1 mb-3">
-                <span className="text-xs bg-holo-purple/20 text-holo-purple px-2 py-1 rounded">
+                <span className="text-xs bg-purple-500/20 text-purple-400 px-2 py-1 rounded">
                   {rec.plugin.category}
                 </span>
                 {rec.plugin.languages.slice(0, 2).map(lang => (
-                  <span key={lang} className="text-xs bg-holo-cyan/20 text-holo-cyan px-2 py-1 rounded">
+                  <span key={lang} className="text-xs bg-cyan-500/20 text-cyan-400 px-2 py-1 rounded">
                     {lang}
                   </span>
                 ))}
                 {rec.plugin.languages.length > 2 && (
-                  <span className="text-xs text-holo-cyan/70">
+                  <span className="text-xs text-slate-500">
                     +{rec.plugin.languages.length - 2} more
                   </span>
                 )}
@@ -275,11 +288,11 @@ function AIRecommendations() {
               {/* Recommendation Reasons */}
               {rec.reasons && rec.reasons.length > 0 && (
                 <div className="mb-3">
-                  <div className="text-holo-amber text-sm font-semibold mb-1">💡 Why recommended:</div>
-                  <ul className="text-sm text-holo-cyan/80 space-y-1">
+                  <div className="text-amber-400 text-sm font-semibold mb-1">💡 Why recommended:</div>
+                  <ul className="text-sm text-slate-300 space-y-1">
                     {rec.reasons.slice(0, 2).map((reason, index) => (
                       <li key={index} className="flex items-start gap-2">
-                        <span className="text-holo-green mt-1">•</span>
+                        <span className="text-green-400 mt-1">•</span>
                         <span>{reason}</span>
                       </li>
                     ))}
@@ -289,10 +302,10 @@ function AIRecommendations() {
 
               {/* Recommendation Sources */}
               <div className="mb-4">
-                <div className="text-holo-cyan/70 text-xs mb-1">Based on:</div>
+                <div className="text-slate-400 text-xs mb-1">Based on:</div>
                 <div className="flex flex-wrap gap-1">
                   {rec.sources.map(source => (
-                    <span key={source} className="text-xs bg-holo-cyan/10 text-holo-cyan px-2 py-1 rounded">
+                    <span key={source} className="text-xs bg-cyan-500/10 text-cyan-400 px-2 py-1 rounded">
                       {source.replace('-', ' ')}
                     </span>
                   ))}
@@ -301,25 +314,26 @@ function AIRecommendations() {
 
               {/* Actions */}
               <div className="flex gap-2">
-                <HudButton
+                <Button
                   onClick={() => installPlugin(rec.pluginId)}
-                  className="flex-1"
+                  className="flex-1 bg-white text-black hover:bg-slate-100"
                   size="sm"
                 >
                   📥 Install
-                </HudButton>
-                <HudButton size="sm" variant="ghost">
+                </Button>
+                <Button size="sm" variant="outline" className="border-slate-800">
                   ℹ️ Details
-                </HudButton>
+                </Button>
               </div>
-            </HudPanel>
+              </CardContent>
+            </Card>
           ))}
         </div>
       )}
 
       {/* Status Info */}
-      <div className="mt-6 p-3 bg-void-surface/50 rounded-lg border border-holo-cyan/20">
-        <div className="text-xs text-holo-cyan/70 text-center">
+      <div className="mt-6 p-3 bg-slate-900/50 rounded-lg border border-slate-800">
+        <div className="text-xs text-slate-400 text-center">
           🤖 AI Recommendations | 📊 {recommendations.length} total recommendations |
           🎯 Confidence threshold: 70% | 🔄 Last updated: {new Date().toLocaleTimeString()}
         </div>

@@ -7,19 +7,13 @@ import { NextRequest, NextResponse } from 'next/server';
  */
 export async function GET(request: NextRequest) {
   try {
-    // Check if BEAST MODE deployment orchestrator is available
-    if (!global.beastMode || !global.beastMode.deploymentOrchestrator) {
-      return NextResponse.json(
-        { error: 'Deployment Orchestrator not available', platforms: [] },
-        { status: 503 }
-      );
-    }
-
-    // Get supported platforms
-    const platforms = global.beastMode.getSupportedPlatforms?.() || [
+    // Return supported platforms
+    const platforms = [
       'vercel',
       'railway',
       'aws',
+      'docker',
+      'kubernetes',
       'netlify',
       'render'
     ];
@@ -36,7 +30,7 @@ export async function GET(request: NextRequest) {
       {
         error: 'Failed to retrieve platforms',
         details: error.message,
-        platforms: ['vercel', 'railway', 'aws', 'netlify', 'render']
+        platforms: ['vercel', 'railway', 'aws', 'docker', 'kubernetes']
       },
       { status: 500 }
     );

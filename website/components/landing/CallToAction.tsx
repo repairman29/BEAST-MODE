@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card';
 import { Button } from '../ui/button';
 import { Badge } from '../ui/badge';
@@ -69,6 +70,7 @@ const pricingTiers = [
 ];
 
 function CallToAction() {
+  const router = useRouter();
   const [email, setEmail] = useState('');
   const [isSubscribed, setIsSubscribed] = useState(false);
 
@@ -81,6 +83,20 @@ function CallToAction() {
         setEmail('');
       }, 3000);
     }
+  };
+
+  const handlePricingClick = (tierName: string) => {
+    if (tierName === 'Enterprise') {
+      // For enterprise, could open contact form or email
+      window.location.href = 'mailto:sales@beastmode.dev?subject=Enterprise Inquiry';
+    } else {
+      // For other tiers, go to dashboard with signup
+      router.push('/dashboard?view=auth&action=signup');
+    }
+  };
+
+  const handleGetStarted = () => {
+    router.push('/dashboard?view=auth&action=signup');
   };
 
   return (
@@ -141,6 +157,7 @@ function CallToAction() {
                       ? 'bg-white text-black hover:bg-slate-100'
                       : 'bg-slate-900 hover:bg-slate-800 border border-slate-800'
                   }`}
+                  onClick={() => handlePricingClick(tier.name)}
                 >
                   {tier.cta}
                 </Button>
@@ -189,7 +206,11 @@ function CallToAction() {
           <p className="text-lg text-slate-400 mb-10 max-w-2xl mx-auto">
             Join developers using BEAST MODE to build better software with AI-powered analysis and automated bug detection.
           </p>
-          <Button size="lg" className="bg-white text-black hover:bg-slate-100">
+          <Button 
+            size="lg" 
+            className="bg-white text-black hover:bg-slate-100"
+            onClick={handleGetStarted}
+          >
             Get Started Free
           </Button>
         </div>
