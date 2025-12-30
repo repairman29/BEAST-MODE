@@ -1,9 +1,8 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import HudPanel from '../hud/HudPanel';
-import HudButton from '../hud/HudButton';
-import StatusBar from '../hud/StatusBar';
+import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
+import { Button } from '../ui/button';
 
 interface RevenueMetrics {
   totalRevenue: number;
@@ -88,22 +87,26 @@ function MonetizationDashboard() {
 
   if (isLoading) {
     return (
-      <HudPanel className="w-full max-w-6xl">
-        <div className="flex items-center justify-center py-12">
-          <div className="animate-spin w-8 h-8 border-2 border-holo-cyan border-t-transparent rounded-full mr-4"></div>
-          <span className="text-holo-cyan">Loading monetization analytics...</span>
-        </div>
-      </HudPanel>
+      <Card className="bg-slate-900/90 border-slate-800 w-full max-w-6xl">
+        <CardContent className="flex items-center justify-center py-12">
+          <div className="animate-spin w-8 h-8 border-2 border-cyan-500 border-t-transparent rounded-full mr-4"></div>
+          <span className="text-cyan-400">Loading monetization analytics...</span>
+        </CardContent>
+      </Card>
     );
   }
 
   if (!analytics) {
     return (
-      <HudPanel className="w-full max-w-6xl">
-        <div className="text-center py-12">
-          <span className="text-holo-red">❌ Analytics unavailable</span>
-        </div>
-      </HudPanel>
+      <Card className="bg-slate-900/90 border-slate-800 w-full max-w-6xl">
+        <CardContent className="text-center py-12">
+          <div className="text-red-400 text-lg mb-2">❌ Analytics unavailable</div>
+          <p className="text-slate-400 text-sm mb-4">Unable to fetch analytics data. Please try again later.</p>
+          <Button onClick={fetchAnalytics} className="bg-white text-black hover:bg-slate-100">
+            Retry
+          </Button>
+        </CardContent>
+      </Card>
     );
   }
 
@@ -113,86 +116,93 @@ function MonetizationDashboard() {
   return (
     <div className="w-full max-w-7xl space-y-6">
       {/* Header */}
-      <HudPanel>
-        <div className="flex items-center justify-between mb-4">
-          <h2 className="text-holo-cyan font-bold text-xl">💰 BEAST MODE Monetization</h2>
-          <div className="flex gap-2">
-            <select
-              value={timeframe}
-              onChange={(e) => setTimeframe(e.target.value)}
-              className="bg-holo-black/50 border border-holo-cyan/30 rounded px-3 py-1 text-holo-cyan text-sm"
-            >
-              <option value="7d">Last 7 days</option>
-              <option value="30d">Last 30 days</option>
-              <option value="90d">Last 90 days</option>
-              <option value="1y">Last year</option>
-            </select>
-            <HudButton onClick={fetchAnalytics}>
-              🔄 Refresh
-            </HudButton>
+      <Card className="bg-slate-900/90 border-slate-800">
+        <CardHeader>
+          <div className="flex items-center justify-between">
+            <CardTitle className="text-white text-xl">💰 BEAST MODE Monetization</CardTitle>
+            <div className="flex gap-2">
+              <select
+                value={timeframe}
+                onChange={(e) => setTimeframe(e.target.value)}
+                className="bg-slate-900/80 border border-slate-700 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-cyan-500"
+              >
+                <option value="7d">Last 7 days</option>
+                <option value="30d">Last 30 days</option>
+                <option value="90d">Last 90 days</option>
+                <option value="1y">Last year</option>
+              </select>
+              <Button onClick={fetchAnalytics} variant="outline" size="sm" className="border-slate-800">
+                🔄 Refresh
+              </Button>
+            </div>
           </div>
-        </div>
+        </CardHeader>
+        <CardContent>
 
         {/* Key Metrics */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
           <div className="text-center">
-            <div className="text-2xl font-bold text-holo-green">
+            <div className="text-2xl font-bold text-green-400">
               {formatCurrency(marketplace.totalRevenue)}
             </div>
-            <div className="text-holo-cyan/70 text-sm">Total Revenue</div>
-            <div className="text-xs text-holo-green">
+            <div className="text-slate-400 text-sm">Total Revenue</div>
+            <div className="text-xs text-green-400">
               +{metrics.revenue?.growthRate.toFixed(1)}% growth
             </div>
           </div>
 
           <div className="text-center">
-            <div className="text-2xl font-bold text-holo-cyan">
+            <div className="text-2xl font-bold text-cyan-400">
               {formatCurrency(marketplace.monthlyRevenue)}
             </div>
-            <div className="text-holo-cyan/70 text-sm">Monthly Revenue</div>
-            <div className="text-xs text-holo-cyan">
+            <div className="text-slate-400 text-sm">Monthly Revenue</div>
+            <div className="text-xs text-cyan-400">
               Recurring
             </div>
           </div>
 
           <div className="text-center">
-            <div className="text-2xl font-bold text-holo-amber">
+            <div className="text-2xl font-bold text-amber-400">
               {marketplace.totalPlugins}
             </div>
-            <div className="text-holo-cyan/70 text-sm">Total Plugins</div>
-            <div className="text-xs text-holo-amber">
+            <div className="text-slate-400 text-sm">Total Plugins</div>
+            <div className="text-xs text-amber-400">
               {metrics.plugins?.summary?.totalInstalls || 0} installs
             </div>
           </div>
 
           <div className="text-center">
-            <div className="text-2xl font-bold text-holo-purple">
+            <div className="text-2xl font-bold text-purple-400">
               {metrics.users?.totalUsers || 0}
             </div>
-            <div className="text-holo-cyan/70 text-sm">Active Users</div>
-            <div className="text-xs text-holo-purple">
+            <div className="text-slate-400 text-sm">Active Users</div>
+            <div className="text-xs text-purple-400">
               {metrics.marketplace?.downloads?.total || 0} downloads
             </div>
           </div>
         </div>
-      </HudPanel>
+        </CardContent>
+      </Card>
 
       {/* Revenue Breakdown */}
       {metrics.revenue && (
-        <HudPanel>
-          <h3 className="text-holo-cyan font-bold text-lg mb-4">💵 Revenue Breakdown</h3>
+        <Card className="bg-slate-900/90 border-slate-800">
+          <CardHeader>
+            <CardTitle className="text-white text-lg">💵 Revenue Breakdown</CardTitle>
+          </CardHeader>
+          <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Revenue by Type */}
             <div>
-              <h4 className="text-holo-amber font-semibold mb-3">Revenue by Type</h4>
+              <h4 className="text-amber-400 font-semibold mb-3">Revenue by Type</h4>
               <div className="space-y-2">
                 {Object.entries(metrics.revenue.revenueByType).map(([type, amount]) => (
                   <div key={type} className="flex justify-between items-center">
-                    <span className="text-holo-cyan capitalize">{type}</span>
+                    <span className="text-white capitalize">{type}</span>
                     <div className="text-right">
-                      <div className="text-holo-green font-semibold">{formatCurrency(amount)}</div>
-                      <div className="text-xs text-holo-cyan/70">
-                        {((amount / metrics.revenue.totalRevenue) * 100).toFixed(1)}%
+                      <div className="text-green-400 font-semibold">{formatCurrency(amount as number)}</div>
+                      <div className="text-xs text-slate-400">
+                        {((amount as number / metrics.revenue.totalRevenue) * 100).toFixed(1)}%
                       </div>
                     </div>
                   </div>
@@ -202,15 +212,15 @@ function MonetizationDashboard() {
 
             {/* Top Earning Plugins */}
             <div>
-              <h4 className="text-holo-amber font-semibold mb-3">Top Earning Plugins</h4>
+              <h4 className="text-amber-400 font-semibold mb-3">Top Earning Plugins</h4>
               <div className="space-y-2">
                 {metrics.revenue.topEarningPlugins.slice(0, 5).map(([pluginId, revenue], index) => (
                   <div key={pluginId} className="flex justify-between items-center">
                     <div className="flex items-center gap-2">
-                      <span className="text-holo-cyan/70">#{index + 1}</span>
-                      <span className="text-holo-cyan text-sm">{pluginId}</span>
+                      <span className="text-slate-400">#{index + 1}</span>
+                      <span className="text-white text-sm">{pluginId}</span>
                     </div>
-                    <span className="text-holo-green font-semibold">{formatCurrency(revenue)}</span>
+                    <span className="text-green-400 font-semibold">{formatCurrency(revenue)}</span>
                   </div>
                 ))}
               </div>
@@ -218,71 +228,75 @@ function MonetizationDashboard() {
           </div>
 
           {/* Revenue Projections */}
-          <div className="mt-6 pt-4 border-t border-holo-cyan/30">
-            <h4 className="text-holo-amber font-semibold mb-3">Revenue Projections</h4>
+          <div className="mt-6 pt-4 border-t border-slate-800">
+            <h4 className="text-amber-400 font-semibold mb-3">Revenue Projections</h4>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div className="text-center">
-                <div className="text-xl font-bold text-holo-green">
+                <div className="text-xl font-bold text-green-400">
                   {formatCurrency(metrics.revenue.projections.nextMonth)}
                 </div>
-                <div className="text-holo-cyan/70 text-sm">Next Month</div>
+                <div className="text-slate-400 text-sm">Next Month</div>
               </div>
               <div className="text-center">
-                <div className="text-xl font-bold text-holo-cyan">
+                <div className="text-xl font-bold text-cyan-400">
                   {formatCurrency(metrics.revenue.projections.nextQuarter)}
                 </div>
-                <div className="text-holo-cyan/70 text-sm">Next Quarter</div>
+                <div className="text-slate-400 text-sm">Next Quarter</div>
               </div>
               <div className="text-center">
-                <div className="text-xl font-bold text-holo-purple">
+                <div className="text-xl font-bold text-purple-400">
                   {formatCurrency(metrics.revenue.projections.nextYear)}
                 </div>
-                <div className="text-holo-cyan/70 text-sm">Next Year</div>
+                <div className="text-slate-400 text-sm">Next Year</div>
               </div>
             </div>
           </div>
-        </HudPanel>
+        </CardContent>
+      </Card>
       )}
 
       {/* Marketplace Performance */}
       {metrics.marketplace && (
-        <HudPanel>
-          <h3 className="text-holo-cyan font-bold text-lg mb-4">🛒 Marketplace Performance</h3>
+        <Card className="bg-slate-900/90 border-slate-800">
+          <CardHeader>
+            <CardTitle className="text-white text-lg">🛒 Marketplace Performance</CardTitle>
+          </CardHeader>
+          <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {/* Searches */}
             <div>
-              <h4 className="text-holo-amber font-semibold mb-3">Search Activity</h4>
+              <h4 className="text-amber-400 font-semibold mb-3">Search Activity</h4>
               <div className="space-y-2">
                 <div className="flex justify-between">
-                  <span className="text-holo-cyan">Total Searches</span>
-                  <span className="text-holo-cyan font-semibold">{metrics.marketplace.searches.total}</span>
+                  <span className="text-white">Total Searches</span>
+                  <span className="text-cyan-400 font-semibold">{metrics.marketplace.searches.total}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-holo-cyan">Unique Queries</span>
-                  <span className="text-holo-cyan font-semibold">{metrics.marketplace.searches.uniqueQueries}</span>
+                  <span className="text-white">Unique Queries</span>
+                  <span className="text-cyan-400 font-semibold">{metrics.marketplace.searches.uniqueQueries}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-holo-cyan">Conversion Rate</span>
-                  <span className="text-holo-green font-semibold">{metrics.marketplace.purchases.conversionRate}%</span>
+                  <span className="text-white">Conversion Rate</span>
+                  <span className="text-green-400 font-semibold">{metrics.marketplace.purchases.conversionRate}%</span>
                 </div>
               </div>
             </div>
 
             {/* Downloads */}
             <div>
-              <h4 className="text-holo-amber font-semibold mb-3">Downloads</h4>
+              <h4 className="text-amber-400 font-semibold mb-3">Downloads</h4>
               <div className="space-y-2">
                 <div className="flex justify-between">
-                  <span className="text-holo-cyan">Total Downloads</span>
-                  <span className="text-holo-cyan font-semibold">{metrics.marketplace.downloads.total}</span>
+                  <span className="text-white">Total Downloads</span>
+                  <span className="text-cyan-400 font-semibold">{metrics.marketplace.downloads.total}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-holo-cyan">Purchases</span>
-                  <span className="text-holo-green font-semibold">{metrics.marketplace.purchases.total}</span>
+                  <span className="text-white">Purchases</span>
+                  <span className="text-green-400 font-semibold">{metrics.marketplace.purchases.total}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-holo-cyan">Avg Order Value</span>
-                  <span className="text-holo-purple font-semibold">
+                  <span className="text-white">Avg Order Value</span>
+                  <span className="text-purple-400 font-semibold">
                     {formatCurrency(metrics.marketplace.purchases.avgOrderValue)}
                   </span>
                 </div>
@@ -291,36 +305,40 @@ function MonetizationDashboard() {
 
             {/* Top Search Terms */}
             <div>
-              <h4 className="text-holo-amber font-semibold mb-3">Top Search Terms</h4>
+              <h4 className="text-amber-400 font-semibold mb-3">Top Search Terms</h4>
               <div className="space-y-1">
                 {metrics.marketplace.searches.topTerms.slice(0, 5).map(([term, count], index) => (
                   <div key={term} className="flex justify-between text-sm">
-                    <span className="text-holo-cyan">{term}</span>
-                    <span className="text-holo-cyan/70">{count}</span>
+                    <span className="text-white">{term}</span>
+                    <span className="text-slate-400">{count}</span>
                   </div>
                 ))}
               </div>
             </div>
           </div>
-        </HudPanel>
+        </CardContent>
+      </Card>
       )}
 
       {/* Plugin Performance */}
       {metrics.plugins && (
-        <HudPanel>
-          <h3 className="text-holo-cyan font-bold text-lg mb-4">🔌 Plugin Performance</h3>
+        <Card className="bg-slate-900/90 border-slate-800">
+          <CardHeader>
+            <CardTitle className="text-white text-lg">🔌 Plugin Performance</CardTitle>
+          </CardHeader>
+          <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {/* Most Installed */}
             <div>
-              <h4 className="text-holo-amber font-semibold mb-3">Most Installed</h4>
+              <h4 className="text-amber-400 font-semibold mb-3">Most Installed</h4>
               <div className="space-y-2">
                 {metrics.plugins.mostInstalled.slice(0, 5).map((plugin, index) => (
                   <div key={plugin.pluginId} className="flex justify-between items-center">
                     <div className="flex items-center gap-2">
-                      <span className="text-holo-cyan/70">#{index + 1}</span>
-                      <span className="text-holo-cyan text-sm">{plugin.pluginId}</span>
+                      <span className="text-slate-400">#{index + 1}</span>
+                      <span className="text-white text-sm">{plugin.pluginId}</span>
                     </div>
-                    <span className="text-holo-green font-semibold">{plugin.installs}</span>
+                    <span className="text-green-400 font-semibold">{plugin.installs}</span>
                   </div>
                 ))}
               </div>
@@ -328,15 +346,15 @@ function MonetizationDashboard() {
 
             {/* Most Used */}
             <div>
-              <h4 className="text-holo-amber font-semibold mb-3">Most Used</h4>
+              <h4 className="text-amber-400 font-semibold mb-3">Most Used</h4>
               <div className="space-y-2">
                 {metrics.plugins.mostUsed.slice(0, 5).map((plugin, index) => (
                   <div key={plugin.pluginId} className="flex justify-between items-center">
                     <div className="flex items-center gap-2">
-                      <span className="text-holo-cyan/70">#{index + 1}</span>
-                      <span className="text-holo-cyan text-sm">{plugin.pluginId}</span>
+                      <span className="text-slate-400">#{index + 1}</span>
+                      <span className="text-white text-sm">{plugin.pluginId}</span>
                     </div>
-                    <span className="text-holo-cyan font-semibold">{plugin.uses}</span>
+                    <span className="text-cyan-400 font-semibold">{plugin.uses}</span>
                   </div>
                 ))}
               </div>
@@ -344,29 +362,30 @@ function MonetizationDashboard() {
 
             {/* Success Rates */}
             <div>
-              <h4 className="text-holo-amber font-semibold mb-3">Success Metrics</h4>
+              <h4 className="text-amber-400 font-semibold mb-3">Success Metrics</h4>
               <div className="space-y-2">
                 <div className="flex justify-between">
-                  <span className="text-holo-cyan">Avg Success Rate</span>
-                  <span className="text-holo-green font-semibold">{metrics.plugins.summary.avgSuccessRate}%</span>
+                  <span className="text-white">Avg Success Rate</span>
+                  <span className="text-green-400 font-semibold">{metrics.plugins.summary.avgSuccessRate}%</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-holo-cyan">Avg Retention</span>
-                  <span className="text-holo-purple font-semibold">{metrics.plugins.summary.avgRetentionRate}%</span>
+                  <span className="text-white">Avg Retention</span>
+                  <span className="text-purple-400 font-semibold">{metrics.plugins.summary.avgRetentionRate}%</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-holo-cyan">Total Uses</span>
-                  <span className="text-holo-cyan font-semibold">{metrics.plugins.summary.totalUses}</span>
+                  <span className="text-white">Total Uses</span>
+                  <span className="text-cyan-400 font-semibold">{metrics.plugins.summary.totalUses}</span>
                 </div>
               </div>
             </div>
           </div>
-        </HudPanel>
+        </CardContent>
+      </Card>
       )}
 
       {/* Status Info */}
-      <div className="mt-6 p-3 bg-void-surface/50 rounded-lg border border-holo-cyan/20">
-        <div className="text-xs text-holo-cyan/70 text-center">
+      <div className="mt-6 p-3 bg-slate-900/50 rounded-lg border border-slate-800">
+        <div className="text-xs text-slate-400 text-center">
           💰 Monetization Dashboard | 📊 {timeframe} analytics |
           💵 {formatCurrency(marketplace.totalRevenue)} total revenue |
           📈 {metrics.revenue?.growthRate.toFixed(1)}% growth |

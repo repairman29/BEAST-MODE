@@ -1,10 +1,21 @@
 "use client";
 
 import React from 'react';
+import { useRouter } from 'next/navigation';
 import { Button } from '../ui/button';
 import { Badge } from '../ui/badge';
 
 function HeroSection() {
+  const router = useRouter();
+
+  const handleGetStarted = () => {
+    router.push('/dashboard?view=auth&action=signup');
+  };
+
+  const handleViewDemo = () => {
+    router.push('/dashboard');
+  };
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background */}
@@ -38,10 +49,19 @@ function HeroSection() {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button size="lg" className="bg-white text-black hover:bg-slate-100">
+              <Button 
+                size="lg" 
+                className="bg-white text-black hover:bg-slate-100"
+                onClick={handleGetStarted}
+              >
                 Get Started Free
               </Button>
-              <Button size="lg" variant="outline" className="border-slate-800 hover:bg-slate-900">
+              <Button 
+                size="lg" 
+                variant="outline" 
+                className="border-slate-800 hover:bg-slate-900"
+                onClick={handleViewDemo}
+              >
                 View Demo
               </Button>
             </div>

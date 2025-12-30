@@ -7,16 +7,13 @@ import { NextRequest, NextResponse } from 'next/server';
  */
 export async function GET(request: NextRequest) {
   try {
-    // Check if BEAST MODE deployment orchestrator is available
-    if (!global.beastMode || !global.beastMode.deploymentOrchestrator) {
-      return NextResponse.json(
-        { error: 'Deployment Orchestrator not available', strategies: [] },
-        { status: 503 }
-      );
-    }
-
-    // Get supported strategies
-    const strategies = global.beastMode.getSupportedStrategies();
+    // Return supported deployment strategies
+    const strategies = [
+      'instant',
+      'blue-green',
+      'canary',
+      'rolling'
+    ];
 
     return NextResponse.json({
       strategies,
@@ -24,12 +21,13 @@ export async function GET(request: NextRequest) {
       timestamp: new Date().toISOString()
     });
 
-  } catch (error) {
+  } catch (error: any) {
     console.error('Strategies API error:', error);
     return NextResponse.json(
       {
         error: 'Failed to retrieve strategies',
-        details: error.message
+        details: error.message,
+        strategies: ['instant', 'blue-green', 'canary', 'rolling']
       },
       { status: 500 }
     );

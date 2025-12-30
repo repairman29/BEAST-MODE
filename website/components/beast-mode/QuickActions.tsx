@@ -75,7 +75,7 @@ export default function QuickActions({ onScanRepo, onSignIn, onPricing, onImprov
   };
 
   return (
-    <Card className="bg-slate-950/50 border-slate-900">
+    <Card className="bg-slate-900/90 border-slate-800">
       <CardHeader>
         <CardTitle className="text-white">Quick Actions</CardTitle>
       </CardHeader>

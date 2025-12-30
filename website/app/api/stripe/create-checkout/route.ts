@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import Stripe from 'stripe';
 
 /**
  * Stripe Checkout Session Creation
@@ -31,12 +32,24 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // TODO: Replace with actual Stripe integration
-    // Install: npm install stripe
-    // Then use:
-    /*
-    const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+    // Check if Stripe is configured
+    const stripeSecretKey = process.env.STRIPE_SECRET_KEY;
+    if (!stripeSecretKey) {
+      return NextResponse.json(
+        { 
+          error: 'Stripe not configured',
+          message: 'STRIPE_SECRET_KEY is missing from environment variables'
+        },
+        { status: 500 }
+      );
+    }
+
+    // Initialize Stripe
+    const stripe = new Stripe(stripeSecretKey, {
+      apiVersion: '2024-12-18.acacia',
+    });
     
+    // Create checkout session
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
       line_items: [{
@@ -44,6 +57,7 @@ export async function POST(request: NextRequest) {
           currency: 'usd',
           product_data: {
             name: `BEAST MODE ${planId.charAt(0).toUpperCase() + planId.slice(1)} Plan`,
+            description: `BEAST MODE ${planId} subscription plan`,
           },
           unit_amount: priceId,
           recurring: {
@@ -53,18 +67,16 @@ export async function POST(request: NextRequest) {
         quantity: 1,
       }],
       mode: 'subscription',
-      success_url: `${process.env.NEXT_PUBLIC_URL}/dashboard?success=true`,
-      cancel_url: `${process.env.NEXT_PUBLIC_URL}/dashboard?canceled=true`,
+      success_url: `${process.env.NEXT_PUBLIC_URL || 'http://localhost:7777'}/dashboard?success=true&session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${process.env.NEXT_PUBLIC_URL || 'http://localhost:7777'}/dashboard?canceled=true`,
+      metadata: {
+        planId: planId,
+      },
     });
 
-    return NextResponse.json({ url: session.url });
-    */
-
-    // For now, return a mock checkout URL
-    // In production, this will be the actual Stripe checkout URL
-    return NextResponse.json({
-      url: `/dashboard?checkout=${planId}&mock=true`,
-      message: 'Stripe integration pending. Install stripe package and configure STRIPE_SECRET_KEY'
+    return NextResponse.json({ 
+      url: session.url,
+      sessionId: session.id 
     });
 
   } catch (error: any) {

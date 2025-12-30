@@ -1,9 +1,8 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import HudPanel from '../hud/HudPanel';
-import HudButton from '../hud/HudButton';
-import StatusBar from '../hud/StatusBar';
+import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
+import { Button } from '../ui/button';
 
 interface Mission {
   id: string;
@@ -145,21 +144,21 @@ function MissionDashboard() {
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'completed': return 'text-holo-green';
-      case 'active': return 'text-holo-cyan';
-      case 'planning': return 'text-holo-amber';
-      case 'cancelled': return 'text-holo-red';
-      default: return 'text-holo-gray';
+      case 'completed': return 'text-green-400';
+      case 'active': return 'text-cyan-400';
+      case 'planning': return 'text-amber-400';
+      case 'cancelled': return 'text-red-400';
+      default: return 'text-slate-400';
     }
   };
 
   const getPriorityColor = (priority: string) => {
     switch (priority) {
-      case 'critical': return 'text-holo-red';
-      case 'high': return 'text-holo-amber';
-      case 'medium': return 'text-holo-cyan';
-      case 'low': return 'text-holo-green';
-      default: return 'text-holo-gray';
+      case 'critical': return 'text-red-400';
+      case 'high': return 'text-amber-400';
+      case 'medium': return 'text-cyan-400';
+      case 'low': return 'text-green-400';
+      default: return 'text-slate-400';
     }
   };
 
@@ -173,374 +172,400 @@ function MissionDashboard() {
   return (
     <div className="w-full max-w-7xl space-y-6">
       {/* Header */}
-      <HudPanel>
-        <div className="flex items-center justify-between mb-4">
-          <h2 className="text-holo-cyan font-bold text-xl">🎯 Mission Guidance</h2>
-          <div className="flex gap-2">
-            <HudButton onClick={() => setShowCreateMission(true)}>
-              ➕ New Mission
-            </HudButton>
-            <HudButton onClick={fetchMissions}>
-              🔄 Refresh
-            </HudButton>
-          </div>
-        </div>
-
-        {/* Mission Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4">
-          <div className="text-center">
-            <div className="text-2xl font-bold text-holo-cyan">
-              {missions.length}
+      <Card className="bg-slate-900/90 border-slate-800">
+        <CardHeader>
+          <div className="flex items-center justify-between">
+            <CardTitle className="text-white text-xl">🎯 Mission Guidance</CardTitle>
+            <div className="flex gap-2">
+              <Button onClick={() => setShowCreateMission(true)} className="bg-white text-black hover:bg-slate-100">
+                ➕ New Mission
+              </Button>
+              <Button onClick={fetchMissions} variant="outline" className="border-slate-800">
+                🔄 Refresh
+              </Button>
             </div>
-            <div className="text-holo-cyan/70 text-sm">Total Missions</div>
           </div>
-
-          <div className="text-center">
-            <div className="text-2xl font-bold text-holo-green">
-              {missions.filter(m => m.status === 'completed').length}
+        </CardHeader>
+        <CardContent>
+          {/* Mission Stats */}
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <div className="text-center">
+              <div className="text-2xl font-bold text-cyan-400">
+                {missions.length}
+              </div>
+              <div className="text-slate-400 text-sm">Total Missions</div>
             </div>
-            <div className="text-holo-cyan/70 text-sm">Completed</div>
-          </div>
 
-          <div className="text-center">
-            <div className="text-2xl font-bold text-holo-amber">
-              {missions.filter(m => m.status === 'active').length}
+            <div className="text-center">
+              <div className="text-2xl font-bold text-green-400">
+                {missions.filter(m => m.status === 'completed').length}
+              </div>
+              <div className="text-slate-400 text-sm">Completed</div>
             </div>
-            <div className="text-holo-cyan/70 text-sm">Active</div>
-          </div>
 
-          <div className="text-center">
-            <div className="text-2xl font-bold text-holo-purple">
-              {recommendations.length}
+            <div className="text-center">
+              <div className="text-2xl font-bold text-amber-400">
+                {missions.filter(m => m.status === 'active').length}
+              </div>
+              <div className="text-slate-400 text-sm">Active</div>
             </div>
-            <div className="text-holo-cyan/70 text-sm">Recommendations</div>
+
+            <div className="text-center">
+              <div className="text-2xl font-bold text-purple-400">
+                {recommendations.length}
+              </div>
+              <div className="text-slate-400 text-sm">Recommendations</div>
+            </div>
           </div>
-        </div>
-      </HudPanel>
+        </CardContent>
+      </Card>
 
       {/* Mission Recommendations */}
       {recommendations.length > 0 && (
-        <HudPanel>
-          <h3 className="text-holo-cyan font-bold text-lg mb-4">💡 AI Recommendations</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {recommendations.slice(0, 4).map((rec, index) => (
-              <div key={index} className="bg-holo-black/30 border border-holo-cyan/30 rounded-lg p-4">
-                <div className="flex items-start justify-between mb-2">
-                  <h4 className="text-holo-cyan font-semibold">{rec.name}</h4>
-                  <div className={`text-sm font-bold ${rec.priority === 'critical' ? 'text-holo-red' : rec.priority === 'high' ? 'text-holo-amber' : 'text-holo-cyan'}`}>
-                    {rec.priority.toUpperCase()}
+        <Card className="bg-slate-900/90 border-slate-800">
+          <CardHeader>
+            <CardTitle className="text-white text-lg">💡 AI Recommendations</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {recommendations.slice(0, 4).map((rec, index) => (
+                <div key={index} className="bg-slate-900/50 border border-slate-800 rounded-lg p-4">
+                  <div className="flex items-start justify-between mb-2">
+                    <h4 className="text-white font-semibold">{rec.name}</h4>
+                    <div className={`text-sm font-bold ${rec.priority === 'critical' ? 'text-red-400' : rec.priority === 'high' ? 'text-amber-400' : 'text-cyan-400'}`}>
+                      {rec.priority.toUpperCase()}
+                    </div>
                   </div>
+                  <p className="text-slate-300 text-sm mb-3">{rec.description}</p>
+                  <div className="flex items-center justify-between text-sm mb-3">
+                    <div className="flex items-center gap-2">
+                      <span className="text-green-400">🎯</span>
+                      <span className="text-cyan-400">{Math.round(rec.successProbability * 100)}% success</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <span className="text-purple-400">⏱️</span>
+                      <span className="text-cyan-400">{rec.estimatedHours}h</span>
+                    </div>
+                  </div>
+                  <Button
+                    onClick={() => {
+                      setNewMission(prev => ({ ...prev, name: rec.name, description: rec.description, type: rec.template }));
+                      setShowCreateMission(true);
+                    }}
+                    className="w-full bg-white text-black hover:bg-slate-100"
+                    size="sm"
+                  >
+                    Use Template
+                  </Button>
                 </div>
-                <p className="text-holo-cyan/80 text-sm mb-3">{rec.description}</p>
-                <div className="flex items-center justify-between text-sm">
-                  <div className="flex items-center gap-2">
-                    <span className="text-holo-green">🎯</span>
-                    <span className="text-holo-cyan">{Math.round(rec.successProbability * 100)}% success</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <span className="text-holo-purple">⏱️</span>
-                    <span className="text-holo-cyan">{rec.estimatedHours}h</span>
-                  </div>
-                </div>
-                <HudButton
-                  onClick={() => setNewMission(prev => ({ ...prev, name: rec.name, description: rec.description, type: rec.template }))}
-                  className="w-full mt-3"
-                  size="sm"
-                >
-                  Use Template
-                </HudButton>
-              </div>
-            ))}
-          </div>
-        </HudPanel>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
       )}
 
       {/* Active Missions */}
       {missions.filter(m => m.status !== 'completed').length > 0 && (
-        <HudPanel>
-          <h3 className="text-holo-cyan font-bold text-lg mb-4">🚀 Active Missions</h3>
-          <div className="space-y-4">
-            {missions.filter(m => m.status !== 'completed').map((mission) => (
-              <div
-                key={mission.id}
-                className="bg-holo-black/30 border border-holo-cyan/30 rounded-lg p-4 cursor-pointer hover:border-holo-cyan/50 transition-colors"
-                onClick={() => setSelectedMission(mission)}
-              >
-                <div className="flex items-start justify-between mb-3">
-                  <div className="flex-1">
-                    <h4 className="text-holo-cyan font-bold text-lg">{mission.name}</h4>
-                    <p className="text-holo-cyan/80 text-sm mt-1">{mission.description}</p>
-                  </div>
-                  <div className="text-right">
-                    <div className={`text-sm font-bold ${getStatusColor(mission.status)}`}>
-                      {mission.status.toUpperCase()}
+        <Card className="bg-slate-900/90 border-slate-800">
+          <CardHeader>
+            <CardTitle className="text-white text-lg">🚀 Active Missions</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-4">
+              {missions.filter(m => m.status !== 'completed').map((mission) => (
+                <div
+                  key={mission.id}
+                  className="bg-slate-900/50 border border-slate-800 rounded-lg p-4 cursor-pointer hover:border-cyan-500/50 transition-colors"
+                  onClick={() => setSelectedMission(mission)}
+                >
+                  <div className="flex items-start justify-between mb-3">
+                    <div className="flex-1">
+                      <h4 className="text-white font-bold text-lg">{mission.name}</h4>
+                      <p className="text-slate-300 text-sm mt-1">{mission.description}</p>
                     </div>
-                    <div className={`text-xs ${getPriorityColor(mission.priority)}`}>
-                      {mission.priority}
-                    </div>
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-4 mb-3">
-                  <div className="flex-1">
-                    <div className="flex justify-between text-sm mb-1">
-                      <span className="text-holo-cyan/70">Progress</span>
-                      <span className="text-holo-cyan">{mission.progress}%</span>
-                    </div>
-                    <div className="w-full bg-holo-black/50 rounded-full h-2">
-                      <div
-                        className="bg-holo-cyan h-2 rounded-full transition-all duration-300"
-                        style={{ width: `${mission.progress}%` }}
-                      ></div>
-                    </div>
-                  </div>
-
-                  {mission.successPrediction && (
-                    <div className="text-center">
-                      <div className="text-holo-green font-bold">
-                        {Math.round(mission.successPrediction.probability * 100)}%
+                    <div className="text-right">
+                      <div className={`text-sm font-bold ${getStatusColor(mission.status)}`}>
+                        {mission.status.toUpperCase()}
                       </div>
-                      <div className="text-xs text-holo-cyan/70">Success</div>
+                      <div className={`text-xs ${getPriorityColor(mission.priority)}`}>
+                        {mission.priority}
+                      </div>
                     </div>
-                  )}
-                </div>
+                  </div>
 
-                <div className="flex items-center justify-between text-sm">
-                  <div className="flex items-center gap-4">
-                    <span className="text-holo-cyan/70">
-                      📅 Due: {new Date(mission.deadline).toLocaleDateString()}
-                    </span>
-                    {mission.tasks && (
-                      <span className="text-holo-cyan/70">
-                        📋 Tasks: {mission.tasks.filter(t => t.status === 'completed').length}/{mission.tasks.length}
-                      </span>
+                  <div className="flex items-center gap-4 mb-3">
+                    <div className="flex-1">
+                      <div className="flex justify-between text-sm mb-1">
+                        <span className="text-slate-400">Progress</span>
+                        <span className="text-cyan-400">{mission.progress}%</span>
+                      </div>
+                      <div className="w-full bg-slate-900 rounded-full h-2">
+                        <div
+                          className="bg-cyan-500 h-2 rounded-full transition-all duration-300"
+                          style={{ width: `${mission.progress}%` }}
+                        ></div>
+                      </div>
+                    </div>
+
+                    {mission.successPrediction && (
+                      <div className="text-center">
+                        <div className="text-green-400 font-bold">
+                          {Math.round(mission.successPrediction.probability * 100)}%
+                        </div>
+                        <div className="text-xs text-slate-400">Success</div>
+                      </div>
                     )}
                   </div>
 
-                  {mission.status === 'planning' && (
-                    <HudButton
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        startMission(mission.id);
-                      }}
-                      size="sm"
-                    >
-                      🚀 Start
-                    </HudButton>
-                  )}
+                  <div className="flex items-center justify-between text-sm">
+                    <div className="flex items-center gap-4">
+                      <span className="text-slate-400">
+                        📅 Due: {new Date(mission.deadline).toLocaleDateString()}
+                      </span>
+                      {mission.tasks && (
+                        <span className="text-slate-400">
+                          📋 Tasks: {mission.tasks.filter(t => t.status === 'completed').length}/{mission.tasks.length}
+                        </span>
+                      )}
+                    </div>
+
+                    {mission.status === 'planning' && (
+                      <Button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          startMission(mission.id);
+                        }}
+                        size="sm"
+                        className="bg-white text-black hover:bg-slate-100"
+                      >
+                        🚀 Start
+                      </Button>
+                    )}
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
-        </HudPanel>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
       )}
 
       {/* Completed Missions */}
       {missions.filter(m => m.status === 'completed').length > 0 && (
-        <HudPanel>
-          <h3 className="text-holo-cyan font-bold text-lg mb-4">✅ Completed Missions</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {missions.filter(m => m.status === 'completed').slice(0, 4).map((mission) => (
-              <div key={mission.id} className="bg-holo-green/10 border border-holo-green/30 rounded-lg p-4">
-                <h4 className="text-holo-green font-semibold">{mission.name}</h4>
-                <p className="text-holo-cyan/80 text-sm mt-1">{mission.description}</p>
-                <div className="flex justify-between items-center mt-2 text-sm">
-                  <span className="text-holo-cyan/70">
-                    Completed {new Date(mission.deadline).toLocaleDateString()}
-                  </span>
-                  <span className="text-holo-green font-bold">100%</span>
+        <Card className="bg-slate-900/90 border-slate-800">
+          <CardHeader>
+            <CardTitle className="text-white text-lg">✅ Completed Missions</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {missions.filter(m => m.status === 'completed').slice(0, 4).map((mission) => (
+                <div key={mission.id} className="bg-green-500/10 border border-green-500/30 rounded-lg p-4">
+                  <h4 className="text-green-400 font-semibold">{mission.name}</h4>
+                  <p className="text-slate-300 text-sm mt-1">{mission.description}</p>
+                  <div className="flex justify-between items-center mt-2 text-sm">
+                    <span className="text-slate-400">
+                      Completed {new Date(mission.deadline).toLocaleDateString()}
+                    </span>
+                    <span className="text-green-400 font-bold">100%</span>
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
-        </HudPanel>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
       )}
 
       {/* Create Mission Modal */}
       {showCreateMission && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-          <HudPanel className="w-full max-w-2xl max-h-screen overflow-y-auto">
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="text-holo-cyan font-bold text-lg">🎯 Create New Mission</h3>
-              <HudButton onClick={() => setShowCreateMission(false)}>
-                ✕
-              </HudButton>
-            </div>
-
-            <div className="space-y-4">
-              <div>
-                <label className="block text-holo-cyan/70 text-sm mb-1">Mission Name</label>
-                <input
-                  type="text"
-                  value={newMission.name}
-                  onChange={(e) => setNewMission(prev => ({ ...prev, name: e.target.value }))}
-                  className="w-full bg-holo-black/50 border border-holo-cyan/30 rounded px-3 py-2 text-holo-cyan placeholder-holo-cyan/50 focus:outline-none focus:border-holo-cyan"
-                  placeholder="Enter mission name"
-                />
+        <div className="fixed inset-0 bg-black/80 backdrop-blur-md flex items-center justify-center z-[200] p-4">
+          <Card className="bg-slate-950 border-slate-800 w-full max-w-2xl max-h-[90vh] overflow-y-auto">
+            <CardHeader>
+              <div className="flex items-center justify-between">
+                <CardTitle className="text-white text-lg">🎯 Create New Mission</CardTitle>
+                <Button onClick={() => setShowCreateMission(false)} variant="ghost" size="sm">
+                  ✕
+                </Button>
               </div>
-
-              <div>
-                <label className="block text-holo-cyan/70 text-sm mb-1">Description</label>
-                <textarea
-                  value={newMission.description}
-                  onChange={(e) => setNewMission(prev => ({ ...prev, description: e.target.value }))}
-                  className="w-full bg-holo-black/50 border border-holo-cyan/30 rounded px-3 py-2 text-holo-cyan placeholder-holo-cyan/50 focus:outline-none focus:border-holo-cyan h-20 resize-none"
-                  placeholder="Describe the mission objectives"
-                />
-              </div>
-
-              <div className="grid grid-cols-2 gap-4">
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-4">
                 <div>
-                  <label className="block text-holo-cyan/70 text-sm mb-1">Mission Type</label>
-                  <select
-                    value={newMission.type}
-                    onChange={(e) => setNewMission(prev => ({ ...prev, type: e.target.value }))}
-                    className="w-full bg-holo-black/50 border border-holo-cyan/30 rounded px-3 py-2 text-holo-cyan focus:outline-none focus:border-holo-cyan"
-                  >
-                    {missionTemplates.map(template => (
-                      <option key={template.value} value={template.value}>
-                        {template.label}
-                      </option>
-                    ))}
-                  </select>
+                  <label className="block text-slate-400 text-sm mb-1">Mission Name</label>
+                  <input
+                    type="text"
+                    value={newMission.name}
+                    onChange={(e) => setNewMission(prev => ({ ...prev, name: e.target.value }))}
+                    className="w-full bg-slate-900/80 border border-slate-700 rounded-lg px-3 py-2 text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500"
+                    placeholder="Enter mission name"
+                  />
                 </div>
 
                 <div>
-                  <label className="block text-holo-cyan/70 text-sm mb-1">Priority</label>
-                  <select
-                    value={newMission.priority}
-                    onChange={(e) => setNewMission(prev => ({ ...prev, priority: e.target.value }))}
-                    className="w-full bg-holo-black/50 border border-holo-cyan/30 rounded px-3 py-2 text-holo-cyan focus:outline-none focus:border-holo-cyan"
+                  <label className="block text-slate-400 text-sm mb-1">Description</label>
+                  <textarea
+                    value={newMission.description}
+                    onChange={(e) => setNewMission(prev => ({ ...prev, description: e.target.value }))}
+                    className="w-full bg-slate-900/80 border border-slate-700 rounded-lg px-3 py-2 text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 h-20 resize-none"
+                    placeholder="Describe the mission objectives"
+                  />
+                </div>
+
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-slate-400 text-sm mb-1">Mission Type</label>
+                    <select
+                      value={newMission.type}
+                      onChange={(e) => setNewMission(prev => ({ ...prev, type: e.target.value }))}
+                      className="w-full bg-slate-900/80 border border-slate-700 rounded-lg px-3 py-2 text-white focus:outline-none focus:border-cyan-500"
+                    >
+                      {missionTemplates.map(template => (
+                        <option key={template.value} value={template.value}>
+                          {template.label}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+
+                  <div>
+                    <label className="block text-slate-400 text-sm mb-1">Priority</label>
+                    <select
+                      value={newMission.priority}
+                      onChange={(e) => setNewMission(prev => ({ ...prev, priority: e.target.value }))}
+                      className="w-full bg-slate-900/80 border border-slate-700 rounded-lg px-3 py-2 text-white focus:outline-none focus:border-cyan-500"
+                    >
+                      <option value="low">Low</option>
+                      <option value="medium">Medium</option>
+                      <option value="high">High</option>
+                      <option value="critical">Critical</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-slate-400 text-sm mb-1">Deadline</label>
+                  <input
+                    type="datetime-local"
+                    value={newMission.deadline}
+                    onChange={(e) => setNewMission(prev => ({ ...prev, deadline: e.target.value }))}
+                    className="w-full bg-slate-900/80 border border-slate-700 rounded-lg px-3 py-2 text-white focus:outline-none focus:border-cyan-500"
+                  />
+                </div>
+
+                <div className="flex gap-2 pt-4">
+                  <Button
+                    onClick={createMission}
+                    disabled={isLoading || !newMission.name || !newMission.description}
+                    className="flex-1 bg-white text-black hover:bg-slate-100"
                   >
-                    <option value="low">Low</option>
-                    <option value="medium">Medium</option>
-                    <option value="high">High</option>
-                    <option value="critical">Critical</option>
-                  </select>
+                    {isLoading ? 'Creating...' : '🎯 Create Mission'}
+                  </Button>
+                  <Button
+                    onClick={() => setShowCreateMission(false)}
+                    variant="outline"
+                    className="border-slate-800"
+                  >
+                    Cancel
+                  </Button>
                 </div>
               </div>
-
-              <div>
-                <label className="block text-holo-cyan/70 text-sm mb-1">Deadline</label>
-                <input
-                  type="datetime-local"
-                  value={newMission.deadline}
-                  onChange={(e) => setNewMission(prev => ({ ...prev, deadline: e.target.value }))}
-                  className="w-full bg-holo-black/50 border border-holo-cyan/30 rounded px-3 py-2 text-holo-cyan focus:outline-none focus:border-holo-cyan"
-                />
-              </div>
-
-              <div className="flex gap-2 pt-4">
-                <HudButton
-                  onClick={createMission}
-                  disabled={isLoading || !newMission.name || !newMission.description}
-                  className="flex-1"
-                >
-                  {isLoading ? 'Creating...' : '🎯 Create Mission'}
-                </HudButton>
-                <HudButton
-                  onClick={() => setShowCreateMission(false)}
-                  variant="ghost"
-                >
-                  Cancel
-                </HudButton>
-              </div>
-            </div>
-          </HudPanel>
+            </CardContent>
+          </Card>
         </div>
       )}
 
       {/* Mission Details Modal */}
       {selectedMission && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-          <HudPanel className="w-full max-w-4xl max-h-screen overflow-y-auto">
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="text-holo-cyan font-bold text-lg">{selectedMission.name}</h3>
-              <HudButton onClick={() => setSelectedMission(null)}>
-                ✕
-              </HudButton>
-            </div>
-
-            <div className="space-y-6">
-              <div>
-                <h4 className="text-holo-amber font-semibold mb-2">📋 Description</h4>
-                <p className="text-holo-cyan/80">{selectedMission.description}</p>
+        <div className="fixed inset-0 bg-black/80 backdrop-blur-md flex items-center justify-center z-[200] p-4">
+          <Card className="bg-slate-950 border-slate-800 w-full max-w-4xl max-h-[90vh] overflow-y-auto">
+            <CardHeader>
+              <div className="flex items-center justify-between">
+                <CardTitle className="text-white text-lg">{selectedMission.name}</CardTitle>
+                <Button onClick={() => setSelectedMission(null)} variant="ghost" size="sm">
+                  ✕
+                </Button>
               </div>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-6">
+                <div>
+                  <h4 className="text-amber-400 font-semibold mb-2">📋 Description</h4>
+                  <p className="text-slate-300">{selectedMission.description}</p>
+                </div>
 
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <div>
-                  <span className="text-holo-cyan/70 text-sm">Status</span>
-                  <div className={`font-semibold ${getStatusColor(selectedMission.status)}`}>
-                    {selectedMission.status}
-                  </div>
-                </div>
-                <div>
-                  <span className="text-holo-cyan/70 text-sm">Progress</span>
-                  <div className="text-holo-cyan font-semibold">{selectedMission.progress}%</div>
-                </div>
-                <div>
-                  <span className="text-holo-cyan/70 text-sm">Priority</span>
-                  <div className={`font-semibold ${getPriorityColor(selectedMission.priority)}`}>
-                    {selectedMission.priority}
-                  </div>
-                </div>
-                <div>
-                  <span className="text-holo-cyan/70 text-sm">Deadline</span>
-                  <div className="text-holo-cyan font-semibold">
-                    {new Date(selectedMission.deadline).toLocaleDateString()}
-                  </div>
-                </div>
-              </div>
-
-              {selectedMission.successPrediction && (
-                <div>
-                  <h4 className="text-holo-amber font-semibold mb-2">🎯 AI Success Prediction</h4>
-                  <div className="bg-holo-black/30 border border-holo-cyan/30 rounded-lg p-4">
-                    <div className="flex items-center justify-between mb-2">
-                      <span className="text-holo-cyan">Success Probability</span>
-                      <span className="text-holo-green font-bold text-lg">
-                        {Math.round(selectedMission.successPrediction.probability * 100)}%
-                      </span>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                  <div>
+                    <span className="text-slate-400 text-sm">Status</span>
+                    <div className={`mt-1 font-semibold ${getStatusColor(selectedMission.status)}`}>
+                      {selectedMission.status}
                     </div>
-                    <div className="w-full bg-holo-black/50 rounded-full h-2 mb-2">
-                      <div
-                        className="bg-holo-green h-2 rounded-full transition-all duration-300"
-                        style={{ width: `${selectedMission.successPrediction.probability * 100}%` }}
-                      ></div>
+                  </div>
+                  <div>
+                    <span className="text-slate-400 text-sm">Progress</span>
+                    <div className="mt-1 text-cyan-400 font-semibold">{selectedMission.progress}%</div>
+                  </div>
+                  <div>
+                    <span className="text-slate-400 text-sm">Priority</span>
+                    <div className={`mt-1 font-semibold ${getPriorityColor(selectedMission.priority)}`}>
+                      {selectedMission.priority}
                     </div>
-                    <div className="text-sm text-holo-cyan/70">
-                      Confidence: {Math.round(selectedMission.successPrediction.confidence * 100)}%
+                  </div>
+                  <div>
+                    <span className="text-slate-400 text-sm">Deadline</span>
+                    <div className="mt-1 text-cyan-400 font-semibold">
+                      {new Date(selectedMission.deadline).toLocaleDateString()}
                     </div>
                   </div>
                 </div>
-              )}
 
-              {selectedMission.tasks && selectedMission.tasks.length > 0 && (
-                <div>
-                  <h4 className="text-holo-amber font-semibold mb-2">📝 Tasks</h4>
-                  <div className="space-y-2">
-                    {selectedMission.tasks.map((task) => (
-                      <div key={task.id} className="flex items-center gap-3 bg-holo-black/30 border border-holo-cyan/30 rounded-lg p-3">
-                        <div className={`w-3 h-3 rounded-full ${
-                          task.status === 'completed' ? 'bg-holo-green' :
-                          task.status === 'in-progress' ? 'bg-holo-cyan' :
-                          'bg-holo-gray'
-                        }`}></div>
-                        <span className="text-holo-cyan flex-1">{task.name}</span>
-                        <span className="text-holo-cyan/70 text-sm">{task.progress}%</span>
+                {selectedMission.successPrediction && (
+                  <div>
+                    <h4 className="text-amber-400 font-semibold mb-2">🎯 AI Success Prediction</h4>
+                    <div className="bg-slate-900/50 border border-slate-800 rounded-lg p-4">
+                      <div className="flex items-center justify-between mb-2">
+                        <span className="text-white">Success Probability</span>
+                        <span className="text-green-400 font-bold text-lg">
+                          {Math.round(selectedMission.successPrediction.probability * 100)}%
+                        </span>
                       </div>
-                    ))}
+                      <div className="w-full bg-slate-900 rounded-full h-2 mb-2">
+                        <div
+                          className="bg-green-500 h-2 rounded-full transition-all duration-300"
+                          style={{ width: `${selectedMission.successPrediction.probability * 100}%` }}
+                        ></div>
+                      </div>
+                      <div className="text-sm text-slate-400">
+                        Confidence: {Math.round(selectedMission.successPrediction.confidence * 100)}%
+                      </div>
+                    </div>
                   </div>
-                </div>
-              )}
-            </div>
-          </HudPanel>
+                )}
+
+                {selectedMission.tasks && selectedMission.tasks.length > 0 && (
+                  <div>
+                    <h4 className="text-amber-400 font-semibold mb-2">📝 Tasks</h4>
+                    <div className="space-y-2">
+                      {selectedMission.tasks.map((task) => (
+                        <div key={task.id} className="flex items-center gap-3 bg-slate-900/50 border border-slate-800 rounded-lg p-3">
+                          <div className={`w-3 h-3 rounded-full ${
+                            task.status === 'completed' ? 'bg-green-500' :
+                            task.status === 'in-progress' ? 'bg-cyan-500' :
+                            'bg-slate-600'
+                          }`}></div>
+                          <span className="text-white flex-1">{task.name}</span>
+                          <span className="text-slate-400 text-sm">{task.progress}%</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            </CardContent>
+          </Card>
         </div>
       )}
 
       {/* Status Info */}
-      <div className="mt-6 p-3 bg-void-surface/50 rounded-lg border border-holo-cyan/20">
-        <div className="text-xs text-holo-cyan/70 text-center">
+      <div className="mt-6 p-3 bg-slate-900/50 rounded-lg border border-slate-800">
+        <div className="text-xs text-slate-400 text-center">
           🎯 Mission Guidance | 📊 {missions.length} missions | 🚀 {missions.filter(m => m.status === 'active').length} active |
           ✅ {missions.filter(m => m.status === 'completed').length} completed | 🤖 AI recommendations: {recommendations.length}
         </div>
