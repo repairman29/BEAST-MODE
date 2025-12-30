@@ -18,6 +18,8 @@ import PluginReviews from './PluginReviews';
 import PluginUpdates from './PluginUpdates';
 import PluginAnalytics from './PluginAnalytics';
 import IntegrationsManager from './IntegrationsManager';
+import CollaborationWorkspace from './CollaborationWorkspace';
+import MLMonitoringDashboard from './MLMonitoringDashboard';
 import { useUser } from '../../lib/user-context';
 
 /**
@@ -48,7 +50,7 @@ function BeastModeDashboardInner({ initialView }: BeastModeDashboardInnerProps) 
   // Handle initial view from URL params
   useEffect(() => {
     if (initialView) {
-      const validViews = ['quality', 'intelligence', 'marketplace', 'self-improve', 'settings', 'auth', 'pricing'];
+      const validViews = ['quality', 'intelligence', 'marketplace', 'self-improve', 'settings', 'auth', 'pricing', 'ml-monitoring'];
       if (validViews.includes(initialView)) {
         setCurrentView(initialView as typeof currentView);
       }
@@ -93,7 +95,7 @@ function BeastModeDashboardInner({ initialView }: BeastModeDashboardInnerProps) 
   });
 
   const [commandInput, setCommandInput] = useState('');
-  const [currentView, setCurrentView] = useState<'quality' | 'intelligence' | 'marketplace' | 'self-improve' | 'settings' | 'auth' | 'pricing' | null>(
+  const [currentView, setCurrentView] = useState<'quality' | 'intelligence' | 'marketplace' | 'self-improve' | 'settings' | 'auth' | 'pricing' | 'ml-monitoring' | null>(
     initialView === 'auth' ? 'auth' : initialView === 'pricing' ? 'pricing' : null
   );
   const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState(false);
@@ -3186,6 +3188,21 @@ function SettingsView({ data }: any) {
         </CardHeader>
         <CardContent>
           <IntegrationsManager
+            userId={user?.id || (typeof window !== 'undefined' ? localStorage.getItem('beastModeUserId') || undefined : undefined)}
+          />
+        </CardContent>
+      </Card>
+
+      {/* Real-Time Collaboration */}
+      <Card className="bg-slate-900/90 border-slate-800">
+        <CardHeader>
+          <CardTitle className="text-white text-lg">👥 Real-Time Collaboration</CardTitle>
+          <CardDescription className="text-slate-400">
+            Live code review sessions, team workspaces, and collaborative annotations
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <CollaborationWorkspace
             userId={user?.id || (typeof window !== 'undefined' ? localStorage.getItem('beastModeUserId') || undefined : undefined)}
           />
         </CardContent>
