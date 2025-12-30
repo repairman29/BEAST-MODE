@@ -665,21 +665,94 @@ function StatLine({ label, value, max }: { label: string; value: number; max: nu
  * Quality View - Code Quality Analysis Dashboard
  */
 function QualityView({ data }: any) {
+  const [latestScan, setLatestScan] = React.useState<any>(null);
+  const [isLoading, setIsLoading] = React.useState(true);
+
+  React.useEffect(() => {
+    // Load latest scan from localStorage
+    try {
+      const stored = localStorage.getItem('beast-mode-scan-results');
+      if (stored) {
+        const scans = JSON.parse(stored);
+        const completed = scans.find((s: any) => s.status === 'completed');
+        if (completed) {
+          setLatestScan(completed);
+        }
+      }
+    } catch (e) {
+      console.error('Failed to load scan results:', e);
+    } finally {
+      setIsLoading(false);
+    }
+
+    // Listen for new scans
+    const handleStorageChange = () => {
+      try {
+        const stored = localStorage.getItem('beast-mode-scan-results');
+        if (stored) {
+          const scans = JSON.parse(stored);
+          const completed = scans.find((s: any) => s.status === 'completed');
+          if (completed) {
+            setLatestScan(completed);
+          }
+        }
+      } catch (e) {
+        console.error('Failed to load scan results:', e);
+      }
+    };
+
+    window.addEventListener('storage', handleStorageChange);
+    // Also check periodically (for same-tab updates)
+    const interval = setInterval(handleStorageChange, 2000);
+
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+      clearInterval(interval);
+    };
+  }, []);
+
+  const handleScanNow = () => {
+    // Navigate to GitHub scan tab
+    window.location.href = '/dashboard?view=github-scan';
+  };
+
+  // Use latest scan data if available, otherwise fall back to props
+  const qualityData = latestScan ? {
+    score: latestScan.score || data.score,
+    issues: latestScan.issues || data.issues,
+    improvements: latestScan.improvements || data.improvements,
+    lastScan: latestScan.timestamp || data.lastScan
+  } : data;
+
   return (
     <div className="w-full max-w-6xl grid grid-cols-1 md:grid-cols-2 gap-6 px-4">
       {/* Quality Score */}
       <Card className="bg-slate-900/90 border-slate-800 hover:border-slate-700 transition-all">
         <CardHeader>
-          <CardTitle className="text-white text-lg mb-4">Quality Score</CardTitle>
+          <div className="flex items-center justify-between mb-4">
+            <CardTitle className="text-white text-lg">Quality Score</CardTitle>
+            <Button
+              onClick={handleScanNow}
+              size="sm"
+              className="bg-cyan-600 hover:bg-cyan-700 text-white"
+            >
+              Scan Now
+            </Button>
+          </div>
         </CardHeader>
         <CardContent>
           <div className="text-center mb-6">
-            <div className="text-6xl font-bold text-gradient-cyan mb-2">{data.score}</div>
+            <div className="text-6xl font-bold text-gradient-cyan mb-2">{qualityData.score}</div>
             <div className="text-sm text-slate-500">/100</div>
+            {latestScan && (
+              <div className="text-xs text-slate-500 mt-2">
+                Last scan: {latestScan.repo}
+              </div>
+            )}
           </div>
           <div className="space-y-3">
-            <StatLine label="Issues Found" value={data.issues} max={50} />
-            <StatLine label="Improvements" value={data.improvements} max={20} />
+            <StatLine label="Issues Found" value={qualityData.issues} max={50} />
+            <StatLine label="Improvements" value={qualityData.improvements} max={20} />
           </div>
         </CardContent>
       </Card>
@@ -690,28 +763,63 @@ function QualityView({ data }: any) {
           <CardTitle className="text-white text-lg mb-4">Quality Metrics</CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="space-y-4">
-            <div className="flex justify-between items-center">
-              <span className="text-slate-400">Logger Infra</span>
-              <span className="text-green-400 font-semibold">25/25 ✓</span>
+          {latestScan?.metrics ? (
+            <div className="space-y-4">
+              <div className="flex justify-between items-center">
+                <span className="text-slate-400">Test Coverage</span>
+                <span className={`font-semibold ${latestScan.metrics.coverage >= 70 ? 'text-green-400' : 'text-amber-400'}`}>
+                  {latestScan.metrics.coverage || 0}%
+                </span>
+              </div>
+              <div className="flex justify-between items-center">
+                <span className="text-slate-400">Maintainability</span>
+                <span className={`font-semibold ${latestScan.metrics.maintainability >= 80 ? 'text-green-400' : 'text-amber-400'}`}>
+                  {latestScan.metrics.maintainability || 0}/100
+                </span>
+              </div>
+              <div className="flex justify-between items-center">
+                <span className="text-slate-400">Has Tests</span>
+                <span className={`font-semibold ${latestScan.metrics.hasTests ? 'text-green-400' : 'text-red-400'}`}>
+                  {latestScan.metrics.hasTests ? '✓ Yes' : '✗ No'}
+                </span>
+              </div>
+              <div className="flex justify-between items-center">
+                <span className="text-slate-400">Has CI/CD</span>
+                <span className={`font-semibold ${latestScan.metrics.hasCI ? 'text-green-400' : 'text-red-400'}`}>
+                  {latestScan.metrics.hasCI ? '✓ Yes' : '✗ No'}
+                </span>
+              </div>
+              <div className="flex justify-between items-center">
+                <span className="text-slate-400">Has Docker</span>
+                <span className={`font-semibold ${latestScan.metrics.hasDocker ? 'text-green-400' : 'text-red-400'}`}>
+                  {latestScan.metrics.hasDocker ? '✓ Yes' : '✗ No'}
+                </span>
+              </div>
             </div>
-            <div className="flex justify-between items-center">
-              <span className="text-slate-400">Supabase Safety</span>
-              <span className="text-amber-400 font-semibold">18/20 ⚠</span>
+          ) : (
+            <div className="space-y-4">
+              <div className="flex justify-between items-center">
+                <span className="text-slate-400">Logger Infra</span>
+                <span className="text-green-400 font-semibold">25/25 ✓</span>
+              </div>
+              <div className="flex justify-between items-center">
+                <span className="text-slate-400">Supabase Safety</span>
+                <span className="text-amber-400 font-semibold">18/20 ⚠</span>
+              </div>
+              <div className="flex justify-between items-center">
+                <span className="text-slate-400">Cross-Platform</span>
+                <span className="text-green-400 font-semibold">20/20 ✓</span>
+              </div>
+              <div className="flex justify-between items-center">
+                <span className="text-slate-400">Oracle Insights</span>
+                <span className="text-cyan-400 font-semibold">🧠 Active</span>
+              </div>
+              <div className="flex justify-between items-center">
+                <span className="text-slate-400">Bug Detection</span>
+                <span className="text-cyan-400 font-semibold">🐛 Active</span>
+              </div>
             </div>
-            <div className="flex justify-between items-center">
-              <span className="text-slate-400">Cross-Platform</span>
-              <span className="text-green-400 font-semibold">20/20 ✓</span>
-            </div>
-            <div className="flex justify-between items-center">
-              <span className="text-slate-400">Oracle Insights</span>
-              <span className="text-cyan-400 font-semibold">🧠 Active</span>
-            </div>
-            <div className="flex justify-between items-center">
-              <span className="text-slate-400">Bug Detection</span>
-              <span className="text-cyan-400 font-semibold">🐛 Active</span>
-            </div>
-          </div>
+          )}
         </CardContent>
       </Card>
 
@@ -721,20 +829,64 @@ function QualityView({ data }: any) {
           <CardTitle className="text-white text-lg mb-4">Recent Quality Scans</CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="space-y-3">
-            <div className="flex justify-between items-center py-2 border-b border-slate-800">
-              <span className="text-slate-300">Main Application</span>
-              <span className="text-green-400 font-semibold">✓ Passed</span>
+          {isLoading ? (
+            <div className="text-center text-slate-500 py-4">
+              <div className="animate-spin mx-auto w-6 h-6 border-2 border-cyan-500 border-t-transparent rounded-full mb-2"></div>
+              Loading scan results...
             </div>
-            <div className="flex justify-between items-center py-2 border-b border-slate-800">
-              <span className="text-slate-300">BEAST MODE Core</span>
-              <span className="text-green-400 font-semibold">✓ Passed</span>
+          ) : latestScan ? (
+            <div className="space-y-3">
+              <div className="flex justify-between items-center py-2 border-b border-slate-800">
+                <div>
+                  <span className="text-slate-300 font-medium">{latestScan.repo}</span>
+                  <div className="text-xs text-slate-500 mt-1">
+                    {latestScan.timestamp ? new Date(latestScan.timestamp).toLocaleString() : 'Recently scanned'}
+                  </div>
+                </div>
+                <div className="text-right">
+                  <span className={`font-semibold ${latestScan.score >= 80 ? 'text-green-400' : latestScan.score >= 60 ? 'text-amber-400' : 'text-red-400'}`}>
+                    {latestScan.score}/100
+                  </span>
+                  <div className="text-xs text-slate-500 mt-1">
+                    {latestScan.issues} issues • {latestScan.improvements} improvements
+                  </div>
+                </div>
+              </div>
+              {latestScan.detectedIssues && latestScan.detectedIssues.length > 0 && (
+                <div className="mt-4 pt-4 border-t border-slate-800">
+                  <div className="text-sm text-slate-400 mb-2">Top Issues:</div>
+                  <div className="space-y-2">
+                    {latestScan.detectedIssues.slice(0, 3).map((issue: any, idx: number) => (
+                      <div key={idx} className="text-sm text-slate-300">
+                        <span className={`inline-block px-2 py-1 rounded text-xs mr-2 ${
+                          issue.priority === 'high' ? 'bg-red-500/20 text-red-400' :
+                          issue.priority === 'medium' ? 'bg-amber-500/20 text-amber-400' :
+                          'bg-blue-500/20 text-blue-400'
+                        }`}>
+                          {issue.priority}
+                        </span>
+                        {issue.title}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
-            <div className="flex justify-between items-center py-2">
-              <span className="text-slate-300">Plugin System</span>
-              <span className="text-amber-400 font-semibold">⚠ 2 Issues</span>
+          ) : (
+            <div className="text-center text-slate-500 py-8">
+              <div className="text-4xl mb-3">📊</div>
+              <div className="text-sm mb-2">No scans yet</div>
+              <div className="text-xs text-slate-600 mb-4">
+                Scan a GitHub repository to see quality metrics
+              </div>
+              <Button
+                onClick={handleScanNow}
+                className="bg-cyan-600 hover:bg-cyan-700 text-white"
+              >
+                Scan Repository
+              </Button>
             </div>
-          </div>
+          )}
         </CardContent>
       </Card>
     </div>
@@ -745,84 +897,215 @@ function QualityView({ data }: any) {
  * Intelligence View - AI Insights & Analytics
  */
 function IntelligenceView({ data, messages, onCommand, commandInput, setCommandInput }: any) {
+  const [conversationMessages, setConversationMessages] = React.useState<any[]>([]);
+  const [isProcessing, setIsProcessing] = React.useState(false);
+  const [aiInput, setAiInput] = React.useState('');
+
+  const exampleQueries = [
+    "What's the quality of my code?",
+    "Suggest improvements for my project",
+    "Run quality analysis",
+    "What are the biggest risks?",
+    "Generate insights for my repository",
+    "Show me code quality trends"
+  ];
+
+  const handleExampleClick = (query: string) => {
+    setAiInput(query);
+    handleSendMessage(query);
+  };
+
+  const handleSendMessage = async (query?: string) => {
+    const message = query || aiInput;
+    if (!message.trim() || isProcessing) return;
+
+    const userMsg = {
+      id: `user-${Date.now()}`,
+      text: message,
+      type: 'user',
+      timestamp: new Date()
+    };
+
+    setConversationMessages(prev => [...prev, userMsg]);
+    setAiInput('');
+    setIsProcessing(true);
+
+    try {
+      const response = await fetch('/api/beast-mode/conversation', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          message,
+          context: {
+            conversationHistory: conversationMessages.slice(-5),
+            timestamp: new Date().toISOString()
+          }
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to process message');
+      }
+
+      const result = await response.json();
+
+      const aiMsg = {
+        id: `ai-${Date.now()}`,
+        text: result.response || "I'm analyzing your request. This feature is being enhanced with real AI capabilities.",
+        type: 'ai',
+        timestamp: new Date()
+      };
+
+      setConversationMessages(prev => [...prev, aiMsg]);
+    } catch (error) {
+      console.error('Conversation error:', error);
+      const errorMsg = {
+        id: `error-${Date.now()}`,
+        text: "❌ Sorry, I encountered an error. Please try again or check your connection.",
+        type: 'system',
+        timestamp: new Date()
+      };
+      setConversationMessages(prev => [...prev, errorMsg]);
+    } finally {
+      setIsProcessing(false);
+    }
+  };
+
+  const handleKeyPress = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      handleSendMessage();
+    }
+  };
+
+  const displayMessages = conversationMessages.length > 0 ? conversationMessages : messages;
+
   return (
-    <Card className="bg-slate-900/90 border-slate-800 w-full max-w-4xl h-[70vh] flex flex-col">
-      <CardHeader>
-        <div className="flex items-center justify-between">
+    <div className="w-full max-w-6xl space-y-6">
+      {/* Intelligence Metrics */}
+      <Card className="bg-slate-900/90 border-slate-800">
+        <CardHeader>
           <CardTitle className="text-white text-lg uppercase tracking-widest">
             AI Intelligence Core
           </CardTitle>
-          <div className="text-xs text-slate-500">
-            {messages.length} insights • {data.accuracy}% accuracy
+        </CardHeader>
+        <CardContent>
+          <div className="grid grid-cols-4 gap-4">
+            <div className="text-center">
+              <div className="text-2xl font-bold text-cyan-400">{data.predictions}</div>
+              <div className="text-xs text-slate-500">Predictions</div>
+            </div>
+            <div className="text-center">
+              <div className="text-2xl font-bold text-cyan-400">{data.insights}</div>
+              <div className="text-xs text-slate-500">Insights</div>
+            </div>
+            <div className="text-center">
+              <div className="text-2xl font-bold text-cyan-400">{data.optimizations}</div>
+              <div className="text-xs text-slate-500">Optimizations</div>
+            </div>
+            <div className="text-center">
+              <div className="text-2xl font-bold text-green-400">{data.accuracy}%</div>
+              <div className="text-xs text-slate-500">Accuracy</div>
+            </div>
           </div>
-        </div>
-      </CardHeader>
-      <CardContent className="flex-1 flex flex-col overflow-hidden">
-        {/* Intelligence Metrics */}
-        <div className="grid grid-cols-4 gap-4 mb-4">
-          <div className="text-center">
-            <div className="text-2xl font-bold text-cyan-400">{data.predictions}</div>
-            <div className="text-xs text-slate-500">Predictions</div>
-          </div>
-          <div className="text-center">
-            <div className="text-2xl font-bold text-cyan-400">{data.insights}</div>
-            <div className="text-xs text-slate-500">Insights</div>
-          </div>
-          <div className="text-center">
-            <div className="text-2xl font-bold text-cyan-400">{data.optimizations}</div>
-            <div className="text-xs text-slate-500">Optimizations</div>
-          </div>
-          <div className="text-center">
-            <div className="text-2xl font-bold text-green-400">{data.accuracy}%</div>
-            <div className="text-xs text-slate-500">Accuracy</div>
-          </div>
-        </div>
+        </CardContent>
+      </Card>
 
-        {/* Messages */}
-        <div className="flex-1 overflow-y-auto space-y-3 mb-4 pr-2">
-          {messages.length === 0 ? (
-            <div className="text-center text-slate-500 py-12">
-              <div className="text-4xl mb-3">🧠</div>
-              <div className="text-sm">AI Intelligence Core Active</div>
-              <div className="text-xs text-slate-600 mt-2">
-                Ready for analysis and insights
+      {/* AI Conversation */}
+      <Card className="bg-slate-900/90 border-slate-800 w-full h-[60vh] flex flex-col">
+        <CardHeader>
+          <CardTitle className="text-white text-lg">AI Assistant</CardTitle>
+        </CardHeader>
+        <CardContent className="flex-1 flex flex-col overflow-hidden">
+          {/* Example Queries */}
+          {displayMessages.length === 0 && (
+            <div className="mb-4">
+              <div className="text-sm text-slate-400 mb-3">💡 Try these queries:</div>
+              <div className="flex flex-wrap gap-2">
+                {exampleQueries.map((query, idx) => (
+                  <Button
+                    key={idx}
+                    onClick={() => handleExampleClick(query)}
+                    variant="outline"
+                    size="sm"
+                    className="border-slate-800 text-slate-300 hover:bg-slate-800 hover:text-white text-xs"
+                  >
+                    {query}
+                  </Button>
+                ))}
               </div>
             </div>
-          ) : (
-            messages.map((msg: any) => (
-              <div
-                key={msg.id}
-                className={`
-                  ${msg.type === 'user' ? 'text-cyan-400' : ''}
-                  ${msg.type === 'ai' ? 'text-white' : ''}
-                  ${msg.type === 'system' ? 'text-slate-500' : ''}
-                  text-sm leading-relaxed
-                `}
-              >
-                <span className="text-slate-600 text-xs mr-2">
-                  {msg.type === 'user' ? '>' : msg.type === 'ai' ? '🧠' : '•'}
-                </span>
-                {msg.text}
-              </div>
-            ))
           )}
-        </div>
 
-        {/* Command Input */}
-        <form onSubmit={onCommand} className="flex gap-2">
-          <input
-            type="text"
-            value={commandInput}
-            onChange={(e) => setCommandInput(e.target.value)}
-            placeholder="Ask AI for insights..."
-            className="flex-1 bg-slate-900 border border-slate-800 px-3 py-2 text-white text-sm focus:outline-none focus:border-cyan-500 transition-colors rounded-lg"
-          />
-          <Button type="submit" className="bg-white text-black hover:bg-slate-100">
-            Analyze
-          </Button>
-        </form>
-      </CardContent>
-    </Card>
+          {/* Messages */}
+          <div className="flex-1 overflow-y-auto space-y-3 mb-4 pr-2 custom-scrollbar">
+            {displayMessages.length === 0 ? (
+              <div className="text-center text-slate-500 py-12">
+                <div className="text-4xl mb-3">🧠</div>
+                <div className="text-sm">AI Intelligence Core Active</div>
+                <div className="text-xs text-slate-600 mt-2">
+                  Click a query above or type your own question
+                </div>
+              </div>
+            ) : (
+              displayMessages.map((msg: any) => (
+                <div
+                  key={msg.id}
+                  className={`
+                    p-3 rounded-lg ${
+                      msg.type === 'user' 
+                        ? 'bg-cyan-500/10 border-l-4 border-cyan-500 ml-8' 
+                        : msg.type === 'ai'
+                        ? 'bg-purple-500/10 border-l-4 border-purple-500 mr-8'
+                        : 'bg-slate-800/50 border-l-4 border-slate-600'
+                    }
+                  `}
+                >
+                  <div className={`text-sm leading-relaxed ${
+                    msg.type === 'user' ? 'text-cyan-400' : 
+                    msg.type === 'ai' ? 'text-white' : 
+                    'text-slate-400'
+                  }`}>
+                    {msg.text}
+                  </div>
+                  <div className="text-xs text-slate-500 mt-2">
+                    {msg.timestamp ? new Date(msg.timestamp).toLocaleTimeString() : ''}
+                  </div>
+                </div>
+              ))
+            )}
+            {isProcessing && (
+              <div className="bg-purple-500/10 border-l-4 border-purple-500 mr-8 p-3 rounded-lg">
+                <div className="flex items-center gap-2">
+                  <div className="animate-spin w-4 h-4 border-2 border-purple-500 border-t-transparent rounded-full"></div>
+                  <span className="text-purple-400 text-sm">Processing...</span>
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* Command Input */}
+          <div className="flex gap-2">
+            <input
+              type="text"
+              value={aiInput}
+              onChange={(e) => setAiInput(e.target.value)}
+              onKeyPress={handleKeyPress}
+              placeholder="Ask AI for insights..."
+              className="flex-1 bg-slate-900 border border-slate-800 px-3 py-2 text-white text-sm focus:outline-none focus:border-cyan-500 transition-colors rounded-lg"
+              disabled={isProcessing}
+            />
+            <Button 
+              onClick={() => handleSendMessage()} 
+              disabled={!aiInput.trim() || isProcessing}
+              className="bg-white text-black hover:bg-slate-100"
+            >
+              {isProcessing ? '⏳' : 'Send'}
+            </Button>
+          </div>
+        </CardContent>
+      </Card>
+    </div>
   );
 }
 
@@ -953,25 +1236,60 @@ function MarketplaceView({ data }: any) {
     }
   };
 
+  const [installingPlugins, setInstallingPlugins] = useState<Set<string>>(new Set());
+  const [installedPlugins, setInstalledPlugins] = useState<Set<string>>(new Set());
+
   const installPlugin = async (pluginId: string) => {
+    if (installingPlugins.has(pluginId) || installedPlugins.has(pluginId)) {
+      return;
+    }
+
+    setInstallingPlugins(prev => new Set(prev).add(pluginId));
+
     try {
       const response = await fetch('/api/beast-mode/marketplace/install', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           pluginId,
-          userId: 'demo-user'
+          userId: typeof window !== 'undefined' ? localStorage.getItem('beastModeUserId') || 'demo-user' : 'demo-user'
         })
       });
 
       if (response.ok) {
-        alert(`Plugin installation initiated! Check your dashboard for status.`);
+        const result = await response.json();
+        setInstalledPlugins(prev => new Set(prev).add(pluginId));
+        // Show success notification
+        if (typeof window !== 'undefined') {
+          const event = new CustomEvent('beast-mode-notification', {
+            detail: {
+              type: 'success',
+              message: `Plugin "${pluginId}" installed successfully!`
+            }
+          });
+          window.dispatchEvent(event);
+        }
       } else {
-        alert('Plugin installation failed. This feature is coming soon!');
+        const error = await response.json();
+        throw new Error(error.error || 'Installation failed');
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error('Failed to install plugin:', error);
-      alert('Plugin installation failed. This feature is coming soon!');
+      if (typeof window !== 'undefined') {
+        const event = new CustomEvent('beast-mode-notification', {
+          detail: {
+            type: 'error',
+            message: `Failed to install plugin: ${error.message || 'Unknown error'}`
+          }
+        });
+        window.dispatchEvent(event);
+      }
+    } finally {
+      setInstallingPlugins(prev => {
+        const next = new Set(prev);
+        next.delete(pluginId);
+        return next;
+      });
     }
   };
 
@@ -1103,9 +1421,26 @@ function MarketplaceView({ data }: any) {
                   </div>
                   <Button
                     onClick={() => installPlugin(item.pluginId)}
-                    className="bg-cyan-500 hover:bg-cyan-600 text-white"
+                    disabled={installingPlugins.has(item.pluginId) || installedPlugins.has(item.pluginId)}
+                    className={`${
+                      installedPlugins.has(item.pluginId)
+                        ? 'bg-green-600 hover:bg-green-700 text-white'
+                        : 'bg-cyan-500 hover:bg-cyan-600 text-white'
+                    }`}
                   >
-                    Install
+                    {installingPlugins.has(item.pluginId) ? (
+                      <>
+                        <span className="animate-spin mr-2">⏳</span>
+                        Installing...
+                      </>
+                    ) : installedPlugins.has(item.pluginId) ? (
+                      <>
+                        <span className="mr-2">✓</span>
+                        Installed
+                      </>
+                    ) : (
+                      'Install'
+                    )}
                   </Button>
                 </div>
               </CardContent>

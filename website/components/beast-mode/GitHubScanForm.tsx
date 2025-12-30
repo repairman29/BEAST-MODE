@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
 import { Button } from '../ui/button';
+import { scanResultsStore, ScanResult } from '../../lib/scan-results-store';
 
 interface ScanResult {
   repo: string;
@@ -97,11 +98,15 @@ export default function GitHubScanForm() {
       const data = await response.json();
 
       // Update with results
+      const updatedScan: ScanResult = { ...newScan, ...data, status: 'completed' as const };
       setScanResults(prev => prev.map(s => 
         s.repo === fullRepo 
-          ? { ...s, ...data, status: 'completed' as const }
+          ? updatedScan
           : s
       ));
+
+      // Save to shared store for Quality tab
+      scanResultsStore.addScan(updatedScan);
     } catch (err: any) {
       setError(err.message || 'Failed to scan repository');
       setScanResults(prev => prev.map(s => 

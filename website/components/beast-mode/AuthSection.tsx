@@ -157,16 +157,91 @@ export default function AuthSection({ onAuthSuccess }: AuthSectionProps) {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-slate-300 mb-2">Password</label>
+            <div className="flex items-center justify-between mb-2">
+              <label className="block text-sm font-medium text-slate-300">Password</label>
+              {isSignIn && (
+                <button
+                  type="button"
+                  onClick={() => setShowPasswordReset(true)}
+                  className="text-xs text-cyan-400 hover:text-cyan-300"
+                >
+                  Forgot password?
+                </button>
+              )}
+            </div>
             <input
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Enter your password"
               className="w-full bg-slate-900/80 border border-slate-700 rounded-lg px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 transition-all"
-              required
+              required={!showPasswordReset}
+              disabled={showPasswordReset}
             />
           </div>
+          {showPasswordReset && (
+            <div className="bg-slate-800/50 border border-slate-700 rounded-lg p-4 space-y-3">
+              <div>
+                <label className="block text-sm font-medium text-slate-300 mb-2">Email</label>
+                <input
+                  type="email"
+                  value={resetEmail}
+                  onChange={(e) => setResetEmail(e.target.value)}
+                  placeholder="Enter your email"
+                  className="w-full bg-slate-900/80 border border-slate-700 rounded-lg px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 transition-all"
+                />
+              </div>
+              {resetSent ? (
+                <div className="text-green-400 text-sm">
+                  ✓ Password reset email sent! Check your inbox.
+                </div>
+              ) : (
+                <Button
+                  type="button"
+                  onClick={async () => {
+                    if (!resetEmail) {
+                      setError('Please enter your email');
+                      return;
+                    }
+                    setIsLoading(true);
+                    try {
+                      const response = await fetch('/api/auth/reset-password', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ email: resetEmail })
+                      });
+                      if (response.ok) {
+                        setResetSent(true);
+                        setError(null);
+                      } else {
+                        const data = await response.json();
+                        throw new Error(data.error || 'Failed to send reset email');
+                      }
+                    } catch (err: any) {
+                      setError(err.message);
+                    } finally {
+                      setIsLoading(false);
+                    }
+                  }}
+                  className="w-full bg-cyan-600 hover:bg-cyan-700 text-white"
+                >
+                  Send Reset Link
+                </Button>
+              )}
+              <button
+                type="button"
+                onClick={() => {
+                  setShowPasswordReset(false);
+                  setResetEmail('');
+                  setResetSent(false);
+                  setError(null);
+                }}
+                className="w-full text-sm text-slate-400 hover:text-white"
+              >
+                Back to sign in
+              </button>
+            </div>
+          )}
           {error && (
             <div className="text-red-400 text-sm bg-red-500/10 border border-red-500/20 rounded-lg p-3">
               {error}
