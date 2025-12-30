@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import cache, { cacheKeys, cacheTTL } from '../../../../lib/cache';
+import cache, { cacheKeys, cacheTTL } from '../../../../../lib/cache';
 
 /**
  * BEAST MODE Plugin Registry API
