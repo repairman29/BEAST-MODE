@@ -11,19 +11,43 @@ import { Button } from '../ui/button';
  */
 function HealthDashboard() {
   const [healthData, setHealthData] = useState(null);
+  const [healthHistory, setHealthHistory] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [autoRefresh, setAutoRefresh] = useState(true);
   const [selectedComponent, setSelectedComponent] = useState(null);
   const [healingInProgress, setHealingInProgress] = useState(false);
+  const [showTrends, setShowTrends] = useState(false);
 
   useEffect(() => {
     fetchHealthData();
 
     if (autoRefresh) {
-      const interval = setInterval(fetchHealthData, 30000); // Refresh every 30 seconds
+      const interval = setInterval(fetchHealthData, 5000); // Refresh every 5 seconds for real-time feel
       return () => clearInterval(interval);
     }
   }, [autoRefresh]);
+
+  // Track health history for charts
+  useEffect(() => {
+    if (healthData) {
+      const timestamp = new Date().toISOString();
+      const overallStatus = healthData.history && healthData.history.length > 0 
+        ? healthData.history[healthData.history.length - 1].overall 
+        : 'unknown';
+      
+      setHealthHistory(prev => {
+        const newHistory = [...prev, {
+          timestamp,
+          overall: overallStatus,
+          healthyComponents: Object.values(healthData.components || {}).filter((c: any) => c.status === 'healthy').length,
+          totalComponents: Object.keys(healthData.components || {}).length,
+          alerts: healthData.alerts?.length || 0
+        }];
+        // Keep last 50 data points
+        return newHistory.slice(-50);
+      });
+    }
+  }, [healthData]);
 
   const fetchHealthData = async () => {
     try {
@@ -131,6 +155,14 @@ function HealthDashboard() {
                 🔄 Refresh
               </Button>
               <Button
+                onClick={() => setShowTrends(!showTrends)}
+                variant="outline"
+                size="sm"
+                className={showTrends ? 'bg-cyan-500/20 border-cyan-500 text-cyan-400' : 'border-slate-800'}
+              >
+                {showTrends ? '📊 Hide Trends' : '📊 Show Trends'}
+              </Button>
+              <Button
                 onClick={() => triggerSelfHealing()}
                 disabled={healingInProgress}
                 variant="outline"
@@ -188,6 +220,96 @@ function HealthDashboard() {
         </div>
         </CardContent>
       </Card>
+
+      {/* Health Trend Charts */}
+      {showTrends && healthHistory.length > 0 && (
+        <Card className="bg-slate-900/90 border-slate-800">
+          <CardHeader>
+            <CardTitle className="text-white text-lg">📈 Health Trends</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-6">
+              {/* Overall Health Trend */}
+              <div>
+                <div className="text-sm text-slate-400 mb-3">Overall Health Status Over Time</div>
+                <div className="flex items-end gap-1 h-32">
+                  {healthHistory.slice(-20).map((point, idx) => {
+                    const statusValue = point.overall === 'healthy' ? 100 : point.overall === 'degraded' ? 50 : 0;
+                    return (
+                      <div key={idx} className="flex-1 flex flex-col items-center group">
+                        <div className="w-full bg-slate-800 rounded-t relative">
+                          <div
+                            className={`w-full rounded-t transition-all ${
+                              statusValue === 100 ? 'bg-green-500' :
+                              statusValue === 50 ? 'bg-amber-500' :
+                              'bg-red-500'
+                            }`}
+                            style={{ height: `${statusValue}%` }}
+                          >
+                            <div className="absolute -top-6 left-1/2 -translate-x-1/2 text-[10px] text-slate-400 opacity-0 group-hover:opacity-100 whitespace-nowrap">
+                              {new Date(point.timestamp).toLocaleTimeString()}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* Healthy Components Trend */}
+              <div>
+                <div className="text-sm text-slate-400 mb-3">Healthy Components Count</div>
+                <div className="flex items-end gap-1 h-24">
+                  {healthHistory.slice(-20).map((point, idx) => {
+                    const maxComponents = Math.max(...healthHistory.map(p => p.totalComponents), 1);
+                    const height = (point.healthyComponents / maxComponents) * 100;
+                    return (
+                      <div key={idx} className="flex-1 flex flex-col items-center">
+                        <div className="w-full bg-slate-800 rounded-t">
+                          <div
+                            className="w-full bg-green-500/60 rounded-t"
+                            style={{ height: `${height}%` }}
+                          />
+                        </div>
+                        <div className="text-[10px] text-slate-600 mt-1">
+                          {point.healthyComponents}/{point.totalComponents}
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* Alerts Trend */}
+              {healthHistory.some(p => p.alerts > 0) && (
+                <div>
+                  <div className="text-sm text-slate-400 mb-3">Active Alerts Over Time</div>
+                  <div className="flex items-end gap-1 h-24">
+                    {healthHistory.slice(-20).map((point, idx) => {
+                      const maxAlerts = Math.max(...healthHistory.map(p => p.alerts), 1);
+                      const height = maxAlerts > 0 ? (point.alerts / maxAlerts) * 100 : 0;
+                      return (
+                        <div key={idx} className="flex-1 flex flex-col items-center">
+                          <div className="w-full bg-slate-800 rounded-t">
+                            <div
+                              className="w-full bg-red-500/60 rounded-t"
+                              style={{ height: `${height}%` }}
+                            />
+                          </div>
+                          <div className="text-[10px] text-slate-600 mt-1">
+                            {point.alerts}
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
+            </div>
+          </CardContent>
+        </Card>
+      )}
 
       {/* Component Health Grid */}
       <Card className="bg-slate-900/90 border-slate-800">

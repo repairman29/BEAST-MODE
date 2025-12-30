@@ -5,33 +5,6 @@ import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
 import { Button } from '../ui/button';
 import { scanResultsStore, ScanResult } from '../../lib/scan-results-store';
 
-interface ScanResult {
-  repo: string;
-  score: number;
-  issues: number;
-  improvements: number;
-  status: 'scanning' | 'completed' | 'error';
-  detectedIssues?: Array<{ 
-    title: string; 
-    description: string; 
-    priority: string; 
-    category: string; 
-    type: string;
-    count?: number;
-  }>;
-  recommendations?: Array<{ 
-    title: string; 
-    description: string; 
-    priority: string; 
-    category: string; 
-    message: string;
-    file?: string;
-    line?: number;
-  }>;
-  metrics?: any;
-  report?: any;
-}
-
 export default function GitHubScanForm() {
   const [repoUrl, setRepoUrl] = useState('');
   const [isScanning, setIsScanning] = useState(false);
