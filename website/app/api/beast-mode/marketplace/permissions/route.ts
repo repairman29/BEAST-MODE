@@ -104,7 +104,8 @@ export async function GET(request: NextRequest) {
       // Get all permissions for user
       const allPermissions: Record<string, Permission[]> = {};
       
-      for (const [storeKey, value] of permissionsStore.entries()) {
+      const entries = Array.from(permissionsStore.entries());
+      for (const [storeKey, value] of entries) {
         if (storeKey.startsWith(`${userId}:`)) {
           const pluginId = storeKey.split(':')[1];
           allPermissions[pluginId] = value.permissions;

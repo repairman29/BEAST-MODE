@@ -17,6 +17,7 @@ import PluginManager from './PluginManager';
 import PluginReviews from './PluginReviews';
 import PluginUpdates from './PluginUpdates';
 import PluginAnalytics from './PluginAnalytics';
+import IntegrationsManager from './IntegrationsManager';
 import { useUser } from '../../lib/user-context';
 
 /**
@@ -3171,6 +3172,21 @@ function SettingsView({ data }: any) {
               </div>
             ))}
           </div>
+        </CardContent>
+      </Card>
+
+      {/* Integrations */}
+      <Card className="bg-slate-900/90 border-slate-800">
+        <CardHeader>
+          <CardTitle className="text-white text-lg">🔗 Integrations</CardTitle>
+          <CardDescription className="text-slate-400">
+            Connect BEAST MODE with your favorite tools for notifications and updates
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <IntegrationsManager
+            userId={user?.id || (typeof window !== 'undefined' ? localStorage.getItem('beastModeUserId') || undefined : undefined)}
+          />
         </CardContent>
       </Card>
 
