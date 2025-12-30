@@ -51,11 +51,26 @@ function MonetizationDashboard() {
   const fetchAnalytics = async () => {
     setIsLoading(true);
     try {
-      const response = await fetch(`/api/beast-mode/marketplace/analytics?timeframe=${timeframe}`);
-      if (response.ok) {
-        const data = await response.json();
-        setAnalytics(data);
+      // Try Stripe analytics first
+      const stripeResponse = await fetch(`/api/stripe/analytics?timeframe=${timeframe}`);
+      let stripeData = null;
+      if (stripeResponse.ok) {
+        stripeData = await stripeResponse.json();
       }
+
+      // Also fetch marketplace analytics
+      const marketplaceResponse = await fetch(`/api/beast-mode/marketplace/analytics?timeframe=${timeframe}`);
+      let marketplaceData = null;
+      if (marketplaceResponse.ok) {
+        marketplaceData = await marketplaceResponse.json();
+      }
+
+      // Merge data
+      const mergedData = {
+        ...marketplaceData,
+        stripe: stripeData
+      };
+      setAnalytics(mergedData);
     } catch (error) {
       console.error('Failed to fetch analytics:', error);
     } finally {
