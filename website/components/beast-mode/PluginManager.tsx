@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '../ui/card';
 import { Button } from '../ui/button';
 import PluginRunner from './PluginRunner';
+import PluginPermissions from './PluginPermissions';
 
 interface Plugin {
   id: string;
@@ -22,6 +23,7 @@ export default function PluginManager() {
   const [selectedPlugin, setSelectedPlugin] = useState<Plugin | null>(null);
   const [showConfig, setShowConfig] = useState(false);
   const [showRunner, setShowRunner] = useState(false);
+  const [showPermissions, setShowPermissions] = useState(false);
 
   useEffect(() => {
     fetchInstalledPlugins();
@@ -208,6 +210,7 @@ export default function PluginManager() {
                   setSelectedPlugin(plugin);
                   setShowConfig(false);
                   setShowRunner(false);
+                  setShowPermissions(false);
                 }}
                 className="border-slate-700 text-slate-300 hover:bg-slate-800"
               >
@@ -219,7 +222,21 @@ export default function PluginManager() {
                 onClick={() => {
                   setSelectedPlugin(plugin);
                   setShowConfig(false);
+                  setShowRunner(false);
+                  setShowPermissions(true);
+                }}
+                className="border-yellow-700 text-yellow-300 hover:bg-yellow-900/20"
+              >
+                🔒 Permissions
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => {
+                  setSelectedPlugin(plugin);
+                  setShowConfig(false);
                   setShowRunner(true);
+                  setShowPermissions(false);
                 }}
                 className="border-cyan-700 text-cyan-300 hover:bg-cyan-900/20"
               >
@@ -261,6 +278,13 @@ export default function PluginManager() {
                   pluginId={selectedPlugin.id}
                   pluginName={selectedPlugin.name}
                   config={selectedPlugin.config}
+                />
+              ) : showPermissions ? (
+                <PluginPermissions
+                  pluginId={selectedPlugin.id}
+                  pluginName={selectedPlugin.name}
+                  userId={typeof window !== 'undefined' ? localStorage.getItem('beastModeUserId') || undefined : undefined}
+                  onPermissionsChanged={() => fetchInstalledPlugins()}
                 />
               ) : showConfig ? (
                 <div className="space-y-4">
