@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import cache, { cacheKeys, cacheTTL } from '../../../../lib/cache';
 
 /**
  * BEAST MODE Plugin Registry API
@@ -167,6 +168,12 @@ const PLUGIN_REGISTRY: Record<string, any> = {
  */
 export async function GET(request: NextRequest) {
   try {
+    // Check cache first
+    const cacheKey = cacheKeys.pluginRegistry();
+    const cached = cache.get(cacheKey);
+    if (cached) {
+      return NextResponse.json(cached);
+    }
     const { searchParams } = new URL(request.url);
     const category = searchParams.get('category');
     const search = searchParams.get('search');
@@ -196,11 +203,18 @@ export async function GET(request: NextRequest) {
       plugins = [];
     }
 
-    return NextResponse.json({
+    const response = {
       plugins,
       total: plugins.length,
       timestamp: new Date().toISOString()
-    });
+    };
+
+    // Cache the response (only if no filters applied, otherwise cache is less useful)
+    if (!category && !search && !installed) {
+      cache.set(cacheKey, response, cacheTTL.medium);
+    }
+
+    return NextResponse.json(response);
 
   } catch (error) {
     console.error('Plugin Registry API error:', error);
