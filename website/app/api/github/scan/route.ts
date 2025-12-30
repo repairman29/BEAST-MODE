@@ -28,6 +28,13 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // Check cache first
+    const cacheKey = cacheKeys.scanResult(repo);
+    const cached = cache.get(cacheKey);
+    if (cached) {
+      return NextResponse.json(cached);
+    }
+
     // Use real GitHub API if configured
     if (octokit) {
       try {
