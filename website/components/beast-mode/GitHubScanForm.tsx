@@ -9,8 +9,43 @@ export default function GitHubScanForm() {
   const [repoUrl, setRepoUrl] = useState('');
   const [isScanning, setIsScanning] = useState(false);
   const [scanResults, setScanResults] = useState<ScanResult[]>([]);
+  const [favoriteRepos, setFavoriteRepos] = useState<string[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [expandedScans, setExpandedScans] = useState<Set<number>>(new Set());
+
+  // Load favorites from localStorage
+  React.useEffect(() => {
+    try {
+      const stored = localStorage.getItem('beast-mode-favorite-repos');
+      if (stored) {
+        setFavoriteRepos(JSON.parse(stored));
+      }
+    } catch (e) {
+      console.error('Failed to load favorites:', e);
+    }
+  }, []);
+
+  // Load scan results from localStorage
+  React.useEffect(() => {
+    try {
+      const stored = localStorage.getItem('beast-mode-scan-results');
+      if (stored) {
+        setScanResults(JSON.parse(stored));
+      }
+    } catch (e) {
+      console.error('Failed to load scan results:', e);
+    }
+  }, []);
+
+  const toggleFavorite = (repo: string) => {
+    setFavoriteRepos(prev => {
+      const newFavorites = prev.includes(repo)
+        ? prev.filter(r => r !== repo)
+        : [...prev, repo];
+      localStorage.setItem('beast-mode-favorite-repos', JSON.stringify(newFavorites));
+      return newFavorites;
+    });
+  };
 
   const handleScan = async () => {
     if (!repoUrl.trim()) {
@@ -80,6 +115,13 @@ export default function GitHubScanForm() {
 
       // Save to shared store for Quality tab
       scanResultsStore.addScan(updatedScan);
+      
+      // Update local state
+      setScanResults(prev => prev.map(s => 
+        s.repo === fullRepo 
+          ? updatedScan
+          : s
+      ));
     } catch (err: any) {
       setError(err.message || 'Failed to scan repository');
       setScanResults(prev => prev.map(s => 
@@ -125,19 +167,70 @@ export default function GitHubScanForm() {
         </CardContent>
       </Card>
 
+      {/* Favorite Repos */}
+      {favoriteRepos.length > 0 && (
+        <Card className="bg-slate-900/90 border-slate-800">
+          <CardHeader>
+            <CardTitle className="text-white">⭐ Favorite Repositories</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="flex flex-wrap gap-2">
+              {favoriteRepos.map((repo) => (
+                <div
+                  key={repo}
+                  className="flex items-center gap-2 bg-slate-800/50 border border-slate-700 rounded-lg px-3 py-2"
+                >
+                  <span className="text-white text-sm">{repo}</span>
+                  <button
+                    onClick={() => {
+                      setRepoUrl(`https://github.com/${repo}`);
+                      handleScan();
+                    }}
+                    className="text-cyan-400 hover:text-cyan-300 text-xs"
+                  >
+                    Scan
+                  </button>
+                  <button
+                    onClick={() => toggleFavorite(repo)}
+                    className="text-yellow-400 hover:text-yellow-300"
+                  >
+                    ⭐
+                  </button>
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+      )}
+
       {/* Scan Results */}
       {scanResults.length > 0 && (
         <div className="space-y-4">
           <div className="flex items-center justify-between">
             <h3 className="text-white text-lg font-semibold">Recent Scans</h3>
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => setScanResults([])}
-              className="border-slate-800 text-slate-400 hover:bg-slate-900"
-            >
-              Clear All
-            </Button>
+            <div className="flex gap-2">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => {
+                  if (scanResults.length > 0) {
+                    exportReport(scanResults[0]);
+                  }
+                }}
+                className="border-slate-800 text-slate-400 hover:bg-slate-900"
+                disabled={scanResults.length === 0}
+              >
+                📥 Export Latest
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => setScanResults([])}
+                className="border-slate-800 text-slate-400 hover:bg-slate-900"
+              >
+                Clear All
+              </Button>
+            </div>
           </div>
           {scanResults.map((result, idx) => {
             const isExpanded = expandedScans.has(idx);

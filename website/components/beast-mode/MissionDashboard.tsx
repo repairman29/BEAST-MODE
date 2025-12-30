@@ -275,7 +275,28 @@ function MissionDashboard() {
           <div className="flex items-center justify-between">
             <CardTitle className="text-white text-xl">🎯 Mission Guidance</CardTitle>
             <div className="flex gap-2">
-              <Button onClick={() => setShowCreateMission(true)} className="bg-white text-black hover:bg-slate-100">
+              <Button 
+                onClick={() => {
+                  setShowTemplates(!showTemplates);
+                  setEditingMission(null);
+                  setNewMission({
+                    name: '',
+                    description: '',
+                    type: 'code-refactor',
+                    priority: 'medium',
+                    deadline: '',
+                    objectives: ['']
+                  });
+                }}
+                variant="outline"
+                className="border-slate-800"
+              >
+                📋 Templates
+              </Button>
+              <Button onClick={() => {
+                setShowCreateMission(true);
+                setEditingMission(null);
+              }} className="bg-white text-black hover:bg-slate-100">
                 ➕ New Mission
               </Button>
               <Button onClick={fetchMissions} variant="outline" className="border-slate-800">
@@ -427,18 +448,31 @@ function MissionDashboard() {
                       )}
                     </div>
 
-                    {mission.status === 'planning' && (
+                    <div className="flex gap-2">
                       <Button
                         onClick={(e) => {
                           e.stopPropagation();
-                          startMission(mission.id);
+                          editMission(mission);
                         }}
                         size="sm"
-                        className="bg-white text-black hover:bg-slate-100"
+                        variant="outline"
+                        className="border-slate-800"
                       >
-                        🚀 Start
+                        ✏️ Edit
                       </Button>
-                    )}
+                      {mission.status === 'planning' && (
+                        <Button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            startMission(mission.id);
+                          }}
+                          size="sm"
+                          className="bg-white text-black hover:bg-slate-100"
+                        >
+                          🚀 Start
+                        </Button>
+                      )}
+                    </div>
                   </div>
                 </div>
               ))}
@@ -478,8 +512,13 @@ function MissionDashboard() {
           <Card className="bg-slate-950 border-slate-800 w-full max-w-2xl max-h-[90vh] overflow-y-auto">
             <CardHeader>
               <div className="flex items-center justify-between">
-                <CardTitle className="text-white text-lg">🎯 Create New Mission</CardTitle>
-                <Button onClick={() => setShowCreateMission(false)} variant="ghost" size="sm">
+                <CardTitle className="text-white text-lg">
+                  {editingMission ? '✏️ Edit Mission' : '🎯 Create New Mission'}
+                </CardTitle>
+                <Button onClick={() => {
+                  setShowCreateMission(false);
+                  setEditingMission(null);
+                }} variant="ghost" size="sm">
                   ✕
                 </Button>
               </div>
@@ -508,20 +547,30 @@ function MissionDashboard() {
                 </div>
 
                 <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-slate-400 text-sm mb-1">Mission Type</label>
-                    <select
-                      value={newMission.type}
-                      onChange={(e) => setNewMission(prev => ({ ...prev, type: e.target.value }))}
-                      className="w-full bg-slate-900/80 border border-slate-700 rounded-lg px-3 py-2 text-white focus:outline-none focus:border-cyan-500"
-                    >
-                      {missionTemplates.map(template => (
-                        <option key={template.value} value={template.value}>
-                          {template.label}
-                        </option>
-                      ))}
-                    </select>
+                <div>
+                  <label className="block text-slate-400 text-sm mb-1">Mission Type</label>
+                  <select
+                    value={newMission.type}
+                    onChange={(e) => {
+                      const template = missionTemplates.find(t => t.value === e.target.value);
+                      setNewMission(prev => ({
+                        ...prev,
+                        type: e.target.value,
+                        objectives: template?.defaultObjectives || prev.objectives
+                      }));
+                    }}
+                    className="w-full bg-slate-900/80 border border-slate-700 rounded-lg px-3 py-2 text-white focus:outline-none focus:border-cyan-500"
+                  >
+                    {missionTemplates.map(template => (
+                      <option key={template.value} value={template.value}>
+                        {template.label}
+                      </option>
+                    ))}
+                  </select>
+                  <div className="text-xs text-slate-500 mt-1">
+                    Selecting a template will auto-fill objectives
                   </div>
+                </div>
 
                   <div>
                     <label className="block text-slate-400 text-sm mb-1">Priority</label>
@@ -548,16 +597,63 @@ function MissionDashboard() {
                   />
                 </div>
 
+                <div>
+                  <label className="block text-slate-400 text-sm mb-2">Objectives</label>
+                  <div className="space-y-2">
+                    {newMission.objectives.map((objective, index) => (
+                      <div key={index} className="flex gap-2">
+                        <input
+                          type="text"
+                          value={objective}
+                          onChange={(e) => {
+                            const newObjectives = [...newMission.objectives];
+                            newObjectives[index] = e.target.value;
+                            setNewMission(prev => ({ ...prev, objectives: newObjectives }));
+                          }}
+                          className="flex-1 bg-slate-900/80 border border-slate-700 rounded-lg px-3 py-2 text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500"
+                          placeholder={`Objective ${index + 1}`}
+                        />
+                        {newMission.objectives.length > 1 && (
+                          <Button
+                            onClick={() => {
+                              const newObjectives = newMission.objectives.filter((_, i) => i !== index);
+                              setNewMission(prev => ({ ...prev, objectives: newObjectives }));
+                            }}
+                            variant="outline"
+                            size="sm"
+                            className="border-red-700 text-red-400 hover:bg-red-500/10"
+                          >
+                            ✕
+                          </Button>
+                        )}
+                      </div>
+                    ))}
+                    <Button
+                      onClick={() => setNewMission(prev => ({ ...prev, objectives: [...prev.objectives, ''] }))}
+                      variant="outline"
+                      size="sm"
+                      className="border-slate-800 w-full"
+                    >
+                      + Add Objective
+                    </Button>
+                  </div>
+                </div>
+
                 <div className="flex gap-2 pt-4">
                   <Button
-                    onClick={createMission}
+                    onClick={editingMission ? updateMission : createMission}
                     disabled={isLoading || !newMission.name || !newMission.description}
                     className="flex-1 bg-white text-black hover:bg-slate-100"
                   >
-                    {isLoading ? 'Creating...' : '🎯 Create Mission'}
+                    {isLoading 
+                      ? (editingMission ? 'Updating...' : 'Creating...') 
+                      : (editingMission ? '💾 Update Mission' : '🎯 Create Mission')}
                   </Button>
                   <Button
-                    onClick={() => setShowCreateMission(false)}
+                    onClick={() => {
+                      setShowCreateMission(false);
+                      setEditingMission(null);
+                    }}
                     variant="outline"
                     className="border-slate-800"
                   >
