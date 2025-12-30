@@ -121,12 +121,6 @@ export async function GET(request: NextRequest) {
       }
     ];
 
-    // Check platform connection status
-    const platformStatus = {
-      vercel: hasVercelToken ? 'connected' : 'not_connected',
-      railway: hasRailwayToken ? 'connected' : 'not_connected'
-    };
-
     return NextResponse.json({
       deployments: mockDeployments,
       count: mockDeployments.length,
