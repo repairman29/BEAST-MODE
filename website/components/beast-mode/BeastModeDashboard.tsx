@@ -14,6 +14,9 @@ import Sidebar from './Sidebar';
 import DashboardHeader from './DashboardHeader';
 import FTUEOnboarding from './FTUEOnboarding';
 import PluginManager from './PluginManager';
+import PluginReviews from './PluginReviews';
+import PluginUpdates from './PluginUpdates';
+import PluginAnalytics from './PluginAnalytics';
 import { useUser } from '../../lib/user-context';
 
 /**
@@ -1932,10 +1935,13 @@ function IntelligenceView({ data, messages, onCommand, commandInput, setCommandI
  * Marketplace View - Browse All Plugins
  */
 function MarketplaceView({ data }: any) {
+  const { user } = useUser();
   const [plugins, setPlugins] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
+  const [selectedPlugin, setSelectedPlugin] = useState<string | null>(null);
+  const [showReviews, setShowReviews] = useState(false);
 
   useEffect(() => {
     fetchPlugins();
@@ -2294,35 +2300,89 @@ function MarketplaceView({ data }: any) {
                   <div className="text-slate-400 text-sm">
                     {item.plugin.price === 0 ? 'Free' : `$${item.plugin.price}/mo`}
                   </div>
-                  <Button
-                    onClick={() => installPlugin(item.pluginId)}
-                    disabled={installingPlugins.has(item.pluginId) || installedPlugins.has(item.pluginId)}
-                    className={`${
-                      installedPlugins.has(item.pluginId)
-                        ? 'bg-green-600 hover:bg-green-700 text-white'
-                        : 'bg-cyan-500 hover:bg-cyan-600 text-white'
-                    }`}
-                  >
-                    {installingPlugins.has(item.pluginId) ? (
-                      <>
-                        <span className="animate-spin mr-2">⏳</span>
-                        Installing...
-                      </>
-                    ) : installedPlugins.has(item.pluginId) ? (
-                      <>
-                        <span className="mr-2">✓</span>
-                        Installed
-                      </>
-                    ) : (
-                      'Install'
-                    )}
-                  </Button>
+                  <div className="flex gap-2">
+                    <Button
+                      onClick={() => {
+                        setSelectedPlugin(item.pluginId);
+                        setShowReviews(true);
+                      }}
+                      variant="outline"
+                      className="border-slate-700 text-slate-300 hover:bg-slate-800 text-xs"
+                    >
+                      ⭐ Reviews
+                    </Button>
+                    <Button
+                      onClick={() => installPlugin(item.pluginId)}
+                      disabled={installingPlugins.has(item.pluginId) || installedPlugins.has(item.pluginId)}
+                      className={`${
+                        installedPlugins.has(item.pluginId)
+                          ? 'bg-green-600 hover:bg-green-700 text-white'
+                          : 'bg-cyan-500 hover:bg-cyan-600 text-white'
+                      }`}
+                    >
+                      {installingPlugins.has(item.pluginId) ? (
+                        <>
+                          <span className="animate-spin mr-2">⏳</span>
+                          Installing...
+                        </>
+                      ) : installedPlugins.has(item.pluginId) ? (
+                        <>
+                          <span className="mr-2">✓</span>
+                          Installed
+                        </>
+                      ) : (
+                        'Install'
+                      )}
+                    </Button>
+                  </div>
                 </div>
               </CardContent>
             </Card>
           ))}
         </div>
       )}
+
+      {/* Reviews Modal/Expanded View */}
+      {showReviews && selectedPlugin && (
+        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-in fade-in">
+          <Card className="bg-slate-900 border-slate-800 w-full max-w-3xl max-h-[90vh] overflow-y-auto">
+            <CardHeader className="sticky top-0 bg-slate-900 z-10 border-b border-slate-800">
+              <div className="flex items-center justify-between">
+                <CardTitle className="text-white text-xl">
+                  {filteredPlugins.find(p => p.pluginId === selectedPlugin)?.plugin.name || 'Plugin'} Reviews
+                </CardTitle>
+                <Button
+                  onClick={() => {
+                    setShowReviews(false);
+                    setSelectedPlugin(null);
+                  }}
+                  variant="outline"
+                  className="border-slate-700 text-slate-300 hover:bg-slate-800"
+                >
+                  ✕
+                </Button>
+              </div>
+            </CardHeader>
+            <CardContent className="p-6">
+              <PluginReviews
+                pluginId={selectedPlugin}
+                pluginName={filteredPlugins.find(p => p.pluginId === selectedPlugin)?.plugin.name || 'Plugin'}
+                currentUserId={user?.id || (typeof window !== 'undefined' ? localStorage.getItem('beastModeUserId') || undefined : undefined)}
+                currentUserName={user?.email || 'User'}
+              />
+            </CardContent>
+          </Card>
+        </div>
+      )}
+
+      {/* Plugin Updates Section */}
+      <PluginUpdates
+        userId={user?.id || (typeof window !== 'undefined' ? localStorage.getItem('beastModeUserId') || undefined : undefined)}
+        onUpdateApplied={() => {
+          // Refresh plugin list if needed
+          fetchPlugins();
+        }}
+      />
 
       {/* Installed Plugins Section */}
       <Card className="bg-slate-900/90 border-slate-800">
@@ -2334,6 +2394,21 @@ function MarketplaceView({ data }: any) {
         </CardHeader>
         <CardContent>
           <PluginManager />
+        </CardContent>
+      </Card>
+
+      {/* Analytics Section */}
+      <Card className="bg-slate-900/90 border-slate-800">
+        <CardHeader>
+          <CardTitle className="text-white text-lg">📊 Plugin Analytics</CardTitle>
+          <CardDescription className="text-slate-400">
+            Usage statistics and performance metrics for your plugins
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <PluginAnalytics
+            userId={user?.id || (typeof window !== 'undefined' ? localStorage.getItem('beastModeUserId') || undefined : undefined)}
+          />
         </CardContent>
       </Card>
 
