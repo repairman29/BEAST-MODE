@@ -318,7 +318,9 @@ export default function PluginManager() {
                     <div>
                       <div className="text-cyan-400 font-semibold mb-2">Documentation:</div>
                       <a 
-                        href={`/docs/plugins/${selectedPlugin.id}`}
+                        href={typeof window !== 'undefined' && window.location.hostname.includes('beastmode.dev')
+                          ? `https://beastmode.dev/docs/plugins/${selectedPlugin.id}`
+                          : `/docs/plugins/${selectedPlugin.id}`}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-cyan-400 hover:underline"
