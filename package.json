@@ -46,6 +46,7 @@
     "train:transformer": "node scripts/train-transformer.js",
     "test:explainability": "node scripts/test-explainability.js",
     "compare:models": "node scripts/compare-models.js",
+    "quantize:model": "node scripts/quantize-model.js",
     "test:comprehensive": "node scripts/test-comprehensive.js",
     "test:expanded": "node scripts/test-expanded.js",
     "test:ftue": "node scripts/test-ftue.js",
