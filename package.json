@@ -48,6 +48,7 @@
     "compare:models": "node scripts/compare-models.js",
     "quantize:model": "node scripts/quantize-model.js",
     "test:enterprise": "node scripts/test-enterprise-features.js",
+    "test:multi-region": "node scripts/test-multi-region.js",
     "test:comprehensive": "node scripts/test-comprehensive.js",
     "test:expanded": "node scripts/test-expanded.js",
     "test:ftue": "node scripts/test-ftue.js",

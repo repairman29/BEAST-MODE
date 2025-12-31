@@ -62,6 +62,12 @@ const nextConfig = {
   // experimental: {
   //   optimizeCss: true,
   // },
+  
+  // Performance optimizations
+  reactStrictMode: true,
+  
+  // Compiler optimizations
+  swcMinify: true,
 };
 
 module.exports = nextConfig;

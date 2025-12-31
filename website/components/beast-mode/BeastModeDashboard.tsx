@@ -45,7 +45,16 @@ interface BeastModeDashboardInnerProps {
 
 function BeastModeDashboardInner({ initialView }: BeastModeDashboardInnerProps) {
   const { user, isFirstTime, setUser, signOut, completeOnboarding, isLoading: userLoading } = useUser();
+  const analytics = getAnalytics();
   const [showOnboarding, setShowOnboarding] = useState(false);
+
+  // Initialize analytics
+  useEffect(() => {
+    if (user) {
+      analytics.setUserId(user.id);
+      analytics.trackConversion('sign-in');
+    }
+  }, [user]);
 
   // Show onboarding for first-time users
   useEffect(() => {
