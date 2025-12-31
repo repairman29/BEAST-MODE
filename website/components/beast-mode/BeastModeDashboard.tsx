@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '../ui/card';
 import { Button } from '../ui/button';
 import NotificationWidget, { Notification } from '../hud/NotificationWidget';
+import { getAnalytics } from '../../lib/analytics';
 // Removed unused imports: ConversationalAI, HealthDashboard, AIRecommendations, MonetizationDashboard, MissionDashboard, DeploymentDashboard, GitHubScanForm
 // These features are now consolidated into Quality, Intelligence, Marketplace, and Settings tabs
 import AuthSection from './AuthSection';
