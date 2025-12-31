@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '../ui/card';
-import { Button } from '@/components/ui/button';
+import { Button } from '../ui/button';
 import { X, BookOpen, Rocket, CheckCircle2 } from 'lucide-react';
 
 interface OnboardingWelcomeProps {

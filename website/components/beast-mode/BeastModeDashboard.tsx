@@ -750,7 +750,7 @@ function StatLine({ label, value, max }: { label: string; value: number; max: nu
 /**
  * Quality View - Code Quality Analysis Dashboard
  */
-function QualityView({ data }: any) {
+function QualityView({ data }: any): React.JSX.Element {
   const [latestScan, setLatestScan] = React.useState<any>(null);
   const [allScans, setAllScans] = React.useState<any[]>([]);
   const [isLoading, setIsLoading] = React.useState(true);
@@ -967,7 +967,7 @@ function QualityView({ data }: any) {
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `beast-mode-report-${result.repo.replace('/', '-')}.json`;
+    a.download = `beast-mode-report-${result.repo.replace(/\//g, '-')}.json`;
     a.click();
     URL.revokeObjectURL(url);
   };
@@ -1112,8 +1112,7 @@ function QualityView({ data }: any) {
                     'text-red-500'
                   }`}
                   style={{
-                    filter: 'drop-shadow(0 0 8px rgba(6, 182, 212, 0.5))'
-                  }} 
+                    filter: 'drop-shadow(0 0 8px rgba(6, 182, 212, 0.5))',
                     strokeDashoffset: 0,
                     animationDelay: '0.2s'
                   }}
