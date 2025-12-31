@@ -51,6 +51,7 @@
     "test:multi-region": "node scripts/test-multi-region.js",
     "test:month7": "node scripts/test-month7-integration.js",
     "benchmark:month7": "node scripts/benchmark-month7.js",
+    "test:optimization": "node scripts/test-optimization.js",
     "test:comprehensive": "node scripts/test-comprehensive.js",
     "test:expanded": "node scripts/test-expanded.js",
     "test:ftue": "node scripts/test-ftue.js",
