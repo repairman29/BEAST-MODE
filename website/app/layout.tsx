@@ -3,7 +3,7 @@ import Navigation from '../components/layout/Navigation'
 import { UserProvider } from '../lib/user-context'
 
 export const metadata = {
-  title: 'BEAST MODE - Enterprise Quality Intelligence Platform',
+  title: 'BEAST MODE - Quality Intelligence for Vibe Coders',
   description: 'AI-powered development tools for vibe coders. Quality intelligence, intelligent recommendations, and a community of developers who ship with style.',
   keywords: 'AI, development, automation, enterprise, quality, intelligence, deployment, orchestration',
   authors: [{ name: 'BEAST MODE Team' }],
@@ -13,7 +13,7 @@ export const metadata = {
     apple: '/favicon.ico',
   },
   openGraph: {
-    title: 'BEAST MODE - AI Revolution in Development',
+    title: 'BEAST MODE - AI-Powered Development Tools',
     description: '9 integrated AI systems helping you build better code',
     type: 'website',
   },
