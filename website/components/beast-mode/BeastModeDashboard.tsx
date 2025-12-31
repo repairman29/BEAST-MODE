@@ -2455,36 +2455,63 @@ function MarketplaceView({ data }: any) {
 
   return (
     <div className="w-full max-w-7xl space-y-6 mx-auto pt-4 animate-in fade-in duration-500">
-      {/* Header */}
-      <Card className="bg-slate-900/90 border-slate-800 card-polish stagger-item">
-        <CardHeader>
-          <CardTitle className="text-white text-xl font-bold flex items-center gap-2">
-            <span className="text-2xl">📦</span>
-            Plugin Marketplace
-          </CardTitle>
-          <CardDescription className="text-slate-400 text-sm mt-2">
-            Find and install plugins for your code. We'll find the tools you need, you click install. It's that simple. 🎯
-          </CardDescription>
+      {/* Header - Enhanced */}
+      <Card className="bg-gradient-to-br from-slate-900/95 to-slate-800/90 border-slate-700/50 card-polish stagger-item shadow-xl">
+        <CardHeader className="pb-4">
+          <div className="flex items-start justify-between">
+            <div className="flex-1">
+              <CardTitle className="text-white text-xl md:text-2xl font-bold flex items-center gap-3 mb-2">
+                <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg flex items-center justify-center shadow-lg">
+                  <span className="text-xl">📦</span>
+                </div>
+                Plugin Marketplace
+              </CardTitle>
+              <CardDescription className="text-slate-400 text-sm mt-1">
+                Find and install plugins for your code. We'll find the tools you need, you click install. It's that simple. 🎯
+              </CardDescription>
+            </div>
+            {installedPlugins.size > 0 && (
+              <div className="hidden md:flex flex-col items-end gap-1">
+                <div className="text-xs text-slate-500 uppercase tracking-wider">Installed</div>
+                <div className="text-2xl font-bold text-green-400">{installedPlugins.size}</div>
+              </div>
+            )}
+          </div>
         </CardHeader>
-        <CardContent>
-          {/* Search */}
-          <input
-            type="text"
-            placeholder="Search plugins..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full bg-slate-950 border border-slate-700 rounded-lg px-4 py-3 text-white placeholder-slate-500 input-focus transition-all duration-200 mb-4"
-          />
+        <CardContent className="pt-4">
+          {/* Search - Enhanced */}
+          <div className="relative mb-4">
+            <input
+              type="text"
+              placeholder="Search plugins by name, description, or tags..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full bg-slate-950/80 border-2 border-slate-700 rounded-xl px-4 py-3.5 text-white placeholder-slate-500 input-focus transition-all duration-200 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 pr-12"
+            />
+            {searchQuery && (
+              <button
+                onClick={() => setSearchQuery('')}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-white transition-colors"
+              >
+                ✕
+              </button>
+            )}
+            <div className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500">
+              🔍
+            </div>
+          </div>
           
-          {/* Category Filters */}
+          {/* Category Filters - Enhanced */}
           <div className="flex flex-wrap gap-2">
             {categories.map((cat) => (
               <Button
                 key={cat}
                 variant={selectedCategory === cat ? 'default' : 'outline'}
-                className={selectedCategory === cat 
-                  ? 'bg-white text-black hover:bg-slate-100' 
-                  : 'border-slate-800 text-slate-400 hover:bg-slate-900'}
+                className={`transition-all duration-200 font-medium ${
+                  selectedCategory === cat 
+                    ? 'bg-gradient-to-r from-cyan-600 to-cyan-500 hover:from-cyan-700 hover:to-cyan-600 text-white shadow-lg shadow-cyan-500/20 scale-105' 
+                    : 'bg-slate-800/50 hover:bg-slate-700/50 text-slate-300 hover:text-white border border-slate-700/50'
+                }`}
                 onClick={() => setSelectedCategory(cat)}
               >
                 {cat.charAt(0).toUpperCase() + cat.slice(1)}
@@ -2494,38 +2521,42 @@ function MarketplaceView({ data }: any) {
         </CardContent>
       </Card>
 
-      {/* Stats */}
+      {/* Stats - Enhanced */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <Card className="bg-slate-900/90 border-slate-800 card-polish stagger-item">
+        <Card className="bg-gradient-to-br from-slate-800/60 to-slate-900/40 border-2 border-slate-700/50 card-polish stagger-item hover:border-cyan-500/50 transition-all duration-200 hover:scale-[1.02] hover:shadow-xl">
           <CardContent className="pt-6">
             <div className="text-slate-400 text-xs uppercase tracking-wider mb-2 font-medium">Total Plugins</div>
-            <div className="text-4xl font-bold text-white mb-1">{plugins.length}</div>
+            <div className="text-4xl md:text-5xl font-bold text-white mb-1">{plugins.length}</div>
+            <div className="text-xs text-slate-500">Available now</div>
           </CardContent>
         </Card>
-        <Card className="bg-slate-900/90 border-slate-800 card-polish stagger-item">
+        <Card className="bg-gradient-to-br from-slate-800/60 to-slate-900/40 border-2 border-slate-700/50 card-polish stagger-item hover:border-cyan-500/50 transition-all duration-200 hover:scale-[1.02] hover:shadow-xl">
           <CardContent className="pt-6">
             <div className="text-slate-400 text-xs uppercase tracking-wider mb-2 font-medium">Total Downloads</div>
-            <div className="text-4xl font-bold text-cyan-400 mb-1">
+            <div className="text-4xl md:text-5xl font-bold text-cyan-400 mb-1">
               {plugins.reduce((sum, p) => sum + (p.plugin.downloads || 0), 0).toLocaleString()}
             </div>
+            <div className="text-xs text-slate-500">Community trusted</div>
           </CardContent>
         </Card>
-        <Card className="bg-slate-900/90 border-slate-800 card-polish stagger-item">
+        <Card className="bg-gradient-to-br from-slate-800/60 to-slate-900/40 border-2 border-slate-700/50 card-polish stagger-item hover:border-green-500/50 transition-all duration-200 hover:scale-[1.02] hover:shadow-xl">
           <CardContent className="pt-6">
             <div className="text-slate-400 text-xs uppercase tracking-wider mb-2 font-medium">Avg Rating</div>
-            <div className="text-4xl font-bold text-green-400 mb-1">
+            <div className="text-4xl md:text-5xl font-bold text-green-400 mb-1">
               {plugins.length > 0 
                 ? (plugins.reduce((sum, p) => sum + (p.plugin.rating || 0), 0) / plugins.length).toFixed(1)
                 : '0.0'}
             </div>
+            <div className="text-xs text-slate-500">⭐ Quality score</div>
           </CardContent>
         </Card>
-        <Card className="bg-slate-900/90 border-slate-800 card-polish stagger-item">
+        <Card className="bg-gradient-to-br from-slate-800/60 to-slate-900/40 border-2 border-slate-700/50 card-polish stagger-item hover:border-purple-500/50 transition-all duration-200 hover:scale-[1.02] hover:shadow-xl">
           <CardContent className="pt-6">
             <div className="text-slate-400 text-xs uppercase tracking-wider mb-2 font-medium">Free Plugins</div>
-            <div className="text-4xl font-bold text-white mb-1">
+            <div className="text-4xl md:text-5xl font-bold text-white mb-1">
               {plugins.filter(p => p.plugin.price === 0).length}
             </div>
+            <div className="text-xs text-slate-500">100% free</div>
           </CardContent>
         </Card>
       </div>
@@ -2551,56 +2582,70 @@ function MarketplaceView({ data }: any) {
           </CardContent>
         </Card>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {filteredPlugins.map((item, idx) => (
-            <Card key={item.pluginId} className="bg-slate-900/90 border-slate-800 card-polish stagger-item" style={{ animationDelay: `${idx * 0.05}s` }}>
-              <CardHeader>
-                <div className="flex items-start justify-between">
-                  <div className="flex-1">
-                    <CardTitle className="text-white text-lg mb-1">{item.plugin.name}</CardTitle>
-                    <CardDescription className="text-slate-400 text-sm">
+            <Card 
+              key={item.pluginId} 
+              className={`bg-gradient-to-br from-slate-800/60 to-slate-900/40 border-2 card-polish stagger-item transition-all duration-200 hover:scale-[1.02] hover:shadow-xl ${
+                installedPlugins.has(item.pluginId)
+                  ? 'border-green-500/50 shadow-lg shadow-green-500/10'
+                  : 'border-slate-700/50 hover:border-cyan-500/50'
+              }`}
+              style={{ animationDelay: `${idx * 0.05}s` }}
+            >
+              <CardHeader className="pb-3">
+                <div className="flex items-start justify-between gap-3">
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2 mb-2">
+                      <CardTitle className="text-white text-lg font-bold truncate">{item.plugin.name}</CardTitle>
+                      {installedPlugins.has(item.pluginId) && (
+                        <span className="px-2 py-0.5 bg-green-500/20 text-green-400 rounded text-xs font-semibold border border-green-500/30 flex-shrink-0">
+                          ✓ Installed
+                        </span>
+                      )}
+                    </div>
+                    <CardDescription className="text-slate-400 text-sm line-clamp-2">
                       {item.plugin.description}
                     </CardDescription>
                   </div>
-                  <div className="ml-4 text-right">
-                    <div className="text-green-400 font-semibold">⭐ {item.plugin.rating}</div>
-                    <div className="text-slate-500 text-xs mt-1">{item.plugin.downloads?.toLocaleString()} downloads</div>
-                    <Button
-                      onClick={() => {
-                        setSelectedPlugin(item.pluginId);
-                        setShowReviews(true);
-                      }}
-                      variant="ghost"
-                      className="text-slate-400 hover:text-cyan-400 text-xs p-0 h-auto mt-1"
-                    >
-                      View Reviews
-                    </Button>
+                  <div className="flex flex-col items-end gap-1 flex-shrink-0">
+                    <div className="flex items-center gap-1 text-green-400 font-semibold">
+                      <span>⭐</span>
+                      <span>{item.plugin.rating}</span>
+                    </div>
+                    <div className="text-slate-500 text-xs">
+                      {item.plugin.downloads?.toLocaleString()} downloads
+                    </div>
                   </div>
                 </div>
               </CardHeader>
-              <CardContent>
+              <CardContent className="pt-0">
                 <div className="flex flex-wrap gap-2 mb-4">
                   {item.plugin.tags?.slice(0, 3).map((tag: string) => (
-                    <span key={tag} className="px-2.5 py-1 bg-slate-800/50 text-slate-300 text-xs rounded-full border border-slate-700/50 badge-polish">
+                    <span key={tag} className="px-2.5 py-1 bg-slate-800/50 text-slate-300 text-xs rounded-full border border-slate-700/50 badge-polish hover:border-cyan-500/50 transition-colors">
                       {tag}
                     </span>
                   ))}
                 </div>
                 {item.plugin.dependencies && item.plugin.dependencies.length > 0 && (
-                  <div className="mb-3 p-2 bg-slate-950 rounded border border-slate-800">
-                    <div className="text-slate-400 text-xs mb-1">📦 Requires:</div>
-                    <div className="flex flex-wrap gap-1">
+                  <div className="mb-4 p-3 bg-slate-950/50 rounded-lg border border-slate-800/50">
+                    <div className="text-slate-400 text-xs mb-2 font-medium">📦 Requires:</div>
+                    <div className="flex flex-wrap gap-1.5">
                       {item.plugin.dependencies.map((depId: string) => (
-                        <span key={depId} className="px-2 py-1 bg-cyan-500/20 text-cyan-400 text-xs rounded">
+                        <span key={depId} className="px-2 py-1 bg-cyan-500/20 text-cyan-400 text-xs rounded border border-cyan-500/30">
                           {depId}
                         </span>
                       ))}
                     </div>
                   </div>
                 )}
-                <div className="flex items-center justify-between">
-                  <div className="text-slate-400 text-sm">
-                    {item.plugin.price === 0 ? 'Free' : `$${item.plugin.price}/mo`}
+                <div className="flex items-center justify-between pt-3 border-t border-slate-800/50">
+                  <div className="flex items-center gap-2">
+                    <span className={`text-sm font-semibold ${
+                      item.plugin.price === 0 ? 'text-green-400' : 'text-amber-400'
+                    }`}>
+                      {item.plugin.price === 0 ? '🆓 Free' : `$${item.plugin.price}/mo`}
+                    </span>
                   </div>
                   <div className="flex gap-2">
                     <Button
@@ -2609,18 +2654,22 @@ function MarketplaceView({ data }: any) {
                         setShowReviews(true);
                       }}
                       variant="outline"
-                      className="border-slate-700 text-slate-300 hover:bg-slate-800 text-xs"
+                      size="sm"
+                      className="border-slate-700 text-slate-300 hover:bg-slate-800 hover:text-white hover:border-slate-600 text-xs"
                     >
                       ⭐ Reviews
                     </Button>
                     <Button
                       onClick={() => installPlugin(item.pluginId, true)}
                       disabled={installingPlugins.has(item.pluginId) || installedPlugins.has(item.pluginId)}
-                      className={`${
+                      size="sm"
+                      className={`font-semibold transition-all duration-200 ${
                         installedPlugins.has(item.pluginId)
-                          ? 'bg-green-600 hover:bg-green-700 text-white'
-                          : 'bg-cyan-500 hover:bg-cyan-600 text-white'
-                      }`}
+                          ? 'bg-green-600 hover:bg-green-700 text-white shadow-lg shadow-green-500/20'
+                          : installingPlugins.has(item.pluginId)
+                          ? 'bg-slate-600 text-white cursor-wait'
+                          : 'bg-gradient-to-r from-cyan-600 to-cyan-500 hover:from-cyan-700 hover:to-cyan-600 text-white shadow-lg shadow-cyan-500/20'
+                      } disabled:opacity-50 disabled:cursor-not-allowed`}
                     >
                       {installingPlugins.has(item.pluginId) ? (
                         <>
@@ -2633,7 +2682,10 @@ function MarketplaceView({ data }: any) {
                           Installed
                         </>
                       ) : (
-                        'Install'
+                        <>
+                          <span className="mr-2">📥</span>
+                          Install
+                        </>
                       )}
                     </Button>
                   </div>
