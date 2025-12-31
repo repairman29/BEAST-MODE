@@ -310,6 +310,143 @@ program
             })
     );
 
+// CI/CD Commands
+program
+    .command('ci')
+    .description('CI/CD integration commands')
+    .addCommand(
+        new Command('github-actions')
+            .description('Generate GitHub Actions workflow')
+            .option('-o, --output <file>', 'Output file path', '.github/workflows/beast-mode-quality-check.yml')
+            .option('-s, --min-score <score>', 'Minimum quality score', '80')
+            .action(async (options) => {
+                const GitHubActionsIntegration = require('../lib/integrations/github-actions');
+                const workflow = GitHubActionsIntegration.generateWorkflow({
+                    minScore: parseInt(options.minScore),
+                    name: 'beast-mode-quality-check'
+                });
+                
+                const fs = require('fs-extra');
+                const path = require('path');
+                const outputPath = path.resolve(options.output);
+                await fs.ensureDir(path.dirname(outputPath));
+                await fs.writeFile(outputPath, workflow);
+                
+                console.log(chalk.green(`✅ GitHub Actions workflow created at ${outputPath}`));
+                console.log(chalk.cyan('Add it to your repository and push to enable automated quality checks!'));
+            })
+    )
+    .addCommand(
+        new Command('vercel')
+            .description('Configure Vercel integration')
+            .option('-c, --config', 'Generate vercel.json configuration')
+            .option('-p, --pre-deploy', 'Run pre-deployment check')
+            .action(async (options) => {
+                const VercelIntegration = require('../lib/integrations/vercel');
+                const integration = new VercelIntegration();
+                
+                if (options.config) {
+                    const config = VercelIntegration.generateVercelConfig();
+                    const fs = require('fs-extra');
+                    await fs.writeJson('vercel.json', config, { spaces: 2 });
+                    console.log(chalk.green('✅ vercel.json configuration created'));
+                }
+                
+                if (options.preDeploy) {
+                    const spinner = ora('Running pre-deployment check...').start();
+                    const results = await integration.preDeployCheck();
+                    spinner.stop();
+                    
+                    if (results.skipped) {
+                        console.log(chalk.yellow('⚠️  Not in Vercel environment, skipping check'));
+                    } else {
+                        console.log(chalk.cyan(`\nQuality Score: ${results.score}/100`));
+                        console.log(chalk.cyan(`Issues: ${results.issues?.length || 0}`));
+                    }
+                }
+            })
+    )
+    .addCommand(
+        new Command('railway')
+            .description('Configure Railway integration')
+            .option('-c, --config', 'Generate railway.json configuration')
+            .option('-h, --health', 'Run health check')
+            .action(async (options) => {
+                const RailwayIntegration = require('../lib/integrations/railway');
+                const integration = new RailwayIntegration();
+                
+                if (options.config) {
+                    const config = RailwayIntegration.generateRailwayConfig();
+                    const fs = require('fs-extra');
+                    await fs.writeJson('railway.json', config, { spaces: 2 });
+                    console.log(chalk.green('✅ railway.json configuration created'));
+                }
+                
+                if (options.health) {
+                    const spinner = ora('Running health check...').start();
+                    const results = await integration.healthCheck();
+                    spinner.stop();
+                    
+                    if (results.skipped) {
+                        console.log(chalk.yellow('⚠️  Not in Railway environment, skipping check'));
+                    } else {
+                        console.log(chalk.cyan(`\nHealth Status: ${results.healthy ? '✅ Healthy' : '❌ Unhealthy'}`));
+                    }
+                }
+            })
+    )
+    .addCommand(
+        new Command('check')
+            .description('Run CI quality check')
+            .option('-p, --platform <platform>', 'CI platform (github-actions, vercel, railway)', 'github-actions')
+            .option('-s, --min-score <score>', 'Minimum quality score', '80')
+            .option('--fail-on-low-score', 'Exit with error if score is too low')
+            .action(async (options) => {
+                const spinner = ora('Running CI quality check...').start();
+                
+                try {
+                    let integration;
+                    if (options.platform === 'github-actions') {
+                        const GitHubActionsIntegration = require('../lib/integrations/github-actions');
+                        integration = new GitHubActionsIntegration({
+                            minScore: parseInt(options.minScore),
+                            failOnLowScore: options.failOnLowScore
+                        });
+                    } else if (options.platform === 'vercel') {
+                        const VercelIntegration = require('../lib/integrations/vercel');
+                        integration = new VercelIntegration({
+                            minScore: parseInt(options.minScore)
+                        });
+                        const results = await integration.preDeployCheck();
+                        spinner.succeed(chalk.green(`Quality check complete: ${results.score || 0}/100`));
+                        return;
+                    } else if (options.platform === 'railway') {
+                        const RailwayIntegration = require('../lib/integrations/railway');
+                        integration = new RailwayIntegration({
+                            minScore: parseInt(options.minScore)
+                        });
+                        const results = await integration.healthCheck();
+                        spinner.succeed(chalk.green(`Health check complete: ${results.healthy ? 'Healthy' : 'Unhealthy'}`));
+                        return;
+                    }
+                    
+                    const results = await integration.runQualityCheck();
+                    spinner.succeed(chalk.green(`Quality check complete: ${results.score}/100`));
+                    
+                    if (results.score < parseInt(options.minScore)) {
+                        console.log(chalk.yellow(`⚠️  Quality score (${results.score}) is below minimum (${options.minScore})`));
+                        if (options.failOnLowScore) {
+                            process.exit(1);
+                        }
+                    }
+                } catch (error) {
+                    spinner.fail(chalk.red('Quality check failed'));
+                    console.error(chalk.red(error.message));
+                    process.exit(1);
+                }
+            })
+    );
+
 // Help and Info
 program
     .command('info')
