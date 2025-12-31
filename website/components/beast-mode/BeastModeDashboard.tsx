@@ -17,6 +17,7 @@ import PluginManager from './PluginManager';
 import PluginReviews from './PluginReviews';
 import PluginUpdates from './PluginUpdates';
 import PluginAnalytics from './PluginAnalytics';
+import PluginAnalyticsEnhanced from './PluginAnalyticsEnhanced';
 import PredictiveAnalytics from './PredictiveAnalytics';
 import AutomatedCodeReview from './AutomatedCodeReview';
 import TeamWorkspace from './TeamWorkspace';
