@@ -32,7 +32,7 @@ import CollaborationWorkspace from './CollaborationWorkspace';
 import MLMonitoringDashboard from './MLMonitoringDashboard';
 import GamificationSystem from './GamificationSystem';
 import MobileNavigation from './MobileNavigation';
-import { ErrorBoundary } from '../ui/ErrorBoundary';
+import ErrorBoundary from '../ui/ErrorBoundary';
 import { useUser } from '../../lib/user-context';
 
 /**
