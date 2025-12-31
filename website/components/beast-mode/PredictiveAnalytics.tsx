@@ -307,8 +307,8 @@ export default function PredictiveAnalytics({ userId }: PredictiveAnalyticsProps
                   }`}
                 >
                   <div className="text-white font-semibold mb-2">{rec.action}</div>
-                  {rec.description && (
-                    <div className="text-slate-400 text-sm mb-3">{rec.description}</div>
+                  {(rec as any).description && (
+                    <div className="text-slate-400 text-sm mb-3">{(rec as any).description}</div>
                   )}
                   {rec.steps && rec.steps.length > 0 && (
                     <div className="space-y-1">
