@@ -2071,7 +2071,18 @@ function IntelligenceView({ data, messages, onCommand, commandInput, setCommandI
                                         headers: { 'Content-Type': 'application/json' },
                                         body: JSON.stringify({ status: 'completed', progress: 100 })
                                       });
-                                      if (response.ok) await fetchMissions();
+                                      if (response.ok) {
+                                        // Trigger gamification event
+                                        window.dispatchEvent(new CustomEvent('beast-mode-gamification', { detail: { action: 'mission' } }));
+                                        // Show success notification
+                                        window.dispatchEvent(new CustomEvent('beast-mode-notification', {
+                                          detail: {
+                                            type: 'success',
+                                            message: `🎯 Mission completed! +30 XP!`
+                                          }
+                                        }));
+                                        await fetchMissions();
+                                      }
                                     } catch (e) { console.error(e); }
                                   }
                                 }}
