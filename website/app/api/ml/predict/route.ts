@@ -34,7 +34,18 @@ export async function POST(request: NextRequest) {
     // If ML model is available, use it
     if (mlIntegration && mlIntegration.isMLModelAvailable()) {
       try {
-        const prediction = mlIntegration.predictQualitySync(context);
+        // Add service name to context (detect from provider or use default)
+        const serviceName = context.provider === 'first-mate' ? 'first-mate' : 
+                          context.provider === 'game-app' ? 'game-app' :
+                          'unknown';
+        
+        const enhancedContext = {
+          ...context,
+          serviceName: serviceName,
+          predictionType: context.actionType || 'quality'
+        };
+        
+        const prediction = mlIntegration.predictQualitySync(enhancedContext);
         
         return NextResponse.json({
           prediction: {
