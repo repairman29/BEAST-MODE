@@ -1,8 +1,22 @@
+const path = require('path');
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   // Performance optimizations
   compress: true,
   poweredByHeader: false,
+  
+  // Allow imports from parent directory (lib folder)
+  webpack: (config, { isServer }) => {
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      '@lib': path.resolve(__dirname, '../lib'),
+    };
+    return config;
+  },
+  
+  // Transpile packages from parent directory
+  transpilePackages: [],
   
   // Image optimization
   images: {
