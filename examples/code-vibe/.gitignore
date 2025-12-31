@@ -1,0 +1,6 @@
+node_modules/
+.beast-mode/
+.env
+*.log
+.DS_Store
+
