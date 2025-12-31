@@ -304,25 +304,47 @@ export default function SharedDashboard({ dashboardId, userId }: SharedDashboard
           </CardContent>
         </Card>
 
-        {/* Recent Activity */}
-        <Card className="bg-slate-900/90 border-slate-800">
-          <CardHeader>
-            <CardTitle className="text-white text-lg">📋 Recent Activity</CardTitle>
+        {/* Recent Activity - Enhanced */}
+        <Card className="bg-gradient-to-br from-slate-900/95 to-slate-800/90 border-2 border-slate-700/50 shadow-xl">
+          <CardHeader className="pb-4">
+            <CardTitle className="text-white text-lg font-bold flex items-center gap-2">
+              <span className="text-xl">📋</span>
+              Recent Activity
+            </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="space-y-2">
-              {data.recentActivity.map((activity) => (
+            <div className="space-y-3">
+              {data.recentActivity.map((activity, idx) => (
                 <div
                   key={activity.id}
-                  className="p-3 bg-slate-950 rounded-lg border border-slate-800"
+                  className="p-4 bg-slate-800/50 rounded-xl border-2 border-slate-700/50 hover:border-cyan-500/50 transition-all duration-200 hover:scale-[1.01] hover:shadow-lg"
+                  style={{ animationDelay: `${idx * 50}ms` }}
                 >
-                  <div className="text-white text-sm">
-                    <span className="font-semibold">{activity.userName}</span>
-                    {' '}
-                    <span className="text-slate-400">{activity.action}</span>
-                  </div>
-                  <div className="text-slate-500 text-xs mt-1">
-                    {new Date(activity.timestamp).toLocaleString()}
+                  <div className="flex items-start gap-3">
+                    <div className="w-8 h-8 rounded-lg bg-cyan-500/20 flex items-center justify-center flex-shrink-0 border border-cyan-500/30">
+                      <span className="text-cyan-400 text-sm">
+                        {activity.type === 'scan' ? '🔍' :
+                         activity.type === 'fix' ? '🔧' :
+                         activity.type === 'mission' ? '🎯' :
+                         '📝'}
+                      </span>
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="text-white text-sm leading-relaxed">
+                        <span className="font-semibold text-cyan-400">{activity.userName}</span>
+                        {' '}
+                        <span className="text-slate-300">{activity.action}</span>
+                        {activity.target && (
+                          <>
+                            {' '}
+                            <span className="text-slate-400">{activity.target}</span>
+                          </>
+                        )}
+                      </div>
+                      <div className="text-slate-500 text-xs mt-2 flex items-center gap-2">
+                        <span>🕐 {new Date(activity.timestamp).toLocaleString()}</span>
+                      </div>
+                    </div>
                   </div>
                 </div>
               ))}
@@ -330,26 +352,32 @@ export default function SharedDashboard({ dashboardId, userId }: SharedDashboard
           </CardContent>
         </Card>
 
-        {/* Trends */}
-        <Card className="bg-slate-900/90 border-slate-800">
-          <CardHeader>
-            <CardTitle className="text-white text-lg">📈 Trends</CardTitle>
+        {/* Trends - Enhanced */}
+        <Card className="bg-gradient-to-br from-slate-900/95 to-slate-800/90 border-2 border-slate-700/50 shadow-xl">
+          <CardHeader className="pb-4">
+            <CardTitle className="text-white text-lg font-bold flex items-center gap-2">
+              <span className="text-xl">📈</span>
+              Trends
+            </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="space-y-4">
+            <div className="space-y-6">
               <div>
-                <div className="flex items-center justify-between mb-2">
-                  <div className="text-slate-400 text-sm">Quality Score</div>
-                  <div className={`text-sm font-semibold ${
+                <div className="flex items-center justify-between mb-3">
+                  <div className="text-slate-300 text-sm font-medium">Quality Score</div>
+                  <div className={`text-base font-bold flex items-center gap-1 ${
                     data.trends.qualityScore.direction === 'up' ? 'text-green-400' : 'text-red-400'
                   }`}>
+                    {data.trends.qualityScore.direction === 'up' ? '📈' : '📉'}
                     {data.trends.qualityScore.change > 0 ? '+' : ''}{data.trends.qualityScore.change}
                   </div>
                 </div>
-                <div className="h-2 bg-slate-800 rounded-full overflow-hidden">
+                <div className="h-3 bg-slate-800 rounded-full overflow-hidden border border-slate-700/50">
                   <div
-                    className={`h-full ${
-                      data.trends.qualityScore.direction === 'up' ? 'bg-green-500' : 'bg-red-500'
+                    className={`h-full transition-all duration-500 ${
+                      data.trends.qualityScore.direction === 'up' 
+                        ? 'bg-gradient-to-r from-green-500 to-green-400' 
+                        : 'bg-gradient-to-r from-red-500 to-red-400'
                     }`}
                     style={{ width: `${Math.min(100, Math.abs(data.trends.qualityScore.change) * 10)}%` }}
                   />
@@ -357,18 +385,21 @@ export default function SharedDashboard({ dashboardId, userId }: SharedDashboard
               </div>
 
               <div>
-                <div className="flex items-center justify-between mb-2">
-                  <div className="text-slate-400 text-sm">Issues</div>
-                  <div className={`text-sm font-semibold ${
+                <div className="flex items-center justify-between mb-3">
+                  <div className="text-slate-300 text-sm font-medium">Issues</div>
+                  <div className={`text-base font-bold flex items-center gap-1 ${
                     data.trends.issues.direction === 'down' ? 'text-green-400' : 'text-red-400'
                   }`}>
+                    {data.trends.issues.direction === 'down' ? '📉' : '📈'}
                     {data.trends.issues.change > 0 ? '+' : ''}{data.trends.issues.change}
                   </div>
                 </div>
-                <div className="h-2 bg-slate-800 rounded-full overflow-hidden">
+                <div className="h-3 bg-slate-800 rounded-full overflow-hidden border border-slate-700/50">
                   <div
-                    className={`h-full ${
-                      data.trends.issues.direction === 'down' ? 'bg-green-500' : 'bg-red-500'
+                    className={`h-full transition-all duration-500 ${
+                      data.trends.issues.direction === 'down' 
+                        ? 'bg-gradient-to-r from-green-500 to-green-400' 
+                        : 'bg-gradient-to-r from-red-500 to-red-400'
                     }`}
                     style={{ width: `${Math.min(100, Math.abs(data.trends.issues.change) * 5)}%` }}
                   />
@@ -376,15 +407,15 @@ export default function SharedDashboard({ dashboardId, userId }: SharedDashboard
               </div>
 
               <div>
-                <div className="flex items-center justify-between mb-2">
-                  <div className="text-slate-400 text-sm">Resolved Issues</div>
-                  <div className="text-sm font-semibold text-green-400">
-                    +{data.trends.resolvedIssues.change}
+                <div className="flex items-center justify-between mb-3">
+                  <div className="text-slate-300 text-sm font-medium">Resolved Issues</div>
+                  <div className="text-base font-bold flex items-center gap-1 text-green-400">
+                    📈 +{data.trends.resolvedIssues.change}
                   </div>
                 </div>
-                <div className="h-2 bg-slate-800 rounded-full overflow-hidden">
+                <div className="h-3 bg-slate-800 rounded-full overflow-hidden border border-slate-700/50">
                   <div
-                    className="h-full bg-green-500"
+                    className="h-full bg-gradient-to-r from-green-500 to-green-400 transition-all duration-500"
                     style={{ width: `${Math.min(100, data.trends.resolvedIssues.change * 5)}%` }}
                   />
                 </div>
