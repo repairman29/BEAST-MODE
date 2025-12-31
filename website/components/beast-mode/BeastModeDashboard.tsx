@@ -33,6 +33,7 @@ import GamificationSystem from './GamificationSystem';
 import MobileNavigation from './MobileNavigation';
 import { ErrorBoundary } from '../ui/ErrorBoundary';
 import { useUser } from '../../lib/user-context';
+import { getErrorMonitor } from '../../lib/error-monitoring';
 
 /**
  * BEAST MODE Enterprise Dashboard
