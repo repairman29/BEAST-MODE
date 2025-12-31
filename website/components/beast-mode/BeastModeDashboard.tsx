@@ -29,6 +29,8 @@ import IntegrationsManager from './IntegrationsManager';
 import CollaborationWorkspace from './CollaborationWorkspace';
 import MLMonitoringDashboard from './MLMonitoringDashboard';
 import GamificationSystem from './GamificationSystem';
+import MobileNavigation from './MobileNavigation';
+import { ErrorBoundary } from '../ui/ErrorBoundary';
 import { useUser } from '../../lib/user-context';
 
 /**
@@ -239,33 +241,45 @@ function BeastModeDashboardInner({ initialView }: BeastModeDashboardInnerProps) 
   }, []);
 
   return (
-    <div className="relative w-full h-full min-h-screen bg-black overflow-hidden flex">
-      {/* FTUE Onboarding */}
-      {showOnboarding && (
-        <FTUEOnboarding
-          onComplete={() => {
-            setShowOnboarding(false);
-            completeOnboarding();
-          }}
-          onSkip={() => {
-            setShowOnboarding(false);
-            completeOnboarding();
-          }}
+    <ErrorBoundary>
+      <div className="relative w-full h-full min-h-screen bg-black overflow-hidden flex">
+        {/* FTUE Onboarding */}
+        {showOnboarding && (
+          <FTUEOnboarding
+            onComplete={() => {
+              setShowOnboarding(false);
+              completeOnboarding();
+            }}
+            onSkip={() => {
+              setShowOnboarding(false);
+              completeOnboarding();
+            }}
+          />
+        )}
+
+        {/* Sidebar */}
+        <ErrorBoundary>
+          <Sidebar
+            currentView={currentView}
+            onViewChange={(view) => setCurrentView(view as typeof currentView)}
+            onCommandPalette={() => setIsCommandPaletteOpen(true)}
+          />
+        </ErrorBoundary>
+
+        {/* Dashboard Header */}
+        <ErrorBoundary>
+          <DashboardHeader user={user} onSignOut={signOut} />
+        </ErrorBoundary>
+
+        {/* Mobile Navigation */}
+        <MobileNavigation
+          currentView={currentView}
+          onViewChange={(view) => setCurrentView(view as typeof currentView)}
+          onCommandPalette={() => setIsCommandPaletteOpen(true)}
         />
-      )}
-
-      {/* Sidebar */}
-      <Sidebar
-        currentView={currentView}
-        onViewChange={(view) => setCurrentView(view as typeof currentView)}
-        onCommandPalette={() => setIsCommandPaletteOpen(true)}
-      />
-
-      {/* Dashboard Header */}
-      <DashboardHeader user={user} onSignOut={signOut} />
 
       {/* Main Content Area */}
-      <div className="flex-1 flex flex-col ml-64 transition-all duration-300 ease-in-out relative pt-16 z-0 pb-16">
+      <div className="flex-1 flex flex-col md:ml-64 transition-all duration-300 ease-in-out relative pt-16 md:pt-16 pb-16">
         {/* Background ambient effects */}
         <div className="absolute inset-0 bg-gradient-to-b from-black via-slate-950 to-black z-0"></div>
         <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:64px_64px] z-0"></div>
