@@ -29,12 +29,12 @@ export default function OnboardingWelcome({ onDismiss }: OnboardingWelcomeProps)
 
   const steps = [
     {
-      title: 'Welcome to BEAST MODE! 🎉',
-      description: 'You\'re about to transform how you build software.',
+      title: 'Welcome to BEAST MODE! 🎸',
+      description: 'You\'re about to experience the BEAST MODE VIBE.',
       content: (
         <div className="space-y-4">
           <p className="text-slate-300">
-            BEAST MODE is your AI-powered development companion. We're here to help you write better code, faster.
+            BEAST MODE is built for <strong className="text-cyan-400">vibe coders</strong> like you - developers who code with passion, build with purpose, and ship with style. We're here to help you write better code, learn faster, and have more fun.
           </p>
           <div className="grid grid-cols-2 gap-4">
             <div className="bg-slate-800/50 p-4 rounded-lg">
