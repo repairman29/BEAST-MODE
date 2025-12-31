@@ -6,7 +6,7 @@ import React, { Component, ErrorInfo, ReactNode } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from './card';
 import { Button } from './button';
 
-interface Props {
+export interface Props {
   children: ReactNode;
   fallback?: ReactNode;
   onError?: (error: Error, errorInfo: ErrorInfo) => void;
@@ -143,6 +143,12 @@ class ErrorBoundary extends Component<Props, State> {
 }
 
 // Export both default and named for compatibility
-export default ErrorBoundary;
+// Export the class component
 export { ErrorBoundary };
+export default ErrorBoundary;
+
+// Also export a function wrapper for better Next.js compatibility
+export function ErrorBoundaryWrapper({ children, fallback, onError }: Props) {
+  return <ErrorBoundary fallback={fallback} onError={onError}>{children}</ErrorBoundary>;
+}
 
