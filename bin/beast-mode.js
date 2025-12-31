@@ -355,6 +355,12 @@ if (process.argv.length === 2) {
     program.outputHelp();
 }
 
+// Helper function for init command (moved from bottom to avoid duplicate)
+async function initializeBEASTMODE(options) {
+    const { initializeBEASTMODE: initFn } = require('../lib/init');
+    return await initFn(options);
+}
+
 // Parse and execute
 program.parse();
     const configPath = path.join(process.cwd(), '.beast-mode.json');
