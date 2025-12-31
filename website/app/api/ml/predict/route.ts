@@ -47,7 +47,17 @@ export async function POST(request: NextRequest) {
         
         const prediction = mlIntegration.predictQualitySync(enhancedContext);
         
-        return NextResponse.json({
+        // Get expanded predictions if requested
+        let expandedPredictions = null;
+        if (context.includeExpanded !== false) {
+          try {
+            expandedPredictions = await mlIntegration.getExpandedPredictions(enhancedContext);
+          } catch (error) {
+            console.debug('[ML API] Expanded predictions not available:', error.message);
+          }
+        }
+        
+        const response: any = {
           prediction: {
             predictedQuality: prediction.predictedQuality,
             confidence: prediction.confidence,
@@ -56,7 +66,13 @@ export async function POST(request: NextRequest) {
           },
           timestamp: new Date().toISOString(),
           mlAvailable: true
-        });
+        };
+
+        if (expandedPredictions) {
+          response.expanded = expandedPredictions;
+        }
+        
+        return NextResponse.json(response);
       } catch (error) {
         console.warn('[ML API] ML prediction failed:', error.message);
         // Fall through to heuristic fallback
