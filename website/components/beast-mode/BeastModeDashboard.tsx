@@ -1599,6 +1599,54 @@ function IntelligenceView({ data, messages, onCommand, commandInput, setCommandI
 
   return (
     <div className="w-full max-w-7xl space-y-6 mx-auto pt-4 animate-in fade-in duration-500">
+      {/* Section Navigation */}
+      <Card className="bg-slate-900/90 border-slate-800 card-polish">
+        <CardContent className="pt-6">
+          <div className="flex flex-wrap gap-2">
+            <Button
+              onClick={() => setActiveSection('chat')}
+              className={activeSection === 'chat' 
+                ? 'bg-cyan-600 hover:bg-cyan-700 text-white' 
+                : 'bg-slate-800 hover:bg-slate-700 text-slate-300'}
+            >
+              💬 Chat
+            </Button>
+            <Button
+              onClick={() => setActiveSection('recommendations')}
+              className={activeSection === 'recommendations' 
+                ? 'bg-cyan-600 hover:bg-cyan-700 text-white' 
+                : 'bg-slate-800 hover:bg-slate-700 text-slate-300'}
+            >
+              💡 Recommendations
+            </Button>
+            <Button
+              onClick={() => setActiveSection('missions')}
+              className={activeSection === 'missions' 
+                ? 'bg-cyan-600 hover:bg-cyan-700 text-white' 
+                : 'bg-slate-800 hover:bg-slate-700 text-slate-300'}
+            >
+              🎯 Missions
+            </Button>
+            <Button
+              onClick={() => setActiveSection('predictive')}
+              className={activeSection === 'predictive' 
+                ? 'bg-cyan-600 hover:bg-cyan-700 text-white' 
+                : 'bg-slate-800 hover:bg-slate-700 text-slate-300'}
+            >
+              📈 Predictive Analytics
+            </Button>
+            <Button
+              onClick={() => setActiveSection('code-review')}
+              className={activeSection === 'code-review' 
+                ? 'bg-cyan-600 hover:bg-cyan-700 text-white' 
+                : 'bg-slate-800 hover:bg-slate-700 text-slate-300'}
+            >
+              🔍 Code Review
+            </Button>
+          </div>
+        </CardContent>
+      </Card>
+
       {/* Your Activity Summary */}
       <Card className="bg-slate-900/90 border-slate-800 card-polish stagger-item">
         <CardHeader>

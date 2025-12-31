@@ -45,6 +45,7 @@
     "train:neural-network": "node scripts/train-neural-network.js",
     "train:transformer": "node scripts/train-transformer.js",
     "test:explainability": "node scripts/test-explainability.js",
+    "compare:models": "node scripts/compare-models.js",
     "test:comprehensive": "node scripts/test-comprehensive.js",
     "test:expanded": "node scripts/test-expanded.js",
     "test:ftue": "node scripts/test-ftue.js",
