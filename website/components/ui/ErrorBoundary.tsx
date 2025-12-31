@@ -1,6 +1,8 @@
 "use client";
 
 import React, { Component, ErrorInfo, ReactNode } from 'react';
+
+// Ensure React is in scope for JSX
 import { Card, CardContent, CardHeader, CardTitle } from './card';
 import { Button } from './button';
 
@@ -140,6 +142,7 @@ class ErrorBoundary extends Component<Props, State> {
   }
 }
 
+// Export both default and named for compatibility
 export default ErrorBoundary;
 export { ErrorBoundary };
 
