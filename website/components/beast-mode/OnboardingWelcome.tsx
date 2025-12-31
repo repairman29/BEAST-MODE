@@ -110,7 +110,7 @@ export default function OnboardingWelcome({ onDismiss }: OnboardingWelcomeProps)
           </p>
           <div className="space-y-2">
             <a
-              href="/docs/QUICK_START.md"
+              href="https://beastmode.dev/docs/QUICK_START"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 p-3 bg-slate-800/50 rounded-lg hover:bg-slate-800 transition-colors text-cyan-400"
@@ -119,7 +119,7 @@ export default function OnboardingWelcome({ onDismiss }: OnboardingWelcomeProps)
               <span className="text-sm">Quick Start Guide (5 minutes)</span>
             </a>
             <a
-              href="/docs/FTUE.md"
+              href="https://beastmode.dev/docs/FTUE"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 p-3 bg-slate-800/50 rounded-lg hover:bg-slate-800 transition-colors text-cyan-400"

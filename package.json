@@ -33,6 +33,7 @@
     "ml:status": "node scripts/ml-status.js",
     "test:integrations": "node scripts/test-integrations.js",
     "test:all": "node scripts/test-all-integrations.js",
+    "test:consolidated": "node scripts/test-consolidated-services.js",
     "monitoring": "node scripts/production-monitoring.js",
     "analytics:report": "node scripts/analytics-report.js",
     "test:db-writer": "node scripts/test-database-writer.js",
