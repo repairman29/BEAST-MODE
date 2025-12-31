@@ -49,6 +49,8 @@
     "quantize:model": "node scripts/quantize-model.js",
     "test:enterprise": "node scripts/test-enterprise-features.js",
     "test:multi-region": "node scripts/test-multi-region.js",
+    "test:month7": "node scripts/test-month7-integration.js",
+    "benchmark:month7": "node scripts/benchmark-month7.js",
     "test:comprehensive": "node scripts/test-comprehensive.js",
     "test:expanded": "node scripts/test-expanded.js",
     "test:ftue": "node scripts/test-ftue.js",
