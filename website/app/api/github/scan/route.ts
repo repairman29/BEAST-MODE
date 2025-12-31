@@ -73,10 +73,17 @@ export async function POST(request: NextRequest) {
         let hasConfig = false;
 
         try {
+          // Get the default branch commit SHA first
+          const { data: branchData } = await octokit.repos.getBranch({
+            owner,
+            repo: repoName,
+            branch: repoData.default_branch
+          });
+          
           const { data: tree } = await octokit.git.getTree({
             owner,
             repo: repoName,
-            tree_sha: repoData.default_branch,
+            tree_sha: branchData.commit.sha,
             recursive: '1'
           });
 
