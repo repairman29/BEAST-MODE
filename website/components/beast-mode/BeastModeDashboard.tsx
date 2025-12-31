@@ -1106,17 +1106,14 @@ function QualityView({ data }: any) {
                   fill="none"
                   strokeDasharray={`${(qualityData.score / 100) * 565} 565`}
                   strokeLinecap="round"
-                  className="transition-all duration-1000 ease-out"
-                  style={{
-                    filter: 'drop-shadow(0 0 8px rgba(6, 182, 212, 0.5))'
-                  }}
-                  strokeLinecap="round"
                   className={`transition-all duration-1000 ease-out ${
                     qualityData.score >= 80 ? 'text-green-500 pulse-glow' :
                     qualityData.score >= 60 ? 'text-amber-500' :
                     'text-red-500'
                   }`}
-                  style={{ 
+                  style={{
+                    filter: 'drop-shadow(0 0 8px rgba(6, 182, 212, 0.5))'
+                  }} 
                     strokeDashoffset: 0,
                     animationDelay: '0.2s'
                   }}
