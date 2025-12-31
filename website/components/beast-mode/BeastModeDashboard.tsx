@@ -1355,7 +1355,7 @@ function IntelligenceView({ data, messages, onCommand, commandInput, setCommandI
   const [isProcessing, setIsProcessing] = React.useState(false);
   const [aiInput, setAiInput] = React.useState('');
   const [recentScans, setRecentScans] = React.useState<any[]>([]);
-  const [activeSection, setActiveSection] = React.useState<'chat' | 'recommendations' | 'missions'>('chat');
+  const [activeSection, setActiveSection] = React.useState<'chat' | 'recommendations' | 'missions' | 'predictive' | 'code-review'>('chat');
   
   // AI Recommendations state
   const [recommendations, setRecommendations] = React.useState<any[]>([]);
