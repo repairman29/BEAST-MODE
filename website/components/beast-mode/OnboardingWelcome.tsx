@@ -106,26 +106,34 @@ export default function OnboardingWelcome({ onDismiss }: OnboardingWelcomeProps)
       content: (
         <div className="space-y-4">
           <p className="text-slate-300">
-            New to BEAST MODE? We have comprehensive guides to help you succeed:
+            New to BEAST MODE? Start simple with 3 easy steps:
           </p>
           <div className="space-y-2">
+            <a
+              href="https://beastmode.dev/docs/3_EASY_STEPS"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 p-3 bg-cyan-600/20 border border-cyan-500/30 rounded-lg hover:bg-cyan-600/30 transition-colors text-cyan-400 font-semibold"
+            >
+              <Rocket className="w-4 h-4" />
+              <span className="text-sm">3 Easy Steps (Start Here!)</span>
+            </a>
             <a
               href="https://beastmode.dev/docs/QUICK_START"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 p-3 bg-slate-800/50 rounded-lg hover:bg-slate-800 transition-colors text-cyan-400"
+              className="flex items-center gap-2 p-3 bg-slate-800/50 rounded-lg hover:bg-slate-800 transition-colors text-slate-300"
             >
-              <Rocket className="w-4 h-4" />
               <span className="text-sm">Quick Start Guide (5 minutes)</span>
             </a>
             <a
               href="https://beastmode.dev/docs/FTUE"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 p-3 bg-slate-800/50 rounded-lg hover:bg-slate-800 transition-colors text-cyan-400"
+              className="flex items-center gap-2 p-3 bg-slate-800/50 rounded-lg hover:bg-slate-800 transition-colors text-slate-400 text-xs"
             >
-              <BookOpen className="w-4 h-4" />
-              <span className="text-sm">Complete FTUE Guide (100 steps)</span>
+              <BookOpen className="w-3 h-3" />
+              <span className="text-xs">Complete Guide (100 steps - when ready)</span>
             </a>
           </div>
         </div>
