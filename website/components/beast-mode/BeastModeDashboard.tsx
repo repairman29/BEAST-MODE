@@ -50,7 +50,7 @@ function BeastModeDashboardInner({ initialView }: BeastModeDashboardInnerProps) 
   // Handle initial view from URL params
   useEffect(() => {
     if (initialView) {
-      const validViews = ['quality', 'intelligence', 'marketplace', 'self-improve', 'settings', 'auth', 'pricing', 'ml-monitoring'];
+      const validViews = ['quality', 'intelligence', 'marketplace', 'self-improve', 'collaboration', 'collaboration-workspace', 'collaboration-dashboard', 'settings', 'auth', 'pricing', 'ml-monitoring'];
       if (validViews.includes(initialView)) {
         setCurrentView(initialView as typeof currentView);
       }
@@ -95,7 +95,7 @@ function BeastModeDashboardInner({ initialView }: BeastModeDashboardInnerProps) 
   });
 
   const [commandInput, setCommandInput] = useState('');
-  const [currentView, setCurrentView] = useState<'quality' | 'intelligence' | 'marketplace' | 'self-improve' | 'settings' | 'auth' | 'pricing' | 'ml-monitoring' | null>(
+  const [currentView, setCurrentView] = useState<'quality' | 'intelligence' | 'marketplace' | 'self-improve' | 'collaboration' | 'collaboration-workspace' | 'collaboration-dashboard' | 'settings' | 'auth' | 'pricing' | 'ml-monitoring' | null>(
     initialView === 'auth' ? 'auth' : initialView === 'pricing' ? 'pricing' : null
   );
   const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState(false);
@@ -349,6 +349,40 @@ function BeastModeDashboardInner({ initialView }: BeastModeDashboardInnerProps) 
           {currentView === 'marketplace' && (
             <div className="w-full max-w-7xl relative z-30">
               <MarketplaceView data={beastModeState.marketplace} />
+            </div>
+          )}
+
+          {currentView === 'collaboration' && (
+            <div className="w-full max-w-7xl relative z-30">
+              <div className="space-y-6">
+                <div className="flex gap-4 mb-6">
+                  <Button
+                    onClick={() => setCurrentView('collaboration-workspace')}
+                    className="bg-cyan-500 hover:bg-cyan-600 text-white"
+                  >
+                    👥 Team Workspace
+                  </Button>
+                  <Button
+                    onClick={() => setCurrentView('collaboration-dashboard')}
+                    className="bg-cyan-500 hover:bg-cyan-600 text-white"
+                  >
+                    📊 Shared Dashboard
+                  </Button>
+                </div>
+                <TeamWorkspace userId={user?.id || (typeof window !== 'undefined' ? localStorage.getItem('beastModeUserId') || undefined : undefined)} />
+              </div>
+            </div>
+          )}
+
+          {currentView === 'collaboration-workspace' && (
+            <div className="w-full max-w-7xl relative z-30">
+              <TeamWorkspace userId={user?.id || (typeof window !== 'undefined' ? localStorage.getItem('beastModeUserId') || undefined : undefined)} />
+            </div>
+          )}
+
+          {currentView === 'collaboration-dashboard' && (
+            <div className="w-full max-w-7xl relative z-30">
+              <SharedDashboard userId={user?.id || (typeof window !== 'undefined' ? localStorage.getItem('beastModeUserId') || undefined : undefined)} />
             </div>
           )}
 

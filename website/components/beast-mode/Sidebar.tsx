@@ -27,6 +27,7 @@ export default function Sidebar({ currentView, onViewChange, onCommandPalette }:
     { id: 'intelligence', label: 'Intelligence', icon: '🧠', tooltip: 'Ask questions, get AI recommendations and missions', category: 'Core' },
     { id: 'marketplace', label: 'Marketplace', icon: '📦', tooltip: 'Find and install plugins for your code', category: 'Core' },
     { id: 'self-improve', label: 'Improve', icon: '✨', tooltip: 'Auto-fix code issues with one click', category: 'Core' },
+    { id: 'collaboration', label: 'Collaboration', icon: '👥', tooltip: 'Team workspaces, shared dashboards, and real-time collaboration', category: 'Core' },
     { id: 'ml-monitoring', label: 'ML Monitoring', icon: '📊', tooltip: 'Real-time ML system monitoring and performance metrics', category: 'Core' },
     { id: 'settings', label: 'Settings', icon: '⚙️', tooltip: 'Manage teams, users, and preferences', category: 'Core' },
   ];

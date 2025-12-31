@@ -41,6 +41,7 @@
     "ml:performance": "node scripts/ml-db-performance.js",
     "fine-tune": "node scripts/fine-tune-model.js",
     "test:advanced-ensemble": "node scripts/test-advanced-ensemble.js",
+    "test:month5": "node scripts/test-month5-features.js",
     "test:comprehensive": "node scripts/test-comprehensive.js",
     "test:expanded": "node scripts/test-expanded.js",
     "test:ftue": "node scripts/test-ftue.js",
