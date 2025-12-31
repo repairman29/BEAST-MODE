@@ -34,35 +34,37 @@ function HeroSection() {
           {/* Left: Content */}
           <div className="space-y-8">
             <Badge variant="secondary" className="bg-cyan-500/10 text-cyan-400 border-cyan-500/20">
-              9 Integrated AI Systems
+              🎸 Built for Vibe Coders
             </Badge>
 
             <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold text-white leading-[1.1] tracking-tight">
-              Code Quality,
+              BEAST MODE
               <br />
-              <span className="text-gradient-cyan">Automated</span>
+              <span className="text-gradient-cyan">Ship with Style</span>
             </h1>
 
-            <p className="text-xl md:text-2xl text-slate-400 max-w-xl leading-relaxed">
-              AI-powered code analysis, bug detection, and deployment orchestration. 
-              Ship better code, faster.
+            <p className="text-xl md:text-2xl text-cyan-400 max-w-xl leading-relaxed font-semibold mb-2">
+              Code Better. Ship Faster. Have Fun.
+            </p>
+            <p className="text-lg md:text-xl text-slate-400 max-w-xl leading-relaxed">
+              AI-powered development companion for vibe coders who build with passion and ship with confidence.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4">
               <Button 
                 size="lg" 
-                className="bg-white text-black hover:bg-slate-100"
+                className="bg-cyan-600 hover:bg-cyan-700 text-white"
                 onClick={handleGetStarted}
               >
-                Get Started Free
+                Join the Vibe 🚀
               </Button>
               <Button 
                 size="lg" 
                 variant="outline" 
-                className="border-slate-800 hover:bg-slate-900"
+                className="border-slate-800 hover:bg-slate-900 text-white"
                 onClick={handleViewDemo}
               >
-                View Demo
+                See It in Action
               </Button>
             </div>
 
