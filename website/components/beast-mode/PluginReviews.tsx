@@ -37,6 +37,8 @@ export default function PluginReviews({
   const [userComment, setUserComment] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [userReview, setUserReview] = useState<Review | null>(null);
+  const [sortBy, setSortBy] = useState<'newest' | 'oldest' | 'highest' | 'lowest'>('newest');
+  const [filterRating, setFilterRating] = useState<number | null>(null);
 
   useEffect(() => {
     fetchReviews();
@@ -270,9 +272,52 @@ export default function PluginReviews({
         {/* Reviews List */}
         {reviews.length > 0 ? (
           <div className="space-y-4">
-            <div className="text-white font-semibold text-sm">All Reviews</div>
+            <div className="flex items-center justify-between mb-4">
+              <div className="text-white font-semibold text-sm">All Reviews</div>
+              <div className="flex gap-2">
+                {/* Sort Dropdown */}
+                <select
+                  value={sortBy}
+                  onChange={(e) => setSortBy(e.target.value as any)}
+                  className="bg-slate-800 border border-slate-700 rounded px-2 py-1 text-xs text-white focus:outline-none focus:border-cyan-500"
+                >
+                  <option value="newest">Newest First</option>
+                  <option value="oldest">Oldest First</option>
+                  <option value="highest">Highest Rating</option>
+                  <option value="lowest">Lowest Rating</option>
+                </select>
+                {/* Filter by Rating */}
+                <select
+                  value={filterRating || ''}
+                  onChange={(e) => setFilterRating(e.target.value ? parseInt(e.target.value) : null)}
+                  className="bg-slate-800 border border-slate-700 rounded px-2 py-1 text-xs text-white focus:outline-none focus:border-cyan-500"
+                >
+                  <option value="">All Ratings</option>
+                  <option value="5">5 Stars</option>
+                  <option value="4">4 Stars</option>
+                  <option value="3">3 Stars</option>
+                  <option value="2">2 Stars</option>
+                  <option value="1">1 Star</option>
+                </select>
+              </div>
+            </div>
             {reviews
               .filter((r) => !userReview || r.id !== userReview.id)
+              .filter((r) => filterRating === null || r.rating === filterRating)
+              .sort((a, b) => {
+                switch (sortBy) {
+                  case 'newest':
+                    return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+                  case 'oldest':
+                    return new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime();
+                  case 'highest':
+                    return b.rating - a.rating;
+                  case 'lowest':
+                    return a.rating - b.rating;
+                  default:
+                    return 0;
+                }
+              })
               .map((review) => (
                 <div key={review.id} className="bg-slate-950 p-4 rounded-lg border border-slate-800">
                   <div className="flex items-start justify-between mb-2">
