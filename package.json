@@ -57,6 +57,7 @@
     "test:analytics": "node scripts/test-analytics.js",
     "test:intelligence": "node scripts/test-intelligence.js",
     "test:month9": "node scripts/test-month9-integration.js",
+    "test:scale": "node scripts/test-scale.js",
     "test:comprehensive": "node scripts/test-comprehensive.js",
     "test:expanded": "node scripts/test-expanded.js",
     "test:ftue": "node scripts/test-ftue.js"
