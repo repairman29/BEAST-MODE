@@ -1,6 +1,7 @@
 import './globals.css'
 import Navigation from '../components/layout/Navigation'
 import { UserProvider } from '../lib/user-context'
+import { ErrorBoundary } from '../components/ui/ErrorBoundary'
 
 export const metadata = {
   title: 'BEAST MODE - Quality Intelligence for Vibe Coders',
@@ -27,10 +28,12 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body className="bg-background text-foreground antialiased">
-        <UserProvider>
-          <Navigation />
-          {children}
-        </UserProvider>
+        <ErrorBoundary>
+          <UserProvider>
+            <Navigation />
+            {children}
+          </UserProvider>
+        </ErrorBoundary>
       </body>
     </html>
   )
