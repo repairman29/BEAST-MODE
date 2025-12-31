@@ -88,7 +88,20 @@ function MLMonitoringDashboard() {
   if (!dashboardData) {
     return (
       <div className="p-6">
-        <div className="text-center text-slate-400">No monitoring data available</div>
+        <Card className="bg-slate-900/90 border-slate-800">
+          <CardContent className="py-16 text-center">
+            <div className="text-6xl mb-4">📊</div>
+            <div className="text-xl font-semibold text-slate-300 mb-2">ML Monitoring Not Active</div>
+            <div className="text-sm text-slate-400 max-w-md mx-auto mb-6">
+              ML monitoring tracks how well BEAST MODE's AI predictions are performing. 
+              This helps us improve code quality recommendations and issue detection.
+            </div>
+            <div className="text-xs text-slate-500 max-w-md mx-auto">
+              <strong>What this means:</strong> BEAST MODE is still working! This dashboard just shows 
+              internal ML system metrics. Your quality scans, recommendations, and auto-fixes work independently.
+            </div>
+          </CardContent>
+        </Card>
       </div>
     );
   }
@@ -105,6 +118,13 @@ function MLMonitoringDashboard() {
         <div>
           <h2 className="text-3xl font-bold text-cyan-400">ML System Monitoring</h2>
           <p className="text-slate-400 mt-1">Real-time performance and health metrics</p>
+          <div className="mt-3 p-4 bg-slate-800/50 border border-slate-700 rounded-lg">
+            <p className="text-sm text-slate-300">
+              <strong className="text-cyan-400">What's being monitored:</strong> BEAST MODE uses machine learning to predict code quality, 
+              identify potential issues, and recommend improvements. This dashboard shows how well our AI predictions are performing 
+              in real-time—helping us make better recommendations for your code.
+            </p>
+          </div>
         </div>
         <div className="flex items-center gap-4">
           <label className="flex items-center gap-2 text-sm text-slate-400">
@@ -155,55 +175,60 @@ function MLMonitoringDashboard() {
       </Card>
 
       {/* Predictions Metrics */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        <Card className="bg-slate-800 border-slate-700">
-          <CardContent className="pt-6">
-            <div className="text-sm text-slate-400">Total Predictions</div>
-            <div className="text-3xl font-bold text-white mt-2">
-              {predictions.total?.toLocaleString() || 0}
+      <Card className="bg-slate-900/90 border-slate-800">
+        <CardHeader>
+          <CardTitle className="text-white text-lg">📊 Prediction Performance</CardTitle>
+          <p className="text-sm text-slate-400 mt-1">
+            These metrics show how many quality predictions BEAST MODE has made for code analysis, 
+            issue detection, and improvement recommendations.
+          </p>
+        </CardHeader>
+        <CardContent>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="bg-slate-800/50 rounded-lg p-4 border border-slate-700">
+              <div className="text-sm text-slate-400">Total Predictions</div>
+              <div className="text-3xl font-bold text-white mt-2">
+                {predictions.total?.toLocaleString() || 0}
+              </div>
+              <div className="text-xs text-slate-500 mt-1">Quality & issue predictions</div>
             </div>
-          </CardContent>
-        </Card>
 
-        <Card className="bg-slate-800 border-slate-700">
-          <CardContent className="pt-6">
-            <div className="text-sm text-slate-400">ML Model Predictions</div>
-            <div className="text-3xl font-bold text-cyan-400 mt-2">
-              {predictions.mlModel?.toLocaleString() || 0}
+            <div className="bg-slate-800/50 rounded-lg p-4 border border-slate-700">
+              <div className="text-sm text-slate-400">ML Model Predictions</div>
+              <div className="text-3xl font-bold text-cyan-400 mt-2">
+                {predictions.mlModel?.toLocaleString() || 0}
+              </div>
+              <div className="text-xs text-slate-500 mt-1">
+                {predictions.total > 0 
+                  ? `${((predictions.mlModel / predictions.total) * 100).toFixed(1)}% of total`
+                  : '0%'} • AI-powered predictions
+              </div>
             </div>
-            <div className="text-xs text-slate-500 mt-1">
-              {predictions.total > 0 
-                ? `${((predictions.mlModel / predictions.total) * 100).toFixed(1)}% of total`
-                : '0%'}
-            </div>
-          </CardContent>
-        </Card>
 
-        <Card className="bg-slate-800 border-slate-700">
-          <CardContent className="pt-6">
-            <div className="text-sm text-slate-400">Error Rate</div>
-            <div className="text-3xl font-bold text-red-400 mt-2">
-              {predictions.errorRate 
-                ? `${(predictions.errorRate * 100).toFixed(2)}%`
-                : '0%'}
+            <div className="bg-slate-800/50 rounded-lg p-4 border border-slate-700">
+              <div className="text-sm text-slate-400">Error Rate</div>
+              <div className="text-3xl font-bold text-red-400 mt-2">
+                {predictions.errorRate 
+                  ? `${(predictions.errorRate * 100).toFixed(2)}%`
+                  : '0%'}
+              </div>
+              <div className="text-xs text-slate-500 mt-1">
+                {predictions.errors || 0} errors • Prediction failures
+              </div>
             </div>
-            <div className="text-xs text-slate-500 mt-1">
-              {predictions.errors || 0} errors
-            </div>
-          </CardContent>
-        </Card>
 
-        <Card className="bg-slate-800 border-slate-700">
-          <CardContent className="pt-6">
-            <div className="text-sm text-slate-400">Avg Latency</div>
-            <div className="text-3xl font-bold text-yellow-400 mt-2">
-              {predictions.avgLatency 
-                ? `${predictions.avgLatency.toFixed(0)}ms`
-                : '0ms'}
+            <div className="bg-slate-800/50 rounded-lg p-4 border border-slate-700">
+              <div className="text-sm text-slate-400">Avg Latency</div>
+              <div className="text-3xl font-bold text-yellow-400 mt-2">
+                {predictions.avgLatency 
+                  ? `${predictions.avgLatency.toFixed(0)}ms`
+                  : '0ms'}
+              </div>
+              <div className="text-xs text-slate-500 mt-1">Prediction response time</div>
             </div>
-          </CardContent>
-        </Card>
-      </div>
+          </div>
+        </CardContent>
+      </Card>
 
       {/* Alerts */}
       {alerts.total > 0 && (
