@@ -126,8 +126,6 @@ export async function GET(request: NextRequest) {
       // Conversion funnel
       visitors: filteredEvents.filter((e: any) => e.action === 'view' && e.label === '/').length,
       users: filteredEvents.filter((e: any) => e.action === 'start').length,
-      scans: filteredEvents.filter((e: any) => e.action === 'scan-complete').length,
-      fixes: filteredEvents.filter((e: any) => e.action === 'fix-applied').length,
     };
 
     // Calculate feature usage

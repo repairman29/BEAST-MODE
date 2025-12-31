@@ -32,7 +32,7 @@
     "train:quality": "node scripts/train-quality-model.js",
     "ml:status": "node scripts/ml-status.js",
     "test:integrations": "node scripts/test-integrations.js",
-    "test:all": "node scripts/test-all-integrations.js",
+    "test:all": "npm run test:comprehensive && npm run test:expanded && npm run test:ftue",
     "test:consolidated": "node scripts/test-consolidated-services.js",
     "monitoring": "node scripts/production-monitoring.js",
     "analytics:report": "node scripts/analytics-report.js",
@@ -57,8 +57,7 @@
     "test:analytics": "node scripts/test-analytics.js",
     "test:comprehensive": "node scripts/test-comprehensive.js",
     "test:expanded": "node scripts/test-expanded.js",
-    "test:ftue": "node scripts/test-ftue.js",
-    "test:all": "npm run test:comprehensive && npm run test:expanded && npm run test:ftue"
+    "test:ftue": "node scripts/test-ftue.js"
   },
   "keywords": [
     "ai",
@@ -96,6 +95,7 @@
     "dotenv": "^17.2.3",
     "express": "^5.2.1",
     "fs-extra": "^11.3.3",
+    "glob": "^13.0.0",
     "helmet": "^8.1.0",
     "joi": "^18.0.2",
     "jsonwebtoken": "^9.0.3",
