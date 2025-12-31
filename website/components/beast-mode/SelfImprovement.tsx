@@ -66,6 +66,17 @@ export default function SelfImprovement() {
       if (result.success) {
         setAppliedFixes(prev => new Set(prev).add(index));
         
+        // Trigger gamification event
+        if (typeof window !== 'undefined') {
+          window.dispatchEvent(new CustomEvent('beast-mode-gamification', { detail: { action: 'fix' } }));
+          window.dispatchEvent(new CustomEvent('beast-mode-notification', {
+            detail: {
+              type: 'success',
+              message: `✨ Fix applied! +20 XP!`
+            }
+          }));
+        }
+        
         // Build detailed success message
         let message = `✅ Fix applied!\n\n`;
         

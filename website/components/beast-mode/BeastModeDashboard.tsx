@@ -339,11 +339,39 @@ function BeastModeDashboardInner({ initialView }: BeastModeDashboardInnerProps) 
               <div className="text-center mb-12">
                 <div className="text-7xl mb-6 animate-in zoom-in-95 duration-500">⚔️</div>
                 <div className="text-lg uppercase tracking-widest text-white mb-3 font-bold">BEAST MODE Active</div>
-                <div className="text-sm text-slate-300 space-y-1">
+                <div className="text-sm text-slate-300 space-y-1 mb-6">
                   <div>Press <kbd className="px-2 py-1 bg-slate-800 rounded text-xs text-white">⌘K</kbd> for command palette</div>
                   <div>Press <kbd className="px-2 py-1 bg-slate-800 rounded text-xs text-white">⌘B</kbd> to toggle sidebar</div>
                 </div>
+                
+                {/* Value Props */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+                  <Card className="bg-gradient-to-br from-cyan-500/10 to-cyan-500/5 border-cyan-500/30">
+                    <CardContent className="p-4 text-center">
+                      <div className="text-3xl mb-2">⚡</div>
+                      <div className="text-white font-semibold mb-1">Instant Quality</div>
+                      <div className="text-xs text-slate-400">See your code quality score in 10 seconds</div>
+                    </CardContent>
+                  </Card>
+                  <Card className="bg-gradient-to-br from-purple-500/10 to-purple-500/5 border-purple-500/30">
+                    <CardContent className="p-4 text-center">
+                      <div className="text-3xl mb-2">🧠</div>
+                      <div className="text-white font-semibold mb-1">AI-Powered</div>
+                      <div className="text-xs text-slate-400">Get smart recommendations for your code</div>
+                    </CardContent>
+                  </Card>
+                  <Card className="bg-gradient-to-br from-green-500/10 to-green-500/5 border-green-500/30">
+                    <CardContent className="p-4 text-center">
+                      <div className="text-3xl mb-2">✨</div>
+                      <div className="text-white font-semibold mb-1">Auto-Fix</div>
+                      <div className="text-xs text-slate-400">Fix issues with one click</div>
+                    </CardContent>
+                  </Card>
+                </div>
               </div>
+              
+              <GamificationSystem userId={user?.id} />
+              
               <QuickActions
                 onScanRepo={() => setCurrentView('quality')}
                 onSignIn={() => setCurrentView('auth')}
