@@ -3309,6 +3309,60 @@ function SettingsView({ data }: any) {
         </CardContent>
       </Card>
 
+      {/* Enterprise SSO */}
+      <Card className="bg-slate-900/90 border-slate-800 card-polish stagger-item">
+        <CardHeader>
+          <CardTitle className="text-white text-lg font-semibold flex items-center gap-2">
+            <span className="text-2xl">🔐</span>
+            Enterprise SSO
+          </CardTitle>
+          <CardDescription className="text-slate-400 text-sm mt-2">
+            Configure SAML, OAuth, LDAP, Okta, or Azure AD single sign-on
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <EnterpriseSSO
+            userId={user?.id || (typeof window !== 'undefined' ? localStorage.getItem('beastModeUserId') || undefined : undefined)}
+          />
+        </CardContent>
+      </Card>
+
+      {/* White-Label Options */}
+      <Card className="bg-slate-900/90 border-slate-800 card-polish stagger-item">
+        <CardHeader>
+          <CardTitle className="text-white text-lg font-semibold flex items-center gap-2">
+            <span className="text-2xl">🎨</span>
+            White-Label Options
+          </CardTitle>
+          <CardDescription className="text-slate-400 text-sm mt-2">
+            Customize branding, domain, and theme for your organization
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <WhiteLabel
+            userId={user?.id || (typeof window !== 'undefined' ? localStorage.getItem('beastModeUserId') || undefined : undefined)}
+          />
+        </CardContent>
+      </Card>
+
+      {/* Custom Integrations */}
+      <Card className="bg-slate-900/90 border-slate-800 card-polish stagger-item">
+        <CardHeader>
+          <CardTitle className="text-white text-lg font-semibold flex items-center gap-2">
+            <span className="text-2xl">🔌</span>
+            Custom Integrations
+          </CardTitle>
+          <CardDescription className="text-slate-400 text-sm mt-2">
+            Create webhooks, API integrations, and custom plugins
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <CustomIntegrations
+            userId={user?.id || (typeof window !== 'undefined' ? localStorage.getItem('beastModeUserId') || undefined : undefined)}
+          />
+        </CardContent>
+      </Card>
+
       <div className="grid grid-cols-2 gap-4">
         <Card className="bg-slate-900/90 border-slate-800">
           <div className="text-amber-400 uppercase tracking-widest mb-3 text-sm">
