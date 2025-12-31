@@ -4,7 +4,7 @@
  * BEAST MODE CLI
  * Enterprise Quality Intelligence & Marketplace Platform
  *
- * The world's most advanced AI-powered development ecosystem
+ * AI-powered development tools for vibe coders who ship with style
  * Command-line interface for BEAST MODE operations
  */
 
@@ -24,7 +24,7 @@ const BEAST_MODE = {
     name: 'BEAST MODE',
     version: '1.0.0',
     description: 'Enterprise Quality Intelligence & Marketplace Platform',
-    tagline: 'The world\'s most advanced AI-powered development ecosystem',
+    tagline: 'AI-powered development tools for vibe coders who ship with style',
     ascii: `
 ██████╗ ███████╗ █████╗ ███████╗████████╗    ███╗   ███╗ ██████╗ ██████╗ ███████╗
 ██╔══██╗██╔════╝██╔══██╗██╔════╝╚══██╔══╝    ████╗ ████║██╔═══██╗██╔══██╗██╔════╝

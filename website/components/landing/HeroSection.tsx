@@ -145,12 +145,12 @@ await beastMode.deployApplication({
             {/* Stats below the code editor */}
             <div className="grid grid-cols-2 gap-4">
               <div className="bg-black border border-slate-800 rounded-xl p-4 shadow-xl">
-                <div className="text-2xl font-bold text-gradient-purple mb-1">10x</div>
-                <div className="text-xs text-slate-500">Faster Reviews</div>
+                <div className="text-2xl font-bold text-gradient-purple mb-1">Fast</div>
+                <div className="text-xs text-slate-500">Quality Checks</div>
               </div>
               <div className="bg-black border border-slate-800 rounded-xl p-4 shadow-xl">
-                <div className="text-2xl font-bold text-gradient-cyan mb-1">97%</div>
-                <div className="text-xs text-slate-500">Bug Reduction</div>
+                <div className="text-2xl font-bold text-gradient-cyan mb-1">Real</div>
+                <div className="text-xs text-slate-500">Results</div>
               </div>
             </div>
           </div>
