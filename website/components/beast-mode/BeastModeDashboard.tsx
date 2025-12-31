@@ -2532,7 +2532,7 @@ function MarketplaceView({ data }: any) {
           
           <div className="flex gap-2">
             <Button
-              onClick={() => window.open('https://docs.beastmode.dev/plugins/development', '_blank')}
+              onClick={() => window.open('/docs/plugins/development', '_blank')}
               className="bg-cyan-600 hover:bg-cyan-700 text-white"
             >
               📚 View Documentation
