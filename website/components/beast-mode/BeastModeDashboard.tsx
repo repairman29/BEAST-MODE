@@ -28,6 +28,7 @@ import CustomIntegrations from './CustomIntegrations';
 import IntegrationsManager from './IntegrationsManager';
 import CollaborationWorkspace from './CollaborationWorkspace';
 import MLMonitoringDashboard from './MLMonitoringDashboard';
+import GamificationSystem from './GamificationSystem';
 import { useUser } from '../../lib/user-context';
 
 /**
@@ -219,6 +220,22 @@ function BeastModeDashboardInner({ initialView }: BeastModeDashboardInnerProps) 
     const interval = setInterval(updateTime, 1000);
     
     return () => clearInterval(interval);
+  }, []);
+
+  // Listen for CustomEvent notifications
+  useEffect(() => {
+    const handleNotification = (e: Event) => {
+      const customEvent = e as CustomEvent;
+      if (customEvent.detail) {
+        addNotification(
+          customEvent.detail.message || 'Notification',
+          customEvent.detail.type || 'info'
+        );
+      }
+    };
+
+    window.addEventListener('beast-mode-notification', handleNotification as EventListener);
+    return () => window.removeEventListener('beast-mode-notification', handleNotification as EventListener);
   }, []);
 
   return (
