@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { fetchRepository, fetchRepositoryContents, octokit } from '../../../../lib/github';
-import cache, { cacheKeys, cacheTTL } from '../../../../lib/cache';
-import queryOptimizer from '../../../../lib/query-optimizer';
+import { fetchRepository, fetchRepositoryContents, octokit } from '../../../lib/github';
+import cache, { cacheKeys, cacheTTL } from '../../../lib/cache';
+import queryOptimizer from '../../../lib/query-optimizer';
 
 /**
  * GitHub Repository Scanning API
