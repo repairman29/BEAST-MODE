@@ -1609,7 +1609,7 @@ function IntelligenceView({ data, messages, onCommand, commandInput, setCommandI
                     onClick={() => handleExampleClick(query)}
                     variant="outline"
                     size="sm"
-                    className="border-slate-800 text-slate-300 hover:bg-slate-800 hover:text-white text-xs"
+                    className="border-slate-700 text-slate-300 hover:bg-slate-800 hover:border-slate-600 hover:text-white text-xs smooth-transition"
                   >
                     {query}
                   </Button>
@@ -1710,7 +1710,7 @@ function IntelligenceView({ data, messages, onCommand, commandInput, setCommandI
             <Button 
               onClick={() => handleSendMessage()} 
               disabled={!aiInput.trim() || isProcessing}
-              className="bg-white text-black hover:bg-slate-100 smooth-transition hover-lift button-press disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:transform-none"
+              className="bg-cyan-600 hover:bg-cyan-700 text-white glow-on-hover smooth-transition disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:shadow-none px-6"
             >
               {isProcessing ? (
                 <>
@@ -1739,9 +1739,19 @@ function IntelligenceView({ data, messages, onCommand, commandInput, setCommandI
           <Card className="bg-slate-900/90 border-slate-800">
             <CardHeader>
               <div className="flex items-center justify-between">
-                <CardTitle className="text-white text-lg">💡 We'll Tell You Exactly What to Fix</CardTitle>
-                <Button onClick={fetchRecommendations} disabled={isLoadingRecommendations} className="bg-white text-black hover:bg-slate-100">
-                  {isLoadingRecommendations ? '🔄 Analyzing...' : '🔍 Get Recommendations'}
+                <CardTitle className="text-white text-lg font-semibold">💡 We'll Tell You Exactly What to Fix</CardTitle>
+                <Button onClick={fetchRecommendations} disabled={isLoadingRecommendations} className="bg-cyan-600 hover:bg-cyan-700 text-white glow-on-hover smooth-transition disabled:opacity-50 disabled:cursor-not-allowed px-4">
+                  {isLoadingRecommendations ? (
+                    <>
+                      <span className="animate-spin mr-2">🔄</span>
+                      Analyzing...
+                    </>
+                  ) : (
+                    <>
+                      <span className="mr-2">🔍</span>
+                      Get Recommendations
+                    </>
+                  )}
                 </Button>
               </div>
             </CardHeader>
@@ -1812,15 +1822,16 @@ function IntelligenceView({ data, messages, onCommand, commandInput, setCommandI
                 <div className="text-5xl mb-4">🤔</div>
                 <div className="text-lg font-semibold text-slate-300 mb-2">No recommendations yet</div>
                 <div className="text-sm text-slate-400 mb-6">Click "Get Recommendations" to analyze your project and get personalized suggestions</div>
-                <Button onClick={fetchRecommendations} className="bg-cyan-600 hover:bg-cyan-700 text-white">
-                  🔍 Get Recommendations
+                <Button onClick={fetchRecommendations} className="bg-cyan-600 hover:bg-cyan-700 text-white glow-on-hover smooth-transition px-4">
+                  <span className="mr-2">🔍</span>
+                  Get Recommendations
                 </Button>
               </CardContent>
             </Card>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {recommendations.slice(0, 6).map((rec: any) => (
-                <Card key={rec.pluginId} className="bg-slate-900/90 border-slate-800 hover:border-cyan-500/50 transition-colors">
+                <Card key={rec.pluginId} className="bg-slate-900/90 border-slate-800 card-polish stagger-item">
                   <CardContent className="p-6">
                     <div className="flex items-start justify-between mb-3">
                       <div className="flex-1">
@@ -1860,9 +1871,10 @@ function IntelligenceView({ data, messages, onCommand, commandInput, setCommandI
           <Card className="bg-slate-900/90 border-slate-800">
             <CardHeader>
               <div className="flex items-center justify-between">
-                <CardTitle className="text-white text-lg">🎯 Track Your Improvement Goals</CardTitle>
-                <Button onClick={() => setShowCreateMission(true)} className="bg-white text-black hover:bg-slate-100">
-                  + New Mission
+                <CardTitle className="text-white text-lg font-semibold">🎯 Track Your Improvement Goals</CardTitle>
+                <Button onClick={() => setShowCreateMission(true)} className="bg-cyan-600 hover:bg-cyan-700 text-white glow-on-hover smooth-transition px-4">
+                  <span className="mr-2">+</span>
+                  New Mission
                 </Button>
               </div>
             </CardHeader>
@@ -1885,7 +1897,7 @@ function IntelligenceView({ data, messages, onCommand, commandInput, setCommandI
               ) : (
                 <div className="space-y-4">
                   {missions.map((mission: any) => (
-                    <Card key={mission.id} className="bg-slate-800/50 border-slate-700">
+                    <Card key={mission.id} className="bg-slate-800/50 border-slate-700/50 card-polish stagger-item">
                       <CardContent className="p-4">
                         <div className="flex items-start justify-between">
                           <div className="flex-1">
@@ -1908,7 +1920,7 @@ function IntelligenceView({ data, messages, onCommand, commandInput, setCommandI
                                   } catch (e) { console.error(e); }
                                 }}
                                 size="sm"
-                                className="bg-green-600 hover:bg-green-700"
+                                className="bg-green-600 hover:bg-green-700 glow-on-hover smooth-transition"
                               >
                                 Start
                               </Button>
@@ -1928,7 +1940,7 @@ function IntelligenceView({ data, messages, onCommand, commandInput, setCommandI
                                   }
                                 }}
                                 size="sm"
-                                className="bg-cyan-600 hover:bg-cyan-700"
+                                className="bg-cyan-600 hover:bg-cyan-700 glow-on-hover smooth-transition"
                               >
                                 Complete
                               </Button>
@@ -2288,34 +2300,34 @@ function MarketplaceView({ data }: any) {
 
       {/* Stats */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <Card className="bg-slate-900/90 border-slate-800">
+        <Card className="bg-slate-900/90 border-slate-800 card-polish stagger-item">
           <CardContent className="pt-6">
-            <div className="text-slate-400 text-sm mb-1">Total Plugins</div>
-            <div className="text-2xl font-bold text-white">{plugins.length}</div>
+            <div className="text-slate-400 text-xs uppercase tracking-wider mb-2 font-medium">Total Plugins</div>
+            <div className="text-4xl font-bold text-white mb-1">{plugins.length}</div>
           </CardContent>
         </Card>
-        <Card className="bg-slate-900/90 border-slate-800">
+        <Card className="bg-slate-900/90 border-slate-800 card-polish stagger-item">
           <CardContent className="pt-6">
-            <div className="text-slate-400 text-sm mb-1">Total Downloads</div>
-            <div className="text-2xl font-bold text-cyan-400">
+            <div className="text-slate-400 text-xs uppercase tracking-wider mb-2 font-medium">Total Downloads</div>
+            <div className="text-4xl font-bold text-cyan-400 mb-1">
               {plugins.reduce((sum, p) => sum + (p.plugin.downloads || 0), 0).toLocaleString()}
             </div>
           </CardContent>
         </Card>
-        <Card className="bg-slate-900/90 border-slate-800">
+        <Card className="bg-slate-900/90 border-slate-800 card-polish stagger-item">
           <CardContent className="pt-6">
-            <div className="text-slate-400 text-sm mb-1">Avg Rating</div>
-            <div className="text-2xl font-bold text-green-400">
+            <div className="text-slate-400 text-xs uppercase tracking-wider mb-2 font-medium">Avg Rating</div>
+            <div className="text-4xl font-bold text-green-400 mb-1">
               {plugins.length > 0 
                 ? (plugins.reduce((sum, p) => sum + (p.plugin.rating || 0), 0) / plugins.length).toFixed(1)
                 : '0.0'}
             </div>
           </CardContent>
         </Card>
-        <Card className="bg-slate-900/90 border-slate-800">
+        <Card className="bg-slate-900/90 border-slate-800 card-polish stagger-item">
           <CardContent className="pt-6">
-            <div className="text-slate-400 text-sm mb-1">Free Plugins</div>
-            <div className="text-2xl font-bold text-white">
+            <div className="text-slate-400 text-xs uppercase tracking-wider mb-2 font-medium">Free Plugins</div>
+            <div className="text-4xl font-bold text-white mb-1">
               {plugins.filter(p => p.plugin.price === 0).length}
             </div>
           </CardContent>
@@ -2344,8 +2356,8 @@ function MarketplaceView({ data }: any) {
         </Card>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {filteredPlugins.map((item) => (
-            <Card key={item.pluginId} className="bg-slate-900/90 border-slate-800 hover:border-cyan-500/50 smooth-transition hover-lift">
+          {filteredPlugins.map((item, idx) => (
+            <Card key={item.pluginId} className="bg-slate-900/90 border-slate-800 card-polish stagger-item" style={{ animationDelay: `${idx * 0.05}s` }}>
               <CardHeader>
                 <div className="flex items-start justify-between">
                   <div className="flex-1">
@@ -2363,7 +2375,7 @@ function MarketplaceView({ data }: any) {
               <CardContent>
                 <div className="flex flex-wrap gap-2 mb-4">
                   {item.plugin.tags?.slice(0, 3).map((tag: string) => (
-                    <span key={tag} className="px-2 py-1 bg-slate-800 text-slate-300 text-xs rounded">
+                    <span key={tag} className="px-2.5 py-1 bg-slate-800/50 text-slate-300 text-xs rounded-full border border-slate-700/50 badge-polish">
                       {tag}
                     </span>
                   ))}
