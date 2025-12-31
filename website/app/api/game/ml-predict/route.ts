@@ -42,7 +42,14 @@ export async function POST(request: NextRequest) {
     }
 
     // Get ML prediction
-    const prediction = await gameIntegration.predictNarrativeQuality(context);
+      // Add service name to context
+      const enhancedContext = {
+        ...context,
+        serviceName: 'game-app',
+        predictionType: 'narrative-quality'
+      };
+      
+      const prediction = await gameIntegration.predictNarrativeQuality(enhancedContext);
 
     if (!prediction) {
       // Fallback

@@ -34,7 +34,9 @@
     "test:all": "node scripts/test-all-integrations.js",
     "monitoring": "node scripts/production-monitoring.js",
     "analytics:report": "node scripts/analytics-report.js",
-    "test:db-writer": "node scripts/test-database-writer.js"
+    "test:db-writer": "node scripts/test-database-writer.js",
+    "ml:health-check": "node scripts/ml-db-health-check.js",
+    "ml:performance": "node scripts/ml-db-performance.js"
   },
   "keywords": [
     "ai",
