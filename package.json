@@ -43,6 +43,7 @@
     "test:advanced-ensemble": "node scripts/test-advanced-ensemble.js",
     "test:month5": "node scripts/test-month5-features.js",
     "train:neural-network": "node scripts/train-neural-network.js",
+    "train:transformer": "node scripts/train-transformer.js",
     "test:explainability": "node scripts/test-explainability.js",
     "test:comprehensive": "node scripts/test-comprehensive.js",
     "test:expanded": "node scripts/test-expanded.js",
