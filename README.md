@@ -48,17 +48,38 @@ BEAST MODE is a comprehensive JavaScript/TypeScript library that brings the powe
 
 ## 🚀 Quick Start
 
+### For New Developers
+
+**New to BEAST MODE? Start here:**
+- 📖 [Quick Start Guide](./docs/QUICK_START.md) - Get running in 5 minutes
+- 🎯 [100-Point FTUE Guide](./docs/FTUE.md) - Complete walkthrough
+- 💼 [New Developer Workflow](./docs/NEW_DEVELOPER_WORKFLOW.md) - Day-in-the-life guide
+
 ### Installation
 
 ```bash
+npm install -g @beast-mode/core
+# or
 npm install @beast-mode/core
-# or
-yarn add @beast-mode/core
-# or
-pnpm add @beast-mode/core
 ```
 
-### Basic Usage
+### CLI Quick Start
+
+```bash
+# Initialize in your project
+beast-mode init
+
+# Run your first quality check
+beast-mode quality check
+
+# Get your quality score
+beast-mode quality score
+
+# Launch dashboard
+beast-mode dashboard --open
+```
+
+### Programmatic Usage
 
 ```javascript
 import { BeastMode } from '@beast-mode/core';
@@ -72,8 +93,8 @@ const beastMode = new BeastMode({
 await beastMode.initialize();
 
 // Analyze code quality
-const quality = await beastMode.analyzeQuality('./src');
-console.log(`Quality Score: ${quality.score}/100`);
+const quality = await beastMode.getQualityScore();
+console.log(`Quality Score: ${quality.overall}/100`);
 
 // Deploy your application
 await beastMode.deployApplication({
