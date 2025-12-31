@@ -3642,6 +3642,7 @@ function SettingsView({ data }: any) {
         </Card>
       </div>
     </div>
+    </ErrorBoundary>
   );
 }
 
