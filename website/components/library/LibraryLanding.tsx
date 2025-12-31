@@ -43,7 +43,7 @@ function LibraryLanding() {
             Neural Intelligence Library
           </div>
           <p className="text-xl md:text-2xl text-neural-gray-400 max-w-4xl mx-auto leading-relaxed">
-            The world's most advanced AI-powered development ecosystem.
+            AI-powered development tools for vibe coders who ship with style.
             <br />
             <span className="text-neural-primary font-semibold">9 integrated neural networks</span> in a single JavaScript library.
           </p>
