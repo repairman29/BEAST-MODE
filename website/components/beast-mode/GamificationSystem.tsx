@@ -242,7 +242,7 @@ export default function GamificationSystem({ userId, onAchievementUnlocked }: Ga
           <Card className="bg-gradient-to-br from-cyan-500/20 to-purple-500/20 border-cyan-500/50 shadow-2xl animate-in zoom-in-95">
             <CardContent className="p-8 text-center">
               <div className="text-8xl mb-4 animate-bounce">{showCelebration.icon}</div>
-              <CardTitle className="text-3xl text-white mb-2">{showCelebration.name}</div>
+              <CardTitle className="text-3xl text-white mb-2">{showCelebration.name}</CardTitle>
               <p className="text-slate-300 mb-4">{showCelebration.description}</p>
               <div className="text-cyan-400 text-sm">Achievement Unlocked! 🎉</div>
             </CardContent>
