@@ -1956,6 +1956,16 @@ function IntelligenceView({ data, messages, onCommand, commandInput, setCommandI
           </Card>
         </div>
       )}
+
+      {/* Predictive Analytics Section */}
+      {activeSection === 'predictive' && (
+        <PredictiveAnalytics userId={user?.id || (typeof window !== 'undefined' ? localStorage.getItem('beastModeUserId') || undefined : undefined)} />
+      )}
+
+      {/* Automated Code Review Section */}
+      {activeSection === 'code-review' && (
+        <AutomatedCodeReview />
+      )}
     </div>
   );
 }
