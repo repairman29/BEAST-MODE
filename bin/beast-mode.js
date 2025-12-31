@@ -14,6 +14,7 @@ const ora = require('ora');
 const path = require('path');
 const fs = require('fs-extra');
 const { createLogger } = require('../lib/utils/logger');
+const { initializeBEASTMODE } = require('../lib/init');
 const log = createLogger('beast-mode');
 
 const program = new Command();
@@ -356,9 +357,6 @@ if (process.argv.length === 2) {
 
 // Parse and execute
 program.parse();
-
-// Helper Functions
-async function initializeBEASTMODE(options) {
     const configPath = path.join(process.cwd(), '.beast-mode.json');
 
     // Check if already initialized
