@@ -29,7 +29,12 @@
     "mlflow:start": "mlflow ui --port 5000 --host 0.0.0.0",
     "mlflow:init": "node scripts/setup-mlflow.js",
     "train:quality": "node scripts/train-quality-model.js",
-    "ml:status": "node scripts/ml-status.js"
+    "ml:status": "node scripts/ml-status.js",
+    "test:integrations": "node scripts/test-integrations.js",
+    "test:all": "node scripts/test-all-integrations.js",
+    "monitoring": "node scripts/production-monitoring.js",
+    "analytics:report": "node scripts/analytics-report.js",
+    "test:db-writer": "node scripts/test-database-writer.js"
   },
   "keywords": [
     "ai",
