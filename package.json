@@ -38,7 +38,11 @@
     "analytics:report": "node scripts/analytics-report.js",
     "test:db-writer": "node scripts/test-database-writer.js",
     "ml:health-check": "node scripts/ml-db-health-check.js",
-    "ml:performance": "node scripts/ml-db-performance.js"
+    "ml:performance": "node scripts/ml-db-performance.js",
+    "test:comprehensive": "node scripts/test-comprehensive.js",
+    "test:expanded": "node scripts/test-expanded.js",
+    "test:ftue": "node scripts/test-ftue.js",
+    "test:all": "npm run test:comprehensive && npm run test:expanded && npm run test:ftue"
   },
   "keywords": [
     "ai",
