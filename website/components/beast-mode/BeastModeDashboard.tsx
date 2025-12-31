@@ -1055,28 +1055,39 @@ function QualityView({ data }: any) {
           )}
         </CardHeader>
         <CardContent className="pt-0">
-              {/* Large Score Display */}
-              <div className="flex items-center justify-center mb-8">
-                <div className="relative score-reveal">
-              {/* Score Ring */}
-              <svg className="w-40 h-40 transform -rotate-90 score-reveal">
+              {/* Large Score Display - Enhanced */}
+              <div className="flex flex-col items-center justify-center mb-8">
+                <div className="relative score-reveal mb-4">
+              {/* Score Ring - Enhanced with gradient */}
+              <svg className="w-48 h-48 md:w-56 md:h-56 transform -rotate-90 score-reveal drop-shadow-lg">
+                <defs>
+                  <linearGradient id="scoreGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stopColor={qualityData.score >= 80 ? "#06b6d4" : qualityData.score >= 60 ? "#f59e0b" : "#ef4444"} />
+                    <stop offset="100%" stopColor={qualityData.score >= 80 ? "#8b5cf6" : qualityData.score >= 60 ? "#f97316" : "#dc2626"} />
+                  </linearGradient>
+                </defs>
                 <circle
-                  cx="80"
-                  cy="80"
-                  r="70"
+                  cx="112"
+                  cy="112"
+                  r="90"
                   stroke="currentColor"
-                  strokeWidth="10"
+                  strokeWidth="12"
                   fill="none"
-                  className="text-slate-800"
+                  className="text-slate-800/30"
                 />
                 <circle
-                  cx="80"
-                  cy="80"
-                  r="70"
-                  stroke="currentColor"
-                  strokeWidth="10"
+                  cx="112"
+                  cy="112"
+                  r="90"
+                  stroke="url(#scoreGradient)"
+                  strokeWidth="12"
                   fill="none"
-                  strokeDasharray={`${(qualityData.score / 100) * 440} 440`}
+                  strokeDasharray={`${(qualityData.score / 100) * 565} 565`}
+                  strokeLinecap="round"
+                  className="transition-all duration-1000 ease-out"
+                  style={{
+                    filter: 'drop-shadow(0 0 8px rgba(6, 182, 212, 0.5))'
+                  }}
                   strokeLinecap="round"
                   className={`transition-all duration-1000 ease-out ${
                     qualityData.score >= 80 ? 'text-green-500 pulse-glow' :
