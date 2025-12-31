@@ -1392,6 +1392,7 @@ function QualityView({ data }: any) {
  * Intelligence View - AI Insights, Recommendations & Missions
  */
 function IntelligenceView({ data, messages, onCommand, commandInput, setCommandInput }: any) {
+  const { user } = useUser();
   const [conversationMessages, setConversationMessages] = React.useState<any[]>([]);
   const [isProcessing, setIsProcessing] = React.useState(false);
   const [aiInput, setAiInput] = React.useState('');
