@@ -53,6 +53,8 @@
     "benchmark:month7": "node scripts/benchmark-month7.js",
     "test:optimization": "node scripts/test-optimization.js",
     "test:resilience": "node scripts/test-resilience.js",
+    "test:month8": "node scripts/test-month8-integration.js",
+    "test:analytics": "node scripts/test-analytics.js",
     "test:comprehensive": "node scripts/test-comprehensive.js",
     "test:expanded": "node scripts/test-expanded.js",
     "test:ftue": "node scripts/test-ftue.js",

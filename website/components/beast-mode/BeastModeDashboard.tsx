@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-// Ensure React is in scope for JSX
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '../ui/card';
 import { Button } from '../ui/button';
 import NotificationWidget, { Notification } from '../hud/NotificationWidget';
@@ -32,7 +31,7 @@ import CollaborationWorkspace from './CollaborationWorkspace';
 import MLMonitoringDashboard from './MLMonitoringDashboard';
 import GamificationSystem from './GamificationSystem';
 import MobileNavigation from './MobileNavigation';
-import ErrorBoundary from '../ui/ErrorBoundary';
+import { ErrorBoundary } from '../ui/ErrorBoundary';
 import { useUser } from '../../lib/user-context';
 
 /**
@@ -255,8 +254,7 @@ function BeastModeDashboardInner({ initialView }: BeastModeDashboardInnerProps) 
   }, []);
 
   return (
-    <ErrorBoundary>
-      <div className="relative w-full h-full min-h-screen bg-black overflow-hidden flex" role="application" aria-label="BEAST MODE Dashboard">
+    <div className="relative w-full h-full min-h-screen bg-black overflow-hidden flex" role="application" aria-label="BEAST MODE Dashboard">
         {/* FTUE Onboarding */}
         {showOnboarding && (
           <FTUEOnboarding
@@ -3642,7 +3640,6 @@ function SettingsView({ data }: any) {
         </Card>
       </div>
     </div>
-    </ErrorBoundary>
   );
 }
 

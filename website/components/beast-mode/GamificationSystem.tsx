@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import * as React from 'react';
+import { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
 import { Button } from '../ui/button';
 
@@ -31,7 +32,7 @@ interface GamificationSystemProps {
   onAchievementUnlocked?: (achievement: Achievement) => void;
 }
 
-export default function GamificationSystem({ userId, onAchievementUnlocked }: GamificationSystemProps) {
+export default function GamificationSystem({ userId, onAchievementUnlocked }: GamificationSystemProps): React.JSX.Element {
   const [stats, setStats] = useState<UserStats>({
     totalScans: 0,
     totalFixes: 0,
@@ -230,10 +231,11 @@ export default function GamificationSystem({ userId, onAchievementUnlocked }: Ga
 
     window.addEventListener('beast-mode-gamification', handleGamificationEvent as EventListener);
     return () => window.removeEventListener('beast-mode-gamification', handleGamificationEvent as EventListener);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
-    <>
+    <div>
       {/* Celebration Modal */}
       {showCelebration && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm animate-in fade-in">
@@ -310,7 +312,7 @@ export default function GamificationSystem({ userId, onAchievementUnlocked }: Ga
           )}
         </CardContent>
       </Card>
-    </>
+    </div>
   );
 }
 
