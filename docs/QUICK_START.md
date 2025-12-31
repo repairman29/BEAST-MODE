@@ -1,9 +1,9 @@
 # BEAST MODE - Quick Start Guide
-## Get up and running in 5 minutes! ⚡
+## 3 Easy Steps to Get Started ⚡
 
-**Welcome, vibe coder!** You're about to experience the BEAST MODE VIBE - where coding feels good, quality matters, and fun isn't optional.
+**Welcome, vibe coder!** Getting started with BEAST MODE is simple. Just 3 steps and you're ready to build better code.
 
-Perfect for developers who want to get started fast and build better code.
+> 💡 **New to BEAST MODE?** Start with our [3 Easy Steps Guide](./3_EASY_STEPS.md) - no intimidation, just results!
 
 ---
 

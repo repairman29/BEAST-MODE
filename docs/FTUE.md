@@ -1,9 +1,13 @@
-# BEAST MODE - First Time User Experience (FTUE)
-## 100-Point Complete Workflow Guide for Vibe Coders
+# BEAST MODE - Complete Guide (100 Steps)
+## For When You're Ready to Go Deep 🚀
+
+> ⚡ **Just getting started?** Check out our [3 Easy Steps Guide](./3_EASY_STEPS.md) first - it's all you need to begin!
 
 **Welcome to the BEAST MODE VIBE! 🎸**
 
-This guide will take you from zero to BEAST MODE hero in 100 steps. You're not just learning a tool - you're joining a community of vibe coders who build with style, ship with confidence, and have fun while doing it.
+This comprehensive guide will take you from zero to BEAST MODE expert in 100 steps. You're not just learning a tool - you're joining a community of vibe coders who build with style, ship with confidence, and have fun while doing it.
+
+**This is the deep dive.** Take it at your own pace. Skip around. Come back when you're ready.
 
 **Don't worry - you've got this! 🚀**
 
