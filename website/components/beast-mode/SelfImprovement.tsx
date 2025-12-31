@@ -106,11 +106,14 @@ export default function SelfImprovement() {
   };
 
   return (
-    <div className="w-full max-w-7xl space-y-6 mx-auto pt-4">
-      <Card className="bg-slate-900/90 border-slate-800">
+    <div className="w-full max-w-7xl space-y-6 mx-auto pt-4 animate-in fade-in duration-500">
+      <Card className="bg-slate-900/90 border-slate-800 card-polish stagger-item">
         <CardHeader>
-          <CardTitle className="text-white text-lg">✨ Auto-Fix Code Issues</CardTitle>
-          <CardDescription className="text-slate-400">
+          <CardTitle className="text-white text-xl font-bold flex items-center gap-2">
+            <span className="text-2xl">✨</span>
+            Auto-Fix Code Issues
+          </CardTitle>
+          <CardDescription className="text-slate-400 text-sm mt-2">
             One click fixes common issues automatically. Code fixed. Git committed. You're done. It's like magic, but real. 🪄
           </CardDescription>
         </CardHeader>

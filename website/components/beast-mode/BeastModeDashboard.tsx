@@ -375,6 +375,12 @@ function BeastModeDashboardInner({ initialView }: BeastModeDashboardInnerProps) 
               <SelfImprovement />
             </div>
           )}
+
+          {currentView === 'ml-monitoring' && (
+            <div className="w-full max-w-7xl relative z-30">
+              <MLMonitoringDashboard />
+            </div>
+          )}
         </div>
 
         {/* Bottom Status Line */}
@@ -830,29 +836,32 @@ function QualityView({ data }: any) {
   };
 
   return (
-    <div className="w-full max-w-7xl space-y-6 mx-auto pt-4">
+    <div className="w-full max-w-7xl space-y-6 mx-auto pt-4 animate-in fade-in duration-500">
       {/* Quick Scan Bar */}
-      <Card className="bg-slate-900/90 border-slate-800">
-        <CardHeader>
-          <CardTitle className="text-white text-lg">⚡ Scan Your Code</CardTitle>
-          <CardDescription className="text-slate-400">
+      <Card className="bg-slate-900/90 border-slate-800 card-polish">
+        <CardHeader className="pb-4">
+          <CardTitle className="text-white text-xl font-bold flex items-center gap-2">
+            <span className="text-2xl">⚡</span>
+            Scan Your Code
+          </CardTitle>
+          <CardDescription className="text-slate-400 text-sm mt-2">
             See your code quality score in 10 seconds. No setup. No configuration. Just paste your GitHub repo and watch the magic happen. ✨
           </CardDescription>
         </CardHeader>
-        <CardContent className="pt-6">
+        <CardContent className="pt-4">
           <div className="flex flex-col sm:flex-row gap-3">
             <input
               type="text"
               value={quickScanRepo}
               onChange={(e) => setQuickScanRepo(e.target.value)}
               placeholder="owner/repo (e.g., facebook/react)"
-              className="flex-1 bg-slate-950 border border-slate-700 rounded-lg px-4 py-2 text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500"
+              className="flex-1 bg-slate-950 border border-slate-700 rounded-lg px-4 py-3 text-white placeholder-slate-500 input-focus transition-all duration-200"
               onKeyPress={(e) => e.key === 'Enter' && handleQuickScan()}
             />
             <Button
               onClick={handleQuickScan}
               disabled={isScanning || !quickScanRepo.trim()}
-              className="bg-cyan-600 hover:bg-cyan-700 text-white smooth-transition hover-lift button-press disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:transform-none"
+              className="bg-cyan-600 hover:bg-cyan-700 text-white smooth-transition hover-lift button-press glow-on-hover disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:transform-none disabled:hover:shadow-none px-6"
             >
               {isScanning ? (
                 <>
@@ -869,7 +878,7 @@ function QualityView({ data }: any) {
             <Button
               onClick={handleScanNow}
               variant="outline"
-              className="border-slate-700 text-slate-400 hover:bg-slate-900"
+              className="border-slate-700 text-slate-400 hover:bg-slate-800 hover:border-slate-600 smooth-transition px-4"
             >
               {showAdvancedScan ? 'Hide Advanced' : 'Advanced Scan'}
             </Button>
@@ -906,17 +915,17 @@ function QualityView({ data }: any) {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
       {/* Quality Score */}
-      <Card className="bg-slate-900/90 border-slate-800 hover:border-slate-700 transition-all h-full">
+      <Card className="bg-slate-900/90 border-slate-800 card-polish h-full stagger-item">
         <CardHeader className="pb-6">
-          <div className="flex items-center justify-between mb-2">
+          <div className="flex items-center justify-between mb-3">
             <CardTitle className="text-white text-xl font-bold">Quality Score</CardTitle>
             {scoreChange !== null && scoreChange !== 0 && (
-              <div className={`flex items-center gap-1 px-3 py-1 rounded-full text-sm font-semibold ${
+              <div className={`flex items-center gap-1 px-3 py-1.5 rounded-full text-sm font-semibold badge-polish ${
                 scoreChange > 0 
-                  ? 'bg-green-500/20 text-green-400' 
-                  : 'bg-red-500/20 text-red-400'
+                  ? 'bg-green-500/20 text-green-400 border border-green-500/30' 
+                  : 'bg-red-500/20 text-red-400 border border-red-500/30'
               }`}>
-                <span>{scoreChange > 0 ? '↑' : '↓'}</span>
+                <span className="text-base">{scoreChange > 0 ? '↑' : '↓'}</span>
                 <span>{Math.abs(scoreChange)}</span>
               </div>
             )}
@@ -981,15 +990,15 @@ function QualityView({ data }: any) {
 
           {/* Key Metrics Grid */}
           <div className="grid grid-cols-2 gap-4 pt-6 border-t border-slate-800">
-            <div className="bg-slate-800/30 rounded-lg p-4">
-              <div className="text-xs text-slate-400 mb-1">Issues Found</div>
-              <div className="text-2xl font-bold text-white">{qualityData.issues}</div>
-              <div className="text-xs text-slate-500 mt-1">needs attention</div>
+            <div className="bg-slate-800/30 rounded-lg p-4 hover:bg-slate-800/50 transition-colors duration-200 border border-slate-700/50">
+              <div className="text-xs text-slate-400 mb-2 uppercase tracking-wider font-medium">Issues Found</div>
+              <div className="text-3xl font-bold text-white mb-1">{qualityData.issues}</div>
+              <div className="text-xs text-slate-500">needs attention</div>
             </div>
-            <div className="bg-slate-800/30 rounded-lg p-4">
-              <div className="text-xs text-slate-400 mb-1">Improvements</div>
-              <div className="text-2xl font-bold text-cyan-400">{qualityData.improvements}</div>
-              <div className="text-xs text-slate-500 mt-1">available</div>
+            <div className="bg-slate-800/30 rounded-lg p-4 hover:bg-slate-800/50 transition-colors duration-200 border border-slate-700/50">
+              <div className="text-xs text-slate-400 mb-2 uppercase tracking-wider font-medium">Improvements</div>
+              <div className="text-3xl font-bold text-cyan-400 mb-1">{qualityData.improvements}</div>
+              <div className="text-xs text-slate-500">available</div>
             </div>
           </div>
 
@@ -1021,10 +1030,10 @@ function QualityView({ data }: any) {
       </Card>
 
       {/* Quality Metrics */}
-      <Card className="bg-slate-900/90 border-slate-800 hover:border-slate-700 transition-all h-full">
+      <Card className="bg-slate-900/90 border-slate-800 card-polish h-full stagger-item">
         <CardHeader>
-          <CardTitle className="text-white text-lg">Quality Metrics</CardTitle>
-          <CardDescription className="text-slate-400">
+          <CardTitle className="text-white text-lg font-semibold">Quality Metrics</CardTitle>
+          <CardDescription className="text-slate-400 text-sm mt-1">
             Detailed metrics from your latest scan
           </CardDescription>
         </CardHeader>
@@ -1090,17 +1099,17 @@ function QualityView({ data }: any) {
       </Card>
 
       {/* Recent Scans */}
-      <Card className="col-span-1 md:col-span-2 bg-slate-900/90 border-slate-800 hover:border-slate-800 transition-all">
+      <Card className="col-span-1 md:col-span-2 bg-slate-900/90 border-slate-800 card-polish stagger-item">
         <CardHeader>
           <div className="flex items-center justify-between">
-            <CardTitle className="text-white text-lg">Recent Quality Scans</CardTitle>
+            <CardTitle className="text-white text-lg font-semibold">Recent Quality Scans</CardTitle>
             <div className="flex gap-2">
               {latestScan && (
                 <Button
                   onClick={() => exportReport(latestScan)}
                   variant="outline"
                   size="sm"
-                  className="border-slate-800 text-slate-400 hover:bg-slate-900"
+                  className="border-slate-700 text-slate-400 hover:bg-slate-800 hover:border-slate-600 smooth-transition"
                 >
                   📥 Export Latest
                 </Button>
@@ -1110,7 +1119,7 @@ function QualityView({ data }: any) {
                   onClick={() => setComparisonScan(comparisonScan ? null : allScans[1])}
                   variant="outline"
                   size="sm"
-                  className="border-slate-800 text-slate-400 hover:bg-slate-900"
+                  className="border-slate-700 text-slate-400 hover:bg-slate-800 hover:border-slate-600 smooth-transition"
                 >
                   {comparisonScan ? 'Hide Comparison' : 'Compare with Previous'}
                 </Button>
@@ -1206,8 +1215,10 @@ function QualityView({ data }: any) {
                       <div
                         key={idx}
                         onClick={() => setSelectedIssue(issue)}
-                        className={`text-sm text-slate-300 p-2 rounded-lg cursor-pointer transition-colors ${
-                          selectedIssue === issue ? 'bg-cyan-500/20 border border-cyan-500/50' : 'hover:bg-slate-800/50'
+                        className={`text-sm text-slate-300 p-3 rounded-lg cursor-pointer transition-all duration-200 border ${
+                          selectedIssue === issue 
+                            ? 'bg-cyan-500/20 border-cyan-500/50 shadow-lg shadow-cyan-500/10' 
+                            : 'hover:bg-slate-800/50 border-slate-700/50 hover:border-slate-600'
                         }`}
                       >
                         <div className="flex items-start gap-2">
@@ -1544,39 +1555,42 @@ function IntelligenceView({ data, messages, onCommand, commandInput, setCommandI
     : (Array.isArray(messages) ? messages : []);
 
   return (
-    <div className="w-full max-w-7xl space-y-6">
+    <div className="w-full max-w-7xl space-y-6 mx-auto pt-4 animate-in fade-in duration-500">
       {/* Your Activity Summary */}
-      <Card className="bg-slate-900/90 border-slate-800">
+      <Card className="bg-slate-900/90 border-slate-800 card-polish stagger-item">
         <CardHeader>
-          <CardTitle className="text-white text-lg">Your Activity</CardTitle>
-          <CardDescription className="text-slate-400">
+          <CardTitle className="text-white text-xl font-bold flex items-center gap-2">
+            <span className="text-2xl">📊</span>
+            Your Activity
+          </CardTitle>
+          <CardDescription className="text-slate-400 text-sm mt-2">
             Watch your progress grow: every question, recommendation, and completed mission makes you a better developer. 🚀
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            <div className="text-center bg-slate-800/30 rounded-lg p-4">
-              <div className="text-3xl font-bold text-cyan-400">{conversationMessages.length}</div>
-              <div className="text-xs text-slate-400 mt-1">Questions Asked</div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div className="text-center bg-slate-800/30 rounded-lg p-5 hover:bg-slate-800/50 transition-colors duration-200 border border-slate-700/50 stagger-item">
+              <div className="text-4xl font-bold text-cyan-400 mb-2">{conversationMessages.length}</div>
+              <div className="text-xs text-slate-400 uppercase tracking-wider font-medium">Questions Asked</div>
             </div>
-            <div className="text-center bg-slate-800/30 rounded-lg p-4">
-              <div className="text-3xl font-bold text-purple-400">{recommendations.length}</div>
-              <div className="text-xs text-slate-400 mt-1">Recommendations</div>
+            <div className="text-center bg-slate-800/30 rounded-lg p-5 hover:bg-slate-800/50 transition-colors duration-200 border border-slate-700/50 stagger-item">
+              <div className="text-4xl font-bold text-purple-400 mb-2">{recommendations.length}</div>
+              <div className="text-xs text-slate-400 uppercase tracking-wider font-medium">Recommendations</div>
             </div>
-            <div className="text-center bg-slate-800/30 rounded-lg p-4">
-              <div className="text-3xl font-bold text-amber-400">{missions.filter((m: any) => m.status === 'completed').length}</div>
-              <div className="text-xs text-slate-400 mt-1">Missions Completed</div>
+            <div className="text-center bg-slate-800/30 rounded-lg p-5 hover:bg-slate-800/50 transition-colors duration-200 border border-slate-700/50 stagger-item">
+              <div className="text-4xl font-bold text-amber-400 mb-2">{missions.filter((m: any) => m.status === 'completed').length}</div>
+              <div className="text-xs text-slate-400 uppercase tracking-wider font-medium">Missions Completed</div>
             </div>
-            <div className="text-center bg-slate-800/30 rounded-lg p-4">
-              <div className="text-3xl font-bold text-green-400">{missions.filter((m: any) => m.status === 'active').length}</div>
-              <div className="text-xs text-slate-400 mt-1">Active Missions</div>
+            <div className="text-center bg-slate-800/30 rounded-lg p-5 hover:bg-slate-800/50 transition-colors duration-200 border border-slate-700/50 stagger-item">
+              <div className="text-4xl font-bold text-green-400 mb-2">{missions.filter((m: any) => m.status === 'active').length}</div>
+              <div className="text-xs text-slate-400 uppercase tracking-wider font-medium">Active Missions</div>
             </div>
           </div>
         </CardContent>
       </Card>
 
       {/* AI Conversation */}
-      <Card className="bg-slate-900/90 border-slate-800 w-full h-[70vh] min-h-[500px] flex flex-col">
+      <Card className="bg-slate-900/90 border-slate-800 card-polish w-full h-[70vh] min-h-[500px] flex flex-col stagger-item">
         <CardHeader>
           <CardTitle className="text-white text-lg">Ask Anything About Your Code</CardTitle>
           <CardDescription className="text-slate-400">
@@ -2232,12 +2246,15 @@ function MarketplaceView({ data }: any) {
   });
 
   return (
-    <div className="w-full max-w-7xl space-y-6 mx-auto">
+    <div className="w-full max-w-7xl space-y-6 mx-auto pt-4 animate-in fade-in duration-500">
       {/* Header */}
-      <Card className="bg-slate-900/90 border-slate-800">
+      <Card className="bg-slate-900/90 border-slate-800 card-polish stagger-item">
         <CardHeader>
-          <CardTitle className="text-white text-lg">📦 Plugin Marketplace</CardTitle>
-          <CardDescription className="text-slate-400">
+          <CardTitle className="text-white text-xl font-bold flex items-center gap-2">
+            <span className="text-2xl">📦</span>
+            Plugin Marketplace
+          </CardTitle>
+          <CardDescription className="text-slate-400 text-sm mt-2">
             Find and install plugins for your code. We'll find the tools you need, you click install. It's that simple. 🎯
           </CardDescription>
         </CardHeader>
@@ -2248,7 +2265,7 @@ function MarketplaceView({ data }: any) {
             placeholder="Search plugins..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-2 text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 mb-4"
+            className="w-full bg-slate-950 border border-slate-700 rounded-lg px-4 py-3 text-white placeholder-slate-500 input-focus transition-all duration-200 mb-4"
           />
           
           {/* Category Filters */}
@@ -2886,10 +2903,10 @@ function SettingsView({ data }: any) {
       </Card>
 
       {/* Teams Management */}
-      <Card className="bg-slate-900/90 border-slate-800">
+      <Card className="bg-slate-900/90 border-slate-800 card-polish stagger-item">
         <CardHeader>
           <div className="flex items-center justify-between mb-2">
-            <CardTitle className="text-white text-lg">Teams</CardTitle>
+            <CardTitle className="text-white text-lg font-semibold">Teams</CardTitle>
             <Button
               onClick={() => setShowAddTeam(!showAddTeam)}
               size="sm"
@@ -2937,8 +2954,8 @@ function SettingsView({ data }: any) {
             </div>
           )}
           <div className="space-y-2">
-            {teams.map(team => (
-              <div key={team.id} className="flex items-center justify-between p-3 bg-slate-800/30 rounded-lg">
+            {teams.map((team, idx) => (
+              <div key={team.id} className="flex items-center justify-between p-4 bg-slate-800/30 rounded-lg hover:bg-slate-800/50 transition-all duration-200 border border-slate-700/50 stagger-item" style={{ animationDelay: `${idx * 0.05}s` }}>
                 <div>
                   <div className="text-white font-medium">{team.name}</div>
                   <div className="text-sm text-slate-400">{team.members} members • {team.repos} repos</div>
@@ -2968,10 +2985,10 @@ function SettingsView({ data }: any) {
       </Card>
 
       {/* Users Management */}
-      <Card className="bg-slate-900/90 border-slate-800">
+      <Card className="bg-slate-900/90 border-slate-800 card-polish stagger-item">
         <CardHeader>
           <div className="flex items-center justify-between mb-2">
-            <CardTitle className="text-white text-lg">Users</CardTitle>
+            <CardTitle className="text-white text-lg font-semibold">Users</CardTitle>
             <Button
               onClick={() => setShowAddUser(!showAddUser)}
               size="sm"
@@ -3048,7 +3065,7 @@ function SettingsView({ data }: any) {
           )}
           <div className="space-y-2">
             {users.map((user, idx) => (
-              <div key={user.id} className="flex items-center justify-between p-3 bg-slate-800/30 rounded-lg slide-up smooth-transition hover-lift" style={{ animationDelay: `${idx * 0.05}s` }}>
+              <div key={user.id} className="flex items-center justify-between p-4 bg-slate-800/30 rounded-lg hover:bg-slate-800/50 transition-all duration-200 border border-slate-700/50 stagger-item" style={{ animationDelay: `${idx * 0.05}s` }}>
                 <div>
                   <div className="text-white font-medium">{user.name || user.email}</div>
                   <div className="text-sm text-slate-400">{user.email} • {user.role} {user.team && `• ${user.team}`}</div>
@@ -3078,10 +3095,10 @@ function SettingsView({ data }: any) {
       </Card>
 
       {/* Repositories Management */}
-      <Card className="bg-slate-900/90 border-slate-800">
+      <Card className="bg-slate-900/90 border-slate-800 card-polish stagger-item">
         <CardHeader>
           <div className="flex items-center justify-between mb-2">
-            <CardTitle className="text-white text-lg">Repositories</CardTitle>
+            <CardTitle className="text-white text-lg font-semibold">Repositories</CardTitle>
             <Button
               onClick={() => setShowAddRepo(!showAddRepo)}
               size="sm"
@@ -3141,7 +3158,7 @@ function SettingsView({ data }: any) {
           )}
           <div className="space-y-2">
             {repos.map((repo, idx) => (
-              <div key={repo.id} className="flex items-center justify-between p-3 bg-slate-800/30 rounded-lg slide-up smooth-transition hover-lift" style={{ animationDelay: `${idx * 0.05}s` }}>
+              <div key={repo.id} className="flex items-center justify-between p-4 bg-slate-800/30 rounded-lg hover:bg-slate-800/50 transition-all duration-200 border border-slate-700/50 stagger-item" style={{ animationDelay: `${idx * 0.05}s` }}>
                 <div>
                   <div className="text-white font-medium">{repo.name}</div>
                   <div className="text-sm text-slate-400">{repo.team || 'No team'} • Last scan: {repo.lastScan}</div>
@@ -3179,10 +3196,13 @@ function SettingsView({ data }: any) {
       </Card>
 
       {/* Integrations */}
-      <Card className="bg-slate-900/90 border-slate-800">
+      <Card className="bg-slate-900/90 border-slate-800 card-polish stagger-item">
         <CardHeader>
-          <CardTitle className="text-white text-lg">🔗 Integrations</CardTitle>
-          <CardDescription className="text-slate-400">
+          <CardTitle className="text-white text-lg font-semibold flex items-center gap-2">
+            <span className="text-2xl">🔗</span>
+            Integrations
+          </CardTitle>
+          <CardDescription className="text-slate-400 text-sm mt-2">
             Connect BEAST MODE with your favorite tools for notifications and updates
           </CardDescription>
         </CardHeader>
@@ -3194,10 +3214,13 @@ function SettingsView({ data }: any) {
       </Card>
 
       {/* Real-Time Collaboration */}
-      <Card className="bg-slate-900/90 border-slate-800">
+      <Card className="bg-slate-900/90 border-slate-800 card-polish stagger-item">
         <CardHeader>
-          <CardTitle className="text-white text-lg">👥 Real-Time Collaboration</CardTitle>
-          <CardDescription className="text-slate-400">
+          <CardTitle className="text-white text-lg font-semibold flex items-center gap-2">
+            <span className="text-2xl">👥</span>
+            Real-Time Collaboration
+          </CardTitle>
+          <CardDescription className="text-slate-400 text-sm mt-2">
             Live code review sessions, team workspaces, and collaborative annotations
           </CardDescription>
         </CardHeader>
