@@ -1,0 +1,105 @@
+name: BEAST MODE PR Quality Gate
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  pr-quality-gate:
+    runs-on: ubuntu-latest
+    name: PR Quality Gate
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Run BEAST MODE Analysis
+        id: analysis
+        run: |
+          npx @beast-mode/core analyze --pr --format json > analysis.json || true
+          cat analysis.json
+      
+      - name: Process Analysis Results
+        id: process
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const fs = require('fs');
+            let analysis = { score: 0, issues: [], recommendations: [] };
+            
+            try {
+              const data = fs.readFileSync('analysis.json', 'utf8');
+              analysis = JSON.parse(data);
+            } catch (e) {
+              console.log('No analysis file found, using defaults');
+            }
+            
+            const score = analysis.score || 0;
+            const issues = analysis.issues || [];
+            const recommendations = analysis.recommendations || [];
+            
+            // Create detailed PR comment
+            let comment = `## 🔍 BEAST MODE PR Analysis\n\n`;
+            comment += `**Quality Score:** ${score}/100\n\n`;
+            
+            if (issues.length > 0) {
+              comment += `### ⚠️ Issues Found (${issues.length})\n\n`;
+              issues.slice(0, 10).forEach((issue, idx) => {
+                comment += `${idx + 1}. **${issue.type}**: ${issue.message}\n`;
+                if (issue.file) {
+                  comment += `   - File: \`${issue.file}\`\n`;
+                }
+              });
+              if (issues.length > 10) {
+                comment += `\n*...and ${issues.length - 10} more issues*\n`;
+              }
+            }
+            
+            if (recommendations.length > 0) {
+              comment += `\n### 💡 Recommendations\n\n`;
+              recommendations.slice(0, 5).forEach((rec, idx) => {
+                comment += `${idx + 1}. ${rec}\n`;
+              });
+            }
+            
+            comment += `\n---\n*Automated by [BEAST MODE](https://beastmode.dev)*`;
+            
+            // Post comment to PR
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: comment
+            });
+            
+            // Set outputs
+            core.setOutput('score', score);
+            core.setOutput('passed', score >= 70); // Lower threshold for PRs
+      
+      - name: Set PR Status
+        if: steps.process.outputs.passed != 'true'
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            github.rest.repos.createCommitStatus({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              sha: context.payload.pull_request.head.sha,
+              state: 'failure',
+              context: 'beast-mode/quality',
+              description: `Quality score: ${{ steps.process.outputs.score }}/100 (minimum: 70)`
+            });
+

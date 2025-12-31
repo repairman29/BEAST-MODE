@@ -1,0 +1,96 @@
+name: BEAST MODE Quality Check
+
+on:
+  pull_request:
+    branches: [ main, develop ]
+  push:
+    branches: [ main, develop ]
+  workflow_dispatch:
+
+jobs:
+  quality-check:
+    runs-on: ubuntu-latest
+    name: Quality Check
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Full history for better analysis
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Run BEAST MODE Quality Check
+        id: quality-check
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const { execSync } = require('child_process');
+            
+            // Run BEAST MODE quality analysis
+            const output = execSync('npx @beast-mode/core quality --format json', {
+              encoding: 'utf-8',
+              stdio: 'pipe'
+            });
+            
+            const results = JSON.parse(output);
+            
+            // Set outputs for later steps
+            core.setOutput('score', results.score || 0);
+            core.setOutput('issues', results.issues?.length || 0);
+            core.setOutput('passed', results.score >= 80);
+            
+            return results;
+      
+      - name: Comment PR with Quality Report
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const score = ${{ steps.quality-check.outputs.score }};
+            const issues = ${{ steps.quality-check.outputs.issues }};
+            const passed = ${{ steps.quality-check.outputs.passed }} === 'true';
+            
+            const status = passed ? '✅ PASSED' : '⚠️ NEEDS ATTENTION';
+            const emoji = passed ? '🎉' : '🔍';
+            
+            const body = `## ${emoji} BEAST MODE Quality Check ${status}
+            
+            **Quality Score:** ${score}/100
+            **Issues Found:** ${issues}
+            
+            ${passed 
+              ? '✨ Your code quality looks great! Ready to merge.' 
+              : '📋 Please review the issues below and address them before merging.'}
+            
+            ### Quality Breakdown
+            - **Code Quality:** ${score >= 90 ? 'Excellent' : score >= 80 ? 'Good' : 'Needs Improvement'}
+            - **Best Practices:** ${score >= 85 ? 'Following' : 'Review Recommended'}
+            - **Performance:** ${score >= 80 ? 'Optimized' : 'Could Be Better'}
+            
+            ---
+            *Powered by [BEAST MODE](https://beastmode.dev) - AI-Powered Development Tools*`;
+            
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: body
+            });
+      
+      - name: Quality Gate
+        if: steps.quality-check.outputs.passed != 'true'
+        run: |
+          echo "Quality check failed. Score: ${{ steps.quality-check.outputs.score }}/100"
+          echo "Minimum required score: 80"
+          exit 1
+
