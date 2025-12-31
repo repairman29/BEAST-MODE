@@ -347,15 +347,16 @@ function BeastModeDashboardInner({ initialView }: BeastModeDashboardInnerProps) 
         )}
 
         {/* Center Content - BEAST MODE Views */}
-        <div className="flex-1 flex items-start justify-center overflow-y-auto py-8 px-6 xl:px-12 pb-20 custom-scrollbar relative z-20" style={{ paddingTop: 'calc(4rem + 1rem)', paddingBottom: 'calc(1.5rem + 3rem)' }}>
+        <div className="flex-1 flex items-start justify-center overflow-y-auto py-4 md:py-8 px-4 md:px-6 xl:px-12 pb-20 custom-scrollbar relative z-20" style={{ paddingTop: 'calc(4rem + 1rem)', paddingBottom: 'calc(1.5rem + 3rem)' }}>
           {currentView === null && (
-            <div className="w-full max-w-4xl space-y-8 animate-in fade-in duration-300 relative z-30">
-              <div className="text-center mb-12">
-                <div className="text-7xl mb-6 animate-in zoom-in-95 duration-500">⚔️</div>
-                <div className="text-lg uppercase tracking-widest text-white mb-3 font-bold">BEAST MODE Active</div>
-                <div className="text-sm text-slate-300 space-y-1 mb-6">
-                  <div>Press <kbd className="px-2 py-1 bg-slate-800 rounded text-xs text-white">⌘K</kbd> for command palette</div>
-                  <div>Press <kbd className="px-2 py-1 bg-slate-800 rounded text-xs text-white">⌘B</kbd> to toggle sidebar</div>
+            <div className="w-full max-w-4xl space-y-6 md:space-y-8 animate-in fade-in duration-300 relative z-30 px-2 md:px-0">
+              <div className="text-center mb-8 md:mb-12">
+                <div className="text-5xl md:text-7xl mb-4 md:mb-6 animate-in zoom-in-95 duration-500">⚔️</div>
+                <div className="text-base md:text-lg uppercase tracking-widest text-white mb-3 font-bold">BEAST MODE Active</div>
+                <div className="text-xs md:text-sm text-slate-300 space-y-1 mb-4 md:mb-6">
+                  <div className="hidden md:block">Press <kbd className="px-2 py-1 bg-slate-800 rounded text-xs text-white">⌘K</kbd> for command palette</div>
+                  <div className="hidden md:block">Press <kbd className="px-2 py-1 bg-slate-800 rounded text-xs text-white">⌘B</kbd> to toggle sidebar</div>
+                  <div className="md:hidden">Tap ☰ in top-left for menu</div>
                 </div>
                 
                 {/* Value Props */}

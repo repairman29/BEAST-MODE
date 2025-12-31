@@ -42,7 +42,7 @@ async function main() {
   const rateLimit = security.checkRateLimit(apiKey.keyId, 'predict');
   console.log(`   ✅ Rate limit check: ${rateLimit.allowed ? 'allowed' : 'blocked'}`);
 
-  security.auditLog('test-tenant-1', 'prediction', { ip: '127.0.0.1' });
+  security.logAudit('test-tenant-1', 'prediction', { ip: '127.0.0.1' });
   const auditLog = security.getAuditLog('test-tenant-1', 5);
   console.log(`   ✅ Audit log entries: ${auditLog.length}\n`);
 
