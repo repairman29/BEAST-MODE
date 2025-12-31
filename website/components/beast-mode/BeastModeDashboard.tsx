@@ -436,20 +436,42 @@ function BeastModeDashboardInner({ initialView }: BeastModeDashboardInnerProps) 
           {currentView === 'collaboration' && (
             <div className="w-full max-w-7xl relative z-30">
               <div className="space-y-6">
-                <div className="flex gap-4 mb-6">
-                  <Button
-                    onClick={() => setCurrentView('collaboration-workspace')}
-                    className="bg-cyan-500 hover:bg-cyan-600 text-white"
-                  >
-                    👥 Team Workspace
-                  </Button>
-                  <Button
-                    onClick={() => setCurrentView('collaboration-dashboard')}
-                    className="bg-cyan-500 hover:bg-cyan-600 text-white"
-                  >
-                    📊 Shared Dashboard
-                  </Button>
-                </div>
+                {/* Header - Enhanced */}
+                <Card className="bg-gradient-to-br from-slate-900/95 to-slate-800/90 border-slate-700/50 shadow-xl">
+                  <CardHeader className="pb-4">
+                    <div className="flex items-start justify-between">
+                      <div className="flex-1">
+                        <CardTitle className="text-white text-xl md:text-2xl font-bold flex items-center gap-3 mb-2">
+                          <div className="w-10 h-10 bg-gradient-to-br from-cyan-500 to-purple-500 rounded-lg flex items-center justify-center shadow-lg">
+                            <span className="text-xl">👥</span>
+                          </div>
+                          Collaboration
+                        </CardTitle>
+                        <CardDescription className="text-slate-400 text-sm mt-1">
+                          Team workspaces, shared dashboards, and real-time collaboration
+                        </CardDescription>
+                      </div>
+                    </div>
+                  </CardHeader>
+                  <CardContent className="pt-4">
+                    <div className="flex flex-wrap gap-3">
+                      <Button
+                        onClick={() => setCurrentView('collaboration-workspace')}
+                        className="bg-gradient-to-r from-cyan-600 to-cyan-500 hover:from-cyan-700 hover:to-cyan-600 text-white px-6 py-3 font-semibold shadow-lg shadow-cyan-500/20 transition-all duration-200 hover:scale-105"
+                      >
+                        <span className="mr-2">👥</span>
+                        Team Workspace
+                      </Button>
+                      <Button
+                        onClick={() => setCurrentView('collaboration-dashboard')}
+                        className="bg-gradient-to-r from-purple-600 to-purple-500 hover:from-purple-700 hover:to-purple-600 text-white px-6 py-3 font-semibold shadow-lg shadow-purple-500/20 transition-all duration-200 hover:scale-105"
+                      >
+                        <span className="mr-2">📊</span>
+                        Shared Dashboard
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
                 <TeamWorkspace userId={user?.id || (typeof window !== 'undefined' ? localStorage.getItem('beastModeUserId') || undefined : undefined)} />
               </div>
             </div>
