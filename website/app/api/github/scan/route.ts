@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { fetchRepository, fetchRepositoryContents, octokit } from '../../../lib/github';
-import cache, { cacheKeys, cacheTTL } from '../../../lib/cache';
-import queryOptimizer from '../../../lib/query-optimizer';
+import { fetchRepository, fetchRepositoryContents, octokit } from '../../../../lib/github';
+import cache, { cacheKeys, cacheTTL } from '../../../../lib/cache';
+import queryOptimizer from '../../../../lib/query-optimizer';
 
 /**
  * GitHub Repository Scanning API
@@ -502,9 +502,21 @@ export async function POST(request: NextRequest) {
 
   } catch (error: any) {
     console.error('GitHub scan error:', error);
+    // Return more helpful error messages
+    const errorMessage = error.message || 'Unknown error occurred';
+    const statusCode = error.status || 500;
+    
     return NextResponse.json(
-      { error: 'Failed to scan repository', details: error.message },
-      { status: 500 }
+      { 
+        error: 'Failed to scan repository', 
+        details: errorMessage,
+        message: errorMessage.includes('not found') 
+          ? 'Repository not found or is private. Make sure the repository exists and is public, or configure a GitHub token for private repos.'
+          : errorMessage.includes('token')
+          ? 'GitHub token not configured. Add GITHUB_TOKEN to your environment variables for real scanning.'
+          : 'An error occurred while scanning the repository. Please try again or check the repository URL.'
+      },
+      { status: statusCode }
     );
   }
 }
