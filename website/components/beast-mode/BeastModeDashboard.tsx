@@ -2369,6 +2369,16 @@ function MarketplaceView({ data }: any) {
                   <div className="ml-4 text-right">
                     <div className="text-green-400 font-semibold">⭐ {item.plugin.rating}</div>
                     <div className="text-slate-500 text-xs mt-1">{item.plugin.downloads?.toLocaleString()} downloads</div>
+                    <Button
+                      onClick={() => {
+                        setSelectedPlugin(item.pluginId);
+                        setShowReviews(true);
+                      }}
+                      variant="ghost"
+                      className="text-slate-400 hover:text-cyan-400 text-xs p-0 h-auto mt-1"
+                    >
+                      View Reviews
+                    </Button>
                   </div>
                 </div>
               </CardHeader>
@@ -2502,7 +2512,7 @@ function MarketplaceView({ data }: any) {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <PluginAnalytics
+          <PluginAnalyticsEnhanced
             userId={user?.id || (typeof window !== 'undefined' ? localStorage.getItem('beastModeUserId') || undefined : undefined)}
           />
         </CardContent>

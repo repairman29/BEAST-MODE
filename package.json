@@ -39,6 +39,8 @@
     "test:db-writer": "node scripts/test-database-writer.js",
     "ml:health-check": "node scripts/ml-db-health-check.js",
     "ml:performance": "node scripts/ml-db-performance.js",
+    "fine-tune": "node scripts/fine-tune-model.js",
+    "test:advanced-ensemble": "node scripts/test-advanced-ensemble.js",
     "test:comprehensive": "node scripts/test-comprehensive.js",
     "test:expanded": "node scripts/test-expanded.js",
     "test:ftue": "node scripts/test-ftue.js",
