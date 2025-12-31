@@ -1,7 +1,9 @@
 # BEAST MODE - Quick Start Guide
 ## Get up and running in 5 minutes! ⚡
 
-Perfect for new developers who want to get started fast.
+**Welcome, vibe coder!** You're about to experience the BEAST MODE VIBE - where coding feels good, quality matters, and fun isn't optional.
+
+Perfect for developers who want to get started fast and build better code.
 
 ---
 
