@@ -108,7 +108,8 @@ export default function WhiteLabel({ userId }: WhiteLabelProps) {
         body: JSON.stringify({
           action: 'verify-domain',
           domain: { customDomain: domain.customDomain }
-        });
+        })
+      });
 
       if (response.ok) {
         await fetchConfig();
