@@ -74,7 +74,8 @@ export async function POST(request: NextRequest) {
  */
 export async function GET(request: NextRequest) {
   try {
-    const { searchParams } = new URL(request.url);
+    const url = request.nextUrl || new URL(request.url);
+    const searchParams = url.searchParams;
     const sessionId = searchParams.get('sessionId');
     const filePath = searchParams.get('filePath');
 
@@ -168,7 +169,8 @@ export async function PUT(request: NextRequest) {
  */
 export async function DELETE(request: NextRequest) {
   try {
-    const { searchParams } = new URL(request.url);
+    const url = request.nextUrl || new URL(request.url);
+    const searchParams = url.searchParams;
     const sessionId = searchParams.get('sessionId');
     const annotationId = searchParams.get('annotationId');
 
