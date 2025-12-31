@@ -48,11 +48,14 @@ function BeastModeDashboardInner({ initialView }: BeastModeDashboardInnerProps) 
   const analytics = getAnalytics();
   const [showOnboarding, setShowOnboarding] = useState(false);
 
-  // Initialize analytics
+  // Initialize analytics and error monitoring
   useEffect(() => {
     if (user) {
       analytics.setUserId(user.id);
       analytics.trackConversion('sign-in');
+      
+      const errorMonitor = getErrorMonitor();
+      errorMonitor.setUser(user.id);
     }
   }, [user]);
 
@@ -252,7 +255,7 @@ function BeastModeDashboardInner({ initialView }: BeastModeDashboardInnerProps) 
 
   return (
     <ErrorBoundary>
-      <div className="relative w-full h-full min-h-screen bg-black overflow-hidden flex">
+      <div className="relative w-full h-full min-h-screen bg-black overflow-hidden flex" role="application" aria-label="BEAST MODE Dashboard">
         {/* FTUE Onboarding */}
         {showOnboarding && (
           <FTUEOnboarding

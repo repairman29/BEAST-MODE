@@ -46,10 +46,22 @@ export class ErrorBoundary extends Component<Props, State> {
       this.props.onError(error, errorInfo);
     }
 
-    // TODO: Send to error logging service (Sentry, etc.)
-    // if (typeof window !== 'undefined' && window.Sentry) {
-    //   window.Sentry.captureException(error, { contexts: { react: errorInfo } });
-    // }
+    // Send to error monitoring
+    if (typeof window !== 'undefined') {
+      try {
+        const { getErrorMonitor } = require('../../lib/error-monitoring');
+        const errorMonitor = getErrorMonitor();
+        errorMonitor.captureError(error, {
+          component: 'ErrorBoundary',
+          metadata: {
+            componentStack: errorInfo.componentStack,
+          },
+        });
+      } catch (e) {
+        // Silently fail if error monitoring not available
+        console.debug('Error monitoring not available:', e);
+      }
+    }
   }
 
   handleReset = () => {

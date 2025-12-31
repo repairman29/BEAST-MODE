@@ -127,6 +127,9 @@ export default function Sidebar({ currentView, onViewChange, onCommandPalette }:
                         } ${isHovered && !isActive ? 'translate-x-1' : ''}`}
                         title={isCollapsed ? item.tooltip : undefined}
                         aria-label={item.label}
+                        aria-current={isActive ? 'page' : undefined}
+                        role="menuitem"
+                        tabIndex={0}
                       >
                         {/* Active indicator glow */}
                         {isActive && (
