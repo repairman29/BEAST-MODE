@@ -131,13 +131,18 @@ export default function SharedDashboard({ dashboardId, userId }: SharedDashboard
 
   return (
     <div className="space-y-6">
-      {/* Header */}
-      <Card className="bg-slate-900/90 border-slate-800">
-        <CardHeader>
-          <div className="flex items-center justify-between">
-            <div>
-              <CardTitle className="text-white text-lg">📊 Shared Dashboard</CardTitle>
-              <CardDescription className="text-slate-400">
+      {/* Header - Enhanced */}
+      <Card className="bg-gradient-to-br from-slate-900/95 to-slate-800/90 border-2 border-slate-700/50 shadow-xl">
+        <CardHeader className="pb-4">
+          <div className="flex items-center justify-between flex-wrap gap-4">
+            <div className="flex-1">
+              <CardTitle className="text-white text-xl md:text-2xl font-bold flex items-center gap-3 mb-2">
+                <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg flex items-center justify-center shadow-lg">
+                  <span className="text-xl">📊</span>
+                </div>
+                Shared Dashboard
+              </CardTitle>
+              <CardDescription className="text-slate-400 text-sm mt-1">
                 Team-wide visibility and collaborative insights
               </CardDescription>
             </div>
@@ -147,11 +152,11 @@ export default function SharedDashboard({ dashboardId, userId }: SharedDashboard
                   key={range}
                   onClick={() => setTimeRange(range)}
                   variant={timeRange === range ? 'default' : 'outline'}
-                  className={
+                  className={`transition-all duration-200 font-medium ${
                     timeRange === range
-                      ? 'bg-cyan-500 hover:bg-cyan-600 text-white'
-                      : 'border-slate-700 text-slate-300 hover:bg-slate-800'
-                  }
+                      ? 'bg-gradient-to-r from-purple-600 to-purple-500 hover:from-purple-700 hover:to-purple-600 text-white shadow-lg shadow-purple-500/20 scale-105'
+                      : 'bg-slate-800/50 hover:bg-slate-700/50 text-slate-300 hover:text-white border border-slate-700/50'
+                  }`}
                   size="sm"
                 >
                   {range}
@@ -162,100 +167,139 @@ export default function SharedDashboard({ dashboardId, userId }: SharedDashboard
         </CardHeader>
       </Card>
 
-      {/* Overall Metrics */}
+      {/* Overall Metrics - Enhanced */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-        <Card className="bg-slate-900/90 border-slate-800">
+        <Card className="bg-gradient-to-br from-slate-800/60 to-slate-900/40 border-2 border-slate-700/50 hover:border-cyan-500/50 transition-all duration-200 hover:scale-[1.02] hover:shadow-xl">
           <CardContent className="p-6">
-            <div className="text-slate-400 text-sm mb-2">Quality Score</div>
-            <div className="text-3xl font-bold text-white">{data.overallMetrics.qualityScore}/100</div>
-            <div className={`text-xs mt-1 ${
+            <div className="text-xs text-slate-400 uppercase tracking-wider mb-2 font-medium">Quality Score</div>
+            <div className={`text-4xl font-bold mb-1 ${
+              data.overallMetrics.qualityScore >= 80 ? 'text-green-400' :
+              data.overallMetrics.qualityScore >= 60 ? 'text-amber-400' :
+              'text-red-400'
+            }`}>
+              {data.overallMetrics.qualityScore}/100
+            </div>
+            <div className={`text-xs font-medium flex items-center gap-1 ${
               data.overallMetrics.trend === 'improving' ? 'text-green-400' : 'text-red-400'
             }`}>
+              {data.overallMetrics.trend === 'improving' ? '📈' : '📉'}
               {data.overallMetrics.trendValue > 0 ? '+' : ''}{data.overallMetrics.trendValue} {data.overallMetrics.trend}
             </div>
           </CardContent>
         </Card>
 
-        <Card className="bg-slate-900/90 border-slate-800">
+        <Card className="bg-gradient-to-br from-slate-800/60 to-slate-900/40 border-2 border-slate-700/50 hover:border-cyan-500/50 transition-all duration-200 hover:scale-[1.02] hover:shadow-xl">
           <CardContent className="p-6">
-            <div className="text-slate-400 text-sm mb-2">Total Projects</div>
-            <div className="text-3xl font-bold text-cyan-400">{data.overallMetrics.totalProjects}</div>
-            <div className="text-xs text-slate-500 mt-1">Active projects</div>
+            <div className="text-xs text-slate-400 uppercase tracking-wider mb-2 font-medium">Total Projects</div>
+            <div className="text-4xl font-bold text-cyan-400 mb-1">{data.overallMetrics.totalProjects}</div>
+            <div className="text-xs text-slate-500">Active projects</div>
           </CardContent>
         </Card>
 
-        <Card className="bg-slate-900/90 border-slate-800">
+        <Card className="bg-gradient-to-br from-slate-800/60 to-slate-900/40 border-2 border-slate-700/50 hover:border-orange-500/50 transition-all duration-200 hover:scale-[1.02] hover:shadow-xl">
           <CardContent className="p-6">
-            <div className="text-slate-400 text-sm mb-2">Issues</div>
-            <div className="text-3xl font-bold text-orange-400">{data.overallMetrics.totalIssues}</div>
-            <div className="text-xs text-slate-500 mt-1">
+            <div className="text-xs text-slate-400 uppercase tracking-wider mb-2 font-medium">Issues</div>
+            <div className="text-4xl font-bold text-orange-400 mb-1">{data.overallMetrics.totalIssues}</div>
+            <div className="text-xs text-slate-500">
               {data.overallMetrics.resolvedIssues} resolved
             </div>
           </CardContent>
         </Card>
 
-        <Card className="bg-slate-900/90 border-slate-800">
+        <Card className="bg-gradient-to-br from-slate-800/60 to-slate-900/40 border-2 border-slate-700/50 hover:border-purple-500/50 transition-all duration-200 hover:scale-[1.02] hover:shadow-xl">
           <CardContent className="p-6">
-            <div className="text-slate-400 text-sm mb-2">Team Members</div>
-            <div className="text-3xl font-bold text-purple-400">{data.overallMetrics.activeMembers}</div>
-            <div className="text-xs text-slate-500 mt-1">Active contributors</div>
+            <div className="text-xs text-slate-400 uppercase tracking-wider mb-2 font-medium">Team Members</div>
+            <div className="text-4xl font-bold text-purple-400 mb-1">{data.overallMetrics.activeMembers}</div>
+            <div className="text-xs text-slate-500">Active contributors</div>
           </CardContent>
         </Card>
       </div>
 
-      {/* Main Content Grid */}
+      {/* Main Content Grid - Enhanced */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* Top Performers */}
-        <Card className="bg-slate-900/90 border-slate-800">
-          <CardHeader>
-            <CardTitle className="text-white text-lg">🏆 Top Performers</CardTitle>
+        {/* Top Performers - Enhanced */}
+        <Card className="bg-gradient-to-br from-slate-900/95 to-slate-800/90 border-2 border-slate-700/50 shadow-xl">
+          <CardHeader className="pb-4">
+            <CardTitle className="text-white text-lg font-bold flex items-center gap-2">
+              <span className="text-xl">🏆</span>
+              Top Performers
+            </CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-3">
               {data.teamMetrics.topPerformers.map((performer, idx) => (
                 <div
                   key={performer.userId}
-                  className="flex items-center justify-between p-3 bg-slate-950 rounded-lg border border-slate-800"
+                  className="flex items-center justify-between p-4 bg-slate-800/50 rounded-xl border-2 border-slate-700/50 hover:border-cyan-500/50 transition-all duration-200 hover:scale-[1.01] hover:shadow-lg"
                 >
-                  <div className="flex items-center gap-3">
-                    <div className="text-2xl font-bold text-slate-600 w-8">#{idx + 1}</div>
-                    <div className="text-white font-semibold">{performer.userName}</div>
+                  <div className="flex items-center gap-4">
+                    <div className={`w-10 h-10 rounded-lg flex items-center justify-center font-bold text-lg ${
+                      idx === 0 ? 'bg-gradient-to-br from-yellow-500/30 to-yellow-600/20 text-yellow-400 border-2 border-yellow-500/50' :
+                      idx === 1 ? 'bg-gradient-to-br from-slate-500/30 to-slate-600/20 text-slate-400 border-2 border-slate-500/50' :
+                      idx === 2 ? 'bg-gradient-to-br from-amber-600/30 to-amber-700/20 text-amber-500 border-2 border-amber-600/50' :
+                      'bg-slate-700/30 text-slate-500 border-2 border-slate-700/50'
+                    }`}>
+                      #{idx + 1}
+                    </div>
+                    <div className="text-white font-semibold text-base">{performer.userName}</div>
                   </div>
-                  <div className="text-cyan-400 font-bold text-lg">{performer.score}/100</div>
+                  <div className={`text-2xl font-bold ${
+                    performer.score >= 80 ? 'text-green-400' :
+                    performer.score >= 60 ? 'text-amber-400' :
+                    'text-red-400'
+                  }`}>
+                    {performer.score}/100
+                  </div>
                 </div>
               ))}
             </div>
           </CardContent>
         </Card>
 
-        {/* Top Issues */}
-        <Card className="bg-slate-900/90 border-slate-800">
-          <CardHeader>
-            <CardTitle className="text-white text-lg">⚠️ Top Issues</CardTitle>
+        {/* Top Issues - Enhanced */}
+        <Card className="bg-gradient-to-br from-slate-900/95 to-slate-800/90 border-2 border-slate-700/50 shadow-xl">
+          <CardHeader className="pb-4">
+            <CardTitle className="text-white text-lg font-bold flex items-center gap-2">
+              <span className="text-xl">⚠️</span>
+              Top Issues
+            </CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-3">
-              {data.topIssues.map((issue) => (
-                <div
-                  key={issue.id}
-                  className="p-3 bg-slate-950 rounded-lg border border-slate-800"
-                >
-                  <div className="flex items-center justify-between mb-2">
-                    <div className="text-white font-semibold">{issue.type}</div>
-                    <div className={`px-2 py-1 rounded text-xs ${
-                      issue.severity === 'high' ? 'bg-red-500/20 text-red-400' :
-                      issue.severity === 'medium' ? 'bg-yellow-500/20 text-yellow-400' :
-                      'bg-slate-500/20 text-slate-400'
-                    }`}>
-                      {issue.severity}
+              {data.topIssues.map((issue) => {
+                const isHigh = issue.severity === 'high';
+                const isMedium = issue.severity === 'medium';
+                
+                return (
+                  <div
+                    key={issue.id}
+                    className={`p-4 rounded-xl border-2 transition-all duration-200 hover:scale-[1.01] hover:shadow-lg ${
+                      isHigh
+                        ? 'bg-red-500/10 border-red-500/30 hover:border-red-500/50'
+                        : isMedium
+                        ? 'bg-amber-500/10 border-amber-500/30 hover:border-amber-500/50'
+                        : 'bg-slate-800/50 border-slate-700/50 hover:border-slate-600'
+                    }`}
+                  >
+                    <div className="flex items-center justify-between mb-2">
+                      <div className="text-white font-semibold text-base">{issue.type}</div>
+                      <div className={`px-2 py-1 rounded text-xs font-medium border ${
+                        isHigh ? 'bg-red-500/20 text-red-400 border-red-500/30' :
+                        isMedium ? 'bg-amber-500/20 text-amber-400 border-amber-500/30' :
+                        'bg-slate-500/20 text-slate-400 border-slate-500/30'
+                      }`}>
+                        {issue.severity}
+                      </div>
+                    </div>
+                    <div className="text-slate-300 text-sm mb-2">{issue.message}</div>
+                    <div className="text-slate-500 text-xs flex items-center gap-2">
+                      <span>📊 {issue.count} occurrence(s)</span>
+                      <span>•</span>
+                      <span>📁 Project: {issue.projectId}</span>
                     </div>
                   </div>
-                  <div className="text-slate-400 text-sm">{issue.message}</div>
-                  <div className="text-slate-500 text-xs mt-1">
-                    {issue.count} occurrence(s) • Project: {issue.projectId}
-                  </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </CardContent>
         </Card>
