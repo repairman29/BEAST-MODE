@@ -447,6 +447,52 @@ program
             })
     );
 
+// Integration Commands
+program
+    .command('integrations')
+    .description('Third-party integration commands')
+    .addCommand(
+        new Command('setup')
+            .description('Setup integration')
+            .argument('<service>', 'Service (slack, discord, email)')
+            .action(async (service) => {
+                console.log(chalk.cyan(`Setting up ${service} integration...`));
+                console.log(chalk.yellow('Follow the prompts to configure your integration.'));
+                // Interactive setup would go here
+            })
+    )
+    .addCommand(
+        new Command('test')
+            .description('Test integration')
+            .argument('<service>', 'Service (slack, discord, email)')
+            .option('-m, --message <message>', 'Test message')
+            .action(async (service, options) => {
+                const spinner = ora(`Testing ${service} integration...`).start();
+                
+                try {
+                    if (service === 'slack') {
+                        const SlackIntegration = require('../lib/integrations/slack');
+                        const slack = new SlackIntegration();
+                        const result = await slack.testConnection();
+                        spinner.succeed(chalk.green('Slack integration test successful!'));
+                    } else if (service === 'discord') {
+                        const DiscordIntegration = require('../lib/integrations/discord');
+                        const discord = new DiscordIntegration();
+                        const result = await discord.testConnection();
+                        spinner.succeed(chalk.green('Discord integration test successful!'));
+                    } else if (service === 'email') {
+                        console.log(chalk.yellow('Email integration requires recipient address'));
+                        spinner.stop();
+                    } else {
+                        throw new Error(`Unknown service: ${service}`);
+                    }
+                } catch (error) {
+                    spinner.fail(chalk.red(`Integration test failed: ${error.message}`));
+                    process.exit(1);
+                }
+            })
+    );
+
 // Help and Info
 program
     .command('info')
