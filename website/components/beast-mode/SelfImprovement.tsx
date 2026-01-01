@@ -75,10 +75,6 @@ export default function SelfImprovement() {
           onConfirm: () => {
             setConfirmDialog({ open: false, title: '', message: '', onConfirm: () => {} });
             resolve(true);
-          },
-          onCancel: () => {
-            setConfirmDialog({ open: false, title: '', message: '', onConfirm: () => {} });
-            resolve(false);
           }
         });
       });
