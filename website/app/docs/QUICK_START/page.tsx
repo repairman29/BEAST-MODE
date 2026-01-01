@@ -1,5 +1,7 @@
 import { readFile } from 'fs/promises';
 import { join } from 'path';
+import Link from 'next/link';
+import { ArrowLeft } from 'lucide-react';
 
 export const metadata = {
   title: 'BEAST MODE - Quick Start Guide',
@@ -37,6 +39,13 @@ export default async function QuickStartPage() {
   return (
     <div className="min-h-screen bg-black text-white p-8">
       <div className="max-w-4xl mx-auto">
+        <Link
+          href="/docs"
+          className="inline-flex items-center gap-2 text-cyan-400 hover:text-cyan-300 mb-8 transition-colors"
+        >
+          <ArrowLeft className="w-4 h-4" />
+          Back to Documentation
+        </Link>
         <div className="prose prose-invert prose-cyan max-w-none" dangerouslySetInnerHTML={{ __html: html }} />
       </div>
     </div>

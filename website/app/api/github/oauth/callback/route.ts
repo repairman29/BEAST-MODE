@@ -67,30 +67,65 @@ export async function GET(request: NextRequest) {
     const redirectUri = process.env.GITHUB_REDIRECT_URI || `${process.env.NEXT_PUBLIC_URL || 'http://localhost:7777'}/api/github/oauth/callback`;
     console.log('   Using redirect URI:', redirectUri);
     console.log('   Client ID:', process.env.GITHUB_CLIENT_ID);
+    console.log('   Client ID length:', process.env.GITHUB_CLIENT_ID?.length);
     console.log('   Client Secret present:', !!process.env.GITHUB_CLIENT_SECRET);
+    console.log('   Client Secret length:', process.env.GITHUB_CLIENT_SECRET?.length);
+    console.log('   Code length:', code?.length);
+    console.log('   Redirect URI:', redirectUri);
+    
+    if (!process.env.GITHUB_CLIENT_ID || !process.env.GITHUB_CLIENT_SECRET) {
+      console.error('❌ [GitHub OAuth] Missing credentials');
+      console.error('   Client ID present:', !!process.env.GITHUB_CLIENT_ID);
+      console.error('   Client Secret present:', !!process.env.GITHUB_CLIENT_SECRET);
+      throw new Error('GitHub OAuth credentials not configured');
+    }
+    
+    const tokenRequest = {
+      client_id: process.env.GITHUB_CLIENT_ID,
+      client_secret: process.env.GITHUB_CLIENT_SECRET,
+      code,
+      redirect_uri: redirectUri,
+    };
+    
+    console.log('   Token request (without secrets):', {
+      client_id: tokenRequest.client_id,
+      code: code?.substring(0, 10) + '...',
+      redirect_uri: tokenRequest.redirect_uri,
+    });
+    
+    // GitHub OAuth token endpoint expects form-encoded data, not JSON
+    const formData = new URLSearchParams({
+      client_id: process.env.GITHUB_CLIENT_ID!,
+      client_secret: process.env.GITHUB_CLIENT_SECRET!,
+      code: code,
+      redirect_uri: redirectUri,
+    });
+    
+    console.log('   Using form-encoded request (GitHub standard)');
     
     const tokenResponse = await fetch('https://github.com/login/oauth/access_token', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/x-www-form-urlencoded',
         'Accept': 'application/json',
       },
-      body: JSON.stringify({
-        client_id: process.env.GITHUB_CLIENT_ID,
-        client_secret: process.env.GITHUB_CLIENT_SECRET,
-        code,
-        redirect_uri: redirectUri,
-      }),
+      body: formData.toString(),
     });
 
     console.log('   Token response status:', tokenResponse.status);
     console.log('   Token response ok:', tokenResponse.ok);
+    console.log('   Token response headers:', Object.fromEntries(tokenResponse.headers.entries()));
 
     if (!tokenResponse.ok) {
       const errorText = await tokenResponse.text();
       console.error('❌ [GitHub OAuth] Token exchange failed');
       console.error('   Status:', tokenResponse.status);
       console.error('   Response:', errorText);
+      console.error('   Request details:', {
+        client_id: process.env.GITHUB_CLIENT_ID,
+        redirect_uri: redirectUri,
+        code_present: !!code,
+      });
       throw new Error(`Failed to exchange code for token: ${tokenResponse.status} ${errorText}`);
     }
 

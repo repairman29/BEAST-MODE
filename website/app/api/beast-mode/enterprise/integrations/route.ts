@@ -13,25 +13,31 @@ export async function GET(request: NextRequest) {
     const integrationId = searchParams.get('integrationId');
     const webhookId = searchParams.get('webhookId');
 
-    const CustomIntegrations = require('../../../../../../lib/enterprise/custom-integrations');
-    const integrations = new CustomIntegrations();
-
+    // Custom Integrations service not yet implemented
     if (action === 'list') {
       // List integrations
       return NextResponse.json({
         integrations: [],
-        webhooks: []
+        webhooks: [],
+        status: 'not_implemented',
+        message: 'Custom integrations service coming soon'
       });
     }
 
     if (action === 'events') {
-      const events = integrations.getAvailableEvents();
-      return NextResponse.json({ events });
+      return NextResponse.json({
+        events: [],
+        status: 'not_implemented',
+        message: 'Integration events coming soon'
+      });
     }
 
     if (action === 'webhook' && webhookId) {
-      const webhook = await integrations.getWebhook(webhookId);
-      return NextResponse.json(webhook);
+      return NextResponse.json({
+        status: 'not_implemented',
+        message: 'Webhook management coming soon',
+        webhookId
+      });
     }
 
     return NextResponse.json({ error: 'Invalid action' }, { status: 400 });
@@ -50,9 +56,7 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
     const { action, integrationData, webhookConfig, apiConfig, webhookId, event, payload } = body;
 
-    const CustomIntegrations = require('../../../../../../lib/enterprise/custom-integrations');
-    const integrations = new CustomIntegrations();
-
+    // Custom Integrations service not yet implemented
     if (action === 'create-integration') {
       if (!integrationData) {
         return NextResponse.json(
@@ -61,8 +65,10 @@ export async function POST(request: NextRequest) {
         );
       }
 
-      const result = await integrations.createIntegration(integrationData);
-      return NextResponse.json(result);
+      return NextResponse.json({
+        status: 'not_implemented',
+        message: 'Integration creation coming soon'
+      });
     }
 
     if (action === 'create-webhook') {
@@ -73,8 +79,10 @@ export async function POST(request: NextRequest) {
         );
       }
 
-      const result = await integrations.configureWebhook(webhookConfig);
-      return NextResponse.json(result);
+      return NextResponse.json({
+        status: 'not_implemented',
+        message: 'Webhook configuration coming soon'
+      });
     }
 
     if (action === 'create-api') {
@@ -85,8 +93,10 @@ export async function POST(request: NextRequest) {
         );
       }
 
-      const result = await integrations.createAPIIntegration(apiConfig);
-      return NextResponse.json(result);
+      return NextResponse.json({
+        status: 'not_implemented',
+        message: 'API integration creation coming soon'
+      });
     }
 
     if (action === 'trigger-webhook') {
@@ -97,8 +107,10 @@ export async function POST(request: NextRequest) {
         );
       }
 
-      const result = await integrations.triggerWebhook(webhookId, event, payload);
-      return NextResponse.json(result);
+      return NextResponse.json({
+        status: 'not_implemented',
+        message: 'Webhook triggering coming soon'
+      });
     }
 
     return NextResponse.json({ error: 'Invalid action' }, { status: 400 });
