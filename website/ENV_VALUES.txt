@@ -1,0 +1,28 @@
+# BEAST MODE Environment Variables
+# Copy these values to .env.local
+
+# ============================================
+# DEVELOPMENT (Local)
+# ============================================
+# GitHub OAuth (for private repo scanning)
+GITHUB_CLIENT_ID=Ov23lidLvmp68FVMEqEB
+GITHUB_CLIENT_SECRET=df4c598018de45ce8cb90313489eeb21448aedcf
+GITHUB_REDIRECT_URI=http://localhost:7777/api/github/oauth/callback
+
+# Token Encryption Key
+GITHUB_TOKEN_ENCRYPTION_KEY=20abb6f3b973e2fdeea6e2c417ce93824e7b64962f9fee4bfd6339264c8e792c
+
+# App URL
+NEXT_PUBLIC_URL=http://localhost:7777
+
+# ============================================
+# PRODUCTION (Vercel Environment Variables)
+# ============================================
+# GitHub OAuth - Production App
+GITHUB_CLIENT_ID=Ov23liDKFkIrnPneWwny
+GITHUB_CLIENT_SECRET=014c7fab1ba6cc6a7398b5bde04e26463f16f4e9
+GITHUB_REDIRECT_URI=https://beastmode.dev/api/github/oauth/callback
+NEXT_PUBLIC_URL=https://beastmode.dev
+
+# Note: Use different Client ID/Secret for production!
+

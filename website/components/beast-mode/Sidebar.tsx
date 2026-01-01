@@ -29,6 +29,7 @@ export default function Sidebar({ currentView, onViewChange, onCommandPalette }:
     { id: 'self-improve', label: 'Improve', icon: '✨', tooltip: 'Auto-fix code issues with one click', category: 'Core' },
     { id: 'collaboration', label: 'Collaboration', icon: '👥', tooltip: 'Team workspaces, shared dashboards, and real-time collaboration', category: 'Core' },
     { id: 'ml-monitoring', label: 'ML Monitoring', icon: '📊', tooltip: 'Monitor AI prediction performance - see how well BEAST MODE\'s quality predictions are working', category: 'Core' },
+    { id: 'unified-analytics', label: 'Analytics', icon: '📈', tooltip: 'Unified analytics across CLI, API, Cursor, and Web - see all your BEAST MODE activity', category: 'Core' },
     { id: 'settings', label: 'Settings', icon: '⚙️', tooltip: 'Manage teams, users, and preferences', category: 'Core' },
   ];
 
@@ -135,7 +136,7 @@ export default function Sidebar({ currentView, onViewChange, onCommandPalette }:
                         {isActive && (
                           <div className="absolute left-0 top-0 bottom-0 w-0.5 bg-gradient-to-b from-cyan-400 to-purple-500 rounded-r-full"></div>
                         )}
-                        <span className={`text-lg flex-shrink-0 transition-transform duration-200 ${isActive ? 'scale-110' : 'group-hover:scale-110'}`}>
+                        <span className={`text-lg flex-shrink-0 transition-transform duration-200 ${isActive ? 'scale-110' : 'group-hover:scale-110'}`} suppressHydrationWarning>
                           {item.icon}
                         </span>
                         {!isCollapsed && (

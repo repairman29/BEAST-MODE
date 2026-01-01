@@ -13,6 +13,8 @@
     "start": "next start",
     "lint": "next lint",
     "work": "node scripts/work.js",
+    "services:start": "cd .. && npm run services:start",
+    "work:all": "cd .. && npm run work",
     "test": "node scripts/test-features.js",
     "test:api": "node scripts/test-features.js",
     "test:ui": "node scripts/test-ui.js",

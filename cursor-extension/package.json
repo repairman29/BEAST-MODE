@@ -1,0 +1,77 @@
+{
+  "name": "beast-mode-cursor",
+  "displayName": "BEAST MODE Analytics",
+  "description": "Track your Cursor IDE activity with BEAST MODE unified analytics",
+  "version": "1.0.0",
+  "publisher": "beast-mode",
+  "engines": {
+    "vscode": "^1.60.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "beastMode.connect",
+        "title": "Connect to BEAST MODE"
+      },
+      {
+        "command": "beastMode.status",
+        "title": "BEAST MODE Status"
+      },
+      {
+        "command": "beastMode.toggle",
+        "title": "Toggle BEAST MODE Tracking"
+      }
+    ],
+    "configuration": {
+      "title": "BEAST MODE",
+      "properties": {
+        "beastMode.apiUrl": {
+          "type": "string",
+          "default": "http://localhost:7777",
+          "description": "BEAST MODE API URL (use http://localhost:7777 for local dev, https://beastmode.dev for production)"
+        },
+        "beastMode.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable BEAST MODE tracking"
+        },
+        "beastMode.trackFileSaves": {
+          "type": "boolean",
+          "default": true,
+          "description": "Track file save events"
+        },
+        "beastMode.trackFileOpens": {
+          "type": "boolean",
+          "default": true,
+          "description": "Track file open events"
+        },
+        "beastMode.trackCommands": {
+          "type": "boolean",
+          "default": true,
+          "description": "Track command executions"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "package": "vsce package"
+  },
+  "devDependencies": {
+    "@types/node": "^18.0.0",
+    "@types/vscode": "^1.60.0",
+    "@vscode/vsce": "^3.7.1",
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "axios": "^1.6.0"
+  }
+}

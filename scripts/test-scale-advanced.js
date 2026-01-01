@@ -32,13 +32,13 @@ async function main() {
   const advancedScaler = getAdvancedScaler();
   await advancedScaler.initialize();
 
-  const forecast = Array.from({ length: 24 }, (_, i) => ({
+  const loadForecast = Array.from({ length: 24 }, (_, i) => ({
     timestamp: Date.now() + (i * 3600000),
     load: 50 + i * 5,
     value: 50 + i * 5
   }));
 
-  const predictive = await advancedScaler.predictiveScale(forecast);
+  const predictive = await advancedScaler.predictiveScale(loadForecast);
   console.log(`   ✅ Predictive scaling: ${predictive ? 'yes' : 'no'}`);
   console.log(`   ✅ Predicted instances: ${predictive?.predictedInstances || 'N/A'}`);
 
@@ -70,8 +70,8 @@ async function main() {
   const optimizations = resourceOptimizer.optimizeAllocation();
   console.log(`   ✅ Optimizations: ${optimizations.length}`);
 
-  const forecast = resourceOptimizer.forecastResources();
-  console.log(`   ✅ Resource forecast: ${forecast ? forecast.forecast.length : 0} points\n`);
+  const resourceForecast = resourceOptimizer.forecastResources();
+  console.log(`   ✅ Resource forecast: ${resourceForecast ? resourceForecast.forecast.length : 0} points\n`);
 
   // Test Advanced Load Balancer
   console.log('4️⃣  Testing Advanced Load Balancer...');

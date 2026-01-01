@@ -70,8 +70,11 @@ npm install @beast-mode/core
 ### CLI Quick Start
 
 ```bash
-# Initialize in your project
+# Initialize in your project (with epic animations!)
 beast-mode init
+
+# Login to BEAST MODE (shows awesome creature animation)
+beast-mode login
 
 # Run your first quality check
 beast-mode quality check
@@ -81,6 +84,13 @@ beast-mode quality score
 
 # Launch dashboard
 beast-mode dashboard --open
+
+# See artwork gallery
+beast-mode artwork gallery
+
+# Summon epic creatures
+beast-mode artwork animate --kraken
+beast-mode artwork animate --narwhal
 ```
 
 ### Programmatic Usage

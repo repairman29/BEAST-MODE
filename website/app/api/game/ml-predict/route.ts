@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { withProductionIntegration } from '../../../../lib/api-middleware';
 
 /**
  * Game Narrative ML Prediction API
@@ -6,9 +7,10 @@ import { NextRequest, NextResponse } from 'next/server';
  * Provides ML quality predictions for game narrative generation
  * 
  * Month 4: Week 1 - Main Game App Integration
+ * Phase 1, Week 1: Production Integration (Error Handling, Performance Monitoring, Caching)
  */
 
-export async function POST(request: NextRequest) {
+async function handlePOST(request: NextRequest) {
   try {
     const { context } = await request.json();
 
@@ -151,6 +153,13 @@ function getHeuristicPrediction(context: any) {
       : 'Low quality expected - retry recommended'
   };
 }
+
+// Export wrapped POST handler with production integration
+export const POST = withProductionIntegration(handlePOST, {
+  endpoint: '/api/game/ml-predict',
+  enableCache: true,
+  cacheTTL: 300000 // 5 minutes
+});
 
 /**
  * GET endpoint for health check

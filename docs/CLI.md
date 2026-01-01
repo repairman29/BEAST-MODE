@@ -23,6 +23,38 @@ beast-mode dashboard
 
 ## Commands
 
+### `beast-mode login`
+
+Login to BEAST MODE with epic animations!
+
+**Options:**
+- `--skip-animation` - Skip login animation
+
+**Example:**
+```bash
+beast-mode login
+```
+
+Shows a random creature animation (kraken or narwhal) before the login form. Saves credentials to `~/.beast-mode/config.json`.
+
+### `beast-mode logout`
+
+Logout from BEAST MODE and clear session.
+
+**Example:**
+```bash
+beast-mode logout
+```
+
+### `beast-mode status`
+
+Show login status and user information.
+
+**Example:**
+```bash
+beast-mode status
+```
+
 ### `beast-mode init`
 
 Initialize BEAST MODE in the current project.
@@ -30,13 +62,15 @@ Initialize BEAST MODE in the current project.
 **Options:**
 - `-f, --force` - Force initialization (overwrite existing config)
 - `-e, --enterprise` - Initialize with enterprise features
+- `--logo-style <style>` - Logo style: `ascii`, `figlet`, `image`, `minimal`, `animate`
 
 **Example:**
 ```bash
 beast-mode init --enterprise
+beast-mode init --logo-style animate  # Show animation on init
 ```
 
-Creates `.beast-mode/` directory with configuration.
+Creates `.beast-mode/` directory with configuration. Shows welcome banner by default.
 
 ### `beast-mode dashboard`
 
@@ -149,6 +183,72 @@ Manage enterprise knowledge.
 ```bash
 beast-mode intelligence knowledge --search "code review best practices"
 ```
+
+### `beast-mode artwork`
+
+BEAST MODE artwork and visual assets management.
+
+#### `beast-mode artwork gallery`
+
+Display artwork gallery showing all available artwork files.
+
+**Example:**
+```bash
+beast-mode artwork gallery
+```
+
+#### `beast-mode artwork show <name>`
+
+Display specific artwork file.
+
+**Options:**
+- `-t, --type <type>` - Artwork type: `image`, `ascii`, `banner` (default: `ascii`)
+- `-c, --color <color>` - Color for ASCII/banner (default: `magenta`)
+- `-a, --animate` - Animate display (line-by-line reveal)
+
+**Example:**
+```bash
+beast-mode artwork show epic-banner.txt --type ascii --color cyan
+beast-mode artwork show logo.png --type image
+```
+
+#### `beast-mode artwork logo`
+
+Display BEAST MODE logo with different styles.
+
+**Options:**
+- `-s, --style <style>` - Logo style: `ascii`, `figlet`, `image`, `minimal` (default: `ascii`)
+- `-c, --color <color>` - Logo color (default: `magenta`)
+- `-a, --animate` - Animate logo display
+
+**Example:**
+```bash
+beast-mode artwork logo --style figlet --color cyan
+beast-mode artwork logo --style animate  # Show creature animation
+```
+
+#### `beast-mode artwork animate`
+
+Display animated beast creatures (kraken or narwhal).
+
+**Options:**
+- `-k, --kraken` - Summon the kraken 🦑
+- `-n, --narwhal` - Summon the narwhal 🦄
+- `-r, --random` - Random creature 🎲
+
+**Example:**
+```bash
+beast-mode artwork animate --kraken
+beast-mode artwork animate -n  # Narwhal
+beast-mode artwork animate -r  # Random
+```
+
+**Features:**
+- 🎬 Smooth frame-by-frame animation
+- 🌊 Loading spinner builds tension
+- 🔔 Terminal bell for dramatic moments
+- 🎨 Full ANSI color support
+- 🚀 Zero dependencies (Node.js built-ins only)
 
 ### `beast-mode marketplace`
 
@@ -307,19 +407,32 @@ BEAST MODE configuration is stored in `.beast-mode/config.json`:
 }
 ```
 
+## Global Options
+
+- `-d, --debug` - Enable debug mode
+- `-q, --quiet` - Quiet mode (minimal output, no animations)
+- `--no-color` - Disable colored output
+- `--logo-style <style>` - Logo style: `ascii`, `figlet`, `image`, `minimal`, `animate`
+- `--no-logo` - Skip logo/artwork display
+
 ## Environment Variables
 
 - `BEAST_MODE_API_KEY` - API key for authentication
 - `BEAST_MODE_ENDPOINT` - Custom API endpoint
 - `BEAST_MODE_DEBUG` - Enable debug logging
 - `BEAST_MODE_QUIET` - Quiet mode
+- `BEAST_MODE_ANIMATE` - Always show animations (`true`/`false`)
+- `BEAST_MODE_STARTUP_ANIMATE` - Show animations on startup (`true`/`false`)
 
 ## Examples
 
 ### Complete Workflow
 
 ```bash
-# Initialize
+# Login with epic animation
+beast-mode login
+
+# Initialize (shows welcome banner)
 beast-mode init
 
 # Check quality
@@ -339,6 +452,12 @@ beast-mode intelligence analyze --type quality --deep
 
 # Launch dashboard
 beast-mode dashboard --open
+
+# See artwork gallery
+beast-mode artwork gallery
+
+# Summon epic creatures
+beast-mode artwork animate --kraken
 ```
 
 ### CI/CD Integration
