@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getSupabaseClientOrNull } from '../../../../../../lib/supabase';
+import { getSupabaseClientOrNull } from '@/lib/supabase';
 
 /**
  * GET /api/beast-mode/janitor/architecture/rules
