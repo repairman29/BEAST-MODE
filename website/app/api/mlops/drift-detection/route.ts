@@ -2,20 +2,20 @@ import { NextRequest, NextResponse } from 'next/server';
 import { withProductionIntegration } from '../../../lib/api-middleware';
 
 /**
- * Advanced Analytics API
+ * Drift Detection API
  * 
- * Provides advanced analytics functionality
+ * Provides data drift detection functionality
  * 
- * Phase 3: Feature Store & Advanced Analytics Integration
+ * Phase 3: MLOps Automation Integration
  */
 
 async function handler(req: NextRequest) {
   try {
     const path = require('path');
-    const analyticsPath = path.join(process.cwd(), '../../../lib/mlops/advancedAnalytics');
-    const { AdvancedAnalytics } = require(analyticsPath);
-    const analytics = new AdvancedAnalytics();
-    await analytics.initialize();
+    const modelMonitoringPath = path.join(process.cwd(), '../../../lib/mlops/modelMonitoring');
+    const { ModelMonitoring } = require(modelMonitoringPath);
+    const monitoring = new ModelMonitoring();
+    await monitoring.initialize();
 
     if (req.method === 'GET') {
       const { searchParams } = new URL(req.url);
@@ -24,22 +24,22 @@ async function handler(req: NextRequest) {
       if (operation === 'status') {
         return NextResponse.json({
           status: 'ok',
-          message: 'Advanced analytics ready',
+          message: 'Drift detection ready',
           timestamp: new Date().toISOString()
         });
       }
 
-      if (operation === 'report') {
-        const report = await analytics.generateReport();
+      if (operation === 'check') {
+        const drift = await monitoring.detectDrift();
         return NextResponse.json({
           status: 'ok',
-          data: { report },
+          data: { drift },
           timestamp: new Date().toISOString()
         });
       }
 
       if (operation === 'dashboard') {
-        const dashboard = await analytics.getDashboard();
+        const dashboard = monitoring.getDashboardData();
         return NextResponse.json({
           status: 'ok',
           data: { dashboard },
@@ -47,10 +47,19 @@ async function handler(req: NextRequest) {
         });
       }
 
+      if (operation === 'health') {
+        const health = monitoring.getHealthStatus();
+        return NextResponse.json({
+          status: 'ok',
+          data: { health },
+          timestamp: new Date().toISOString()
+        });
+      }
+
       return NextResponse.json({
         status: 'ok',
-        message: 'Advanced analytics API ready',
-        operations: ['status', 'report', 'dashboard'],
+        message: 'Drift detection API ready',
+        operations: ['status', 'check', 'dashboard', 'health'],
         timestamp: new Date().toISOString()
       });
     }
@@ -59,11 +68,12 @@ async function handler(req: NextRequest) {
       const body = await req.json();
       const { operation } = body;
 
-      if (operation === 'dashboard') {
-        const dashboard = await analytics.getDashboard();
+      if (operation === 'record') {
+        const { prediction, actual, latency, metadata } = body;
+        await monitoring.recordPrediction(prediction, actual, latency, metadata);
         return NextResponse.json({
           status: 'ok',
-          data: { dashboard },
+          message: 'Prediction recorded',
           timestamp: new Date().toISOString()
         });
       }

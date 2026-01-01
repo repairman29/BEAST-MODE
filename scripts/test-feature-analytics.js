@@ -37,18 +37,18 @@ async function main() {
     console.log(`   ⚠️  Feature store: ${features.status}`);
   }
 
-  // Test 2: Feature Store - Create
-  console.log('\n2️⃣  Testing Feature Store - Create...');
-  const createFeature = await testEndpoint(`${BASE_URL}/api/mlops/feature-store`, 'POST', {
-    operation: 'create',
+  // Test 2: Feature Store - Store
+  console.log('\n2️⃣  Testing Feature Store - Store...');
+  const storeFeature = await testEndpoint(`${BASE_URL}/api/mlops/feature-store`, 'POST', {
+    operation: 'store',
     featureName: 'test-feature',
-    featureData: { value: 1.0 },
+    features: { value: 1.0 },
     metadata: { type: 'numeric' }
   });
-  if (createFeature.status === 200) {
-    console.log('   ✅ Feature created');
+  if (storeFeature.status === 200) {
+    console.log('   ✅ Feature stored');
   } else {
-    console.log(`   ⚠️  Feature creation: ${createFeature.status}`);
+    console.log(`   ⚠️  Feature storage: ${storeFeature.status}`);
   }
 
   // Test 3: Advanced Analytics - Status
@@ -62,7 +62,7 @@ async function main() {
 
   // Test 4: Advanced Analytics - Report
   console.log('\n4️⃣  Testing Advanced Analytics - Report...');
-  const report = await testEndpoint(`${BASE_URL}/api/mlops/analytics?operation=report&reportType=summary`);
+  const report = await testEndpoint(`${BASE_URL}/api/mlops/analytics?operation=report`);
   if (report.status === 200) {
     console.log('   ✅ Report generated');
   } else {

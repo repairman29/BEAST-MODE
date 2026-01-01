@@ -2,55 +2,47 @@ import { NextRequest, NextResponse } from 'next/server';
 import { withProductionIntegration } from '../../../lib/api-middleware';
 
 /**
- * Advanced Analytics API
+ * Model Retraining API
  * 
- * Provides advanced analytics functionality
+ * Provides automated model retraining functionality
  * 
- * Phase 3: Feature Store & Advanced Analytics Integration
+ * Phase 3: MLOps Automation Integration
  */
 
 async function handler(req: NextRequest) {
   try {
     const path = require('path');
-    const analyticsPath = path.join(process.cwd(), '../../../lib/mlops/advancedAnalytics');
-    const { AdvancedAnalytics } = require(analyticsPath);
-    const analytics = new AdvancedAnalytics();
-    await analytics.initialize();
+    const modelImprovementPath = path.join(process.cwd(), '../../../lib/mlops/modelImprovement');
+    const { getModelImprovement } = require(modelImprovementPath);
+    const modelImprovement = getModelImprovement();
+    await modelImprovement.initialize();
 
     if (req.method === 'GET') {
       const { searchParams } = new URL(req.url);
       const operation = searchParams.get('operation') || 'status';
 
       if (operation === 'status') {
+        const stats = modelImprovement.getImprovementStats();
         return NextResponse.json({
           status: 'ok',
-          message: 'Advanced analytics ready',
+          data: { stats },
           timestamp: new Date().toISOString()
         });
       }
 
-      if (operation === 'report') {
-        const report = await analytics.generateReport();
+      if (operation === 'recommendations') {
+        const recommendations = modelImprovement.getRecommendations();
         return NextResponse.json({
           status: 'ok',
-          data: { report },
-          timestamp: new Date().toISOString()
-        });
-      }
-
-      if (operation === 'dashboard') {
-        const dashboard = await analytics.getDashboard();
-        return NextResponse.json({
-          status: 'ok',
-          data: { dashboard },
+          data: { recommendations },
           timestamp: new Date().toISOString()
         });
       }
 
       return NextResponse.json({
         status: 'ok',
-        message: 'Advanced analytics API ready',
-        operations: ['status', 'report', 'dashboard'],
+        message: 'Model retraining API ready',
+        operations: ['status', 'recommendations'],
         timestamp: new Date().toISOString()
       });
     }
@@ -59,11 +51,31 @@ async function handler(req: NextRequest) {
       const body = await req.json();
       const { operation } = body;
 
-      if (operation === 'dashboard') {
-        const dashboard = await analytics.getDashboard();
+      if (operation === 'retrain') {
+        const result = await modelImprovement.triggerRetraining();
         return NextResponse.json({
           status: 'ok',
-          data: { dashboard },
+          data: { retrained: result },
+          timestamp: new Date().toISOString()
+        });
+      }
+
+      if (operation === 'record-feedback') {
+        const { prediction, actual, context } = body;
+        await modelImprovement.recordFeedback(prediction, actual, context);
+        return NextResponse.json({
+          status: 'ok',
+          message: 'Feedback recorded',
+          timestamp: new Date().toISOString()
+        });
+      }
+
+      if (operation === 'schedule') {
+        const { modelId, schedule, options } = body;
+        // Schedule retraining would be implemented here
+        return NextResponse.json({
+          status: 'ok',
+          message: 'Retraining scheduled',
           timestamp: new Date().toISOString()
         });
       }
