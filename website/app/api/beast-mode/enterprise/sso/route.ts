@@ -208,6 +208,7 @@ export async function POST(request: NextRequest) {
       // In production, this would use the actual SSO library (passport-saml, etc.)
       // ARCHITECTURE: Moved to API route
 // ARCHITECTURE: Moved to API route
+// // ARCHITECTURE: Moved to API route
 // const loginUrl = `${process.env.NEXT_PUBLIC_URL || 'https://beast-mode.dev'}/api/beast-mode/enterprise/sso/callback?provider=${provider}&state=${Buffer.from(JSON.stringify({ userId, timestamp: Date.now() })).toString('base64')}`;
 
       return NextResponse.json({
@@ -216,7 +217,7 @@ export async function POST(request: NextRequest) {
         provider,
         loginUrl,
         // In production, this would be the actual SSO provider's login URL
-        redirectUrl: ssoConfig.config?.endpoint || loginUrl,
+        redirectUrl: ssoConfig?.config?.endpoint || loginUrl,
       });
     }
 
