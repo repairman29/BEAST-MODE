@@ -86,6 +86,10 @@ async function handler(req: NextRequest) {
   }
 }
 
-export const GET = withProductionIntegration(handler);
-export const POST = withProductionIntegration(handler);
+export async function GET(req: NextRequest) {
+  return withProductionIntegration(handler)(req);
+}
+export async function POST(req: NextRequest) {
+  return withProductionIntegration(handler)(req);
+}
 
