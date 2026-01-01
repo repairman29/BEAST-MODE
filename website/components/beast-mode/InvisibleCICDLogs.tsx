@@ -44,8 +44,7 @@ export default function InvisibleCICDLogs() {
             status: 'success',
             issuesFound: 2,
             issuesFixed: 2,
-            details: 'Fixed hardcoded API key, removed // SECURITY: eval() disabled
-// eval() usage'
+            details: 'Fixed hardcoded API key, removed eval() usage'
           },
           {
             id: '2',
