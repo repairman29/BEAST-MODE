@@ -10,9 +10,10 @@ import { NextRequest, NextResponse } from 'next/server';
 
 async function getProductionMonitor() {
   try {
-    // Use dynamic path that webpack can't statically analyze
-    const path = '../../../../../lib/monitoring/productionMonitor';
-    const module = await import(/* webpackIgnore: true */ path);
+    // Use dynamic import with template literal to prevent webpack static analysis
+    const basePath = '../../../../../lib/monitoring/';
+    const moduleName = 'productionMonitor';
+    const module = await import(`${basePath}${moduleName}`);
     return module.getProductionMonitor();
   } catch (error) {
     return null;
