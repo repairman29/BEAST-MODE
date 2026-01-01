@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEAST MODE - Mullet Strategy (Split Persona)</title>
+    <link rel="stylesheet" href="../css/infographic-style.css">
+    <style>
+        .split-persona {
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .sentinel-half {
+            background: linear-gradient(135deg, #1E3A8A, #475569);
+            padding: 4rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            color: white;
+        }
+
+        .sentinel-half::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
+            opacity: 0.5;
+        }
+
+        .beast-half {
+            background: linear-gradient(135deg, #9333EA, #EC4899);
+            padding: 4rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            color: white;
+        }
+
+        .lightning-bolt {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%) rotate(-45deg);
+            width: 6px;
+            height: 120%;
+            background: white;
+            z-index: 10;
+            box-shadow: 0 0 30px white, 0 0 60px rgba(255, 255, 255, 0.5);
+            border-radius: 3px;
+        }
+
+        .lightning-bolt::before,
+        .lightning-bolt::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 0 20px white;
+        }
+
+        .lightning-bolt::before {
+            top: -10px;
+            left: -7px;
+        }
+
+        .lightning-bolt::after {
+            bottom: -10px;
+            right: -7px;
+        }
+
+        .brand-header {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .subheader {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+
+        .target-audience {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            backdrop-filter: blur(10px);
+        }
+
+        .pricing {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 2rem;
+            padding: 1rem;
+            background: rgba(245, 158, 11, 0.2);
+            border: 2px solid #F59E0B;
+            border-radius: 8px;
+        }
+
+        .value-props {
+            margin: 2rem 0;
+        }
+
+        .value-props h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .value-props ul {
+            list-style: none;
+        }
+
+        .value-props li {
+            padding: 0.75rem;
+            margin: 0.5rem 0;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 6px;
+            border-left: 4px solid;
+        }
+
+        .sentinel-half .value-props li {
+            border-left-color: #F59E0B;
+        }
+
+        .beast-half .value-props li {
+            border-left-color: #06B6D4;
+        }
+
+        .key-insight {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.7);
+            padding: 1.5rem 3rem;
+            border-radius: 12px;
+            text-align: center;
+            color: white;
+            font-weight: 600;
+            z-index: 20;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="split-persona">
+        <div class="sentinel-half">
+            <div class="brand-header">
+                🛡️ SENTINEL
+            </div>
+            <div class="subheader">(Business in the Front)</div>
+            
+            <div class="target-audience">
+                TARGET: Enterprise CTOs, Security Teams, Compliance Officers
+            </div>
+            
+            <div style="opacity: 0.9; margin-bottom: 1.5rem;">
+                TONE: Professional, Trustworthy, Compliance-Focused
+            </div>
+            
+            <div class="pricing">
+                PRICING: Enterprise ($299/month)
+            </div>
+            
+            <div class="value-props">
+                <h3>VALUE PROP:</h3>
+                <ul>
+                    <li>"Compliance-as-a-Service for AI-Generated Code"</li>
+                    <li>"The Governance Layer for AI Coding Tools"</li>
+                    <li>"Prevent Shadow IT from Breaking Your Security Posture"</li>
+                </ul>
+            </div>
+            
+            <div class="value-props">
+                <h3>FEATURES:</h3>
+                <ul>
+                    <li>Enterprise Guardrail (Plain English Reviews)</li>
+                    <li>Compliance Reporting & Audit Logs</li>
+                    <li>SSO, White-Label, Custom Rules</li>
+                    <li>99.9% Confidence Threshold (Safety First)</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="lightning-bolt"></div>
+        
+        <div class="beast-half">
+            <div class="brand-header">
+                🎸 BEAST MODE
+            </div>
+            <div class="subheader">(Party in the Back)</div>
+            
+            <div class="target-audience">
+                TARGET: Vibe Coders, Indie Makers, Citizen Developers
+            </div>
+            
+            <div style="opacity: 0.9; margin-bottom: 1.5rem;">
+                TONE: Energetic, Fun, Community-Focused
+            </div>
+            
+            <div class="pricing">
+                PRICING: Free, Developer ($29), Team ($99)
+            </div>
+            
+            <div class="value-props">
+                <h3>VALUE PROP:</h3>
+                <ul>
+                    <li>"The AI Janitor for Vibe Coders"</li>
+                    <li>"Code Fast. Ship Confidently. We Handle the Mess."</li>
+                    <li>"Wake Up to Clean Code"</li>
+                </ul>
+            </div>
+            
+            <div class="value-props">
+                <h3>FEATURES:</h3>
+                <ul>
+                    <li>Silent Refactoring (Overnight Maintenance)</li>
+                    <li>Vibe Restoration (Rewind to Last Good State)</li>
+                    <li>Vibe Ops (Test in English)</li>
+                    <li>Repo Memory (Context Preservation)</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="key-insight">
+            KEY INSIGHT: Same technology, different positioning.<br>
+            BEAST MODE = Community energy | SENTINEL = Enterprise trust
+        </div>
+    </div>
+</body>
+</html>
+

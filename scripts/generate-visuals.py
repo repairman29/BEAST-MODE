@@ -140,30 +140,50 @@ async def generate_all_visuals():
         browser = await p.chromium.launch(headless=True)
         page = await browser.new_page()
         
-        # 1. HTML-based visuals
-        print("\n📄 Generating HTML-based visuals...\n")
+        # 1. HTML-based visuals (Infographic versions)
+        print("\n📄 Generating HTML-based infographics...\n")
         
-        # Mullet Strategy
-        mullet_html = HTML_DIR / "mullet-strategy.html"
-        mullet_output = ASSETS_DIR / "mullet-strategy-dual-brand.png"
-        if mullet_html.exists():
-            if await generate_html_visual(page, mullet_html, mullet_output, width=1400, height=1200):
-                results["success"].append("Mullet Strategy")
-            else:
-                results["failed"].append("Mullet Strategy")
-        else:
-            results["skipped"].append("Mullet Strategy (file not found)")
+        # Try infographic versions first, fallback to originals
+        infographic_files = {
+            "governance-layer-infographic.html": ("governance-layer-architecture.png", 1600, 1000),
+            "mullet-strategy-infographic.html": ("mullet-strategy-dual-brand.png", 1600, 1200),
+            "before-after-infographic.html": ("before-after-transformation.png", 1800, 1000),
+            "overnight-cycle-infographic.html": ("overnight-refactoring-cycle.png", 1400, 1200),
+            "tech-stack-infographic.html": ("market-positioning-map.png", 1600, 1000),
+            "three-walls-infographic.html": ("three-walls-solution-map.png", 1800, 1200),
+            "english-source-code-infographic.html": ("english-as-source-code-workflow.png", 1800, 1000),
+        }
         
-        # Before/After
-        before_after_html = HTML_DIR / "before-after.html"
-        before_after_output = ASSETS_DIR / "before-after-transformation.png"
-        if before_after_html.exists():
-            if await generate_html_visual(page, before_after_html, before_after_output, width=1600, height=900):
-                results["success"].append("Before/After Transformation")
+        # Fallback to original files if infographic versions don't exist
+        fallback_files = {
+            "mullet-strategy.html": ("mullet-strategy-dual-brand.png", 1400, 1200),
+            "before-after.html": ("before-after-transformation.png", 1600, 900),
+        }
+        
+        for html_file, (output_name, width, height) in infographic_files.items():
+            html_path = HTML_DIR / html_file
+            output_path = ASSETS_DIR / output_name
+            
+            if html_path.exists():
+                if await generate_html_visual(page, html_path, output_path, width=width, height=height):
+                    results["success"].append(output_name.replace(".png", "").replace("-", " ").title())
+                else:
+                    results["failed"].append(output_name.replace(".png", "").replace("-", " ").title())
             else:
-                results["failed"].append("Before/After Transformation")
-        else:
-            results["skipped"].append("Before/After Transformation (file not found)")
+                # Try fallback
+                fallback_name = html_file.replace("-infographic", "")
+                if fallback_name in fallback_files:
+                    fallback_path = HTML_DIR / fallback_name
+                    if fallback_path.exists():
+                        fallback_output, fallback_w, fallback_h = fallback_files[fallback_name]
+                        if await generate_html_visual(page, fallback_path, ASSETS_DIR / fallback_output, width=fallback_w, height=fallback_h):
+                            results["success"].append(output_name.replace(".png", "").replace("-", " ").title())
+                        else:
+                            results["failed"].append(output_name.replace(".png", "").replace("-", " ").title())
+                    else:
+                        results["skipped"].append(f"{html_file} (file not found)")
+                else:
+                    results["skipped"].append(f"{html_file} (file not found)")
         
         # 2. Mermaid diagrams
         print("\n📊 Generating Mermaid diagrams...\n")

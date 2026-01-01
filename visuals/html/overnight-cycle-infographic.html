@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEAST MODE - Overnight Refactoring Cycle (Clock)</title>
+    <link rel="stylesheet" href="../css/infographic-style.css">
+    <style>
+        .clock-cycle {
+            background: linear-gradient(135deg, #0a0a0f, #1a1a2e);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 4rem;
+            color: var(--beast-text);
+        }
+
+        .cycle-ring {
+            width: 700px;
+            height: 700px;
+            position: relative;
+            margin: 3rem 0;
+        }
+
+        .cycle-segment {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 20px solid;
+            clip-path: polygon(50% 50%, var(--start-x) var(--start-y), var(--end-x) var(--end-y));
+        }
+
+        .segment-analyze {
+            border-color: #3B82F6;
+            clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 50%);
+            border-right: none;
+            border-bottom: none;
+        }
+
+        .segment-detect {
+            border-color: #EF4444;
+            clip-path: polygon(50% 50%, 100% 50%, 100% 100%, 50% 100%);
+            border-left: none;
+            border-bottom: none;
+        }
+
+        .segment-refactor {
+            border-color: #F59E0B;
+            clip-path: polygon(50% 50%, 50% 100%, 0% 100%, 0% 50%);
+            border-top: none;
+            border-left: none;
+        }
+
+        .segment-test {
+            border-color: #10B981;
+            clip-path: polygon(50% 50%, 0% 50%, 0% 0%, 50% 0%);
+            border-right: none;
+            border-top: none;
+        }
+
+        .segment-label {
+            position: absolute;
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: white;
+            text-shadow: 0 0 10px currentColor;
+        }
+
+        .segment-analyze .segment-label {
+            top: 15%;
+            right: 15%;
+            color: #3B82F6;
+        }
+
+        .segment-detect .segment-label {
+            bottom: 15%;
+            right: 15%;
+            color: #EF4444;
+        }
+
+        .segment-refactor .segment-label {
+            bottom: 15%;
+            left: 15%;
+            color: #F59E0B;
+        }
+
+        .segment-test .segment-label {
+            top: 15%;
+            left: 15%;
+            color: #10B981;
+        }
+
+        .clock-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 250px;
+            height: 250px;
+            background: linear-gradient(135deg, #1e293b, #0a0a0f);
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border: 6px solid #9333EA;
+            box-shadow: 0 0 50px rgba(147, 51, 234, 0.6);
+            z-index: 10;
+        }
+
+        .clock-time {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #06B6D4;
+            font-family: 'JetBrains Mono', monospace;
+            text-shadow: 0 0 20px #06B6D4;
+        }
+
+        .clock-label {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-top: 0.5rem;
+        }
+
+        .pr-output {
+            position: absolute;
+            top: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #8B5CF6, #9333EA);
+            padding: 1.5rem 3rem;
+            border-radius: 12px;
+            color: white;
+            font-weight: bold;
+            box-shadow: 0 0 30px rgba(139, 92, 246, 0.6);
+            z-index: 20;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .key-info {
+            margin-top: 3rem;
+            text-align: center;
+            max-width: 600px;
+        }
+
+        .key-info h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #F59E0B;
+        }
+
+        .key-info p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.9);
+        }
+    </style>
+</head>
+<body>
+    <div class="clock-cycle">
+        <h1 style="font-size: 2.5rem; margin-bottom: 2rem; text-align: center;">
+            OVERNIGHT REFACTORING CYCLE
+        </h1>
+
+        <div class="cycle-ring">
+            <div class="cycle-segment segment-analyze">
+                <div class="segment-label">ANALYZE</div>
+            </div>
+            <div class="cycle-segment segment-detect">
+                <div class="segment-label">DETECT</div>
+            </div>
+            <div class="cycle-segment segment-refactor">
+                <div class="segment-label">REFACTOR</div>
+            </div>
+            <div class="cycle-segment segment-test">
+                <div class="segment-label">TEST</div>
+            </div>
+
+            <div class="clock-center">
+                <div class="clock-time">02:00</div>
+                <div class="clock-label">AM - 6 AM</div>
+            </div>
+
+            <div class="pr-output">
+                📧 Merged PR
+            </div>
+        </div>
+
+        <div class="key-info">
+            <h2>🔄 Continuous Automated Loop</h2>
+            <p>
+                Runs <strong style="color: #06B6D4;">2 AM - 6 AM</strong> while you sleep.<br>
+                <strong style="color: #F59E0B;">Safety:</strong> 99.9% confidence, tests must pass, human review default.
+            </p>
+        </div>
+    </div>
+</body>
+</html>
+
