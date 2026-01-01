@@ -35,7 +35,7 @@
             overflow: hidden;
             min-width: 150px;
             text-align: center;
-            box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+            box-shadow: 0 0 35px rgba(59, 130, 246, 0.3);
         }
 
         .particle::before {
@@ -61,7 +61,7 @@
             margin: 4rem 0;
             animation: glow-pulse 3s ease-in-out infinite;
             border: 6px solid #F59E0B;
-            box-shadow: 0 0 50px rgba(147, 51, 234, 0.6);
+            box-shadow: 0 0 65px rgba(147, 51, 234, 0.7);
         }
 
         .governance-shield::before {
@@ -77,17 +77,17 @@
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 1.5rem;
-            z-index: 1;
+            z-index: 2;
             padding: 2rem;
         }
 
         .shield-icon {
-            background: rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.25);
             border-radius: 12px;
             padding: 1.5rem;
             text-align: center;
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.30000000000000004);
         }
 
         .shield-icon .icon {
@@ -96,8 +96,8 @@
         }
 
         .shield-icon .label {
-            font-size: 0.9rem;
-            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.0rem;
+            color: rgba(255, 255, 255, 0.95);
         }
 
         .output-diamond {
@@ -109,8 +109,8 @@
             align-items: center;
             justify-content: center;
             margin-top: 4rem;
-            box-shadow: 0 0 40px #F59E0B;
-            border: 4px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 0 55px #F59E0B;
+            border: 4px solid rgba(255, 255, 255, 0.4);
         }
 
         .output-diamond::before {
@@ -131,11 +131,11 @@
         .key-insight {
             margin-top: 3rem;
             padding: 2rem;
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.15000000000000002);
             border-radius: 12px;
             text-align: center;
             max-width: 800px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         @keyframes flow {
@@ -146,10 +146,10 @@
 
         @keyframes glow-pulse {
             0%, 100% { 
-                box-shadow: 0 0 30px rgba(147, 51, 234, 0.5), 0 0 60px rgba(30, 58, 138, 0.3);
+                box-shadow: 0 0 45px rgba(147, 51, 234, 0.6), 0 0 60px rgba(30, 58, 138, 0.3);
             }
             50% { 
-                box-shadow: 0 0 50px rgba(147, 51, 234, 0.8), 0 0 100px rgba(30, 58, 138, 0.5);
+                box-shadow: 0 0 65px rgba(147, 51, 234, 0.8), 0 0 100px rgba(30, 58, 138, 0.5);
             }
         }
     </style>
@@ -192,7 +192,7 @@
         </div>
         <div style="font-size: 1.3rem; font-weight: bold; margin-top: 1rem; color: #F59E0B;">
             🛡️ BEAST MODE / SENTINEL<br>
-            <span style="font-size: 1rem; color: rgba(255, 255, 255, 0.8);">The Governance Layer</span>
+            <span style="font-size: 1.0rem; color: rgba(255, 255, 255, 0.9);">The Governance Layer</span>
         </div>
 
         <div style="font-size: 1.5rem; margin: 2rem 0; color: #10B981;">↓ Clean, Production-Ready Code ↓</div>
