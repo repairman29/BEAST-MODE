@@ -5,59 +5,58 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui
 
 const features = [
   {
-    title: 'Silent Refactoring',
-    description: 'Overnight code cleanup. Automatic de-duplication, security fixes, and quality improvements while you sleep.',
+    title: 'Instant Quality Scoring',
+    description: 'Get your code quality score (0-100) in seconds. See issues found, get recommendations, and track improvement over time.',
     icon: (
       <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
       </svg>
     ),
     gradient: 'from-purple-500 to-pink-500'
   },
   {
-    title: 'Architecture Enforcement',
-    description: 'Pre-commit hooks prevent bad patterns. Blocks secrets, enforces separation of concerns, auto-fixes violations.',
+    title: 'Automated Code Fixes',
+    description: 'One-click fixes for common issues. Automatically applies improvements, removes console.logs, and fixes security vulnerabilities.',
     icon: (
       <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
       </svg>
     ),
     gradient: 'from-blue-500 to-cyan-500'
   },
   {
-    title: 'Vibe Restoration',
-    description: 'Tracks code state, detects regressions, restores to last good state. Never lose your vibe.',
-    icon: (
-      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-      </svg>
-    ),
-    gradient: 'from-green-500 to-emerald-500'
-  },
-  {
-    title: 'Repo Memory',
-    description: 'Semantic graph of your entire codebase. Preserves context, understands architecture, prevents drift.',
+    title: 'AI-Powered Analysis',
+    description: 'Ask questions about your code. Get context-aware answers, understand issues, and learn best practices—all based on YOUR codebase.',
     icon: (
       <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
       </svg>
     ),
+    gradient: 'from-green-500 to-emerald-500'
+  },
+  {
+    title: 'Track Progress Over Time',
+    description: 'See your quality score improve. Track issues found and fixed. Monitor your codebase health with historical data and trends.',
+    icon: (
+      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+      </svg>
+    ),
     gradient: 'from-indigo-500 to-purple-500'
   },
   {
-    title: 'Vibe Ops',
-    description: 'Test in plain English. Visual AI agents spin up browsers, click through flows, report in human language.',
+    title: 'Smart Tool Discovery',
+    description: 'Get personalized plugin recommendations based on your codebase. Find the right tools for your project with one-click installation.',
     icon: (
       <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
       </svg>
     ),
     gradient: 'from-cyan-500 to-blue-500'
   },
   {
-    title: 'Invisible CI/CD',
-    description: 'Silent linting, background testing, security scanning. Auto-fixes without you seeing the CLI.',
+    title: 'Day 2 Operations',
+    description: 'Silent refactoring, architecture enforcement, and invisible CI/CD. Maintain your codebase automatically while you focus on building.',
     icon: (
       <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 10V3L4 14h7v7l9-11h-7z" />

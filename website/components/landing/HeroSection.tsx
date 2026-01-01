@@ -53,10 +53,10 @@ function HeroSection() {
             </h1>
 
             <p className="text-xl md:text-2xl text-cyan-400 max-w-xl leading-relaxed font-semibold mb-2">
-              The Governance Layer for AI-Generated Code
+              Get Your Code Quality Score in Seconds
             </p>
             <p className="text-lg md:text-xl text-slate-400 max-w-xl leading-relaxed">
-              While tools like Cursor and Windsurf help you <strong className="text-white">generate</strong> code, BEAST MODE helps you <strong className="text-white">maintain</strong> it. Silent refactoring, architecture enforcement, and invisible CI/CD—all while you sleep.
+              While tools like Cursor and Windsurf help you <strong className="text-white">generate</strong> code, BEAST MODE helps you <strong className="text-white">maintain</strong> it. Get instant quality scores, automated fixes, and AI-powered analysis—all in one platform.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4">
@@ -166,12 +166,12 @@ console.log(\`Fixed: \${status.fixed}\`);
             {/* Stats below the code editor */}
             <div className="grid grid-cols-2 gap-4">
               <div className="bg-black border border-slate-800 rounded-xl p-4 shadow-xl">
-                <div className="text-2xl font-bold text-gradient-purple mb-1">Fast</div>
-                <div className="text-xs text-slate-500">Quality Checks</div>
+                <div className="text-2xl font-bold text-gradient-purple mb-1">10s</div>
+                <div className="text-xs text-slate-500">Quality Score</div>
               </div>
               <div className="bg-black border border-slate-800 rounded-xl p-4 shadow-xl">
-                <div className="text-2xl font-bold text-gradient-cyan mb-1">Real</div>
-                <div className="text-xs text-slate-500">Results</div>
+                <div className="text-2xl font-bold text-gradient-cyan mb-1">0-100</div>
+                <div className="text-xs text-slate-500">Score Range</div>
               </div>
             </div>
           </div>
