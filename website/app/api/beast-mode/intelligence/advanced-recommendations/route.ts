@@ -19,7 +19,16 @@ export async function POST(request: NextRequest) {
     }
 
     // Import and use AdvancedRecommendations
-    const AdvancedRecommendations = require('../../../../../../lib/intelligence/advanced-recommendations');
+    let AdvancedRecommendations;
+    try {
+      AdvancedRecommendations = require('../../../../../../lib/intelligence/advanced-recommendations');
+    } catch (error) {
+      return NextResponse.json({
+        status: 'error',
+        error: 'Intelligence module not available',
+        timestamp: new Date().toISOString()
+      }, { status: 503 });
+    }
     const recommendations = new AdvancedRecommendations();
 
     const suggestions = await recommendations.generateCodeSuggestions({

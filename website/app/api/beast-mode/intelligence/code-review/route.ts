@@ -18,7 +18,16 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const AutomatedCodeReview = require('../../../../../../lib/intelligence/automated-code-review');
+    let AutomatedCodeReview;
+    try {
+      AutomatedCodeReview = require('../../../../../../lib/intelligence/automated-code-review');
+    } catch (error) {
+      return NextResponse.json({
+        status: 'error',
+        error: 'Intelligence module not available',
+        timestamp: new Date().toISOString()
+      }, { status: 503 });
+    }
     const codeReview = new AutomatedCodeReview(options || {});
 
     const review = await codeReview.reviewCodeChanges(changes);

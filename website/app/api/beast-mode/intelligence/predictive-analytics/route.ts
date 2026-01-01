@@ -18,7 +18,16 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const PredictiveAnalytics = require('../../../../../../lib/intelligence/predictive-analytics');
+    let PredictiveAnalytics;
+    try {
+      PredictiveAnalytics = require('../../../../../../lib/intelligence/predictive-analytics');
+    } catch (error) {
+      return NextResponse.json({
+        status: 'error',
+        error: 'Intelligence module not available',
+        timestamp: new Date().toISOString()
+      }, { status: 503 });
+    }
     const analytics = new PredictiveAnalytics({
       predictionHorizon: predictionHorizon || 30
     });

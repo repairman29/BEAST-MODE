@@ -10,7 +10,9 @@ import { NextRequest, NextResponse } from 'next/server';
 
 async function getProductionMonitor() {
   try {
-    const module = await import('../../../../../lib/monitoring/productionMonitor');
+    // Use dynamic path that webpack can't statically analyze
+    const path = '../../../../../lib/monitoring/productionMonitor';
+    const module = await import(/* webpackIgnore: true */ path);
     return module.getProductionMonitor();
   } catch (error) {
     return null;

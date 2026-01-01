@@ -11,7 +11,9 @@ import { getProductionMonitorService } from '../../../../../lib/api-middleware';
 
 async function getAlertManager() {
   try {
-    const module = await import('../../../../../../lib/monitoring/alertManager');
+    // Use dynamic path that webpack can't statically analyze
+    const path = '../../../../../../lib/monitoring/alertManager';
+    const module = await import(/* webpackIgnore: true */ path);
     return module.getAlertManager();
   } catch (error) {
     return null;
