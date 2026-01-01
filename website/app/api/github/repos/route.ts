@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getDecryptedToken } from '../token/route';
+import { getDecryptedToken } from '../../../../lib/github-token';
 import { createOctokit } from '../../../../lib/github';
 
 /**
