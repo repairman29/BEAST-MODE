@@ -35,7 +35,7 @@ export async function GET(request: NextRequest) {
       for (const [metricName, metricData] of Object.entries(stats.metrics)) {
         exportData.push({
           metric: metricName,
-          count: metricData.count,
+          count: (metricData as any)?.count || 0,
           avg: metricData.avg,
           min: metricData.min,
           max: metricData.max,
