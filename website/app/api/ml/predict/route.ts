@@ -1,5 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { withProductionIntegration } from '../../../../lib/api-middleware';
+
+// Optional production integration
+let withProductionIntegration: any = null;
+try {
+  const middleware = require('../../../../lib/api-middleware');
+  withProductionIntegration = middleware.withProductionIntegration;
+} catch (error) {
+  // Middleware not available
+}
 
 /**
  * ML Prediction API
@@ -216,12 +224,22 @@ function getHeuristicPrediction(context: any) {
   };
 }
 
-// Export wrapped POST handler with production integration
-export const POST = withProductionIntegration(handlePOST, {
-  endpoint: '/api/ml/predict',
-  enableCache: true,
-  cacheTTL: 300000 // 5 minutes
-});
+// Export POST handler - wrap with production integration if available
+let POST: typeof handlePOST = handlePOST;
+try {
+  if (withProductionIntegration) {
+    POST = withProductionIntegration(handlePOST, {
+      endpoint: '/api/ml/predict',
+      enableCache: true,
+      cacheTTL: 300000 // 5 minutes
+    }) as typeof handlePOST;
+  }
+} catch (error) {
+  // Production integration not available, use handler directly
+  console.warn('[ML Predict API] Production integration not available:', error);
+}
+
+export { POST };
 
 /**
  * GET endpoint for health check
