@@ -13,8 +13,9 @@ async function handler(req: NextRequest) {
   try {
     const path = require('path');
     const abTestingPath = path.join(process.cwd(), '../../../lib/mlops/abTesting');
-    const { getABTesting } = require(abTestingPath);
-    const abTesting = getABTesting();
+    const { ABTesting } = require(abTestingPath);
+    const abTesting = new ABTesting();
+    await abTesting.initialize();
 
     if (req.method === 'GET') {
       const { searchParams } = new URL(req.url);
