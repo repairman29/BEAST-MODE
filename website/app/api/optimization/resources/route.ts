@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { withProductionIntegration } from '../../../../lib/api-middleware';
 import { getResourceOptimizerService } from '../../../../lib/api-middleware';
 
 /**
@@ -115,9 +116,11 @@ async function handler(req: NextRequest) {
 }
 
 export async function GET(req: NextRequest) {
-  return withProductionIntegration(handler)(req);
+  const wrappedHandler = await withProductionIntegration(handler);
+  return wrappedHandler(req);
 }
 export async function POST(req: NextRequest) {
-  return withProductionIntegration(handler)(req);
+  const wrappedHandler = await withProductionIntegration(handler);
+  return wrappedHandler(req);
 }
 
