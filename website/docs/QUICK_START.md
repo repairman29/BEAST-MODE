@@ -76,7 +76,25 @@ This guide will get you up and running with BEAST MODE in just 5 minutes.
 
 ---
 
-## Step 5: Improve Your Code (1 minute)
+## Step 5: Enable Day 2 Operations (1 minute)
+
+1. Go to the **"🧹 Day 2 Ops"** tab (or press `4`)
+2. Click **"Enable Janitor"** at the top
+3. Toggle **"Silent Refactoring"** to ON
+4. Enable **"Overnight Mode"** in configuration
+5. **Wake up to clean code!** 🧹
+
+**What happens:**
+- Silent refactoring runs 2 AM - 6 AM
+- Architecture enforcement on every commit
+- Invisible CI/CD in background
+- Automatic PRs created for fixes
+
+**Pro tip:** Start with one feature enabled, then add more!
+
+---
+
+## Step 6: Improve Your Code (1 minute)
 
 1. Go to the **Improve** tab
 2. Click **"🔍 Analyze This Site"**
@@ -98,6 +116,11 @@ This guide will get you up and running with BEAST MODE in just 5 minutes.
 ## 🎉 Congratulations!
 
 You've completed the Quick Start! You now know how to:
+- ✅ Scan repositories for quality
+- ✅ Ask AI questions about your code
+- ✅ Install and use plugins
+- ✅ Enable Day 2 Operations (AI Janitor)
+- ✅ Auto-improve your code
 - ✅ Scan repositories
 - ✅ Ask AI questions
 - ✅ Install plugins

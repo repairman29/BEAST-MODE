@@ -49,8 +49,10 @@ Welcome to the BEAST MODE documentation! Here you'll find everything you need to
 
 1. Read the **[Quick Start Guide](QUICK_START.md)** (5 minutes)
 2. Try the features in the dashboard
-3. Refer to **[User Guide](USER_GUIDE.md)** for details
-4. Check **[FAQs](FAQS.md)** for common questions
+3. **Enable Day 2 Operations** - Go to dashboard → "🧹 Day 2 Ops" tab
+4. Refer to **[User Guide](USER_GUIDE.md)** for details
+5. Check **[Day 2 Operations Guide](DAY2_OPERATIONS_USER_GUIDE.md)** for janitor features
+6. Check **[FAQs](FAQS.md)** for common questions
 
 ---
 

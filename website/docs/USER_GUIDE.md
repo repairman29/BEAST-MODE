@@ -53,7 +53,14 @@ BEAST MODE is an AI-powered development platform that helps you:
    - Click "Install" on ESLint Pro
    - Start using it immediately!
 
-5. **Improve Your Code**
+5. **Enable Day 2 Operations**
+   - Go to the "🧹 Day 2 Ops" tab (or press `4`)
+   - Click "Enable Janitor" at the top
+   - Toggle features on/off as needed
+   - Configure overnight refactoring
+   - **Wake up to clean code!** 🧹
+
+6. **Improve Your Code**
    - Go to the Improve tab
    - Click "Analyze This Site"
    - Review recommendations
@@ -187,7 +194,36 @@ BEAST MODE is an AI-powered development platform that helps you:
 
 ---
 
-### 5. Settings Tab ⚙️
+### 5. Day 2 Operations Tab 🧹
+
+**What it does:** The AI Janitor - Silent refactoring, architecture enforcement, and invisible CI/CD.
+
+**How to use:**
+1. Click "🧹 Day 2 Ops" in sidebar (or press `4`)
+2. Enable/disable individual features
+3. Configure each feature's settings
+4. View histories and logs
+5. Create Vibe Ops tests in plain English
+
+**Features:**
+- 🧹 Silent Refactoring - Overnight code cleanup
+- 🛡️ Architecture Enforcement - Pre-commit pattern blocking
+- ⏮️ Vibe Restoration - Regression detection & restore
+- 🧠 Repo-Level Memory - Semantic graph of codebase
+- 🤖 Vibe Ops - Test in plain English
+- 👻 Invisible CI/CD - Silent linting & scanning
+
+**Tips:**
+- Start with Silent Refactoring enabled
+- Configure overnight schedule (2 AM - 6 AM)
+- Review PRs created by janitor
+- Use Vibe Ops for plain English testing
+
+**📖 Full Guide:** See [Day 2 Operations User Guide](DAY2_OPERATIONS_USER_GUIDE.md)
+
+---
+
+### 6. Settings Tab ⚙️
 
 **What it does:** Manage teams, users, repositories, and preferences.
 
