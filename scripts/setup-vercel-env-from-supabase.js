@@ -8,6 +8,29 @@
 const { createClient } = require('@supabase/supabase-js');
 const { execSync } = require('child_process');
 const readline = require('readline');
+const path = require('path');
+const fs = require('fs');
+
+// Load .env.local from website directory
+try {
+  const envPath = path.join(__dirname, '../website/.env.local');
+  if (fs.existsSync(envPath)) {
+    const envContent = fs.readFileSync(envPath, 'utf8');
+    envContent.split('\n').forEach(line => {
+      const match = line.match(/^([^#=]+)=(.*)$/);
+      if (match) {
+        const key = match[1].trim();
+        const value = match[2].trim().replace(/^["']|["']$/g, '');
+        if (!process.env[key]) {
+          process.env[key] = value;
+        }
+      }
+    });
+    console.log('✅ Loaded .env.local\n');
+  }
+} catch (e) {
+  // Ignore errors
+}
 
 const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.SUPABASE_URL;
 const SUPABASE_SERVICE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
