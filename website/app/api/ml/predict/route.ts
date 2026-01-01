@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { withProductionIntegration } from '../../../../lib/api-middleware';
 
 /**
  * ML Prediction API
@@ -218,20 +217,30 @@ function getHeuristicPrediction(context: any) {
 }
 
 // Export POST handler - wrap with production integration if available
-export async function POST(request: NextRequest) {
-  try {
-    const wrappedHandler = await withProductionIntegration(handlePOST, {
+let withProductionIntegration: any = null;
+try {
+  /* webpackIgnore: true */
+  const middleware = require(`../../../../lib/api-middleware`);
+  withProductionIntegration = middleware.withProductionIntegration;
+} catch (error) {
+  // Middleware not available
+}
+
+let POST: typeof handlePOST = handlePOST;
+try {
+  if (withProductionIntegration) {
+    POST = withProductionIntegration(handlePOST, {
       endpoint: '/api/ml/predict',
       enableCache: true,
       cacheTTL: 300000 // 5 minutes
-    });
-    return wrappedHandler(request);
-  } catch (error) {
-    // Production integration not available, use handler directly
-    console.warn('[ML Predict API] Production integration not available:', error);
-    return handlePOST(request);
+    }) as typeof handlePOST;
   }
+} catch (error) {
+  // Production integration not available, use handler directly
+  console.warn('[ML Predict API] Production integration not available:', error);
 }
+
+export { POST };
 
 /**
  * GET endpoint for health check
