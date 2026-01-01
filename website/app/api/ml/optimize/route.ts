@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { triggerAutoOptimization } from '../../../../lib/api-middleware';
+import { triggerAutoOptimization } from "../../../../lib/api-middleware';
 
 /**
  * Auto-Optimization API
