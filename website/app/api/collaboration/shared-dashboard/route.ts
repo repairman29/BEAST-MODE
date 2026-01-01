@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { withProductionIntegration } from '../../../../lib/api-middleware';
 
 /**
  * Shared Dashboard API
@@ -99,9 +98,25 @@ async function handler(req: NextRequest) {
   }
 }
 
+let withProductionIntegration: any = null;
+try {
+  /* webpackIgnore: true */
+  const middleware = require(`../../../../lib/api-middleware`);
+  withProductionIntegration = middleware.withProductionIntegration;
+} catch (error) {
+  // Middleware not available
+}
+
 export async function GET(req: NextRequest) {
-  const wrapped = await withProductionIntegration(handler, { endpoint: '/api/collaboration/shared-dashboard' });
-  return wrapped(req);
+  if (withProductionIntegration) {
+    try {
+      const wrapped = withProductionIntegration(handler, { endpoint: '/api/collaboration/shared-dashboard' });
+      return wrapped(req);
+    } catch (error) {
+      // Fall through to direct handler
+    }
+  }
+  return handler(req);
 }
 
 export async function POST(req: NextRequest) {
