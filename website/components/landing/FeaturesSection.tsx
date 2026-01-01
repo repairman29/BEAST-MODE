@@ -5,64 +5,65 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui
 
 const features = [
   {
-    title: 'Oracle AI',
-    description: 'Deep code analysis with architectural insights and security scanning',
+    title: 'Silent Refactoring',
+    description: 'Overnight code cleanup. Automatic de-duplication, security fixes, and quality improvements while you sleep.',
     icon: (
       <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
       </svg>
     ),
-    gradient: 'from-cyan-500 to-blue-500'
-  },
-  {
-    title: 'Code Roach',
-    description: 'Automated bug detection with AI-powered fix suggestions',
-    icon: (
-      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-      </svg>
-    ),
     gradient: 'from-purple-500 to-pink-500'
   },
   {
-    title: 'Daisy Chain',
-    description: 'Intelligent workflow orchestration and task automation',
+    title: 'Architecture Enforcement',
+    description: 'Pre-commit hooks prevent bad patterns. Blocks secrets, enforces separation of concerns, auto-fixes violations.',
     icon: (
       <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+      </svg>
+    ),
+    gradient: 'from-blue-500 to-cyan-500'
+  },
+  {
+    title: 'Vibe Restoration',
+    description: 'Tracks code state, detects regressions, restores to last good state. Never lose your vibe.',
+    icon: (
+      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
       </svg>
     ),
     gradient: 'from-green-500 to-emerald-500'
   },
   {
-    title: 'Deployment Orchestrator',
-    description: 'Multi-platform deployment with automated rollback',
+    title: 'Repo Memory',
+    description: 'Semantic graph of your entire codebase. Preserves context, understands architecture, prevents drift.',
     icon: (
       <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
-      </svg>
-    ),
-    gradient: 'from-orange-500 to-red-500'
-  },
-  {
-    title: 'Quality Engine',
-    description: 'Comprehensive quality scoring with actionable recommendations',
-    icon: (
-      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
       </svg>
     ),
     gradient: 'from-indigo-500 to-purple-500'
   },
   {
-    title: 'Health Monitor',
-    description: 'Real-time system diagnostics and performance tracking',
+    title: 'Vibe Ops',
+    description: 'Test in plain English. Visual AI agents spin up browsers, click through flows, report in human language.',
     icon: (
       <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
       </svg>
     ),
-    gradient: 'from-pink-500 to-rose-500'
+    gradient: 'from-cyan-500 to-blue-500'
+  },
+  {
+    title: 'Invisible CI/CD',
+    description: 'Silent linting, background testing, security scanning. Auto-fixes without you seeing the CLI.',
+    icon: (
+      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
+      </svg>
+    ),
+    gradient: 'from-orange-500 to-red-500'
   }
 ];
 
@@ -77,10 +78,12 @@ function FeaturesSection() {
         {/* Header */}
         <div className="text-center mb-20">
           <h2 className="text-5xl md:text-6xl font-bold text-white mb-6 tracking-tight">
-            Everything You Need
+            Day 2 Operations
+            <br />
+            <span className="text-gradient-cyan">Built In</span>
           </h2>
           <p className="text-xl text-slate-400 max-w-2xl mx-auto">
-            Six powerful AI systems working together to analyze, optimize, and deploy your code with confidence.
+            Six powerful janitor systems working together to maintain, secure, and optimize your AI-generated code automatically.
           </p>
         </div>
 
@@ -108,10 +111,10 @@ function FeaturesSection() {
         <div className="mt-20 text-center">
           <Card className="bg-slate-950/50 border-slate-900 max-w-2xl mx-auto">
             <CardHeader>
-              <CardTitle className="text-3xl text-white">All Systems Working Together</CardTitle>
+              <CardTitle className="text-3xl text-white">The Complete AI Janitor</CardTitle>
               <CardDescription className="text-slate-400 text-base">
-                These AI systems integrate seamlessly to provide comprehensive code quality analysis, 
-                automated bug detection, and intelligent deployment orchestration.
+                These systems work together to maintain your codebase silently. Architecture enforcement, 
+                security scanning, and automatic refactoring—all while you focus on building.
               </CardDescription>
             </CardHeader>
             <CardContent>

@@ -43,20 +43,20 @@ function HeroSection() {
           {/* Left: Content */}
           <div className="space-y-8">
             <Badge variant="secondary" className="bg-cyan-500/10 text-cyan-400 border-cyan-500/20">
-              🎸 Built for Vibe Coders
+              🛡️ The AI Janitor for Vibe Coders
             </Badge>
 
             <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold text-white leading-[1.1] tracking-tight">
               BEAST MODE
               <br />
-              <span className="text-gradient-cyan">Ship with Style</span>
+              <span className="text-gradient-cyan">Day 2 Operations</span>
             </h1>
 
             <p className="text-xl md:text-2xl text-cyan-400 max-w-xl leading-relaxed font-semibold mb-2">
-              Code Better. Ship Faster. Have Fun.
+              The Governance Layer for AI-Generated Code
             </p>
             <p className="text-lg md:text-xl text-slate-400 max-w-xl leading-relaxed">
-              AI-powered development companion for vibe coders who build with passion and ship with confidence.
+              While tools like Cursor and Windsurf help you <strong className="text-white">generate</strong> code, BEAST MODE helps you <strong className="text-white">maintain</strong> it. Silent refactoring, architecture enforcement, and invisible CI/CD—all while you sleep.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4">
@@ -129,33 +129,36 @@ function HeroSection() {
   '@beast-mode/core';
 
 const beastMode = new BeastMode({
-  oracle: { enabled: true },
-  codeRoach: { enabled: true }
+  janitor: {
+    enabled: true,
+    overnightMode: true,
+    autoMerge: true
+  }
 });
 
 await beastMode.initialize();
 
-// Analyze code quality
-const quality = await beastMode
-  .analyzeQuality('./src');
+// Silent refactoring runs 2 AM - 6 AM
+// Architecture enforcement on every commit
+// Invisible CI/CD in background
 
-console.log(\`Score: \${quality.score}/100\`);
-// → Score: 87/100 (A+)
+// Wake up to clean code
+const status = await beastMode
+  .janitor.getStatus();
 
-// Deploy automatically
-await beastMode.deployApplication({
-  platform: 'vercel',
-  environment: 'production'
-});`}</code>
+console.log(\`Fixed: \${status.fixed}\`);
+// → Fixed: 23 issues
+// → Merged: 5 PRs
+// → Security: 3 holes closed`}</code>
                 </pre>
               </div>
 
               {/* Result badge */}
               <div className="relative mt-6 flex items-center gap-3 p-4 bg-green-500/10 border border-green-500/20 rounded-lg">
-                <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+                <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
                 <div>
-                  <div className="text-sm font-semibold text-green-400">Quality Score: 87/100</div>
-                  <div className="text-xs text-slate-500">Grade: A+ • 12 issues found</div>
+                  <div className="text-sm font-semibold text-green-400">Silent Janitor Active</div>
+                  <div className="text-xs text-slate-500">23 issues fixed • 5 PRs merged</div>
                 </div>
               </div>
             </div>
