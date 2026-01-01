@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { supabase } from '../../../../lib/supabase';
+import { getSupabaseClientOrNull } from '../../../../lib/supabase';
 import jwt from 'jsonwebtoken';
 
 const JWT_SECRET = process.env.JWT_SECRET || 'beast-mode-secret-change-in-production';
@@ -29,6 +29,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Try Supabase auth first
+    const supabase = getSupabaseClientOrNull();
     if (supabase) {
       const { data, error } = await supabase.auth.signUp({
         email,

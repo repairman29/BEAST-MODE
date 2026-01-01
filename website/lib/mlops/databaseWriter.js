@@ -66,7 +66,8 @@ class DatabaseWriter {
                     // Try to require dataIntegration, but handle gracefully if not available
                     let dataIntegrationModule;
                     try {
-                        dataIntegrationModule = require('./dataIntegration');
+                        // dataIntegration module not available yet
+                        dataIntegrationModule = null;
                     } catch (requireError) {
                         // dataIntegration not available - skip this path
                         dataIntegrationModule = null;
