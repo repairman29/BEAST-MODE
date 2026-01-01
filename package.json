@@ -74,6 +74,7 @@
     "test:phase3-e2e": "node scripts/test-phase3-e2e.js",
     "benchmark:phase3": "node scripts/benchmark-phase3.js",
     "verify:env": "node scripts/verify-env.js",
+    "test:production-build": "node scripts/test-production-build.js",
     "test:comprehensive": "node scripts/test-comprehensive.js",
     "test:expanded": "node scripts/test-expanded.js",
     "test:ftue": "node scripts/test-ftue.js"

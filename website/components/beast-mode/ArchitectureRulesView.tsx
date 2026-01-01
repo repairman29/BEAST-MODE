@@ -70,21 +70,21 @@ export default function ArchitectureRulesView() {
               'UI rendering in utility functions'
             ]
           },
-              {
-                id: 'block-eval',
-                name: 'Block // SECURITY: eval() disabled
+                {
+                  id: 'block-eval',
+                  name: 'Block // SECURITY: eval() disabled
 // eval() Usage',
-                description: 'Prevents use of // SECURITY: eval() disabled
+                  description: 'Prevents use of // SECURITY: eval() disabled
 // eval() which is a security risk',
-                enabled: true,
-                severity: 'error',
-                category: 'security',
-                examples: [
-                  '// SECURITY: eval() disabled
+                  enabled: true,
+                  severity: 'error',
+                  category: 'security',
+                  examples: [
+                    '// SECURITY: eval() disabled
 // eval(userInput);',
-                  'Function(userInput)();'
-                ]
-              },
+                    'Function(userInput)();'
+                  ]
+                },
           {
             id: 'auto-fix-patterns',
             name: 'Auto-Fix Common Patterns',
