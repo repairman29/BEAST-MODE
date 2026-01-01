@@ -134,7 +134,7 @@ export async function POST(request: NextRequest) {
             { status: 400 }
           );
         }
-        const apiKey = await enterpriseService.generateApiKey(tenantId, userId, params.permissions || []);
+        const apiKey = await service.generateApiKey(tenantId, userId, params.permissions || []);
         return NextResponse.json({
           status: 'ok',
           data: apiKey,
@@ -148,7 +148,7 @@ export async function POST(request: NextRequest) {
             { status: 400 }
           );
         }
-        const hasPermission = await enterpriseService.hasPermission(userId, params.permission, tenantId);
+        const hasPermission = await service.hasPermission(userId, params.permission, tenantId);
         return NextResponse.json({
           status: 'ok',
           data: { hasPermission },
@@ -162,7 +162,7 @@ export async function POST(request: NextRequest) {
             { status: 400 }
           );
         }
-        const dashboard = await enterpriseService.createDashboard(tenantId, params.dashboardConfig);
+        const dashboard = await service.createDashboard(tenantId, params.dashboardConfig);
         return NextResponse.json({
           status: 'ok',
           data: dashboard,

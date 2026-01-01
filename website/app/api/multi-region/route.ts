@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getUnifiedMultiRegionService } from '../../../../lib/multi-region/unifiedMultiRegionService';
 
 /**
  * Multi-Region API
@@ -9,11 +8,31 @@ import { getUnifiedMultiRegionService } from '../../../../lib/multi-region/unifi
  * Phase 3, Week 1: Multi-Region Deployment
  */
 
-const multiRegionService = getUnifiedMultiRegionService();
+// Optional import - will be loaded dynamically
+async function getMultiRegionService() {
+  try {
+    const service = await import('../../../../lib/multi-region/unifiedMultiRegionService').catch(() => null);
+    if (service) {
+      return service.getUnifiedMultiRegionService();
+    }
+  } catch (error) {
+    // Service not available
+  }
+  return null;
+}
 
 export async function GET(request: NextRequest) {
   try {
-    await multiRegionService.initialize();
+    const service = await getMultiRegionService();
+    if (!service) {
+      return NextResponse.json({
+        status: 'unavailable',
+        message: 'Multi-region service not available',
+        timestamp: new Date().toISOString()
+      });
+    }
+
+    await service.initialize();
 
     const { searchParams } = new URL(request.url);
     const operation = searchParams.get('operation');
@@ -101,6 +120,15 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   try {
+    const multiRegionService = await getMultiRegionService();
+    if (!multiRegionService) {
+      return NextResponse.json({
+        status: 'unavailable',
+        message: 'Multi-region service not available',
+        timestamp: new Date().toISOString()
+      });
+    }
+    
     await multiRegionService.initialize();
 
     const body = await request.json();
