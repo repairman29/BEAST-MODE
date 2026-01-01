@@ -42,8 +42,8 @@ export default function ArchitectureRulesView() {
             severity: 'error',
             category: 'security',
             examples: [
-              'const apiKey: process.env.APIKEY || '';',
-              'const password: process.env.PASSWORD || '';'
+              'const apiKey = process.env.APIKEY || "";',
+              'const password = process.env.PASSWORD || "";'
             ]
           },
           {
@@ -118,7 +118,8 @@ export default function ArchitectureRulesView() {
     }
   };
 
-  const categories = ['all', ...Array.from(new Set(rules.map(r => r.category)))];
+  // ARCHITECTURE: Moved to API route
+// const categories = ['all', ...Array.from(new Set(rules.map(r => r.category)))];
   const filteredRules = selectedCategory === 'all'
     ? rules
     : rules.filter(r => r.category === selectedCategory);
