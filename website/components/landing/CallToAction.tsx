@@ -53,16 +53,16 @@ const pricingTiers = [
     popular: true
   },
   {
-    name: 'Enterprise',
-    price: 'Custom',
-    period: '',
-    description: 'For large organizations',
+    name: 'SENTINEL',
+    price: '$299',
+    period: '/month',
+    description: 'Enterprise governance layer',
     features: [
       'Unlimited API calls',
-      'White-label options',
-      'Advanced security',
-      'Dedicated support',
-      'Custom SLA'
+      'Plain English reviews',
+      'Compliance & audit logs',
+      'White-label & SSO',
+      '99.9% confidence threshold'
     ],
     cta: 'Contact Sales',
     popular: false
@@ -112,7 +112,7 @@ function CallToAction() {
             Simple Pricing
           </h2>
           <p className="text-xl text-slate-400 max-w-2xl mx-auto">
-            Start free and scale as you grow. All plans include access to all AI systems.
+            Start free and scale as you grow. BEAST MODE for vibe coders. SENTINEL for enterprise.
           </p>
         </div>
 
@@ -201,10 +201,10 @@ function CallToAction() {
         {/* Final CTA */}
         <div className="text-center">
           <h3 className="text-4xl font-bold text-white mb-6">
-            Ready to Improve Your Code Quality?
+            Ready to Wake Up to Clean Code?
           </h3>
           <p className="text-lg text-slate-400 mb-10 max-w-2xl mx-auto">
-            Join developers using BEAST MODE to build better software with AI-powered analysis and automated bug detection.
+            Join vibe coders using BEAST MODE to maintain AI-generated code with silent refactoring, architecture enforcement, and invisible CI/CD.
           </p>
           <Button 
             size="lg" 

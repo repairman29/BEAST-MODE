@@ -4,29 +4,29 @@ import React from 'react';
 import { Card, CardContent } from '../ui/card';
 
 const metrics = [
-  { value: '<100ms', label: 'Response Time', desc: 'Lightning-fast analysis' },
-  { value: '99.9%', label: 'Uptime SLA', desc: 'Enterprise reliability' },
-  { value: '97%', label: 'Bug Reduction', desc: 'Average improvement' },
-  { value: '10x', label: 'Review Speed', desc: 'Faster than manual' }
+  { value: '23', label: 'Issues Fixed', desc: 'Per overnight cycle' },
+  { value: '99.9%', label: 'Confidence', desc: 'Auto-merge threshold' },
+  { value: '100%', label: 'Core Coverage', desc: 'System tests passing' },
+  { value: '2-6 AM', label: 'Silent Hours', desc: 'Overnight refactoring' }
 ];
 
 const useCases = [
   {
-    title: 'For Developers',
+    title: 'For Vibe Coders',
     items: [
-      'Automated code quality analysis',
-      'AI-powered bug detection',
-      'Real-time quality scoring',
-      'CLI tools and dashboard'
+      'Wake up to clean code',
+      'Silent overnight refactoring',
+      'Architecture enforcement',
+      'Invisible CI/CD'
     ]
   },
   {
-    title: 'For Teams',
+    title: 'For Enterprise (SENTINEL)',
     items: [
-      'Centralized quality metrics',
-      'Multi-repository orchestration',
-      'Team collaboration features',
-      'Enterprise security & compliance'
+      'Plain English code reviews',
+      'Compliance & audit logs',
+      '99.9% confidence threshold',
+      'White-label & SSO'
     ]
   }
 ];
