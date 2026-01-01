@@ -15,6 +15,8 @@ import JanitorActivityFeed from './JanitorActivityFeed';
 import JanitorMetricsChart from './JanitorMetricsChart';
 import JanitorNotifications from './JanitorNotifications';
 import JanitorOnboarding from './JanitorOnboarding';
+import JanitorQuickActions from './JanitorQuickActions';
+import JanitorStatusIndicator from './JanitorStatusIndicator';
 
 interface JanitorStatus {
   enabled: boolean;
@@ -71,6 +73,16 @@ export default function JanitorDashboard() {
     const interval = setInterval(loadJanitorStatus, 30000);
     return () => clearInterval(interval);
   }, []);
+
+  // Check if user needs onboarding
+  useEffect(() => {
+    if (status && !status.enabled) {
+      const hasSeenOnboarding = localStorage.getItem('janitor-onboarding-seen');
+      if (!hasSeenOnboarding) {
+        setShowOnboarding(true);
+      }
+    }
+  }, [status]);
 
   const loadJanitorStatus = async () => {
     try {
@@ -162,6 +174,15 @@ export default function JanitorDashboard() {
 
   return (
     <div className="p-6 space-y-6 overflow-y-auto h-full">
+      {/* Onboarding */}
+      {showOnboarding && (
+        <JanitorOnboarding
+          onComplete={() => {
+            setShowOnboarding(false);
+            localStorage.setItem('janitor-onboarding-seen', 'true');
+          }}
+        />
+      )}
       {/* Header */}
       <div className="mb-8">
         <div className="flex items-center justify-between mb-4">
@@ -174,12 +195,7 @@ export default function JanitorDashboard() {
             </p>
           </div>
           <div className="flex items-center gap-4">
-            <Badge 
-              variant={status.enabled ? "default" : "secondary"}
-              className={status.enabled ? "bg-green-500/20 text-green-400 border-green-500/30" : "bg-slate-800 text-slate-400"}
-            >
-              {status.enabled ? '✓ Active' : '○ Inactive'}
-            </Badge>
+            <JanitorStatusIndicator status={status} />
             <Button
               onClick={() => toggleFeature('enabled', !status.enabled)}
               className={status.enabled ? "bg-red-600 hover:bg-red-700" : "bg-green-600 hover:bg-green-700"}
@@ -190,9 +206,22 @@ export default function JanitorDashboard() {
         </div>
       </div>
 
-      {/* Notifications */}
-      <div className="mb-6">
-        <JanitorNotifications />
+      {/* Notifications & Quick Actions */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+        <div className="lg:col-span-2">
+          <JanitorNotifications />
+        </div>
+        <div>
+          <JanitorQuickActions
+            onManualRefactor={runManualRefactor}
+            onCreateTest={() => setShowTestCreator(true)}
+            onViewHistory={() => setShowHistory(true)}
+            onViewRules={() => {
+              setActiveFeature('architectureEnforcement');
+              setShowRules(true);
+            }}
+          />
+        </div>
       </div>
 
       {/* Quick Stats */}
