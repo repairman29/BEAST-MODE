@@ -77,6 +77,9 @@
     "test:production-build": "node scripts/test-production-build.js",
     "test:monitoring": "node scripts/test-monitoring.js",
     "test:alerts": "node scripts/test-alerts.js",
+    "test:pre-deployment": "node scripts/test-pre-deployment.js",
+    "test:optimization": "node scripts/test-optimization-services.js",
+    "test:model-marketplace": "node scripts/test-model-marketplace.js",
     "test:comprehensive": "node scripts/test-comprehensive.js",
     "test:expanded": "node scripts/test-expanded.js",
     "test:ftue": "node scripts/test-ftue.js"
