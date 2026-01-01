@@ -273,6 +273,607 @@ program
             })
     );
 
+// Janitor Commands (The AI Janitor)
+program
+    .command('janitor')
+    .description('🧹 BEAST MODE Janitor - The AI Janitor for vibe coders')
+    .addCommand(
+        new Command('enable')
+            .description('Enable overnight maintenance mode')
+            .option('--overnight', 'Enable overnight automatic refactoring')
+            .action(async (options) => {
+                const { BeastMode } = require('../lib');
+                const beastMode = new BeastMode({ janitor: { enabled: true } });
+                await beastMode.initialize();
+                
+                if (options.overnight) {
+                    await beastMode.janitor.enableOvernightMode();
+                    console.log(chalk.green('🌙 Overnight maintenance mode enabled'));
+                    console.log(chalk.gray('BEAST MODE will automatically refactor your code between 2 AM - 6 AM'));
+                } else {
+                    beastMode.janitor.options.enabled = true;
+                    console.log(chalk.green('✅ Janitor enabled'));
+                }
+            })
+    )
+    .addCommand(
+        new Command('disable')
+            .description('Disable janitor services')
+            .action(async () => {
+                const { BeastMode } = require('../lib');
+                const beastMode = new BeastMode({ janitor: { enabled: false } });
+                await beastMode.initialize();
+                await beastMode.janitor.disableOvernightMode();
+                console.log(chalk.yellow('☀️ Janitor disabled'));
+            })
+    )
+    .addCommand(
+        new Command('status')
+            .description('Show janitor status')
+            .action(async () => {
+                const { BeastMode } = require('../lib');
+                const beastMode = new BeastMode({ janitor: {} });
+                await beastMode.initialize();
+                const status = beastMode.janitor.getStatus();
+                
+                console.log('\n🧹 BEAST MODE Janitor Status');
+                console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+                console.log(`Enabled: ${status.enabled ? chalk.green('Yes') : chalk.red('No')}`);
+                console.log(`Overnight Mode: ${status.silentRefactoring?.overnightMode ? chalk.green('Yes') : chalk.red('No')}`);
+                console.log(`Last Run: ${status.silentRefactoring?.lastRun?.timestamp || 'Never'}`);
+                
+                if (status.silentRefactoring?.stats) {
+                    console.log(`\n📊 Statistics:`);
+                    console.log(`  Total Runs: ${status.silentRefactoring.stats.totalRuns}`);
+                    console.log(`  Total Fixes: ${status.silentRefactoring.stats.totalFixes}`);
+                    console.log(`  Security Fixes: ${status.silentRefactoring.stats.totalSecurityFixes}`);
+                    console.log(`  Deduplications: ${status.silentRefactoring.stats.totalDeduplications}`);
+                }
+            })
+    )
+    .addCommand(
+        new Command('refactor')
+            .description('Run manual refactoring cycle')
+            .option('--dry-run', 'Show what would be changed without applying')
+            .action(async (options) => {
+                const spinner = ora('Running refactoring cycle...').start();
+                try {
+                    const { BeastMode } = require('../lib');
+                    const beastMode = new BeastMode({ janitor: {} });
+                    await beastMode.initialize();
+                    
+                    const results = await beastMode.janitor.runRefactoring();
+                    spinner.succeed('Refactoring complete!');
+                    
+                    console.log('\n📋 Refactoring Results:');
+                    console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+                    if (results.deduplications.length > 0) {
+                        console.log(chalk.cyan(`🔄 ${results.deduplications.length} deduplications`));
+                    }
+                    if (results.securityFixes.length > 0) {
+                        console.log(chalk.green(`🔒 ${results.securityFixes.length} security fixes`));
+                    }
+                    if (results.improvements.length > 0) {
+                        console.log(chalk.blue(`✨ ${results.improvements.length} improvements`));
+                    }
+                    if (results.errors.length > 0) {
+                        console.log(chalk.red(`❌ ${results.errors.length} errors`));
+                    }
+                } catch (error) {
+                    spinner.fail(`Refactoring failed: ${error.message}`);
+                }
+            })
+    );
+
+// Vibe Restoration Commands
+program
+    .command('vibe')
+    .description('🔄 Vibe Restoration - Rewind to last working state')
+    .addCommand(
+        new Command('check')
+            .description('Check for regressions')
+            .action(async () => {
+                const { BeastMode } = require('../lib');
+                const beastMode = new BeastMode({ janitor: {} });
+                await beastMode.initialize();
+                
+                const result = await beastMode.janitor.checkVibe();
+                
+                if (result.hasRegression) {
+                    console.log(chalk.red('\n⚠️  Regression Detected!'));
+                    console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+                    console.log(`Quality dropped from ${chalk.yellow(result.regression.previousQuality)} to ${chalk.red(result.regression.currentQuality)}`);
+                    console.log(`Severity: ${chalk.red(result.regression.severity)}`);
+                    console.log(`\nRun ${chalk.cyan('beast-mode vibe restore')} to restore to last good state`);
+                } else {
+                    console.log(chalk.green('\n✅ No regressions detected'));
+                    console.log(`Current Quality: ${chalk.green(result.currentState?.quality || 'N/A')}`);
+                }
+            })
+    )
+    .addCommand(
+        new Command('restore')
+            .description('Restore to last good state')
+            .option('--commit <hash>', 'Restore to specific commit')
+            .option('--no-branch', 'Don\'t create restore branch')
+            .action(async (options) => {
+                const spinner = ora('Restoring to last good state...').start();
+                try {
+                    const { BeastMode } = require('../lib');
+                    const beastMode = new BeastMode({ janitor: {} });
+                    await beastMode.initialize();
+                    
+                    const result = await beastMode.janitor.restore({
+                        commit: options.commit,
+                        createBranch: !options.noBranch
+                    });
+                    
+                    spinner.succeed('Restored successfully!');
+                    console.log(`\n✅ Restored to commit: ${chalk.cyan(result.targetCommit.substring(0, 7))}`);
+                    if (result.branch) {
+                        console.log(`Branch: ${chalk.cyan(result.branch)}`);
+                    }
+                } catch (error) {
+                    spinner.fail(`Restore failed: ${error.message}`);
+                }
+            })
+    )
+    .addCommand(
+        new Command('analyze')
+            .description('Analyze regression')
+            .option('--index <index>', 'Analyze specific regression by index')
+            .action(async (options) => {
+                const { BeastMode } = require('../lib');
+                const beastMode = new BeastMode({ janitor: {} });
+                await beastMode.initialize();
+                
+                const analysis = await beastMode.janitor.analyzeRegression(
+                    options.index ? parseInt(options.index) : null
+                );
+                
+                if (analysis.error) {
+                    console.log(chalk.red(analysis.error));
+                    return;
+                }
+                
+                console.log('\n📊 Regression Analysis');
+                console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+                console.log(`Quality Drop: ${chalk.red(analysis.qualityDrop)} points`);
+                console.log(`Severity: ${chalk.yellow(analysis.severity)}`);
+                console.log(`\nAffected Files: ${analysis.affectedFiles.length}`);
+                analysis.affectedFiles.slice(0, 5).forEach(file => {
+                    console.log(`  • ${file}`);
+                });
+                
+                if (analysis.suggestions.length > 0) {
+                    console.log(`\n💡 Suggestions:`);
+                    analysis.suggestions.forEach(suggestion => {
+                        console.log(`  • ${suggestion}`);
+                    });
+                }
+            })
+    );
+
+// Architecture Enforcement Commands
+program
+    .command('architecture')
+    .description('🛡️ Architecture Enforcement - Prevent bad patterns')
+    .addCommand(
+        new Command('check')
+            .description('Check for architecture violations')
+            .action(async () => {
+                const { BeastMode } = require('../lib');
+                const beastMode = new BeastMode({ janitor: {} });
+                await beastMode.initialize();
+                
+                const result = await beastMode.janitor.checkArchitecture();
+                
+                if (result.passed) {
+                    console.log(chalk.green('\n✅ No architecture violations detected'));
+                } else {
+                    console.log(chalk.red(`\n❌ ${result.violations.length} violations detected`));
+                    result.violations.forEach(v => {
+                        console.log(`  • ${v.type}: ${v.message} (${v.file})`);
+                    });
+                }
+            })
+    )
+    .addCommand(
+        new Command('rules')
+            .description('Show architecture rules')
+            .action(async () => {
+                const { BeastMode } = require('../lib');
+                const beastMode = new BeastMode({ janitor: {} });
+                await beastMode.initialize();
+                
+                const status = beastMode.janitor.architectureEnforcer.getStatus();
+                console.log('\n🛡️ Architecture Rules');
+                console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+                console.log(`Auto-fix: ${status.autoFix ? chalk.green('Enabled') : chalk.red('Disabled')}`);
+                console.log(`Pre-commit hook: ${status.preCommitHook ? chalk.green('Installed') : chalk.red('Not installed')}`);
+                console.log(`\nViolations caught: ${chalk.cyan(status.stats.violationsCaught)}`);
+                console.log(`Auto-fixes: ${chalk.green(status.stats.autoFixes)}`);
+            })
+    );
+
+// Repo Memory Commands
+program
+    .command('memory')
+    .description('🧠 Repo-Level Memory - Semantic graph of architecture')
+    .addCommand(
+        new Command('build')
+            .description('Build semantic graph of codebase')
+            .action(async () => {
+                const spinner = ora('Building semantic graph...').start();
+                try {
+                    const { BeastMode } = require('../lib');
+                    const beastMode = new BeastMode({ janitor: {} });
+                    await beastMode.initialize();
+                    
+                    await beastMode.janitor.repoMemory.buildGraph();
+                    const stats = beastMode.janitor.repoMemory.getStats();
+                    
+                    spinner.succeed('Graph built successfully!');
+                    console.log('\n📊 Graph Statistics:');
+                    console.log(`  Files: ${chalk.cyan(stats.files)}`);
+                    console.log(`  Dependencies: ${chalk.cyan(stats.dependencies)}`);
+                    console.log(`  Layers: ${chalk.cyan(stats.layers)}`);
+                    console.log(`  Patterns: ${chalk.cyan(stats.patterns)}`);
+                    console.log(`  Functions: ${chalk.cyan(stats.functions)}`);
+                    console.log(`  Components: ${chalk.cyan(stats.components)}`);
+                    console.log(`  APIs: ${chalk.cyan(stats.apis)}`);
+                } catch (error) {
+                    spinner.fail(`Failed: ${error.message}`);
+                }
+            })
+    )
+    .addCommand(
+        new Command('context')
+            .description('Get architectural context for a file')
+            .argument('<file>', 'File path')
+            .action(async (file) => {
+                const { BeastMode } = require('../lib');
+                const beastMode = new BeastMode({ janitor: {} });
+                await beastMode.initialize();
+                
+                const context = beastMode.janitor.repoMemory.getContext(file);
+                if (!context) {
+                    console.log(chalk.red('File not found in graph. Run "beast-mode memory build" first.'));
+                    return;
+                }
+                
+                console.log('\n🧠 Architectural Context:');
+                console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+                console.log(`File: ${chalk.cyan(context.file)}`);
+                console.log(`Type: ${chalk.yellow(context.type)}`);
+                console.log(`Layer: ${chalk.blue(context.layer)}`);
+                console.log(`\nDependencies: ${context.dependencies.length}`);
+                context.dependencies.slice(0, 5).forEach(dep => {
+                    console.log(`  • ${dep.path} (${dep.type})`);
+                });
+            })
+    )
+    .addCommand(
+        new Command('stats')
+            .description('Show memory statistics')
+            .action(async () => {
+                const { BeastMode } = require('../lib');
+                const beastMode = new BeastMode({ janitor: {} });
+                await beastMode.initialize();
+                
+                const stats = beastMode.janitor.repoMemory.getStats();
+                console.log('\n🧠 Repo Memory Statistics:');
+                console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+                console.log(`Files analyzed: ${chalk.cyan(stats.files)}`);
+                console.log(`Dependencies: ${chalk.cyan(stats.dependencies)}`);
+                console.log(`Architecture layers: ${chalk.cyan(stats.layers)}`);
+                console.log(`Patterns detected: ${chalk.cyan(stats.patterns)}`);
+                console.log(`Functions: ${chalk.cyan(stats.functions)}`);
+                console.log(`Components: ${chalk.cyan(stats.components)}`);
+                console.log(`APIs: ${chalk.cyan(stats.apis)}`);
+                console.log(`Last updated: ${chalk.gray(stats.lastUpdated || 'Never')}`);
+            })
+    );
+
+// Vibe Ops Commands
+program
+    .command('vibe-ops')
+    .description('🎭 Vibe Ops - Visual AI Testing (QA for English)')
+    .addCommand(
+        new Command('test')
+            .description('Create and run a test from English description')
+            .argument('<description>', 'Test description in English')
+            .option('--run', 'Run test immediately')
+            .action(async (description, options) => {
+                const { BeastMode } = require('../lib');
+                const beastMode = new BeastMode({ janitor: { vibeOps: {} } });
+                await beastMode.initialize();
+                
+                const test = await beastMode.janitor.vibeOps.createTest(description);
+                console.log(chalk.green(`\n✅ Test created: "${description}"`));
+                console.log(`Test ID: ${chalk.cyan(test.id)}`);
+                
+                if (options.run) {
+                    const spinner = ora('Running test...').start();
+                    const result = await beastMode.janitor.vibeOps.runTest(test.id);
+                    spinner.succeed(result.passed ? 'Test passed!' : 'Test failed!');
+                    
+                    if (!result.passed && result.errors) {
+                        console.log('\n❌ Errors:');
+                        result.errors.forEach(err => {
+                            console.log(`  • ${err.step}: ${err.error}`);
+                        });
+                    }
+                }
+            })
+    )
+    .addCommand(
+        new Command('run')
+            .description('Run all tests')
+            .action(async () => {
+                const spinner = ora('Running all tests...').start();
+                try {
+                    const { BeastMode } = require('../lib');
+                    const beastMode = new BeastMode({ janitor: { vibeOps: {} } });
+                    await beastMode.initialize();
+                    
+                    const results = await beastMode.janitor.vibeOps.runAllTests();
+                    spinner.succeed('Tests complete!');
+                    
+                    console.log('\n📊 Test Results:');
+                    console.log(`  Total: ${chalk.cyan(results.total)}`);
+                    console.log(`  Passed: ${chalk.green(results.passed)}`);
+                    console.log(`  Failed: ${chalk.red(results.failed)}`);
+                } catch (error) {
+                    spinner.fail(`Failed: ${error.message}`);
+                }
+            })
+    )
+    .addCommand(
+        new Command('report')
+            .description('Generate plain English test report')
+            .action(async () => {
+                const { BeastMode } = require('../lib');
+                const beastMode = new BeastMode({ janitor: { vibeOps: {} } });
+                await beastMode.initialize();
+                
+                const report = beastMode.janitor.vibeOps.generateReport();
+                console.log('\n📋 Test Report:');
+                console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+                console.log(`Total: ${report.summary.total}`);
+                console.log(`Passed: ${chalk.green(report.summary.passed)}`);
+                console.log(`Failed: ${chalk.red(report.summary.failed)}`);
+                console.log('\nDetails:');
+                report.details.forEach(detail => {
+                    console.log(`\n${detail.status}: ${detail.test}`);
+                    if (detail.errors.length > 0) {
+                        detail.errors.forEach(err => {
+                            console.log(`  • ${chalk.red(err)}`);
+                        });
+                    }
+                });
+            })
+    );
+
+// Invisible CI/CD Commands
+program
+    .command('cicd')
+    .description('🔇 Invisible CI/CD - Silent background checks')
+    .addCommand(
+        new Command('check')
+            .description('Run all checks silently')
+            .option('--show', 'Show output (not silent)')
+            .action(async (options) => {
+                const spinner = ora('Running checks...').start();
+                try {
+                    const { BeastMode } = require('../lib');
+                    const beastMode = new BeastMode({ janitor: { invisibleCICD: { silent: !options.show } } });
+                    await beastMode.initialize();
+                    
+                    const results = await beastMode.janitor.invisibleCICD.runChecks();
+                    spinner.succeed('Checks complete!');
+                    
+                    if (options.show) {
+                        console.log('\n📊 Check Results:');
+                        if (results.linting) {
+                            console.log(`Linting: ${results.linting.passed ? chalk.green('Passed') : chalk.red(`Failed (${results.linting.issues.length} issues)`)}`);
+                        }
+                        if (results.testing) {
+                            console.log(`Testing: ${results.testing.passed ? chalk.green('Passed') : chalk.red(`Failed`)}`);
+                        }
+                        if (results.security) {
+                            console.log(`Security: ${results.security.passed ? chalk.green('Passed') : chalk.red(`Failed (${results.security.issues.length} issues)`)}`);
+                        }
+                        if (results.fixes.length > 0) {
+                            console.log(`\n✅ Auto-fixed: ${chalk.green(results.fixes.length)} issue(s)`);
+                        }
+                    }
+                } catch (error) {
+                    spinner.fail(`Failed: ${error.message}`);
+                }
+            })
+    )
+    .addCommand(
+        new Command('status')
+            .description('Show CI/CD status')
+            .action(async () => {
+                const { BeastMode } = require('../lib');
+                const beastMode = new BeastMode({ janitor: { invisibleCICD: {} } });
+                await beastMode.initialize();
+                
+                const status = beastMode.janitor.invisibleCICD.getStatus();
+                console.log('\n🔇 Invisible CI/CD Status:');
+                console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+                console.log(`Enabled: ${status.enabled ? chalk.green('Yes') : chalk.red('No')}`);
+                console.log(`Silent mode: ${status.silent ? chalk.green('Yes') : chalk.red('No')}`);
+                console.log(`Auto-fix: ${status.autoFix ? chalk.green('Enabled') : chalk.red('Disabled')}`);
+                console.log(`\nStatistics:`);
+                console.log(`  Total runs: ${chalk.cyan(status.stats.totalRuns)}`);
+                console.log(`  Issues found: ${chalk.yellow(status.stats.issuesFound)}`);
+                console.log(`  Issues fixed: ${chalk.green(status.stats.issuesFixed)}`);
+                console.log(`  Tests run: ${chalk.cyan(status.stats.testsRun)}`);
+                console.log(`  Tests passed: ${chalk.green(status.stats.testsPassed)}`);
+            })
+    );
+
+// Prompt Chain Debugger Commands
+program
+    .command('prompt')
+    .description('🔗 Prompt Chain Debugger - Debug by prompt history')
+    .addCommand(
+        new Command('track')
+            .description('Track a prompt')
+            .argument('<prompt>', 'The prompt text')
+            .option('--tool <tool>', 'Tool used (cursor, windsurf, etc.)', 'cursor')
+            .action(async (promptText, options) => {
+                const { BeastMode } = require('../lib');
+                const beastMode = new BeastMode({ janitor: { promptChainDebugger: {} } });
+                await beastMode.initialize();
+                
+                const prompt = await beastMode.janitor.promptChainDebugger.trackPrompt(promptText, {
+                    tool: options.tool,
+                    user: 'current-user'
+                });
+                
+                console.log(chalk.green(`\n✅ Prompt tracked: ${prompt.id}`));
+                console.log(`Quality: ${chalk.cyan(prompt.codeState?.quality || 'N/A')}`);
+            })
+    )
+    .addCommand(
+        new Command('debug')
+            .description('Debug by prompt chain')
+            .argument('<issue>', 'Issue description')
+            .action(async (issue) => {
+                const spinner = ora('Analyzing prompt chain...').start();
+                try {
+                    const { BeastMode } = require('../lib');
+                    const beastMode = new BeastMode({ janitor: { promptChainDebugger: {} } });
+                    await beastMode.initialize();
+                    
+                    const analysis = await beastMode.janitor.promptChainDebugger.debugByPrompt(issue);
+                    spinner.succeed('Analysis complete!');
+                    
+                    console.log('\n🔍 Prompt Chain Analysis:');
+                    console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+                    console.log(`Issue: ${chalk.yellow(issue)}`);
+                    console.log(`\nRelevant prompts: ${chalk.cyan(analysis.relevantPrompts.length)}`);
+                    analysis.chain.slice(0, 5).forEach((p, i) => {
+                        console.log(`\n${i + 1}. ${p.prompt.substring(0, 60)}...`);
+                        console.log(`   Quality: ${p.quality || 'N/A'}`);
+                    });
+                    
+                    if (analysis.suggestions.length > 0) {
+                        console.log(`\n💡 Suggestions:`);
+                        analysis.suggestions.forEach(s => {
+                            console.log(`  • ${s.message}`);
+                            console.log(`    ${chalk.gray(s.suggestion)}`);
+                        });
+                    }
+                } catch (error) {
+                    spinner.fail(`Failed: ${error.message}`);
+                }
+            })
+    )
+    .addCommand(
+        new Command('history')
+            .description('Show prompt history')
+            .option('--limit <n>', 'Number of prompts to show', '20')
+            .action(async (options) => {
+                const { BeastMode } = require('../lib');
+                const beastMode = new BeastMode({ janitor: { promptChainDebugger: {} } });
+                await beastMode.initialize();
+                
+                const history = beastMode.janitor.promptChainDebugger.getHistory({
+                    limit: parseInt(options.limit)
+                });
+                
+                console.log('\n🔗 Prompt History:');
+                console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+                history.forEach((p, i) => {
+                    console.log(`\n${i + 1}. ${chalk.cyan(p.id)}`);
+                    console.log(`   ${p.prompt.substring(0, 80)}...`);
+                    console.log(`   Quality: ${p.codeState?.quality || 'N/A'} | ${chalk.gray(p.timestamp)}`);
+                });
+            })
+    );
+
+// Enterprise Guardrail Commands
+program
+    .command('guardrail')
+    .description('🛡️ Enterprise Guardrail - Plain English code reviews')
+    .addCommand(
+        new Command('check')
+            .description('Check if push is allowed')
+            .action(async () => {
+                const { BeastMode } = require('../lib');
+                const beastMode = new BeastMode({ janitor: { enterpriseGuardrail: {} } });
+                await beastMode.initialize();
+                
+                const result = await beastMode.janitor.enterpriseGuardrail.checkPush();
+                
+                if (result.allowed) {
+                    console.log(chalk.green('\n✅ Push allowed'));
+                    if (result.plainEnglishDiff) {
+                        console.log(`\n${result.plainEnglishDiff.summary}`);
+                    }
+                } else {
+                    console.log(chalk.red('\n❌ Push blocked: Requires approval'));
+                    console.log(`\n${result.plainEnglishDiff.summary}`);
+                    console.log('\nFiles changed:');
+                    result.plainEnglishDiff.files.forEach(f => {
+                        console.log(`\n${chalk.cyan(f.file)}`);
+                        console.log(`  ${f.summary}`);
+                        f.details.forEach(d => {
+                            console.log(`    • ${d}`);
+                        });
+                    });
+                    console.log(`\nReview ID: ${chalk.cyan(result.review.id)}`);
+                }
+            })
+    )
+    .addCommand(
+        new Command('reviews')
+            .description('List pending reviews')
+            .action(async () => {
+                const { BeastMode } = require('../lib');
+                const beastMode = new BeastMode({ janitor: { enterpriseGuardrail: {} } });
+                await beastMode.initialize();
+                
+                const reviews = beastMode.janitor.enterpriseGuardrail.getPendingReviews();
+                
+                if (reviews.length === 0) {
+                    console.log(chalk.green('\n✅ No pending reviews'));
+                    return;
+                }
+                
+                console.log('\n📋 Pending Reviews:');
+                console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+                reviews.forEach((r, i) => {
+                    console.log(`\n${i + 1}. ${chalk.cyan(r.id)}`);
+                    console.log(`   ${r.summary}`);
+                    console.log(`   Files: ${r.files.length}`);
+                    console.log(`   ${chalk.gray(r.createdAt)}`);
+                });
+            })
+    )
+    .addCommand(
+        new Command('approve')
+            .description('Approve a review')
+            .argument('<reviewId>', 'Review ID')
+            .action(async (reviewId) => {
+                const { BeastMode } = require('../lib');
+                const beastMode = new BeastMode({ janitor: { enterpriseGuardrail: {} } });
+                await beastMode.initialize();
+                
+                try {
+                    await beastMode.janitor.enterpriseGuardrail.approveReview(reviewId, 'current-user');
+                    console.log(chalk.green(`\n✅ Review ${reviewId} approved`));
+                } catch (error) {
+                    console.log(chalk.red(`\n❌ Failed: ${error.message}`));
+                }
+            })
+    );
+
 // Intelligence Commands
 program
     .command('intelligence')
