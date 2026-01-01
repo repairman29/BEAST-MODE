@@ -15,6 +15,8 @@
 
 We're not just another dev tool. We're built for **vibe coders** - developers who code with passion, build with purpose, and ship with style. With 9 integrated AI systems, BEAST MODE helps you write better code, learn faster, and have more fun while doing it.
 
+**🎯 NEW: Day 2 Operations Platform** - The AI Janitor that works while you sleep. Silent refactoring, architecture enforcement, and invisible CI/CD for AI-generated code.
+
 **That's the BEAST MODE VIBE. 🚀**
 
 ### 🤖 9 Integrated AI Systems
@@ -44,7 +46,7 @@ We're not just another dev tool. We're built for **vibe coders** - developers wh
 ### Paid Tiers
 - **Developer**: $29/month - 100K calls, priority support
 - **Team**: $99/month - 500K calls, collaboration features
-- **Enterprise**: $299/month - Unlimited usage, white-label
+- **SENTINEL**: $299/month - Enterprise governance layer, unlimited usage, white-label, SSO
 
 **[View Full Pricing](https://beastmode.dev/pricing)** • **[30-Day Money-Back Guarantee](https://beastmode.dev/terms)**
 
@@ -82,6 +84,12 @@ beast-mode quality check
 # Get your quality score
 beast-mode quality score
 
+# Enable Day 2 Operations (The AI Janitor)
+beast-mode janitor enable --overnight
+
+# Check janitor status
+beast-mode janitor status
+
 # Launch dashboard
 beast-mode dashboard --open
 
@@ -101,7 +109,13 @@ import { BeastMode } from '@beast-mode/core';
 const beastMode = new BeastMode({
   oracle: { enabled: true },
   codeRoach: { enabled: true },
-  daisyChain: { enabled: true }
+  daisyChain: { enabled: true },
+  janitor: {
+    enabled: true,
+    silentRefactoring: true,
+    architectureEnforcement: true,
+    overnightMode: true
+  }
 });
 
 await beastMode.initialize();
@@ -109,6 +123,11 @@ await beastMode.initialize();
 // Analyze code quality
 const quality = await beastMode.getQualityScore();
 console.log(`Quality Score: ${quality.overall}/100`);
+
+// Day 2 Operations - The AI Janitor
+const janitorStatus = await beastMode.janitor.getStatus();
+console.log(`Issues Fixed: ${janitorStatus.issuesFixed}`);
+console.log(`PRs Created: ${janitorStatus.prsCreated}`);
 
 // Deploy your application
 await beastMode.deployApplication({
