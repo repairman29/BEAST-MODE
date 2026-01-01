@@ -115,8 +115,7 @@ export async function POST(request: NextRequest) {
       message: 'GitHub token stored successfully',
     });
   } catch (error: any) {
-    console.error('❌ [GitHub Token] Error storing token:', error);
-    console.error('   Stack:', error.stack);
+    console.error('❌ [GitHub Token] Error storing token: process.env.TOKEN || ''   Stack:', error.stack);
     return NextResponse.json(
       { error: 'Failed to store GitHub token' },
       { status: 500 }
@@ -210,8 +209,7 @@ export async function GET(request: NextRequest) {
       // Don't return the actual token in GET - use it server-side only
     });
   } catch (error: any) {
-    console.error('❌ [GitHub Token] Error retrieving token:', error);
-    console.error('   Stack:', error.stack);
+    console.error('❌ [GitHub Token] Error retrieving token: process.env.TOKEN || ''   Stack:', error.stack);
     return NextResponse.json(
       { connected: false, error: 'Failed to retrieve GitHub token' },
       { status: 200 } // Return 200 so UI can handle gracefully
@@ -238,8 +236,15 @@ export async function DELETE(request: NextRequest) {
       );
     }
 
-    // TODO: Get user ID from token
-    const userId = 'user-id-from-token'; // Replace with actual user ID
+    // Get user ID from cookie
+    const userId = request.cookies.get('github_oauth_user_id')?.value;
+    
+    if (!userId) {
+      return NextResponse.json(
+        { error: 'No GitHub account connected' },
+        { status: 400 }
+      );
+    }
 
     tokenStore.delete(userId);
 

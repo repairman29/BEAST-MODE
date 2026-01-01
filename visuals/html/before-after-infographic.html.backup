@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEAST MODE - Before/After Transformation (High-End Diff View)</title>
+    <link rel="stylesheet" href="../css/infographic-style.css">
+    <style>
+        .diff-view {
+            background: #1e1e1e;
+            min-height: 100vh;
+            font-family: 'JetBrains Mono', 'Fira Code', monospace;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+            position: relative;
+        }
+
+        .diff-side {
+            padding: 2rem;
+            position: relative;
+            overflow-y: auto;
+        }
+
+        .diff-before {
+            background: #1a1a1a;
+            border-right: 3px solid #EF4444;
+        }
+
+        .diff-before::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(239, 68, 68, 0.08) 0px,
+                transparent 2px,
+                transparent 4px
+            );
+            pointer-events: none;
+            animation: glitch 0.3s infinite;
+        }
+
+        .diff-after {
+            background: #1a1a1a;
+            border-left: 3px solid #10B981;
+        }
+
+        .diff-header {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid;
+        }
+
+        .diff-before .diff-header {
+            color: #EF4444;
+            border-bottom-color: #EF4444;
+        }
+
+        .diff-after .diff-header {
+            color: #10B981;
+            border-bottom-color: #10B981;
+        }
+
+        .code-line {
+            padding: 0.75rem;
+            margin: 0.3rem 0;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            position: relative;
+            padding-left: 3rem;
+        }
+
+        .line-number {
+            position: absolute;
+            left: 0.5rem;
+            color: #6B7280;
+            font-size: 0.85rem;
+            width: 2rem;
+            text-align: right;
+        }
+
+        .line-error {
+            background: rgba(239, 68, 68, 0.15);
+            border-left: 4px solid #EF4444;
+            color: #fca5a5;
+            box-shadow: 0 0 10px rgba(239, 68, 68, 0.2);
+        }
+
+        .line-success {
+            background: rgba(16, 185, 129, 0.15);
+            border-left: 4px solid #10B981;
+            color: #86efac;
+            box-shadow: 0 0 10px rgba(16, 185, 129, 0.2);
+        }
+
+        .line-normal {
+            color: #d1d5db;
+        }
+
+        .line-comment {
+            color: #6B7280;
+            font-style: italic;
+        }
+
+        .verified-badge {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            background: linear-gradient(135deg, #10B981, #059669);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            font-weight: bold;
+            box-shadow: 0 0 30px #10B981;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .bridge-arrow {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #9333EA, #06B6D4);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            z-index: 10;
+            box-shadow: 0 0 40px rgba(147, 51, 234, 0.6);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .bridge-arrow::before {
+            content: '→';
+            color: white;
+        }
+
+        .summary-box {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+        }
+
+        .diff-before .summary-box {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid #EF4444;
+            color: #fca5a5;
+        }
+
+        .diff-after .summary-box {
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid #10B981;
+            color: #86efac;
+        }
+
+        @keyframes glitch {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-2px); }
+            75% { transform: translateX(2px); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); }
+            50% { transform: translate(-50%, -50%) scale(1.1); }
+        }
+    </style>
+</head>
+<body>
+    <div class="diff-view">
+        <div class="diff-side diff-before">
+            <div class="diff-header">BEFORE: AI-Generated Code (Chaos)</div>
+            
+            <div class="code-line line-error">
+                <span class="line-number">1</span>
+                <span class="line-comment">// BEFORE: Chaotic code</span>
+            </div>
+            <div class="code-line line-error">
+                <span class="line-number">2</span>
+                <span>const apiKey = <span style="color: #EF4444;">"sk-1234567890"</span>;</span> <span class="line-comment">// ❌ Hardcoded secret</span>
+            </div>
+            <div class="code-line line-error">
+                <span class="line-number">3</span>
+                <span>const db = new Database();</span>
+            </div>
+            <div class="code-line line-error">
+                <span class="line-number">4</span>
+                <span>db.query(<span style="color: #EF4444;">"SELECT * FROM users..."</span>);</span> <span class="line-comment">// ❌ DB in FE</span>
+            </div>
+            <div class="code-line line-error">
+                <span class="line-number">5</span>
+                <span class="line-comment">// SECURITY: // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// // SECURITY: eval() disabled
+// eval() disabled</span>
+            </div>
+            <div class="code-line line-error">
+                <span class="line-number">6</span>
+                <span class="line-comment">// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// // SECURITY: eval() disabled
+// eval(userInput);</span> <span class="line-comment">// ❌ Security risk</span>
+            </div>
+            <div class="code-line line-error">
+                <span class="line-number">7</span>
+                <span>return { success: true };</span>
+            </div>
+            <div class="code-line line-error">
+                <span class="line-number">8</span>
+                <span>}</span>
+            </div>
+            <div class="code-line line-error">
+                <span class="line-number">9</span>
+                <span></span>
+            </div>
+            <div class="code-line line-error">
+                <span class="line-number">10</span>
+                <span>function login(user, pass) {</span> <span class="line-comment">// ❌ Duplicate</span>
+            </div>
+            <div class="code-line line-error">
+                <span class="line-number">11</span>
+                <span class="line-comment">  // Same code repeated...</span>
+            </div>
+            <div class="code-line line-error">
+                <span class="line-number">12</span>
+                <span>}</span>
+            </div>
+            <div class="code-line line-error">
+                <span class="line-number">13</span>
+                <span></span>
+            </div>
+            <div class="code-line line-error">
+                <span class="line-number">14</span>
+                <span>const unusedVar = <span style="color: #EF4444;">"never used"</span>;</span> <span class="line-comment">// ❌ Dead code</span>
+            </div>
+
+            <div class="summary-box">
+                <strong>ISSUES DETECTED:</strong><br>
+                • Hardcoded secrets<br>
+                • Database logic in frontend<br>
+                • Security vulnerabilities<br>
+                • Duplicate code<br>
+                • Unused variables
+            </div>
+        </div>
+
+        <div class="bridge-arrow"></div>
+
+        <div class="diff-side diff-after">
+            <div class="verified-badge">
+                ✓ VERIFIED
+            </div>
+            
+            <div class="diff-header">AFTER: Production-Ready Code (Clean)</div>
+            
+            <div class="code-line line-success">
+                <span class="line-number">1</span>
+                <span class="line-comment">// ✅ Secret moved to environment variable</span>
+            </div>
+            <div class="code-line line-success">
+                <span class="line-number">2</span>
+                <span>const apiKey = <span style="color: #10B981;">process.env.API_KEY</span> || '';</span>
+            </div>
+            <div class="code-line line-success">
+                <span class="line-number">3</span>
+                <span></span>
+            </div>
+            <div class="code-line line-success">
+                <span class="line-number">4</span>
+                <span class="line-comment">// ✅ Database logic moved to API route</span>
+            </div>
+            <div class="code-line line-success">
+                <span class="line-number">5</span>
+                <span class="line-comment">// Frontend calls: /api/auth/login</span>
+            </div>
+            <div class="code-line line-success">
+                <span class="line-number">6</span>
+                <span></span>
+            </div>
+            <div class="code-line line-success">
+                <span class="line-number">7</span>
+                <span class="line-comment">// ✅ Security risk removed</span>
+            </div>
+            <div class="code-line line-success">
+                <span class="line-number">8</span>
+                <span class="line-comment">// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// // SECURITY: eval() disabled
+// eval() usage removed - using safe parsing instead</span>
+            </div>
+            <div class="code-line line-success">
+                <span class="line-number">9</span>
+                <span></span>
+            </div>
+            <div class="code-line line-success">
+                <span class="line-number">10</span>
+                <span class="line-comment">// ✅ Duplicate code removed</span>
+            </div>
+            <div class="code-line line-success">
+                <span class="line-number">11</span>
+                <span class="line-comment">// Single login function, reused across app</span>
+            </div>
+            <div class="code-line line-success">
+                <span class="line-number">12</span>
+                <span></span>
+            </div>
+            <div class="code-line line-success">
+                <span class="line-number">13</span>
+                <span class="line-comment">// ✅ Unused code removed</span>
+            </div>
+            <div class="code-line line-success">
+                <span class="line-number">14</span>
+                <span class="line-comment">// Dead code eliminated</span>
+            </div>
+
+            <div class="summary-box">
+                <strong>PR CREATED:</strong><br>
+                "Fixed 23 issues, de-duplicated 5 functions,<br>
+                closed 3 security holes"<br>
+                <br>
+                <strong style="color: #10B981;">✅ Production Ready</strong>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+

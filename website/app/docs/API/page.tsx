@@ -213,6 +213,108 @@ Response:
             </div>
           </section>
 
+          {/* Health & Monitoring API */}
+          <section className="bg-slate-900/50 border border-slate-800 rounded-lg p-6">
+            <h2 className="text-2xl font-bold text-cyan-400 mb-4">Health & Monitoring API</h2>
+            <div className="space-y-4">
+              <div>
+                <h3 className="text-xl font-semibold text-slate-300 mb-2">GET /api/beast-mode/health</h3>
+                <p className="text-slate-300 mb-2">Get health status of all system components</p>
+                <pre className="bg-slate-900 p-4 rounded-lg overflow-x-auto">
+                  <code className="text-cyan-400">
+{`GET /api/beast-mode/health
+Authorization: Bearer <token>
+
+Response:
+{
+  "isMonitoring": true,
+  "lastCheck": "2024-01-01T00:00:00Z",
+  "components": {
+    "oracle": "operational",
+    "daisy-chain": "operational"
+  },
+  "alerts": []
+}`}
+                  </code>
+                </pre>
+              </div>
+              <div>
+                <h3 className="text-xl font-semibold text-slate-300 mb-2">POST /api/beast-mode/heal</h3>
+                <p className="text-slate-300 mb-2">Trigger self-healing for failed components</p>
+                <pre className="bg-slate-900 p-4 rounded-lg overflow-x-auto">
+                  <code className="text-cyan-400">
+{`POST /api/beast-mode/heal
+Authorization: Bearer <token>
+Content-Type: application/json
+
+{
+  "component": "oracle"
+}
+
+Response:
+{
+  "message": "Self-healing triggered",
+  "results": {...}
+}`}
+                  </code>
+                </pre>
+              </div>
+            </div>
+          </section>
+
+          {/* Collaboration API */}
+          <section className="bg-slate-900/50 border border-slate-800 rounded-lg p-6">
+            <h2 className="text-2xl font-bold text-cyan-400 mb-4">Collaboration API</h2>
+            <div className="space-y-4">
+              <div>
+                <h3 className="text-xl font-semibold text-slate-300 mb-2">GET /api/beast-mode/collaboration/dashboard</h3>
+                <p className="text-slate-300 mb-2">Get collaboration dashboard data</p>
+              </div>
+              <div>
+                <h3 className="text-xl font-semibold text-slate-300 mb-2">POST /api/beast-mode/collaboration/workspace</h3>
+                <p className="text-slate-300 mb-2">Create or update a collaboration workspace</p>
+              </div>
+            </div>
+          </section>
+
+          {/* Missions API */}
+          <section className="bg-slate-900/50 border border-slate-800 rounded-lg p-6">
+            <h2 className="text-2xl font-bold text-cyan-400 mb-4">Missions API</h2>
+            <div className="space-y-4">
+              <div>
+                <h3 className="text-xl font-semibold text-slate-300 mb-2">GET /api/beast-mode/missions</h3>
+                <p className="text-slate-300 mb-2">Get list of missions</p>
+              </div>
+              <div>
+                <h3 className="text-xl font-semibold text-slate-300 mb-2">POST /api/beast-mode/missions</h3>
+                <p className="text-slate-300 mb-2">Create a new mission</p>
+              </div>
+              <div>
+                <h3 className="text-xl font-semibold text-slate-300 mb-2">POST /api/beast-mode/missions/recommendations</h3>
+                <p className="text-slate-300 mb-2">Get AI-powered mission recommendations</p>
+              </div>
+            </div>
+          </section>
+
+          {/* ML & Intelligence API */}
+          <section className="bg-slate-900/50 border border-slate-800 rounded-lg p-6">
+            <h2 className="text-2xl font-bold text-cyan-400 mb-4">ML & Intelligence API</h2>
+            <div className="space-y-4">
+              <div>
+                <h3 className="text-xl font-semibold text-slate-300 mb-2">POST /api/ml/predict</h3>
+                <p className="text-slate-300 mb-2">Get ML predictions for code quality</p>
+              </div>
+              <div>
+                <h3 className="text-xl font-semibold text-slate-300 mb-2">GET /api/ml/monitoring</h3>
+                <p className="text-slate-300 mb-2">Monitor ML model performance</p>
+              </div>
+              <div>
+                <h3 className="text-xl font-semibold text-slate-300 mb-2">GET /api/ml/performance</h3>
+                <p className="text-slate-300 mb-2">Get ML performance metrics</p>
+              </div>
+            </div>
+          </section>
+
           {/* Base URL */}
           <section className="bg-gradient-to-r from-cyan-500/10 to-purple-500/10 border border-cyan-500/20 rounded-lg p-6">
             <h2 className="text-2xl font-bold text-cyan-400 mb-4">Base URL</h2>
