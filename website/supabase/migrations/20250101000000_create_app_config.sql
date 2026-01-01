@@ -15,6 +15,7 @@ CREATE INDEX IF NOT EXISTS idx_app_config_key ON app_config(key);
 ALTER TABLE app_config ENABLE ROW LEVEL SECURITY;
 
 -- Policy: Only service role can read/write (server-side only)
+DROP POLICY IF EXISTS "Service role only" ON app_config;
 CREATE POLICY "Service role only" ON app_config
   FOR ALL
   USING (auth.role() = 'service_role')
