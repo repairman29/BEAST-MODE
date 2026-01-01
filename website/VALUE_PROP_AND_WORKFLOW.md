@@ -166,16 +166,18 @@
 > **"Scan your code. Get instant feedback. Fix issues automatically. Ask questions. Install tools. All in one place."**
 
 ### **Value Points:**
-1. **⚡ Instant Feedback** - "See your code quality score in 10 seconds"
-2. **🧠 AI Answers** - "Ask questions, get answers based on YOUR code"
-3. **✨ Auto-Fix** - "One click fixes common issues automatically"
-4. **📦 Smart Tools** - "We find the tools you need, you click install"
-5. **📈 Track Progress** - "Watch your code quality improve over time"
+1. **⚡ Instant Feedback** - "See your code quality score in 10 seconds" (provable)
+2. **🧠 AI Answers** - "Ask questions, get answers based on YOUR code" (provable)
+3. **✨ Auto-Fix** - "One click fixes common issues automatically" (provable)
+4. **📦 Smart Tools** - "We find the tools you need, you click install" (provable)
+5. **📈 Track Progress** - "Watch your code quality improve over time" (provable)
 
-### **Social Proof:**
-- "Used by 10,000+ developers"
-- "Average quality score improvement: +25 points in first month"
-- "Saves developers 10+ hours per week"
+### **What We Can Prove:**
+- Quality scores calculated instantly (you can verify)
+- AI analysis of YOUR code (system analyzes actual codebase)
+- Automated fixes applied (you can see the changes)
+- Tool recommendations (marketplace AI exists)
+- Historical tracking (system stores data)
 
 ---
 
@@ -287,12 +289,14 @@
 
 ## 🎯 THE SUCCESS METRICS
 
-### **For New Developers:**
-- **Week 1:** Quality score improves by 10+ points
-- **Week 2:** They've asked 5+ questions, got helpful answers
-- **Week 3:** They've applied 10+ fixes automatically
-- **Week 4:** They've installed 3+ recommended plugins
-- **Month 1:** Quality score improved by 25+ points
+### **What New Developers Can Do:**
+- **Week 1:** Get quality score, see issues, ask first question
+- **Week 2:** Apply first automated fix, install first plugin
+- **Week 3:** Track quality score changes, use AI recommendations
+- **Week 4:** See historical trends, use multiple features
+- **Month 1:** Have full understanding of system capabilities
+
+**Note:** Quality score improvements depend on the user's codebase and how they use the system. We track what the system does, not specific improvement guarantees.
 
 ### **For BEAST MODE:**
 - **Activation:** 80% of users scan a repo in first session

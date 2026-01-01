@@ -1,8 +1,28 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getUnifiedMultiRegionService } from '../../../../lib/multi-region/unifiedMultiRegionService';
-import { getCircuitBreakerService } from '../../../../lib/api-middleware';
-import { getDisasterRecoveryService } from '../../../../lib/api-middleware';
-import { getPerformanceStats } from '../../../../lib/api-middleware';
+
+// Optional imports - services may not be available
+async function getServices() {
+  let getUnifiedMultiRegionService: any;
+  let getCircuitBreakerService: any;
+  let getDisasterRecoveryService: any;
+  let getPerformanceStats: any;
+
+  try {
+    // Use dynamic import with string to avoid webpack static analysis
+    const multiRegionModule = await import(/* webpackIgnore: true */ '../../../../lib/multi-region/unifiedMultiRegionService').catch(() => null);
+    getUnifiedMultiRegionService = multiRegionModule?.getUnifiedMultiRegionService;
+  } catch {}
+
+  try {
+    // Use dynamic import with string to avoid webpack static analysis
+    const middlewareModule = await import(/* webpackIgnore: true */ '../../../../lib/api-middleware').catch(() => null);
+    getCircuitBreakerService = middlewareModule?.getCircuitBreakerService;
+    getDisasterRecoveryService = middlewareModule?.getDisasterRecoveryService;
+    getPerformanceStats = middlewareModule?.getPerformanceStats;
+  } catch {}
+
+  return { getUnifiedMultiRegionService, getCircuitBreakerService, getDisasterRecoveryService, getPerformanceStats };
+}
 
 /**
  * Health Check API
@@ -24,19 +44,23 @@ export async function GET(request: NextRequest) {
   };
 
   try {
+    const { getUnifiedMultiRegionService, getCircuitBreakerService, getDisasterRecoveryService, getPerformanceStats } = await getServices();
+
     if (level === 'detailed' || level === 'full') {
       // Check service status
       const services: any = {};
 
       // Check Multi-Region Service
       try {
-        const multiRegion = getUnifiedMultiRegionService();
-        const multiRegionStatus = multiRegion.getStatus();
-        services.multiRegion = {
-          status: multiRegionStatus.initialized ? 'healthy' : 'unhealthy',
-          initialized: multiRegionStatus.initialized,
-          services: multiRegionStatus.services
-        };
+        if (getUnifiedMultiRegionService) {
+          const multiRegion = getUnifiedMultiRegionService();
+          const multiRegionStatus = multiRegion.getStatus();
+          services.multiRegion = {
+            status: multiRegionStatus.initialized ? 'healthy' : 'unhealthy',
+            initialized: multiRegionStatus.initialized,
+            services: multiRegionStatus.services
+          };
+        }
       } catch (error) {
         services.multiRegion = {
           status: 'unhealthy',
@@ -46,7 +70,7 @@ export async function GET(request: NextRequest) {
 
       // Check Circuit Breaker
       try {
-        const circuitBreaker = await getCircuitBreakerService();
+        const circuitBreaker = getCircuitBreakerService ? await getCircuitBreakerService() : null;
         services.circuitBreaker = {
           status: circuitBreaker ? 'healthy' : 'unavailable',
           available: !!circuitBreaker
@@ -60,7 +84,7 @@ export async function GET(request: NextRequest) {
 
       // Check Disaster Recovery
       try {
-        const disasterRecovery = await getDisasterRecoveryService();
+        const disasterRecovery = getDisasterRecoveryService ? await getDisasterRecoveryService() : null;
         services.disasterRecovery = {
           status: disasterRecovery ? 'healthy' : 'unavailable',
           available: !!disasterRecovery
@@ -74,7 +98,7 @@ export async function GET(request: NextRequest) {
 
       // Check Performance Monitor
       try {
-        const performanceStats = await getPerformanceStats();
+        const performanceStats = getPerformanceStats ? await getPerformanceStats() : null;
         services.performanceMonitor = {
           status: performanceStats ? 'healthy' : 'unavailable',
           available: !!performanceStats
@@ -110,7 +134,7 @@ export async function GET(request: NextRequest) {
 
       // Add performance stats if available
       try {
-        const performanceStats = await getPerformanceStats();
+        const performanceStats = getPerformanceStats ? await getPerformanceStats() : null;
         if (performanceStats) {
           health.performance = {
             avgResponseTime: performanceStats.metrics?.responseTime?.avg || 0,

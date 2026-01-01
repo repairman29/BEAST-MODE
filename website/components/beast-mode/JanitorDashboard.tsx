@@ -712,7 +712,8 @@ export default function JanitorDashboard() {
           </div>
         </div>
       )}
-    </div>
+      </div>
+    </JanitorErrorBoundary>
   );
 }
 
