@@ -11,12 +11,13 @@ import { NextRequest, NextResponse } from 'next/server';
 // Optional import - will be loaded dynamically
 async function getMultiRegionService() {
   try {
-    const service = await import('../../../../lib/multi-region/unifiedMultiRegionService').catch(() => null);
-    if (service) {
-      return service.getUnifiedMultiRegionService();
+    // Use dynamic import with catch to prevent build-time evaluation
+    const serviceModule = await import('../../../../lib/multi-region/unifiedMultiRegionService').catch(() => null);
+    if (serviceModule && serviceModule.getUnifiedMultiRegionService) {
+      return serviceModule.getUnifiedMultiRegionService();
     }
   } catch (error) {
-    // Service not available
+    // Service not available - this is expected in some deployments
   }
   return null;
 }
@@ -39,7 +40,7 @@ export async function GET(request: NextRequest) {
     const regionId = searchParams.get('regionId');
 
     if (operation === 'status' && regionId) {
-      const status = await multiRegionService.getRegionStatus(regionId);
+      const status = await service.getRegionStatus(regionId);
       return NextResponse.json({
         status: 'ok',
         data: status,
