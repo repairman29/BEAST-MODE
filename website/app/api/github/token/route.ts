@@ -218,24 +218,7 @@ export async function GET(request: NextRequest) {
   }
 }
 
-/**
- * Get decrypted token (server-side only)
- * Exported for use in other server-side routes
- */
-export async function getDecryptedToken(userId: string): Promise<string | null> {
-  try {
-    const stored = tokenStore.get(userId);
-    if (!stored) {
-      console.log('   No token found for userId:', userId);
-      return null;
-    }
-    console.log('   Decrypting token for userId:', userId);
-    return decrypt(stored.encryptedToken);
-  } catch (error) {
-    console.error('❌ [GitHub Token] Error decrypting token:', error);
-    return null;
-  }
-}
+// getDecryptedToken moved to lib/github-token.ts to avoid Next.js route export restrictions
 
 /**
  * DELETE /api/github/token - Disconnect GitHub account
