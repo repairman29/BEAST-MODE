@@ -16,7 +16,15 @@ export async function GET(request: NextRequest) {
     const format = searchParams.get('format') || 'csv';
     const type = searchParams.get('type') || 'performance';
 
-    // Get performance stats
+    // Performance monitor not available
+    if (!getPerformanceStats) {
+      return NextResponse.json({
+        status: 'unavailable',
+        message: 'Performance monitor not available',
+        timestamp: new Date().toISOString()
+      });
+    }
+
     const stats = await getPerformanceStats();
     
     if (!stats) {
@@ -33,12 +41,13 @@ export async function GET(request: NextRequest) {
     if (type === 'performance') {
       // Export performance metrics
       for (const [metricName, metricData] of Object.entries(stats.metrics)) {
+        const data = metricData as any;
         exportData.push({
           metric: metricName,
-          count: (metricData as any)?.count || 0,
-          avg: metricData.avg,
-          min: metricData.min,
-          max: metricData.max,
+          count: data?.count || 0,
+          avg: data?.avg || 0,
+          min: data?.min || 0,
+          max: data?.max || 0,
           timestamp: new Date().toISOString()
         });
       }
@@ -47,7 +56,15 @@ export async function GET(request: NextRequest) {
       exportData = stats.alerts.active || [];
     }
 
-    // Export for BI
+    // BI export not available
+    if (!exportForBI) {
+      return NextResponse.json({
+        status: 'unavailable',
+        message: 'BI integration not available',
+        timestamp: new Date().toISOString()
+      });
+    }
+
     const exported = await exportForBI(exportData, format);
 
     if (!exported) {
