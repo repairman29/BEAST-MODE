@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { withProductionIntegration } from '../../../../lib/api-middleware';
 
 /**
  * Integration Marketplace API
@@ -93,13 +92,36 @@ async function handler(req: NextRequest) {
   }
 }
 
+let withProductionIntegration: any = null;
+try {
+  /* webpackIgnore: true */
+  const middleware = require(`../../../../lib/api-middleware`);
+  withProductionIntegration = middleware.withProductionIntegration;
+} catch (error) {
+  // Middleware not available
+}
+
 export async function GET(req: NextRequest) {
-  const wrappedHandler = await withProductionIntegration(handler);
-  return wrappedHandler(req);
+  if (withProductionIntegration) {
+    try {
+      const wrappedHandler = withProductionIntegration(handler);
+      return wrappedHandler(req);
+    } catch (error) {
+      // Fall through to direct handler
+    }
+  }
+  return handler(req);
 }
 
 export async function POST(req: NextRequest) {
-  const wrappedHandler = await withProductionIntegration(handler);
-  return wrappedHandler(req);
+  if (withProductionIntegration) {
+    try {
+      const wrappedHandler = withProductionIntegration(handler);
+      return wrappedHandler(req);
+    } catch (error) {
+      // Fall through to direct handler
+    }
+  }
+  return handler(req);
 }
 
