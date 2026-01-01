@@ -8,16 +8,9 @@ import { NextRequest, NextResponse } from 'next/server';
  * Phase 2, Week 1: Enterprise Unification
  */
 
-// Optional import - will be loaded dynamically
+// Optional import - service not available in build
 async function getEnterpriseService() {
-  try {
-    const service = await import('../../../../lib/enterprise/unifiedEnterpriseService').catch(() => null);
-    if (service) {
-      return service.getUnifiedEnterpriseService();
-    }
-  } catch (error) {
-    // Service not available
-  }
+  // Service module not available - return unavailable status
   return null;
 }
 

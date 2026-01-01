@@ -21,16 +21,15 @@ export async function POST(request: NextRequest) {
       try {
         const tokenData = await getDecryptedToken(oauthUserId);
         if (tokenData) {
-      try {
-        const { createOctokit } = await import('../../../../lib/github');
-        const octokit = createOctokit(tokenData);
-        const { data: user } = await octokit.users.getAuthenticated();
-        githubUsername = user.login;
-        githubUserId = user.id;
-      } catch (importError) {
-        console.warn('GitHub lib not available:', importError);
-        githubUsername = oauthUserId;
-      }
+          try {
+            const { createOctokit } = await import('../../../../lib/github');
+            const octokit = createOctokit(tokenData);
+            const { data: user } = await octokit.users.getAuthenticated();
+            githubUsername = user.login;
+            githubUserId = user.id;
+          } catch (importError) {
+            console.warn('GitHub lib not available:', importError);
+          }
         }
       } catch (error) {
         console.error('Failed to get GitHub user info:', error);
@@ -68,21 +67,25 @@ export async function POST(request: NextRequest) {
         const dbWriter = getDatabaseWriter();
         
         await dbWriter.writePrediction({
-        serviceName: 'unified-analytics',
-        predictionType: 'session_event',
-        predictedValue: 1,
-        actualValue: 1,
-        confidence: 1.0,
-        context: {
-          sessionType: 'cursor',
-          event: enriched.event,
-          githubUsername: enriched.githubUsername,
-          githubUserId: enriched.githubUserId,
-          metadata: enriched.metadata,
-        },
-        modelVersion: '1.0.0',
-        source: 'cursor_tracking'
-      });
+          serviceName: 'unified-analytics',
+          predictionType: 'session_event',
+          predictedValue: 1,
+          actualValue: 1,
+          confidence: 1.0,
+          context: {
+            sessionType: 'cursor',
+            event: enriched.event,
+            githubUsername: enriched.githubUsername,
+            githubUserId: enriched.githubUserId,
+            metadata: enriched.metadata,
+          },
+          modelVersion: '1.0.0',
+          source: 'cursor_tracking'
+        });
+      } catch (importError) {
+        // DatabaseWriter not available - log but don't fail
+        console.debug('DatabaseWriter not available:', importError.message);
+      }
     } catch (dbError) {
       console.error('Failed to write Cursor session:', dbError);
     }
