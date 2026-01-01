@@ -31,14 +31,6 @@ export async function POST(request: NextRequest) {
       message: 'Database optimizer not available',
       timestamp: new Date().toISOString()
     });
-
-    return NextResponse.json({
-      status: 'ok',
-      original: query,
-      optimized: optimized.query,
-      analysis: optimized.analysis,
-      timestamp: new Date().toISOString()
-    });
   } catch (error) {
     return NextResponse.json(
       {
@@ -57,13 +49,6 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({
       status: 'unavailable',
       message: 'Database optimizer not available',
-      timestamp: new Date().toISOString()
-    });
-
-    return NextResponse.json({
-      status: 'ok',
-      statistics: stats,
-      recommendations,
       timestamp: new Date().toISOString()
     });
   } catch (error) {
