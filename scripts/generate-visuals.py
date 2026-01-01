@@ -185,28 +185,9 @@ async def generate_all_visuals():
                 else:
                     results["skipped"].append(f"{html_file} (file not found)")
         
-        # 2. Mermaid diagrams
-        print("\n📊 Generating Mermaid diagrams...\n")
-        
-        mermaid_files = {
-            "architecture.mmd": "governance-layer-architecture.png",
-            "overnight-cycle.mmd": "overnight-refactoring-cycle.png",
-            "vibe-ops.mmd": "english-as-source-code-workflow.png",
-            "three-walls.mmd": "three-walls-solution-map.png",
-            "market-positioning.mmd": "market-positioning-map.png"
-        }
-        
-        for mmd_file, output_name in mermaid_files.items():
-            mermaid_path = VISUALS_DIR / "mermaid" / mmd_file
-            output_path = ASSETS_DIR / output_name
-            
-            if mermaid_path.exists():
-                if await generate_mermaid_diagram(page, mermaid_path, output_path):
-                    results["success"].append(output_name.replace(".png", "").replace("-", " ").title())
-                else:
-                    results["failed"].append(output_name.replace(".png", "").replace("-", " ").title())
-            else:
-                results["skipped"].append(f"{mmd_file} (file not found)")
+        # 2. Mermaid diagrams (only if infographic versions don't exist)
+        # Skip Mermaid generation - using infographic HTML versions instead
+        print("\n📊 Mermaid diagrams skipped - using infographic HTML versions\n")
         
         await browser.close()
     
