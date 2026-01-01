@@ -11,6 +11,10 @@ import ArchitectureRulesView from './ArchitectureRulesView';
 import RepoMemoryGraph from './RepoMemoryGraph';
 import VibeRestorationHistory from './VibeRestorationHistory';
 import InvisibleCICDLogs from './InvisibleCICDLogs';
+import JanitorActivityFeed from './JanitorActivityFeed';
+import JanitorMetricsChart from './JanitorMetricsChart';
+import JanitorNotifications from './JanitorNotifications';
+import JanitorOnboarding from './JanitorOnboarding';
 
 interface JanitorStatus {
   enabled: boolean;
@@ -59,6 +63,7 @@ export default function JanitorDashboard() {
   const [showGraph, setShowGraph] = useState(false);
   const [showRestorationHistory, setShowRestorationHistory] = useState(false);
   const [showCICDLogs, setShowCICDLogs] = useState(false);
+  const [showOnboarding, setShowOnboarding] = useState(false);
 
   useEffect(() => {
     loadJanitorStatus();
@@ -183,6 +188,11 @@ export default function JanitorDashboard() {
             </Button>
           </div>
         </div>
+      </div>
+
+      {/* Notifications */}
+      <div className="mb-6">
+        <JanitorNotifications />
       </div>
 
       {/* Quick Stats */}
