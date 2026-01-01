@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getDisasterRecoveryService } from '../../../lib/api-middleware';
+import { getDisasterRecoveryService } from '../../../../lib/api-middleware';
 
 /**
  * Disaster Recovery API
@@ -28,6 +28,7 @@ export async function GET(request: NextRequest) {
     if (operation === 'status') {
       // ARCHITECTURE: Moved to API route
 // // ARCHITECTURE: Moved to API route
+// // ARCHITECTURE: Moved to API route
 // const strategies = recovery.backupStrategies ? Array.from(recovery.backupStrategies.entries()) : [];
       const history = recovery.backupHistory ? recovery.backupHistory.slice(-10) : [];
       return NextResponse.json({
@@ -40,6 +41,7 @@ export async function GET(request: NextRequest) {
 
     if (operation === 'procedures') {
       // ARCHITECTURE: Moved to API route
+// // ARCHITECTURE: Moved to API route
 // // ARCHITECTURE: Moved to API route
 // const procedures = recovery.recoveryProcedures ? Array.from(recovery.recoveryProcedures.entries()) : [];
       return NextResponse.json({

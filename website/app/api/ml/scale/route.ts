@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { checkScalingNeeds, getAdvancedScalerService } from '../../../lib/api-middleware';
+import { checkScalingNeeds, getAdvancedScalerService } from '../../../../lib/api-middleware';
 
 /**
  * Scaling API
