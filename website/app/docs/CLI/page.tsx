@@ -194,6 +194,42 @@ Options:
             </div>
           </section>
 
+          {/* Configuration */}
+          <section className="bg-slate-900/50 border border-slate-800 rounded-lg p-6">
+            <h2 className="text-2xl font-bold text-cyan-400 mb-4">Configuration</h2>
+            <div className="space-y-4">
+              <div>
+                <h3 className="text-xl font-semibold text-slate-300 mb-2">Config File Location</h3>
+                <p className="text-slate-300 mb-2">BEAST MODE stores configuration in:</p>
+                <pre className="bg-slate-900 p-4 rounded-lg overflow-x-auto">
+                  <code className="text-cyan-400">
+{`~/.beast-mode/config.json
+
+Example config:
+{
+  "github": {
+    "username": "your-username",
+    "token": "encrypted-token"
+  },
+  "defaults": {
+    "scanType": "quick",
+    "format": "table"
+  }
+}`}
+                  </code>
+                </pre>
+              </div>
+              <div>
+                <h3 className="text-xl font-semibold text-slate-300 mb-2">Environment Variables</h3>
+                <div className="space-y-2 text-slate-300">
+                  <p><code className="bg-slate-900 px-2 py-1 rounded text-cyan-400">BEAST_MODE_API_URL</code> - API endpoint URL</p>
+                  <p><code className="bg-slate-900 px-2 py-1 rounded text-cyan-400">BEAST_MODE_TOKEN</code> - Authentication token</p>
+                  <p><code className="bg-slate-900 px-2 py-1 rounded text-cyan-400">BEAST_MODE_DEBUG</code> - Enable debug mode</p>
+                </div>
+              </div>
+            </div>
+          </section>
+
           {/* Options */}
           <section className="bg-slate-900/50 border border-slate-800 rounded-lg p-6">
             <h2 className="text-2xl font-bold text-cyan-400 mb-4">Global Options</h2>
@@ -226,22 +262,51 @@ Options:
                 <pre className="bg-slate-900 p-4 rounded-lg overflow-x-auto">
                   <code className="text-cyan-400">beast-mode scan facebook/react</code>
                 </pre>
+                <p className="text-slate-400 text-sm mt-2">Output: Quality score, issues found, recommendations</p>
               </div>
               <div>
-                <p className="text-slate-300 mb-2">Scan with JSON output:</p>
+                <p className="text-slate-300 mb-2">Advanced scan with JSON output:</p>
                 <pre className="bg-slate-900 p-4 rounded-lg overflow-x-auto">
-                  <code className="text-cyan-400">beast-mode scan owner/repo --format json</code>
+                  <code className="text-cyan-400">beast-mode scan owner/repo --advanced --format json --output results.json</code>
                 </pre>
+                <p className="text-slate-400 text-sm mt-2">Saves comprehensive analysis to results.json</p>
               </div>
               <div>
                 <p className="text-slate-300 mb-2">Install and run a plugin:</p>
                 <pre className="bg-slate-900 p-4 rounded-lg overflow-x-auto">
                   <code className="text-cyan-400">
 {`beast-mode plugins install eslint-pro
-beast-mode plugins run eslint-pro`}
+beast-mode plugins run eslint-pro --target ./src`}
                   </code>
                 </pre>
+                <p className="text-slate-400 text-sm mt-2">Installs plugin and runs it on ./src directory</p>
               </div>
+              <div>
+                <p className="text-slate-300 mb-2">Check login status:</p>
+                <pre className="bg-slate-900 p-4 rounded-lg overflow-x-auto">
+                  <code className="text-cyan-400">beast-mode status</code>
+                </pre>
+                <p className="text-slate-400 text-sm mt-2">Shows: Logged in as @username, API connected</p>
+              </div>
+              <div>
+                <p className="text-slate-300 mb-2">Quick scan with quiet mode:</p>
+                <pre className="bg-slate-900 p-4 rounded-lg overflow-x-auto">
+                  <code className="text-cyan-400">beast-mode scan owner/repo --quiet</code>
+                </pre>
+                <p className="text-slate-400 text-sm mt-2">Minimal output, just the score</p>
+              </div>
+            </div>
+          </section>
+
+          {/* Exit Codes */}
+          <section className="bg-slate-900/50 border border-slate-800 rounded-lg p-6">
+            <h2 className="text-2xl font-bold text-cyan-400 mb-4">Exit Codes</h2>
+            <div className="space-y-2 text-slate-300">
+              <p><code className="bg-slate-900 px-2 py-1 rounded text-cyan-400">0</code> - Success</p>
+              <p><code className="bg-slate-900 px-2 py-1 rounded text-cyan-400">1</code> - General error</p>
+              <p><code className="bg-slate-900 px-2 py-1 rounded text-cyan-400">2</code> - Authentication error</p>
+              <p><code className="bg-slate-900 px-2 py-1 rounded text-cyan-400">3</code> - Network error</p>
+              <p><code className="bg-slate-900 px-2 py-1 rounded text-cyan-400">4</code> - Invalid input</p>
             </div>
           </section>
 

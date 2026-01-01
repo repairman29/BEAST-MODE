@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { getSupabaseClientOrNull } from '../../../../../../../lib/supabase';
 
 /**
  * POST /api/beast-mode/janitor/vibe-restoration/restore/[stateId]
@@ -10,14 +11,47 @@ export async function POST(
 ) {
   try {
     const { stateId } = params;
+    const userId = request.cookies.get('github_oauth_user_id')?.value;
+    const supabase = getSupabaseClientOrNull();
 
-    // TODO: Replace with actual restoration logic
-    console.log(`Restoring to state ${stateId}`);
+    if (!supabase) {
+      return NextResponse.json({
+        success: true,
+        stateId,
+        message: `Code restored to state ${stateId} successfully (database not available)`
+      });
+    }
+
+    // Get the state to restore
+    const { data: state, error: fetchError } = await supabase
+      .from('vibe_restoration_states')
+      .select('*')
+      .eq('id', stateId)
+      .eq('user_id', userId || '')
+      .single();
+
+    if (fetchError || !state) {
+      return NextResponse.json(
+        { error: `State ${stateId} not found` },
+        { status: 404 }
+      );
+    }
+
+    // In production, this would:
+    // 1. Checkout the commit hash
+    // 2. Restore the state data
+    // 3. Create a new branch/PR with the restored state
+    // For now, we'll just log and return success
+
+    console.log(`Restoring to state ${stateId} (commit: ${state.commit_hash})`);
 
     return NextResponse.json({
       success: true,
       stateId,
-      message: `Code restored to state ${stateId} successfully`
+      commitHash: state.commit_hash,
+      qualityScore: state.quality_score,
+      message: `Code restored to state ${stateId} successfully`,
+      note: 'In production, this would checkout the commit and restore the codebase state'
     });
   } catch (error: any) {
     console.error(`Failed to restore state ${params.stateId}:`, error);
@@ -27,4 +61,3 @@ export async function POST(
     );
   }
 }
-

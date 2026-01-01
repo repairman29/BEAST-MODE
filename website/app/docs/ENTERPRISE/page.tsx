@@ -110,6 +110,43 @@ export default function EnterpriseDocsPage() {
             </div>
           </section>
 
+          {/* Custom Integrations */}
+          <section className="bg-slate-900/50 border border-slate-800 rounded-lg p-6">
+            <div className="flex items-start gap-4 mb-4">
+              <GitBranch className="w-6 h-6 text-cyan-400 flex-shrink-0 mt-1" />
+              <div>
+                <h2 className="text-2xl font-bold text-cyan-400 mb-2">Custom Integrations</h2>
+                <p className="text-slate-300 mb-4">
+                  Build custom integrations and webhooks to connect BEAST MODE with your existing tools and workflows.
+                </p>
+                <div className="space-y-2">
+                  <h3 className="text-xl font-semibold text-slate-300 mt-4 mb-2">Features</h3>
+                  <ul className="list-disc list-inside text-slate-300 space-y-1">
+                    <li>Webhook system for real-time events</li>
+                    <li>Custom integration APIs</li>
+                    <li>Event-driven architecture</li>
+                    <li>Integration marketplace</li>
+                    <li>Webhook security and validation</li>
+                  </ul>
+                </div>
+                <div className="mt-4">
+                  <h3 className="text-xl font-semibold text-slate-300 mb-2">Available Events</h3>
+                  <ul className="list-disc list-inside text-slate-300 space-y-1">
+                    <li><code className="bg-slate-900 px-2 py-1 rounded text-cyan-400">scan.completed</code> - When a repository scan finishes</li>
+                    <li><code className="bg-slate-900 px-2 py-1 rounded text-cyan-400">quality.score.updated</code> - When quality score changes</li>
+                    <li><code className="bg-slate-900 px-2 py-1 rounded text-cyan-400">plugin.installed</code> - When a plugin is installed</li>
+                    <li><code className="bg-slate-900 px-2 py-1 rounded text-cyan-400">mission.completed</code> - When a mission is completed</li>
+                  </ul>
+                </div>
+                <div className="mt-4 p-4 bg-slate-800/50 rounded-lg">
+                  <p className="text-sm text-slate-400">
+                    <strong className="text-slate-300">Status:</strong> Custom integrations and webhooks are available for enterprise customers. Contact us for more information.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+
           {/* Repository Management */}
           <section className="bg-slate-900/50 border border-slate-800 rounded-lg p-6">
             <div className="flex items-start gap-4 mb-4">

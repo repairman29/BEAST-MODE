@@ -44,12 +44,14 @@ export async function POST(request: NextRequest) {
                   request.cookies.get('beastModeToken')?.value;
     
     if (token) {
-      // TODO: Get user ID from token
-      const userId = 'user-id-from-token'; // Replace with actual user ID from token
-      const userGitHubToken = await getDecryptedToken(userId);
+      // Get user ID from cookie
+      const userId = request.cookies.get('github_oauth_user_id')?.value;
+      if (userId) {
+        const userGitHubToken = await getDecryptedToken(userId);
       
-      if (userGitHubToken) {
-        userOctokit = createOctokit(userGitHubToken);
+        if (userGitHubToken) {
+          userOctokit = createOctokit(userGitHubToken);
+        }
       }
     }
 

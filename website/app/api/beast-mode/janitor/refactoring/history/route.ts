@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { getSupabaseClientOrNull } from '../../../../../../lib/supabase';
 
 /**
  * GET /api/beast-mode/janitor/refactoring/history
@@ -6,34 +7,48 @@ import { NextRequest, NextResponse } from 'next/server';
  */
 export async function GET(request: NextRequest) {
   try {
-    // TODO: Replace with actual database query
-    const runs = [
-      {
-        id: '1',
-        timestamp: new Date(Date.now() - 8 * 60 * 60 * 1000).toISOString(),
-        issuesFixed: 23,
-        prsCreated: 5,
-        status: 'completed',
-        changes: [
-          { file: 'src/utils/api.js', type: 'security', description: 'Removed hardcoded API key' },
-          { file: 'src/components/Login.jsx', type: 'duplicate', description: 'Removed duplicate login function' },
-          { file: 'src/hooks/useAuth.js', type: 'quality', description: 'Improved error handling' }
-        ]
-      },
-      {
-        id: '2',
-        timestamp: new Date(Date.now() - 32 * 60 * 60 * 1000).toISOString(),
-        issuesFixed: 15,
-        prsCreated: 3,
-        status: 'completed',
-        changes: [
-          { file: 'src/api/database.js', type: 'architecture', description: 'Moved DB logic to API route' },
-          { file: 'src/components/Profile.jsx', type: 'quality', description: 'Fixed unused variable' }
-        ]
-      }
-    ];
+    const { searchParams } = new URL(request.url);
+    const repository = searchParams.get('repository');
+    const limit = parseInt(searchParams.get('limit') || '50');
+    
+    const userId = request.cookies.get('github_oauth_user_id')?.value;
+    const supabase = getSupabaseClientOrNull();
 
-    return NextResponse.json({ runs });
+    if (!supabase) {
+      return NextResponse.json({ runs: [] });
+    }
+
+    let query = supabase
+      .from('refactoring_runs')
+      .select('*')
+      .eq('user_id', userId || '')
+      .order('created_at', { ascending: false })
+      .limit(limit);
+
+    if (repository) {
+      query = query.eq('repository', repository);
+    }
+
+    const { data: runs, error } = await query;
+
+    if (error) {
+      console.error('Failed to fetch refactoring history:', error);
+      return NextResponse.json(
+        { error: 'Failed to get refactoring history', details: error.message },
+        { status: 500 }
+      );
+    }
+
+    return NextResponse.json({
+      runs: runs?.map(run => ({
+        id: run.id,
+        timestamp: run.created_at,
+        issuesFixed: run.issues_fixed || 0,
+        prsCreated: run.prs_created || 0,
+        status: run.status,
+        changes: run.changes || []
+      })) || []
+    });
   } catch (error: any) {
     console.error('Failed to get refactoring history:', error);
     return NextResponse.json(
@@ -42,4 +57,3 @@ export async function GET(request: NextRequest) {
     );
   }
 }
-

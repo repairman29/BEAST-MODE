@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEAST MODE - The 3 Walls (Breaking Through)</title>
+    <link rel="stylesheet" href="../css/infographic-style.css">
+    <style>
+        .walls-container {
+            background: linear-gradient(135deg, #1e293b, #0a0a0f);
+            min-height: 100vh;
+            padding: 4rem;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .wall-column {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .wall-icon {
+            width: 250px;
+            height: 250px;
+            background: rgba(239, 68, 68, 0.2);
+            border: 6px solid #EF4444;
+            border-radius: 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            box-shadow: 0 0 30px rgba(239, 68, 68, 0.4);
+        }
+
+        .wall-icon.wall-1 {
+            background: rgba(239, 68, 68, 0.2);
+            border-color: #EF4444;
+        }
+
+        .wall-icon.wall-2 {
+            background: rgba(245, 158, 11, 0.2);
+            border-color: #F59E0B;
+        }
+
+        .wall-icon.wall-3 {
+            background: rgba(239, 68, 68, 0.2);
+            border-color: #EF4444;
+        }
+
+        .wall-emoji {
+            font-size: 5rem;
+            margin-bottom: 1rem;
+        }
+
+        .wall-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: white;
+            text-align: center;
+        }
+
+        .wall-problem {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 1.5rem;
+            border-radius: 12px;
+            color: rgba(255, 255, 255, 0.9);
+            text-align: center;
+            font-size: 1rem;
+            margin-top: 1rem;
+        }
+
+        .solution-bridge {
+            width: 100%;
+            min-height: 120px;
+            background: linear-gradient(135deg, #9333EA, #06B6D4);
+            border-radius: 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            margin: 2rem 0;
+            box-shadow: 0 0 30px rgba(147, 51, 234, 0.6);
+            padding: 1.5rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .solution-bridge::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            animation: flow 3s infinite;
+        }
+
+        .solution-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .solution-label {
+            font-size: 1.1rem;
+        }
+
+        .status-badge {
+            background: #10B981;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            font-weight: bold;
+            margin-top: 1rem;
+            box-shadow: 0 0 20px #10B981;
+        }
+
+        .header {
+            grid-column: 1 / -1;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .header p {
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        @keyframes flow {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="walls-container">
+        <div class="header">
+            <h1>THE 3 WALLS OF VIBE CODING</h1>
+            <p>All Solved by BEAST MODE</p>
+        </div>
+
+        <div class="wall-column">
+            <div class="wall-icon wall-1">
+                <div class="wall-emoji">🧱</div>
+                <div class="wall-title">Wall 1:<br>90% Wall</div>
+            </div>
+            <div class="wall-problem">
+                <strong>Context Trap</strong><br>
+                AI forgets architecture<br>
+                as codebase grows
+            </div>
+            <div class="solution-bridge">
+                <div class="solution-icon">🌉</div>
+                <div class="solution-label">Repo Memory</div>
+                <div style="font-size: 0.9rem; margin-top: 0.5rem; opacity: 0.9;">
+                    Architecture Enforcement<br>
+                    Vibe Restoration
+                </div>
+            </div>
+            <div class="status-badge">✅ SOLVED</div>
+        </div>
+
+        <div class="wall-column">
+            <div class="wall-icon wall-2">
+                <div class="wall-emoji">🏛️</div>
+                <div class="wall-title">Wall 2:<br>Brownfield</div>
+            </div>
+            <div class="wall-problem">
+                <strong>Legacy Systems</strong><br>
+                Vibe coding useless<br>
+                for old monoliths
+            </div>
+            <div class="solution-bridge">
+                <div class="solution-icon">🛡️</div>
+                <div class="solution-label">Safe Mode Wrapper</div>
+                <div style="font-size: 0.9rem; margin-top: 0.5rem; opacity: 0.9;">
+                    Sandboxed extensions<br>
+                    No core touch
+                </div>
+            </div>
+            <div class="status-badge">✅ SOLVED</div>
+        </div>
+
+        <div class="wall-column">
+            <div class="wall-icon wall-3">
+                <div class="wall-emoji">🔒</div>
+                <div class="wall-title">Wall 3:<br>Liability</div>
+            </div>
+            <div class="wall-problem">
+                <strong>Security & IP</strong><br>
+                Hardcoded secrets<br>
+                Security flaws
+            </div>
+            <div class="solution-bridge">
+                <div class="solution-icon">🔍</div>
+                <div class="solution-label">Invisible CI/CD</div>
+                <div style="font-size: 0.9rem; margin-top: 0.5rem; opacity: 0.9;">
+                    Architecture Enforcement<br>
+                    Auto-fix violations
+                </div>
+            </div>
+            <div class="status-badge">✅ SOLVED</div>
+        </div>
+    </div>
+</body>
+</html>
+

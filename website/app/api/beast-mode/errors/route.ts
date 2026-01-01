@@ -1,24 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { getSupabaseClientOrNull } from '../../../../lib/supabase';
 
 /**
  * BEAST MODE Error Logging API
  * 
  * Stores error logs for monitoring and debugging
  */
-
-declare global {
-  var errorLogs: Array<{
-    message: string;
-    stack?: string;
-    name: string;
-    context: any;
-    timestamp: number;
-  }> | undefined;
-}
-
-if (!global.errorLogs) {
-  global.errorLogs = [];
-}
 
 /**
  * POST /api/beast-mode/errors
@@ -36,18 +23,35 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Store errors (in production, this would go to a database)
-    const timestamp = Date.now();
-    errors.forEach((error: any) => {
-      global.errorLogs!.push({
-        ...error,
-        timestamp: error.context?.timestamp || timestamp,
-      });
-    });
+    // Store errors in Supabase
+    const supabase = getSupabaseClientOrNull();
+    const timestamp = new Date().toISOString();
+    
+    if (supabase) {
+      try {
+        const errorRecords = errors.map((error: any) => ({
+          message: error.message || error.name || 'Unknown error',
+          stack: error.stack || null,
+          name: error.name || 'Error',
+          context: error.context || {},
+          user_id: request.cookies.get('github_oauth_user_id')?.value || null,
+          component: error.context?.component || null,
+          severity: error.severity || 'error',
+          created_at: error.context?.timestamp ? new Date(error.context.timestamp).toISOString() : timestamp,
+        }));
 
-    // Keep only last 1000 errors
-    if (global.errorLogs.length > 1000) {
-      global.errorLogs = global.errorLogs.slice(-1000);
+        const { error: dbError } = await supabase
+          .from('error_logs')
+          .insert(errorRecords);
+
+        if (dbError) {
+          console.error('Failed to store errors in database:', dbError);
+          // Fallback to in-memory storage
+        }
+      } catch (dbError) {
+        console.error('Database error:', dbError);
+        // Fallback to in-memory storage
+      }
     }
 
     return NextResponse.json({ success: true, count: errors.length });
@@ -66,38 +70,69 @@ export async function POST(request: NextRequest) {
  */
 export async function GET(request: NextRequest) {
   try {
+    const supabase = getSupabaseClientOrNull();
     const { searchParams } = new URL(request.url);
     const limit = parseInt(searchParams.get('limit') || '100');
     const since = searchParams.get('since');
+    const component = searchParams.get('component');
 
-    let errors = global.errorLogs || [];
-
-    // Filter by timestamp if provided
-    if (since) {
-      const sinceTimestamp = parseInt(since);
-      errors = errors.filter((e) => e.timestamp >= sinceTimestamp);
-    }
-
-    // Sort by timestamp (newest first) and limit
-    errors = errors
-      .sort((a, b) => b.timestamp - a.timestamp)
-      .slice(0, limit);
-
-    // Aggregate error statistics
-    const stats = {
-      total: global.errorLogs?.length || 0,
-      recent: errors.length,
+    let errors: any[] = [];
+    let stats = {
+      total: 0,
+      recent: 0,
       byType: {} as Record<string, number>,
       byComponent: {} as Record<string, number>,
     };
 
-    errors.forEach((error) => {
-      stats.byType[error.name] = (stats.byType[error.name] || 0) + 1;
-      if (error.context?.component) {
-        stats.byComponent[error.context.component] =
-          (stats.byComponent[error.context.component] || 0) + 1;
+    if (supabase) {
+      try {
+        let query = supabase
+          .from('error_logs')
+          .select('*')
+          .order('created_at', { ascending: false })
+          .limit(limit);
+
+        if (since) {
+          query = query.gte('created_at', new Date(parseInt(since)).toISOString());
+        }
+
+        if (component) {
+          query = query.eq('component', component);
+        }
+
+        const { data, error: dbError } = await query;
+
+        if (!dbError && data) {
+          errors = data.map((e: any) => ({
+            message: e.message,
+            stack: e.stack,
+            name: e.name,
+            context: e.context,
+            timestamp: new Date(e.created_at).getTime(),
+          }));
+
+          // Get total count
+          const { count } = await supabase
+            .from('error_logs')
+            .select('*', { count: 'exact', head: true });
+
+          stats.total = count || 0;
+          stats.recent = errors.length;
+
+          // Aggregate statistics
+          errors.forEach((error) => {
+            stats.byType[error.name] = (stats.byType[error.name] || 0) + 1;
+            if (error.context?.component) {
+              stats.byComponent[error.context.component] =
+                (stats.byComponent[error.context.component] || 0) + 1;
+            }
+          });
+        }
+      } catch (dbError) {
+        console.error('Database query error:', dbError);
+        // Return empty results on error
       }
-    });
+    }
 
     return NextResponse.json({
       errors,

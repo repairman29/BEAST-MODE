@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getDecryptedToken } from '../../../../../lib/github-token';
+import { getSupabaseClientOrNull } from '../../../../../lib/supabase';
 
 /**
  * Unified Session Tracking API
@@ -160,15 +161,82 @@ export async function GET(request: NextRequest) {
     }
 
     // Query Supabase for user's sessions
-    // This would query the ml_predictions table filtered by user
-    // In production, you'd have a dedicated user_sessions table
+    const supabase = getSupabaseClientOrNull();
+    
+    let sessions: any[] = [];
+
+    if (supabase) {
+      try {
+        // Query ml_predictions table for session events
+        let query = supabase
+          .from('ml_predictions')
+          .select('*')
+          .eq('service_name', 'unified-analytics')
+          .eq('prediction_type', 'session_event');
+
+        // Filter by user
+        if (githubUsername) {
+          query = query.ilike('context->>githubUsername', `%${githubUsername}%`);
+        } else if (githubUserId) {
+          query = query.eq('context->>githubUserId', githubUserId.toString());
+        } else {
+          query = query.ilike('context->>githubUsername', `%${oauthUserId}%`);
+        }
+
+        const { data: predictions, error } = await query
+          .order('created_at', { ascending: false })
+          .limit(500);
+
+        if (!error && predictions) {
+          // Group events by session
+          const sessionMap = new Map<string, any>();
+          
+          predictions.forEach((pred: any) => {
+            const context = pred.context || {};
+            const sessionId = context.sessionId || pred.id;
+            const sessionType = context.sessionType || 'web';
+            const event = context.event || 'unknown';
+
+            if (!sessionMap.has(sessionId)) {
+              sessionMap.set(sessionId, {
+                id: sessionId,
+                type: sessionType,
+                startTime: pred.created_at,
+                endTime: pred.created_at,
+                events: [],
+                repo: context.repo || context.context?.repo,
+                command: context.command || context.context?.command,
+                metadata: context.metadata || {},
+              });
+            }
+
+            const session = sessionMap.get(sessionId)!;
+            session.events.push({
+              event,
+              timestamp: pred.created_at,
+              metadata: context.metadata || {},
+            });
+            session.endTime = pred.created_at;
+          });
+
+          sessions = Array.from(sessionMap.values()).map(session => ({
+            ...session,
+            duration: new Date(session.endTime).getTime() - new Date(session.startTime).getTime(),
+            eventCount: session.events.length,
+          }));
+        }
+      } catch (dbError) {
+        console.error('Database query error:', dbError);
+        // Continue with empty sessions
+      }
+    }
 
     return NextResponse.json({
       userId: oauthUserId,
       githubUsername,
       githubUserId,
-      sessions: [], // Would be populated from database
-      message: 'Session history endpoint - database query coming soon'
+      sessions,
+      total: sessions.length
     });
 
   } catch (error: any) {

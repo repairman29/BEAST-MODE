@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { getSupabaseClientOrNull } from '../../../../lib/supabase';
 
 /**
  * BEAST MODE GitHub Actions Integration API
@@ -31,8 +32,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Store quality check result
-    // In production, this would be stored in a database
+    // Store quality check result in Supabase
     const checkResult = {
       repository,
       branch,
@@ -45,8 +45,30 @@ export async function POST(request: NextRequest) {
       status: qualityScore >= 80 ? 'passed' : 'failed'
     };
 
-    // In production, save to database
-    // await saveQualityCheck(checkResult);
+    const supabase = getSupabaseClientOrNull();
+    if (supabase) {
+      try {
+        const { error: dbError } = await supabase
+          .from('quality_checks')
+          .insert({
+            repository,
+            branch,
+            commit,
+            pull_request: pullRequest,
+            quality_score: qualityScore,
+            issues: issues || [],
+            warnings: warnings || [],
+            status: checkResult.status,
+            created_at: checkResult.timestamp,
+          });
+
+        if (dbError) {
+          console.error('Failed to store quality check:', dbError);
+        }
+      } catch (dbError) {
+        console.error('Database error:', dbError);
+      }
+    }
 
     return NextResponse.json({
       success: true,
@@ -81,19 +103,42 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    // In production, fetch from database
-    // const checks = await getQualityChecks({ repository, branch });
+    // Fetch from Supabase
+    const supabase = getSupabaseClientOrNull();
+    let checks: any[] = [];
 
-    // Mock data for now
-    const checks = [
-      {
-        commit: 'abc123',
-        branch: branch || 'main',
-        qualityScore: 85,
-        status: 'passed',
-        timestamp: new Date().toISOString()
+    if (supabase) {
+      try {
+        let query = supabase
+          .from('quality_checks')
+          .select('*')
+          .eq('repository', repository)
+          .order('created_at', { ascending: false })
+          .limit(100);
+
+        if (branch) {
+          query = query.eq('branch', branch);
+        }
+
+        const { data, error: dbError } = await query;
+
+        if (!dbError && data) {
+          checks = data.map((check: any) => ({
+            commit: check.commit,
+            branch: check.branch,
+            pullRequest: check.pull_request,
+            qualityScore: check.quality_score,
+            issues: check.issues || [],
+            warnings: check.warnings || [],
+            status: check.status,
+            timestamp: check.created_at,
+          }));
+        }
+      } catch (dbError) {
+        console.error('Database query error:', dbError);
+        // Return empty array on error
       }
-    ];
+    }
 
     return NextResponse.json({
       repository,
