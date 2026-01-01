@@ -8,9 +8,19 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(request: NextRequest) {
   try {
-    const WhiteLabel = require('../../../../../../lib/enterprise/white-label');
-    const whiteLabel = new WhiteLabel();
+    let WhiteLabel: any = null;
+    try {
+      WhiteLabel = require('../../../../../../lib/enterprise/white-label');
+    } catch (error) {
+      // White-label service not available
+      return NextResponse.json({
+        status: 'unavailable',
+        message: 'White-label service not available',
+        timestamp: new Date().toISOString()
+      });
+    }
 
+    const whiteLabel = new WhiteLabel();
     const config = await whiteLabel.getConfiguration();
     return NextResponse.json(config);
 
@@ -28,7 +38,17 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
     const { action, branding, domain, theme } = body;
 
-    const WhiteLabel = require('../../../../../../lib/white-label');
+    let WhiteLabel: any = null;
+    try {
+      WhiteLabel = require('../../../../../../lib/white-label');
+    } catch (error) {
+      return NextResponse.json({
+        status: 'unavailable',
+        message: 'White-label service not available',
+        timestamp: new Date().toISOString()
+      });
+    }
+
     const whiteLabel = new WhiteLabel();
 
     if (action === 'configure-branding') {
