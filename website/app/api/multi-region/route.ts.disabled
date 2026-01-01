@@ -11,13 +11,12 @@ import { NextRequest, NextResponse } from 'next/server';
 // Optional import - will be loaded dynamically
 async function getMultiRegionService() {
   try {
-    // Use dynamic import with catch to prevent build-time evaluation
-    const serviceModule = await import('../../../../lib/multi-region/unifiedMultiRegionService').catch(() => null);
-    if (serviceModule && serviceModule.getUnifiedMultiRegionService) {
-      return serviceModule.getUnifiedMultiRegionService();
+    const service = await import('../../../../lib/multi-region/unifiedMultiRegionService').catch(() => null);
+    if (service) {
+      return service.getUnifiedMultiRegionService();
     }
   } catch (error) {
-    // Service not available - this is expected in some deployments
+    // Service not available
   }
   return null;
 }
@@ -121,8 +120,8 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   try {
-    const multiRegionService = await getMultiRegionService();
-    if (!multiRegionService) {
+    const service = await getMultiRegionService();
+    if (!service) {
       return NextResponse.json({
         status: 'unavailable',
         message: 'Multi-region service not available',
@@ -130,14 +129,14 @@ export async function POST(request: NextRequest) {
       });
     }
     
-    await multiRegionService.initialize();
+    await service.initialize();
 
     const body = await request.json();
     const { operation, ...params } = body;
 
     switch (operation) {
       case 'register-region':
-        const region = await multiRegionService.registerRegion(params);
+        const region = await service.registerRegion(params);
         return NextResponse.json({
           status: 'ok',
           data: region,
