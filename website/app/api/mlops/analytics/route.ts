@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { withProductionIntegration } from '../../../../lib/api-middleware';
+import { withProductionIntegration } from '../../../lib/api-middleware';
 
 /**
  * Advanced Analytics API

@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from 'next/server';
 // Optional imports - handle gracefully if not available
 let detectAnomalies: any = null;
 try {
-  const middleware = require('../../../../lib/api-middleware');
+  const middleware = require('../../../lib/api-middleware');
   detectAnomalies = middleware.detectAnomalies;
 } catch (error) {
   // Middleware not available

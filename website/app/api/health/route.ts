@@ -15,7 +15,7 @@ async function getServices() {
 
   try {
     // Use dynamic import with string to avoid webpack static analysis
-    const middlewareModule = await import(/* webpackIgnore: true */ '../../../../lib/api-middleware').catch(() => null);
+    const middlewareModule = await import(/* webpackIgnore: true */ '../../lib/api-middleware').catch(() => null);
     getCircuitBreakerService = middlewareModule?.getCircuitBreakerService;
     getDisasterRecoveryService = middlewareModule?.getDisasterRecoveryService;
     getPerformanceStats = middlewareModule?.getPerformanceStats;

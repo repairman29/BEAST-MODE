@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getAdvancedLoadBalancerService } from '../../../../lib/api-middleware';
+import { getAdvancedLoadBalancerService } from '../../../lib/api-middleware';
 
 /**
  * Load Balancing API
