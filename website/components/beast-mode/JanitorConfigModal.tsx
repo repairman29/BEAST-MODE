@@ -169,8 +169,7 @@ export default function JanitorConfigModal({ feature, onClose, onSave, currentCo
                   { id: 'preventDbInFrontend', label: 'Prevent database logic in frontend', enabled: config.preventDbInFrontend !== false },
                   { id: 'enforceSeparation', label: 'Enforce separation of concerns', enabled: config.enforceSeparation !== false },
                   { id: 'autoFixPatterns', label: 'Auto-fix common patterns', enabled: config.autoFixPatterns !== false },
-                  { id: 'blockEval', label: 'Block // SECURITY: eval() disabled
-// eval() usage', enabled: config.blockEval !== false },
+                  { id: 'blockEval', label: 'Block eval() usage', enabled: config.blockEval !== false },
                 ].map((rule) => (
                   <label key={rule.id} className="flex items-center gap-2 cursor-pointer p-2 hover:bg-slate-800/50 rounded">
                     <input

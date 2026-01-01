@@ -42,8 +42,8 @@ export default function ArchitectureRulesView() {
             severity: 'error',
             category: 'security',
             examples: [
-              'const apiKey = "sk-1234567890";',
-              'const password = "mypassword123";'
+              'const apiKey: process.env.APIKEY || '';',
+              'const password: process.env.PASSWORD || '';'
             ]
           },
           {
@@ -72,16 +72,13 @@ export default function ArchitectureRulesView() {
           },
                             {
                               id: 'block-eval',
-                              name: 'Block // SECURITY: eval() disabled
-// eval() Usage',
-                              description: 'Prevents use of // SECURITY: eval() disabled
-// eval() which is a security risk',
+                              name: 'Block eval() Usage',
+                              description: 'Prevents use of eval() which is a security risk',
                               enabled: true,
                               severity: 'error',
                               category: 'security',
                               examples: [
-                                '// SECURITY: eval() disabled
-// eval(userInput);',
+                                'eval(userInput);',
                                 'Function(userInput)();'
                               ]
                             },
