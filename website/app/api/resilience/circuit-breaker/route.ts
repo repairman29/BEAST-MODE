@@ -1,5 +1,18 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getCircuitBreakerService, executeWithCircuitBreaker } from '../../../../lib/api-middleware';
+
+// Optional imports - services may not be available
+async function getServices() {
+  let getCircuitBreakerService: any;
+  let executeWithCircuitBreaker: any;
+  
+  try {
+    const middleware = await import(/* webpackIgnore: true */ '../../../../lib/api-middleware').catch(() => null);
+    getCircuitBreakerService = middleware?.getCircuitBreakerService;
+    executeWithCircuitBreaker = middleware?.executeWithCircuitBreaker;
+  } catch {}
+  
+  return { getCircuitBreakerService, executeWithCircuitBreaker };
+}
 
 /**
  * Circuit Breaker API
@@ -41,6 +54,7 @@ export async function GET(request: NextRequest) {
 
     if (operation === 'list') {
       // ARCHITECTURE: Moved to API route
+// // ARCHITECTURE: Moved to API route
 // const circuits = Array.from(breaker.circuits.values());
       return NextResponse.json({
         status: 'ok',

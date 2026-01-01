@@ -1,6 +1,28 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getUnifiedMultiRegionService } from '../../../../../lib/multi-region/unifiedMultiRegionService';
-import { getCircuitBreakerService, getDisasterRecoveryService, getPerformanceStats } from '../../../../../lib/api-middleware';
+
+// Optional imports - services may not be available
+async function getServices() {
+  let getUnifiedMultiRegionService: any;
+  let getCircuitBreakerService: any;
+  let getDisasterRecoveryService: any;
+  let getPerformanceStats: any;
+
+  try {
+    // Use dynamic import with string to avoid webpack static analysis
+    const multiRegionModule = await import(/* webpackIgnore: true */ '../../../../lib/multi-region/unifiedMultiRegionService').catch(() => null);
+    getUnifiedMultiRegionService = multiRegionModule?.getUnifiedMultiRegionService;
+  } catch {}
+
+  try {
+    // Use dynamic import with string to avoid webpack static analysis
+    const middlewareModule = await import(/* webpackIgnore: true */ '../../../../lib/api-middleware').catch(() => null);
+    getCircuitBreakerService = middlewareModule?.getCircuitBreakerService;
+    getDisasterRecoveryService = middlewareModule?.getDisasterRecoveryService;
+    getPerformanceStats = middlewareModule?.getPerformanceStats;
+  } catch {}
+
+  return { getUnifiedMultiRegionService, getCircuitBreakerService, getDisasterRecoveryService, getPerformanceStats };
+}
 
 /**
  * Service Health Check API
@@ -11,6 +33,8 @@ import { getCircuitBreakerService, getDisasterRecoveryService, getPerformanceSta
  */
 
 export async function GET(request: NextRequest) {
+  const { getUnifiedMultiRegionService, getCircuitBreakerService, getDisasterRecoveryService, getPerformanceStats } = await getServices();
+  
   const { searchParams } = new URL(request.url);
   const service = searchParams.get('service');
 
@@ -19,14 +43,16 @@ export async function GET(request: NextRequest) {
   // Multi-Region Service
   if (!service || service === 'multi-region') {
     try {
-      const multiRegion = getUnifiedMultiRegionService();
+      if (getUnifiedMultiRegionService) {
+        const multiRegion = getUnifiedMultiRegionService();
       const status = multiRegion.getStatus();
-      services.multiRegion = {
-        status: status.initialized ? 'healthy' : 'unhealthy',
-        initialized: status.initialized,
-        services: status.services,
-        timestamp: new Date().toISOString()
-      };
+        services.multiRegion = {
+          status: status.initialized ? 'healthy' : 'unhealthy',
+          initialized: status.initialized,
+          services: status.services,
+          timestamp: new Date().toISOString()
+        };
+      }
     } catch (error) {
       services.multiRegion = {
         status: 'unhealthy',
@@ -39,7 +65,7 @@ export async function GET(request: NextRequest) {
   // Circuit Breaker
   if (!service || service === 'circuit-breaker') {
     try {
-      const circuitBreaker = await getCircuitBreakerService();
+      const circuitBreaker = getCircuitBreakerService ? await getCircuitBreakerService() : null;
       services.circuitBreaker = {
         status: circuitBreaker ? 'healthy' : 'unavailable',
         available: !!circuitBreaker,
@@ -57,7 +83,7 @@ export async function GET(request: NextRequest) {
   // Disaster Recovery
   if (!service || service === 'disaster-recovery') {
     try {
-      const disasterRecovery = await getDisasterRecoveryService();
+      const disasterRecovery = getDisasterRecoveryService ? await getDisasterRecoveryService() : null;
       services.disasterRecovery = {
         status: disasterRecovery ? 'healthy' : 'unavailable',
         available: !!disasterRecovery,
@@ -75,7 +101,7 @@ export async function GET(request: NextRequest) {
   // Performance Monitor
   if (!service || service === 'performance-monitor') {
     try {
-      const performanceStats = await getPerformanceStats();
+      const performanceStats = getPerformanceStats ? await getPerformanceStats() : null;
       services.performanceMonitor = {
         status: performanceStats ? 'healthy' : 'unavailable',
         available: !!performanceStats,

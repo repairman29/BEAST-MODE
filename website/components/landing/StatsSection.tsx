@@ -4,29 +4,29 @@ import React from 'react';
 import { Card, CardContent } from '../ui/card';
 
 const metrics = [
-  { value: '23', label: 'Issues Fixed', desc: 'Per overnight cycle' },
-  { value: '99.9%', label: 'Confidence', desc: 'Auto-merge threshold' },
-  { value: '100%', label: 'Core Coverage', desc: 'System tests passing' },
-  { value: '2-6 AM', label: 'Silent Hours', desc: 'Overnight refactoring' }
+  { value: '10s', label: 'Quality Score', desc: 'Get your score instantly' },
+  { value: '0-100', label: 'Score Range', desc: 'Comprehensive quality metrics' },
+  { value: '9', label: 'AI Systems', desc: 'Integrated AI capabilities' },
+  { value: 'Free', label: 'Forever Tier', desc: '10K calls/month, no credit card' }
 ];
 
 const useCases = [
   {
-    title: 'For Vibe Coders',
+    title: 'What You Get',
     items: [
-      'Wake up to clean code',
-      'Silent overnight refactoring',
-      'Architecture enforcement',
-      'Invisible CI/CD'
+      'Instant code quality scores (0-100)',
+      'Automated fixes for common issues',
+      'AI-powered code analysis',
+      'Track improvement over time'
     ]
   },
   {
-    title: 'For Enterprise (SENTINEL)',
+    title: 'How It Works',
     items: [
-      'Plain English code reviews',
-      'Compliance & audit logs',
-      '99.9% confidence threshold',
-      'White-label & SSO'
+      'Paste your GitHub repo URL',
+      'Get quality score in seconds',
+      'See issues found and recommendations',
+      'Apply fixes with one click'
     ]
   }
 ];

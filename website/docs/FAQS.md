@@ -7,7 +7,7 @@
 ## 🚀 Getting Started
 
 ### What is BEAST MODE?
-BEAST MODE is an AI-powered development platform that helps you write better code faster. It scans your code, answers questions, suggests improvements, and provides tools to make you a better developer.
+BEAST MODE is an AI-powered development platform that helps you understand and improve your code. It scans your code, answers questions, suggests improvements, and provides tools to help you build better code.
 
 ### Do I need to sign up?
 No! You can use demo mode immediately. However, signing up gives you:

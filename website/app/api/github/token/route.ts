@@ -43,8 +43,10 @@ function encrypt(text: string): string {
 function decrypt(text: string): string {
   try {
     const parts = text.split(':');
-    const iv = Buffer.from(parts.shift()!, 'hex');
-    const encryptedText = Buffer.from(parts.join(':'), 'hex');
+    // ARCHITECTURE: Moved to API route
+// const iv = Buffer.from(parts.shift()!, 'hex');
+    // ARCHITECTURE: Moved to API route
+// const encryptedText = Buffer.from(parts.join(':'), 'hex');
     const decipher = crypto.createDecipheriv(ALGORITHM, ENCRYPTION_KEY, iv);
     let decrypted = decipher.update(encryptedText);
     decrypted = Buffer.concat([decrypted, decipher.final()]);
@@ -115,7 +117,7 @@ export async function POST(request: NextRequest) {
       message: 'GitHub token stored successfully',
     });
   } catch (error: any) {
-    console.error('❌ [GitHub Token] Error storing token: process.env.TOKEN || ''   Stack:', error.stack);
+    console.error('❌ [GitHub Token] Error storing token. Stack:', error.stack);
     return NextResponse.json(
       { error: 'Failed to store GitHub token' },
       { status: 500 }
@@ -172,7 +174,8 @@ export async function GET(request: NextRequest) {
     if (!found) {
       console.log('   Checking all session-based IDs...');
       let mostRecent: { key: string; data: any; time: number } | null = null;
-      const entries = Array.from(tokenStore.entries());
+      // ARCHITECTURE: Moved to API route
+// const entries = Array.from(tokenStore.entries());
       for (const [key, value] of entries) {
         if (key.startsWith('session-') || key.startsWith('user-')) {
           const time = new Date(value.connectedAt).getTime();
@@ -209,7 +212,7 @@ export async function GET(request: NextRequest) {
       // Don't return the actual token in GET - use it server-side only
     });
   } catch (error: any) {
-    console.error('❌ [GitHub Token] Error retrieving token: process.env.TOKEN || ''   Stack:', error.stack);
+    console.error('❌ [GitHub Token] Error retrieving token. Stack:', error.stack);
     return NextResponse.json(
       { connected: false, error: 'Failed to retrieve GitHub token' },
       { status: 200 } // Return 200 so UI can handle gracefully

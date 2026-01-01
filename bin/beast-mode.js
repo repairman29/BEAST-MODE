@@ -1357,11 +1357,11 @@ program
         console.log(chalk.white('  • Integration Marketplace'));
         console.log(chalk.white('  • Tool Discovery & Ratings'));
         console.log(chalk.white('  • Monetization & Revenue Platform'));
-        console.log(chalk.yellow('\n💰 ECONOMIC IMPACT:'));
-        console.log(chalk.white('  • $2.5M annual cost savings'));
-        console.log(chalk.white('  • 97% ESLint error reduction'));
-        console.log(chalk.white('  • 80%+ prediction accuracy'));
-        console.log(chalk.white('  • $50K/month marketplace potential'));
+        console.log(chalk.yellow('\n📊 SYSTEM CAPABILITIES:'));
+        console.log(chalk.white('  • Quality scoring (0-100)'));
+        console.log(chalk.white('  • Automated code fixes'));
+        console.log(chalk.white('  • AI-powered analysis'));
+        console.log(chalk.white('  • Historical tracking'));
         console.log(chalk.yellow('\n🔗 RESOURCES:'));
         console.log(chalk.white('  • Website: https://beast-mode.dev'));
         console.log(chalk.white('  • Repository: https://github.com/beast-mode/beast-mode'));
