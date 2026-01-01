@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getUnifiedEnterpriseService } from '../../../../lib/enterprise/unifiedEnterpriseService';
 
 /**
  * Enterprise API
@@ -9,7 +8,18 @@ import { getUnifiedEnterpriseService } from '../../../../lib/enterprise/unifiedE
  * Phase 2, Week 1: Enterprise Unification
  */
 
-const enterpriseService = getUnifiedEnterpriseService();
+// Optional import - will be loaded dynamically
+async function getEnterpriseService() {
+  try {
+    const service = await import('../../../../lib/enterprise/unifiedEnterpriseService').catch(() => null);
+    if (service) {
+      return service.getUnifiedEnterpriseService();
+    }
+  } catch (error) {
+    // Service not available
+  }
+  return null;
+}
 
 export async function GET(request: NextRequest) {
   try {
@@ -30,7 +40,7 @@ export async function GET(request: NextRequest) {
     const userId = searchParams.get('userId');
 
     if (operation === 'status' && tenantId) {
-      const status = await enterpriseService.getTenantStatus(tenantId);
+      const status = await service.getTenantStatus(tenantId);
       return NextResponse.json({
         status: 'ok',
         data: status,
@@ -39,7 +49,7 @@ export async function GET(request: NextRequest) {
     }
 
     if (operation === 'service-status') {
-      const serviceStatus = enterpriseService.getStatus();
+      const serviceStatus = service.getStatus();
       return NextResponse.json({
         status: 'ok',
         data: serviceStatus,
@@ -72,14 +82,23 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   try {
-    await enterpriseService.initialize();
+    const service = await getEnterpriseService();
+    if (!service) {
+      return NextResponse.json({
+        status: 'unavailable',
+        message: 'Enterprise service not available',
+        timestamp: new Date().toISOString()
+      });
+    }
+
+    await service.initialize();
 
     const body = await request.json();
     const { operation, tenantId, userId, ...params } = body;
 
     switch (operation) {
       case 'register-tenant':
-        const tenant = await enterpriseService.registerTenant(params);
+        const tenant = await service.registerTenant(params);
         return NextResponse.json({
           status: 'ok',
           data: tenant,
@@ -87,7 +106,7 @@ export async function POST(request: NextRequest) {
         });
 
       case 'create-role':
-        const role = await enterpriseService.createRole(params.roleName, params.permissions);
+        const role = await service.createRole(params.roleName, params.permissions);
         return NextResponse.json({
           status: 'ok',
           data: role,
@@ -101,7 +120,7 @@ export async function POST(request: NextRequest) {
             { status: 400 }
           );
         }
-        const assignment = await enterpriseService.assignRole(userId, params.roleName, tenantId);
+        const assignment = await service.assignRole(userId, params.roleName, tenantId);
         return NextResponse.json({
           status: 'ok',
           data: assignment,
