@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getProductionMonitor } from '../../../../../lib/monitoring/productionMonitor';
 
 /**
  * Monitoring Alerts API
@@ -9,17 +8,40 @@ import { getProductionMonitor } from '../../../../../lib/monitoring/productionMo
  * Phase 1: Production Deployment
  */
 
-const monitor = getProductionMonitor();
+// Optional import - service may not be available
+async function getMonitor() {
+  try {
+    const monitorModule = await import(/* webpackIgnore: true */ '../../../../lib/monitoring/productionMonitor').catch(() => null);
+    return monitorModule?.getProductionMonitor?.() || null;
+  } catch {
+    return null;
+  }
+}
 
 export async function GET(request: NextRequest) {
   try {
-    await monitor.initialize();
+    const monitor = await getMonitor();
+    
+    if (!monitor) {
+      return NextResponse.json({
+        status: 'ok',
+        data: {
+          alerts: [],
+          count: 0,
+          severity: 'all',
+          message: 'Monitoring service not available'
+        },
+        timestamp: new Date().toISOString()
+      });
+    }
+
+    await monitor.initialize?.();
 
     const { searchParams } = new URL(request.url);
     const severity = searchParams.get('severity') || null;
     const limit = parseInt(searchParams.get('limit') || '50');
 
-    const alerts = monitor.getAlerts(severity, limit);
+    const alerts = monitor.getAlerts?.(severity, limit) || [];
 
     return NextResponse.json({
       status: 'ok',

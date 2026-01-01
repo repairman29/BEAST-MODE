@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { learnFromOutcome, getSelfLearningService } from "../../../../lib/api-middleware';
+import { learnFromOutcome, getSelfLearningService } from '../../../../lib/api-middleware';
 
 /**
  * Learning API
