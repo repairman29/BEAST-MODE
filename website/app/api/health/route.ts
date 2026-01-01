@@ -36,7 +36,7 @@ export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
   const level = searchParams.get('level') || 'basic';
 
-  const health = {
+  const health: any = {
     status: 'healthy',
     timestamp: new Date().toISOString(),
     version: process.env.npm_package_version || '1.0.0',
@@ -110,7 +110,7 @@ export async function GET(request: NextRequest) {
         };
       }
 
-      (health as any).services = services;
+      health.services = services;
 
       // Check overall health
       const allHealthy = Object.values(services).every((s: any) => s.status === 'healthy' || s.status === 'unavailable');
