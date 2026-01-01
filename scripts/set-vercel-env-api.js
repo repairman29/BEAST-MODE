@@ -32,9 +32,61 @@ try {
 const { getCredentialsFromSupabase } = require('./setup-vercel-env-from-supabase');
 
 const readline = require('readline');
+const crypto = require('crypto');
 
 let VERCEL_TOKEN = process.env.VERCEL_TOKEN;
 const PROJECT_ID = process.env.VERCEL_PROJECT_ID;
+
+// Function to get Vercel token from Supabase
+async function getVercelTokenFromSupabase() {
+  const supabaseUrl = process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  const encryptionKey = process.env.API_KEYS_ENCRYPTION_KEY || 'default_key_change_in_production';
+  
+  if (!supabaseUrl || !supabaseKey) {
+    return null;
+  }
+  
+  const { createClient } = require('@supabase/supabase-js');
+  const supabase = createClient(supabaseUrl, supabaseKey);
+  
+  try {
+    const { data, error } = await supabase
+      .from('user_api_keys')
+      .select('encrypted_key')
+      .eq('provider', 'vercel')
+      .eq('is_active', true)
+      .order('updated_at', { ascending: false })
+      .limit(1)
+      .single();
+    
+    if (error || !data) {
+      return null;
+    }
+    
+    // Decrypt the token
+    const encrypted = data.encrypted_key;
+    const parts = encrypted.split(':');
+    if (parts.length !== 3) {
+      return null;
+    }
+    
+    const iv = Buffer.from(parts[0], 'hex');
+    const authTag = Buffer.from(parts[1], 'hex');
+    const encryptedData = Buffer.from(parts[2], 'hex');
+    
+    const key = crypto.createHash('sha256').update(encryptionKey).digest();
+    const decipher = crypto.createDecipheriv('aes-256-gcm', key, iv);
+    decipher.setAuthTag(authTag);
+    
+    let decrypted = decipher.update(encryptedData, null, 'utf8');
+    decrypted += decipher.final('utf8');
+    
+    return decrypted;
+  } catch (error) {
+    return null;
+  }
+}
 
 async function getProjectId() {
   if (PROJECT_ID) return PROJECT_ID;
@@ -80,11 +132,12 @@ async function getProjectId() {
 
 async function setEnvVar(projectId, key, value, environment = 'production') {
   return new Promise((resolve, reject) => {
-    const postData = querystring.stringify({
+    // Vercel API expects JSON, not form-encoded
+    const postData = JSON.stringify({
       key,
       value,
       type: 'encrypted',
-      target: environment
+      target: [environment] // Vercel expects array
     });
     
     const options = {
@@ -93,7 +146,7 @@ async function setEnvVar(projectId, key, value, environment = 'production') {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${VERCEL_TOKEN}`,
-        'Content-Type': 'application/x-www-form-urlencoded',
+        'Content-Type': 'application/json',
         'Content-Length': postData.length
       }
     };
@@ -149,10 +202,10 @@ async function updateEnvVar(projectId, key, value, environment = 'production') {
           
           if (existing) {
             // Update existing
-            const putData = querystring.stringify({
+            const putData = JSON.stringify({
               value,
               type: 'encrypted',
-              target: environment
+              target: [environment] // Vercel expects array
             });
             
             const putOptions = {
@@ -161,7 +214,7 @@ async function updateEnvVar(projectId, key, value, environment = 'production') {
               method: 'PATCH',
               headers: {
                 'Authorization': `Bearer ${VERCEL_TOKEN}`,
-                'Content-Type': 'application/x-www-form-urlencoded',
+                'Content-Type': 'application/json',
                 'Content-Length': putData.length
               }
             };
@@ -189,22 +242,30 @@ async function updateEnvVar(projectId, key, value, environment = 'production') {
 }
 
 async function main() {
-  // Get token if not set
+  // Get token if not set - try Supabase first
   if (!VERCEL_TOKEN) {
-    const rl = readline.createInterface({
-      input: process.stdin,
-      output: process.stdout
-    });
+    console.log('🔍 Checking Supabase for Vercel token...');
+    VERCEL_TOKEN = await getVercelTokenFromSupabase();
     
-    console.log('');
-    console.log('🔑 Vercel Token Required');
-    console.log('   Get it from: https://vercel.com/account/tokens');
-    console.log('   Click "Create Token" and copy it');
-    console.log('');
-    
-    VERCEL_TOKEN = await new Promise((resolve) => {
-      rl.question('   Enter VERCEL_TOKEN: process.env.TOKEN || ''❌ Token is required!');
-      process.exit(1);
+    if (VERCEL_TOKEN) {
+      console.log('✅ Found Vercel token in Supabase!\n');
+    } else {
+      // Fallback to prompt
+      const rl = readline.createInterface({
+        input: process.stdin,
+        output: process.stdout
+      });
+      
+      console.log('');
+      console.log('🔑 Vercel Token Required');
+      console.log('   Get it from: https://vercel.com/account/tokens');
+      console.log('   Click "Create Token" and copy it');
+      console.log('');
+      
+      VERCEL_TOKEN = await new Promise((resolve) => {
+        rl.question('   Enter VERCEL_TOKEN: process.env.TOKEN || ''❌ Token is required!');
+        process.exit(1);
+      }
     }
   }
   console.log('');
