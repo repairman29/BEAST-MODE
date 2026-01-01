@@ -30,10 +30,14 @@ async function handler(req: NextRequest) {
       }
 
       if (operation === 'analyze') {
-        // Analyze performance would be implemented here
+        const stats = optimizer.getQueryStatistics();
+        const recommendations = optimizer.getIndexRecommendations();
         return NextResponse.json({
           status: 'ok',
-          data: { analysis: { status: 'ready' } },
+          data: { 
+            stats,
+            recommendations
+          },
           timestamp: new Date().toISOString()
         });
       }
@@ -51,11 +55,11 @@ async function handler(req: NextRequest) {
       const { operation } = body;
 
       if (operation === 'optimize') {
-        const { query, options } = body;
-        // Optimize query would be implemented here
+        const { query, params } = body;
+        const result = await optimizer.optimizeQuery(query, params || []);
         return NextResponse.json({
           status: 'ok',
-          message: 'Query optimization ready',
+          data: { result },
           timestamp: new Date().toISOString()
         });
       }
