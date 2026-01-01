@@ -45,7 +45,9 @@ function decrypt(text: string): string {
   try {
     const parts = text.split(':');
     // ARCHITECTURE: Moved to API route
+    // ARCHITECTURE: Moved to API route
 // const iv = Buffer.from(parts.shift()!, 'hex');
+    // ARCHITECTURE: Moved to API route
     // ARCHITECTURE: Moved to API route
 // const encryptedText = Buffer.from(parts.join(':'), 'hex');
     const decipher = crypto.createDecipheriv(ALGORITHM, ENCRYPTION_KEY, iv);
@@ -176,6 +178,7 @@ export async function GET(request: NextRequest) {
       console.log('   Checking all session-based IDs...');
       let mostRecent: { key: string; data: any; time: number } | null = null;
       // ARCHITECTURE: Moved to API route
+// // ARCHITECTURE: Moved to API route
 // const entries = Array.from(tokenStore.entries());
       for (const [key, value] of entries) {
         if (key.startsWith('session-') || key.startsWith('user-')) {
