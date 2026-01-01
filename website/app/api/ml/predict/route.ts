@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from 'next/server';
 // Optional production integration
 let withProductionIntegration: any = null;
 try {
-  const middleware = require('../../../lib/api-middleware');
+  const middleware = require('../../../../lib/api-middleware');
   withProductionIntegration = middleware.withProductionIntegration;
 } catch (error) {
   // Middleware not available
