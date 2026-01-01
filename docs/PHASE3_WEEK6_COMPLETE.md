@@ -9,8 +9,8 @@
 
 Week 6 of Phase 3 is **complete**! Model management services are integrated:
 
-1. ✅ **Model Registry API** - Model versioning and registry
-2. ✅ **A/B Testing API** - A/B testing for ML models
+1. ✅ **Model Registry API** - MLflow integration for experiment tracking
+2. ✅ **A/B Testing API** - A/B testing framework for ML models
 3. ✅ **Integration Testing** - All services tested
 
 ---
@@ -21,19 +21,19 @@ Week 6 of Phase 3 is **complete**! Model management services are integrated:
 **File**: `website/app/api/mlops/model-registry/route.ts`
 
 **Operations**:
-- `GET /api/mlops/model-registry?operation=list` - List models
-- `GET /api/mlops/model-registry?operation=get&modelName=xxx` - Get model
-- `GET /api/mlops/model-registry?operation=versions&modelName=xxx` - Get model versions
-- `POST /api/mlops/model-registry` - Register model, create version, transition stage
+- `GET /api/mlops/model-registry?operation=list` - List runs
+- `GET /api/mlops/model-registry?operation=get&runId=xxx` - Get run
+- `GET /api/mlops/model-registry?operation=best&metricName=accuracy` - Get best run
+- `POST /api/mlops/model-registry` - Start run, log metrics/params, end run
 
 ### **2. A/B Testing API** ✅
 **File**: `website/app/api/mlops/ab-testing/route.ts`
 
 **Operations**:
-- `GET /api/mlops/ab-testing?operation=list` - List experiments
-- `GET /api/mlops/ab-testing?operation=get&experimentId=xxx` - Get experiment
-- `GET /api/mlops/ab-testing?operation=results&experimentId=xxx` - Get results
-- `POST /api/mlops/ab-testing` - Create, start, stop, select winner
+- `GET /api/mlops/ab-testing?operation=list` - List all experiments
+- `GET /api/mlops/ab-testing?operation=active` - List active experiments
+- `GET /api/mlops/ab-testing?operation=get&experimentName=xxx` - Get results
+- `POST /api/mlops/ab-testing` - Create experiment, get variant, record result, end experiment
 
 ### **3. Test Script** ✅
 **File**: `scripts/test-model-management.js`
@@ -48,7 +48,7 @@ Week 6 of Phase 3 is **complete**! Model management services are integrated:
 
 - **API Endpoints Created**: 2
 - **Test Scripts**: 1
-- **Services Integrated**: 2 (Model Registry, A/B Testing)
+- **Services Integrated**: 2 (MLflow Service, A/B Testing Framework)
 
 ---
 
@@ -73,10 +73,13 @@ curl "http://localhost:3000/api/mlops/ab-testing?operation=list"
 ## 🚀 **PRODUCTION IMPACT**
 
 ### **Model Management Capabilities**:
-- **Model Versioning**: Track and manage model versions
-- **Model Registry**: Centralized model storage and management
+- **Experiment Tracking**: Track ML experiments with MLflow
+- **Run Management**: Start, log, and end experiment runs
+- **Best Run Selection**: Find best runs based on metrics
 - **A/B Testing**: Compare model variants in production
-- **Experiment Management**: Create, run, and analyze experiments
+- **Traffic Splitting**: Consistent user assignment to variants
+- **Result Recording**: Track prediction results per variant
+- **Winner Selection**: Automatically determine experiment winners
 
 ---
 
@@ -91,7 +94,6 @@ curl "http://localhost:3000/api/mlops/ab-testing?operation=list"
 
 **Status**: ✅ **WEEK 6 COMPLETE - MODEL MANAGEMENT INTEGRATED!** 🚀
 
-**Impact**: **System now has comprehensive model versioning, registry, and A/B testing capabilities!**
+**Impact**: **System now has comprehensive experiment tracking and A/B testing capabilities!**
 
 **Next**: Week 7 - Feature Store & Advanced Analytics
-

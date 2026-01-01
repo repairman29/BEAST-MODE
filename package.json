@@ -82,6 +82,7 @@
     "test:model-marketplace": "node scripts/test-model-marketplace.js",
     "test:collaboration-mlops": "node scripts/test-collaboration-mlops.js",
     "test:model-management": "node scripts/test-model-management.js",
+    "test:feature-analytics": "node scripts/test-feature-analytics.js",
     "test:comprehensive": "node scripts/test-comprehensive.js",
     "test:expanded": "node scripts/test-expanded.js",
     "test:ftue": "node scripts/test-ftue.js"

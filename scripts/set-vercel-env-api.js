@@ -36,25 +36,6 @@ const readline = require('readline');
 let VERCEL_TOKEN = process.env.VERCEL_TOKEN;
 const PROJECT_ID = process.env.VERCEL_PROJECT_ID;
 
-// If no token, prompt for it
-if (!VERCEL_TOKEN) {
-  const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
-  });
-  
-  console.log('');
-  console.log('🔑 Vercel Token Required');
-  console.log('   Get it from: https://vercel.com/account/tokens');
-  console.log('   Click "Create Token" and copy it');
-  console.log('');
-  
-  VERCEL_TOKEN = await new Promise((resolve) => {
-    rl.question('   Enter VERCEL_TOKEN: process.env.TOKEN || ''❌ Token is required!');
-    process.exit(1);
-  }
-}
-
 async function getProjectId() {
   if (PROJECT_ID) return PROJECT_ID;
   
