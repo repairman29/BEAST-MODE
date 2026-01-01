@@ -21,11 +21,16 @@ export async function POST(request: NextRequest) {
       try {
         const tokenData = await getDecryptedToken(oauthUserId);
         if (tokenData) {
-          const { createOctokit } = await import('../../../../lib/github');
-          const octokit = createOctokit(tokenData);
-          const { data: user } = await octokit.users.getAuthenticated();
-          githubUsername = user.login;
-          githubUserId = user.id;
+      try {
+        const { createOctokit } = await import('../../../../lib/github');
+        const octokit = createOctokit(tokenData);
+        const { data: user } = await octokit.users.getAuthenticated();
+        githubUsername = user.login;
+        githubUserId = user.id;
+      } catch (importError) {
+        console.warn('GitHub lib not available:', importError);
+        githubUsername = oauthUserId;
+      }
         }
       } catch (error) {
         console.error('Failed to get GitHub user info:', error);
