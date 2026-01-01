@@ -9,12 +9,14 @@ async function getServices() {
 
   try {
     // Use dynamic import with string to avoid webpack static analysis
+    // @ts-ignore - Dynamic import, module may not exist
     const multiRegionModule = await import(/* webpackIgnore: true */ '../../../../lib/multi-region/unifiedMultiRegionService').catch(() => null);
     getUnifiedMultiRegionService = multiRegionModule?.getUnifiedMultiRegionService;
   } catch {}
 
   try {
     // Use dynamic import with string to avoid webpack static analysis
+    // @ts-ignore - Dynamic import, module may not exist
     const middlewareModule = await import(/* webpackIgnore: true */ '../../../lib/api-middleware').catch(() => null);
     getCircuitBreakerService = middlewareModule?.getCircuitBreakerService;
     getDisasterRecoveryService = middlewareModule?.getDisasterRecoveryService;

@@ -20,7 +20,12 @@
     "test:ui": "node scripts/test-ui.js",
     "test:experience": "node scripts/test-experience.js",
     "test:all": "npm run test:ui && npm run test:experience && npm run test:api",
-    "test:build": "npm run lint && npm run build"
+    "test:build": "npm run lint && npm run build",
+    "deploy": "bash ../scripts/deploy-vercel.sh",
+    "deploy:auto": "bash ../scripts/deploy-vercel.sh \"fix: Automated deployment\"",
+    "deploy:manual": "cd .. && git add -A && git commit -m \"fix: Automated deployment\" && git push origin main && cd website && vercel --prod --yes",
+    "logs": "vercel logs",
+    "logs:list": "vercel list --limit 10"
   },
   "dependencies": {
     "@octokit/rest": "^22.0.1",

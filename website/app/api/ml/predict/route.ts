@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { withProductionIntegration } from '../../../../lib/api-middleware';
 
 // Optional production integration
 let withProductionIntegration: any = null;

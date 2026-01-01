@@ -11,6 +11,7 @@ import { NextRequest, NextResponse } from 'next/server';
 // Optional import - service may not be available
 async function getMonitor() {
   try {
+    // @ts-ignore - Dynamic import, module may not exist
     const monitorModule = await import(/* webpackIgnore: true */ '../../../../lib/monitoring/productionMonitor').catch(() => null);
     return monitorModule?.getProductionMonitor?.() || null;
   } catch {
