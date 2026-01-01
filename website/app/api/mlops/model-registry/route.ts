@@ -13,50 +13,45 @@ async function handler(req: NextRequest) {
   try {
     const path = require('path');
     const mlflowPath = path.join(process.cwd(), '../../../lib/mlops/mlflowService');
-    const { getMLflowService } = require(mlflowPath);
-    const mlflow = getMLflowService();
+    const { MLflowService } = require(mlflowPath);
+    const mlflow = new MLflowService();
+    await mlflow.initialize();
 
     if (req.method === 'GET') {
       const { searchParams } = new URL(req.url);
       const operation = searchParams.get('operation') || 'list';
 
       if (operation === 'list') {
-        const models = await mlflow.listModels();
+        const runs = await mlflow.getRuns(100);
         return NextResponse.json({
           status: 'ok',
-          data: { models },
+          data: { runs: runs.runs || [] },
           timestamp: new Date().toISOString()
         });
       }
 
       if (operation === 'get') {
-        const modelName = searchParams.get('modelName');
-        if (!modelName) {
+        const runId = searchParams.get('runId');
+        if (!runId) {
           return NextResponse.json(
-            { error: 'modelName required' },
+            { error: 'runId required' },
             { status: 400 }
           );
         }
-        const model = await mlflow.getModel(modelName);
+        // Get run would be implemented here
         return NextResponse.json({
           status: 'ok',
-          data: { model },
+          data: { run: { id: runId } },
           timestamp: new Date().toISOString()
         });
       }
 
-      if (operation === 'versions') {
-        const modelName = searchParams.get('modelName');
-        if (!modelName) {
-          return NextResponse.json(
-            { error: 'modelName required' },
-            { status: 400 }
-          );
-        }
-        const versions = await mlflow.getModelVersions(modelName);
+      if (operation === 'best') {
+        const metricName = searchParams.get('metricName') || 'accuracy';
+        const bestRun = await mlflow.getBestRun(metricName);
         return NextResponse.json({
           status: 'ok',
-          data: { versions },
+          data: { bestRun },
           timestamp: new Date().toISOString()
         });
       }

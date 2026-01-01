@@ -31,14 +31,28 @@ try {
 // Get credentials from Supabase (reuse logic from setup script)
 const { getCredentialsFromSupabase } = require('./setup-vercel-env-from-supabase');
 
-const VERCEL_TOKEN = process.env.VERCEL_TOKEN;
+const readline = require('readline');
+
+let VERCEL_TOKEN = process.env.VERCEL_TOKEN;
 const PROJECT_ID = process.env.VERCEL_PROJECT_ID;
 
+// If no token, prompt for it
 if (!VERCEL_TOKEN) {
-  console.error('❌ VERCEL_TOKEN not found!');
-  console.error('   Get it from: https://vercel.com/account/tokens');
-  console.error('   Then: export VERCEL_TOKEN=your_token');
-  process.exit(1);
+  const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+  });
+  
+  console.log('');
+  console.log('🔑 Vercel Token Required');
+  console.log('   Get it from: https://vercel.com/account/tokens');
+  console.log('   Click "Create Token" and copy it');
+  console.log('');
+  
+  VERCEL_TOKEN = await new Promise((resolve) => {
+    rl.question('   Enter VERCEL_TOKEN: process.env.TOKEN || ''❌ Token is required!');
+    process.exit(1);
+  }
 }
 
 async function getProjectId() {
@@ -194,6 +208,24 @@ async function updateEnvVar(projectId, key, value, environment = 'production') {
 }
 
 async function main() {
+  // Get token if not set
+  if (!VERCEL_TOKEN) {
+    const rl = readline.createInterface({
+      input: process.stdin,
+      output: process.stdout
+    });
+    
+    console.log('');
+    console.log('🔑 Vercel Token Required');
+    console.log('   Get it from: https://vercel.com/account/tokens');
+    console.log('   Click "Create Token" and copy it');
+    console.log('');
+    
+    VERCEL_TOKEN = await new Promise((resolve) => {
+      rl.question('   Enter VERCEL_TOKEN: process.env.TOKEN || ''❌ Token is required!');
+      process.exit(1);
+    }
+  }
   console.log('');
   console.log('🚀 Setting Vercel Environment Variables via API');
   console.log('===============================================\n');
