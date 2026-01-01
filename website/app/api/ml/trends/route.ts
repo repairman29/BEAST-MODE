@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { analyzeTrends } from '../../../../lib/api-middleware';
+import { analyzeTrends } from "../../../../lib/api-middleware';
 
 /**
  * Trends API

@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { exportForBI } from '../../../lib/api-middleware';
-import { getPerformanceStats } from '../../../lib/api-middleware';
+import { exportForBI, getPerformanceStats } from '@/lib/api-middleware';
 
 /**
  * BI Export API
