@@ -1665,7 +1665,7 @@ function QualityView({ data }: any): React.JSX.Element {
                         
                         {/* Scan Timeline */}
                         <div className="space-y-2 mt-3 pt-3 border-t border-slate-700/50">
-                          {scans.slice(0, 5).map((scan: any, idx: number) => (
+                          {scansArray.slice(0, 5).map((scan: any, idx: number) => (
                             <div
                               key={idx}
                               className="flex items-center justify-between p-2 bg-slate-900/50 rounded hover:bg-slate-900/70 transition-colors cursor-pointer"
