@@ -1,0 +1,5 @@
+# BEAST MODE - Visual Assets Generator Dependencies
+# Python requirements for generating visual assets
+
+playwright>=1.40.0
+
