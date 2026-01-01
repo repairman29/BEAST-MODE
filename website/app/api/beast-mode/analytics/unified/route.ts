@@ -34,7 +34,7 @@ export async function GET(request: NextRequest) {
       if (tokenData) {
         // Try to import github lib, but handle gracefully if not available
         try {
-          const { createOctokit } = await import('../../../../lib/github');
+          const { createOctokit } = await import('../../../../../lib/github');
           const octokit = createOctokit(tokenData);
           const { data: user } = await octokit.users.getAuthenticated();
           githubUsername = user.login;
