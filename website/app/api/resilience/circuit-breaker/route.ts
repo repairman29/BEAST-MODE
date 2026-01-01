@@ -6,7 +6,7 @@ async function getServices() {
   let executeWithCircuitBreaker: any;
   
   try {
-    const middleware = await import(/* webpackIgnore: true */ '../../../../lib/api-middleware').catch(() => null);
+    const middleware = await import(/* webpackIgnore: true */ '../../../lib/api-middleware').catch(() => null);
     getCircuitBreakerService = middleware?.getCircuitBreakerService;
     executeWithCircuitBreaker = middleware?.executeWithCircuitBreaker;
   } catch {}
@@ -54,6 +54,7 @@ export async function GET(request: NextRequest) {
 
     if (operation === 'list') {
       // ARCHITECTURE: Moved to API route
+// // ARCHITECTURE: Moved to API route
 // // ARCHITECTURE: Moved to API route
 // const circuits = Array.from(breaker.circuits.values());
       return NextResponse.json({
