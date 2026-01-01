@@ -173,7 +173,8 @@ export async function GET(request: NextRequest) {
     if (!found) {
       console.log('   Checking all session-based IDs...');
       let mostRecent: { key: string; data: any; time: number } | null = null;
-      for (const [key, value] of tokenStore.entries()) {
+      const entries = Array.from(tokenStore.entries());
+      for (const [key, value] of entries) {
         if (key.startsWith('session-') || key.startsWith('user-')) {
           const time = new Date(value.connectedAt).getTime();
           if (!mostRecent || time > mostRecent.time) {
