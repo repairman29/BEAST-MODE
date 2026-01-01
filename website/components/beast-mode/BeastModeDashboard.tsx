@@ -1641,7 +1641,7 @@ function QualityView({ data }: any): React.JSX.Element {
                               </button>
                             </div>
                             <div className="flex items-center gap-4 text-xs text-slate-500">
-                              <span>{scans.length} {scans.length === 1 ? 'scan' : 'scans'}</span>
+                              <span>{scansArray.length} {scansArray.length === 1 ? 'scan' : 'scans'}</span>
                               <span>•</span>
                               <span>Avg Score: <span className={`font-semibold ${
                                 avgScore >= 80 ? 'text-green-400' : avgScore >= 60 ? 'text-amber-400' : 'text-red-400'
@@ -1707,9 +1707,9 @@ function QualityView({ data }: any): React.JSX.Element {
                               </div>
                             </div>
                           ))}
-                          {scans.length > 5 && (
+                          {scansArray.length > 5 && (
                             <div className="text-xs text-slate-500 text-center pt-2">
-                              ... and {scans.length - 5} more {scans.length - 5 === 1 ? 'scan' : 'scans'}
+                              ... and {scansArray.length - 5} more {scansArray.length - 5 === 1 ? 'scan' : 'scans'}
                             </div>
                           )}
                         </div>
