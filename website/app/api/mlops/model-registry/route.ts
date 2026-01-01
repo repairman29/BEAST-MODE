@@ -59,7 +59,7 @@ async function handler(req: NextRequest) {
       return NextResponse.json({
         status: 'ok',
         message: 'Model registry API ready',
-        operations: ['list', 'get', 'versions'],
+        operations: ['list', 'get', 'best'],
         timestamp: new Date().toISOString()
       });
     }
@@ -68,32 +68,42 @@ async function handler(req: NextRequest) {
       const body = await req.json();
       const { operation } = body;
 
-      if (operation === 'register') {
-        const { modelName, modelPath, metadata } = body;
-        const registered = await mlflow.registerModel(modelName, modelPath, metadata);
+      if (operation === 'start-run') {
+        const { runName, tags } = body;
+        const run = await mlflow.startRun(runName, tags || {});
         return NextResponse.json({
           status: 'ok',
-          data: { model: registered },
+          data: { run },
           timestamp: new Date().toISOString()
         });
       }
 
-      if (operation === 'version') {
-        const { modelName, modelPath, version } = body;
-        const versioned = await mlflow.createModelVersion(modelName, modelPath, version);
+      if (operation === 'log-metric') {
+        const { key, value, step } = body;
+        await mlflow.logMetric(key, value, step);
         return NextResponse.json({
           status: 'ok',
-          data: { version: versioned },
+          message: 'Metric logged',
           timestamp: new Date().toISOString()
         });
       }
 
-      if (operation === 'transition') {
-        const { modelName, version, stage } = body;
-        const transitioned = await mlflow.transitionModelVersionStage(modelName, version, stage);
+      if (operation === 'log-param') {
+        const { key, value } = body;
+        await mlflow.logParam(key, value);
         return NextResponse.json({
           status: 'ok',
-          data: { transitioned },
+          message: 'Parameter logged',
+          timestamp: new Date().toISOString()
+        });
+      }
+
+      if (operation === 'end-run') {
+        const { status } = body;
+        await mlflow.endRun(status || 'FINISHED');
+        return NextResponse.json({
+          status: 'ok',
+          message: 'Run ended',
           timestamp: new Date().toISOString()
         });
       }

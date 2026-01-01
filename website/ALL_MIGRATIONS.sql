@@ -93,7 +93,7 @@ DO UPDATE SET
   updated_at = NOW();
 
 -- ============================================================================
--- MIGRATION 3: Add porkbun provider to user_api_keys
+-- MIGRATION 3: Add porkbun and vercel providers to user_api_keys
 -- ============================================================================
 -- NOTE: This assumes user_api_keys table already exists
 -- If it doesn't exist, you may need to create it first or skip this migration
@@ -104,7 +104,7 @@ DROP CONSTRAINT IF EXISTS user_api_keys_provider_check;
 
 ALTER TABLE user_api_keys 
 ADD CONSTRAINT user_api_keys_provider_check 
-CHECK (provider IN ('openai', 'mistral', 'gemini', 'groq', 'anthropic', 'together', 'porkbun'));
+CHECK (provider IN ('openai', 'mistral', 'gemini', 'groq', 'anthropic', 'together', 'porkbun', 'vercel'));
 
 -- ============================================================================
 -- MIGRATION 4: Create integrations tables

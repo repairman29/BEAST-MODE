@@ -13,16 +13,24 @@ async function handler(req: NextRequest) {
   try {
     const path = require('path');
     const abTestingPath = path.join(process.cwd(), '../../../lib/mlops/abTesting');
-    const { ABTesting } = require(abTestingPath);
-    const abTesting = new ABTesting();
-    await abTesting.initialize();
+    const { ABTestingFramework } = require(abTestingPath);
+    const abTesting = new ABTestingFramework();
 
     if (req.method === 'GET') {
       const { searchParams } = new URL(req.url);
       const operation = searchParams.get('operation') || 'list';
 
       if (operation === 'list') {
-        const experiments = await abTesting.listExperiments();
+        const experiments = abTesting.getAllExperiments();
+        return NextResponse.json({
+          status: 'ok',
+          data: { experiments },
+          timestamp: new Date().toISOString()
+        });
+      }
+
+      if (operation === 'active') {
+        const experiments = abTesting.getActiveExperiments();
         return NextResponse.json({
           status: 'ok',
           data: { experiments },
@@ -31,30 +39,14 @@ async function handler(req: NextRequest) {
       }
 
       if (operation === 'get') {
-        const experimentId = searchParams.get('experimentId');
-        if (!experimentId) {
+        const experimentName = searchParams.get('experimentName');
+        if (!experimentName) {
           return NextResponse.json(
-            { error: 'experimentId required' },
+            { error: 'experimentName required' },
             { status: 400 }
           );
         }
-        const experiment = await abTesting.getExperiment(experimentId);
-        return NextResponse.json({
-          status: 'ok',
-          data: { experiment },
-          timestamp: new Date().toISOString()
-        });
-      }
-
-      if (operation === 'results') {
-        const experimentId = searchParams.get('experimentId');
-        if (!experimentId) {
-          return NextResponse.json(
-            { error: 'experimentId required' },
-            { status: 400 }
-          );
-        }
-        const results = await abTesting.getExperimentResults(experimentId);
+        const results = abTesting.getResults(experimentName);
         return NextResponse.json({
           status: 'ok',
           data: { results },
@@ -65,7 +57,7 @@ async function handler(req: NextRequest) {
       return NextResponse.json({
         status: 'ok',
         message: 'A/B testing API ready',
-        operations: ['list', 'get', 'results'],
+        operations: ['list', 'active', 'get'],
         timestamp: new Date().toISOString()
       });
     }
@@ -75,8 +67,8 @@ async function handler(req: NextRequest) {
       const { operation } = body;
 
       if (operation === 'create') {
-        const { name, variants, config } = body;
-        const experiment = await abTesting.createExperiment(name, variants, config);
+        const { name, variants } = body;
+        const experiment = await abTesting.createExperiment(name, variants);
         return NextResponse.json({
           status: 'ok',
           data: { experiment },
@@ -84,32 +76,32 @@ async function handler(req: NextRequest) {
         });
       }
 
-      if (operation === 'start') {
-        const { experimentId } = body;
-        const started = await abTesting.startExperiment(experimentId);
+      if (operation === 'get-variant') {
+        const { experimentName, userId } = body;
+        const variant = abTesting.getVariant(experimentName, userId);
         return NextResponse.json({
           status: 'ok',
-          data: { started },
+          data: { variant },
           timestamp: new Date().toISOString()
         });
       }
 
-      if (operation === 'stop') {
-        const { experimentId } = body;
-        const stopped = await abTesting.stopExperiment(experimentId);
+      if (operation === 'record-result') {
+        const { experimentName, variantId, result } = body;
+        await abTesting.recordResult(experimentName, variantId, result);
         return NextResponse.json({
           status: 'ok',
-          data: { stopped },
+          message: 'Result recorded',
           timestamp: new Date().toISOString()
         });
       }
 
-      if (operation === 'select-winner') {
-        const { experimentId, winnerVariant } = body;
-        const selected = await abTesting.selectWinner(experimentId, winnerVariant);
+      if (operation === 'end') {
+        const { experimentName } = body;
+        const results = await abTesting.endExperiment(experimentName);
         return NextResponse.json({
           status: 'ok',
-          data: { selected },
+          data: { results },
           timestamp: new Date().toISOString()
         });
       }
