@@ -110,7 +110,7 @@ export async function GET(request: NextRequest) {
         };
       }
 
-      health.services = services;
+      (health as any).services = services;
 
       // Check overall health
       const allHealthy = Object.values(services).every((s: any) => s.status === 'healthy' || s.status === 'unavailable');
