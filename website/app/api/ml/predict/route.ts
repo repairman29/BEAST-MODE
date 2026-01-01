@@ -144,14 +144,15 @@ async function handlePOST(request: NextRequest) {
     // Direct fallback (no service router available)
     const fallbackResult = await fallbackPredictor(context);
 
+    const fallback = fallbackResult as any;
     return NextResponse.json({
       prediction: {
         predictedQuality: fallbackResult.predictedQuality,
         confidence: fallbackResult.confidence,
-        source: fallbackResult.source || 'heuristic'
+        source: fallback?.source || 'heuristic'
       },
       timestamp: new Date().toISOString(),
-        mlAvailable: (fallbackResult as any)?.source !== 'heuristic'
+      mlAvailable: fallback?.source !== 'heuristic'
     });
 
   } catch (error) {
