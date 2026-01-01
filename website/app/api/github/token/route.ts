@@ -220,10 +220,9 @@ export async function GET(request: NextRequest) {
 
 /**
  * Get decrypted token (server-side only)
- * Note: This is not exported as a route handler - it's a utility function
- * Use it from other server-side code, not as an API endpoint
+ * Exported for use in other server-side routes
  */
-async function getDecryptedToken(userId: string): Promise<string | null> {
+export async function getDecryptedToken(userId: string): Promise<string | null> {
   try {
     const stored = tokenStore.get(userId);
     if (!stored) {
