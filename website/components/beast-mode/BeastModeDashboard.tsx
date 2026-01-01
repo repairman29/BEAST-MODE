@@ -31,9 +31,13 @@ import CollaborationWorkspace from './CollaborationWorkspace';
 import MLMonitoringDashboard from './MLMonitoringDashboard';
 import GamificationSystem from './GamificationSystem';
 import MobileNavigation from './MobileNavigation';
+import GitHubConnection from './GitHubConnection';
 import { ErrorBoundary } from '../ui/ErrorBoundary';
 import { useUser } from '../../lib/user-context';
 import { getErrorMonitor } from '../../lib/error-monitoring';
+import { useSearchParams, useRouter } from 'next/navigation';
+import { ScanDetailsModal } from '../ui/ScanDetailsModal';
+import UnifiedAnalyticsView from './UnifiedAnalyticsView';
 
 /**
  * BEAST MODE Enterprise Dashboard
@@ -48,6 +52,8 @@ function BeastModeDashboardInner({ initialView }: BeastModeDashboardInnerProps) 
   const { user, isFirstTime, setUser, signOut, completeOnboarding, isLoading: userLoading } = useUser();
   const analytics = getAnalytics();
   const [showOnboarding, setShowOnboarding] = useState(false);
+  const searchParams = useSearchParams();
+  const router = useRouter();
 
   // Initialize analytics and error monitoring
   useEffect(() => {
@@ -72,15 +78,22 @@ function BeastModeDashboardInner({ initialView }: BeastModeDashboardInnerProps) 
     setUser(userData);
   };
 
-  // Handle initial view from URL params
+  // Handle view from URL params - watch for changes
   useEffect(() => {
-    if (initialView) {
-      const validViews = ['quality', 'intelligence', 'marketplace', 'self-improve', 'collaboration', 'collaboration-workspace', 'collaboration-dashboard', 'settings', 'auth', 'pricing', 'ml-monitoring'];
-      if (validViews.includes(initialView)) {
-        setCurrentView(initialView as typeof currentView);
+    const viewParam = searchParams.get('view') || initialView;
+    if (viewParam) {
+      const validViews = ['quality', 'intelligence', 'marketplace', 'self-improve', 'collaboration', 'collaboration-workspace', 'collaboration-dashboard', 'settings', 'auth', 'pricing', 'ml-monitoring', 'unified-analytics'];
+      if (validViews.includes(viewParam)) {
+        setCurrentView(viewParam as typeof currentView);
+      }
+    } else {
+      // If no view param, check action param
+      const action = searchParams.get('action');
+      if (action === 'signup' || action === 'signin') {
+        setCurrentView('auth');
       }
     }
-  }, [initialView]);
+  }, [searchParams, initialView]);
 
   const [beastModeState, setBeastModeState] = useState({
     quality: {
@@ -120,9 +133,21 @@ function BeastModeDashboardInner({ initialView }: BeastModeDashboardInnerProps) 
   });
 
   const [commandInput, setCommandInput] = useState('');
-  const [currentView, setCurrentView] = useState<'quality' | 'intelligence' | 'marketplace' | 'self-improve' | 'collaboration' | 'collaboration-workspace' | 'collaboration-dashboard' | 'settings' | 'auth' | 'pricing' | 'ml-monitoring' | null>(
+  const [currentView, setCurrentView] = useState<'quality' | 'intelligence' | 'marketplace' | 'self-improve' | 'collaboration' | 'collaboration-workspace' | 'collaboration-dashboard' | 'settings' | 'auth' | 'pricing' | 'ml-monitoring' | 'unified-analytics' | null>(
     initialView === 'auth' ? 'auth' : initialView === 'pricing' ? 'pricing' : null
   );
+
+  // Update URL when view changes (for shareable links)
+  useEffect(() => {
+    if (currentView && typeof window !== 'undefined') {
+      const url = new URL(window.location.href);
+      if (url.searchParams.get('view') !== currentView) {
+        url.searchParams.set('view', currentView);
+        // Use replaceState to avoid adding to history
+        window.history.replaceState({}, '', url.toString());
+      }
+    }
+  }, [currentView]);
   const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState(false);
   const [currentTime, setCurrentTime] = useState<string>('--:--:--');
 
@@ -299,17 +324,17 @@ function BeastModeDashboardInner({ initialView }: BeastModeDashboardInnerProps) 
 
             {/* Status Bar removed - stats shown in individual tabs instead */}
 
-        {/* Notifications */}
-        <NotificationWidget
-          notifications={beastModeState.notifications}
-          onDismiss={(id) => setBeastModeState(prev => ({
-            ...prev,
-            notifications: prev.notifications.filter(n => n.id !== id)
-          }))}
-        />
+      {/* Notifications */}
+      <NotificationWidget
+        notifications={beastModeState.notifications}
+        onDismiss={(id) => setBeastModeState(prev => ({
+          ...prev,
+          notifications: prev.notifications.filter(n => n.id !== id)
+        }))}
+      />
 
-        {/* Command Palette */}
-        {isCommandPaletteOpen && (
+      {/* Command Palette */}
+      {isCommandPaletteOpen && (
           <div 
             className="fixed inset-0 z-[200] flex items-start justify-center pt-32 bg-black/80 backdrop-blur-md animate-in fade-in duration-200"
             onClick={(e) => {
@@ -326,11 +351,11 @@ function BeastModeDashboardInner({ initialView }: BeastModeDashboardInnerProps) 
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <input
-                  type="text"
-                  placeholder="Type a command or search..."
+            <input
+              type="text"
+              placeholder="Type a command or search..."
                   className="w-full bg-slate-900/50 border border-slate-700 rounded-lg p-3 text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 transition-all"
-                  autoFocus
+              autoFocus
                   onKeyDown={(e) => {
                     if (e.key === 'Escape') {
                       setIsCommandPaletteOpen(false);
@@ -341,7 +366,7 @@ function BeastModeDashboardInner({ initialView }: BeastModeDashboardInnerProps) 
                   <div className="flex items-center gap-2">
                     <kbd className="px-2 py-1 bg-slate-800 rounded text-xs">ESC</kbd>
                     <span>Close palette</span>
-                  </div>
+            </div>
                   <div className="flex flex-wrap gap-2 items-center">
                     <span className="text-slate-500">Quick nav:</span>
                     <kbd className="px-2 py-1 bg-slate-800 rounded text-xs">1</kbd>
@@ -356,8 +381,8 @@ function BeastModeDashboardInner({ initialView }: BeastModeDashboardInnerProps) 
                 </div>
               </CardContent>
             </Card>
-          </div>
-        )}
+        </div>
+      )}
 
         {/* Center Content - BEAST MODE Views */}
         <div className="flex-1 flex items-start justify-center overflow-y-auto py-4 md:py-8 px-4 md:px-6 xl:px-12 pb-20 custom-scrollbar relative z-20" style={{ paddingTop: 'calc(4rem + 1rem)', paddingBottom: 'calc(1.5rem + 3rem)' }}>
@@ -396,8 +421,8 @@ function BeastModeDashboardInner({ initialView }: BeastModeDashboardInnerProps) 
                     </CardContent>
                   </Card>
                 </div>
-              </div>
-              
+        </div>
+
               <GamificationSystem userId={user?.id} />
               
               <QuickActions
@@ -410,113 +435,143 @@ function BeastModeDashboardInner({ initialView }: BeastModeDashboardInnerProps) 
           )}
 
           {currentView === 'quality' && (
-            <div className="w-full max-w-7xl relative z-30">
-              <QualityView data={beastModeState.quality} />
-            </div>
+            <ErrorBoundary>
+              <div className="w-full max-w-7xl relative z-30">
+            <QualityView data={beastModeState.quality} />
+              </div>
+            </ErrorBoundary>
           )}
 
           {currentView === 'intelligence' && (
-            <div className="w-full max-w-7xl relative z-30">
-              <IntelligenceView
-                data={beastModeState.intelligence}
-                messages={beastModeState.messages}
-                onCommand={handleCommand}
-                commandInput={commandInput}
-                setCommandInput={setCommandInput}
-              />
-            </div>
+            <ErrorBoundary>
+              <div className="w-full max-w-7xl relative z-30">
+            <IntelligenceView
+              data={beastModeState.intelligence}
+              messages={beastModeState.messages}
+              onCommand={handleCommand}
+              commandInput={commandInput}
+              setCommandInput={setCommandInput}
+            />
+              </div>
+            </ErrorBoundary>
           )}
 
           {currentView === 'marketplace' && (
-            <div className="w-full max-w-7xl relative z-30">
-              <MarketplaceView data={beastModeState.marketplace} />
-            </div>
+            <ErrorBoundary>
+              <div className="w-full max-w-7xl relative z-30">
+            <MarketplaceView data={beastModeState.marketplace} />
+              </div>
+            </ErrorBoundary>
           )}
 
           {currentView === 'collaboration' && (
-            <div className="w-full max-w-7xl relative z-30">
-              <div className="space-y-6">
-                {/* Header - Enhanced */}
-                <Card className="bg-gradient-to-br from-slate-900/95 to-slate-800/90 border-slate-700/50 shadow-xl">
-                  <CardHeader className="pb-4">
-                    <div className="flex items-start justify-between">
-                      <div className="flex-1">
-                        <CardTitle className="text-white text-xl md:text-2xl font-bold flex items-center gap-3 mb-2">
-                          <div className="w-10 h-10 bg-gradient-to-br from-cyan-500 to-purple-500 rounded-lg flex items-center justify-center shadow-lg">
-                            <span className="text-xl">👥</span>
-                          </div>
-                          Collaboration
-                        </CardTitle>
-                        <CardDescription className="text-slate-400 text-sm mt-1">
-                          Team workspaces, shared dashboards, and real-time collaboration
-                        </CardDescription>
+            <ErrorBoundary>
+              <div className="w-full max-w-7xl relative z-30">
+                <div className="space-y-6">
+                  {/* Header - Enhanced */}
+                  <Card className="bg-gradient-to-br from-slate-900/95 to-slate-800/90 border-slate-700/50 shadow-xl">
+                    <CardHeader className="pb-4">
+                      <div className="flex items-start justify-between">
+                        <div className="flex-1">
+                          <CardTitle className="text-white text-xl md:text-2xl font-bold flex items-center gap-3 mb-2">
+                            <div className="w-10 h-10 bg-gradient-to-br from-cyan-500 to-purple-500 rounded-lg flex items-center justify-center shadow-lg">
+                              <span className="text-xl">👥</span>
+                            </div>
+                            Collaboration
+                          </CardTitle>
+                          <CardDescription className="text-slate-400 text-sm mt-1">
+                            Team workspaces, shared dashboards, and real-time collaboration
+                          </CardDescription>
+                        </div>
                       </div>
-                    </div>
-                  </CardHeader>
-                  <CardContent className="pt-4">
-                    <div className="flex flex-wrap gap-3">
-                      <Button
-                        onClick={() => setCurrentView('collaboration-workspace')}
-                        className="bg-gradient-to-r from-cyan-600 to-cyan-500 hover:from-cyan-700 hover:to-cyan-600 text-white px-6 py-3 font-semibold shadow-lg shadow-cyan-500/20 transition-all duration-200 hover:scale-105"
-                      >
-                        <span className="mr-2">👥</span>
-                        Team Workspace
-                      </Button>
-                      <Button
-                        onClick={() => setCurrentView('collaboration-dashboard')}
-                        className="bg-gradient-to-r from-purple-600 to-purple-500 hover:from-purple-700 hover:to-purple-600 text-white px-6 py-3 font-semibold shadow-lg shadow-purple-500/20 transition-all duration-200 hover:scale-105"
-                      >
-                        <span className="mr-2">📊</span>
-                        Shared Dashboard
-                      </Button>
-                    </div>
-                  </CardContent>
-                </Card>
-                <TeamWorkspace userId={user?.id || (typeof window !== 'undefined' ? localStorage.getItem('beastModeUserId') || undefined : undefined)} />
+                    </CardHeader>
+                    <CardContent className="pt-4">
+                      <div className="flex flex-wrap gap-3">
+                        <Button
+                          onClick={() => setCurrentView('collaboration-workspace')}
+                          className="bg-gradient-to-r from-cyan-600 to-cyan-500 hover:from-cyan-700 hover:to-cyan-600 text-white px-6 py-3 font-semibold shadow-lg shadow-cyan-500/20 transition-all duration-200 hover:scale-105"
+                        >
+                          <span className="mr-2">👥</span>
+                          Team Workspace
+                        </Button>
+                        <Button
+                          onClick={() => setCurrentView('collaboration-dashboard')}
+                          className="bg-gradient-to-r from-purple-600 to-purple-500 hover:from-purple-700 hover:to-purple-600 text-white px-6 py-3 font-semibold shadow-lg shadow-purple-500/20 transition-all duration-200 hover:scale-105"
+                        >
+                          <span className="mr-2">📊</span>
+                          Shared Dashboard
+                        </Button>
+                      </div>
+                    </CardContent>
+                  </Card>
+                  <TeamWorkspace userId={user?.id || (typeof window !== 'undefined' ? localStorage.getItem('beastModeUserId') || undefined : undefined)} />
+                </div>
               </div>
-            </div>
+            </ErrorBoundary>
           )}
 
           {currentView === 'collaboration-workspace' && (
-            <div className="w-full max-w-7xl relative z-30">
-              <TeamWorkspace userId={user?.id || (typeof window !== 'undefined' ? localStorage.getItem('beastModeUserId') || undefined : undefined)} />
-            </div>
+            <ErrorBoundary>
+              <div className="w-full max-w-7xl relative z-30">
+                <TeamWorkspace userId={user?.id || (typeof window !== 'undefined' ? localStorage.getItem('beastModeUserId') || undefined : undefined)} />
+              </div>
+            </ErrorBoundary>
           )}
 
           {currentView === 'collaboration-dashboard' && (
-            <div className="w-full max-w-7xl relative z-30">
-              <SharedDashboard userId={user?.id || (typeof window !== 'undefined' ? localStorage.getItem('beastModeUserId') || undefined : undefined)} />
-            </div>
+            <ErrorBoundary>
+              <div className="w-full max-w-7xl relative z-30">
+                <SharedDashboard userId={user?.id || (typeof window !== 'undefined' ? localStorage.getItem('beastModeUserId') || undefined : undefined)} />
+              </div>
+            </ErrorBoundary>
           )}
 
           {currentView === 'settings' && (
-            <div className="w-full max-w-7xl relative z-30">
-              <SettingsView data={beastModeState.enterprise} />
-            </div>
+            <ErrorBoundary>
+              <div className="w-full max-w-7xl relative z-30">
+                <SettingsView data={beastModeState.enterprise} />
+              </div>
+            </ErrorBoundary>
           )}
 
           {currentView === 'auth' && (
-            <div className="w-full max-w-md relative z-30">
-              <AuthSection onAuthSuccess={handleAuthSuccess} />
-            </div>
+            <ErrorBoundary>
+              <div className="w-full max-w-md relative z-30">
+                <AuthSection onAuthSuccess={handleAuthSuccess} />
+              </div>
+            </ErrorBoundary>
           )}
 
           {currentView === 'pricing' && (
-            <div className="w-full max-w-7xl relative z-30">
-              <PricingSection />
-            </div>
+            <ErrorBoundary>
+              <div className="w-full max-w-7xl relative z-30">
+                <PricingSection />
+              </div>
+            </ErrorBoundary>
           )}
 
           {currentView === 'self-improve' && (
-            <div className="w-full max-w-7xl relative z-30">
-              <SelfImprovement />
-            </div>
+            <ErrorBoundary>
+              <div className="w-full max-w-7xl relative z-30">
+                <SelfImprovement />
+              </div>
+            </ErrorBoundary>
           )}
 
           {currentView === 'ml-monitoring' && (
-            <div className="w-full max-w-7xl relative z-30">
-              <MLMonitoringDashboard />
-            </div>
+            <ErrorBoundary>
+              <div className="w-full max-w-7xl relative z-30">
+                <MLMonitoringDashboard />
+              </div>
+            </ErrorBoundary>
+          )}
+
+          {currentView === 'unified-analytics' && (
+            <ErrorBoundary>
+              <div className="w-full max-w-7xl relative z-30">
+                <UnifiedAnalyticsView />
+              </div>
+            </ErrorBoundary>
           )}
         </div>
 
@@ -563,53 +618,53 @@ function ChroniclerView({
       <CardHeader>
         <div className="flex items-center justify-between">
           <CardTitle className="text-white text-lg uppercase tracking-widest">
-            Chronicler AI
+          Chronicler AI
           </CardTitle>
           <div className="text-xs text-slate-500">
-            {messages.length} messages
-          </div>
+          {messages.length} messages
         </div>
+      </div>
       </CardHeader>
       <CardContent className="flex-1 flex flex-col overflow-hidden">
-        {/* Messages */}
-        <div className="flex-1 overflow-y-auto space-y-3 mb-4 pr-2">
-          {messages.length === 0 ? (
+      {/* Messages */}
+      <div className="flex-1 overflow-y-auto space-y-3 mb-4 pr-2">
+        {messages.length === 0 ? (
             <div className="text-center text-slate-500 py-12">
-              <div className="text-4xl mb-3">◈</div>
+            <div className="text-4xl mb-3">◈</div>
               <div className="text-sm">Welcome back.</div>
               <div className="text-xs text-slate-600 mt-2">
-                What would you like to do?
-              </div>
+              What would you like to do?
             </div>
-          ) : (
-            messages.map((msg: any) => (
-              <div
-                key={msg.id}
-                className={`
+          </div>
+        ) : (
+          messages.map((msg: any) => (
+            <div
+              key={msg.id}
+              className={`
                   ${msg.type === 'user' ? 'text-cyan-400' : ''}
                   ${msg.type === 'ai' ? 'text-white' : ''}
                   ${msg.type === 'system' ? 'text-slate-500' : ''}
-                  text-sm leading-relaxed
-                `}
-              >
+                text-sm leading-relaxed
+              `}
+            >
                 <span className="text-slate-600 text-xs mr-2">
-                  {msg.type === 'user' ? '>' : msg.type === 'ai' ? '◈' : '•'}
-                </span>
-                {msg.text}
-              </div>
-            ))
-          )}
-        </div>
+                {msg.type === 'user' ? '>' : msg.type === 'ai' ? '◈' : '•'}
+              </span>
+              {msg.text}
+            </div>
+          ))
+        )}
+      </div>
 
-        {/* Command Input */}
-        <form onSubmit={onCommand} className="flex gap-2">
-          <input
-            type="text"
-            value={commandInput}
-            onChange={(e) => setCommandInput(e.target.value)}
-            placeholder="Enter command..."
+      {/* Command Input */}
+      <form onSubmit={onCommand} className="flex gap-2">
+        <input
+          type="text"
+          value={commandInput}
+          onChange={(e) => setCommandInput(e.target.value)}
+          placeholder="Enter command..."
             className="flex-1 bg-slate-900 border border-slate-800 px-3 py-2 text-white text-sm focus:outline-none focus:border-cyan-500 transition-colors rounded-lg"
-          />
+        />
         <Button type="submit" className="bg-white text-black hover:bg-slate-100">
           Send
         </Button>
@@ -660,21 +715,21 @@ function TacticalView({ gameState }: any) {
       <Card className="bg-slate-900/90 border-slate-800 col-span-2">
         <CardHeader>
           <CardTitle className="text-white uppercase tracking-widest text-sm">
-            Tactical Radar
+          Tactical Radar
           </CardTitle>
         </CardHeader>
         <CardContent>
           <div className="aspect-square max-w-md mx-auto bg-slate-900/50 rounded-full relative">
-            <div className="absolute inset-0 flex items-center justify-center">
+          <div className="absolute inset-0 flex items-center justify-center">
               <div className="text-slate-500 text-xs">
-                NO CONTACTS
-              </div>
+              NO CONTACTS
             </div>
-            {/* Radar rings */}
+          </div>
+          {/* Radar rings */}
             <div className="absolute inset-[20%] border border-slate-700 rounded-full" />
             <div className="absolute inset-[40%] border border-slate-700 rounded-full" />
             <div className="absolute inset-[60%] border border-slate-700 rounded-full" />
-          </div>
+        </div>
         </CardContent>
       </Card>
     </div>
@@ -765,6 +820,67 @@ function QualityView({ data }: any): React.JSX.Element {
   const [favoriteRepos, setFavoriteRepos] = React.useState<string[]>([]);
   const [expandedScans, setExpandedScans] = React.useState<Set<number>>(new Set());
   const [scanError, setScanError] = React.useState<string | null>(null);
+  // GitHub repos
+  const [githubRepos, setGithubRepos] = React.useState<any[]>([]);
+  const [isLoadingRepos, setIsLoadingRepos] = React.useState(false);
+  const [repoSearchQuery, setRepoSearchQuery] = React.useState('');
+  const [isConnected, setIsConnected] = React.useState(false);
+  const [showRepos, setShowRepos] = React.useState(false);
+  const [showScanHistory, setShowScanHistory] = React.useState(false);
+  const [selectedRepoFilter, setSelectedRepoFilter] = React.useState<string | null>(null);
+  const [selectedScanModal, setSelectedScanModal] = React.useState<any>(null);
+
+  // Check GitHub connection and fetch repos
+  React.useEffect(() => {
+    const checkConnectionAndFetchRepos = async () => {
+      try {
+        const response = await fetch('/api/github/token');
+        if (response.ok) {
+          const data = await response.json();
+          setIsConnected(data.connected || false);
+          
+          if (data.connected) {
+            // Auto-fetch repos when connected
+            fetchGitHubRepos();
+          }
+        }
+      } catch (error) {
+        console.error('Error checking GitHub connection:', error);
+      }
+    };
+
+    checkConnectionAndFetchRepos();
+  }, []);
+
+  const fetchGitHubRepos = async () => {
+    setIsLoadingRepos(true);
+    try {
+      const response = await fetch('/api/github/repos');
+      if (response.ok) {
+        const data = await response.json();
+        if (data.connected && data.repos) {
+          setGithubRepos(data.repos);
+          setIsConnected(true);
+          setShowRepos(true);
+        } else {
+          setIsConnected(false);
+        }
+      }
+    } catch (error) {
+      console.error('Error fetching GitHub repos:', error);
+    } finally {
+      setIsLoadingRepos(false);
+    }
+  };
+
+  const handleSelectRepo = (repo: any) => {
+    setQuickScanRepo(repo.fullName);
+    setShowRepos(false);
+    // Auto-trigger scan
+    setTimeout(() => {
+      handleQuickScan();
+    }, 100);
+  };
 
   React.useEffect(() => {
     // Load all scans from localStorage
@@ -849,27 +965,46 @@ function QualityView({ data }: any): React.JSX.Element {
         body: JSON.stringify({ repo: fullRepo, url: advancedScanUrl })
       });
 
-      if (response.ok) {
-        const result = await response.json();
-        window.dispatchEvent(new Event('storage'));
-        setTimeout(() => {
-          const stored = localStorage.getItem('beast-mode-scan-results');
-          if (stored) {
-            const scans = JSON.parse(stored);
-            const completed = scans.filter((s: any) => s.status === 'completed');
-            setAllScans(completed);
-            if (completed.length > 0) {
-              setLatestScan(completed[0]);
+          if (response.ok) {
+            const result = await response.json();
+            
+            // Save scan result to localStorage
+            const scanResult = {
+              ...result,
+              status: 'completed' as const,
+              repo: result.repo || fullRepo,
+              timestamp: result.timestamp || new Date().toISOString()
+            };
+            
+            try {
+              const stored = localStorage.getItem('beast-mode-scan-results');
+              const scans = stored ? JSON.parse(stored) : [];
+              // Remove existing scan for same repo
+              const filteredScans = scans.filter((s: any) => s.repo !== scanResult.repo);
+              // Add new scan at the beginning
+              const updatedScans = [scanResult, ...filteredScans].slice(0, 50); // Keep last 50
+              localStorage.setItem('beast-mode-scan-results', JSON.stringify(updatedScans));
+              
+              // Update state immediately
+              const completed = updatedScans.filter((s: any) => s.status === 'completed');
+              setAllScans(completed);
+              if (completed.length > 0) {
+                setLatestScan(completed[0]);
+              }
+            } catch (e) {
+              console.error('Failed to save scan result:', e);
             }
+            
+            // Trigger storage event to refresh other components
+            window.dispatchEvent(new Event('storage'));
+            
+            setAdvancedScanUrl('');
+            setShowAdvancedScan(false);
+            alert(`✅ Scan complete! Quality score: ${result.score}/100`);
+          } else {
+            const error = await response.json();
+            setScanError(error.error || 'Scan failed');
           }
-        }, 1000);
-        setAdvancedScanUrl('');
-        setShowAdvancedScan(false);
-        alert(`✅ Scan complete! Quality score: ${result.score}/100`);
-      } else {
-        const error = await response.json();
-        setScanError(error.error || 'Scan failed');
-      }
     } catch (error: any) {
       setScanError(error.message || 'Scan failed');
     } finally {
@@ -878,8 +1013,32 @@ function QualityView({ data }: any): React.JSX.Element {
   };
 
   const handleQuickScan = async () => {
+    // If no repo is selected, check connection and load repos
     if (!quickScanRepo.trim()) {
-      alert('Please enter a repository (owner/repo)');
+      // Check if user is connected to GitHub
+      try {
+        const tokenResponse = await fetch('/api/github/token');
+        if (tokenResponse.ok) {
+          const tokenData = await tokenResponse.json();
+          if (tokenData.connected) {
+            // User is connected, fetch and show repos
+            if (githubRepos.length === 0) {
+              await fetchGitHubRepos();
+            }
+            setShowRepos(true);
+            return; // Don't scan yet, let user select a repo
+          } else {
+            // Not connected, show connection option
+            alert('Please connect your GitHub account first to scan repositories. Go to Settings → GitHub Connection.');
+            return;
+          }
+        }
+      } catch (error) {
+        console.error('Error checking GitHub connection:', error);
+      }
+      
+      // If we get here, no repo entered and not connected
+      alert('Please enter a repository (owner/repo) or connect your GitHub account in Settings.');
       return;
     }
 
@@ -893,20 +1052,37 @@ function QualityView({ data }: any): React.JSX.Element {
 
       if (response.ok) {
         const result = await response.json();
-        // Trigger storage event to refresh
-        window.dispatchEvent(new Event('storage'));
-        // Reload scans
-        setTimeout(() => {
+        
+        // Save scan result to localStorage
+        const scanResult = {
+          ...result,
+          status: 'completed' as const,
+          repo: result.repo || quickScanRepo.trim(),
+          timestamp: result.timestamp || new Date().toISOString()
+        };
+        
+        try {
           const stored = localStorage.getItem('beast-mode-scan-results');
-          if (stored) {
-            const scans = JSON.parse(stored);
-            const completed = scans.filter((s: any) => s.status === 'completed');
-            setAllScans(completed);
-            if (completed.length > 0) {
-              setLatestScan(completed[0]);
-            }
+          const scans = stored ? JSON.parse(stored) : [];
+          // Remove existing scan for same repo
+          const filteredScans = scans.filter((s: any) => s.repo !== scanResult.repo);
+          // Add new scan at the beginning
+          const updatedScans = [scanResult, ...filteredScans].slice(0, 50); // Keep last 50
+          localStorage.setItem('beast-mode-scan-results', JSON.stringify(updatedScans));
+          
+          // Update state immediately
+          const completed = updatedScans.filter((s: any) => s.status === 'completed');
+          setAllScans(completed);
+          if (completed.length > 0) {
+            setLatestScan(completed[0]);
           }
-        }, 1000);
+        } catch (e) {
+          console.error('Failed to save scan result:', e);
+        }
+        
+        // Trigger storage event to refresh other components
+        window.dispatchEvent(new Event('storage'));
+        
         setQuickScanRepo('');
         alert(`✅ Scan complete! Quality score: ${result.score}/100`);
       } else {
@@ -986,18 +1162,117 @@ function QualityView({ data }: any): React.JSX.Element {
           </CardDescription>
         </CardHeader>
         <CardContent className="pt-4">
+          {/* GitHub Repos Section */}
+          {isConnected && (
+            <div className="mb-4 pb-4 border-b border-slate-800">
+              <div className="flex items-center justify-between mb-3">
+                <div className="flex items-center gap-2">
+                  <span className="text-green-400">✓</span>
+                  <span className="text-sm text-slate-300 font-medium">GitHub Connected</span>
+                </div>
+                <Button
+                  onClick={() => {
+                    if (showRepos) {
+                      setShowRepos(false);
+                    } else {
+                      fetchGitHubRepos();
+                      setShowRepos(true);
+                    }
+                  }}
+                  variant="outline"
+                  size="sm"
+                  className="border-slate-700 text-slate-400 hover:bg-slate-800 text-xs"
+                >
+                  {showRepos ? 'Hide' : 'Show'} My Repos
+                </Button>
+              </div>
+              {showRepos && (
+                <div className="space-y-3">
+                  {isLoadingRepos ? (
+                    <div className="text-center py-4">
+                      <div className="animate-spin mx-auto w-6 h-6 border-2 border-cyan-500 border-t-transparent rounded-full mb-2"></div>
+                      <div className="text-xs text-slate-500">Loading repositories...</div>
+                    </div>
+                  ) : githubRepos.length > 0 ? (
+                    <>
+                      <input
+                        type="text"
+                        value={repoSearchQuery}
+                        onChange={(e) => setRepoSearchQuery(e.target.value)}
+                        placeholder="🔍 Search repositories..."
+                        className="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500"
+                      />
+                      <div className="max-h-64 overflow-y-auto space-y-2">
+                        {githubRepos
+                          .filter((repo: any) => 
+                            repoSearchQuery === '' || 
+                            repo.name.toLowerCase().includes(repoSearchQuery.toLowerCase()) ||
+                            repo.fullName.toLowerCase().includes(repoSearchQuery.toLowerCase()) ||
+                            (repo.description && repo.description.toLowerCase().includes(repoSearchQuery.toLowerCase()))
+                          )
+                          .map((repo: any) => (
+                            <div
+                              key={repo.id}
+                              onClick={() => handleSelectRepo(repo)}
+                              className="flex items-center justify-between p-3 bg-slate-800/50 hover:bg-slate-800 border border-slate-700 rounded-lg cursor-pointer transition-all hover:border-cyan-500/50 group"
+                            >
+                              <div className="flex-1 min-w-0">
+                                <div className="flex items-center gap-2">
+                                  <span className="text-slate-300 font-medium truncate">{repo.fullName}</span>
+                                  {repo.private && (
+                                    <span className="text-xs px-1.5 py-0.5 bg-amber-500/20 text-amber-400 rounded border border-amber-500/30">Private</span>
+                                  )}
+                                </div>
+                                {repo.description && (
+                                  <div className="text-xs text-slate-500 mt-1 truncate">{repo.description}</div>
+                                )}
+                                <div className="flex items-center gap-3 mt-1.5 text-xs text-slate-600">
+                                  <span>{repo.language}</span>
+                                  <span>⭐ {repo.stars}</span>
+                                  <span>🍴 {repo.forks}</span>
+                                </div>
+                              </div>
+                              <Button
+                                size="sm"
+                                className="ml-3 bg-cyan-600 hover:bg-cyan-700 text-white opacity-0 group-hover:opacity-100 transition-opacity"
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  handleSelectRepo(repo);
+                                }}
+                              >
+                                Scan
+                              </Button>
+                            </div>
+                          ))}
+                      </div>
+                      <div className="text-xs text-slate-500 text-center pt-2">
+                        {githubRepos.length} {githubRepos.length === 1 ? 'repository' : 'repositories'} found
+                      </div>
+                    </>
+                  ) : (
+                    <div className="text-center py-4 text-sm text-slate-500">
+                      No repositories found
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+          )}
+          
           <div className="flex flex-col sm:flex-row gap-3">
-            <input
-              type="text"
-              value={quickScanRepo}
-              onChange={(e) => setQuickScanRepo(e.target.value)}
-              placeholder="owner/repo (e.g., facebook/react)"
-              className="flex-1 bg-slate-950 border border-slate-700 rounded-lg px-4 py-3 text-white placeholder-slate-500 input-focus transition-all duration-200"
-              onKeyPress={(e) => e.key === 'Enter' && handleQuickScan()}
-            />
+            <div className="flex-1 relative">
+              <input
+                type="text"
+                value={quickScanRepo}
+                onChange={(e) => setQuickScanRepo(e.target.value)}
+                placeholder={isConnected ? "Select a repo above or enter owner/repo" : "owner/repo (e.g., facebook/react)"}
+                className="w-full bg-slate-950 border border-slate-700 rounded-lg px-4 py-3 text-white placeholder-slate-500 input-focus transition-all duration-200"
+                onKeyPress={(e) => e.key === 'Enter' && handleQuickScan()}
+              />
+            </div>
             <Button
               onClick={handleQuickScan}
-              disabled={isScanning || !quickScanRepo.trim()}
+              disabled={isScanning}
               className="bg-cyan-600 hover:bg-cyan-700 text-white smooth-transition hover-lift button-press glow-on-hover disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:transform-none disabled:hover:shadow-none px-6"
             >
               {isScanning ? (
@@ -1007,8 +1282,8 @@ function QualityView({ data }: any): React.JSX.Element {
                 </>
               ) : (
                 <>
-                  <span className="mr-2">🔍</span>
-                  Quick Scan
+                  <span className="mr-2">{quickScanRepo.trim() ? '🔍' : '📚'}</span>
+                  {quickScanRepo.trim() ? 'Quick Scan' : 'Load My Repos'}
                 </>
               )}
             </Button>
@@ -1064,16 +1339,16 @@ function QualityView({ data }: any): React.JSX.Element {
               }`}>
                 <span className="text-base">{scoreChange > 0 ? '↑' : '↓'}</span>
                 <span>{Math.abs(scoreChange)}</span>
-              </div>
+        </div>
             )}
-          </div>
+        </div>
           {latestScan && (
             <div className="text-xs text-slate-400">
               Last scan: <span className="text-slate-300">{latestScan.repo}</span>
               {latestScan.timestamp && (
                 <> • <span className="text-slate-400">{new Date(latestScan.timestamp).toLocaleDateString()}</span></>
               )}
-            </div>
+        </div>
           )}
         </CardHeader>
         <CardContent className="pt-0">
@@ -1138,12 +1413,12 @@ function QualityView({ data }: any): React.JSX.Element {
               <div className="text-xs text-slate-400 mb-2 uppercase tracking-wider font-medium">Issues Found</div>
               <div className="text-3xl font-bold text-white mb-1">{qualityData.issues}</div>
               <div className="text-xs text-slate-500">needs attention</div>
-            </div>
+        </div>
             <div className="bg-slate-800/30 rounded-lg p-4 hover:bg-slate-800/50 transition-colors duration-200 border border-slate-700/50">
               <div className="text-xs text-slate-400 mb-2 uppercase tracking-wider font-medium">Improvements</div>
               <div className="text-3xl font-bold text-cyan-400 mb-1">{qualityData.improvements}</div>
               <div className="text-xs text-slate-500">available</div>
-            </div>
+          </div>
           </div>
 
           {/* Additional Metrics (if available) */}
@@ -1158,7 +1433,7 @@ function QualityView({ data }: any): React.JSX.Element {
                   }`}>
                     {latestScan.metrics.coverage || 0}%
                   </span>
-                </div>
+          </div>
                 <div className="flex justify-between items-center">
                   <span className="text-slate-400 text-sm">Maintainability</span>
                   <span className={`font-semibold text-sm ${
@@ -1166,9 +1441,9 @@ function QualityView({ data }: any): React.JSX.Element {
                   }`}>
                     {latestScan.metrics.maintainability || 0}/100
                   </span>
-                </div>
-              </div>
-            </div>
+          </div>
+          </div>
+        </div>
           )}
         </CardContent>
       </Card>
@@ -1189,32 +1464,32 @@ function QualityView({ data }: any): React.JSX.Element {
                 <span className={`font-semibold ${latestScan.metrics.coverage >= 70 ? 'text-green-400' : 'text-amber-400'}`}>
                   {latestScan.metrics.coverage || 0}%
                 </span>
-              </div>
-              <div className="flex justify-between items-center">
+        </div>
+          <div className="flex justify-between items-center">
                 <span className="text-slate-400">Maintainability</span>
                 <span className={`font-semibold ${latestScan.metrics.maintainability >= 80 ? 'text-green-400' : 'text-amber-400'}`}>
                   {latestScan.metrics.maintainability || 0}/100
                 </span>
-              </div>
-              <div className="flex justify-between items-center">
+          </div>
+          <div className="flex justify-between items-center">
                 <span className="text-slate-400">Has Tests</span>
                 <span className={`font-semibold ${latestScan.metrics.hasTests ? 'text-green-400' : 'text-red-400'}`}>
                   {latestScan.metrics.hasTests ? '✓ Yes' : '✗ No'}
                 </span>
-              </div>
-              <div className="flex justify-between items-center">
+          </div>
+          <div className="flex justify-between items-center">
                 <span className="text-slate-400">Has CI/CD</span>
                 <span className={`font-semibold ${latestScan.metrics.hasCI ? 'text-green-400' : 'text-red-400'}`}>
                   {latestScan.metrics.hasCI ? '✓ Yes' : '✗ No'}
                 </span>
-              </div>
+          </div>
               <div className="flex justify-between items-center">
                 <span className="text-slate-400">Has Docker</span>
                 <span className={`font-semibold ${latestScan.metrics.hasDocker ? 'text-green-400' : 'text-red-400'}`}>
                   {latestScan.metrics.hasDocker ? '✓ Yes' : '✗ No'}
                 </span>
-              </div>
-            </div>
+        </div>
+    </div>
           ) : (
             <div className="space-y-4">
               <div className="flex justify-between items-center">
@@ -1242,12 +1517,31 @@ function QualityView({ data }: any): React.JSX.Element {
         </CardContent>
       </Card>
 
-      {/* Recent Scans */}
+      {/* Recent Scans / Scan History */}
       <Card className="col-span-1 md:col-span-2 bg-slate-900/90 border-slate-800 card-polish stagger-item">
         <CardHeader>
           <div className="flex items-center justify-between">
-            <CardTitle className="text-white text-lg font-semibold">Recent Quality Scans</CardTitle>
+            <div className="flex items-center gap-3">
+              <CardTitle className="text-white text-lg font-semibold">
+                {showScanHistory ? '📚 Scan History' : 'Recent Quality Scans'}
+              </CardTitle>
+              {allScans.length > 0 && (
+                <span className="text-xs text-slate-500 bg-slate-800/50 px-2 py-1 rounded">
+                  {allScans.length} {allScans.length === 1 ? 'scan' : 'scans'} saved
+                </span>
+              )}
+            </div>
             <div className="flex gap-2">
+              {allScans.length > 0 && (
+                <Button
+                  onClick={() => setShowScanHistory(!showScanHistory)}
+                  variant="outline"
+                  size="sm"
+                  className="border-slate-700 text-slate-400 hover:bg-slate-800 hover:border-slate-600 smooth-transition"
+                >
+                  {showScanHistory ? '📊 Show Latest' : '📚 View History'}
+                </Button>
+              )}
               {latestScan && (
                 <Button
                   onClick={() => exportReport(latestScan)}
@@ -1258,7 +1552,7 @@ function QualityView({ data }: any): React.JSX.Element {
                   📥 Export Latest
                 </Button>
               )}
-              {allScans.length > 1 && (
+              {allScans.length > 1 && !showScanHistory && (
                 <Button
                   onClick={() => setComparisonScan(comparisonScan ? null : allScans[1])}
                   variant="outline"
@@ -1276,6 +1570,152 @@ function QualityView({ data }: any): React.JSX.Element {
             <div className="text-center text-slate-500 py-12">
               <div className="animate-spin mx-auto w-8 h-8 border-2 border-cyan-500 border-t-transparent rounded-full mb-4"></div>
               <div className="text-sm">Loading scan results...</div>
+            </div>
+          ) : showScanHistory && allScans.length > 0 ? (
+            // Scan History View - Organized by Repository
+            <div className="space-y-4">
+              {/* Filter by Repository */}
+              <div className="flex items-center gap-3 flex-wrap">
+                <span className="text-sm text-slate-400">Filter by repo:</span>
+                <Button
+                  onClick={() => setSelectedRepoFilter(null)}
+                  size="sm"
+                  variant={selectedRepoFilter === null ? 'default' : 'outline'}
+                  className={selectedRepoFilter === null ? 'bg-cyan-600 text-white' : 'border-slate-700 text-slate-400'}
+                >
+                  All ({allScans.length})
+                </Button>
+                {Array.from(new Set(allScans.map((s: any) => s.repo).filter(Boolean))).map((repo: string) => {
+                  const repoScans = allScans.filter((s: any) => s.repo === repo);
+                  return (
+                    <Button
+                      key={repo}
+                      onClick={() => setSelectedRepoFilter(selectedRepoFilter === repo ? null : repo)}
+                      size="sm"
+                      variant={selectedRepoFilter === repo ? 'default' : 'outline'}
+                      className={selectedRepoFilter === repo ? 'bg-cyan-600 text-white' : 'border-slate-700 text-slate-400'}
+                    >
+                      {repo.split('/')[1] || repo} ({repoScans.length})
+                    </Button>
+                  );
+                })}
+              </div>
+
+              {/* Grouped Scans */}
+              <div className="space-y-4">
+                {Object.entries(
+                  allScans
+                    .filter((scan: any) => scan.repo && (!selectedRepoFilter || scan.repo === selectedRepoFilter))
+                    .reduce((acc: any, scan: any) => {
+                      const repo = scan.repo;
+                      if (!repo) return acc; // Skip scans without repo
+                      if (!acc[repo]) acc[repo] = [];
+                      acc[repo].push(scan);
+                      return acc;
+                    }, {} as Record<string, any[]>)
+                )
+                  .sort(([, aScans], [, bScans]) => {
+                    // Sort by most recent scan date
+                    const aLatest = aScans[0]?.timestamp || '';
+                    const bLatest = bScans[0]?.timestamp || '';
+                    return bLatest.localeCompare(aLatest);
+                  })
+                  .map(([repo, scans]) => {
+                    const latestRepoScan = scans[0];
+                    const avgScore = Math.round(scans.reduce((sum: number, s: any) => sum + (s.score || 0), 0) / scans.length);
+                    const totalIssues = scans.reduce((sum: number, s: any) => sum + (s.issues || 0), 0);
+                    
+                    return (
+                      <div key={repo} className="bg-slate-800/30 rounded-lg border border-slate-700/50 p-4 hover:border-cyan-500/50 transition-colors">
+                        <div className="flex items-start justify-between mb-3">
+                          <div className="flex-1">
+                            <div className="flex items-center gap-2 mb-1">
+                              <h4 className="text-white font-semibold">{repo}</h4>
+                              <button
+                                onClick={() => toggleFavorite(repo)}
+                                className="text-yellow-400 hover:text-yellow-300"
+                                title={favoriteRepos.includes(repo) ? 'Remove from favorites' : 'Add to favorites'}
+                              >
+                                {favoriteRepos.includes(repo) ? '⭐' : '☆'}
+                              </button>
+                            </div>
+                            <div className="flex items-center gap-4 text-xs text-slate-500">
+                              <span>{scans.length} {scans.length === 1 ? 'scan' : 'scans'}</span>
+                              <span>•</span>
+                              <span>Avg Score: <span className={`font-semibold ${
+                                avgScore >= 80 ? 'text-green-400' : avgScore >= 60 ? 'text-amber-400' : 'text-red-400'
+                              }`}>{avgScore}/100</span></span>
+                              <span>•</span>
+                              <span>{totalIssues} total issues</span>
+                            </div>
+                          </div>
+                          <Button
+                            onClick={() => {
+                              setSelectedRepoFilter(repo);
+                              setShowScanHistory(false);
+                              setQuickScanRepo(repo);
+                            }}
+                            size="sm"
+                            className="bg-cyan-600 hover:bg-cyan-700 text-white"
+                          >
+                            Scan Again
+                          </Button>
+                        </div>
+                        
+                        {/* Scan Timeline */}
+                        <div className="space-y-2 mt-3 pt-3 border-t border-slate-700/50">
+                          {scans.slice(0, 5).map((scan: any, idx: number) => (
+                            <div
+                              key={idx}
+                              className="flex items-center justify-between p-2 bg-slate-900/50 rounded hover:bg-slate-900/70 transition-colors cursor-pointer"
+                              onClick={() => {
+                                setLatestScan(scan);
+                                setShowScanHistory(false);
+                              }}
+                            >
+                              <div className="flex items-center gap-3 flex-1">
+                                <div className={`w-2 h-2 rounded-full ${
+                                  scan.score >= 80 ? 'bg-green-500' : scan.score >= 60 ? 'bg-amber-500' : 'bg-red-500'
+                                }`} />
+                                <div className="flex-1 min-w-0">
+                                  <div className="text-sm text-slate-300">
+                                    {scan.timestamp ? new Date(scan.timestamp).toLocaleString() : 'Recently scanned'}
+                                  </div>
+                                  <div className="text-xs text-slate-500">
+                                    {scan.issues || 0} issues • {scan.improvements || 0} improvements
+                                  </div>
+                                </div>
+                              </div>
+                              <div className="flex items-center gap-3">
+                                <span className={`font-bold text-lg ${
+                                  scan.score >= 80 ? 'text-green-400' : scan.score >= 60 ? 'text-amber-400' : 'text-red-400'
+                                }`}>
+                                  {scan.score}/100
+                                </span>
+                                <Button
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    exportReport(scan);
+                                  }}
+                                  size="sm"
+                                  variant="outline"
+                                  className="border-slate-700 text-slate-400 hover:bg-slate-800"
+                                >
+                                  📥
+                                </Button>
+                              </div>
+                            </div>
+                          ))}
+                          {scans.length > 5 && (
+                            <div className="text-xs text-slate-500 text-center pt-2">
+                              ... and {scans.length - 5} more {scans.length - 5 === 1 ? 'scan' : 'scans'}
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    );
+                  })}
+              </div>
             </div>
           ) : latestScan ? (
             <div className="space-y-3">
@@ -1312,12 +1752,18 @@ function QualityView({ data }: any): React.JSX.Element {
                 </div>
               )}
 
-              <div className="flex justify-between items-center py-2 border-b border-slate-800">
+              <div 
+                className="flex justify-between items-center py-2 border-b border-slate-800 cursor-pointer hover:bg-slate-800/30 rounded-lg p-2 -m-2 transition-colors"
+                onClick={() => setSelectedScanModal(latestScan)}
+              >
                 <div className="flex-1">
                   <div className="flex items-center gap-2">
                     <span className="text-slate-300 font-medium">{latestScan.repo}</span>
                     <button
-                      onClick={() => toggleFavorite(latestScan.repo)}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        toggleFavorite(latestScan.repo);
+                      }}
                       className="text-yellow-400 hover:text-yellow-300"
                       title={favoriteRepos.includes(latestScan.repo) ? 'Remove from favorites' : 'Add to favorites'}
                     >
@@ -1335,6 +1781,7 @@ function QualityView({ data }: any): React.JSX.Element {
                   <div className="text-xs text-slate-500 mt-1">
                     {latestScan.issues} issues • {latestScan.improvements} improvements
                   </div>
+                  <div className="text-xs text-cyan-400 mt-1">Click to view details →</div>
                 </div>
               </div>
               {latestScan.detectedIssues && latestScan.detectedIssues.length > 0 && (
@@ -1487,6 +1934,33 @@ function QualityView({ data }: any): React.JSX.Element {
         </CardContent>
       </Card>
       </div>
+
+      {/* Scan Details Modal */}
+      <ScanDetailsModal
+        open={!!selectedScanModal}
+        scan={selectedScanModal}
+        onClose={() => setSelectedScanModal(null)}
+        onExport={() => {
+          if (selectedScanModal) {
+            exportReport(selectedScanModal);
+          }
+        }}
+        onScanAgain={() => {
+          if (selectedScanModal) {
+            setQuickScanRepo(selectedScanModal.repo);
+            setSelectedScanModal(null);
+            setTimeout(() => {
+              handleQuickScan();
+            }, 100);
+          }
+        }}
+        onApplyFix={(issue) => {
+          // Navigate to Improve tab with the issue context
+          setSelectedScanModal(null);
+          // Could trigger auto-fix here or navigate to Improve tab
+          console.log('Apply fix for issue:', issue);
+        }}
+      />
     </div>
   );
 }
@@ -1745,7 +2219,7 @@ function IntelligenceView({ data, messages, onCommand, commandInput, setCommandI
             >
               🔍 Code Review
             </Button>
-          </div>
+        </div>
         </CardContent>
       </Card>
 
@@ -1765,20 +2239,20 @@ function IntelligenceView({ data, messages, onCommand, commandInput, setCommandI
             <div className="text-center bg-slate-800/30 rounded-lg p-5 hover:bg-slate-800/50 transition-colors duration-200 border border-slate-700/50 stagger-item">
               <div className="text-4xl font-bold text-cyan-400 mb-2">{conversationMessages.length}</div>
               <div className="text-xs text-slate-400 uppercase tracking-wider font-medium">Questions Asked</div>
-            </div>
+        </div>
             <div className="text-center bg-slate-800/30 rounded-lg p-5 hover:bg-slate-800/50 transition-colors duration-200 border border-slate-700/50 stagger-item">
               <div className="text-4xl font-bold text-purple-400 mb-2">{recommendations.length}</div>
               <div className="text-xs text-slate-400 uppercase tracking-wider font-medium">Recommendations</div>
-            </div>
+      </div>
             <div className="text-center bg-slate-800/30 rounded-lg p-5 hover:bg-slate-800/50 transition-colors duration-200 border border-slate-700/50 stagger-item">
               <div className="text-4xl font-bold text-amber-400 mb-2">{missions.filter((m: any) => m.status === 'completed').length}</div>
               <div className="text-xs text-slate-400 uppercase tracking-wider font-medium">Missions Completed</div>
-            </div>
+        </div>
             <div className="text-center bg-slate-800/30 rounded-lg p-5 hover:bg-slate-800/50 transition-colors duration-200 border border-slate-700/50 stagger-item">
               <div className="text-4xl font-bold text-green-400 mb-2">{missions.filter((m: any) => m.status === 'active').length}</div>
               <div className="text-xs text-slate-400 uppercase tracking-wider font-medium">Active Missions</div>
-            </div>
-          </div>
+        </div>
+        </div>
         </CardContent>
       </Card>
 
@@ -1807,11 +2281,11 @@ function IntelligenceView({ data, messages, onCommand, commandInput, setCommandI
                     {query}
                   </Button>
                 ))}
-              </div>
-            </div>
+        </div>
+      </div>
           )}
 
-          {/* Messages */}
+      {/* Messages */}
           <div className="flex-1 overflow-y-auto space-y-3 mb-4 pr-2 custom-scrollbar">
             {displayMessages.length === 0 ? (
               <div className="text-center text-slate-500 py-12 slide-up">
@@ -1819,13 +2293,13 @@ function IntelligenceView({ data, messages, onCommand, commandInput, setCommandI
                 <div className="text-lg font-semibold text-slate-300 mb-2">Ask me anything about your code</div>
                 <div className="text-sm text-slate-400 mt-2">
                   Click a question above or type your own. I'll analyze YOUR code and give you specific answers. No generic advice here! ✨
-                </div>
-              </div>
-            ) : (
+            </div>
+          </div>
+        ) : (
               Array.isArray(displayMessages) ? displayMessages.map((msg: any, idx: number) => (
-                <div
-                  key={msg.id}
-                  className={`
+            <div
+              key={msg.id}
+              className={`
                     p-3 rounded-lg slide-up smooth-transition hover-lift ${
                       msg.type === 'user' 
                         ? 'bg-cyan-500/10 border-l-4 border-cyan-500 ml-8' 
@@ -1841,8 +2315,8 @@ function IntelligenceView({ data, messages, onCommand, commandInput, setCommandI
                     msg.type === 'ai' ? 'text-white' : 
                     'text-slate-400'
                   }`}>
-                    {msg.text}
-                  </div>
+              {msg.text}
+            </div>
                   {msg.actionableItems && msg.actionableItems.length > 0 && (
                     <div className="mt-3 pt-3 border-t border-slate-700">
                       <div className="flex flex-wrap gap-2">
@@ -1886,13 +2360,13 @@ function IntelligenceView({ data, messages, onCommand, commandInput, setCommandI
                   <span className="text-purple-400 text-sm">Processing...</span>
                 </div>
               </div>
-            )}
-          </div>
+        )}
+      </div>
 
-          {/* Command Input */}
+      {/* Command Input */}
           <div className="flex gap-2">
-            <input
-              type="text"
+        <input
+          type="text"
               value={aiInput}
               onChange={(e) => setAiInput(e.target.value)}
               onKeyPress={handleKeyPress}
@@ -2482,17 +2956,17 @@ function MarketplaceView({ data }: any) {
                 <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg flex items-center justify-center shadow-lg">
                   <span className="text-xl">📦</span>
                 </div>
-                Plugin Marketplace
+          Plugin Marketplace
               </CardTitle>
               <CardDescription className="text-slate-400 text-sm mt-1">
                 Find and install plugins for your code. We'll find the tools you need, you click install. It's that simple. 🎯
               </CardDescription>
-            </div>
+        </div>
             {installedPlugins.size > 0 && (
               <div className="hidden md:flex flex-col items-end gap-1">
                 <div className="text-xs text-slate-500 uppercase tracking-wider">Installed</div>
                 <div className="text-2xl font-bold text-green-400">{installedPlugins.size}</div>
-              </div>
+        </div>
             )}
           </div>
         </CardHeader>
@@ -2517,7 +2991,7 @@ function MarketplaceView({ data }: any) {
             <div className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500">
               🔍
             </div>
-          </div>
+            </div>
           
           {/* Category Filters - Enhanced */}
           <div className="flex flex-wrap gap-2">
@@ -2535,7 +3009,7 @@ function MarketplaceView({ data }: any) {
                 {cat.charAt(0).toUpperCase() + cat.slice(1)}
               </Button>
             ))}
-          </div>
+            </div>
         </CardContent>
       </Card>
 
@@ -2564,7 +3038,7 @@ function MarketplaceView({ data }: any) {
               {plugins.length > 0 
                 ? (plugins.reduce((sum, p) => sum + (p.plugin.rating || 0), 0) / plugins.length).toFixed(1)
                 : '0.0'}
-            </div>
+          </div>
             <div className="text-xs text-slate-500">⭐ Quality score</div>
           </CardContent>
         </Card>
@@ -2593,7 +3067,7 @@ function MarketplaceView({ data }: any) {
             <div className="text-6xl mb-4 animate-bounce">📦</div>
             <div className="text-lg font-semibold text-slate-300 mb-2">
               {searchQuery ? 'No plugins found' : 'No plugins in this category'}
-            </div>
+          </div>
             <div className="text-sm text-slate-400">
               {searchQuery ? 'Try a different search term - we have amazing plugins waiting for you! 🔍' : "Try selecting a different category - there's something for everyone! ✨"}
             </div>
@@ -2621,19 +3095,19 @@ function MarketplaceView({ data }: any) {
                           ✓ Installed
                         </span>
                       )}
-                    </div>
+            </div>
                     <CardDescription className="text-slate-400 text-sm line-clamp-2">
                       {item.plugin.description}
                     </CardDescription>
-                  </div>
+            </div>
                   <div className="flex flex-col items-end gap-1 flex-shrink-0">
                     <div className="flex items-center gap-1 text-green-400 font-semibold">
                       <span>⭐</span>
                       <span>{item.plugin.rating}</span>
-                    </div>
+          </div>
                     <div className="text-slate-500 text-xs">
                       {item.plugin.downloads?.toLocaleString()} downloads
-                    </div>
+      </div>
                   </div>
                 </div>
               </CardHeader>
@@ -3152,7 +3626,7 @@ function SettingsView({ data }: any) {
   };
 
   if (isLoading) {
-    return (
+  return (
       <div className="w-full max-w-7xl space-y-6 mx-auto">
         <Card className="bg-slate-900/90 border-slate-800">
           <CardContent className="flex items-center justify-center py-12">
@@ -3160,7 +3634,7 @@ function SettingsView({ data }: any) {
             <span className="text-cyan-400">Loading enterprise data...</span>
           </CardContent>
         </Card>
-      </div>
+        </div>
     );
   }
 
@@ -3173,25 +3647,30 @@ function SettingsView({ data }: any) {
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            <div className="text-center">
+          <div className="text-center">
               <div className="text-3xl font-bold text-cyan-400">{teams.length}</div>
               <div className="text-sm text-slate-400 mt-1">Teams</div>
-            </div>
-            <div className="text-center">
+          </div>
+          <div className="text-center">
               <div className="text-3xl font-bold text-cyan-400">{repos.length}</div>
               <div className="text-sm text-slate-400 mt-1">Repositories</div>
-            </div>
-            <div className="text-center">
+          </div>
+          <div className="text-center">
               <div className="text-3xl font-bold text-cyan-400">{users.length}</div>
               <div className="text-sm text-slate-400 mt-1">Users</div>
-            </div>
-            <div className="text-center">
+          </div>
+          <div className="text-center">
               <div className="text-3xl font-bold text-green-400">{data.uptime}%</div>
               <div className="text-sm text-slate-400 mt-1">Uptime</div>
-            </div>
           </div>
+        </div>
         </CardContent>
       </Card>
+
+      {/* GitHub Connection - Always visible */}
+      <ErrorBoundary>
+        <GitHubConnection userId={user?.id} />
+      </ErrorBoundary>
 
       {/* Teams Management */}
       <Card className="bg-slate-900/90 border-slate-800 card-polish stagger-item">
@@ -3613,29 +4092,29 @@ function SettingsView({ data }: any) {
               <div className="flex justify-between items-center py-2 border-b border-slate-800">
                 <span className="text-slate-300">BEAST MODE Core</span>
                 <span className="text-green-400 font-semibold">✓ Operational</span>
-              </div>
+          </div>
               <div className="flex justify-between items-center py-2 border-b border-slate-800">
                 <span className="text-slate-300">AI Assistant</span>
                 <span className={`font-semibold ${data.conversationalAIStatus === 'operational' ? 'text-green-400' : 'text-amber-400'}`}>
                   {data.conversationalAIStatus === 'operational' ? '✓ Ready' : '⚠ Limited'}
-                </span>
-              </div>
+              </span>
+            </div>
               <div className="flex justify-between items-center py-2 border-b border-slate-800">
                 <span className="text-slate-300">Code Analysis</span>
                 <span className="text-green-400 font-semibold">✓ Active</span>
-              </div>
+            </div>
               <div className="flex justify-between items-center py-2 border-b border-slate-800">
                 <span className="text-slate-300">Recommendations Engine</span>
                 <span className="text-green-400 font-semibold">✓ Active</span>
-              </div>
+            </div>
               <div className="flex justify-between items-center py-2">
                 <span className="text-slate-300">Integrations</span>
                 <span className="text-cyan-400 font-semibold">{data.integrations || 0} Connected</span>
-              </div>
+            </div>
             </div>
           </CardContent>
         </Card>
-      </div>
+            </div>
     </div>
   );
 }

@@ -15,7 +15,11 @@ const path = require('path');
 const fs = require('fs-extra');
 const { createLogger } = require('../lib/utils/logger');
 const { initializeBEASTMODE } = require('../lib/init');
+const CLIArtwork = require('../lib/cli/artwork');
 const log = createLogger('beast-mode');
+
+// Initialize artwork handler
+const artwork = new CLIArtwork();
 
 const program = new Command();
 
@@ -45,10 +49,21 @@ program
     .version(BEAST_MODE.version, '-v, --version', 'Show BEAST MODE version')
     .option('-d, --debug', 'Enable debug mode')
     .option('-q, --quiet', 'Quiet mode - minimal output')
-    .option('--no-color', 'Disable colored output');
+    .option('--no-color', 'Disable colored output')
+    .option('--logo-style <style>', 'Logo style: ascii, figlet, image, minimal, animate', 'ascii')
+    .option('--no-logo', 'Skip logo display');
+
+// Initialize session tracker
+const { getCLISessionTracker } = require('../lib/cli/session-tracker');
+const sessionTracker = getCLISessionTracker();
+
+// Initialize session tracking on CLI startup
+sessionTracker.initialize().catch(() => {
+    // Silently fail - don't break CLI if tracking fails
+});
 
 // Global setup
-program.hook('preAction', (thisCommand, actionCommand) => {
+program.hook('preAction', async (thisCommand, actionCommand) => {
     const options = thisCommand.opts();
 
     if (options.debug) {
@@ -64,12 +79,71 @@ program.hook('preAction', (thisCommand, actionCommand) => {
         process.env.NO_COLOR = 'true';
     }
 
-    // Show BEAST MODE header (unless quiet mode)
-    if (!options.quiet) {
-        console.log(chalk.bold.magenta(BEAST_MODE.ascii));
-        console.log(chalk.bold.yellow(`🏆 ${BEAST_MODE.tagline}\n`));
+    // Track command execution
+    const command = actionCommand.name() || 'unknown';
+    sessionTracker.trackCommand(command, options).catch(() => {
+        // Silently fail
+    });
+
+    // Show BEAST MODE header (unless quiet mode or --no-logo)
+    if (!options.quiet && !options.noLogo) {
+        // Check if we should show animation on startup
+        const showAnimation = process.env.BEAST_MODE_ANIMATE === 'true' || 
+                             options.logoStyle === 'animate' ||
+                             process.env.BEAST_MODE_STARTUP_ANIMATE === 'true';
+        
+        if (showAnimation && beastCreatures) {
+            // Show animation on startup
+            try {
+                await artwork.animateCreature('random');
+                // Small delay after animation
+                await new Promise(resolve => setTimeout(resolve, 500));
+            } catch (err) {
+                // Fallback to ASCII if animation fails
+                console.log(chalk.bold.magenta(BEAST_MODE.ascii));
+                console.log(chalk.bold.yellow(`🏆 ${BEAST_MODE.tagline}\n`));
+            }
+        } else {
+            // Use default ASCII
+            console.log(chalk.bold.magenta(BEAST_MODE.ascii));
+            console.log(chalk.bold.yellow(`🏆 ${BEAST_MODE.tagline}\n`));
+        }
     }
 });
+
+// Auth Commands
+program
+    .command('login')
+    .description('Login to BEAST MODE (with epic animation!)')
+    .option('--skip-animation', 'Skip login animation')
+    .action(async (options) => {
+        const CLILogin = require('../lib/cli/login');
+        const login = new CLILogin();
+        
+        if (!options.skipAnimation) {
+            await login.showLoginAnimation();
+        }
+        
+        await login.login();
+    });
+
+program
+    .command('logout')
+    .description('Logout from BEAST MODE')
+    .action(async () => {
+        const CLILogin = require('../lib/cli/login');
+        const login = new CLILogin();
+        await login.logout();
+    });
+
+program
+    .command('status')
+    .description('Show login status')
+    .action(async () => {
+        const CLILogin = require('../lib/cli/login');
+        const login = new CLILogin();
+        await login.showStatus();
+    });
 
 // Core Commands
 program
@@ -78,6 +152,23 @@ program
     .option('-f, --force', 'Force initialization (overwrite existing config)')
     .option('-e, --enterprise', 'Initialize with enterprise features')
     .action(async (options) => {
+        // Display welcome artwork or animation
+        if (!options.quiet) {
+            // Option to show animation on init (can be disabled with --no-logo)
+            if (options.logoStyle === 'animate' || process.env.BEAST_MODE_ANIMATE === 'true') {
+                await artwork.animateCreature('random').catch(() => {
+                    // Fallback to epic banner if animation fails
+                    artwork.displayASCII('epic-banner.txt', { color: 'magenta', animate: false }).catch(() => {});
+                });
+            } else {
+                // Show epic banner with the RAD logo
+                await artwork.displayASCII('epic-banner.txt', { color: 'magenta', animate: false }).catch(() => {
+                    // Fallback to default banner
+                    artwork.displayASCII('banner.txt', { color: 'cyan', animate: false }).catch(() => {});
+                });
+            }
+        }
+
         const spinner = ora('Initializing BEAST MODE...').start();
 
         try {
@@ -98,6 +189,15 @@ program
     .option('-p, --port <port>', 'Port to run dashboard on', '3001')
     .option('-o, --open', 'Open dashboard in browser')
     .action(async (options) => {
+        // Display dashboard launch artwork
+        if (!options.quiet) {
+            await artwork.generateBanner('Launching Dashboard', {
+                font: 'Standard',
+                color: 'cyan',
+                box: true
+            }).catch(() => {});
+        }
+
         const spinner = ora('Starting BEAST MODE Dashboard...').start();
 
         try {
@@ -493,12 +593,155 @@ program
             })
     );
 
+// Artwork Commands
+program
+    .command('artwork')
+    .description('BEAST MODE artwork and visual assets')
+    .addCommand(
+        new Command('gallery')
+            .description('Display artwork gallery')
+    .action(async () => {
+        await artwork.displayGallery();
+        
+        // Show available animations
+        const animations = artwork.listAnimations();
+        if (animations.available) {
+            console.log(chalk.bold('\n🎬 Animations:'));
+            animations.creatures.forEach(creature => {
+                console.log(chalk.white(`   • ${creature}`));
+            });
+            console.log(chalk.cyan('\n   Run "beast-mode artwork animate --kraken" to see animations!\n'));
+        }
+    })
+    )
+    .addCommand(
+        new Command('show')
+            .description('Display specific artwork')
+            .argument('<name>', 'Artwork file name')
+            .option('-t, --type <type>', 'Artwork type: image, ascii, banner', 'ascii')
+            .option('-c, --color <color>', 'Color for ASCII/banner', 'magenta')
+            .option('-a, --animate', 'Animate display')
+            .action(async (name, options) => {
+                try {
+                    if (options.type === 'image') {
+                        await artwork.displayImage(name);
+                    } else if (options.type === 'ascii') {
+                        await artwork.displayASCII(name, {
+                            color: options.color,
+                            animate: options.animate
+                        });
+                    } else if (options.type === 'banner') {
+                        await artwork.generateBanner(name, {
+                            color: options.color
+                        });
+                    }
+                } catch (error) {
+                    console.error(chalk.red(`Error displaying artwork: ${error.message}`));
+                }
+            })
+    )
+    .addCommand(
+        new Command('logo')
+            .description('Display BEAST MODE logo')
+            .option('-s, --style <style>', 'Logo style: ascii, figlet, image, minimal', 'ascii')
+            .option('-c, --color <color>', 'Logo color', 'magenta')
+            .option('-a, --animate', 'Animate logo display')
+            .action(async (options) => {
+                await artwork.displayLogo({
+                    style: options.style,
+                    color: options.color,
+                    animated: options.animate
+                });
+            })
+    )
+    .addCommand(
+        new Command('animate')
+            .description('Display animated beast creatures')
+            .option('-k, --kraken', 'Summon the kraken')
+            .option('-n, --narwhal', 'Summon the narwhal')
+            .option('-r, --random', 'Random creature')
+            .action(async (options) => {
+                let creature = 'random';
+                if (options.kraken) creature = 'kraken';
+                else if (options.narwhal) creature = 'narwhal';
+                else if (options.random) creature = 'random';
+
+                await artwork.animateCreature(creature);
+            })
+    );
+
 // Help and Info
+// GitHub OAuth Commands
+program
+    .command('github-oauth')
+    .description('GitHub OAuth setup and management')
+    .addCommand(
+        new Command('setup-dev')
+            .description('Setup GitHub OAuth for development (.env.local)')
+            .action(async () => {
+                const { setupDev } = require('../lib/cli/github-oauth');
+                await setupDev();
+            })
+    )
+    .addCommand(
+        new Command('setup-prod')
+            .description('Setup GitHub OAuth for production (Vercel)')
+            .action(async () => {
+                const { setupProd } = require('../lib/cli/github-oauth');
+                await setupProd();
+            })
+    )
+    .addCommand(
+        new Command('setup')
+            .description('Setup GitHub OAuth for both dev and prod (interactive)')
+            .action(async () => {
+                const githubOAuth = require('../lib/cli/github-oauth');
+                await githubOAuth.setupDev();
+                const readline = require('readline');
+                const rl = readline.createInterface({
+                    input: process.stdin,
+                    output: process.stdout,
+                });
+                const answer = await new Promise(resolve => {
+                    rl.question('\n🌐 Setup production too? (y/n): ', resolve);
+                });
+                rl.close();
+                if (answer.toLowerCase() === 'y') {
+                    await githubOAuth.setupProd();
+                }
+            })
+    )
+    .addCommand(
+        new Command('verify')
+            .description('Verify GitHub OAuth configuration')
+            .action(async () => {
+                const { verify } = require('../lib/cli/github-oauth');
+                await verify();
+            })
+    )
+    .addCommand(
+        new Command('test')
+            .description('Test GitHub OAuth connection')
+            .action(async () => {
+                const { test } = require('../lib/cli/github-oauth');
+                await test();
+            })
+    )
+    .addCommand(
+        new Command('show')
+            .description('Show current GitHub OAuth configuration')
+            .action(async () => {
+                const { show } = require('../lib/cli/github-oauth');
+                show();
+            })
+    );
+
 program
     .command('info')
     .description('Show BEAST MODE system information')
-    .action(() => {
-        console.log(chalk.bold.magenta(BEAST_MODE.ascii));
+    .action(async () => {
+        // Display logo with artwork if available
+        await artwork.displayLogo({ style: 'ascii', color: 'magenta' });
         console.log(chalk.bold.cyan('\n🏆 BEAST MODE SYSTEM INFORMATION'));
         console.log(chalk.yellow('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));
         console.log(chalk.white(`Version: ${BEAST_MODE.version}`));
@@ -533,9 +776,41 @@ program.on('command:*', (unknownCommand) => {
     process.exit(1);
 });
 
-// Handle no command
+// Handle no command - show animation and help
 if (process.argv.length === 2) {
-    program.outputHelp();
+    // Check if we should show animation on startup
+    // Default: show animation on first run, then check config
+    (async () => {
+        try {
+            const CLILogin = require('../lib/cli/login');
+            const login = new CLILogin();
+            const isLoggedIn = await login.isLoggedIn();
+            
+            const showAnimation = process.env.BEAST_MODE_ANIMATE === 'true' || 
+                                 process.env.BEAST_MODE_STARTUP_ANIMATE === 'true' ||
+                                 (!isLoggedIn && beastCreatures); // Show on first run if not logged in
+            
+            if (showAnimation && beastCreatures) {
+                try {
+                    await artwork.animateCreature('random');
+                    await new Promise(resolve => setTimeout(resolve, 500));
+                } catch (err) {
+                    // Fallback if animation fails
+                }
+            }
+            
+            // Show help
+            program.outputHelp();
+            
+            // If not logged in, suggest login
+            if (!isLoggedIn) {
+                console.log(chalk.yellow('\n💡 Tip: Run "beast-mode login" to authenticate and see epic animations!\n'));
+            }
+        } catch (err) {
+            // If login check fails, just show help
+            program.outputHelp();
+        }
+    })();
 }
 
 // Parse and execute

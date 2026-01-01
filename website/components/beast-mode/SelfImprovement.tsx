@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '../ui/card';
 import { Button } from '../ui/button';
+import { ConfirmDialog, AlertDialog } from '../ui/ConfirmDialog';
 import { getAnalytics } from '../../lib/analytics';
 
 export default function SelfImprovement() {
@@ -11,6 +12,33 @@ export default function SelfImprovement() {
   const [error, setError] = useState<string | null>(null);
   const [applyingFixes, setApplyingFixes] = useState<Set<number>>(new Set());
   const [appliedFixes, setAppliedFixes] = useState<Set<number>>(new Set());
+  
+  // Dialog states
+  const [confirmDialog, setConfirmDialog] = useState<{
+    open: boolean;
+    title: string;
+    message: string;
+    onConfirm: () => void;
+    variant?: 'default' | 'danger';
+  }>({
+    open: false,
+    title: '',
+    message: '',
+    onConfirm: () => {},
+    variant: 'default'
+  });
+  
+  const [alertDialog, setAlertDialog] = useState<{
+    open: boolean;
+    title: string;
+    message: string;
+    variant?: 'success' | 'error' | 'info';
+  }>({
+    open: false,
+    title: '',
+    message: '',
+    variant: 'info'
+  });
 
   const handleAnalyze = async () => {
     setIsAnalyzing(true);
@@ -36,14 +64,56 @@ export default function SelfImprovement() {
   };
 
   const handleApplyFix = async (recommendation: any, index: number) => {
-    // Ask user about git operations
-    const shouldCommit = confirm('Apply fix and commit changes to git?');
-    const shouldPush = shouldCommit && confirm('Push to remote repository?');
-    const shouldDeploy = shouldPush && confirm('Deploy to production? (This will trigger deployment)');
+    // Helper function to show confirmation dialog
+    const showConfirm = (title: string, message: string, variant: 'default' | 'danger' = 'default'): Promise<boolean> => {
+      return new Promise((resolve) => {
+        setConfirmDialog({
+          open: true,
+          title,
+          message,
+          variant,
+          onConfirm: () => {
+            setConfirmDialog({ open: false, title: '', message: '', onConfirm: () => {} });
+            resolve(true);
+          },
+          onCancel: () => {
+            setConfirmDialog({ open: false, title: '', message: '', onConfirm: () => {} });
+            resolve(false);
+          }
+        });
+      });
+    };
+
+    // Ask user about git operations using styled dialogs
+    const shouldCommit = await showConfirm(
+      'Apply Fix',
+      'Apply fix and commit changes to git?'
+    );
+
+    if (!shouldCommit) {
+      return;
+    }
+
+    const shouldPush = await showConfirm(
+      'Push to Remote',
+      'Push to remote repository?'
+    );
+
+    const shouldDeploy = shouldPush && await showConfirm(
+      'Deploy to Production',
+      'Deploy to production? (This will trigger deployment)',
+      'danger'
+    );
 
     setApplyingFixes(prev => new Set(prev).add(index));
     
     try {
+      console.log('🔧 [SelfImprovement] Applying fix:', {
+        recommendation: recommendation.title,
+        fixType: recommendation.type || recommendation.title,
+        gitOptions: { commit: shouldCommit, push: shouldPush, deploy: shouldDeploy }
+      });
+
       const response = await fetch('/api/beast-mode/self-improve/apply-fix', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -58,11 +128,20 @@ export default function SelfImprovement() {
         })
       });
 
+      console.log('   Response status:', response.status);
+      console.log('   Response ok:', response.ok);
+
       if (!response.ok) {
-        throw new Error('Failed to apply fix');
+        const errorData = await response.json().catch(() => ({}));
+        console.error('❌ [SelfImprovement] Fix application failed:', {
+          status: response.status,
+          error: errorData
+        });
+        throw new Error(errorData.error || errorData.message || 'Failed to apply fix');
       }
 
       const result = await response.json();
+      console.log('✅ [SelfImprovement] Fix application result:', result);
       
       if (result.success) {
         setAppliedFixes(prev => new Set(prev).add(index));
@@ -97,7 +176,12 @@ export default function SelfImprovement() {
           }
         }
         
-        alert(message);
+        setAlertDialog({
+          open: true,
+          title: 'Fix Applied Successfully',
+          message,
+          variant: 'success'
+        });
         
         // Refresh analysis after fix
         setTimeout(() => {
@@ -107,7 +191,19 @@ export default function SelfImprovement() {
         throw new Error(result.error || result.message || 'Failed to apply fix');
       }
     } catch (err: any) {
-      alert(`❌ Failed to apply fix: ${err.message}`);
+      console.error('❌ [SelfImprovement] Error applying fix:', {
+        error: err,
+        message: err.message,
+        stack: err.stack,
+        recommendation: recommendation.title
+      });
+      
+      setAlertDialog({
+        open: true,
+        title: 'Failed to Apply Fix',
+        message: `❌ ${err.message || 'An unexpected error occurred'}\n\nCheck the browser console for more details.`,
+        variant: 'error'
+      });
     } finally {
       setApplyingFixes(prev => {
         const newSet = new Set(prev);
@@ -374,6 +470,24 @@ export default function SelfImprovement() {
           </Card>
         </>
       )}
+
+      {/* Styled Dialogs */}
+      <ConfirmDialog
+        open={confirmDialog.open}
+        title={confirmDialog.title}
+        message={confirmDialog.message}
+        onConfirm={confirmDialog.onConfirm}
+        onCancel={() => setConfirmDialog({ open: false, title: '', message: '', onConfirm: () => {} })}
+        variant={confirmDialog.variant}
+      />
+      
+      <AlertDialog
+        open={alertDialog.open}
+        title={alertDialog.title}
+        message={alertDialog.message}
+        variant={alertDialog.variant}
+        onClose={() => setAlertDialog({ open: false, title: '', message: '', variant: 'info' })}
+      />
     </div>
   );
 }

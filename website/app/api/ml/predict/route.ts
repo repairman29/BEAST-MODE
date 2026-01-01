@@ -1,14 +1,22 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { withProductionIntegration } from '../../../../lib/api-middleware';
 
 /**
  * ML Prediction API
  * 
- * Provides ML quality predictions for First Mate and other services
+ * Provides ML quality predictions with intelligent routing to specialized services
+ * 
+ * Routing Strategy:
+ * 1. Try specialized service (Code Roach, Oracle, etc.) if context matches
+ * 2. Fall back to BEAST MODE ML model if available
+ * 3. Fall back to heuristics
  * 
  * Month 3: Week 1 - First Mate Integration
+ * Phase 1, Week 1: Production Integration (Error Handling, Performance Monitoring, Caching)
+ * Phase 2: Service Integration - Specialized ML services
  */
 
-export async function POST(request: NextRequest) {
+async function handlePOST(request: NextRequest) {
   try {
     const { context } = await request.json();
 
@@ -19,10 +27,20 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Try to load ML model integration
+    // Try service router first (specialized services)
+    let serviceRouter = null;
+    try {
+      const path = require('path');
+      const routerPath = path.join(process.cwd(), '../lib/mlops/serviceRouter');
+      const { getServiceRouter } = require(routerPath);
+      serviceRouter = getServiceRouter();
+    } catch (error) {
+      console.debug('[ML API] Service router not available:', error.message);
+    }
+
+    // Try to load ML model integration (fallback)
     let mlIntegration = null;
     try {
-      // Path relative to BEAST-MODE-PRODUCT root
       const path = require('path');
       const mlPath = path.join(process.cwd(), '../lib/mlops/mlModelIntegration');
       const { getMLModelIntegration } = require(mlPath);
@@ -31,65 +49,101 @@ export async function POST(request: NextRequest) {
       console.debug('[ML API] ML integration not available:', error.message);
     }
 
-    // If ML model is available, use it
-    if (mlIntegration && mlIntegration.isMLModelAvailable()) {
-      try {
-        // Add service name to context (detect from provider or use default)
-        const serviceName = context.provider === 'first-mate' ? 'first-mate' : 
-                          context.provider === 'game-app' ? 'game-app' :
-                          'unknown';
-        
-        const enhancedContext = {
-          ...context,
-          serviceName: serviceName,
-          predictionType: context.actionType || 'quality'
-        };
-        
-        const prediction = mlIntegration.predictQualitySync(enhancedContext);
-        
-        // Get expanded predictions if requested
-        let expandedPredictions = null;
-        if (context.includeExpanded !== false) {
-          try {
-            expandedPredictions = await mlIntegration.getExpandedPredictions(enhancedContext);
-          } catch (error) {
-            console.debug('[ML API] Expanded predictions not available:', error.message);
+    // Fallback predictor function
+    const fallbackPredictor = async (ctx: any) => {
+      // Try BEAST MODE ML model
+      if (mlIntegration && mlIntegration.isMLModelAvailable()) {
+        try {
+          const serviceName = ctx.provider === 'first-mate' ? 'first-mate' : 
+                            ctx.provider === 'game-app' ? 'game-app' :
+                            'unknown';
+          
+          const enhancedContext = {
+            ...ctx,
+            serviceName: serviceName,
+            predictionType: ctx.actionType || 'quality'
+          };
+          
+          const prediction = mlIntegration.predictQualitySync(enhancedContext);
+          
+          // Get expanded predictions if requested
+          let expandedPredictions = null;
+          if (ctx.includeExpanded !== false) {
+            try {
+              expandedPredictions = await mlIntegration.getExpandedPredictions(enhancedContext);
+            } catch (error) {
+              console.debug('[ML API] Expanded predictions not available:', error.message);
+            }
           }
-        }
-        
-        const response: any = {
-          prediction: {
+          
+          return {
             predictedQuality: prediction.predictedQuality,
             confidence: prediction.confidence,
             source: prediction.source || 'ml_model',
-            modelVersion: prediction.modelVersion || 'unknown'
+            modelVersion: prediction.modelVersion || 'unknown',
+            expanded: expandedPredictions
+          };
+        } catch (error) {
+          console.debug('[ML API] ML prediction failed:', error.message);
+          // Fall through to heuristics
+        }
+      }
+      
+      // Final fallback: heuristics
+      return getHeuristicPrediction(ctx);
+    };
+
+    // Try service router first (specialized services)
+    if (serviceRouter) {
+      try {
+        const routedResult = await serviceRouter.routePrediction(context, fallbackPredictor);
+        
+        const response: any = {
+          prediction: {
+            predictedQuality: routedResult.predictedQuality,
+            confidence: routedResult.confidence,
+            source: routedResult.source || 'unknown',
+            routed: routedResult.routed || false,
+            service: routedResult.service,
+            predictionType: routedResult.predictionType
           },
           timestamp: new Date().toISOString(),
-          mlAvailable: true
+          mlAvailable: routedResult.source !== 'heuristic',
+          serviceUsed: routedResult.routed ? routedResult.service : null
         };
 
-        if (expandedPredictions) {
-          response.expanded = expandedPredictions;
+        // Add service-specific metadata
+        if (routedResult.method) {
+          response.prediction.method = routedResult.method;
         }
-        
+        if (routedResult.factors) {
+          response.prediction.factors = routedResult.factors;
+        }
+        if (routedResult.relevance) {
+          response.prediction.relevance = routedResult.relevance;
+        }
+        if (routedResult.expanded) {
+          response.expanded = routedResult.expanded;
+        }
+
         return NextResponse.json(response);
       } catch (error) {
-        console.warn('[ML API] ML prediction failed:', error.message);
-        // Fall through to heuristic fallback
+        console.warn('[ML API] Service routing failed:', error.message);
+        // Fall through to direct fallback
       }
     }
 
-    // Fallback: Simple heuristic prediction
-    const heuristicPrediction = getHeuristicPrediction(context);
+    // Direct fallback (no service router available)
+    const fallbackResult = await fallbackPredictor(context);
 
     return NextResponse.json({
       prediction: {
-        predictedQuality: heuristicPrediction.predictedQuality,
-        confidence: heuristicPrediction.confidence,
-        source: 'heuristic'
+        predictedQuality: fallbackResult.predictedQuality,
+        confidence: fallbackResult.confidence,
+        source: fallbackResult.source || 'heuristic'
       },
       timestamp: new Date().toISOString(),
-      mlAvailable: false
+      mlAvailable: fallbackResult.source !== 'heuristic'
     });
 
   } catch (error) {
@@ -162,6 +216,13 @@ function getHeuristicPrediction(context: any) {
   };
 }
 
+// Export wrapped POST handler with production integration
+export const POST = withProductionIntegration(handlePOST, {
+  endpoint: '/api/ml/predict',
+  enableCache: true,
+  cacheTTL: 300000 // 5 minutes
+});
+
 /**
  * GET endpoint for health check
  */
@@ -169,7 +230,9 @@ export async function GET(request: NextRequest) {
   try {
     let mlAvailable = false;
     let modelInfo = null;
+    let serviceStatus = null;
 
+    // Check BEAST MODE ML
     try {
       const path = require('path');
       const mlPath = path.join(process.cwd(), '../lib/mlops/mlModelIntegration');
@@ -184,10 +247,22 @@ export async function GET(request: NextRequest) {
       // ML not available
     }
 
+    // Check service router
+    try {
+      const path = require('path');
+      const routerPath = path.join(process.cwd(), '../lib/mlops/serviceRouter');
+      const { getServiceRouter } = require(routerPath);
+      const router = getServiceRouter();
+      serviceStatus = router.getRoutingStatistics();
+    } catch (error) {
+      // Service router not available
+    }
+
     return NextResponse.json({
       status: 'ok',
       mlAvailable,
       modelInfo,
+      services: serviceStatus,
       timestamp: new Date().toISOString()
     });
   } catch (error) {
@@ -200,4 +275,3 @@ export async function GET(request: NextRequest) {
     );
   }
 }
-

@@ -1,12 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { fetchRepository, fetchRepositoryContents, octokit } from '../../../../lib/github';
+import { fetchRepository, fetchRepositoryContents, octokit, createOctokit } from '../../../../lib/github';
 import cache, { cacheKeys, cacheTTL } from '../../../../lib/cache';
 import queryOptimizer from '../../../../lib/query-optimizer';
+import { getDecryptedToken } from '../token/route';
 
 /**
  * GitHub Repository Scanning API
  * 
  * Scans a GitHub repository for code quality issues using GitHub API
+ * Supports private repos when user has connected their GitHub account
  */
 export async function POST(request: NextRequest) {
   try {
@@ -35,14 +37,33 @@ export async function POST(request: NextRequest) {
       return NextResponse.json(cached);
     }
 
+    // Get user's GitHub token if available (for private repos)
+    let userOctokit = null;
+    const authHeader = request.headers.get('authorization');
+    const token = authHeader?.replace('Bearer ', '') || 
+                  request.cookies.get('beastModeToken')?.value;
+    
+    if (token) {
+      // TODO: Get user ID from token
+      const userId = 'user-id-from-token'; // Replace with actual user ID from token
+      const userGitHubToken = await getDecryptedToken(userId);
+      
+      if (userGitHubToken) {
+        userOctokit = createOctokit(userGitHubToken);
+      }
+    }
+
+    // Use user's token if available, otherwise fall back to global token
+    const activeOctokit = userOctokit || octokit;
+
     // Use real GitHub API if configured
-    if (octokit) {
+    if (activeOctokit) {
       try {
         // Fetch repository metadata
-        const repoData = await fetchRepository(owner, repoName);
+        const repoData = await fetchRepository(owner, repoName, activeOctokit);
 
         // Fetch repository languages
-        const { data: languages } = await octokit.repos.listLanguages({
+        const { data: languages } = await activeOctokit.repos.listLanguages({
           owner,
           repo: repoName
         });
@@ -57,7 +78,7 @@ export async function POST(request: NextRequest) {
         // Check for README by trying to fetch it
         let hasReadme = 0;
         try {
-          await fetchRepositoryContents(owner, repoName, 'README.md');
+          await fetchRepositoryContents(owner, repoName, 'README.md', activeOctokit);
           hasReadme = 1;
         } catch {
           // No README found
@@ -74,13 +95,13 @@ export async function POST(request: NextRequest) {
 
         try {
           // Get the default branch commit SHA first
-          const { data: branchData } = await octokit.repos.getBranch({
+          const { data: branchData } = await activeOctokit.repos.getBranch({
             owner,
             repo: repoName,
             branch: repoData.default_branch
           });
           
-          const { data: tree } = await octokit.git.getTree({
+          const { data: tree } = await activeOctokit.git.getTree({
             owner,
             repo: repoName,
             tree_sha: branchData.commit.sha,
