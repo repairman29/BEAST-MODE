@@ -66,21 +66,12 @@ export async function GET(request: NextRequest) {
     const { searchParams } = new URL(request.url);
     const input = searchParams.get('input') || '';
 
-    const security = await getSecurityEnhancerService();
-    
-    if (!security) {
-      return NextResponse.json({
-        status: 'unavailable',
-        message: 'Security enhancer not available',
-        timestamp: new Date().toISOString()
-      });
-    }
-
-    // Scan for vulnerabilities
-    const vulnerabilities = security.scanVulnerabilities(input);
-
-    // Sanitize
-    const sanitized = security.sanitizeOutput(input, 'xss');
+    // Security enhancer not available
+    return NextResponse.json({
+      status: 'unavailable',
+      message: 'Security enhancer not available',
+      timestamp: new Date().toISOString()
+    });
 
     return NextResponse.json({
       status: 'ok',
