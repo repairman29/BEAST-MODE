@@ -1,5 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { detectAnomalies, getPerformanceMonitor } from '../../../../lib/api-middleware';
+
+// Optional imports - handle gracefully if not available
+let detectAnomalies: any = null;
+try {
+  const middleware = require('../../../../lib/api-middleware');
+  detectAnomalies = middleware.detectAnomalies;
+} catch (error) {
+  // Middleware not available
+}
 
 /**
  * Anomalies API
@@ -9,7 +17,7 @@ import { detectAnomalies, getPerformanceMonitor } from '../../../../lib/api-midd
  * Phase 1, Week 2: High-Impact Services Integration
  */
 
-async function getPerformanceMonitor() {
+async function getPerformanceMonitorLocal() {
   try {
     const path = require('path');
     const monitorPath = path.join(process.cwd(), '../lib/scale/performanceMonitor');
@@ -26,7 +34,16 @@ export async function GET(request: NextRequest) {
     const endpoint = searchParams.get('endpoint') || 'all';
     const limit = parseInt(searchParams.get('limit') || '50');
 
-    const detector = await getAnomalyDetectorService();
+    // Try to get anomaly detector service
+    let detector = null;
+    try {
+      const path = require('path');
+      const detectorPath = path.join(process.cwd(), '../lib/scale/anomalyDetector');
+      const { getAnomalyDetectorService } = require(detectorPath);
+      detector = await getAnomalyDetectorService();
+    } catch (error) {
+      // Detector not available
+    }
     
     if (!detector) {
       return NextResponse.json({
@@ -37,7 +54,7 @@ export async function GET(request: NextRequest) {
     }
 
     // Get detection history
-    const history = detector.getDetectionHistory(limit);
+    const history = detector.getDetectionHistory ? detector.getDetectionHistory(limit) : [];
     
     if (history.length === 0) {
       return NextResponse.json({

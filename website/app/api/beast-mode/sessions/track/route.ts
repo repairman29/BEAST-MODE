@@ -41,7 +41,7 @@ export async function POST(request: NextRequest) {
         const tokenData = await getDecryptedToken(oauthUserId);
         if (tokenData) {
           // Get GitHub user info from stored token data
-          const { createOctokit } = await import('../../../../../../lib/github');
+          const { createOctokit } = await import('../../../../../lib/github');
           const octokit = createOctokit(tokenData);
           const { data: user } = await octokit.users.getAuthenticated();
           githubUsername = user.login;
@@ -63,7 +63,7 @@ export async function POST(request: NextRequest) {
 
     // Write to Supabase (ML database)
     try {
-      const { getDatabaseWriter } = await import('../../../../../../lib/mlops/databaseWriter');
+      const { getDatabaseWriter } = await import('../../../../../lib/mlops/databaseWriter');
       const dbWriter = getDatabaseWriter();
       
       await dbWriter.writePrediction({

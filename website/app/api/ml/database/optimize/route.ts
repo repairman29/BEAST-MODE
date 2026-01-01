@@ -1,5 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { optimizeQuery, getDatabaseOptimizerService } from '../../../../lib/api-middleware';
+
+// Optional imports - handle gracefully if not available
+let optimizeQuery: any = null;
+let getDatabaseOptimizerService: any = null;
+try {
+  const middleware = require('../../../../lib/api-middleware');
+  optimizeQuery = middleware.optimizeQuery;
+  getDatabaseOptimizerService = middleware.getDatabaseOptimizerService;
+} catch (error) {
+  // Middleware not available
+}
 
 /**
  * Database Optimization API
@@ -21,6 +31,14 @@ export async function POST(request: NextRequest) {
         },
         { status: 400 }
       );
+    }
+
+    if (!optimizeQuery) {
+      return NextResponse.json({
+        status: 'unavailable',
+        message: 'Query optimizer not available',
+        timestamp: new Date().toISOString()
+      });
     }
 
     const optimized = await optimizeQuery(query, params);
@@ -46,6 +64,14 @@ export async function POST(request: NextRequest) {
 
 export async function GET(request: NextRequest) {
   try {
+    if (!getDatabaseOptimizerService) {
+      return NextResponse.json({
+        status: 'unavailable',
+        message: 'Database optimizer not available',
+        timestamp: new Date().toISOString()
+      });
+    }
+
     const optimizer = await getDatabaseOptimizerService();
     
     if (!optimizer) {
@@ -56,8 +82,8 @@ export async function GET(request: NextRequest) {
       });
     }
 
-    const stats = optimizer.getQueryStatistics();
-    const recommendations = optimizer.getIndexRecommendations();
+    const stats = optimizer.getQueryStatistics ? optimizer.getQueryStatistics() : {};
+    const recommendations = optimizer.getIndexRecommendations ? optimizer.getIndexRecommendations() : [];
 
     return NextResponse.json({
       status: 'ok',
