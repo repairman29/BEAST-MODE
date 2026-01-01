@@ -35,6 +35,37 @@ While tools like Cursor, Windsurf, and Replit help developers *generate* code fa
 
 **The Solution:** BEAST MODE is the complete Day 2 Operations Platform that makes AI-generated code actually production-ready, maintainable, and shippable.
 
+### Where BEAST MODE Sits: The Governance Layer
+
+```
+┌──────────────┐      ┌──────────────┐      ┌──────────────┐
+│   Cursor     │      │   Windsurf   │      │    Replit    │
+│  (Code Gen)  │      │  (Code Gen)  │      │  (Code Gen)  │
+└──────┬───────┘      └──────┬───────┘      └──────┬───────┘
+       │                     │                     │
+       │  AI-Generated Code │                     │
+       └──────────┬──────────┴──────────┬──────────┘
+                  │                     │
+                  ▼                     ▼
+       ┌───────────────────────────────────────────┐
+       │      🛡️  BEAST MODE / SENTINEL 🛡️        │
+       │      The Governance Layer (The Filter)    │
+       │  • Architecture Enforcement               │
+       │  • Silent Security Scanning               │
+       │  • Plain English Reviews                  │
+       └───────────────────┬───────────────────────┘
+                           │
+                           │  Clean, Production-Ready Code
+                           ▼
+                  ┌──────────────┐
+                  │   GitHub     │
+                  │  Repository  │
+                  └──────────────┘
+
+KEY: We COMPLEMENT code generation tools. We don't compete.
+     We are the FILTER, not the GENERATOR.
+```
+
 **Status:** ✅ **GOLD MASTER - RELEASE CANDIDATE**
 - 9 AI systems fully integrated and tested
 - 6,000+ lines of production code
@@ -86,20 +117,36 @@ Built for **vibe coders**—developers who code with passion, build with purpose
    - Auto-creates PRs
    - **Safety:** 99.9% confidence threshold, human review default
 
+   **The Overnight Cycle:**
+   ```
+   ┌─────────────┐    ┌─────────────┐    ┌─────────────┐
+   │   ANALYZE   │───▶│   DETECT    │───▶│  REFACTOR   │
+   │  Codebase   │    │  Code Smells│    │  Fix Issues │
+   └─────────────┘    └─────────────┘    └──────┬──────┘
+                                                 │
+   ┌─────────────┐    ┌─────────────┐           │
+   │   WAKE UP   │◀───│  CREATE PR  │◀──────────┘
+   │  TO CLEAN   │    │  + Notify    │
+   │    CODE     │    │              │
+   └─────────────┘    └──────┬───────┘
+                             │
+                    ┌────────┴────────┐
+                    │   TEST          │
+                    │  Verify Changes │
+                    └─────────────────┘
+   
+   Runs 2 AM - 6 AM while you sleep.
+   Safety: 99.9% confidence, tests must pass, human review default.
+   ```
+
 2. **Architecture Enforcement Layer** ✅
    - Prevents bad patterns automatically
    - Pre-commit hooks installed
    - Blocks secrets in code
    - Prevents database logic in frontend
    - Auto-fixes violations
-   - **Tested:** Detects hardcoded secrets, XSS risks, // SECURITY: // SECURITY: // SECURITY: eval() disabled
-// eval() disabled
-// // SECURITY: eval() disabled
-// eval() disabled
-// // SECURITY: // SECURITY: eval() disabled
-// eval() disabled
-// // SECURITY: eval() disabled
-// eval() usage
+   - **Tested:** Detects hardcoded secrets, XSS risks, // SECURITY: eval() disabled
+// eval() usage, architecture violations
 
 3. **Vibe Restoration System** ✅
    - "Rewind to last working state"
@@ -122,6 +169,31 @@ Built for **vibe coders**—developers who code with passion, build with purpose
    - Plain English reports
    - **Cost Optimized:** Tiered testing strategy, caching, selective execution
    - **Tested:** Pattern matching, visual AI tiers working
+
+   **The "English as Source Code" Testing Workflow:**
+   ```
+   ┌─────────────────────────────────────────────────────────┐
+   │  CITIZEN DEVELOPER / PM                                  │
+   │  "User can login and see dashboard"                      │
+   └──────────────────┬──────────────────────────────────────┘
+                      │
+                      ▼
+   ┌─────────────────────────────────────────────────────────┐
+   │  BEAST MODE: Vibe Ops                                    │
+   │  • Translates English → Test Case                        │
+   │  • Spins up browser (Playwright)                        │
+   │  • Executes test automatically                          │
+   └──────────────────┬──────────────────────────────────────┘
+                      │
+                      ▼
+   ┌─────────────────────────────────────────────────────────┐
+   │  PLAIN ENGLISH REPORT                                    │
+   │  "Login failed because Submit button                    │
+   │   covered by pop-up"                                     │
+   └─────────────────────────────────────────────────────────┘
+   
+   KEY: No code knowledge required. Test in English, fix in English.
+   ```
 
 6. **Enterprise Guardrail** ✅
    - Plain English code reviews
@@ -153,20 +225,56 @@ Built for **vibe coders**—developers who code with passion, build with purpose
 
 ---
 
-## 🎯 Dual-Brand Strategy
+## 🎯 Dual-Brand Strategy: The "Mullet Strategy"
 
-### BEAST MODE (Community)
-- **Tagline:** "The AI Janitor for Vibe Coders"
-- **Target:** Developers, hobbyists, indie makers
-- **Tone:** Energetic, fun, community-focused
-- **Features:** All 9 systems, overnight maintenance, vibe restoration
+**"Business in the Front, Party in the Back"**
 
-### SENTINEL by BEAST MODE (Enterprise)
-- **Tagline:** "The Governance Layer for AI-Generated Code"
-- **Target:** CTOs, Engineering Managers, Security Teams
-- **Tone:** Professional, trustworthy, compliance-focused
-- **Features:** Enterprise guardrail, compliance reporting, audit logs
-- **Positioning:** "Compliance-as-a-Service for the AI Coding Era"
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                    🛡️  SENTINEL  🛡️                            │
+│              (Business in the Front)                            │
+│                                                                 │
+│  TARGET: Enterprise CTOs, Security Teams, Compliance Officers  │
+│  TONE: Professional, Trustworthy, Compliance-Focused           │
+│  PRICING: Enterprise ($299/month)                               │
+│                                                                 │
+│  VALUE PROP:                                                    │
+│  • "Compliance-as-a-Service for AI-Generated Code"            │
+│  • "The Governance Layer for AI Coding Tools"                  │
+│  • "Prevent Shadow IT from Breaking Your Security Posture"    │
+│                                                                 │
+│  FEATURES:                                                      │
+│  • Enterprise Guardrail (Plain English Reviews)                │
+│  • Compliance Reporting & Audit Logs                           │
+│  • SSO, White-Label, Custom Rules                              │
+│  • 99.9% Confidence Threshold (Safety First)                  │
+└─────────────────────────────────────────────────────────────────┘
+                              │
+                              │ Powered by
+                              ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                    🎸  BEAST MODE  🎸                            │
+│              (Party in the Back)                                 │
+│                                                                 │
+│  TARGET: Vibe Coders, Indie Makers, Citizen Developers         │
+│  TONE: Energetic, Fun, Community-Focused                       │
+│  PRICING: Free, Developer ($29), Team ($99)                    │
+│                                                                 │
+│  VALUE PROP:                                                    │
+│  • "The AI Janitor for Vibe Coders"                            │
+│  • "Code Fast. Ship Confidently. We Handle the Mess."          │
+│  • "Wake Up to Clean Code"                                      │
+│                                                                 │
+│  FEATURES:                                                      │
+│  • Silent Refactoring (Overnight Maintenance)                   │
+│  • Vibe Restoration (Rewind to Last Good State)                │
+│  • Vibe Ops (Test in English)                                   │
+│  • Repo Memory (Context Preservation)                          │
+└─────────────────────────────────────────────────────────────────┘
+
+KEY INSIGHT: Same technology, different positioning.
+BEAST MODE = Community energy | SENTINEL = Enterprise trust
+```
 
 **Status:** ✅ Both brands implemented and tested
 
@@ -407,7 +515,15 @@ Built for **vibe coders**—developers who code with passion, build with purpose
 - Blocks secrets in code
 - Auto-fixes violations
 - Enforces separation of concerns
-- **Tested:** Detects hardcoded secrets, XSS risks, // SECURITY: // SECURITY: // SECURITY: eval() disabled
+- **Tested:** Detects hardcoded secrets, XSS risks, // SECURITY: // SECURITY: // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// // SECURITY: eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// // SECURITY: eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: // SECURITY: eval() disabled
 // eval() disabled
 // // SECURITY: eval() disabled
 // eval() disabled
@@ -588,8 +704,9 @@ beast-mode vibe check
 
 ### Press Contact
 - **Email:** press@beastmode.dev
-- **Status:** ✅ Production ready - Contact for access
-- **Response Time:** Within 24 hours
+- **Status:** ✅ Gold Master - Release Candidate
+- **Response Time:** Within 24 hours (48-hour window of interest when press hits)
+- **Note:** Ensure press@beastmode.dev routes to your phone. When this hits, the window of interest is about 48 hours.
 
 ---
 
@@ -668,12 +785,22 @@ beast-mode vibe check
 
 ## 🎬 Demo Scenarios
 
-> **📹 Visual Demo Recommendation:** Create a 30-second GIF showing:
-> - **Frame 1:** Chaotic code block with hardcoded secrets, duplicate code, security issues (The "Before")
-> - **Frame 2:** "Janitor Running" loading bar with timestamp "2:00 AM - 6:00 AM" (The "During")
-> - **Frame 3:** Clean code with PR comment explaining why it was fixed (The "After")
->
-> This visual transformation demonstrates the value instantly and makes the "invisible" visible.
+> **📹 MANDATORY VISUAL ASSET:** A 30-second GIF is required for launch.
+> 
+> **Frame 1:** Chaotic code block (The "Before")
+> - Red errors: Hardcoded secrets, duplicate code, security issues
+> - Visual chaos: Multiple violations highlighted
+> 
+> **Frame 2:** "Janitor Running" (The "During")
+> - Loading bar: "BEAST MODE Janitor Running... 2:00 AM - 6:00 AM"
+> - Progress indicators: "Analyzing... Detecting... Refactoring... Testing..."
+> 
+> **Frame 3:** Clean code with PR (The "After")
+> - Green checkmarks: All issues fixed
+> - PR comment: "Fixed 23 issues, de-duplicated 5 functions, closed 3 security holes"
+> - Clean, production-ready code
+> 
+> **Why this matters:** The text "Fixed 23 issues" is boring. Seeing a red wall of errors turn into a green wall of "Fixed" checks is dopamine. This GIF is your viral asset on Twitter/X.
 
 ### Demo 1: Overnight Maintenance
 1. Developer codes with Cursor all day
