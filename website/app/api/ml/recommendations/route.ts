@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getRecommendations } from '@/lib/api-middleware';
+import { getRecommendations } from '../../../../lib/api-middleware';
 
 /**
  * Recommendations API

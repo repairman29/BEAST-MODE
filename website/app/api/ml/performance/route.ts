@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getPerformanceStats } from '@/lib/api-middleware';
+import { getPerformanceStats } from '../../../../lib/api-middleware';
 
 /**
  * Performance Statistics API
