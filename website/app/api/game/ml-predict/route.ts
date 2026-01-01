@@ -154,12 +154,22 @@ function getHeuristicPrediction(context: any) {
   };
 }
 
-// Export wrapped POST handler with production integration
-export const POST = withProductionIntegration(handlePOST, {
-  endpoint: '/api/game/ml-predict',
-  enableCache: true,
-  cacheTTL: 300000 // 5 minutes
-});
+// Export POST handler - wrap with production integration if available
+let POST: typeof handlePOST = handlePOST;
+try {
+  if (withProductionIntegration) {
+    POST = withProductionIntegration(handlePOST, {
+      endpoint: '/api/game/ml-predict',
+      enableCache: true,
+      cacheTTL: 300000 // 5 minutes
+    }) as typeof handlePOST;
+  }
+} catch (error) {
+  // Production integration not available, use handler directly
+  console.warn('[Game ML API] Production integration not available:', error);
+}
+
+export { POST };
 
 /**
  * GET endpoint for health check
