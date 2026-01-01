@@ -1,0 +1,15 @@
+graph TD
+    A[ANALYZE<br/>Scan Codebase<br/>2 AM] --> B[DETECT<br/>Code Smells<br/>Security Issues]
+    B --> C[REFACTOR<br/>Fix Issues<br/>99.9% Confidence]
+    C --> D[TEST<br/>Verify Changes<br/>No Regressions]
+    D --> E[CREATE PR<br/>Plain English<br/>Description]
+    E --> F[WAKE UP<br/>Clean Code<br/>6 AM]
+    F -.->|Next Night| A
+    
+    style A fill:#1E3A8A,stroke:#F59E0B,stroke-width:3px,color:#fff
+    style B fill:#3B82F6,stroke:#1E40AF,stroke-width:3px,color:#fff
+    style C fill:#F59E0B,stroke:#D97706,stroke-width:3px,color:#000
+    style D fill:#10B981,stroke:#059669,stroke-width:3px,color:#fff
+    style E fill:#8B5CF6,stroke:#7C3AED,stroke-width:3px,color:#fff
+    style F fill:#10B981,stroke:#059669,stroke-width:4px,color:#fff
+

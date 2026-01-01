@@ -1,0 +1,16 @@
+sequenceDiagram
+    participant CD as Citizen Developer<br/>PM
+    participant BM as BEAST MODE<br/>Vibe Ops
+    participant BR as Browser<br/>Playwright
+    participant PR as Plain English<br/>Report
+    
+    CD->>BM: "User can login<br/>and see dashboard"
+    BM->>BM: Translates English<br/>→ Test Case
+    BM->>BR: Spins up browser
+    BR->>BR: Executes test<br/>automatically
+    BR->>BM: Test results
+    BM->>PR: "Login failed because<br/>Submit button covered<br/>by pop-up"
+    PR->>CD: Plain English Report
+    
+    Note over CD,PR: No code knowledge required<br/>Test in English, fix in English
+

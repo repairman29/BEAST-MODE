@@ -43,13 +43,14 @@ function commandExists(command) {
  * Generate Mermaid diagram
  */
 function generateMermaid(inputFile, outputFile) {
-  if (!commandExists('mmdc')) {
-    console.warn('⚠️  mermaid-cli not found. Install with: npm install -g @mermaid-js/mermaid-cli');
-    return false;
-  }
-
+  // Try npx first (local install), then global
+  const mermaidCmd = commandExists('mmdc') ? 'mmdc' : 'npx @mermaid-js/mermaid-cli';
+  
   try {
-    execSync(`mmdc -i ${inputFile} -o ${outputFile} -w 1200 -H 800`, { stdio: 'inherit' });
+    execSync(`${mermaidCmd} -i ${inputFile} -o ${outputFile} -w 1200 -H 800`, { 
+      stdio: 'inherit',
+      cwd: path.join(__dirname, '..')
+    });
     console.log(`✅ Generated: ${outputFile}`);
     return true;
   } catch (error) {
@@ -63,11 +64,24 @@ function generateMermaid(inputFile, outputFile) {
  */
 async function generateHTMLVisual(htmlFile, outputFile) {
   try {
-    const puppeteer = require('puppeteer');
-    const browser = await puppeteer.launch();
+    // Use dynamic require to handle missing puppeteer gracefully
+    let puppeteer;
+    try {
+      puppeteer = require('puppeteer');
+    } catch (e) {
+      console.warn('⚠️  Puppeteer not found. Install with: npm install puppeteer');
+      return false;
+    }
+    
+    const browser = await puppeteer.launch({
+      headless: true,
+      args: ['--no-sandbox', '--disable-setuid-sandbox']
+    });
     const page = await browser.newPage();
     
-    await page.goto(`file://${htmlFile}`, { waitUntil: 'networkidle0' });
+    // Use absolute path for file:// protocol
+    const absolutePath = path.resolve(htmlFile);
+    await page.goto(`file://${absolutePath}`, { waitUntil: 'networkidle0' });
     await page.screenshot({ 
       path: outputFile, 
       fullPage: true,

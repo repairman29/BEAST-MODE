@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEAST MODE - Before/After Transformation</title>
+    <link rel="stylesheet" href="../css/visual-assets.css">
+</head>
+<body>
+    <div class="before-after">
+        <div class="before">
+            <h3>BEFORE: AI-Generated Code (Chaos)</h3>
+            <div class="code-block">
+                <span class="comment">// BEFORE: Chaotic code</span><br>
+                <span class="error">const apiKey = "sk-1234567890";</span> <span class="comment">// ❌ Hardcoded secret</span><br>
+                <span class="error">const db = new Database();</span><br>
+                <span class="error">db.query("SELECT * FROM users...");</span> <span class="comment">// ❌ DB in FE</span><br>
+                <span class="comment">// SECURITY: // SECURITY: eval() disabled
+// eval() disabled</span><br>
+                <span class="error">// // SECURITY: eval() disabled
+// eval(userInput);</span> <span class="comment">// ❌ Security risk</span><br>
+                <span class="error">return { success: true };</span><br>
+                <br>
+                <span class="error">function login(user, pass) {</span> <span class="comment">// ❌ Duplicate</span><br>
+                <span class="comment">  // Same code repeated...</span><br>
+                <span class="error">}</span><br>
+                <br>
+                <span class="error">const unusedVar = "never used";</span> <span class="comment">// ❌ Dead code</span>
+            </div>
+            <div style="margin-top: 1rem; padding: 1rem; background: #fee2e2; border-radius: 8px;">
+                <strong>ISSUES:</strong><br>
+                • Hardcoded secrets<br>
+                • Database logic in frontend<br>
+                • Security vulnerabilities<br>
+                • Duplicate code<br>
+                • Unused variables
+            </div>
+        </div>
+        
+        <div class="arrow">→</div>
+        
+        <div class="after">
+            <h3>AFTER: Production-Ready Code (Clean)</h3>
+            <div class="code-block">
+                <span class="comment">// ✅ Secret moved to environment variable</span><br>
+                <span class="success">const apiKey = process.env.API_KEY || '';</span><br>
+                <br>
+                <span class="comment">// ✅ Database logic moved to API route</span><br>
+                <span class="comment">// Frontend calls: /api/auth/login</span><br>
+                <br>
+                <span class="comment">// ✅ Security risk removed</span><br>
+                <span class="comment">// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled</span><br>
+                <span class="comment">// // SECURITY: eval() disabled
+// eval() usage removed - using safe parsing instead</span><br>
+                <br>
+                <span class="comment">// ✅ Duplicate code removed</span><br>
+                <span class="comment">// Single login function, reused across app</span><br>
+                <br>
+                <span class="comment">// ✅ Unused code removed</span><br>
+                <span class="comment">// Dead code eliminated</span>
+            </div>
+            <div style="margin-top: 1rem; padding: 1rem; background: #d1fae5; border-radius: 8px;">
+                <strong>PR CREATED:</strong><br>
+                "Fixed 23 issues, de-duplicated 5 functions,<br>
+                closed 3 security holes"<br>
+                <br>
+                <strong style="color: var(--success-green);">✅ Production Ready</strong>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
