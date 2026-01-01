@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { optimizeResources, getResourceOptimizerService } from '../../../lib/api-middleware';
+import { optimizeResources, getResourceOptimizerService } from '../../../../lib/api-middleware';
 
 /**
  * Resources API
