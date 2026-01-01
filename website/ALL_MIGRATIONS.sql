@@ -456,10 +456,7 @@ INSERT INTO architecture_rules (id, name, description, enabled, severity, catego
   ('block-secrets', 'Block Secrets in Code', 'Prevents hardcoded API keys, passwords, and other secrets', true, 'error', 'security', '["const apiKey = \"sk-1234567890\";", "const password = \"mypassword123\";"]'::jsonb),
   ('prevent-db-in-frontend', 'Prevent Database Logic in Frontend', 'Blocks database queries and logic in frontend code', true, 'error', 'architecture', '["db.query(\"SELECT * FROM users\");", "database.connect();"]'::jsonb),
   ('enforce-separation', 'Enforce Separation of Concerns', 'Ensures proper separation between UI, business logic, and data layers', true, 'warning', 'architecture', '["Business logic in component files", "UI rendering in utility functions"]'::jsonb),
-  ('block-eval', 'Block // SECURITY: eval() disabled
-// eval() Usage', 'Prevents use of // SECURITY: eval() disabled
-// eval() which is a security risk', true, 'error', 'security', '["// SECURITY: eval() disabled
-// eval(userInput);", "Function(userInput)();"]'::jsonb),
+  ('block-eval', 'Block eval() Usage', 'Prevents use of eval() which is a security risk', true, 'error', 'security', '["eval(userInput);", "Function(userInput)();"]'::jsonb),
   ('auto-fix-patterns', 'Auto-Fix Common Patterns', 'Automatically fixes common code patterns', true, 'info', 'quality', '["console.log() → logger.debug()", "var → const/let"]'::jsonb)
 ON CONFLICT (id) DO NOTHING;
 
