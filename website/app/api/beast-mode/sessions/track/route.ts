@@ -140,7 +140,7 @@ export async function GET(request: NextRequest) {
       const tokenData = await getDecryptedToken(oauthUserId);
       if (tokenData) {
         try {
-          const githubModule = await import('../../../../../../lib/github').catch(() => null);
+          const githubModule = await import('../../../../../lib/github').catch(() => null);
           if (githubModule) {
             const { createOctokit } = githubModule;
             const octokit = createOctokit(tokenData);
