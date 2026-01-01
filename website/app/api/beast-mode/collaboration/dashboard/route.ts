@@ -12,7 +12,16 @@ export async function GET(request: NextRequest) {
     const dashboardId = searchParams.get('dashboardId');
     const action = searchParams.get('action') || 'data';
 
-    const SharedDashboard = require('../../../../../../lib/collaboration/shared-dashboard');
+    let SharedDashboard;
+    try {
+      SharedDashboard = require('../../../../../../lib/collaboration/shared-dashboard');
+    } catch (error) {
+      return NextResponse.json({
+        status: 'ok',
+        data: { message: 'Collaboration module not available' },
+        timestamp: new Date().toISOString()
+      });
+    }
     const dashboard = new SharedDashboard({ dashboardId });
 
     if (action === 'data') {
@@ -53,7 +62,16 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
     const { action, dashboardData, shareConfig } = body;
 
-    const SharedDashboard = require('../../../../../../lib/collaboration/shared-dashboard');
+    let SharedDashboard;
+    try {
+      SharedDashboard = require('../../../../../../lib/collaboration/shared-dashboard');
+    } catch (error) {
+      return NextResponse.json({
+        status: 'error',
+        error: 'Collaboration module not available',
+        timestamp: new Date().toISOString()
+      }, { status: 503 });
+    }
     const dashboard = new SharedDashboard({ dashboardId: body.dashboardId });
 
     if (action === 'create') {
