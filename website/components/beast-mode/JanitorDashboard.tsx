@@ -17,6 +17,7 @@ import JanitorNotifications from './JanitorNotifications';
 import JanitorOnboarding from './JanitorOnboarding';
 import JanitorQuickActions from './JanitorQuickActions';
 import JanitorStatusIndicator from './JanitorStatusIndicator';
+import JanitorErrorBoundary from './JanitorErrorBoundary';
 
 interface JanitorStatus {
   enabled: boolean;
@@ -173,16 +174,17 @@ export default function JanitorDashboard() {
   }
 
   return (
-    <div className="p-6 space-y-6 overflow-y-auto h-full">
-      {/* Onboarding */}
-      {showOnboarding && (
-        <JanitorOnboarding
-          onComplete={() => {
-            setShowOnboarding(false);
-            localStorage.setItem('janitor-onboarding-seen', 'true');
-          }}
-        />
-      )}
+    <JanitorErrorBoundary>
+      <div className="p-6 space-y-6 overflow-y-auto h-full">
+        {/* Onboarding */}
+        {showOnboarding && (
+          <JanitorOnboarding
+            onComplete={() => {
+              setShowOnboarding(false);
+              localStorage.setItem('janitor-onboarding-seen', 'true');
+            }}
+          />
+        )}
       {/* Header */}
       <div className="mb-8">
         <div className="flex items-center justify-between mb-4">
