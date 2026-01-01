@@ -219,9 +219,11 @@ export async function GET(request: NextRequest) {
 }
 
 /**
- * GET /api/github/token/decrypt - Get decrypted token (server-side only)
+ * Get decrypted token (server-side only)
+ * Note: This is not exported as a route handler - it's a utility function
+ * Use it from other server-side code, not as an API endpoint
  */
-export async function getDecryptedToken(userId: string): Promise<string | null> {
+async function getDecryptedToken(userId: string): Promise<string | null> {
   try {
     const stored = tokenStore.get(userId);
     if (!stored) {
