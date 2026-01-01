@@ -38,16 +38,12 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
     const { action, branding, domain, theme } = body;
 
-    let WhiteLabel: any = null;
-    try {
-      WhiteLabel = require('../../../../../../lib/white-label');
-    } catch (error) {
-      return NextResponse.json({
-        status: 'unavailable',
-        message: 'White-label service not available',
-        timestamp: new Date().toISOString()
-      });
-    }
+    // White-label service not available in build
+    return NextResponse.json({
+      status: 'unavailable',
+      message: 'White-label service not available',
+      timestamp: new Date().toISOString()
+    });
 
     const whiteLabel = new WhiteLabel();
 
