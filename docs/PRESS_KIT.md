@@ -10,18 +10,32 @@
 
 ## 📊 Visual Assets
 
-**For complete visual diagrams, see:** `docs/PRESS_KIT_VISUALS.md`
+**For complete visual diagrams, see:** `docs/PRESS_KIT_VISUALS.md`  
+**For visual asset specifications, see:** `docs/VISUAL_ASSETS_SPEC.md`
 
-This press kit includes 7 key visualizations:
+This press kit includes 7 key visualizations (high-fidelity diagrams required):
 1. **Architecture Diagram** - Where BEAST MODE sits in the developer workflow
+   - *File: `governance-layer-architecture.png`*
 2. **Silent Janitor Workflow** - The overnight refactoring cycle
+   - *File: `overnight-refactoring-cycle.png`*
 3. **Dual-Brand Strategy** - The "Mullet Strategy" (Business in front, Party in back)
+   - *File: `mullet-strategy-dual-brand.png`*
 4. **The 3 Walls Solution Map** - How BEAST MODE solves each wall
+   - *File: `three-walls-solution-map.png`*
 5. **Before/After Transformation** - Visual code transformation
+   - *File: `before-after-transformation.png`*
 6. **English as Source Code** - The future vision
+   - *File: `english-as-source-code-workflow.png`*
 7. **Market Positioning Map** - Competitive landscape
+   - *File: `market-positioning-map.png`*
+
+**Mandatory Visual Asset:**
+- **30-Second GIF:** `janitor-transformation-demo.gif` (Before/During/After transformation)
+  - *This is your viral asset for Twitter/X. Do not launch without it.*
 
 **Key Insight:** BEAST MODE is the **Governance Layer** (the filter) that catches code before it hits the repository. We complement code generation tools; we don't compete with them.
+
+**Note:** ASCII diagrams below are placeholders. Replace with high-fidelity visual assets before distribution.
 
 ---
 
@@ -145,7 +159,9 @@ Built for **vibe coders**—developers who code with passion, build with purpose
    - Blocks secrets in code
    - Prevents database logic in frontend
    - Auto-fixes violations
-   - **Tested:** Detects hardcoded secrets, XSS risks, // SECURITY: eval() disabled
+   - **Tested:** Detects hardcoded secrets, XSS risks, // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// // SECURITY: eval() disabled
 // eval() usage, architecture violations
 
 3. **Vibe Restoration System** ✅
@@ -515,7 +531,23 @@ BEAST MODE = Community energy | SENTINEL = Enterprise trust
 - Blocks secrets in code
 - Auto-fixes violations
 - Enforces separation of concerns
-- **Tested:** Detects hardcoded secrets, XSS risks, // SECURITY: // SECURITY: // SECURITY: // SECURITY: eval() disabled
+- **Tested:** Detects hardcoded secrets, XSS risks, // SECURITY: // SECURITY: // SECURITY: // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// // SECURITY: eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// // SECURITY: eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// // SECURITY: eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// // SECURITY: eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: // SECURITY: // SECURITY: eval() disabled
 // eval() disabled
 // // SECURITY: eval() disabled
 // eval() disabled
