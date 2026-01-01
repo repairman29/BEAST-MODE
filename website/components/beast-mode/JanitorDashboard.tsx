@@ -4,6 +4,13 @@ import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card';
 import { Button } from '../ui/button';
 import { Badge } from '../ui/badge';
+import JanitorConfigModal from './JanitorConfigModal';
+import VibeOpsTestCreator from './VibeOpsTestCreator';
+import RefactoringHistory from './RefactoringHistory';
+import ArchitectureRulesView from './ArchitectureRulesView';
+import RepoMemoryGraph from './RepoMemoryGraph';
+import VibeRestorationHistory from './VibeRestorationHistory';
+import InvisibleCICDLogs from './InvisibleCICDLogs';
 
 interface JanitorStatus {
   enabled: boolean;
@@ -45,6 +52,13 @@ export default function JanitorDashboard() {
   const [status, setStatus] = useState<JanitorStatus | null>(null);
   const [loading, setLoading] = useState(true);
   const [activeFeature, setActiveFeature] = useState<string | null>(null);
+  const [showConfigModal, setShowConfigModal] = useState(false);
+  const [showTestCreator, setShowTestCreator] = useState(false);
+  const [showHistory, setShowHistory] = useState(false);
+  const [showRules, setShowRules] = useState(false);
+  const [showGraph, setShowGraph] = useState(false);
+  const [showRestorationHistory, setShowRestorationHistory] = useState(false);
+  const [showCICDLogs, setShowCICDLogs] = useState(false);
 
   useEffect(() => {
     loadJanitorStatus();
@@ -260,14 +274,27 @@ export default function JanitorDashboard() {
             >
               Run Manual Refactor
             </Button>
-            <Button
-              variant="ghost"
-              size="sm"
-              className="w-full text-slate-400"
-              onClick={() => setActiveFeature('silentRefactoring')}
-            >
-              Configure →
-            </Button>
+            <div className="flex gap-2">
+              <Button
+                variant="ghost"
+                size="sm"
+                className="flex-1 text-slate-400"
+                onClick={() => {
+                  setActiveFeature('silentRefactoring');
+                  setShowConfigModal(true);
+                }}
+              >
+                Configure →
+              </Button>
+              <Button
+                variant="ghost"
+                size="sm"
+                className="flex-1 text-slate-400"
+                onClick={() => setShowHistory(true)}
+              >
+                History →
+              </Button>
+            </div>
           </CardContent>
         </Card>
 
@@ -318,7 +345,10 @@ export default function JanitorDashboard() {
               variant="ghost"
               size="sm"
               className="w-full text-slate-400"
-              onClick={() => setActiveFeature('architectureEnforcement')}
+              onClick={() => {
+                setActiveFeature('architectureEnforcement');
+                setShowRules(true);
+              }}
             >
               View Rules →
             </Button>
@@ -368,7 +398,7 @@ export default function JanitorDashboard() {
               variant="ghost"
               size="sm"
               className="w-full text-slate-400"
-              onClick={() => setActiveFeature('vibeRestoration')}
+              onClick={() => setShowRestorationHistory(true)}
             >
               View History →
             </Button>
@@ -421,7 +451,7 @@ export default function JanitorDashboard() {
               variant="ghost"
               size="sm"
               className="w-full text-slate-400"
-              onClick={() => setActiveFeature('repoMemory')}
+              onClick={() => setShowGraph(true)}
             >
               View Graph →
             </Button>
@@ -469,7 +499,7 @@ export default function JanitorDashboard() {
             <Button
               variant="outline"
               className="w-full border-cyan-500/30 text-cyan-400 hover:bg-cyan-500/10"
-              onClick={() => setActiveFeature('vibeOps')}
+              onClick={() => setShowTestCreator(true)}
             >
               Create Test →
             </Button>
@@ -518,7 +548,7 @@ export default function JanitorDashboard() {
               variant="ghost"
               size="sm"
               className="w-full text-slate-400"
-              onClick={() => setActiveFeature('invisibleCICD')}
+              onClick={() => setShowCICDLogs(true)}
             >
               View Logs →
             </Button>
@@ -526,21 +556,119 @@ export default function JanitorDashboard() {
         </Card>
       </div>
 
-      {/* Configuration Modal Placeholder */}
-      {activeFeature && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50" onClick={() => setActiveFeature(null)}>
-          <Card className="bg-slate-900 border-slate-800 max-w-2xl w-full mx-4" onClick={(e) => e.stopPropagation()}>
-            <CardHeader>
-              <CardTitle className="text-white">Configure {activeFeature}</CardTitle>
-              <CardDescription className="text-slate-400">
-                Configure settings for {activeFeature}
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <p className="text-slate-400">Configuration UI coming soon...</p>
-              <Button className="mt-4" onClick={() => setActiveFeature(null)}>Close</Button>
-            </CardContent>
-          </Card>
+      {/* Modals */}
+      {showConfigModal && activeFeature && (
+        <JanitorConfigModal
+          feature={activeFeature}
+          onClose={() => {
+            setShowConfigModal(false);
+            setActiveFeature(null);
+          }}
+          onSave={async (config) => {
+            // TODO: Save config via API
+            console.log('Saving config:', config);
+            await loadJanitorStatus();
+          }}
+        />
+      )}
+
+      {showTestCreator && (
+        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4" onClick={() => setShowTestCreator(false)}>
+          <div onClick={(e) => e.stopPropagation()} className="max-w-2xl w-full">
+            <VibeOpsTestCreator
+              onTestCreated={(test) => {
+                console.log('Test created:', test);
+                setShowTestCreator(false);
+                loadJanitorStatus();
+              }}
+              onClose={() => setShowTestCreator(false)}
+            />
+          </div>
+        </div>
+      )}
+
+      {showHistory && (
+        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4" onClick={() => setShowHistory(false)}>
+          <div onClick={(e) => e.stopPropagation()} className="max-w-3xl w-full max-h-[90vh] overflow-y-auto">
+            <RefactoringHistory />
+            <div className="mt-4 text-center">
+              <Button
+                onClick={() => setShowHistory(false)}
+                variant="outline"
+                className="border-slate-700 text-slate-300 hover:bg-slate-800"
+              >
+                Close
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {showRules && (
+        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4" onClick={() => setShowRules(false)}>
+          <div onClick={(e) => e.stopPropagation()} className="max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+            <ArchitectureRulesView />
+            <div className="mt-4 text-center">
+              <Button
+                onClick={() => setShowRules(false)}
+                variant="outline"
+                className="border-slate-700 text-slate-300 hover:bg-slate-800"
+              >
+                Close
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {showGraph && (
+        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4" onClick={() => setShowGraph(false)}>
+          <div onClick={(e) => e.stopPropagation()} className="max-w-5xl w-full max-h-[90vh] overflow-y-auto">
+            <RepoMemoryGraph />
+            <div className="mt-4 text-center">
+              <Button
+                onClick={() => setShowGraph(false)}
+                variant="outline"
+                className="border-slate-700 text-slate-300 hover:bg-slate-800"
+              >
+                Close
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {showRestorationHistory && (
+        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4" onClick={() => setShowRestorationHistory(false)}>
+          <div onClick={(e) => e.stopPropagation()} className="max-w-3xl w-full max-h-[90vh] overflow-y-auto">
+            <VibeRestorationHistory />
+            <div className="mt-4 text-center">
+              <Button
+                onClick={() => setShowRestorationHistory(false)}
+                variant="outline"
+                className="border-slate-700 text-slate-300 hover:bg-slate-800"
+              >
+                Close
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {showCICDLogs && (
+        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4" onClick={() => setShowCICDLogs(false)}>
+          <div onClick={(e) => e.stopPropagation()} className="max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+            <InvisibleCICDLogs />
+            <div className="mt-4 text-center">
+              <Button
+                onClick={() => setShowCICDLogs(false)}
+                variant="outline"
+                className="border-slate-700 text-slate-300 hover:bg-slate-800"
+              >
+                Close
+              </Button>
+            </div>
+          </div>
         </div>
       )}
     </div>
