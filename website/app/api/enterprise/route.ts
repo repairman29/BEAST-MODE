@@ -169,7 +169,7 @@ export async function POST(request: NextRequest) {
             { status: 400 }
           );
         }
-        const report = await enterpriseService.generateReport(tenantId, params.reportType, params.options || {});
+        const report = await service.generateReport(tenantId, params.reportType, params.options || {});
         return NextResponse.json({
           status: 'ok',
           data: report,
