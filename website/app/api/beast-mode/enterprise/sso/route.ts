@@ -12,20 +12,23 @@ export async function GET(request: NextRequest) {
     const action = searchParams.get('action') || 'list';
     const provider = searchParams.get('provider');
 
-    const EnterpriseSSO = require('../../../../../../lib/enterprise/sso');
-    const sso = new EnterpriseSSO();
-
+    // Enterprise SSO service not yet implemented
     if (action === 'list') {
       // List configured providers
       return NextResponse.json({
         providers: ['saml', 'oauth', 'ldap', 'okta', 'azure'],
-        configured: []
+        configured: [],
+        status: 'not_implemented',
+        message: 'Enterprise SSO service coming soon'
       });
     }
 
     if (action === 'test' && provider) {
-      const result = await sso.testConnection(provider);
-      return NextResponse.json(result);
+      return NextResponse.json({
+        status: 'not_implemented',
+        message: 'SSO test connection not yet available',
+        provider
+      });
     }
 
     return NextResponse.json({ error: 'Invalid action' }, { status: 400 });
@@ -44,9 +47,7 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
     const { action, provider, config, callbackData } = body;
 
-    const EnterpriseSSO = require('../../../../../../lib/enterprise/sso');
-    const sso = new EnterpriseSSO();
-
+    // Enterprise SSO service not yet implemented
     if (action === 'configure') {
       if (!provider || !config) {
         return NextResponse.json(
@@ -55,8 +56,11 @@ export async function POST(request: NextRequest) {
         );
       }
 
-      const result = await sso.configureProvider({ provider, config });
-      return NextResponse.json(result);
+      return NextResponse.json({
+        status: 'not_implemented',
+        message: 'SSO provider configuration coming soon',
+        provider
+      });
     }
 
     if (action === 'login') {
@@ -67,9 +71,11 @@ export async function POST(request: NextRequest) {
         );
       }
 
-      const redirectUrl = body.redirectUrl || `${request.headers.get('origin')}/auth/callback`;
-      const result = await sso.initiateLogin(provider, redirectUrl);
-      return NextResponse.json(result);
+      return NextResponse.json({
+        status: 'not_implemented',
+        message: 'SSO login initiation coming soon',
+        provider
+      });
     }
 
     if (action === 'callback') {
@@ -80,8 +86,11 @@ export async function POST(request: NextRequest) {
         );
       }
 
-      const result = await sso.handleCallback(provider, callbackData);
-      return NextResponse.json(result);
+      return NextResponse.json({
+        status: 'not_implemented',
+        message: 'SSO callback handling coming soon',
+        provider
+      });
     }
 
     return NextResponse.json({ error: 'Invalid action' }, { status: 400 });

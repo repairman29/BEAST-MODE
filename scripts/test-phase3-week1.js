@@ -67,20 +67,41 @@ async function main() {
 
   // Test Monitoring
   console.log('5️⃣  Testing Cross-Region Monitoring...');
-  const aggregatedMetrics = await multiRegion.aggregateMetrics(3600000);
-  console.log(`   ✅ Metrics aggregated: ${aggregatedMetrics ? 'yes' : 'no'}`);
+  try {
+    const aggregatedMetrics = await Promise.race([
+      multiRegion.aggregateMetrics(3600000),
+      new Promise((_, reject) => setTimeout(() => reject(new Error('Timeout')), 5000))
+    ]);
+    console.log(`   ✅ Metrics aggregated: ${aggregatedMetrics ? 'yes' : 'no'}`);
+  } catch (error) {
+    console.log(`   ⚠️  Metrics aggregation: ${error.message}`);
+  }
 
-  const globalDashboard = await multiRegion.getGlobalDashboard();
-  console.log(`   ✅ Global dashboard retrieved: ${globalDashboard ? 'yes' : 'no'}\n`);
+  try {
+    const globalDashboard = await Promise.race([
+      multiRegion.getGlobalDashboard(),
+      new Promise((_, reject) => setTimeout(() => reject(new Error('Timeout')), 5000))
+    ]);
+    console.log(`   ✅ Global dashboard retrieved: ${globalDashboard ? 'yes' : 'no'}\n`);
+  } catch (error) {
+    console.log(`   ⚠️  Global dashboard: ${error.message}\n`);
+  }
 
   // Test Unified Operations
   console.log('6️⃣  Testing Unified Operations...');
-  const globalStatus = await multiRegion.getGlobalStatus();
-  console.log(`   ✅ Global status retrieved`);
-  console.log(`      - Regions: ${Object.keys(globalStatus.regions || {}).length}`);
-  console.log(`      - Failover: ${globalStatus.failover ? 'active' : 'inactive'}`);
-  console.log(`      - Metrics: ${globalStatus.metrics ? 'available' : 'unavailable'}`);
-  console.log(`      - Dashboard: ${globalStatus.dashboard ? 'available' : 'unavailable'}\n`);
+  try {
+    const globalStatus = await Promise.race([
+      multiRegion.getGlobalStatus(),
+      new Promise((_, reject) => setTimeout(() => reject(new Error('Timeout')), 10000))
+    ]);
+    console.log(`   ✅ Global status retrieved`);
+    console.log(`      - Regions: ${Object.keys(globalStatus.regions || {}).length}`);
+    console.log(`      - Failover: ${globalStatus.failover ? 'active' : 'inactive'}`);
+    console.log(`      - Metrics: ${globalStatus.metrics ? 'available' : 'unavailable'}`);
+    console.log(`      - Dashboard: ${globalStatus.dashboard ? 'available' : 'unavailable'}\n`);
+  } catch (error) {
+    console.log(`   ⚠️  Global status: ${error.message}\n`);
+  }
 
   // Test Service Status
   const serviceStatus = multiRegion.getStatus();

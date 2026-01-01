@@ -123,12 +123,22 @@ export default function CustomIntegrations({ userId }: CustomIntegrationsProps) 
                 Create webhooks, API integrations, and custom plugins
               </CardDescription>
             </div>
-            <Button
-              onClick={() => setShowCreateWebhook(true)}
-              className="bg-cyan-500 hover:bg-cyan-600 text-white"
-            >
-              + Create Webhook
-            </Button>
+            <div className="flex gap-2">
+              <Button
+                onClick={() => window.open('/docs/ENTERPRISE', '_blank')}
+                variant="outline"
+                size="sm"
+                className="border-slate-700 text-slate-300 hover:bg-slate-800"
+              >
+                📚 Docs
+              </Button>
+              <Button
+                onClick={() => setShowCreateWebhook(true)}
+                className="bg-cyan-500 hover:bg-cyan-600 text-white"
+              >
+                + Create Webhook
+              </Button>
+            </div>
           </div>
         </CardHeader>
       </Card>

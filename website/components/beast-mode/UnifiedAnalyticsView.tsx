@@ -110,16 +110,28 @@ export default function UnifiedAnalyticsView() {
       {/* Header */}
       <Card className="bg-slate-900/90 border-slate-800">
         <CardHeader>
-          <CardTitle className="text-white text-2xl flex items-center gap-3">
-            <span className="text-3xl">📊</span>
-            Unified Analytics
-          </CardTitle>
-          <CardDescription className="text-slate-400">
-            Complete view of your BEAST MODE activity across CLI, API, Cursor, and Web
-            {analytics.githubUsername && (
-              <span className="ml-2 text-cyan-400">• @{analytics.githubUsername}</span>
-            )}
-          </CardDescription>
+          <div className="flex items-center justify-between">
+            <div>
+              <CardTitle className="text-white text-2xl flex items-center gap-3">
+                <span className="text-3xl">📊</span>
+                Unified Analytics
+              </CardTitle>
+              <CardDescription className="text-slate-400">
+                Complete view of your BEAST MODE activity across CLI, API, Cursor, and Web
+                {analytics.githubUsername && (
+                  <span className="ml-2 text-cyan-400">• @{analytics.githubUsername}</span>
+                )}
+              </CardDescription>
+            </div>
+            <Button
+              onClick={() => window.open('/docs/ANALYTICS', '_blank')}
+              variant="outline"
+              size="sm"
+              className="border-slate-700 text-slate-300 hover:bg-slate-800"
+            >
+              📚 Docs
+            </Button>
+          </div>
         </CardHeader>
       </Card>
 

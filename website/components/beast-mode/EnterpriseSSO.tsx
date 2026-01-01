@@ -105,10 +105,22 @@ export default function EnterpriseSSO({ userId }: EnterpriseSSOProps) {
       {/* Header */}
       <Card className="bg-slate-900/90 border-slate-800">
         <CardHeader>
-          <CardTitle className="text-white text-lg">🔐 Enterprise SSO</CardTitle>
-          <CardDescription className="text-slate-400">
-            Configure single sign-on for your organization
-          </CardDescription>
+          <div className="flex items-center justify-between">
+            <div>
+              <CardTitle className="text-white text-lg">🔐 Enterprise SSO</CardTitle>
+              <CardDescription className="text-slate-400">
+                Configure single sign-on for your organization
+              </CardDescription>
+            </div>
+            <Button
+              onClick={() => window.open('/docs/ENTERPRISE', '_blank')}
+              variant="outline"
+              size="sm"
+              className="border-slate-700 text-slate-300 hover:bg-slate-800"
+            >
+              📚 Docs
+            </Button>
+          </div>
         </CardHeader>
       </Card>
 

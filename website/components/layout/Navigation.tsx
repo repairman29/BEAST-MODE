@@ -59,6 +59,12 @@ function Navigation() {
               Features
             </button>
             <a
+              href="/docs"
+              className="text-slate-400 hover:text-white transition-colors text-sm font-medium"
+            >
+              Documentation
+            </a>
+            <a
               href="/dashboard"
               className="text-slate-400 hover:text-white transition-colors text-sm font-medium"
             >
@@ -101,6 +107,12 @@ function Navigation() {
               >
                 Features
               </button>
+              <a
+                href="/docs"
+                className="text-left text-slate-400 hover:text-white transition-colors py-2"
+              >
+                Documentation
+              </a>
               <a
                 href="/dashboard"
                 className="text-left text-slate-400 hover:text-white transition-colors py-2"
