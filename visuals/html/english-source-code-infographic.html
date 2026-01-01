@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEAST MODE - English as Source Code (Story Strip)</title>
+    <link rel="stylesheet" href="../css/infographic-style.css">
+    <style>
+        .story-strip {
+            background: linear-gradient(135deg, #0a0a0f, #1a1a2e);
+            min-height: 100vh;
+            padding: 4rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--beast-text);
+        }
+
+        .strip-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            max-width: 1600px;
+            width: 100%;
+        }
+
+        .strip-step {
+            flex: 1;
+            text-align: center;
+            position: relative;
+            padding: 2rem;
+        }
+
+        .strip-line {
+            position: absolute;
+            top: 50%;
+            left: 100%;
+            width: 3rem;
+            height: 6px;
+            background: linear-gradient(to right, #9333EA, #06B6D4);
+            transform: translateY(-50%);
+            z-index: 0;
+            box-shadow: 0 0 10px rgba(147, 51, 234, 0.5);
+        }
+
+        .strip-line::after {
+            content: '→';
+            position: absolute;
+            right: -15px;
+            top: -12px;
+            color: #06B6D4;
+            font-size: 2rem;
+            text-shadow: 0 0 10px #06B6D4;
+        }
+
+        .step-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 2rem;
+            border: 2px solid;
+            backdrop-filter: blur(10px);
+            min-height: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .step-1 .step-card {
+            border-color: #3B82F6;
+            background: rgba(59, 130, 246, 0.1);
+        }
+
+        .step-2 .step-card {
+            border-color: #9333EA;
+            background: rgba(147, 51, 234, 0.1);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .step-3 .step-card {
+            border-color: #06B6D4;
+            background: rgba(6, 182, 212, 0.1);
+        }
+
+        .step-4 .step-card {
+            border-color: #10B981;
+            background: rgba(16, 185, 129, 0.1);
+        }
+
+        .step-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .step-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .step-description {
+            font-size: 1rem;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        .speech-bubble {
+            background: rgba(59, 130, 246, 0.2);
+            border: 2px solid #3B82F6;
+            border-radius: 20px;
+            padding: 1rem 1.5rem;
+            margin-top: 1rem;
+            position: relative;
+        }
+
+        .speech-bubble::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 20px;
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-top: 10px solid #3B82F6;
+        }
+
+        .code-snippet {
+            background: #1e293b;
+            border: 1px solid #475569;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-top: 1rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            color: #86efac;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .key-note {
+            margin-top: 3rem;
+            text-align: center;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+    </style>
+</head>
+<body>
+    <div class="story-strip">
+        <div style="width: 100%;">
+            <div class="header">
+                <h1>ENGLISH AS SOURCE CODE</h1>
+                <p style="font-size: 1.2rem; opacity: 0.8;">The Future of Testing</p>
+            </div>
+
+            <div class="strip-container">
+                <div class="strip-step step-1">
+                    <div class="step-card">
+                        <div class="step-icon">👤</div>
+                        <div class="step-title">Citizen Developer / PM</div>
+                        <div class="step-description">
+                            Describes test in plain English
+                        </div>
+                        <div class="speech-bubble">
+                            "User can login<br>and see dashboard"
+                        </div>
+                    </div>
+                </div>
+
+                <div class="strip-line"></div>
+
+                <div class="strip-step step-2">
+                    <div class="step-card">
+                        <div class="step-icon">🎸</div>
+                        <div class="step-title">BEAST MODE: Vibe Ops</div>
+                        <div class="step-description">
+                            Translates English → Test Case
+                        </div>
+                        <div class="code-snippet">
+                            test.spec.ts<br>
+                            describe('Login', () => {<br>
+                            &nbsp;&nbsp;it('should login...')<br>
+                            })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="strip-line"></div>
+
+                <div class="strip-step step-3">
+                    <div class="step-card">
+                        <div class="step-icon">🤖</div>
+                        <div class="step-title">Browser Agent</div>
+                        <div class="step-description">
+                            Spins up Playwright<br>
+                            Executes test automatically
+                        </div>
+                    </div>
+                </div>
+
+                <div class="strip-line"></div>
+
+                <div class="strip-step step-4">
+                    <div class="step-card">
+                        <div class="step-icon">✅</div>
+                        <div class="step-title">Plain English Report</div>
+                        <div class="step-description">
+                            Results in human language
+                        </div>
+                        <div class="speech-bubble" style="border-color: #10B981; background: rgba(16, 185, 129, 0.2);">
+                            "Login failed because<br>Submit button covered<br>by pop-up"
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="key-note">
+                <strong style="color: #F59E0B; font-size: 1.3rem;">KEY:</strong><br>
+                No code knowledge required. Test in English, fix in English.
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
