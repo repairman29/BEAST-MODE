@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getProductionMonitor } from '../../../../../lib/monitoring/productionMonitor';
 
 /**
  * Monitoring Metrics API
@@ -9,10 +8,29 @@ import { getProductionMonitor } from '../../../../../lib/monitoring/productionMo
  * Phase 1: Production Deployment
  */
 
-const monitor = getProductionMonitor();
+// Optional: Production monitor not available in current build
+let monitor: any = null;
+try {
+  const { getProductionMonitor } = require('../../../../../lib/monitoring/productionMonitor');
+  monitor = getProductionMonitor();
+} catch (error) {
+  // Production monitor not available
+}
 
 export async function GET(request: NextRequest) {
   try {
+    if (!monitor) {
+      return NextResponse.json({
+        status: 'ok',
+        data: {
+          message: 'Production monitor not available',
+          summary: {},
+          health: { status: 'unknown' }
+        },
+        timestamp: new Date().toISOString()
+      });
+    }
+
     await monitor.initialize();
 
     const { searchParams } = new URL(request.url);
