@@ -41,7 +41,8 @@ export async function GET(request: NextRequest) {
       const store = globalForTokenStore.tokenStore;
       
       let mostRecent: { key: string; data: any; time: number } | null = null;
-      for (const [key, value] of store.entries()) {
+      const entries = Array.from(store.entries());
+      for (const [key, value] of entries) {
         if (key.startsWith('session-') || key.startsWith('user-')) {
           const time = new Date(value.connectedAt).getTime();
           if (!mostRecent || time > mostRecent.time) {
