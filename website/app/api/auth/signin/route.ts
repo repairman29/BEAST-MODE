@@ -21,6 +21,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Try Supabase auth first
+    const supabase = getSupabaseClientOrNull();
     if (supabase) {
       const { data, error } = await supabase.auth.signInWithPassword({
         email,
