@@ -38,6 +38,7 @@ import { getErrorMonitor } from '../../lib/error-monitoring';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { ScanDetailsModal } from '../ui/ScanDetailsModal';
 import UnifiedAnalyticsView from './UnifiedAnalyticsView';
+import JanitorDashboard from './JanitorDashboard';
 
 /**
  * BEAST MODE Enterprise Dashboard
@@ -82,7 +83,7 @@ function BeastModeDashboardInner({ initialView }: BeastModeDashboardInnerProps) 
   useEffect(() => {
     const viewParam = searchParams.get('view') || initialView;
     if (viewParam) {
-      const validViews = ['quality', 'intelligence', 'marketplace', 'self-improve', 'collaboration', 'collaboration-workspace', 'collaboration-dashboard', 'settings', 'auth', 'pricing', 'ml-monitoring', 'unified-analytics'];
+      const validViews = ['quality', 'intelligence', 'marketplace', 'self-improve', 'collaboration', 'collaboration-workspace', 'collaboration-dashboard', 'settings', 'auth', 'pricing', 'ml-monitoring', 'unified-analytics', 'janitor'];
       if (validViews.includes(viewParam)) {
         setCurrentView(viewParam as typeof currentView);
       }
@@ -133,8 +134,8 @@ function BeastModeDashboardInner({ initialView }: BeastModeDashboardInnerProps) 
   });
 
   const [commandInput, setCommandInput] = useState('');
-  const [currentView, setCurrentView] = useState<'quality' | 'intelligence' | 'marketplace' | 'self-improve' | 'collaboration' | 'collaboration-workspace' | 'collaboration-dashboard' | 'settings' | 'auth' | 'pricing' | 'ml-monitoring' | 'unified-analytics' | null>(
-    initialView === 'auth' ? 'auth' : initialView === 'pricing' ? 'pricing' : null
+  const [currentView, setCurrentView] = useState<'quality' | 'intelligence' | 'marketplace' | 'self-improve' | 'collaboration' | 'collaboration-workspace' | 'collaboration-dashboard' | 'settings' | 'auth' | 'pricing' | 'ml-monitoring' | 'unified-analytics' | 'janitor' | null>(
+    initialView === 'auth' ? 'auth' : initialView === 'pricing' ? 'pricing' : initialView === 'janitor' ? 'janitor' : null
   );
 
   // Update URL when view changes (for shareable links)
@@ -231,9 +232,13 @@ function BeastModeDashboardInner({ initialView }: BeastModeDashboardInnerProps) 
         }
         if (e.key === '4') {
           e.preventDefault();
-          setCurrentView('self-improve');
+          setCurrentView('janitor');
         }
         if (e.key === '5') {
+          e.preventDefault();
+          setCurrentView('self-improve');
+        }
+        if (e.key === '6') {
           e.preventDefault();
           setCurrentView('settings');
         }
@@ -570,6 +575,14 @@ function BeastModeDashboardInner({ initialView }: BeastModeDashboardInnerProps) 
             <ErrorBoundary>
               <div className="w-full max-w-7xl relative z-30">
                 <UnifiedAnalyticsView />
+              </div>
+            </ErrorBoundary>
+          )}
+
+          {currentView === 'janitor' && (
+            <ErrorBoundary>
+              <div className="w-full max-w-7xl relative z-30">
+                <JanitorDashboard />
               </div>
             </ErrorBoundary>
           )}

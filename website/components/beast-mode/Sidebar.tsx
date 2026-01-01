@@ -26,6 +26,7 @@ export default function Sidebar({ currentView, onViewChange, onCommandPalette }:
     { id: 'quality', label: 'Quality', icon: '⚡', tooltip: 'Scan your code and see quality score instantly', category: 'Core' },
     { id: 'intelligence', label: 'Intelligence', icon: '🧠', tooltip: 'Ask questions, get AI recommendations and missions', category: 'Core' },
     { id: 'marketplace', label: 'Marketplace', icon: '📦', tooltip: 'Find and install plugins for your code', category: 'Core' },
+    { id: 'janitor', label: 'Day 2 Ops', icon: '🧹', tooltip: 'The AI Janitor - Silent refactoring, architecture enforcement, and invisible CI/CD', category: 'Core' },
     { id: 'self-improve', label: 'Improve', icon: '✨', tooltip: 'Auto-fix code issues with one click', category: 'Core' },
     { id: 'collaboration', label: 'Collaboration', icon: '👥', tooltip: 'Team workspaces, shared dashboards, and real-time collaboration', category: 'Core' },
     { id: 'ml-monitoring', label: 'ML Monitoring', icon: '📊', tooltip: 'Monitor AI prediction performance - see how well BEAST MODE\'s quality predictions are working', category: 'Core' },
