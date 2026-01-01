@@ -41,7 +41,7 @@ export async function GET(request: NextRequest) {
     }
 
     if (operation === 'global-status') {
-      const globalStatus = await multiRegionService.getGlobalStatus();
+      const globalStatus = await service.getGlobalStatus();
       return NextResponse.json({
         status: 'ok',
         data: globalStatus,
@@ -50,7 +50,7 @@ export async function GET(request: NextRequest) {
     }
 
     if (operation === 'service-status') {
-      const serviceStatus = multiRegionService.getStatus();
+      const serviceStatus = service.getStatus();
       return NextResponse.json({
         status: 'ok',
         data: serviceStatus,
@@ -60,7 +60,7 @@ export async function GET(request: NextRequest) {
 
     if (operation === 'best-region') {
       const strategy = searchParams.get('strategy') || 'latency';
-      const bestRegion = await multiRegionService.selectBestRegion(strategy);
+      const bestRegion = await service.selectBestRegion(strategy);
       return NextResponse.json({
         status: 'ok',
         data: { bestRegion },
@@ -69,7 +69,7 @@ export async function GET(request: NextRequest) {
     }
 
     if (operation === 'failover-status') {
-      const failoverStatus = await multiRegionService.getFailoverStatus();
+      const failoverStatus = await service.getFailoverStatus();
       return NextResponse.json({
         status: 'ok',
         data: failoverStatus,
@@ -78,7 +78,7 @@ export async function GET(request: NextRequest) {
     }
 
     if (operation === 'global-dashboard') {
-      const dashboard = await multiRegionService.getGlobalDashboard();
+      const dashboard = await service.getGlobalDashboard();
       return NextResponse.json({
         status: 'ok',
         data: dashboard,
@@ -143,7 +143,7 @@ export async function POST(request: NextRequest) {
             { status: 400 }
           );
         }
-        const replication = await multiRegionService.replicateModel(params.modelId, params.regionId);
+        const replication = await service.replicateModel(params.modelId, params.regionId);
         return NextResponse.json({
           status: 'ok',
           data: replication,
@@ -157,7 +157,7 @@ export async function POST(request: NextRequest) {
             { status: 400 }
           );
         }
-        const routing = await multiRegionService.routeRequest(params.request, params.strategy || 'latency');
+        const routing = await service.routeRequest(params.request, params.strategy || 'latency');
         return NextResponse.json({
           status: 'ok',
           data: routing,
@@ -171,7 +171,7 @@ export async function POST(request: NextRequest) {
             { status: 400 }
           );
         }
-        const failover = await multiRegionService.initiateFailover(params.fromRegionId, params.toRegionId);
+        const failover = await service.initiateFailover(params.fromRegionId, params.toRegionId);
         return NextResponse.json({
           status: 'ok',
           data: failover,
@@ -185,7 +185,7 @@ export async function POST(request: NextRequest) {
             { status: 400 }
           );
         }
-        const recovery = await multiRegionService.recoverRegion(params.regionId);
+        const recovery = await service.recoverRegion(params.regionId);
         return NextResponse.json({
           status: 'ok',
           data: recovery,
@@ -193,7 +193,7 @@ export async function POST(request: NextRequest) {
         });
 
       case 'aggregate-metrics':
-        const metrics = await multiRegionService.aggregateMetrics(params.timeRange || 3600000);
+        const metrics = await service.aggregateMetrics(params.timeRange || 3600000);
         return NextResponse.json({
           status: 'ok',
           data: metrics,
