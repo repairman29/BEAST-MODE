@@ -1621,9 +1621,10 @@ function QualityView({ data }: any): React.JSX.Element {
                     return bLatest.localeCompare(aLatest);
                   })
                   .map(([repo, scans]) => {
-                    const latestRepoScan = scans[0];
-                    const avgScore = Math.round(scans.reduce((sum: number, s: any) => sum + (s.score || 0), 0) / scans.length);
-                    const totalIssues = scans.reduce((sum: number, s: any) => sum + (s.issues || 0), 0);
+                    const scansArray = scans as any[];
+                    const latestRepoScan = scansArray[0];
+                    const avgScore = Math.round(scansArray.reduce((sum: number, s: any) => sum + (s.score || 0), 0) / scansArray.length);
+                    const totalIssues = scansArray.reduce((sum: number, s: any) => sum + (s.issues || 0), 0);
                     
                     return (
                       <div key={repo} className="bg-slate-800/30 rounded-lg border border-slate-700/50 p-4 hover:border-cyan-500/50 transition-colors">
