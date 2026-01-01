@@ -8,17 +8,18 @@ import { NextRequest, NextResponse } from 'next/server';
  * Phase 1: Production Deployment
  */
 
-// Optional: Production monitor not available in current build
-let monitor: any = null;
-try {
-  const { getProductionMonitor } = require('../../../../../lib/monitoring/productionMonitor');
-  monitor = getProductionMonitor();
-} catch (error) {
-  // Production monitor not available
+async function getProductionMonitor() {
+  try {
+    const module = await import('../../../../../lib/monitoring/productionMonitor');
+    return module.getProductionMonitor();
+  } catch (error) {
+    return null;
+  }
 }
 
 export async function GET(request: NextRequest) {
   try {
+    const monitor = await getProductionMonitor();
     if (!monitor) {
       return NextResponse.json({
         status: 'ok',

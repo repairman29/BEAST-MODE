@@ -8,17 +8,18 @@ import { NextRequest, NextResponse } from 'next/server';
  * Phase 1: Production Deployment
  */
 
-// Optional: Alert manager not available in current build
-let alertManager: any = null;
-try {
-  const { getAlertManager } = require('../../../../../../lib/monitoring/alertManager');
-  alertManager = getAlertManager();
-} catch (error) {
-  // Alert manager not available
+async function getAlertManager() {
+  try {
+    const module = await import('../../../../../../lib/monitoring/alertManager');
+    return module.getAlertManager();
+  } catch (error) {
+    return null;
+  }
 }
 
 export async function GET(request: NextRequest) {
   try {
+    const alertManager = await getAlertManager();
     if (!alertManager) {
       return NextResponse.json({
         status: 'ok',
@@ -51,6 +52,7 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   try {
+    const alertManager = await getAlertManager();
     if (!alertManager) {
       return NextResponse.json(
         {
