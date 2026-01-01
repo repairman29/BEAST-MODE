@@ -139,11 +139,21 @@ export async function GET(request: NextRequest) {
     try {
       const tokenData = await getDecryptedToken(oauthUserId);
       if (tokenData) {
-        const { createOctokit } = await import('../../../../../../lib/github');
-        const octokit = createOctokit(tokenData);
-        const { data: user } = await octokit.users.getAuthenticated();
-        githubUsername = user.login;
-        githubUserId = user.id;
+        try {
+          const githubModule = await import('../../../../../../lib/github').catch(() => null);
+          if (githubModule) {
+            const { createOctokit } = githubModule;
+            const octokit = createOctokit(tokenData);
+            const { data: user } = await octokit.users.getAuthenticated();
+            githubUsername = user.login;
+            githubUserId = user.id;
+          } else {
+            githubUsername = oauthUserId;
+          }
+        } catch (importError) {
+          console.warn('GitHub lib not available:', importError);
+          githubUsername = oauthUserId;
+        }
       }
     } catch (error) {
       console.error('Failed to get GitHub user info:', error);

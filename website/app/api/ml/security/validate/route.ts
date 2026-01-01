@@ -1,5 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { validateAndSanitizeRequest, getSecurityEnhancerService } from '../../../../lib/api-middleware';
+
+// Optional imports - handle gracefully if not available
+let validateAndSanitizeRequest: any = null;
+let getSecurityEnhancerService: any = null;
+try {
+  const middleware = require('../../../../lib/api-middleware');
+  validateAndSanitizeRequest = middleware.validateAndSanitizeRequest;
+  getSecurityEnhancerService = middleware.getSecurityEnhancerService;
+} catch (error) {
+  // Middleware not available
+}
 
 /**
  * Security Validation API
@@ -21,6 +31,14 @@ export async function POST(request: NextRequest) {
         },
         { status: 400 }
       );
+    }
+
+    if (!validateAndSanitizeRequest) {
+      return NextResponse.json({
+        status: 'unavailable',
+        message: 'Validation service not available',
+        timestamp: new Date().toISOString()
+      });
     }
 
     const validation = await validateAndSanitizeRequest(data, schema || {});
