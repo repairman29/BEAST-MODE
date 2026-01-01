@@ -2,9 +2,9 @@ import { NextRequest, NextResponse } from 'next/server';
 import { withProductionIntegration } from '../../../lib/api-middleware';
 
 /**
- * Shared Dashboard API
+ * Team Workspace API
  * 
- * Provides shared dashboard functionality
+ * Provides team workspace functionality
  * 
  * Phase 2: Collaboration Services Integration
  */
@@ -12,42 +12,42 @@ import { withProductionIntegration } from '../../../lib/api-middleware';
 async function handler(req: NextRequest) {
   try {
     const path = require('path');
-    const sharedDashboardPath = path.join(process.cwd(), '../../../lib/collaboration/shared-dashboard');
-    const { SharedDashboard } = require(sharedDashboardPath);
-    const dashboard = new SharedDashboard();
+    const teamWorkspacePath = path.join(process.cwd(), '../../../lib/collaboration/team-workspace');
+    const { TeamWorkspace } = require(teamWorkspacePath);
+    const workspace = new TeamWorkspace();
 
     if (req.method === 'GET') {
       const { searchParams } = new URL(req.url);
       const operation = searchParams.get('operation') || 'list';
 
       if (operation === 'list') {
-        // List dashboards would be implemented here
+        // List workspaces would be implemented here
         return NextResponse.json({
           status: 'ok',
-          data: { dashboards: [] },
+          data: { workspaces: [] },
           timestamp: new Date().toISOString()
         });
       }
 
       if (operation === 'get') {
-        const dashboardId = searchParams.get('dashboardId');
-        if (!dashboardId) {
+        const workspaceId = searchParams.get('workspaceId');
+        if (!workspaceId) {
           return NextResponse.json(
-            { error: 'dashboardId required' },
+            { error: 'workspaceId required' },
             { status: 400 }
           );
         }
-        // Get dashboard would be implemented here
+        // Get workspace would be implemented here
         return NextResponse.json({
           status: 'ok',
-          data: { dashboard: { id: dashboardId } },
+          data: { workspace: { id: workspaceId } },
           timestamp: new Date().toISOString()
         });
       }
 
       return NextResponse.json({
         status: 'ok',
-        message: 'Shared dashboard API ready',
+        message: 'Team workspace API ready',
         operations: ['list', 'get'],
         timestamp: new Date().toISOString()
       });
@@ -58,21 +58,21 @@ async function handler(req: NextRequest) {
       const { operation } = body;
 
       if (operation === 'create') {
-        const { name, description, workspaceId, widgets, visibility } = body;
-        const created = await dashboard.createDashboard({ name, description, workspaceId, widgets, visibility });
+        const { name, description, teamMembers, settings } = body;
+        const created = await workspace.createWorkspace({ name, description, teamMembers, settings });
         return NextResponse.json({
           status: 'ok',
-          data: { dashboard: created },
+          data: { workspace: created },
           timestamp: new Date().toISOString()
         });
       }
 
-      if (operation === 'share') {
-        const { dashboardId, userId, permissions } = body;
-        // Share dashboard would be implemented here
+      if (operation === 'add-member') {
+        const { workspaceId, userId, role } = body;
+        // Add member would be implemented here
         return NextResponse.json({
           status: 'ok',
-          data: { shared: true },
+          data: { added: true },
           timestamp: new Date().toISOString()
         });
       }

@@ -69,6 +69,9 @@ NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
 SUPABASE_SERVICE_ROLE_KEY=your-service-role-key
 
+# API Keys Encryption (for decrypting user_api_keys)
+API_KEYS_ENCRYPTION_KEY=your-encryption-key-32-chars-minimum
+
 # GitHub OAuth (for authentication)
 GITHUB_CLIENT_ID=your-client-id
 GITHUB_CLIENT_SECRET=your-client-secret
@@ -78,6 +81,9 @@ GITHUB_OAUTH_CALLBACK_URL=https://your-domain.com/api/github/oauth/callback
 NEXT_PUBLIC_JANITOR_ENABLED=true
 NEXT_PUBLIC_JANITOR_OVERNIGHT_MODE=true
 ```
+
+**📝 Note:** API keys are stored in Supabase `user_api_keys` table (encrypted). 
+The `API_KEYS_ENCRYPTION_KEY` is used to decrypt them. See [API Keys Setup Guide](./API_KEYS_SETUP.md) for details.
 
 ### Database Setup
 1. **Create Supabase Project**
