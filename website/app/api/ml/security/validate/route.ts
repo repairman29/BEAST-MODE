@@ -31,24 +31,6 @@ export async function POST(request: NextRequest) {
       message: 'Validation service not available',
       timestamp: new Date().toISOString()
     });
-
-    if (!validation.valid) {
-      return NextResponse.json(
-        {
-          status: 'validation_failed',
-          errors: validation.errors,
-          timestamp: new Date().toISOString()
-        },
-        { status: 400 }
-      );
-    }
-
-    return NextResponse.json({
-      status: 'ok',
-      valid: true,
-      sanitized: validation.sanitized,
-      timestamp: new Date().toISOString()
-    });
   } catch (error) {
     return NextResponse.json(
       {
@@ -70,14 +52,6 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({
       status: 'unavailable',
       message: 'Security enhancer not available',
-      timestamp: new Date().toISOString()
-    });
-
-    return NextResponse.json({
-      status: 'ok',
-      input,
-      sanitized,
-      vulnerabilities,
       timestamp: new Date().toISOString()
     });
   } catch (error) {
