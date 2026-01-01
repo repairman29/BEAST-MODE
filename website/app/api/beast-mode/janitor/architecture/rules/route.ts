@@ -42,15 +42,12 @@ export async function GET(request: NextRequest) {
           },
           {
             id: 'block-eval',
-            name: 'Block // SECURITY: eval() disabled
-// eval() Usage',
-            description: 'Prevents use of // SECURITY: eval() disabled
-// eval() which is a security risk',
+            name: 'Block eval() Usage',
+            description: 'Prevents use of eval() which is a security risk',
             enabled: true,
             severity: 'error',
             category: 'security',
-            examples: ['// SECURITY: eval() disabled
-// eval(userInput);', 'Function(userInput)();']
+            examples: ['eval(userInput);', 'Function(userInput)();']
           },
           {
             id: 'auto-fix-patterns',
