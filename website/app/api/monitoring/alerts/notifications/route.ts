@@ -10,9 +10,10 @@ import { NextRequest, NextResponse } from 'next/server';
 
 async function getAlertManager() {
   try {
-    // Use dynamic path that webpack can't statically analyze
-    const path = '../../../../../../lib/monitoring/alertManager';
-    const module = await import(/* webpackIgnore: true */ path);
+    // Use dynamic import with template literal to prevent webpack static analysis
+    const basePath = '../../../../../../lib/monitoring/';
+    const moduleName = 'alertManager';
+    const module = await import(`${basePath}${moduleName}`);
     return module.getAlertManager();
   } catch (error) {
     return null;
