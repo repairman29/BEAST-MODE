@@ -100,10 +100,12 @@ async function handler(req: NextRequest) {
 }
 
 export async function GET(req: NextRequest) {
-  return withProductionIntegration(handler, { endpoint: '/api/collaboration/shared-dashboard' })(req);
+  const wrapped = await withProductionIntegration(handler, { endpoint: '/api/collaboration/shared-dashboard' });
+  return wrapped(req);
 }
 
 export async function POST(req: NextRequest) {
-  return withProductionIntegration(handler, { endpoint: '/api/collaboration/shared-dashboard' })(req);
+  const wrapped = await withProductionIntegration(handler, { endpoint: '/api/collaboration/shared-dashboard' });
+  return wrapped(req);
 }
 
