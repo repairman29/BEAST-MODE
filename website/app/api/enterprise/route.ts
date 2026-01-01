@@ -13,7 +13,8 @@ const enterpriseService = getUnifiedEnterpriseService();
 
 export async function GET(request: NextRequest) {
   try {
-    if (!enterpriseService) {
+    const service = await getEnterpriseService();
+    if (!service) {
       return NextResponse.json({
         status: 'unavailable',
         message: 'Enterprise service not available',
@@ -21,7 +22,7 @@ export async function GET(request: NextRequest) {
       });
     }
 
-    await enterpriseService.initialize();
+    await service.initialize();
 
     const { searchParams } = new URL(request.url);
     const operation = searchParams.get('operation');
