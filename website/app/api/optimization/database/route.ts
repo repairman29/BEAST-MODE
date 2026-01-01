@@ -2,20 +2,20 @@ import { NextRequest, NextResponse } from 'next/server';
 import { withProductionIntegration } from '../../../lib/api-middleware';
 
 /**
- * Advanced Analytics API
+ * Database Optimization API
  * 
- * Provides advanced analytics functionality
+ * Provides database optimization functionality
  * 
- * Phase 3: Feature Store & Advanced Analytics Integration
+ * Phase 4: Performance Optimization
  */
 
 async function handler(req: NextRequest) {
   try {
     const path = require('path');
-    const analyticsPath = path.join(process.cwd(), '../../../lib/mlops/advancedAnalytics');
-    const { AdvancedAnalytics } = require(analyticsPath);
-    const analytics = new AdvancedAnalytics();
-    await analytics.initialize();
+    const dbOptimizerPath = path.join(process.cwd(), '../../../lib/scale/databaseOptimizer');
+    const { getDatabaseOptimizer } = require(dbOptimizerPath);
+    const optimizer = getDatabaseOptimizer();
+    await optimizer.initialize();
 
     if (req.method === 'GET') {
       const { searchParams } = new URL(req.url);
@@ -24,33 +24,24 @@ async function handler(req: NextRequest) {
       if (operation === 'status') {
         return NextResponse.json({
           status: 'ok',
-          message: 'Advanced analytics ready',
+          message: 'Database optimizer ready',
           timestamp: new Date().toISOString()
         });
       }
 
-      if (operation === 'report') {
-        const report = await analytics.generateReport();
+      if (operation === 'analyze') {
+        // Analyze performance would be implemented here
         return NextResponse.json({
           status: 'ok',
-          data: { report },
-          timestamp: new Date().toISOString()
-        });
-      }
-
-      if (operation === 'dashboard') {
-        const dashboard = await analytics.getDashboard();
-        return NextResponse.json({
-          status: 'ok',
-          data: { dashboard },
+          data: { analysis: { status: 'ready' } },
           timestamp: new Date().toISOString()
         });
       }
 
       return NextResponse.json({
         status: 'ok',
-        message: 'Advanced analytics API ready',
-        operations: ['status', 'report', 'dashboard'],
+        message: 'Database optimization API ready',
+        operations: ['status', 'analyze'],
         timestamp: new Date().toISOString()
       });
     }
@@ -59,11 +50,12 @@ async function handler(req: NextRequest) {
       const body = await req.json();
       const { operation } = body;
 
-      if (operation === 'dashboard') {
-        const dashboard = await analytics.getDashboard();
+      if (operation === 'optimize') {
+        const { query, options } = body;
+        // Optimize query would be implemented here
         return NextResponse.json({
           status: 'ok',
-          data: { dashboard },
+          message: 'Query optimization ready',
           timestamp: new Date().toISOString()
         });
       }

@@ -22,23 +22,24 @@ async function handler(req: NextRequest) {
       const operation = searchParams.get('operation') || 'list';
 
       if (operation === 'list') {
-        const features = featureStore.getAllFeatures();
+        const stats = featureStore.getStats();
         return NextResponse.json({
           status: 'ok',
-          data: { features },
+          data: { stats },
           timestamp: new Date().toISOString()
         });
       }
 
       if (operation === 'get') {
         const featureName = searchParams.get('featureName');
+        const version = searchParams.get('version') || 'latest';
         if (!featureName) {
           return NextResponse.json(
             { error: 'featureName required' },
             { status: 400 }
           );
         }
-        const feature = featureStore.getFeature(featureName);
+        const feature = await featureStore.retrieve(featureName, version);
         return NextResponse.json({
           status: 'ok',
           data: { feature },
@@ -46,10 +47,26 @@ async function handler(req: NextRequest) {
         });
       }
 
+      if (operation === 'versions') {
+        const featureName = searchParams.get('featureName');
+        if (!featureName) {
+          return NextResponse.json(
+            { error: 'featureName required' },
+            { status: 400 }
+          );
+        }
+        const versions = await featureStore.getVersions(featureName);
+        return NextResponse.json({
+          status: 'ok',
+          data: { versions },
+          timestamp: new Date().toISOString()
+        });
+      }
+
       return NextResponse.json({
         status: 'ok',
         message: 'Feature store API ready',
-        operations: ['list', 'get'],
+        operations: ['list', 'get', 'versions'],
         timestamp: new Date().toISOString()
       });
     }
@@ -58,22 +75,32 @@ async function handler(req: NextRequest) {
       const body = await req.json();
       const { operation } = body;
 
-      if (operation === 'create') {
-        const { featureName, featureData, metadata } = body;
-        const created = await featureStore.createFeature(featureName, featureData, metadata);
+      if (operation === 'store') {
+        const { featureName, features, metadata } = body;
+        const stored = await featureStore.store(featureName, features, metadata);
         return NextResponse.json({
           status: 'ok',
-          data: { feature: created },
+          data: { stored },
           timestamp: new Date().toISOString()
         });
       }
 
-      if (operation === 'update') {
-        const { featureName, featureData } = body;
-        const updated = await featureStore.updateFeature(featureName, featureData);
+      if (operation === 'search') {
+        const { query } = body;
+        const results = await featureStore.search(query || {});
         return NextResponse.json({
           status: 'ok',
-          data: { feature: updated },
+          data: { results },
+          timestamp: new Date().toISOString()
+        });
+      }
+
+      if (operation === 'delete') {
+        const { featureName, version } = body;
+        const deleted = await featureStore.delete(featureName, version);
+        return NextResponse.json({
+          status: 'ok',
+          data: { deleted },
           timestamp: new Date().toISOString()
         });
       }

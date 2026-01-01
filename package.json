@@ -83,6 +83,8 @@
     "test:collaboration-mlops": "node scripts/test-collaboration-mlops.js",
     "test:model-management": "node scripts/test-model-management.js",
     "test:feature-analytics": "node scripts/test-feature-analytics.js",
+    "test:mlops-automation": "node scripts/test-mlops-automation.js",
+    "test:performance": "node scripts/test-performance-optimization.js",
     "test:comprehensive": "node scripts/test-comprehensive.js",
     "test:expanded": "node scripts/test-expanded.js",
     "test:ftue": "node scripts/test-ftue.js"
