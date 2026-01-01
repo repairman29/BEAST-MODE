@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { fetchRepository, fetchRepositoryContents, octokit, createOctokit } from '../../../../lib/github';
 import cache, { cacheKeys, cacheTTL } from '../../../../lib/cache';
 import queryOptimizer from '../../../../lib/query-optimizer';
-import { getDecryptedToken } from '../token/route';
+import { getDecryptedToken } from '../../../../lib/github-token';
 
 /**
  * GitHub Repository Scanning API
