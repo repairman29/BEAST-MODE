@@ -151,7 +151,7 @@ async function handlePOST(request: NextRequest) {
         source: fallbackResult.source || 'heuristic'
       },
       timestamp: new Date().toISOString(),
-      mlAvailable: fallbackResult.source !== 'heuristic'
+        mlAvailable: (fallbackResult as any)?.source !== 'heuristic'
     });
 
   } catch (error) {
