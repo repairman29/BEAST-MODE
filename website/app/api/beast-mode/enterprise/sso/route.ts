@@ -208,6 +208,8 @@ export async function POST(request: NextRequest) {
       // In production, this would use the actual SSO library (passport-saml, etc.)
       // ARCHITECTURE: Moved to API route
 // const loginUrl = `${process.env.NEXT_PUBLIC_URL || 'https://beast-mode.dev'}/api/beast-mode/enterprise/sso/callback?provider=${provider}&state=${Buffer.from(JSON.stringify({ userId, timestamp: Date.now() })).toString('base64')}`;
+
+      return NextResponse.json({
         status: 'success',
         message: 'SSO login initiated',
         provider,
