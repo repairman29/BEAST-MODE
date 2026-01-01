@@ -62,10 +62,12 @@ export async function POST(request: NextRequest) {
 
     // Write to unified analytics
     try {
-      const { getDatabaseWriter } = await import('../../../../lib/mlops/databaseWriter');
-      const dbWriter = getDatabaseWriter();
-      
-      await dbWriter.writePrediction({
+      // Try to import databaseWriter, but handle gracefully if not available
+      try {
+        const { getDatabaseWriter } = await import('../../../../lib/mlops/databaseWriter');
+        const dbWriter = getDatabaseWriter();
+        
+        await dbWriter.writePrediction({
         serviceName: 'unified-analytics',
         predictionType: 'session_event',
         predictedValue: 1,
