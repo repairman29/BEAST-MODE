@@ -20,7 +20,7 @@ export async function POST(request: NextRequest) {
 
     let AutomatedCodeReview;
     try {
-      // @ts-ignore - Dynamic import, module may not exist
+      // @ts-ignore - Optional module, may not exist
       const module = await import(/* webpackIgnore: true */ '../../../../../../lib/intelligence/automated-code-review').catch(() => null);
       AutomatedCodeReview = module?.default || module;
       if (!AutomatedCodeReview) {
