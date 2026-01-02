@@ -1,5 +1,16 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getProductionMonitorService } from '../../../../../lib/api-middleware';
+
+// Optional import - service may not be available
+async function getProductionMonitorService() {
+  try {
+    // @ts-ignore - Dynamic import, module may not exist
+    const middleware = await import(/* webpackIgnore: true */ '../../../../../lib/monitoring/productionMonitor').catch(() => null);
+    const getMonitor = middleware?.getProductionMonitor;
+    return getMonitor ? getMonitor() : null;
+  } catch {
+    return null;
+  }
+}
 
 /**
  * Alert Rules API

@@ -1,5 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getPerformanceStats } from '../../../../lib/api-middleware';
+
+// Optional import - service may not be available
+async function getPerformanceStats() {
+  try {
+    const middleware = await import(/* webpackIgnore: true */ '../../../../lib/api-middleware').catch(() => null);
+    const getStats = middleware?.getPerformanceStats;
+    return getStats ? getStats() : null;
+  } catch {
+    return null;
+  }
+}
 
 /**
  * Performance Statistics API
@@ -37,4 +47,3 @@ export async function GET(request: NextRequest) {
     );
   }
 }
-

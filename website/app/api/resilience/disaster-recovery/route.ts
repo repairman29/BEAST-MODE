@@ -1,5 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getDisasterRecoveryService } from '../../../../lib/api-middleware';
+
+// Optional import - service may not be available
+async function getDisasterRecoveryService() {
+  try {
+    // @ts-ignore - Dynamic import, module may not exist
+    const middleware = await import(/* webpackIgnore: true */ '../../../../lib/api-middleware').catch(() => null);
+    return middleware?.getDisasterRecoveryService || null;
+  } catch {
+    return null;
+  }
+}
 
 /**
  * Disaster Recovery API
@@ -15,7 +25,15 @@ export async function GET(request: NextRequest) {
     const operation = searchParams.get('operation') || 'status';
     const backupType = searchParams.get('type') || 'model';
 
-    const recovery = await getDisasterRecoveryService();
+    const getRecovery = await getDisasterRecoveryService();
+    if (!getRecovery) {
+      return NextResponse.json({
+        status: 'unavailable',
+        message: 'Disaster recovery not available',
+        timestamp: new Date().toISOString()
+      });
+    }
+    const recovery = getRecovery();
     
     if (!recovery) {
       return NextResponse.json({
@@ -27,8 +45,6 @@ export async function GET(request: NextRequest) {
 
     if (operation === 'status') {
       // ARCHITECTURE: Moved to API route
-// // ARCHITECTURE: Moved to API route
-// // ARCHITECTURE: Moved to API route
 // const strategies = recovery.backupStrategies ? Array.from(recovery.backupStrategies.entries()) : [];
       const history = recovery.backupHistory ? recovery.backupHistory.slice(-10) : [];
       return NextResponse.json({
@@ -41,8 +57,6 @@ export async function GET(request: NextRequest) {
 
     if (operation === 'procedures') {
       // ARCHITECTURE: Moved to API route
-// // ARCHITECTURE: Moved to API route
-// // ARCHITECTURE: Moved to API route
 // const procedures = recovery.recoveryProcedures ? Array.from(recovery.recoveryProcedures.entries()) : [];
       return NextResponse.json({
         status: 'ok',
@@ -73,7 +87,15 @@ export async function POST(request: NextRequest) {
   try {
     const { operation, backupType, recoveryType } = await request.json();
 
-    const recovery = await getDisasterRecoveryService();
+    const getRecovery = await getDisasterRecoveryService();
+    if (!getRecovery) {
+      return NextResponse.json({
+        status: 'unavailable',
+        message: 'Disaster recovery not available',
+        timestamp: new Date().toISOString()
+      });
+    }
+    const recovery = getRecovery();
     
     if (!recovery) {
       return NextResponse.json({

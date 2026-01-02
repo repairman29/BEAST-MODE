@@ -1,5 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { triggerAutoOptimization } from '../../../../lib/api-middleware';
+
+// Optional import - service may not be available
+async function getTriggerAutoOptimization() {
+  try {
+    // @ts-ignore - Dynamic import, module may not exist
+    const middleware = await import(/* webpackIgnore: true */ '../../../../lib/api-middleware').catch(() => null);
+    return middleware?.triggerAutoOptimization || null;
+  } catch {
+    return null;
+  }
+}
 
 /**
  * Auto-Optimization API
@@ -11,6 +21,14 @@ import { triggerAutoOptimization } from '../../../../lib/api-middleware';
 
 export async function POST(request: NextRequest) {
   try {
+    const triggerAutoOptimization = await getTriggerAutoOptimization();
+    if (!triggerAutoOptimization) {
+      return NextResponse.json({
+        status: 'unavailable',
+        message: 'Auto-optimizer not available',
+        timestamp: new Date().toISOString()
+      });
+    }
     const optimization = await triggerAutoOptimization();
 
     if (!optimization) {
@@ -40,6 +58,14 @@ export async function POST(request: NextRequest) {
 
 export async function GET(request: NextRequest) {
   try {
+    const triggerAutoOptimization = await getTriggerAutoOptimization();
+    if (!triggerAutoOptimization) {
+      return NextResponse.json({
+        status: 'unavailable',
+        message: 'Auto-optimizer not available',
+        timestamp: new Date().toISOString()
+      });
+    }
     const optimization = await triggerAutoOptimization();
 
     if (!optimization) {

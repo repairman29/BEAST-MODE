@@ -1,5 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { checkScalingNeeds, getAdvancedScalerService } from '../../../../lib/api-middleware';
+
+// Optional imports - services may not be available
+let checkScalingNeeds: any = null;
+let getAdvancedScalerService: any = null;
+try {
+  const middleware = await import(/* webpackIgnore: true */ '../../../../lib/api-middleware').catch(() => null);
+  checkScalingNeeds = middleware?.checkScalingNeeds;
+  getAdvancedScalerService = middleware?.getAdvancedScalerService;
+} catch {}
 
 /**
  * Scaling API

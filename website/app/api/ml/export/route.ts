@@ -1,5 +1,21 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { exportForBI, getPerformanceStats } from '../../../../lib/api-middleware';
+
+// Optional imports - services may not be available
+async function getExportServices() {
+  try {
+    // @ts-ignore - Dynamic import, module may not exist
+    const middleware = await import(/* webpackIgnore: true */ '../../../../lib/api-middleware').catch(() => null);
+    return {
+      exportForBI: middleware?.exportForBI || null,
+      getPerformanceStats: middleware?.getPerformanceStats || null
+    };
+  } catch {
+    return {
+      exportForBI: null,
+      getPerformanceStats: null
+    };
+  }
+}
 
 /**
  * BI Export API
@@ -11,20 +27,20 @@ import { exportForBI, getPerformanceStats } from '../../../../lib/api-middleware
 
 export async function GET(request: NextRequest) {
   try {
-    const { searchParams } = new URL(request.url);
-    const format = searchParams.get('format') || 'csv';
-    const type = searchParams.get('type') || 'performance';
-
-    // Performance monitor not available
-    if (!getPerformanceStats) {
+    const services = await getExportServices();
+    if (!services.getPerformanceStats) {
       return NextResponse.json({
         status: 'unavailable',
         message: 'Performance monitor not available',
         timestamp: new Date().toISOString()
       });
     }
+    
+    const { searchParams } = new URL(request.url);
+    const format = searchParams.get('format') || 'csv';
+    const type = searchParams.get('type') || 'performance';
 
-    const stats = await getPerformanceStats();
+    const stats = await services.getPerformanceStats();
     
     if (!stats) {
       return NextResponse.json({
@@ -56,7 +72,7 @@ export async function GET(request: NextRequest) {
     }
 
     // BI export not available
-    if (!exportForBI) {
+    if (!services.exportForBI) {
       return NextResponse.json({
         status: 'unavailable',
         message: 'BI integration not available',
@@ -64,7 +80,7 @@ export async function GET(request: NextRequest) {
       });
     }
 
-    const exported = await exportForBI(exportData, format);
+    const exported = await services.exportForBI(exportData, format);
 
     if (!exported) {
       return NextResponse.json({
