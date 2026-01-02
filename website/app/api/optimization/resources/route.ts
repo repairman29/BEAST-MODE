@@ -9,9 +9,23 @@ import { NextRequest, NextResponse } from 'next/server';
  */
 
 async function handler(req: NextRequest) {
+  try {
+    // Optional service - may not be available
+    let optimizer: any = null;
+    try {
+      const path = require('path');
+      const optimizerPath = path.join(process.cwd(), '../../../lib/scale/resourceOptimizer');
+      const { getResourceOptimizerService } = require(optimizerPath);
+      optimizer = await getResourceOptimizerService();
+    } catch (error) {
+      // Service not available - return graceful response
+      return NextResponse.json(
+        { error: 'Resource optimizer not available', status: 'unavailable' },
+        { status: 503 }
+      );
     }
     
-    const optimizer = getResourceOptimizerService ? await getResourceOptimizerService() : null;
+    if (!optimizer) {
     if (!optimizer) {
       return NextResponse.json(
         { error: 'Resource optimizer not available' },
@@ -114,17 +128,11 @@ async function handler(req: NextRequest) {
   }
 }
 
-}
-
 export async function GET(req: NextRequest) {
   return handler(req);
-    }
-  }
-  return handler(req);
+}
 
 export async function POST(req: NextRequest) {
   return handler(req);
-    }
-  }
-  return handler(req);
+}
 
