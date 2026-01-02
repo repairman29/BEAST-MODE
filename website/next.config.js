@@ -41,13 +41,17 @@ const nextConfig = {
     optimizeCss: true,
   },
   
-  // Skip static generation for error pages (they use dynamic features)
-  generateBuildId: async () => {
-    return 'build-' + Date.now().toString();
+  // Skip static generation for error pages
+  // Error pages use dynamic features and cannot be statically generated
+  typescript: {
+    ignoreBuildErrors: false,
   },
   
-  // Output configuration
-  output: 'standalone',
+  // Disable static optimization for error pages
+  onDemandEntries: {
+    maxInactiveAge: 25 * 1000,
+    pagesBufferLength: 2,
+  },
 };
 
 module.exports = nextConfig;
