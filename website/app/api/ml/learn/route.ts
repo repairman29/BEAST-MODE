@@ -3,6 +3,7 @@ import { NextRequest, NextResponse } from 'next/server';
 // Optional imports - services may not be available
 async function getLearningServices() {
   try {
+    // @ts-ignore - Dynamic import, module may not exist
     const middleware = await import(/* webpackIgnore: true */ '../../../../lib/api-middleware').catch(() => null);
     return {
       learnFromOutcome: middleware?.learnFromOutcome,
@@ -35,15 +36,15 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const services = await getLearningServices();
-    if (!services.learnFromOutcome) {
+    const { learnFromOutcome } = await getLearningServices();
+    if (!learnFromOutcome) {
       return NextResponse.json({
         status: 'unavailable',
         message: 'Self-learning service not available',
         timestamp: new Date().toISOString()
       });
     }
-    const learning = await services.learnFromOutcome(action, outcome, reward);
+    const learning = await learnFromOutcome(action, outcome, reward);
 
     if (!learning) {
       return NextResponse.json({
@@ -72,15 +73,15 @@ export async function POST(request: NextRequest) {
 
 export async function GET(request: NextRequest) {
   try {
-    const services = await getLearningServices();
-    if (!services.getSelfLearningService) {
+    const { getSelfLearningService } = await getLearningServices();
+    if (!getSelfLearningService) {
       return NextResponse.json({
         status: 'unavailable',
         message: 'Self-learning service not available',
         timestamp: new Date().toISOString()
       });
     }
-    const learning = await services.getSelfLearningService();
+    const learning = await getSelfLearningService();
     
     if (!learning) {
       return NextResponse.json({

@@ -29,7 +29,6 @@ export async function GET(request: NextRequest) {
         timestamp: new Date().toISOString()
       });
     }
-    const stats = await getPerformanceStats();
 
     if (!stats) {
       return NextResponse.json({
