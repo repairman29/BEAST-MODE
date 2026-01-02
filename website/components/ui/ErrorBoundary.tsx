@@ -51,7 +51,7 @@ class ErrorBoundary extends Component<Props, State> {
     // Send to error monitoring
     if (typeof window !== 'undefined') {
       try {
-        const { getErrorMonitor } = require('@/lib/error-monitoring');
+        const { getErrorMonitor } = require('../../lib/error-monitoring');
         const errorMonitor = getErrorMonitor();
         errorMonitor.captureError(error, {
           component: 'ErrorBoundary',
