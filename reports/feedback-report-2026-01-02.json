@@ -1,0 +1,58 @@
+{
+  "generatedAt": "2026-01-02T08:44:26.071Z",
+  "summary": {
+    "totalPredictions": 984,
+    "withActuals": 2,
+    "withoutActuals": 982,
+    "feedbackRate": "0.2%",
+    "targetRate": 0.05,
+    "health": "critical"
+  },
+  "byService": {
+    "ai-gm": {
+      "total": 464,
+      "recent": 464,
+      "old": 0,
+      "withContext": 464,
+      "avgConfidence": 0.8500000000000053,
+      "confidenceSum": 394.4000000000025
+    },
+    "code-roach": {
+      "total": 70,
+      "recent": 70,
+      "old": 0,
+      "withContext": 70,
+      "avgConfidence": 0.8500000000000009,
+      "confidenceSum": 59.500000000000064
+    },
+    "oracle": {
+      "total": 70,
+      "recent": 70,
+      "old": 0,
+      "withContext": 70,
+      "avgConfidence": 0.8500000000000009,
+      "confidenceSum": 59.500000000000064
+    },
+    "game-app": {
+      "total": 374,
+      "recent": 0,
+      "old": 0,
+      "withContext": 374,
+      "avgConfidence": 0.8500000000000012,
+      "confidenceSum": 317.90000000000043
+    },
+    "unknown": {
+      "total": 4,
+      "recent": 0,
+      "old": 0,
+      "withContext": 4,
+      "avgConfidence": 0.85,
+      "confidenceSum": 3.4
+    }
+  },
+  "byDay": {
+    "2026-01-02": 604,
+    "2025-12-31": 378
+  },
+  "recommendations": []
+}
