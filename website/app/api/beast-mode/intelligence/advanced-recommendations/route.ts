@@ -21,6 +21,7 @@ export async function POST(request: NextRequest) {
     // Import and use AdvancedRecommendations
     let AdvancedRecommendations;
     try {
+      // @ts-ignore - Optional module, may not exist
       const module = await import(/* webpackIgnore: true */ '../../../../../../lib/intelligence/advanced-recommendations').catch(() => null);
       AdvancedRecommendations = module?.default || module;
       if (!AdvancedRecommendations) {
