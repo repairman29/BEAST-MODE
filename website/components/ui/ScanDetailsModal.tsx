@@ -361,52 +361,70 @@ export function ScanDetailsModal({
                 Detected Issues ({scan.detectedIssues.length})
               </h3>
               <div className="space-y-2 max-h-96 overflow-y-auto">
-                {scan.detectedIssues.map((issue: any, idx: number) => (
+                {scan.detectedIssues.map((issue: any, idx: number) => {
+                  // Use a component for expandable issues
+                  return <ExpandableIssue key={idx} issue={issue} onApplyFix={onApplyFix} applyingFix={applyingFix} handleFix={handleFix} />;
+                })}
+              </div>
+            </div>
+          )}
+
+          {/* Recommendations */}
+          {scan.recommendations && scan.recommendations.length > 0 && (
+            <div>
+              <h3 className="text-white font-semibold mb-3 flex items-center gap-2">
+                <span>💡</span>
+                Recommendations ({scan.recommendations.length})
+              </h3>
+              <div className="space-y-2 max-h-96 overflow-y-auto">
+                {scan.recommendations.map((rec: any, idx: number) => (
                   <div
                     key={idx}
-                    className="bg-slate-800/50 rounded-lg p-4 border border-slate-700/50 hover:border-slate-600 transition-colors"
+                    className="bg-slate-800/50 rounded-lg p-4 border border-slate-700/50 hover:border-cyan-500/50 transition-colors"
                   >
                     <div className="flex items-start justify-between gap-4">
                       <div className="flex-1">
                         <div className="flex items-center gap-2 mb-2">
                           <span className={`px-2 py-1 rounded text-xs font-medium ${
-                            issue.priority === 'high' ? 'bg-red-500/20 text-red-400 border border-red-500/30' :
-                            issue.priority === 'medium' ? 'bg-amber-500/20 text-amber-400 border border-amber-500/30' :
+                            rec.priority === 'high' ? 'bg-red-500/20 text-red-400 border border-red-500/30' :
+                            rec.priority === 'medium' ? 'bg-amber-500/20 text-amber-400 border border-amber-500/30' :
                             'bg-blue-500/20 text-blue-400 border border-blue-500/30'
                           }`}>
-                              {issue.priority || 'low'}
-                            </span>
-                          <span className="text-white font-semibold">{issue.title || issue.type || 'Issue'}</span>
+                            {rec.priority || 'low'}
+                          </span>
+                          <span className="text-white font-semibold">{rec.title || 'Recommendation'}</span>
                         </div>
-                        {issue.description && (
-                          <div className="text-slate-300 text-sm mb-2">{issue.description}</div>
+                        {rec.description && (
+                          <div className="text-slate-300 text-sm mb-2">{rec.description}</div>
                         )}
-                        {issue.message && (
-                          <div className="text-slate-400 text-sm mb-2">{issue.message}</div>
+                        {rec.action && (
+                          <div className="text-cyan-400 text-sm font-mono bg-cyan-500/10 px-3 py-2 rounded-lg border border-cyan-500/20 mb-2">
+                            💡 {rec.action}
+                          </div>
                         )}
-                        {issue.file && (
+                        {rec.file && (
                           <div className="flex items-center gap-2 text-xs text-slate-500">
                             <span>📄</span>
                             <code className="bg-slate-900 px-2 py-1 rounded border border-slate-700">
-                              {issue.file}{issue.line ? `:${issue.line}` : ''}
+                              {rec.file}
                             </code>
                           </div>
                         )}
                       </div>
-                      {onApplyFix && issue.fixable !== false && (
+                      {onApplyFix && (
                         <Button
-                          onClick={() => handleFix(issue)}
-                          disabled={applyingFix === (issue.title || issue.type)}
+                          onClick={() => handleFix(rec)}
+                          disabled={applyingFix === (rec.title || rec.type)}
                           size="sm"
-                          className="bg-green-600 hover:bg-green-700 text-white flex-shrink-0 disabled:opacity-50"
+                          className="bg-cyan-600 hover:bg-cyan-700 text-white flex-shrink-0 disabled:opacity-50"
                         >
-                          {applyingFix === (issue.title || issue.type) ? (
+                          {applyingFix === (rec.title || rec.type) ? (
                             <span className="flex items-center gap-1">
                               <span className="animate-spin w-3 h-3 border-2 border-white border-t-transparent rounded-full"></span>
-                              <span className="animate-pulse">Fixing...</span>
+                              <span className="animate-pulse">Applying...</span>
                             </span>
                           ) : (
-                            '🔧 Fix'
+                            '🔧 Apply'
                           )}
                         </Button>
                       )}
@@ -416,6 +434,237 @@ export function ScanDetailsModal({
               </div>
             </div>
           )}
+
+          {/* Raw Data (Collapsible) */}
+          <details className="bg-slate-800/30 rounded-lg p-4 border border-slate-700/50">
+            <summary className="text-slate-400 text-sm cursor-pointer hover:text-slate-300">
+              🔍 View Raw Scan Data
+            </summary>
+            <pre className="mt-3 text-xs text-slate-500 overflow-auto max-h-64 p-3 bg-slate-900 rounded border border-slate-700">
+              {JSON.stringify(scan, null, 2)}
+            </pre>
+          </details>
+        </CardContent>
+      </Card>
+
+      {/* Dialogs */}
+      <ConfirmDialog
+        open={showConfirmDialog}
+        title="Apply Fix"
+        message={pendingFix ? `Apply fix for: ${pendingFix.title || pendingFix.type || 'this issue'}?\n\nThis will modify files in your codebase.` : ''}
+        onConfirm={confirmFix}
+        onCancel={() => {
+          setShowConfirmDialog(false);
+          setPendingFix(null);
+        }}
+        variant="default"
+      />
+      
+      <AlertDialog
+        open={showAlertDialog}
+        title={alertData.title}
+        message={alertData.message}
+        variant={alertData.variant}
+        onClose={() => {
+          setShowAlertDialog(false);
+          setAlertData({ title: '', message: '', variant: 'info' });
+        }}
+      />
+    </div>
+  );
+}
+
+// Expandable Issue Component
+function ExpandableIssue({ issue, onApplyFix, applyingFix, handleFix }: any) {
+  const [isExpanded, setIsExpanded] = useState(false);
+  
+  return (
+    <div className="bg-slate-800/50 rounded-lg p-4 border border-slate-700/50 hover:border-slate-600 transition-colors">
+      <div className="flex items-start justify-between gap-4">
+        <div className="flex-1">
+          <div className="flex items-center gap-2 mb-2">
+            <span className={`px-2 py-1 rounded text-xs font-medium ${
+              issue.priority === 'high' ? 'bg-red-500/20 text-red-400 border border-red-500/30' :
+              issue.priority === 'medium' ? 'bg-amber-500/20 text-amber-400 border border-amber-500/30' :
+              'bg-blue-500/20 text-blue-400 border border-blue-500/30'
+            }`}>
+              {issue.priority || 'low'}
+            </span>
+            <span className="text-white font-semibold">{issue.title || issue.type || 'Issue'}</span>
+            {issue.category && (
+              <span className="text-xs text-slate-500 px-2 py-0.5 bg-slate-900 rounded">
+                {issue.category}
+              </span>
+            )}
+          </div>
+          {issue.description && (
+            <div className="text-slate-300 text-sm mb-2">{issue.description}</div>
+          )}
+          {issue.message && (
+            <div className="text-slate-400 text-sm mb-2">{issue.message}</div>
+          )}
+          {issue.file && (
+            <div className="flex items-center gap-2 text-xs text-slate-500 mb-2">
+              <span>📄</span>
+              <code className="bg-slate-900 px-2 py-1 rounded border border-slate-700">
+                {issue.file}{issue.line ? `:${issue.line}` : ''}
+              </code>
+            </div>
+          )}
+          {issue.expectedPath && !issue.file && (
+            <div className="flex items-center gap-2 text-xs text-slate-500 mb-2">
+              <span>📍</span>
+              <code className="bg-slate-900 px-2 py-1 rounded border border-slate-700">
+                Expected: {issue.expectedPath}
+              </code>
+            </div>
+          )}
+          
+          {/* Expandable Context Section */}
+          {issue.context && (
+            <div className="mt-3">
+              <button
+                onClick={() => setIsExpanded(!isExpanded)}
+                className="text-xs text-cyan-400 hover:text-cyan-300 flex items-center gap-1 mb-2"
+              >
+                <span>{isExpanded ? '▼' : '▶'}</span>
+                <span>{isExpanded ? 'Hide' : 'Show'} Context & Details</span>
+              </button>
+              {isExpanded && (
+                <div className="bg-slate-900/50 rounded-lg p-3 space-y-3 border border-slate-700/50">
+                  {/* Suggestion */}
+                  {issue.context.suggestion && (
+                    <div className="bg-cyan-500/10 border border-cyan-500/20 rounded-lg p-3">
+                      <div className="text-xs text-cyan-400 font-semibold mb-1">💡 Suggestion</div>
+                      <div className="text-sm text-slate-300">{issue.context.suggestion}</div>
+                    </div>
+                  )}
+                  
+                  {/* Checked Paths */}
+                  {issue.context.checkedPaths && issue.context.checkedPaths.length > 0 && (
+                    <div>
+                      <div className="text-xs text-slate-400 mb-1">Checked Paths:</div>
+                      <div className="flex flex-wrap gap-1">
+                        {issue.context.checkedPaths.map((path: string, pIdx: number) => (
+                          <code key={pIdx} className="text-xs bg-slate-800 px-2 py-1 rounded border border-slate-700">
+                            {path}
+                          </code>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                  
+                  {/* Checked Patterns */}
+                  {issue.context.checkedPatterns && issue.context.checkedPatterns.length > 0 && (
+                    <div>
+                      <div className="text-xs text-slate-400 mb-1">Checked Patterns:</div>
+                      <div className="flex flex-wrap gap-1">
+                        {issue.context.checkedPatterns.map((pattern: string, pIdx: number) => (
+                          <code key={pIdx} className="text-xs bg-slate-800 px-2 py-1 rounded border border-slate-700">
+                            {pattern}
+                          </code>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                  
+                  {/* Expected Files */}
+                  {issue.context.expectedFiles && issue.context.expectedFiles.length > 0 && (
+                    <div>
+                      <div className="text-xs text-slate-400 mb-1">Expected Files:</div>
+                      <div className="flex flex-wrap gap-1">
+                        {issue.context.expectedFiles.map((file: string, fIdx: number) => (
+                          <code key={fIdx} className="text-xs bg-slate-800 px-2 py-1 rounded border border-slate-700">
+                            {file}
+                          </code>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                  
+                  {/* Metrics */}
+                  {issue.context.metrics && (
+                    <div>
+                      <div className="text-xs text-slate-400 mb-1">Metrics:</div>
+                      <div className="grid grid-cols-2 gap-2 text-xs">
+                        {Object.entries(issue.context.metrics).map(([key, value]: [string, any]) => (
+                          <div key={key} className="bg-slate-800 px-2 py-1 rounded">
+                            <span className="text-slate-400">{key}:</span>{' '}
+                            <span className="text-slate-200">{String(value)}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                  
+                  {/* Repository Context */}
+                  {issue.context.repository && (
+                    <div>
+                      <div className="text-xs text-slate-400 mb-1">Repository Info:</div>
+                      <div className="space-y-1 text-xs">
+                        {issue.context.repository.defaultBranch && (
+                          <div className="bg-slate-800 px-2 py-1 rounded">
+                            <span className="text-slate-400">Default Branch:</span>{' '}
+                            <code className="text-slate-200">{issue.context.repository.defaultBranch}</code>
+                          </div>
+                        )}
+                        {issue.context.repository.url && (
+                          <div className="bg-slate-800 px-2 py-1 rounded">
+                            <span className="text-slate-400">URL:</span>{' '}
+                            <a href={issue.context.repository.url} target="_blank" rel="noopener noreferrer" className="text-cyan-400 hover:underline">
+                              {issue.context.repository.url}
+                            </a>
+                          </div>
+                        )}
+                        {issue.context.repository.issuesUrl && (
+                          <div className="bg-slate-800 px-2 py-1 rounded">
+                            <span className="text-slate-400">Issues:</span>{' '}
+                            <a href={issue.context.repository.issuesUrl} target="_blank" rel="noopener noreferrer" className="text-cyan-400 hover:underline">
+                              View Issues
+                            </a>
+                          </div>
+                        )}
+                        {issue.context.repository.languages && issue.context.repository.languages.length > 0 && (
+                          <div className="bg-slate-800 px-2 py-1 rounded">
+                            <span className="text-slate-400">Languages:</span>{' '}
+                            <span className="text-slate-200">{issue.context.repository.languages.join(', ')}</span>
+                          </div>
+                        )}
+                        {issue.context.repository.primaryLanguage && (
+                          <div className="bg-slate-800 px-2 py-1 rounded">
+                            <span className="text-slate-400">Primary Language:</span>{' '}
+                            <span className="text-slate-200">{issue.context.repository.primaryLanguage}</span>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+        {onApplyFix && issue.fixable !== false && (
+          <Button
+            onClick={() => handleFix(issue)}
+            disabled={applyingFix === (issue.title || issue.type)}
+            size="sm"
+            className="bg-green-600 hover:bg-green-700 text-white flex-shrink-0 disabled:opacity-50"
+          >
+            {applyingFix === (issue.title || issue.type) ? (
+              <span className="flex items-center gap-1">
+                <span className="animate-spin w-3 h-3 border-2 border-white border-t-transparent rounded-full"></span>
+                <span className="animate-pulse">Fixing...</span>
+              </span>
+            ) : (
+              '🔧 Fix'
+            )}
+          </Button>
+        )}
+      </div>
+    </div>
+  );
+}
 
           {/* Recommendations */}
           {scan.recommendations && scan.recommendations.length > 0 && (
