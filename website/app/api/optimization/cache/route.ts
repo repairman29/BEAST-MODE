@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { withProductionIntegration } from '../../../../lib/api-middleware';
 
 /**
  * Cache Optimization API

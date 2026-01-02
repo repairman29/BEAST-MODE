@@ -99,10 +99,37 @@ async function handler(req: NextRequest) {
   }
 }
 
-export async function GET(req: NextRequest) {
+let withProductionIntegration: any = null;
+try {
+  // @ts-ignore - Dynamic require, module may not exist
+  /* webpackIgnore: true */
+  const middleware = require(`../../../../lib/api-middleware`);
+  withProductionIntegration = middleware.withProductionIntegration;
+} catch (error) {
+  // Middleware not available
 }
+
+export async function GET(req: NextRequest) {
+  if (withProductionIntegration) {
+    try {
+      const wrappedHandler = await withProductionIntegration(handler);
+      return wrappedHandler(req);
+    } catch (error) {
+      // Fall through to direct handler
+    }
+  }
+  return handler(req);
+}
+
 export async function POST(req: NextRequest) {
-  const wrappedHandler = await withProductionIntegration(handler);
-  return wrappedHandler(req);
+  if (withProductionIntegration) {
+    try {
+      const wrappedHandler = await withProductionIntegration(handler);
+      return wrappedHandler(req);
+    } catch (error) {
+      // Fall through to direct handler
+    }
+  }
+  return handler(req);
 }
 
