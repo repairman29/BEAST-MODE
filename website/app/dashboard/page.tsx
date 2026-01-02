@@ -3,6 +3,7 @@
 import { Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import BeastModeDashboard from '../../components/beast-mode/BeastModeDashboard'
+import FeedbackPrompt from '../../components/feedback/FeedbackPrompt'
 
 function DashboardContent() {
   const searchParams = useSearchParams();
@@ -10,6 +11,8 @@ function DashboardContent() {
   return (
     <div className="fixed inset-0 overflow-hidden pt-0" style={{ pointerEvents: 'auto' }}>
       <BeastModeDashboard initialView={searchParams.get('view') || null} />
+      {/* Global feedback prompt - appears in bottom-right */}
+      <FeedbackPrompt />
     </div>
   )
 }
