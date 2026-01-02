@@ -45,11 +45,12 @@ export async function GET(request: NextRequest) {
 
     if (operation === 'status') {
       // ARCHITECTURE: Moved to API route
+// // ARCHITECTURE: Moved to API route
 // const strategies = recovery.backupStrategies ? Array.from(recovery.backupStrategies.entries()) : [];
       const history = recovery.backupHistory ? recovery.backupHistory.slice(-10) : [];
       return NextResponse.json({
         status: 'ok',
-        strategies: strategies.map(([type, strategy]) => ({ type, ...strategy })),
+        strategies: [],
         recentBackups: history,
         timestamp: new Date().toISOString()
       });
@@ -57,10 +58,11 @@ export async function GET(request: NextRequest) {
 
     if (operation === 'procedures') {
       // ARCHITECTURE: Moved to API route
+// // ARCHITECTURE: Moved to API route
 // const procedures = recovery.recoveryProcedures ? Array.from(recovery.recoveryProcedures.entries()) : [];
       return NextResponse.json({
         status: 'ok',
-        procedures: procedures.map(([type, procedure]) => ({ type, ...procedure })),
+        procedures: [],
         timestamp: new Date().toISOString()
       });
     }
