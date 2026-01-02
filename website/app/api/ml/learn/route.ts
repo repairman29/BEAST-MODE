@@ -35,7 +35,15 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const learning = await learnFromOutcome(action, outcome, reward);
+    const services = await getLearningServices();
+    if (!services.learnFromOutcome) {
+      return NextResponse.json({
+        status: 'unavailable',
+        message: 'Self-learning service not available',
+        timestamp: new Date().toISOString()
+      });
+    }
+    const learning = await services.learnFromOutcome(action, outcome, reward);
 
     if (!learning) {
       return NextResponse.json({
@@ -64,7 +72,15 @@ export async function POST(request: NextRequest) {
 
 export async function GET(request: NextRequest) {
   try {
-    const learning = await getSelfLearningService();
+    const services = await getLearningServices();
+    if (!services.getSelfLearningService) {
+      return NextResponse.json({
+        status: 'unavailable',
+        message: 'Self-learning service not available',
+        timestamp: new Date().toISOString()
+      });
+    }
+    const learning = await services.getSelfLearningService();
     
     if (!learning) {
       return NextResponse.json({
