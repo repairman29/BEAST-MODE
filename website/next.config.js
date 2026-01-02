@@ -19,12 +19,17 @@ const nextConfig = {
       '@': projectRoot,
     };
     
-    // Ensure modules resolve from project root
+    // CRITICAL: Ensure modules resolve from project root
+    // This is needed when root directory is set to a subdirectory in Vercel
     config.resolve.modules = [
-      projectRoot,
+      projectRoot, // Add project root first so relative paths resolve correctly
       path.join(projectRoot, 'node_modules'),
-      ...(Array.isArray(config.resolve.modules) ? config.resolve.modules : []),
+      ...(Array.isArray(config.resolve.modules) ? config.resolve.modules.filter(m => m !== projectRoot) : []),
     ];
+    
+    // Also ensure that relative paths resolve from the file's directory
+    // This helps with ../../lib/ style imports
+    config.resolve.roots = [projectRoot];
     
     return config;
   },
