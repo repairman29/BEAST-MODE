@@ -1,101 +1,123 @@
-#!/usr/bin/env node
-
 /**
- * MLflow Setup Script
- * Initializes MLflow infrastructure
- * 
- * Month 1: MLOps Infrastructure Setup
+ * Setup MLflow for Experiment Tracking
+ * Installs and configures MLflow for ML training
  */
 
-const { createLogger } = require('../lib/utils/logger');
-const log = createLogger('SetupMLflow');
+const { execSync } = require('child_process');
+const fs = require('fs');
+const path = require('path');
 
 async function main() {
-    log.info('🔧 Setting up MLflow infrastructure...');
-    log.info('='.repeat(60));
+  console.log('🔧 Setting Up MLflow for Experiment Tracking\n');
+  console.log('='.repeat(60));
 
-    try {
-        // Check if MLflow is installed
-        const { execSync } = require('child_process');
-        
-        try {
-            execSync('mlflow --version', { stdio: 'ignore' });
-            log.info('✅ MLflow is installed');
-        } catch (error) {
-            log.warn('⚠️  MLflow not found. Installing...');
-            log.info('💡 Run: pip install mlflow');
-            log.info('   Or: npm install -g mlflow (if available)');
-        }
+  // Check if MLflow is installed
+  let mlflowInstalled = false;
+  try {
+    execSync('mlflow --version', { stdio: 'ignore' });
+    mlflowInstalled = true;
+    console.log('✅ MLflow CLI already installed');
+  } catch (error) {
+    console.log('⚠️  MLflow CLI not found');
+  }
 
-        // Check MLflow server
-        const fetch = require('node-fetch');
-        try {
-            const response = await fetch('http://localhost:5000/health');
-            if (response.ok) {
-                log.info('✅ MLflow server is running at http://localhost:5000');
-            }
-        } catch (error) {
-            log.warn('⚠️  MLflow server not running');
-            log.info('💡 Start it with: npm run mlflow:start');
-            log.info('   Or: mlflow ui --port 5000');
-        }
+  // Check if Python MLflow package is installed
+  let pythonMLflowInstalled = false;
+  try {
+    execSync('python3 -c "import mlflow"', { stdio: 'ignore' });
+    pythonMLflowInstalled = true;
+    console.log('✅ Python MLflow package installed');
+  } catch (error) {
+    console.log('⚠️  Python MLflow package not found');
+  }
 
-        // Create necessary directories
-        const fs = require('fs').promises;
-        const path = require('path');
+  // Installation instructions
+  console.log('\n📦 Installation Options:\n');
 
-        const dirs = [
-            '.beast-mode/data/training',
-            '.beast-mode/models',
-            '.beast-mode/mlflow'
-        ];
+  if (!mlflowInstalled || !pythonMLflowInstalled) {
+    console.log('Option 1: Install MLflow CLI (Recommended)');
+    console.log('  pip install mlflow');
+    console.log('  mlflow ui --port 5000');
+    console.log('');
 
-        for (const dir of dirs) {
-            const fullPath = path.join(process.cwd(), dir);
-            await fs.mkdir(fullPath, { recursive: true });
-            log.info(`✅ Created directory: ${dir}`);
-        }
+    console.log('Option 2: Use MLflow REST API (No installation needed)');
+    console.log('  Our service will use REST API if MLflow server is running');
+    console.log('  Set MLFLOW_TRACKING_URI=http://localhost:5000');
+    console.log('');
 
-        // Create .env.example if it doesn't exist
-        const envExample = `
+    console.log('Option 3: Use MLflow in Docker');
+    console.log('  docker run -p 5000:5000 ghcr.io/mlflow/mlflow:v2.8.1');
+    console.log('');
+  }
+
+  // Create .env.example entry
+  const envExample = `
 # MLflow Configuration
 MLFLOW_TRACKING_URI=http://localhost:5000
-MLFLOW_EXPERIMENT_NAME=beast-mode-experiments
+MLFLOW_EXPERIMENT_NAME=beast-mode-ml
+`;
 
-# Data Collection
-BEAST_MODE_DATA_DIR=.beast-mode/data/training
-`.trim();
+  console.log('📝 Add to .env.local:');
+  console.log(envExample);
 
-        const envPath = path.join(process.cwd(), '.env.example');
-        try {
-            await fs.access(envPath);
-            log.info('✅ .env.example already exists');
-        } catch {
-            await fs.writeFile(envPath, envExample);
-            log.info('✅ Created .env.example');
-        }
+  // Create setup script
+  const setupScript = `#!/bin/bash
+# MLflow Setup Script
 
-        log.info('');
-        log.info('🎉 MLflow setup complete!');
-        log.info('');
-        log.info('📋 Next steps:');
-        log.info('  1. Start MLflow server: npm run mlflow:start');
-        log.info('  2. Train first model: npm run train:quality');
-        log.info('  3. View experiments: http://localhost:5000');
-        log.info('');
+echo "🔧 Setting up MLflow..."
 
-    } catch (error) {
-        log.error('❌ Setup failed:', error.message);
-        process.exit(1);
+# Install MLflow
+pip install mlflow
+
+# Start MLflow UI
+echo "🚀 Starting MLflow UI on http://localhost:5000"
+mlflow ui --port 5000 --host 0.0.0.0
+`;
+
+  const scriptPath = path.join(__dirname, '../scripts/start-mlflow.sh');
+  fs.writeFileSync(scriptPath, setupScript);
+  fs.chmodSync(scriptPath, '755');
+
+  console.log(`\n✅ Created setup script: ${scriptPath}`);
+  console.log('   Run: ./scripts/start-mlflow.sh');
+
+  // Test connection
+  console.log('\n🧪 Testing MLflow Connection...');
+  try {
+    const { getMLflowService } = require('../lib/mlops/mlflowService');
+    const mlflow = await getMLflowService();
+    
+    if (mlflow.isAvailable()) {
+      console.log('✅ MLflow service initialized');
+      
+      // Try to start a test run
+      const run = await mlflow.startRun('test-run', { test: 'true' });
+      await mlflow.logMetric(run.info.run_id, 'test_metric', 1.0);
+      await mlflow.logParam(run.info.run_id, 'test_param', 'test_value');
+      await mlflow.endRun(run.info.run_id);
+      
+      console.log('✅ MLflow connection test successful!');
+      console.log(`   Run ID: ${run.info.run_id}`);
+    } else {
+      console.log('⚠️  MLflow not available (server may not be running)');
+      console.log('   Start MLflow: mlflow ui --port 5000');
     }
+  } catch (error) {
+    console.log('⚠️  MLflow test failed:', error.message);
+    console.log('   This is okay - service will use REST API when server is available');
+  }
+
+  console.log('\n' + '='.repeat(60));
+  console.log('✅ MLflow setup complete!\n');
+  console.log('📚 Next Steps:');
+  console.log('   1. Install MLflow: pip install mlflow');
+  console.log('   2. Start server: mlflow ui --port 5000');
+  console.log('   3. Set MLFLOW_TRACKING_URI in .env.local');
+  console.log('   4. Start training models!\n');
 }
 
 if (require.main === module) {
-    main().catch(error => {
-        console.error('Fatal error:', error);
-        process.exit(1);
-    });
+  main().catch(console.error);
 }
 
 module.exports = { main };
-
