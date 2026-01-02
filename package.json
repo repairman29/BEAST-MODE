@@ -55,6 +55,7 @@
     "service:feedback": "node scripts/start-feedback-service.js",
     "report:feedback": "node scripts/generate-feedback-report.js",
     "setup:feedback": "node scripts/setup-feedback-system.js",
+    "check:feedback": "./scripts/check-feedback-service.sh",
     "extract:training-data": "node scripts/test-training-data-extractor.js",
     "ml:health-check": "node scripts/ml-db-health-check.js",
     "ml:performance": "node scripts/ml-db-performance.js",
