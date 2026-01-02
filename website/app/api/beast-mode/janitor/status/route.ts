@@ -80,8 +80,8 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({
       enabled: true,
       silentRefactoring: {
-        enabled: silentRefactoring?.enabled !== false,
-        overnightMode: silentRefactoring?.config?.overnightMode !== false,
+        enabled: (silentRefactoring as any)?.enabled !== false,
+        overnightMode: (silentRefactoring as any)?.config?.overnightMode !== false,
         lastRun: latestRefactor?.completed_at || null,
         issuesFixed: latestRefactor?.issues_fixed || 0,
         prsCreated: latestRefactor?.prs_created || 0
