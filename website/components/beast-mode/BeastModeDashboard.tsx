@@ -1819,7 +1819,7 @@ function QualityView({ data }: any): React.JSX.Element {
                     {(showAllIssues ? latestScan.detectedIssues : latestScan.detectedIssues.slice(0, 3)).map((issue: any, idx: number) => (
                       <div
                         key={idx}
-                        onClick={() => setSelectedIssue(issue)}
+                        onClick={() => setSelectedIssue(selectedIssue === issue ? null : issue)}
                         className={`text-sm text-slate-300 p-3 rounded-lg cursor-pointer transition-all duration-200 border ${
                           selectedIssue === issue 
                             ? 'bg-cyan-500/20 border-cyan-500/50 shadow-lg shadow-cyan-500/10' 
@@ -1837,11 +1837,42 @@ function QualityView({ data }: any): React.JSX.Element {
                           <div className="flex-1">
                             <div className="font-medium">{issue.title}</div>
                             {selectedIssue === issue && (
-                              <div className="mt-2 text-xs text-slate-400">
-                                {issue.description}
+                              <div className="mt-2 text-xs text-slate-400 space-y-2">
+                                {issue.description && <div>{issue.description}</div>}
                                 {issue.file && (
                                   <div className="mt-1 text-slate-500">
                                     File: <code className="bg-slate-900 px-1 rounded">{issue.file}{issue.line ? `:${issue.line}` : ''}</code>
+                                  </div>
+                                )}
+                                {issue.expectedPath && !issue.file && (
+                                  <div className="mt-1 text-slate-500">
+                                    Expected: <code className="bg-slate-900 px-1 rounded">{issue.expectedPath}</code>
+                                  </div>
+                                )}
+                                {issue.context?.suggestion && (
+                                  <div className="mt-2 bg-cyan-500/10 border border-cyan-500/20 rounded p-2">
+                                    <div className="text-cyan-400 font-semibold mb-1">💡 Suggestion</div>
+                                    <div className="text-slate-300">{issue.context.suggestion}</div>
+                                  </div>
+                                )}
+                                {issue.context?.checkedPaths && issue.context.checkedPaths.length > 0 && (
+                                  <div className="mt-2">
+                                    <div className="text-slate-500 mb-1">Checked paths:</div>
+                                    <div className="flex flex-wrap gap-1">
+                                      {issue.context.checkedPaths.slice(0, 5).map((path: string, pIdx: number) => (
+                                        <code key={pIdx} className="text-xs bg-slate-900 px-1 rounded">{path}</code>
+                                      ))}
+                                      {issue.context.checkedPaths.length > 5 && (
+                                        <span className="text-slate-500">+{issue.context.checkedPaths.length - 5} more</span>
+                                      )}
+                                    </div>
+                                  </div>
+                                )}
+                                {issue.context?.repository?.url && (
+                                  <div className="mt-1">
+                                    <a href={issue.context.repository.url} target="_blank" rel="noopener noreferrer" className="text-cyan-400 hover:underline text-xs">
+                                      View Repository →
+                                    </a>
                                   </div>
                                 )}
                               </div>

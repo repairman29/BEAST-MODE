@@ -94,6 +94,9 @@ export async function POST(request: NextRequest) {
         let hasCI = false;
         let hasDocker = false;
         let hasConfig = false;
+        let filePaths: string[] = [];
+        let testPaths: string[] = [];
+        let configPaths: string[] = [];
 
         try {
           // Get the default branch commit SHA first
@@ -111,6 +114,7 @@ export async function POST(request: NextRequest) {
           });
 
           if (tree.tree) {
+            filePaths = tree.tree.map((item: any) => item.path || '');
             fileCount = tree.tree.filter((item: any) => item.type === 'blob').length;
             codeFileCount = tree.tree.filter((item: any) => {
               const ext = item.path?.split('.').pop()?.toLowerCase();
@@ -128,6 +132,21 @@ export async function POST(request: NextRequest) {
               p.includes('pom.xml') || 
               p.includes('cargo.toml') ||
               p.includes('go.mod')
+            );
+            
+            // Extract paths for context
+            testPaths = filePaths.filter((p: string) => 
+              p.toLowerCase().includes('test') || 
+              p.toLowerCase().includes('spec') || 
+              p.toLowerCase().includes('__tests__')
+            );
+            configPaths = filePaths.filter((p: string) => 
+              p.toLowerCase().includes('package.json') || 
+              p.toLowerCase().includes('tsconfig.json') ||
+              p.toLowerCase().includes('requirements.txt') ||
+              p.toLowerCase().includes('pom.xml') ||
+              p.toLowerCase().includes('cargo.toml') ||
+              p.toLowerCase().includes('go.mod')
             );
           }
         } catch (treeError) {
@@ -163,63 +182,146 @@ export async function POST(request: NextRequest) {
           issuePenalty
         ));
 
-        // Generate detected issues (problems found)
+        // Generate detected issues (problems found) with enhanced context
         const detectedIssues = [];
+        
         if (!hasReadme) detectedIssues.push({ 
           title: 'Missing README.md',
           description: 'A README file helps users understand your project quickly. Add documentation about installation, usage, and features.',
           priority: 'high', 
           category: 'documentation',
-          type: 'missing_file'
+          type: 'missing_file',
+          file: 'README.md',
+          expectedPath: 'README.md',
+          context: {
+            checkedPaths: ['README.md', 'readme.md', 'README.txt', 'readme.txt'],
+            repository: {
+              defaultBranch: repoData.default_branch,
+              totalFiles: fileCount,
+              codeFiles: codeFileCount
+            },
+            suggestion: 'Create a README.md file in the root directory with project overview, installation instructions, and usage examples.'
+          }
         });
         if (!hasLicense) detectedIssues.push({ 
           title: 'Missing LICENSE File',
           description: 'Specify a license to clarify how others can use your code. Consider MIT, Apache 2.0, or GPL.',
           priority: 'high', 
           category: 'legal',
-          type: 'missing_file'
+          type: 'missing_file',
+          file: 'LICENSE',
+          expectedPath: 'LICENSE',
+          context: {
+            checkedPaths: ['LICENSE', 'LICENSE.txt', 'LICENSE.md', 'license', 'LICENSE-MIT', 'LICENSE-APACHE'],
+            repository: {
+              defaultBranch: repoData.default_branch,
+              visibility: repoData.private ? 'private' : 'public'
+            },
+            suggestion: 'Add a LICENSE file in the root directory. Common choices: MIT (permissive), Apache 2.0 (patent protection), or GPL (copyleft).'
+          }
         });
         if (!hasTests) detectedIssues.push({ 
           title: 'No Test Suite Found',
           description: 'Tests improve code reliability and prevent regressions. Consider adding unit tests, integration tests, or end-to-end tests.',
           priority: 'high', 
           category: 'quality',
-          type: 'missing_tests'
+          type: 'missing_tests',
+          context: {
+            checkedPatterns: ['**/test/**', '**/tests/**', '**/__tests__/**', '**/*.test.*', '**/*.spec.*'],
+            filesScanned: fileCount,
+            codeFiles: codeFileCount,
+            languages: Object.keys(languages),
+            repository: {
+              defaultBranch: repoData.default_branch,
+              primaryLanguage: Object.keys(languages)[0] || 'Unknown'
+            },
+            suggestion: `Based on your primary language (${Object.keys(languages)[0] || 'code'}), consider adding test files. For ${Object.keys(languages)[0] === 'TypeScript' || Object.keys(languages)[0] === 'JavaScript' ? 'JavaScript/TypeScript' : Object.keys(languages)[0]}, use Jest, Vitest, or similar.`
+          }
         });
         if (!hasCI) detectedIssues.push({ 
           title: 'No CI/CD Pipeline',
           description: 'Automate your build and test process with CI/CD workflows. Set up GitHub Actions, GitLab CI, or similar.',
           priority: 'medium', 
           category: 'devops',
-          type: 'missing_ci'
+          type: 'missing_ci',
+          context: {
+            checkedPaths: ['.github/workflows', '.gitlab-ci.yml', 'ci.yml', '.circleci', 'azure-pipelines.yml'],
+            repository: {
+              defaultBranch: repoData.default_branch,
+              platform: 'GitHub'
+            },
+            suggestion: `Create a workflow file at .github/workflows/ci.yml to automate testing and builds on every push and pull request.`
+          }
         });
         if (!hasDocker) detectedIssues.push({ 
           title: 'Missing Dockerfile',
           description: 'Containerize your application for consistent deployment environments. This makes it easier to deploy and scale.',
           priority: 'low', 
           category: 'devops',
-          type: 'missing_docker'
+          type: 'missing_docker',
+          context: {
+            checkedPaths: ['Dockerfile', 'docker-compose.yml', 'Dockerfile.prod', 'docker/Dockerfile'],
+            repository: {
+              defaultBranch: repoData.default_branch,
+              primaryLanguage: Object.keys(languages)[0] || 'Unknown'
+            },
+            suggestion: `Create a Dockerfile in the root directory. For ${Object.keys(languages)[0] === 'TypeScript' || Object.keys(languages)[0] === 'JavaScript' ? 'Node.js' : Object.keys(languages)[0]}, use the appropriate base image.`
+          }
         });
         if (!hasConfig) detectedIssues.push({ 
           title: 'Missing Configuration Files',
           description: 'Standard configuration files (e.g., package.json, tsconfig.json) are crucial for project setup and tooling.',
           priority: 'medium', 
           category: 'setup',
-          type: 'missing_config'
+          type: 'missing_config',
+          context: {
+            checkedPaths: configPaths.length > 0 ? configPaths : ['package.json', 'tsconfig.json', 'requirements.txt', 'pom.xml', 'cargo.toml', 'go.mod'],
+            expectedFiles: Object.keys(languages)[0] === 'TypeScript' || Object.keys(languages)[0] === 'JavaScript' 
+              ? ['package.json', 'tsconfig.json (if TypeScript)']
+              : Object.keys(languages)[0] === 'Python'
+              ? ['requirements.txt', 'setup.py', 'pyproject.toml']
+              : ['Configuration file for your language'],
+            repository: {
+              defaultBranch: repoData.default_branch,
+              languages: Object.keys(languages),
+              primaryLanguage: Object.keys(languages)[0] || 'Unknown'
+            },
+            suggestion: `Add appropriate configuration files for ${Object.keys(languages)[0] || 'your language'}. This helps with dependency management, build tooling, and IDE support.`
+          }
         });
         if (!hasDescription) detectedIssues.push({ 
           title: 'Missing Repository Description',
           description: 'A clear description helps others discover and understand your project. Include key features and use cases.',
           priority: 'low', 
           category: 'documentation',
-          type: 'missing_description'
+          type: 'missing_description',
+          context: {
+            repository: {
+              name: repoData.name,
+              url: repoData.html_url,
+              defaultBranch: repoData.default_branch
+            },
+            suggestion: 'Add a description to your repository settings on GitHub. This appears on the repository homepage and in search results.'
+          }
         });
         if (codeFileCount < 5 && fileCount > 10) detectedIssues.push({ 
           title: 'Poor Code Organization',
           description: 'Consider organizing code files into logical directories. This improves maintainability and developer experience.',
           priority: 'low', 
           category: 'structure',
-          type: 'structure'
+          type: 'structure',
+          context: {
+            metrics: {
+              totalFiles: fileCount,
+              codeFiles: codeFileCount,
+              codeRatio: ((codeFileCount / fileCount) * 100).toFixed(1) + '%'
+            },
+            repository: {
+              defaultBranch: repoData.default_branch,
+              languages: Object.keys(languages)
+            },
+            suggestion: 'Organize code into directories like src/, lib/, components/, utils/, etc. This makes the codebase easier to navigate and maintain.'
+          }
         });
         if (openIssues > 10) detectedIssues.push({ 
           title: `High Number of Open Issues (${openIssues})`,
@@ -227,14 +329,37 @@ export async function POST(request: NextRequest) {
           priority: 'medium', 
           category: 'maintenance',
           type: 'open_issues',
-          count: openIssues
+          count: openIssues,
+          context: {
+            repository: {
+              url: repoData.html_url,
+              issuesUrl: `${repoData.html_url}/issues`,
+              defaultBranch: repoData.default_branch
+            },
+            suggestion: `Review and prioritize issues at ${repoData.html_url}/issues. Consider labeling issues by priority, closing stale ones, and addressing high-priority bugs first.`
+          }
         });
         if (fileCount === 0 || codeFileCount === 0) detectedIssues.push({ 
           title: 'No Code Files Detected',
           description: 'Unable to detect code files in the repository. This may indicate an empty repository or access issues.',
           priority: 'high', 
           category: 'structure',
-          type: 'no_code'
+          type: 'no_code',
+          context: {
+            metrics: {
+              totalFiles: fileCount,
+              codeFiles: codeFileCount,
+              filesScanned: fileCount
+            },
+            repository: {
+              defaultBranch: repoData.default_branch,
+              url: repoData.html_url,
+              isEmpty: fileCount === 0
+            },
+            suggestion: fileCount === 0 
+              ? 'This appears to be an empty repository. Consider adding initial code, a README, and a LICENSE file.'
+              : 'Code files may be in non-standard locations or use uncommon extensions. Verify repository access and file structure.'
+          }
         });
 
         // Generate actionable recommendations (improvements)
@@ -390,56 +515,128 @@ export async function POST(request: NextRequest) {
     const mockStars = Math.floor(seed * 2.5);
     const mockForks = Math.floor(seed * 0.8);
     
-    // Generate detected issues based on mock flags
+    // Generate detected issues based on mock flags with enhanced context
     const mockDetectedIssues = [];
+    const mockLanguage = seed % 3 === 0 ? 'TypeScript' : seed % 3 === 1 ? 'JavaScript' : 'Python';
+    
     if (!mockHasReadme) mockDetectedIssues.push({ 
       title: 'Missing README.md',
       description: 'A README file helps users understand your project quickly. Add documentation about installation, usage, and features.',
       priority: 'high', 
       category: 'documentation',
-      type: 'missing_file'
+      type: 'missing_file',
+      file: 'README.md',
+      expectedPath: 'README.md',
+      context: {
+        checkedPaths: ['README.md', 'readme.md', 'README.txt', 'readme.txt'],
+        repository: {
+          defaultBranch: 'main',
+          totalFiles: mockFileCount,
+          codeFiles: mockCodeFileCount
+        },
+        suggestion: 'Create a README.md file in the root directory with project overview, installation instructions, and usage examples.'
+      }
     });
     if (!mockHasLicense) mockDetectedIssues.push({ 
       title: 'Missing LICENSE File',
       description: 'Specify a license to clarify how others can use your code. Consider MIT, Apache 2.0, or GPL.',
       priority: 'high', 
       category: 'legal',
-      type: 'missing_file'
+      type: 'missing_file',
+      file: 'LICENSE',
+      expectedPath: 'LICENSE',
+      context: {
+        checkedPaths: ['LICENSE', 'LICENSE.txt', 'LICENSE.md', 'license'],
+        repository: {
+          defaultBranch: 'main',
+          visibility: 'public'
+        },
+        suggestion: 'Add a LICENSE file in the root directory. Common choices: MIT (permissive), Apache 2.0 (patent protection), or GPL (copyleft).'
+      }
     });
     if (!mockHasTests) mockDetectedIssues.push({ 
       title: 'No Test Suite Found',
       description: 'Tests improve code reliability and prevent regressions. Consider adding unit tests, integration tests, or end-to-end tests.',
       priority: 'high', 
       category: 'quality',
-      type: 'missing_tests'
+      type: 'missing_tests',
+      context: {
+        checkedPatterns: ['**/test/**', '**/tests/**', '**/__tests__/**', '**/*.test.*', '**/*.spec.*'],
+        filesScanned: mockFileCount,
+        codeFiles: mockCodeFileCount,
+        languages: [mockLanguage],
+        repository: {
+          defaultBranch: 'main',
+          primaryLanguage: mockLanguage
+        },
+        suggestion: `Based on your primary language (${mockLanguage}), consider adding test files. For ${mockLanguage === 'TypeScript' || mockLanguage === 'JavaScript' ? 'JavaScript/TypeScript' : mockLanguage}, use Jest, Vitest, or similar.`
+      }
     });
     if (!mockHasCI) mockDetectedIssues.push({ 
       title: 'No CI/CD Pipeline',
       description: 'Automate your build and test process with CI/CD workflows. Set up GitHub Actions, GitLab CI, or similar.',
       priority: 'medium', 
       category: 'devops',
-      type: 'missing_ci'
+      type: 'missing_ci',
+      context: {
+        checkedPaths: ['.github/workflows', '.gitlab-ci.yml', 'ci.yml'],
+        repository: {
+          defaultBranch: 'main',
+          platform: 'GitHub'
+        },
+        suggestion: 'Create a workflow file at .github/workflows/ci.yml to automate testing and builds on every push and pull request.'
+      }
     });
     if (!mockHasDocker) mockDetectedIssues.push({ 
       title: 'Missing Dockerfile',
       description: 'Containerize your application for consistent deployment environments. This makes it easier to deploy and scale.',
       priority: 'low', 
       category: 'devops',
-      type: 'missing_docker'
+      type: 'missing_docker',
+      context: {
+        checkedPaths: ['Dockerfile', 'docker-compose.yml', 'Dockerfile.prod'],
+        repository: {
+          defaultBranch: 'main',
+          primaryLanguage: mockLanguage
+        },
+        suggestion: `Create a Dockerfile in the root directory. For ${mockLanguage === 'TypeScript' || mockLanguage === 'JavaScript' ? 'Node.js' : mockLanguage}, use the appropriate base image.`
+      }
     });
     if (!mockHasConfig) mockDetectedIssues.push({ 
       title: 'Missing Configuration Files',
       description: 'Standard configuration files (e.g., package.json, tsconfig.json) are crucial for project setup and tooling.',
       priority: 'medium', 
       category: 'setup',
-      type: 'missing_config'
+      type: 'missing_config',
+      context: {
+        checkedPaths: ['package.json', 'tsconfig.json', 'requirements.txt', 'pom.xml', 'cargo.toml', 'go.mod'],
+        expectedFiles: mockLanguage === 'TypeScript' || mockLanguage === 'JavaScript' 
+          ? ['package.json', 'tsconfig.json (if TypeScript)']
+          : mockLanguage === 'Python'
+          ? ['requirements.txt', 'setup.py', 'pyproject.toml']
+          : ['Configuration file for your language'],
+        repository: {
+          defaultBranch: 'main',
+          languages: [mockLanguage],
+          primaryLanguage: mockLanguage
+        },
+        suggestion: `Add appropriate configuration files for ${mockLanguage}. This helps with dependency management, build tooling, and IDE support.`
+      }
     });
     if (!mockHasDescription) mockDetectedIssues.push({ 
       title: 'Missing Repository Description',
       description: 'A clear description helps others discover and understand your project. Include key features and use cases.',
       priority: 'low', 
       category: 'documentation',
-      type: 'missing_description'
+      type: 'missing_description',
+      context: {
+        repository: {
+          name: repoName,
+          url: url || `https://github.com/${repo}`,
+          defaultBranch: 'main'
+        },
+        suggestion: 'Add a description to your repository settings on GitHub. This appears on the repository homepage and in search results.'
+      }
     });
     if (mockOpenIssues > 10) mockDetectedIssues.push({ 
       title: `High Number of Open Issues (${mockOpenIssues})`,
@@ -447,7 +644,15 @@ export async function POST(request: NextRequest) {
       priority: 'medium', 
       category: 'maintenance',
       type: 'open_issues',
-      count: mockOpenIssues
+      count: mockOpenIssues,
+      context: {
+        repository: {
+          url: url || `https://github.com/${repo}`,
+          issuesUrl: `${url || `https://github.com/${repo}`}/issues`,
+          defaultBranch: 'main'
+        },
+        suggestion: `Review and prioritize issues. Consider labeling issues by priority, closing stale ones, and addressing high-priority bugs first.`
+      }
     });
     
     // Generate recommendations

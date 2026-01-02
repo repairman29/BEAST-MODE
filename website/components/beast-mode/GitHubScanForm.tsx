@@ -441,49 +441,105 @@ export default function GitHubScanForm() {
                             Issues Found ({result.detectedIssues.length})
                           </h5>
                           <div className="bg-slate-950/50 rounded-lg p-4 space-y-3">
-                            {result.detectedIssues.map((issue: any, issueIdx: number) => (
-                              <div 
-                                key={issueIdx}
-                                className={`flex items-start gap-3 p-3 rounded-lg border ${
-                                  issue.priority === 'high' 
-                                    ? 'bg-red-500/10 border-red-500/20' 
-                                    : issue.priority === 'medium'
-                                    ? 'bg-amber-500/10 border-amber-500/20'
-                                    : 'bg-blue-500/10 border-blue-500/20'
-                                }`}
-                              >
-                                <svg 
-                                  className={`w-5 h-5 mt-0.5 flex-shrink-0 ${
-                                    issue.priority === 'high' ? 'text-red-400' :
-                                    issue.priority === 'medium' ? 'text-amber-400' :
-                                    'text-blue-400'
-                                  }`} 
-                                  fill="none" 
-                                  stroke="currentColor" 
-                                  viewBox="0 0 24 24"
+                            {result.detectedIssues.map((issue: any, issueIdx: number) => {
+                              const [isExpanded, setIsExpanded] = useState(false);
+                              return (
+                                <div 
+                                  key={issueIdx}
+                                  className={`flex items-start gap-3 p-3 rounded-lg border ${
+                                    issue.priority === 'high' 
+                                      ? 'bg-red-500/10 border-red-500/20' 
+                                      : issue.priority === 'medium'
+                                      ? 'bg-amber-500/10 border-amber-500/20'
+                                      : 'bg-blue-500/10 border-blue-500/20'
+                                  }`}
                                 >
-                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-                                </svg>
-                                <div className="flex-1">
-                                  <div className="flex items-center gap-2 mb-1">
-                                    <div className="text-white font-medium">{issue.title}</div>
-                                    <span className={`text-xs px-2 py-0.5 rounded ${
-                                      issue.priority === 'high' ? 'bg-red-500/20 text-red-400' :
-                                      issue.priority === 'medium' ? 'bg-amber-500/20 text-amber-400' :
-                                      'bg-blue-500/20 text-blue-400'
-                                    }`}>
-                                      {issue.priority.toUpperCase()}
-                                    </span>
-                                    {issue.category && (
-                                      <span className="text-xs text-slate-500 px-2 py-0.5 bg-slate-800 rounded">
-                                        {issue.category}
+                                  <svg 
+                                    className={`w-5 h-5 mt-0.5 flex-shrink-0 ${
+                                      issue.priority === 'high' ? 'text-red-400' :
+                                      issue.priority === 'medium' ? 'text-amber-400' :
+                                      'text-blue-400'
+                                    }`} 
+                                    fill="none" 
+                                    stroke="currentColor" 
+                                    viewBox="0 0 24 24"
+                                  >
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                                  </svg>
+                                  <div className="flex-1">
+                                    <div className="flex items-center gap-2 mb-1">
+                                      <div className="text-white font-medium">{issue.title}</div>
+                                      <span className={`text-xs px-2 py-0.5 rounded ${
+                                        issue.priority === 'high' ? 'bg-red-500/20 text-red-400' :
+                                        issue.priority === 'medium' ? 'bg-amber-500/20 text-amber-400' :
+                                        'bg-blue-500/20 text-blue-400'
+                                      }`}>
+                                        {issue.priority.toUpperCase()}
                                       </span>
+                                      {issue.category && (
+                                        <span className="text-xs text-slate-500 px-2 py-0.5 bg-slate-800 rounded">
+                                          {issue.category}
+                                        </span>
+                                      )}
+                                    </div>
+                                    <div className="text-slate-400 text-sm mb-2">{issue.description}</div>
+                                    {issue.file && (
+                                      <div className="text-xs text-slate-500 mb-2">
+                                        📄 <code className="bg-slate-900 px-1 rounded">{issue.file}{issue.line ? `:${issue.line}` : ''}</code>
+                                      </div>
+                                    )}
+                                    {issue.expectedPath && !issue.file && (
+                                      <div className="text-xs text-slate-500 mb-2">
+                                        📍 Expected: <code className="bg-slate-900 px-1 rounded">{issue.expectedPath}</code>
+                                      </div>
+                                    )}
+                                    
+                                    {/* Expandable Context */}
+                                    {issue.context && (
+                                      <div className="mt-2">
+                                        <button
+                                          onClick={() => setIsExpanded(!isExpanded)}
+                                          className="text-xs text-cyan-400 hover:text-cyan-300 flex items-center gap-1"
+                                        >
+                                          <span>{isExpanded ? '▼' : '▶'}</span>
+                                          <span>{isExpanded ? 'Hide' : 'Show'} Details</span>
+                                        </button>
+                                        {isExpanded && (
+                                          <div className="mt-2 bg-slate-900/50 rounded p-2 space-y-2 text-xs">
+                                            {issue.context.suggestion && (
+                                              <div className="bg-cyan-500/10 border border-cyan-500/20 rounded p-2">
+                                                <div className="text-cyan-400 font-semibold mb-1">💡 Suggestion</div>
+                                                <div className="text-slate-300">{issue.context.suggestion}</div>
+                                              </div>
+                                            )}
+                                            {issue.context.checkedPaths && issue.context.checkedPaths.length > 0 && (
+                                              <div>
+                                                <div className="text-slate-400 mb-1">Checked:</div>
+                                                <div className="flex flex-wrap gap-1">
+                                                  {issue.context.checkedPaths.slice(0, 3).map((path: string, pIdx: number) => (
+                                                    <code key={pIdx} className="bg-slate-800 px-1 rounded text-xs">{path}</code>
+                                                  ))}
+                                                  {issue.context.checkedPaths.length > 3 && (
+                                                    <span className="text-slate-500">+{issue.context.checkedPaths.length - 3}</span>
+                                                  )}
+                                                </div>
+                                              </div>
+                                            )}
+                                            {issue.context.repository?.url && (
+                                              <div>
+                                                <a href={issue.context.repository.url} target="_blank" rel="noopener noreferrer" className="text-cyan-400 hover:underline">
+                                                  View Repository →
+                                                </a>
+                                              </div>
+                                            )}
+                                          </div>
+                                        )}
+                                      </div>
                                     )}
                                   </div>
-                                  <div className="text-slate-400 text-sm">{issue.description}</div>
                                 </div>
-                              </div>
-                            ))}
+                              );
+                            })}
                           </div>
                         </div>
                       )}
