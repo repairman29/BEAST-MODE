@@ -1,12 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server';
 
 // Optional imports - handle gracefully if not available
-let detectAnomalies: any = null;
-try {
-  const middleware = await import(/* webpackIgnore: true */ '../../../../lib/api-middleware').catch(() => null);
-  detectAnomalies = middleware?.detectAnomalies;
-} catch (error) {
-  // Middleware not available
+async function getDetectAnomalies() {
+  try {
+    const middleware = await import(/* webpackIgnore: true */ '../../../../lib/api-middleware').catch(() => null);
+    return middleware?.detectAnomalies;
+  } catch {
+    return null;
+  }
 }
 
 /**

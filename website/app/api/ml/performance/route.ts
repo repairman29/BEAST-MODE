@@ -21,6 +21,14 @@ async function getPerformanceStats() {
 
 export async function GET(request: NextRequest) {
   try {
+    const getPerformanceStats = await getPerformanceStatsService();
+    if (!getPerformanceStats) {
+      return NextResponse.json({
+        status: 'unavailable',
+        message: 'Performance monitor not available',
+        timestamp: new Date().toISOString()
+      });
+    }
     const stats = await getPerformanceStats();
 
     if (!stats) {
