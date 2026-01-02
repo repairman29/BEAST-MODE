@@ -4,7 +4,16 @@
  */
 
 import { NextRequest, NextResponse } from 'next/server';
-import { getFeedbackCollector } from '../../../../lib/mlops/feedbackCollector';
+
+// Optional import - module may not exist
+async function getFeedbackCollector() {
+  try {
+    const module = await import('../../../../lib/mlops/feedbackCollector');
+    return module.getFeedbackCollector();
+  } catch {
+    return null;
+  }
+}
 
 export async function POST(request: NextRequest) {
   try {
