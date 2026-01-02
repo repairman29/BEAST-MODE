@@ -10,20 +10,23 @@ const nextConfig = {
   output: undefined, // Let Vercel auto-detect (don't force static export)
   
   // Webpack configuration for path aliases
-  webpack: (config, { isServer }) => {
+  webpack: (config, { isServer, dir }) => {
+    // Use the dir parameter which Next.js provides - this is the actual project directory
+    // This is more reliable than __dirname in Vercel's build environment
+    const projectRoot = dir || path.resolve(__dirname);
+    
     // Ensure @/ alias resolves correctly in both server and client builds
     const alias = {
       ...config.resolve.alias,
-      '@': path.resolve(__dirname),
+      '@': projectRoot,
     };
     config.resolve.alias = alias;
     
-    // Explicitly add the website directory to module resolution
+    // Explicitly add the project root to module resolution
     // This ensures relative paths work correctly in Vercel builds
-    const websiteRoot = path.resolve(__dirname);
     config.resolve.modules = [
-      websiteRoot, // Add website root to module resolution
-      path.resolve(websiteRoot, 'node_modules'),
+      projectRoot, // Add project root to module resolution
+      path.resolve(projectRoot, 'node_modules'),
       ...(config.resolve.modules || []),
     ];
     
