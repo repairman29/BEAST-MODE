@@ -26,7 +26,6 @@ async function handler(req: NextRequest) {
     }
     
     if (!optimizer) {
-    if (!optimizer) {
       return NextResponse.json(
         { error: 'Resource optimizer not available' },
         { status: 503 }
