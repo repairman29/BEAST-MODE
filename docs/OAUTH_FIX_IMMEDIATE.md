@@ -23,10 +23,12 @@ The code now **automatically selects the correct client ID** based on your envir
 **Go to:** https://github.com/settings/developers/oauth-apps  
 **Find app:** Client ID `Ov23liDKFkIrnPneWwny` (Production)
 
-**Add this callback URL:**
+**Add this callback URL (note the dash in beast-mode):**
 ```
 https://beast-mode.dev/api/github/oauth/callback
 ```
+
+**⚠️ Important:** The domain is `beast-mode.dev` (with dash), not `beastmode.dev`!
 
 **Steps:**
 1. Click on the production OAuth app
