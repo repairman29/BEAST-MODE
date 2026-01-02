@@ -45,8 +45,19 @@ async function handlePOST(request: NextRequest) {
     const fallbackPredictor = async (ctx: any) => {
       // Try BEAST MODE ML model
       if (mlIntegration && mlIntegration.isMLModelAvailable()) {
-              console.debug('[ML API] Expanded predictions not available:', error.message);
-            }
+        try {
+          const prediction = await mlIntegration.predict(ctx);
+          try {
+            const expandedPredictions = await mlIntegration.getExpandedPredictions(prediction);
+            return {
+              predictedQuality: prediction.predictedQuality,
+              confidence: prediction.confidence,
+              source: prediction.source || 'ml_model',
+              modelVersion: prediction.modelVersion || 'unknown',
+              expanded: expandedPredictions
+            };
+          } catch (error: any) {
+            console.debug('[ML API] Expanded predictions not available:', error.message);
           }
           
           return {
@@ -54,9 +65,9 @@ async function handlePOST(request: NextRequest) {
             confidence: prediction.confidence,
             source: prediction.source || 'ml_model',
             modelVersion: prediction.modelVersion || 'unknown',
-            expanded: expandedPredictions
+            expanded: null
           };
-        } catch (error) {
+        } catch (error: any) {
           console.debug('[ML API] ML prediction failed:', error.message);
         }
       }
@@ -67,6 +78,14 @@ async function handlePOST(request: NextRequest) {
 
     // Try service router first (specialized services)
     if (serviceRouter) {
+      try {
+        const result = await serviceRouter.route(context);
+        return NextResponse.json({
+          prediction: result,
+          timestamp: new Date().toISOString(),
+          mlAvailable: true
+        });
+      } catch (error: any) {
         console.warn('[ML API] Service routing failed:', error.message);
       }
     }
