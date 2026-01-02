@@ -18,10 +18,23 @@ const nextConfig = {
     };
     config.resolve.alias = alias;
     
-    // Also ensure modules resolve correctly
+    // Explicitly add the website directory to module resolution
+    // This ensures relative paths work correctly in Vercel builds
+    const websiteRoot = path.resolve(__dirname);
     config.resolve.modules = [
-      path.resolve(__dirname, 'node_modules'),
+      websiteRoot, // Add website root to module resolution
+      path.resolve(websiteRoot, 'node_modules'),
       ...(config.resolve.modules || []),
+    ];
+    
+    // Ensure extensions are resolved correctly
+    config.resolve.extensions = [
+      '.tsx',
+      '.ts',
+      '.jsx',
+      '.js',
+      '.json',
+      ...(config.resolve.extensions || []),
     ];
     
     return config;
