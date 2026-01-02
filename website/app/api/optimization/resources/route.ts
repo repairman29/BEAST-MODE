@@ -10,7 +10,16 @@ import { NextRequest, NextResponse } from 'next/server';
 
 async function handler(req: NextRequest) {
   try {
-    const optimizer = await getResourceOptimizerService();
+    let getResourceOptimizerService: any = null;
+    try {
+      /* webpackIgnore: true */
+      const middleware = require(`../../../../lib/api-middleware`);
+      getResourceOptimizerService = middleware.getResourceOptimizerService;
+    } catch (error) {
+      // Middleware not available
+    }
+    
+    const optimizer = getResourceOptimizerService ? await getResourceOptimizerService() : null;
     if (!optimizer) {
       return NextResponse.json(
         { error: 'Resource optimizer not available' },
