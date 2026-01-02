@@ -23,7 +23,6 @@ async function handler(req: NextRequest) {
 
     // Cost tracking
     try {
-      const path = require('path');
       const costTrackingPath = path.join(process.cwd(), '../../../shared-utils/cost-tracking');
       const { getCostTrackingService } = require(costTrackingPath);
       const costTracking = getCostTrackingService();
