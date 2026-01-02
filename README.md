@@ -136,6 +136,43 @@ await beastMode.deployApplication({
 });
 ```
 
+## 🤖 ML Training System
+
+**Complete ML training data pipeline with feedback collection**
+
+### Quick Start
+
+```bash
+# Monitor feedback collection
+npm run monitor:feedback
+
+# Extract training data
+npm run test:training-extractor
+
+# Build training dataset
+npm run test:training-pipeline
+
+# Test feedback collector
+npm run test:feedback-collector
+```
+
+### Components
+
+- **Training Data Extractor** - Extracts from production + GitHub
+- **Feedback Collector** - Records outcomes for predictions
+- **Training Pipeline** - Combines, validates, and exports datasets
+- **Feedback Monitor** - Tracks feedback rates and alerts
+
+### Documentation
+
+- `docs/COMPLETE_ML_TRAINING_SYSTEM.md` - Complete system overview
+- `docs/TRAINING_DATA_IMPLEMENTATION_GUIDE.md` - Implementation guide
+- `docs/FEEDBACK_COLLECTION_INTEGRATION.md` - Service integration
+
+**Current Status:** 728 predictions, 2 with actual values (0.27% feedback rate)
+
+---
+
 ## 📚 Documentation
 
 ### Core API
