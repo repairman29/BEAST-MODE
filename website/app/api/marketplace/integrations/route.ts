@@ -28,15 +28,18 @@ async function handler(req: NextRequest) {
 }
 
 // Optional middleware - may not be available
-let withProductionIntegration: any = null;
-try {
-  const middleware = await import(/* webpackIgnore: true */ '../../../../lib/api-middleware').catch(() => null);
-  withProductionIntegration = middleware?.withProductionIntegration;
-} catch (error) {
-  // Middleware not available
+// Optional middleware - may not be available
+async function getWithProductionIntegration() {
+  try {
+    const middleware = await import(/* webpackIgnore: true */ '../../../../lib/api-middleware').catch(() => null);
+    return middleware?.withProductionIntegration;
+  } catch {
+    return null;
+  }
 }
 
 export async function GET(req: NextRequest) {
+  const withProductionIntegration = await getWithProductionIntegration();
   if (withProductionIntegration) {
     try {
       const wrappedHandler = withProductionIntegration(handler);
@@ -49,6 +52,7 @@ export async function GET(req: NextRequest) {
 }
 
 export async function POST(req: NextRequest) {
+  const withProductionIntegration = await getWithProductionIntegration();
   if (withProductionIntegration) {
     try {
       const wrappedHandler = withProductionIntegration(handler);

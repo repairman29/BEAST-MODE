@@ -1,13 +1,17 @@
 import { NextRequest, NextResponse } from 'next/server';
 
 // Optional imports - services may not be available
-let learnFromOutcome: any = null;
-let getSelfLearningService: any = null;
-try {
-  const middleware = await import(/* webpackIgnore: true */ '../../../../lib/api-middleware').catch(() => null);
-  learnFromOutcome = middleware?.learnFromOutcome;
-  getSelfLearningService = middleware?.getSelfLearningService;
-} catch {}
+async function getLearningServices() {
+  try {
+    const middleware = await import(/* webpackIgnore: true */ '../../../../lib/api-middleware').catch(() => null);
+    return {
+      learnFromOutcome: middleware?.learnFromOutcome,
+      getSelfLearningService: middleware?.getSelfLearningService
+    };
+  } catch {
+    return { learnFromOutcome: null, getSelfLearningService: null };
+  }
+}
 
 /**
  * Learning API
