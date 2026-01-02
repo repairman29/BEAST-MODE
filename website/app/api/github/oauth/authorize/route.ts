@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import crypto from 'crypto';
 import jwt from 'jsonwebtoken';
-import { getSupabaseClientOrNull } from '../../../../lib/supabase';
+import { getSupabaseClientOrNull } from '../../../../../lib/supabase';
 
 const JWT_SECRET = process.env.JWT_SECRET || 'beast-mode-secret-change-in-production';
 

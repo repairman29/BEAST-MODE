@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import crypto from 'crypto';
-import { getSupabaseClientOrNull } from '../../../../lib/supabase';
-import { encrypt } from '../../../../lib/github-token-encrypt';
+import { getSupabaseClientOrNull } from '../../../../../lib/supabase';
+import { encrypt } from '../../../../../lib/github-token-encrypt';
 
 /**
  * GitHub OAuth Callback
@@ -217,8 +217,6 @@ export async function GET(request: NextRequest) {
     console.log('   User ID:', userId);
     console.log('   GitHub Username:', githubUser.login);
     console.log('   GitHub User ID:', githubUser.id);
-    
-    const isSupabaseUser = request.cookies.get('github_oauth_is_supabase_user')?.value === 'true';
     console.log('   Is Supabase user:', isSupabaseUser);
     
     try {
@@ -259,33 +257,34 @@ export async function GET(request: NextRequest) {
       
       // Fallback: Store via API route (for non-Supabase users or if Supabase fails)
       if (!isSupabaseUser || !userId || !userId.startsWith('00000000-')) {
-      const storeUrl = `${process.env.NEXT_PUBLIC_URL || 'http://localhost:7777'}/api/github/token`;
-      console.log('   Using fallback storage via API:', storeUrl);
-      
-      const storeResponse = await fetch(storeUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          userId,
-          githubToken: accessToken,
-          githubUsername: githubUser.login,
-          githubUserId: githubUser.id,
-        }),
-      });
-      
-      console.log('   Store response status:', storeResponse.status);
-      console.log('   Store response ok:', storeResponse.ok);
-      
-      if (storeResponse.ok) {
-        const storeData = await storeResponse.json();
-        console.log('✅ [GitHub OAuth] Token stored successfully (fallback):', storeData);
-      } else {
-        const errorData = await storeResponse.json().catch(() => ({}));
-        console.error('❌ [GitHub OAuth] Failed to store token');
-        console.error('   Status:', storeResponse.status);
-        console.error('   Error:', errorData);
+        const storeUrl = `${process.env.NEXT_PUBLIC_URL || 'http://localhost:7777'}/api/github/token`;
+        console.log('   Using fallback storage via API:', storeUrl);
+        
+        const storeResponse = await fetch(storeUrl, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            userId,
+            githubToken: accessToken,
+            githubUsername: githubUser.login,
+            githubUserId: githubUser.id,
+          }),
+        });
+        
+        console.log('   Store response status:', storeResponse.status);
+        console.log('   Store response ok:', storeResponse.ok);
+        
+        if (storeResponse.ok) {
+          const storeData = await storeResponse.json();
+          console.log('✅ [GitHub OAuth] Token stored successfully (fallback):', storeData);
+        } else {
+          const errorData = await storeResponse.json().catch(() => ({}));
+          console.error('❌ [GitHub OAuth] Failed to store token');
+          console.error('   Status:', storeResponse.status);
+          console.error('   Error:', errorData);
+        }
       }
     } catch (storeError: any) {
       console.error('❌ [GitHub OAuth] Error storing token (non-fatal):', storeError);
