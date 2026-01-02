@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '../ui/card';
 import { Button } from '../ui/button';
 import NotificationWidget, { Notification } from '../hud/NotificationWidget';
-import { getAnalytics } from '@/lib/analytics';
+import { getAnalytics } from '../../lib/analytics';
 // Removed unused imports: ConversationalAI, HealthDashboard, AIRecommendations, MonetizationDashboard, MissionDashboard, DeploymentDashboard, GitHubScanForm
 // These features are now consolidated into Quality, Intelligence, Marketplace, and Settings tabs
 import AuthSection from './AuthSection';
@@ -33,8 +33,8 @@ import GamificationSystem from './GamificationSystem';
 import MobileNavigation from './MobileNavigation';
 import GitHubConnection from './GitHubConnection';
 import { ErrorBoundary } from '../ui/ErrorBoundary';
-import { useUser } from '@/lib/user-context';
-import { getErrorMonitor } from '@/lib/error-monitoring';
+import { useUser } from '../../lib/user-context';
+import { getErrorMonitor } from '../../lib/error-monitoring';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { ScanDetailsModal } from '../ui/ScanDetailsModal';
 import UnifiedAnalyticsView from './UnifiedAnalyticsView';
