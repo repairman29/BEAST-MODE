@@ -16,35 +16,11 @@ import { NextRequest, NextResponse } from 'next/server';
  */
 
 async function handlePOST(request: NextRequest) {
-  try {
-    const { context } = await request.json();
-
-    if (!context) {
-      return NextResponse.json(
-        { error: 'Context is required' },
-        { status: 400 }
-      );
-    }
-
-    // Try service router first (specialized services)
-    let serviceRouter = null;
-    try {
-      const path = require('path');
-      const routerPath = path.join(process.cwd(), '../lib/mlops/serviceRouter');
-      const { getServiceRouter } = require(routerPath);
-      serviceRouter = getServiceRouter();
-    } catch (error) {
       console.debug('[ML API] Service router not available:', error.message);
     }
 
     // Try to load ML model integration (fallback)
     let mlIntegration = null;
-    try {
-      const path = require('path');
-      const mlPath = path.join(process.cwd(), '../lib/mlops/mlModelIntegration');
-      const { getMLModelIntegration } = require(mlPath);
-      mlIntegration = await getMLModelIntegration();
-    } catch (error) {
       console.debug('[ML API] ML integration not available:', error.message);
     }
 
@@ -52,25 +28,6 @@ async function handlePOST(request: NextRequest) {
     const fallbackPredictor = async (ctx: any) => {
       // Try BEAST MODE ML model
       if (mlIntegration && mlIntegration.isMLModelAvailable()) {
-        try {
-          const serviceName = ctx.provider === 'first-mate' ? 'first-mate' : 
-                            ctx.provider === 'game-app' ? 'game-app' :
-                            'unknown';
-          
-          const enhancedContext = {
-            ...ctx,
-            serviceName: serviceName,
-            predictionType: ctx.actionType || 'quality'
-          };
-          
-          const prediction = mlIntegration.predictQualitySync(enhancedContext);
-          
-          // Get expanded predictions if requested
-          let expandedPredictions = null;
-          if (ctx.includeExpanded !== false) {
-            try {
-              expandedPredictions = await mlIntegration.getExpandedPredictions(enhancedContext);
-            } catch (error) {
               console.debug('[ML API] Expanded predictions not available:', error.message);
             }
           }
@@ -84,7 +41,6 @@ async function handlePOST(request: NextRequest) {
           };
         } catch (error) {
           console.debug('[ML API] ML prediction failed:', error.message);
-          // Fall through to heuristics
         }
       }
       
@@ -94,41 +50,7 @@ async function handlePOST(request: NextRequest) {
 
     // Try service router first (specialized services)
     if (serviceRouter) {
-      try {
-        const routedResult = await serviceRouter.routePrediction(context, fallbackPredictor);
-        
-        const response: any = {
-          prediction: {
-            predictedQuality: routedResult.predictedQuality,
-            confidence: routedResult.confidence,
-            source: routedResult.source || 'unknown',
-            routed: routedResult.routed || false,
-            service: routedResult.service,
-            predictionType: routedResult.predictionType
-          },
-          timestamp: new Date().toISOString(),
-          mlAvailable: routedResult.source !== 'heuristic',
-          serviceUsed: routedResult.routed ? routedResult.service : null
-        };
-
-        // Add service-specific metadata
-        if (routedResult.method) {
-          response.prediction.method = routedResult.method;
-        }
-        if (routedResult.factors) {
-          response.prediction.factors = routedResult.factors;
-        }
-        if (routedResult.relevance) {
-          response.prediction.relevance = routedResult.relevance;
-        }
-        if (routedResult.expanded) {
-          response.expanded = routedResult.expanded;
-        }
-
-        return NextResponse.json(response);
-      } catch (error) {
         console.warn('[ML API] Service routing failed:', error.message);
-        // Fall through to direct fallback
       }
     }
 
@@ -217,25 +139,9 @@ function getHeuristicPrediction(context: any) {
 }
 
 // Export POST handler - wrap with production integration if available
-let withProductionIntegration: any = null;
-try {
-  /* webpackIgnore: true */
-  const middleware = require(`../../../../lib/api-middleware`);
-  withProductionIntegration = middleware.withProductionIntegration;
-} catch (error) {
-  // Middleware not available
 }
 
 let POST: typeof handlePOST = handlePOST;
-try {
-  if (withProductionIntegration) {
-    POST = withProductionIntegration(handlePOST, {
-      endpoint: '/api/ml/predict',
-      enableCache: true,
-      cacheTTL: 300000 // 5 minutes
-    }) as typeof handlePOST;
-  }
-} catch (error) {
   // Production integration not available, use handler directly
   console.warn('[ML Predict API] Production integration not available:', error);
 }
@@ -246,34 +152,11 @@ export { POST };
  * GET endpoint for health check
  */
 export async function GET(request: NextRequest) {
-  try {
-    let mlAvailable = false;
-    let modelInfo = null;
-    let serviceStatus = null;
-
-    // Check BEAST MODE ML
-    try {
-      const path = require('path');
-      const mlPath = path.join(process.cwd(), '../lib/mlops/mlModelIntegration');
-      const { getMLModelIntegration } = require(mlPath);
-      const mlIntegration = await getMLModelIntegration();
-      
-      if (mlIntegration && mlIntegration.isMLModelAvailable()) {
-        mlAvailable = true;
-        modelInfo = mlIntegration.getModelInfo();
-      }
-    } catch (error) {
+  return handler(req);
       // ML not available
     }
 
     // Check service router
-    try {
-      const path = require('path');
-      const routerPath = path.join(process.cwd(), '../lib/mlops/serviceRouter');
-      const { getServiceRouter } = require(routerPath);
-      const router = getServiceRouter();
-      serviceStatus = router.getRoutingStatistics();
-    } catch (error) {
       // Service router not available
     }
 
@@ -293,4 +176,3 @@ export async function GET(request: NextRequest) {
       { status: 500 }
     );
   }
-}
