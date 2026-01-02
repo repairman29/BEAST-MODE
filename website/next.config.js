@@ -1,3 +1,5 @@
+const path = require('path');
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   // Production optimizations
@@ -6,6 +8,15 @@ const nextConfig = {
   
   // Ensure API routes are treated as serverless functions
   output: undefined, // Let Vercel auto-detect (don't force static export)
+  
+  // Webpack configuration for path aliases
+  webpack: (config) => {
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      '@': path.resolve(__dirname),
+    };
+    return config;
+  },
   
   // API configuration
   async headers() {
