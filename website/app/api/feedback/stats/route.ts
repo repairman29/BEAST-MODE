@@ -9,7 +9,7 @@ import { NextRequest, NextResponse } from 'next/server';
 async function getFeedbackCollector() {
   try {
     // @ts-ignore - Dynamic import, module may not exist
-    const module = await import(/* webpackIgnore: true */ '../../../../lib/mlops/feedbackCollector').catch(() => null);
+    const module = await import(/* webpackIgnore: true */ '../../../../../../lib/mlops/feedbackCollector').catch(() => null);
     if (!module?.getFeedbackCollector) return null;
     
     const collector = await module.getFeedbackCollector();
