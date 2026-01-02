@@ -9,14 +9,6 @@ import { NextRequest, NextResponse } from 'next/server';
  */
 
 async function handler(req: NextRequest) {
-  try {
-    let getResourceOptimizerService: any = null;
-    try {
-      /* webpackIgnore: true */
-      const middleware = require(`../../../../lib/api-middleware`);
-      getResourceOptimizerService = middleware.getResourceOptimizerService;
-    } catch (error) {
-      // Middleware not available
     }
     
     const optimizer = getResourceOptimizerService ? await getResourceOptimizerService() : null;
@@ -122,36 +114,17 @@ async function handler(req: NextRequest) {
   }
 }
 
-let withProductionIntegration: any = null;
-try {
-  /* webpackIgnore: true */
-  const middleware = require(`../../../../lib/api-middleware`);
-  withProductionIntegration = middleware.withProductionIntegration;
-} catch (error) {
-  // Middleware not available
 }
 
 export async function GET(req: NextRequest) {
-  if (withProductionIntegration) {
-    try {
-      const wrappedHandler = withProductionIntegration(handler);
-      return wrappedHandler(req);
-    } catch (error) {
-      // Fall through to direct handler
+  return handler(req);
     }
   }
   return handler(req);
-}
 
 export async function POST(req: NextRequest) {
-  if (withProductionIntegration) {
-    try {
-      const wrappedHandler = withProductionIntegration(handler);
-      return wrappedHandler(req);
-    } catch (error) {
-      // Fall through to direct handler
+  return handler(req);
     }
   }
   return handler(req);
-}
 
