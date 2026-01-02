@@ -138,15 +138,9 @@ function getHeuristicPrediction(context: any) {
   };
 }
 
-// Export POST handler - wrap with production integration if available
+export async function POST(request: NextRequest) {
+  return handlePOST(request);
 }
-
-let POST: typeof handlePOST = handlePOST;
-  // Production integration not available, use handler directly
-  console.warn('[ML Predict API] Production integration not available:', error);
-}
-
-export { POST };
 
 /**
  * GET endpoint for health check
