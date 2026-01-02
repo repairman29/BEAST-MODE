@@ -4,7 +4,17 @@
  */
 
 import { NextRequest, NextResponse } from 'next/server';
-import { getMultiTypeFeedbackCollector } from '../../../../lib/mlops/multiTypeFeedbackCollector';
+
+// Optional import - module may not exist
+async function getMultiTypeFeedbackCollector() {
+  try {
+    // @ts-ignore - Dynamic import, module may not exist
+    const module = await import(/* webpackIgnore: true */ '../../../../lib/mlops/multiTypeFeedbackCollector').catch(() => null);
+    return module?.getMultiTypeFeedbackCollector || null;
+  } catch {
+    return null;
+  }
+}
 
 export async function POST(request: NextRequest) {
   try {
