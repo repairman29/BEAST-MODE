@@ -4,11 +4,31 @@
  */
 
 import { NextRequest, NextResponse } from 'next/server';
-// Optional import - handled dynamically
+
+// Optional import - module may not exist
+async function getFeedbackCollector() {
+  try {
+    // @ts-ignore - Dynamic import, module may not exist
+    const module = await import(/* webpackIgnore: true */ '../../../../lib/mlops/feedbackCollector').catch(() => null);
+    return module?.getFeedbackCollector || null;
+  } catch {
+    return null;
+  }
+}
 
 export async function GET(request: NextRequest) {
   try {
     const collector = await getFeedbackCollector();
+    if (!collector) {
+      return NextResponse.json({
+        success: false,
+        health: {
+          status: 'unavailable',
+          message: 'Feedback collector not available',
+          timestamp: new Date().toISOString()
+        }
+      }, { status: 503 });
+    }
     const stats = await collector.getFeedbackStats();
 
     const health = {
@@ -42,4 +62,3 @@ export async function GET(request: NextRequest) {
     );
   }
 }
-
