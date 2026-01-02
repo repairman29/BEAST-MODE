@@ -10,7 +10,13 @@ async function getFeedbackCollector() {
   try {
     // @ts-ignore - Dynamic import, module may not exist
     const module = await import(/* webpackIgnore: true */ '../../../../lib/mlops/feedbackCollector').catch(() => null);
-    return module?.getFeedbackCollector || null;
+    if (!module?.getFeedbackCollector) return null;
+    
+    const collector = await module.getFeedbackCollector();
+    if (collector && !collector.initialized) {
+      await collector.initialize();
+    }
+    return collector;
   } catch {
     return null;
   }
@@ -24,10 +30,14 @@ export async function GET(request: NextRequest) {
 
     const collector = await getFeedbackCollector();
     if (!collector) {
+      // Return empty prompts instead of 503 - UI should handle gracefully
       return NextResponse.json({
-        success: false,
-        message: 'Feedback collector not available'
-      }, { status: 503 });
+        success: true,
+        prompts: [],
+        total: 0,
+        service: serviceName,
+        message: 'Feedback collector not available - returning empty prompts'
+      });
     }
     
     // Get predictions needing feedback
