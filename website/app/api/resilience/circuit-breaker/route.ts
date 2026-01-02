@@ -57,7 +57,9 @@ export async function GET(request: NextRequest) {
     if (operation === 'list') {
       // ARCHITECTURE: Moved to API route
       // ARCHITECTURE: Moved to API route
+      // // ARCHITECTURE: Moved to API route
 // const circuits = breaker && breaker.circuits ? Array.from(breaker.circuits.values()) : [];
+      const circuits: any[] = breaker && breaker.circuits ? Array.from(breaker.circuits.values()) : [];
       return NextResponse.json({
         status: 'ok',
         circuits: circuits.map((c: any) => ({

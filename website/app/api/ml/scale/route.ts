@@ -26,7 +26,15 @@ export async function GET(request: NextRequest) {
     const { searchParams } = new URL(request.url);
     const operation = searchParams.get('operation') || 'check';
 
-    const scaler = await getAdvancedScalerService();
+    const services = await getScalingServices();
+    if (!services.getAdvancedScalerService) {
+      return NextResponse.json({
+        status: 'unavailable',
+        message: 'Advanced scaler not available',
+        timestamp: new Date().toISOString()
+      });
+    }
+    const scaler = await services.getAdvancedScalerService();
     
     if (!scaler) {
       return NextResponse.json({
@@ -37,7 +45,14 @@ export async function GET(request: NextRequest) {
     }
 
     if (operation === 'check') {
-      const scaling = await checkScalingNeeds();
+      if (!services.checkScalingNeeds) {
+        return NextResponse.json({
+          status: 'unavailable',
+          message: 'Scaling service not available',
+          timestamp: new Date().toISOString()
+        });
+      }
+      const scaling = await services.checkScalingNeeds();
       return NextResponse.json({
         status: 'ok',
         scaling,
@@ -76,7 +91,15 @@ export async function POST(request: NextRequest) {
   try {
     const { operation, metrics } = await request.json();
 
-    const scaler = await getAdvancedScalerService();
+    const services = await getScalingServices();
+    if (!services.getAdvancedScalerService) {
+      return NextResponse.json({
+        status: 'unavailable',
+        message: 'Advanced scaler not available',
+        timestamp: new Date().toISOString()
+      });
+    }
+    const scaler = await services.getAdvancedScalerService();
     
     if (!scaler) {
       return NextResponse.json({
