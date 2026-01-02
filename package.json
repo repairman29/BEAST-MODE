@@ -47,6 +47,7 @@
     "monitor:feedback": "node scripts/monitor-feedback.js",
     "setup:mlflow": "node scripts/setup-mlflow.js",
     "train:model": "node scripts/train-first-model.js",
+    "test:predictionid": "node scripts/test-predictionid-flow.js",
     "extract:training-data": "node scripts/test-training-data-extractor.js",
     "ml:health-check": "node scripts/ml-db-health-check.js",
     "ml:performance": "node scripts/ml-db-performance.js",
