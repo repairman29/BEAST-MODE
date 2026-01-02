@@ -100,8 +100,6 @@ async function handler(req: NextRequest) {
 }
 
 export async function GET(req: NextRequest) {
-  const wrappedHandler = await withProductionIntegration(handler);
-  return wrappedHandler(req);
 }
 export async function POST(req: NextRequest) {
   const wrappedHandler = await withProductionIntegration(handler);

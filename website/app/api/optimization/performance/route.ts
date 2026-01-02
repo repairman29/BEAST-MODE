@@ -120,7 +120,6 @@ try {
 }
 
 export async function GET(req: NextRequest) {
-  return handler(req);
 }
 
 export async function POST(req: NextRequest) {
