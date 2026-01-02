@@ -72,6 +72,7 @@ export async function POST(request: NextRequest) {
 
     let SharedDashboard;
     try {
+      // @ts-ignore - Optional module, may not exist
       const module = await import(/* webpackIgnore: true */ '../../../../../../lib/collaboration/shared-dashboard').catch(() => null);
       SharedDashboard = module?.default || module;
       if (!SharedDashboard) {

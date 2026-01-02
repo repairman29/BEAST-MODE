@@ -14,6 +14,7 @@ export async function GET(request: NextRequest) {
 
     let TeamWorkspace;
     try {
+      // @ts-ignore - Dynamic import, module may not exist
       const module = await import(/* webpackIgnore: true */ '../../../../../../lib/collaboration/team-workspace').catch(() => null);
       TeamWorkspace = module?.default || module;
       if (!TeamWorkspace) {
@@ -72,6 +73,7 @@ export async function POST(request: NextRequest) {
 
     let TeamWorkspace;
     try {
+      // @ts-ignore - Dynamic import, module may not exist
       const module = await import(/* webpackIgnore: true */ '../../../../../../lib/collaboration/team-workspace').catch(() => null);
       TeamWorkspace = module?.default || module;
       if (!TeamWorkspace) {
