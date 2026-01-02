@@ -33,7 +33,7 @@ http://localhost:7777/api/github/oauth/callback
 
 **Callback URLs to Add:**
 ```
-https://beastmode.dev/api/github/oauth/callback
+https://beast-mode.dev/api/github/oauth/callback
 https://beast-mode-website.vercel.app/api/github/oauth/callback
 ```
 
@@ -42,9 +42,11 @@ https://beast-mode-website.vercel.app/api/github/oauth/callback
 2. Find the app with Client ID: `Ov23liDKFkIrnPneWwny`
 3. Click "Edit" or the app name
 4. In "Authorization callback URL", add **both**:
-   - `https://beastmode.dev/api/github/oauth/callback` (your custom domain)
+   - `https://beast-mode.dev/api/github/oauth/callback` (your custom domain - **note the dash!**)
    - `https://beast-mode-website.vercel.app/api/github/oauth/callback` (Vercel preview URLs)
 5. Click "Update application"
+
+**⚠️ Important:** The domain is `beast-mode.dev` (with a dash), not `beastmode.dev` (no dash)!
 
 **Note:** GitHub allows multiple callback URLs separated by newlines or commas. Add both to support:
 - Custom domain (beastmode.dev)
@@ -67,7 +69,7 @@ However, you DO need to:
 
 ### GitHub OAuth Apps
 - [ ] Development app has: `http://localhost:7777/api/github/oauth/callback`
-- [ ] Production app has: `https://beastmode.dev/api/github/oauth/callback`
+- [ ] Production app has: `https://beast-mode.dev/api/github/oauth/callback` (with dash!)
 - [ ] Production app has: `https://beast-mode-website.vercel.app/api/github/oauth/callback`
 
 ### Environment Variables
