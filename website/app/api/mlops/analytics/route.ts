@@ -9,75 +9,6 @@ import { NextRequest, NextResponse } from 'next/server';
  */
 
 async function handler(req: NextRequest) {
-  try {
-    const path = require('path');
-    const analyticsPath = path.join(process.cwd(), '../../../lib/mlops/advancedAnalytics');
-    const { AdvancedAnalytics } = require(analyticsPath);
-    const analytics = new AdvancedAnalytics();
-    await analytics.initialize();
-
-    if (req.method === 'GET') {
-      const { searchParams } = new URL(req.url);
-      const operation = searchParams.get('operation') || 'status';
-
-      if (operation === 'status') {
-        return NextResponse.json({
-          status: 'ok',
-          message: 'Advanced analytics ready',
-          timestamp: new Date().toISOString()
-        });
-      }
-
-      if (operation === 'report') {
-        const report = await analytics.generateReport();
-        return NextResponse.json({
-          status: 'ok',
-          data: { report },
-          timestamp: new Date().toISOString()
-        });
-      }
-
-      if (operation === 'dashboard') {
-        const dashboard = await analytics.getDashboard();
-        return NextResponse.json({
-          status: 'ok',
-          data: { dashboard },
-          timestamp: new Date().toISOString()
-        });
-      }
-
-      return NextResponse.json({
-        status: 'ok',
-        message: 'Advanced analytics API ready',
-        operations: ['status', 'report', 'dashboard'],
-        timestamp: new Date().toISOString()
-      });
-    }
-
-    if (req.method === 'POST') {
-      const body = await req.json();
-      const { operation } = body;
-
-      if (operation === 'dashboard') {
-        const dashboard = await analytics.getDashboard();
-        return NextResponse.json({
-          status: 'ok',
-          data: { dashboard },
-          timestamp: new Date().toISOString()
-        });
-      }
-
-      return NextResponse.json(
-        { error: `Unknown operation: ${operation}` },
-        { status: 400 }
-      );
-    }
-
-    return NextResponse.json(
-      { error: 'Method not allowed' },
-      { status: 405 }
-    );
-  } catch (error) {
     return NextResponse.json(
       {
         status: 'error',
@@ -89,36 +20,18 @@ async function handler(req: NextRequest) {
   }
 }
 
-let withProductionIntegration: any = null;
-try {
-  /* webpackIgnore: true */
-  const middleware = require(`../../../../lib/api-middleware`);
-  withProductionIntegration = middleware.withProductionIntegration;
-} catch (error) {
   // Middleware not available
 }
 
 export async function GET(req: NextRequest) {
-  if (withProductionIntegration) {
-    try {
-      const wrappedHandler = withProductionIntegration(handler);
-      return wrappedHandler(req);
-    } catch (error) {
-      // Fall through to direct handler
+  return handler(req);
     }
   }
-  return handler(req);
 }
 
 export async function POST(req: NextRequest) {
-  if (withProductionIntegration) {
-    try {
-      const wrappedHandler = withProductionIntegration(handler);
-      return wrappedHandler(req);
-    } catch (error) {
-      // Fall through to direct handler
+  return handler(req);
     }
   }
-  return handler(req);
 }
 
