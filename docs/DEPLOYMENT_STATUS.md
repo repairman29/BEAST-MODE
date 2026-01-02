@@ -15,9 +15,11 @@
 
 ### Deployment
 - **Platform:** Vercel
-- **Project:** `jeff-adkins-projects/beast-mode`
+- **Project:** `jeff-adkins-projects/beast-mode-website`
 - **Environment:** Production
 - **Status:** ✅ **Deployed Successfully**
+- **Git Integration:** ✅ Connected to `repairman29/BEAST-MODE`
+- **Auto-Deploy:** ✅ Enabled (deploys on push to main)
 
 ---
 
