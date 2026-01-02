@@ -14,7 +14,7 @@ export async function GET(request: NextRequest) {
 
     let SharedDashboard;
     try {
-      // @ts-ignore - Optional module, may not exist
+      // @ts-ignore - Dynamic import, module may not exist
       const module = await import(/* webpackIgnore: true */ '../../../../../../lib/collaboration/shared-dashboard').catch(() => null);
       SharedDashboard = module?.default || module;
       if (!SharedDashboard) {
