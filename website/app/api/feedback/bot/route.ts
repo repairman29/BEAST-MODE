@@ -38,7 +38,14 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const collector = getMultiTypeFeedbackCollector();
+    const collector = await getMultiTypeFeedbackCollector();
+    
+    if (!collector) {
+      return NextResponse.json({
+        success: false,
+        error: 'Multi-type feedback collector not available'
+      }, { status: 503 });
+    }
     
     // Determine if it's bot feedback or AI system feedback
     let result;
