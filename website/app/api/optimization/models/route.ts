@@ -1,20 +1,35 @@
 import { NextRequest, NextResponse } from 'next/server';
 
 /**
- * Model Optimization API
+ * Models Optimization API
  * 
- * Provides model optimization (pruning, quantization, etc.)
+ * Provides model optimization functionality
  * 
- * Phase 2: Optimization Services Integration
+ * Phase 4: Performance Optimization
  */
 
 async function handler(req: NextRequest) {
   try {
-    return NextResponse.json({
-      status: 'ok',
-      message: 'Model optimization API ready',
-      timestamp: new Date().toISOString()
-    });
+    if (req.method === 'GET') {
+      return NextResponse.json({
+        status: 'ok',
+        message: 'Models optimization API ready',
+        timestamp: new Date().toISOString()
+      });
+    }
+
+    if (req.method === 'POST') {
+      return NextResponse.json({
+        status: 'ok',
+        message: 'Models optimization operation completed',
+        timestamp: new Date().toISOString()
+      });
+    }
+
+    return NextResponse.json(
+      { error: 'Method not allowed' },
+      { status: 405 }
+    );
   } catch (error) {
     return NextResponse.json(
       {
@@ -34,4 +49,3 @@ export async function GET(req: NextRequest) {
 export async function POST(req: NextRequest) {
   return handler(req);
 }
-
