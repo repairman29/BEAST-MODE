@@ -10,11 +10,20 @@ const nextConfig = {
   output: undefined, // Let Vercel auto-detect (don't force static export)
   
   // Webpack configuration for path aliases
-  webpack: (config) => {
-    config.resolve.alias = {
+  webpack: (config, { isServer }) => {
+    // Ensure @/ alias resolves correctly in both server and client builds
+    const alias = {
       ...config.resolve.alias,
       '@': path.resolve(__dirname),
     };
+    config.resolve.alias = alias;
+    
+    // Also ensure modules resolve correctly
+    config.resolve.modules = [
+      path.resolve(__dirname, 'node_modules'),
+      ...(config.resolve.modules || []),
+    ];
+    
     return config;
   },
   
