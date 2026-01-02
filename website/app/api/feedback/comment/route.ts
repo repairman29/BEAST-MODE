@@ -1,0 +1,52 @@
+/**
+ * Comment Feedback API
+ * Collect open-ended text feedback
+ */
+
+import { NextRequest, NextResponse } from 'next/server';
+import { getMultiTypeFeedbackCollector } from '../../../../lib/mlops/multiTypeFeedbackCollector';
+
+export async function POST(request: NextRequest) {
+  try {
+    const body = await request.json();
+    const { predictionId, text, sentiment, rating, context = {} } = body;
+
+    if (!predictionId) {
+      return NextResponse.json(
+        { success: false, error: 'predictionId is required' },
+        { status: 400 }
+      );
+    }
+
+    if (!text || text.trim().length === 0) {
+      return NextResponse.json(
+        { success: false, error: 'Comment text is required' },
+        { status: 400 }
+      );
+    }
+
+    const collector = getMultiTypeFeedbackCollector();
+    
+    const result = await collector.collectCommentFeedback(predictionId, {
+      text,
+      sentiment,
+      rating,
+      context
+    });
+
+    return NextResponse.json({
+      success: true,
+      predictionId: predictionId,
+      feedbackType: 'comment',
+      rating: result.rating,
+      message: 'Comment feedback collected successfully'
+    });
+  } catch (error: any) {
+    console.error('[Feedback Comment] Error:', error);
+    return NextResponse.json(
+      { success: false, error: error.message },
+      { status: 500 }
+    );
+  }
+}
+
