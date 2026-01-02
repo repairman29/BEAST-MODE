@@ -4,7 +4,7 @@
  */
 
 import { NextRequest, NextResponse } from 'next/server';
-import { getFeedbackCollector } from '@/lib/mlops/feedbackCollector';
+import { getFeedbackCollector } from '../../../../lib/mlops/feedbackCollector';
 
 export async function GET(request: NextRequest) {
   try {
