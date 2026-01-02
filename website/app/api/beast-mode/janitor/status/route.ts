@@ -87,27 +87,27 @@ export async function GET(request: NextRequest) {
         prsCreated: latestRefactor?.prs_created || 0
       },
       architectureEnforcement: {
-        enabled: architectureEnforcement?.enabled !== false,
+        enabled: (architectureEnforcement as any)?.enabled !== false,
         violationsBlocked: violationsBlocked || 0,
         lastCheck: new Date().toISOString()
       },
       vibeRestoration: {
-        enabled: vibeRestoration?.enabled !== false,
+        enabled: (vibeRestoration as any)?.enabled !== false,
         lastRestore: latestVibe?.created_at || null,
         regressionsDetected: 0
       },
       repoMemory: {
-        enabled: repoMemory?.enabled !== false,
+        enabled: (repoMemory as any)?.enabled !== false,
         graphSize: graphSize || 0,
         lastUpdate: new Date().toISOString()
       },
       vibeOps: {
-        enabled: vibeOps?.enabled !== false,
+        enabled: (vibeOps as any)?.enabled !== false,
         testsRun: testsRun || 0,
         lastTest: new Date().toISOString()
       },
       invisibleCICD: {
-        enabled: invisibleCICD?.enabled !== false,
+        enabled: (invisibleCICD as any)?.enabled !== false,
         scansRun: 0,
         issuesFound: 0
       }
