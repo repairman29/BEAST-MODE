@@ -9,6 +9,13 @@ import { NextRequest, NextResponse } from 'next/server';
  */
 
 async function handler(req: NextRequest) {
+  try {
+    return NextResponse.json({
+      status: 'ok',
+      message: 'Model fine-tuning API ready',
+      timestamp: new Date().toISOString()
+    });
+  } catch (error) {
     return NextResponse.json(
       {
         status: 'error',
@@ -17,8 +24,7 @@ async function handler(req: NextRequest) {
       },
       { status: 500 }
     );
-}
-
+  }
 }
 
 export async function GET(req: NextRequest) {
