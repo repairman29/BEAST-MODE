@@ -1,5 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getRecommendations } from '../../../../lib/api-middleware';
+
+// Optional import - service may not be available
+async function getRecommendations() {
+  try {
+    const middleware = await import(/* webpackIgnore: true */ '../../../../lib/api-middleware').catch(() => null);
+    return middleware?.getRecommendations || null;
+  } catch {
+    return null;
+  }
+}
 
 /**
  * Recommendations API
@@ -23,7 +32,15 @@ export async function GET(request: NextRequest) {
       }
     });
 
-    const recommendations = await getRecommendations(userId, context);
+    const getRecs = await getRecommendations();
+    if (!getRecs) {
+      return NextResponse.json({
+        status: 'unavailable',
+        message: 'Recommendation engine not available',
+        timestamp: new Date().toISOString()
+      });
+    }
+    const recommendations = await getRecs(userId, context);
 
     if (!recommendations) {
       return NextResponse.json({
@@ -67,7 +84,15 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const recommendations = await getRecommendations(userId, context);
+    const getRecs = await getRecommendations();
+    if (!getRecs) {
+      return NextResponse.json({
+        status: 'unavailable',
+        message: 'Recommendation engine not available',
+        timestamp: new Date().toISOString()
+      });
+    }
+    const recommendations = await getRecs(userId, context);
 
     if (!recommendations) {
       return NextResponse.json({

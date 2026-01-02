@@ -23,28 +23,32 @@ export default function JanitorOnboarding({ onComplete }: { onComplete: () => vo
       title: 'Enable Janitor',
       description: 'Turn on the AI Janitor to start maintaining your code automatically',
       action: 'Enable Janitor',
-      actionUrl: '#enable'
+      actionUrl: '#enable',
+      completed: false
     },
     {
       id: 'configure',
       title: 'Configure Silent Refactoring',
       description: 'Set up overnight refactoring schedule (2 AM - 6 AM)',
       action: 'Configure',
-      actionUrl: '#configure'
+      actionUrl: '#configure',
+      completed: false
     },
     {
       id: 'test',
       title: 'Create Your First Test',
       description: 'Try Vibe Ops - create a test in plain English',
       action: 'Create Test',
-      actionUrl: '#test'
+      actionUrl: '#test',
+      completed: false
     },
     {
       id: 'review',
       title: 'Review Architecture Rules',
       description: 'Check which rules are active and customize them',
       action: 'View Rules',
-      actionUrl: '#rules'
+      actionUrl: '#rules',
+      completed: false
     }
   ];
 

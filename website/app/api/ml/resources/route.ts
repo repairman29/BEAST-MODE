@@ -1,5 +1,20 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { optimizeResources, getResourceOptimizerService } from '../../../../lib/api-middleware';
+
+// Optional imports - services may not be available
+async function getResourceServices() {
+  try {
+    const middleware = await import(/* webpackIgnore: true */ '../../../../lib/api-middleware').catch(() => null);
+    return {
+      optimizeResources: middleware?.optimizeResources || null,
+      getResourceOptimizerService: middleware?.getResourceOptimizerService || null
+    };
+  } catch {
+    return {
+      optimizeResources: null,
+      getResourceOptimizerService: null
+    };
+  }
+}
 
 /**
  * Resources API
@@ -11,10 +26,19 @@ import { optimizeResources, getResourceOptimizerService } from '../../../../lib/
 
 export async function GET(request: NextRequest) {
   try {
+    const services = await getResourceServices();
+    if (!services.getResourceOptimizerService || !services.optimizeResources) {
+      return NextResponse.json({
+        status: 'unavailable',
+        message: 'Resource optimizer not available',
+        timestamp: new Date().toISOString()
+      });
+    }
+    
     const { searchParams } = new URL(request.url);
     const operation = searchParams.get('operation') || 'optimize';
 
-    const optimizer = await getResourceOptimizerService();
+    const optimizer = await services.getResourceOptimizerService();
     
     if (!optimizer) {
       return NextResponse.json({
@@ -25,7 +49,7 @@ export async function GET(request: NextRequest) {
     }
 
     if (operation === 'optimize') {
-      const optimization = await optimizeResources();
+      const optimization = await services.optimizeResources();
       return NextResponse.json({
         status: 'ok',
         optimization,
@@ -71,9 +95,18 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   try {
+    const services = await getResourceServices();
+    if (!services.getResourceOptimizerService) {
+      return NextResponse.json({
+        status: 'unavailable',
+        message: 'Resource optimizer not available',
+        timestamp: new Date().toISOString()
+      });
+    }
+    
     const { operation, resources } = await request.json();
 
-    const optimizer = await getResourceOptimizerService();
+    const optimizer = await services.getResourceOptimizerService();
     
     if (!optimizer) {
       return NextResponse.json({

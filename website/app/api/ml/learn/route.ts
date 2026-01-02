@@ -1,5 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { learnFromOutcome, getSelfLearningService } from '../../../../lib/api-middleware';
+
+// Optional imports - services may not be available
+let learnFromOutcome: any = null;
+let getSelfLearningService: any = null;
+try {
+  const middleware = await import(/* webpackIgnore: true */ '../../../../lib/api-middleware').catch(() => null);
+  learnFromOutcome = middleware?.learnFromOutcome;
+  getSelfLearningService = middleware?.getSelfLearningService;
+} catch {}
 
 /**
  * Learning API

@@ -1,5 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getAdvancedLoadBalancerService } from '../../../../lib/api-middleware';
+
+// Optional import - service may not be available
+let getAdvancedLoadBalancerService: any = null;
+try {
+  const middleware = await import(/* webpackIgnore: true */ '../../../../lib/api-middleware').catch(() => null);
+  getAdvancedLoadBalancerService = middleware?.getAdvancedLoadBalancerService;
+} catch {}
 
 /**
  * Load Balancing API

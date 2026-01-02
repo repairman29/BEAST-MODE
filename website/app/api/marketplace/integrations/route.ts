@@ -27,11 +27,11 @@ async function handler(req: NextRequest) {
   }
 }
 
+// Optional middleware - may not be available
 let withProductionIntegration: any = null;
 try {
-  /* webpackIgnore: true */
-  const middleware = require(`../../../../lib/api-middleware`);
-  withProductionIntegration = middleware.withProductionIntegration;
+  const middleware = await import(/* webpackIgnore: true */ '../../../../lib/api-middleware').catch(() => null);
+  withProductionIntegration = middleware?.withProductionIntegration;
 } catch (error) {
   // Middleware not available
 }

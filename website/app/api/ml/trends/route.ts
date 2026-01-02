@@ -1,5 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { analyzeTrends } from '../../../../lib/api-middleware';
+
+// Optional import - service may not be available
+async function getAnalyzeTrends() {
+  try {
+    const middleware = await import(/* webpackIgnore: true */ '../../../../lib/api-middleware').catch(() => null);
+    return middleware?.analyzeTrends || null;
+  } catch {
+    return null;
+  }
+}
 
 /**
  * Trends API
@@ -11,6 +20,15 @@ import { analyzeTrends } from '../../../../lib/api-middleware';
 
 export async function GET(request: NextRequest) {
   try {
+    const analyzeTrends = await getAnalyzeTrends();
+    if (!analyzeTrends) {
+      return NextResponse.json({
+        status: 'unavailable',
+        message: 'Trend analysis not available',
+        timestamp: new Date().toISOString()
+      });
+    }
+    
     const { searchParams } = new URL(request.url);
     const endpoint = searchParams.get('endpoint') || 'all';
     const timeRange = parseInt(searchParams.get('timeRange') || '3600000'); // Default 1 hour
