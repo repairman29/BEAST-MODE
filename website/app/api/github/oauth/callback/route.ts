@@ -77,34 +77,36 @@ export async function GET(request: NextRequest) {
                          request.url.includes('beast-mode.dev');
     
     const expectedProdClientId = 'Ov23liDKFkIrnPneWwny';
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const expectedProdClientSecret = process.env.GITHUB_CLIENT_SECRET || '014c7fab1ba6cc6a7398b5bde04e26463f16f4e9';
+    const expectedProdClientSecret: process.env.SECRET || '';
     const expectedDevClientId = 'Ov23lidLvmp68FVMEqEB';
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const expectedDevClientSecret = process.env.GITHUB_CLIENT_SECRET || 'df4c598018de45ce8cb90313489eeb21448aedcf';
+    const expectedDevClientSecret: process.env.SECRET || '';
     
     let clientId: string;
     let clientSecret: string;
     
     if (isProduction) {
-      // Production: Use prod credentials
-      if (process.env.GITHUB_CLIENT_ID === expectedProdClientId) {
+      // Production: Use prod credentials (auto-select, ignore env if wrong)
+      if (process.env.GITHUB_CLIENT_ID === expectedProdClientId && 
+          process.env.GITHUB_CLIENT_SECRET === expectedProdClientSecret) {
+        // Env vars are correct
         clientId = process.env.GITHUB_CLIENT_ID;
-        clientSecret = process.env.GITHUB_CLIENT_SECRET || expectedProdClientSecret;
+        clientSecret = process.env.GITHUB_CLIENT_SECRET;
       } else {
-        // Auto-fix: use prod credentials
-        console.warn('⚠️ [GitHub OAuth] Auto-fixing: Using PROD credentials (env had wrong values)');
+        // Auto-fix: use prod credentials (env vars are wrong or missing)
+        console.warn('⚠️ [GitHub OAuth] Auto-fixing: Using PROD credentials (env had wrong/missing values)');
         clientId = expectedProdClientId;
         clientSecret = expectedProdClientSecret;
       }
     } else {
-      // Development: Use dev credentials
-      if (process.env.GITHUB_CLIENT_ID === expectedDevClientId) {
+      // Development: Use dev credentials (auto-select, ignore env if wrong)
+      if (process.env.GITHUB_CLIENT_ID === expectedDevClientId && 
+          process.env.GITHUB_CLIENT_SECRET === expectedDevClientSecret) {
+        // Env vars are correct
         clientId = process.env.GITHUB_CLIENT_ID;
-        clientSecret = process.env.GITHUB_CLIENT_SECRET || expectedDevClientSecret;
+        clientSecret = process.env.GITHUB_CLIENT_SECRET;
       } else {
-        // Auto-fix: use dev credentials
-        console.warn('⚠️ [GitHub OAuth] Auto-fixing: Using DEV credentials (env had wrong values)');
+        // Auto-fix: use dev credentials (env vars are wrong or missing)
+        console.warn('⚠️ [GitHub OAuth] Auto-fixing: Using DEV credentials (env had wrong/missing values)');
         clientId = expectedDevClientId;
         clientSecret = expectedDevClientSecret;
       }
