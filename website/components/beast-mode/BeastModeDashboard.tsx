@@ -3335,7 +3335,7 @@ function MarketplaceView({ data }: any) {
           <div className="flex gap-2">
             <Button
               onClick={() => {
-                const { getDocsUrl } = require('../../lib/docs-url');
+                const { getDocsUrl } = require('@/lib/docs-url');
                 window.open(getDocsUrl('plugins/development'), '_blank');
               }}
               className="bg-cyan-600 hover:bg-cyan-700 text-white"
