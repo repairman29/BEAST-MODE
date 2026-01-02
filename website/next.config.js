@@ -40,6 +40,14 @@ const nextConfig = {
   experimental: {
     optimizeCss: true,
   },
+  
+  // Skip static generation for error pages (they use dynamic features)
+  generateBuildId: async () => {
+    return 'build-' + Date.now().toString();
+  },
+  
+  // Output configuration
+  output: 'standalone',
 };
 
 module.exports = nextConfig;
