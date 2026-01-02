@@ -77,9 +77,11 @@ export async function GET(request: NextRequest) {
                          request.url.includes('beast-mode.dev');
     
     const expectedProdClientId = 'Ov23liDKFkIrnPneWwny';
-    const expectedProdClientSecret: process.env.SECRET || '';
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const expectedProdClientSecret = process.env.GITHUB_CLIENT_SECRET || '014c7fab1ba6cc6a7398b5bde04e26463f16f4e9';
     const expectedDevClientId = 'Ov23lidLvmp68FVMEqEB';
-    const expectedDevClientSecret: process.env.SECRET || '';
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const expectedDevClientSecret = process.env.GITHUB_CLIENT_SECRET || 'df4c598018de45ce8cb90313489eeb21448aedcf';
     
     let clientId: string;
     let clientSecret: string;
