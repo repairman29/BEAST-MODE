@@ -17,21 +17,15 @@ async function handler(req: NextRequest) {
       },
       { status: 500 }
     );
-  }
 }
 
-  // Middleware not available
 }
 
 export async function GET(req: NextRequest) {
   return handler(req);
-    }
-  }
 }
 
 export async function POST(req: NextRequest) {
   return handler(req);
-    }
-  }
 }
 
