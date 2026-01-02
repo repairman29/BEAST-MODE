@@ -1,7 +1,18 @@
 {
-  "buildCommand": "cd website && npm install && npm run build",
-  "outputDirectory": "website/.next",
-  "installCommand": "cd website && npm install",
   "framework": "nextjs",
-  "rootDirectory": "website"
+  "regions": ["iad1"],
+  "buildCommand": "npm run build",
+  "installCommand": "npm install",
+  "rootDirectory": "website",
+  "headers": [
+    {
+      "source": "/static/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    }
+  ]
 }
