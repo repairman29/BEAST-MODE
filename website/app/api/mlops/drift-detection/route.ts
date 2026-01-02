@@ -22,6 +22,9 @@ async function handler(req: NextRequest) {
 }
 
 export async function GET(req: NextRequest) {
+  return handler(req);
+}
 
 export async function POST(req: NextRequest) {
-
+  return handler(req);
+}
