@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
 import { Button } from '../ui/button';
-import { scanResultsStore, ScanResult } from '../../lib/scan-results-store';
+import { scanResultsStore, ScanResult } from '@/lib/scan-results-store';
 
 export default function GitHubScanForm() {
   const [repoUrl, setRepoUrl] = useState('');
