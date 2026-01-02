@@ -28,9 +28,9 @@ async function handler(req: NextRequest) {
 }
 
 // Optional middleware - may not be available
-// Optional middleware - may not be available
 async function getWithProductionIntegration() {
   try {
+    // @ts-ignore - Dynamic import, module may not exist
     const middleware = await import(/* webpackIgnore: true */ '../../../../lib/api-middleware').catch(() => null);
     return middleware?.withProductionIntegration;
   } catch {
