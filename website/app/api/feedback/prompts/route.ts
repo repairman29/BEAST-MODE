@@ -8,11 +8,10 @@ import { NextRequest, NextResponse } from 'next/server';
 // Optional import - module may not exist
 async function getFeedbackCollector() {
   try {
-    // @ts-ignore - Dynamic import, module may not exist
-    const module = await import(/* webpackIgnore: true */ '../../../../../../lib/mlops/feedbackCollector').catch((error) => {
-      console.error('[Feedback Prompts] Failed to import feedbackCollector:', error.message);
-      return null;
-    });
+    // Use require with absolute path (works in Vercel where website/ is the build root)
+    const path = require('path');
+    const libPath = path.join(process.cwd(), '../lib/mlops/feedbackCollector');
+    const module = require(libPath);
     if (!module?.getFeedbackCollector) {
       console.warn('[Feedback Prompts] Module imported but getFeedbackCollector not found');
       return null;
@@ -37,6 +36,19 @@ async function getFeedbackCollector() {
     return collector;
   } catch (error: any) {
     console.error('[Feedback Prompts] Error getting feedback collector:', error.message);
+    // Fallback: try dynamic import
+    try {
+      const module = await import(/* webpackIgnore: true */ '../../../../../../lib/mlops/feedbackCollector').catch(() => null);
+      if (module?.getFeedbackCollector) {
+        const collector = await module.getFeedbackCollector();
+        if (collector && !collector.initialized) {
+          await collector.initialize();
+        }
+        return collector;
+      }
+    } catch {
+      // Ignore
+    }
     return null;
   }
 }
