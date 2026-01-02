@@ -7,8 +7,9 @@ import { NextRequest, NextResponse } from 'next/server';
 // Optional import - module may not exist
 async function getMultiTypeFeedbackCollector() {
   try {
-    const module = await import('../../../../lib/mlops/multiTypeFeedbackCollector');
-    return module.getMultiTypeFeedbackCollector();
+    // @ts-ignore - Dynamic import, module may not exist
+    const module = await import(/* webpackIgnore: true */ '../../../../lib/mlops/multiTypeFeedbackCollector').catch(() => null);
+    return module?.getMultiTypeFeedbackCollector || null;
   } catch {
     return null;
   }
