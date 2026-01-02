@@ -9,15 +9,34 @@ import { NextRequest, NextResponse } from 'next/server';
 async function getFeedbackCollector() {
   try {
     // @ts-ignore - Dynamic import, module may not exist
-    const module = await import(/* webpackIgnore: true */ '../../../../lib/mlops/feedbackCollector').catch(() => null);
-    if (!module?.getFeedbackCollector) return null;
+    const module = await import(/* webpackIgnore: true */ '../../../../lib/mlops/feedbackCollector').catch((error) => {
+      console.error('[Feedback Prompts] Failed to import feedbackCollector:', error.message);
+      return null;
+    });
+    if (!module?.getFeedbackCollector) {
+      console.warn('[Feedback Prompts] Module imported but getFeedbackCollector not found');
+      return null;
+    }
     
     const collector = await module.getFeedbackCollector();
-    if (collector && !collector.initialized) {
+    if (!collector) {
+      console.warn('[Feedback Prompts] getFeedbackCollector returned null');
+      return null;
+    }
+    
+    if (!collector.initialized) {
       await collector.initialize();
     }
+    
+    // Check if Supabase is configured
+    if (!collector.supabase) {
+      console.warn('[Feedback Prompts] Feedback collector initialized but Supabase not configured');
+      return null;
+    }
+    
     return collector;
-  } catch {
+  } catch (error: any) {
+    console.error('[Feedback Prompts] Error getting feedback collector:', error.message);
     return null;
   }
 }
