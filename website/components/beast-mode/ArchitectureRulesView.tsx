@@ -119,7 +119,7 @@ export default function ArchitectureRulesView() {
   };
 
   // ARCHITECTURE: Moved to API route
-// const categories = ['all', ...Array.from(new Set(rules.map(r => r.category)))];
+  const categories = ['all', ...Array.from(new Set(rules.map(r => r.category)))];
   const filteredRules = selectedCategory === 'all'
     ? rules
     : rules.filter(r => r.category === selectedCategory);
