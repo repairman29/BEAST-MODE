@@ -4,6 +4,9 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   
+  // Ensure API routes are treated as serverless functions
+  output: undefined, // Let Vercel auto-detect (don't force static export)
+  
   // API configuration
   async headers() {
     return [
@@ -39,18 +42,6 @@ const nextConfig = {
   // Experimental features for performance
   experimental: {
     optimizeCss: true,
-  },
-  
-  // Skip static generation for error pages
-  // Error pages use dynamic features and cannot be statically generated
-  typescript: {
-    ignoreBuildErrors: false,
-  },
-  
-  // Disable static optimization for error pages
-  onDemandEntries: {
-    maxInactiveAge: 25 * 1000,
-    pagesBufferLength: 2,
   },
 };
 

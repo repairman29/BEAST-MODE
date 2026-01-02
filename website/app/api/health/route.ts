@@ -1,5 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 
+// Force dynamic rendering for serverless functions
+export const dynamic = 'force-dynamic';
+export const runtime = 'nodejs';
+
 // Optional imports - services may not be available
 async function getServices() {
   let getUnifiedMultiRegionService: any;
