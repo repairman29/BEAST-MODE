@@ -8,10 +8,16 @@ const nextConfig = {
   // Ensure API routes are treated as serverless functions
   output: undefined, // Let Vercel auto-detect (don't force static export)
   
-  // Configure both webpack (for server) and SWC (for client) path resolution
+  // Configure webpack for path resolution
+  // CRITICAL: When root directory is 'website', we need to ensure @/ resolves correctly
   webpack: (config, { isServer, dir }) => {
-    // Use dir parameter which Next.js provides - this is the website directory
+    // dir is the absolute path to the project root (website directory in Vercel)
     const projectRoot = dir || path.resolve(__dirname);
+    
+    console.log('[webpack] Configuring path resolution:');
+    console.log('[webpack] dir parameter:', dir);
+    console.log('[webpack] __dirname:', __dirname);
+    console.log('[webpack] projectRoot:', projectRoot);
     
     // Set alias for @/ to point to project root
     config.resolve.alias = {
@@ -19,17 +25,18 @@ const nextConfig = {
       '@': projectRoot,
     };
     
-    // CRITICAL: Ensure modules resolve from project root
-    // This is needed when root directory is set to a subdirectory in Vercel
+    // Ensure modules resolve from project root
     config.resolve.modules = [
-      projectRoot, // Add project root first so relative paths resolve correctly
+      projectRoot,
       path.join(projectRoot, 'node_modules'),
       ...(Array.isArray(config.resolve.modules) ? config.resolve.modules.filter(m => m !== projectRoot) : []),
     ];
     
-    // Also ensure that relative paths resolve from the file's directory
-    // This helps with ../../lib/ style imports
+    // Set roots for module resolution
     config.resolve.roots = [projectRoot];
+    
+    console.log('[webpack] @ alias set to:', config.resolve.alias['@']);
+    console.log('[webpack] resolve.modules:', config.resolve.modules.slice(0, 3));
     
     return config;
   },
