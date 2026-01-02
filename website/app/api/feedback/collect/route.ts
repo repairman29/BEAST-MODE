@@ -27,7 +27,14 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const collector = getMultiTypeFeedbackCollector();
+    const collector = await getMultiTypeFeedbackCollector();
+    
+    if (!collector) {
+      return NextResponse.json({
+        success: false,
+        error: 'Multi-type feedback collector not available'
+      }, { status: 503 });
+    }
     
     // Collect feedback based on type
     const result = await collector.collectFeedback(predictionId, {
