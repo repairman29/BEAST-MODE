@@ -20,7 +20,15 @@ export async function POST(request: NextRequest) {
 
     let AutomatedCodeReview;
     try {
-      AutomatedCodeReview = require('../../../../../../lib/intelligence/automated-code-review');
+      const module = await import(/* webpackIgnore: true */ '../../../../../../lib/intelligence/automated-code-review').catch(() => null);
+      AutomatedCodeReview = module?.default || module;
+      if (!AutomatedCodeReview) {
+        return NextResponse.json({
+          status: 'error',
+          error: 'Intelligence module not available',
+          timestamp: new Date().toISOString()
+        }, { status: 503 });
+      }
     } catch (error) {
       return NextResponse.json({
         status: 'error',

@@ -14,7 +14,15 @@ export async function GET(request: NextRequest) {
 
     let TeamWorkspace;
     try {
-      TeamWorkspace = require('../../../../../../lib/collaboration/team-workspace');
+      const module = await import(/* webpackIgnore: true */ '../../../../../../lib/collaboration/team-workspace').catch(() => null);
+      TeamWorkspace = module?.default || module;
+      if (!TeamWorkspace) {
+        return NextResponse.json({
+          status: 'ok',
+          data: { message: 'Collaboration module not available' },
+          timestamp: new Date().toISOString()
+        });
+      }
     } catch (error) {
       return NextResponse.json({
         status: 'ok',
@@ -64,7 +72,15 @@ export async function POST(request: NextRequest) {
 
     let TeamWorkspace;
     try {
-      TeamWorkspace = require('../../../../../../lib/collaboration/team-workspace');
+      const module = await import(/* webpackIgnore: true */ '../../../../../../lib/collaboration/team-workspace').catch(() => null);
+      TeamWorkspace = module?.default || module;
+      if (!TeamWorkspace) {
+        return NextResponse.json({
+          status: 'error',
+          error: 'Collaboration module not available',
+          timestamp: new Date().toISOString()
+        }, { status: 503 });
+      }
     } catch (error) {
       return NextResponse.json({
         status: 'error',
