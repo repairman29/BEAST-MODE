@@ -48,6 +48,8 @@
     "setup:mlflow": "node scripts/setup-mlflow.js",
     "train:model": "node scripts/train-first-model.js",
     "test:predictionid": "node scripts/test-predictionid-flow.js",
+    "improve:feedback": "node scripts/improve-feedback-rate.js",
+    "prompts:feedback": "node scripts/auto-feedback-prompts.js",
     "extract:training-data": "node scripts/test-training-data-extractor.js",
     "ml:health-check": "node scripts/ml-db-health-check.js",
     "ml:performance": "node scripts/ml-db-performance.js",
