@@ -16,11 +16,28 @@ import { NextRequest, NextResponse } from 'next/server';
  */
 
 async function handlePOST(request: NextRequest) {
+  try {
+    const body = await request.json();
+    const context = body.context || {};
+
+    // Try to load service router (specialized services)
+    let serviceRouter = null;
+    try {
+      const path = require('path');
+      const routerPath = path.join(process.cwd(), '../../../lib/mlops/serviceRouter');
+      const { ServiceRouter } = require(routerPath);
+      serviceRouter = new ServiceRouter();
+    } catch (error: any) {
       console.debug('[ML API] Service router not available:', error.message);
     }
 
     // Try to load ML model integration (fallback)
     let mlIntegration = null;
+    try {
+      const path = require('path');
+      const mlPath = path.join(process.cwd(), '../../../lib/mlops/mlIntegration');
+      mlIntegration = require(mlPath);
+    } catch (error: any) {
       console.debug('[ML API] ML integration not available:', error.message);
     }
 
