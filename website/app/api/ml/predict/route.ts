@@ -146,19 +146,12 @@ export async function POST(request: NextRequest) {
  * GET endpoint for health check
  */
 export async function GET(request: NextRequest) {
-  return handler(req);
-      // ML not available
-    }
-
-    // Check service router
-      // Service router not available
-    }
-
+  try {
     return NextResponse.json({
       status: 'ok',
-      mlAvailable,
-      modelInfo,
-      services: serviceStatus,
+      mlAvailable: false,
+      modelInfo: null,
+      services: {},
       timestamp: new Date().toISOString()
     });
   } catch (error) {
@@ -170,3 +163,4 @@ export async function GET(request: NextRequest) {
       { status: 500 }
     );
   }
+}
