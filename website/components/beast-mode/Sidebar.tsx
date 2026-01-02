@@ -15,11 +15,24 @@ interface SidebarProps {
   currentView: string | null;
   onViewChange: (view: string | null) => void;
   onCommandPalette: () => void;
+  onCollapseChange?: (collapsed: boolean) => void;
+  isCollapsed?: boolean;
 }
 
-export default function Sidebar({ currentView, onViewChange, onCommandPalette }: SidebarProps) {
-  const [isCollapsed, setIsCollapsed] = useState(false);
+export default function Sidebar({ currentView, onViewChange, onCommandPalette, onCollapseChange, isCollapsed: externalCollapsed }: SidebarProps) {
+  const [internalCollapsed, setInternalCollapsed] = useState(false);
+  const isCollapsed = externalCollapsed !== undefined ? externalCollapsed : internalCollapsed;
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
+  
+  const handleToggleCollapse = () => {
+    const newState = !isCollapsed;
+    if (externalCollapsed === undefined) {
+      setInternalCollapsed(newState);
+    }
+    if (onCollapseChange) {
+      onCollapseChange(newState);
+    }
+  };
 
   const navigationItems: SidebarItem[] = [
     // Core Tabs - Unforgettable Experience
@@ -48,12 +61,12 @@ export default function Sidebar({ currentView, onViewChange, onCommandPalette }:
     const handleKeyDown = (e: KeyboardEvent) => {
       if ((e.metaKey || e.ctrlKey) && e.key === 'b') {
         e.preventDefault();
-        setIsCollapsed(prev => !prev);
+        handleToggleCollapse();
       }
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, []);
+  }, [isCollapsed]);
 
   return (
     <>
@@ -84,7 +97,7 @@ export default function Sidebar({ currentView, onViewChange, onCommandPalette }:
             </div>
           )}
           <button
-            onClick={() => setIsCollapsed(!isCollapsed)}
+            onClick={handleToggleCollapse}
             className="ml-auto p-2 hover:bg-slate-900/50 rounded-lg transition-all duration-200 text-slate-400 hover:text-white hover:scale-110 active:scale-95"
             title={isCollapsed ? 'Expand sidebar (⌘B)' : 'Collapse sidebar (⌘B)'}
             aria-label={isCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}
