@@ -1,6 +1,4 @@
 {
-  "buildCommand": "cd website && npm run build",
-  "installCommand": "cd website && npm install",
   "framework": "nextjs",
   "regions": ["iad1"],
   "headers": [
