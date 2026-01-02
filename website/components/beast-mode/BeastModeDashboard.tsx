@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '../ui/card';
 import { Button } from '../ui/button';
 import NotificationWidget, { Notification } from '../hud/NotificationWidget';
-import { getAnalytics } from '../../lib/analytics';
+import { getAnalytics } from '@/lib/analytics';
 // Removed unused imports: ConversationalAI, HealthDashboard, AIRecommendations, MonetizationDashboard, MissionDashboard, DeploymentDashboard, GitHubScanForm
 // These features are now consolidated into Quality, Intelligence, Marketplace, and Settings tabs
 import AuthSection from './AuthSection';
@@ -33,12 +33,13 @@ import GamificationSystem from './GamificationSystem';
 import MobileNavigation from './MobileNavigation';
 import GitHubConnection from './GitHubConnection';
 import { ErrorBoundary } from '../ui/ErrorBoundary';
-import { useUser } from '../../lib/user-context';
-import { getErrorMonitor } from '../../lib/error-monitoring';
+import { useUser } from '@/lib/user-context';
+import { getErrorMonitor } from '@/lib/error-monitoring';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { ScanDetailsModal } from '../ui/ScanDetailsModal';
 import UnifiedAnalyticsView from './UnifiedAnalyticsView';
 import JanitorDashboard from './JanitorDashboard';
+import FeedbackDashboard from '../feedback/FeedbackDashboard';
 
 /**
  * BEAST MODE Enterprise Dashboard
@@ -3723,6 +3724,19 @@ function SettingsView({ data }: any) {
       <ErrorBoundary>
         <GitHubConnection userId={user?.id} />
       </ErrorBoundary>
+
+      {/* Feedback System */}
+      <Card className="bg-slate-900/90 border-slate-800 card-polish stagger-item">
+        <CardHeader>
+          <CardTitle className="text-white text-lg font-semibold">Feedback System</CardTitle>
+          <CardDescription className="text-slate-400">
+            Monitor and manage feedback collection for all AI predictions.
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <FeedbackDashboard />
+        </CardContent>
+      </Card>
 
       {/* Teams Management */}
       <Card className="bg-slate-900/90 border-slate-800 card-polish stagger-item">
