@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getSupabaseClientOrNull } from '../../../../lib/supabase';
+import { sendError, handleApiError, validateRequired } from '../../../../lib/errors';
 
 /**
  * BEAST MODE Error Logging API
@@ -16,11 +17,13 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
     const { errors } = body;
 
-    if (!errors || !Array.isArray(errors)) {
-      return NextResponse.json(
-        { error: 'Invalid request: errors array required' },
-        { status: 400 }
-      );
+    const validation = validateRequired(body, ['errors']);
+    if (!validation.valid) {
+      return sendError('VALIDATION_ERROR', 'Invalid request: errors array required', validation.error?.details);
+    }
+    
+    if (!Array.isArray(errors)) {
+      return sendError('VALIDATION_ERROR', 'Errors must be an array');
     }
 
     // Store errors in Supabase
@@ -56,11 +59,11 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({ success: true, count: errors.length });
   } catch (error: any) {
-    console.error('Error logging API error:', error);
-    return NextResponse.json(
-      { error: 'Failed to store error logs' },
-      { status: 500 }
-    );
+    return handleApiError(error, {
+      method: 'POST',
+      path: '/api/beast-mode/errors',
+      service: 'beast-mode'
+    });
   }
 }
 
@@ -139,11 +142,11 @@ export async function GET(request: NextRequest) {
       stats,
     });
   } catch (error: any) {
-    console.error('Error fetching error logs:', error);
-    return NextResponse.json(
-      { error: 'Failed to fetch error logs' },
-      { status: 500 }
-    );
+    return handleApiError(error, {
+      method: 'GET',
+      path: '/api/beast-mode/errors',
+      service: 'beast-mode'
+    });
   }
 }
 

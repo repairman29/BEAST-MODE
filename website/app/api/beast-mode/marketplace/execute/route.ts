@@ -230,14 +230,12 @@ export async function POST(request: NextRequest) {
     });
 
   } catch (error: any) {
-    console.error('Plugin Execution API error:', error);
-    return NextResponse.json(
-      { 
-        error: 'Failed to execute plugin',
-        details: error.message 
-      },
-      { status: 500 }
-    );
+    const { handleApiError } = require('../../../../../lib/errors');
+    return handleApiError(error, {
+      method: 'POST',
+      path: '/api/beast-mode/marketplace/execute',
+      service: 'beast-mode'
+    });
   }
 }
 

@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getSupabaseClientOrNull } from '../../../../../lib/supabase';
+import { handleApiError } from '../../../../../lib/errors';
 
 /**
  * POST /api/beast-mode/janitor/errors
@@ -34,11 +35,11 @@ export async function POST(request: NextRequest) {
       message: 'Error logged'
     });
   } catch (error: any) {
-    console.error('Failed to log error:', error);
-    return NextResponse.json(
-      { error: 'Failed to log error', details: error.message },
-      { status: 500 }
-    );
+    return handleApiError(error, {
+      method: 'POST',
+      path: '/api/beast-mode/janitor/errors',
+      service: 'beast-mode'
+    });
   }
 }
 

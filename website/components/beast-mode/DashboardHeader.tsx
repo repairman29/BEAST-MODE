@@ -10,23 +10,26 @@ interface DashboardHeaderProps {
     plan?: string;
   } | null;
   onSignOut?: () => void;
+  isSidebarCollapsed?: boolean;
 }
 
-export default function DashboardHeader({ user, onSignOut }: DashboardHeaderProps) {
+export default function DashboardHeader({ user, onSignOut, isSidebarCollapsed = false }: DashboardHeaderProps) {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
+  const leftOffset = isSidebarCollapsed ? 'left-16' : 'left-64';
+
   if (!mounted) {
     return (
-      <div className="fixed top-0 left-64 right-0 h-16 bg-black/95 backdrop-blur-xl border-b border-slate-800/50 z-[90]"></div>
+      <div className={`fixed top-0 ${leftOffset} right-0 h-16 bg-black/95 backdrop-blur-xl border-b border-slate-800/50 z-[90] transition-all duration-300 ease-in-out`}></div>
     );
   }
 
   return (
-    <header className="fixed top-0 left-64 right-0 h-16 bg-black/95 backdrop-blur-xl border-b border-slate-800/50 z-[90] flex items-center justify-between px-6">
+    <header className={`fixed top-0 ${leftOffset} right-0 h-16 bg-black/95 backdrop-blur-xl border-b border-slate-800/50 z-[90] flex items-center justify-between px-6 transition-all duration-300 ease-in-out`}>
       {/* Left: Logo/Brand */}
       <div className="flex items-center gap-3">
         <div className="w-8 h-8 bg-gradient-to-br from-cyan-500 via-purple-500 to-pink-500 rounded-lg flex items-center justify-center shadow-lg shadow-cyan-500/20">

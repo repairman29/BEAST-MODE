@@ -137,6 +137,7 @@ function BeastModeDashboardInner({ initialView }: BeastModeDashboardInnerProps) 
   const [currentView, setCurrentView] = useState<'quality' | 'intelligence' | 'marketplace' | 'self-improve' | 'collaboration' | 'collaboration-workspace' | 'collaboration-dashboard' | 'settings' | 'auth' | 'pricing' | 'ml-monitoring' | 'unified-analytics' | 'janitor' | null>(
     initialView === 'auth' ? 'auth' : initialView === 'pricing' ? 'pricing' : initialView === 'janitor' ? 'janitor' : null
   );
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
 
   // Update URL when view changes (for shareable links)
   useEffect(() => {
@@ -306,12 +307,14 @@ function BeastModeDashboardInner({ initialView }: BeastModeDashboardInnerProps) 
             currentView={currentView}
             onViewChange={(view) => setCurrentView(view as typeof currentView)}
             onCommandPalette={() => setIsCommandPaletteOpen(true)}
+            isCollapsed={isSidebarCollapsed}
+            onCollapseChange={setIsSidebarCollapsed}
           />
         </ErrorBoundary>
 
         {/* Dashboard Header */}
         <ErrorBoundary>
-          <DashboardHeader user={user} onSignOut={signOut} />
+          <DashboardHeader user={user} onSignOut={signOut} isSidebarCollapsed={isSidebarCollapsed} />
         </ErrorBoundary>
 
         {/* Mobile Navigation */}
@@ -322,7 +325,9 @@ function BeastModeDashboardInner({ initialView }: BeastModeDashboardInnerProps) 
         />
 
       {/* Main Content Area */}
-      <div className="flex-1 flex flex-col md:ml-64 transition-all duration-300 ease-in-out relative pt-16 md:pt-16 pb-16">
+      <div className={`flex-1 flex flex-col transition-all duration-300 ease-in-out relative pt-16 md:pt-16 pb-16 ${
+        isSidebarCollapsed ? 'md:ml-16' : 'md:ml-64'
+      }`}>
         {/* Background ambient effects */}
         <div className="absolute inset-0 bg-gradient-to-b from-black via-slate-950 to-black z-0"></div>
         <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:64px_64px] z-0"></div>
@@ -589,7 +594,9 @@ function BeastModeDashboardInner({ initialView }: BeastModeDashboardInnerProps) 
         </div>
 
         {/* Bottom Status Line */}
-        <div className="fixed bottom-0 left-64 right-0 px-6 py-3 bg-black/90 backdrop-blur-md border-t border-slate-800/50 z-40 shadow-lg">
+        <div className={`fixed bottom-0 right-0 px-6 py-3 bg-black/90 backdrop-blur-md border-t border-slate-800/50 z-40 shadow-lg transition-all duration-300 ease-in-out ${
+          isSidebarCollapsed ? 'left-16' : 'left-64'
+        }`}>
           <div className="flex items-center justify-between text-xs text-slate-400 max-w-7xl mx-auto">
             <div className="flex gap-4 sm:gap-6 md:gap-8 flex-wrap">
               <div className="flex items-center gap-2">
