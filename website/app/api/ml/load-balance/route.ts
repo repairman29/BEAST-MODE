@@ -71,7 +71,15 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const balancer = await getAdvancedLoadBalancerService();
+    const getBalancer = await getAdvancedLoadBalancerService();
+    if (!getBalancer) {
+      return NextResponse.json({
+        status: 'unavailable',
+        message: 'Advanced load balancer not available',
+        timestamp: new Date().toISOString()
+      });
+    }
+    const balancer = await getBalancer();
     
     if (!balancer) {
       return NextResponse.json({
