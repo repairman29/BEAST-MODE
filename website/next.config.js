@@ -9,22 +9,25 @@ const nextConfig = {
   output: undefined, // Let Vercel auto-detect (don't force static export)
   
   // Explicitly configure webpack to resolve @/ paths
-  // This is needed when root directory is set to a subdirectory in Vercel
-  // Next.js 14 uses SWC but still needs webpack for module resolution
-  webpack: (config, { isServer }) => {
-    const projectRoot = path.resolve(__dirname);
+  // When root directory is 'website', __dirname is the website directory
+  // This ensures @/ resolves correctly in Vercel builds
+  webpack: (config, { isServer, dir }) => {
+    // Use dir parameter (Next.js provides this) or fallback to __dirname
+    // dir is the absolute path to the project root (website directory)
+    const projectRoot = dir || path.resolve(__dirname);
     
-    // Set alias for @/ to point to project root
+    // Set alias for @/ to point to project root (website directory)
     config.resolve.alias = {
       ...config.resolve.alias,
       '@': projectRoot,
     };
     
     // Ensure modules resolve from project root
+    // This helps webpack find modules when root directory is set
     config.resolve.modules = [
       projectRoot,
       path.join(projectRoot, 'node_modules'),
-      ...(config.resolve.modules || []),
+      ...(Array.isArray(config.resolve.modules) ? config.resolve.modules : []),
     ];
     
     return config;
