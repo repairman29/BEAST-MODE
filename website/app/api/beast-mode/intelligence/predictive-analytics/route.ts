@@ -20,7 +20,15 @@ export async function POST(request: NextRequest) {
 
     let PredictiveAnalytics;
     try {
-      PredictiveAnalytics = require('../../../../../../lib/intelligence/predictive-analytics');
+      const module = await import(/* webpackIgnore: true */ '../../../../../../lib/intelligence/predictive-analytics').catch(() => null);
+      PredictiveAnalytics = module?.default || module;
+      if (!PredictiveAnalytics) {
+        return NextResponse.json({
+          status: 'error',
+          error: 'Intelligence module not available',
+          timestamp: new Date().toISOString()
+        }, { status: 503 });
+      }
     } catch (error) {
       return NextResponse.json({
         status: 'error',

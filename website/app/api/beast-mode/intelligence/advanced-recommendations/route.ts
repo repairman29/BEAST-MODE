@@ -21,7 +21,15 @@ export async function POST(request: NextRequest) {
     // Import and use AdvancedRecommendations
     let AdvancedRecommendations;
     try {
-      AdvancedRecommendations = require('../../../../../../lib/intelligence/advanced-recommendations');
+      const module = await import(/* webpackIgnore: true */ '../../../../../../lib/intelligence/advanced-recommendations').catch(() => null);
+      AdvancedRecommendations = module?.default || module;
+      if (!AdvancedRecommendations) {
+        return NextResponse.json({
+          status: 'error',
+          error: 'Intelligence module not available',
+          timestamp: new Date().toISOString()
+        }, { status: 503 });
+      }
     } catch (error) {
       return NextResponse.json({
         status: 'error',
