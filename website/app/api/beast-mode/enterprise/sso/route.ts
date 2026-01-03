@@ -1,6 +1,34 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getSupabaseClientOrNull } from '../../../../../lib/supabase';
 
+// Use unified config if available
+let getUnifiedConfig: any = null;
+try {
+  const path = require('path');
+  const configPath = path.join(process.cwd(), '../../shared-utils/unified-config');
+  const unifiedConfig = require(configPath);
+  getUnifiedConfig = unifiedConfig.getUnifiedConfig;
+} catch (error) {
+  // Unified config not available
+}
+
+// Helper function to get config value (TypeScript compatible)
+async function getConfigValue(key: string, defaultValue: string | null = null): Promise<string | null> {
+  if (getUnifiedConfig) {
+    try {
+      const config = await getUnifiedConfig();
+      const value = config.get(key);
+      if (value !== null && value !== undefined && value !== '') {
+        return value;
+      }
+    } catch (error) {
+      // Fallback to process.env
+    }
+  }
+  // Fallback to process.env for backward compatibility
+  return process.env[key] !== undefined && process.env[key] !== '' ? process.env[key] : defaultValue;
+}
+
 /**
  * BEAST MODE Enterprise SSO API
  * 
@@ -209,7 +237,9 @@ export async function POST(request: NextRequest) {
       const stateData = JSON.stringify({ userId, timestamp: Date.now() });
       // ARCHITECTURE: Moved to API route
       const state = Buffer.from(stateData).toString('base64');
-      const loginUrl = `${process.env.NEXT_PUBLIC_URL || 'https://beast-mode.dev'}/api/beast-mode/enterprise/sso/callback?provider=${provider}&state=${state}`;
+      const nextPublicUrl = await getConfigValue('NEXT_PUBLIC_URL', 'https://beast-mode.dev');
+      const baseUrl = nextPublicUrl || 'https://beast-mode.dev';
+      const loginUrl = `${baseUrl}/api/beast-mode/enterprise/sso/callback?provider=${provider}&state=${state}`;
 
       return NextResponse.json({
         status: 'success',

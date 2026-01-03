@@ -7,18 +7,52 @@ import { createClient } from '@supabase/supabase-js';
  * Stores and retrieves GitHub OAuth credentials from Supabase
  */
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+// Use unified config if available
+let getUnifiedConfig: any = null;
+try {
+  const path = require('path');
+  const configPath = path.join(process.cwd(), '../../shared-utils/unified-config');
+  const unifiedConfig = require(configPath);
+  getUnifiedConfig = unifiedConfig.getUnifiedConfig;
+} catch (error) {
+  // Unified config not available
+}
 
-const supabase = supabaseUrl && supabaseServiceKey
-  ? createClient(supabaseUrl, supabaseServiceKey)
-  : null;
+// Helper function to get config value (TypeScript compatible)
+async function getConfigValue(key: string, defaultValue: string | null = null): Promise<string | null> {
+  if (getUnifiedConfig) {
+    try {
+      const config = await getUnifiedConfig();
+      const value = config.get(key);
+      if (value !== null && value !== undefined && value !== '') {
+        return value;
+      }
+    } catch (error) {
+      // Fallback to process.env
+    }
+  }
+  // Fallback to process.env for backward compatibility
+  return process.env[key] !== undefined && process.env[key] !== '' ? process.env[key] : defaultValue;
+}
+
+// Helper to get Supabase client
+async function getSupabaseClient() {
+  const supabaseUrl = await getConfigValue('NEXT_PUBLIC_SUPABASE_URL', null);
+  const supabaseServiceKey = await getConfigValue('SUPABASE_SERVICE_ROLE_KEY', null);
+  
+  if (!supabaseUrl || !supabaseServiceKey) {
+    return null;
+  }
+  
+  return createClient(supabaseUrl, supabaseServiceKey);
+}
 
 /**
  * POST /api/github/config - Store GitHub OAuth config in Supabase
  */
 export async function POST(request: NextRequest) {
   try {
+    const supabase = await getSupabaseClient();
     if (!supabase) {
       return NextResponse.json(
         { error: 'Supabase not configured' },
@@ -85,6 +119,7 @@ export async function POST(request: NextRequest) {
  */
 export async function GET(request: NextRequest) {
   try {
+    const supabase = await getSupabaseClient();
     if (!supabase) {
       return NextResponse.json(
         { error: 'Supabase not configured' },

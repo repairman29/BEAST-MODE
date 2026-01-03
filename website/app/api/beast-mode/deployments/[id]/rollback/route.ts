@@ -1,13 +1,48 @@
 import { NextRequest, NextResponse } from 'next/server';
 
+// Use unified config if available
+let getUnifiedConfig: any = null;
+try {
+  const path = require('path');
+  const configPath = path.join(process.cwd(), '../../shared-utils/unified-config');
+  const unifiedConfig = require(configPath);
+  getUnifiedConfig = unifiedConfig.getUnifiedConfig;
+} catch (error) {
+  // Unified config not available
+}
+
+// Helper function to get config value (TypeScript compatible)
+async function getConfigValue(key: string, defaultValue: string | null = null): Promise<string | null> {
+  if (getUnifiedConfig) {
+    try {
+      const config = await getUnifiedConfig();
+      const value = config.get(key);
+      if (value !== null && value !== undefined && value !== '') {
+        return value;
+      }
+    } catch (error) {
+      // Fallback to process.env
+    }
+  }
+  // Fallback to process.env for backward compatibility
+  return process.env[key] !== undefined && process.env[key] !== '' ? process.env[key] : defaultValue;
+}
+
 /**
  * BEAST MODE Deployment Rollback API
  * 
  * Rolls back a deployment to the previous version
  */
 
-const hasVercelToken = !!process.env.VERCEL_API_TOKEN;
-const hasRailwayToken = !!process.env.RAILWAY_TOKEN;
+// Helper to check if platform tokens are configured (async)
+async function checkPlatformTokens() {
+  const vercelToken = await getConfigValue('VERCEL_API_TOKEN', null);
+  const railwayToken = await getConfigValue('RAILWAY_TOKEN', null);
+  return {
+    hasVercelToken: !!vercelToken,
+    hasRailwayToken: !!railwayToken
+  };
+}
 
 export async function POST(
   request: NextRequest,

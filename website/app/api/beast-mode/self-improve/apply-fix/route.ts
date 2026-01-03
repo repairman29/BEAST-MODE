@@ -4,6 +4,34 @@ import { join } from 'path';
 import { existsSync } from 'fs';
 import { execSync } from 'child_process';
 
+// Use unified config if available
+let getUnifiedConfig: any = null;
+try {
+  const path = require('path');
+  const configPath = path.join(process.cwd(), '../../shared-utils/unified-config');
+  const unifiedConfig = require(configPath);
+  getUnifiedConfig = unifiedConfig.getUnifiedConfig;
+} catch (error) {
+  // Unified config not available
+}
+
+// Helper function to get config value (TypeScript compatible)
+async function getConfigValue(key: string, defaultValue: string | null = null): Promise<string | null> {
+  if (getUnifiedConfig) {
+    try {
+      const config = await getUnifiedConfig();
+      const value = config.get(key);
+      if (value !== null && value !== undefined && value !== '') {
+        return value;
+      }
+    } catch (error) {
+      // Fallback to process.env
+    }
+  }
+  // Fallback to process.env for backward compatibility
+  return process.env[key] !== undefined && process.env[key] !== '' ? process.env[key] : defaultValue;
+}
+
 /**
  * Apply Fix API
  * 
@@ -460,28 +488,31 @@ async function addAnalytics(): Promise<FixResult> {
       };
     }
 
+    // Get analytics ID from unified config
+    const analyticsId = await getConfigValue('NEXT_PUBLIC_VERCEL_ANALYTICS_ID', null);
+    
     // Add Vercel Analytics (simple approach)
-    const analyticsScript = `
+    const analyticsScript = analyticsId ? `
       {/* Analytics */}
-      {process.env.NEXT_PUBLIC_VERCEL_ANALYTICS_ID && (
+      {${analyticsId} && (
         <script
           async
-          src="https://www.googletagmanager.com/gtag/js?id=" + process.env.NEXT_PUBLIC_VERCEL_ANALYTICS_ID}
+          src="https://www.googletagmanager.com/gtag/js?id=" + ${analyticsId}}
         />
       )}
-      {process.env.NEXT_PUBLIC_VERCEL_ANALYTICS_ID && (
+      {${analyticsId} && (
         <script
           dangerouslySetInnerHTML={{
             __html: \`
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
-              gtag('config', '\${process.env.NEXT_PUBLIC_VERCEL_ANALYTICS_ID}');
+              gtag('config', '${analyticsId}');
             \`,
           }}
         />
       )}
-    `;
+    ` : '';
 
     // Find the closing </head> tag and insert before it
     const headEnd = content.indexOf('</head>');

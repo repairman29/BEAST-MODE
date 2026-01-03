@@ -1,6 +1,34 @@
 import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
 
+// Use unified config if available
+let getUnifiedConfig: any = null;
+try {
+  const path = require('path');
+  const configPath = path.join(process.cwd(), '../../shared-utils/unified-config');
+  const unifiedConfig = require(configPath);
+  getUnifiedConfig = unifiedConfig.getUnifiedConfig;
+} catch (error) {
+  // Unified config not available
+}
+
+// Helper function to get config value (TypeScript compatible)
+async function getConfigValue(key: string, defaultValue: string | null = null): Promise<string | null> {
+  if (getUnifiedConfig) {
+    try {
+      const config = await getUnifiedConfig();
+      const value = config.get(key);
+      if (value !== null && value !== undefined && value !== '') {
+        return value;
+      }
+    } catch (error) {
+      // Fallback to process.env
+    }
+  }
+  // Fallback to process.env for backward compatibility
+  return process.env[key] !== undefined && process.env[key] !== '' ? process.env[key] : defaultValue;
+}
+
 /**
  * Stripe Analytics API
  * 
@@ -11,8 +39,10 @@ export async function GET(request: NextRequest) {
     const { searchParams } = new URL(request.url);
     const timeframe = searchParams.get('timeframe') || '30d';
 
+    // Get Stripe secret key from unified config
+    const stripeSecretKey = await getConfigValue('STRIPE_SECRET_KEY', null);
+    
     // Check if Stripe is configured
-    const stripeSecretKey = process.env.STRIPE_SECRET_KEY;
     if (!stripeSecretKey) {
       // Return mock data if Stripe not configured
       return NextResponse.json({

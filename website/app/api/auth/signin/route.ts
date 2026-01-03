@@ -2,7 +2,33 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getSupabaseClientOrNull } from '../../../../lib/supabase';
 import jwt from 'jsonwebtoken';
 
-const JWT_SECRET = process.env.JWT_SECRET || 'beast-mode-secret-change-in-production';
+// Use unified config if available
+let getUnifiedConfig: any = null;
+try {
+  const path = require('path');
+  const configPath = path.join(process.cwd(), '../../shared-utils/unified-config');
+  const unifiedConfig = require(configPath);
+  getUnifiedConfig = unifiedConfig.getUnifiedConfig;
+} catch (error) {
+  // Unified config not available
+}
+
+// Helper function to get config value (TypeScript compatible)
+async function getConfigValue(key: string, defaultValue: string | null = null): Promise<string | null> {
+  if (getUnifiedConfig) {
+    try {
+      const config = await getUnifiedConfig();
+      const value = config.get(key);
+      if (value !== null && value !== undefined && value !== '') {
+        return value;
+      }
+    } catch (error) {
+      // Fallback to process.env
+    }
+  }
+  // Fallback to process.env for backward compatibility
+  return process.env[key] !== undefined && process.env[key] !== '' ? process.env[key] : defaultValue;
+}
 
 /**
  * Sign In API
@@ -19,6 +45,9 @@ export async function POST(request: NextRequest) {
         { status: 400 }
       );
     }
+
+    // Get JWT secret from unified config
+    const JWT_SECRET = await getConfigValue('JWT_SECRET', 'beast-mode-secret-change-in-production');
 
     // Try Supabase auth first
     const supabase = getSupabaseClientOrNull();
@@ -37,7 +66,7 @@ export async function POST(request: NextRequest) {
 
       const token = jwt.sign(
         { userId: data.user.id, email: data.user.email },
-        JWT_SECRET,
+        JWT_SECRET || 'beast-mode-secret-change-in-production',
         { expiresIn: '7d' }
       );
 
@@ -56,7 +85,7 @@ export async function POST(request: NextRequest) {
     console.warn('Using mock authentication - configure Supabase for production');
     const token = jwt.sign(
       { email, userId: `user_${Date.now()}` },
-      JWT_SECRET,
+      JWT_SECRET || 'beast-mode-secret-change-in-production',
       { expiresIn: '7d' }
     );
 
