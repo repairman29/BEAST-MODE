@@ -1,20 +1,55 @@
 import { NextRequest, NextResponse } from 'next/server';
 
+// Use unified config if available
+let getUnifiedConfig: any = null;
+try {
+  const path = require('path');
+  const configPath = path.join(process.cwd(), '../../shared-utils/unified-config');
+  const unifiedConfig = require(configPath);
+  getUnifiedConfig = unifiedConfig.getUnifiedConfig;
+} catch (error) {
+  // Unified config not available
+}
+
+// Helper function to get config value (TypeScript compatible)
+async function getConfigValue(key: string, defaultValue: string | null = null): Promise<string | null> {
+  if (getUnifiedConfig) {
+    try {
+      const config = await getUnifiedConfig();
+      const value = config.get(key);
+      if (value !== null && value !== undefined && value !== '') {
+        return value;
+      }
+    } catch (error) {
+      // Fallback to process.env
+    }
+  }
+  // Fallback to process.env for backward compatibility
+  return process.env[key] !== undefined && process.env[key] !== '' ? process.env[key] : defaultValue;
+}
+
 /**
  * BEAST MODE Deployments API
  *
  * Enterprise deployment orchestration across multiple platforms
  */
 
-// Check if platform tokens are configured
-const hasVercelToken = !!process.env.VERCEL_API_TOKEN;
-const hasRailwayToken = !!process.env.RAILWAY_TOKEN;
+// Helper to check if platform tokens are configured (async)
+async function checkPlatformTokens() {
+  const vercelToken = await getConfigValue('VERCEL_API_TOKEN', null);
+  const railwayToken = await getConfigValue('RAILWAY_TOKEN', null);
+  return {
+    hasVercelToken: !!vercelToken,
+    hasRailwayToken: !!railwayToken
+  };
+}
 
 /**
  * Deploy to Vercel
  */
 async function deployToVercel(config: any) {
-  if (!hasVercelToken) {
+  const tokens = await checkPlatformTokens();
+  if (!tokens.hasVercelToken) {
     throw new Error('Vercel API token not configured');
   }
 
@@ -46,7 +81,8 @@ async function deployToVercel(config: any) {
  * Deploy to Railway
  */
 async function deployToRailway(config: any) {
-  if (!hasRailwayToken) {
+  const tokens = await checkPlatformTokens();
+  if (!tokens.hasRailwayToken) {
     throw new Error('Railway API token not configured');
   }
 
@@ -77,9 +113,10 @@ async function deployToRailway(config: any) {
 export async function GET(request: NextRequest) {
   try {
     // Check platform connection status
+    const tokens = await checkPlatformTokens();
     const platformStatus = {
-      vercel: hasVercelToken ? 'connected' : 'not_connected',
-      railway: hasRailwayToken ? 'connected' : 'not_connected'
+      vercel: tokens.hasVercelToken ? 'connected' : 'not_connected',
+      railway: tokens.hasRailwayToken ? 'connected' : 'not_connected'
     };
 
     // Mock deployment data for now
@@ -129,7 +166,7 @@ export async function GET(request: NextRequest) {
       failed: mockDeployments.filter(d => d.status === 'failed').length,
       platformStatus,
       timestamp: new Date().toISOString(),
-      note: hasVercelToken || hasRailwayToken 
+      note: tokens.hasVercelToken || tokens.hasRailwayToken 
         ? 'Real platform integration available' 
         : 'Configure VERCEL_API_TOKEN or RAILWAY_TOKEN for real deployments'
     });
@@ -157,10 +194,11 @@ export async function POST(request: NextRequest) {
     let deployment;
 
     // Try real platform deployment if tokens are configured
+    const tokens = await checkPlatformTokens();
     try {
-      if (deploymentConfig.platform === 'vercel' && hasVercelToken) {
+      if (deploymentConfig.platform === 'vercel' && tokens.hasVercelToken) {
         deployment = await deployToVercel(deploymentConfig);
-      } else if (deploymentConfig.platform === 'railway' && hasRailwayToken) {
+      } else if (deploymentConfig.platform === 'railway' && tokens.hasRailwayToken) {
         deployment = await deployToRailway(deploymentConfig);
       } else {
         // Fallback to mock deployment
@@ -177,16 +215,16 @@ export async function POST(request: NextRequest) {
           logs: [
             { 
               timestamp: new Date().toISOString(), 
-              message: deploymentConfig.platform === 'vercel' && !hasVercelToken
+              message: deploymentConfig.platform === 'vercel' && !tokens.hasVercelToken
                 ? 'Vercel token not configured - using mock deployment'
-                : deploymentConfig.platform === 'railway' && !hasRailwayToken
+                : deploymentConfig.platform === 'railway' && !tokens.hasRailwayToken
                 ? 'Railway token not configured - using mock deployment'
                 : 'Deployment initiated', 
               progress: 0 
             }
           ],
-          note: (deploymentConfig.platform === 'vercel' && !hasVercelToken) || 
-                (deploymentConfig.platform === 'railway' && !hasRailwayToken)
+          note: (deploymentConfig.platform === 'vercel' && !tokens.hasVercelToken) || 
+                (deploymentConfig.platform === 'railway' && !tokens.hasRailwayToken)
             ? 'Configure platform token for real deployment'
             : undefined
         };

@@ -5,18 +5,53 @@
 
 import { NextRequest, NextResponse } from 'next/server';
 
+// Use unified config if available
+let getUnifiedConfig: any = null;
+try {
+  const path = require('path');
+  const configPath = path.join(process.cwd(), '../../shared-utils/unified-config');
+  const unifiedConfig = require(configPath);
+  getUnifiedConfig = unifiedConfig.getUnifiedConfig;
+} catch (error) {
+  // Unified config not available
+}
+
+// Helper function to get config value (TypeScript compatible)
+async function getConfigValue(key: string, defaultValue: string | null = null): Promise<string | null> {
+  if (getUnifiedConfig) {
+    try {
+      const config = await getUnifiedConfig();
+      const value = config.get(key);
+      if (value !== null && value !== undefined && value !== '') {
+        return value;
+      }
+    } catch (error) {
+      // Fallback to process.env
+    }
+  }
+  // Fallback to process.env for backward compatibility
+  return process.env[key] !== undefined && process.env[key] !== '' ? process.env[key] : defaultValue;
+}
+
 export async function GET(request: NextRequest) {
   try {
+    // Get config values
+    const supabaseUrl = await getConfigValue('SUPABASE_URL', null);
+    const nextPublicSupabaseUrl = await getConfigValue('NEXT_PUBLIC_SUPABASE_URL', null);
+    const supabaseServiceKey = await getConfigValue('SUPABASE_SERVICE_ROLE_KEY', null);
+    const supabaseAnonKey = await getConfigValue('SUPABASE_ANON_KEY', null);
+    const nextPublicSupabaseAnonKey = await getConfigValue('NEXT_PUBLIC_SUPABASE_ANON_KEY', null);
+
     // Check environment variables (without exposing values)
     const envCheck = {
-      hasSupabaseUrl: !!(process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL),
-      hasSupabaseServiceKey: !!process.env.SUPABASE_SERVICE_ROLE_KEY,
-      hasSupabaseAnonKey: !!(process.env.SUPABASE_ANON_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY),
-      supabaseUrlSource: process.env.SUPABASE_URL ? 'SUPABASE_URL' : 
-                        process.env.NEXT_PUBLIC_SUPABASE_URL ? 'NEXT_PUBLIC_SUPABASE_URL' : 'none',
-      supabaseKeySource: process.env.SUPABASE_SERVICE_ROLE_KEY ? 'SUPABASE_SERVICE_ROLE_KEY' :
-                        process.env.SUPABASE_ANON_KEY ? 'SUPABASE_ANON_KEY' :
-                        process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ? 'NEXT_PUBLIC_SUPABASE_ANON_KEY' : 'none'
+      hasSupabaseUrl: !!(supabaseUrl || nextPublicSupabaseUrl),
+      hasSupabaseServiceKey: !!supabaseServiceKey,
+      hasSupabaseAnonKey: !!(supabaseAnonKey || nextPublicSupabaseAnonKey),
+      supabaseUrlSource: supabaseUrl ? 'SUPABASE_URL' : 
+                        nextPublicSupabaseUrl ? 'NEXT_PUBLIC_SUPABASE_URL' : 'none',
+      supabaseKeySource: supabaseServiceKey ? 'SUPABASE_SERVICE_ROLE_KEY' :
+                        supabaseAnonKey ? 'SUPABASE_ANON_KEY' :
+                        nextPublicSupabaseAnonKey ? 'NEXT_PUBLIC_SUPABASE_ANON_KEY' : 'none'
     };
 
     // Try to import feedback collector

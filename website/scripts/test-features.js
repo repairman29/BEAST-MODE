@@ -10,7 +10,36 @@ const http = require('http');
 const https = require('https');
 const { URL } = require('url');
 
-const BASE_URL = process.env.TEST_BASE_URL || 'http://localhost:7777';
+// Use unified config if available
+let getUnifiedConfig = null;
+try {
+  const path = require('path');
+  const configPath = path.join(__dirname, '../../shared-utils/unified-config');
+  const unifiedConfig = require(configPath);
+  getUnifiedConfig = unifiedConfig.getUnifiedConfig;
+} catch (error) {
+  // Unified config not available
+}
+
+// Helper function to get config value
+async function getConfigValue(key, defaultValue = null) {
+  if (getUnifiedConfig) {
+    try {
+      const config = await getUnifiedConfig();
+      const value = config.get(key);
+      if (value !== null && value !== undefined && value !== '') {
+        return value;
+      }
+    } catch (error) {
+      // Fallback to process.env
+    }
+  }
+  // Fallback to process.env for backward compatibility
+  return process.env[key] !== undefined && process.env[key] !== '' ? process.env[key] : defaultValue;
+}
+
+// BASE_URL will be loaded async
+let BASE_URL;
 const colors = {
   reset: '\x1b[0m',
   green: '\x1b[32m',
@@ -51,6 +80,10 @@ function logTest(name, status, details = '') {
 
 async function checkServerHealth() {
   try {
+    // Ensure BASE_URL is loaded
+    if (!BASE_URL) {
+      BASE_URL = await getConfigValue('TEST_BASE_URL', 'http://localhost:7777') || 'http://localhost:7777';
+    }
     const result = await makeRequest('/api/beast-mode/health', { timeout: 3000 });
     return result.status === 200;
   } catch (error) {

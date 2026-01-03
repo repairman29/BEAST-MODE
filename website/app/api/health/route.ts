@@ -1,5 +1,33 @@
 import { NextRequest, NextResponse } from 'next/server';
 
+// Use unified config if available
+let getUnifiedConfig: any = null;
+try {
+  const path = require('path');
+  const configPath = path.join(process.cwd(), '../../shared-utils/unified-config');
+  const unifiedConfig = require(configPath);
+  getUnifiedConfig = unifiedConfig.getUnifiedConfig;
+} catch (error) {
+  // Unified config not available
+}
+
+// Helper function to get config value (TypeScript compatible)
+async function getConfigValue(key: string, defaultValue: string | null = null): Promise<string | null> {
+  if (getUnifiedConfig) {
+    try {
+      const config = await getUnifiedConfig();
+      const value = config.get(key);
+      if (value !== null && value !== undefined && value !== '') {
+        return value;
+      }
+    } catch (error) {
+      // Fallback to process.env
+    }
+  }
+  // Fallback to process.env for backward compatibility
+  return process.env[key] !== undefined && process.env[key] !== '' ? process.env[key] : defaultValue;
+}
+
 // Force dynamic rendering for serverless functions
 export const dynamic = 'force-dynamic';
 export const runtime = 'nodejs';
@@ -42,11 +70,15 @@ export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
   const level = searchParams.get('level') || 'basic';
 
+  // Get config values
+  const version = await getConfigValue('npm_package_version', '1.0.0');
+  const environment = await getConfigValue('NODE_ENV', 'development');
+
   const health: any = {
     status: 'healthy',
     timestamp: new Date().toISOString(),
-    version: process.env.npm_package_version || '1.0.0',
-    environment: process.env.NODE_ENV || 'development'
+    version: version || '1.0.0',
+    environment: environment || 'development'
   };
 
   try {

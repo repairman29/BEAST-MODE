@@ -3,6 +3,34 @@ import crypto from 'crypto';
 import { getSupabaseClientOrNull } from '../../../../../lib/supabase';
 import { encrypt } from '../../../../../lib/github-token-encrypt';
 
+// Use unified config if available
+let getUnifiedConfig: any = null;
+try {
+  const path = require('path');
+  const configPath = path.join(process.cwd(), '../../shared-utils/unified-config');
+  const unifiedConfig = require(configPath);
+  getUnifiedConfig = unifiedConfig.getUnifiedConfig;
+} catch (error) {
+  // Unified config not available
+}
+
+// Helper function to get config value (TypeScript compatible)
+async function getConfigValue(key: string, defaultValue: string | null = null): Promise<string | null> {
+  if (getUnifiedConfig) {
+    try {
+      const config = await getUnifiedConfig();
+      const value = config.get(key);
+      if (value !== null && value !== undefined && value !== '') {
+        return value;
+      }
+    } catch (error) {
+      // Fallback to process.env
+    }
+  }
+  // Fallback to process.env for backward compatibility
+  return process.env[key] !== undefined && process.env[key] !== '' ? process.env[key] : defaultValue;
+}
+
 /**
  * GitHub OAuth Callback
  * 
@@ -23,11 +51,15 @@ export async function GET(request: NextRequest) {
     console.log('   State present:', !!state);
     console.log('   Error present:', !!error);
 
+    // Get config values
+    const nextPublicUrl = await getConfigValue('NEXT_PUBLIC_URL', 'http://localhost:7777');
+    const baseUrl = nextPublicUrl || 'http://localhost:7777';
+
     // Handle OAuth errors
     if (error) {
       console.error('❌ [GitHub OAuth] Error from GitHub:', error);
       return NextResponse.redirect(
-        `${process.env.NEXT_PUBLIC_URL || 'http://localhost:7777'}/dashboard?github_oauth=error&error=${error}`
+        `${baseUrl}/dashboard?github_oauth=error&error=${error}`
       );
     }
 
@@ -36,7 +68,7 @@ export async function GET(request: NextRequest) {
       console.error('   Code:', code);
       console.error('   State:', state);
       return NextResponse.redirect(
-        `${process.env.NEXT_PUBLIC_URL || 'http://localhost:7777'}/dashboard?github_oauth=error&error=missing_code_or_state`
+        `${baseUrl}/dashboard?github_oauth=error&error=missing_code_or_state`
       );
     }
 
@@ -54,49 +86,59 @@ export async function GET(request: NextRequest) {
       console.error('   Stored:', storedState);
       console.error('   Received:', state);
       return NextResponse.redirect(
-        `${process.env.NEXT_PUBLIC_URL || 'http://localhost:7777'}/dashboard?github_oauth=error&error=invalid_state`
+        `${baseUrl}/dashboard?github_oauth=error&error=invalid_state`
       );
     }
 
     if (!userId) {
       console.error('❌ [GitHub OAuth] No userId in cookie');
       return NextResponse.redirect(
-        `${process.env.NEXT_PUBLIC_URL || 'http://localhost:7777'}/dashboard?github_oauth=error&error=session_expired`
+        `${baseUrl}/dashboard?github_oauth=error&error=session_expired`
       );
     }
 
     // Exchange code for access token
     console.log('🔄 [GitHub OAuth] Exchanging code for token...');
-    const redirectUri = process.env.GITHUB_REDIRECT_URI || `${process.env.NEXT_PUBLIC_URL || 'http://localhost:7777'}/api/github/oauth/callback`;
+    const githubRedirectUri = await getConfigValue('GITHUB_REDIRECT_URI', null);
+    const redirectUri = githubRedirectUri || `${baseUrl}/api/github/oauth/callback`;
     
     // Determine correct client ID and secret based on environment
-    const isProduction = process.env.NODE_ENV === 'production' || 
-                         process.env.NEXT_PUBLIC_URL?.includes('beastmode.dev') ||
-                         process.env.NEXT_PUBLIC_URL?.includes('beast-mode.dev') ||
+    const nodeEnv = await getConfigValue('NODE_ENV', 'development');
+    const isProduction = nodeEnv === 'production' || 
+                         nextPublicUrl?.includes('beastmode.dev') ||
+                         nextPublicUrl?.includes('beast-mode.dev') ||
                          request.url.includes('beastmode.dev') ||
                          request.url.includes('beast-mode.dev');
     
     const expectedProdClientId = 'Ov23liDKFkIrnPneWwny';
-    // Use environment variable with fallback - architecture enforcer safe
-    const expectedProdClientSecret = process.env.GITHUB_CLIENT_SECRET_PROD || 
-      (process.env.GITHUB_CLIENT_SECRET === '014c7fab1ba6cc6a7398b5bde04e26463f16f4e9' 
-        ? process.env.GITHUB_CLIENT_SECRET: process.env.SECRET || '');
     const expectedDevClientId = 'Ov23lidLvmp68FVMEqEB';
+    
+    // Get GitHub config values
+    const githubClientId = await getConfigValue('GITHUB_CLIENT_ID', null);
+    const githubClientSecret = await getConfigValue('GITHUB_CLIENT_SECRET', null);
+    const githubClientSecretProd = await getConfigValue('GITHUB_CLIENT_SECRET_PROD', null);
+    const githubClientSecretDev = await getConfigValue('GITHUB_CLIENT_SECRET_DEV', null);
+    const secret = await getConfigValue('SECRET', null);
+    
     // Use environment variable with fallback - architecture enforcer safe
-    const expectedDevClientSecret = process.env.GITHUB_CLIENT_SECRET_DEV || 
-      (process.env.GITHUB_CLIENT_SECRET === 'df4c598018de45ce8cb90313489eeb21448aedcf'
-        ? process.env.GITHUB_CLIENT_SECRET: process.env.SECRET || '');
+    const expectedProdClientSecret = githubClientSecretProd || 
+      (githubClientSecret === '014c7fab1ba6cc6a7398b5bde04e26463f16f4e9' 
+        ? githubClientSecret: secret || '');
+    // Use environment variable with fallback - architecture enforcer safe
+    const expectedDevClientSecret = githubClientSecretDev || 
+      (githubClientSecret === 'df4c598018de45ce8cb90313489eeb21448aedcf'
+        ? githubClientSecret: secret || '');
     
     let clientId: string;
     let clientSecret: string;
     
     if (isProduction) {
       // Production: Use prod credentials (auto-select, ignore env if wrong)
-      if (process.env.GITHUB_CLIENT_ID === expectedProdClientId && 
-          process.env.GITHUB_CLIENT_SECRET === expectedProdClientSecret) {
+      if (githubClientId === expectedProdClientId && 
+          githubClientSecret === expectedProdClientSecret) {
         // Env vars are correct
-        clientId = process.env.GITHUB_CLIENT_ID;
-        clientSecret = process.env.GITHUB_CLIENT_SECRET;
+        clientId = githubClientId || expectedProdClientId;
+        clientSecret = githubClientSecret || expectedProdClientSecret;
       } else {
         // Auto-fix: use prod credentials (env vars are wrong or missing)
         console.warn('⚠️ [GitHub OAuth] Auto-fixing: Using PROD credentials (env had wrong/missing values)');
@@ -105,11 +147,11 @@ export async function GET(request: NextRequest) {
       }
     } else {
       // Development: Use dev credentials (auto-select, ignore env if wrong)
-      if (process.env.GITHUB_CLIENT_ID === expectedDevClientId && 
-          process.env.GITHUB_CLIENT_SECRET === expectedDevClientSecret) {
+      if (githubClientId === expectedDevClientId && 
+          githubClientSecret === expectedDevClientSecret) {
         // Env vars are correct
-        clientId = process.env.GITHUB_CLIENT_ID;
-        clientSecret = process.env.GITHUB_CLIENT_SECRET;
+        clientId = githubClientId || expectedDevClientId;
+        clientSecret = githubClientSecret || expectedDevClientSecret;
       } else {
         // Auto-fix: use dev credentials (env vars are wrong or missing)
         console.warn('⚠️ [GitHub OAuth] Auto-fixing: Using DEV credentials (env had wrong/missing values)');
@@ -175,7 +217,7 @@ export async function GET(request: NextRequest) {
       console.error('   Status:', tokenResponse.status);
       console.error('   Response:', errorText);
       console.error('   Request details:', {
-        client_id: process.env.GITHUB_CLIENT_ID,
+        client_id: githubClientId,
         redirect_uri: redirectUri,
         code_present: !!code,
       });
@@ -190,7 +232,7 @@ export async function GET(request: NextRequest) {
       console.error('❌ [GitHub OAuth] Error in token response:', tokenData.error);
       console.error('   Error description:', tokenData.error_description);
       return NextResponse.redirect(
-        `${process.env.NEXT_PUBLIC_URL || 'http://localhost:7777'}/dashboard?github_oauth=error&error=${tokenData.error}`
+        `${baseUrl}/dashboard?github_oauth=error&error=${tokenData.error}`
       );
     }
 
@@ -267,7 +309,7 @@ export async function GET(request: NextRequest) {
       
       // Fallback: Store via API route (for non-Supabase users or if Supabase fails)
       if (!isSupabaseUser || !userId || !userId.startsWith('00000000-')) {
-        const storeUrl = `${process.env.NEXT_PUBLIC_URL || 'http://localhost:7777'}/api/github/token`;
+        const storeUrl = `${baseUrl}/api/github/token`;
         console.log('   Using fallback storage via API:', storeUrl);
         
         const storeResponse = await fetch(storeUrl, {
@@ -304,14 +346,15 @@ export async function GET(request: NextRequest) {
 
     // Clear OAuth cookies but keep userId cookie temporarily for token lookup
     const response = NextResponse.redirect(
-      `${process.env.NEXT_PUBLIC_URL || 'http://localhost:7777'}/dashboard?github_oauth=success`
+      `${baseUrl}/dashboard?github_oauth=success`
     );
 
     response.cookies.delete('github_oauth_state');
     // Keep github_oauth_user_id cookie for a bit longer so GET /api/github/token can find it
+    const isProd = nodeEnv === 'production';
     response.cookies.set('github_oauth_user_id', userId, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
+      secure: isProd,
       sameSite: 'lax',
       maxAge: 60 // Keep for 1 minute to allow token lookup
     });
@@ -322,7 +365,7 @@ export async function GET(request: NextRequest) {
     console.error('   Message:', error.message);
     console.error('   Stack:', error.stack);
     return NextResponse.redirect(
-      `${process.env.NEXT_PUBLIC_URL || 'http://localhost:7777'}/dashboard?github_oauth=error&error=${encodeURIComponent(error.message)}`
+      `${baseUrl}/dashboard?github_oauth=error&error=${encodeURIComponent(error.message)}`
     );
   }
 }

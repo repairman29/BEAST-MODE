@@ -3,7 +3,33 @@ import crypto from 'crypto';
 import jwt from 'jsonwebtoken';
 import { getSupabaseClientOrNull } from '../../../../../lib/supabase';
 
-const JWT_SECRET = process.env.JWT_SECRET || 'beast-mode-secret-change-in-production';
+// Use unified config if available
+let getUnifiedConfig: any = null;
+try {
+  const path = require('path');
+  const configPath = path.join(process.cwd(), '../../shared-utils/unified-config');
+  const unifiedConfig = require(configPath);
+  getUnifiedConfig = unifiedConfig.getUnifiedConfig;
+} catch (error) {
+  // Unified config not available
+}
+
+// Helper function to get config value (TypeScript compatible)
+async function getConfigValue(key: string, defaultValue: string | null = null): Promise<string | null> {
+  if (getUnifiedConfig) {
+    try {
+      const config = await getUnifiedConfig();
+      const value = config.get(key);
+      if (value !== null && value !== undefined && value !== '') {
+        return value;
+      }
+    } catch (error) {
+      // Fallback to process.env
+    }
+  }
+  // Fallback to process.env for backward compatibility
+  return process.env[key] !== undefined && process.env[key] !== '' ? process.env[key] : defaultValue;
+}
 
 /**
  * GitHub OAuth Authorization
@@ -28,10 +54,13 @@ export async function GET(request: NextRequest) {
     let userId: string | null = null;
     let isSupabaseUser = false;
     
+    // Get JWT secret from unified config
+    const JWT_SECRET = await getConfigValue('JWT_SECRET', 'beast-mode-secret-change-in-production');
+
     // Try to get Supabase user ID from JWT token
     if (token) {
       try {
-        const decoded = jwt.verify(token, JWT_SECRET) as any;
+        const decoded = jwt.verify(token, JWT_SECRET || 'beast-mode-secret-change-in-production') as any;
         if (decoded.userId && typeof decoded.userId === 'string' && decoded.userId.startsWith('00000000-')) {
           // This looks like a Supabase UUID
           userId = decoded.userId;
@@ -73,15 +102,17 @@ export async function GET(request: NextRequest) {
     // Check if GitHub OAuth is configured
     // Production should use: Ov23liDKFkIrnPneWwny
     // Development should use: Ov23lidLvmp68FVMEqEB
-    const isProduction = process.env.NODE_ENV === 'production' || 
-                         process.env.NEXT_PUBLIC_URL?.includes('beastmode.dev') ||
-                         process.env.NEXT_PUBLIC_URL?.includes('beast-mode.dev') ||
+    const nodeEnv = await getConfigValue('NODE_ENV', 'development');
+    const nextPublicUrl = await getConfigValue('NEXT_PUBLIC_URL', null);
+    const isProduction = nodeEnv === 'production' || 
+                         nextPublicUrl?.includes('beastmode.dev') ||
+                         nextPublicUrl?.includes('beast-mode.dev') ||
                          request.url.includes('beastmode.dev') ||
                          request.url.includes('beast-mode.dev');
     
     const expectedProdClientId = 'Ov23liDKFkIrnPneWwny';
     const expectedDevClientId = 'Ov23lidLvmp68FVMEqEB';
-    const envClientId = process.env.GITHUB_CLIENT_ID;
+    const envClientId = await getConfigValue('GITHUB_CLIENT_ID', null);
     
     // Auto-select correct client ID based on environment if env var is wrong
     let currentClientId: string;
@@ -137,8 +168,9 @@ export async function GET(request: NextRequest) {
     console.log('   Generated state:', state.substring(0, 16) + '...');
     
     // Store state in session/cookie (in production, use Redis or database)
-    const redirectUri = process.env.GITHUB_REDIRECT_URI || 
-                       `${process.env.NEXT_PUBLIC_URL || 'http://localhost:7777'}/api/github/oauth/callback`;
+    const githubRedirectUri = await getConfigValue('GITHUB_REDIRECT_URI', null);
+    const redirectUri = githubRedirectUri || 
+                       `${nextPublicUrl || 'http://localhost:7777'}/api/github/oauth/callback`;
     
     console.log('   Redirect URI:', redirectUri);
     
@@ -153,16 +185,17 @@ export async function GET(request: NextRequest) {
     const response = NextResponse.redirect(githubAuthUrl);
 
     // Store state in httpOnly cookie
+    const isProd = nodeEnv === 'production';
     response.cookies.set('github_oauth_state', state, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
+      secure: isProd,
       sameSite: 'lax',
       maxAge: 600 // 10 minutes
     });
 
     response.cookies.set('github_oauth_user_id', userId, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
+      secure: isProd,
       sameSite: 'lax',
       maxAge: 600
     });
@@ -170,7 +203,7 @@ export async function GET(request: NextRequest) {
     // Store whether this is a Supabase user for callback
     response.cookies.set('github_oauth_is_supabase_user', isSupabaseUser ? 'true' : 'false', {
       httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
+      secure: isProd,
       sameSite: 'lax',
       maxAge: 600
     });

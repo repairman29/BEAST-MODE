@@ -9,15 +9,47 @@
 const { createClient } = require('@supabase/supabase-js');
 require('dotenv').config({ path: '.env.local' });
 
-const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID || 'Ov23lidLvmp68FVMEqEB';
-const GITHUB_CLIENT_SECRET = process.env.GITHUB_CLIENT_SECRET || 'df4c598018de45ce8cb90313489eeb21448aedcf';
-const GITHUB_REDIRECT_URI = process.env.GITHUB_REDIRECT_URI || 'http://localhost:7777/api/github/oauth/callback';
-const GITHUB_TOKEN_ENCRYPTION_KEY = process.env.GITHUB_TOKEN_ENCRYPTION_KEY || '20abb6f3b973e2fdeea6e2c417ce93824e7b64962f9fee4bfd6339264c8e792c';
+// Use unified config if available
+let getUnifiedConfig = null;
+try {
+  const path = require('path');
+  const configPath = path.join(__dirname, '../../shared-utils/unified-config');
+  const unifiedConfig = require(configPath);
+  getUnifiedConfig = unifiedConfig.getUnifiedConfig;
+} catch (error) {
+  // Unified config not available
+}
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+// Helper function to get config value
+async function getConfigValue(key, defaultValue = null) {
+  if (getUnifiedConfig) {
+    try {
+      const config = await getUnifiedConfig();
+      const value = config.get(key);
+      if (value !== null && value !== undefined && value !== '') {
+        return value;
+      }
+    } catch (error) {
+      // Fallback to process.env
+    }
+  }
+  // Fallback to process.env for backward compatibility
+  return process.env[key] !== undefined && process.env[key] !== '' ? process.env[key] : defaultValue;
+}
+
+// Config values (will be loaded async)
+let GITHUB_CLIENT_ID, GITHUB_CLIENT_SECRET, GITHUB_REDIRECT_URI, GITHUB_TOKEN_ENCRYPTION_KEY;
+let supabaseUrl, supabaseServiceKey;
 
 async function storeInSupabase() {
+  // Load config values
+  GITHUB_CLIENT_ID = await getConfigValue('GITHUB_CLIENT_ID', 'Ov23lidLvmp68FVMEqEB');
+  GITHUB_CLIENT_SECRET = await getConfigValue('GITHUB_CLIENT_SECRET', 'df4c598018de45ce8cb90313489eeb21448aedcf');
+  GITHUB_REDIRECT_URI = await getConfigValue('GITHUB_REDIRECT_URI', 'http://localhost:7777/api/github/oauth/callback');
+  GITHUB_TOKEN_ENCRYPTION_KEY = await getConfigValue('GITHUB_TOKEN_ENCRYPTION_KEY', '20abb6f3b973e2fdeea6e2c417ce93824e7b64962f9fee4bfd6339264c8e792c');
+  supabaseUrl = await getConfigValue('NEXT_PUBLIC_SUPABASE_URL', null);
+  supabaseServiceKey = await getConfigValue('SUPABASE_SERVICE_ROLE_KEY', null);
+
   if (!supabaseUrl || !supabaseServiceKey) {
     console.log('⚠️  Supabase not configured');
     console.log('   Set NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY in .env.local');

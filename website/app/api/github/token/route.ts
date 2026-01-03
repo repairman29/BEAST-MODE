@@ -8,30 +8,69 @@ import { Buffer } from 'buffer';
  * Stores and retrieves encrypted GitHub tokens for users
  */
 
+// Use unified config if available
+let getUnifiedConfig: any = null;
+try {
+  const path = require('path');
+  const configPath = path.join(process.cwd(), '../../shared-utils/unified-config');
+  const unifiedConfig = require(configPath);
+  getUnifiedConfig = unifiedConfig.getUnifiedConfig;
+} catch (error) {
+  // Unified config not available
+}
+
+// Helper function to get config value (TypeScript compatible)
+async function getConfigValue(key: string, defaultValue: string | null = null): Promise<string | null> {
+  if (getUnifiedConfig) {
+    try {
+      const config = await getUnifiedConfig();
+      const value = config.get(key);
+      if (value !== null && value !== undefined && value !== '') {
+        return value;
+      }
+    } catch (error) {
+      // Fallback to process.env
+    }
+  }
+  // Fallback to process.env for backward compatibility
+  return process.env[key] !== undefined && process.env[key] !== '' ? process.env[key] : defaultValue;
+}
+
 // Simple encryption (in production, use a proper key management service)
 // ENCRYPTION_KEY should be 64 hex characters (32 bytes) or we'll generate one
-let ENCRYPTION_KEY: Buffer;
-if (process.env.GITHUB_TOKEN_ENCRYPTION_KEY) {
-  // If provided, it should be a hex string (64 chars = 32 bytes)
-  const keyHex = process.env.GITHUB_TOKEN_ENCRYPTION_KEY;
-  if (keyHex.length === 64) {
-    ENCRYPTION_KEY = Buffer.from(keyHex, 'hex');
-  } else {
-    // If not 64 chars, treat as raw string and pad/truncate to 32 bytes
-    ENCRYPTION_KEY = Buffer.from(keyHex.padEnd(32, '0').slice(0, 32), 'utf8');
+// Lazy initialization - will be set on first use
+let ENCRYPTION_KEY: Buffer | null = null;
+
+async function getEncryptionKey(): Promise<Buffer> {
+  if (ENCRYPTION_KEY) {
+    return ENCRYPTION_KEY;
   }
-} else {
-  // Generate a random 32-byte key
-  ENCRYPTION_KEY = crypto.randomBytes(32);
-  console.warn('⚠️ [GitHub Token] No GITHUB_TOKEN_ENCRYPTION_KEY set, using random key (tokens will be lost on restart)');
+
+  const keyHex = await getConfigValue('GITHUB_TOKEN_ENCRYPTION_KEY', null);
+  if (keyHex) {
+    // If provided, it should be a hex string (64 chars = 32 bytes)
+    if (keyHex.length === 64) {
+      ENCRYPTION_KEY = Buffer.from(keyHex, 'hex');
+    } else {
+      // If not 64 chars, treat as raw string and pad/truncate to 32 bytes
+      ENCRYPTION_KEY = Buffer.from(keyHex.padEnd(32, '0').slice(0, 32), 'utf8');
+    }
+  } else {
+    // Generate a random 32-byte key
+    ENCRYPTION_KEY = crypto.randomBytes(32);
+    console.warn('⚠️ [GitHub Token] No GITHUB_TOKEN_ENCRYPTION_KEY set, using random key (tokens will be lost on restart)');
+  }
+  
+  return ENCRYPTION_KEY;
 }
 
 const ALGORITHM = 'aes-256-cbc';
 
-function encrypt(text: string): string {
+async function encrypt(text: string): Promise<string> {
   try {
+    const key = await getEncryptionKey();
     const iv = crypto.randomBytes(16);
-    const cipher = crypto.createCipheriv(ALGORITHM, ENCRYPTION_KEY, iv);
+    const cipher = crypto.createCipheriv(ALGORITHM, key, iv);
     let encrypted = cipher.update(text, 'utf8');
     encrypted = Buffer.concat([encrypted, cipher.final()]);
     return iv.toString('hex') + ':' + encrypted.toString('hex');
@@ -41,14 +80,15 @@ function encrypt(text: string): string {
   }
 }
 
-function decrypt(text: string): string {
+async function decrypt(text: string): Promise<string> {
   try {
+    const key = await getEncryptionKey();
     const parts = text.split(':');
     // ARCHITECTURE: Moved to API route
     const iv = Buffer.from(parts.shift()!, 'hex');
     // ARCHITECTURE: Moved to API route
     const encryptedText = Buffer.from(parts.join(':'), 'hex');
-    const decipher = crypto.createDecipheriv(ALGORITHM, ENCRYPTION_KEY, iv);
+    const decipher = crypto.createDecipheriv(ALGORITHM, key, iv);
     let decrypted = decipher.update(encryptedText);
     decrypted = Buffer.concat([decrypted, decipher.final()]);
     return decrypted.toString('utf8');
@@ -100,7 +140,7 @@ export async function POST(request: NextRequest) {
 
     // Encrypt token before storing
     console.log('   Encrypting token...');
-    const encryptedToken = encrypt(githubToken);
+    const encryptedToken = await encrypt(githubToken);
 
     tokenStore.set(userId, {
       encryptedToken,
