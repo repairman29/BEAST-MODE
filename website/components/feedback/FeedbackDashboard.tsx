@@ -76,7 +76,7 @@ export default function FeedbackDashboard() {
           </div>
           <div className="text-xs text-[#78909c] mt-1">
             {stats.stats.withActuals > 0 
-              ? `${((stats.stats.autoCollected || 0) / stats.stats.withActuals * 100).toFixed(0)}% of feedback`
+              ? `${(((stats.stats as any).autoCollected || 0) / stats.stats.withActuals * 100).toFixed(0)}% of feedback`
               : 'No feedback yet'}
           </div>
         </div>
