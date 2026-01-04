@@ -56,9 +56,29 @@ export async function POST(request: NextRequest) {
       });
     }
 
-    // TODO: Store in error_logs table if needed
+    // Store in error_logs table
     if (supabase) {
-      // Could insert into error_logs table here
+      try {
+        const { error: insertError } = await supabase
+          .from('error_logs')
+          .insert({
+            user_id: userId || null,
+            error: error || 'Unknown error',
+            stack: stack || null,
+            component_stack: componentStack || null,
+            service: 'beast-mode',
+            severity: 'error',
+            metadata: {
+              timestamp: timestamp || new Date().toISOString()
+            }
+          });
+
+        if (insertError) {
+          console.warn('[Error Log] Failed to insert error:', insertError);
+        }
+      } catch (err: any) {
+        console.warn('[Error Log] Error inserting:', err.message);
+      }
     }
 
     return NextResponse.json({

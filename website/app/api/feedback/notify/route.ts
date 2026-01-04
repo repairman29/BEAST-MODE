@@ -43,10 +43,43 @@ export async function POST(request: NextRequest) {
         ]
       };
 
-      // TODO: Send email if email provided
+      // Send email if email provided
       if (email) {
-        // await sendEmail(email, message.subject, message.body);
-        console.log('[Feedback Notify] Would send email to:', email);
+        try {
+          // Use BEAST MODE email integration API
+          const emailResponse = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/integrations/email`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              to: email,
+              subject: message.subject,
+              html: `
+                <h2>${message.subject}</h2>
+                <p>${message.body}</p>
+                <h3>Statistics:</h3>
+                <ul>
+                  <li>Total Predictions: ${message.stats.totalPredictions}</li>
+                  <li>With Feedback: ${message.stats.withActuals}</li>
+                  <li>Feedback Rate: ${(message.stats.feedbackRate * 100).toFixed(2)}%</li>
+                  <li>Target Rate: ${(message.stats.targetRate * 100).toFixed(0)}%</li>
+                </ul>
+                <h3>Recommendations:</h3>
+                <ul>
+                  ${message.recommendations.map(rec => `<li>${rec}</li>`).join('')}
+                </ul>
+              `,
+              text: `${message.body}\n\nStatistics:\n- Total Predictions: ${message.stats.totalPredictions}\n- With Feedback: ${message.stats.withActuals}\n- Feedback Rate: ${(message.stats.feedbackRate * 100).toFixed(2)}%\n\nRecommendations:\n${message.recommendations.map(rec => `- ${rec}`).join('\n')}`
+            })
+          });
+
+          if (emailResponse.ok) {
+            console.log('[Feedback Notify] Email sent to:', email);
+          } else {
+            console.warn('[Feedback Notify] Failed to send email:', await emailResponse.text());
+          }
+        } catch (err: any) {
+          console.warn('[Feedback Notify] Error sending email:', err.message);
+        }
       }
 
       return NextResponse.json({

@@ -30,30 +30,31 @@ export async function GET(request: NextRequest) {
       });
     }
 
-    // TODO: Create activity_logs table or query from existing tables
-    // For now, return mock data
-    return NextResponse.json({
-      activities: [
-        {
-          id: '1',
-          timestamp: new Date(Date.now() - 5 * 60 * 1000).toISOString(),
-          type: 'refactor',
-          feature: 'Silent Refactoring',
-          message: 'Fixed 23 issues, created 5 PRs',
-          status: 'success',
-          details: { issuesFixed: 23, prsCreated: 5 }
-        },
-        {
-          id: '2',
-          timestamp: new Date(Date.now() - 15 * 60 * 1000).toISOString(),
-          type: 'enforcement',
-          feature: 'Architecture Enforcement',
-          message: 'Blocked 3 violations: secrets in code',
-          status: 'success',
-          details: { violationsBlocked: 3 }
-        }
-      ]
-    });
+    // Query from activity_logs table
+    const { data: activities, error } = await supabase
+      .from('activity_logs')
+      .select('*')
+      .eq('user_id', userId)
+      .order('created_at', { ascending: false })
+      .limit(limit);
+
+    if (error) {
+      console.warn('[Activity] Error querying activity_logs:', error);
+      // Fallback to empty array if table doesn't exist yet
+      return NextResponse.json({ activities: [] });
+    }
+
+    const formattedActivities = (activities || []).map(activity => ({
+      id: activity.id,
+      timestamp: activity.created_at,
+      type: activity.activity_type,
+      feature: activity.feature,
+      message: activity.message,
+      status: activity.status,
+      details: activity.details || {}
+    }));
+
+    return NextResponse.json({ activities: formattedActivities });
   } catch (error: any) {
     console.error('Failed to get activity feed:', error);
     return NextResponse.json(
