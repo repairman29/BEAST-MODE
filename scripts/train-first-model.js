@@ -1,74 +1,90 @@
+#!/usr/bin/env node
 /**
- * Train First ML Model
- * Trains Code Quality Predictor with collected data
+ * Train first ML model when enough data is available
  */
 
-const { getModelTrainer } = require('../lib/mlops/modelTrainer');
-const { getFeedbackMonitor } = require('../lib/mlops/feedbackMonitor');
+require('dotenv').config();
+const { createClient } = require('@supabase/supabase-js');
+const { ModelTrainer } = require('../lib/mlops/modelTrainer');
 
-async function main() {
-  console.log('🎯 Training First ML Model\n');
-  console.log('='.repeat(60));
+const supabaseUrl = process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL;
+const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+
+if (!supabaseUrl || !supabaseKey) {
+  console.error('❌ SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY required');
+  process.exit(1);
+}
+
+const supabase = createClient(supabaseUrl, supabaseKey);
+
+async function trainFirstModel() {
+  console.log('🚀 Training First ML Model...\n');
 
   try {
-    // Check feedback status first
-    console.log('\n📊 Checking Feedback Status...');
-    const monitor = await getFeedbackMonitor();
-    const status = await monitor.checkStatus();
+    // Check if we have enough data
+    const { count: feedbackCount, error: fError } = await supabase
+      .from('ml_feedback')
+      .select('*', { count: 'exact', head: true })
+      .not('actual_value', 'is', null);
 
-    if (status.available) {
-      console.log(`   Total predictions: ${status.stats.totalPredictions}`);
-      console.log(`   With actual values: ${status.stats.withActuals}`);
-      console.log(`   Feedback rate: ${status.stats.feedbackRate}`);
-      
-      if (status.stats.withActuals < 50) {
-        console.log(`\n⚠️  Warning: Only ${status.stats.withActuals} examples with actual values`);
-        console.log(`   Need at least 50 for meaningful training`);
-        console.log(`   Recommendation: Wait for more feedback or use GitHub code data\n`);
-      }
+    if (fError) {
+      throw fError;
     }
 
-    // Train model
-    console.log('\n🚀 Training Code Quality Predictor...\n');
-    const trainer = await getModelTrainer();
+    if (feedbackCount < 50) {
+      console.log(`⚠️  Not enough data to train`);
+      console.log(`   Current: ${feedbackCount} examples`);
+      console.log(`   Need: 50+ examples`);
+      console.log(`   Missing: ${50 - feedbackCount} examples\n`);
+      console.log('💡 To improve feedback collection:');
+      console.log('   npm run ml:improve-feedback');
+      return;
+    }
+
+    console.log(`✅ Enough data! (${feedbackCount} examples)\n`);
+
+    // Check MLflow is running
+    try {
+      await fetch('http://localhost:5000/health');
+      console.log('✅ MLflow server is running\n');
+    } catch (e) {
+      console.log('⚠️  MLflow server not running. Starting...\n');
+      const { execSync } = require('child_process');
+      execSync('npm run mlflow:start', { stdio: 'inherit' });
+      await new Promise(resolve => setTimeout(resolve, 3000));
+    }
+
+    // Train models
+    console.log('📊 Training models...\n');
+
+    const trainer = new ModelTrainer();
     
-    const result = await trainer.trainCodeQualityModel({
-      minExamples: 50, // Lower threshold for first model
-      testSplit: 0.2,
-      validationSplit: 0.1
-    });
+    // Train Code Quality Predictor
+    console.log('1. Training Code Quality Predictor...');
+    await trainer.trainCodeQualityModel();
+    
+    // Train Narrative Quality Predictor
+    console.log('\n2. Training Narrative Quality Predictor...');
+    await trainer.trainNarrativeQualityModel();
+    
+    // Train Search Relevance Predictor
+    console.log('\n3. Training Search Relevance Predictor...');
+    await trainer.trainSearchRelevanceModel();
 
-    console.log('\n' + '='.repeat(60));
-    console.log('✅ Model Training Complete!\n');
-    console.log('📊 Results:');
-    console.log(`   Accuracy: ${(result.metrics.accuracy * 100).toFixed(1)}%`);
-    console.log(`   MAE: ${result.metrics.mae.toFixed(4)}`);
-    console.log(`   RMSE: ${result.metrics.rmse.toFixed(4)}`);
-    console.log(`   MLflow Run ID: ${result.runId}\n`);
-
-    console.log('📝 Next Steps:');
-    console.log('   1. Review model performance');
-    console.log('   2. Deploy model if accuracy > 70%');
-    console.log('   3. Monitor predictions vs actuals');
-    console.log('   4. Retrain with more data\n');
+    console.log('\n✅ All models trained!');
+    console.log('   View in MLflow: http://localhost:5000');
 
   } catch (error) {
-    if (error.message.includes('Not enough')) {
-      console.log(`\n⚠️  ${error.message}`);
-      console.log('\n💡 Recommendations:');
-      console.log('   1. Wait for more feedback to be collected');
-      console.log('   2. Use GitHub code data (if available)');
-      console.log('   3. Lower minExamples threshold (not recommended)');
-    } else {
-      console.error('\n❌ Training failed:', error);
-    }
+    console.error('❌ Error:', error.message);
     process.exit(1);
   }
 }
 
 if (require.main === module) {
-  main().catch(console.error);
+  trainFirstModel().catch(error => {
+    console.error('Fatal error:', error);
+    process.exit(1);
+  });
 }
 
-module.exports = { main };
-
+module.exports = { trainFirstModel };

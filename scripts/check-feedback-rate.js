@@ -1,70 +1,111 @@
+#!/usr/bin/env node
 /**
- * Check Feedback Collection Rate
- * Analyzes why feedback rate is low and suggests improvements
+ * Check ML feedback collection rate
  */
 
-const { getFeedbackMonitor } = require('../lib/mlops/feedbackMonitor');
+// Load env from website directory
+const path = require('path');
+const fs = require('fs');
 
-async function main() {
-  console.log('📊 Feedback Collection Rate Analysis\n');
-  console.log('='.repeat(60));
+// Try to load .env.local from website directory
+const websiteEnvPath = path.join(__dirname, '../website/.env.local');
+if (fs.existsSync(websiteEnvPath)) {
+  require('dotenv').config({ path: websiteEnvPath });
+}
+
+// Also try root .env
+require('dotenv').config();
+
+const { createClient } = require('@supabase/supabase-js');
+
+const supabaseUrl = process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL;
+const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+
+if (!supabaseUrl || !supabaseKey) {
+  console.error('❌ SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY required');
+  process.exit(1);
+}
+
+const supabase = createClient(supabaseUrl, supabaseKey);
+
+async function checkFeedbackRate() {
+  console.log('📊 Checking ML Feedback Collection Rate...\n');
 
   try {
-    const monitor = await getFeedbackMonitor();
-    const status = await monitor.checkStatus();
+    // Get total predictions
+    const { count: totalPredictions, error: pError } = await supabase
+      .from('ml_predictions')
+      .select('*', { count: 'exact', head: true });
 
-    if (!status.available) {
-      console.log('❌ Feedback monitor not available');
-      return;
+    if (pError) {
+      throw pError;
     }
 
-    console.log('\n📈 Current Status:');
-    console.log(`   Total predictions: ${status.stats.totalPredictions}`);
-    console.log(`   With actual values: ${status.stats.withActuals}`);
-    console.log(`   Feedback rate: ${(status.stats.feedbackRate * 100).toFixed(2)}%`);
+    // Get feedback with actual values
+    const { count: feedbackCount, error: fError } = await supabase
+      .from('ml_feedback')
+      .select('*', { count: 'exact', head: true })
+      .not('actual_value', 'is', null);
 
-    console.log('\n🔍 Analysis:');
-    
-    if (status.stats.feedbackRate < 0.01) {
-      console.log('   ⚠️  CRITICAL: Feedback rate is extremely low (<1%)');
-      console.log('   💡 Possible causes:');
-      console.log('      1. predictionId not being passed correctly');
-      console.log('      2. Feedback collection not being called');
-      console.log('      3. Services not integrated with feedback system');
-    } else if (status.stats.feedbackRate < 0.05) {
-      console.log('   ⚠️  WARNING: Feedback rate is low (<5%)');
-      console.log('   💡 Recommendations:');
-      console.log('      1. Verify predictionId flow in services');
-      console.log('      2. Check feedback collection integration');
-      console.log('      3. Monitor service logs for feedback calls');
-    } else {
-      console.log('   ✅ Feedback rate is acceptable');
+    if (fError) {
+      throw fError;
     }
 
-    if (status.stats.withActuals < 50) {
-      console.log(`\n⚠️  Need ${50 - status.stats.withActuals} more examples for training`);
-      console.log('   💡 Recommendations:');
-      console.log('      1. Wait for more user feedback');
-      console.log('      2. Use GitHub code data (if available)');
-      console.log('      3. Lower minExamples threshold (not recommended)');
-    } else {
-      console.log(`\n✅ Enough data for training (${status.stats.withActuals} examples)`);
+    // Get feedback by service
+    const { data: feedbackByService, error: sError } = await supabase
+      .from('ml_feedback')
+      .select('service_name')
+      .not('actual_value', 'is', null);
+
+    const serviceCounts = {};
+    feedbackByService?.forEach(f => {
+      serviceCounts[f.service_name] = (serviceCounts[f.service_name] || 0) + 1;
+    });
+
+    const rate = totalPredictions > 0 ? ((feedbackCount / totalPredictions) * 100).toFixed(2) : 0;
+
+    console.log('📈 Statistics:');
+    console.log(`   Total Predictions: ${totalPredictions || 0}`);
+    console.log(`   With Feedback: ${feedbackCount || 0}`);
+    console.log(`   Feedback Rate: ${rate}%`);
+    console.log(`   Target Rate: 5-10%`);
+    console.log(`   Status: ${parseFloat(rate) >= 5 ? '✅' : '⚠️'} ${parseFloat(rate) >= 5 ? 'GOOD' : 'NEEDS IMPROVEMENT'}`);
+    console.log('');
+
+    if (Object.keys(serviceCounts).length > 0) {
+      console.log('📊 Feedback by Service:');
+      Object.entries(serviceCounts).forEach(([service, count]) => {
+        console.log(`   ${service}: ${count}`);
+      });
+      console.log('');
     }
 
-    console.log('\n📝 Next Steps:');
-    console.log('   1. Verify predictionId is passed in all services');
-    console.log('   2. Check feedback collection integration points');
-    console.log('   3. Monitor service logs for feedback calls');
-    console.log('   4. Consider automated feedback prompts');
+    // Training readiness
+    const readyToTrain = feedbackCount >= 50;
+    console.log('🎯 Training Readiness:');
+    console.log(`   Examples with actual values: ${feedbackCount || 0}`);
+    console.log(`   Need for training: 50+`);
+    console.log(`   Status: ${readyToTrain ? '✅ READY TO TRAIN' : `⚠️  Need ${50 - (feedbackCount || 0)} more examples`}`);
+    console.log('');
+
+    // Recommendations
+    if (parseFloat(rate) < 5) {
+      console.log('💡 Recommendations:');
+      console.log('   1. Verify predictionId flow in all services');
+      console.log('   2. Check feedback collection triggers');
+      console.log('   3. Review service logs for errors');
+      console.log('   4. Ensure feedback UI is accessible');
+    }
+
+    if (readyToTrain) {
+      console.log('🚀 Ready to train! Run:');
+      console.log('   npm run ml:train');
+    }
 
   } catch (error) {
-    console.error('❌ Error checking feedback rate:', error);
+    console.error('❌ Error:', error.message);
+    process.exit(1);
   }
 }
 
-if (require.main === module) {
-  main().catch(console.error);
-}
-
-module.exports = { main };
-
+checkFeedbackRate();
