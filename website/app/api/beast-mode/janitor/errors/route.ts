@@ -40,7 +40,7 @@ export async function POST(request: NextRequest) {
     const { error, stack, componentStack, timestamp } = body;
     
     const userId = request.cookies.get('github_oauth_user_id')?.value;
-    const supabase = getSupabaseClientOrNull();
+    const supabase = await getSupabaseClientOrNull();
 
     // Get NODE_ENV from unified config
     const nodeEnv = await getConfigValue('NODE_ENV', 'development');

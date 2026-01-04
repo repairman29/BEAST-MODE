@@ -161,7 +161,7 @@ export async function GET(request: NextRequest) {
     }
 
     // Query Supabase for user's sessions
-    const supabase = getSupabaseClientOrNull();
+    const supabase = await getSupabaseClientOrNull();
     
     let sessions: any[] = [];
 

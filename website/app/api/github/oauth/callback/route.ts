@@ -41,6 +41,10 @@ export async function GET(request: NextRequest) {
   console.log('   URL:', request.url);
   console.log('   Search params:', Object.fromEntries(request.nextUrl.searchParams.entries()));
   
+  // Get base URL for redirects
+  const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 
+    (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'http://localhost:3000');
+
   try {
     const searchParams = request.nextUrl.searchParams;
     const code = searchParams.get('code');
@@ -274,7 +278,7 @@ export async function GET(request: NextRequest) {
     try {
       // Try to store in Supabase if user is a Supabase user
       if (isSupabaseUser && userId && userId.startsWith('00000000-')) {
-        const supabase = getSupabaseClientOrNull();
+        const supabase = await getSupabaseClientOrNull();
         if (supabase) {
           const encryptedToken = encrypt(accessToken);
           const scopes = tokenData.scope ? tokenData.scope.split(',') : ['repo', 'read:user', 'user:email'];

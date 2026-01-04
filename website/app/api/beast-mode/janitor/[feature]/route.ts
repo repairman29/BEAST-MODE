@@ -15,7 +15,7 @@ export async function POST(
     const { enabled, config } = body;
 
     const userId = request.cookies.get('github_oauth_user_id')?.value;
-    const supabase = getSupabaseClientOrNull();
+    const supabase = await getSupabaseClientOrNull();
 
     if (!supabase) {
       return NextResponse.json({

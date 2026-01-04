@@ -50,7 +50,7 @@ export async function POST(request: NextRequest) {
     const JWT_SECRET = await getConfigValue('JWT_SECRET', 'beast-mode-secret-change-in-production');
 
     // Try Supabase auth first
-    const supabase = getSupabaseClientOrNull();
+    const supabase = await getSupabaseClientOrNull();
     if (supabase) {
       const { data, error } = await supabase.auth.signInWithPassword({
         email,

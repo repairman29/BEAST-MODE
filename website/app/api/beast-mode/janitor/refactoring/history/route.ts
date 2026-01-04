@@ -12,7 +12,7 @@ export async function GET(request: NextRequest) {
     const limit = parseInt(searchParams.get('limit') || '50');
     
     const userId = request.cookies.get('github_oauth_user_id')?.value;
-    const supabase = getSupabaseClientOrNull();
+    const supabase = await getSupabaseClientOrNull();
 
     if (!supabase) {
       return NextResponse.json({ runs: [] });

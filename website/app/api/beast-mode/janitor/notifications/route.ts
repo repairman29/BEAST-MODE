@@ -8,7 +8,7 @@ import { getSupabaseClientOrNull } from '../../../../../lib/supabase';
 export async function GET(request: NextRequest) {
   try {
     const userId = request.cookies.get('github_oauth_user_id')?.value;
-    const supabase = getSupabaseClientOrNull();
+    const supabase = await getSupabaseClientOrNull();
 
     if (!supabase) {
       // Mock data fallback

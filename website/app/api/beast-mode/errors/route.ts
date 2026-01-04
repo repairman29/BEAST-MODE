@@ -27,7 +27,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Store errors in Supabase
-    const supabase = getSupabaseClientOrNull();
+    const supabase = await getSupabaseClientOrNull();
     const timestamp = new Date().toISOString();
     
     if (supabase) {
@@ -73,7 +73,7 @@ export async function POST(request: NextRequest) {
  */
 export async function GET(request: NextRequest) {
   try {
-    const supabase = getSupabaseClientOrNull();
+    const supabase = await getSupabaseClientOrNull();
     const { searchParams } = new URL(request.url);
     const limit = parseInt(searchParams.get('limit') || '100');
     const since = searchParams.get('since');

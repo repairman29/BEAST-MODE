@@ -37,7 +37,7 @@ async function getConfigValue(key: string, defaultValue: string | null = null): 
 
 export async function GET(request: NextRequest) {
   try {
-    const supabase = getSupabaseClientOrNull();
+    const supabase = await getSupabaseClientOrNull();
     const { searchParams } = new URL(request.url);
     const action = searchParams.get('action') || 'list';
     const provider = searchParams.get('provider');
@@ -134,7 +134,7 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   try {
-    const supabase = getSupabaseClientOrNull();
+    const supabase = await getSupabaseClientOrNull();
     
     if (!supabase) {
       return NextResponse.json({

@@ -45,7 +45,7 @@ export async function POST(request: NextRequest) {
       status: qualityScore >= 80 ? 'passed' : 'failed'
     };
 
-    const supabase = getSupabaseClientOrNull();
+    const supabase = await getSupabaseClientOrNull();
     if (supabase) {
       try {
         const { error: dbError } = await supabase
@@ -104,7 +104,7 @@ export async function GET(request: NextRequest) {
     }
 
     // Fetch from Supabase
-    const supabase = getSupabaseClientOrNull();
+    const supabase = await getSupabaseClientOrNull();
     let checks: any[] = [];
 
     if (supabase) {

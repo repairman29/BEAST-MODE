@@ -11,7 +11,7 @@ export async function GET(request: NextRequest) {
     const repository = searchParams.get('repository');
     
     const userId = request.cookies.get('github_oauth_user_id')?.value;
-    const supabase = getSupabaseClientOrNull();
+    const supabase = await getSupabaseClientOrNull();
 
     if (!supabase) {
       return NextResponse.json({ nodes: [] });

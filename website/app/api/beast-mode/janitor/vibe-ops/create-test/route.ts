@@ -18,7 +18,7 @@ export async function POST(request: NextRequest) {
     }
 
     const userId = request.cookies.get('github_oauth_user_id')?.value;
-    const supabase = getSupabaseClientOrNull();
+    const supabase = await getSupabaseClientOrNull();
 
     // Generate test code (in production, this would use AI to generate proper test code)
     const testCode = `describe('${description}', () => {

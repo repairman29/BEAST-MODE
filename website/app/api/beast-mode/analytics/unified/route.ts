@@ -52,7 +52,7 @@ export async function GET(request: NextRequest) {
     }
 
     // Query Supabase for unified analytics
-    const supabase = getSupabaseClientOrNull();
+    const supabase = await getSupabaseClientOrNull();
     
     let summary = {
       totalSessions: 0,

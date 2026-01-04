@@ -11,7 +11,7 @@ export async function GET(request: NextRequest) {
     const range = searchParams.get('range') || '7d';
     
     const userId = request.cookies.get('github_oauth_user_id')?.value;
-    const supabase = getSupabaseClientOrNull();
+    const supabase = await getSupabaseClientOrNull();
 
     if (!supabase) {
       // Generate mock data

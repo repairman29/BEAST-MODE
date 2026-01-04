@@ -7,7 +7,7 @@ import { getSupabaseClientOrNull } from '../../../../../../lib/supabase';
  */
 export async function GET(request: NextRequest) {
   try {
-    const supabase = getSupabaseClientOrNull();
+    const supabase = await getSupabaseClientOrNull();
 
     if (!supabase) {
       // Fallback to default rules if database not available

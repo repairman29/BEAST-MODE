@@ -73,7 +73,7 @@ export async function GET(request: NextRequest) {
         }
       } catch (jwtError) {
         // JWT invalid, try Supabase auth
-        const supabase = getSupabaseClientOrNull();
+        const supabase = await getSupabaseClientOrNull();
         if (supabase) {
           // Try to get user from Supabase session
           const { data: { user } } = await supabase.auth.getUser(token);

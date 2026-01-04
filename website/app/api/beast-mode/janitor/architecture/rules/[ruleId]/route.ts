@@ -14,7 +14,7 @@ export async function POST(
     const body = await request.json();
     const { enabled } = body;
 
-    const supabase = getSupabaseClientOrNull();
+    const supabase = await getSupabaseClientOrNull();
 
     if (!supabase) {
       return NextResponse.json({
