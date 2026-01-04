@@ -72,7 +72,7 @@ export default function FeedbackDashboard() {
         <div className="bg-[#1a1a24] p-4 rounded border border-[#1e293b]">
           <div className="text-sm text-[#b0bec5] mb-1">Auto-Collected</div>
           <div className="text-2xl font-bold text-[#00d9ff]">
-            {stats.stats.autoCollected || 0}
+            {(stats.stats as any).autoCollected || 0}
           </div>
           <div className="text-xs text-[#78909c] mt-1">
             {stats.stats.withActuals > 0 
