@@ -189,7 +189,7 @@ export function getAutoFeedbackTracker(): AutoFeedbackTracker {
       enable: () => {},
       disable: () => {},
       flushNow: async () => {}
-    } as AutoFeedbackTracker;
+    } as unknown as AutoFeedbackTracker;
   }
 
   if (!tracker) {
