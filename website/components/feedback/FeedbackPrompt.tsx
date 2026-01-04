@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 
 interface FeedbackPrompt {
   predictionId: string
@@ -16,22 +16,38 @@ export default function FeedbackPrompt() {
   const [rating, setRating] = useState<number>(0.5)
   const [submitting, setSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
+  const [autoRefresh, setAutoRefresh] = useState(true)
 
-  useEffect(() => {
-    loadPrompt()
-  }, [])
-
-  const loadPrompt = async () => {
+  const loadPrompt = useCallback(async () => {
     try {
       const response = await fetch('/api/feedback/prompts?limit=1')
       const data = await response.json()
       if (data.success && data.prompts.length > 0) {
         setPrompt(data.prompts[0])
+        setSubmitted(false) // Reset submitted state when new prompt loads
+      } else if (!prompt) {
+        // Only hide if we don't have a prompt already
+        setPrompt(null)
       }
     } catch (error) {
       console.error('Failed to load prompt:', error)
     }
-  }
+  }, [prompt])
+
+  useEffect(() => {
+    loadPrompt()
+    
+    // Auto-refresh every 30 seconds if enabled
+    if (autoRefresh) {
+      const interval = setInterval(() => {
+        if (!prompt || submitted) {
+          loadPrompt()
+        }
+      }, 30000) // 30 seconds
+      
+      return () => clearInterval(interval)
+    }
+  }, [loadPrompt, autoRefresh, prompt, submitted])
 
   const submitFeedback = async () => {
     if (!prompt) return
@@ -54,11 +70,14 @@ export default function FeedbackPrompt() {
       const data = await response.json()
       if (data.success) {
         setSubmitted(true)
+        // Load next prompt after 2 seconds
         setTimeout(() => {
           setSubmitted(false)
           setPrompt(null)
           loadPrompt()
         }, 2000)
+      } else {
+        console.error('Failed to submit feedback:', data.error)
       }
     } catch (error) {
       console.error('Failed to submit feedback:', error)
@@ -67,7 +86,17 @@ export default function FeedbackPrompt() {
     }
   }
 
-  if (!prompt) return null
+  // Don't render if no prompt and not in auto-refresh mode
+  if (!prompt && !autoRefresh) return null
+  
+  // Show loading state if we're waiting for a prompt
+  if (!prompt) {
+    return (
+      <div className="fixed bottom-4 right-4 bg-[#12121a] border border-[#00d9ff] border-opacity-20 rounded-lg p-3 max-w-sm shadow-lg z-50">
+        <p className="text-xs text-[#78909c]">Loading feedback prompts...</p>
+      </div>
+    )
+  }
 
   return (
     <div className="fixed bottom-4 right-4 bg-[#12121a] border border-[#00d9ff] border-opacity-30 rounded-lg p-4 max-w-sm shadow-lg z-50">

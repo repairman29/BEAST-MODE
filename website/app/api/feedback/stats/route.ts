@@ -100,10 +100,18 @@ export async function GET(request: NextRequest) {
         totalPredictions: stats.totalPredictions,
         withActuals: stats.withActuals,
         withoutActuals: stats.withoutActuals,
-        feedbackRate: stats.feedbackRate,
+        feedbackRate: typeof stats.feedbackRate === 'string' 
+          ? parseFloat(stats.feedbackRate.replace('%', '')) / 100 
+          : stats.feedbackRate,
+        autoCollected: stats.autoCollected || 0,
+        manualCollected: stats.manualCollected || (stats.withActuals - (stats.autoCollected || 0)),
         targetRate: 0.05, // 5%
-        health: stats.feedbackRate >= 0.05 ? 'healthy' : 
-                stats.feedbackRate >= 0.01 ? 'needs-attention' : 'critical'
+        health: (typeof stats.feedbackRate === 'string' 
+          ? parseFloat(stats.feedbackRate.replace('%', '')) / 100 
+          : stats.feedbackRate) >= 0.05 ? 'healthy' : 
+                (typeof stats.feedbackRate === 'string' 
+          ? parseFloat(stats.feedbackRate.replace('%', '')) / 100 
+          : stats.feedbackRate) >= 0.01 ? 'needs-attention' : 'critical'
       },
       byService: byService,
       needingFeedback: needingFeedback.length

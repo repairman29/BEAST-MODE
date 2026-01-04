@@ -2,6 +2,7 @@ import './globals.css'
 import Navigation from '../components/layout/Navigation'
 import { UserProvider } from '../lib/user-context'
 import { ErrorBoundary } from '../components/ui/ErrorBoundary'
+import AutoFeedbackInitializer from '../components/feedback/AutoFeedbackInitializer'
 
 export const metadata = {
   title: 'BEAST MODE - Quality Intelligence for Vibe Coders',
@@ -61,6 +62,7 @@ export default function RootLayout({
       <body className="bg-background text-foreground antialiased">
         <ErrorBoundary>
           <UserProvider>
+            <AutoFeedbackInitializer />
             <Navigation />
             {children}
           </UserProvider>
