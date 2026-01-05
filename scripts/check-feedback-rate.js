@@ -41,21 +41,20 @@ async function checkFeedbackRate() {
       throw pError;
     }
 
-    // Get feedback with actual values
-    const { count: feedbackCount, error: fError } = await supabase
+    // Get feedback with feedback scores (not null) - ml_feedback uses feedback_score, not actual_value
+    const { data: feedbackData, error: fError } = await supabase
       .from('ml_feedback')
-      .select('*', { count: 'exact', head: true })
-      .not('actual_value', 'is', null);
+      .select('*')
+      .not('feedback_score', 'is', null);
+    
+    const feedbackCount = feedbackData?.length || 0;
 
     if (fError) {
       throw fError;
     }
 
-    // Get feedback by service
-    const { data: feedbackByService, error: sError } = await supabase
-      .from('ml_feedback')
-      .select('service_name')
-      .not('actual_value', 'is', null);
+    // Get feedback by service (use feedbackData we already have)
+    const feedbackByService = feedbackData || [];
 
     const serviceCounts = {};
     feedbackByService?.forEach(f => {
@@ -80,12 +79,21 @@ async function checkFeedbackRate() {
       console.log('');
     }
 
-    // Training readiness
-    const readyToTrain = feedbackCount >= 50;
+    // Training readiness - need feedback linked to predictions
+    // Count predictions that have feedback
+    const { data: predictionsWithFeedback, error: pwfError } = await supabase
+      .from('ml_predictions')
+      .select('id')
+      .in('id', feedbackData?.map(f => f.prediction_id).filter(Boolean) || []);
+    
+    const predictionsWithFeedbackCount = predictionsWithFeedback?.length || 0;
+    const readyToTrain = predictionsWithFeedbackCount >= 50;
+    
     console.log('🎯 Training Readiness:');
-    console.log(`   Examples with actual values: ${feedbackCount || 0}`);
-    console.log(`   Need for training: 50+`);
-    console.log(`   Status: ${readyToTrain ? '✅ READY TO TRAIN' : `⚠️  Need ${50 - (feedbackCount || 0)} more examples`}`);
+    console.log(`   Predictions with feedback: ${predictionsWithFeedbackCount || 0}`);
+    console.log(`   Total feedback entries: ${feedbackCount || 0}`);
+    console.log(`   Need for training: 50+ predictions with feedback`);
+    console.log(`   Status: ${readyToTrain ? '✅ READY TO TRAIN' : `⚠️  Need ${50 - (predictionsWithFeedbackCount || 0)} more predictions with feedback`}`);
     console.log('');
 
     // Recommendations

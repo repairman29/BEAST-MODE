@@ -72,25 +72,31 @@ export async function GET(request: NextRequest) {
       });
     }
     
-    // Get predictions needing feedback
+    // Get predictions needing feedback - be very inclusive to catch all predictions
     const predictions = await collector.getPredictionsNeedingFeedback({
       serviceName,
-      limit,
-      daysOld: 7
+      limit: limit * 10, // Get many more predictions to filter from
+      daysOld: 30 // Increase to 30 days to catch older predictions too
     });
 
-    // Filter for high-value predictions
-    const highValue = predictions.filter(pred => {
-      // High confidence predictions
-      if (pred.confidence && pred.confidence > 0.8) return true;
+    // Filter for high-value predictions - be VERY inclusive to maximize feedback collection
+    const highValue = predictions.filter((pred: any) => {
+      // Accept ALL predictions with any confidence
+      if (pred.confidence && pred.confidence > 0.3) return true; // Lowered from 0.6
       
-      // Recent predictions (last 24 hours)
+      // Recent predictions (last 7 days - was 48 hours)
       const age = Date.now() - new Date(pred.created_at).getTime();
-      if (age < 24 * 60 * 60 * 1000) return true;
+      if (age < 7 * 24 * 60 * 60 * 1000) return true;
       
-      // Important services
-      const importantServices = ['code-roach', 'ai-gm', 'oracle'];
+      // Important services (include ALL services)
+      const importantServices = ['code-roach', 'ai-gm', 'oracle', 'daisy-chain', 'first-mate', 'game-app'];
       if (importantServices.includes(pred.service_name)) return true;
+      
+      // Any prediction from last 30 days (very inclusive)
+      if (age < 30 * 24 * 60 * 60 * 1000) return true;
+      
+      // If we have very few predictions, accept all
+      if (predictions.length < 10) return true;
       
       return false;
     });

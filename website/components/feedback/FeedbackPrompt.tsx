@@ -37,17 +37,40 @@ export default function FeedbackPrompt() {
   useEffect(() => {
     loadPrompt()
     
-    // Auto-refresh every 30 seconds if enabled
+      // Auto-refresh more frequently to catch new predictions
     if (autoRefresh) {
       const interval = setInterval(() => {
         if (!prompt || submitted) {
           loadPrompt()
         }
-      }, 30000) // 30 seconds
+      }, 5000) // 5 seconds - very frequent to catch predictions immediately
       
       return () => clearInterval(interval)
     }
   }, [loadPrompt, autoRefresh, prompt, submitted])
+  
+  // Also load prompt when user interacts with the page (visibility change, focus)
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === 'visible' && !prompt) {
+        loadPrompt()
+      }
+    }
+    
+    const handleFocus = () => {
+      if (!prompt) {
+        loadPrompt()
+      }
+    }
+    
+    document.addEventListener('visibilitychange', handleVisibilityChange)
+    window.addEventListener('focus', handleFocus)
+    
+    return () => {
+      document.removeEventListener('visibilitychange', handleVisibilityChange)
+      window.removeEventListener('focus', handleFocus)
+    }
+  }, [loadPrompt, prompt])
 
   const submitFeedback = async () => {
     if (!prompt) return
@@ -86,22 +109,33 @@ export default function FeedbackPrompt() {
     }
   }
 
-  // Don't render if no prompt and not in auto-refresh mode
+  // Always show a subtle indicator when auto-refresh is enabled, even if no prompt
+  // This makes users aware feedback collection is active
   if (!prompt && !autoRefresh) return null
   
-  // Show loading state if we're waiting for a prompt
-  if (!prompt) {
+  // Show a more visible "waiting for feedback" indicator when no prompt but auto-refresh is on
+  // This makes users aware that feedback collection is active
+  if (!prompt && autoRefresh) {
     return (
-      <div className="fixed bottom-4 right-4 bg-[#12121a] border border-[#00d9ff] border-opacity-20 rounded-lg p-3 max-w-sm shadow-lg z-50">
-        <p className="text-xs text-[#78909c]">Loading feedback prompts...</p>
+      <div className="fixed bottom-4 right-4 bg-[#12121a] border-2 border-[#00d9ff] border-opacity-30 rounded-lg p-3 max-w-xs shadow-lg z-40 hover:border-opacity-60 transition-all cursor-pointer"
+           onClick={() => loadPrompt()}
+           title="Click to check for feedback prompts">
+        <p className="text-xs text-[#00d9ff] flex items-center gap-2 font-semibold">
+          <span className="animate-pulse text-lg">💡</span>
+          <span>Help improve AI - Rate predictions</span>
+        </p>
+        <p className="text-[10px] text-[#78909c] mt-1">Click to check for prompts</p>
       </div>
     )
   }
 
   return (
-    <div className="fixed bottom-4 right-4 bg-[#12121a] border border-[#00d9ff] border-opacity-30 rounded-lg p-4 max-w-sm shadow-lg z-50">
+    <div className="fixed bottom-4 right-4 bg-[#12121a] border-2 border-[#00d9ff] border-opacity-70 rounded-lg p-4 max-w-sm shadow-2xl shadow-[#00d9ff]/30 z-50 animate-bounce-subtle hover:scale-105 transition-transform">
       <div className="flex items-start justify-between mb-3">
-        <h3 className="text-sm font-semibold text-[#00d9ff]">Quick Feedback</h3>
+        <div className="flex items-center gap-2">
+          <span className="text-lg">💡</span>
+          <h3 className="text-sm font-semibold text-[#00d9ff]">Quick Feedback</h3>
+        </div>
         <button
           onClick={() => setPrompt(null)}
           className="text-[#78909c] hover:text-white text-xs"
