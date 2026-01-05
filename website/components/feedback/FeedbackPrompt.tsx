@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect, useCallback } from 'react'
+import { getPendingFeedbackPrompts, clearPendingFeedback } from '@/lib/feedback-trigger'
 
 interface FeedbackPrompt {
   predictionId: string
@@ -20,6 +21,22 @@ export default function FeedbackPrompt() {
 
   const loadPrompt = useCallback(async () => {
     try {
+      // First, check for pending feedback from immediate triggers
+      const pending = getPendingFeedbackPrompts()
+      if (pending.length > 0 && !prompt) {
+        // Use the most recent pending feedback
+        const latest = pending[pending.length - 1]
+        // Fetch the prediction details to create a prompt
+        const response = await fetch(`/api/feedback/prompts?predictionId=${latest.predictionId}&limit=1`)
+        const data = await response.json()
+        if (data.success && data.prompts.length > 0) {
+          setPrompt(data.prompts[0])
+          setSubmitted(false)
+          return
+        }
+      }
+      
+      // Fallback to regular prompt loading
       const response = await fetch('/api/feedback/prompts?limit=1')
       const data = await response.json()
       if (data.success && data.prompts.length > 0) {
@@ -48,6 +65,20 @@ export default function FeedbackPrompt() {
       return () => clearInterval(interval)
     }
   }, [loadPrompt, autoRefresh, prompt, submitted])
+  
+  // Listen for immediate feedback triggers
+  useEffect(() => {
+    const handleFeedbackAvailable = (e: CustomEvent) => {
+      // Reload prompt when new feedback is triggered
+      loadPrompt()
+    }
+    
+    window.addEventListener('feedback-prompt-available', handleFeedbackAvailable as EventListener)
+    
+    return () => {
+      window.removeEventListener('feedback-prompt-available', handleFeedbackAvailable as EventListener)
+    }
+  }, [loadPrompt])
   
   // Also load prompt when user interacts with the page (visibility change, focus)
   useEffect(() => {
@@ -92,6 +123,11 @@ export default function FeedbackPrompt() {
 
       const data = await response.json()
       if (data.success) {
+        // Clear pending feedback for this prediction
+        if (prompt?.predictionId) {
+          clearPendingFeedback(prompt.predictionId)
+        }
+        
         setSubmitted(true)
         // Load next prompt after 2 seconds
         setTimeout(() => {

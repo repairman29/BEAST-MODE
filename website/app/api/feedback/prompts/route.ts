@@ -72,12 +72,29 @@ export async function GET(request: NextRequest) {
       });
     }
     
-    // Get predictions needing feedback - be very inclusive to catch all predictions
-    const predictions = await collector.getPredictionsNeedingFeedback({
-      serviceName,
-      limit: limit * 10, // Get many more predictions to filter from
-      daysOld: 30 // Increase to 30 days to catch older predictions too
-    });
+    // If specific predictionId requested, get that one first
+    let predictions: any[] = []
+    if (predictionId) {
+      const { data: specificPred, error: predError } = await collector.supabase
+        .from('ml_predictions')
+        .select('*')
+        .eq('id', predictionId)
+        .is('actual_value', null)
+        .single()
+      
+      if (!predError && specificPred) {
+        predictions = [specificPred]
+      }
+    }
+    
+    // If no specific prediction or it wasn't found, get general predictions
+    if (predictions.length === 0) {
+      predictions = await collector.getPredictionsNeedingFeedback({
+        serviceName,
+        limit: limit * 10, // Get many more predictions to filter from
+        daysOld: 30 // Increase to 30 days to catch older predictions too
+      });
+    }
 
     // Filter for high-value predictions - be VERY inclusive to maximize feedback collection
     const highValue = predictions.filter((pred: any) => {
