@@ -1337,6 +1337,62 @@ program
             })
     );
 
+// Repository Management Commands
+program
+    .command('repos')
+    .description('Manage GitHub repository connections')
+    .addCommand(
+        new Command('status')
+            .description('Check GitHub connection status')
+            .action(async () => {
+                const { checkConnection } = require('../lib/cli/repos');
+                await checkConnection();
+            })
+    )
+    .addCommand(
+        new Command('connect')
+            .description('Connect GitHub account via OAuth')
+            .action(async () => {
+                const { connect } = require('../lib/cli/repos');
+                await connect();
+            })
+    )
+    .addCommand(
+        new Command('list')
+            .description('List connected repositories')
+            .action(async () => {
+                const { list } = require('../lib/cli/repos');
+                await list();
+            })
+    )
+    .addCommand(
+        new Command('add')
+            .description('Add repository manually')
+            .argument('<url>', 'Repository URL (e.g., https://github.com/user/repo)')
+            .option('-t, --team <team>', 'Team name for the repository')
+            .action(async (url, options) => {
+                const { add } = require('../lib/cli/repos');
+                await add(url, options);
+            })
+    )
+    .addCommand(
+        new Command('remove')
+            .description('Remove repository')
+            .argument('<id>', 'Repository ID (from list command)')
+            .action(async (id) => {
+                const { remove } = require('../lib/cli/repos');
+                await remove(id);
+            })
+    )
+    .addCommand(
+        new Command('disconnect')
+            .description('Disconnect GitHub account')
+            .action(async () => {
+                const { disconnect } = require('../lib/cli/repos');
+                await disconnect();
+            })
+    );
+
 program
     .command('info')
     .description('Show BEAST MODE system information')

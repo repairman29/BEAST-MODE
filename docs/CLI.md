@@ -85,6 +85,77 @@ Launch the BEAST MODE quality intelligence dashboard.
 beast-mode dashboard --port 8080 --open
 ```
 
+### `beast-mode repos`
+
+Manage GitHub repository connections via CLI.
+
+#### `beast-mode repos status`
+
+Check GitHub connection status.
+
+**Example:**
+```bash
+beast-mode repos status
+```
+
+Shows whether GitHub is connected and displays username.
+
+#### `beast-mode repos connect`
+
+Connect GitHub account via OAuth (opens browser).
+
+**Example:**
+```bash
+beast-mode repos connect
+```
+
+Opens browser for GitHub authorization, then saves connection automatically.
+
+#### `beast-mode repos list`
+
+List all connected repositories from GitHub.
+
+**Example:**
+```bash
+beast-mode repos list
+```
+
+Shows all repositories from your GitHub account, plus any manually added enterprise repos.
+
+#### `beast-mode repos add`
+
+Add repository manually (without GitHub OAuth).
+
+**Options:**
+- `-t, --team <team>` - Team name for the repository
+
+**Example:**
+```bash
+beast-mode repos add https://github.com/user/repo --team Engineering
+```
+
+#### `beast-mode repos remove`
+
+Remove a repository.
+
+**Example:**
+```bash
+beast-mode repos remove <id>
+```
+
+Get repository ID from `beast-mode repos list`.
+
+#### `beast-mode repos disconnect`
+
+Disconnect GitHub account.
+
+**Example:**
+```bash
+beast-mode repos disconnect
+```
+
+---
+
 ### `beast-mode quality`
 
 Quality assurance operations.
