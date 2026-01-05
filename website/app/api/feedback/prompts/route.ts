@@ -75,14 +75,15 @@ export async function GET(request: NextRequest) {
     // If specific predictionId requested, get that one first
     let predictions: any[] = []
     if (predictionId) {
-      const { data: specificPred, error: predError } = await collector.supabase
-        .from('ml_predictions')
-        .select('*')
-        .eq('id', predictionId)
-        .is('actual_value', null)
-        .single()
+      // Use collector's method to get predictions, then filter for specific ID
+      const allPredictions = await collector.getPredictionsNeedingFeedback({
+        serviceName: null, // Don't filter by service
+        limit: 1000, // Get many to find the specific one
+        daysOld: 30
+      })
       
-      if (!predError && specificPred) {
+      const specificPred = allPredictions.find((p: any) => p.id === predictionId)
+      if (specificPred) {
         predictions = [specificPred]
       }
     }
