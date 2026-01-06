@@ -186,6 +186,13 @@ export default function PricingSection() {
           >
             {showFAQ ? '❓ Hide FAQ' : '❓ FAQ'}
           </Button>
+          <Button
+            onClick={() => setShowROI(!showROI)}
+            variant="outline"
+            className="border-slate-800"
+          >
+            {showROI ? '💰 Hide ROI Calculator' : '💰 ROI Calculator'}
+          </Button>
         </div>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -292,6 +299,13 @@ export default function PricingSection() {
             </div>
           </CardContent>
         </Card>
+      )}
+
+      {/* ROI Calculator */}
+      {showROI && (
+        <div className="mt-12">
+          <ROICalculator />
+        </div>
       )}
 
       {/* FAQ Section */}
