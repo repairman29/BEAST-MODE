@@ -104,12 +104,20 @@ function ROICalculator() {
 
           {/* Results */}
           <div className="p-6 bg-gradient-to-r from-cyan-500/10 to-purple-500/10 border border-cyan-500/20 rounded-lg">
-            <h3 className="text-xl font-bold text-white mb-4">Your ROI</h3>
+            <h3 className="text-xl font-bold text-white mb-4">Estimated Value</h3>
+            <div className="mb-4 p-3 bg-slate-900/50 rounded border border-slate-800">
+              <p className="text-xs text-slate-400 italic">
+                ⚠️ This calculator provides estimates based on your inputs. Actual time savings and value will vary based on your specific use case and codebase.
+              </p>
+            </div>
             <div className="grid md:grid-cols-2 gap-6">
               <div>
-                <div className="text-sm text-slate-400 mb-1">Monthly Time Value</div>
+                <div className="text-sm text-slate-400 mb-1">Estimated Monthly Time Value</div>
                 <div className="text-3xl font-bold text-green-400">
                   ${monthlyTimeValue.toLocaleString()}
+                </div>
+                <div className="text-xs text-slate-500 mt-1">
+                  If time saved = value
                 </div>
               </div>
               <div>
@@ -119,25 +127,34 @@ function ROICalculator() {
                 </div>
               </div>
               <div>
-                <div className="text-sm text-slate-400 mb-1">Monthly Net Savings</div>
+                <div className="text-sm text-slate-400 mb-1">Potential Net Value</div>
                 <div className="text-3xl font-bold text-cyan-400">
                   ${monthlyROI.toLocaleString()}
                 </div>
+                <div className="text-xs text-slate-500 mt-1">
+                  If estimates are accurate
+                </div>
               </div>
               <div>
-                <div className="text-sm text-slate-400 mb-1">ROI Multiplier</div>
+                <div className="text-sm text-slate-400 mb-1">Value Multiplier</div>
                 <div className="text-3xl font-bold text-purple-400">
                   {roiMultiplier}x
+                </div>
+                <div className="text-xs text-slate-500 mt-1">
+                  Estimated ratio
                 </div>
               </div>
             </div>
             <div className="mt-6 pt-6 border-t border-slate-800">
-              <div className="text-sm text-slate-400 mb-1">Annual Savings</div>
+              <div className="text-sm text-slate-400 mb-1">Potential Annual Value</div>
               <div className="text-4xl font-bold text-gradient-cyan">
                 ${annualROI.toLocaleString()}
               </div>
               <div className="text-sm text-slate-500 mt-2">
-                Based on {developers} developers saving {hoursPerWeek} hours/week at ${hourlyRate}/hour
+                Based on {developers} developers × {hoursPerWeek} hours/week × ${hourlyRate}/hour
+              </div>
+              <div className="text-xs text-slate-600 mt-2 italic">
+                *These are estimates. Actual results will vary.
               </div>
             </div>
           </div>

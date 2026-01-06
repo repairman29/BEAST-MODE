@@ -3,62 +3,18 @@
 import React from 'react';
 import { Card, CardContent } from '../ui/card';
 
-const testimonials = [
-  {
-    name: 'Sarah Chen',
-    role: 'Senior Developer',
-    company: 'TechStart Inc.',
-    image: '👩‍💻',
-    quote: 'BEAST MODE saved me 20 hours per week. I can finally focus on building features instead of fixing bugs.',
-    metrics: '20 hours/week saved',
-    tier: 'Developer'
-  },
-  {
-    name: 'Marcus Rodriguez',
-    role: 'CTO',
-    company: 'ScaleUp Co.',
-    image: '👨‍💼',
-    quote: 'Our team quality score improved by 30 points in the first month. Technical debt is actually decreasing now.',
-    metrics: '+30 quality points, $150K/year saved',
-    tier: 'Team'
-  },
-  {
-    name: 'Alex Kim',
-    role: 'Solo Developer',
-    company: 'Indie Studio',
-    image: '👨‍💻',
-    quote: 'The free tier is incredibly generous. I get instant quality feedback without any setup. Game changer.',
-    metrics: '10K free calls/month',
-    tier: 'Free'
-  },
-  {
-    name: 'Jordan Taylor',
-    role: 'Engineering Manager',
-    company: 'Enterprise Corp',
-    image: '👩‍💼',
-    quote: 'Day 2 Operations is exactly what we needed. Code maintains itself while we build. ROI is off the charts.',
-    metrics: '400 hours/week saved, $80K/month value',
-    tier: 'Enterprise'
-  },
-  {
-    name: 'Riley Patel',
-    role: 'Full-Stack Developer',
-    company: 'StartupXYZ',
-    image: '🧑‍💻',
-    quote: 'New developers are productive 50% faster. The AI answers questions about our codebase 24/7.',
-    metrics: '50% faster onboarding',
-    tier: 'Team'
-  },
-  {
-    name: 'Casey Morgan',
-    role: 'DevOps Lead',
-    company: 'CloudFirst',
-    image: '👨‍🔧',
-    quote: 'Silent refactoring runs overnight. We wake up to cleaner code. It\'s like having a senior dev working 24/7.',
-    metrics: '23 issues fixed overnight',
-    tier: 'Developer'
-  }
-];
+// Testimonials will be added when we have real customer feedback
+// For now, we'll show a placeholder encouraging early adopters
+const comingSoon = {
+  title: 'Early Adopter Program',
+  description: 'We\'re looking for early users to help shape BEAST MODE. Join us and get:',
+  benefits: [
+    'Lifetime discount on paid tiers',
+    'Direct input on feature development',
+    'Priority support',
+    'Early access to new features'
+  ]
+};
 
 function TestimonialsSection() {
   return (
@@ -71,54 +27,46 @@ function TestimonialsSection() {
         {/* Header */}
         <div className="text-center mb-20">
           <h2 className="text-5xl md:text-6xl font-bold text-white mb-6 tracking-tight">
-            Real Results from
+            Join Early Adopters
             <br />
-            <span className="text-gradient-cyan">Real Developers</span>
+            <span className="text-gradient-cyan">Shape the Future</span>
           </h2>
           <p className="text-xl text-slate-400 max-w-3xl mx-auto">
-            See how developers and teams are using BEAST MODE to save time, improve quality, and ship better code.
+            BEAST MODE is in active development. Be among the first to use it and help us build the best developer tools.
           </p>
         </div>
 
-        {/* Testimonials Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {testimonials.map((testimonial, index) => (
-            <Card
-              key={index}
-              className="bg-slate-900/50 border-slate-800 hover:border-cyan-500/30 transition-all hover:shadow-xl hover:shadow-cyan-500/5"
-            >
-              <CardContent className="p-6">
-                <div className="flex items-start gap-4 mb-4">
-                  <div className="text-4xl">{testimonial.image}</div>
-                  <div className="flex-1">
-                    <div className="font-semibold text-white">{testimonial.name}</div>
-                    <div className="text-sm text-slate-400">{testimonial.role}</div>
-                    <div className="text-sm text-slate-500">{testimonial.company}</div>
-                  </div>
-                  <div className="px-2 py-1 bg-cyan-500/10 text-cyan-400 text-xs rounded border border-cyan-500/20">
-                    {testimonial.tier}
-                  </div>
+        {/* Early Adopter Program */}
+        <Card className="bg-slate-900/50 border-slate-800 max-w-3xl mx-auto mb-12">
+          <CardContent className="p-10">
+            <h3 className="text-3xl font-bold text-white mb-4 text-center">
+              {comingSoon.title}
+            </h3>
+            <p className="text-slate-300 text-center mb-8">
+              {comingSoon.description}
+            </p>
+            <div className="grid md:grid-cols-2 gap-4">
+              {comingSoon.benefits.map((benefit, index) => (
+                <div key={index} className="flex items-start gap-3 text-slate-300">
+                  <svg className="w-5 h-5 text-cyan-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span>{benefit}</span>
                 </div>
-                <blockquote className="text-slate-300 mb-4 italic">
-                  "{testimonial.quote}"
-                </blockquote>
-                <div className="text-sm text-cyan-400 font-semibold">
-                  {testimonial.metrics}
-                </div>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
 
         {/* CTA */}
         <div className="mt-20 text-center">
           <Card className="bg-slate-950/50 border-slate-900 max-w-2xl mx-auto">
             <CardContent className="p-8">
               <h3 className="text-2xl font-bold text-white mb-4">
-                Join Thousands of Developers Using BEAST MODE
+                Ready to Try BEAST MODE?
               </h3>
               <p className="text-slate-400 mb-6">
-                Start free. No credit card required. See results in minutes.
+                Start free. No credit card required. Get instant code quality feedback.
               </p>
               <a
                 href="/dashboard?view=auth&action=signup"
