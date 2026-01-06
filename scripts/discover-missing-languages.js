@@ -10,7 +10,16 @@
 const fs = require('fs-extra');
 const path = require('path');
 const { Octokit } = require('@octokit/rest');
-const { PublicRepoScanner } = require('../lib/mlops/publicRepoScanner');
+
+// Load environment variables from .env.local if it exists
+try {
+  const envPath = path.join(__dirname, '../../echeo-landing/.env.local');
+  if (fs.existsSync(envPath)) {
+    require('dotenv').config({ path: envPath });
+  }
+} catch (e) {
+  // Ignore if dotenv not available or file doesn't exist
+}
 
 const DISCOVERED_DIR = path.join(__dirname, '../.beast-mode/training-data/discovered-repos');
 const SCANNED_DIR = path.join(__dirname, '../.beast-mode/training-data/scanned-repos');
@@ -111,14 +120,127 @@ async function discoverReposForLanguage(octokit, language, count, minStars = 100
 }
 
 /**
+ * Get GitHub token from multiple sources
+ */
+async function getGitHubToken() {
+  // Try environment variable first
+  if (process.env.GITHUB_TOKEN || process.env.GH_TOKEN) {
+    console.log('📝 Using token from environment variable');
+    return process.env.GITHUB_TOKEN || process.env.GH_TOKEN;
+  }
+
+  // Try Supabase app_config
+  try {
+    const { createClient } = require('@supabase/supabase-js');
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.SUPABASE_URL;
+    const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+
+    if (!supabaseUrl || !supabaseKey) {
+      console.log('⚠️  Supabase credentials not found in environment');
+      console.log(`   NEXT_PUBLIC_SUPABASE_URL: ${supabaseUrl ? 'found' : 'missing'}`);
+      console.log(`   SUPABASE_SERVICE_ROLE_KEY: ${supabaseKey ? 'found' : 'missing'}`);
+    }
+
+    if (supabaseUrl && supabaseKey) {
+      console.log('📝 Checking Supabase for token...');
+      const supabase = createClient(supabaseUrl, supabaseKey);
+
+      // Try app_config.github
+      const { data: config } = await supabase
+        .from('app_config')
+        .select('value')
+        .eq('key', 'github')
+        .maybeSingle();
+
+      if (config?.value) {
+        const value = typeof config.value === 'string' ? JSON.parse(config.value) : config.value;
+        // Handle different value structures
+        if (value && typeof value === 'object') {
+          if (value.token) {
+            console.log('✅ Found token in app_config.github.value.token');
+            return value.token;
+          }
+          // Sometimes token is nested
+          if (value.value && typeof value.value === 'string' && value.value.startsWith('ghp_')) {
+            console.log('✅ Found token in app_config.github.value.value');
+            return value.value;
+          }
+        }
+        // Sometimes token is directly in value as string
+        if (typeof value === 'string' && value.startsWith('ghp_')) {
+          console.log('✅ Found token directly in app_config.github.value');
+          return value;
+        }
+      }
+
+      // Try app_config.github_token
+      const { data: tokenConfig } = await supabase
+        .from('app_config')
+        .select('value')
+        .eq('key', 'github_token')
+        .maybeSingle();
+
+      if (tokenConfig?.value) {
+        const value = typeof tokenConfig.value === 'string' 
+          ? JSON.parse(tokenConfig.value) 
+          : tokenConfig.value;
+        return value.token || value;
+      }
+
+      // Try app_config.echeo_env
+      const { data: envConfig } = await supabase
+        .from('app_config')
+        .select('value')
+        .eq('key', 'echeo_env')
+        .maybeSingle();
+
+      if (envConfig?.value?.GITHUB_TOKEN || envConfig?.value?.GITHUB_PAT) {
+        const value = typeof envConfig.value === 'string' 
+          ? JSON.parse(envConfig.value) 
+          : envConfig.value;
+        return value.GITHUB_TOKEN || value.GITHUB_PAT;
+      }
+    }
+  } catch (error) {
+    console.log('⚠️  Error checking Supabase:', error.message);
+  }
+
+  // Try reading .env.local directly
+  try {
+    const envPath = path.join(__dirname, '../website/.env.local');
+    if (fs.existsSync(envPath)) {
+      const envContent = fs.readFileSync(envPath, 'utf8');
+      const match = envContent.match(/GITHUB_TOKEN\s*=\s*(.+)/);
+      if (match) {
+        return match[1].trim().replace(/^["']|["']$/g, '');
+      }
+    }
+  } catch (error) {
+    // Ignore
+  }
+
+  return null;
+}
+
+/**
  * Discover repos for missing languages
  */
 async function discoverMissingLanguages(options = {}) {
   const { priority = 'all', maxRepos = 500, minStars = 100 } = options;
 
-  const token = process.env.GITHUB_TOKEN || process.env.GH_TOKEN;
+  const token = await getGitHubToken();
   if (!token) {
-    throw new Error('GITHUB_TOKEN or GH_TOKEN environment variable required');
+    throw new Error('GITHUB_TOKEN not found. Check environment variables, Supabase app_config, or .env.local');
+  }
+
+  // Verify token works before proceeding
+  try {
+    const testOctokit = new Octokit({ auth: token });
+    const { data: user } = await testOctokit.rest.users.getAuthenticated();
+    console.log(`✅ Token verified for user: ${user.login}\n`);
+  } catch (error) {
+    console.error(`❌ Token verification failed: ${error.message}`);
+    throw new Error(`Invalid GitHub token: ${error.message}`);
   }
 
   const octokit = new Octokit({ auth: token });

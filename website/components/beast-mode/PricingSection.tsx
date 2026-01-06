@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
 import { Button } from '../ui/button';
+import { Badge } from '../ui/badge';
 
 const plans = [
   {
@@ -10,52 +11,78 @@ const plans = [
     name: 'Free',
     price: '$0',
     period: 'forever',
+    priceAnnual: null,
+    savings: null,
     features: [
       '10,000 API calls/month',
-      'All 9 AI systems',
+      'Core library (MIT licensed)',
+      'Basic quality checks',
       'Community support',
       'Self-hosted deployment'
     ],
-    cta: 'Get Started Free'
+    cta: 'Get Started Free',
+    popular: false
   },
   {
     id: 'developer',
     name: 'Developer',
-    price: '$29',
+    price: '$79',
     period: 'month',
+    priceAnnual: '$790',
+    savings: 'Save $158/year',
     features: [
       '100K API calls/month',
-      'Priority support',
+      'Day 2 Operations (AI Janitor)',
+      'Priority email support',
       'Advanced analytics',
-      'Email support'
+      'Quality tracking',
+      'Overnight janitor',
+      'Silent refactoring'
     ],
-    cta: 'Subscribe'
+    cta: 'Start Free Trial',
+    popular: true
   },
   {
     id: 'team',
     name: 'Team',
-    price: '$99',
+    price: '$299',
     period: 'month',
+    priceAnnual: '$2,990',
+    savings: 'Save $598/year',
     features: [
       '500K API calls/month',
+      'Everything in Developer',
       'Team collaboration',
-      'Advanced features',
-      'Dedicated support'
+      'Enterprise guardrail',
+      'Plain English diffs',
+      'Team analytics',
+      'Phone support',
+      '99.9% SLA guarantee'
     ],
-    cta: 'Subscribe'
+    cta: 'Start Free Trial',
+    popular: false
   },
   {
     id: 'enterprise',
     name: 'Enterprise',
-    price: '$299',
+    price: '$799',
     period: 'month',
+    priceAnnual: '$7,990',
+    savings: 'Save $1,598/year',
     features: [
-      'Unlimited usage',
-      'White-label options',
+      '2M API calls/month',
+      'Everything in Team',
+      'Unlimited API calls (overage)',
+      'White-label deployment',
+      'SSO integration',
       'Custom integrations',
-      '24/7 support'
+      'Dedicated account manager',
+      '24/7 phone support',
+      'On-premise option',
+      'Custom AI models'
     ],
-    cta: 'Contact Sales'
+    cta: 'Contact Sales',
+    popular: false
   }
 ];
 
@@ -95,15 +122,20 @@ export default function PricingSection() {
   };
 
   const allFeatures = [
-    { name: 'API Calls/Month', free: '10,000', developer: '100,000', team: '500,000', enterprise: 'Unlimited' },
-    { name: 'AI Systems', free: 'All 9', developer: 'All 9', team: 'All 9', enterprise: 'All 9 + Custom' },
-    { name: 'Support', free: 'Community', developer: 'Email', team: 'Priority', enterprise: '24/7 Dedicated' },
-    { name: 'Team Members', free: '1', developer: '1', team: 'Up to 10', enterprise: 'Unlimited' },
-    { name: 'Repositories', free: '5', developer: 'Unlimited', team: 'Unlimited', enterprise: 'Unlimited' },
-    { name: 'Advanced Analytics', free: false, developer: true, team: true, enterprise: true },
-    { name: 'White-label Options', free: false, developer: false, team: false, enterprise: true },
-    { name: 'Custom Integrations', free: false, developer: false, team: true, enterprise: true },
-    { name: 'SLA Guarantee', free: false, developer: false, team: '99.9%', enterprise: '99.99%' }
+    { name: 'API Calls/Month', free: '10,000', developer: '100,000', team: '500,000', enterprise: '2,000,000' },
+    { name: 'Overage Pricing', free: 'N/A', developer: '$0.001/call', team: '$0.0008/call', enterprise: '$0.0005/call' },
+    { name: 'Core Library (MIT)', free: true, developer: true, team: true, enterprise: true },
+    { name: 'Day 2 Operations', free: false, developer: true, team: true, enterprise: true },
+    { name: 'AI Janitor', free: false, developer: true, team: true, enterprise: true },
+    { name: 'Silent Refactoring', free: false, developer: true, team: true, enterprise: true },
+    { name: 'Support', free: 'Community', developer: 'Email (24h)', team: 'Phone + Email', enterprise: '24/7 Dedicated' },
+    { name: 'Team Collaboration', free: false, developer: false, team: true, enterprise: true },
+    { name: 'Enterprise Guardrail', free: false, developer: false, team: true, enterprise: true },
+    { name: 'SLA Guarantee', free: false, developer: false, team: '99.9%', enterprise: '99.99%' },
+    { name: 'White-label', free: false, developer: false, team: false, enterprise: true },
+    { name: 'SSO Integration', free: false, developer: false, team: false, enterprise: true },
+    { name: 'Custom AI Models', free: false, developer: false, team: false, enterprise: true },
+    { name: 'On-premise Option', free: false, developer: false, team: false, enterprise: true }
   ];
 
   const faqs = [
@@ -164,11 +196,28 @@ export default function PricingSection() {
             }`}
           >
             <CardHeader>
-              <CardTitle className="text-white">{plan.name}</CardTitle>
+              <div className="flex items-center justify-between mb-2">
+                <CardTitle className="text-white">{plan.name}</CardTitle>
+                {plan.popular && (
+                  <Badge className="bg-cyan-500/20 text-cyan-400 border-cyan-500/30 text-xs">
+                    Most Popular
+                  </Badge>
+                )}
+              </div>
               <div className="mt-2">
-                <span className="text-3xl font-bold text-white">{plan.price}</span>
-                {plan.period !== 'forever' && (
-                  <span className="text-slate-400 text-sm">/{plan.period}</span>
+                <div className="flex items-baseline gap-2">
+                  <span className="text-3xl font-bold text-white">{plan.price}</span>
+                  {plan.period !== 'forever' && (
+                    <span className="text-slate-400 text-sm">/{plan.period}</span>
+                  )}
+                </div>
+                {plan.priceAnnual && (
+                  <div className="mt-1">
+                    <div className="text-sm text-slate-400">
+                      <span className="line-through">{plan.priceAnnual}/year</span>
+                      <span className="ml-2 text-green-400 font-semibold">{plan.savings}</span>
+                    </div>
+                  </div>
                 )}
               </div>
             </CardHeader>
@@ -187,8 +236,10 @@ export default function PricingSection() {
                 onClick={() => handleSubscribe(plan.id)}
                 disabled={loadingPlan === plan.id}
                 className={`w-full ${
-                  plan.id === 'developer'
-                    ? 'bg-white text-black hover:bg-slate-100'
+                  plan.popular
+                    ? 'bg-cyan-600 text-white hover:bg-cyan-700 border-cyan-500'
+                    : plan.id === 'free'
+                    ? 'bg-slate-800 text-white hover:bg-slate-700 border border-slate-700'
                     : 'bg-slate-900 text-white hover:bg-slate-800 border border-slate-800'
                 }`}
               >

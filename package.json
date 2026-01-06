@@ -131,6 +131,7 @@
   ],
   "author": "BEAST MODE <support@beastmode.dev>",
   "license": "MIT",
+  "licenseText": "MIT License - See LICENSE.md for full terms. Core library is MIT licensed. Cloud API access requires subscription.",
   "repository": {
     "type": "git",
     "url": "https://github.com/repairman29/BEAST-MODE.git"

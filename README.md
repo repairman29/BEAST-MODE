@@ -39,14 +39,17 @@ We're not just another dev tool. We're built for **vibe coders** - developers wh
 
 ### Free Forever (MIT License)
 - ✅ **10,000 API calls/month**
-- ✅ **All 9 AI systems**
+- ✅ **Core library (MIT licensed)**
+- ✅ **Basic quality checks**
 - ✅ **Community support**
 - ✅ **Self-hosted deployment**
 
 ### Paid Tiers
-- **Developer**: $29/month - 100K calls, priority support
-- **Team**: $99/month - 500K calls, collaboration features
-- **SENTINEL**: $299/month - Enterprise governance layer, unlimited usage, white-label, SSO
+- **Developer**: $79/month ($790/year) - 100K calls, Day 2 Operations, priority support
+- **Team**: $299/month ($2,990/year) - 500K calls, team collaboration, enterprise guardrail
+- **Enterprise**: $799/month ($7,990/year) - 2M calls, white-label, SSO, custom integrations
+
+**Note:** Core library is MIT licensed and works offline. Cloud API access requires subscription.
 
 **[View Full Pricing](https://beastmode.dev/pricing)** • **[30-Day Money-Back Guarantee](https://beastmode.dev/terms)**
 
@@ -106,10 +109,16 @@ beast-mode artwork animate --narwhal
 ```javascript
 import { BeastMode } from '@beast-mode/core';
 
+// Free tier: Works offline with limited features
 const beastMode = new BeastMode({
   oracle: { enabled: true },
   codeRoach: { enabled: true },
-  daisyChain: { enabled: true },
+  daisyChain: { enabled: true }
+});
+
+// Paid tier: Add API key for cloud features
+const beastMode = new BeastMode({
+  apiKey: process.env.BEAST_MODE_API_KEY, // Get from https://beastmode.dev/dashboard
   janitor: {
     enabled: true,
     silentRefactoring: true,
@@ -119,6 +128,7 @@ const beastMode = new BeastMode({
 });
 
 await beastMode.initialize();
+// Validates subscription tier and unlocks features
 
 // Analyze code quality
 const quality = await beastMode.getQualityScore();
@@ -256,6 +266,9 @@ console.log(`Deployment: ${deployment.deploymentId}`);
 ### Environment Variables
 
 ```bash
+# BEAST MODE API Key (for cloud features)
+BEAST_MODE_API_KEY=your_api_key_here  # Get from https://beastmode.dev/dashboard
+
 # AI Service Endpoints
 ORACLE_API_URL=http://localhost:3006
 CODE_ROACH_API_URL=http://localhost:3007
@@ -270,6 +283,25 @@ AWS_SECRET_ACCESS_KEY=your_aws_secret
 # Database (optional)
 DATABASE_URL=postgresql://...
 ```
+
+### License & Subscription
+
+**Core Library:** MIT licensed - works offline with limited features  
+**Cloud API:** Requires subscription - features unlocked based on tier
+
+**Get API Key:**
+1. Sign up at https://beastmode.dev
+2. Go to Dashboard → API Keys
+3. Create new API key
+4. Set `BEAST_MODE_API_KEY` environment variable
+
+**Subscription Tiers:**
+- **Free:** $0 - 10K calls/month, basic features
+- **Developer:** $79/month - 100K calls, Day 2 Operations
+- **Team:** $299/month - 500K calls, team features
+- **Enterprise:** $799/month - 2M calls, enterprise features
+
+See [LICENSE.md](./LICENSE.md) for full licensing details.
 
 ### Advanced Configuration
 
