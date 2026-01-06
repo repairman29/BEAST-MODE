@@ -120,14 +120,26 @@ async function scanMissingLanguages(options = {}) {
     }
   });
 
-  const trainingData = scanResults
+  // Handle different return types from batchScan
+  const resultsArray = Array.isArray(scanResults) ? scanResults : 
+                       (scanResults?.results || scanResults?.data || []);
+
+  const trainingData = resultsArray
     .filter(r => r && r.features)
-    .map(r => ({
-      repo: r.repo,
-      url: r.url || `https://github.com/${r.repo}`,
-      features: r.features,
-      language: r.language || reposToScan.find(repo => (repo.repo || repo.url) === r.repo)?.language
-    }));
+    .map(r => {
+      const repoName = r.repo || r.fullName || r.name;
+      const originalRepo = reposToScan.find(repo => {
+        const repoKey = repo.repo || repo.url;
+        return repoKey === repoName || repoKey === `https://github.com/${repoName}`;
+      });
+      
+      return {
+        repo: repoName,
+        url: r.url || `https://github.com/${repoName}`,
+        features: r.features || r,
+        language: r.language || originalRepo?.language
+      };
+    });
 
   // Save results
   const timestamp = new Date().toISOString().replace(/[:.]/g, '-');

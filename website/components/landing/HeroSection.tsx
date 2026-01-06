@@ -43,7 +43,7 @@ function HeroSection() {
           {/* Left: Content */}
           <div className="space-y-8">
             <Badge variant="secondary" className="bg-cyan-500/10 text-cyan-400 border-cyan-500/20">
-              🛡️ The AI Janitor for Vibe Coders
+              🛡️ Day 2 Operations Platform
             </Badge>
 
             <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold text-white leading-[1.1] tracking-tight">

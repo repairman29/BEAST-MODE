@@ -110,10 +110,10 @@ function FeaturesSection() {
         <div className="mt-20 text-center">
           <Card className="bg-slate-950/50 border-slate-900 max-w-2xl mx-auto">
             <CardHeader>
-              <CardTitle className="text-3xl text-white">The Complete AI Janitor</CardTitle>
+              <CardTitle className="text-3xl text-white">Day 2 Operations Platform</CardTitle>
               <CardDescription className="text-slate-400 text-base">
-                These systems work together to maintain your codebase silently. Architecture enforcement, 
-                security scanning, and automatic refactoring—all while you focus on building.
+                Six powerful systems work together to maintain your codebase automatically. Architecture enforcement, 
+                security scanning, and silent refactoring—all while you focus on building. The AI Janitor works overnight.
               </CardDescription>
             </CardHeader>
             <CardContent>
