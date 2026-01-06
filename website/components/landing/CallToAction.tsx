@@ -12,51 +12,58 @@ const pricingTiers = [
     price: '$0',
     period: 'forever',
     description: 'Perfect for individual developers',
+    valueProp: '10K free calls/month',
     features: [
       '10K API calls/month',
-      'All 6 AI systems',
+      'All 9 AI systems',
       'Community support',
       'MIT License',
-      'Self-hosted option'
+      'Instant quality scores'
     ],
-    cta: 'Get Started',
+    cta: 'Get Started Free',
+    ctaValue: 'No credit card required',
     popular: false
   },
   {
     name: 'Developer',
-    price: '$29',
+    price: '$79',
     period: '/month',
     description: 'For professional developers',
+    valueProp: 'Lower than CodeClimate ($99)',
     features: [
       '100K API calls/month',
       'Priority support',
       'Advanced analytics',
-      'Custom integrations',
+      'Day 2 Operations',
       'Email support'
     ],
     cta: 'Start Free Trial',
-    popular: false
+    ctaValue: '14-day free trial',
+    popular: true
   },
   {
     name: 'Team',
-    price: '$99',
+    price: '$299',
     period: '/month',
     description: 'For growing teams',
+    valueProp: 'All-in-one platform',
     features: [
       '500K API calls/month',
       'Team collaboration',
       'Shared dashboards',
       'Multi-repo support',
-      '99.9% SLA guarantee'
+      'Architecture enforcement'
     ],
     cta: 'Start Free Trial',
-    popular: true
+    ctaValue: '14-day free trial',
+    popular: false
   },
   {
-    name: 'SENTINEL',
-    price: '$299',
+    name: 'Enterprise',
+    price: '$799',
     period: '/month',
-    description: 'Enterprise governance layer',
+    description: 'SENTINEL governance layer',
+    valueProp: 'Unlimited + compliance',
     features: [
       'Unlimited API calls',
       'Plain English reviews',
@@ -65,6 +72,7 @@ const pricingTiers = [
       '99.9% confidence threshold'
     ],
     cta: 'Contact Sales',
+    ctaValue: 'Custom pricing available',
     popular: false
   }
 ];
@@ -138,7 +146,12 @@ function CallToAction() {
                   <span className="text-5xl font-bold text-gradient-cyan">{tier.price}</span>
                   <span className="text-slate-500">{tier.period}</span>
                 </div>
-                <CardDescription className="text-slate-400">{tier.description}</CardDescription>
+                <CardDescription className="text-slate-400 mb-2">{tier.description}</CardDescription>
+                {tier.valueProp && (
+                  <div className="text-sm text-cyan-400 font-semibold">
+                    {tier.valueProp}
+                  </div>
+                )}
               </CardHeader>
               <CardContent>
                 <ul className="space-y-4 mb-8">
@@ -151,16 +164,23 @@ function CallToAction() {
                     </li>
                   ))}
                 </ul>
-                <Button
-                  className={`w-full ${
-                    tier.popular
-                      ? 'bg-white text-black hover:bg-slate-100'
-                      : 'bg-slate-900 hover:bg-slate-800 border border-slate-800'
-                  }`}
-                  onClick={() => handlePricingClick(tier.name)}
-                >
-                  {tier.cta}
-                </Button>
+                <div className="space-y-2">
+                  <Button
+                    className={`w-full ${
+                      tier.popular
+                        ? 'bg-white text-black hover:bg-slate-100'
+                        : 'bg-slate-900 hover:bg-slate-800 border border-slate-800'
+                    }`}
+                    onClick={() => handlePricingClick(tier.name)}
+                  >
+                    {tier.cta}
+                  </Button>
+                  {tier.ctaValue && (
+                    <p className="text-xs text-slate-500 text-center">
+                      {tier.ctaValue}
+                    </p>
+                  )}
+                </div>
               </CardContent>
             </Card>
           ))}
@@ -201,18 +221,32 @@ function CallToAction() {
         {/* Final CTA */}
         <div className="text-center">
           <h3 className="text-4xl font-bold text-white mb-6">
-            Ready to Wake Up to Clean Code?
+            Stop Guessing If Your Code Is Good
           </h3>
-          <p className="text-lg text-slate-400 mb-10 max-w-2xl mx-auto">
-            Join vibe coders using BEAST MODE to maintain AI-generated code with silent refactoring, architecture enforcement, and invisible CI/CD.
+          <p className="text-lg text-slate-400 mb-6 max-w-2xl mx-auto">
+            Get instant quality scores, automated fixes, and Day 2 Operations. All 9 AI systems in one platform.
           </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-10">
+            <div className="text-sm text-slate-500">
+              ✓ 10K free calls/month
+            </div>
+            <div className="text-sm text-slate-500">
+              ✓ No credit card required
+            </div>
+            <div className="text-sm text-slate-500">
+              ✓ Start in seconds
+            </div>
+          </div>
           <Button 
             size="lg" 
-            className="bg-white text-black hover:bg-slate-100"
+            className="bg-white text-black hover:bg-slate-100 px-8 py-6 text-lg"
             onClick={handleGetStarted}
           >
-            Get Started Free
+            Get Started Free →
           </Button>
+          <p className="text-sm text-slate-600 mt-4">
+            Join early adopters shaping the future of code quality
+          </p>
         </div>
 
         {/* Footer */}
