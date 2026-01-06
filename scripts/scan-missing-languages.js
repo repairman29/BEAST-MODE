@@ -60,9 +60,9 @@ async function getGitHubToken() {
 }
 
 /**
- * Load latest missing-languages discovery file
+ * Load latest missing-languages discovery file(s)
  */
-function loadLatestDiscovery() {
+function loadLatestDiscovery(combineAll = false) {
   const files = fs.readdirSync(DISCOVERED_DIR)
     .filter(f => f.startsWith('missing-languages-') && f.endsWith('.json'))
     .sort()
@@ -72,26 +72,52 @@ function loadLatestDiscovery() {
     throw new Error('No missing-languages discovery files found');
   }
 
-  const latestFile = files[0];
-  const filePath = path.join(DISCOVERED_DIR, latestFile);
-  const data = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+  if (combineAll) {
+    // Combine all missing-languages files
+    const allRepos = [];
+    const seenRepos = new Set();
+    
+    for (const file of files) {
+      const filePath = path.join(DISCOVERED_DIR, file);
+      const data = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+      const repos = data.repositories || [];
+      
+      for (const repo of repos) {
+        const repoKey = repo.repo || repo.url;
+        if (!seenRepos.has(repoKey)) {
+          seenRepos.add(repoKey);
+          allRepos.push(repo);
+        }
+      }
+    }
+    
+    console.log(`📂 Loaded ${files.length} discovery file(s)`);
+    console.log(`   Total unique repositories: ${allRepos.length}\n`);
+    
+    return allRepos;
+  } else {
+    // Load just the latest file
+    const latestFile = files[0];
+    const filePath = path.join(DISCOVERED_DIR, latestFile);
+    const data = JSON.parse(fs.readFileSync(filePath, 'utf8'));
 
-  console.log(`📂 Loaded: ${latestFile}`);
-  console.log(`   Repositories: ${data.repositories?.length || 0}\n`);
+    console.log(`📂 Loaded: ${latestFile}`);
+    console.log(`   Repositories: ${data.repositories?.length || 0}\n`);
 
-  return data.repositories || [];
+    return data.repositories || [];
+  }
 }
 
 /**
  * Scan repositories
  */
 async function scanMissingLanguages(options = {}) {
-  const { maxRepos = 1000, delayBetweenScans = 500, concurrency = 3 } = options;
+  const { maxRepos = 1000, delayBetweenScans = 500, concurrency = 3, combineAll = false } = options;
 
   console.log('🔍 Scanning Missing Languages Repositories\n');
   console.log('='.repeat(60));
 
-  const repos = loadLatestDiscovery();
+  const repos = loadLatestDiscovery(combineAll);
   const reposToScan = repos.slice(0, maxRepos);
   const repoNamesToScan = reposToScan.map(r => r.repo || r.url);
 

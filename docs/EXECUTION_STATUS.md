@@ -204,8 +204,8 @@ node scripts/discover-missing-languages.js --critical
 4. ✅ Added ROI calculator to pricing page (toggle button)
 5. ✅ Integrated ValueSection and TestimonialsSection into homepage
 6. ✅ Created migration automation script (CLI/API-first)
-7. ⏳ Apply database migration (script ready, needs execution)
-8. ⏳ Test license validation in production (pending migration)
+7. ✅ Apply database migration (executed via exec_sql RPC - SUCCESS!)
+8. ⏳ Test license validation in production (migration complete, ready to test)
 
 **Next Steps (Week 4):**
 1. Apply database migration using automation script
