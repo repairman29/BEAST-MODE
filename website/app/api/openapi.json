@@ -1,0 +1,501 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "BEAST MODE API",
+    "description": "AI-powered code quality platform with 9 integrated AI systems",
+    "version": "1.0.0",
+    "contact": {
+      "name": "BEAST MODE Support",
+      "email": "support@beastmode.dev",
+      "url": "https://beastmode.dev/support"
+    },
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://beastmode.dev/api",
+      "description": "Production server"
+    },
+    {
+      "url": "http://localhost:3000/api",
+      "description": "Local development server"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "BearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "description": "BEAST MODE API key. Format: bm_live_..."
+      }
+    },
+    "schemas": {
+      "Error": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "description": "Error message"
+          },
+          "valid": {
+            "type": "boolean",
+            "description": "Whether the request was valid"
+          },
+          "tier": {
+            "type": "string",
+            "enum": ["free", "developer", "team", "enterprise"],
+            "description": "Subscription tier"
+          }
+        }
+      },
+      "ValidationResponse": {
+        "type": "object",
+        "properties": {
+          "valid": {
+            "type": "boolean",
+            "description": "Whether the API key is valid"
+          },
+          "tier": {
+            "type": "string",
+            "enum": ["free", "developer", "team", "enterprise"],
+            "description": "Current subscription tier"
+          },
+          "subscription": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Tier name"
+              },
+              "apiCalls": {
+                "type": "integer",
+                "description": "Monthly API call limit"
+              },
+              "features": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Available features for this tier"
+              }
+            }
+          },
+          "apiCallsUsed": {
+            "type": "integer",
+            "description": "API calls used this month"
+          },
+          "apiCallsLimit": {
+            "type": "integer",
+            "description": "Monthly API call limit"
+          },
+          "apiCallsRemaining": {
+            "type": "integer",
+            "description": "Remaining API calls this month"
+          }
+        }
+      },
+      "UsageResponse": {
+        "type": "object",
+        "properties": {
+          "tier": {
+            "type": "string",
+            "enum": ["free", "developer", "team", "enterprise"]
+          },
+          "used": {
+            "type": "integer",
+            "description": "API calls used this month"
+          },
+          "limit": {
+            "type": "integer",
+            "description": "Monthly API call limit"
+          },
+          "remaining": {
+            "type": "integer",
+            "description": "Remaining API calls"
+          },
+          "usagePercentage": {
+            "type": "integer",
+            "description": "Usage percentage (0-100)"
+          },
+          "limitExceeded": {
+            "type": "boolean",
+            "description": "Whether limit has been exceeded"
+          },
+          "currentMonth": {
+            "type": "string",
+            "format": "date",
+            "description": "Current month (YYYY-MM)"
+          },
+          "recentUsage": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "endpoint": {
+                  "type": "string"
+                },
+                "method": {
+                  "type": "string"
+                },
+                "status_code": {
+                  "type": "integer"
+                },
+                "created_at": {
+                  "type": "string",
+                  "format": "date-time"
+                }
+              }
+            }
+          }
+        }
+      },
+      "APIKey": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "key_prefix": {
+            "type": "string",
+            "description": "First 12 characters of key (for display)"
+          },
+          "name": {
+            "type": "string",
+            "description": "User-friendly name"
+          },
+          "tier": {
+            "type": "string",
+            "enum": ["free", "developer", "team", "enterprise"]
+          },
+          "is_active": {
+            "type": "boolean"
+          },
+          "last_used_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "expires_at": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        }
+      },
+      "APIKeyListResponse": {
+        "type": "object",
+        "properties": {
+          "keys": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/APIKey"
+            }
+          },
+          "tier": {
+            "type": "string",
+            "enum": ["free", "developer", "team", "enterprise"]
+          },
+          "subscription": {
+            "type": "object",
+            "nullable": true
+          }
+        }
+      },
+      "APIKeyCreateResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "apiKey": {
+            "type": "string",
+            "description": "Full API key (only shown once!)"
+          },
+          "key": {
+            "$ref": "#/components/schemas/APIKey"
+          },
+          "warning": {
+            "type": "string",
+            "description": "Warning to save the key"
+          }
+        }
+      }
+    }
+  },
+  "paths": {
+    "/auth/validate": {
+      "get": {
+        "summary": "Validate API Key",
+        "description": "Validates a BEAST MODE API key and returns subscription tier and usage information",
+        "operationId": "validateApiKey",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Validation successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationResponse"
+                },
+                "examples": {
+                  "valid": {
+                    "value": {
+                      "valid": true,
+                      "tier": "developer",
+                      "subscription": {
+                        "name": "Developer",
+                        "apiCalls": 100000,
+                        "features": ["basic-quality-checks", "day2-operations", "priority-support"]
+                      },
+                      "apiCallsUsed": 5420,
+                      "apiCallsLimit": 100000,
+                      "apiCallsRemaining": 94580
+                    }
+                  },
+                  "invalid": {
+                    "value": {
+                      "valid": false,
+                      "tier": "free",
+                      "error": "Invalid API key"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - Invalid or missing API key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/usage": {
+      "get": {
+        "summary": "Get API Usage",
+        "description": "Returns current API usage statistics for the authenticated user",
+        "operationId": "getApiUsage",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Usage data retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsageResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Track API Usage",
+        "description": "Records API usage for tracking (internal use)",
+        "operationId": "trackApiUsage",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["apiKeyId", "endpoint", "method"],
+                "properties": {
+                  "apiKeyId": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "endpoint": {
+                    "type": "string"
+                  },
+                  "method": {
+                    "type": "string",
+                    "enum": ["GET", "POST", "PUT", "DELETE", "PATCH"]
+                  },
+                  "statusCode": {
+                    "type": "integer"
+                  },
+                  "responseTimeMs": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Usage recorded successfully"
+          },
+          "400": {
+            "description": "Bad request - missing required fields"
+          }
+        }
+      }
+    },
+    "/auth/api-keys": {
+      "get": {
+        "summary": "List API Keys",
+        "description": "Returns all API keys for the authenticated user",
+        "operationId": "listApiKeys",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "User ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "API keys retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIKeyListResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request - userId required"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      },
+      "post": {
+        "summary": "Create API Key",
+        "description": "Generates a new BEAST MODE API key for the user. The full key is only returned once!",
+        "operationId": "createApiKey",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["userId"],
+                "properties": {
+                  "userId": {
+                    "type": "string",
+                    "description": "User ID"
+                  },
+                  "name": {
+                    "type": "string",
+                    "description": "Optional: User-friendly name for the key",
+                    "default": "My API Key"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "API key created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIKeyCreateResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request - userId required"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/auth/api-keys/{id}": {
+      "delete": {
+        "summary": "Revoke API Key",
+        "description": "Revokes (deletes) an API key. This action cannot be undone.",
+        "operationId": "revokeApiKey",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "description": "API key ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "API key revoked successfully"
+          },
+          "404": {
+            "description": "API key not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Authentication",
+      "description": "API key management and validation"
+    },
+    {
+      "name": "Usage",
+      "description": "API usage tracking and limits"
+    }
+  ]
+}
+
