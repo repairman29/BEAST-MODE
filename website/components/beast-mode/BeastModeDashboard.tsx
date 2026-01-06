@@ -1074,12 +1074,41 @@ function QualityView({ data }: any): React.JSX.Element {
       if (response.ok) {
         const result = await response.json();
         
-        // Save scan result to localStorage
+        // Also fetch ML quality prediction
+        let mlQualityData = null;
+        try {
+          const qualityResponse = await fetch('/api/repos/quality', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              repo: quickScanRepo.trim(),
+              platform: 'beast-mode',
+              features: result.features || result.metrics // Use scan features if available
+            })
+          });
+          
+          if (qualityResponse.ok) {
+            mlQualityData = await qualityResponse.json();
+          }
+        } catch (e) {
+          console.warn('Failed to fetch ML quality (non-critical):', e);
+        }
+        
+        // Save scan result to localStorage with ML quality data
         const scanResult = {
           ...result,
           status: 'completed' as const,
           repo: result.repo || quickScanRepo.trim(),
-          timestamp: result.timestamp || new Date().toISOString()
+          timestamp: result.timestamp || new Date().toISOString(),
+          // Add ML quality data
+          mlQuality: mlQualityData ? {
+            predictedQuality: mlQualityData.quality,
+            confidence: mlQualityData.confidence,
+            percentile: mlQualityData.percentile,
+            factors: mlQualityData.factors,
+            recommendations: mlQualityData.recommendations,
+            benchmarkComparison: mlQualityData.platformSpecific?.beastMode?.benchmarkComparison
+          } : null
         };
         
         try {
@@ -1105,7 +1134,8 @@ function QualityView({ data }: any): React.JSX.Element {
         window.dispatchEvent(new Event('storage'));
         
         setQuickScanRepo('');
-        alert(`✅ Scan complete! Quality score: ${result.score}/100`);
+        const mlScore = mlQualityData ? ` (ML: ${(mlQualityData.quality * 100).toFixed(1)}%)` : '';
+        alert(`✅ Scan complete! Quality score: ${result.score}/100${mlScore}`);
       } else {
         const error = await response.json();
         alert(`❌ Scan failed: ${error.error || 'Unknown error'}`);
@@ -1749,6 +1779,11 @@ function QualityView({ data }: any): React.JSX.Element {
                     <div>
                       <div className="text-xs text-slate-500 mb-1">Current Scan</div>
                       <div className="text-lg font-bold text-white">{latestScan.score}/100</div>
+                      {latestScan.mlQuality && (
+                        <div className="text-xs text-blue-400 mt-1">
+                          ML: {(latestScan.mlQuality.predictedQuality * 100).toFixed(1)}%
+                        </div>
+                      )}
                       <div className="text-xs text-slate-500">{latestScan.issues} issues</div>
                     </div>
                     <div>
@@ -1800,6 +1835,12 @@ function QualityView({ data }: any): React.JSX.Element {
                   <span className={`font-semibold ${latestScan.score >= 80 ? 'text-green-400' : latestScan.score >= 60 ? 'text-amber-400' : 'text-red-400'}`}>
                     {latestScan.score}/100
                   </span>
+                  {latestScan.mlQuality && (
+                    <div className="text-xs text-blue-400 mt-1">
+                      ML: {(latestScan.mlQuality.predictedQuality * 100).toFixed(1)}% 
+                      {latestScan.mlQuality.percentile && ` (${latestScan.mlQuality.percentile.toFixed(0)}th)`}
+                    </div>
+                  )}
                   <div className="text-xs text-slate-500 mt-1">
                     {latestScan.issues} issues • {latestScan.improvements} improvements
                   </div>

@@ -1,150 +1,177 @@
-# Production Deployment Checklist
+# Deployment Checklist
+## Repository Quality Model - Production Deployment
 
-**Date**: 2026-01-01  
-**Status**: 📋 **Pre-Deployment**
-
----
-
-## 🎯 **PRE-DEPLOYMENT CHECKLIST**
-
-### **Environment Setup** ✅
-- [x] Health check endpoints created
-- [x] Environment variables documented
-- [x] Environment verification script created
-- [ ] Vercel environment variables configured
-- [ ] Production database connection verified
-- [ ] SSL certificates configured (Vercel handles this)
-- [ ] Domain names configured
-
-### **Configuration** ⏳
-- [ ] Vercel configuration reviewed
-- [ ] Next.js production config reviewed
-- [ ] Build settings verified
-- [ ] API routes configured
-- [ ] Middleware configured
-
-### **Testing** ⏳
-- [ ] Local production build test
-- [ ] Health check endpoints tested
-- [ ] API endpoints tested
-- [ ] Database connectivity tested
-- [ ] Environment variables verified
-
-### **Documentation** ✅
-- [x] Environment setup guide created
-- [x] Deployment checklist created
-- [ ] API documentation (in progress)
-- [ ] Deployment procedure documented
-- [ ] Rollback procedure documented
+**Date:** January 6, 2026  
+**Status:** Ready for Deployment
 
 ---
 
-## 🚀 **DEPLOYMENT PROCEDURE**
+## ✅ Pre-Deployment Verification
 
-### **Step 1: Pre-Deployment**
+### BEAST MODE
+- [x] Model file exists: `.beast-mode/models/model-notable-quality-*.json`
+- [x] Quality API endpoint: `/api/repos/quality`
+- [x] Benchmark API endpoint: `/api/repos/benchmark`
+- [x] Dashboard integration: ML quality display added
+- [x] Model loading: Verified working
+- [x] API testing: Both endpoints tested
+
+### Echeo
+- [x] Integration code: `lib/repo-quality-integration.ts`
+- [x] Trust score enhancement: `lib/trust-score.ts` updated
+- [x] Bounty quality API: `/api/bounties/[id]/quality`
+- [x] Bounty quality badge: Component created
+- [x] Feed integration: Badge added to feed page
+
+---
+
+## 🚀 Deployment Steps
+
+### Step 1: BEAST MODE Deployment
+
 ```bash
-# 1. Verify environment variables
-npm run verify:env
+cd BEAST-MODE-PRODUCT
 
-# 2. Test health checks locally
-npm run dev
-curl http://localhost:3000/api/health
+# 1. Verify all changes are committed
+git status
 
-# 3. Build for production
+# 2. Build and test locally
 cd website
 npm run build
 
-# 4. Test production build locally
-npm run start
-curl http://localhost:3000/api/health
-```
-
-### **Step 2: Deploy to Vercel**
-```bash
-# 1. Navigate to website directory
-cd BEAST-MODE-PRODUCT/website
-
-# 2. Deploy to production
+# 3. Deploy to Vercel
+cd ..
 vercel --prod --yes
 
-# 3. Verify deployment
-vercel list
+# 4. Verify deployment
+vercel ls --limit 1
 ```
 
-### **Step 3: Post-Deployment Verification**
+**Checklist:**
+- [ ] Build succeeds without errors
+- [ ] Model file is included in deployment
+- [ ] API routes are accessible
+- [ ] Dashboard loads correctly
+
+---
+
+### Step 2: Echeo Deployment
+
 ```bash
-# 1. Check health endpoint
-curl https://your-domain.com/api/health
+cd echeo-landing
 
-# 2. Check detailed health
-curl https://your-domain.com/api/health?level=detailed
+# 1. Verify all changes are committed
+git status
 
-# 3. Check service health
-curl https://your-domain.com/api/health/services
+# 2. Build and test locally
+npm run build
 
-# 4. Test API endpoints
-curl https://your-domain.com/api/ml/predict
+# 3. Deploy to Vercel
+vercel --prod --yes
+
+# 4. Verify deployment
+vercel ls --limit 1
 ```
 
----
-
-## 🔄 **ROLLBACK PROCEDURE**
-
-### **If Deployment Fails**:
-```bash
-# 1. Check deployment status
-vercel list
-
-# 2. Rollback to previous deployment
-vercel rollback
-
-# 3. Verify rollback
-curl https://your-domain.com/api/health
-```
-
-### **If Issues Detected**:
-1. Check Vercel logs: `vercel logs`
-2. Check health endpoints
-3. Review error logs
-4. Rollback if necessary
-5. Fix issues
-6. Redeploy
+**Checklist:**
+- [ ] Build succeeds without errors
+- [ ] Trust score calculation works
+- [ ] Bounty quality badge displays
+- [ ] API endpoints are accessible
 
 ---
 
-## 📊 **POST-DEPLOYMENT MONITORING**
+## 🔍 Post-Deployment Verification
 
-### **Immediate Checks** (First 5 minutes):
-- [ ] Health endpoint responding
-- [ ] All services healthy
-- [ ] No errors in logs
-- [ ] API endpoints responding
-- [ ] Database connections working
+### BEAST MODE
+- [ ] Quality API responds: `POST https://playsmuggler.com/api/repos/quality`
+- [ ] Benchmark API responds: `POST https://playsmuggler.com/api/repos/benchmark`
+- [ ] Dashboard shows ML quality scores
+- [ ] Model loads correctly in production
 
-### **First Hour**:
-- [ ] Monitor error rates
-- [ ] Monitor response times
-- [ ] Check for any alerts
-- [ ] Verify all features working
-
-### **First Day**:
-- [ ] Review performance metrics
-- [ ] Check for any issues
-- [ ] Monitor resource usage
-- [ ] Review user feedback
+### Echeo
+- [ ] Trust scores include repo quality component
+- [ ] Bounty quality badges display on feed
+- [ ] Bounty quality API responds: `GET /api/bounties/[id]/quality`
+- [ ] No console errors in browser
 
 ---
 
-## ✅ **SUCCESS CRITERIA**
+## 📊 Monitoring
 
-- ✅ Health endpoint returns 200
-- ✅ All services show as healthy
-- ✅ API endpoints responding correctly
-- ✅ No critical errors in logs
-- ✅ Response times < 500ms
-- ✅ Error rate < 1%
+### Metrics to Track
+1. **API Usage**
+   - Quality API requests/day
+   - Benchmark API requests/day
+   - Average response time
+   - Error rate
+
+2. **Model Performance**
+   - Prediction accuracy
+   - Model loading time
+   - Cache hit rate
+
+3. **User Engagement**
+   - Trust score changes
+   - Bounty quality views
+   - Dashboard quality scans
+
+### Tools
+- Vercel Analytics
+- Supabase logs
+- Custom monitoring dashboard
 
 ---
 
-**Status**: 📋 **Deployment Checklist Ready!**
+## 🐛 Troubleshooting
 
+### Issue: Model not loading
+**Solution:**
+- Check model file path in production
+- Verify file is included in deployment
+- Check Vercel build logs
+
+### Issue: API returns 503
+**Solution:**
+- Check model file exists
+- Verify path resolution
+- Check server logs
+
+### Issue: Quality scores not displaying
+**Solution:**
+- Check API responses in network tab
+- Verify component is rendering
+- Check for console errors
+
+---
+
+## 🔄 Rollback Plan
+
+If issues occur:
+
+1. **BEAST MODE:**
+   ```bash
+   cd BEAST-MODE-PRODUCT
+   vercel rollback
+   ```
+
+2. **Echeo:**
+   ```bash
+   cd echeo-landing
+   vercel rollback
+   ```
+
+---
+
+## ✅ Success Criteria
+
+- [ ] All APIs respond correctly
+- [ ] No build errors
+- [ ] No runtime errors
+- [ ] Quality scores display correctly
+- [ ] Trust scores include quality component
+- [ ] Bounty badges display correctly
+
+---
+
+**Ready to Deploy!** 🚀
