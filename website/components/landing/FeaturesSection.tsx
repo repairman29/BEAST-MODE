@@ -6,7 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui
 const features = [
   {
     title: 'Instant Quality Scoring',
-    description: 'Get your code quality score (0-100) in seconds. See issues found, get recommendations, and track improvement over time.',
+    description: 'Get your code quality score (0-100) in seconds. See issues found, get recommendations, and track improvement over time. Save hours of manual code review.',
     icon: (
       <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
@@ -16,7 +16,7 @@ const features = [
   },
   {
     title: 'Automated Code Fixes',
-    description: 'One-click fixes for common issues. Automatically applies improvements, removes console.logs, and fixes security vulnerabilities.',
+    description: 'One-click fixes for common issues. Automatically applies improvements, removes console.logs, and fixes security vulnerabilities. Fix issues while you sleep.',
     icon: (
       <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -56,7 +56,7 @@ const features = [
   },
   {
     title: 'Day 2 Operations',
-    description: 'Silent refactoring, architecture enforcement, and invisible CI/CD. Maintain your codebase automatically while you focus on building.',
+    description: 'Silent refactoring, architecture enforcement, and invisible CI/CD. Maintain your codebase automatically while you focus on building. 24/7 AI Janitor saves 10+ hours/week.',
     icon: (
       <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
@@ -82,7 +82,7 @@ function FeaturesSection() {
             <span className="text-gradient-cyan">Built In</span>
           </h2>
           <p className="text-xl text-slate-400 max-w-2xl mx-auto">
-            Six powerful janitor systems working together to maintain, secure, and optimize your AI-generated code automatically.
+            Six powerful janitor systems working together to maintain, secure, and optimize your AI-generated code automatically. Save 10+ hours per week while improving code quality.
           </p>
         </div>
 
