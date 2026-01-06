@@ -60,9 +60,10 @@ We're not just another dev tool. We're built for **vibe coders** - developers wh
 ### For New Developers
 
 **New to BEAST MODE? Start here:**
-- 📖 [Quick Start Guide](./docs/QUICK_START.md) - Get running in 5 minutes
-- 🎯 [100-Point FTUE Guide](./docs/FTUE.md) - Complete walkthrough
-- 💼 [New Developer Workflow](./docs/NEW_DEVELOPER_WORKFLOW.md) - Day-in-the-life guide
+- 📖 [Getting Started Guide](./docs/getting-started/README.md) - Complete guide to get up and running
+- 📚 [Documentation Index](./docs/README.md) - All documentation in one place
+- 🎯 [CLI Guide](./docs/guides/cli.md) - Command-line reference
+- 💼 [API Documentation](./docs/guides/api.md) - API reference
 
 ### Installation
 
