@@ -59,6 +59,7 @@ export async function GET(request: NextRequest) {
     const { searchParams } = new URL(request.url);
     const limit = parseInt(searchParams.get('limit') || '10');
     const serviceName = searchParams.get('service') || null;
+    const predictionId = searchParams.get('predictionId') || null;
 
     const collector = await getFeedbackCollector();
     if (!collector) {

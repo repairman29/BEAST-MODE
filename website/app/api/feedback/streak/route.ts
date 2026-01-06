@@ -90,7 +90,8 @@ export async function GET(request: NextRequest) {
           longestStreak: 0,
           totalFeedback: 0,
           level: 1
-        });
+        }
+      });
     }
 
     // Calculate level based on total feedback (every 10 feedback = 1 level)
