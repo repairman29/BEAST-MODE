@@ -246,9 +246,18 @@ node scripts/discover-missing-languages.js --critical
 3. ✅ Reference documentation (CLI, config, features, technical)
 4. ✅ Hyperparameter tuning script (created and ready to run)
 
+**Week 6 Status:** 🎯 **IN PROGRESS**
+
+**Week 6 Priorities:**
+1. ⏳ Feature engineering (enhance-features.js exists, ready to run)
+2. ⏳ Retrain with enhanced features (script created)
+3. ⏳ Model evaluation and comparison
+4. ⏳ Prepare for Week 7 expanded dataset
+
 **See:** 
 - `docs/WEEK5_PRIORITIES.md` for Week 5 plan
 - `docs/WEEK5_IMPLEMENTATION_SUMMARY.md` for complete summary
+- `docs/WEEK6_PRIORITIES.md` for Week 6 plan
 
 **In Progress (Other Agent):**
 - 🔄 Missing languages discovery (Java, HTML, CSS, Shell, C)
