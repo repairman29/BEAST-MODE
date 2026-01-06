@@ -4,33 +4,33 @@ import React from 'react';
 import { Card, CardContent } from '../ui/card';
 
 const metrics = [
-  { value: '10+', label: 'Hours Saved/Week', desc: 'Average time saved per developer', highlight: true },
-  { value: '5-10x', label: 'ROI', desc: 'Return on investment in time savings', highlight: true },
-  { value: '97%', label: 'Error Reduction', desc: 'Fewer bugs and issues in production' },
-  { value: '$2.5M', label: 'Annual Savings', desc: 'Potential savings for enterprise teams' }
+  { value: '$0.0007', label: 'Cost per API Call', desc: 'Infrastructure cost (verified)', highlight: true },
+  { value: '10K', label: 'Free Calls/Month', desc: 'Free forever tier (no credit card)', highlight: true },
+  { value: '9', label: 'AI Systems', desc: 'Integrated AI capabilities', highlight: false },
+  { value: 'MIT', label: 'Core License', desc: 'Open source core library', highlight: false }
 ];
 
 const useCases = [
   {
-    title: 'Value You Get',
+    title: 'What You Get',
     items: [
-      'Save 10+ hours per week per developer',
-      '5-10x ROI in time savings alone',
-      '97% reduction in production errors',
-      'Instant quality scores (0-100) in seconds',
-      'Automated fixes while you sleep (Day 2 Operations)',
-      'Track improvement over time with analytics'
+      'Instant code quality scores (0-100) in seconds',
+      'All 9 AI systems integrated in one platform',
+      'Day 2 Operations: Silent refactoring while you sleep',
+      'Automated fixes for common code issues',
+      'Track improvement over time with analytics',
+      'Free forever tier: 10K API calls/month (MIT licensed)'
     ]
   },
   {
-    title: 'Customer Success',
+    title: 'Competitive Advantages',
     items: [
-      'Teams ship 40% faster with automated quality checks',
-      'Average $50K+ saved annually per team',
-      '99.9% uptime SLA for Team and Enterprise tiers',
-      '24/7 AI Janitor works overnight to fix issues',
-      'Plain English diffs make code reviews 3x faster',
-      'Enterprise guardrail prevents costly mistakes'
+      'Lower entry price than CodeClimate ($79 vs $99/month)',
+      'More generous free tier than competitors (10K calls vs trials)',
+      'Unique Day 2 Operations feature (AI Janitor)',
+      'All-in-one platform (9 AI systems vs single-purpose tools)',
+      'Flat pricing (better for teams than per-user pricing)',
+      '70-80% gross margins enable sustainable scaling'
     ]
   }
 ];
@@ -46,10 +46,10 @@ function StatsSection() {
         {/* Metrics */}
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-            Proven Results for Development Teams
+            Transparent Infrastructure & Pricing
           </h2>
           <p className="text-lg text-slate-400 max-w-2xl mx-auto">
-            Real metrics from teams using BEAST MODE to ship better code faster
+            Verified metrics from our infrastructure analysis and competitive research
           </p>
         </div>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-24">

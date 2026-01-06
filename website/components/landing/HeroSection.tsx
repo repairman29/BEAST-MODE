@@ -53,10 +53,10 @@ function HeroSection() {
             </h1>
 
             <p className="text-xl md:text-2xl text-cyan-400 max-w-xl leading-relaxed font-semibold mb-2">
-              Ship Better Code, Save Time & Money
+              Get Your Code Quality Score in Seconds
             </p>
             <p className="text-lg md:text-xl text-slate-400 max-w-xl leading-relaxed">
-              While tools like Cursor and Windsurf help you <strong className="text-white">generate</strong> code, BEAST MODE helps you <strong className="text-white">maintain</strong> it. Save 10+ hours/week with automated quality checks, instant fixes, and AI-powered analysis. <strong className="text-white">ROI: 5-10x</strong> in time savings alone.
+              While tools like Cursor and Windsurf help you <strong className="text-white">generate</strong> code, BEAST MODE helps you <strong className="text-white">maintain</strong> it. Get instant quality scores, automated fixes, and AI-powered analysis—all in one platform with Day 2 Operations built in.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4">
@@ -97,13 +97,7 @@ function HeroSection() {
                 <svg className="w-4 h-4 text-green-400" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                 </svg>
-                <span className="text-slate-400">Save 10+ hours/week</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <svg className="w-4 h-4 text-green-400" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                </svg>
-                <span className="text-slate-400">5-10x ROI</span>
+                <span className="text-slate-400">No credit card</span>
               </div>
               <div className="flex items-center gap-2">
                 <svg className="w-4 h-4 text-green-400" fill="currentColor" viewBox="0 0 20 20">
