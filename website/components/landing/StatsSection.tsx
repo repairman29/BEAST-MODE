@@ -12,25 +12,25 @@ const metrics = [
 
 const useCases = [
   {
-    title: 'What You Get',
+    title: 'For Solo Developers',
     items: [
-      'Instant code quality scores (0-100) in seconds',
-      'All 9 AI systems integrated in one platform',
-      'Day 2 Operations: Silent refactoring while you sleep',
-      'Automated fixes for common code issues',
-      'Track improvement over time with analytics',
-      'Free forever tier: 10K API calls/month (MIT licensed)'
+      'No one to review your code? Get instant quality feedback',
+      'Don\'t know if code is good? See your score (0-100) in seconds',
+      'Hard to find the right tools? Get personalized recommendations',
+      'Questions about your code? AI answers 24/7 based on YOUR codebase',
+      'Want to improve? Track your quality score over time',
+      'Free forever tier: 10K API calls/month, no credit card required'
     ]
   },
   {
-    title: 'Competitive Advantages',
+    title: 'For Teams',
     items: [
-      'Lower entry price than CodeClimate ($79 vs $99/month)',
-      'More generous free tier than competitors (10K calls vs trials)',
-      'Unique Day 2 Operations feature (AI Janitor)',
-      'All-in-one platform (9 AI systems vs single-purpose tools)',
-      'Flat pricing (better for teams than per-user pricing)',
-      '70-80% gross margins enable sustainable scaling'
+      'Inconsistent code quality? Team metrics show you exactly where',
+      'Slow code reviews? Plain English diffs make reviews 3x faster',
+      'Hard to onboard new devs? AI answers questions about your codebase',
+      'Technical debt piling up? Silent refactoring fixes it overnight',
+      'Bugs in production? Automated fixes catch issues before they ship',
+      'Too many tools? All 9 AI systems in one platform, one dashboard'
     ]
   }
 ];
@@ -46,35 +46,67 @@ function StatsSection() {
         {/* Metrics */}
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-            Transparent Infrastructure & Pricing
+            Problems We Solve for Development Teams
           </h2>
           <p className="text-lg text-slate-400 max-w-2xl mx-auto">
-            Verified metrics from our infrastructure analysis and competitive research
+            Real problems developers face every day—and how BEAST MODE solves them
           </p>
         </div>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-24">
-          {metrics.map((metric) => (
-            <Card 
-              key={metric.label} 
-              className={`bg-black/50 border-slate-900 text-center hover:border-slate-800 transition-all ${
-                metric.highlight ? 'border-cyan-500/30 bg-gradient-to-br from-cyan-500/5 to-transparent' : ''
-              }`}
-            >
-              <CardContent className="p-8">
-                <div className={`text-4xl md:text-5xl font-bold mb-2 ${
-                  metric.highlight ? 'text-gradient-cyan' : 'text-gradient-purple'
-                }`}>
-                  {metric.value}
-                </div>
-                <div className="text-sm font-semibold text-white mb-1">
-                  {metric.label}
-                </div>
-                <div className="text-xs text-slate-500">
-                  {metric.desc}
-                </div>
-              </CardContent>
-            </Card>
-          ))}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-24">
+          <Card className="bg-black/50 border-slate-900 hover:border-cyan-500/30 transition-all">
+            <CardContent className="p-8">
+              <div className="text-3xl mb-4">❓</div>
+              <h3 className="text-lg font-semibold text-white mb-2">Don't Know If Code Is Good</h3>
+              <p className="text-sm text-slate-400">
+                Get instant quality scores (0-100) in seconds. See exactly what's wrong and how to fix it. No more guessing.
+              </p>
+            </CardContent>
+          </Card>
+          <Card className="bg-black/50 border-slate-900 hover:border-cyan-500/30 transition-all">
+            <CardContent className="p-8">
+              <div className="text-3xl mb-4">🐛</div>
+              <h3 className="text-lg font-semibold text-white mb-2">Bugs Slip Into Production</h3>
+              <p className="text-sm text-slate-400">
+                Automated fixes run overnight. Security holes closed automatically. Issues fixed before you even see them.
+              </p>
+            </CardContent>
+          </Card>
+          <Card className="bg-black/50 border-slate-900 hover:border-cyan-500/30 transition-all">
+            <CardContent className="p-8">
+              <div className="text-3xl mb-4">⏰</div>
+              <h3 className="text-lg font-semibold text-white mb-2">Slow Code Reviews</h3>
+              <p className="text-sm text-slate-400">
+                Plain English diffs make reviews 3x faster. Automated quality checks catch issues before review.
+              </p>
+            </CardContent>
+          </Card>
+          <Card className="bg-black/50 border-slate-900 hover:border-cyan-500/30 transition-all">
+            <CardContent className="p-8">
+              <div className="text-3xl mb-4">🏗️</div>
+              <h3 className="text-lg font-semibold text-white mb-2">Technical Debt Accumulates</h3>
+              <p className="text-sm text-slate-400">
+                Silent refactoring runs overnight. Architecture enforced automatically. Code improves while you sleep.
+              </p>
+            </CardContent>
+          </Card>
+          <Card className="bg-black/50 border-slate-900 hover:border-cyan-500/30 transition-all">
+            <CardContent className="p-8">
+              <div className="text-3xl mb-4">👥</div>
+              <h3 className="text-lg font-semibold text-white mb-2">Hard to Onboard New Devs</h3>
+              <p className="text-sm text-slate-400">
+                AI answers questions about YOUR codebase 24/7. New devs productive faster with instant context.
+              </p>
+            </CardContent>
+          </Card>
+          <Card className="bg-black/50 border-slate-900 hover:border-cyan-500/30 transition-all">
+            <CardContent className="p-8">
+              <div className="text-3xl mb-4">🔧</div>
+              <h3 className="text-lg font-semibold text-white mb-2">Too Many Tools to Manage</h3>
+              <p className="text-sm text-slate-400">
+                All 9 AI systems in one platform. No juggling multiple tools. One dashboard, everything you need.
+              </p>
+            </CardContent>
+          </Card>
         </div>
 
         {/* Use Cases */}

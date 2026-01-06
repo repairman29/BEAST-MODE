@@ -53,10 +53,10 @@ function HeroSection() {
             </h1>
 
             <p className="text-xl md:text-2xl text-cyan-400 max-w-xl leading-relaxed font-semibold mb-2">
-              Get Your Code Quality Score in Seconds
+              Stop Guessing If Your Code Is Good
             </p>
             <p className="text-lg md:text-xl text-slate-400 max-w-xl leading-relaxed">
-              While tools like Cursor and Windsurf help you <strong className="text-white">generate</strong> code, BEAST MODE helps you <strong className="text-white">maintain</strong> it. Get instant quality scores, automated fixes, and AI-powered analysis—all in one platform with Day 2 Operations built in.
+              Tired of wondering if your code is production-ready? Spending hours on code reviews? Dealing with bugs that slip into production? <strong className="text-white">BEAST MODE tells you what's wrong, fixes it automatically, and maintains your codebase while you sleep.</strong> All in one platform.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4">

@@ -140,36 +140,36 @@ export default function PricingSection() {
 
   const faqs = [
     {
-      question: 'Can I change plans later?',
-      answer: 'Yes! You can upgrade or downgrade your plan at any time. Changes take effect immediately, and we\'ll prorate any charges.'
+      question: 'What if I need more than the free tier?',
+      answer: 'Upgrade anytime! Your usage carries over, and we\'ll notify you before you hit limits. No surprises.'
     },
     {
-      question: 'What happens if I exceed my API limit?',
-      answer: 'We\'ll notify you when you\'re approaching your limit. You can upgrade your plan or purchase additional API calls as needed.'
+      question: 'Can I cancel anytime?',
+      answer: 'Yes! Cancel anytime, no questions asked. You keep access until the end of your billing period.'
+    },
+    {
+      question: 'What if I exceed my API limit?',
+      answer: 'We\'ll notify you when you\'re approaching your limit. Upgrade your plan or pay for overage at $0.001 per call.'
     },
     {
       question: 'Do you offer refunds?',
-      answer: 'Yes, we offer a 30-day money-back guarantee on all paid plans. No questions asked.'
+      answer: 'Yes, we offer a 30-day money-back guarantee on all paid plans. If BEAST MODE doesn\'t work for you, we\'ll refund you.'
     },
     {
-      question: 'Can I self-host BEAST MODE?',
-      answer: 'Yes! The Free plan includes self-hosting options. Enterprise plans include managed hosting with dedicated support.'
+      question: 'Can I try before I buy?',
+      answer: 'The Free plan is always free with 10K calls/month. Try everything risk-free, no credit card required.'
     },
     {
       question: 'What payment methods do you accept?',
-      answer: 'We accept all major credit cards, PayPal, and for Enterprise plans, we can arrange invoicing.'
-    },
-    {
-      question: 'Is there a free trial?',
-      answer: 'The Free plan is always free! For paid plans, you can start with the Free plan and upgrade when you\'re ready.'
+      answer: 'We accept all major credit cards. For Enterprise plans, we can arrange invoicing and annual billing.'
     }
   ];
 
   return (
-    <div className="w-full max-w-7xl space-y-6 mx-auto">
+      <div className="w-full max-w-7xl space-y-6 mx-auto">
       <div className="text-center mb-8">
-        <h2 className="text-3xl font-bold text-white mb-2">Choose Your Plan</h2>
-        <p className="text-slate-400">Start free, upgrade as you grow</p>
+        <h2 className="text-3xl font-bold text-white mb-2">Pricing That Grows With You</h2>
+        <p className="text-slate-400">Start free. Upgrade when you need more. Cancel anytime.</p>
         <div className="flex gap-4 justify-center mt-4">
           <Button
             onClick={() => setShowComparison(!showComparison)}

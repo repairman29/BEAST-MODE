@@ -82,7 +82,7 @@ function FeaturesSection() {
             <span className="text-gradient-cyan">Built In</span>
           </h2>
           <p className="text-xl text-slate-400 max-w-2xl mx-auto">
-            Six powerful janitor systems working together to maintain, secure, and optimize your AI-generated code automatically. Save 10+ hours per week while improving code quality.
+            While other tools help you generate code, BEAST MODE helps you maintain it. Six powerful systems that work automatically—fixing bugs, enforcing architecture, and keeping your codebase clean while you focus on building.
           </p>
         </div>
 
