@@ -1,6 +1,6 @@
 {
   "name": "@beast-mode/core",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "BEAST MODE - Neural Intelligence Development Ecosystem. AI-powered code analysis, deployment orchestration, and development intelligence.",
   "main": "lib/index.js",
   "module": "lib/index.js",
