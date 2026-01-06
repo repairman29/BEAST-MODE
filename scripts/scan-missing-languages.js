@@ -121,23 +121,38 @@ async function scanMissingLanguages(options = {}) {
   });
 
   // Handle different return types from batchScan
-  const resultsArray = Array.isArray(scanResults) ? scanResults : 
-                       (scanResults?.results || scanResults?.data || []);
+  // batchScan returns { results: [...], totalScanned, successful, optedOut }
+  // Each result from scanPublicRepo is a metadata object directly
+  const resultsArray = scanResults?.results || (Array.isArray(scanResults) ? scanResults : []);
+
+  console.log(`\n📊 Processing ${resultsArray.length} scan results...`);
 
   const trainingData = resultsArray
-    .filter(r => r && r.features)
+    .filter(r => r && (r.repo || r.metadata))
     .map(r => {
-      const repoName = r.repo || r.fullName || r.name;
+      // scanPublicRepo returns metadata directly: { repo, url, stars, forks, ... }
+      // We need to wrap it in a features.metadata structure for consistency
+      const repoName = r.repo || r.metadata?.repo;
       const originalRepo = reposToScan.find(repo => {
-        const repoKey = repo.repo || repo.url;
+        const repoKey = repo.repo || repo.url?.replace('https://github.com/', '');
         return repoKey === repoName || repoKey === `https://github.com/${repoName}`;
       });
       
+      // Create features structure matching what retrain script expects
+      const features = {
+        metadata: {
+          ...r,
+          repo: repoName,
+          language: r.language || originalRepo?.language || 'Unknown',
+          primaryLanguage: r.language || originalRepo?.language || 'Unknown',
+        }
+      };
+      
       return {
-        repo: repoName,
-        url: r.url || `https://github.com/${repoName}`,
-        features: r.features || r,
-        language: r.language || originalRepo?.language
+        repo: repoName || originalRepo?.repo || 'unknown',
+        url: r.url || originalRepo?.url || `https://github.com/${repoName || 'unknown'}`,
+        features: features,
+        language: r.language || originalRepo?.language || 'Unknown'
       };
     });
 
