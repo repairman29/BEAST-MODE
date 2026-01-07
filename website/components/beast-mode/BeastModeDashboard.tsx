@@ -14,6 +14,7 @@ import QuickActions from './QuickActions';
 import Sidebar from './Sidebar';
 import DashboardHeader from './DashboardHeader';
 import ValueMetrics from './ValueMetrics';
+import DashboardROICalculator from './DashboardROICalculator';
 import FTUEOnboarding from './FTUEOnboarding';
 import PluginManager from './PluginManager';
 import PluginReviews from './PluginReviews';
@@ -443,6 +444,13 @@ function BeastModeDashboardInner({ initialView }: BeastModeDashboardInnerProps) 
         </div>
 
               <GamificationSystem userId={user?.id} />
+              
+              {/* ROI Calculator - Pre-filled with user's actual data */}
+              {user && (
+                <div className="mb-8">
+                  <DashboardROICalculator />
+                </div>
+              )}
               
               <QuickActions
                 onScanRepo={() => setCurrentView('quality')}
