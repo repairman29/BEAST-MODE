@@ -218,6 +218,7 @@ function generatePlatformSpecific(
 }
 
 export async function POST(request: NextRequest) {
+  const startTime = Date.now();
   try {
     const body: QualityRequest = await request.json();
     const { repo, platform, features: providedFeatures } = body;
@@ -280,16 +281,78 @@ export async function POST(request: NextRequest) {
       platformSpecific
     };
     
-    return NextResponse.json(response);
-    
-  } catch (error: any) {
-    console.error('[Quality API] Error:', error);
-    return NextResponse.json(
-      { error: 'Failed to predict repository quality', details: error.message },
-      { status: 500 }
-    );
-  }
-}
+        // Track performance
+        const duration = Date.now() - startTime;
+        if (typeof window === 'undefined') {
+          // Server-side: track via API
+          try {
+            await fetch(`${request.url.split('/api')[0]}/api/beast-mode/monitoring/performance`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                stats: {
+                  'api.repos.quality': {
+                    operation: 'api.repos.quality',
+                    count: 1,
+                    totalDuration: duration,
+                    averageDuration: duration,
+                    minDuration: duration,
+                    maxDuration: duration,
+                    p50: duration,
+                    p95: duration,
+                    p99: duration,
+                    errorCount: 0,
+                    errorRate: 0,
+                  },
+                },
+                timestamp: Date.now(),
+              }),
+            });
+          } catch (e) {
+            // Silently fail
+          }
+        }
+        
+        return NextResponse.json(response);
+        
+      } catch (error: any) {
+        console.error('[Quality API] Error:', error);
+        const duration = Date.now() - startTime;
+        // Track error performance
+        if (typeof window === 'undefined') {
+          try {
+            await fetch(`${request.url.split('/api')[0]}/api/beast-mode/monitoring/performance`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                stats: {
+                  'api.repos.quality': {
+                    operation: 'api.repos.quality',
+                    count: 1,
+                    totalDuration: duration,
+                    averageDuration: duration,
+                    minDuration: duration,
+                    maxDuration: duration,
+                    p50: duration,
+                    p95: duration,
+                    p99: duration,
+                    errorCount: 1,
+                    errorRate: 100,
+                  },
+                },
+                timestamp: Date.now(),
+              }),
+            });
+          } catch (e) {
+            // Silently fail
+          }
+        }
+        return NextResponse.json(
+          { error: 'Failed to predict repository quality', details: error.message },
+          { status: 500 }
+        );
+      }
+    }
 
 export async function GET() {
   return NextResponse.json({
