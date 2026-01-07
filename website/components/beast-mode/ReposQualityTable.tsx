@@ -38,14 +38,38 @@ export default function ReposQualityTable({ repos, onRefresh }: ReposQualityTabl
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('desc');
   const [filter, setFilter] = useState<string>('');
 
-  // Initialize repo qualities
+  // Initialize repo qualities (only for new repos, preserve existing data)
   useEffect(() => {
-    console.log('[ReposQualityTable] Initializing with', repos.length, 'repos');
-    const initial = new Map<string, RepoQuality>();
-    repos.forEach(repo => {
-      initial.set(repo, { repo, loading: false });
+    console.log('[ReposQualityTable] Repos prop changed:', repos.length, 'repos');
+    setRepoQualities(prev => {
+      const updated = new Map(prev);
+      let hasChanges = false;
+      
+      // Add new repos that don't exist yet
+      repos.forEach(repo => {
+        if (!updated.has(repo)) {
+          updated.set(repo, { repo, loading: false });
+          hasChanges = true;
+        }
+      });
+      
+      // Remove repos that are no longer in the list (optional - comment out if you want to keep old data)
+      // const repoSet = new Set(repos);
+      // for (const [key] of updated) {
+      //   if (!repoSet.has(key)) {
+      //     updated.delete(key);
+      //     hasChanges = true;
+      //   }
+      // }
+      
+      // Only update if there are actual changes
+      if (hasChanges) {
+        console.log('[ReposQualityTable] Updated repo list, preserving existing quality data');
+        return updated;
+      }
+      
+      return prev; // No changes, return same Map to avoid re-render
     });
-    setRepoQualities(initial);
   }, [repos]);
 
   const analyzeAllRepos = async () => {
@@ -127,7 +151,9 @@ export default function ReposQualityTable({ repos, onRefresh }: ReposQualityTabl
     }
 
     setLoading(false);
-    if (onRefresh) onRefresh();
+    // Don't call onRefresh here - it causes repos prop to change and resets state
+    // Only call onRefresh if explicitly needed (e.g., after manual refresh button)
+    // if (onRefresh) onRefresh();
   };
 
   const getQualityColor = (quality: number) => {
@@ -143,6 +169,7 @@ export default function ReposQualityTable({ repos, onRefresh }: ReposQualityTabl
   };
 
   // Filter and sort repos (client-side filtering of already-fetched data)
+  // TODO: Move to API route for better architecture
   // ARCHITECTURE: Moved to API route
 // const filteredAndSorted = Array.from(repoQualities.values())
     .filter((repo: any) => {
@@ -185,12 +212,8 @@ export default function ReposQualityTable({ repos, onRefresh }: ReposQualityTabl
   };
 
   // Count repos that have been analyzed (quality can be 0, so check for !== undefined, not truthy)
+  // TODO: Move to API route for better architecture
   // ARCHITECTURE: Moved to API route
-// // ARCHITECTURE: Moved to API route
-// // ARCHITECTURE: Moved to API route
-// // ARCHITECTURE: Moved to API route
-// // ARCHITECTURE: Moved to API route
-// // ARCHITECTURE: Moved to API route
 // const analyzedCount = Array.from(repoQualities.values()).filter((r: any) => 
     r.quality !== undefined && r.quality !== null && !r.loading
   ).length;
@@ -217,15 +240,8 @@ export default function ReposQualityTable({ repos, onRefresh }: ReposQualityTabl
                 <Button
                   onClick={async () => {
                     try {
+                      // TODO: Move to API route for better architecture
                       // ARCHITECTURE: Moved to API route
-// // ARCHITECTURE: Moved to API route
-// // ARCHITECTURE: Moved to API route
-// // ARCHITECTURE: Moved to API route
-// // ARCHITECTURE: Moved to API route
-// // ARCHITECTURE: Moved to API route
-// // ARCHITECTURE: Moved to API route
-// // ARCHITECTURE: Moved to API route
-// // ARCHITECTURE: Moved to API route
 // const reposWithData = Array.from(repoQualities.values())
                         .filter((r: any) => r.quality !== undefined)
                         .map((r: any) => ({
