@@ -324,7 +324,7 @@ export async function POST(request: NextRequest) {
     // Generate platform-specific insights
     const platformSpecific = generatePlatformSpecific(quality, features, platform);
     
-    const response: QualityResponse = {
+    const responseData: QualityResponse = {
       quality: Math.max(0, Math.min(1, quality)),
       confidence,
       percentile: Math.max(0, Math.min(100, percentile)),
@@ -333,47 +333,47 @@ export async function POST(request: NextRequest) {
       platformSpecific
     };
     
-        // Track performance
-        const duration = Date.now() - startTime;
-        if (typeof window === 'undefined') {
-          // Server-side: track via API
-          try {
-            await fetch(`${request.url.split('/api')[0]}/api/beast-mode/monitoring/performance`, {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({
-                stats: {
-                  'api.repos.quality': {
-                    operation: 'api.repos.quality',
-                    count: 1,
-                    totalDuration: duration,
-                    averageDuration: duration,
-                    minDuration: duration,
-                    maxDuration: duration,
-                    p50: duration,
-                    p95: duration,
-                    p99: duration,
-                    errorCount: 0,
-                    errorRate: 0,
-                  },
-                },
-                timestamp: Date.now(),
-              }),
-            });
-          } catch (e) {
-            // Silently fail
-          }
-        }
-        
-        const response = NextResponse.json(responseData);
-        
-        // Add cache headers for successful responses
-        response.headers.set('Cache-Control', 'public, max-age=300, stale-while-revalidate=600');
-        
-        // Store in cache
-        cache.set(repo, providedFeatures, responseData);
-        
-        return response;
+    // Track performance
+    const duration = Date.now() - startTime;
+    if (typeof window === 'undefined') {
+      // Server-side: track via API
+      try {
+        await fetch(`${request.url.split('/api')[0]}/api/beast-mode/monitoring/performance`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            stats: {
+              'api.repos.quality': {
+                operation: 'api.repos.quality',
+                count: 1,
+                totalDuration: duration,
+                averageDuration: duration,
+                minDuration: duration,
+                maxDuration: duration,
+                p50: duration,
+                p95: duration,
+                p99: duration,
+                errorCount: 0,
+                errorRate: 0,
+              },
+            },
+            timestamp: Date.now(),
+          }),
+        });
+      } catch (e) {
+        // Silently fail
+      }
+    }
+    
+    const response = NextResponse.json(responseData);
+    
+    // Add cache headers for successful responses
+    response.headers.set('Cache-Control', 'public, max-age=300, stale-while-revalidate=600');
+    
+    // Store in cache
+    cache.set(repo, providedFeatures, responseData);
+    
+    return response;
         
       } catch (error: any) {
         console.error('[Quality API] Error:', error);
