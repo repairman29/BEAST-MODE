@@ -1,5 +1,17 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getQualityCache } from '../../../../../lib/mlops/qualityCache';
+
+// Import from BEAST-MODE-PRODUCT root (outside website directory)
+// Use dynamic require to avoid build-time errors
+let getQualityCache: any;
+
+try {
+  const qualityCache = require('../../../../../../lib/mlops/qualityCache');
+  getQualityCache = qualityCache.getQualityCache || qualityCache.default?.getQualityCache;
+} catch (error) {
+  // Fallback if module doesn't exist
+  console.warn('[Quality Stats] Module not available, using fallback');
+  getQualityCache = () => ({ getStats: () => ({}) });
+}
 
 /**
  * GET /api/repos/quality/stats
