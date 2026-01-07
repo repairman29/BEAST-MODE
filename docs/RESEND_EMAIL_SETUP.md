@@ -2,7 +2,7 @@
 ## Email Addresses and Projects Configuration
 
 **Date:** January 2026  
-**Domain:** `beastmode.dev`  
+**Domain:** `beast-mode.dev`  
 **Status:** 📋 **Setup Required**
 
 ---
@@ -11,7 +11,7 @@
 
 ### **1. Primary Sending Address** ⭐
 
-#### `notifications@beastmode.dev`
+#### `notifications@beast-mode.dev`
 - **Purpose:** Main sending address for all transactional emails
 - **Used For:**
   - Welcome emails
@@ -133,7 +133,7 @@ Update email service configuration:
 ```typescript
 // In email service config
 {
-  from: 'notifications@beastmode.dev',
+  from: 'notifications@beast-mode.dev',
   replyTo: 'support@beastmode.dev',
   provider: 'resend'
 }
@@ -162,7 +162,7 @@ If you want to receive emails in your personal inbox:
 
 | Address | Type | Purpose | Status | Action Needed |
 |---------|------|---------|--------|---------------|
-| `notifications@beastmode.dev` | Sending | Primary transactional emails | ⚠️ Needs setup | Verify domain |
+| `notifications@beast-mode.dev` | Sending | Primary transactional emails | ⚠️ Needs setup | Verify domain |
 | `support@beastmode.dev` | Receiving | Customer support | ⚠️ Needs setup | Set up forwarding |
 | `security@beastmode.dev` | Receiving | Security inquiries | ⚠️ Needs setup | Set up forwarding |
 | `admin@beastmode.dev` | Receiving | Admin communications | ⚠️ Optional | Set up if needed |
