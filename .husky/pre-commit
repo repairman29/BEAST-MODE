@@ -1,0 +1,52 @@
+#!/bin/sh
+# Pre-commit hook to check for sensitive files
+# Install: npm install --save-dev husky && npx husky install
+
+. "$(dirname "$0")/_/husky.sh"
+
+# Check for sensitive files
+SENSITIVE_PATTERNS=(
+  "docs/PRICING_90_PERCENT_MARGIN_STRATEGY.md"
+  "docs/PRICING_MODEL_DESIGN.md"
+  "docs/PRICING_STRATEGY_REVIEW.md"
+  "docs/COMPETITIVE_PRICING_ANALYSIS.md"
+  "docs/INFRASTRUCTURE_COST_ANALYSIS.md"
+  "docs/business/"
+  "docs/STRATEGIC_ROADMAP"
+  "docs/ACTIONABLE_IMPLEMENTATION_PLAN.md"
+  "docs/EXECUTIVE_SUMMARY"
+  "docs/MODEL_BUSINESS_VALUE_STRATEGY.md"
+)
+
+FOUND=0
+
+for pattern in "${SENSITIVE_PATTERNS[@]}"; do
+  for file in $(git diff --cached --name-only | grep -E "$pattern" || true); do
+    if [ -n "$file" ]; then
+      echo "❌ ERROR: Sensitive file detected: $file"
+      echo "   This file contains business strategy/costs and should not be committed to public repo."
+      echo "   Add it to .gitignore or move to private repo."
+      FOUND=1
+    fi
+  done
+done
+
+# Check for sensitive keywords in staged files
+SENSITIVE_KEYWORDS=("margin.*90%" "infrastructure.*cost" "revenue.*projection" "pricing.*strategy")
+
+for keyword in "${SENSITIVE_KEYWORDS[@]}"; do
+  if git diff --cached | grep -iE "$keyword" >/dev/null 2>&1; then
+    echo "❌ ERROR: Sensitive keyword detected: $keyword"
+    echo "   Review your changes for business-sensitive information."
+    FOUND=1
+  fi
+done
+
+if [ $FOUND -eq 1 ]; then
+  echo ""
+  echo "💡 Tip: See docs/PUBLIC_REPO_GUIDELINES.md for what's safe to commit."
+  exit 1
+fi
+
+exit 0
+

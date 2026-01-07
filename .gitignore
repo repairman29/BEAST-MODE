@@ -51,18 +51,35 @@ Thumbs.db
 
 # Sensitive Business Documents (DO NOT COMMIT TO PUBLIC REPO)
 # These contain pricing strategies, margins, costs, and business plans
+
+# Pricing & Cost Analysis
 docs/PRICING_90_PERCENT_MARGIN_STRATEGY.md
 docs/PRICING_MODEL_DESIGN.md
 docs/PRICING_STRATEGY_REVIEW.md
 docs/COMPETITIVE_PRICING_ANALYSIS.md
-docs/business/
 docs/INFRASTRUCTURE_COST_ANALYSIS.md
+docs/*PRICING*.md
+docs/*MARGIN*.md
+docs/*COST*.md
+
+# Business Strategy & Plans
+docs/business/
+docs/business/**
 docs/STRATEGIC_ROADMAP*.md
 docs/ACTIONABLE_IMPLEMENTATION_PLAN.md
-docs/EXECUTIVE_SUMMARY*.md
 docs/IMMEDIATE_INTEGRATION_WORK.md
 docs/CRITICAL_INTEGRATION_CHECKLIST.md
 docs/MODEL_BUSINESS_VALUE_STRATEGY.md
+docs/EXECUTIVE_SUMMARY*.md
+docs/EXECUTIVE_SUMMARY_XGBOOST.md
+
+# Strategy Documents (business-related only - technical strategies are OK)
+# Note: Some strategy docs are technical (ML_STORAGE_STRATEGY, etc.) and are OK
+# Only exclude business/margin/pricing strategies
+docs/NPM_PACKAGING_LICENSING_STRATEGY.md
+docs/*PRICING*STRATEGY*.md
+docs/*MARGIN*STRATEGY*.md
+docs/*BUSINESS*STRATEGY*.md
 
 # ML Model Files (Large, may contain proprietary data)
 .beast-mode/models/
