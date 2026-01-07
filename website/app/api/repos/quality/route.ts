@@ -235,7 +235,7 @@ async function getMLIntegration() {
   }
 
   // Initialize new instance
-  const { MLModelIntegration } = require('../../../../BEAST-MODE-PRODUCT/lib/mlops/mlModelIntegration');
+  const { MLModelIntegration } = require('../../../../../lib/mlops/mlModelIntegration');
   mlIntegrationInstance = new MLModelIntegration();
   const initPromise = mlIntegrationInstance.initialize().then(() => {
     mlIntegrationInitialized = true;
@@ -249,9 +249,9 @@ async function getMLIntegration() {
 export async function POST(request: NextRequest) {
   const startTime = Date.now();
   
-  // Initialize monitoring and cache
-  const { getQualityMonitoring } = require('../../../../BEAST-MODE-PRODUCT/lib/mlops/qualityMonitoring');
-  const { getQualityCache } = require('../../../../BEAST-MODE-PRODUCT/lib/mlops/qualityCache');
+    // Initialize monitoring and cache
+    const { getQualityMonitoring } = require('../../../../../lib/mlops/qualityMonitoring');
+    const { getQualityCache } = require('../../../../../lib/mlops/qualityCache');
   const monitoring = getQualityMonitoring();
   const cache = getQualityCache();
   

@@ -22,7 +22,9 @@
 - **[API Documentation](./guides/api.md)** - Complete API reference
 - **[CLI Guide](./guides/cli.md)** - Command-line interface reference
 - **[Day 2 Operations](./features/day2-operations.md)** - AI Janitor and silent refactoring
+- **[MVP User Guide](./guides/mvp-user-guide.md)** - MVP features and usage
 - **[Troubleshooting](./guides/troubleshooting.md)** - Common issues and solutions
+- **[MVP Troubleshooting](./guides/mvp-troubleshooting.md)** - MVP-specific issues
 - **[FAQ](./guides/faq.md)** - Frequently asked questions
 
 ### Advanced Guides
