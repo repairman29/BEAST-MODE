@@ -3,7 +3,7 @@
   "displayName": "BEAST MODE",
   "description": "AI-powered code quality, suggestions, and automation",
   "version": "0.1.0",
-  "publisher": "beast-mode",
+  "publisher": "beastmode",
   "engines": {
     "vscode": "^1.80.0"
   },
