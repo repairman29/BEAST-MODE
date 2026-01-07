@@ -91,6 +91,7 @@ export default function PricingSection() {
   const [loadingPlan, setLoadingPlan] = useState<string | null>(null);
   const [showComparison, setShowComparison] = useState(false);
   const [showFAQ, setShowFAQ] = useState(false);
+  const [showROI, setShowROI] = useState(false);
 
   const handleSubscribe = async (planId: string) => {
     if (planId === 'free') {
