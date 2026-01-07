@@ -28,7 +28,7 @@ export class SuggestionProvider {
             );
 
             if (result.success && result.suggestions.length > 0) {
-              return result.suggestions.map(suggestion => ({
+              return result.suggestions.map((suggestion: any) => ({
                 insertText: suggestion.text,
                 range: new vscode.Range(position, position),
                 command: {

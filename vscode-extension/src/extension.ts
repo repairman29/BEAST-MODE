@@ -88,7 +88,8 @@ export function activate(context: vscode.ExtensionContext) {
         );
 
         if (selected && typeof selected === 'object' && 'label' in selected) {
-          const suggestion = suggestions.find((s: any) => s.text === selected.label);
+          const selectedLabel = (selected as { label: string }).label;
+          const suggestion = suggestions.find((s: any) => s.text === selectedLabel);
           if (suggestion) {
             editor.edit(editBuilder => {
               editBuilder.insert(position, suggestion.text);
