@@ -76,49 +76,49 @@ SOFTWARE.
 
 ### Developer Tier
 
-**Price:** $79/month ($790/year - save $158)  
+**Price:** $149/month ($1,490/year - save $298, 17% discount)  
 **API Calls:** 100,000/month included  
 **License:** Commercial subscription required  
 **Features:**
 - ✅ Everything in Free tier
-- ✅ All Day 2 Operations features
+- ✅ LLM-powered suggestions
+- ✅ Quality intelligence (ML models)
+- ✅ Real-time code suggestions
+- ✅ Codebase chat
 - ✅ Priority email support
-- ✅ Advanced analytics
-- ✅ Quality improvement tracking
-- ✅ Overnight janitor
-- ✅ Silent refactoring
+- ✅ Quality trends & analytics
+- ✅ Automated testing & refactoring
 
 **Value:** Save 16-30 hours per week • Improve code quality by 25+ points  
 **Perfect for:** Individual developers, freelancers
 
-**Overage:** $0.001 per API call (after 100K)
+**Overage:** $0.002 per API call (after 100K) - 90% margin
 
 ---
 
 ### Team Tier
 
-**Price:** $299/month ($2,990/year - save $598)  
+**Price:** $599/month ($5,990/year - save $1,198, 17% discount)  
 **API Calls:** 500,000/month included  
 **License:** Commercial subscription required  
 **Features:**
 - ✅ Everything in Developer tier
 - ✅ Team collaboration (up to 10 users)
-- ✅ Enterprise guardrail
-- ✅ Plain English diffs
-- ✅ Team analytics
+- ✅ Multi-file editing
+- ✅ Team analytics & insights
 - ✅ Phone/video support
 - ✅ SLA (99.9% uptime)
 
 **Value:** Save $65K-$325K per year • 50% faster onboarding  
 **Perfect for:** Teams of 2-10 developers
 
-**Overage:** $0.0008 per API call (after 500K)
+**Overage:** $0.0015 per API call (after 500K) - 87% margin
 
 ---
 
 ### Enterprise Tier
 
-**Price:** $799/month ($7,990/year - save $1,598)  
+**Price:** $1,999/month ($19,990/year - save $3,998, 17% discount)  
 **API Calls:** 2,000,000/month included  
 **License:** Commercial subscription required  
 **Features:**
@@ -136,7 +136,7 @@ SOFTWARE.
 **Value:** Save $100K-$500K per year • Enterprise governance  
 **Perfect for:** Organizations with 50+ developers
 
-**Overage:** $0.0005 per API call (after 2M)
+**Overage:** $0.001 per API call (after 2M) - 80% margin
 
 ---
 
