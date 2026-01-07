@@ -835,7 +835,12 @@ export async function POST(request: NextRequest) {
     }
     
     const quality = predictionResult.predictedQuality;
-    const confidence = predictionResult.confidence || 0.5;
+    // Enhanced confidence: combine model confidence with feature completeness
+    const baseConfidence = predictionResult.confidence || 0.5;
+    const featureCount = Object.keys(features).length;
+    const expectedFeatures = 60; // Based on model training
+    const featureCompleteness = Math.min(1, featureCount / expectedFeatures);
+    const confidence = Math.min(0.95, baseConfidence * 0.7 + featureCompleteness * 0.3);
     
     // Log prediction details for debugging
     if (quality === 0.5 && !usingFallback) {

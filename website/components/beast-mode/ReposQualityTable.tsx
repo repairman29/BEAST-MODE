@@ -312,6 +312,7 @@ export default function ReposQualityTable({ repos, onRefresh }: ReposQualityTabl
                       try {
                         // Get average quality
                         // ARCHITECTURE: Moved to API route
+// // ARCHITECTURE: Moved to API route
 // const reposWithQuality = Array.from(repoQualities.values())
                           .filter((r: any) => r.quality !== undefined && r.quality !== null);
                         
@@ -340,6 +341,38 @@ export default function ReposQualityTable({ repos, onRefresh }: ReposQualityTabl
                         }
 
                         const plan = await response.json();
+                        
+                        // Auto-collect feedback: User acted on recommendation
+                        if (firstRepo && reposWithQuality[0].quality !== undefined) {
+                          try {
+                            // Find predictionId from the quality data if available
+                            const repoData = reposWithQuality.find(r => r.repo === firstRepo);
+                            if (repoData && (repoData as any).predictionId) {
+                              await fetch('/api/feedback/auto-collect', {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify({
+                                  actions: [{
+                                    actionType: 'quality_improvement_plan_created',
+                                    predictionId: (repoData as any).predictionId,
+                                    metadata: {
+                                      repo: firstRepo,
+                                      currentQuality: reposWithQuality[0].quality,
+                                      targetQuality,
+                                      estimatedFinalQuality: plan.finalQuality,
+                                      filesToGenerate: plan.generatedFiles?.length || 0,
+                                      outcome: plan.success ? 1.0 : 0.5 // Positive outcome if plan created
+                                    }
+                                  }]
+                                })
+                              });
+                            }
+                          } catch (feedbackError) {
+                            // Silently fail - feedback is optional
+                            console.warn('Failed to auto-collect feedback:', feedbackError);
+                          }
+                        }
+                        
                         alert(`✅ Improvement plan created!\n\nCurrent: ${(plan.currentQuality * 100).toFixed(1)}%\nTarget: ${(targetQuality * 100).toFixed(1)}%\nEstimated: ${(plan.finalQuality * 100).toFixed(1)}%\n\nFiles to generate: ${plan.generatedFiles.length}`);
                       } catch (error: any) {
                         console.error('Failed to create improvement plan:', error);
