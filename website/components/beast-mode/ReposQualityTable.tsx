@@ -127,6 +127,7 @@ export default function ReposQualityTable({ repos, onRefresh }: ReposQualityTabl
   // TODO: Move to API route for better architecture
   // ARCHITECTURE: Moved to API route
   // ARCHITECTURE: Moved to API route
+// // ARCHITECTURE: Moved to API route
 // const filteredAndSorted = Array.from(repoQualities.values())
     .filter(repo => {
       if (!filter) return true;
@@ -170,6 +171,7 @@ export default function ReposQualityTable({ repos, onRefresh }: ReposQualityTabl
   // TODO: Move to API route for better architecture
   // ARCHITECTURE: Moved to API route
   // ARCHITECTURE: Moved to API route
+// // ARCHITECTURE: Moved to API route
 // const analyzedCount = Array.from(repoQualities.values()).filter((r: any) => r.quality !== undefined && !r.loading).length;
   const hasData = analyzedCount > 0;
 
@@ -197,17 +199,16 @@ export default function ReposQualityTable({ repos, onRefresh }: ReposQualityTabl
                         // TODO: Move to API route for better architecture
                         // ARCHITECTURE: Moved to API route
                         // ARCHITECTURE: Moved to API route
-// // ARCHITECTURE: Moved to API route
 // const reposWithData = Array.from(repoQualities.values())
-                          .filter(r => r.quality !== undefined)
-                        .map(r => ({
-                          repo: r.repo,
-                          quality: r.quality,
-                          confidence: r.confidence,
-                          percentile: r.percentile,
-                          factors: r.factors,
-                          recommendations: r.recommendations
-                        }));
+                          .filter((r: any) => r.quality !== undefined)
+                          .map((r: any) => ({
+                            repo: r.repo,
+                            quality: r.quality,
+                            confidence: r.confidence,
+                            percentile: r.percentile,
+                            factors: r.factors,
+                            recommendations: r.recommendations
+                          }));
 
                       if (reposWithData.length === 0) {
                         alert('Please analyze repos first before exporting');
