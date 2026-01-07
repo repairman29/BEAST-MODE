@@ -1,5 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { fileQualityScorer } from '../../../../../lib/mlops/fileQualityScorer';
+import { getDecryptedToken } from '../../../../lib/github-token';
+
+// Dynamic require for Node.js modules
+let fileQualityScorer: any;
+let githubFileFetcher: any;
+try {
+  fileQualityScorer = require('../../../../../lib/mlops/fileQualityScorer').fileQualityScorer;
+  githubFileFetcher = require('../../../../../lib/github/fileFetcher');
+} catch (error) {
+  console.error('[File Quality API] Failed to load modules:', error);
+}
 
 /**
  * File-Level Quality Analysis API
@@ -19,11 +29,51 @@ export async function POST(request: NextRequest) {
       );
     }
     
+    // Auto-fetch files from GitHub if not provided
+    let fetchedFiles = files;
     if (!files || !Array.isArray(files) || files.length === 0) {
-      return NextResponse.json(
-        { error: 'Files array is required with file paths and content' },
-        { status: 400 }
-      );
+      console.log(`[File Quality API] Files not provided for ${repo}, fetching from GitHub...`);
+      
+      try {
+        // Get user's GitHub token if available (for private repos)
+        let userToken = null;
+        const userId = request.cookies.get('github_oauth_user_id')?.value;
+        if (userId) {
+          try {
+            userToken = await getDecryptedToken(userId);
+            if (userToken) {
+              githubFileFetcher.initializeUserToken(userToken);
+            }
+          } catch (error) {
+            console.warn('[File Quality API] Could not get user token: process.env.TOKEN || ''/');
+        if (!owner || !repoName) {
+          return NextResponse.json(
+            { error: 'Invalid repository format. Use: owner/repo' },
+            { status: 400 }
+          );
+        }
+
+        // Fetch files from GitHub
+        fetchedFiles = await githubFileFetcher.fetchRepositoryFiles(owner, repoName, {
+          maxFiles: 50, // Limit to 50 files for performance
+          maxFileSize: 50000, // 50KB max per file
+        });
+
+        if (!fetchedFiles || fetchedFiles.length === 0) {
+          return NextResponse.json(
+            { error: 'No code files found in repository' },
+            { status: 404 }
+          );
+        }
+
+        console.log(`[File Quality API] Fetched ${fetchedFiles.length} files from GitHub`);
+      } catch (error: any) {
+        console.error('[File Quality API] Error fetching files from GitHub:', error);
+        return NextResponse.json(
+          { error: 'Failed to fetch files from GitHub', details: error.message },
+          { status: 500 }
+        );
+      }
     }
     
     // Get repository context (from quality API or scan)
@@ -52,8 +102,8 @@ export async function POST(request: NextRequest) {
       console.warn('[File Quality API] Could not fetch repo context:', error);
     }
     
-    // Score all files
-    const fileAnalysis = fileQualityScorer.scoreRepository(files, repoContext);
+    // Score all files (async now, stores in Supabase)
+    const fileAnalysis = await fileQualityScorer.scoreRepository(fetchedFiles, repoContext, repo);
     
     // Get quality recommendations
     let qualityRecommendations = [];

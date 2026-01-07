@@ -43,6 +43,11 @@ import UnifiedAnalyticsView from './UnifiedAnalyticsView';
 import JanitorDashboard from './JanitorDashboard';
 import FeedbackDashboard from '../feedback/FeedbackDashboard';
 import ReposQualityTable from './ReposQualityTable';
+import QualityTrendsChart from './QualityTrendsChart';
+import ThemesAndOpportunities from './ThemesAndOpportunities';
+import FeatureGenerator from './FeatureGenerator';
+import CodebaseChat from './CodebaseChat';
+import RealtimeSuggestions from './RealtimeSuggestions';
 
 /**
  * BEAST MODE Enterprise Dashboard
@@ -1730,6 +1735,52 @@ function QualityView({ data }: any): React.JSX.Element {
           )}
         </CardContent>
       </Card>
+
+      {/* Codebase Chat */}
+      {isConnected && githubRepos.length > 0 && (
+        <div className="col-span-1 md:col-span-2 mt-6">
+          <CodebaseChat
+            repo={githubRepos[0]?.fullName || ''}
+            currentFile={latestScan?.filePath}
+            files={latestScan ? [{ path: latestScan.filePath || '', content: latestScan.content || '' }] : []}
+          />
+        </div>
+      )}
+
+      {/* Real-Time Suggestions */}
+      {isConnected && githubRepos.length > 0 && latestScan && (
+        <div className="col-span-1 md:col-span-2 mt-6">
+          <RealtimeSuggestions
+            repo={githubRepos[0]?.fullName || ''}
+            filePath={latestScan.filePath || ''}
+            content={latestScan.content || ''}
+            cursorLine={1}
+            cursorColumn={0}
+            onSuggestionSelect={(suggestion) => {
+              console.log('Suggestion selected:', suggestion);
+            }}
+          />
+        </div>
+      )}
+
+      {/* Themes & Opportunities */}
+      {isConnected && githubRepos.length > 0 && latestScan && (
+        <div className="col-span-1 md:col-span-2 mt-6">
+          <ThemesAndOpportunities repo={githubRepos[0]?.fullName || ''} />
+        </div>
+      )}
+
+      {/* Feature Generator */}
+      {isConnected && githubRepos.length > 0 && (
+        <div className="col-span-1 md:col-span-2 mt-6">
+          <FeatureGenerator 
+            repo={githubRepos[0]?.fullName || ''}
+            onFeatureGenerated={(result) => {
+              console.log('Feature generated:', result);
+            }}
+          />
+        </div>
+      )}
 
       {/* All Repos Quality Table */}
       {githubRepos.length > 0 && (

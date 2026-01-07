@@ -181,6 +181,7 @@ export default function ReposQualityTable({ repos, onRefresh }: ReposQualityTabl
 
   // Filter and sort repos (client-side filtering of already-fetched data)
   // Note: This is client-side filtering of data already fetched from API, not a database query
+  // TODO: Move to API route for better architecture
   // ARCHITECTURE: Moved to API route
 // const filteredAndSorted = Array.from(repoQualities.values())
     .filter((repo: any) => {
@@ -224,6 +225,7 @@ export default function ReposQualityTable({ repos, onRefresh }: ReposQualityTabl
 
   // Count repos that have been analyzed (quality can be 0, so check for !== undefined, not truthy)
   // Note: This is client-side counting of data already fetched from API, not a database query
+  // TODO: Move to API route for better architecture
   // ARCHITECTURE: Moved to API route
 // const analyzedCount = Array.from(repoQualities.values()).filter((r: any) => 
     r.quality !== undefined && r.quality !== null && !r.loading
@@ -252,6 +254,7 @@ export default function ReposQualityTable({ repos, onRefresh }: ReposQualityTabl
                   onClick={async () => {
                     try {
                       // Note: This is client-side processing of data already fetched from API
+                      // TODO: Move to API route for better architecture
                       // ARCHITECTURE: Moved to API route
 // const reposWithData = Array.from(repoQualities.values())
                         .filter((r: any) => r.quality !== undefined)
@@ -303,6 +306,53 @@ export default function ReposQualityTable({ repos, onRefresh }: ReposQualityTabl
                 >
                   📄 Export PDF Zine
                 </Button>
+                {analyzedCount > 0 && (
+                  <Button
+                    onClick={async () => {
+                      try {
+                        // Get average quality
+                        // ARCHITECTURE: Moved to API route
+// const reposWithQuality = Array.from(repoQualities.values())
+                          .filter((r: any) => r.quality !== undefined && r.quality !== null);
+                        
+                        if (reposWithQuality.length === 0) {
+                          alert('Please analyze repos first');
+                          return;
+                        }
+
+                        const avgQuality = reposWithQuality.reduce((sum, r) => sum + (r.quality || 0), 0) / reposWithQuality.length;
+                        const targetQuality = Math.min(0.9, avgQuality + 0.2); // Improve by 20% or to 90%
+
+                        // Create improvement plan for first repo (can expand later)
+                        const firstRepo = reposWithQuality[0].repo;
+                        const response = await fetch('/api/repos/quality/improve', {
+                          method: 'POST',
+                          headers: { 'Content-Type': 'application/json' },
+                          body: JSON.stringify({
+                            repo: firstRepo,
+                            targetQuality,
+                            dryRun: true,
+                          }),
+                        });
+
+                        if (!response.ok) {
+                          throw new Error('Failed to create improvement plan');
+                        }
+
+                        const plan = await response.json();
+                        alert(`✅ Improvement plan created!\n\nCurrent: ${(plan.currentQuality * 100).toFixed(1)}%\nTarget: ${(targetQuality * 100).toFixed(1)}%\nEstimated: ${(plan.finalQuality * 100).toFixed(1)}%\n\nFiles to generate: ${plan.generatedFiles.length}`);
+                      } catch (error: any) {
+                        console.error('Failed to create improvement plan:', error);
+                        alert('Failed to create improvement plan: ' + error.message);
+                      }
+                    }}
+                    disabled={analyzedCount === 0}
+                    variant="outline"
+                    className="border-green-600 text-green-400 hover:bg-green-600/20 hover:border-green-500"
+                  >
+                    🚀 Improve Quality
+                  </Button>
+                )}
               </div>
         </div>
       </CardHeader>
