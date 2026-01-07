@@ -54,7 +54,9 @@ const nextConfig = {
         headers: [
           {
             key: 'Access-Control-Allow-Origin',
-            value: '*',
+            value: process.env.NODE_ENV === 'production' 
+              ? 'https://beast-mode.dev' 
+              : '*', // Allow all in development
           },
           {
             key: 'Access-Control-Allow-Methods',
