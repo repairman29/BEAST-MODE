@@ -71,8 +71,8 @@ export async function POST(request: NextRequest) {
     // For now, we'll index from the fetched files
     const tempDir = `/tmp/beast-mode-index-${Date.now()}`;
     
-    // Index codebase
-    const results = await codebaseIndexer.indexCodebase(tempDir, {
+    // Index codebase (pass files directly if indexer supports it)
+    const results = await codebaseIndexer.indexCodebase(files, {
       maxFiles: 500,
       excludePatterns: ['node_modules', '.git', 'dist', 'build'],
       includeExtensions: ['.js', '.ts', '.jsx', '.tsx', '.py', '.rs', '.go'],
