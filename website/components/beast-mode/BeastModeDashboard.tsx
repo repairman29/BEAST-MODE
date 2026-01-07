@@ -1465,13 +1465,21 @@ function QualityView({ data }: any): React.JSX.Element {
               )}
               {latestScan.mlQuality.recommendations && latestScan.mlQuality.recommendations.length > 0 && (
                 <div className="w-full mt-4">
-                  <div className="text-xs text-slate-400 mb-2 uppercase tracking-wider">Recommendations</div>
+                  <div className="text-xs text-slate-400 mb-2 uppercase tracking-wider">Intelligence & Insights</div>
                   <div className="space-y-2">
                     {latestScan.mlQuality.recommendations.slice(0, 3).map((rec: any, idx: number) => (
-                      <div key={idx} className="bg-slate-800/50 rounded p-2 border border-slate-700/50">
-                        <div className="text-sm text-slate-300">{rec.action}</div>
-                        {rec.impact && (
-                          <div className="text-xs text-cyan-400 mt-1">{rec.impact}</div>
+                      <div key={idx} className="bg-slate-800/50 rounded p-3 border border-slate-700/50 hover:border-slate-600 transition-colors">
+                        <div className="flex items-center gap-2 mb-1">
+                          <span className="text-sm font-semibold text-white">{rec.action}</span>
+                          {rec.estimatedGain && (
+                            <span className="text-xs text-cyan-400 bg-cyan-500/20 px-2 py-0.5 rounded">
+                              +{(rec.estimatedGain * 100).toFixed(0)}%
+                            </span>
+                          )}
+                        </div>
+                        <div className="text-xs text-slate-300 mb-1">{rec.impact}</div>
+                        {rec.actionable && (
+                          <div className="text-xs text-cyan-400 mt-1 italic">{rec.actionable.substring(0, 100)}...</div>
                         )}
                       </div>
                     ))}
