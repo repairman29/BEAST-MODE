@@ -44,6 +44,7 @@ export default function ReposQualityTable({ repos, onRefresh }: ReposQualityTabl
   const [sortBy, setSortBy] = useState<'quality' | 'repo' | 'percentile'>('quality');
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('desc');
   const [filter, setFilter] = useState<string>('');
+  const [selectedRepo, setSelectedRepo] = useState<string | null>(null);
 
   // Initialize repo qualities (only for new repos, preserve existing data)
   useEffect(() => {
@@ -371,10 +372,22 @@ export default function ReposQualityTable({ repos, onRefresh }: ReposQualityTabl
                 {filteredAndSorted.map((repo) => (
                   <tr
                     key={repo.repo}
-                    className="border-b border-slate-800/50 hover:bg-slate-800/30 transition-colors"
+                    className="border-b border-slate-800/50 hover:bg-slate-800/30 transition-colors cursor-pointer"
+                    onClick={() => {
+                      if (repo.quality !== undefined || repo.error) {
+                        setSelectedRepo(repo.repo);
+                      }
+                    }}
                   >
                     <td className="py-3 px-4">
-                      <div className="text-sm font-medium text-white">{repo.repo}</div>
+                      <div className="text-sm font-medium text-white flex items-center gap-2">
+                        {repo.repo}
+                        {(repo.quality !== undefined || repo.error) && (
+                          <span className="text-xs text-cyan-400 opacity-0 group-hover:opacity-100">
+                            👁️ Click for details
+                          </span>
+                        )}
+                      </div>
                     </td>
                     <td className="py-3 px-4">
                       {repo.loading ? (
