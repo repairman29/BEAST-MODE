@@ -52,6 +52,12 @@ export async function POST(request: NextRequest) {
         { status: 400 }
       );
     }
+    if (!owner || !repoName) {
+      return NextResponse.json(
+        { error: 'Invalid repository format. Use: owner/repo' },
+        { status: 400 }
+      );
+    }
 
     // Fetch repository files
     const files = await githubFileFetcher.fetchRepositoryFiles(owner, repoName, {

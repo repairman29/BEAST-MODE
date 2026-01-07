@@ -97,8 +97,8 @@ export async function POST(request: NextRequest) {
         const userId = request.cookies.get('github_oauth_user_id')?.value;
         if (!userId) {
           return NextResponse.json({
-            ...response,
-            prError: 'GitHub authentication required to create PR',
+            success: false,
+            error: 'GitHub authentication required to create PR',
           });
         }
 
