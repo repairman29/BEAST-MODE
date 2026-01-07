@@ -92,7 +92,7 @@ SOFTWARE.
 **Value:** Save 16-30 hours per week • Improve code quality by 25+ points  
 **Perfect for:** Individual developers, freelancers
 
-**Overage:** $0.002 per API call (after 100K) - 90% margin
+**Overage:** $0.002 per API call (after 100K)
 
 ---
 
@@ -112,7 +112,7 @@ SOFTWARE.
 **Value:** Save $65K-$325K per year • 50% faster onboarding  
 **Perfect for:** Teams of 2-10 developers
 
-**Overage:** $0.0015 per API call (after 500K) - 87% margin
+**Overage:** $0.0015 per API call (after 500K)
 
 ---
 
@@ -136,7 +136,7 @@ SOFTWARE.
 **Value:** Save $100K-$500K per year • Enterprise governance  
 **Perfect for:** Organizations with 50+ developers
 
-**Overage:** $0.001 per API call (after 2M) - 80% margin
+**Overage:** $0.001 per API call (after 2M)
 
 ---
 
