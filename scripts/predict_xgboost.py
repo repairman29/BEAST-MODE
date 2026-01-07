@@ -75,7 +75,8 @@ if __name__ == '__main__':
     
     try:
         quality = predict(features_json, model_dir)
-        print(json.dumps({'predictedQuality': quality}))
+        result = {'predictedQuality': float(quality)}
+        print(json.dumps(result))
     except Exception as e:
         print(json.dumps({'error': str(e)}))
         sys.exit(1)

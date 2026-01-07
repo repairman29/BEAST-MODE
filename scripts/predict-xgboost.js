@@ -34,15 +34,31 @@ function predictQuality(features, modelPath) {
     
     python.on('close', (code) => {
       if (code !== 0) {
-        reject(new Error(`Python script failed: ${stderr}`));
+        reject(new Error(`Python script failed (code ${code}): ${stderr || stdout}`));
         return;
       }
       
       try {
-        const result = JSON.parse(stdout.trim());
+        const output = stdout.trim();
+        if (!output) {
+          reject(new Error('Python script returned no output'));
+          return;
+        }
+        
+        const result = JSON.parse(output);
+        if (result.error) {
+          reject(new Error(result.error));
+          return;
+        }
+        
+        if (result.predictedQuality === undefined) {
+          reject(new Error('Python script did not return predictedQuality'));
+          return;
+        }
+        
         resolve(result.predictedQuality);
       } catch (error) {
-        reject(new Error(`Failed to parse prediction result: ${error.message}`));
+        reject(new Error(`Failed to parse prediction result: ${error.message}. Output: ${stdout}`));
       }
     });
   });

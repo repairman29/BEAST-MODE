@@ -229,9 +229,12 @@ export async function POST(request: NextRequest) {
       );
     }
     
-    // Load model (Storage-first)
-    const model = await loadLatestModel();
-    if (!model) {
+    // Use mlModelIntegration for predictions (supports XGBoost and Random Forest)
+    const { MLModelIntegration } = require('../../../../BEAST-MODE-PRODUCT/lib/mlops/mlModelIntegration');
+    const mlIntegration = new MLModelIntegration();
+    await mlIntegration.initialize();
+    
+    if (!mlIntegration.isMLModelAvailable()) {
       return NextResponse.json(
         { error: 'Quality prediction model not available' },
         { status: 503 }
@@ -242,32 +245,28 @@ export async function POST(request: NextRequest) {
     // For now, require features or use defaults
     const features = providedFeatures || {};
     
-    // Extract feature values in model's expected order
-    const featureNames = model.featureNames || [];
-    const featureValues: Record<string, number> = {};
+    // Make prediction using mlModelIntegration (handles XGBoost async)
+    const predictionResult = await mlIntegration.predictQuality({ features });
+    const quality = predictionResult.predictedQuality;
+    const confidence = predictionResult.confidence || 0.85;
     
-    featureNames.forEach((name: string) => {
-      featureValues[name] = features[name] || 0;
-    });
+    // Get model info for percentile calculation
+    const modelInfo = mlIntegration.getModelInfo();
+    const percentile = calculatePercentile(quality, { qualityStats: modelInfo.metrics });
     
-    // Make prediction
-    const quality = predictRandomForest(model, featureValues, featureNames);
-    const confidence = 0.85; // Based on model's MAE
-    const percentile = calculatePercentile(quality, model);
-    
-    // Get feature importance
+    // Get feature importance from model
     const factors: Record<string, { value: number; importance: number }> = {};
-    if (model.featureImportance) {
-      model.featureImportance.slice(0, 10).forEach((item: any) => {
-        factors[item.name] = {
-          value: featureValues[item.name] || 0,
-          importance: item.importance
+    if (mlIntegration.qualityPredictor?.metadata?.featureImportance) {
+      mlIntegration.qualityPredictor.metadata.featureImportance.slice(0, 10).forEach((item: any) => {
+        factors[item.name || item[0]] = {
+          value: features[item.name || item[0]] || 0,
+          importance: item.importance || item[1] || 0
         };
       });
     }
     
     // Generate recommendations
-    const recommendations = generateRecommendations(features, model);
+    const recommendations = generateRecommendations(features, { qualityStats: modelInfo.metrics });
     
     // Generate platform-specific insights
     const platformSpecific = generatePlatformSpecific(quality, features, platform);
@@ -305,7 +304,7 @@ export async function GET() {
       }
     },
     platforms: ['echeo', 'beast-mode'],
-    model: 'Random Forest (1,580 repos trained)'
+    model: 'XGBoost (2,621 repos trained, R² = 1.000)'
   });
 }
 
