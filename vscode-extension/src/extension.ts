@@ -79,7 +79,7 @@ export function activate(context: vscode.ExtensionContext) {
 
       if (suggestions.length > 0) {
         const selected = await vscode.window.showQuickPick(
-          suggestions.map(s => ({
+          suggestions.map((s: any) => ({
             label: s.text,
             description: `${s.type} (${(s.score * 100).toFixed(0)}%)`,
             detail: s.source
@@ -87,8 +87,8 @@ export function activate(context: vscode.ExtensionContext) {
           { placeHolder: 'Select a suggestion' }
         );
 
-        if (selected) {
-          const suggestion = suggestions.find(s => s.text === selected.label);
+        if (selected && typeof selected === 'object' && 'label' in selected) {
+          const suggestion = suggestions.find((s: any) => s.text === selected.label);
           if (suggestion) {
             editor.edit(editBuilder => {
               editBuilder.insert(position, suggestion.text);
@@ -167,7 +167,7 @@ export function activate(context: vscode.ExtensionContext) {
           
           if (analysis.success && analysis.opportunities.length > 0) {
             const selected = await vscode.window.showQuickPick(
-              analysis.opportunities.map(opp => ({
+              analysis.opportunities.map((opp: any) => ({
                 label: opp.description,
                 description: `${opp.type} - ${opp.severity}`,
                 detail: `Estimated improvement: ${(opp.estimatedImprovement * 100).toFixed(1)}%`,
@@ -176,11 +176,11 @@ export function activate(context: vscode.ExtensionContext) {
               { placeHolder: 'Select a refactoring to apply' }
             );
 
-            if (selected && selected.opportunity) {
+            if (selected && typeof selected === 'object' && 'opportunity' in selected) {
               const result = await beastModeClient.applyRefactoring(
                 filePath,
                 content,
-                selected.opportunity
+                (selected as any).opportunity
               );
 
               if (result.success) {
