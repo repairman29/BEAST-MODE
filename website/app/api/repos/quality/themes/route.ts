@@ -52,7 +52,7 @@ export async function POST(request: NextRequest) {
               githubFileFetcher.initializeUserToken(userToken);
             }
           } catch (error) {
-            console.warn('[Themes API] Could not get user token: process.env.TOKEN || ''/');
+            console.warn('[Themes API] Could not get user token');
         if (!owner || !repoName) {
           return NextResponse.json(
             { error: 'Invalid repository format. Use: owner/repo' },
