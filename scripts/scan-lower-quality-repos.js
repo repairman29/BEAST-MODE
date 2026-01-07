@@ -1,29 +1,38 @@
 #!/usr/bin/env node
 
 /**
- * Scan Missing Languages Repositories
+ * Scan Lower Quality Repositories
  * 
- * Scans the discovered missing language repositories
+ * Scans the discovered lower-quality repos to add to training dataset
  */
 
-const path = require('path');
 const fs = require('fs-extra');
-const { PublicRepoScanner } = require('../lib/mlops/publicRepoScanner');
+const path = require('path');
 const { Octokit } = require('@octokit/rest');
-
-// Load environment variables
-try {
-  const envPath = path.join(__dirname, '../../echeo-landing/.env.local');
-  if (fs.existsSync(envPath)) {
-    require('dotenv').config({ path: envPath });
-  }
-} catch (e) {
-  // Ignore
-}
+const { PublicRepoScanner } = require('../lib/mlops/publicRepoScanner');
+require('dotenv').config({ path: path.join(__dirname, '../../echeo-landing/.env.local') });
 
 const DISCOVERED_DIR = path.join(__dirname, '../.beast-mode/training-data/discovered-repos');
 const SCANNED_DIR = path.join(__dirname, '../.beast-mode/training-data/scanned-repos');
 fs.ensureDirSync(SCANNED_DIR);
+
+/**
+ * Load latest lower-quality discovery
+ */
+function loadLatestDiscovery() {
+  const files = fs.readdirSync(DISCOVERED_DIR)
+    .filter(f => f.startsWith('lower-quality-repos-') && f.endsWith('.json'))
+    .sort()
+    .reverse();
+
+  if (files.length === 0) {
+    throw new Error('No lower-quality discovery files found. Run discover-lower-quality-repos.js first.');
+  }
+
+  const filePath = path.join(DISCOVERED_DIR, files[0]);
+  const data = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+  return data.repositories || [];
+}
 
 /**
  * Get GitHub token
@@ -40,6 +49,7 @@ async function getGitHubToken() {
 
     if (supabaseUrl && supabaseKey) {
       const supabase = createClient(supabaseUrl, supabaseKey);
+
       const { data: config } = await supabase
         .from('app_config')
         .select('value')
@@ -51,73 +61,50 @@ async function getGitHubToken() {
         if (value.token) return value.token;
         if (typeof value === 'string' && value.startsWith('ghp_')) return value;
       }
+
+      const { data: tokenConfig } = await supabase
+        .from('app_config')
+        .select('value')
+        .eq('key', 'github_token')
+        .maybeSingle();
+
+      if (tokenConfig?.value) {
+        const value = typeof tokenConfig.value === 'string' 
+          ? JSON.parse(tokenConfig.value) 
+          : tokenConfig.value;
+        return value.token || value;
+      }
+
+      const { data: envConfig } = await supabase
+        .from('app_config')
+        .select('value')
+        .eq('key', 'echeo_env')
+        .maybeSingle();
+
+      if (envConfig?.value?.GITHUB_TOKEN || envConfig?.value?.GITHUB_PAT) {
+        const value = typeof envConfig.value === 'string' 
+          ? JSON.parse(envConfig.value) 
+          : envConfig.value;
+        return value.GITHUB_TOKEN || value.GITHUB_PAT;
+      }
     }
   } catch (error) {
-    // Ignore
+    console.log('⚠️  Error checking Supabase:', error.message);
   }
 
   return null;
 }
 
 /**
- * Load latest missing-languages discovery file(s)
- */
-function loadLatestDiscovery(combineAll = false) {
-  const files = fs.readdirSync(DISCOVERED_DIR)
-    .filter(f => f.startsWith('missing-languages-') && f.endsWith('.json'))
-    .sort()
-    .reverse();
-
-  if (files.length === 0) {
-    throw new Error('No missing-languages discovery files found');
-  }
-
-  if (combineAll) {
-    // Combine all missing-languages files
-    const allRepos = [];
-    const seenRepos = new Set();
-    
-    for (const file of files) {
-      const filePath = path.join(DISCOVERED_DIR, file);
-      const data = JSON.parse(fs.readFileSync(filePath, 'utf8'));
-      const repos = data.repositories || [];
-      
-      for (const repo of repos) {
-        const repoKey = repo.repo || repo.url;
-        if (!seenRepos.has(repoKey)) {
-          seenRepos.add(repoKey);
-          allRepos.push(repo);
-        }
-      }
-    }
-    
-    console.log(`📂 Loaded ${files.length} discovery file(s)`);
-    console.log(`   Total unique repositories: ${allRepos.length}\n`);
-    
-    return allRepos;
-  } else {
-    // Load just the latest file
-    const latestFile = files[0];
-    const filePath = path.join(DISCOVERED_DIR, latestFile);
-    const data = JSON.parse(fs.readFileSync(filePath, 'utf8'));
-
-    console.log(`📂 Loaded: ${latestFile}`);
-    console.log(`   Repositories: ${data.repositories?.length || 0}\n`);
-
-    return data.repositories || [];
-  }
-}
-
-/**
  * Scan repositories
  */
-async function scanMissingLanguages(options = {}) {
-  const { maxRepos = 1000, delayBetweenScans = 500, concurrency = 3, combineAll = false } = options;
+async function scanLowerQualityRepos(options = {}) {
+  const { maxRepos = 500, delayBetweenScans = 500, concurrency = 3 } = options;
 
-  console.log('🔍 Scanning Missing Languages Repositories\n');
+  console.log('📉 Scanning Lower Quality Repositories\n');
   console.log('='.repeat(60));
 
-  const repos = loadLatestDiscovery(combineAll);
+  const repos = loadLatestDiscovery();
   const reposToScan = repos.slice(0, maxRepos);
   const repoNamesToScan = reposToScan.map(r => r.repo || r.url);
 
@@ -146,9 +133,6 @@ async function scanMissingLanguages(options = {}) {
     }
   });
 
-  // Handle different return types from batchScan
-  // batchScan returns { results: [...], totalScanned, successful, optedOut }
-  // Each result from scanPublicRepo is a metadata object directly
   const resultsArray = scanResults?.results || (Array.isArray(scanResults) ? scanResults : []);
 
   console.log(`\n📊 Processing ${resultsArray.length} scan results...`);
@@ -156,8 +140,6 @@ async function scanMissingLanguages(options = {}) {
   const trainingData = resultsArray
     .filter(r => r && (r.repo || r.metadata))
     .map(r => {
-      // scanPublicRepo returns: { metadata: {...}, source, scannedAt, optedOut }
-      // Extract the metadata and ensure all required features are present
       const metadata = r.metadata || r;
       const repoName = metadata.repo || r.repo;
       const originalRepo = reposToScan.find(repo => {
@@ -165,7 +147,6 @@ async function scanMissingLanguages(options = {}) {
         return repoKey === repoName || repoKey === `https://github.com/${repoName}`;
       });
       
-      // Ensure all required features are present with defaults
       const normalizedMetadata = {
         repo: repoName,
         url: metadata.url || originalRepo?.url || `https://github.com/${repoName}`,
@@ -187,7 +168,6 @@ async function scanMissingLanguages(options = {}) {
         createdAt: metadata.createdAt,
         updatedAt: metadata.updatedAt,
         pushedAt: metadata.pushedAt,
-        // Calculate derived features
         repoAgeDays: metadata.createdAt ? Math.floor((Date.now() - new Date(metadata.createdAt).getTime()) / (1000 * 60 * 60 * 24)) : 0,
         daysSincePush: metadata.pushedAt ? Math.floor((Date.now() - new Date(metadata.pushedAt).getTime()) / (1000 * 60 * 60 * 24)) : 365,
         daysSinceUpdate: metadata.updatedAt ? Math.floor((Date.now() - new Date(metadata.updatedAt).getTime()) / (1000 * 60 * 60 * 24)) : 365,
@@ -196,14 +176,12 @@ async function scanMissingLanguages(options = {}) {
         starsPerFile: metadata.fileCount > 0 ? metadata.stars / metadata.fileCount : 0,
         engagementPerIssue: metadata.openIssues > 0 ? (metadata.stars + metadata.forks) / metadata.openIssues : 0,
         codeFileRatio: metadata.fileCount > 0 ? metadata.codeFileCount / metadata.fileCount : 0,
-        // Defaults for missing features
         codeQualityScore: 0,
         communityHealth: 0,
         totalFiles: metadata.fileCount || 0,
         totalLines: 0,
       };
       
-      // Create features structure matching what retrain script expects
       const features = {
         metadata: normalizedMetadata
       };
@@ -216,14 +194,13 @@ async function scanMissingLanguages(options = {}) {
       };
     });
 
-  // Save results
   const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
-  const outputPath = path.join(SCANNED_DIR, `scanned-repos-missing-languages-${timestamp}.json`);
+  const outputPath = path.join(SCANNED_DIR, `scanned-repos-lower-quality-${timestamp}.json`);
 
   await fs.writeJson(outputPath, {
     metadata: {
       scannedAt: new Date().toISOString(),
-      source: 'missing-languages-discovery',
+      source: 'quality-balancing',
       totalRepos: reposToScan.length,
       successful: trainingData.length,
       failed: reposToScan.length - trainingData.length,
@@ -234,28 +211,13 @@ async function scanMissingLanguages(options = {}) {
 
   console.log(`\n✅ Scanned ${trainingData.length} repositories`);
   console.log(`📄 Saved to: ${outputPath}\n`);
-
-  return outputPath;
-}
-
-/**
- * Main function
- */
-async function main() {
-  const args = process.argv.slice(2);
-  const maxRepos = parseInt(args.find(a => a.startsWith('--max='))?.split('=')[1] || '1000');
-
-  try {
-    await scanMissingLanguages({ maxRepos });
-  } catch (error) {
-    console.error('❌ Error:', error.message);
-    process.exit(1);
-  }
+  console.log('='.repeat(60));
+  console.log('✅ Scanning complete!\n');
 }
 
 if (require.main === module) {
-  main().catch(console.error);
+  const args = process.argv.slice(2);
+  const maxRepos = args.find(arg => arg.startsWith('--max='))?.split('=')[1];
+  scanLowerQualityRepos({ maxRepos: maxRepos ? parseInt(maxRepos) : undefined }).catch(console.error);
 }
-
-module.exports = { scanMissingLanguages };
 
