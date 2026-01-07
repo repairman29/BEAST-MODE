@@ -516,9 +516,94 @@ export async function POST(request: NextRequest) {
       mlIntegration = null;
     }
     
-    // If features not provided, we'd need to scan the repo
-    // For now, require features or use defaults
-    const features = providedFeatures || {};
+    // If features not provided, scan the repo to extract features
+    let features = providedFeatures;
+    
+    if (!features || Object.keys(features).length === 0) {
+      try {
+        // Call scan API to get repository features
+        const scanUrl = new URL('/api/github/scan', request.nextUrl.origin);
+        const scanResponse = await fetch(scanUrl.toString(), {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Cookie': request.headers.get('cookie') || '',
+          },
+          body: JSON.stringify({ repo })
+        });
+        
+        if (scanResponse.ok) {
+          const scanData = await scanResponse.json();
+          const metrics = scanData.metrics || {};
+          const repoData = scanData.repository || {};
+          
+          // Extract features in format expected by XGBoost model
+          // Model expects: codeFileCount, codeFileRatio, codeQualityScore, communityHealth,
+          // daysSincePush, daysSinceUpdate, engagementPerIssue, fileCount, forks, hasCI,
+          // hasConfig, hasDescription, hasDocker, hasLicense, hasReadme, hasTests, hasTopics,
+          // isActive, openIssues, repoAgeDays, stars, starsForksRatio, starsPerFile, totalFiles, totalLines
+          
+          const stars = metrics.stars || 0;
+          const forks = metrics.forks || 0;
+          const openIssues = metrics.openIssues || 0;
+          const fileCount = metrics.fileCount || 0;
+          const codeFileCount = metrics.codeFileCount || 0;
+          const repoAgeDays = repoData.createdAt 
+            ? Math.floor((Date.now() - new Date(repoData.createdAt).getTime()) / (1000 * 60 * 60 * 24))
+            : 365;
+          const daysSinceUpdate = repoData.updatedAt
+            ? Math.floor((Date.now() - new Date(repoData.updatedAt).getTime()) / (1000 * 60 * 60 * 24))
+            : 365;
+          const daysSincePush = daysSinceUpdate; // Use same as update for now
+          const isActive = daysSinceUpdate < 30 ? 1 : 0;
+          
+          features = {
+            // Core metrics (exact names expected by model)
+            stars: stars,
+            forks: forks,
+            openIssues: openIssues,
+            fileCount: fileCount,
+            codeFileCount: codeFileCount,
+            totalFiles: fileCount,
+            totalLines: 0, // Not available from scan, default to 0
+            
+            // Calculated ratios
+            codeFileRatio: fileCount > 0 ? codeFileCount / fileCount : 0,
+            starsForksRatio: forks > 0 ? stars / forks : 0,
+            starsPerFile: fileCount > 0 ? stars / fileCount : 0,
+            engagementPerIssue: openIssues > 0 ? (stars + forks) / openIssues : 0,
+            
+            // Quality indicators (binary)
+            hasTests: metrics.hasTests ? 1 : 0,
+            hasCI: metrics.hasCI ? 1 : 0,
+            hasReadme: metrics.hasReadme ? 1 : 0,
+            hasLicense: metrics.hasLicense ? 1 : 0,
+            hasDocker: metrics.hasDocker ? 1 : 0,
+            hasDescription: (repoData.description || metrics.hasDescription) ? 1 : 0,
+            hasTopics: 0, // Not available from scan
+            hasConfig: 0, // Would need deeper scan
+            
+            // Activity metrics
+            repoAgeDays: repoAgeDays,
+            daysSinceUpdate: daysSinceUpdate,
+            daysSincePush: daysSincePush,
+            isActive: isActive,
+            
+            // Quality scores
+            codeQualityScore: metrics.maintainability || 0,
+            communityHealth: metrics.maintainability || 0,
+          };
+          
+          console.log(`[Quality API] Extracted ${Object.keys(features).length} features from scan for ${repo}`);
+        } else {
+          console.warn(`[Quality API] Scan failed for ${repo}, using empty features`);
+          features = {};
+        }
+      } catch (scanError: any) {
+        console.warn(`[Quality API] Error scanning repo ${repo}:`, scanError.message);
+        features = {};
+      }
+    }
     
     // Make prediction using mlModelIntegration (handles XGBoost async)
     // If model not available, it will use fallback prediction
