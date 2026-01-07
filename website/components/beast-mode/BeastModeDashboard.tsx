@@ -13,6 +13,7 @@ import SelfImprovement from './SelfImprovement';
 import QuickActions from './QuickActions';
 import Sidebar from './Sidebar';
 import DashboardHeader from './DashboardHeader';
+import ValueMetrics from './ValueMetrics';
 import FTUEOnboarding from './FTUEOnboarding';
 import PluginManager from './PluginManager';
 import PluginReviews from './PluginReviews';
@@ -408,6 +409,13 @@ function BeastModeDashboardInner({ initialView }: BeastModeDashboardInnerProps) 
                   <div className="md:hidden">Tap ☰ in top-left for menu</div>
                 </div>
                 
+                {/* Value Metrics - Show user's actual value */}
+                {user && (
+                  <div className="mb-8">
+                    <ValueMetrics />
+                  </div>
+                )}
+
                 {/* Value Props */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
                   <Card className="bg-gradient-to-br from-cyan-500/10 to-cyan-500/5 border-cyan-500/30">
