@@ -22,6 +22,8 @@ const BEAST_MODE_DIR = path.join(__dirname, '..');
 const TRAINING_DATA_DIR = path.join(BEAST_MODE_DIR, '.beast-mode/training-data');
 const MODELS_DIR = path.join(BEAST_MODE_DIR, '.beast-mode/models');
 const CATALOG_DIR = path.join(__dirname, '../../payload-cli/docs/repo-catalog');
+const ORACLE_DIR = path.join(__dirname, '../../smuggler-oracle/data');
+const AUDIT_DIR = path.join(BEAST_MODE_DIR, '.beast-mode/audit');
 
 // Files to upload (organized by folder)
 const FILES_TO_UPLOAD = {
@@ -29,7 +31,9 @@ const FILES_TO_UPLOAD = {
     'enhanced-features-*.json',  // 3-3.4MB files
     'dataset.json',              // If > 100KB
     'dataset-split.json',        // If > 100KB
-    'high-quality-repos-analysis.json'  // 172KB
+    'high-quality-repos-analysis.json',  // 172KB
+    'scanned-repos/scanned-repos-*.json',  // > 500KB files
+    'discovered-repos/*.json'  // > 100KB files
   ],
   'models': [
     'model-notable-quality-*.json'  // > 500KB files
@@ -38,6 +42,14 @@ const FILES_TO_UPLOAD = {
     'COMPLETE_CATALOG_FIXED.json',  // 5.5MB
     'TOP_REPOS_WITH_CODE.json',     // 4.4MB
     'COMPLETE_CATALOG.json'          // 1.1MB
+  ],
+  'oracle': [
+    'oracle-embeddings.json',  // 11MB - HIGH PRIORITY!
+    'oracle_manifest.json'     // 3.6MB
+  ],
+  'audit': [
+    'export-*.json',  // > 500KB files
+    'audit-*.jsonl'   // > 500KB files
   ]
 };
 
@@ -118,6 +130,26 @@ class MLArtifactUploader {
       return files;
     }
 
+    // Handle patterns with subdirectories (e.g., 'scanned-repos/*.json')
+    if (pattern.includes('/')) {
+      const [subdir, filePattern] = pattern.split('/');
+      const subdirPath = path.join(directory, subdir);
+      if (fs.existsSync(subdirPath) && fs.statSync(subdirPath).isDirectory()) {
+        const dirFiles = fs.readdirSync(subdirPath);
+        const regex = new RegExp('^' + filePattern.replace(/\*/g, '.*') + '$');
+        for (const file of dirFiles) {
+          if (regex.test(file)) {
+            const filePath = path.join(subdirPath, file);
+            if (fs.statSync(filePath).isFile()) {
+              files.push(filePath);
+            }
+          }
+        }
+      }
+      return files;
+    }
+
+    // Handle simple patterns
     const dirFiles = fs.readdirSync(directory);
     const regex = new RegExp('^' + pattern.replace(/\*/g, '.*') + '$');
 
@@ -236,6 +268,45 @@ class MLArtifactUploader {
       }
     }
 
+    // Upload Oracle files (HIGH PRIORITY - 11MB + 3.6MB)
+    this.log('\n🔮 Uploading Oracle files...', 'info');
+    for (const pattern of FILES_TO_UPLOAD['oracle']) {
+      const files = this.findFiles(pattern, ORACLE_DIR);
+      for (const file of files) {
+        const size = this.getFileSize(file);
+        if (size > 100 * 1024) { // > 100KB
+          const result = await this.uploadFile(file, 'oracle');
+          if (result.success) {
+            results.uploaded.push(result.path);
+          } else {
+            results.failed.push({ path: file, error: result.error });
+          }
+        } else {
+          results.skipped.push({ path: file, reason: 'Too small (< 100KB)' });
+        }
+      }
+    }
+
+    // Upload audit files
+    this.log('\n📋 Uploading audit files...', 'info');
+    for (const pattern of FILES_TO_UPLOAD['audit']) {
+      const files = this.findFiles(pattern, AUDIT_DIR);
+      for (const file of files) {
+        const size = this.getFileSize(file);
+        if (size > 500 * 1024) { // > 500KB for audit files
+          const folder = file.endsWith('.jsonl') ? 'audit/logs' : 'audit/exports';
+          const result = await this.uploadFile(file, folder);
+          if (result.success) {
+            results.uploaded.push(result.path);
+          } else {
+            results.failed.push({ path: file, error: result.error });
+          }
+        } else {
+          results.skipped.push({ path: file, reason: 'Too small (< 500KB)' });
+        }
+      }
+    }
+
     // Summary
     this.log('\n📊 Upload Summary:', 'info');
     this.log(`  ✅ Uploaded: ${results.uploaded.length}`, 'success');
@@ -277,6 +348,10 @@ class MLArtifactUploader {
       folder = 'models';
     } else if (filePath.includes('catalog') || filePath.includes('repo-catalog')) {
       folder = 'catalogs';
+    } else if (filePath.includes('oracle') || filePath.includes('smuggler-oracle')) {
+      folder = 'oracle';
+    } else if (filePath.includes('audit') || filePath.includes('.beast-mode/audit')) {
+      folder = filePath.endsWith('.jsonl') ? 'audit/logs' : 'audit/exports';
     }
 
     const result = await this.uploadFile(filePath, folder);

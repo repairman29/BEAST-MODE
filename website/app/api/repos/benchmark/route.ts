@@ -42,26 +42,19 @@ interface BenchmarkResponse {
 }
 
 /**
- * Load dataset statistics for benchmarking
+ * Load dataset statistics for benchmarking (Storage-first pattern)
  */
-function loadDatasetStats() {
+async function loadDatasetStats() {
   try {
-    const fs = require('fs');
-    const path = require('path');
-    const modelPath = path.join(process.cwd(), '../../.beast-mode/models');
+    // Use Storage-first loader (falls back to local if Storage unavailable)
+    const { loadModel } = require('../../../../BEAST-MODE-PRODUCT/lib/mlops/loadTrainingData');
+    const model = await loadModel('model-notable-quality-*.json');
     
-    // Find latest model
-    const files = fs.readdirSync(modelPath)
-      .filter((f: string) => f.startsWith('model-notable-quality-') && f.endsWith('.json'))
-      .sort()
-      .reverse();
-    
-    if (files.length === 0) {
-      return null;
+    if (model) {
+      return model.qualityStats || null;
     }
     
-    const model = JSON.parse(fs.readFileSync(path.join(modelPath, files[0]), 'utf8'));
-    return model.qualityStats || null;
+    return null;
   } catch (error) {
     return null;
   }
@@ -177,8 +170,8 @@ export async function POST(request: NextRequest) {
     const qualityData = await qualityResponse.json();
     const quality = qualityData.quality;
     
-    // Load dataset stats
-    const stats = loadDatasetStats();
+    // Load dataset stats (Storage-first)
+    const stats = await loadDatasetStats();
     const percentile = calculatePercentile(quality, stats);
     const rank = getRank(percentile);
     

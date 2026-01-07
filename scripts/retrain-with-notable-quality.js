@@ -10,22 +10,21 @@
 const fs = require('fs-extra');
 const path = require('path');
 const { calculateNotableQuality } = require('./analyze-high-quality-repos');
+const { calculateSimpleQuality, calculateHybridQuality } = require('./simple-quality-calculation');
+const { loadScannedRepos } = require('../lib/mlops/loadTrainingData');
 
-const SCANNED_DIR = path.join(__dirname, '../.beast-mode/training-data/scanned-repos');
 const MODELS_DIR = path.join(__dirname, '../.beast-mode/models');
 fs.ensureDirSync(MODELS_DIR);
 
 /**
- * Load all scanned repositories
+ * Load all scanned repositories (Storage-first pattern)
  */
-function loadAllScannedRepos() {
-  const files = fs.readdirSync(SCANNED_DIR)
-    .filter(f => f.startsWith('scanned-repos-') && f.endsWith('.json'))
-    .sort()
-    .reverse();
-
-  if (files.length === 0) {
-    throw new Error('No scanned repository files found');
+async function loadAllScannedRepos() {
+  // Load from Storage (or local fallback)
+  const repos = await loadScannedRepos({ fromStorage: true });
+  
+  if (repos.length === 0) {
+    throw new Error('No scanned repository files found in Storage or local');
   }
 
   const allRepos = [];
@@ -33,29 +32,22 @@ function loadAllScannedRepos() {
   let notableRepos = 0;
   let existingRepos = 0;
 
-  for (const file of files) {
-    const filePath = path.join(SCANNED_DIR, file);
-    const data = JSON.parse(fs.readFileSync(filePath, 'utf8'));
-    const repos = data.trainingData || [];
-    const isNotable = file.includes('notable') || data.metadata?.source === 'notable';
-
-    for (const repo of repos) {
-      const repoKey = repo.repo || repo.url || JSON.stringify(repo.features || {});
-      if (!seenRepos.has(repoKey)) {
-        seenRepos.add(repoKey);
-        allRepos.push(repo);
-        
-        // Identify notable repos (have discoveredAt or originalStars from discovery)
-        if (isNotable || repo.discoveredAt || repo.originalStars) {
-          notableRepos++;
-        } else {
-          existingRepos++;
-        }
+  for (const repo of repos) {
+    const repoKey = repo.repo || repo.url || JSON.stringify(repo.features || {});
+    if (!seenRepos.has(repoKey)) {
+      seenRepos.add(repoKey);
+      allRepos.push(repo);
+      
+      // Identify notable repos (have discoveredAt or originalStars from discovery)
+      if (repo.discoveredAt || repo.originalStars) {
+        notableRepos++;
+      } else {
+        existingRepos++;
       }
     }
   }
 
-  console.log(`✅ Loaded ${seenRepos.size} unique repositories from ${files.length} file(s)`);
+  console.log(`✅ Loaded ${seenRepos.size} unique repositories from Storage (or local fallback)`);
   if (notableRepos > 0 || existingRepos > 0) {
     console.log(`   📊 Notable repos: ${notableRepos}`);
     console.log(`   📊 Existing repos: ${existingRepos}`);
@@ -332,7 +324,7 @@ async function retrainModel() {
   console.log('='.repeat(60));
   
   // Load all repos
-  const repos = loadAllScannedRepos();
+  const repos = await loadAllScannedRepos();
   
   // Dataset statistics
   const avgStars = repos.reduce((sum, r) => sum + ((r.features || {}).stars || 0), 0) / repos.length;

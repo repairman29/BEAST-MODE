@@ -77,50 +77,22 @@ function predictTree(tree: any, row: number[]): number {
 }
 
 /**
- * Load latest trained model
+ * Load latest trained model (Storage-first pattern)
  */
-function loadLatestModel() {
+async function loadLatestModel() {
   try {
-    const fs = require('fs');
-    const path = require('path');
+    // Use Storage-first loader (falls back to local if Storage unavailable)
+    const { loadModel } = require('../../../../BEAST-MODE-PRODUCT/lib/mlops/loadTrainingData');
+    const model = await loadModel('model-notable-quality-*.json');
     
-    // Try multiple possible paths
-    const possiblePaths = [
-      path.join(process.cwd(), '../../.beast-mode/models'), // From website/ directory
-      path.join(process.cwd(), '../.beast-mode/models'),    // Alternative
-      path.join(process.cwd(), '.beast-mode/models'),        // If in root
-      path.join(__dirname, '../../../.beast-mode/models'),   // From compiled location
-    ];
-    
-    let modelsDir = null;
-    for (const dir of possiblePaths) {
-      if (fs.existsSync(dir)) {
-        modelsDir = dir;
-        break;
-      }
+    if (model) {
+      console.log('[Quality API] Loaded model from Storage (or local fallback)');
+      return model;
     }
     
-    if (!modelsDir) {
-      console.error('[Quality API] Models directory not found. Tried:', possiblePaths);
-      return null;
-    }
-    
-    const files = fs.readdirSync(modelsDir)
-      .filter((f: string) => f.startsWith('model-notable-quality-') && f.endsWith('.json'))
-      .sort()
-      .reverse();
-    
-    if (files.length === 0) {
-      console.error('[Quality API] No model files found in:', modelsDir);
-      return null;
-    }
-    
-    const modelPath = path.join(modelsDir, files[0]);
-    const model = JSON.parse(fs.readFileSync(modelPath, 'utf8'));
-    
-    console.log('[Quality API] Loaded model from:', modelPath);
-    return model;
-  } catch (error) {
+    console.error('[Quality API] Model not found in Storage or local');
+    return null;
+  } catch (error: any) {
     console.error('[Quality API] Error loading model:', error);
     return null;
   }
@@ -257,8 +229,8 @@ export async function POST(request: NextRequest) {
       );
     }
     
-    // Load model
-    const model = loadLatestModel();
+    // Load model (Storage-first)
+    const model = await loadLatestModel();
     if (!model) {
       return NextResponse.json(
         { error: 'Quality prediction model not available' },

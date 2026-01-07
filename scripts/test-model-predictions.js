@@ -9,27 +9,19 @@
 const fs = require('fs-extra');
 const path = require('path');
 const { calculateNotableQuality } = require('./analyze-high-quality-repos');
-
-const MODELS_DIR = path.join(__dirname, '../.beast-mode/models');
-const SCANNED_DIR = path.join(__dirname, '../.beast-mode/training-data/scanned-repos');
+const { loadModel, loadScannedRepos } = require('../lib/mlops/loadTrainingData');
 
 /**
- * Load the latest trained model
+ * Load the latest trained model (Storage-first pattern)
  */
-function loadLatestModel() {
-  const files = fs.readdirSync(MODELS_DIR)
-    .filter(f => f.startsWith('model-notable-quality-') && f.endsWith('.json'))
-    .sort()
-    .reverse();
-
-  if (files.length === 0) {
-    throw new Error('No trained models found');
-  }
-
-  const modelPath = path.join(MODELS_DIR, files[0]);
-  const model = JSON.parse(fs.readFileSync(modelPath, 'utf8'));
+async function loadLatestModel() {
+  const model = await loadModel('model-notable-quality-*.json');
   
-  console.log(`✅ Loaded model: ${files[0]}`);
+  if (!model) {
+    throw new Error('No trained models found in Storage or local');
+  }
+  
+  console.log(`✅ Loaded model from Storage (or local fallback)`);
   console.log(`   Algorithm: ${model.algorithm}`);
   console.log(`   R²: ${model.metrics.r2.toFixed(3)}`);
   console.log(`   MAE: ${model.metrics.mae.toFixed(3)}`);
@@ -71,22 +63,15 @@ function predictRandomForest(model, features, featureNames) {
 }
 
 /**
- * Get sample repositories for testing
+ * Get sample repositories for testing (Storage-first pattern)
  */
-function getTestRepos() {
-  const files = fs.readdirSync(SCANNED_DIR)
-    .filter(f => f.startsWith('scanned-repos-') && f.endsWith('.json'))
-    .sort()
-    .reverse();
-
-  if (files.length === 0) {
-    throw new Error('No scanned repositories found');
+async function getTestRepos() {
+  // Load repos from Storage (or local fallback)
+  const repos = await loadScannedRepos({ fromStorage: true, maxFiles: 1 });
+  
+  if (repos.length === 0) {
+    throw new Error('No scanned repositories found in Storage or local');
   }
-
-  // Load latest file
-  const filePath = path.join(SCANNED_DIR, files[0]);
-  const data = JSON.parse(fs.readFileSync(filePath, 'utf8'));
-  const repos = data.trainingData || [];
   
   // Select diverse test samples
   const testRepos = [];
@@ -122,15 +107,15 @@ function getTestRepos() {
 /**
  * Test model predictions
  */
-function testModel() {
+async function testModel() {
   console.log('🧪 Testing Model Predictions\n');
   console.log('='.repeat(60));
   
-  // Load model
-  const model = loadLatestModel();
+  // Load model (Storage-first)
+  const model = await loadLatestModel();
   
-  // Get test repos
-  const testRepos = getTestRepos();
+  // Get test repos (Storage-first)
+  const testRepos = await getTestRepos();
   
   console.log(`📊 Testing on ${testRepos.length} sample repositories:\n`);
   
@@ -202,14 +187,16 @@ function testModel() {
 }
 
 if (require.main === module) {
-  try {
-    testModel();
-    console.log('✅ Testing complete!');
-    process.exit(0);
-  } catch (error) {
-    console.error('\n❌ Error:', error.message);
-    process.exit(1);
-  }
+  (async () => {
+    try {
+      await testModel();
+      console.log('✅ Testing complete!');
+      process.exit(0);
+    } catch (error) {
+      console.error('\n❌ Error:', error.message);
+      process.exit(1);
+    }
+  })();
 }
 
 module.exports = { testModel, loadLatestModel, predictRandomForest };
