@@ -36,7 +36,9 @@ const FILES_TO_UPLOAD = {
     'discovered-repos/*.json'  // > 100KB files
   ],
   'models': [
-    'model-notable-quality-*.json'  // > 500KB files
+    'model-notable-quality-*.json',  // > 500KB files
+    'model-xgboost-*/model.json',    // XGBoost model files
+    'model-xgboost-*/model-metadata.json'  // XGBoost metadata
   ],
   'catalogs': [
     'COMPLETE_CATALOG_FIXED.json',  // 5.5MB
