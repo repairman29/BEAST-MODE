@@ -107,8 +107,8 @@ export async function POST(request: NextRequest) {
 
         if (!userToken) {
           return NextResponse.json({
-            ...response,
-            prError: 'GitHub token not found',
+            success: false,
+            error: 'GitHub token not found',
           });
         }
 
