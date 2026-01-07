@@ -896,16 +896,34 @@ function QualityView({ data }: any): React.JSX.Element {
       const response = await fetch('/api/github/repos');
       if (response.ok) {
         const data = await response.json();
-        if (data.connected && data.repos) {
+        console.log('[BeastModeDashboard] GitHub repos response:', { 
+          connected: data.connected, 
+          count: data.repos?.length || 0,
+          error: data.error 
+        });
+        
+        if (data.connected && data.repos && data.repos.length > 0) {
           setGithubRepos(data.repos);
           setIsConnected(true);
-          setShowRepos(true);
+          setShowRepos(true); // Auto-show repos when loaded
+          console.log(`[BeastModeDashboard] Loaded ${data.repos.length} repositories`);
         } else {
-          setIsConnected(false);
+          setIsConnected(data.connected || false);
+          setGithubRepos([]);
+          if (data.error) {
+            console.warn('[BeastModeDashboard] GitHub repos error:', data.error, data.message);
+          }
         }
+      } else {
+        const errorData = await response.json().catch(() => ({}));
+        console.error('[BeastModeDashboard] Failed to fetch repos:', response.status, errorData);
+        setIsConnected(false);
+        setGithubRepos([]);
       }
     } catch (error) {
-      console.error('Error fetching GitHub repos:', error);
+      console.error('[BeastModeDashboard] Error fetching GitHub repos:', error);
+      setIsConnected(false);
+      setGithubRepos([]);
     } finally {
       setIsLoadingRepos(false);
     }

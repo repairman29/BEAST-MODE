@@ -179,7 +179,6 @@ export default function ReposQualityTable({ repos, onRefresh }: ReposQualityTabl
   // Filter and sort repos (client-side filtering of already-fetched data)
   // TODO: Move to API route for better architecture
   // ARCHITECTURE: Moved to API route
-// // ARCHITECTURE: Moved to API route
 // const filteredAndSorted = Array.from(repoQualities.values())
     .filter((repo: any) => {
       if (!filter) return true;
@@ -223,7 +222,6 @@ export default function ReposQualityTable({ repos, onRefresh }: ReposQualityTabl
   // Count repos that have been analyzed (quality can be 0, so check for !== undefined, not truthy)
   // TODO: Move to API route for better architecture
   // ARCHITECTURE: Moved to API route
-// // ARCHITECTURE: Moved to API route
 // const analyzedCount = Array.from(repoQualities.values()).filter((r: any) => 
     r.quality !== undefined && r.quality !== null && !r.loading
   ).length;
@@ -252,7 +250,6 @@ export default function ReposQualityTable({ repos, onRefresh }: ReposQualityTabl
                     try {
                       // TODO: Move to API route for better architecture
                       // ARCHITECTURE: Moved to API route
-// // ARCHITECTURE: Moved to API route
 // const reposWithData = Array.from(repoQualities.values())
                         .filter((r: any) => r.quality !== undefined)
                         .map((r: any) => ({
@@ -372,7 +369,8 @@ export default function ReposQualityTable({ repos, onRefresh }: ReposQualityTabl
                 {filteredAndSorted.map((repo) => (
                   <tr
                     key={repo.repo}
-                    className="border-b border-slate-800/50 hover:bg-slate-800/30 transition-colors cursor-pointer"
+                    className="border-b border-slate-800/50 hover:bg-slate-800/30 transition-colors group"
+                    style={{ cursor: (repo.quality !== undefined || repo.error) ? 'pointer' : 'default' }}
                     onClick={() => {
                       if (repo.quality !== undefined || repo.error) {
                         setSelectedRepo(repo.repo);
@@ -383,7 +381,7 @@ export default function ReposQualityTable({ repos, onRefresh }: ReposQualityTabl
                       <div className="text-sm font-medium text-white flex items-center gap-2">
                         {repo.repo}
                         {(repo.quality !== undefined || repo.error) && (
-                          <span className="text-xs text-cyan-400 opacity-0 group-hover:opacity-100">
+                          <span className="text-xs text-cyan-400 opacity-0 group-hover:opacity-100 transition-opacity">
                             👁️ Click for details
                           </span>
                         )}
@@ -480,6 +478,13 @@ export default function ReposQualityTable({ repos, onRefresh }: ReposQualityTabl
           </div>
         )}
       </CardContent>
+
+      {/* Quality Detail Modal */}
+      <QualityDetailModal
+        open={selectedRepo !== null}
+        repo={selectedRepo ? repoQualities.get(selectedRepo) || null : null}
+        onClose={() => setSelectedRepo(null)}
+      />
     </Card>
   );
 }
