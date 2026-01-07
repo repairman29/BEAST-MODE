@@ -82,7 +82,7 @@ function predictTree(tree: any, row: number[]): number {
 async function loadLatestModel() {
   try {
     // Use Storage-first loader (falls back to local if Storage unavailable)
-    const { loadModel } = require('../../../../BEAST-MODE-PRODUCT/lib/mlops/loadTrainingData');
+    const { loadModel } = require('../../../../../lib/mlops/loadTrainingData');
     const model = await loadModel('model-notable-quality-*.json');
     
     if (model) {
