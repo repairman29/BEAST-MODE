@@ -16,6 +16,9 @@ interface QualityDetailModalProps {
       action: string;
       impact: string;
       priority: 'high' | 'medium' | 'low';
+      insight: string;
+      actionable: string;
+      estimatedGain?: number;
     }>;
     cached?: boolean;
     error?: string;
@@ -200,25 +203,41 @@ export default function QualityDetailModal({ open, repo, onClose }: QualityDetai
                 </div>
               )}
 
-              {/* Recommendations */}
+              {/* Intelligence & Insights */}
               {recommendations.length > 0 && (
                 <div className="mb-6">
-                  <h3 className="text-lg font-semibold text-white mb-4">Recommendations</h3>
-                  <div className="space-y-3">
+                  <h3 className="text-lg font-semibold text-white mb-4">Intelligence & Insights</h3>
+                  <p className="text-sm text-slate-400 mb-4">
+                    Actionable recommendations to improve your repository quality
+                  </p>
+                  <div className="space-y-4">
                     {recommendations.map((rec, idx) => (
                       <div
                         key={idx}
-                        className="bg-slate-800/50 rounded-lg p-4 border border-slate-700"
+                        className="bg-slate-800/50 rounded-lg p-5 border border-slate-700 hover:border-slate-600 transition-colors"
                       >
-                        <div className="flex items-start justify-between mb-2">
+                        <div className="flex items-start justify-between mb-3">
                           <div className="flex-1">
-                            <div className="flex items-center gap-2 mb-1">
+                            <div className="flex items-center gap-2 mb-2">
                               <Badge className={getPriorityColor(rec.priority)}>
                                 {rec.priority.toUpperCase()}
                               </Badge>
-                              <span className="text-white font-medium">{rec.action}</span>
+                              <span className="text-white font-semibold text-base">{rec.action}</span>
+                              {rec.estimatedGain && (
+                                <Badge className="bg-cyan-500/20 text-cyan-400 border-cyan-500/50 text-xs">
+                                  +{(rec.estimatedGain * 100).toFixed(0)}% quality
+                                </Badge>
+                              )}
                             </div>
-                            <p className="text-sm text-slate-400 mt-1">{rec.impact}</p>
+                            <p className="text-sm text-slate-300 mb-2 font-medium">{rec.impact}</p>
+                            <div className="bg-slate-900/50 rounded p-3 mb-2 border border-slate-700/50">
+                              <p className="text-xs text-slate-400 mb-1 font-semibold uppercase tracking-wider">Why This Matters</p>
+                              <p className="text-sm text-slate-300">{rec.insight}</p>
+                            </div>
+                            <div className="bg-cyan-500/10 rounded p-3 border border-cyan-500/30">
+                              <p className="text-xs text-cyan-400 mb-1 font-semibold uppercase tracking-wider">What To Do</p>
+                              <p className="text-sm text-cyan-300">{rec.actionable}</p>
+                            </div>
                           </div>
                         </div>
                       </div>
