@@ -42,9 +42,14 @@ export default function OnboardingWelcome({ onDismiss }: OnboardingWelcomeProps)
               <div className="text-sm text-slate-400">AI Systems</div>
             </div>
             <div className="bg-slate-800/50 p-4 rounded-lg">
-              <div className="text-2xl font-bold text-green-400">100%</div>
-              <div className="text-sm text-slate-400">Test Coverage</div>
+              <div className="text-2xl font-bold text-green-400">10K</div>
+              <div className="text-sm text-slate-400">Free Calls/Month</div>
             </div>
+          </div>
+          <div className="mt-4 p-3 bg-gradient-to-r from-cyan-500/10 to-purple-500/10 rounded-lg border border-cyan-500/20">
+            <p className="text-xs text-slate-400 text-center">
+              💰 See your time saved, ROI, and quality improvements on the dashboard
+            </p>
           </div>
         </div>
       )

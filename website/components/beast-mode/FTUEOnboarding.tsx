@@ -69,6 +69,36 @@ export default function FTUEOnboarding({ onComplete, onSkip }: FTUEOnboardingPro
       )
     },
     {
+      title: "See Your Value",
+      description: "Track time saved and ROI",
+      content: (
+        <div className="space-y-4">
+          <div className="text-4xl text-center mb-4">💰</div>
+          <p className="text-slate-400">
+            BEAST MODE tracks your actual value: time saved, estimated ROI, and quality improvements. 
+            See your metrics on the dashboard and use the ROI calculator to explore upgrade options.
+          </p>
+          <div className="grid grid-cols-3 gap-4">
+            <div className="bg-gradient-to-br from-cyan-500/10 to-blue-500/10 p-3 rounded-lg text-center border border-cyan-500/20">
+              <div className="text-2xl font-bold text-cyan-400">2.5</div>
+              <div className="text-xs text-slate-400">Hours Saved</div>
+            </div>
+            <div className="bg-gradient-to-br from-green-500/10 to-emerald-500/10 p-3 rounded-lg text-center border border-green-500/20">
+              <div className="text-2xl font-bold text-green-400">$125</div>
+              <div className="text-xs text-slate-400">Value</div>
+            </div>
+            <div className="bg-gradient-to-br from-purple-500/10 to-pink-500/10 p-3 rounded-lg text-center border border-purple-500/20">
+              <div className="text-2xl font-bold text-purple-400">+1.2</div>
+              <div className="text-xs text-slate-400">Quality ↑</div>
+            </div>
+          </div>
+          <p className="text-xs text-slate-500 text-center italic">
+            *Example values - your actual metrics will appear as you use BEAST MODE
+          </p>
+        </div>
+      )
+    },
+    {
       title: "Keyboard Shortcuts",
       description: "Work faster with shortcuts",
       content: (
@@ -101,8 +131,11 @@ export default function FTUEOnboarding({ onComplete, onSkip }: FTUEOnboardingPro
             You're ready to use BEAST MODE! Start by scanning a repository or exploring the dashboard.
           </p>
           <div className="bg-gradient-to-r from-cyan-500/10 to-purple-500/10 p-4 rounded-lg border border-cyan-500/20">
-            <p className="text-sm text-cyan-400 text-center">
+            <p className="text-sm text-cyan-400 text-center mb-2">
               💡 Tip: Sign in to save your scans and access advanced features
+            </p>
+            <p className="text-xs text-slate-500 text-center">
+              Free tier: 10K API calls/month • Upgrade for more value
             </p>
           </div>
         </div>
