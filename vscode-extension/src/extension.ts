@@ -14,7 +14,7 @@ export function activate(context: vscode.ExtensionContext) {
 
   // Initialize client
   const config = vscode.workspace.getConfiguration('beastMode');
-  const apiUrl = config.get<string>('apiUrl', 'https://playsmuggler.com');
+  const apiUrl = config.get<string>('apiUrl', 'https://beast-mode.dev');
   
   beastModeClient = new BeastModeClient(apiUrl);
   suggestionProvider = new SuggestionProvider(beastModeClient);
