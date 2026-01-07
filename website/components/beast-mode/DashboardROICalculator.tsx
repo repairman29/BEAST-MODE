@@ -4,6 +4,8 @@ import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card';
 import { Button } from '../ui/button';
 import { useUser } from '@/lib/user-context';
+import LoadingSpinner from '../ui/LoadingSpinner';
+import ErrorMessage from '../ui/ErrorMessage';
 
 /**
  * Dashboard ROI Calculator
@@ -84,7 +86,7 @@ export default function DashboardROICalculator() {
     return (
       <Card className="bg-slate-950/50 border-slate-900">
         <CardContent className="p-6">
-          <div className="h-32 bg-slate-800/50 rounded animate-pulse"></div>
+          <LoadingSpinner size="md" text="Loading ROI calculator..." />
         </CardContent>
       </Card>
     );

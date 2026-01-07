@@ -3,6 +3,8 @@
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent } from '../ui/card';
 import { useUser } from '@/lib/user-context';
+import LoadingSpinner from '../ui/LoadingSpinner';
+import ErrorMessage from '../ui/ErrorMessage';
 
 interface ValueMetricsData {
   apiCallsUsed: number;
@@ -131,7 +133,7 @@ export default function ValueMetrics() {
         {[1, 2, 3].map((i) => (
           <Card key={i} className="bg-slate-900/50 border-slate-800">
             <CardContent className="p-4">
-              <div className="h-16 bg-slate-800/50 rounded animate-pulse"></div>
+              <LoadingSpinner size="sm" text="Loading metrics..." />
             </CardContent>
           </Card>
         ))}
