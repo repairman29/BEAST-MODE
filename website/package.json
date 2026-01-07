@@ -20,6 +20,7 @@
     "test:ui": "node scripts/test-ui.js",
     "test:experience": "node scripts/test-experience.js",
     "test:e2e": "node scripts/test-e2e-flows.js",
+    "test:final": "node scripts/test-final-mvp.js",
     "test:all": "npm run test:ui && npm run test:experience && npm run test:api && npm run test:e2e",
     "test:build": "npm run lint && npm run build",
     "deploy": "bash ../scripts/deploy-vercel.sh",

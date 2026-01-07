@@ -244,16 +244,13 @@ function generateZineHTML(
   `;
 }
 
-function getZineCSS(style: string): string {
+function getZineCSS(style?: string): string {
   if (style === 'professional') {
     return getProfessionalCSS();
   } else if (style === 'minimal') {
     return getMinimalCSS();
   }
-  return getZineCSS();
-}
-
-function getZineCSS(): string {
+  // Default zine style
   return `
     @page {
       size: A4;

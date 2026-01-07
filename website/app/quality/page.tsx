@@ -182,7 +182,7 @@ export default function QualityDashboard() {
                   onChange={(e) => setRepoInput(e.target.value)}
                   onKeyPress={(e) => e.key === 'Enter' && addRepo()}
                   placeholder="facebook/react"
-                  className="bg-slate-800 border-slate-700 text-white"
+                  className="flex-1"
                 />
                 <Button onClick={addRepo} className="bg-cyan-600 hover:bg-cyan-700">
                   Add
