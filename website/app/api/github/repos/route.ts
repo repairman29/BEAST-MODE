@@ -62,10 +62,11 @@ export async function GET(request: NextRequest) {
         // ARCHITECTURE: Moved to API route
 // const entries = Array.from(store.entries());
         for (const [key, value] of entries) {
-        if (key.startsWith('session-') || key.startsWith('user-')) {
-          const time = new Date(value.connectedAt).getTime();
-          if (!mostRecent || time > mostRecent.time) {
-            mostRecent = { key, data: value, time };
+          if (key.startsWith('session-') || key.startsWith('user-')) {
+            const time = new Date(value.connectedAt).getTime();
+            if (!mostRecent || time > mostRecent.time) {
+              mostRecent = { key, data: value, time };
+            }
           }
         }
         if (mostRecent) {
