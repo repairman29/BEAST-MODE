@@ -252,7 +252,6 @@ export default function ReposQualityTable({ repos, onRefresh }: ReposQualityTabl
                     try {
                       // Note: This is client-side processing of data already fetched from API
                       // ARCHITECTURE: Moved to API route
-// // ARCHITECTURE: Moved to API route
 // const reposWithData = Array.from(repoQualities.values())
                         .filter((r: any) => r.quality !== undefined)
                         .map((r: any) => ({
