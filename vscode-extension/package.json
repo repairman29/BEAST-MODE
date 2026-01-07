@@ -13,7 +13,10 @@
     "Snippets"
   ],
   "activationEvents": [
-    "onStartupFinished"
+    "onStartupFinished",
+    "onCommand:beastMode.analyzeQuality",
+    "onCommand:beastMode.getSuggestions",
+    "onCommand:beastMode.openChat"
   ],
   "main": "./out/extension.js",
   "contributes": {
