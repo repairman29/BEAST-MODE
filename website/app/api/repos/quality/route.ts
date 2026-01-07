@@ -219,6 +219,13 @@ function generatePlatformSpecific(
 
 export async function POST(request: NextRequest) {
   const startTime = Date.now();
+  
+  // Initialize monitoring and cache
+  const { getQualityMonitoring } = require('../../../../BEAST-MODE-PRODUCT/lib/mlops/qualityMonitoring');
+  const { getQualityCache } = require('../../../../BEAST-MODE-PRODUCT/lib/mlops/qualityCache');
+  const monitoring = getQualityMonitoring();
+  const cache = getQualityCache();
+  
   try {
     const body: QualityRequest = await request.json();
     const { repo, platform, features: providedFeatures } = body;
@@ -230,12 +237,27 @@ export async function POST(request: NextRequest) {
       );
     }
     
+    // Check cache first
+    const cached = cache.get(repo, providedFeatures);
+    if (cached) {
+      const latency = Date.now() - startTime;
+      monitoring.recordRequest(repo, platform, latency, true, true);
+      console.log(`[Quality API] Cache hit for ${repo} (${latency}ms)`);
+      return NextResponse.json({
+        ...cached,
+        cached: true,
+        latency
+      });
+    }
+    
     // Use mlModelIntegration for predictions (supports XGBoost and Random Forest)
     const { MLModelIntegration } = require('../../../../BEAST-MODE-PRODUCT/lib/mlops/mlModelIntegration');
     const mlIntegration = new MLModelIntegration();
     await mlIntegration.initialize();
     
     if (!mlIntegration.isMLModelAvailable()) {
+      const latency = Date.now() - startTime;
+      monitoring.recordRequest(repo, platform, latency, false, false, new Error('Model not available'));
       return NextResponse.json(
         { error: 'Quality prediction model not available' },
         { status: 503 }

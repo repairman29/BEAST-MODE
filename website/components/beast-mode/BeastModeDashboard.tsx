@@ -1459,6 +1459,55 @@ function QualityView({ data }: any): React.JSX.Element {
                   </div>
                 </div>
               )}
+              
+              {/* Feedback Section */}
+              <div className="w-full mt-6 pt-4 border-t border-slate-700/50">
+                <div className="text-xs text-slate-400 mb-2">Was this quality score helpful?</div>
+                <div className="flex gap-2">
+                  <button
+                    onClick={async () => {
+                      try {
+                        await fetch('/api/feedback/quality', {
+                          method: 'POST',
+                          headers: { 'Content-Type': 'application/json' },
+                          body: JSON.stringify({
+                            repo: latestScan.repo,
+                            predictedQuality: latestScan.mlQuality.predictedQuality,
+                            helpful: true
+                          })
+                        });
+                        alert('✅ Thank you for your feedback!');
+                      } catch (e) {
+                        console.error('Failed to submit feedback:', e);
+                      }
+                    }}
+                    className="px-3 py-1.5 bg-green-500/20 text-green-400 rounded text-xs hover:bg-green-500/30 transition-colors border border-green-500/30"
+                  >
+                    👍 Helpful
+                  </button>
+                  <button
+                    onClick={async () => {
+                      try {
+                        await fetch('/api/feedback/quality', {
+                          method: 'POST',
+                          headers: { 'Content-Type': 'application/json' },
+                          body: JSON.stringify({
+                            repo: latestScan.repo,
+                            predictedQuality: latestScan.mlQuality.predictedQuality,
+                            helpful: false
+                          })
+                        });
+                        alert('✅ Thank you for your feedback!');
+                      } catch (e) {
+                        console.error('Failed to submit feedback:', e);
+                      }
+                    }}
+                    className="px-3 py-1.5 bg-red-500/20 text-red-400 rounded text-xs hover:bg-red-500/30 transition-colors border border-red-500/30"
+                  >
+                    👎 Not Helpful
+                  </button>
+                </div>
+              </div>
             </div>
           </CardContent>
         </Card>
