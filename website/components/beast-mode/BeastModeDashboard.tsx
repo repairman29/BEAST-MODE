@@ -42,6 +42,7 @@ import { ScanDetailsModal } from '../ui/ScanDetailsModal';
 import UnifiedAnalyticsView from './UnifiedAnalyticsView';
 import JanitorDashboard from './JanitorDashboard';
 import FeedbackDashboard from '../feedback/FeedbackDashboard';
+import ReposQualityTable from './ReposQualityTable';
 
 /**
  * BEAST MODE Enterprise Dashboard
@@ -1703,6 +1704,19 @@ function QualityView({ data }: any): React.JSX.Element {
           )}
         </CardContent>
       </Card>
+
+      {/* All Repos Quality Table */}
+      {githubRepos.length > 0 && (
+        <div className="col-span-1 md:col-span-2">
+          <ReposQualityTable
+            repos={githubRepos.map((repo: any) => repo.fullName || `${repo.owner}/${repo.name}`)}
+            onRefresh={() => {
+              // Refresh repos list
+              fetchGitHubRepos();
+            }}
+          />
+        </div>
+      )}
 
       {/* Recent Scans / Scan History */}
       <Card className="col-span-1 md:col-span-2 bg-slate-900/90 border-slate-800 card-polish stagger-item">
