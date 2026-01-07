@@ -1,0 +1,99 @@
+{
+  "name": "beast-mode",
+  "displayName": "BEAST MODE",
+  "description": "AI-powered code quality, suggestions, and automation",
+  "version": "0.1.0",
+  "publisher": "beast-mode",
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": [
+    "Other",
+    "Machine Learning",
+    "Snippets"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "beastMode.analyzeQuality",
+        "title": "Analyze Code Quality"
+      },
+      {
+        "command": "beastMode.getSuggestions",
+        "title": "Get AI Suggestions"
+      },
+      {
+        "command": "beastMode.openChat",
+        "title": "Open Codebase Chat"
+      },
+      {
+        "command": "beastMode.generateTests",
+        "title": "Generate Tests"
+      },
+      {
+        "command": "beastMode.refactor",
+        "title": "Refactor Code"
+      },
+      {
+        "command": "beastMode.indexCodebase",
+        "title": "Index Codebase"
+      }
+    ],
+    "configuration": {
+      "title": "BEAST MODE",
+      "properties": {
+        "beastMode.apiUrl": {
+          "type": "string",
+          "default": "https://playsmuggler.com",
+          "description": "BEAST MODE API URL"
+        },
+        "beastMode.enableSuggestions": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable real-time code suggestions"
+        },
+        "beastMode.enableQualityHints": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable quality hints"
+        },
+        "beastMode.useLLM": {
+          "type": "boolean",
+          "default": false,
+          "description": "Use LLM for suggestions (requires API key)"
+        }
+      }
+    },
+    "keybindings": [
+      {
+        "command": "beastMode.getSuggestions",
+        "key": "ctrl+shift+b",
+        "mac": "cmd+shift+b"
+      },
+      {
+        "command": "beastMode.openChat",
+        "key": "ctrl+shift+c",
+        "mac": "cmd+shift+c"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "package": "vsce package"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.80.0",
+    "@types/node": "^18.0.0",
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "axios": "^1.6.0"
+  }
+}
+
