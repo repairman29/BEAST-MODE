@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect, useRef } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
 import { Button } from '../ui/button';
 import { Badge } from '../ui/badge';
@@ -16,8 +17,8 @@ interface QualityDetailModalProps {
       action: string;
       impact: string;
       priority: 'high' | 'medium' | 'low';
-      insight: string;
-      actionable: string;
+      insight?: string;
+      actionable?: string;
       estimatedGain?: number;
     }>;
     cached?: boolean;
@@ -27,6 +28,15 @@ interface QualityDetailModalProps {
 }
 
 export default function QualityDetailModal({ open, repo, onClose }: QualityDetailModalProps) {
+  const scrollableRef = useRef<HTMLDivElement>(null);
+
+  // Scroll to top when modal opens
+  useEffect(() => {
+    if (open && scrollableRef.current) {
+      scrollableRef.current.scrollTop = 0;
+    }
+  }, [open]);
+
   if (!open || !repo) return null;
 
   const getQualityColor = (quality: number) => {
@@ -66,6 +76,7 @@ export default function QualityDetailModal({ open, repo, onClose }: QualityDetai
       onClick={onClose}
     >
       <Card
+        ref={scrollableRef}
         className="bg-slate-900 border-slate-800 max-w-4xl w-full mx-4 max-h-[90vh] overflow-y-auto"
         onClick={(e) => e.stopPropagation()}
       >
@@ -230,14 +241,18 @@ export default function QualityDetailModal({ open, repo, onClose }: QualityDetai
                               )}
                             </div>
                             <p className="text-sm text-slate-300 mb-2 font-medium">{rec.impact}</p>
-                            <div className="bg-slate-900/50 rounded p-3 mb-2 border border-slate-700/50">
-                              <p className="text-xs text-slate-400 mb-1 font-semibold uppercase tracking-wider">Why This Matters</p>
-                              <p className="text-sm text-slate-300">{rec.insight}</p>
-                            </div>
-                            <div className="bg-cyan-500/10 rounded p-3 border border-cyan-500/30">
-                              <p className="text-xs text-cyan-400 mb-1 font-semibold uppercase tracking-wider">What To Do</p>
-                              <p className="text-sm text-cyan-300">{rec.actionable}</p>
-                            </div>
+                            {rec.insight && (
+                              <div className="bg-slate-900/50 rounded p-3 mb-2 border border-slate-700/50">
+                                <p className="text-xs text-slate-400 mb-1 font-semibold uppercase tracking-wider">Why This Matters</p>
+                                <p className="text-sm text-slate-300">{rec.insight}</p>
+                              </div>
+                            )}
+                            {rec.actionable && (
+                              <div className="bg-cyan-500/10 rounded p-3 border border-cyan-500/30">
+                                <p className="text-xs text-cyan-400 mb-1 font-semibold uppercase tracking-wider">What To Do</p>
+                                <p className="text-sm text-cyan-300">{rec.actionable}</p>
+                              </div>
+                            )}
                           </div>
                         </div>
                       </div>

@@ -30,6 +30,9 @@ interface RepoQuality {
     action: string;
     impact: string;
     priority: 'high' | 'medium' | 'low';
+    insight?: string;
+    actionable?: string;
+    estimatedGain?: number;
   }>;
 }
 
@@ -222,9 +225,6 @@ export default function ReposQualityTable({ repos, onRefresh }: ReposQualityTabl
   // Count repos that have been analyzed (quality can be 0, so check for !== undefined, not truthy)
   // Note: This is client-side counting of data already fetched from API, not a database query
   // ARCHITECTURE: Moved to API route
-  // ARCHITECTURE: Moved to API route
-// // ARCHITECTURE: Moved to API route
-// // ARCHITECTURE: Moved to API route
 // const analyzedCount = Array.from(repoQualities.values()).filter((r: any) => 
     r.quality !== undefined && r.quality !== null && !r.loading
   ).length;
@@ -253,9 +253,6 @@ export default function ReposQualityTable({ repos, onRefresh }: ReposQualityTabl
                     try {
                       // Note: This is client-side processing of data already fetched from API
                       // ARCHITECTURE: Moved to API route
-// ARCHITECTURE: Moved to API route
-// // ARCHITECTURE: Moved to API route
-// // ARCHITECTURE: Moved to API route
 // const reposWithData = Array.from(repoQualities.values())
                         .filter((r: any) => r.quality !== undefined)
                         .map((r: any) => ({
