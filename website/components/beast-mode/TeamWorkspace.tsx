@@ -153,7 +153,7 @@ export default function TeamWorkspace({ workspaceId, userId }: TeamWorkspaceProp
         <Card className="bg-gradient-to-br from-slate-800/60 to-slate-900/40 border-2 border-slate-700/50 hover:border-cyan-500/50 transition-all duration-200 hover:scale-[1.02] hover:shadow-xl">
           <CardContent className="p-6">
             <div className="text-xs text-slate-400 uppercase tracking-wider mb-2 font-medium">Team Members</div>
-            <div className="text-4xl font-bold text-cyan-400 mb-1">{metrics.memberScores.length}</div>
+            <div className="text-4xl font-bold text-cyan-400 mb-1">{metrics.memberScores?.length || 0}</div>
             <div className="text-xs text-slate-500">Active contributors</div>
           </CardContent>
         </Card>
@@ -169,7 +169,7 @@ export default function TeamWorkspace({ workspaceId, userId }: TeamWorkspaceProp
         <Card className="bg-gradient-to-br from-slate-800/60 to-slate-900/40 border-2 border-slate-700/50 hover:border-purple-500/50 transition-all duration-200 hover:scale-[1.02] hover:shadow-xl">
           <CardContent className="p-6">
             <div className="text-xs text-slate-400 uppercase tracking-wider mb-2 font-medium">Projects</div>
-            <div className="text-4xl font-bold text-purple-400 mb-1">{metrics.projectScores.length}</div>
+            <div className="text-4xl font-bold text-purple-400 mb-1">{metrics.projectScores?.length || 0}</div>
             <div className="text-xs text-slate-500">Active projects</div>
           </CardContent>
         </Card>
@@ -208,7 +208,7 @@ export default function TeamWorkspace({ workspaceId, userId }: TeamWorkspaceProp
             </CardHeader>
             <CardContent>
               <div className="space-y-3">
-                {metrics.topPerformers.map((performer, idx) => (
+                {(metrics.topPerformers || []).map((performer, idx) => (
                   <div
                     key={performer.userId}
                     className="flex items-center justify-between p-4 bg-slate-800/50 rounded-xl border-2 border-slate-700/50 hover:border-cyan-500/50 transition-all duration-200 hover:scale-[1.01] hover:shadow-lg"
@@ -248,7 +248,7 @@ export default function TeamWorkspace({ workspaceId, userId }: TeamWorkspaceProp
             </CardHeader>
             <CardContent>
               <div className="space-y-3">
-                {metrics.topIssues.map((issue, idx) => {
+                {(metrics.topIssues || []).map((issue, idx) => {
                   const isHigh = issue.severity === 'high';
                   const isMedium = issue.severity === 'medium';
                   
@@ -295,7 +295,7 @@ export default function TeamWorkspace({ workspaceId, userId }: TeamWorkspaceProp
           </CardHeader>
           <CardContent>
             <div className="space-y-3">
-              {metrics.memberScores.map((member, idx) => (
+              {(metrics.memberScores || []).map((member, idx) => (
                 <div
                   key={member.userId}
                   className="flex items-center justify-between p-5 bg-slate-800/50 rounded-xl border-2 border-slate-700/50 hover:border-cyan-500/50 transition-all duration-200 hover:scale-[1.01] hover:shadow-lg"

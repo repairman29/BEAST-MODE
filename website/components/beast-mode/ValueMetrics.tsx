@@ -90,9 +90,23 @@ export default function ValueMetrics() {
       setLoading(true);
       
       // Get API usage
+      const apiKey = localStorage.getItem('beastModeApiKey');
+      if (!apiKey) {
+        // No API key - use default free tier metrics
+        setMetrics({
+          apiCallsUsed: 0,
+          apiCallsLimit: 10000,
+          tier: 'free',
+          timeSaved: 0,
+          estimatedValue: 0,
+          qualityImprovement: 0
+        });
+        return;
+      }
+      
       const usageResponse = await fetch(`/api/auth/usage`, {
         headers: {
-          'Authorization': `Bearer ${localStorage.getItem('beastModeApiKey') || ''}`
+          'Authorization': `Bearer ${apiKey}`
         }
       });
       
@@ -109,6 +123,16 @@ export default function ValueMetrics() {
           apiCallsLimit,
           tier: tier as 'free' | 'developer' | 'team' | 'enterprise',
           ...valueMetrics
+        });
+      } else if (usageResponse.status === 401) {
+        // Unauthorized - use default free tier metrics
+        setMetrics({
+          apiCallsUsed: 0,
+          apiCallsLimit: 10000,
+          tier: 'free',
+          timeSaved: 0,
+          estimatedValue: 0,
+          qualityImprovement: 0
         });
       }
     } catch (error) {

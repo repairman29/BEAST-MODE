@@ -32,9 +32,18 @@ export default function DashboardROICalculator() {
       setLoading(true);
       
       // Get API usage
+      const apiKey = localStorage.getItem('beastModeApiKey');
+      if (!apiKey) {
+        // No API key - use default free tier values
+        setApiCallsUsed(0);
+        setTier('free');
+        setLoading(false);
+        return;
+      }
+      
       const usageResponse = await fetch(`/api/auth/usage`, {
         headers: {
-          'Authorization': `Bearer ${localStorage.getItem('beastModeApiKey') || ''}`
+          'Authorization': `Bearer ${apiKey}`
         }
       });
       
@@ -54,6 +63,13 @@ export default function DashboardROICalculator() {
         const hoursSaved = ((usageData.used || 0) * 13) / 60;
         const hoursPerWeekPerDev = hoursSaved / (estimatedDevs * 4.33); // weeks to months
         setHoursPerWeek(Math.max(1, Math.round(hoursPerWeekPerDev)));
+      } else if (usageResponse.status === 401) {
+        // Unauthorized - use default free tier values
+        setApiCallsUsed(0);
+        setTier('free');
+        setSelectedTier('developer');
+        setDevelopers(1);
+        setHoursPerWeek(1);
       }
     } catch (error) {
       console.error('Error fetching user data:', error);
