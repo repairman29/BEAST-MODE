@@ -64,7 +64,7 @@ AI-powered code quality, suggestions, and automation for VS Code.
 
 Open VS Code settings and search for "BEAST MODE":
 
-- **API URL**: Your BEAST MODE API endpoint (default: `https://playsmuggler.com`)
+- **API URL**: Your BEAST MODE API endpoint (default: `https://beast-mode.dev`)
 - **Enable Suggestions**: Toggle real-time suggestions (default: `true`)
 - **Enable Quality Hints**: Toggle quality hints (default: `true`)
 - **Use LLM**: Use LLM for suggestions (requires API key, default: `false`)
@@ -139,7 +139,7 @@ Improve code quality automatically:
 
 ```json
 {
-  "beastMode.apiUrl": "https://playsmuggler.com",
+  "beastMode.apiUrl": "https://beast-mode.dev",
   "beastMode.enableSuggestions": true,
   "beastMode.enableQualityHints": true,
   "beastMode.useLLM": false
@@ -175,5 +175,5 @@ See [LICENSE](../../LICENSE) for details.
 
 - Issues: [GitHub Issues](https://github.com/your-repo/issues)
 - Documentation: [docs/](../../docs/)
-- Email: support@playsmuggler.com
+- Email: support@beast-mode.dev
 

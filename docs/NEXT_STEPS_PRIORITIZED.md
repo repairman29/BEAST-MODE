@@ -22,11 +22,11 @@
 **Commands:**
 ```bash
 # Test production APIs
-curl -X POST https://playsmuggler.com/api/repos/quality \
+curl -X POST https://beast-mode.dev/api/repos/quality \
   -H "Content-Type: application/json" \
   -d '{"repo": "facebook/react", "platform": "beast-mode"}'
 
-curl -X POST https://playsmuggler.com/api/repos/benchmark \
+curl -X POST https://beast-mode.dev/api/repos/benchmark \
   -H "Content-Type: application/json" \
   -d '{"repo": "facebook/react"}'
 ```
@@ -205,7 +205,7 @@ node scripts/retrain-with-notable-quality.js
 
 1. **Test Production APIs** (15 minutes)
    ```bash
-   curl -X POST https://playsmuggler.com/api/repos/quality ...
+   curl -X POST https://beast-mode.dev/api/repos/quality ...
    ```
 
 2. **Start Feature Engineering** (1-2 hours)

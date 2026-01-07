@@ -312,9 +312,6 @@ export default function ReposQualityTable({ repos, onRefresh }: ReposQualityTabl
                       try {
                         // Get average quality
                         // ARCHITECTURE: Moved to API route
-// // ARCHITECTURE: Moved to API route
-// // ARCHITECTURE: Moved to API route
-// // ARCHITECTURE: Moved to API route
 // const reposWithQuality = Array.from(repoQualities.values())
                           .filter((r: any) => r.quality !== undefined && r.quality !== null);
                         

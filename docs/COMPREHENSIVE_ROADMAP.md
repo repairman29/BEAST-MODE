@@ -28,7 +28,7 @@ This roadmap covers all recommended next steps:
 - [ ] Set up production environment (Vercel/Cloud provider)
 - [ ] Configure environment variables
 - [ ] Set up SSL certificates
-- [ ] Configure domain names (playsmuggler.com)
+- [ ] Configure domain names (beast-mode.dev)
 - [ ] Set up production database (Supabase)
 - [ ] Configure production API keys
 

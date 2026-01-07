@@ -83,7 +83,7 @@ vercel --prod --yes
 
 ### Test BEAST MODE APIs
 ```bash
-curl -X POST https://playsmuggler.com/api/repos/quality \
+curl -X POST https://beast-mode.dev/api/repos/quality \
   -H "Content-Type: application/json" \
   -d '{"repo": "facebook/react", "platform": "beast-mode"}'
 ```
@@ -105,7 +105,7 @@ curl -X POST https://playsmuggler.com/api/repos/quality \
 ### Environment Variables
 - No new env vars required
 - Uses existing GITHUB_TOKEN for scanning
-- BEAST MODE API calls Echeo at: `https://playsmuggler.com/api/repos/quality`
+- Echeo calls BEAST MODE API at: `https://beast-mode.dev/api/repos/quality`
 
 ### Build Warnings
 - Pre-existing build errors in other parts of codebase

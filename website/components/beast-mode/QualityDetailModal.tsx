@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
 import { Button } from '../ui/button';
 import { Badge } from '../ui/badge';
@@ -12,6 +12,7 @@ interface QualityDetailModalProps {
     quality?: number;
     confidence?: number;
     percentile?: number;
+    predictionId?: string; // For feedback collection
     factors?: Record<string, { value: number; importance: number }>;
         recommendations?: Array<{
           action: string;
@@ -31,13 +32,45 @@ interface QualityDetailModalProps {
 
 export default function QualityDetailModal({ open, repo, onClose }: QualityDetailModalProps) {
   const scrollableRef = useRef<HTMLDivElement>(null);
+  const [feedbackSubmitted, setFeedbackSubmitted] = useState(false);
+  const [feedbackLoading, setFeedbackLoading] = useState(false);
 
   // Scroll to top when modal opens
   useEffect(() => {
     if (open && scrollableRef.current) {
       scrollableRef.current.scrollTop = 0;
     }
+    // Reset feedback state when modal opens
+    if (open) {
+      setFeedbackSubmitted(false);
+    }
   }, [open]);
+
+  const handleFeedback = async (helpful: boolean) => {
+    if (!repo?.predictionId) return;
+    
+    setFeedbackLoading(true);
+    try {
+      const response = await fetch('/api/feedback/quality', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          predictionId: repo.predictionId,
+          helpful,
+          quality: repo.quality,
+          repo: repo.repo
+        })
+      });
+      
+      if (response.ok) {
+        setFeedbackSubmitted(true);
+      }
+    } catch (error) {
+      console.error('Failed to submit feedback:', error);
+    } finally {
+      setFeedbackLoading(false);
+    }
+  };
 
   if (!open || !repo) return null;
 
@@ -284,6 +317,49 @@ export default function QualityDetailModal({ open, repo, onClose }: QualityDetai
                 <div className="text-center py-8 text-slate-400">
                   <p>No detailed information available for this repository.</p>
                   <p className="text-sm mt-2">Try analyzing the repository again to get more details.</p>
+                </div>
+              )}
+
+              {/* Feedback Section */}
+              {repo.predictionId && !repo.cached && (
+                <div className="mt-6 pt-6 border-t border-slate-800">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-sm font-semibold text-white mb-1">
+                        Was this quality prediction helpful?
+                      </p>
+                      <p className="text-xs text-slate-400">
+                        Your feedback helps improve our predictions
+                      </p>
+                    </div>
+                    {!feedbackSubmitted ? (
+                      <div className="flex gap-2">
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          onClick={() => handleFeedback(true)}
+                          disabled={feedbackLoading}
+                          className="border-green-500/50 text-green-400 hover:bg-green-500/10 hover:border-green-500"
+                        >
+                          {feedbackLoading ? '...' : '✓ Helpful'}
+                        </Button>
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          onClick={() => handleFeedback(false)}
+                          disabled={feedbackLoading}
+                          className="border-red-500/50 text-red-400 hover:bg-red-500/10 hover:border-red-500"
+                        >
+                          {feedbackLoading ? '...' : '✗ Not Helpful'}
+                        </Button>
+                      </div>
+                    ) : (
+                      <div className="flex items-center gap-2 text-sm text-green-400">
+                        <span>✓</span>
+                        <span>Thank you for your feedback!</span>
+                      </div>
+                    )}
+                  </div>
                 </div>
               )}
             </>

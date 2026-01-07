@@ -21,7 +21,7 @@ This guide covers environment variable setup for production deployment.
 ### **Deployment**
 - `NODE_ENV=production` - Environment mode
 - `VERCEL_ENV=production` - Vercel environment
-- `NEXT_PUBLIC_APP_URL` - Production URL (e.g., https://playsmuggler.com)
+- `NEXT_PUBLIC_APP_URL` - Production URL (e.g., https://beast-mode.dev)
 
 ---
 

@@ -1,79 +1,93 @@
+#!/usr/bin/env node
+
 /**
- * Script to compare all available models
+ * Model Comparison Tool
+ * Compare different ML models (XGBoost, Random Forest, etc.)
  */
 
-const { getModelComparison } = require('../lib/mlops/modelComparison');
-const { getDataCollectionService } = require('../lib/mlops/dataCollection');
-const { getEnhancedFeatureEngineering } = require('../lib/features/enhancedFeatureEngineering');
+const path = require('path');
+const fs = require('fs').promises;
 
-async function main() {
-  console.log('📊 Model Comparison Script\n');
+// Load environment variables
+require('dotenv').config({ path: path.join(__dirname, '../.env.local') });
 
-  const comparison = getModelComparison();
-  await comparison.initialize();
+const { getMLModelIntegration } = require('../lib/mlops/mlModelIntegration');
 
-  const dataCollection = await getDataCollectionService();
-  const featureEngine = getEnhancedFeatureEngineering();
+async function compareModels() {
+  console.log('🔬 Model Comparison Tool\n');
+  console.log('='.repeat(60));
 
-  // Collect test data
-  console.log('📊 Collecting test data...');
-  const qualityData = await dataCollection.getQualityData();
-
-  if (!qualityData || qualityData.length < 50) {
-    console.log('⚠️  Insufficient data for comparison');
-    console.log(`   Found: ${qualityData?.length || 0} samples (min: 50)`);
-    process.exit(1);
-  }
-
-  console.log(`✅ Collected ${qualityData.length} samples\n`);
-
-  // Prepare data
-  console.log('🔧 Preparing data...');
-  const X = [];
-  const y = [];
-
-  for (const sample of qualityData) {
-    const features = featureEngine.extractFeatures(sample);
-    X.push(features);
-    y.push(sample.quality_score || sample.quality || 0);
-  }
-
-  // Split into train/test (80/20)
-  const splitIndex = Math.floor(X.length * 0.8);
-  const X_test = X.slice(splitIndex);
-  const y_test = y.slice(splitIndex);
-
-  console.log(`✅ Prepared ${X_test.length} test samples\n`);
-
-  // Compare models
-  console.log('🔍 Comparing models...\n');
-  const results = await comparison.compareModels(X_test, y_test);
-
-  if (results) {
-    console.log('✅ Comparison complete!\n');
-    console.log('📊 Results:');
+  try {
+    const mlIntegration = await getMLModelIntegration();
     
-    results.comparisons.forEach(comp => {
-      console.log(`\n${comp.modelName}:`);
-      console.log(`   MAE: ${comp.metrics.mae}`);
-      console.log(`   RMSE: ${comp.metrics.rmse}`);
-      console.log(`   R²: ${comp.metrics.r2}`);
-      console.log(`   Accuracy: ${comp.metrics.accuracy}%`);
-      console.log(`   Avg Latency: ${comp.performance.avgLatency}ms`);
-    });
-
-    if (results.bestModel) {
-      console.log(`\n🏆 Best Model: ${results.bestModel.modelName}`);
-      console.log(`   Score: ${results.bestModel.score?.toFixed(4)}`);
+    if (!mlIntegration || !mlIntegration.isMLModelAvailable()) {
+      console.error('❌ ML model not available');
+      process.exit(1);
     }
-  } else {
-    console.log('❌ Comparison failed');
+
+    const modelInfo = mlIntegration.getModelInfo();
+    console.log('\n📊 Current Model Info:');
+    console.log(`   Algorithm: ${modelInfo.algorithm || 'Unknown'}`);
+    console.log(`   Version: ${modelInfo.version || 'Unknown'}`);
+    console.log(`   R²: ${modelInfo.metrics?.r2?.toFixed(4) || 'N/A'}`);
+    console.log(`   MAE: ${modelInfo.metrics?.mae?.toFixed(4) || 'N/A'}`);
+    console.log(`   RMSE: ${modelInfo.metrics?.rmse?.toFixed(4) || 'N/A'}`);
+    console.log(`   Dataset Size: ${modelInfo.datasetSize || 'N/A'}`);
+    console.log(`   Features: ${modelInfo.featureCount || 'N/A'}`);
+
+    // Check for other model files
+    const modelsDir = path.join(__dirname, '../.beast-mode/models');
+    try {
+      const modelDirs = await fs.readdir(modelsDir);
+      const modelTypes = modelDirs.filter(d => d.startsWith('model-'));
+      
+      console.log(`\n📁 Found ${modelTypes.length} model(s) in .beast-mode/models:`);
+      for (const modelType of modelTypes) {
+        const modelPath = path.join(modelsDir, modelType);
+        const metadataPath = path.join(modelPath, 'model-metadata.json');
+        
+        try {
+          const metadata = JSON.parse(await fs.readFile(metadataPath, 'utf8'));
+          console.log(`\n   ${modelType}:`);
+          console.log(`     Algorithm: ${metadata.algorithm || 'Unknown'}`);
+          console.log(`     R²: ${metadata.metrics?.r2?.toFixed(4) || 'N/A'}`);
+          console.log(`     MAE: ${metadata.metrics?.mae?.toFixed(4) || 'N/A'}`);
+          console.log(`     RMSE: ${metadata.metrics?.rmse?.toFixed(4) || 'N/A'}`);
+          console.log(`     Trained: ${metadata.trainedAt || 'Unknown'}`);
+        } catch (e) {
+          console.log(`     (metadata not available)`);
+        }
+      }
+    } catch (e) {
+      console.log('\n⚠️  Could not read models directory');
+    }
+
+    // Feature importance
+    if (mlIntegration.qualityPredictor?.metadata?.featureImportance) {
+      console.log('\n🎯 Top 10 Features (by importance):');
+      const topFeatures = mlIntegration.qualityPredictor.metadata.featureImportance
+        .slice(0, 10)
+        .map((item, idx) => {
+          const name = item.name || item[0] || 'unknown';
+          const importance = item.importance || item[1] || 0;
+          return { name, importance, rank: idx + 1 };
+        });
+
+      topFeatures.forEach(f => {
+        const bar = '█'.repeat(Math.floor(f.importance * 20));
+        console.log(`   ${f.rank.toString().padStart(2)}. ${f.name.padEnd(20)} ${bar} ${f.importance.toFixed(3)}`);
+      });
+    }
+
+    console.log('\n✅ Model comparison complete!\n');
+  } catch (error) {
+    console.error('\n❌ Error:', error.message);
     process.exit(1);
   }
 }
 
-main().catch(error => {
-  console.error('Fatal error:', error);
-  process.exit(1);
-});
+if (require.main === module) {
+  compareModels();
+}
 
+module.exports = { compareModels };

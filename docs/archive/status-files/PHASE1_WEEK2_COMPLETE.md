@@ -95,13 +95,13 @@ vercel --prod --yes
 ### **3. Verify**:
 ```bash
 # Check health
-curl https://playsmuggler.com/api/health
+curl https://beast-mode.dev/api/health
 
 # Check detailed health
-curl https://playsmuggler.com/api/health?level=detailed
+curl https://beast-mode.dev/api/health?level=detailed
 
 # Check monitoring
-curl https://playsmuggler.com/api/monitoring/metrics?type=health
+curl https://beast-mode.dev/api/monitoring/metrics?type=health
 ```
 
 ---

@@ -99,13 +99,13 @@ npm run verify:env
 ### **Health Check**:
 ```bash
 # Basic check
-curl "https://playsmuggler.com/api/health"
+curl "https://beast-mode.dev/api/health"
 
 # Detailed check with service status
-curl "https://playsmuggler.com/api/health?level=detailed"
+curl "https://beast-mode.dev/api/health?level=detailed"
 
 # Check specific service
-curl "https://playsmuggler.com/api/health/services?service=circuit-breaker"
+curl "https://beast-mode.dev/api/health/services?service=circuit-breaker"
 ```
 
 ### **Environment Verification**:

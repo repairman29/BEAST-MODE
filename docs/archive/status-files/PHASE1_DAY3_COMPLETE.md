@@ -118,22 +118,22 @@ curl "http://localhost:3000/api/monitoring/alerts?severity=high"
 
 ### **Get Metrics Summary**:
 ```bash
-curl "https://playsmuggler.com/api/monitoring/metrics?type=summary"
+curl "https://beast-mode.dev/api/monitoring/metrics?type=summary"
 ```
 
 ### **Get Health Status**:
 ```bash
-curl "https://playsmuggler.com/api/monitoring/metrics?type=health"
+curl "https://beast-mode.dev/api/monitoring/metrics?type=health"
 ```
 
 ### **Get Recent Logs**:
 ```bash
-curl "https://playsmuggler.com/api/monitoring/logs?type=error&limit=20"
+curl "https://beast-mode.dev/api/monitoring/logs?type=error&limit=20"
 ```
 
 ### **Get Alerts**:
 ```bash
-curl "https://playsmuggler.com/api/monitoring/alerts?severity=high"
+curl "https://beast-mode.dev/api/monitoring/alerts?severity=high"
 ```
 
 ---

@@ -48,7 +48,7 @@
       "properties": {
         "beastMode.apiUrl": {
           "type": "string",
-          "default": "https://playsmuggler.com",
+          "default": "https://beast-mode.dev",
           "description": "BEAST MODE API URL"
         },
         "beastMode.enableSuggestions": {

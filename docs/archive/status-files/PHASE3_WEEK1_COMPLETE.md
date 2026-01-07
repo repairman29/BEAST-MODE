@@ -120,7 +120,7 @@ curl -X POST "http://localhost:3001/api/multi-region" \
     "operation": "register-region",
     "id": "eu-west-1",
     "name": "Europe West",
-    "endpoint": "https://api-eu.playsmuggler.com"
+    "endpoint": "https://api-eu.beast-mode.dev"
   }'
 ```
 

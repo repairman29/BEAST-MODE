@@ -172,7 +172,7 @@ const handleQuickScan = async () => {
 ### Echeo
 - Integration code is ready
 - Requires Supabase env vars (already configured)
-- API calls use production URL (`https://playsmuggler.com/api/repos/quality`)
+- API calls use production URL (`https://beast-mode.dev/api/repos/quality`)
 - Can be updated to use localhost for local testing if needed
 
 ---

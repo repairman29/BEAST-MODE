@@ -16,7 +16,7 @@
 
 ### **Option 2: Web Dashboard**
 
-1. Visit [playsmuggler.com](https://playsmuggler.com)
+1. Visit [beast-mode.dev](https://beast-mode.dev)
 2. Sign in with GitHub
 3. Connect your repositories
 4. Start using BEAST MODE!
@@ -31,7 +31,7 @@ Open VS Code settings (`Ctrl+,` or `Cmd+,`) and search for "BEAST MODE":
 
 ```json
 {
-  "beastMode.apiUrl": "https://playsmuggler.com",
+  "beastMode.apiUrl": "https://beast-mode.dev",
   "beastMode.enableSuggestions": true,
   "beastMode.enableQualityHints": true
 }
@@ -191,5 +191,5 @@ Open any JavaScript/TypeScript/Python project in VS Code.
 
 Start coding and let BEAST MODE help you write better code, faster!
 
-**Questions?** Check the [FAQ](../docs/FAQ.md) or [contact support](mailto:support@playsmuggler.com).
+**Questions?** Check the [FAQ](../docs/FAQ.md) or [contact support](mailto:support@beast-mode.dev).
 

@@ -23,6 +23,7 @@ interface QualityResponse {
   quality: number;
   confidence: number;
   percentile: number;
+  predictionId?: string; // For feedback collection
   factors: Record<string, {
     value: number;
     importance: number;
@@ -869,10 +870,49 @@ export async function POST(request: NextRequest) {
     // Generate platform-specific insights
     const platformSpecific = generatePlatformSpecific(quality, features, platform);
     
+    // Track prediction for feedback collection (async, don't block)
+    let predictionId: string | undefined;
+    try {
+      const { getDatabaseWriter } = require('../../../../../lib/mlops/databaseWriter');
+      const databaseWriter = getDatabaseWriter();
+      if (databaseWriter) {
+        const predictionPromise = databaseWriter.writePrediction({
+          serviceName: 'beast-mode',
+          predictionType: 'quality',
+          predictedValue: quality,
+          actualValue: null, // User can provide via feedback
+          confidence: confidence,
+          context: {
+            repo,
+            platform,
+            features: Object.keys(features).length,
+            hasRecommendations: recommendations.length > 0,
+            percentile
+          },
+          modelVersion: predictionResult.modelVersion || 'unknown',
+          source: predictionResult.source || 'ml_model'
+        });
+        
+        // Get predictionId from promise (it's returned immediately)
+        predictionPromise.then((id: string) => {
+          predictionId = id;
+        }).catch((err: any) => {
+          console.warn('[Quality API] Failed to track prediction:', err.message);
+        });
+        
+        // For immediate use, we'll generate a temporary ID
+        // The actual ID will be set when the promise resolves
+        predictionId = require('crypto').randomUUID();
+      }
+    } catch (error: any) {
+      console.warn('[Quality API] Database writer not available:', error.message);
+    }
+    
     const responseData: QualityResponse = {
       quality: Math.max(0, Math.min(1, quality)),
       confidence,
       percentile: Math.max(0, Math.min(100, percentile)),
+      predictionId, // Include for feedback collection
       factors,
       recommendations,
       platformSpecific,

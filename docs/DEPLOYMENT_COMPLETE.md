@@ -53,12 +53,12 @@
 ### Test BEAST MODE APIs
 ```bash
 # Quality API
-curl -X POST https://playsmuggler.com/api/repos/quality \
+curl -X POST https://beast-mode.dev/api/repos/quality \
   -H "Content-Type: application/json" \
   -d '{"repo": "facebook/react", "platform": "beast-mode"}'
 
 # Benchmark API
-curl -X POST https://playsmuggler.com/api/repos/benchmark \
+curl -X POST https://beast-mode.dev/api/repos/benchmark \
   -H "Content-Type: application/json" \
   -d '{"repo": "facebook/react"}'
 ```

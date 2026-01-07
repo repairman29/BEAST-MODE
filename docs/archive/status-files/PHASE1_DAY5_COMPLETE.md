@@ -123,17 +123,17 @@ curl -X POST "http://localhost:3000/api/monitoring/alerts/notifications" \
 
 ### **List Alert Rules**:
 ```bash
-curl "https://playsmuggler.com/api/monitoring/alerts/rules?operation=list"
+curl "https://beast-mode.dev/api/monitoring/alerts/rules?operation=list"
 ```
 
 ### **Evaluate Alerts**:
 ```bash
-curl "https://playsmuggler.com/api/monitoring/alerts/rules?operation=evaluate"
+curl "https://beast-mode.dev/api/monitoring/alerts/rules?operation=evaluate"
 ```
 
 ### **Silence Alert**:
 ```bash
-curl -X POST "https://playsmuggler.com/api/monitoring/alerts/rules" \
+curl -X POST "https://beast-mode.dev/api/monitoring/alerts/rules" \
   -H "Content-Type: application/json" \
   -d '{
     "operation": "silence",
@@ -144,7 +144,7 @@ curl -X POST "https://playsmuggler.com/api/monitoring/alerts/rules" \
 
 ### **Send Test Alert**:
 ```bash
-curl -X POST "https://playsmuggler.com/api/monitoring/alerts/notifications" \
+curl -X POST "https://beast-mode.dev/api/monitoring/alerts/notifications" \
   -H "Content-Type: application/json" \
   -d '{"test": true}'
 ```
