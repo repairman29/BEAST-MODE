@@ -178,9 +178,6 @@ export default function ReposQualityTable({ repos, onRefresh }: ReposQualityTabl
 
   // Filter and sort repos (client-side filtering of already-fetched data)
   // Note: This is client-side filtering of data already fetched from API, not a database query
-  // ARCHITECTURE: Moved to API route
-// const filteredAndSorted = Array.from(repoQualities.values())
-    .filter((repo: any) => {
       if (!filter) return true;
       return repo.repo.toLowerCase().includes(filter.toLowerCase());
     })
