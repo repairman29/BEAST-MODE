@@ -25,22 +25,36 @@ export async function GET(request: NextRequest) {
     
     // Try to get token from oauth userId
     if (oauthUserId) {
-      githubToken = await getDecryptedToken(oauthUserId);
-      console.log('   Token found for OAuth user ID:', !!githubToken);
+      try {
+        githubToken = await getDecryptedToken(oauthUserId);
+        console.log('   Token found for OAuth user ID:', !!githubToken);
+      } catch (error: any) {
+        console.warn('   Error getting token for OAuth user ID:', error.message);
+      }
     }
     
     // If not found, try token-based user ID
     if (!githubToken && token) {
-      const userId = `user-${token.slice(0, 8)}`;
-      githubToken = await getDecryptedToken(userId);
-      console.log('   Token found for user ID:', !!githubToken);
+      try {
+        const userId = `user-${token.slice(0, 8)}`;
+        githubToken = await getDecryptedToken(userId);
+        console.log('   Token found for user ID:', !!githubToken);
+      } catch (error: any) {
+        console.warn('   Error getting token for user ID:', error.message);
+      }
     }
     
     // If still not found, check all session-based IDs (get the most recent)
     if (!githubToken) {
       const globalForTokenStore = globalThis as unknown as {
-        tokenStore: Map<string, any>;
+        tokenStore?: Map<string, any>;
       };
+      
+      // Initialize tokenStore if it doesn't exist
+      if (!globalForTokenStore.tokenStore) {
+        globalForTokenStore.tokenStore = new Map();
+      }
+      
       const store = globalForTokenStore.tokenStore;
       
       let mostRecent: { key: string; data: any; time: number } | null = null;
@@ -55,8 +69,12 @@ export async function GET(request: NextRequest) {
         }
       }
       if (mostRecent) {
-        githubToken = await getDecryptedToken(mostRecent.key);
-        console.log('   Token found for most recent user ID:', !!githubToken);
+        try {
+          githubToken = await getDecryptedToken(mostRecent.key);
+          console.log('   Token found for most recent user ID:', !!githubToken);
+        } catch (error: any) {
+          console.warn('   Error getting token for most recent user ID:', error.message);
+        }
       }
     }
 
@@ -75,12 +93,33 @@ export async function GET(request: NextRequest) {
     const octokit = createOctokit(githubToken);
     
     // Fetch all repositories (including private)
-    const { data: repos } = await octokit.repos.listForAuthenticatedUser({
-      type: 'all', // all, owner, member
-      sort: 'updated',
-      direction: 'desc',
-      per_page: 100, // Get up to 100 repos
-    });
+    let repos: any[] = [];
+    try {
+      const response = await octokit.repos.listForAuthenticatedUser({
+        type: 'all', // all, owner, member
+        sort: 'updated',
+        direction: 'desc',
+        per_page: 100, // Get up to 100 repos
+      });
+      repos = response.data || [];
+    } catch (apiError: any) {
+      console.error('❌ [GitHub Repos] GitHub API error:', apiError.message);
+      console.error('   Status:', apiError.status);
+      console.error('   Response:', apiError.response?.data);
+      
+      // If it's an auth error, return not connected
+      if (apiError.status === 401 || apiError.status === 403) {
+        return NextResponse.json({
+          repos: [],
+          connected: false,
+          message: 'GitHub token is invalid or expired. Please reconnect your GitHub account.',
+          error: 'Authentication failed'
+        }, { status: 401 });
+      }
+      
+      // Re-throw other errors to be caught by outer catch
+      throw apiError;
+    }
 
     console.log(`✅ [GitHub Repos] Found ${repos.length} repositories`);
 

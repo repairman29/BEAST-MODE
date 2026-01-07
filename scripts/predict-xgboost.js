@@ -16,7 +16,15 @@ const fs = require('fs');
  */
 function predictQuality(features, modelPath) {
   return new Promise((resolve, reject) => {
+    // Script is in the same directory as this file
     const scriptPath = path.join(__dirname, 'predict_xgboost.py');
+    
+    // Verify script exists
+    if (!fs.existsSync(scriptPath)) {
+      reject(new Error(`Python script not found: ${scriptPath}`));
+      return;
+    }
+    
     const featuresJson = JSON.stringify(features);
     
     const python = spawn('python3', [scriptPath, modelPath, featuresJson]);

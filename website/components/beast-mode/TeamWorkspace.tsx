@@ -161,7 +161,7 @@ export default function TeamWorkspace({ workspaceId, userId }: TeamWorkspaceProp
         <Card className="bg-gradient-to-br from-slate-800/60 to-slate-900/40 border-2 border-slate-700/50 hover:border-green-500/50 transition-all duration-200 hover:scale-[1.02] hover:shadow-xl">
           <CardContent className="p-6">
             <div className="text-xs text-slate-400 uppercase tracking-wider mb-2 font-medium">Improving</div>
-            <div className="text-4xl font-bold text-green-400 mb-1">{metrics.trends.improving}</div>
+            <div className="text-4xl font-bold text-green-400 mb-1">{metrics.trends?.improving || 0}</div>
             <div className="text-xs text-slate-500">Members trending up</div>
           </CardContent>
         </Card>
@@ -345,7 +345,7 @@ export default function TeamWorkspace({ workspaceId, userId }: TeamWorkspaceProp
           </CardHeader>
           <CardContent>
             <div className="space-y-3">
-              {metrics.projectScores.map((project, idx) => (
+              {(metrics.projectScores || []).map((project, idx) => (
                 <div
                   key={project.projectId}
                   className="flex items-center justify-between p-5 bg-slate-800/50 rounded-xl border-2 border-slate-700/50 hover:border-cyan-500/50 transition-all duration-200 hover:scale-[1.01] hover:shadow-lg"

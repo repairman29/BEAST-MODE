@@ -40,6 +40,7 @@ export default function ReposQualityTable({ repos, onRefresh }: ReposQualityTabl
 
   // Initialize repo qualities
   useEffect(() => {
+    console.log('[ReposQualityTable] Initializing with', repos.length, 'repos');
     const initial = new Map<string, RepoQuality>();
     repos.forEach(repo => {
       initial.set(repo, { repo, loading: false });
@@ -50,6 +51,7 @@ export default function ReposQualityTable({ repos, onRefresh }: ReposQualityTabl
   const analyzeAllRepos = async () => {
     if (repos.length === 0) return;
 
+    console.log('[ReposQualityTable] Starting analysis for', repos.length, 'repos');
     setLoading(true);
     const updated = new Map(repoQualities);
 
@@ -57,7 +59,7 @@ export default function ReposQualityTable({ repos, onRefresh }: ReposQualityTabl
     repos.forEach(repo => {
       updated.set(repo, { ...updated.get(repo) || { repo }, loading: true });
     });
-    setRepoQualities(updated);
+    setRepoQualities(new Map(updated)); // Create new Map to trigger re-render
 
     // Process in batches of 10 to avoid overwhelming the API
     const batchSize = 10;
@@ -66,6 +68,7 @@ export default function ReposQualityTable({ repos, onRefresh }: ReposQualityTabl
       
       const promises = batch.map(async (repo) => {
         try {
+          console.log('[ReposQualityTable] Analyzing repo:', repo);
           const res = await fetch('/api/repos/quality', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -73,13 +76,24 @@ export default function ReposQualityTable({ repos, onRefresh }: ReposQualityTabl
           });
 
           if (!res.ok) {
-            throw new Error(`Failed to analyze ${repo}`);
+            const errorText = await res.text();
+            console.error(`[ReposQualityTable] API error for ${repo}:`, res.status, errorText);
+            throw new Error(`Failed to analyze ${repo}: ${res.status}`);
           }
 
           const data = await res.json();
+          console.log(`[ReposQualityTable] Got result for ${repo}:`, { 
+            quality: data.quality, 
+            confidence: data.confidence,
+            source: data.source || 'unknown'
+          });
+          
+          // Ensure quality is a number (0 is valid!)
+          const quality = typeof data.quality === 'number' ? data.quality : 0;
+          
           return {
             repo,
-            quality: data.quality || 0,
+            quality: quality, // Keep 0 as valid value
             confidence: data.confidence || 0,
             percentile: data.percentile || 0,
             cached: data.cached || false,
@@ -89,13 +103,14 @@ export default function ReposQualityTable({ repos, onRefresh }: ReposQualityTabl
             recommendations: data.recommendations
           };
         } catch (error: any) {
+          console.error(`[ReposQualityTable] Error analyzing ${repo}:`, error);
           return {
             repo,
-            quality: 0,
+            quality: undefined, // Use undefined for errors, not 0
             confidence: 0,
             percentile: 0,
             loading: false,
-            error: error.message
+            error: error.message || 'Unknown error'
           };
         }
       });
@@ -104,7 +119,11 @@ export default function ReposQualityTable({ repos, onRefresh }: ReposQualityTabl
       results.forEach(result => {
         updated.set(result.repo, result);
       });
+      // Create new Map to ensure React detects the change
       setRepoQualities(new Map(updated));
+      console.log('[ReposQualityTable] Updated', results.length, 'repos. Total analyzed:', 
+        Array.from(updated.values()).filter(r => r.quality !== undefined && r.quality !== null).length
+      );
     }
 
     setLoading(false);
@@ -167,8 +186,11 @@ export default function ReposQualityTable({ repos, onRefresh }: ReposQualityTabl
   };
 
   // TODO: Move to API route for better architecture
+  // Count repos that have been analyzed (quality can be 0, so check for !== undefined, not truthy)
   // ARCHITECTURE: Moved to API route
-// const analyzedCount = Array.from(repoQualities.values()).filter((r: any) => r.quality !== undefined && !r.loading).length;
+// const analyzedCount = Array.from(repoQualities.values()).filter((r: any) => 
+    r.quality !== undefined && r.quality !== null && !r.loading
+  ).length;
   const hasData = analyzedCount > 0;
 
   return (
@@ -326,7 +348,7 @@ export default function ReposQualityTable({ repos, onRefresh }: ReposQualityTabl
                         </div>
                       ) : repo.error ? (
                         <span className="text-xs text-red-400">Error</span>
-                      ) : repo.quality !== undefined ? (
+                      ) : repo.quality !== undefined && repo.quality !== null ? (
                         <div className="flex items-center gap-2">
                           <Badge className={getQualityColor(repo.quality)}>
                             {(repo.quality * 100).toFixed(1)}%

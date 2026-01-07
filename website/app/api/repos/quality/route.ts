@@ -46,6 +46,8 @@ interface QualityResponse {
       };
     };
   };
+  warning?: string;
+  source?: string;
 }
 
 /**
@@ -220,7 +222,7 @@ function generatePlatformSpecific(
 // Model cache (singleton pattern - shared across requests)
 let mlIntegrationInstance: any = null;
 let mlIntegrationInitialized = false;
-const mlIntegrationInitPromise: Promise<any> | null = null;
+let mlIntegrationInitPromise: Promise<any> | null = null;
 
 async function getMLIntegration() {
   // Return cached instance if already initialized
@@ -230,20 +232,41 @@ async function getMLIntegration() {
 
   // If already initializing, wait for it
   if (mlIntegrationInitPromise) {
-    await mlIntegrationInitPromise;
-    return mlIntegrationInstance;
+    try {
+      await mlIntegrationInitPromise;
+      return mlIntegrationInstance;
+    } catch (error: any) {
+      console.error('[Quality API] Initialization promise rejected:', error);
+      // Continue to try initializing again
+    }
   }
 
   // Initialize new instance
-  const { MLModelIntegration } = require('../../../../../lib/mlops/mlModelIntegration');
-  mlIntegrationInstance = new MLModelIntegration();
-  const initPromise = mlIntegrationInstance.initialize().then(() => {
-    mlIntegrationInitialized = true;
+  try {
+    const { MLModelIntegration } = require('../../../../../lib/mlops/mlModelIntegration');
+    mlIntegrationInstance = new MLModelIntegration();
+    
+    mlIntegrationInitPromise = mlIntegrationInstance.initialize().then(() => {
+      mlIntegrationInitialized = true;
+      mlIntegrationInitPromise = null; // Clear promise after initialization
+      console.log('[Quality API] ML Integration initialized successfully');
+      console.log('[Quality API] Model available:', mlIntegrationInstance.isMLModelAvailable());
+      return mlIntegrationInstance;
+    }).catch((error: any) => {
+      mlIntegrationInitPromise = null; // Clear promise on error
+      mlIntegrationInitialized = false; // Mark as not initialized
+      console.error('[Quality API] Initialization error:', error);
+      console.error('[Quality API] Error stack:', error.stack);
+      throw error;
+    });
+    
+    await mlIntegrationInitPromise;
     return mlIntegrationInstance;
-  });
-  
-  await initPromise;
-  return mlIntegrationInstance;
+  } catch (error: any) {
+    console.error('[Quality API] Failed to create ML Integration:', error);
+    console.error('[Quality API] Error stack:', error.stack);
+    throw error;
+  }
 }
 
 export async function POST(request: NextRequest) {
@@ -283,15 +306,13 @@ export async function POST(request: NextRequest) {
     }
     
     // Use cached ML integration instance (avoids reloading model on every request)
-    const mlIntegration = await getMLIntegration();
-    
-    if (!mlIntegration.isMLModelAvailable()) {
-      const latency = Date.now() - startTime;
-      monitoring.recordRequest(repo, platform, latency, false, false, new Error('Model not available'));
-      return NextResponse.json(
-        { error: 'Quality prediction model not available' },
-        { status: 503 }
-      );
+    let mlIntegration;
+    try {
+      mlIntegration = await getMLIntegration();
+    } catch (error: any) {
+      console.warn('[Quality API] Failed to get ML Integration, will use fallback:', error.message);
+      // Continue with fallback - don't return 503
+      mlIntegration = null;
     }
     
     // If features not provided, we'd need to scan the repo
@@ -299,17 +320,39 @@ export async function POST(request: NextRequest) {
     const features = providedFeatures || {};
     
     // Make prediction using mlModelIntegration (handles XGBoost async)
-    const predictionResult = await mlIntegration.predictQuality({ features });
-    const quality = predictionResult.predictedQuality;
-    const confidence = predictionResult.confidence || 0.85;
+    // If model not available, it will use fallback prediction
+    let predictionResult;
+    let usingFallback = false;
     
-    // Get model info for percentile calculation
-    const modelInfo = mlIntegration.getModelInfo();
+    if (!mlIntegration || !mlIntegration.isMLModelAvailable()) {
+      console.warn('[Quality API] Model not available, using fallback. Initialized:', mlIntegration?.initialized, 'Predictor:', !!mlIntegration?.qualityPredictor);
+      // Use default prediction as fallback
+      predictionResult = mlIntegration?.getDefaultPrediction() || {
+        predictedQuality: 0.75,
+        confidence: 0.5,
+        source: 'fallback'
+      };
+      usingFallback = true;
+    } else {
+      try {
+        predictionResult = await mlIntegration.predictQuality({ features });
+      } catch (error: any) {
+        console.warn('[Quality API] Prediction failed, using fallback:', error.message);
+        predictionResult = mlIntegration.getDefaultPrediction();
+        usingFallback = true;
+      }
+    }
+    
+    const quality = predictionResult.predictedQuality;
+    const confidence = predictionResult.confidence || 0.5;
+    
+    // Get model info for percentile calculation (use defaults if model not available)
+    const modelInfo = mlIntegration?.getModelInfo() || { metrics: {} };
     const percentile = calculatePercentile(quality, { qualityStats: modelInfo.metrics });
     
-    // Get feature importance from model
+    // Get feature importance from model (only if model is available)
     const factors: Record<string, { value: number; importance: number }> = {};
-    if (mlIntegration.qualityPredictor?.metadata?.featureImportance) {
+    if (mlIntegration?.qualityPredictor?.metadata?.featureImportance) {
       mlIntegration.qualityPredictor.metadata.featureImportance.slice(0, 10).forEach((item: any) => {
         factors[item.name || item[0]] = {
           value: features[item.name || item[0]] || 0,
@@ -330,7 +373,12 @@ export async function POST(request: NextRequest) {
       percentile: Math.max(0, Math.min(100, percentile)),
       factors,
       recommendations,
-      platformSpecific
+      platformSpecific,
+      // Add metadata about prediction source
+      ...(usingFallback && { 
+        warning: 'Using fallback prediction - ML model not available',
+        source: 'fallback'
+      })
     };
     
     // Track performance
