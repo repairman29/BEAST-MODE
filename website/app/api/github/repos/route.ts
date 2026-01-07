@@ -68,13 +68,13 @@ export async function GET(request: NextRequest) {
             mostRecent = { key, data: value, time };
           }
         }
-      }
-      if (mostRecent) {
-        try {
-          githubToken = await getDecryptedToken(mostRecent.key);
-          console.log('   Token found for most recent user ID:', !!githubToken);
-        } catch (error: any) {
-          console.warn('   Error getting token for most recent user ID:', error.message);
+        if (mostRecent) {
+          try {
+            githubToken = await getDecryptedToken(mostRecent.key);
+            console.log('   Token found for most recent user ID:', !!githubToken);
+          } catch (error: any) {
+            console.warn('   Error getting token for most recent user ID:', error.message);
+          }
         }
       }
     }
