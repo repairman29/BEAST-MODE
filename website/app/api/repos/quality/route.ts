@@ -217,6 +217,35 @@ function generatePlatformSpecific(
   return undefined;
 }
 
+// Model cache (singleton pattern - shared across requests)
+let mlIntegrationInstance: any = null;
+let mlIntegrationInitialized = false;
+const mlIntegrationInitPromise: Promise<any> | null = null;
+
+async function getMLIntegration() {
+  // Return cached instance if already initialized
+  if (mlIntegrationInstance && mlIntegrationInitialized) {
+    return mlIntegrationInstance;
+  }
+
+  // If already initializing, wait for it
+  if (mlIntegrationInitPromise) {
+    await mlIntegrationInitPromise;
+    return mlIntegrationInstance;
+  }
+
+  // Initialize new instance
+  const { MLModelIntegration } = require('../../../../BEAST-MODE-PRODUCT/lib/mlops/mlModelIntegration');
+  mlIntegrationInstance = new MLModelIntegration();
+  const initPromise = mlIntegrationInstance.initialize().then(() => {
+    mlIntegrationInitialized = true;
+    return mlIntegrationInstance;
+  });
+  
+  await initPromise;
+  return mlIntegrationInstance;
+}
+
 export async function POST(request: NextRequest) {
   const startTime = Date.now();
   
@@ -243,17 +272,18 @@ export async function POST(request: NextRequest) {
       const latency = Date.now() - startTime;
       monitoring.recordRequest(repo, platform, latency, true, true);
       console.log(`[Quality API] Cache hit for ${repo} (${latency}ms)`);
-      return NextResponse.json({
+      const response = NextResponse.json({
         ...cached,
         cached: true,
         latency
       });
+      // Add cache headers
+      response.headers.set('Cache-Control', 'public, max-age=300, stale-while-revalidate=600');
+      return response;
     }
     
-    // Use mlModelIntegration for predictions (supports XGBoost and Random Forest)
-    const { MLModelIntegration } = require('../../../../BEAST-MODE-PRODUCT/lib/mlops/mlModelIntegration');
-    const mlIntegration = new MLModelIntegration();
-    await mlIntegration.initialize();
+    // Use cached ML integration instance (avoids reloading model on every request)
+    const mlIntegration = await getMLIntegration();
     
     if (!mlIntegration.isMLModelAvailable()) {
       const latency = Date.now() - startTime;
@@ -335,7 +365,15 @@ export async function POST(request: NextRequest) {
           }
         }
         
-        return NextResponse.json(response);
+        const response = NextResponse.json(responseData);
+        
+        // Add cache headers for successful responses
+        response.headers.set('Cache-Control', 'public, max-age=300, stale-while-revalidate=600');
+        
+        // Store in cache
+        cache.set(repo, providedFeatures, responseData);
+        
+        return response;
         
       } catch (error: any) {
         console.error('[Quality API] Error:', error);
