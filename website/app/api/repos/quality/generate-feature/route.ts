@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getDecryptedToken } from '../../../../lib/github-token';
+import { getDecryptedToken } from '../../../../../lib/github-token';
 
 // Dynamic require for Node.js modules
 let featureGenerator: any;
