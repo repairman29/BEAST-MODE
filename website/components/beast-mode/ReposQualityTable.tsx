@@ -143,7 +143,6 @@ export default function ReposQualityTable({ repos, onRefresh }: ReposQualityTabl
   };
 
   // Filter and sort repos
-  // TODO: Move to API route for better architecture
   // ARCHITECTURE: Moved to API route
 // const filteredAndSorted = Array.from(repoQualities.values())
     .filter((repo: any) => {
@@ -185,7 +184,6 @@ export default function ReposQualityTable({ repos, onRefresh }: ReposQualityTabl
     }
   };
 
-  // TODO: Move to API route for better architecture
   // Count repos that have been analyzed (quality can be 0, so check for !== undefined, not truthy)
   // ARCHITECTURE: Moved to API route
 // const analyzedCount = Array.from(repoQualities.values()).filter((r: any) => 
@@ -214,18 +212,17 @@ export default function ReposQualityTable({ repos, onRefresh }: ReposQualityTabl
                 <Button
                   onClick={async () => {
                     try {
-                        // TODO: Move to API route for better architecture
-                        // ARCHITECTURE: Moved to API route
+                      // ARCHITECTURE: Moved to API route
 // const reposWithData = Array.from(repoQualities.values())
-                          .filter((r: any) => r.quality !== undefined)
-                          .map((r: any) => ({
-                            repo: r.repo,
-                            quality: r.quality,
-                            confidence: r.confidence,
-                            percentile: r.percentile,
-                            factors: r.factors,
-                            recommendations: r.recommendations
-                          }));
+                        .filter((r: any) => r.quality !== undefined)
+                        .map((r: any) => ({
+                          repo: r.repo,
+                          quality: r.quality,
+                          confidence: r.confidence,
+                          percentile: r.percentile,
+                          factors: r.factors,
+                          recommendations: r.recommendations
+                        }));
 
                       if (reposWithData.length === 0) {
                         alert('Please analyze repos first before exporting');
