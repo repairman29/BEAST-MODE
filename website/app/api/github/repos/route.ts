@@ -59,6 +59,7 @@ export async function GET(request: NextRequest) {
       
       if (store) {
         let mostRecent: { key: string; data: any; time: number } | null = null;
+        // Note: This is iterating over in-memory token store, not a database query
         // ARCHITECTURE: Moved to API route
 // const entries = Array.from(store.entries());
         for (const [key, value] of entries) {
