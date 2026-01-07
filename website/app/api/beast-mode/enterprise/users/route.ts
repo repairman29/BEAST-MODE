@@ -4,9 +4,14 @@ import { NextRequest, NextResponse } from 'next/server';
  * Enterprise Users API
  * 
  * Manage users for enterprise organizations
+ * 
+ * ⚠️ DEVELOPMENT ONLY: Example users below are for development/testing only.
+ * In production, this should connect to a real database (Supabase).
+ * These example users should NEVER appear in production UI or be shown to real users.
  */
 
 // In-memory storage (replace with database in production)
+// ⚠️ EXAMPLE USERS - DEVELOPMENT ONLY - DO NOT USE IN PRODUCTION
 let users: any[] = [
   { id: '1', email: 'john@example.com', name: 'John Doe', role: 'admin', team: 'Engineering', createdAt: new Date().toISOString() },
   { id: '2', email: 'jane@example.com', name: 'Jane Smith', role: 'developer', team: 'Engineering', createdAt: new Date().toISOString() },

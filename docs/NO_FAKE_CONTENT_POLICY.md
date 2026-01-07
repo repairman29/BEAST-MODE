@@ -67,6 +67,17 @@
   - `website/app/api/github/scan/route.ts` - Has mock data fallback (marked)
   - `website/app/api/auth/signin/route.ts` - Has mock auth fallback (marked)
   - `website/app/api/beast-mode/janitor/*` - Has mock data fallbacks (marked)
+  - `website/app/api/beast-mode/enterprise/users/route.ts` - Has example users (John Doe, Jane Smith) - **NEEDS VERIFICATION**
+
+### **3. Plugin Reviews** ✅ **CLEAN**
+- **Location:** `website/app/api/beast-mode/marketplace/reviews/route.ts`
+- **Status:** Uses in-memory store (real user reviews only)
+- **Action:** ✅ Correct - no fake reviews seeded
+
+### **4. Enterprise Users API** ⚠️ **FIXED**
+- **Location:** `website/app/api/beast-mode/enterprise/users/route.ts`
+- **Status:** Had example users (John Doe, Jane Smith) - **NOW CLEARLY MARKED**
+- **Action:** ✅ Updated with clear warnings that these are development-only
 
 ---
 
