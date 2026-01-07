@@ -24,6 +24,7 @@ interface QualityResult {
   recommendations?: Array<{ action: string; impact?: string }>;
   cached?: boolean;
   latency?: number;
+  error?: string;
 }
 
 export default function QualityDashboard() {

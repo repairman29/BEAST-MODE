@@ -126,7 +126,6 @@ export default function ReposQualityTable({ repos, onRefresh }: ReposQualityTabl
   // Filter and sort repos
   // TODO: Move to API route for better architecture
   // ARCHITECTURE: Moved to API route
-  // ARCHITECTURE: Moved to API route
 // const filteredAndSorted = Array.from(repoQualities.values())
     .filter((repo: any) => {
       if (!filter) return true;
@@ -169,9 +168,6 @@ export default function ReposQualityTable({ repos, onRefresh }: ReposQualityTabl
 
   // TODO: Move to API route for better architecture
   // ARCHITECTURE: Moved to API route
-  // ARCHITECTURE: Moved to API route
-// // ARCHITECTURE: Moved to API route
-// // ARCHITECTURE: Moved to API route
 // const analyzedCount = Array.from(repoQualities.values()).filter((r: any) => r.quality !== undefined && !r.loading).length;
   const hasData = analyzedCount > 0;
 
@@ -198,8 +194,6 @@ export default function ReposQualityTable({ repos, onRefresh }: ReposQualityTabl
                     try {
                         // TODO: Move to API route for better architecture
                         // ARCHITECTURE: Moved to API route
-                        // ARCHITECTURE: Moved to API route
-// // ARCHITECTURE: Moved to API route
 // const reposWithData = Array.from(repoQualities.values())
                           .filter((r: any) => r.quality !== undefined)
                           .map((r: any) => ({
