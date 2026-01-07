@@ -13,14 +13,16 @@ interface QualityDetailModalProps {
     confidence?: number;
     percentile?: number;
     factors?: Record<string, { value: number; importance: number }>;
-    recommendations?: Array<{
-      action: string;
-      impact: string;
-      priority: 'high' | 'medium' | 'low';
-      insight?: string;
-      actionable?: string;
-      estimatedGain?: number;
-    }>;
+        recommendations?: Array<{
+          action: string;
+          impact: string;
+          priority: 'high' | 'medium' | 'low';
+          insight?: string;
+          actionable?: string;
+          estimatedGain?: number;
+          benchmark?: string;
+          currentValue?: string;
+        }>;
     cached?: boolean;
     error?: string;
   } | null;
@@ -250,7 +252,23 @@ export default function QualityDetailModal({ open, repo, onClose }: QualityDetai
                             {rec.actionable && (
                               <div className="bg-cyan-500/10 rounded p-3 border border-cyan-500/30">
                                 <p className="text-xs text-cyan-400 mb-1 font-semibold uppercase tracking-wider">What To Do</p>
-                                <p className="text-sm text-cyan-300">{rec.actionable}</p>
+                                <p className="text-sm text-cyan-300 whitespace-pre-line">{rec.actionable}</p>
+                              </div>
+                            )}
+                            {(rec.benchmark || rec.currentValue) && (
+                              <div className="mt-3 flex gap-3 text-xs">
+                                {rec.currentValue && (
+                                  <div className="flex-1 bg-slate-900/50 rounded p-2 border border-slate-700/50">
+                                    <p className="text-slate-400 mb-1 font-semibold uppercase tracking-wider">Current State</p>
+                                    <p className="text-slate-300">{rec.currentValue}</p>
+                                  </div>
+                                )}
+                                {rec.benchmark && (
+                                  <div className="flex-1 bg-green-500/10 rounded p-2 border border-green-500/30">
+                                    <p className="text-green-400 mb-1 font-semibold uppercase tracking-wider">Target Benchmark</p>
+                                    <p className="text-green-300">{rec.benchmark}</p>
+                                  </div>
+                                )}
                               </div>
                             )}
                           </div>
