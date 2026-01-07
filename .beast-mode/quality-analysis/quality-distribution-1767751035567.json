@@ -1,0 +1,92 @@
+{
+  "total": 70,
+  "distribution": {
+    "high": {
+      "count": 68,
+      "percentage": "97.1",
+      "target": 42,
+      "gap": -26
+    },
+    "medium": {
+      "count": 2,
+      "percentage": "2.9",
+      "target": 21,
+      "gap": 19
+    },
+    "low": {
+      "count": 0,
+      "percentage": "0.0",
+      "target": 7,
+      "gap": 7
+    }
+  },
+  "statistics": {
+    "mean": 0.9260731235585427,
+    "std": 0.09517275281865392,
+    "min": 0.6866762039126069,
+    "max": 1
+  },
+  "languageDistribution": {
+    "Unknown": {
+      "total": 70,
+      "high": 68,
+      "medium": 2,
+      "low": 0
+    }
+  },
+  "reposByQuality": {
+    "high": [
+      {
+        "repo": "ohmyzsh/ohmyzsh",
+        "quality": 1
+      },
+      {
+        "repo": "d3/d3",
+        "quality": 1
+      },
+      {
+        "repo": "papers-we-love/papers-we-love",
+        "quality": 1
+      },
+      {
+        "repo": "nvm-sh/nvm",
+        "quality": 1
+      },
+      {
+        "repo": "youngyangyang04/leetcode-master",
+        "quality": 1
+      },
+      {
+        "repo": "pi-hole/pi-hole",
+        "quality": 1
+      },
+      {
+        "repo": "romkatv/powerlevel10k",
+        "quality": 0.864906778033275
+      },
+      {
+        "repo": "sickcodes/Docker-OSX",
+        "quality": 1
+      },
+      {
+        "repo": "anthropics/claude-code",
+        "quality": 1
+      },
+      {
+        "repo": "dockur/windows",
+        "quality": 1
+      }
+    ],
+    "medium": [
+      {
+        "repo": "trimstray/nginx-admins-handbook",
+        "quality": 0.696215445094966
+      },
+      {
+        "repo": "foxlet/macOS-Simple-KVM",
+        "quality": 0.6866762039126069
+      }
+    ],
+    "low": []
+  }
+}

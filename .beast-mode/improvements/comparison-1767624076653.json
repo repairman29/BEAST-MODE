@@ -1,0 +1,28 @@
+{
+  "timestamp": "2026-01-05T14:41:16.653Z",
+  "comparison": {
+    "comparison": {
+      "old": {
+        "version": "1.0.0",
+        "r2": 0.79,
+        "features": 0
+      },
+      "new": {
+        "version": "2.0.0",
+        "r2": 0.8411090672740489,
+        "features": 51
+      }
+    },
+    "improvement": 6.469502186588462,
+    "shouldDeploy": true
+  },
+  "newModel": {
+    "metrics": {
+      "r2": 0.8411090672740489,
+      "mae": 3.811650923715176,
+      "rmse": 5.052999118091296
+    },
+    "featureCount": 51,
+    "trainingSize": 56
+  }
+}

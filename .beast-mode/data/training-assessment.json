@@ -1,0 +1,45 @@
+{
+  "timestamp": "2026-01-02T07:36:23.174Z",
+  "production": {
+    "totalPredictions": 813,
+    "withActuals": 2,
+    "usableExamples": 2,
+    "qualityScore": 0.4014760147601476,
+    "issues": [
+      "Only 0.2% of predictions have actual values (need feedback loop)",
+      "Only 2 usable examples (need at least 1000 for meaningful training)"
+    ]
+  },
+  "github": {
+    "totalFiles": 44306,
+    "processedFiles": 0,
+    "usableExamples": 0,
+    "qualityScore": 0,
+    "issues": [
+      "Only processed 0 of 44306 files (0.0%)",
+      "Only 0 usable code examples (need more for training)"
+    ]
+  },
+  "combined": {
+    "totalExamples": 2,
+    "trainSplit": 1,
+    "valSplit": 0,
+    "testSplit": 1,
+    "productionExamples": 2,
+    "githubExamples": 0,
+    "qualityScore": 0.2810332103321033,
+    "issues": [
+      "Only 0.2% of predictions have actual values (need feedback loop)",
+      "Only 2 usable examples (need at least 1000 for meaningful training)",
+      "Only processed 0 of 44306 files (0.0%)",
+      "Only 0 usable code examples (need more for training)"
+    ]
+  },
+  "summary": {
+    "productionUsable": 2,
+    "githubUsable": 0,
+    "totalUsable": 2,
+    "overallQuality": 0.2810332103321033,
+    "readyForTraining": false
+  }
+}

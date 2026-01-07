@@ -1,0 +1,32 @@
+{
+  "autoRetrain": {
+    "enabled": true,
+    "interval": "7d",
+    "minNewSamples": 100,
+    "triggerOnAccuracyDrop": true,
+    "accuracyDropThreshold": 0.05
+  },
+  "dataCollection": {
+    "enabled": true,
+    "interval": "1h",
+    "sources": [
+      "supabase",
+      "csat_service"
+    ]
+  },
+  "modelVersioning": {
+    "enabled": true,
+    "keepVersions": 5,
+    "autoPromote": false
+  },
+  "monitoring": {
+    "enabled": true,
+    "trackMetrics": [
+      "accuracy",
+      "mae",
+      "rmse",
+      "r2"
+    ],
+    "alertOnDegradation": true
+  }
+}

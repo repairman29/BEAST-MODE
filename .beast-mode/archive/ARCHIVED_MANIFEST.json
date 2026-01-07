@@ -1,0 +1,182 @@
+{
+  "archivedAt": "2026-01-07T01:20:54.384Z",
+  "reason": "Files moved to Supabase Storage (ml-artifacts bucket)",
+  "totalFiles": 25,
+  "files": [
+    {
+      "category": "training-data",
+      "fileName": "enhanced-features-2026-01-06T02-53-58-291Z.json",
+      "localPath": "/Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/.beast-mode/training-data/enhanced-features-2026-01-06T02-53-58-291Z.json",
+      "archivePath": "/Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/.beast-mode/archive/training-data/enhanced-features-2026-01-06T02-53-58-291Z.json",
+      "storagePath": "training-data/enhanced-features-2026-01-06T02-53-58-291Z.json"
+    },
+    {
+      "category": "training-data",
+      "fileName": "enhanced-features-2026-01-06T02-54-15-865Z.json",
+      "localPath": "/Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/.beast-mode/training-data/enhanced-features-2026-01-06T02-54-15-865Z.json",
+      "archivePath": "/Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/.beast-mode/archive/training-data/enhanced-features-2026-01-06T02-54-15-865Z.json",
+      "storagePath": "training-data/enhanced-features-2026-01-06T02-54-15-865Z.json"
+    },
+    {
+      "category": "training-data",
+      "fileName": "enhanced-features-2026-01-06T05-13-48-424Z.json",
+      "localPath": "/Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/.beast-mode/training-data/enhanced-features-2026-01-06T05-13-48-424Z.json",
+      "archivePath": "/Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/.beast-mode/archive/training-data/enhanced-features-2026-01-06T05-13-48-424Z.json",
+      "storagePath": "training-data/enhanced-features-2026-01-06T05-13-48-424Z.json"
+    },
+    {
+      "category": "training-data",
+      "fileName": "high-quality-repos-analysis.json",
+      "localPath": "/Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/.beast-mode/training-data/high-quality-repos-analysis.json",
+      "archivePath": "/Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/.beast-mode/archive/training-data/high-quality-repos-analysis.json",
+      "storagePath": "training-data/high-quality-repos-analysis.json"
+    },
+    {
+      "category": "training-data",
+      "fileName": "scanned-repos-2026-01-05T16-59-19-258Z.json",
+      "localPath": "/Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/.beast-mode/training-data/scanned-repos/scanned-repos-2026-01-05T16-59-19-258Z.json",
+      "archivePath": "/Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/.beast-mode/archive/training-data/scanned-repos-2026-01-05T16-59-19-258Z.json",
+      "storagePath": "training-data/scanned-repos-2026-01-05T16-59-19-258Z.json"
+    },
+    {
+      "category": "training-data",
+      "fileName": "scanned-repos-2026-01-05T18-23-20-808Z.json",
+      "localPath": "/Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/.beast-mode/training-data/scanned-repos/scanned-repos-2026-01-05T18-23-20-808Z.json",
+      "archivePath": "/Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/.beast-mode/archive/training-data/scanned-repos-2026-01-05T18-23-20-808Z.json",
+      "storagePath": "training-data/scanned-repos-2026-01-05T18-23-20-808Z.json"
+    },
+    {
+      "category": "training-data",
+      "fileName": "scanned-repos-lower-quality-2026-01-06T17-17-57-389Z.json",
+      "localPath": "/Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/.beast-mode/training-data/scanned-repos/scanned-repos-lower-quality-2026-01-06T17-17-57-389Z.json",
+      "archivePath": "/Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/.beast-mode/archive/training-data/scanned-repos-lower-quality-2026-01-06T17-17-57-389Z.json",
+      "storagePath": "training-data/scanned-repos-lower-quality-2026-01-06T17-17-57-389Z.json"
+    },
+    {
+      "category": "training-data",
+      "fileName": "scanned-repos-lower-quality-2026-01-06T20-50-46-094Z.json",
+      "localPath": "/Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/.beast-mode/training-data/scanned-repos/scanned-repos-lower-quality-2026-01-06T20-50-46-094Z.json",
+      "archivePath": "/Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/.beast-mode/archive/training-data/scanned-repos-lower-quality-2026-01-06T20-50-46-094Z.json",
+      "storagePath": "training-data/scanned-repos-lower-quality-2026-01-06T20-50-46-094Z.json"
+    },
+    {
+      "category": "training-data",
+      "fileName": "scanned-repos-missing-languages-2026-01-06T04-03-51-428Z.json",
+      "localPath": "/Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/.beast-mode/training-data/scanned-repos/scanned-repos-missing-languages-2026-01-06T04-03-51-428Z.json",
+      "archivePath": "/Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/.beast-mode/archive/training-data/scanned-repos-missing-languages-2026-01-06T04-03-51-428Z.json",
+      "storagePath": "training-data/scanned-repos-missing-languages-2026-01-06T04-03-51-428Z.json"
+    },
+    {
+      "category": "training-data",
+      "fileName": "scanned-repos-notable-2026-01-05T23-39-47.json",
+      "localPath": "/Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/.beast-mode/training-data/scanned-repos/scanned-repos-notable-2026-01-05T23-39-47.json",
+      "archivePath": "/Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/.beast-mode/archive/training-data/scanned-repos-notable-2026-01-05T23-39-47.json",
+      "storagePath": "training-data/scanned-repos-notable-2026-01-05T23-39-47.json"
+    },
+    {
+      "category": "training-data",
+      "fileName": "high-value-repos-2026-01-05T15-15-45-679Z.json",
+      "localPath": "/Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/.beast-mode/training-data/discovered-repos/high-value-repos-2026-01-05T15-15-45-679Z.json",
+      "archivePath": "/Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/.beast-mode/archive/training-data/high-value-repos-2026-01-05T15-15-45-679Z.json",
+      "storagePath": "training-data/high-value-repos-2026-01-05T15-15-45-679Z.json"
+    },
+    {
+      "category": "training-data",
+      "fileName": "high-value-repos-2026-01-05T15-16-54-570Z.json",
+      "localPath": "/Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/.beast-mode/training-data/discovered-repos/high-value-repos-2026-01-05T15-16-54-570Z.json",
+      "archivePath": "/Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/.beast-mode/archive/training-data/high-value-repos-2026-01-05T15-16-54-570Z.json",
+      "storagePath": "training-data/high-value-repos-2026-01-05T15-16-54-570Z.json"
+    },
+    {
+      "category": "training-data",
+      "fileName": "high-value-repos-diverse-2026-01-05T18-01-14-901Z.json",
+      "localPath": "/Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/.beast-mode/training-data/discovered-repos/high-value-repos-diverse-2026-01-05T18-01-14-901Z.json",
+      "archivePath": "/Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/.beast-mode/archive/training-data/high-value-repos-diverse-2026-01-05T18-01-14-901Z.json",
+      "storagePath": "training-data/high-value-repos-diverse-2026-01-05T18-01-14-901Z.json"
+    },
+    {
+      "category": "training-data",
+      "fileName": "lower-quality-repos-2026-01-06T17-00-36-521Z.json",
+      "localPath": "/Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/.beast-mode/training-data/discovered-repos/lower-quality-repos-2026-01-06T17-00-36-521Z.json",
+      "archivePath": "/Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/.beast-mode/archive/training-data/lower-quality-repos-2026-01-06T17-00-36-521Z.json",
+      "storagePath": "training-data/lower-quality-repos-2026-01-06T17-00-36-521Z.json"
+    },
+    {
+      "category": "training-data",
+      "fileName": "lower-quality-repos-2026-01-06T20-32-29-533Z.json",
+      "localPath": "/Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/.beast-mode/training-data/discovered-repos/lower-quality-repos-2026-01-06T20-32-29-533Z.json",
+      "archivePath": "/Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/.beast-mode/archive/training-data/lower-quality-repos-2026-01-06T20-32-29-533Z.json",
+      "storagePath": "training-data/lower-quality-repos-2026-01-06T20-32-29-533Z.json"
+    },
+    {
+      "category": "training-data",
+      "fileName": "notable-repos-2026-01-05T19-32-51.json",
+      "localPath": "/Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/.beast-mode/training-data/discovered-repos/notable-repos-2026-01-05T19-32-51.json",
+      "archivePath": "/Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/.beast-mode/archive/training-data/notable-repos-2026-01-05T19-32-51.json",
+      "storagePath": "training-data/notable-repos-2026-01-05T19-32-51.json"
+    },
+    {
+      "category": "models",
+      "fileName": "model-notable-quality-2026-01-05T21-01-16.json",
+      "localPath": "/Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/.beast-mode/models/model-notable-quality-2026-01-05T21-01-16.json",
+      "archivePath": "/Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/.beast-mode/archive/models/model-notable-quality-2026-01-05T21-01-16.json",
+      "storagePath": "models/model-notable-quality-2026-01-05T21-01-16.json"
+    },
+    {
+      "category": "models",
+      "fileName": "model-notable-quality-2026-01-06T01-48-25.json",
+      "localPath": "/Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/.beast-mode/models/model-notable-quality-2026-01-06T01-48-25.json",
+      "archivePath": "/Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/.beast-mode/archive/models/model-notable-quality-2026-01-06T01-48-25.json",
+      "storagePath": "models/model-notable-quality-2026-01-06T01-48-25.json"
+    },
+    {
+      "category": "models",
+      "fileName": "model-notable-quality-2026-01-06T03-27-22.json",
+      "localPath": "/Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/.beast-mode/models/model-notable-quality-2026-01-06T03-27-22.json",
+      "archivePath": "/Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/.beast-mode/archive/models/model-notable-quality-2026-01-06T03-27-22.json",
+      "storagePath": "models/model-notable-quality-2026-01-06T03-27-22.json"
+    },
+    {
+      "category": "models",
+      "fileName": "model-notable-quality-2026-01-07T00-11-13.json",
+      "localPath": "/Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/.beast-mode/models/model-notable-quality-2026-01-07T00-11-13.json",
+      "archivePath": "/Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/.beast-mode/archive/models/model-notable-quality-2026-01-07T00-11-13.json",
+      "storagePath": "models/model-notable-quality-2026-01-07T00-11-13.json"
+    },
+    {
+      "category": "oracle",
+      "fileName": "oracle-embeddings.json",
+      "localPath": "/Users/jeffadkins/Smugglers/smuggler-oracle/data/oracle-embeddings.json",
+      "archivePath": "/Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/.beast-mode/archive/oracle/oracle-embeddings.json",
+      "storagePath": "oracle/oracle-embeddings.json"
+    },
+    {
+      "category": "oracle",
+      "fileName": "oracle_manifest.json",
+      "localPath": "/Users/jeffadkins/Smugglers/smuggler-oracle/data/oracle_manifest.json",
+      "archivePath": "/Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/.beast-mode/archive/oracle/oracle_manifest.json",
+      "storagePath": "oracle/oracle_manifest.json"
+    },
+    {
+      "category": "audit",
+      "fileName": "exports/export-2026-01-06T02-52-28-614Z.json",
+      "localPath": "/Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/.beast-mode/audit/export-2026-01-06T02-52-28-614Z.json",
+      "archivePath": "/Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/.beast-mode/archive/audit/exports/export-2026-01-06T02-52-28-614Z.json",
+      "storagePath": "audit/exports/export-2026-01-06T02-52-28-614Z.json"
+    },
+    {
+      "category": "audit",
+      "fileName": "logs/audit-2026-01-05.jsonl",
+      "localPath": "/Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/.beast-mode/audit/audit-2026-01-05.jsonl",
+      "archivePath": "/Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/.beast-mode/archive/audit/logs/audit-2026-01-05.jsonl",
+      "storagePath": "audit/logs/audit-2026-01-05.jsonl"
+    },
+    {
+      "category": "audit",
+      "fileName": "logs/audit-2026-01-06.jsonl",
+      "localPath": "/Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/.beast-mode/audit/audit-2026-01-06.jsonl",
+      "archivePath": "/Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/.beast-mode/archive/audit/logs/audit-2026-01-06.jsonl",
+      "storagePath": "audit/logs/audit-2026-01-06.jsonl"
+    }
+  ]
+}

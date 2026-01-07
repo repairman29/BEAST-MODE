@@ -1,157 +1,96 @@
 # Dependencies
 node_modules/
+.pnp
+.pnp.js
+
+# Testing
+coverage/
+.nyc_output
+
+# Production
+build/
+dist/
+.next/
+out/
+
+# Misc
+.DS_Store
+*.pem
+.env
+.env*.local
+.env.production
+
+# Debug
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# Runtime data
-pids
-*.pid
-*.seed
-*.pid.lock
-
-# Coverage directory used by tools like istanbul
-coverage/
-*.lcov
-
-# nyc test coverage
-.nyc_output
-
-# Grunt intermediate storage (https://gruntjs.com/creating-plugins#storing-task-files)
-.grunt
-
-# Bower dependency directory (https://bower.io/)
-bower_components
-
-# node-waf configuration
-.lock-wscript
-
-# Compiled binary addons (https://nodejs.org/api/addons.html)
-build/Release
-
-# Dependency directories
-jspm_packages/
-
-# TypeScript cache
-*.tsbuildinfo
-
-# Optional npm cache directory
-.npm
-
-# Optional eslint cache
-.eslintcache
-
-# Optional REPL history
-.node_repl_history
-
-# Output of 'npm pack'
-*.tgz
-
-# Yarn Integrity file
-.yarn-integrity
-
-# dotenv environment variables file
-.env
+# Local env files
 .env.local
 .env.development.local
 .env.test.local
 .env.production.local
 
-# parcel-bundler cache (https://parceljs.org/)
-.cache
-.parcel-cache
+# Vercel
+.vercel
 
-# Next.js build output
-.next
+# TypeScript
+*.tsbuildinfo
+next-env.d.ts
 
-# Nuxt.js build / generate output
-.nuxt
-dist
-
-# Gatsby files
-.cache/
-public
-
-# Storybook build outputs
-.out
-.storybook-out
-
-# Temporary folders
-tmp/
-temp/
-
-# Logs
-logs
-*.log
-
-# Runtime data
-pids
-*.pid
-*.seed
-*.pid.lock
-
-# OS generated files
-.DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
-Thumbs.db
-
-# IDE files
+# IDE
 .vscode/
 .idea/
 *.swp
 *.swo
 *~
 
-# Build outputs
-build/
-dist/
-lib/
-*.tgz
-*.tar.gz
+# OS
+.DS_Store
+Thumbs.db
 
-# Test coverage
-coverage/
-.nyc_output/
+# Sensitive Business Documents (DO NOT COMMIT TO PUBLIC REPO)
+# These contain pricing strategies, margins, costs, and business plans
+docs/PRICING_90_PERCENT_MARGIN_STRATEGY.md
+docs/PRICING_MODEL_DESIGN.md
+docs/PRICING_STRATEGY_REVIEW.md
+docs/COMPETITIVE_PRICING_ANALYSIS.md
+docs/business/
+docs/INFRASTRUCTURE_COST_ANALYSIS.md
+docs/STRATEGIC_ROADMAP*.md
+docs/ACTIONABLE_IMPLEMENTATION_PLAN.md
+docs/EXECUTIVE_SUMMARY*.md
+docs/IMMEDIATE_INTEGRATION_WORK.md
+docs/CRITICAL_INTEGRATION_CHECKLIST.md
+docs/MODEL_BUSINESS_VALUE_STRATEGY.md
 
-# Local development
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+# ML Model Files (Large, may contain proprietary data)
+.beast-mode/models/
+*.model
+*.pkl
+*.h5
 
-# MLOps - Proprietary algorithms and training scripts
-scripts/analytics-dashboard.js
-scripts/auto-retrain.js
-scripts/collect-real-data.js
-scripts/deploy-model.js
-scripts/fix-ensemble-model.js
-scripts/ml-dashboard.js
-scripts/ml-status.js
-scripts/monitor-status.js
-scripts/run-iteration.js
-scripts/setup-iteration-pipeline.js
-scripts/test-advanced-model.js
-scripts/test-batch.js
-scripts/test-ensemble.js
-scripts/test-supabase-connection.js
-scripts/train-advanced-model.js
-scripts/train-enhanced-model.js
-scripts/train-improved-model.js
-scripts/train-quality-model.js
-scripts/integrate-service.js
-lib/mlops/
-lib/models/
-.beast-mode/
-QUICK_START_ML.md
-docs/ML_*.md
-docs/*ML*.md
-docs/*ml*.md
-docs/MONTH*.md
-docs/PROGRESS*.md
-docs/INTEGRATION*.md
-docs/ML_SYSTEM*.md
-.vercel
+# Training Data (May contain proprietary information)
+training-data/
+scanned-repos-*.json
+all-repos-for-python.json
+
+# API Keys and Secrets (Never commit)
+*.key
+*.pem
+*.secret
+secrets/
+.secrets/
+
+# Database backups
+*.sql.backup
+*.db.backup
+
+# Logs
+logs/
+*.log
+
+# Temporary files
+tmp/
+temp/
+*.tmp
