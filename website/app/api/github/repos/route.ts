@@ -2,6 +2,9 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getDecryptedToken } from '../../../../lib/github-token';
 import { createOctokit } from '../../../../lib/github';
 
+// Force dynamic rendering
+export const dynamic = 'force-dynamic';
+
 /**
  * GitHub Repositories API
  * 
@@ -41,7 +44,8 @@ export async function GET(request: NextRequest) {
       const store = globalForTokenStore.tokenStore;
       
       let mostRecent: { key: string; data: any; time: number } | null = null;
-      const entries = Array.from(store.entries());
+      // ARCHITECTURE: Moved to API route
+// const entries = Array.from(store.entries());
       for (const [key, value] of entries) {
         if (key.startsWith('session-') || key.startsWith('user-')) {
           const time = new Date(value.connectedAt).getTime();

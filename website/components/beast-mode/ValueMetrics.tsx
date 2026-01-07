@@ -201,7 +201,7 @@ export default function ValueMetrics() {
       </Card>
 
       {/* Tier Value & Upgrade Prompt */}
-      {metrics.tier !== 'enterprise' && tierValue.upgradeValue && (
+      {(metrics.tier === 'free' || metrics.tier === 'developer' || metrics.tier === 'team') && tierValue.upgradeValue && (
         <div className="md:col-span-3 mt-2">
           <Card className="bg-slate-900/50 border-slate-800">
             <CardContent className="p-4">
@@ -219,7 +219,7 @@ export default function ValueMetrics() {
                     )}
                   </div>
                 </div>
-                {metrics.tier !== 'enterprise' && (
+                {(metrics.tier === 'free' || metrics.tier === 'developer' || metrics.tier === 'team') && (
                   <a
                     href="/pricing"
                     className="px-4 py-2 bg-cyan-600 hover:bg-cyan-700 text-white text-sm font-semibold rounded-lg transition-colors"

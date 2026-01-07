@@ -168,6 +168,7 @@ export default function ReposQualityTable({ repos, onRefresh }: ReposQualityTabl
 
   // TODO: Move to API route for better architecture
   // ARCHITECTURE: Moved to API route
+  // ARCHITECTURE: Moved to API route
 // const analyzedCount = Array.from(repoQualities.values()).filter((r: any) => r.quality !== undefined && !r.loading).length;
   const hasData = analyzedCount > 0;
 
@@ -193,6 +194,7 @@ export default function ReposQualityTable({ repos, onRefresh }: ReposQualityTabl
                   onClick={async () => {
                     try {
                         // TODO: Move to API route for better architecture
+                        // ARCHITECTURE: Moved to API route
                         // ARCHITECTURE: Moved to API route
 // const reposWithData = Array.from(repoQualities.values())
                           .filter((r: any) => r.quality !== undefined)

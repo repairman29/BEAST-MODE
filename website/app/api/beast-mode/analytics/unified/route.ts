@@ -2,6 +2,9 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getDecryptedToken } from '../../../../../lib/github-token';
 import { getSupabaseClientOrNull } from '../../../../../lib/supabase';
 
+// Force dynamic rendering
+export const dynamic = 'force-dynamic';
+
 /**
  * Unified Analytics API
  * 
