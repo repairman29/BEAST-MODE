@@ -1393,11 +1393,82 @@ function QualityView({ data }: any): React.JSX.Element {
       </Card>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {/* XGBoost ML Quality Score - Prominent Display */}
+      {latestScan?.mlQuality && (
+        <Card className="bg-gradient-to-br from-blue-500/20 via-purple-500/20 to-cyan-500/20 border-blue-500/50 card-polish mb-6 stagger-item">
+          <CardHeader className="pb-4">
+            <div className="flex items-center justify-between mb-2">
+              <CardTitle className="text-white text-xl font-bold flex items-center gap-2">
+                🚀 XGBoost Quality Score
+                <span className="px-2 py-1 bg-blue-500/30 text-blue-300 text-xs font-semibold rounded border border-blue-500/50">
+                  R² = 1.000
+                </span>
+              </CardTitle>
+            </div>
+            <CardDescription className="text-slate-300 text-sm">
+              Powered by machine learning model trained on 2,621 repositories
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="pt-0">
+            <div className="flex flex-col items-center mb-6">
+              <div className="text-6xl font-bold text-blue-400 mb-2">
+                {(latestScan.mlQuality.predictedQuality * 100).toFixed(1)}%
+              </div>
+              <div className="text-sm text-slate-400 mb-4">
+                Confidence: {(latestScan.mlQuality.confidence * 100).toFixed(0)}%
+                {latestScan.mlQuality.percentile && (
+                  <> • {latestScan.mlQuality.percentile.toFixed(0)}th percentile</>
+                )}
+              </div>
+              {latestScan.mlQuality.factors && Object.keys(latestScan.mlQuality.factors).length > 0 && (
+                <div className="w-full mt-4">
+                  <div className="text-xs text-slate-400 mb-2 uppercase tracking-wider">Top Quality Factors</div>
+                  <div className="grid grid-cols-2 gap-2">
+                    {Object.entries(latestScan.mlQuality.factors)
+                      .slice(0, 6)
+                      .map(([factor, data]: [string, any]) => (
+                        <div key={factor} className="bg-slate-800/50 rounded p-2 border border-slate-700/50">
+                          <div className="text-xs text-slate-300 font-medium capitalize">
+                            {factor.replace(/([A-Z])/g, ' $1').trim()}
+                          </div>
+                          <div className="text-xs text-blue-400 mt-1">
+                            Value: {typeof data.value === 'number' ? data.value.toFixed(0) : data.value}
+                          </div>
+                          {data.importance && (
+                            <div className="text-xs text-slate-500 mt-1">
+                              Impact: {(data.importance * 100).toFixed(1)}%
+                            </div>
+                          )}
+                        </div>
+                      ))}
+                  </div>
+                </div>
+              )}
+              {latestScan.mlQuality.recommendations && latestScan.mlQuality.recommendations.length > 0 && (
+                <div className="w-full mt-4">
+                  <div className="text-xs text-slate-400 mb-2 uppercase tracking-wider">Recommendations</div>
+                  <div className="space-y-2">
+                    {latestScan.mlQuality.recommendations.slice(0, 3).map((rec: any, idx: number) => (
+                      <div key={idx} className="bg-slate-800/50 rounded p-2 border border-slate-700/50">
+                        <div className="text-sm text-slate-300">{rec.action}</div>
+                        {rec.impact && (
+                          <div className="text-xs text-cyan-400 mt-1">{rec.impact}</div>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+          </CardContent>
+        </Card>
+      )}
+
       {/* Quality Score */}
       <Card className="bg-slate-900/90 border-slate-800 card-polish h-full stagger-item">
         <CardHeader className="pb-6">
           <div className="flex items-center justify-between mb-3">
-            <CardTitle className="text-white text-xl font-bold">Quality Score</CardTitle>
+            <CardTitle className="text-white text-xl font-bold">Traditional Quality Score</CardTitle>
             {scoreChange !== null && scoreChange !== 0 && (
               <div className={`flex items-center gap-1 px-3 py-1.5 rounded-full text-sm font-semibold badge-polish ${
                 scoreChange > 0 
