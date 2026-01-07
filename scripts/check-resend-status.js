@@ -17,7 +17,7 @@ const https = require('https');
 
 const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const SUPABASE_SERVICE_ROLE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
-const DOMAIN = 'beastmode.dev';
+const DOMAIN = 'beast-mode.dev';
 
 const colors = {
   reset: '\x1b[0m',

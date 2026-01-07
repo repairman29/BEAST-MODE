@@ -21,14 +21,14 @@
   - Billing notifications
   - Quality scan results
   - System notifications
-- **Reply-To:** `support@beastmode.dev`
+- **Reply-To:** `support@beast-mode.dev`
 - **Status:** ⚠️ **Needs Setup**
 
 ---
 
 ### **2. Support & Contact Addresses** 📞
 
-#### `support@beastmode.dev` **REQUIRED**
+#### `support@beast-mode.dev` **REQUIRED**
 - **Purpose:** Customer support inquiries
 - **Used For:**
   - Reply-to address for all transactional emails
@@ -39,7 +39,7 @@
 - **Status:** ⚠️ **Needs Setup**
 - **Action:** Set up email forwarding or inbox
 
-#### `security@beastmode.dev` **REQUIRED**
+#### `security@beast-mode.dev` **REQUIRED**
 - **Purpose:** Security-related inquiries
 - **Used For:**
   - Security vulnerability reports
@@ -53,7 +53,7 @@
 
 ### **3. Admin Addresses** 👤
 
-#### `admin@beastmode.dev` **OPTIONAL**
+#### `admin@beast-mode.dev` **OPTIONAL**
 - **Purpose:** Administrative communications
 - **Used For:**
   - Admin notifications
@@ -70,12 +70,12 @@
 1. **Go to Resend Dashboard:**
    - https://resend.com/domains
    - Click "Add Domain"
-   - Enter: `beastmode.dev`
+   - Enter: `beast-mode.dev`
 
 2. **Add DNS Records:**
    - DKIM record (provided by Resend)
    - SPF record: `v=spf1 include:resend.com ~all`
-   - DMARC record: `v=DMARC1; p=none; rua=mailto:dmarc@beastmode.dev`
+   - DMARC record: `v=DMARC1; p=none; rua=mailto:dmarc@beast-mode.dev`
 
 3. **Wait for Verification:**
    - Usually 5-10 minutes
@@ -89,11 +89,11 @@
 
 1. **Go to Resend Dashboard:**
    - https://resend.com/domains
-   - Click on `beastmode.dev`
+   - Click on `beast-mode.dev`
    - All addresses on verified domain are automatically available
 
 2. **No Additional Setup Needed:**
-   - Once domain is verified, you can send from any `@beastmode.dev` address
+   - Once domain is verified, you can send from any `@beast-mode.dev` address
    - Receiving addresses can be viewed in Resend dashboard
 
 #### **Option B: Use Automation Script**
@@ -134,7 +134,7 @@ Update email service configuration:
 // In email service config
 {
   from: 'notifications@beast-mode.dev',
-  replyTo: 'support@beastmode.dev',
+  replyTo: 'support@beast-mode.dev',
   provider: 'resend'
 }
 ```
@@ -147,10 +147,10 @@ If you want to receive emails in your personal inbox:
 
 #### **Option A: Use DNS Provider (Porkbun)**
 1. Go to Porkbun dashboard
-2. Navigate to `beastmode.dev` → Email Forwarding
+2. Navigate to `beast-mode.dev` → Email Forwarding
 3. Set up forwarding:
-   - `support@beastmode.dev` → your-email@example.com
-   - `security@beastmode.dev` → your-email@example.com
+   - `support@beast-mode.dev` → your-email@example.com
+   - `security@beast-mode.dev` → your-email@example.com
 
 #### **Option B: Use Resend Dashboard**
 - View emails directly in Resend dashboard
@@ -163,9 +163,9 @@ If you want to receive emails in your personal inbox:
 | Address | Type | Purpose | Status | Action Needed |
 |---------|------|---------|--------|---------------|
 | `notifications@beast-mode.dev` | Sending | Primary transactional emails | ⚠️ Needs setup | Verify domain |
-| `support@beastmode.dev` | Receiving | Customer support | ⚠️ Needs setup | Set up forwarding |
-| `security@beastmode.dev` | Receiving | Security inquiries | ⚠️ Needs setup | Set up forwarding |
-| `admin@beastmode.dev` | Receiving | Admin communications | ⚠️ Optional | Set up if needed |
+| `support@beast-mode.dev` | Receiving | Customer support | ⚠️ Needs setup | Set up forwarding |
+| `security@beast-mode.dev` | Receiving | Security inquiries | ⚠️ Needs setup | Set up forwarding |
+| `admin@beast-mode.dev` | Receiving | Admin communications | ⚠️ Optional | Set up if needed |
 
 ---
 
@@ -177,7 +177,7 @@ If you want to receive emails in your personal inbox:
    - `website/app/support/page.tsx` - References support email
 
 2. **Documentation:**
-   - `docs/README.md` - Support email: support@beastmode.dev
+   - `docs/README.md` - Support email: support@beast-mode.dev
    - `README.md` - Support email references
 
 3. **API Routes:**
@@ -219,7 +219,7 @@ node scripts/test-email-sending.js your-email@example.com
 
 ## ✅ **CHECKLIST**
 
-- [ ] Add `beastmode.dev` domain to Resend
+- [ ] Add `beast-mode.dev` domain to Resend
 - [ ] Add DNS records (DKIM, SPF, DMARC)
 - [ ] Verify domain in Resend
 - [ ] Store Resend API key in Supabase

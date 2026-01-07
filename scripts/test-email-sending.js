@@ -71,7 +71,7 @@ async function getResendApiKey() {
 function sendEmail(apiKey, recipient) {
   return new Promise((resolve, reject) => {
     const postData = JSON.stringify({
-      from: 'notifications@beastmode.dev',
+      from: 'notifications@beast-mode.dev',
       to: recipient,
       subject: 'BEAST MODE - Test Email',
       html: `
@@ -81,7 +81,7 @@ function sendEmail(apiKey, recipient) {
         <hr>
         <p><small>Sent from BEAST MODE email system</small></p>
       `,
-      reply_to: 'support@beastmode.dev'
+      reply_to: 'support@beast-mode.dev'
     });
 
     const options = {

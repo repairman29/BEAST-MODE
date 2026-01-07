@@ -2,7 +2,7 @@
 ## Current Configuration and Setup Status
 
 **Date:** January 2026  
-**Domain:** `beastmode.dev`  
+**Domain:** `beast-mode.dev`  
 **Status:** 📋 **Setup Required**
 
 ---
@@ -10,22 +10,22 @@
 ## 📧 **REQUIRED EMAIL ADDRESSES**
 
 ### **Sending Addresses:**
-1. **`notifications@beastmode.dev`** ⭐ **PRIMARY**
+1. **`notifications@beast-mode.dev`** ⭐ **PRIMARY**
    - Purpose: Main sending address for transactional emails
-   - Reply-To: `support@beastmode.dev`
+   - Reply-To: `support@beast-mode.dev`
    - Status: ⚠️ **Needs domain verification**
 
 ### **Receiving Addresses:**
-2. **`support@beastmode.dev`** 📞 **REQUIRED**
+2. **`support@beast-mode.dev`** 📞 **REQUIRED**
    - Purpose: Customer support inquiries
    - Used in: Support page, documentation, reply-to
    - Status: ⚠️ **Needs setup**
 
-3. **`security@beastmode.dev`** 🔒 **REQUIRED**
+3. **`security@beast-mode.dev`** 🔒 **REQUIRED**
    - Purpose: Security inquiries and vulnerability reports
    - Status: ⚠️ **Needs setup**
 
-4. **`admin@beastmode.dev`** 👤 **OPTIONAL**
+4. **`admin@beast-mode.dev`** 👤 **OPTIONAL**
    - Purpose: Administrative communications
    - Status: ⚠️ **Optional**
 
@@ -48,7 +48,7 @@ node scripts/setup-resend-addresses.js re_YOUR_API_KEY
 ### **3. Add Domain to Resend:**
 1. Go to: https://resend.com/domains
 2. Click "Add Domain"
-3. Enter: `beastmode.dev`
+3. Enter: `beast-mode.dev`
 4. Add DNS records (DKIM, SPF, DMARC)
 5. Wait for verification (5-10 minutes)
 
@@ -63,7 +63,7 @@ node scripts/test-email-sending.js your-email@example.com
 
 | Item | Status | Action Needed |
 |------|--------|---------------|
-| Domain Added | ❌ | Add `beastmode.dev` to Resend |
+| Domain Added | ❌ | Add `beast-mode.dev` to Resend |
 | Domain Verified | ❌ | Add DNS records and verify |
 | API Key Stored | ⚠️ | Run setup script |
 | Email Service Config | ⚠️ | Run setup script |
@@ -81,7 +81,7 @@ node scripts/test-email-sending.js your-email@example.com
 
 ## 🔍 **WHERE EMAIL ADDRESSES ARE USED**
 
-### **`support@beastmode.dev`:**
+### **`support@beast-mode.dev`:**
 - `docs/README.md` - Support email
 - `README.md` - Support contact
 - `docs/guides/faq.md` - Support email

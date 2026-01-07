@@ -19,7 +19,7 @@ const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const SUPABASE_SERVICE_ROLE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
 const API_KEY = process.argv[2];
 
-const DOMAIN = 'beastmode.dev';
+const DOMAIN = 'beast-mode.dev';
 
 const colors = {
   reset: '\x1b[0m',
@@ -36,26 +36,26 @@ function log(message, color = 'reset') {
 // Email addresses configuration
 const EMAIL_ADDRESSES = {
   primary: {
-    address: 'notifications@beastmode.dev',
+    address: 'notifications@beast-mode.dev',
     name: 'BEAST MODE',
     purpose: 'Primary sending address for all transactional emails',
     replyTo: 'support@beastmode.dev',
     type: 'sending'
   },
   support: {
-    address: 'support@beastmode.dev',
+    address: 'support@beast-mode.dev',
     name: 'BEAST MODE Support',
     purpose: 'Customer support inquiries and reply-to address',
     type: 'receiving'
   },
   security: {
-    address: 'security@beastmode.dev',
+    address: 'security@beast-mode.dev',
     name: 'BEAST MODE Security',
     purpose: 'Security-related inquiries and vulnerability reports',
     type: 'receiving'
   },
   admin: {
-    address: 'admin@beastmode.dev',
+    address: 'admin@beast-mode.dev',
     name: 'BEAST MODE Admin',
     purpose: 'Administrative communications (optional)',
     type: 'receiving'
