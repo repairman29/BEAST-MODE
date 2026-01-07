@@ -84,7 +84,9 @@ export default function ReposQualityTable({ repos, onRefresh }: ReposQualityTabl
             percentile: data.percentile || 0,
             cached: data.cached || false,
             loading: false,
-            error: undefined
+            error: undefined,
+            factors: data.factors,
+            recommendations: data.recommendations
           };
         } catch (error: any) {
           return {
@@ -177,13 +179,69 @@ export default function ReposQualityTable({ repos, onRefresh }: ReposQualityTabl
               {repos.length} total repositories • {analyzedCount} analyzed
             </CardDescription>
           </div>
-          <Button
-            onClick={analyzeAllRepos}
-            disabled={loading || repos.length === 0}
-            className="bg-gradient-to-r from-cyan-600 to-purple-600 hover:from-cyan-700 hover:to-purple-700"
-          >
-            {loading ? 'Analyzing...' : `Analyze All (${repos.length})`}
-          </Button>
+              <div className="flex gap-2">
+                <Button
+                  onClick={analyzeAllRepos}
+                  disabled={loading || repos.length === 0}
+                  className="bg-gradient-to-r from-cyan-600 to-purple-600 hover:from-cyan-700 hover:to-purple-700"
+                >
+                  {loading ? 'Analyzing...' : `Analyze All (${repos.length})`}
+                </Button>
+                <Button
+                  onClick={async () => {
+                    try {
+                      // ARCHITECTURE: Moved to API route
+// const reposWithData = Array.from(repoQualities.values())
+                        .filter(r => r.quality !== undefined)
+                        .map(r => ({
+                          repo: r.repo,
+                          quality: r.quality,
+                          confidence: r.confidence,
+                          percentile: r.percentile,
+                          factors: r.factors,
+                          recommendations: r.recommendations
+                        }));
+
+                      if (reposWithData.length === 0) {
+                        alert('Please analyze repos first before exporting');
+                        return;
+                      }
+
+                      const res = await fetch('/api/repos/quality/export-pdf', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                          repos: reposWithData,
+                          title: 'Code Quality Report',
+                          author: 'BEAST MODE',
+                          style: 'zine'
+                        })
+                      });
+
+                      if (!res.ok) {
+                        throw new Error('Failed to generate PDF');
+                      }
+
+                      const blob = await res.blob();
+                      const url = window.URL.createObjectURL(blob);
+                      const a = document.createElement('a');
+                      a.href = url;
+                      a.download = `quality-report-${Date.now()}.pdf`;
+                      document.body.appendChild(a);
+                      a.click();
+                      window.URL.revokeObjectURL(url);
+                      document.body.removeChild(a);
+                    } catch (error: any) {
+                      console.error('Failed to export PDF:', error);
+                      alert('Failed to export PDF: ' + error.message);
+                    }
+                  }}
+                  disabled={Array.from(repoQualities.values()).filter(r => r.quality !== undefined).length === 0}
+                  className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700"
+                >
+                  📄 Export PDF Zine
+                </Button>
+              </div>
         </div>
       </CardHeader>
       <CardContent>
