@@ -190,7 +190,7 @@ export default function ProductionMonitoringDashboard() {
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
             {Object.entries(data.health.services).map(([service, info]) => (
               <div key={service} className="flex items-center gap-2">
                 <span className={`w-2 h-2 rounded-full ${getStatusColor(info.status)}`}></span>
@@ -239,7 +239,7 @@ export default function ProductionMonitoringDashboard() {
       )}
 
       {/* Error Metrics */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <Card className="bg-slate-900/90 border-slate-800">
           <CardHeader>
             <CardTitle className="text-white">Error Rate</CardTitle>

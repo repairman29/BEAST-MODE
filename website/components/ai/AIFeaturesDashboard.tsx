@@ -112,7 +112,7 @@ export default function AIFeaturesDashboard() {
           <TabsTrigger value="documentation">Documentation</TabsTrigger>
         </TabsList>
 
-        <div className="grid grid-cols-2 gap-4 mt-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
           <Card className="bg-slate-900/90 border-slate-800">
             <CardHeader>
               <CardTitle className="text-white">Input Code</CardTitle>

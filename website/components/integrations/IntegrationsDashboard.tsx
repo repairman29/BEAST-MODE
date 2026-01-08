@@ -73,7 +73,7 @@ export default function IntegrationsDashboard() {
         </TabsList>
 
         <TabsContent value="overview" className="space-y-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {integrationTypes.map(type => (
               <Card key={type.id} className="bg-slate-900/90 border-slate-800">
                 <CardHeader>
