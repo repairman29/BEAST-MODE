@@ -1,0 +1,52 @@
+[
+  {
+    "category": "software-engineering",
+    "title": "SOLID Principles",
+    "content": "Single Responsibility: Each class should have one reason to change. Open/Closed: Open for extension, closed for modification. Liskov Substitution: Derived classes must be substitutable for their base classes. Interface Segregation: Clients shouldn't depend on interfaces they don't use. Dependency Inversion: Depend on abstractions, not concretions.",
+    "metadata": {
+      "source": "Clean Code by Robert Martin",
+      "tags": ["solid", "principles", "oop", "design"],
+      "priority": "high"
+    }
+  },
+  {
+    "category": "software-engineering",
+    "title": "DRY Principle",
+    "content": "Don't Repeat Yourself. Every piece of knowledge should have a single, unambiguous representation within a system. Extract common logic into reusable functions, components, or modules. Avoid duplication at all levels: code, configuration, documentation.",
+    "metadata": {
+      "source": "The Pragmatic Programmer",
+      "tags": ["principles", "maintainability", "code-quality"],
+      "priority": "high"
+    }
+  },
+  {
+    "category": "software-engineering",
+    "title": "YAGNI Principle",
+    "content": "You Aren't Gonna Need It. Don't add functionality until it's necessary. Avoid over-engineering and premature optimization. Build only what you need now, refactor when requirements change.",
+    "metadata": {
+      "source": "Extreme Programming",
+      "tags": ["principles", "simplicity", "agile"],
+      "priority": "medium"
+    }
+  },
+  {
+    "category": "software-engineering",
+    "title": "Separation of Concerns",
+    "content": "Separate different aspects of a system into distinct sections. Each section should address a separate concern. This improves maintainability, testability, and makes code easier to understand and modify.",
+    "metadata": {
+      "source": "Software Engineering Best Practices",
+      "tags": ["architecture", "maintainability", "design"],
+      "priority": "high"
+    }
+  },
+  {
+    "category": "software-engineering",
+    "title": "Fail Fast Principle",
+    "content": "Detect errors as early as possible. Validate inputs at boundaries, use type checking, and fail immediately with clear error messages. This makes debugging easier and prevents errors from propagating through the system.",
+    "metadata": {
+      "source": "Software Engineering Best Practices",
+      "tags": ["error-handling", "validation", "reliability"],
+      "priority": "medium"
+    }
+  }
+]

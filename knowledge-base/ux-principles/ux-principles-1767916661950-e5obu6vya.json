@@ -1,0 +1,16 @@
+{
+  "id": "ux-principles-1767916661950-e5obu6vya",
+  "category": "ux-principles",
+  "title": "Progressive Disclosure",
+  "content": "Show complexity gradually, not all at once. Use collapsible sections, tabs for related content, modals for detailed views, expandable cards, and step-by-step flows. Never overwhelm users with too much information at once.",
+  "metadata": {
+    "source": "UX_PSYCHOLOGY_PRINCIPLES.md",
+    "tags": [
+      "information-architecture",
+      "usability"
+    ],
+    "priority": "medium",
+    "createdAt": "2026-01-08T23:57:41.950Z",
+    "updatedAt": "2026-01-08T23:57:41.950Z"
+  }
+}

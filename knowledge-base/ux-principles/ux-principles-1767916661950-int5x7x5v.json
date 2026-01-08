@@ -1,0 +1,17 @@
+{
+  "id": "ux-principles-1767916661950-int5x7x5v",
+  "category": "ux-principles",
+  "title": "Feedback & Affordances",
+  "content": "Users need immediate, clear feedback for every action. Implement hover states on all interactive elements, loading states for async operations, success/error states with clear messaging, disabled states that explain why, and micro-interactions for delight.",
+  "metadata": {
+    "source": "UX_PSYCHOLOGY_PRINCIPLES.md",
+    "tags": [
+      "feedback",
+      "interaction",
+      "usability"
+    ],
+    "priority": "high",
+    "createdAt": "2026-01-08T23:57:41.950Z",
+    "updatedAt": "2026-01-08T23:57:41.950Z"
+  }
+}

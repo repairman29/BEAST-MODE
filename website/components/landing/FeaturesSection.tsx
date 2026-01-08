@@ -89,20 +89,22 @@ function FeaturesSection() {
         {/* Features Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {features.map((feature) => (
-            <Card
+            <CardEnhanced
               key={feature.title}
-              className="bg-slate-950/50 border-slate-900 hover:border-slate-800 transition-all hover:shadow-xl hover:shadow-cyan-500/5"
+              hover
+              interactive
+              className="border-slate-800/50"
             >
-              <CardHeader>
-                <div className={`w-12 h-12 mb-4 rounded-lg bg-gradient-to-br ${feature.gradient} flex items-center justify-center text-white`}>
+              <CardHeaderEnhanced>
+                <div className={`w-12 h-12 mb-4 rounded-lg bg-gradient-to-br ${feature.gradient} flex items-center justify-center text-white shadow-lg`}>
                   {feature.icon}
                 </div>
-                <CardTitle className="text-white">{feature.title}</CardTitle>
-                <CardDescription className="text-slate-400">
+                <CardTitleEnhanced className="text-white">{feature.title}</CardTitleEnhanced>
+                <CardDescriptionEnhanced className="text-slate-400">
                   {feature.description}
-                </CardDescription>
-              </CardHeader>
-            </Card>
+                </CardDescriptionEnhanced>
+              </CardHeaderEnhanced>
+            </CardEnhanced>
           ))}
         </div>
 

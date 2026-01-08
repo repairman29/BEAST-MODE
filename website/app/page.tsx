@@ -1,4 +1,4 @@
-import HeroSection from '../components/landing/HeroSection'
+import HeroSectionEnhanced from '../components/landing/HeroSectionEnhanced'
 import Day2OperationsSection from '../components/landing/Day2OperationsSection'
 import FeaturesSection from '../components/landing/FeaturesSection'
 import StatsSection from '../components/landing/StatsSection'
@@ -9,7 +9,7 @@ import CallToAction from '../components/landing/CallToAction'
 export default function Home() {
   return (
     <>
-      <HeroSection />
+      <HeroSectionEnhanced />
       <Day2OperationsSection />
       <FeaturesSection />
       <StatsSection />
