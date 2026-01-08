@@ -46,27 +46,37 @@ export async function POST(request: NextRequest) {
       );
     }
     
-    // Get user's API key if using LLM
-    let userApiKey = null;
-    if (useLLM) {
+    // Determine if this is a custom model
+    const isCustomModel = model?.startsWith('custom:');
+    const customModelId: string | null = isCustomModel ? model : null;
+    let requestedModel = model;
+
+    // Auto-select model if not provided
+    if (!requestedModel) {
+      const smartModelSelector = getSmartModelSelector();
+      const selection = await smartModelSelector.selectModel(userId || '');
+      requestedModel = selection.modelId;
+      const effectiveCustomModelId = selection.type === 'custom' ? selection.modelId : null;
+      if (effectiveCustomModelId) {
+        // Update customModelId if auto-selected
+        (customModelId as any) = effectiveCustomModelId;
+      }
+      console.log(`[Feature Gen API] Auto-selected model: ${requestedModel} (Reason: ${selection.message})`);
+    }
+
+    // Get user's API key if using LLM (provider models only)
+    let userApiKey: string | null = null;
+    if (useLLM && !customModelId) {
       try {
-        const userId = request.cookies.get('github_oauth_user_id')?.value;
         if (userId) {
-          // Get API key from Supabase
-          const { getSupabaseClientOrNull } = require('../../../../lib/supabase');
-          const supabase = await getSupabaseClientOrNull();
-          if (supabase) {
-            const { data } = await supabase
-              .from('user_api_keys')
-              .select('decrypted_key')
-              .eq('user_id', userId)
-              .eq('provider', llmProvider)
-              .single();
-            
-            if (data?.decrypted_key) {
-              userApiKey = data.decrypted_key;
-            }
-          }
+          // Use the proper decryption library
+          const { getUserApiKey } = require('../../../../lib/api-keys-decrypt');
+          
+          // Determine provider from model
+          const provider = requestedModel?.startsWith('anthropic:') ? 'anthropic' : 'openai';
+          
+          // Get and decrypt API key
+          userApiKey = await getUserApiKey(userId, provider);
         }
       } catch (error) {
         console.warn('[Feature Generation API] Could not get user API key:', error);
@@ -75,7 +85,7 @@ export async function POST(request: NextRequest) {
     
     // Generate feature with model support
     const generateOptions = {
-      useLLM: useLLM && (!!userApiKey || customModelId), // Use LLM if key or custom model available
+      useLLM: useLLM && (!!userApiKey || !!customModelId), // Use LLM if key or custom model available
       userApiKey: customModelId ? null : userApiKey, // Don't pass API key for custom models (router handles it)
       llmProvider,
       model: requestedModel, // Pass model to generator
