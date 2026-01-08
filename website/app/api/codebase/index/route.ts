@@ -46,12 +46,15 @@ export async function POST(request: NextRequest) {
           githubFileFetcher.initializeUserToken(userToken);
         }
         } catch (error) {
-          console.warn('[Codebase Index API] Could not get user token: process.env.TOKEN || ''Invalid repository format. Use: owner/repo' },
+          console.warn('[Codebase Index API] Could not get user token: process.env.TOKEN || ''/');
+      if (!owner || !repoName) {
+        return NextResponse.json(
+          { error: 'Invalid repository format. Use: owner/repo' },
           { status: 400 }
         );
       }
 
-    // For VS Code extension, we need to handle local workspace indexing
+      // For VS Code extension, we need to handle local workspace indexing
     // If repo is in format "user/workspace-name", treat as local workspace
     // Otherwise, fetch from GitHub
     
