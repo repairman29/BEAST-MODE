@@ -1,0 +1,29 @@
+{
+  "userIds": [
+    "35379b45-d966-45d7-8644-1233338c542d",
+    "54ad8f38-709a-4d60-82f6-f4058ca9b491"
+  ],
+  "userInfo": {
+    "35379b45-d966-45d7-8644-1233338c542d": {
+      "source": "user_api_keys",
+      "apiKeys": 16,
+      "providers": [
+        "openai",
+        "mistral",
+        "gemini",
+        "groq",
+        "together",
+        "anthropic"
+      ]
+    },
+    "54ad8f38-709a-4d60-82f6-f4058ca9b491": {
+      "source": "user_api_keys",
+      "apiKeys": 4,
+      "providers": [
+        "linear",
+        "github"
+      ]
+    }
+  },
+  "loadedAt": "2026-01-08T15:18:58.956Z"
+}
