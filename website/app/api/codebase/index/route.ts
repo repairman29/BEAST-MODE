@@ -52,7 +52,7 @@ export async function POST(request: NextRequest) {
           { error: 'Invalid repository format. Use: owner/repo' },
           { status: 400 }
         );
-    }
+      }
 
     // For VS Code extension, we need to handle local workspace indexing
     // If repo is in format "user/workspace-name", treat as local workspace
