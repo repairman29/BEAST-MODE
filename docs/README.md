@@ -83,6 +83,7 @@
 ## 📊 Current Status
 
 - **Latest Roadmap**: [2026 Comprehensive Roadmap](./business/roadmap.md)
+- **LLM Opportunities Roadmap**: [18 Opportunities Using BEAST MODE APIs](./LLM_OPPORTUNITIES_ROADMAP.md) - Dogfooding all features
 - **Execution Status**: [Execution Status](./EXECUTION_STATUS.md)
 - **Recent Updates**: [Week 3 Implementation Summary](./WEEK3_IMPLEMENTATION_SUMMARY.md)
 
