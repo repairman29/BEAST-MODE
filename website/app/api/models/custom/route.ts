@@ -266,8 +266,10 @@ export async function PATCH(request: NextRequest) {
       .update(updateData)
       .eq('user_id', userId)
       .eq('model_id', modelId)
-      .select()
-      .single();
+      .select();
+    
+    // Handle case where update returns array or single object
+    const updatedModel = Array.isArray(data) ? data[0] : data;
 
     if (error) {
       console.error('[Custom Models API] Error:', error);
@@ -277,18 +279,25 @@ export async function PATCH(request: NextRequest) {
       );
     }
 
+    if (!updatedModel) {
+      return NextResponse.json(
+        { error: 'Model not found or no changes made' },
+        { status: 404 }
+      );
+    }
+
     return NextResponse.json({
       success: true,
       model: {
-        id: data.id,
-        modelName: data.model_name,
-        modelId: data.model_id,
-        endpointUrl: data.endpoint_url,
-        provider: data.provider,
-        isActive: data.is_active,
-        isPublic: data.is_public,
-        description: data.description,
-        updatedAt: data.updated_at
+        id: updatedModel.id,
+        modelName: updatedModel.model_name,
+        modelId: updatedModel.model_id,
+        endpointUrl: updatedModel.endpoint_url,
+        provider: updatedModel.provider,
+        isActive: updatedModel.is_active,
+        isPublic: updatedModel.is_public,
+        description: updatedModel.description,
+        updatedAt: updatedModel.updated_at
       }
     });
 
