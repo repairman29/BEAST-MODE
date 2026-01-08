@@ -8,9 +8,20 @@ import { loadModule } from '../../../../lib/api-module-loader';
 let featureGenerator: any;
 let codebaseContextBuilder: any;
 
-// Load modules with error handling
-featureGenerator = loadModule('../../../../../lib/mlops/featureGenerator');
-codebaseContextBuilder = loadModule('../../../../../lib/mlops/codebaseContextBuilder');
+// Load modules with error handling and fallback
+try {
+  featureGenerator = loadModule('../../../../../lib/mlops/featureGenerator') || require('../../../../../lib/mlops/featureGenerator');
+  codebaseContextBuilder = loadModule('../../../../../lib/mlops/codebaseContextBuilder') || require('../../../../../lib/mlops/codebaseContextBuilder');
+} catch (error) {
+  console.warn('[Feature Generation API] Module loading issue:', error);
+  // Try direct require as fallback
+  try {
+    featureGenerator = require('../../../../../lib/mlops/featureGenerator');
+    codebaseContextBuilder = require('../../../../../lib/mlops/codebaseContextBuilder');
+  } catch (fallbackError) {
+    console.error('[Feature Generation API] Failed to load modules:', fallbackError);
+  }
+}
 
 if (!featureGenerator) {
   console.warn('[Feature Generation API] Feature generator module not available - may need to bundle for production');
@@ -58,6 +69,7 @@ export async function POST(request: NextRequest) {
 
     // Auto-select model if not provided
     if (!requestedModel) {
+      const { getSmartModelSelector } = loadModule('../../../../../lib/mlops/smartModelSelector') || require('../../../../../lib/mlops/smartModelSelector');
       const smartModelSelector = getSmartModelSelector();
       const selection = await smartModelSelector.selectModel(userId || '');
       requestedModel = selection.modelId;
