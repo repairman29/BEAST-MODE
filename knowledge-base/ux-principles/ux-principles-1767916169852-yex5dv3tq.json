@@ -1,0 +1,17 @@
+{
+  "id": "ux-principles-1767916169852-yex5dv3tq",
+  "category": "ux-principles",
+  "title": "Cognitive Load Reduction",
+  "content": "Minimize mental effort required to understand and use the interface. Apply progressive disclosure (show only what's needed), maintain clear visual hierarchy, use consistent patterns, minimize choices at each step, and chunk related information together.",
+  "metadata": {
+    "source": "UX_PSYCHOLOGY_PRINCIPLES.md",
+    "tags": [
+      "cognitive-load",
+      "usability",
+      "design"
+    ],
+    "priority": "high",
+    "createdAt": "2026-01-08T23:49:29.852Z",
+    "updatedAt": "2026-01-08T23:49:29.853Z"
+  }
+}

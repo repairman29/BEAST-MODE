@@ -1,0 +1,52 @@
+[
+  {
+    "category": "ux-principles",
+    "title": "Cognitive Load Reduction",
+    "content": "Minimize mental effort required to understand and use the interface. Apply progressive disclosure (show only what's needed), maintain clear visual hierarchy, use consistent patterns, minimize choices at each step, and chunk related information together.",
+    "metadata": {
+      "source": "UX_PSYCHOLOGY_PRINCIPLES.md",
+      "tags": ["cognitive-load", "usability", "design"],
+      "priority": "high"
+    }
+  },
+  {
+    "category": "ux-principles",
+    "title": "Visual Hierarchy",
+    "content": "Guide user attention through size, color, contrast, and spacing. Primary actions should be large, high contrast, and prominent. Secondary actions should be medium and subtle. Tertiary actions should be small and muted. Use whitespace strategically and maintain a typography scale of 4-5 sizes maximum.",
+    "metadata": {
+      "source": "UX_PSYCHOLOGY_PRINCIPLES.md",
+      "tags": ["visual-design", "hierarchy", "layout"],
+      "priority": "high"
+    }
+  },
+  {
+    "category": "ux-principles",
+    "title": "Feedback & Affordances",
+    "content": "Users need immediate, clear feedback for every action. Implement hover states on all interactive elements, loading states for async operations, success/error states with clear messaging, disabled states that explain why, and micro-interactions for delight.",
+    "metadata": {
+      "source": "UX_PSYCHOLOGY_PRINCIPLES.md",
+      "tags": ["feedback", "interaction", "usability"],
+      "priority": "high"
+    }
+  },
+  {
+    "category": "ux-principles",
+    "title": "Progressive Disclosure",
+    "content": "Show complexity gradually, not all at once. Use collapsible sections, tabs for related content, modals for detailed views, expandable cards, and step-by-step flows. Never overwhelm users with too much information at once.",
+    "metadata": {
+      "source": "UX_PSYCHOLOGY_PRINCIPLES.md",
+      "tags": ["information-architecture", "usability"],
+      "priority": "medium"
+    }
+  },
+  {
+    "category": "ux-principles",
+    "title": "Error Prevention & Recovery",
+    "content": "Prevent errors, but when they happen, make recovery easy. Implement validation before submission, confirmation for destructive actions, clear error messages with solutions, undo/redo capabilities, and graceful degradation.",
+    "metadata": {
+      "source": "UX_PSYCHOLOGY_PRINCIPLES.md",
+      "tags": ["error-handling", "usability", "safety"],
+      "priority": "high"
+    }
+  }
+]
