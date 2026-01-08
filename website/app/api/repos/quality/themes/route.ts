@@ -61,9 +61,9 @@ export async function POST(request: NextRequest) {
           }
 
           analyzedFiles = await githubFileFetcher.fetchRepositoryFiles(owner, repoName, {
-          maxFiles: 100, // More files for pattern analysis
-          maxFileSize: 50000,
-        });
+            maxFiles: 100, // More files for pattern analysis
+            maxFileSize: 50000,
+          });
 
         if (!analyzedFiles || analyzedFiles.length === 0) {
           return NextResponse.json(
