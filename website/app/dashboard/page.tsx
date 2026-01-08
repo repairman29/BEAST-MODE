@@ -1,9 +1,12 @@
 "use client";
 
-import { Suspense } from 'react';
+import { Suspense, lazy } from 'react';
 import { useSearchParams } from 'next/navigation';
-import BeastModeDashboard from '../../components/beast-mode/BeastModeDashboard'
-import FeedbackPrompt from '../../components/feedback/FeedbackPrompt'
+import LoadingState from '../../components/ui/LoadingState';
+
+// Lazy load heavy components for better performance
+const BeastModeDashboard = lazy(() => import('../../components/beast-mode/BeastModeDashboard'));
+const FeedbackPrompt = lazy(() => import('../../components/feedback/FeedbackPrompt'));
 
 function DashboardContent() {
   const searchParams = useSearchParams();

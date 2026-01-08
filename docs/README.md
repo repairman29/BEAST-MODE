@@ -31,6 +31,7 @@
 - **[FTUE Guide](./guides/ftue.md)** - First Time User Experience (100-step walkthrough)
 - **[Architecture](./technical/architecture.md)** - System architecture
 - **[ML Models](./technical/ml-models.md)** - Machine learning models
+- **[LLM Models Complete Guide](./LLM_MODELS_COMPLETE_GUIDE.md)** - Complete LLM models documentation & usage opportunities
 - **[Deployment](./technical/deployment.md)** - Deployment guide
 
 ---
