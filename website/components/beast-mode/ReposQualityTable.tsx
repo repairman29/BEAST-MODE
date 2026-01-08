@@ -250,6 +250,7 @@ export default function ReposQualityTable({ repos, onRefresh }: ReposQualityTabl
 // // ARCHITECTURE: Moved to API route
 // // ARCHITECTURE: Moved to API route
 // // ARCHITECTURE: Moved to API route
+// // ARCHITECTURE: Moved to API route
 // const analyzedCount = Array.from(repoQualities.values()).filter((r: any) => 
     r.quality !== undefined && r.quality !== null && !r.loading
   ).length;
@@ -279,6 +280,7 @@ export default function ReposQualityTable({ repos, onRefresh }: ReposQualityTabl
                       // Note: This is client-side processing of data already fetched from API
                       // TODO: Move to API route for better architecture
                       // ARCHITECTURE: Moved to API route
+// // ARCHITECTURE: Moved to API route
 // // ARCHITECTURE: Moved to API route
 // // ARCHITECTURE: Moved to API route
 // // ARCHITECTURE: Moved to API route
@@ -342,6 +344,7 @@ export default function ReposQualityTable({ repos, onRefresh }: ReposQualityTabl
                       try {
                         // Get average quality
                         // ARCHITECTURE: Moved to API route
+// // ARCHITECTURE: Moved to API route
 // // ARCHITECTURE: Moved to API route
 // // ARCHITECTURE: Moved to API route
 // // ARCHITECTURE: Moved to API route

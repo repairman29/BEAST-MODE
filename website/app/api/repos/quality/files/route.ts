@@ -45,7 +45,11 @@ export async function POST(request: NextRequest) {
               githubFileFetcher.initializeUserToken(userToken);
             }
             } catch (error) {
-              console.warn('[File Quality API] Could not get user token: process.env.TOKEN || ''/');
+              console.warn('[File Quality API] Could not get user token:', error);
+            }
+          }
+
+          const [owner, repoName] = repo.split('/');
           if (!owner || !repoName) {
             return NextResponse.json(
               { error: 'Invalid repository format. Use: owner/repo' },

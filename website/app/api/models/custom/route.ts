@@ -16,8 +16,7 @@ const ENCRYPTION_KEY = process.env.ENCRYPTION_KEY || 'default-encryption-key-cha
  */
 function encryptApiKey(apiKey: string): { encrypted: string; iv: string } {
   const iv = crypto.randomBytes(16);
-  // ARCHITECTURE: Moved to API route
-// const cipher = crypto.createCipheriv('aes-256-cbc', Buffer.from(ENCRYPTION_KEY.slice(0, 32), 'utf8'), iv);
+  const cipher = crypto.createCipheriv('aes-256-cbc', Buffer.from(ENCRYPTION_KEY.slice(0, 32), 'utf8'), iv);
   let encrypted = cipher.update(apiKey, 'utf8', 'hex');
   encrypted += cipher.final('hex');
   return {
