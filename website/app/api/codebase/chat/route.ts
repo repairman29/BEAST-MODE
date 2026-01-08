@@ -117,10 +117,18 @@ export async function POST(request: NextRequest) {
         });
       } catch (error: any) {
         console.error('[Chat API] Custom model error:', error);
-        return NextResponse.json(
-          { error: 'Failed to use custom model', details: error.message },
-          { status: 500 }
-        );
+        // If custom model fails, fall back to regular chat processing
+        // Don't return error - let it fall through to regular processing
+        if (error.message?.includes('not found') || error.message?.includes('authentication')) {
+          // Custom model not available - fall through to regular processing
+          requestedModel = null;
+        } else {
+          // Other errors - return error
+          return NextResponse.json(
+            { error: 'Failed to use custom model', details: error.message },
+            { status: 500 }
+          );
+        }
       }
     }
 
