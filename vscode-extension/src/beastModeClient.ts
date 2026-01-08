@@ -25,9 +25,22 @@ export class BeastModeClient {
         recommendations: response.data.recommendations,
       };
     } catch (error: any) {
+      // Provide detailed error information
+      let errorMessage = error.message;
+      if (error.response) {
+        // API returned an error response
+        errorMessage = error.response.data?.error || error.response.data?.details || error.response.statusText || error.message;
+        if (error.response.status) {
+          errorMessage = `[${error.response.status}] ${errorMessage}`;
+        }
+      } else if (error.request) {
+        // Request was made but no response received
+        errorMessage = `Network error: Unable to reach ${this.apiUrl}. Check your connection.`;
+      }
+      
       return {
         success: false,
-        error: error.message,
+        error: errorMessage,
       };
     }
   }

@@ -851,8 +851,21 @@ export async function POST(request: NextRequest) {
     } else {
       try {
         predictionResult = await mlIntegration.predictQuality({ features });
+        // Validate prediction result
+        if (!predictionResult || typeof predictionResult.predictedQuality !== 'number') {
+          throw new Error('Invalid prediction result returned from model');
+        }
+        if (predictionResult.predictedQuality === 0.5 && predictionResult.source === 'ml_model') {
+          console.warn(`[Quality API] Warning: Quality score is exactly 0.5 from ML model for ${repo}. This may indicate a model issue.`);
+        }
       } catch (error: any) {
-        console.warn('[Quality API] Prediction failed, using fallback:', error.message);
+        console.error('[Quality API] Prediction failed, using fallback:', {
+          error: error.message,
+          stack: error.stack,
+          modelPath: mlIntegration?.modelPath,
+          modelAvailable: mlIntegration?.isMLModelAvailable(),
+          featureCount: Object.keys(features).length
+        });
         predictionResult = mlIntegration.getDefaultPrediction();
         usingFallback = true;
       }
