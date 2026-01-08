@@ -1,0 +1,117 @@
+[
+  {
+    "modelId": "openai:gpt-3.5-turbo",
+    "scenarios": [
+      {
+        "scenario": "Simple Function",
+        "complexity": "low",
+        "success": true,
+        "quality": 0.6,
+        "confidence": 0.7,
+        "issues": [
+          "Missing comments",
+          "No error handling"
+        ],
+        "metrics": {
+          "codeBlocks": 1,
+          "avgLines": 1,
+          "latency": 686,
+          "codeLength": 76
+        },
+        "details": [
+          {
+            "fileName": "generated.js",
+            "language": "javascript",
+            "quality": 0.6,
+            "confidence": 0.7,
+            "issues": [
+              "Missing comments",
+              "No error handling"
+            ],
+            "metrics": {
+              "lines": 1,
+              "hasComments": false,
+              "hasErrorHandling": false,
+              "hasTypeAnnotations": false,
+              "avgLineLength": 76
+            }
+          }
+        ]
+      },
+      {
+        "scenario": "Medium Component",
+        "complexity": "medium",
+        "success": true,
+        "quality": 0.6,
+        "confidence": 0.7,
+        "issues": [
+          "Missing comments",
+          "No error handling"
+        ],
+        "metrics": {
+          "codeBlocks": 1,
+          "avgLines": 1,
+          "latency": 11,
+          "codeLength": 76
+        },
+        "details": [
+          {
+            "fileName": "generated.js",
+            "language": "javascript",
+            "quality": 0.6,
+            "confidence": 0.7,
+            "issues": [
+              "Missing comments",
+              "No error handling"
+            ],
+            "metrics": {
+              "lines": 1,
+              "hasComments": false,
+              "hasErrorHandling": false,
+              "hasTypeAnnotations": false,
+              "avgLineLength": 76
+            }
+          }
+        ]
+      },
+      {
+        "scenario": "Complex Feature",
+        "complexity": "high",
+        "success": true,
+        "quality": 0.6,
+        "confidence": 0.7,
+        "issues": [
+          "Missing comments",
+          "No error handling"
+        ],
+        "metrics": {
+          "codeBlocks": 1,
+          "avgLines": 1,
+          "latency": 13,
+          "codeLength": 76
+        },
+        "details": [
+          {
+            "fileName": "generated.js",
+            "language": "javascript",
+            "quality": 0.6,
+            "confidence": 0.7,
+            "issues": [
+              "Missing comments",
+              "No error handling"
+            ],
+            "metrics": {
+              "lines": 1,
+              "hasComments": false,
+              "hasErrorHandling": false,
+              "hasTypeAnnotations": false,
+              "avgLineLength": 76
+            }
+          }
+        ]
+      }
+    ],
+    "avgQuality": 0.6,
+    "avgLatency": 236.66666666666666
+  }
+]

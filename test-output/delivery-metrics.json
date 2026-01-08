@@ -1,0 +1,18 @@
+{
+  "features": [
+    {
+      "featureName": "Email Validation Utility",
+      "startTime": 1767900508760,
+      "modelId": "auto",
+      "stages": [
+        {
+          "name": "Generation",
+          "latency": 278,
+          "success": false
+        }
+      ],
+      "success": false,
+      "endTime": 1767900509038
+    }
+  ]
+}

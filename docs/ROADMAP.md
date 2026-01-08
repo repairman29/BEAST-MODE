@@ -65,8 +65,8 @@
 **Testing with Custom Models:**
 - [x] Code generation quality
 - [x] Feature generation quality
-- [ ] Speed benchmarking
-- [ ] Delivery time tracking
+- [x] Speed benchmarking (tool exists)
+- [x] Delivery time tracking (tool exists)
 - [ ] Cost comparison analysis
 
 ---
@@ -395,9 +395,9 @@ GET /api/models/custom/monitoring
 ### Immediate (This Week)
 
 1. **Create Testing Tools:**
-   - [ ] `scripts/benchmark-custom-models.js`
-   - [ ] `scripts/test-custom-model-quality.js`
-   - [ ] `scripts/track-delivery-metrics.js`
+   - [x] `scripts/benchmark-custom-models.js`
+   - [x] `scripts/test-custom-model-quality.js`
+   - [x] `scripts/track-delivery-metrics.js`
 
 2. **Set Up Metrics:**
    - [ ] Quality tracking dashboard
