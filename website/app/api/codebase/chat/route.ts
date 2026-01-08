@@ -5,7 +5,14 @@ import { getDecryptedToken } from '@/lib/github-token';
 let codebaseChat: any;
 try {
   // Path: website/app/api/codebase/chat -> BEAST-MODE-PRODUCT/lib/mlops
-  codebaseChat = require('../../../../../lib/mlops/codebaseChat');
+  const codebaseChatModule = require('../../../../../lib/mlops/codebaseChat');
+  // Handle both singleton instance and class export
+  codebaseChat = codebaseChatModule.default || codebaseChatModule;
+  // If it's a class, we might need to instantiate it, but check if it has processMessage first
+  if (codebaseChat && typeof codebaseChat.processMessage !== 'function') {
+    // Try to get the instance if it's exported
+    codebaseChat = codebaseChatModule.getCodebaseChat?.() || codebaseChat;
+  }
 } catch (error) {
   console.error('[Chat API] Failed to load modules:', error);
 }
