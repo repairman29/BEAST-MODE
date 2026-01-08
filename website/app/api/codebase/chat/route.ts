@@ -26,6 +26,7 @@ export async function POST(request: NextRequest) {
       files = [],
       currentFile = null,
       useLLM = false,
+      model, // Optional: model ID (e.g., "custom:my-model" or "openai:gpt-4")
     } = body;
 
     if (!sessionId || !message) {
@@ -42,20 +43,73 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Get user's API key if using LLM
+    // Get user ID
+    const userId = request.cookies.get('github_oauth_user_id')?.value;
+
+    // If custom model is specified, use model router
+    if (model && model.startsWith('custom:')) {
+      try {
+        const { getModelRouter } = require('../../../../../lib/mlops/modelRouter');
+        const modelRouter = getModelRouter();
+        
+        // Get conversation history for context
+        const history = codebaseChat.getHistory(sessionId) || [];
+        const messages = [
+          ...history.map((h: any) => ({
+            role: h.role || 'user',
+            content: h.message || h.content
+          })),
+          { role: 'user', content: message }
+        ];
+
+        // Route to custom model
+        const modelResponse = await modelRouter.route(model, {
+          messages,
+          temperature: 0.7,
+          maxTokens: 4000
+        }, userId || '');
+
+        // Save to conversation history
+        codebaseChat.addToHistory(sessionId, {
+          role: 'user',
+          message
+        });
+        codebaseChat.addToHistory(sessionId, {
+          role: 'assistant',
+          message: modelResponse.content
+        });
+
+        return NextResponse.json({
+          success: true,
+          message: modelResponse.content,
+          model: modelResponse.model || model,
+          usage: modelResponse.usage,
+          context: { repo, files, currentFile }
+        });
+      } catch (error: any) {
+        console.error('[Chat API] Custom model error:', error);
+        return NextResponse.json(
+          { error: 'Failed to use custom model', details: error.message },
+          { status: 500 }
+        );
+      }
+    }
+
+    // Get user's API key if using LLM (provider models)
     let userApiKey = null;
     if (useLLM) {
       try {
-        const userId = request.cookies.get('github_oauth_user_id')?.value;
         if (userId) {
           const { getSupabaseClientOrNull } = require('../../../lib/supabase');
           const supabase = await getSupabaseClientOrNull();
           if (supabase) {
+            // Determine provider from model
+            const provider = model?.startsWith('anthropic:') ? 'anthropic' : 'openai';
             const { data } = await supabase
               .from('user_api_keys')
               .select('decrypted_key')
               .eq('user_id', userId)
-              .eq('provider', 'openai')
+              .eq('provider', provider)
               .single();
             
             if (data?.decrypted_key) {
@@ -68,7 +122,7 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    // Process chat message
+    // Process chat message (existing flow)
     const response = await codebaseChat.processMessage(
       sessionId,
       message,
@@ -78,6 +132,7 @@ export async function POST(request: NextRequest) {
         currentFile,
         userApiKey,
         useLLM: useLLM && !!userApiKey,
+        model, // Pass model to codebaseChat if it supports it
       }
     );
 
