@@ -20,7 +20,10 @@ try {
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { repo, featureRequest, files, useLLM = false, llmOptions = {}, llmProvider = 'openai' } = body;
+    const { repo, featureRequest, files, useLLM = false, llmOptions = {}, llmProvider = 'openai', model } = body;
+    
+    // Get user ID for smart model selection
+    const userId = request.cookies.get('github_oauth_user_id')?.value;
     
     if (!repo) {
       return NextResponse.json(
@@ -70,17 +73,22 @@ export async function POST(request: NextRequest) {
       }
     }
     
-    // Generate feature
+    // Generate feature with model support
+    const generateOptions = {
+      useLLM: useLLM && (!!userApiKey || customModelId), // Use LLM if key or custom model available
+      userApiKey,
+      llmProvider,
+      model: requestedModel, // Pass model to generator
+      customModelId, // Pass custom model ID
+      userId, // Pass user ID for model routing
+      ...llmOptions,
+    };
+    
     const result = await featureGenerator.generateFeature(
       repo,
       featureRequest,
       files,
-      {
-        useLLM: useLLM && !!userApiKey, // Only use LLM if key available
-        userApiKey,
-        llmProvider,
-        ...llmOptions,
-      }
+      generateOptions
     );
     
     if (!result.success) {
