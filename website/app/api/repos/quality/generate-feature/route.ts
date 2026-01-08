@@ -76,7 +76,7 @@ export async function POST(request: NextRequest) {
     // Generate feature with model support
     const generateOptions = {
       useLLM: useLLM && (!!userApiKey || customModelId), // Use LLM if key or custom model available
-      userApiKey,
+      userApiKey: customModelId ? null : userApiKey, // Don't pass API key for custom models (router handles it)
       llmProvider,
       model: requestedModel, // Pass model to generator
       customModelId, // Pass custom model ID
