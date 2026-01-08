@@ -59,31 +59,39 @@ export default function PerformanceMetricsDashboard() {
       const performance = performanceRes ? await performanceRes.json().catch(() => null) : null;
       
       // Combine data from all sources
-      const response = monitoring || {};
+      const result = monitoring || {};
       
-      if (!response.ok) {
-        throw new Error('Failed to fetch performance data');
-      }
+      const metrics = result.metrics || result.data?.metrics || {};
+      const latencyData = latency?.data || latency || {};
+      const performanceData = performance?.data || performance || {};
       
-      const result = await response.json();
-      
-      if (result.metrics) {
+      if (metrics || latencyData || performanceData) {
+        // Combine metrics from all sources
+        const combinedMetrics = {
+          ...metrics,
+          latency: latencyData,
+          performance: performanceData
+        };
+        
         setData({
           performance: {
-            averageLatency: result.metrics.performance?.averageLatency || 0,
-            p50Latency: result.metrics.performance?.p50Latency || 0,
-            p95Latency: result.metrics.performance?.p95Latency || 0,
-            p99Latency: result.metrics.performance?.p99Latency || 0,
-            successRate: parseFloat(result.metrics.requests?.successRate?.replace('%', '') || '0'),
-            totalRequests: result.metrics.requests?.total || 0,
+            averageLatency: combinedMetrics.performance?.averageLatency || combinedMetrics.latency?.averageLatency || metrics.performance?.averageLatency || 0,
+            p50Latency: combinedMetrics.performance?.p50Latency || combinedMetrics.latency?.p50Latency || metrics.performance?.p50Latency || 0,
+            p95Latency: combinedMetrics.performance?.p95Latency || combinedMetrics.latency?.p95Latency || metrics.performance?.p95Latency || 0,
+            p99Latency: combinedMetrics.performance?.p99Latency || combinedMetrics.latency?.p99Latency || metrics.performance?.p99Latency || 0,
+            successRate: parseFloat(
+              (combinedMetrics.requests?.successRate || metrics.requests?.successRate || '0')
+                .toString().replace('%', '')
+            ) || 0,
+            totalRequests: combinedMetrics.requests?.total || metrics.requests?.total || 0,
             requestsPerSecond: 0 // Calculate from time range
           },
           requests: {
-            total: result.metrics.requests?.total || 0,
-            success: result.metrics.requests?.success || 0,
-            failures: result.metrics.requests?.failures || 0,
-            byModel: result.metrics.requests?.byModel || {},
-            byEndpoint: result.metrics.requests?.byEndpoint || {}
+            total: combinedMetrics.requests?.total || metrics.requests?.total || 0,
+            success: combinedMetrics.requests?.success || metrics.requests?.success || 0,
+            failures: combinedMetrics.requests?.failures || metrics.requests?.failures || 0,
+            byModel: combinedMetrics.requests?.byModel || metrics.requests?.byModel || {},
+            byEndpoint: combinedMetrics.requests?.byEndpoint || metrics.requests?.byEndpoint || {}
           },
           timestamp: result.timestamp || new Date().toISOString()
         });
