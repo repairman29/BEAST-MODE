@@ -1,0 +1,100 @@
+{
+  "total": 19,
+  "passed": 6,
+  "failed": 13,
+  "skipped": 0,
+  "tests": [
+    {
+      "name": "Health Check",
+      "status": "passed"
+    },
+    {
+      "name": "Models List API",
+      "status": "passed"
+    },
+    {
+      "name": "Custom Models Monitoring API",
+      "status": "passed"
+    },
+    {
+      "name": "Quality API",
+      "status": "passed"
+    },
+    {
+      "name": "Codebase Chat API",
+      "status": "failed",
+      "error": "Chat API failed: 500"
+    },
+    {
+      "name": "Feature Generation API",
+      "status": "passed"
+    },
+    {
+      "name": "Analytics API",
+      "status": "failed",
+      "error": "Analytics API failed: 500"
+    },
+    {
+      "name": "Anomaly Detection API",
+      "status": "failed",
+      "error": "Anomalies API failed: 500"
+    },
+    {
+      "name": "Predictive Analysis API",
+      "status": "failed",
+      "error": "Predictions API failed: 500"
+    },
+    {
+      "name": "Bug Tracking API",
+      "status": "failed",
+      "error": "Bug tracking API failed: 500"
+    },
+    {
+      "name": "Productivity API",
+      "status": "failed",
+      "error": "Productivity API failed: 500"
+    },
+    {
+      "name": "Cost Tracking API",
+      "status": "failed",
+      "error": "Cost tracking API failed: 500"
+    },
+    {
+      "name": "Model Quality API",
+      "status": "failed",
+      "error": "Model quality API failed: 500"
+    },
+    {
+      "name": "Model Tuning API",
+      "status": "failed",
+      "error": "Model tuning API failed: 500"
+    },
+    {
+      "name": "Latency Optimization API",
+      "status": "failed",
+      "error": "Latency optimization API failed: 500"
+    },
+    {
+      "name": "API Response Time < 500ms",
+      "status": "passed"
+    },
+    {
+      "name": "API Success Rate",
+      "status": "failed",
+      "error": "Success rate too low: 0.0% (expected >= 90%)"
+    },
+    {
+      "name": "Model Router Integration",
+      "status": "failed",
+      "error": "Model router integration failed with 500 error"
+    },
+    {
+      "name": "Smart Model Selector Integration",
+      "status": "failed",
+      "error": "Smart model selector integration failed"
+    }
+  ],
+  "startTime": 1767909579057,
+  "endTime": 1767909584371,
+  "duration": 5314
+}
