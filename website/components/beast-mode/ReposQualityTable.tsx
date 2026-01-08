@@ -21,6 +21,7 @@ interface RepoQuality {
   quality?: number;
   confidence?: number;
   percentile?: number;
+  predictionId?: string; // For feedback collection
   cached?: boolean;
   loading?: boolean;
   error?: string;
@@ -126,17 +127,30 @@ export default function ReposQualityTable({ repos, onRefresh }: ReposQualityTabl
           // Ensure quality is a number (0 is valid!)
           const quality = typeof data.quality === 'number' ? data.quality : 0;
           
-          return {
+          const result = {
             repo,
             quality: quality, // Keep 0 as valid value
             confidence: data.confidence || 0,
             percentile: data.percentile || 0,
+            predictionId: data.predictionId, // Store for feedback collection
             cached: data.cached || false,
             loading: false,
             error: undefined,
             factors: data.factors,
             recommendations: data.recommendations
           };
+          
+          // Automatically trigger feedback prompt when prediction is made
+          if (data.predictionId && typeof window !== 'undefined') {
+            const { triggerFeedbackPrompt } = require('../../lib/feedback-trigger');
+            triggerFeedbackPrompt(data.predictionId, {
+              service: 'code-roach',
+              actionType: 'quality-prediction',
+              message: `Quality prediction for ${repo}`
+            });
+          }
+          
+          return result;
         } catch (error: any) {
           console.error(`[ReposQualityTable] Error analyzing ${repo}:`, error);
           return {
@@ -235,6 +249,7 @@ export default function ReposQualityTable({ repos, onRefresh }: ReposQualityTabl
 // // ARCHITECTURE: Moved to API route
 // // ARCHITECTURE: Moved to API route
 // // ARCHITECTURE: Moved to API route
+// // ARCHITECTURE: Moved to API route
 // const analyzedCount = Array.from(repoQualities.values()).filter((r: any) => 
     r.quality !== undefined && r.quality !== null && !r.loading
   ).length;
@@ -264,6 +279,7 @@ export default function ReposQualityTable({ repos, onRefresh }: ReposQualityTabl
                       // Note: This is client-side processing of data already fetched from API
                       // TODO: Move to API route for better architecture
                       // ARCHITECTURE: Moved to API route
+// // ARCHITECTURE: Moved to API route
 // // ARCHITECTURE: Moved to API route
 // // ARCHITECTURE: Moved to API route
 // // ARCHITECTURE: Moved to API route
@@ -325,6 +341,7 @@ export default function ReposQualityTable({ repos, onRefresh }: ReposQualityTabl
                       try {
                         // Get average quality
                         // ARCHITECTURE: Moved to API route
+// // ARCHITECTURE: Moved to API route
 // // ARCHITECTURE: Moved to API route
 // // ARCHITECTURE: Moved to API route
 // // ARCHITECTURE: Moved to API route
