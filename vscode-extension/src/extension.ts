@@ -49,11 +49,18 @@ export function activate(context: vscode.ExtensionContext) {
         cancellable: false
       }, async (progress) => {
         try {
+          console.log('[BEAST MODE] Starting quality analysis...');
+          console.log('[BEAST MODE] File:', filePath);
+          console.log('[BEAST MODE] API URL:', (beastModeClient as any).apiUrl);
+          
           const result = await beastModeClient.analyzeQuality(filePath, content);
           
+          console.log('[BEAST MODE] Analysis result:', result);
+          
           if (result.success) {
+            const qualityPercent = (result.quality * 100).toFixed(1);
             vscode.window.showInformationMessage(
-              `Quality Score: ${(result.quality * 100).toFixed(1)}%`
+              `Quality Score: ${qualityPercent}%`
             );
             
             // Show quality details in a new document
@@ -67,17 +74,32 @@ export function activate(context: vscode.ExtensionContext) {
             panel.webview.html = generateQualityReport(result);
           } else {
             const errorMsg = result.error || 'Unknown error';
-            vscode.window.showErrorMessage(`Analysis failed: ${errorMsg}`, 'Show Details').then(selection => {
-              if (selection === 'Show Details') {
-                vscode.window.showInformationMessage(`Full error: ${errorMsg}\nAPI URL: ${beastModeClient['apiUrl']}`, { modal: true });
+            console.error('[BEAST MODE] Quality analysis failed:', errorMsg);
+            console.error('[BEAST MODE] Full result:', JSON.stringify(result, null, 2));
+            
+            // Show detailed error with actionable info
+            const apiUrl = (beastModeClient as any).apiUrl || 'not set';
+            const fullError = `Analysis failed: ${errorMsg}\n\nAPI URL: ${apiUrl}\nFile: ${filePath}\n\nCheck:\n1. Is the API URL correct?\n2. Is your internet connection working?\n3. Check Output panel for more details`;
+            
+            vscode.window.showErrorMessage(fullError, 'Open Output').then(selection => {
+              if (selection === 'Open Output') {
+                vscode.commands.executeCommand('workbench.action.output.toggleOutput');
               }
             });
-            console.error('[BEAST MODE] Quality analysis failed:', errorMsg);
           }
         } catch (error: any) {
           const errorMsg = error.message || 'Unknown error';
-          vscode.window.showErrorMessage(`Error: ${errorMsg}`);
           console.error('[BEAST MODE] Exception during quality analysis:', error);
+          console.error('[BEAST MODE] Error stack:', error.stack);
+          
+          vscode.window.showErrorMessage(
+            `Error: ${errorMsg}\n\nCheck Output panel (View > Output > Log (Extension Host)) for details.`,
+            'Open Output'
+          ).then(selection => {
+            if (selection === 'Open Output') {
+              vscode.commands.executeCommand('workbench.action.output.toggleOutput');
+            }
+          });
         }
       });
     }),
