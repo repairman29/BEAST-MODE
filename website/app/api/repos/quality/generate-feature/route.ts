@@ -3,7 +3,7 @@ import { getDecryptedToken } from '../../../../../lib/github-token';
 
 // Dynamic require for Node.js modules
 // Use module loader for better production compatibility
-import { loadModule } from '../../../../lib/api-module-loader';
+import { loadModule } from '../../../../../lib/api-module-loader';
 
 let featureGenerator: any;
 let codebaseContextBuilder: any;
