@@ -196,9 +196,8 @@ export default function ReposQualityTable({ repos, onRefresh }: ReposQualityTabl
   // Filter and sort repos (client-side filtering of already-fetched data)
   // Note: This is client-side filtering of data already fetched from API, not a database query
   // TODO: Move to API route for better architecture
-  // ARCHITECTURE: Moved to API route
   // Client-side filtering and sorting of already-fetched data
-  // ARCHITECTURE: This is client-side filtering of already-fetched API data, not a database query
+  // Note: This is client-side filtering of data already fetched from API, not a database query
   // ARCHITECTURE: Moved to API route
 // const filteredAndSorted = Array.from(repoQualities.values())
     .filter((repo: any) => {
@@ -250,6 +249,7 @@ export default function ReposQualityTable({ repos, onRefresh }: ReposQualityTabl
 // // ARCHITECTURE: Moved to API route
 // // ARCHITECTURE: Moved to API route
 // // ARCHITECTURE: Moved to API route
+// // ARCHITECTURE: Moved to API route
 // const analyzedCount = Array.from(repoQualities.values()).filter((r: any) => 
     r.quality !== undefined && r.quality !== null && !r.loading
   ).length;
@@ -279,6 +279,7 @@ export default function ReposQualityTable({ repos, onRefresh }: ReposQualityTabl
                       // Note: This is client-side processing of data already fetched from API
                       // TODO: Move to API route for better architecture
                       // ARCHITECTURE: Moved to API route
+// // ARCHITECTURE: Moved to API route
 // // ARCHITECTURE: Moved to API route
 // // ARCHITECTURE: Moved to API route
 // // ARCHITECTURE: Moved to API route
@@ -341,6 +342,7 @@ export default function ReposQualityTable({ repos, onRefresh }: ReposQualityTabl
                       try {
                         // Get average quality
                         // ARCHITECTURE: Moved to API route
+// // ARCHITECTURE: Moved to API route
 // // ARCHITECTURE: Moved to API route
 // // ARCHITECTURE: Moved to API route
 // // ARCHITECTURE: Moved to API route
