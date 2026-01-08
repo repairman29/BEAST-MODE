@@ -6,8 +6,8 @@
  * Tests the integration of custom models into code generation workflows.
  */
 
-const BASE_URL = process.env.BEAST_MODE_URL || 'https://beast-mode.dev';
-const LOCAL_URL = 'http://localhost:3000';
+const BASE_URL = process.env.BEAST_MODE_URL || 'http://localhost:3000';
+const PROD_URL = 'https://beast-mode.dev';
 
 // Test configuration
 const TEST_MODEL = {
@@ -67,11 +67,11 @@ async function request(url, options = {}) {
       data
     };
   } catch (error) {
-    // Try local fallback
-    if (url.startsWith('/')) {
-      const localUrl = `${LOCAL_URL}${url}`;
+    // Try production fallback if testing locally
+    if (url.startsWith('/') && BASE_URL.includes('localhost')) {
+      const prodUrl = `${PROD_URL}${url}`;
       try {
-        const response = await fetch(localUrl, {
+        const response = await fetch(prodUrl, {
           ...options,
           headers: {
             'Content-Type': 'application/json',
@@ -86,8 +86,8 @@ async function request(url, options = {}) {
           status: response.status,
           data
         };
-      } catch (localError) {
-        throw new Error(`Both ${BASE_URL} and ${LOCAL_URL} failed: ${error.message}`);
+      } catch (prodError) {
+        throw new Error(`Both ${BASE_URL} and ${PROD_URL} failed: ${error.message}`);
       }
     }
     throw error;
@@ -292,7 +292,10 @@ async function testModelRouterCode() {
 async function runTests() {
   console.log('🚀 Testing Custom Models for Code Generation\n');
   console.log(`📍 Testing against: ${BASE_URL}`);
-  console.log(`📍 Fallback: ${LOCAL_URL}\n`);
+  if (BASE_URL.includes('localhost')) {
+    console.log(`📍 Production fallback: ${PROD_URL}`);
+  }
+  console.log('');
   
   await test('Health Check', testHealthCheck);
   await test('List Models', testListModels);

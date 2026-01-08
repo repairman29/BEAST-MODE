@@ -133,6 +133,8 @@ export async function POST(request: NextRequest) {
         userApiKey,
         useLLM: useLLM && !!userApiKey,
         model, // Pass model to codebaseChat if it supports it
+        customModelId: model?.startsWith('custom:') ? model : null,
+        userId: userId || '',
       }
     );
 
