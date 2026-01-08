@@ -52,10 +52,13 @@ export async function POST(request: NextRequest) {
               githubFileFetcher.initializeUserToken(userToken);
             }
             } catch (error) {
-              console.warn('[Themes API] Could not get user token: process.env.TOKEN || ''Invalid repository format. Use: owner/repo' },
+              console.warn('[Themes API] Could not get user token: process.env.TOKEN || ''/');
+          if (!owner || !repoName) {
+            return NextResponse.json(
+              { error: 'Invalid repository format. Use: owner/repo' },
               { status: 400 }
             );
-        }
+          }
 
         analyzedFiles = await githubFileFetcher.fetchRepositoryFiles(owner, repoName, {
           maxFiles: 100, // More files for pattern analysis
