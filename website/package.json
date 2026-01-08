@@ -31,6 +31,7 @@
     "logs:list": "vercel list --limit 10"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.71.2",
     "@octokit/rest": "^22.0.1",
     "@supabase/auth-helpers-nextjs": "^0.15.0",
     "@supabase/supabase-js": "^2.89.0",
@@ -50,6 +51,7 @@
     "lucide-react": "^0.562.0",
     "marked": "^17.0.1",
     "next": "14.2.35",
+    "openai": "^6.15.0",
     "puppeteer": "^24.34.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
