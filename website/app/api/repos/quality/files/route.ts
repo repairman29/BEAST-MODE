@@ -44,14 +44,14 @@ export async function POST(request: NextRequest) {
             if (userToken) {
               githubFileFetcher.initializeUserToken(userToken);
             }
-            } catch (error) {
-              console.warn('[File Quality API] Could not get user token: error);
-          if (!owner || !repoName) {
-            return NextResponse.json(
-              { error: 'Invalid repository format. Use: owner/repo' },
-              { status: 400 }
-            );
-          }
+          } catch (error) {
+            console.warn('[File Quality API] Could not get user token: process.env.TOKEN || ''/');
+        if (!owner || !repoName) {
+          return NextResponse.json(
+            { error: 'Invalid repository format. Use: owner/repo' },
+            { status: 400 }
+          );
+        }
 
         // Fetch files from GitHub
         fetchedFiles = await githubFileFetcher.fetchRepositoryFiles(owner, repoName, {
