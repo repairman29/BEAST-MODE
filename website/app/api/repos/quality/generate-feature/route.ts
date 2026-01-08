@@ -2,13 +2,18 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getDecryptedToken } from '../../../../../lib/github-token';
 
 // Dynamic require for Node.js modules
+// Use module loader for better production compatibility
+import { loadModule } from '../../../../lib/api-module-loader';
+
 let featureGenerator: any;
 let codebaseContextBuilder: any;
-try {
-  featureGenerator = require('../../../../../lib/mlops/featureGenerator');
-  codebaseContextBuilder = require('../../../../../lib/mlops/codebaseContextBuilder');
-} catch (error) {
-  console.error('[Feature Generation API] Failed to load modules:', error);
+
+// Load modules with error handling
+featureGenerator = loadModule('../../../../../lib/mlops/featureGenerator');
+codebaseContextBuilder = loadModule('../../../../../lib/mlops/codebaseContextBuilder');
+
+if (!featureGenerator) {
+  console.warn('[Feature Generation API] Feature generator module not available - may need to bundle for production');
 }
 
 /**
