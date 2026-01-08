@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { loadModule } from '../../../../../lib/api-module-loader';
+import { loadModule } from '../../../../lib/api-module-loader';
 
 /**
  * Latency Optimization API
