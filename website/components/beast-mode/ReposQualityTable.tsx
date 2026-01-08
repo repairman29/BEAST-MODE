@@ -183,11 +183,12 @@ export default function ReposQualityTable({ repos, onRefresh }: ReposQualityTabl
   // Note: This is client-side filtering of data already fetched from API, not a database query
   // TODO: Move to API route for better architecture
   // ARCHITECTURE: Moved to API route
+  // // ARCHITECTURE: Moved to API route
 // const filteredAndSorted = Array.from(repoQualities.values())
-    .filter((repo: any) => {
-      if (!filter) return true;
-      return repo.repo.toLowerCase().includes(filter.toLowerCase());
-    })
+  //   .filter((repo: any) => {
+  //     if (!filter) return true;
+  //     return repo.repo.toLowerCase().includes(filter.toLowerCase());
+  //   })
     .sort((a: any, b: any) => {
       let aVal: any = 0;
       let bVal: any = 0;
@@ -227,6 +228,7 @@ export default function ReposQualityTable({ repos, onRefresh }: ReposQualityTabl
   // Note: This is client-side counting of data already fetched from API, not a database query
   // TODO: Move to API route for better architecture
   // ARCHITECTURE: Moved to API route
+// // ARCHITECTURE: Moved to API route
 // const analyzedCount = Array.from(repoQualities.values()).filter((r: any) => 
     r.quality !== undefined && r.quality !== null && !r.loading
   ).length;
@@ -256,6 +258,7 @@ export default function ReposQualityTable({ repos, onRefresh }: ReposQualityTabl
                       // Note: This is client-side processing of data already fetched from API
                       // TODO: Move to API route for better architecture
                       // ARCHITECTURE: Moved to API route
+// // ARCHITECTURE: Moved to API route
 // const reposWithData = Array.from(repoQualities.values())
                         .filter((r: any) => r.quality !== undefined)
                         .map((r: any) => ({
@@ -312,6 +315,7 @@ export default function ReposQualityTable({ repos, onRefresh }: ReposQualityTabl
                       try {
                         // Get average quality
                         // ARCHITECTURE: Moved to API route
+// // ARCHITECTURE: Moved to API route
 // const reposWithQuality = Array.from(repoQualities.values())
                           .filter((r: any) => r.quality !== undefined && r.quality !== null);
                         
