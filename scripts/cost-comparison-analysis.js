@@ -123,13 +123,13 @@ function generateReport(metrics, projections) {
   console.log('╚══════════════════════════════════════════════════════════════╝');
   
   console.log(`\n📅 Time Range: ${timeRange}`);
-  console.log(`📊 Total Requests: ${metrics.costs.totalRequests.toLocaleString()}`);
+  console.log(`📊 Total Requests: ${metrics.costs?.totalRequests?.toLocaleString() || '0'}`);
   
   // Current Period Costs
   console.log(`\n💰 Current Period Costs (${timeRange}):`);
-  console.log(`   Custom Models:  $${metrics.costs.customModelCost.toFixed(4)}`);
-  console.log(`   Provider Models: $${metrics.costs.providerModelCost.toFixed(4)}`);
-  console.log(`   💵 Savings:      $${metrics.costs.savings.toFixed(4)} (${metrics.costs.savingsPercent.toFixed(1)}%)`);
+  console.log(`   Custom Models:  $${(metrics.costs?.customModelCost || 0).toFixed(4)}`);
+  console.log(`   Provider Models: $${(metrics.costs?.providerModelCost || 0).toFixed(4)}`);
+  console.log(`   💵 Savings:      $${(metrics.costs?.savings || 0).toFixed(4)} (${(metrics.costs?.savingsPercent || 0).toFixed(1)}%)`);
   
   // Projections
   console.log(`\n📈 Monthly Projections:`);
@@ -144,9 +144,9 @@ function generateReport(metrics, projections) {
   
   // Performance
   console.log(`\n⚡ Performance:`);
-  console.log(`   Success Rate: ${metrics.performance.successRate.toFixed(1)}%`);
-  console.log(`   Avg Latency: ${metrics.performance.averageLatency.toFixed(0)}ms`);
-  console.log(`   P95 Latency: ${metrics.performance.p95Latency.toFixed(0)}ms`);
+  console.log(`   Success Rate: ${(metrics.performance?.successRate || 0).toFixed(1)}%`);
+  console.log(`   Avg Latency: ${(metrics.performance?.averageLatency || 0).toFixed(0)}ms`);
+  console.log(`   P95 Latency: ${(metrics.performance?.p95Latency || 0).toFixed(0)}ms`);
   
   // ROI
   const roi = (projections.yearly.savings / projections.yearly.custom) * 100;
@@ -155,26 +155,27 @@ function generateReport(metrics, projections) {
   console.log(`   Break-even: Immediate (custom models are cheaper from day 1)`);
   
   // Recommendations
+  const savingsPercent = metrics.costs?.savingsPercent || 0;
   console.log(`\n💡 Recommendations:`);
-  if (metrics.costs.savingsPercent > 90) {
-    console.log(`   ✅ Excellent! You're saving ${metrics.costs.savingsPercent.toFixed(1)}%`);
+  if (savingsPercent > 90) {
+    console.log(`   ✅ Excellent! You're saving ${savingsPercent.toFixed(1)}%`);
     console.log(`   💡 Consider scaling up custom model usage`);
-  } else if (metrics.costs.savingsPercent > 70) {
-    console.log(`   ✅ Good savings! ${metrics.costs.savingsPercent.toFixed(1)}%`);
+  } else if (savingsPercent > 70) {
+    console.log(`   ✅ Good savings! ${savingsPercent.toFixed(1)}%`);
     console.log(`   💡 Monitor fallback rate - optimize custom models`);
   } else {
-    console.log(`   ⚠️  Savings: ${metrics.costs.savingsPercent.toFixed(1)}%`);
+    console.log(`   ⚠️  Savings: ${savingsPercent.toFixed(1)}%`);
     console.log(`   💡 Review custom model performance - high fallback rate?`);
   }
   
   return {
     timeRange,
-    current: metrics.costs,
+    current: metrics.costs || {},
     projections,
-    performance: metrics.performance,
+    performance: metrics.performance || {},
     roi,
-    recommendations: metrics.costs.savingsPercent > 90 ? 'excellent' : 
-                     metrics.costs.savingsPercent > 70 ? 'good' : 'needs_optimization'
+    recommendations: savingsPercent > 90 ? 'excellent' : 
+                     savingsPercent > 70 ? 'good' : 'needs_optimization'
   };
 }
 
@@ -196,7 +197,18 @@ async function main() {
     process.exit(1);
   }
   
-  const metrics = monitoringData.metrics;
+  const metrics = monitoringData.metrics || {};
+  
+  // Ensure costs object exists
+  if (!metrics.costs) {
+    metrics.costs = {
+      customModelCost: 0,
+      providerModelCost: 0,
+      savings: 0,
+      savingsPercent: 0,
+      totalRequests: 0
+    };
+  }
   
   // Calculate projections
   const projections = calculateProjections(metrics);
