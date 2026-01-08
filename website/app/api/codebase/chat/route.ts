@@ -46,8 +46,30 @@ export async function POST(request: NextRequest) {
     // Get user ID
     const userId = request.cookies.get('github_oauth_user_id')?.value;
 
+    // Smart model selection: auto-detect best model for user (zero-config!)
+    let requestedModel = model || null;
+    
+    if (!requestedModel && userId) {
+      try {
+        const { getSmartModelSelector } = require('../../../../../lib/mlops/smartModelSelector');
+        const selector = getSmartModelSelector();
+        const selection = await selector.selectModel(userId, requestedModel);
+        requestedModel = selection.modelId;
+        
+        // Log helpful message for user
+        const message = selector.getModelMessage(selection);
+        console.log(`[Codebase Chat] ${message.message} - ${message.submessage}`);
+      } catch (error) {
+        // Fallback to default if auto-selection fails (non-critical)
+        console.warn('[Codebase Chat] Auto-selection failed, using default:', error.message);
+        requestedModel = requestedModel || 'openai:gpt-3.5-turbo';
+      }
+    } else {
+      requestedModel = requestedModel || 'openai:gpt-3.5-turbo';
+    }
+
     // If custom model is specified, use model router
-    if (model && model.startsWith('custom:')) {
+    if (requestedModel && requestedModel.startsWith('custom:')) {
       try {
         const { getModelRouter } = require('../../../../../lib/mlops/modelRouter');
         const modelRouter = getModelRouter();
@@ -63,7 +85,7 @@ export async function POST(request: NextRequest) {
         ];
 
         // Route to custom model
-        const modelResponse = await modelRouter.route(model, {
+        const modelResponse = await modelRouter.route(requestedModel, {
           messages,
           temperature: 0.7,
           maxTokens: 4000
