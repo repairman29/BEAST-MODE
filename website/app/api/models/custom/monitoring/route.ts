@@ -19,6 +19,8 @@ try {
  * Get custom model metrics and health status
  */
 export async function GET(request: NextRequest) {
+  const { searchParams } = new URL(request.url);
+  const timeRange = searchParams.get('timeRange') || '7d';
   try {
     if (!customModelMonitoring) {
       return NextResponse.json(
