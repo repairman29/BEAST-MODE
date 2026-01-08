@@ -47,7 +47,19 @@ export default function PerformanceMetricsDashboard() {
   async function fetchPerformanceData() {
     try {
       setLoading(true);
-      const response = await fetch(`/api/models/custom/monitoring?timeRange=${timeRange}`);
+      // Fetch from multiple sources for comprehensive metrics
+      const [monitoringRes, latencyRes, performanceRes] = await Promise.all([
+        fetch(`/api/models/custom/monitoring?timeRange=${timeRange}`).catch(() => null),
+        fetch(`/api/optimization/latency`).catch(() => null),
+        fetch(`/api/beast-mode/monitoring/performance?timeRange=${timeRange}`).catch(() => null)
+      ]);
+      
+      const monitoring = monitoringRes ? await monitoringRes.json().catch(() => null) : null;
+      const latency = latencyRes ? await latencyRes.json().catch(() => null) : null;
+      const performance = performanceRes ? await performanceRes.json().catch(() => null) : null;
+      
+      // Combine data from all sources
+      const response = monitoring || {};
       
       if (!response.ok) {
         throw new Error('Failed to fetch performance data');
