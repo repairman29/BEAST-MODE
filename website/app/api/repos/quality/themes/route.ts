@@ -65,7 +65,7 @@ export async function POST(request: NextRequest) {
             maxFileSize: 50000,
           });
 
-        if (!analyzedFiles || analyzedFiles.length === 0) {
+          if (!analyzedFiles || analyzedFiles.length === 0) {
           return NextResponse.json(
             { error: 'No code files found in repository' },
             { status: 404 }
