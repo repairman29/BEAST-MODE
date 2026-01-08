@@ -4,6 +4,12 @@
   "description": "AI-powered code quality, suggestions, and automation",
   "version": "0.1.0",
   "publisher": "beastmode",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/repairman29/BEAST-MODE.git",
+    "directory": "vscode-extension"
+  },
+  "license": "MIT",
   "engines": {
     "vscode": "^1.80.0"
   },
