@@ -2,32 +2,28 @@ import { NextRequest, NextResponse } from 'next/server';
 import { loadModule } from '../../../../lib/api-module-loader';
 
 /**
- * Model Performance Tuning API
- * 
- * Provides model performance tuning and optimization
+ * Model Tuning API
+ * Provides model performance tuning recommendations
  */
 
 let modelPerformanceTuner: any;
+let customModelMonitoring: any;
 
 try {
-  const modelPerformanceTunerModule = loadModule('../../../../../lib/mlops/modelPerformanceTuner') ||
-                                      require('../../../../../lib/mlops/modelPerformanceTuner');
-  modelPerformanceTuner = modelPerformanceTunerModule?.getModelPerformanceTuner
-    ? modelPerformanceTunerModule.getModelPerformanceTuner()
-    : modelPerformanceTunerModule;
+  modelPerformanceTuner = loadModule('../../../../../lib/mlops/modelPerformanceTuner');
+  customModelMonitoring = loadModule('../../../../../lib/mlops/customModelMonitoring');
 } catch (error) {
-  console.warn('[Model Tuning API] Module not available:', error);
+  console.warn('[Model Tuning API] Some modules not available:', error);
 }
 
 /**
  * GET /api/models/tuning
- * Get optimal settings for a model
+ * Get tuning recommendations for a model
  */
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
     const modelId = searchParams.get('modelId');
-    const taskType = searchParams.get('taskType');
 
     if (!modelId) {
       return NextResponse.json(
@@ -36,58 +32,9 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    if (modelPerformanceTuner && typeof modelPerformanceTuner.getOptimalSettings === 'function') {
-      const settings = modelPerformanceTuner.getOptimalSettings(modelId, taskType);
-      const stats = modelPerformanceTuner.getStats(modelId);
-
-      return NextResponse.json({
-        success: true,
-        modelId,
-        taskType,
-        optimalSettings: settings,
-        stats
-      });
-    }
-
-    // Return defaults if tuner not available
-    return NextResponse.json({
-      success: true,
-      modelId,
-      taskType,
-      optimalSettings: {
-        temperature: 0.7,
-        maxTokens: 2000
-      },
-      note: 'Model performance tuner not available - using defaults'
-    });
-
-  } catch (error: any) {
-    console.error('[Model Tuning API] Error:', error);
-    return NextResponse.json(
-      { error: 'Failed to get optimal settings', details: error.message },
-      { status: 500 }
-    );
-  }
-}
-
-/**
- * POST /api/models/tuning
- * Tune model based on performance metrics
- */
-export async function POST(request: NextRequest) {
-  try {
-    const body = await request.json();
-    const { modelId, metrics, currentSettings } = body;
-
-    if (!modelId || !metrics) {
-      return NextResponse.json(
-        { error: 'modelId and metrics are required' },
-        { status: 400 }
-      );
-    }
-
-    if (modelPerformanceTuner && typeof modelPerformanceTuner.tuneModel === 'function') {
-      const recommendations = modelPerformanceTuner.tuneModel(modelId, metrics, currentSettings);
+    // Get tuning recommendations
+    if (modelPerformanceTuner && typeof modelPerformanceTuner.getTuningRecommendations === 'function') {
+      const recommendations = modelPerformanceTuner.getTuningRecommendations(modelId);
       return NextResponse.json({
         success: true,
         modelId,
@@ -95,15 +42,85 @@ export async function POST(request: NextRequest) {
       });
     }
 
-    return NextResponse.json(
-      { error: 'Model performance tuner not available' },
-      { status: 503 }
-    );
+    // Fallback: Get metrics and provide basic recommendations
+    if (customModelMonitoring && typeof customModelMonitoring.getMetrics === 'function') {
+      const metrics = customModelMonitoring.getMetrics('7d');
+      const recommendations = {
+        temperature: metrics.averageQuality < 0.7 ? 0.8 : 0.7,
+        maxTokens: 4000,
+        reasoning: metrics.averageQuality < 0.7 
+          ? 'Quality below threshold - consider increasing temperature'
+          : 'Model performing well - current settings optimal'
+      };
+
+      return NextResponse.json({
+        success: true,
+        modelId,
+        recommendations,
+        note: 'Basic recommendations (tuner not available)'
+      });
+    }
+
+    // Default recommendations
+    return NextResponse.json({
+      success: true,
+      modelId,
+      recommendations: {
+        temperature: 0.7,
+        maxTokens: 4000,
+        reasoning: 'Default recommendations (monitoring not available)'
+      },
+      note: 'Monitoring not available'
+    });
 
   } catch (error: any) {
     console.error('[Model Tuning API] Error:', error);
     return NextResponse.json(
-      { error: 'Failed to tune model', details: error.message },
+      { error: 'Failed to get tuning recommendations', details: error.message },
+      { status: 500 }
+    );
+  }
+}
+
+/**
+ * POST /api/models/tuning
+ * Apply tuning recommendations to a model
+ */
+export async function POST(request: NextRequest) {
+  try {
+    const body = await request.json();
+    const { modelId, settings } = body;
+
+    if (!modelId || !settings) {
+      return NextResponse.json(
+        { error: 'modelId and settings are required' },
+        { status: 400 }
+      );
+    }
+
+    // Apply tuning if tuner is available
+    if (modelPerformanceTuner && typeof modelPerformanceTuner.applyTuning === 'function') {
+      const result = modelPerformanceTuner.applyTuning(modelId, settings);
+      return NextResponse.json({
+        success: true,
+        modelId,
+        applied: result,
+        message: 'Tuning applied successfully'
+      });
+    }
+
+    // Fallback: Just acknowledge
+    return NextResponse.json({
+      success: true,
+      modelId,
+      message: 'Tuning settings received (tuner not available)',
+      note: 'Settings would be applied when tuner is available'
+    });
+
+  } catch (error: any) {
+    console.error('[Model Tuning API] Error:', error);
+    return NextResponse.json(
+      { error: 'Failed to apply tuning', details: error.message },
       { status: 500 }
     );
   }

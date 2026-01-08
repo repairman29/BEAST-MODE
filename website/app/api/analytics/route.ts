@@ -1,36 +1,23 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { loadModule } from '../../../../lib/api-module-loader';
+import { loadModule } from '../../../lib/api-module-loader';
 
 /**
- * Advanced Analytics API
- * 
- * Aggregates data from all analytics sources
+ * Aggregated Analytics API
+ * Combines data from multiple sources for comprehensive analytics
  */
 
-let deliveryMetrics: any;
 let customModelMonitoring: any;
-let modelQualityScorer: any;
+let deliveryMetrics: any;
+let anomalyDetector: any;
+let predictiveAnalyzer: any;
 
 try {
-  const deliveryMetricsModule = loadModule('../../../../../lib/mlops/deliveryMetrics') ||
-                                require('../../../../../lib/mlops/deliveryMetrics');
-  deliveryMetrics = deliveryMetricsModule?.getDeliveryMetrics
-    ? deliveryMetricsModule.getDeliveryMetrics()
-    : deliveryMetricsModule;
-
-  const customModelMonitoringModule = loadModule('../../../../../lib/mlops/customModelMonitoring') ||
-                                      require('../../../../../lib/mlops/customModelMonitoring');
-  customModelMonitoring = customModelMonitoringModule?.getCustomModelMonitoring
-    ? customModelMonitoringModule.getCustomModelMonitoring()
-    : customModelMonitoringModule;
-
-  const modelQualityScorerModule = loadModule('../../../../../lib/mlops/modelQualityScorer') ||
-                                   require('../../../../../lib/mlops/modelQualityScorer');
-  modelQualityScorer = modelQualityScorerModule?.getModelQualityScorer
-    ? modelQualityScorerModule.getModelQualityScorer()
-    : modelQualityScorerModule;
+  customModelMonitoring = loadModule('../../../../lib/mlops/customModelMonitoring');
+  deliveryMetrics = loadModule('../../../../lib/mlops/deliveryMetrics');
+  anomalyDetector = loadModule('../../../../lib/mlops/anomalyDetector');
+  predictiveAnalyzer = loadModule('../../../../lib/mlops/predictiveAnalyzer');
 } catch (error) {
-  console.warn('[Analytics API] Modules not available:', error);
+  console.warn('[Analytics API] Some modules not available:', error);
 }
 
 /**
@@ -40,132 +27,114 @@ try {
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
-    const timeRange = searchParams.get('timeRange') || '30d';
-    const category = searchParams.get('category'); // quality, performance, delivery, cost, models
+    const category = searchParams.get('category') || 'all'; // quality, performance, cost, delivery, all
+    const timeRange = searchParams.get('timeRange') || '7d';
 
-    const userId = request.cookies.get('github_oauth_user_id')?.value;
+    const analytics: any = {
+      timestamp: new Date().toISOString(),
+      timeRange,
+      category,
+      data: {}
+    };
 
-    // Fetch data based on category
-    if (category === 'quality') {
-      // Quality analytics
-      const qualityData = {
-        trends: [] as Array<{ date: string; score: number }>,
-        average: 0.85,
-        distribution: {}
-      };
-
-      return NextResponse.json({
-        success: true,
-        data: qualityData,
-        timeRange
-      });
-    }
-
-    if (category === 'performance') {
-      // Performance analytics
-      let performanceData: any = {
-        latency: [] as Array<{ date: string; avg: number; p95: number; p99: number }>,
-        throughput: [] as Array<{ date: string; requests: number }>,
-        successRate: 100
-      };
-
-      if (customModelMonitoring && typeof customModelMonitoring.getMetrics === 'function') {
-        const metrics = customModelMonitoring.getMetrics();
-        performanceData.successRate = parseFloat(metrics.requests?.successRate?.replace('%', '') || '100');
+    // Quality Analytics
+    if (category === 'quality' || category === 'all') {
+      try {
+        // Get quality metrics from monitoring
+        if (customModelMonitoring && typeof customModelMonitoring.getMetrics === 'function') {
+          const qualityMetrics = customModelMonitoring.getMetrics(timeRange);
+          analytics.data.quality = {
+            averageQuality: qualityMetrics.averageQuality || 0,
+            qualityTrend: qualityMetrics.qualityTrend || 'stable',
+            qualityDistribution: qualityMetrics.qualityDistribution || {}
+          };
+        }
+      } catch (error: any) {
+        console.warn('[Analytics API] Quality metrics error:', error.message);
+        analytics.data.quality = { error: 'Not available' };
       }
-
-      return NextResponse.json({
-        success: true,
-        data: performanceData,
-        timeRange
-      });
     }
 
-    if (category === 'delivery') {
-      // Delivery analytics
-      let deliveryData: any = {
-        featuresCompleted: 0,
-        avgTimeToCode: 0,
-        bugRate: 0,
-        productivityScore: 0
-      };
-
-      if (deliveryMetrics && typeof deliveryMetrics.getDeliveryMetrics === 'function') {
-        const metrics = deliveryMetrics.getDeliveryMetrics(userId, timeRange);
-        deliveryData = {
-          featuresCompleted: metrics.totalFeatures || 0,
-          avgTimeToCode: metrics.avgTimeToCode || 0,
-          bugRate: 0, // Will be calculated from bug tracking
-          productivityScore: 75 // Placeholder
-        };
+    // Performance Analytics
+    if (category === 'performance' || category === 'all') {
+      try {
+        if (customModelMonitoring && typeof customModelMonitoring.getMetrics === 'function') {
+          const perfMetrics = customModelMonitoring.getMetrics(timeRange);
+          analytics.data.performance = {
+            averageLatency: perfMetrics.averageLatency || 0,
+            p95Latency: perfMetrics.p95Latency || 0,
+            p99Latency: perfMetrics.p99Latency || 0,
+            successRate: perfMetrics.successRate || 0,
+            requestsPerSecond: perfMetrics.requestsPerSecond || 0
+          };
+        }
+      } catch (error: any) {
+        console.warn('[Analytics API] Performance metrics error:', error.message);
+        analytics.data.performance = { error: 'Not available' };
       }
-
-      return NextResponse.json({
-        success: true,
-        data: deliveryData,
-        timeRange
-      });
     }
 
-    if (category === 'cost') {
-      // Cost analytics
-      let costData: any = {
-        customModelCost: 0,
-        providerModelCost: 0,
-        savings: 0,
-        savingsPercent: 0,
-        trends: []
-      };
-
-      if (customModelMonitoring && typeof customModelMonitoring.getMetrics === 'function') {
-        const metrics = customModelMonitoring.getMetrics();
-        costData.customModelCost = metrics.costs?.customModelCost || 0;
-        costData.providerModelCost = metrics.costs?.providerModelCost || 0;
-        costData.savings = metrics.costs?.savings || 0;
-        costData.savingsPercent = metrics.costs?.savingsPercent || 0;
+    // Cost Analytics
+    if (category === 'cost' || category === 'all') {
+      try {
+        if (customModelMonitoring && typeof customModelMonitoring.getMetrics === 'function') {
+          const costMetrics = customModelMonitoring.getMetrics(timeRange);
+          analytics.data.cost = {
+            totalCost: costMetrics.totalCost || 0,
+            costSavings: costMetrics.costSavings || 0,
+            costPerRequest: costMetrics.costPerRequest || 0,
+            projectedMonthly: costMetrics.projectedMonthly || 0
+          };
+        }
+      } catch (error: any) {
+        console.warn('[Analytics API] Cost metrics error:', error.message);
+        analytics.data.cost = { error: 'Not available' };
       }
-
-      return NextResponse.json({
-        success: true,
-        data: costData,
-        timeRange
-      });
     }
 
-    if (category === 'models') {
-      // Model analytics
-      let modelsData: any = {
-        topPerformers: [] as Array<{ modelId: string; score: number; requests: number }>,
-        qualityComparison: {}
-      };
-
-      if (modelQualityScorer && typeof modelQualityScorer.getAllScores === 'function') {
-        const scores = modelQualityScorer.getAllScores();
-        modelsData.topPerformers = scores.slice(0, 10).map((s: any) => ({
-          modelId: s.modelId,
-          score: s.score,
-          requests: s.count || 0
-        }));
+    // Delivery Analytics
+    if (category === 'delivery' || category === 'all') {
+      try {
+        if (deliveryMetrics && typeof deliveryMetrics.getDeliveryMetrics === 'function') {
+          const deliveryData = deliveryMetrics.getDeliveryMetrics(timeRange);
+          analytics.data.delivery = {
+            averageTimeToCode: deliveryData.averageTimeToCode || 0,
+            featureCompletionRate: deliveryData.featureCompletionRate || 0,
+            bugRate: deliveryData.bugRate || 0,
+            developerProductivity: deliveryData.developerProductivity || {}
+          };
+        }
+      } catch (error: any) {
+        console.warn('[Analytics API] Delivery metrics error:', error.message);
+        analytics.data.delivery = { error: 'Not available' };
       }
-
-      return NextResponse.json({
-        success: true,
-        data: modelsData,
-        timeRange
-      });
     }
 
-    // Return all categories
+    // Anomaly Summary
+    if (category === 'all') {
+      try {
+        if (anomalyDetector && typeof anomalyDetector.getStats === 'function') {
+          const anomalyStats = anomalyDetector.getStats(timeRange);
+          analytics.data.anomalies = {
+            total: anomalyStats.total || 0,
+            bySeverity: anomalyStats.bySeverity || {},
+            recent: anomalyStats.recent || []
+          };
+        }
+      } catch (error: any) {
+        console.warn('[Analytics API] Anomaly stats error:', error.message);
+      }
+    }
+
     return NextResponse.json({
       success: true,
-      message: 'Specify category parameter: quality, performance, delivery, cost, or models',
-      availableCategories: ['quality', 'performance', 'delivery', 'cost', 'models']
+      analytics
     });
 
   } catch (error: any) {
     console.error('[Analytics API] Error:', error);
     return NextResponse.json(
-      { error: 'Failed to get analytics data', details: error.message },
+      { error: 'Failed to get analytics', details: error.message },
       { status: 500 }
     );
   }
