@@ -119,17 +119,21 @@ export async function POST(request: NextRequest) {
 
     // Get user's API key if using LLM (provider models)
     let userApiKey = null;
-    if (useLLM) {
+    if (useLLM || model) {
       try {
         if (userId) {
           // Use the proper decryption library
           const { getUserApiKey } = require('../../../lib/api-keys-decrypt');
           
           // Determine provider from model
-          const provider = model?.startsWith('anthropic:') ? 'anthropic' : 'openai';
+          const provider = model?.startsWith('anthropic:') ? 'anthropic' : 
+                          model?.startsWith('custom:') ? null : 'openai';
           
-          // Get and decrypt API key
-          userApiKey = await getUserApiKey(userId, provider);
+          // Get and decrypt API key (only for provider models, not custom)
+          if (provider) {
+            userApiKey = await getUserApiKey(userId, provider);
+            console.log(`[Chat API] Retrieved API key for ${provider}:`, userApiKey ? 'Found' : 'Not found');
+          }
         }
       } catch (error) {
         console.warn('[Chat API] Could not get user API key:', error);
@@ -145,7 +149,7 @@ export async function POST(request: NextRequest) {
         files,
         currentFile,
         userApiKey,
-        useLLM: useLLM && !!userApiKey,
+        useLLM: useLLM || !!userApiKey || !!customModelId || (model && model.startsWith('custom:')) || !!model,
         model, // Pass model to codebaseChat if it supports it
         customModelId: model?.startsWith('custom:') ? model : null,
         userId: userId || '',

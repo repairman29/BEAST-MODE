@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-01-08T17:16:26.423Z",
+  "timestamp": "2026-01-08T17:36:04.270Z",
   "userId": "35379b45-d966-45d7-8644-1233338c542d",
   "baseUrl": "http://localhost:3000",
   "scenarios": [
@@ -11,8 +11,8 @@
         {
           "success": true,
           "modelId": "openai:gpt-3.5-turbo",
-          "totalTime": 45,
-          "latency": 44,
+          "totalTime": 37,
+          "latency": 37,
           "responseLength": 95,
           "quality": null,
           "response": "I can help you with code generation, refactoring, testing, and more. What would you like to do?"
@@ -20,7 +20,7 @@
         {
           "success": false,
           "modelId": "custom:demo-code-model-1767889155418",
-          "totalTime": 484,
+          "totalTime": 517,
           "error": "Failed to use custom model",
           "status": 500
         }
@@ -34,8 +34,8 @@
         {
           "success": true,
           "modelId": "openai:gpt-3.5-turbo",
-          "totalTime": 8,
-          "latency": 8,
+          "totalTime": 11,
+          "latency": 11,
           "responseLength": 76,
           "quality": null,
           "response": "I can help you find and fix bugs. I can analyze your code for common issues."
@@ -43,7 +43,7 @@
         {
           "success": false,
           "modelId": "custom:demo-code-model-1767889155418",
-          "totalTime": 333,
+          "totalTime": 196,
           "error": "Failed to use custom model",
           "status": 500
         }
@@ -57,8 +57,8 @@
         {
           "success": true,
           "modelId": "openai:gpt-3.5-turbo",
-          "totalTime": 9,
-          "latency": 8,
+          "totalTime": 11,
+          "latency": 11,
           "responseLength": 76,
           "quality": null,
           "response": "I can help you find and fix bugs. I can analyze your code for common issues."
@@ -66,7 +66,7 @@
         {
           "success": false,
           "modelId": "custom:demo-code-model-1767889155418",
-          "totalTime": 263,
+          "totalTime": 212,
           "error": "Failed to use custom model",
           "status": 500
         }
@@ -77,7 +77,7 @@
     "totalTests": 6,
     "successful": 3,
     "failed": 3,
-    "averageLatency": 20.666666666666668,
+    "averageLatency": 19.666666666666668,
     "averageQuality": 0
   }
 }

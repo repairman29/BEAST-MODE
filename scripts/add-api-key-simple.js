@@ -120,6 +120,9 @@ async function main() {
       .eq('is_active', true)
       .single();
     
+    // Format: iv:authTag:encrypted (all hex encoded)
+    const formattedKey = `${encrypted.iv}:${encrypted.authTag}:${encrypted.encrypted}`;
+    
     let result;
     if (existing) {
       // Update existing
@@ -127,9 +130,7 @@ async function main() {
       result = await supabase
         .from('user_api_keys')
         .update({
-          encrypted_key: encrypted.encrypted,
-          iv: encrypted.iv,
-          auth_tag: encrypted.authTag,
+          encrypted_key: formattedKey,
           updated_at: new Date().toISOString()
         })
         .eq('id', existing.id)
@@ -143,9 +144,7 @@ async function main() {
         .insert({
           user_id: userId,
           provider: provider,
-          encrypted_key: encrypted.encrypted,
-          iv: encrypted.iv,
-          auth_tag: encrypted.authTag,
+          encrypted_key: formattedKey,
           is_active: true
         })
         .select()
