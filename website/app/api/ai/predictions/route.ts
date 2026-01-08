@@ -119,7 +119,8 @@ export async function GET(request: NextRequest) {
     }
 
     if (predictionId) {
-      const prediction = predictiveCapabilities.predictions.get(predictionId);
+      const predictionsMap = predictiveCapabilities.predictions || new Map();
+      const prediction = predictionsMap.get(predictionId);
       if (!prediction) {
         return NextResponse.json(
           { error: 'Prediction not found' },
@@ -133,9 +134,10 @@ export async function GET(request: NextRequest) {
     }
 
     if (filePath) {
-      const predictions = Array.from(predictiveCapabilities.predictions.values())
-        .filter(p => p.file === filePath)
-        .sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime());
+      const predictionsMap = predictiveCapabilities.predictions || new Map();
+      const predictions = Array.from(predictionsMap.values())
+        .filter((p: any) => p.file === filePath)
+        .sort((a: any, b: any) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime());
       
       return NextResponse.json({
         success: true,
@@ -144,7 +146,8 @@ export async function GET(request: NextRequest) {
     }
 
     // Return all predictions
-    const predictions = Array.from(predictiveCapabilities.predictions.values());
+    const predictionsMap = predictiveCapabilities.predictions || new Map();
+    const predictions = Array.from(predictionsMap.values());
     return NextResponse.json({
       success: true,
       predictions,
