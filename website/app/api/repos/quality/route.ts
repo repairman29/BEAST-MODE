@@ -649,8 +649,32 @@ async function getMLIntegration() {
 
   // Initialize new instance
   try {
-    const { MLModelIntegration } = require('../../../../../lib/mlops/mlModelIntegration');
-    mlIntegrationInstance = new MLModelIntegration();
+    // Try multiple paths to find the ML model integration
+    const path = require('path');
+    const possiblePaths = [
+      path.join(process.cwd(), '../lib/mlops/mlModelIntegration'),
+      path.join(process.cwd(), 'lib/mlops/mlModelIntegration'),
+      path.join(__dirname, '../../../../../lib/mlops/mlModelIntegration'),
+      path.join(process.cwd(), 'BEAST-MODE-PRODUCT/lib/mlops/mlModelIntegration'),
+    ];
+    
+    let mlIntegrationLoaded = false;
+    for (const mlPath of possiblePaths) {
+      try {
+        delete require.cache[require.resolve(mlPath)];
+        const { MLModelIntegration } = require(mlPath);
+        mlIntegrationInstance = new MLModelIntegration();
+        mlIntegrationLoaded = true;
+        break;
+      } catch (error) {
+        // Try next path
+        continue;
+      }
+    }
+    
+    if (!mlIntegrationLoaded) {
+      console.warn('[Quality API] ML model integration not available, using fallback');
+    }
     
     mlIntegrationInitPromise = mlIntegrationInstance.initialize().then(() => {
       mlIntegrationInitialized = true;

@@ -26,7 +26,17 @@ export function activate(context: vscode.ExtensionContext) {
     vscode.commands.registerCommand('beastMode.analyzeQuality', async () => {
       const editor = vscode.window.activeTextEditor;
       if (!editor) {
-        vscode.window.showWarningMessage('No active editor');
+        // Try to open a test file automatically
+        const testFile = vscode.Uri.file(
+          vscode.workspace.workspaceFolders?.[0]?.uri.fsPath + 
+          '/BEAST-MODE-PRODUCT/vscode-extension/src/test-file.ts'
+        );
+        try {
+          await vscode.window.showTextDocument(testFile);
+          vscode.window.showInformationMessage('Opened test file - try the command again!');
+        } catch {
+          vscode.window.showWarningMessage('Please open a file first, then try again');
+        }
         return;
       }
 
