@@ -66,10 +66,18 @@ export function activate(context: vscode.ExtensionContext) {
             
             panel.webview.html = generateQualityReport(result);
           } else {
-            vscode.window.showErrorMessage(`Analysis failed: ${result.error}`);
+            const errorMsg = result.error || 'Unknown error';
+            vscode.window.showErrorMessage(`Analysis failed: ${errorMsg}`, 'Show Details').then(selection => {
+              if (selection === 'Show Details') {
+                vscode.window.showInformationMessage(`Full error: ${errorMsg}\nAPI URL: ${beastModeClient['apiUrl']}`, { modal: true });
+              }
+            });
+            console.error('[BEAST MODE] Quality analysis failed:', errorMsg);
           }
         } catch (error: any) {
-          vscode.window.showErrorMessage(`Error: ${error.message}`);
+          const errorMsg = error.message || 'Unknown error';
+          vscode.window.showErrorMessage(`Error: ${errorMsg}`);
+          console.error('[BEAST MODE] Exception during quality analysis:', error);
         }
       });
     }),
