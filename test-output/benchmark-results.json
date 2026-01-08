@@ -1,0 +1,27 @@
+{
+  "speed": {
+    "custom:demo-code-model-1767889155418": {
+      "success": false,
+      "error": "Failed to use custom model",
+      "latency": 587,
+      "totalTime": 590
+    },
+    "openai:gpt-3.5-turbo": {
+      "success": true,
+      "latency": 33,
+      "totalTime": 33,
+      "responseLength": 76,
+      "tokensPerSecond": 2303.030303030303,
+      "model": "openai:gpt-3.5-turbo"
+    }
+  },
+  "quality": {
+    "openai:gpt-3.5-turbo": {
+      "success": true,
+      "quality": 0.75,
+      "confidence": 0.35,
+      "features": {}
+    }
+  },
+  "delivery": {}
+}

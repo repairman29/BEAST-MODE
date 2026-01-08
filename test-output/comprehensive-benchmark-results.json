@@ -1,0 +1,83 @@
+{
+  "timestamp": "2026-01-08T17:14:36.701Z",
+  "userId": "35379b45-d966-45d7-8644-1233338c542d",
+  "baseUrl": "http://localhost:3000",
+  "scenarios": [
+    {
+      "name": "Simple Component",
+      "complexity": "low",
+      "prompt": "Create a simple React button component with TypeScript",
+      "tests": [
+        {
+          "success": true,
+          "modelId": "openai:gpt-3.5-turbo",
+          "totalTime": 68,
+          "latency": 67,
+          "responseLength": 95,
+          "quality": null,
+          "response": "I can help you with code generation, refactoring, testing, and more. What would you like to do?"
+        },
+        {
+          "success": false,
+          "modelId": "custom:demo-code-model-1767889155418",
+          "totalTime": 401,
+          "error": "Failed to use custom model",
+          "status": 500
+        }
+      ]
+    },
+    {
+      "name": "Medium Component",
+      "complexity": "medium",
+      "prompt": "Create a React user profile card component with TypeScript. Include avatar, name, email, bio, and proper error handling.",
+      "tests": [
+        {
+          "success": true,
+          "modelId": "openai:gpt-3.5-turbo",
+          "totalTime": 10,
+          "latency": 10,
+          "responseLength": 76,
+          "quality": null,
+          "response": "I can help you find and fix bugs. I can analyze your code for common issues."
+        },
+        {
+          "success": false,
+          "modelId": "custom:demo-code-model-1767889155418",
+          "totalTime": 233,
+          "error": "Failed to use custom model",
+          "status": 500
+        }
+      ]
+    },
+    {
+      "name": "Complex Feature",
+      "complexity": "high",
+      "prompt": "Create a complete authentication system with login, signup, password reset, and session management. Include TypeScript types, error handling, validation, and security best practices.",
+      "tests": [
+        {
+          "success": true,
+          "modelId": "openai:gpt-3.5-turbo",
+          "totalTime": 9,
+          "latency": 9,
+          "responseLength": 76,
+          "quality": null,
+          "response": "I can help you find and fix bugs. I can analyze your code for common issues."
+        },
+        {
+          "success": false,
+          "modelId": "custom:demo-code-model-1767889155418",
+          "totalTime": 228,
+          "error": "Failed to use custom model",
+          "status": 500
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "totalTests": 6,
+    "successful": 3,
+    "failed": 3,
+    "averageLatency": 29,
+    "averageQuality": 0
+  }
+}
