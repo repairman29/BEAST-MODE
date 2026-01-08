@@ -114,7 +114,8 @@
           "description": "Track command executions"
         }
       }
-    },
+    }
+  },
   "scripts": {
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./",
