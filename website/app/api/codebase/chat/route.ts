@@ -4,7 +4,8 @@ import { getDecryptedToken } from '@/lib/github-token';
 // Dynamic require for Node.js modules
 let codebaseChat: any;
 try {
-  codebaseChat = require('../../../../lib/mlops/codebaseChat');
+  // Path: website/app/api/codebase/chat -> BEAST-MODE-PRODUCT/lib/mlops
+  codebaseChat = require('../../../../../lib/mlops/codebaseChat');
 } catch (error) {
   console.error('[Chat API] Failed to load modules:', error);
 }

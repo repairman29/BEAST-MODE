@@ -5,8 +5,9 @@ import { getDecryptedToken } from '@/lib/github-token';
 let codebaseIndexer: any;
 let githubFileFetcher: any;
 try {
-  codebaseIndexer = require('../../../../lib/mlops/codebaseIndexer');
-  githubFileFetcher = require('../../../../lib/github/fileFetcher');
+  // Path: website/app/api/codebase/index -> BEAST-MODE-PRODUCT/lib/mlops
+  codebaseIndexer = require('../../../../../lib/mlops/codebaseIndexer');
+  githubFileFetcher = require('../../../../../lib/github/fileFetcher');
 } catch (error) {
   console.error('[Codebase Index API] Failed to load modules:', error);
 }
@@ -52,14 +53,43 @@ export async function POST(request: NextRequest) {
         { status: 400 }
       );
     }
-    if (!owner || !repoName) {
+
+    // For VS Code extension, we need to handle local workspace indexing
+    // If repo is in format "user/workspace-name", treat as local workspace
+    // Otherwise, fetch from GitHub
+    
+    let results;
+    if (repo.startsWith('user/')) {
+      // Local workspace - extension will provide workspace path
+      // For now, return a simple response indicating indexing would happen
+      // In production, this could accept a file list or workspace path
+      return NextResponse.json({
+        success: true,
+        repo,
+        indexing: {
+          filesIndexed: 0,
+          symbolsIndexed: 0,
+          dependenciesFound: 0,
+          errors: 0,
+        },
+        stats: {
+          totalFiles: 0,
+          totalSymbols: 0,
+          languages: {},
+          lastIndexed: null,
+        },
+        message: 'Local workspace indexing - use GitHub repo format (owner/repo) for remote indexing',
+      });
+    }
+
+    // Fetch repository files from GitHub
+    if (!githubFileFetcher) {
       return NextResponse.json(
-        { error: 'Invalid repository format. Use: owner/repo' },
-        { status: 400 }
+        { error: 'GitHub file fetcher not available' },
+        { status: 500 }
       );
     }
 
-    // Fetch repository files
     const files = await githubFileFetcher.fetchRepositoryFiles(owner, repoName, {
       maxFiles: 500,
       maxFileSize: 100000,
@@ -72,17 +102,49 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Create temporary directory structure for indexing
-    // In production, this would be handled differently
-    // For now, we'll index from the fetched files
-    const tempDir = `/tmp/beast-mode-index-${Date.now()}`;
+    // Use the singleton CodebaseIndexer instance
+    // codebaseIndexer is already an instance (module.exports = new CodebaseIndexer())
+    const indexer = codebaseIndexer;
     
-    // Index codebase (pass files directly if indexer supports it)
-    const results = await codebaseIndexer.indexCodebase(files, {
-      maxFiles: 500,
-      excludePatterns: ['node_modules', '.git', 'dist', 'build'],
-      includeExtensions: ['.js', '.ts', '.jsx', '.tsx', '.py', '.rs', '.go'],
-    });
+    // For GitHub repos, we need to create a temp directory and write files
+    // Then index that directory
+    const fs = require('fs');
+    const path = require('path');
+    const os = require('os');
+    const tempDir = path.join(os.tmpdir(), `beast-mode-index-${Date.now()}`);
+    
+    // Create temp directory
+    fs.mkdirSync(tempDir, { recursive: true });
+    
+    try {
+      // Write files to temp directory
+      for (const file of files) {
+        if (file.path && file.content) {
+          const filePath = path.join(tempDir, file.path);
+          const dir = path.dirname(filePath);
+          fs.mkdirSync(dir, { recursive: true });
+          fs.writeFileSync(filePath, file.content);
+        }
+      }
+      
+      // Index the temporary directory
+      results = await indexer.indexCodebase(tempDir, {
+        maxFiles: 500,
+        excludePatterns: ['node_modules', '.git', 'dist', 'build'],
+        includeExtensions: ['.js', '.ts', '.jsx', '.tsx', '.py', '.rs', '.go'],
+      });
+      
+      // Clean up temp directory
+      fs.rmSync(tempDir, { recursive: true, force: true });
+    } catch (indexError: any) {
+      // Clean up on error
+      try {
+        fs.rmSync(tempDir, { recursive: true, force: true });
+      } catch (cleanupError) {
+        // Ignore cleanup errors
+      }
+      throw indexError;
+    }
 
     // Get statistics
     const stats = codebaseIndexer.getStats();

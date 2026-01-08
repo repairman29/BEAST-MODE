@@ -5,8 +5,9 @@ import { getDecryptedToken } from '@/lib/github-token';
 let realtimeSuggestions: any;
 let codebaseIndexer: any;
 try {
-  realtimeSuggestions = require('../../../../lib/mlops/realtimeSuggestions');
-  codebaseIndexer = require('../../../../lib/mlops/codebaseIndexer');
+  // Path: website/app/api/codebase/suggestions -> BEAST-MODE-PRODUCT/lib/mlops
+  realtimeSuggestions = require('../../../../../lib/mlops/realtimeSuggestions');
+  codebaseIndexer = require('../../../../../lib/mlops/codebaseIndexer');
 } catch (error) {
   console.error('[Suggestions API] Failed to load modules:', error);
 }

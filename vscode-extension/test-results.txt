@@ -1,0 +1,57 @@
+🧪 Testing BEAST MODE VS Code Extension API Endpoints
+
+Primary API URL: http://localhost:3000
+Fallback API URL: https://beast-mode.dev
+
+
+📋 Testing: Quality Analysis
+   POST /api/repos/quality
+   URL: http://localhost:3000
+   ✅ SUCCESS (58ms)
+   Quality: 50.0%
+
+📋 Testing: Code Suggestions
+   POST /api/codebase/suggestions
+   URL: http://localhost:3000
+   ⚠️  Status: 500
+   Error: Real-time suggestions not available
+
+📋 Testing: Codebase Chat
+   POST /api/codebase/chat
+   URL: http://localhost:3000
+   ⚠️  Status: 500
+   Error: Codebase chat not available
+
+📋 Testing: Generate Tests
+   POST /api/codebase/tests/generate
+   URL: http://localhost:3000
+   ⚠️  Status: 500
+   Error: Automated testing not available
+
+📋 Testing: Refactor Analysis
+   POST /api/codebase/refactor
+   URL: http://localhost:3000
+   ✅ SUCCESS (313ms)
+   Response: success=false
+
+📋 Testing: Index Codebase (Local)
+   POST /api/codebase/index
+   URL: http://localhost:3000
+   ⚠️  Status: 500
+   Error: Codebase indexer not available
+
+============================================================
+📊 TEST SUMMARY
+============================================================
+
+✅ Successful: 2/6
+❌ Failed: 4/6
+⏱️  Average duration: 130ms
+
+Failed tests:
+  - Code Suggestions: Real-time suggestions not available
+  - Codebase Chat: Codebase chat not available
+  - Generate Tests: Automated testing not available
+  - Index Codebase (Local): Codebase indexer not available
+
+============================================================

@@ -219,8 +219,9 @@ export default function QualityTrendsChart({ repo, days = 30 }: QualityTrendsCha
                   r="4"
                   fill="rgb(34, 211, 238)"
                   className="hover:r-6 transition-all cursor-pointer"
-                  title={`${(point.quality * 100).toFixed(1)}% - ${new Date(point.date).toLocaleDateString()}`}
-                />
+                >
+                  <title>{`${(point.quality * 100).toFixed(1)}% - ${new Date(point.date).toLocaleDateString()}`}</title>
+                </circle>
               ))}
             </svg>
 

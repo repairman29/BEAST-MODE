@@ -54,7 +54,7 @@ export async function POST(request: NextRequest) {
       }
     );
     
-    return NextResponse.json({
+    const response = {
       success: plan.success,
       repo,
       currentQuality: plan.currentQuality,
@@ -88,7 +88,7 @@ export async function POST(request: NextRequest) {
         validation: plan.validation,
       }),
       ...(plan.error && { error: plan.error }),
-    });
+    };
 
     // Create PR if requested
     if (createPR && !dryRun && plan.success && plan.generatedFiles.length > 0) {

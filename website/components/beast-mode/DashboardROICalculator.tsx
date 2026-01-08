@@ -270,9 +270,80 @@ export default function DashboardROICalculator() {
             </div>
           </div>
 
+          {/* Tier Comparison Table */}
+          <div className="mt-6">
+            <h4 className="text-sm font-semibold text-white mb-3">Compare All Tiers</h4>
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="border-b border-slate-800">
+                    <th className="text-left py-2 px-3 text-slate-400 font-medium">Tier</th>
+                    <th className="text-right py-2 px-3 text-slate-400 font-medium">Price</th>
+                    <th className="text-right py-2 px-3 text-slate-400 font-medium">Monthly Value</th>
+                    <th className="text-right py-2 px-3 text-slate-400 font-medium">Net Value</th>
+                    <th className="text-right py-2 px-3 text-slate-400 font-medium">ROI</th>
+                    <th className="text-center py-2 px-3 text-slate-400 font-medium">Calls</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {Object.entries(tiers).map(([key, tierData]) => {
+                    const tierMonthlyValue = developers * hoursPerWeek * hourlyRate * 4.33;
+                    const tierCost = tierData.price;
+                    const tierNetValue = tierMonthlyValue - tierCost;
+                    const tierROI = tierCost > 0 ? ((tierMonthlyValue - tierCost) / tierCost * 100).toFixed(0) : '∞';
+                    const isCurrentTier = tier === key;
+                    const isSelectedTier = selectedTier === key;
+                    
+                    return (
+                      <tr
+                        key={key}
+                        className={`border-b border-slate-800/50 hover:bg-slate-900/50 transition-colors ${
+                          isCurrentTier ? 'bg-cyan-500/10' : ''
+                        } ${isSelectedTier ? 'ring-2 ring-cyan-500/50' : ''}`}
+                      >
+                        <td className="py-2 px-3">
+                          <div className="flex items-center gap-2">
+                            <span className="text-white font-medium">{tierData.name}</span>
+                            {isCurrentTier && (
+                              <span className="text-xs px-1.5 py-0.5 bg-cyan-500/20 text-cyan-400 rounded">
+                                Current
+                              </span>
+                            )}
+                            {isSelectedTier && !isCurrentTier && (
+                              <span className="text-xs px-1.5 py-0.5 bg-purple-500/20 text-purple-400 rounded">
+                                Selected
+                              </span>
+                            )}
+                          </div>
+                        </td>
+                        <td className="text-right py-2 px-3 text-slate-300">
+                          ${tierCost.toLocaleString()}/mo
+                        </td>
+                        <td className="text-right py-2 px-3 text-green-400 font-medium">
+                          ${tierMonthlyValue.toLocaleString()}
+                        </td>
+                        <td className={`text-right py-2 px-3 font-medium ${
+                          tierNetValue >= 0 ? 'text-cyan-400' : 'text-red-400'
+                        }`}>
+                          ${tierNetValue.toLocaleString()}
+                        </td>
+                        <td className="text-right py-2 px-3 text-purple-400 font-medium">
+                          {tierROI === '∞' ? '∞' : `${tierROI}%`}
+                        </td>
+                        <td className="text-center py-2 px-3 text-slate-400">
+                          {tierData.calls}
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
           {/* Upgrade CTA */}
           {tier !== selectedTier && (
-            <div className="text-center p-4 bg-slate-900/50 rounded-lg border border-cyan-500/20">
+            <div className="text-center p-4 bg-slate-900/50 rounded-lg border border-cyan-500/20 mt-6">
               <p className="text-sm text-slate-300 mb-3">
                 Upgrade to <span className="text-cyan-400 font-semibold">{tiers[selectedTier as keyof typeof tiers].name}</span> to unlock more value
               </p>

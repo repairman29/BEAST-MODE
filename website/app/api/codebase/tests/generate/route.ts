@@ -3,7 +3,8 @@ import { NextRequest, NextResponse } from 'next/server';
 // Dynamic require for Node.js modules
 let automatedTesting: any;
 try {
-  automatedTesting = require('../../../../../lib/mlops/automatedTesting');
+  // Path: website/app/api/codebase/tests/generate -> BEAST-MODE-PRODUCT/lib/mlops
+  automatedTesting = require('../../../../../../lib/mlops/automatedTesting');
 } catch (error) {
   console.error('[Test Generation API] Failed to load modules:', error);
 }

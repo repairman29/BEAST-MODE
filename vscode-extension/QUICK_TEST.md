@@ -1,77 +1,66 @@
-# Quick Test Guide - VS Code Extension
-## 5-Minute Test Setup
+# Quick Test - Extension is Installed! 🎉
+
+## ✅ **Extension Found!**
+
+Great! The extension is now showing in Extensions panel.
 
 ---
 
-## 🚀 **STEP 1: Setup (1 minute)**
+## 🧪 **TEST IT NOW:**
 
-```bash
-cd BEAST-MODE-PRODUCT/vscode-extension
-npm install
-npm run compile
-```
+### **Test 1: Find Commands**
+1. Press `Cmd+Shift+P` (Mac) or `Ctrl+Shift+P` (Windows)
+2. Type: `BEAST MODE` or `@beast`
+3. You should see:
+   - ✅ **BEAST MODE: Analyze Code Quality**
+   - ✅ **BEAST MODE: Get AI Suggestions**
+   - ✅ **BEAST MODE: Open Codebase Chat**
+   - ✅ **BEAST MODE: Generate Tests**
+   - ✅ **BEAST MODE: Refactor Code**
+   - ✅ **BEAST MODE: Index Codebase**
 
----
+### **Test 2: Analyze Quality**
+1. Open any code file (`.ts`, `.js`, `.tsx`, etc.)
+2. Press `Cmd+Shift+P`
+3. Select: **"BEAST MODE: Analyze Code Quality"**
+4. **Expected:** Notification showing quality score (e.g., "Quality Score: 75.3%")
 
-## 🎯 **STEP 2: Launch Extension (30 seconds)**
+### **Test 3: Get Suggestions**
+1. In a code file, place cursor where you want suggestions
+2. Press `Cmd+Shift+B` (Mac) or `Ctrl+Shift+B` (Windows)
+3. **Expected:** Suggestions picker appears
 
-1. Open VS Code in the `BEAST-MODE-PRODUCT` directory
-2. Press **`F5`** (or Run > Start Debugging)
-3. New "Extension Development Host" window opens
-4. ✅ Extension is loaded!
-
----
-
-## 🧪 **STEP 3: Test Commands (3 minutes)**
-
-### **Test 1: Analyze Quality**
-1. Open any code file in Extension Development Host
-2. Press `Cmd+Shift+P` (Mac) or `Ctrl+Shift+P` (Windows)
-3. Type: `BEAST MODE: Analyze Quality`
-4. ✅ Should show quality score
-
-### **Test 2: Get Suggestions**
-1. In same file, press `Cmd+Shift+B` (Mac) or `Ctrl+Shift+B` (Windows)
-2. ✅ Should show code suggestions
-
-### **Test 3: Open Chat**
+### **Test 4: Open Chat**
 1. Press `Cmd+Shift+C` (Mac) or `Ctrl+Shift+C` (Windows)
-2. ✅ Chat panel should open
+2. **Expected:** Chat panel opens
 
 ---
 
-## ✅ **SUCCESS INDICATORS**
+## 🔍 **VERIFY IT'S WORKING:**
 
-- [ ] Extension Development Host opens
-- [ ] Commands appear in palette
-- [ ] No errors in Output panel
-- [ ] API calls work (check Network tab)
+### **Check Extension Logs:**
+1. View > Output (`Cmd+Shift+U`)
+2. Select: **"Log (Extension Host)"** from dropdown
+3. Look for: `BEAST MODE extension is now active!` ✅
 
----
+### **If Commands Work:**
+- ✅ Extension is loaded and working!
+- ✅ Commands are registered
+- ✅ Ready to use!
 
-## 🐛 **IF IT DOESN'T WORK**
-
-1. **Check Output Panel:**
-   - View > Output
-   - Select "BEAST MODE" from dropdown
-   - Look for errors
-
-2. **Check Debug Console:**
-   - View > Debug Console
-   - Look for TypeScript errors
-
-3. **Rebuild:**
-   ```bash
-   npm run compile
-   ```
-
-4. **Check API URL:**
-   - Settings > Search "beastMode.apiUrl"
-   - Should be: `https://beast-mode.dev`
+### **If Commands Don't Work:**
+- Check Output panel for errors
+- Verify API URL in settings: `beastMode.apiUrl` = `https://beast-mode.dev`
+- Check network connectivity
 
 ---
 
-**That's it!** 🎉
+## 🎯 **QUICK COMMANDS:**
 
-For detailed testing, see `TESTING_GUIDE.md`
+- **Analyze Quality:** `Cmd+Shift+P` → `BEAST MODE: Analyze Code Quality`
+- **Get Suggestions:** `Cmd+Shift+B`
+- **Open Chat:** `Cmd+Shift+C`
 
+---
+
+**Try it now and let me know what happens!** 🚀

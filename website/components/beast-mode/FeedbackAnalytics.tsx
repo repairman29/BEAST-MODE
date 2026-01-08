@@ -164,7 +164,7 @@ export default function FeedbackAnalytics() {
                       <div className="text-cyan-400 font-semibold">{data.recent}</div>
                     </div>
                     <div>
-                      <div className="text-slate-400">Old (>7d)</div>
+                      <div className="text-slate-400">Old (&gt;7d)</div>
                       <div className="text-amber-400 font-semibold">{data.old}</div>
                     </div>
                     <div>
