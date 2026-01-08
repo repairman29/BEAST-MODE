@@ -1,11 +1,36 @@
-.vscode/**
-.vscode-test/**
-src/**
-.gitignore
-.yarnrc
-vscode-extension.iml
+# Exclude from extension package
+
+# Source files (only include compiled output)
+src/
+tsconfig.json
+
+# Development files
+.vscode/
+*.md
+!README.md
+test-*.js
+validate-*.js
+*.test-results.txt
+
+# Build artifacts
 *.vsix
 *.map
-*.ts
-!out/**/*.js.map
 
+# Dependencies (if bundled)
+node_modules/
+
+# Git
+.git/
+.gitignore
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Test files
+test-file.*
+test-runtime.js
