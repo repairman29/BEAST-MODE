@@ -1,5 +1,7 @@
 import * as vscode from 'vscode';
 import axios from 'axios';
+import { ModelSelector } from './modelSelector';
+import { BeastModeClient } from './beastModeClient';
 
 let sessionId: string;
 let apiUrl: string;
@@ -9,26 +11,32 @@ let trackFileOpens: boolean;
 let trackCommands: boolean;
 let sessionStartTime: number;
 let statusBarItem: vscode.StatusBarItem;
+let modelSelector: ModelSelector;
+let beastModeClient: BeastModeClient;
 
 export function activate(context: vscode.ExtensionContext) {
-  console.log('BEAST MODE extension activated');
+  console.log('BEAST MODE Cursor extension is now active!');
   
   // Get configuration
   const config = vscode.workspace.getConfiguration('beastMode');
-  // Default to localhost for development, can be overridden in settings
-  apiUrl = config.get<string>('apiUrl', 'http://localhost:7777');
+  // Default to production, can be overridden in settings
+  apiUrl = config.get<string>('apiUrl', 'https://beast-mode.dev');
   enabled = config.get<boolean>('enabled', true);
   trackFileSaves = config.get<boolean>('trackFileSaves', true);
   trackFileOpens = config.get<boolean>('trackFileOpens', true);
   trackCommands = config.get<boolean>('trackCommands', true);
   
+  // Initialize BEAST MODE components
+  modelSelector = new ModelSelector(apiUrl);
+  beastModeClient = new BeastModeClient(apiUrl);
+  
   // Generate session ID
   sessionStartTime = Date.now();
   sessionId = `cursor_${sessionStartTime}_${Math.random().toString(36).substr(2, 9)}`;
   
-  // Create status bar item
+  // Create status bar item (will be updated by model selector)
   statusBarItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right, 100);
-  statusBarItem.command = 'beastMode.toggle';
+  statusBarItem.command = 'beastMode.showModelStatus';
   updateStatusBar();
   statusBarItem.show();
   context.subscriptions.push(statusBarItem);
@@ -75,7 +83,94 @@ export function activate(context: vscode.ExtensionContext) {
     // Note: We can't easily intercept all commands, but we can track specific ones
   }
   
-  // Register commands
+  // Register BEAST MODE commands
+  context.subscriptions.push(
+    vscode.commands.registerCommand('beastMode.selectModel', async () => {
+      await modelSelector.selectModel();
+      updateStatusBar();
+    })
+  );
+
+  context.subscriptions.push(
+    vscode.commands.registerCommand('beastMode.registerCustomModel', async () => {
+      await modelSelector.registerCustomModel();
+    })
+  );
+
+  context.subscriptions.push(
+    vscode.commands.registerCommand('beastMode.showModelStatus', async () => {
+      await modelSelector.showModelStatus();
+    })
+  );
+
+  context.subscriptions.push(
+    vscode.commands.registerCommand('beastMode.chat', async () => {
+      const selectedModel = modelSelector.getSelectedModel();
+      if (!selectedModel) {
+        const result = await vscode.window.showWarningMessage(
+          'No model selected. Would you like to select one now?',
+          'Yes',
+          'No'
+        );
+        if (result === 'Yes') {
+          await modelSelector.selectModel();
+        }
+        return;
+      }
+
+      const message = await vscode.window.showInputBox({
+        prompt: 'Enter your message',
+        placeHolder: 'Ask BEAST MODE anything...'
+      });
+
+      if (!message) return;
+
+      try {
+        const response = await beastModeClient.chat(message, selectedModel);
+        if (response.success) {
+          // Show response in a new document
+          const doc = await vscode.workspace.openTextDocument({
+            content: `# BEAST MODE Chat Response\n\n**Model:** ${selectedModel}\n\n**Your Message:**\n${message}\n\n**Response:**\n${response.message || response.content || 'No response'}`,
+            language: 'markdown'
+          });
+          await vscode.window.showTextDocument(doc);
+        } else {
+          vscode.window.showErrorMessage(`Chat failed: ${response.error}`);
+        }
+      } catch (error: any) {
+        vscode.window.showErrorMessage(`Chat error: ${error.message}`);
+      }
+    })
+  );
+
+  context.subscriptions.push(
+    vscode.commands.registerCommand('beastMode.analyzeQuality', async () => {
+      const editor = vscode.window.activeTextEditor;
+      if (!editor) {
+        vscode.window.showWarningMessage('No active editor');
+        return;
+      }
+
+      const selectedModel = modelSelector.getSelectedModel();
+      const filePath = editor.document.fileName;
+      const content = editor.document.getText();
+
+      try {
+        const result = await beastModeClient.analyzeQuality(filePath, content, selectedModel || undefined);
+        if (result.success) {
+          vscode.window.showInformationMessage(
+            `Quality Score: ${(result.quality * 100).toFixed(1)}%`
+          );
+        } else {
+          vscode.window.showErrorMessage(`Analysis failed: ${result.error}`);
+        }
+      } catch (error: any) {
+        vscode.window.showErrorMessage(`Analysis error: ${error.message}`);
+      }
+    })
+  );
+
+  // Register tracking commands
   context.subscriptions.push(
     vscode.commands.registerCommand('beastMode.connect', async () => {
       const token = await vscode.window.showInputBox({
@@ -127,15 +222,22 @@ export function activate(context: vscode.ExtensionContext) {
   
   // Track configuration changes
   context.subscriptions.push(
-    vscode.workspace.onDidChangeConfiguration((e) => {
+    vscode.workspace.onDidChangeConfiguration(async (e) => {
       if (e.affectsConfiguration('beastMode')) {
         const newConfig = vscode.workspace.getConfiguration('beastMode');
         enabled = newConfig.get<boolean>('enabled', true);
-        apiUrl = newConfig.get<string>('apiUrl', 'https://beastmode.dev');
+        apiUrl = newConfig.get<string>('apiUrl', 'https://beast-mode.dev');
         trackFileSaves = newConfig.get<boolean>('trackFileSaves', true);
         trackFileOpens = newConfig.get<boolean>('trackFileOpens', true);
         trackCommands = newConfig.get<boolean>('trackCommands', true);
-        updateStatusBar();
+        
+        // Update model selector if API URL changed
+        if (e.affectsConfiguration('beastMode.apiUrl')) {
+          modelSelector = new ModelSelector(apiUrl);
+          beastModeClient = new BeastModeClient(apiUrl);
+        }
+        
+        await updateStatusBar();
       }
     })
   );
@@ -151,16 +253,19 @@ export function activate(context: vscode.ExtensionContext) {
   );
 }
 
-function updateStatusBar() {
-  if (enabled) {
-    statusBarItem.text = '$(beaker) BEAST MODE';
-    statusBarItem.tooltip = 'BEAST MODE tracking enabled - Click to disable';
-    statusBarItem.backgroundColor = undefined;
+async function updateStatusBar() {
+  // Update based on selected model
+  const selectedModel = modelSelector?.getSelectedModel();
+  if (selectedModel) {
+    const models = await modelSelector?.getAvailableModels() || [];
+    const model = models.find(m => m.modelId === selectedModel);
+    statusBarItem.text = `$(beaker) BEAST MODE: ${model?.modelName || selectedModel}`;
+    statusBarItem.tooltip = `BEAST MODE - Model: ${selectedModel} - Click to view status`;
   } else {
-    statusBarItem.text = '$(beaker) BEAST MODE (Paused)';
-    statusBarItem.tooltip = 'BEAST MODE tracking disabled - Click to enable';
-    statusBarItem.backgroundColor = new vscode.ThemeColor('statusBarItem.warningBackground');
+    statusBarItem.text = '$(beaker) BEAST MODE: No Model';
+    statusBarItem.tooltip = 'BEAST MODE - No model selected - Click to select';
   }
+  statusBarItem.backgroundColor = enabled ? undefined : new vscode.ThemeColor('statusBarItem.warningBackground');
 }
 
 async function trackEvent(event: string, metadata: any = {}) {

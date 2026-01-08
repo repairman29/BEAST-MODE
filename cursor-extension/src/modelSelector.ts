@@ -29,7 +29,7 @@ export class ModelSelector {
    */
   private loadSelectedModel() {
     const config = vscode.workspace.getConfiguration('beastMode');
-    this.selectedModel = config.get<string>('selectedModel', null);
+    this.selectedModel = config.get<string | null>('selectedModel', null);
   }
 
   /**

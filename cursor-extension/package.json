@@ -1,32 +1,73 @@
 {
   "name": "beast-mode-cursor",
-  "displayName": "BEAST MODE Analytics",
-  "description": "Track your Cursor IDE activity with BEAST MODE unified analytics",
+  "displayName": "BEAST MODE",
+  "description": "AI-powered code quality, suggestions, and custom model support for Cursor",
   "version": "1.0.0",
   "publisher": "beast-mode",
   "engines": {
     "vscode": "^1.60.0"
   },
   "categories": [
-    "Other"
+    "Other",
+    "Machine Learning",
+    "Snippets"
   ],
   "activationEvents": [
-    "onStartupFinished"
+    "onStartupFinished",
+    "onCommand:beastMode.selectModel",
+    "onCommand:beastMode.chat",
+    "onCommand:beastMode.analyzeQuality"
   ],
   "main": "./out/extension.js",
   "contributes": {
     "commands": [
       {
+        "command": "beastMode.selectModel",
+        "title": "BEAST MODE: Select Model"
+      },
+      {
+        "command": "beastMode.registerCustomModel",
+        "title": "BEAST MODE: Register Custom Model"
+      },
+      {
+        "command": "beastMode.showModelStatus",
+        "title": "BEAST MODE: Show Model Status"
+      },
+      {
+        "command": "beastMode.chat",
+        "title": "BEAST MODE: Chat"
+      },
+      {
+        "command": "beastMode.analyzeQuality",
+        "title": "BEAST MODE: Analyze Quality"
+      },
+      {
+        "command": "beastMode.getSuggestions",
+        "title": "BEAST MODE: Get Suggestions"
+      },
+      {
+        "command": "beastMode.generateTests",
+        "title": "BEAST MODE: Generate Tests"
+      },
+      {
+        "command": "beastMode.refactor",
+        "title": "BEAST MODE: Refactor"
+      },
+      {
+        "command": "beastMode.indexCodebase",
+        "title": "BEAST MODE: Index Codebase"
+      },
+      {
         "command": "beastMode.connect",
-        "title": "Connect to BEAST MODE"
+        "title": "BEAST MODE: Connect"
       },
       {
         "command": "beastMode.status",
-        "title": "BEAST MODE Status"
+        "title": "BEAST MODE: Status"
       },
       {
         "command": "beastMode.toggle",
-        "title": "Toggle BEAST MODE Tracking"
+        "title": "BEAST MODE: Toggle Tracking"
       }
     ],
     "configuration": {
@@ -34,8 +75,23 @@
       "properties": {
         "beastMode.apiUrl": {
           "type": "string",
-          "default": "http://localhost:7777",
-          "description": "BEAST MODE API URL (use http://localhost:7777 for local dev, https://beastmode.dev for production)"
+          "default": "https://beast-mode.dev",
+          "description": "BEAST MODE API URL"
+        },
+        "beastMode.selectedModel": {
+          "type": "string",
+          "default": null,
+          "description": "Selected model ID (e.g., 'custom:my-model' or 'openai:gpt-4')"
+        },
+        "beastMode.enableSuggestions": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable real-time code suggestions"
+        },
+        "beastMode.enableQualityHints": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable quality hints"
         },
         "beastMode.enabled": {
           "type": "boolean",
@@ -58,8 +114,7 @@
           "description": "Track command executions"
         }
       }
-    }
-  },
+    },
   "scripts": {
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./",
