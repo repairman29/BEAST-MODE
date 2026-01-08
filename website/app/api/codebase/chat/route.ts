@@ -122,22 +122,14 @@ export async function POST(request: NextRequest) {
     if (useLLM) {
       try {
         if (userId) {
-          const { getSupabaseClientOrNull } = require('../../../lib/supabase');
-          const supabase = await getSupabaseClientOrNull();
-          if (supabase) {
-            // Determine provider from model
-            const provider = model?.startsWith('anthropic:') ? 'anthropic' : 'openai';
-            const { data } = await supabase
-              .from('user_api_keys')
-              .select('decrypted_key')
-              .eq('user_id', userId)
-              .eq('provider', provider)
-              .single();
-            
-            if (data?.decrypted_key) {
-              userApiKey = data.decrypted_key;
-            }
-          }
+          // Use the proper decryption library
+          const { getUserApiKey } = require('../../../lib/api-keys-decrypt');
+          
+          // Determine provider from model
+          const provider = model?.startsWith('anthropic:') ? 'anthropic' : 'openai';
+          
+          // Get and decrypt API key
+          userApiKey = await getUserApiKey(userId, provider);
         }
       } catch (error) {
         console.warn('[Chat API] Could not get user API key:', error);
