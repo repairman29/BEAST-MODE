@@ -91,19 +91,24 @@ def calculate_hybrid_quality(repo):
 
 def prepare_training_data(repos):
     """Prepare training data with features and labels"""
-    print("\n📊 Calculating quality labels with hybrid algorithm...\n")
+    print("\n📊 Preparing quality labels...\n")
     
     training_data = []
     for repo in repos:
         normalized_features = normalize_features(repo)
         normalized_repo = {**repo, 'features': normalized_features}
         
-        quality = calculate_hybrid_quality(normalized_repo)
+        # Use quality_score if available (from feedback), otherwise calculate
+        if 'quality_score' in repo and repo['quality_score'] is not None:
+            quality = float(repo['quality_score'])
+        else:
+            quality = calculate_hybrid_quality(normalized_repo)
+        
         if not np.isnan(quality) and quality >= 0:
             training_data.append({
                 'features': normalized_features,
                 'quality': quality,
-                'repo': repo.get('repo') or repo.get('url')
+                'repo': repo.get('name') or repo.get('repo') or repo.get('url')
             })
     
     # Quality distribution

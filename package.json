@@ -117,7 +117,11 @@
     "test:performance": "node scripts/test-performance-optimization.js",
     "test:comprehensive": "node scripts/test-comprehensive.js",
     "test:expanded": "node scripts/test-expanded.js",
-    "test:ftue": "node scripts/test-ftue.js"
+    "test:ftue": "node scripts/test-ftue.js",
+    "review:all-repos": "node scripts/review-and-fix-all-repos.js",
+    "review:all-repos:fix": "node scripts/review-and-fix-all-repos.js --fix",
+    "review:all-repos:apply": "node scripts/review-and-fix-all-repos.js --fix --apply",
+    "apply:fixes": "node scripts/apply-fixes-to-local-repos.js"
   },
   "keywords": [
     "ai",

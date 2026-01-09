@@ -1,0 +1,466 @@
+{
+  "timestamp": "2026-01-09T06:01:05.507Z",
+  "summary": {
+    "total": 3,
+    "successful": 3,
+    "failed": 0,
+    "averageScore": 75,
+    "scoreDistribution": {
+      "excellent": 0,
+      "good": 0,
+      "fair": 3,
+      "needsWork": 0,
+      "poor": 0
+    },
+    "reposWithFixes": 0
+  },
+  "results": [
+    {
+      "repo": "frontend-app",
+      "url": "https://github.com/company/frontend-app",
+      "success": true,
+      "quality": 0.75,
+      "score": 75,
+      "grade": "F",
+      "recommendations": [
+        {
+          "action": "Create Comprehensive README Documentation",
+          "impact": "No README.md detected. This is the first file users see and is critical for onboarding. Without a README, potential users have no way to understand what your project does or how to use it. Top-tier repositories (80th+ percentile) have detailed READMEs with 4+ sections.",
+          "priority": "high",
+          "insight": "README importance in quality model: 50%. Repositories with comprehensive READMEs see 3x more forks, 2.5x more contributions, and 40% lower \"how do I use this?\" issues. Your 0 files suggest a simple project that would benefit from clear documentation.",
+          "actionable": "Create `README.md` with these sections: (1) **Project Title & Badge** - Name, brief tagline, build/coverage badges. (2) **Description** - What it does, why it exists, key features (3-5 bullet points). (3) **Installation** - Step-by-step: `git clone`, `npm install` (or equivalent), dependencies, environment setup. (4) **Usage** - Quick start example, common use cases, API overview if applicable. (5) **Configuration** - Environment variables, config files, options. (6) **Contributing** - How to contribute, code style, PR process. (7) **License** - License type and link. (8) **Credits/Authors** - Maintainers, acknowledgments.  Use clear headings, code blocks with syntax highlighting, and emoji sparingly for visual breaks. Target length: 150-300 lines.",
+          "estimatedGain": 0.1,
+          "benchmark": "Top-tier repos: 4+ sections, 150+ lines",
+          "currentValue": "0% documentation (no README)",
+          "categorization": {
+            "type": "quick-win",
+            "roi": "high",
+            "effort": "low",
+            "timeframe": "1 week",
+            "estimatedHours": 2
+          }
+        },
+        {
+          "action": "Establish Testing Foundation",
+          "impact": "No test infrastructure detected. Even with 0 files, tests provide safety nets for refactoring and document expected behavior. Repositories in the similar percentile typically have at least basic test coverage.",
+          "priority": "medium",
+          "insight": "Small repos benefit from tests because they prevent regressions during growth. Your 0 code files represent 0-0 estimated lines of code that could break. Test coverage importance: 50%.",
+          "actionable": "Create your first test file: `tests/index.test.js`. Write 3-5 tests for your most important function. Example structure: `describe('YourFunction', () => { it('should handle normal case', () => { ... }); it('should handle edge cases', () => { ... }); });`. Run tests locally before committing. Add a simple CI check that runs tests.",
+          "estimatedGain": 0.135,
+          "benchmark": "Similar-sized repos average 40-50% test coverage",
+          "currentValue": "0% coverage, 0 test files",
+          "categorization": {
+            "type": "quick-win",
+            "roi": "high",
+            "effort": "low",
+            "timeframe": "1 week",
+            "estimatedHours": 3
+          }
+        },
+        {
+          "action": "Establish CI/CD Foundation",
+          "impact": "No CI/CD detected. While your repo is smaller (0 files, 0 stars), early automation prevents technical debt. 55% of repositories at this stage already have CI/CD, giving them faster iteration cycles.",
+          "priority": "medium",
+          "insight": "Early CI/CD setup (before reaching 20+ stars) prevents 60% of common quality issues. The model weights CI/CD at 50% importance. Even simple CI catches syntax errors, missing dependencies, and basic test failures before code review.",
+          "actionable": "Create minimal CI: `.github/workflows/ci.yml` with a single job that (1) checks out code, (2) sets up your runtime, (3) installs dependencies, (4) runs tests (if you have them) or at minimum runs a build/lint check. Use GitHub Actions (free for public repos). Add a simple badge: `![CI](https://github.com/OWNER/REPO/workflows/CI/badge.svg)`. This takes ~15 minutes and pays dividends as your repo grows.",
+          "estimatedGain": 0.115,
+          "benchmark": "55% adoption rate at this stage",
+          "currentValue": "No automation - manual checks only",
+          "categorization": {
+            "type": "quick-win",
+            "roi": "high",
+            "effort": "low",
+            "timeframe": "1 week",
+            "estimatedHours": 3
+          }
+        }
+      ],
+      "factors": {
+        "hasCI": {
+          "value": 0,
+          "importance": 0.15
+        },
+        "hasTests": {
+          "value": 0,
+          "importance": 0.12
+        },
+        "hasReadme": {
+          "value": 0,
+          "importance": 0.1
+        },
+        "stars": {
+          "value": 0,
+          "importance": 0.08
+        },
+        "hasLicense": {
+          "value": 0,
+          "importance": 0.08
+        },
+        "forks": {
+          "value": 0,
+          "importance": 0.07
+        },
+        "codeFileCount": {
+          "value": 0,
+          "importance": 0.06
+        },
+        "hasDescription": {
+          "value": 0,
+          "importance": 0.06
+        },
+        "openIssues": {
+          "value": 0,
+          "importance": 0.05
+        },
+        "fileCount": {
+          "value": 0,
+          "importance": 0.05
+        },
+        "daysSincePush": {
+          "value": 0,
+          "importance": 0.05
+        },
+        "hasDocker": {
+          "value": 0,
+          "importance": 0.04
+        },
+        "repoAgeDays": {
+          "value": 0,
+          "importance": 0.04
+        },
+        "codeFileRatio": {
+          "value": 0,
+          "importance": 0.03
+        },
+        "engagementPerIssue": {
+          "value": 0,
+          "importance": 0.03
+        },
+        "starsForksRatio": {
+          "value": 0,
+          "importance": 0.02
+        },
+        "starsPerFile": {
+          "value": 0,
+          "importance": 0.02
+        },
+        "isActive": {
+          "value": 0,
+          "importance": 0.02
+        },
+        "hasTopics": {
+          "value": 0,
+          "importance": 0.01
+        },
+        "hasConfig": {
+          "value": 0,
+          "importance": 0.01
+        }
+      },
+      "confidence": 0.35,
+      "source": "fallback",
+      "fixes": [],
+      "fixErrors": [
+        "Automated quality improver not available"
+      ]
+    },
+    {
+      "repo": "backend-api",
+      "url": "https://github.com/company/backend-api",
+      "success": true,
+      "quality": 0.75,
+      "score": 75,
+      "grade": "F",
+      "recommendations": [
+        {
+          "action": "Create Comprehensive README Documentation",
+          "impact": "No README.md detected. This is the first file users see and is critical for onboarding. Without a README, potential users have no way to understand what your project does or how to use it. Top-tier repositories (80th+ percentile) have detailed READMEs with 4+ sections.",
+          "priority": "high",
+          "insight": "README importance in quality model: 50%. Repositories with comprehensive READMEs see 3x more forks, 2.5x more contributions, and 40% lower \"how do I use this?\" issues. Your 0 files suggest a simple project that would benefit from clear documentation.",
+          "actionable": "Create `README.md` with these sections: (1) **Project Title & Badge** - Name, brief tagline, build/coverage badges. (2) **Description** - What it does, why it exists, key features (3-5 bullet points). (3) **Installation** - Step-by-step: `git clone`, `npm install` (or equivalent), dependencies, environment setup. (4) **Usage** - Quick start example, common use cases, API overview if applicable. (5) **Configuration** - Environment variables, config files, options. (6) **Contributing** - How to contribute, code style, PR process. (7) **License** - License type and link. (8) **Credits/Authors** - Maintainers, acknowledgments.  Use clear headings, code blocks with syntax highlighting, and emoji sparingly for visual breaks. Target length: 150-300 lines.",
+          "estimatedGain": 0.1,
+          "benchmark": "Top-tier repos: 4+ sections, 150+ lines",
+          "currentValue": "0% documentation (no README)",
+          "categorization": {
+            "type": "quick-win",
+            "roi": "high",
+            "effort": "low",
+            "timeframe": "1 week",
+            "estimatedHours": 2
+          }
+        },
+        {
+          "action": "Establish Testing Foundation",
+          "impact": "No test infrastructure detected. Even with 0 files, tests provide safety nets for refactoring and document expected behavior. Repositories in the similar percentile typically have at least basic test coverage.",
+          "priority": "medium",
+          "insight": "Small repos benefit from tests because they prevent regressions during growth. Your 0 code files represent 0-0 estimated lines of code that could break. Test coverage importance: 50%.",
+          "actionable": "Create your first test file: `tests/index.test.js`. Write 3-5 tests for your most important function. Example structure: `describe('YourFunction', () => { it('should handle normal case', () => { ... }); it('should handle edge cases', () => { ... }); });`. Run tests locally before committing. Add a simple CI check that runs tests.",
+          "estimatedGain": 0.135,
+          "benchmark": "Similar-sized repos average 40-50% test coverage",
+          "currentValue": "0% coverage, 0 test files",
+          "categorization": {
+            "type": "quick-win",
+            "roi": "high",
+            "effort": "low",
+            "timeframe": "1 week",
+            "estimatedHours": 3
+          }
+        },
+        {
+          "action": "Establish CI/CD Foundation",
+          "impact": "No CI/CD detected. While your repo is smaller (0 files, 0 stars), early automation prevents technical debt. 55% of repositories at this stage already have CI/CD, giving them faster iteration cycles.",
+          "priority": "medium",
+          "insight": "Early CI/CD setup (before reaching 20+ stars) prevents 60% of common quality issues. The model weights CI/CD at 50% importance. Even simple CI catches syntax errors, missing dependencies, and basic test failures before code review.",
+          "actionable": "Create minimal CI: `.github/workflows/ci.yml` with a single job that (1) checks out code, (2) sets up your runtime, (3) installs dependencies, (4) runs tests (if you have them) or at minimum runs a build/lint check. Use GitHub Actions (free for public repos). Add a simple badge: `![CI](https://github.com/OWNER/REPO/workflows/CI/badge.svg)`. This takes ~15 minutes and pays dividends as your repo grows.",
+          "estimatedGain": 0.115,
+          "benchmark": "55% adoption rate at this stage",
+          "currentValue": "No automation - manual checks only",
+          "categorization": {
+            "type": "quick-win",
+            "roi": "high",
+            "effort": "low",
+            "timeframe": "1 week",
+            "estimatedHours": 3
+          }
+        }
+      ],
+      "factors": {
+        "hasCI": {
+          "value": 0,
+          "importance": 0.15
+        },
+        "hasTests": {
+          "value": 0,
+          "importance": 0.12
+        },
+        "hasReadme": {
+          "value": 0,
+          "importance": 0.1
+        },
+        "stars": {
+          "value": 0,
+          "importance": 0.08
+        },
+        "hasLicense": {
+          "value": 0,
+          "importance": 0.08
+        },
+        "forks": {
+          "value": 0,
+          "importance": 0.07
+        },
+        "codeFileCount": {
+          "value": 0,
+          "importance": 0.06
+        },
+        "hasDescription": {
+          "value": 0,
+          "importance": 0.06
+        },
+        "openIssues": {
+          "value": 0,
+          "importance": 0.05
+        },
+        "fileCount": {
+          "value": 0,
+          "importance": 0.05
+        },
+        "daysSincePush": {
+          "value": 0,
+          "importance": 0.05
+        },
+        "hasDocker": {
+          "value": 0,
+          "importance": 0.04
+        },
+        "repoAgeDays": {
+          "value": 0,
+          "importance": 0.04
+        },
+        "codeFileRatio": {
+          "value": 0,
+          "importance": 0.03
+        },
+        "engagementPerIssue": {
+          "value": 0,
+          "importance": 0.03
+        },
+        "starsForksRatio": {
+          "value": 0,
+          "importance": 0.02
+        },
+        "starsPerFile": {
+          "value": 0,
+          "importance": 0.02
+        },
+        "isActive": {
+          "value": 0,
+          "importance": 0.02
+        },
+        "hasTopics": {
+          "value": 0,
+          "importance": 0.01
+        },
+        "hasConfig": {
+          "value": 0,
+          "importance": 0.01
+        }
+      },
+      "confidence": 0.35,
+      "source": "fallback",
+      "fixes": [],
+      "fixErrors": [
+        "Automated quality improver not available"
+      ]
+    },
+    {
+      "repo": "design-system",
+      "url": "https://github.com/company/design-system",
+      "success": true,
+      "quality": 0.75,
+      "score": 75,
+      "grade": "F",
+      "recommendations": [
+        {
+          "action": "Create Comprehensive README Documentation",
+          "impact": "No README.md detected. This is the first file users see and is critical for onboarding. Without a README, potential users have no way to understand what your project does or how to use it. Top-tier repositories (80th+ percentile) have detailed READMEs with 4+ sections.",
+          "priority": "high",
+          "insight": "README importance in quality model: 50%. Repositories with comprehensive READMEs see 3x more forks, 2.5x more contributions, and 40% lower \"how do I use this?\" issues. Your 0 files suggest a simple project that would benefit from clear documentation.",
+          "actionable": "Create `README.md` with these sections: (1) **Project Title & Badge** - Name, brief tagline, build/coverage badges. (2) **Description** - What it does, why it exists, key features (3-5 bullet points). (3) **Installation** - Step-by-step: `git clone`, `npm install` (or equivalent), dependencies, environment setup. (4) **Usage** - Quick start example, common use cases, API overview if applicable. (5) **Configuration** - Environment variables, config files, options. (6) **Contributing** - How to contribute, code style, PR process. (7) **License** - License type and link. (8) **Credits/Authors** - Maintainers, acknowledgments.  Use clear headings, code blocks with syntax highlighting, and emoji sparingly for visual breaks. Target length: 150-300 lines.",
+          "estimatedGain": 0.1,
+          "benchmark": "Top-tier repos: 4+ sections, 150+ lines",
+          "currentValue": "0% documentation (no README)",
+          "categorization": {
+            "type": "quick-win",
+            "roi": "high",
+            "effort": "low",
+            "timeframe": "1 week",
+            "estimatedHours": 2
+          }
+        },
+        {
+          "action": "Establish Testing Foundation",
+          "impact": "No test infrastructure detected. Even with 0 files, tests provide safety nets for refactoring and document expected behavior. Repositories in the similar percentile typically have at least basic test coverage.",
+          "priority": "medium",
+          "insight": "Small repos benefit from tests because they prevent regressions during growth. Your 0 code files represent 0-0 estimated lines of code that could break. Test coverage importance: 50%.",
+          "actionable": "Create your first test file: `tests/index.test.js`. Write 3-5 tests for your most important function. Example structure: `describe('YourFunction', () => { it('should handle normal case', () => { ... }); it('should handle edge cases', () => { ... }); });`. Run tests locally before committing. Add a simple CI check that runs tests.",
+          "estimatedGain": 0.135,
+          "benchmark": "Similar-sized repos average 40-50% test coverage",
+          "currentValue": "0% coverage, 0 test files",
+          "categorization": {
+            "type": "quick-win",
+            "roi": "high",
+            "effort": "low",
+            "timeframe": "1 week",
+            "estimatedHours": 3
+          }
+        },
+        {
+          "action": "Establish CI/CD Foundation",
+          "impact": "No CI/CD detected. While your repo is smaller (0 files, 0 stars), early automation prevents technical debt. 55% of repositories at this stage already have CI/CD, giving them faster iteration cycles.",
+          "priority": "medium",
+          "insight": "Early CI/CD setup (before reaching 20+ stars) prevents 60% of common quality issues. The model weights CI/CD at 50% importance. Even simple CI catches syntax errors, missing dependencies, and basic test failures before code review.",
+          "actionable": "Create minimal CI: `.github/workflows/ci.yml` with a single job that (1) checks out code, (2) sets up your runtime, (3) installs dependencies, (4) runs tests (if you have them) or at minimum runs a build/lint check. Use GitHub Actions (free for public repos). Add a simple badge: `![CI](https://github.com/OWNER/REPO/workflows/CI/badge.svg)`. This takes ~15 minutes and pays dividends as your repo grows.",
+          "estimatedGain": 0.115,
+          "benchmark": "55% adoption rate at this stage",
+          "currentValue": "No automation - manual checks only",
+          "categorization": {
+            "type": "quick-win",
+            "roi": "high",
+            "effort": "low",
+            "timeframe": "1 week",
+            "estimatedHours": 3
+          }
+        }
+      ],
+      "factors": {
+        "hasCI": {
+          "value": 0,
+          "importance": 0.15
+        },
+        "hasTests": {
+          "value": 0,
+          "importance": 0.12
+        },
+        "hasReadme": {
+          "value": 0,
+          "importance": 0.1
+        },
+        "stars": {
+          "value": 0,
+          "importance": 0.08
+        },
+        "hasLicense": {
+          "value": 0,
+          "importance": 0.08
+        },
+        "forks": {
+          "value": 0,
+          "importance": 0.07
+        },
+        "codeFileCount": {
+          "value": 0,
+          "importance": 0.06
+        },
+        "hasDescription": {
+          "value": 0,
+          "importance": 0.06
+        },
+        "openIssues": {
+          "value": 0,
+          "importance": 0.05
+        },
+        "fileCount": {
+          "value": 0,
+          "importance": 0.05
+        },
+        "daysSincePush": {
+          "value": 0,
+          "importance": 0.05
+        },
+        "hasDocker": {
+          "value": 0,
+          "importance": 0.04
+        },
+        "repoAgeDays": {
+          "value": 0,
+          "importance": 0.04
+        },
+        "codeFileRatio": {
+          "value": 0,
+          "importance": 0.03
+        },
+        "engagementPerIssue": {
+          "value": 0,
+          "importance": 0.03
+        },
+        "starsForksRatio": {
+          "value": 0,
+          "importance": 0.02
+        },
+        "starsPerFile": {
+          "value": 0,
+          "importance": 0.02
+        },
+        "isActive": {
+          "value": 0,
+          "importance": 0.02
+        },
+        "hasTopics": {
+          "value": 0,
+          "importance": 0.01
+        },
+        "hasConfig": {
+          "value": 0,
+          "importance": 0.01
+        }
+      },
+      "confidence": 0.35,
+      "source": "fallback",
+      "fixes": [],
+      "fixErrors": [
+        "Automated quality improver not available"
+      ]
+    }
+  ]
+}

@@ -47,13 +47,14 @@ async function main() {
     .not('actual_value', 'is', null);
 
   const currentCount = withFeedback?.length || 0;
-  const needed = 50 - currentCount;
+  const targetCount = 150; // Updated target
+  const needed = targetCount - currentCount;
 
   console.log(`📊 Current: ${currentCount} with feedback`);
   console.log(`🎯 Need: ${needed} more\n`);
 
   if (needed <= 0) {
-    console.log('✅ Already have 50+ predictions with feedback!');
+    console.log(`✅ Already have ${targetCount}+ predictions with feedback!`);
     return;
   }
 
@@ -161,13 +162,13 @@ async function main() {
   const finalCount = final?.length || 0;
   console.log(`📈 Total with feedback: ${finalCount}`);
 
-  if (finalCount >= 50) {
+  if (finalCount >= targetCount) {
     console.log();
     console.log('🎉 TRAINING READY!');
     console.log(`   You now have ${finalCount} predictions with feedback.`);
     console.log(`   Run: npm run ml:train`);
   } else {
-    console.log(`⏳ Need ${50 - finalCount} more.`);
+    console.log(`⏳ Need ${targetCount - finalCount} more.`);
   }
   console.log();
 }
