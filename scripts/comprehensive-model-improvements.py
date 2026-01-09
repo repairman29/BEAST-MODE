@@ -397,6 +397,36 @@ def main():
         print("   - Different quality labels")
     
     print()
+    
+    # Log best model results to database
+    try:
+        import subprocess
+        from pathlib import Path
+        
+        log_script = Path(__file__).parent / 'log-training-results.js'
+        if log_script.exists():
+            print('📊 Logging best model results to database...')
+            args = [
+                'node',
+                str(log_script),
+                best_model['name'].lower().replace(' ', '-'),
+                str(best_model['r2_train']),
+                str(best_model['r2_test']),
+                str(best_model['r2_cv']),
+                str(best_model['mae']),
+                str(best_model['rmse']),
+                str(len(repos)),
+                str(len(feature_names))
+            ]
+            result = subprocess.run(args, capture_output=True, text=True, check=False)
+            if result.returncode === 0:
+                print(result.stdout)
+            else:
+                print(f'⚠️  Could not log results: {result.stderr}')
+            print()
+    except Exception as e:
+        print(f'⚠️  Could not log results: {e}')
+        print()
 
 if __name__ == '__main__':
     main()
