@@ -3,11 +3,12 @@
  * Train first ML model when enough data is available
  */
 
-require('dotenv').config();
+const path = require('path');
+require('dotenv').config({ path: path.join(__dirname, '../website/.env.local') });
 const { createClient } = require('@supabase/supabase-js');
 const { ModelTrainer } = require('../lib/mlops/modelTrainer');
 
-const supabaseUrl = process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL;
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.SUPABASE_URL;
 const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
 if (!supabaseUrl || !supabaseKey) {
@@ -21,11 +22,15 @@ async function trainFirstModel() {
   console.log('🚀 Training First ML Model...\n');
 
   try {
-    // Check if we have enough data
-    const { count: feedbackCount, error: fError } = await supabase
-      .from('ml_feedback')
-      .select('*', { count: 'exact', head: true })
+    // Check if we have enough data (check ml_predictions with actual_value)
+    const { data: predictionsWithFeedback, error: fError } = await supabase
+      .from('ml_predictions')
+      .select('id')
+      .eq('service_name', 'beast-mode')
+      .eq('prediction_type', 'quality')
       .not('actual_value', 'is', null);
+    
+    const feedbackCount = predictionsWithFeedback?.length || 0;
 
     if (fError) {
       throw fError;
