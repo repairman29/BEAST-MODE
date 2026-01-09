@@ -66,18 +66,20 @@ async function trainFirstModel() {
     
     // Train Code Quality Predictor
     console.log('1. Training Code Quality Predictor...');
-    await trainer.trainCodeQualityModel();
+    const result = await trainer.trainCodeQualityModel();
     
-    // Train Narrative Quality Predictor
-    console.log('\n2. Training Narrative Quality Predictor...');
-    await trainer.trainNarrativeQualityModel();
-    
-    // Train Search Relevance Predictor
-    console.log('\n3. Training Search Relevance Predictor...');
-    await trainer.trainSearchRelevanceModel();
-
-    console.log('\n✅ All models trained!');
+    console.log('\n✅ Code Quality Model trained!');
+    console.log(`   Accuracy: ${(result.metrics.accuracy * 100).toFixed(1)}%`);
+    console.log(`   MAE: ${result.metrics.mae.toFixed(4)}`);
+    console.log(`   RMSE: ${result.metrics.rmse.toFixed(4)}`);
+    console.log(`   Run ID: ${result.runId}`);
     console.log('   View in MLflow: http://localhost:5000');
+    
+    // TODO: Train other models when we have more data
+    // console.log('\n2. Training Narrative Quality Predictor...');
+    // await trainer.trainNarrativeQualityModel();
+    // console.log('\n3. Training Search Relevance Predictor...');
+    // await trainer.trainSearchRelevanceModel();
 
   } catch (error) {
     console.error('❌ Error:', error.message);
