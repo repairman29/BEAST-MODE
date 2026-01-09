@@ -121,7 +121,9 @@
     "review:all-repos": "node scripts/review-and-fix-all-repos.js",
     "review:all-repos:fix": "node scripts/review-and-fix-all-repos.js --fix",
     "review:all-repos:apply": "node scripts/review-and-fix-all-repos.js --fix --apply",
-    "apply:fixes": "node scripts/apply-fixes-to-local-repos.js"
+    "apply:fixes": "node scripts/apply-fixes-to-local-repos.js",
+    "improve:all": "node scripts/improve-all-repos-to-100.js",
+    "improve:all:apply": "node scripts/improve-all-repos-to-100.js --apply"
   },
   "keywords": [
     "ai",

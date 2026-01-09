@@ -1,13 +1,27 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-// Dynamic require for Node.js modules
-let automatedImprover: any;
-let prCreator: any;
-try {
-  automatedImprover = require('../../../../../lib/mlops/automatedQualityImprover');
-  prCreator = require('../../../../../lib/github/prCreator');
-} catch (error) {
-  console.error('[Quality Improvement API] Failed to load modules:', error);
+// Dynamic require for Node.js modules (server-side only, bypasses webpack)
+function loadImprover() {
+  // Use eval to bypass webpack bundling for dynamic requires
+  const path = // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval('require')('path');
+  const rootPath = path.resolve(process.cwd(), '..');
+  const improverPath = path.join(rootPath, 'lib/mlops/automatedQualityImprover');
+  
+  try {
+    const automatedImprover = // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval('require')(improverPath);
+    console.log('[Quality Improvement API] Loaded automatedImprover:', {
+      exists: !!automatedImprover,
+      hasMethod: automatedImprover ? typeof automatedImprover.improveRepositoryQuality : 'N/A'
+    });
+    return automatedImprover;
+  } catch (error: any) {
+    console.error('[Quality Improvement API] Failed to load improver:', error.message);
+    throw error;
+  }
 }
 
 /**
@@ -35,9 +49,17 @@ export async function POST(request: NextRequest) {
       );
     }
     
-    if (!automatedImprover) {
+    // Load the improver module (server-side only)
+    const automatedImprover = loadImprover();
+    
+    if (!automatedImprover || typeof automatedImprover.improveRepositoryQuality !== 'function') {
+      console.error('[Quality Improvement API] automatedImprover:', {
+        exists: !!automatedImprover,
+        hasMethod: automatedImprover ? typeof automatedImprover.improveRepositoryQuality : 'N/A',
+        keys: automatedImprover ? Object.keys(automatedImprover) : []
+      });
       return NextResponse.json(
-        { error: 'Automated quality improver not available' },
+        { error: 'Automated quality improver not available', details: 'Module loaded but improveRepositoryQuality method not found' },
         { status: 500 }
       );
     }
