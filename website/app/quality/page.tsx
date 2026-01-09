@@ -60,6 +60,8 @@ export default function QualityDashboard() {
   const [results, setResults] = useState<QualityResult[]>([]);
   const [loading, setLoading] = useState(false);
   const [stats, setStats] = useState<any>(null);
+  const [trends, setTrends] = useState<Record<string, any>>({});
+  const [loadingTrends, setLoadingTrends] = useState<Record<string, boolean>>({});
 
   // Load stats on mount
   useEffect(() => {
@@ -87,6 +89,29 @@ export default function QualityDashboard() {
     setRepos(repos.filter(r => r !== repo));
   };
 
+  const fetchTrends = async (repo: string) => {
+    if (trends[repo] || loadingTrends[repo]) return;
+
+    setLoadingTrends(prev => ({ ...prev, [repo]: true }));
+
+    try {
+      const res = await fetch('/api/repos/quality/trends', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ repo, days: 90 })
+      });
+
+      if (res.ok) {
+        const data = await res.json();
+        setTrends(prev => ({ ...prev, [repo]: data }));
+      }
+    } catch (error) {
+      console.error(`Failed to fetch trends for ${repo}:`, error);
+    } finally {
+      setLoadingTrends(prev => ({ ...prev, [repo]: false }));
+    }
+  };
+
   const analyzeRepos = async () => {
     if (repos.length === 0) return;
 
@@ -107,6 +132,10 @@ export default function QualityDashboard() {
           }
 
           const data = await res.json();
+          
+          // Fetch trends for this repo
+          fetchTrends(repo);
+          
           return {
             repo,
             ...data,
@@ -493,6 +522,127 @@ export default function QualityDashboard() {
                                       </CardContent>
                                     </Card>
                                   ))}
+                              </div>
+                            </div>
+                          )}
+
+                          {/* Trends Visualization */}
+                          {trends[result.repo] && trends[result.repo].trends && trends[result.repo].trends.length > 0 && (
+                            <div className="mt-4 pt-4 border-t border-slate-700">
+                              <div className="text-xs text-slate-400 mb-3 uppercase tracking-wider">Quality Trends (90 days)</div>
+                              
+                              {/* Trend Stats */}
+                              {trends[result.repo].statistics && (
+                                <div className="grid grid-cols-3 gap-3 mb-4">
+                                  <div className="bg-slate-800/50 rounded p-2 border border-slate-700/50">
+                                    <div className="text-xs text-slate-400 mb-1">Trend</div>
+                                    <div className={`text-sm font-semibold flex items-center gap-1 ${
+                                      trends[result.repo].statistics.trend === 'improving' ? 'text-green-400' :
+                                      trends[result.repo].statistics.trend === 'declining' ? 'text-red-400' :
+                                      'text-slate-400'
+                                    }`}>
+                                      {trends[result.repo].statistics.trend === 'improving' ? '📈' :
+                                       trends[result.repo].statistics.trend === 'declining' ? '📉' : '➡️'}
+                                      {trends[result.repo].statistics.trend}
+                                    </div>
+                                  </div>
+                                  <div className="bg-slate-800/50 rounded p-2 border border-slate-700/50">
+                                    <div className="text-xs text-slate-400 mb-1">Change</div>
+                                    <div className={`text-sm font-semibold ${
+                                      trends[result.repo].statistics.trendValue > 0 ? 'text-green-400' : 'text-red-400'
+                                    }`}>
+                                      {trends[result.repo].statistics.trendValue > 0 ? '+' : ''}
+                                      {(trends[result.repo].statistics.trendValue * 100).toFixed(1)}%
+                                    </div>
+                                  </div>
+                                  <div className="bg-slate-800/50 rounded p-2 border border-slate-700/50">
+                                    <div className="text-xs text-slate-400 mb-1">Data Points</div>
+                                    <div className="text-sm font-semibold text-slate-300">
+                                      {trends[result.repo].statistics.count}
+                                    </div>
+                                  </div>
+                                </div>
+                              )}
+
+                              {/* Simple Line Chart (using CSS) */}
+                              <div className="bg-slate-800/50 rounded p-3 border border-slate-700/50">
+                                <div className="relative h-32">
+                                  {trends[result.repo].trends.length > 1 && (
+                                    <svg className="w-full h-full" viewBox="0 0 400 120" preserveAspectRatio="none">
+                                      <defs>
+                                        <linearGradient id={`gradient-${result.repo}`} x1="0%" y1="0%" x2="0%" y2="100%">
+                                          <stop offset="0%" stopColor="rgb(34, 211, 238)" stopOpacity="0.3" />
+                                          <stop offset="100%" stopColor="rgb(34, 211, 238)" stopOpacity="0" />
+                                        </linearGradient>
+                                      </defs>
+                                      {/* Grid lines */}
+                                      {[0, 25, 50, 75, 100].map(y => (
+                                        <line
+                                          key={y}
+                                          x1="0"
+                                          y1={120 - (y * 1.2)}
+                                          x2="400"
+                                          y2={120 - (y * 1.2)}
+                                          stroke="rgb(51, 65, 85)"
+                                          strokeWidth="0.5"
+                                          opacity="0.5"
+                                        />
+                                      ))}
+                                      {/* Trend line */}
+                                      <polyline
+                                        points={trends[result.repo].trends.map((t: any, i: number) => {
+                                          const x = (i / (trends[result.repo].trends.length - 1)) * 400;
+                                          const y = 120 - (t.quality * 120);
+                                          return `${x},${y}`;
+                                        }).join(' ')}
+                                        fill="none"
+                                        stroke="rgb(34, 211, 238)"
+                                        strokeWidth="2"
+                                      />
+                                      {/* Area under curve */}
+                                      <polygon
+                                        points={`0,120 ${trends[result.repo].trends.map((t: any, i: number) => {
+                                          const x = (i / (trends[result.repo].trends.length - 1)) * 400;
+                                          const y = 120 - (t.quality * 120);
+                                          return `${x},${y}`;
+                                        }).join(' ')} 400,120`}
+                                        fill={`url(#gradient-${result.repo})`}
+                                      />
+                                      {/* Current point */}
+                                      {trends[result.repo].trends.length > 0 && (() => {
+                                        const last = trends[result.repo].trends[trends[result.repo].trends.length - 1];
+                                        const x = 400;
+                                        const y = 120 - (last.quality * 120);
+                                        return (
+                                          <circle
+                                            cx={x}
+                                            cy={y}
+                                            r="4"
+                                            fill="rgb(34, 211, 238)"
+                                            stroke="rgb(15, 23, 42)"
+                                            strokeWidth="2"
+                                          />
+                                        );
+                                      })()}
+                                    </svg>
+                                  )}
+                                  {trends[result.repo].trends.length <= 1 && (
+                                    <div className="flex items-center justify-center h-full text-slate-500 text-sm">
+                                      Not enough data for trend visualization
+                                    </div>
+                                  )}
+                                </div>
+                                {/* X-axis labels */}
+                                {trends[result.repo].trends.length > 1 && (
+                                  <div className="flex justify-between text-xs text-slate-500 mt-2">
+                                    <span>
+                                      {new Date(trends[result.repo].trends[0].date).toLocaleDateString()}
+                                    </span>
+                                    <span>
+                                      {new Date(trends[result.repo].trends[trends[result.repo].trends.length - 1].date).toLocaleDateString()}
+                                    </span>
+                                  </div>
+                                )}
                               </div>
                             </div>
                           )}
