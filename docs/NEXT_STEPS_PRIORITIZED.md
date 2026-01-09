@@ -1,267 +1,211 @@
-# Next Steps - Prioritized Roadmap
-## Repository Quality Model - What's Next
+# Next Steps - Prioritized Action Plan
 
-**Date:** January 6, 2026  
-**Status:** ✅ Deployed to Production  
-**Current Model:** R²=0.004, MAE=0.065, RMSE=0.088
-
----
+**Date:** January 8, 2026  
+**Status:** 🚀 **Ready to Execute**
 
 ## 🎯 Immediate Next Steps (This Week)
 
-### 1. **Verify Production Deployment** 🔍 HIGH PRIORITY
-**Why:** Ensure everything works in production
+### 1. Deploy & Test PLG Components ✅ HIGH PRIORITY
+**Goal:** Get components live and working
 
-**Tasks:**
-- [ ] Test Quality API in production
-- [ ] Test Benchmark API in production
-- [ ] Verify trust score enhancement works
-- [ ] Check bounty quality badges display
-- [ ] Monitor for errors
+**Actions:**
+- [ ] Deploy demo page (`/plg-demo`) to production
+- [ ] Test all components with real repos
+- [ ] Verify badge API works (SVG generation)
+- [ ] Test feedback collection end-to-end
+- [ ] Verify usage tracking is working
 
-**Commands:**
-```bash
-# Test production APIs
-curl -X POST https://beast-mode.dev/api/repos/quality \
-  -H "Content-Type: application/json" \
-  -d '{"repo": "facebook/react", "platform": "beast-mode"}'
-
-curl -X POST https://beast-mode.dev/api/repos/benchmark \
-  -H "Content-Type: application/json" \
-  -d '{"repo": "facebook/react"}'
-```
-
-**Timeline:** Today
+**Time:** 2-3 hours  
+**Impact:** HIGH - Validates everything works
 
 ---
 
-### 2. **Improve Model Accuracy** 🎯 HIGH PRIORITY
-**Why:** R² of 0.004 is very low - model needs improvement
+### 2. Integrate Components into Existing Pages ✅ HIGH PRIORITY
+**Goal:** Use components where they add value
 
-**Current Performance:**
-- R²: 0.004 (very low - model explains <1% of variance)
-- MAE: 0.065 (good - predictions within 6.5%)
-- RMSE: 0.088 (good - low error)
+**Actions:**
+- [ ] Add Quality Widget to `/quality` page
+- [ ] Add Recommendation Cards to quality results
+- [ ] Add Feedback Button to quality predictions
+- [ ] Add Quality Badge to README/docs
+- [ ] Replace existing quality displays with components
 
-**Goal:** Improve R² to 0.1+ (10x improvement)
-
-**Strategies:**
-
-#### A. Feature Engineering (Recommended First)
-- Add interaction features (stars × activity, forks × age)
-- Create composite features (engagement score, health score)
-- Remove low-importance features
-- Normalize features better
-
-**Script:** `scripts/improve-model-with-existing-repos.js` (exists)
-
-#### B. Hyperparameter Tuning
-- Increase tree count: 50 → 100, 200
-- Adjust max depth: 10 → 15, 20
-- Tune min samples split: 10 → 5, 20
-
-**Expected:** 10-20% improvement
-
-#### C. Try Different Algorithms
-- Gradient Boosting (often better for small datasets)
-- Neural Networks (if we get more data)
-- Ensemble methods
-
-**Timeline:** 1-2 weeks
+**Time:** 3-4 hours  
+**Impact:** HIGH - Immediate value to users
 
 ---
 
-### 3. **Add More Diverse Training Data** 📈 MEDIUM PRIORITY
-**Why:** Current dataset is 96.8% high quality - needs more variance
+### 3. Set Up Usage Monitoring ✅ MEDIUM PRIORITY
+**Goal:** Track what's actually being used
 
-**Current Distribution:**
-- High Quality (≥0.7): 96.8%
-- Medium Quality (0.4-0.7): 3.2%
-- Low Quality (<0.4): 0.0%
+**Actions:**
+- [ ] Run database migration for `plg_component_usage` table
+- [ ] Verify tracking API works (`/api/plg/usage`)
+- [ ] Test component tracking (client-side)
+- [ ] Set up weekly usage reports
+- [ ] Create dashboard to view stats
 
-**Target:**
-- Add lower quality repos (0.0-0.4 range)
-- More language diversity
-- Different project types
-- Various sizes
-
-**Commands:**
-```bash
-# Discover more diverse repos
-node scripts/discover-more-repos.js 500 diverse
-
-# Scan them
-node scripts/scan-notable-repos.js --maxRepos 500
-
-# Retrain
-node scripts/retrain-with-notable-quality.js
-```
-
-**Timeline:** 1-2 weeks
+**Time:** 2-3 hours  
+**Impact:** MEDIUM - Data-driven decisions
 
 ---
 
-## 📊 Short-term Improvements (Next 2-4 Weeks)
+## 📅 Short-Term (Next 2 Weeks)
 
-### 4. **Monitor Usage & Collect Feedback** 📈
-**Why:** Understand how users interact with quality features
+### 4. Create Quick Start Guide ✅ HIGH PRIORITY
+**Goal:** Make it easy for new users
 
-**Metrics to Track:**
-- API usage (requests/day)
-- Which repos are being checked
-- User engagement with quality scores
-- Trust score changes
-- Bounty quality views
+**Actions:**
+- [ ] Create "5-Minute Quick Start" guide
+- [ ] Add code examples for each component
+- [ ] Create video/screenshots showing usage
+- [ ] Add to main README
+- [ ] Create landing page for developers
 
-**Tools:**
-- Vercel Analytics
-- Supabase logs
-- Custom monitoring dashboard
-
-**Timeline:** Ongoing
+**Time:** 4-5 hours  
+**Impact:** HIGH - Reduces friction for new users
 
 ---
 
-### 5. **Feature Enhancements** 🎨
-**Why:** Improve user experience and value
+### 5. Build Quality Dashboard Using Components ✅ HIGH PRIORITY
+**Goal:** Showcase components in real use case
 
-**BEAST MODE:**
-- [ ] Quality improvement tracker (historical scores)
-- [ ] Feature importance visualization
-- [ ] Improvement recommendations UI
-- [ ] Batch quality analysis tool
+**Actions:**
+- [ ] Create enhanced quality dashboard
+- [ ] Use QualityWidget for main display
+- [ ] Use RecommendationCards for insights
+- [ ] Use FeedbackButton for each prediction
+- [ ] Add trends visualization
+- [ ] Make it the default quality page
 
-**Echeo:**
-- [ ] Quality breakdown in trust score
-- [ ] Quality trends over time
-- [ ] Organization-wide quality metrics
-- [ ] Quality-based matching
-
-**Timeline:** 2-4 weeks
+**Time:** 6-8 hours  
+**Impact:** HIGH - Demonstrates value
 
 ---
 
-### 6. **Automated Retraining Pipeline** 🔄
-**Why:** Keep model up-to-date with new data
+### 6. Test Integration Templates ✅ MEDIUM PRIORITY
+**Goal:** Validate templates work
 
-**Pipeline:**
-1. Collect new repos weekly
-2. Scan and extract features
-3. Retrain model
-4. A/B test new vs old
-5. Deploy if better
+**Actions:**
+- [ ] Test GitHub Actions template in real repo
+- [ ] Test Vercel integration template
+- [ ] Test Slack notification template
+- [ ] Fix any issues found
+- [ ] Document any gotchas
 
-**Timeline:** 2-3 weeks to set up
-
----
-
-## 🔬 Medium-term Goals (Next 1-3 Months)
-
-### 7. **Model Performance Targets**
-- **R²:** 0.004 → 0.1+ (25x improvement)
-- **MAE:** Maintain <0.1
-- **RMSE:** Maintain <0.1
-- **Dataset:** 1,580 → 5,000+ repos
-
-### 8. **Product Features**
-- Quality widget/badge for GitHub READMEs
-- Quality API for external integrations
-- Quality-based recommendations
-- Quality leaderboards
-
-### 9. **Research & Insights**
-- Publish quality insights report
-- Blog posts about findings
-- Open source contributions
-- Community engagement
+**Time:** 3-4 hours  
+**Impact:** MEDIUM - Validates templates
 
 ---
 
-## 🎯 Recommended Priority Order
+## 🚀 Medium-Term (Next Month)
 
-### **This Week (Critical)**
-1. ✅ Verify production deployment
-2. ✅ Start feature engineering experiments
-3. ✅ Set up monitoring
+### 7. Measure & Iterate ✅ HIGH PRIORITY
+**Goal:** Build what users actually use
 
-### **Next 2 Weeks (High Priority)**
-4. Improve model (feature engineering + hyperparameter tuning)
-5. Add more diverse training data
-6. Collect user feedback
+**Actions:**
+- [ ] Query usage stats weekly
+- [ ] Identify most-used components
+- [ ] Identify unused components
+- [ ] Improve popular components
+- [ ] Remove or simplify unused ones
+- [ ] Build more features using popular patterns
 
-### **Next Month (Medium Priority)**
-7. Build quality improvement tracker
-8. Set up automated retraining
-9. Enhance UI/UX
-
-### **Ongoing**
-10. Monitor usage
-11. Iterate based on feedback
-12. Continuous model improvement
+**Time:** Ongoing  
+**Impact:** HIGH - Data-driven development
 
 ---
 
-## 💡 Quick Wins (Can Do Today)
+### 8. Create SDK/Helper Library ✅ MEDIUM PRIORITY
+**Goal:** Make API usage even easier
 
-1. **Test Production APIs** (15 minutes)
-   ```bash
-   curl -X POST https://beast-mode.dev/api/repos/quality ...
-   ```
+**Actions:**
+- [ ] Create TypeScript SDK
+- [ ] Add helper functions
+- [ ] Add type definitions
+- [ ] Create npm package
+- [ ] Document SDK usage
 
-2. **Start Feature Engineering** (1-2 hours)
-   ```bash
-   node scripts/improve-model-with-existing-repos.js
-   ```
-
-3. **Set Up Monitoring** (30 minutes)
-   - Check Vercel Analytics
-   - Set up Supabase logging
-   - Create simple dashboard
+**Time:** 8-10 hours  
+**Impact:** MEDIUM - Better DX
 
 ---
 
-## 📈 Success Metrics
+### 9. Build More Templates ✅ LOW PRIORITY
+**Goal:** Cover more common use cases
 
-### **Week 1 Goals**
-- [ ] Production APIs verified working
-- [ ] Feature engineering experiments started
-- [ ] Monitoring set up
-- [ ] No critical errors
+**Actions:**
+- [ ] Discord integration template
+- [ ] Email report template
+- [ ] CI/CD integration templates
+- [ ] Webhook templates
+- [ ] API client templates
 
-### **Month 1 Goals**
-- [ ] R² improved to 0.05+ (12x improvement)
-- [ ] 2,000+ repos in dataset
-- [ ] User feedback collected
-- [ ] Quality tracker feature added
-
-### **Quarter 1 Goals**
-- [ ] R² improved to 0.1+ (25x improvement)
-- [ ] 5,000+ repos in dataset
-- [ ] Automated retraining pipeline
-- [ ] Quality widget/badge launched
+**Time:** 4-6 hours  
+**Impact:** LOW - Nice to have
 
 ---
 
-## 🚀 What to Do Right Now
+## 🎯 Recommended Order
 
-**Immediate Actions:**
-1. **Test production APIs** - Verify everything works
-2. **Start feature engineering** - Improve model accuracy
-3. **Set up monitoring** - Track usage and errors
+### Week 1: Deploy & Integrate
+1. **Deploy demo page** (1 hour)
+2. **Integrate components** (3-4 hours)
+3. **Set up monitoring** (2-3 hours)
+4. **Test everything** (2 hours)
 
-**This Week:**
-4. **Improve model** - Feature engineering + hyperparameter tuning
-5. **Add diverse repos** - Expand dataset with lower quality repos
-6. **Collect feedback** - Monitor user interactions
+**Total:** ~8-10 hours
 
-**This Month:**
-7. **Build features** - Quality tracker, batch analysis
-8. **Automate** - Set up retraining pipeline
-9. **Iterate** - Based on usage and feedback
+### Week 2: Improve & Measure
+1. **Create quick start guide** (4-5 hours)
+2. **Build quality dashboard** (6-8 hours)
+3. **Test templates** (3-4 hours)
+
+**Total:** ~13-17 hours
+
+### Week 3-4: Iterate Based on Data
+1. **Measure usage** (ongoing)
+2. **Improve popular components** (as needed)
+3. **Build SDK** (8-10 hours)
+4. **More templates** (if needed)
+
+**Total:** Variable
+
+## 💡 Key Principles
+
+### Do First
+- ✅ Deploy and test (validate it works)
+- ✅ Integrate into existing pages (immediate value)
+- ✅ Measure usage (data-driven decisions)
+
+### Do Next
+- ✅ Improve based on usage data
+- ✅ Build what's popular
+- ✅ Remove what's not used
+
+### Don't Do Yet
+- ❌ Build more components (wait for usage data)
+- ❌ Create SDK (wait for demand)
+- ❌ More templates (wait for requests)
+
+## 🚀 This Week's Focus
+
+**Priority 1: Deploy & Test**
+- Get components live
+- Verify everything works
+- Fix any issues
+
+**Priority 2: Integrate**
+- Use components in existing pages
+- Replace manual implementations
+- Add value immediately
+
+**Priority 3: Monitor**
+- Set up tracking
+- Start collecting data
+- Prepare for iteration
 
 ---
 
-**Status:** 🟢 **Ready for Next Phase - Model Improvement**
-
-**Recommended Next Step:** Start feature engineering to improve R² from 0.004 to 0.1+
-
+**Status:** ✅ **Ready to Execute**  
+**Next:** Start with Priority 1 - Deploy & Test
