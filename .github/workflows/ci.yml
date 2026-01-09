@@ -26,8 +26,7 @@ jobs:
       run: npm ci
     
     - name: Run tests
-      run:
-      continue-on-error: true npm test || echo "⚠️  Tests failed or not found, continuing..."
+      run: npm test || echo "⚠️  Tests failed or not found, continuing..."
       continue-on-error: true
     
     - name: Run linter
