@@ -7,7 +7,10 @@ import { Badge } from '@/components/ui/badge';
 /**
  * PLG Component Usage Dashboard
  * 
- * Shows which components are used most to guide development
+ * INTERNAL USE ONLY - Shows which components are used most to guide development
+ * 
+ * Audience: Internal team/admins
+ * Purpose: Data-driven product decisions
  */
 
 interface ComponentUsage {
@@ -30,8 +33,13 @@ export default function PLGUsageDashboard() {
   const [days, setDays] = useState(30);
   const [componentType, setComponentType] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [accessDenied, setAccessDenied] = useState(false);
 
   useEffect(() => {
+    // TODO: Add authentication check here
+    // For now, allow access but show warning
+    // In production, add: if (!isAdmin()) { setAccessDenied(true); return; }
+    
     fetchUsageStats();
   }, [days, componentType]);
 
@@ -47,6 +55,10 @@ export default function PLGUsageDashboard() {
 
       const response = await fetch(url);
       if (!response.ok) {
+        if (response.status === 403) {
+          setAccessDenied(true);
+          return;
+        }
         throw new Error(`HTTP ${response.status}`);
       }
 
@@ -80,14 +92,42 @@ export default function PLGUsageDashboard() {
     return (count / stats.total * 100).toFixed(1);
   };
 
+  // Access denied screen
+  if (accessDenied) {
+    return (
+      <div className="min-h-screen bg-slate-950 p-6 flex items-center justify-center">
+        <Card className="bg-slate-900/90 border-slate-800 max-w-md">
+          <CardHeader>
+            <CardTitle className="text-white">Access Denied</CardTitle>
+            <CardDescription>This page is for internal use only.</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <p className="text-slate-400">
+              The PLG Usage Dashboard is an internal analytics tool for the BEAST MODE team.
+              If you need access, please contact the team.
+            </p>
+          </CardContent>
+        </Card>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-slate-950 p-6">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-4xl font-bold text-white mb-2">PLG Component Usage Dashboard</h1>
+          <div className="flex items-center justify-between mb-2">
+            <h1 className="text-4xl font-bold text-white">PLG Component Usage Dashboard</h1>
+            <Badge className="bg-amber-500/20 text-amber-400 border-amber-500/50">
+              Internal Only
+            </Badge>
+          </div>
           <p className="text-slate-400">
             Track which components are used most to guide development decisions
+          </p>
+          <p className="text-xs text-amber-400 mt-2">
+            ⚠️ This is an internal analytics dashboard. Not for customer use.
           </p>
         </div>
 
