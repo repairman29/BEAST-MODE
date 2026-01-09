@@ -1560,12 +1560,55 @@ function QualityView({ data }: any): React.JSX.Element {
                   <> • {latestScan.mlQuality.percentile.toFixed(0)}th percentile</>
                 )}
               </div>
+
+              {/* Model Info Badge */}
+              {latestScan.mlQuality.modelInfo && (
+                <div className="mb-4 flex items-center justify-center gap-2 flex-wrap">
+                  <span className="text-xs text-slate-500 bg-slate-800/50 px-2 py-1 rounded border border-slate-700/50">
+                    {latestScan.mlQuality.modelInfo.name} {latestScan.mlQuality.modelInfo.version}
+                  </span>
+                  <span className="text-xs text-slate-500">{latestScan.mlQuality.modelInfo.accuracy}</span>
+                  {latestScan.mlQuality.modelInfo.trainingDate && (
+                    <span className="text-xs text-slate-500">
+                      Trained: {new Date(latestScan.mlQuality.modelInfo.trainingDate).toLocaleDateString()}
+                    </span>
+                  )}
+                </div>
+              )}
+
+              {/* Confidence Explanation */}
+              {latestScan.mlQuality.confidenceExplanation && (
+                <div className="w-full mb-4 bg-blue-500/10 border border-blue-500/30 rounded-lg p-3">
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className={`text-xs px-2 py-1 rounded ${
+                      latestScan.mlQuality.confidenceExplanation.level === 'very-high' ? 'bg-green-500/20 text-green-400 border border-green-500/50' :
+                      latestScan.mlQuality.confidenceExplanation.level === 'high' ? 'bg-blue-500/20 text-blue-400 border border-blue-500/50' :
+                      latestScan.mlQuality.confidenceExplanation.level === 'medium' ? 'bg-amber-500/20 text-amber-400 border border-amber-500/50' :
+                      'bg-red-500/20 text-red-400 border border-red-500/50'
+                    }`}>
+                      {latestScan.mlQuality.confidenceExplanation.level.replace('-', ' ')}
+                    </span>
+                  </div>
+                  <p className="text-xs text-slate-300 mb-2">
+                    {latestScan.mlQuality.confidenceExplanation.explanation}
+                  </p>
+                  {latestScan.mlQuality.confidenceExplanation.factors && latestScan.mlQuality.confidenceExplanation.factors.length > 0 && (
+                    <div className="text-xs text-slate-400 mb-2">
+                      Factors: {latestScan.mlQuality.confidenceExplanation.factors.join(', ')}
+                    </div>
+                  )}
+                  <div className="text-xs text-cyan-400 italic">
+                    💡 {latestScan.mlQuality.confidenceExplanation.recommendation}
+                  </div>
+                </div>
+              )}
               {latestScan.mlQuality.factors && Object.keys(latestScan.mlQuality.factors).length > 0 && (
                 <div className="w-full mt-4">
                   <div className="text-xs text-slate-400 mb-2 uppercase tracking-wider">Top Quality Factors</div>
                   <div className="grid grid-cols-2 gap-2">
                     {Object.entries(latestScan.mlQuality.factors)
-                      .slice(0, 6)
+                      .sort((a, b) => (b[1].importance || 0) - (a[1].importance || 0))
+                      .slice(0, 10)
                       .map(([factor, data]: [string, any]) => (
                         <div key={factor} className="bg-slate-800/50 rounded p-2 border border-slate-700/50">
                           <div className="text-xs text-slate-300 font-medium capitalize">
@@ -1586,24 +1629,62 @@ function QualityView({ data }: any): React.JSX.Element {
               )}
               {latestScan.mlQuality.recommendations && latestScan.mlQuality.recommendations.length > 0 && (
                 <div className="w-full mt-4">
-                  <div className="text-xs text-slate-400 mb-2 uppercase tracking-wider">Intelligence & Insights</div>
-                  <div className="space-y-2">
-                    {latestScan.mlQuality.recommendations.slice(0, 3).map((rec: any, idx: number) => (
-                      <div key={idx} className="bg-slate-800/50 rounded p-3 border border-slate-700/50 hover:border-slate-600 transition-colors">
-                        <div className="flex items-center gap-2 mb-1">
-                          <span className="text-sm font-semibold text-white">{rec.action}</span>
-                          {rec.estimatedGain && (
-                            <span className="text-xs text-cyan-400 bg-cyan-500/20 px-2 py-0.5 rounded">
-                              +{(rec.estimatedGain * 100).toFixed(0)}%
-                            </span>
+                  <div className="text-xs text-slate-400 mb-3 uppercase tracking-wider">Intelligence & Insights</div>
+                  <div className="space-y-3">
+                    {latestScan.mlQuality.recommendations
+                      .sort((a: any, b: any) => {
+                        // Sort by categorization type (quick-win first) or priority
+                        if (a.categorization?.type === 'quick-win' && b.categorization?.type !== 'quick-win') return -1;
+                        if (a.categorization?.type !== 'quick-win' && b.categorization?.type === 'quick-win') return 1;
+                        if (a.categorization?.roi === 'high' && b.categorization?.roi !== 'high') return -1;
+                        return (b.estimatedGain || 0) - (a.estimatedGain || 0);
+                      })
+                      .slice(0, 5)
+                      .map((rec: any, idx: number) => (
+                        <div key={idx} className="bg-slate-800/50 rounded p-3 border border-slate-700/50 hover:border-slate-600 transition-colors">
+                          <div className="flex items-start gap-2 mb-2 flex-wrap">
+                            <span className="text-sm font-semibold text-white flex-1">{rec.action}</span>
+                            <div className="flex gap-2 flex-wrap">
+                              {rec.categorization && (
+                                <>
+                                  <span className={`text-xs px-2 py-0.5 rounded ${
+                                    rec.categorization.type === 'quick-win' ? 'bg-green-500/20 text-green-400 border border-green-500/50' :
+                                    rec.categorization.type === 'high-impact' ? 'bg-blue-500/20 text-blue-400 border border-blue-500/50' :
+                                    'bg-purple-500/20 text-purple-400 border border-purple-500/50'
+                                  }`}>
+                                    {rec.categorization.type === 'quick-win' ? '⚡' : rec.categorization.type === 'high-impact' ? '🎯' : '🚀'} {rec.categorization.type.replace('-', ' ')}
+                                  </span>
+                                  <span className={`text-xs px-2 py-0.5 rounded border ${
+                                    rec.categorization.roi === 'high' ? 'bg-green-500/20 text-green-400 border-green-500/50' :
+                                    rec.categorization.roi === 'medium' ? 'bg-amber-500/20 text-amber-400 border-amber-500/50' :
+                                    'bg-slate-500/20 text-slate-400 border-slate-500/50'
+                                  }`}>
+                                    ROI: {rec.categorization.roi}
+                                  </span>
+                                </>
+                              )}
+                              {rec.estimatedGain && (
+                                <span className="text-xs text-cyan-400 bg-cyan-500/20 px-2 py-0.5 rounded border border-cyan-500/50">
+                                  +{(rec.estimatedGain * 100).toFixed(0)}%
+                                </span>
+                              )}
+                            </div>
+                          </div>
+                          <div className="text-xs text-slate-300 mb-2">{rec.impact}</div>
+                          {rec.categorization && (
+                            <div className="flex gap-4 text-xs text-slate-500 mb-2">
+                              <span>Effort: <span className="text-slate-400">{rec.categorization.effort}</span></span>
+                              <span>Timeframe: <span className="text-slate-400">{rec.categorization.timeframe}</span></span>
+                              {rec.categorization.estimatedHours && (
+                                <span>Hours: <span className="text-slate-400">{rec.categorization.estimatedHours}</span></span>
+                              )}
+                            </div>
+                          )}
+                          {rec.actionable && (
+                            <div className="text-xs text-cyan-400 mt-2 italic border-t border-slate-700/50 pt-2">{rec.actionable.substring(0, 150)}...</div>
                           )}
                         </div>
-                        <div className="text-xs text-slate-300 mb-1">{rec.impact}</div>
-                        {rec.actionable && (
-                          <div className="text-xs text-cyan-400 mt-1 italic">{rec.actionable.substring(0, 100)}...</div>
-                        )}
-                      </div>
-                    ))}
+                      ))}
                   </div>
                 </div>
               )}

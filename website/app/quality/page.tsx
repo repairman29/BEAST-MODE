@@ -20,8 +20,35 @@ interface QualityResult {
   quality: number;
   confidence: number;
   percentile: number;
+  confidenceExplanation?: {
+    score: number;
+    level: 'very-high' | 'high' | 'medium' | 'low';
+    explanation: string;
+    factors: string[];
+    recommendation: string;
+  };
   factors?: Record<string, { value: number; importance: number }>;
-  recommendations?: Array<{ action: string; impact?: string }>;
+  recommendations?: Array<{
+    action: string;
+    impact?: string;
+    priority?: 'high' | 'medium' | 'low';
+    estimatedGain?: number;
+    categorization?: {
+      type: 'quick-win' | 'high-impact' | 'strategic';
+      roi: 'high' | 'medium' | 'low';
+      effort: 'low' | 'medium' | 'high';
+      timeframe: string;
+      estimatedHours?: number;
+    };
+  }>;
+  modelInfo?: {
+    name: string;
+    version: string;
+    accuracy: string;
+    trainingDate?: string;
+    trainingSize?: number;
+    features?: number;
+  };
   cached?: boolean;
   latency?: number;
   error?: string;
@@ -118,6 +145,47 @@ export default function QualityDashboard() {
     if (quality >= 0.7) return 'High Quality';
     if (quality >= 0.4) return 'Moderate';
     return 'Low Quality';
+  };
+
+  const getConfidenceBadgeColor = (level: string) => {
+    switch (level) {
+      case 'very-high':
+        return 'bg-green-500/20 text-green-400 border-green-500/50';
+      case 'high':
+        return 'bg-blue-500/20 text-blue-400 border-blue-500/50';
+      case 'medium':
+        return 'bg-amber-500/20 text-amber-400 border-amber-500/50';
+      case 'low':
+        return 'bg-red-500/20 text-red-400 border-red-500/50';
+      default:
+        return 'bg-slate-500/20 text-slate-400 border-slate-500/50';
+    }
+  };
+
+  const getCategoryBadgeColor = (type: string) => {
+    switch (type) {
+      case 'quick-win':
+        return 'bg-green-500/20 text-green-400 border-green-500/50';
+      case 'high-impact':
+        return 'bg-blue-500/20 text-blue-400 border-blue-500/50';
+      case 'strategic':
+        return 'bg-purple-500/20 text-purple-400 border-purple-500/50';
+      default:
+        return 'bg-slate-500/20 text-slate-400 border-slate-500/50';
+    }
+  };
+
+  const getROIColor = (roi: string) => {
+    switch (roi) {
+      case 'high':
+        return 'text-green-400';
+      case 'medium':
+        return 'text-amber-400';
+      case 'low':
+        return 'text-slate-400';
+      default:
+        return 'text-slate-400';
+    }
   };
 
   return (
@@ -285,6 +353,48 @@ export default function QualityDashboard() {
                             </div>
                           </div>
 
+                          {/* Model Info Badge */}
+                          {result.modelInfo && (
+                            <div className="mb-4 flex items-center gap-2">
+                              <Badge variant="outline" className="text-xs">
+                                {result.modelInfo.name} {result.modelInfo.version}
+                              </Badge>
+                              <span className="text-xs text-slate-400">{result.modelInfo.accuracy}</span>
+                              {result.modelInfo.trainingDate && (
+                                <span className="text-xs text-slate-500">
+                                  Trained: {new Date(result.modelInfo.trainingDate).toLocaleDateString()}
+                                </span>
+                              )}
+                            </div>
+                          )}
+
+                          {/* Confidence Explanation */}
+                          {result.confidenceExplanation && (
+                            <Card className="bg-blue-500/10 border-blue-500/30 mb-4">
+                              <CardContent className="pt-4">
+                                <div className="flex items-center gap-2 mb-2">
+                                  <Badge className={getConfidenceBadgeColor(result.confidenceExplanation.level)}>
+                                    {result.confidenceExplanation.level.replace('-', ' ')}
+                                  </Badge>
+                                  <span className="text-sm text-slate-400">
+                                    Confidence: {(result.confidence * 100).toFixed(0)}%
+                                  </span>
+                                </div>
+                                <p className="text-sm text-slate-300 mb-2">
+                                  {result.confidenceExplanation.explanation}
+                                </p>
+                                {result.confidenceExplanation.factors && result.confidenceExplanation.factors.length > 0 && (
+                                  <div className="text-xs text-slate-400 mb-2">
+                                    Factors: {result.confidenceExplanation.factors.join(', ')}
+                                  </div>
+                                )}
+                                <div className="text-xs text-cyan-400 italic">
+                                  💡 {result.confidenceExplanation.recommendation}
+                                </div>
+                              </CardContent>
+                            </Card>
+                          )}
+
                           <div className="grid grid-cols-3 gap-4 mb-4">
                             <div>
                               <div className="text-xs text-slate-400 mb-1">Confidence</div>
@@ -308,17 +418,25 @@ export default function QualityDashboard() {
 
                           {result.factors && Object.keys(result.factors).length > 0 && (
                             <div className="mt-4 pt-4 border-t border-slate-700">
-                              <div className="text-xs text-slate-400 mb-2">Top Factors:</div>
-                              <div className="flex flex-wrap gap-2">
+                              <div className="text-xs text-slate-400 mb-2 uppercase tracking-wider">Top Quality Factors</div>
+                              <div className="grid grid-cols-2 gap-2">
                                 {Object.entries(result.factors)
-                                  .slice(0, 5)
+                                  .sort((a, b) => (b[1].importance || 0) - (a[1].importance || 0))
+                                  .slice(0, 10)
                                   .map(([factor, data]: [string, any]) => (
-                                    <Badge
-                                      key={factor}
-                                      className="bg-slate-700/50 text-slate-300 border-slate-600"
-                                    >
-                                      {factor.replace(/([A-Z])/g, ' $1').trim()}: {data.value?.toFixed(0) || 0}
-                                    </Badge>
+                                    <div key={factor} className="bg-slate-800/50 rounded p-2 border border-slate-700/50">
+                                      <div className="text-xs text-slate-300 font-medium capitalize mb-1">
+                                        {factor.replace(/([A-Z])/g, ' $1').trim()}
+                                      </div>
+                                      <div className="text-xs text-blue-400">
+                                        Value: {typeof data.value === 'number' ? data.value.toFixed(0) : data.value}
+                                      </div>
+                                      {data.importance && (
+                                        <div className="text-xs text-slate-500 mt-1">
+                                          Impact: {(data.importance * 100).toFixed(1)}%
+                                        </div>
+                                      )}
+                                    </div>
                                   ))}
                               </div>
                             </div>
@@ -326,14 +444,56 @@ export default function QualityDashboard() {
 
                           {result.recommendations && result.recommendations.length > 0 && (
                             <div className="mt-4 pt-4 border-t border-slate-700">
-                              <div className="text-xs text-slate-400 mb-2">Recommendations:</div>
-                              <ul className="space-y-1">
-                                {result.recommendations.slice(0, 3).map((rec: any, idx: number) => (
-                                  <li key={idx} className="text-sm text-slate-300">
-                                    • {rec.action}
-                                  </li>
-                                ))}
-                              </ul>
+                              <div className="text-xs text-slate-400 mb-3 uppercase tracking-wider">Recommendations</div>
+                              <div className="space-y-3">
+                                {result.recommendations
+                                  .sort((a: any, b: any) => {
+                                    // Sort by categorization type (quick-win first) or priority
+                                    if (a.categorization?.type === 'quick-win' && b.categorization?.type !== 'quick-win') return -1;
+                                    if (a.categorization?.type !== 'quick-win' && b.categorization?.type === 'quick-win') return 1;
+                                    if (a.categorization?.roi === 'high' && b.categorization?.roi !== 'high') return -1;
+                                    return (b.estimatedGain || 0) - (a.estimatedGain || 0);
+                                  })
+                                  .slice(0, 5)
+                                  .map((rec: any, idx: number) => (
+                                    <Card key={idx} className="bg-slate-800/50 border-slate-700/50">
+                                      <CardContent className="p-3">
+                                        <div className="flex items-start justify-between mb-2">
+                                          <h4 className="text-sm font-semibold text-white flex-1">{rec.action}</h4>
+                                          <div className="flex gap-2 ml-2">
+                                            {rec.categorization && (
+                                              <>
+                                                <Badge className={getCategoryBadgeColor(rec.categorization.type)}>
+                                                  {rec.categorization.type === 'quick-win' ? '⚡' : rec.categorization.type === 'high-impact' ? '🎯' : '🚀'} {rec.categorization.type.replace('-', ' ')}
+                                                </Badge>
+                                                <Badge variant="outline" className={`text-xs ${getROIColor(rec.categorization.roi)}`}>
+                                                  ROI: {rec.categorization.roi}
+                                                </Badge>
+                                              </>
+                                            )}
+                                            {rec.estimatedGain && (
+                                              <Badge className="bg-cyan-500/20 text-cyan-400 border-cyan-500/50 text-xs">
+                                                +{(rec.estimatedGain * 100).toFixed(0)}%
+                                              </Badge>
+                                            )}
+                                          </div>
+                                        </div>
+                                        {rec.impact && (
+                                          <p className="text-xs text-slate-300 mb-2">{rec.impact}</p>
+                                        )}
+                                        {rec.categorization && (
+                                          <div className="flex gap-4 text-xs text-slate-500">
+                                            <span>Effort: <span className="text-slate-400">{rec.categorization.effort}</span></span>
+                                            <span>Timeframe: <span className="text-slate-400">{rec.categorization.timeframe}</span></span>
+                                            {rec.categorization.estimatedHours && (
+                                              <span>Hours: <span className="text-slate-400">{rec.categorization.estimatedHours}</span></span>
+                                            )}
+                                          </div>
+                                        )}
+                                      </CardContent>
+                                    </Card>
+                                  ))}
+                              </div>
                             </div>
                           )}
 
