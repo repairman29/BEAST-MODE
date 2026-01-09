@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { usePLGTracking } from '@/lib/plg-tracker';
 
 /**
  * Quality Widget Component
@@ -21,6 +22,9 @@ export function QualityWidget({ repo, platform = 'beast-mode', className = '' }:
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    // Track component usage
+    usePLGTracking('QualityWidget', 'widget', { repo });
+    
     async function fetchQuality() {
       try {
         const response = await fetch('/api/repos/quality', {

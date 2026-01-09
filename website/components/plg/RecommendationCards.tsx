@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { usePLGTracking } from '@/lib/plg-tracker';
 
 /**
  * Recommendation Cards Component
@@ -20,6 +21,9 @@ export function RecommendationCards({ repo, platform = 'beast-mode', limit = 5 }
   const [recommendations, setRecommendations] = useState<any[]>([]);
 
   useEffect(() => {
+    // Track component usage
+    usePLGTracking('RecommendationCards', 'cards', { repo });
+    
     async function fetchRecommendations() {
       try {
         const response = await fetch('/api/repos/quality', {

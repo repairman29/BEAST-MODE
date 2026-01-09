@@ -1,6 +1,7 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { usePLGTracking } from '@/lib/plg-tracker';
 
 /**
  * Feedback Button Component
@@ -24,6 +25,11 @@ export function FeedbackButton({
 }: FeedbackButtonProps) {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    // Track component usage
+    usePLGTracking('FeedbackButton', 'button', { predictionId });
+  }, [predictionId]);
 
   async function submitFeedback(isHelpful: boolean) {
     setLoading(true);
