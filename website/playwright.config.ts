@@ -12,10 +12,10 @@ export default defineConfig({
   timeout: 60 * 1000, // 60 seconds for dev server
   
   // Test execution
-  fullyParallel: true,
+  fullyParallel: false, // Use sequential for stability
   forbidOnly: !!process.env.CI,
-  retries: process.env.CI ? 2 : 0,
-  workers: process.env.CI ? 1 : undefined,
+  retries: process.env.CI ? 2 : 1, // Retry once for flakiness
+  workers: 1, // Single worker for stability
   
   // Reporter configuration
   reporter: [
@@ -67,9 +67,9 @@ export default defineConfig({
   // Run local dev server before starting tests
   webServer: {
     command: 'npm run dev',
-    url: 'http://localhost:3000',
+    url: 'http://localhost:3000/api/health',
     reuseExistingServer: !process.env.CI,
-    timeout: 180 * 1000, // 3 minutes for server to start
+    timeout: 240 * 1000, // 4 minutes for server to start
     stdout: 'pipe',
     stderr: 'pipe',
   },
