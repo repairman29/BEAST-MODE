@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import InlineFeedbackButton from '@/components/feedback/InlineFeedbackButton';
+import EnhancedFeedbackPrompt from '@/components/feedback/EnhancedFeedbackPrompt';
 import { getQualityFeedbackTracker } from '@/lib/qualityFeedbackTracker';
 
 /**
@@ -65,6 +66,7 @@ export default function QualityDashboard() {
   const [stats, setStats] = useState<any>(null);
   const [trends, setTrends] = useState<Record<string, any>>({});
   const [loadingTrends, setLoadingTrends] = useState<Record<string, boolean>>({});
+  const [showFeedbackPrompt, setShowFeedbackPrompt] = useState<string | null>(null);
 
   // Load stats on mount
   useEffect(() => {
