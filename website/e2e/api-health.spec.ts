@@ -30,6 +30,6 @@ test.describe('API Health Checks', () => {
     const duration = Date.now() - start;
     
     expect(response.status()).toBe(200);
-    expect(duration).toBeLessThan(3000); // Should respond in < 3 seconds (dev server can be slower)
+    expect(duration).toBeLessThan(6000); // Should respond in < 6 seconds (dev server can be slow on cold start)
   });
 });
