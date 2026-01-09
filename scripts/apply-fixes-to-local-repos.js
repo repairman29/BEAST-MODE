@@ -74,14 +74,27 @@ async function applyFixes(repoResult, workspaceRoot) {
     // Try to find local path from repo name
     const repoName = repo.split('/').pop();
     const owner = repo.split('/')[0];
-    const possiblePaths = [
-      path.join(workspaceRoot, repoName),
-      path.join(workspaceRoot, repo.split('/')[1]),
-      path.join(workspaceRoot, '..', repoName), // Check parent directory
-      path.join(workspaceRoot, '..', '..', repoName), // Check grandparent
-      path.join(workspaceRoot, 'smuggler-' + repoName.replace('smuggler-', '')), // Handle smuggler- prefix
-      path.join(workspaceRoot, repoName.replace('smuggler-', '')), // Without prefix
+    // Handle naming variations
+    const nameVariations = [
+      repoName,
+      repoName.replace('smuggler-', ''),
+      'smuggler-' + repoName.replace('smuggler-', ''),
+      repoName.replace('-service', ''),
+      'smuggler-' + repoName.replace('-service', '').replace('smuggler-', ''),
+      repoName.replace('ai-gm-service', 'ai-gm'),
+      repoName.replace('code-roach', 'code-roach'),
+      repoName.replace('daisy-chain', 'daisy-chain'),
     ];
+    
+    const possiblePaths = [];
+    for (const name of nameVariations) {
+      possiblePaths.push(
+        path.join(workspaceRoot, name),
+        path.join(workspaceRoot, '..', name),
+        path.join(workspaceRoot, 'BEAST-MODE-PRODUCT', name),
+        path.join(workspaceRoot, 'BEAST-MODE-PRODUCT', 'smuggler-' + name.replace('smuggler-', '')),
+      );
+    }
     
     // Also search for directories containing the repo name
     try {
