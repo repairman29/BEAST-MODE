@@ -12,6 +12,7 @@ import { QualityWidget } from '@/components/plg/QualityWidget';
 import { RecommendationCards } from '@/components/plg/RecommendationCards';
 import { getUserLimits, canAddRepo, canExport, canCompare, getUserTier } from '@/lib/freemium-limits';
 import { isAuthenticated } from '@/lib/auth';
+import { exportQualityToCSV, exportQualityToJSON, exportQualityToPDF, QualityExportData } from '@/lib/export-quality-data';
 
 /**
  * Quality Dashboard MVP
@@ -270,16 +271,16 @@ export default function QualityDashboard() {
     <div className="min-h-screen bg-slate-950 p-6">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-4xl font-bold text-white mb-2">Quality Dashboard</h1>
-          <p className="text-slate-400">
+        <div className="mb-6 md:mb-8">
+          <h1 className="text-2xl md:text-4xl font-bold text-white mb-2">Quality Dashboard</h1>
+          <p className="text-sm md:text-base text-slate-400">
             Analyze and compare repository quality scores powered by XGBoost ML model (R² = 1.000)
           </p>
         </div>
 
         {/* Stats Overview */}
         {stats && (
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4 mb-4 md:mb-6">
             <Card className="bg-slate-900/90 border-slate-800">
               <CardContent className="pt-6">
                 <div className="text-sm text-slate-400 mb-1">Total Requests</div>
@@ -342,7 +343,7 @@ export default function QualityDashboard() {
           </Card>
         )}
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6">
           {/* Input Panel */}
           <Card className="bg-slate-900/90 border-slate-800 lg:col-span-1">
             <CardHeader>
