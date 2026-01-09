@@ -410,12 +410,35 @@ export default function QualityDashboard() {
           {/* Results Panel */}
           <Card className="bg-slate-900/90 border-slate-800 lg:col-span-2">
             <CardHeader>
-              <CardTitle className="text-white">Quality Results</CardTitle>
-              <CardDescription>
-                {results.length > 0
-                  ? `${results.length} repos analyzed`
-                  : 'Add repos and click Analyze to see results'}
-              </CardDescription>
+              <div className="flex items-center justify-between">
+                <div>
+                  <CardTitle className="text-white">Quality Results</CardTitle>
+                  <CardDescription>
+                    {results.length > 0
+                      ? `${results.length} repos analyzed`
+                      : 'Add repos and click Analyze to see results'}
+                  </CardDescription>
+                </div>
+                {results.length > 1 && userLimits?.canCompare && (
+                  <Button
+                    onClick={() => setShowComparison(true)}
+                    className="bg-purple-600 hover:bg-purple-700 text-sm"
+                  >
+                    🔍 Compare
+                  </Button>
+                )}
+                {results.length > 1 && !userLimits?.canCompare && (
+                  <Button
+                    onClick={() => {
+                      alert('Sign in to unlock comparison features!');
+                    }}
+                    className="bg-slate-700 hover:bg-slate-600 text-sm"
+                    title="Sign in to compare"
+                  >
+                    🔍 Compare (Sign In)
+                  </Button>
+                )}
+              </div>
             </CardHeader>
             <CardContent>
               {loading && (
