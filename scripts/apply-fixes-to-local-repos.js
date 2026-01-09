@@ -197,7 +197,8 @@ async function applyFixes(repoResult, workspaceRoot) {
 // Main function
 async function main() {
   const args = process.argv.slice(2);
-  const workspaceRoot = process.env.WORKSPACE_ROOT || path.resolve(__dirname, '../../..');
+  // Default to Smugglers directory (parent of BEAST-MODE-PRODUCT)
+  const workspaceRoot = process.env.WORKSPACE_ROOT || path.resolve(__dirname, '../..');
   const repoFilter = args.find(arg => arg.startsWith('--repo='))?.split('=')[1];
   
   log('\n🔧 BEAST MODE Fix Application System\n', 'bright');
