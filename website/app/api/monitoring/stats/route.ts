@@ -1,5 +1,16 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { createServiceRoleClient } from '../../../../../echeo-landing/lib/supabase';
+import { createClient } from '@supabase/supabase-js';
+
+function createServiceRoleClient() {
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.SUPABASE_URL;
+  const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_ANON_KEY;
+  
+  if (!supabaseUrl || !supabaseKey) {
+    throw new Error('Missing Supabase credentials');
+  }
+  
+  return createClient(supabaseUrl, supabaseKey);
+}
 
 /**
  * Monitoring Stats API
