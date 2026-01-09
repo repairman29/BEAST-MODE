@@ -118,13 +118,88 @@ async function discoverLocalRepos() {
   return repos;
 }
 
+// Normalize repo identifier (owner/repo format)
+function normalizeRepoName(nameOrUrl) {
+  // If it's a URL, extract owner/repo
+  const urlMatch = nameOrUrl.match(/github\.com[/:]([^/]+)\/([^/]+?)(?:\.git)?\/?$/);
+  if (urlMatch) {
+    return `${urlMatch[1]}/${urlMatch[2]}`;
+  }
+  // If it's already in owner/repo format, return as-is
+  if (nameOrUrl.includes('/') && !nameOrUrl.includes('://')) {
+    return nameOrUrl;
+  }
+  return nameOrUrl;
+}
+
+// Normalize URL to canonical form
+function normalizeUrl(url) {
+  if (!url || url.startsWith('file://')) return url;
+  return url.replace(/^git@github.com:/, 'https://github.com/')
+            .replace(/\.git$/, '')
+            .replace(/\/$/, '');
+}
+
+// Deduplicate repos by canonical identifier
+function deduplicateRepos(repos) {
+  const repoMap = new Map();
+  const duplicates = [];
+  
+  for (const repo of repos) {
+    const normalizedName = normalizeRepoName(repo.name);
+    const normalizedUrl = normalizeUrl(repo.url);
+    
+    // Create canonical key
+    const key = normalizedName.includes('/') ? normalizedName : normalizedUrl;
+    
+    if (repoMap.has(key)) {
+      // Merge with existing repo
+      const existing = repoMap.get(key);
+      duplicates.push({
+        original: repo.name,
+        mergedInto: existing.name,
+        source: repo.source
+      });
+      
+      // Merge local paths if available
+      if (repo.localPath && !existing.localPaths) {
+        existing.localPaths = [existing.localPath].filter(Boolean);
+      }
+      if (repo.localPath && existing.localPaths && !existing.localPaths.includes(repo.localPath)) {
+        existing.localPaths.push(repo.localPath);
+      }
+      
+      // Keep the best source (prioritize local-git > github-cli > others)
+      const sourcePriority = { 'local-git': 3, 'github-cli': 2, 'beast-mode-api': 1, 'enterprise': 1, 'local': 0 };
+      if (sourcePriority[repo.source] > (sourcePriority[existing.source] || 0)) {
+        existing.source = repo.source;
+      }
+    } else {
+      // New repo
+      const repoData = {
+        ...repo,
+        name: normalizedName,
+        url: normalizedUrl,
+        localPaths: repo.localPath ? [repo.localPath] : []
+      };
+      delete repoData.localPath; // Use localPaths array instead
+      repoMap.set(key, repoData);
+    }
+  }
+  
+  return {
+    repos: Array.from(repoMap.values()),
+    duplicates: duplicates
+  };
+}
+
 // Fetch all repos using GitHub CLI
 async function fetchAllRepos() {
-  const repos = [];
+  const allRepos = [];
   
   // First, discover local repos
   const localRepos = await discoverLocalRepos();
-  repos.push(...localRepos);
+  allRepos.push(...localRepos);
   
   // Try to get repos from GitHub CLI
   if (hasGitHubCLI()) {
@@ -138,16 +213,12 @@ async function fetchAllRepos() {
       
       ghRepos.forEach(repo => {
         const repoName = repo.nameWithOwner || `${repo.owner.login}/${repo.name}`;
-        // Avoid duplicates - check by name
-        const existing = repos.find(r => r.name === repoName || r.url === repo.url);
-        if (!existing) {
-          repos.push({
-            name: repoName,
-            url: repo.url,
-            private: repo.isPrivate,
-            source: 'github-cli'
-          });
-        }
+        allRepos.push({
+          name: repoName,
+          url: repo.url,
+          private: repo.isPrivate,
+          source: 'github-cli'
+        });
       });
       
       log(`  ✅ Found ${ghRepos.length} GitHub repositories`, 'green');
@@ -167,15 +238,12 @@ async function fetchAllRepos() {
     if (response.status === 200 && response.data.repos) {
       response.data.repos.forEach(repo => {
         const repoName = repo.fullName || repo.name;
-        // Avoid duplicates
-        if (!repos.find(r => r.name === repoName)) {
-          repos.push({
-            name: repoName,
-            url: repo.url || `https://github.com/${repoName}`,
-            private: repo.private || false,
-            source: 'beast-mode-api'
-          });
-        }
+        allRepos.push({
+          name: repoName,
+          url: repo.url || `https://github.com/${repoName}`,
+          private: repo.private || false,
+          source: 'beast-mode-api'
+        });
       });
       log(`  ✅ Found ${response.data.repos.length} repositories from API`, 'green');
     }
@@ -192,21 +260,38 @@ async function fetchAllRepos() {
     
     if (enterpriseResponse.status === 200 && enterpriseResponse.data.repos) {
       enterpriseResponse.data.repos.forEach(repo => {
-        const repoName = repo.name;
-        if (!repos.find(r => r.name === repoName)) {
-          repos.push({
-            name: repoName,
-            url: repo.url,
-            private: true,
-            source: 'enterprise'
-          });
-        }
+        allRepos.push({
+          name: repo.name,
+          url: repo.url,
+          private: true,
+          source: 'enterprise'
+        });
       });
       log(`  ✅ Found ${enterpriseResponse.data.repos.length} enterprise repositories`, 'green');
     }
   } catch (error) {
     log(`  ⚠️  Could not fetch enterprise repos: ${error.message}`, 'yellow');
   }
+  
+  // Deduplicate repos
+  log('\n🔍 Deduplicating repositories...', 'cyan');
+  const { repos, duplicates } = deduplicateRepos(allRepos);
+  
+  if (duplicates.length > 0) {
+    log(`  ⚠️  Found ${duplicates.length} duplicate entries (merged)`, 'yellow');
+    if (duplicates.length <= 10) {
+      duplicates.forEach(dup => {
+        log(`    - ${dup.original} → merged into ${dup.mergedInto}`, 'yellow');
+      });
+    } else {
+      log(`    - Showing first 10 of ${duplicates.length} duplicates...`, 'yellow');
+      duplicates.slice(0, 10).forEach(dup => {
+        log(`    - ${dup.original} → merged into ${dup.mergedInto}`, 'yellow');
+      });
+    }
+  }
+  
+  log(`  ✅ Unique repositories: ${repos.length} (from ${allRepos.length} total entries)`, 'green');
   
   return repos;
 }
@@ -400,6 +485,7 @@ async function generateReport(results) {
       averageScore: avgScore,
       scoreDistribution: scoreStats,
       reposWithFixes: withFixes.length,
+      duplicatesMerged: 0, // Will be populated from deduplication
     },
     results: results,
   };
@@ -418,6 +504,7 @@ async function generateReport(results) {
 - ❌ **Failed Reviews:** ${failed.length}
 - 🔧 **Repos with Fixes:** ${withFixes.length}
 - 📊 **Average Quality Score:** ${avgScore.toFixed(1)}/100
+- 🔄 **Duplicates Merged:** ${report.summary.duplicatesMerged || 0}
 
 ## Score Distribution
 

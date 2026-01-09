@@ -1386,7 +1386,8 @@ export async function POST(request: NextRequest) {
           context: {
             repo,
             platform,
-            features: Object.keys(features).length,
+            features: features, // Store actual features, not just count
+            featuresCount: Object.keys(features).length,
             hasRecommendations: recommendations.length > 0,
             percentile
           },

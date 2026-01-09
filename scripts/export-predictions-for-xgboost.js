@@ -52,63 +52,81 @@ async function exportPredictionsForXGBoost() {
   for (const pred of predictions) {
     const context = pred.context || {};
     const repo = context.repo || 'unknown/unknown';
-    const features = context.features || {};
+    
+    // Try to get features from context, or fetch from API
+    let features = {};
+    if (context.features && typeof context.features === 'object' && !Array.isArray(context.features)) {
+      // Features are stored as object
+      features = context.features;
+    } else if (typeof context.features === 'number') {
+      // Only count stored, need to fetch
+      console.log(`   ⚠️  Features not stored for ${repo}, using defaults`);
+      features = {}; // Will use defaults below
+    } else {
+      features = context.features || {};
+    }
     
     // Extract features in the format expected by train_xgboost.py
+    // Use camelCase keys that match what the Python script expects
     const repoData = {
       name: repo,
       full_name: repo,
+      repo: repo, // Also include as 'repo' for compatibility
       quality_score: pred.actual_value, // Use actual_value as the target
       predicted_quality: pred.predicted_value,
       confidence: pred.confidence || 0.5,
       features: {
-        // Code metrics
-        has_readme: features.hasReadme ? 1 : 0,
-        readme_length: features.readmeLength || 0,
-        has_tests: features.hasTests ? 1 : 0,
-        test_coverage: features.testCoverage || 0,
-        has_ci: features.hasCI ? 1 : 0,
-        has_license: features.hasLicense ? 1 : 0,
-        has_contributing: features.hasContributing ? 1 : 0,
+        // Code metrics (use camelCase for Python script compatibility)
+        hasReadme: features.hasReadme ? 1 : 0,
+        readmeLength: features.readmeLength || 0,
+        hasTests: features.hasTests ? 1 : 0,
+        testCoverage: features.testCoverage || 0,
+        hasCI: features.hasCI ? 1 : 0,
+        hasLicense: features.hasLicense ? 1 : 0,
+        hasContributing: features.hasContributing ? 1 : 0,
         
-        // Repository stats
+        // Repository stats (camelCase)
         stars: features.stars || 0,
         forks: features.forks || 0,
         watchers: features.watchers || 0,
-        open_issues: features.openIssues || 0,
-        total_issues: features.totalIssues || 0,
+        openIssues: features.openIssues || 0,
+        totalIssues: features.totalIssues || 0,
         
-        // Code stats
-        file_count: features.fileCount || features.totalFiles || 0,
-        total_lines: features.totalLines || 0,
-        code_lines: features.codeLines || 0,
-        comment_lines: features.commentLines || 0,
-        blank_lines: features.blankLines || 0,
+        // Code stats (camelCase)
+        fileCount: features.fileCount || features.totalFiles || 0,
+        totalLines: features.totalLines || 0,
+        codeLines: features.codeLines || 0,
+        commentLines: features.commentLines || 0,
+        blankLines: features.blankLines || 0,
         
-        // Language info
-        primary_language: features.primaryLanguage || 'unknown',
-        language_count: features.languageCount || 1,
+        // Language info (camelCase)
+        primaryLanguage: features.primaryLanguage || 'unknown',
+        languageCount: features.languageCount || 1,
         
-        // Activity
-        days_since_created: features.daysSinceCreated || 0,
-        days_since_updated: features.daysSinceUpdated || 0,
-        commit_count: features.commitCount || 0,
-        contributor_count: features.contributorCount || 0,
+        // Activity (camelCase)
+        daysSinceCreated: features.daysSinceCreated || 0,
+        daysSinceUpdated: features.daysSinceUpdated || 0,
+        commitCount: features.commitCount || 0,
+        contributorCount: features.contributorCount || 0,
         
-        // Quality indicators
-        has_documentation: features.hasDocumentation ? 1 : 0,
-        has_examples: features.hasExamples ? 1 : 0,
-        has_changelog: features.hasChangelog ? 1 : 0,
-        has_security_policy: features.hasSecurityPolicy ? 1 : 0,
+        // Quality indicators (camelCase)
+        hasDocumentation: features.hasDocumentation ? 1 : 0,
+        hasExamples: features.hasExamples ? 1 : 0,
+        hasChangelog: features.hasChangelog ? 1 : 0,
+        hasSecurityPolicy: features.hasSecurityPolicy ? 1 : 0,
         
-        // Size metrics
-        repo_size_kb: features.repoSizeKB || 0,
-        avg_file_size: features.avgFileSize || 0,
+        // Size metrics (camelCase)
+        repoSizeKB: features.repoSizeKB || 0,
+        avgFileSize: features.avgFileSize || 0,
         
-        // Additional features from context
+        // Additional common features
+        isActive: features.isActive ? 1 : 0,
+        hasReleases: features.hasReleases ? 1 : 0,
+        
+        // Additional features from context (preserve camelCase)
         ...Object.fromEntries(
           Object.entries(features).map(([k, v]) => [
-            k.replace(/([A-Z])/g, '_$1').toLowerCase(),
+            k, // Keep original key name (camelCase)
             typeof v === 'boolean' ? (v ? 1 : 0) : (typeof v === 'number' ? v : 0)
           ])
         )
