@@ -19,9 +19,20 @@ from sklearn.metrics import r2_score, mean_absolute_error, mean_squared_error
 # Add parent directory to path for imports
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-def load_training_data():
+def load_training_data(use_real_only=False):
     """Load training data from exported JSON file or local files"""
-    # Try exported file first (from Storage)
+    # Try real-only file first if requested
+    if use_real_only:
+        real_only_file = Path(__file__).parent.parent / '.beast-mode' / 'training-data' / 'all-repos-real-only.json'
+        if real_only_file.exists():
+            print("📥 Loading REAL FEEDBACK ONLY (no synthetic data)...")
+            with open(real_only_file, 'r') as f:
+                data = json.load(f)
+                repos = data.get('repositories', [])
+                print(f"✅ Loaded {len(repos)} repositories with REAL feedback only")
+                return repos
+    
+    # Try exported file (from Storage)
     exported_file = Path(__file__).parent.parent / '.beast-mode' / 'training-data' / 'all-repos-for-python.json'
     
     if exported_file.exists():
