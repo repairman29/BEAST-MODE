@@ -1,0 +1,52 @@
+[
+  {
+    "category": "code-quality",
+    "title": "Meaningful Variable Names",
+    "content": "Use descriptive names that reveal intent. Avoid abbreviations and single-letter names (except for loop counters). Names should be searchable, pronounceable, and consistent. Good: `userAccountBalance`, `isAuthenticated`. Bad: `uab`, `auth`, `x`.",
+    "metadata": {
+      "source": "Clean Code by Robert Martin",
+      "tags": ["naming", "readability", "maintainability"],
+      "priority": "high"
+    }
+  },
+  {
+    "category": "code-quality",
+    "title": "Small Functions",
+    "content": "Functions should do one thing and do it well. Keep functions small (ideally < 20 lines). If a function is hard to name, it's probably doing too much. Extract complex logic into separate functions with descriptive names.",
+    "metadata": {
+      "source": "Clean Code by Robert Martin",
+      "tags": ["functions", "readability", "maintainability"],
+      "priority": "high"
+    }
+  },
+  {
+    "category": "code-quality",
+    "title": "Error Handling",
+    "content": "Handle errors explicitly. Don't ignore exceptions. Use try-catch blocks appropriately. Provide meaningful error messages. Fail fast with clear diagnostics. Log errors appropriately. Never swallow exceptions silently.",
+    "metadata": {
+      "source": "Software Engineering Best Practices",
+      "tags": ["error-handling", "reliability", "debugging"],
+      "priority": "high"
+    }
+  },
+  {
+    "category": "code-quality",
+    "title": "Code Comments",
+    "content": "Comments should explain 'why', not 'what'. Good code is self-documenting. Use comments for complex business logic, non-obvious decisions, and warnings. Avoid redundant comments that just repeat the code.",
+    "metadata": {
+      "source": "Clean Code by Robert Martin",
+      "tags": ["documentation", "readability"],
+      "priority": "medium"
+    }
+  },
+  {
+    "category": "code-quality",
+    "title": "Test Coverage",
+    "content": "Write tests for critical paths. Aim for high coverage of business logic. Tests should be fast, independent, repeatable, and self-validating. Use unit tests for functions, integration tests for workflows, and E2E tests for user journeys.",
+    "metadata": {
+      "source": "Software Engineering Best Practices",
+      "tags": ["testing", "quality", "reliability"],
+      "priority": "high"
+    }
+  }
+]

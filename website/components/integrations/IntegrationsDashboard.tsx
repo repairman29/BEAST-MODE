@@ -4,6 +4,8 @@ import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '../ui/card';
 import { Button } from '../ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../ui/tabs';
+import ThirdPartyIntegrations from './ThirdPartyIntegrations';
+import CICDIntegrations from './CICDIntegrations';
 
 interface Integration {
   id: string;
@@ -17,7 +19,7 @@ export default function IntegrationsDashboard() {
   const [integrations, setIntegrations] = useState<Integration[]>([]);
   const [workflows, setWorkflows] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState<'overview' | 'github-actions' | 'gitlab' | 'bitbucket' | 'slack' | 'jira'>('overview');
+  const [activeTab, setActiveTab] = useState<'overview' | 'github-actions' | 'vercel' | 'railway' | 'gitlab' | 'bitbucket' | 'slack' | 'jira'>('overview');
 
   useEffect(() => {
     fetchData();
@@ -49,6 +51,8 @@ export default function IntegrationsDashboard() {
 
   const integrationTypes = [
     { id: 'github-actions', name: 'GitHub Actions', icon: '⚙️', description: 'CI/CD workflows' },
+    { id: 'vercel', name: 'Vercel', icon: '▲', description: 'Deployments & hosting' },
+    { id: 'railway', name: 'Railway', icon: '🚂', description: 'Deployments & hosting' },
     { id: 'gitlab', name: 'GitLab', icon: '🦊', description: 'GitLab CI/CD' },
     { id: 'bitbucket', name: 'Bitbucket', icon: '🔷', description: 'Bitbucket Pipelines' },
     { id: 'slack', name: 'Slack', icon: '💬', description: 'Notifications' },
@@ -63,9 +67,11 @@ export default function IntegrationsDashboard() {
       </div>
 
       <Tabs value={activeTab} onValueChange={(v) => setActiveTab(v as any)}>
-        <TabsList className="grid w-full grid-cols-6">
+        <TabsList className="grid w-full grid-cols-8">
           <TabsTrigger value="overview">Overview</TabsTrigger>
           <TabsTrigger value="github-actions">GitHub</TabsTrigger>
+          <TabsTrigger value="vercel">Vercel</TabsTrigger>
+          <TabsTrigger value="railway">Railway</TabsTrigger>
           <TabsTrigger value="gitlab">GitLab</TabsTrigger>
           <TabsTrigger value="bitbucket">Bitbucket</TabsTrigger>
           <TabsTrigger value="slack">Slack</TabsTrigger>
@@ -92,38 +98,15 @@ export default function IntegrationsDashboard() {
         </TabsContent>
 
         <TabsContent value="github-actions" className="space-y-4">
-          <Card className="bg-slate-900/90 border-slate-800">
-            <CardHeader>
-              <CardTitle className="text-white">GitHub Actions Workflows</CardTitle>
-              <CardDescription>Manage CI/CD workflows</CardDescription>
-            </CardHeader>
-            <CardContent>
-              {loading ? (
-                <div className="text-slate-400">Loading workflows...</div>
-              ) : (
-                <div className="space-y-4">
-                  <Button onClick={() => {/* Create workflow */}}>
-                    + Create Workflow
-                  </Button>
-                  <div className="space-y-2">
-                    {workflows.map(workflow => (
-                      <Card key={workflow.id} className="bg-slate-800 border-slate-700">
-                        <CardContent className="pt-4">
-                          <div className="flex justify-between items-start">
-                            <div>
-                              <h3 className="text-white font-semibold">{workflow.name}</h3>
-                              <p className="text-slate-400 text-sm">{workflow.repo}</p>
-                            </div>
-                            <Button variant="outline" size="sm">View YAML</Button>
-                          </div>
-                        </CardContent>
-                      </Card>
-                    ))}
-                  </div>
-                </div>
-              )}
-            </CardContent>
-          </Card>
+          <CICDIntegrations userId={typeof window !== 'undefined' ? localStorage.getItem('beastModeUserId') || undefined : undefined} />
+        </TabsContent>
+
+        <TabsContent value="vercel" className="space-y-4">
+          <CICDIntegrations userId={typeof window !== 'undefined' ? localStorage.getItem('beastModeUserId') || undefined : undefined} />
+        </TabsContent>
+
+        <TabsContent value="railway" className="space-y-4">
+          <CICDIntegrations userId={typeof window !== 'undefined' ? localStorage.getItem('beastModeUserId') || undefined : undefined} />
         </TabsContent>
 
         <TabsContent value="gitlab" className="space-y-4">
@@ -197,25 +180,7 @@ export default function IntegrationsDashboard() {
         </TabsContent>
 
         <TabsContent value="slack" className="space-y-4">
-          <Card className="bg-slate-900/90 border-slate-800">
-            <CardHeader>
-              <CardTitle className="text-white">Slack Integration</CardTitle>
-              <CardDescription>Send notifications to Slack</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-4">
-                <div>
-                  <label className="text-white text-sm mb-2 block">Webhook URL</label>
-                  <input
-                    type="text"
-                    className="w-full bg-slate-800 border border-slate-700 rounded px-3 py-2 text-white"
-                    placeholder="https://hooks.slack.com/services/..."
-                  />
-                </div>
-                <Button>Connect Slack</Button>
-              </div>
-            </CardContent>
-          </Card>
+          <ThirdPartyIntegrations userId={typeof window !== 'undefined' ? localStorage.getItem('beastModeUserId') || undefined : undefined} />
         </TabsContent>
 
         <TabsContent value="jira" className="space-y-4">

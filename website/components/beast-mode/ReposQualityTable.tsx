@@ -5,6 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui
 import { Button } from '../ui/button';
 import { Badge } from '../ui/badge';
 import QualityDetailModal from './QualityDetailModal';
+import InlineFeedbackButton from '../feedback/InlineFeedbackButton';
 
 /**
  * Repos Quality Table
@@ -515,16 +516,28 @@ export default function ReposQualityTable({ repos, onRefresh }: ReposQualityTabl
                       )}
                     </td>
                     <td className="py-3 px-4">
-                      {repo.cached && (
-                        <Badge className="bg-blue-500/20 text-blue-400 border-blue-500/50 text-xs">
-                          Cached
-                        </Badge>
-                      )}
-                      {repo.error && (
-                        <Badge className="bg-red-500/20 text-red-400 border-red-500/50 text-xs">
-                          Error
-                        </Badge>
-                      )}
+                      <div className="flex items-center gap-2">
+                        {repo.cached && (
+                          <Badge className="bg-blue-500/20 text-blue-400 border-blue-500/50 text-xs">
+                            Cached
+                          </Badge>
+                        )}
+                        {repo.error && (
+                          <Badge className="bg-red-500/20 text-red-400 border-red-500/50 text-xs">
+                            Error
+                          </Badge>
+                        )}
+                        {repo.predictionId && repo.quality !== undefined && !repo.cached && (
+                          <div onClick={(e) => e.stopPropagation()}>
+                            <InlineFeedbackButton
+                              predictionId={repo.predictionId}
+                              predictedValue={repo.quality}
+                              serviceName="code-roach"
+                              compact={true}
+                            />
+                          </div>
+                        )}
+                      </div>
                     </td>
                   </tr>
                 ))}

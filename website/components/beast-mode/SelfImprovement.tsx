@@ -5,6 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '../ui
 import { Button } from '../ui/button';
 import { ConfirmDialog, AlertDialog } from '../ui/ConfirmDialog';
 import { getAnalytics } from '@/lib/analytics';
+import EmptyState from '../ui/EmptyState';
 
 export default function SelfImprovement() {
   const [isAnalyzing, setIsAnalyzing] = useState(false);
@@ -255,11 +256,34 @@ export default function SelfImprovement() {
       </Card>
 
       {error && (
-        <Card className="bg-red-500/10 border-red-500/20">
-          <CardContent className="p-6">
-            <div className="text-red-400">{error}</div>
+        <EmptyState
+          icon={<span className="text-6xl">⚠️</span>}
+          title="Analysis Failed"
+          description={error}
+          action={{
+            label: 'Try Again',
+            onClick: handleAnalyze
+          }}
+        />
+      )}
+
+      {isAnalyzing && (
+        <Card className="bg-slate-900/90 border-slate-800">
+          <CardContent className="flex items-center justify-center py-16">
+            <div className="flex flex-col items-center gap-3">
+              <div className="animate-spin w-8 h-8 border-2 border-cyan-500 border-t-transparent rounded-full"></div>
+              <span className="text-cyan-400 text-sm">Analyzing codebase...</span>
+            </div>
           </CardContent>
         </Card>
+      )}
+
+      {!results && !error && !isAnalyzing && (
+        <EmptyState
+          icon={<span className="text-6xl">✨</span>}
+          title="Ready to Analyze"
+          description="Click 'Analyze This Site' to scan your codebase and get automated fix recommendations. We'll find issues and suggest improvements automatically."
+        />
       )}
 
       {results && (

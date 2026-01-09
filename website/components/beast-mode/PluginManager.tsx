@@ -5,6 +5,8 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '../ui
 import { Button } from '../ui/button';
 import PluginRunner from './PluginRunner';
 import PluginPermissions from './PluginPermissions';
+import PluginDependencies from './PluginDependencies';
+import PluginSandbox from './PluginSandbox';
 
 interface Plugin {
   id: string;
@@ -24,6 +26,8 @@ export default function PluginManager() {
   const [showConfig, setShowConfig] = useState(false);
   const [showRunner, setShowRunner] = useState(false);
   const [showPermissions, setShowPermissions] = useState(false);
+  const [showDependencies, setShowDependencies] = useState(false);
+  const [showSandbox, setShowSandbox] = useState(false);
 
   useEffect(() => {
     fetchInstalledPlugins();
@@ -224,10 +228,42 @@ export default function PluginManager() {
                   setShowConfig(false);
                   setShowRunner(false);
                   setShowPermissions(true);
+                  setShowDependencies(false);
+                  setShowSandbox(false);
                 }}
                 className="border-yellow-700 text-yellow-300 hover:bg-yellow-900/20"
               >
                 🔒 Permissions
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => {
+                  setSelectedPlugin(plugin);
+                  setShowConfig(false);
+                  setShowRunner(false);
+                  setShowPermissions(false);
+                  setShowDependencies(true);
+                  setShowSandbox(false);
+                }}
+                className="border-purple-700 text-purple-300 hover:bg-purple-900/20"
+              >
+                📦 Dependencies
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => {
+                  setSelectedPlugin(plugin);
+                  setShowConfig(false);
+                  setShowRunner(false);
+                  setShowPermissions(false);
+                  setShowDependencies(false);
+                  setShowSandbox(true);
+                }}
+                className="border-cyan-700 text-cyan-300 hover:bg-cyan-900/20"
+              >
+                🛡️ Sandbox
               </Button>
               <Button
                 variant="outline"
@@ -285,6 +321,19 @@ export default function PluginManager() {
                   pluginName={selectedPlugin.name}
                   userId={typeof window !== 'undefined' ? localStorage.getItem('beastModeUserId') || undefined : undefined}
                   onPermissionsChanged={() => fetchInstalledPlugins()}
+                />
+              ) : showDependencies ? (
+                <PluginDependencies
+                  pluginId={selectedPlugin.id}
+                  pluginName={selectedPlugin.name}
+                  userId={typeof window !== 'undefined' ? localStorage.getItem('beastModeUserId') || undefined : undefined}
+                  onInstall={() => fetchInstalledPlugins()}
+                />
+              ) : showSandbox ? (
+                <PluginSandbox
+                  pluginId={selectedPlugin.id}
+                  pluginName={selectedPlugin.name}
+                  userId={typeof window !== 'undefined' ? localStorage.getItem('beastModeUserId') || undefined : undefined}
                 />
               ) : showConfig ? (
                 <div className="space-y-4">

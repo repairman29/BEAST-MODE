@@ -3,6 +3,8 @@
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
 import { Button } from '../ui/button';
+import LoadingState from '../ui/LoadingState';
+import EmptyState from '../ui/EmptyState';
 
 /**
  * ML Monitoring Dashboard
@@ -71,7 +73,7 @@ function MLMonitoringDashboard() {
   if (isLoading && !dashboardData) {
     return (
       <div className="p-6">
-        <div className="text-center text-slate-400">Loading monitoring data...</div>
+        <LoadingState message="Loading ML monitoring data..." />
       </div>
     );
   }
@@ -79,29 +81,27 @@ function MLMonitoringDashboard() {
   if (error && !dashboardData) {
     return (
       <div className="p-6">
-        <div className="text-center text-red-400">Error: {error}</div>
-        <Button onClick={fetchDashboardData} className="mt-4">Retry</Button>
+        <EmptyState
+          icon={<span className="text-6xl">⚠️</span>}
+          title="Failed to load monitoring data"
+          description={error}
+          action={{
+            label: 'Retry',
+            onClick: fetchDashboardData
+          }}
+        />
       </div>
     );
   }
 
-  if (!dashboardData) {
+  if (!dashboardData || dashboardData.status === 'monitoring_not_available') {
     return (
       <div className="p-6">
-        <Card className="bg-slate-900/90 border-slate-800">
-          <CardContent className="py-16 text-center">
-            <div className="text-6xl mb-4">📊</div>
-            <div className="text-xl font-semibold text-slate-300 mb-2">ML Monitoring Not Active</div>
-            <div className="text-sm text-slate-400 max-w-md mx-auto mb-6">
-              ML monitoring tracks how well BEAST MODE's AI predictions are performing. 
-              This helps us improve code quality recommendations and issue detection.
-            </div>
-            <div className="text-xs text-slate-500 max-w-md mx-auto">
-              <strong>What this means:</strong> BEAST MODE is still working! This dashboard just shows 
-              internal ML system metrics. Your quality scans, recommendations, and auto-fixes work independently.
-            </div>
-          </CardContent>
-        </Card>
+        <EmptyState
+          icon={<span className="text-6xl">📊</span>}
+          title="ML Monitoring Not Active"
+          description="ML monitoring tracks how well BEAST MODE's AI predictions are performing. This helps us improve code quality recommendations and issue detection. BEAST MODE is still working! This dashboard just shows detailed monitoring data when available."
+        />
       </div>
     );
   }

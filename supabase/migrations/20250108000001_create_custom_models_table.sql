@@ -33,21 +33,25 @@ CREATE INDEX IF NOT EXISTS idx_custom_models_provider ON custom_models(provider)
 ALTER TABLE custom_models ENABLE ROW LEVEL SECURITY;
 
 -- Policy: Users can read their own models
+DROP POLICY IF EXISTS "Users can read their own models" ON custom_models;
 CREATE POLICY "Users can read their own models"
   ON custom_models FOR SELECT
   USING (auth.uid() = user_id OR is_public = TRUE);
 
 -- Policy: Users can insert their own models
+DROP POLICY IF EXISTS "Users can insert their own models" ON custom_models;
 CREATE POLICY "Users can insert their own models"
   ON custom_models FOR INSERT
   WITH CHECK (auth.uid() = user_id);
 
 -- Policy: Users can update their own models
+DROP POLICY IF EXISTS "Users can update their own models" ON custom_models;
 CREATE POLICY "Users can update their own models"
   ON custom_models FOR UPDATE
   USING (auth.uid() = user_id);
 
 -- Policy: Users can delete their own models
+DROP POLICY IF EXISTS "Users can delete their own models" ON custom_models;
 CREATE POLICY "Users can delete their own models"
   ON custom_models FOR DELETE
   USING (auth.uid() = user_id);
@@ -62,6 +66,7 @@ END;
 $$ LANGUAGE plpgsql;
 
 -- Trigger to auto-update updated_at
+DROP TRIGGER IF EXISTS update_custom_models_updated_at ON custom_models;
 CREATE TRIGGER update_custom_models_updated_at
   BEFORE UPDATE ON custom_models
   FOR EACH ROW

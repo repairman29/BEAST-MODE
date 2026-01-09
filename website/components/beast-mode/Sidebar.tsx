@@ -43,7 +43,9 @@ export default function Sidebar({ currentView, onViewChange, onCommandPalette, o
     { id: 'self-improve', label: 'Improve', icon: '✨', tooltip: 'Auto-fix code issues with one click', category: 'Core' },
     { id: 'collaboration', label: 'Collaboration', icon: '👥', tooltip: 'Team workspaces, shared dashboards, and real-time collaboration', category: 'Core' },
     { id: 'ml-monitoring', label: 'ML Monitoring', icon: '📊', tooltip: 'Monitor AI prediction performance - see how well BEAST MODE\'s quality predictions are working', category: 'Core' },
-    { id: 'unified-analytics', label: 'Analytics', icon: '📈', tooltip: 'Unified analytics across CLI, API, Cursor, and Web - see all your BEAST MODE activity', category: 'Core' },
+    { id: 'advanced-ml', label: 'Advanced ML', icon: '🤖', tooltip: 'Ensembles, NAS, Fine-Tuning, Cross-Domain Learning, and Advanced Caching', category: 'Core' },
+    { id: 'unified-analytics', label: 'Unified Analytics', icon: '📈', tooltip: 'Unified analytics across CLI, API, Cursor, and Web - see all your BEAST MODE activity', category: 'Core' },
+    { id: 'analytics', label: 'User Analytics', icon: '📊', tooltip: 'User engagement and feature usage insights', category: 'Core' },
     { id: 'settings', label: 'Settings', icon: '⚙️', tooltip: 'Manage teams, users, and preferences', category: 'Core' },
   ];
 

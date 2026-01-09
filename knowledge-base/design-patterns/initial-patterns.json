@@ -1,0 +1,52 @@
+[
+  {
+    "category": "design-patterns",
+    "title": "Observer Pattern",
+    "content": "Define a one-to-many dependency between objects. When one object changes state, all dependents are notified and updated automatically. Use for event handling, MVC architectures, and reactive systems. Example: Event emitters, pub/sub systems.",
+    "metadata": {
+      "source": "Design Patterns: Elements of Reusable OOP",
+      "tags": ["patterns", "behavioral", "events"],
+      "priority": "high"
+    }
+  },
+  {
+    "category": "design-patterns",
+    "title": "Factory Pattern",
+    "content": "Create objects without specifying the exact class. Use a factory method or class to create instances. Useful when object creation logic is complex or when you want to decouple object creation from usage. Example: Database connection factories, UI component factories.",
+    "metadata": {
+      "source": "Design Patterns: Elements of Reusable OOP",
+      "tags": ["patterns", "creational", "abstraction"],
+      "priority": "high"
+    }
+  },
+  {
+    "category": "design-patterns",
+    "title": "Strategy Pattern",
+    "content": "Define a family of algorithms, encapsulate each one, and make them interchangeable. Strategy lets the algorithm vary independently from clients that use it. Use when you have multiple ways to perform a task. Example: Payment processing, sorting algorithms.",
+    "metadata": {
+      "source": "Design Patterns: Elements of Reusable OOP",
+      "tags": ["patterns", "behavioral", "algorithms"],
+      "priority": "medium"
+    }
+  },
+  {
+    "category": "design-patterns",
+    "title": "Repository Pattern",
+    "content": "Abstract the data access layer. Provides a collection-like interface for accessing domain objects. Separates business logic from data access. Use for database abstraction, testing, and maintaining clean architecture. Example: UserRepository, ProductRepository.",
+    "metadata": {
+      "source": "Domain-Driven Design",
+      "tags": ["patterns", "architectural", "data-access"],
+      "priority": "high"
+    }
+  },
+  {
+    "category": "design-patterns",
+    "title": "Dependency Injection",
+    "content": "Pass dependencies into a class rather than creating them internally. Improves testability, flexibility, and follows inversion of control. Use for managing dependencies, mocking in tests, and loose coupling. Example: Constructor injection, service containers.",
+    "metadata": {
+      "source": "Software Engineering Best Practices",
+      "tags": ["patterns", "architectural", "testing"],
+      "priority": "high"
+    }
+  }
+]

@@ -18,10 +18,34 @@ export async function POST(
       return NextResponse.json({ success: true, id });
     }
 
-    // TODO: Update notification in database
+    if (!userId) {
+      return NextResponse.json(
+        { error: 'User not authenticated' },
+        { status: 401 }
+      );
+    }
+
+    // Update notification in database
+    const { data, error } = await supabase
+      .from('notifications')
+      .update({ read: true, read_at: new Date().toISOString() })
+      .eq('id', id)
+      .eq('user_id', userId)
+      .select()
+      .single();
+
+    if (error) {
+      console.error(`[Notification Read] Error updating notification:`, error);
+      return NextResponse.json(
+        { error: 'Failed to mark notification as read', details: error.message },
+        { status: 500 }
+      );
+    }
+
     return NextResponse.json({
       success: true,
       id,
+      notification: data,
       message: 'Notification marked as read'
     });
   } catch (error: any) {

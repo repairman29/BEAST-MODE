@@ -3,6 +3,8 @@
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '../ui/card';
 import { Button } from '../ui/button';
+import EmptyState from '../ui/EmptyState';
+import LoadingState from '../ui/LoadingState';
 
 interface CollaborationSession {
   id: string;
@@ -33,6 +35,7 @@ export default function CollaborationWorkspace({ userId }: { userId?: string }) 
   const [annotations, setAnnotations] = useState<Annotation[]>([]);
   const [newAnnotation, setNewAnnotation] = useState({ filePath: '', lineNumber: '', content: '' });
   const [isCreatingSession, setIsCreatingSession] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [newSession, setNewSession] = useState({ repoUrl: '', title: '', sessionType: 'code-review' });
 
   useEffect(() => {
@@ -55,16 +58,30 @@ export default function CollaborationWorkspace({ userId }: { userId?: string }) 
   }, [selectedSession]);
 
   const fetchSessions = async () => {
-    if (!userId) return;
+    if (!userId) {
+      setIsLoading(false);
+      return;
+    }
 
+    setIsLoading(true);
     try {
-      const response = await fetch(`/api/collaboration/sessions?userId=${userId}`);
+      const response = await fetch(`/api/beast-mode/collaboration/workspace?userId=${userId}&action=activity`);
       if (response.ok) {
         const data = await response.json();
-        setSessions(data.sessions || []);
+        // Transform activity data to sessions if needed
+        setSessions(data.sessions || data.activity || []);
+      } else {
+        // If API fails, try fallback
+        const fallbackResponse = await fetch(`/api/collaboration/sessions?userId=${userId}`);
+        if (fallbackResponse.ok) {
+          const fallbackData = await fallbackResponse.json();
+          setSessions(fallbackData.sessions || []);
+        }
       }
     } catch (error) {
       console.error('Failed to fetch sessions:', error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -99,27 +116,56 @@ export default function CollaborationWorkspace({ userId }: { userId?: string }) 
   const handleCreateSession = async () => {
     if (!userId || !newSession.repoUrl) return;
 
+    setIsCreatingSession(true);
     try {
-      const response = await fetch('/api/collaboration/sessions', {
+      // Try BEAST MODE API first
+      const response = await fetch('/api/beast-mode/collaboration/workspace', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
+          action: 'create',
           userId,
-          repoUrl: newSession.repoUrl,
-          title: newSession.title,
-          sessionType: newSession.sessionType
+          workspaceData: {
+            repoUrl: newSession.repoUrl,
+            title: newSession.title,
+            sessionType: newSession.sessionType
+          }
         })
       });
 
       if (response.ok) {
         const data = await response.json();
-        setSessions([...sessions, data.session]);
-        setSelectedSession(data.session.id);
+        // Refresh sessions list
+        await fetchSessions();
+        if (data.workspace?.id || data.session?.id) {
+          setSelectedSession(data.workspace?.id || data.session?.id);
+        }
         setIsCreatingSession(false);
         setNewSession({ repoUrl: '', title: '', sessionType: 'code-review' });
+      } else {
+        // Fallback to old API
+        const fallbackResponse = await fetch('/api/collaboration/sessions', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            userId,
+            repoUrl: newSession.repoUrl,
+            title: newSession.title,
+            sessionType: newSession.sessionType
+          })
+        });
+
+        if (fallbackResponse.ok) {
+          const fallbackData = await fallbackResponse.json();
+          setSessions([...sessions, fallbackData.session]);
+          setSelectedSession(fallbackData.session.id);
+          setIsCreatingSession(false);
+          setNewSession({ repoUrl: '', title: '', sessionType: 'code-review' });
+        }
       }
     } catch (error) {
       console.error('Failed to create session:', error);
+      setIsCreatingSession(false);
     }
   };
 
@@ -230,12 +276,21 @@ export default function CollaborationWorkspace({ userId }: { userId?: string }) 
             </div>
           )}
 
-          <div className="space-y-2">
-            {sessions.length === 0 ? (
-              <div className="text-center py-8 text-slate-400">
-                No active sessions. Create one to get started!
-              </div>
-            ) : (
+          {isLoading ? (
+            <LoadingState message="Loading collaboration sessions..." />
+          ) : (
+            <div className="space-y-2">
+              {sessions.length === 0 ? (
+                <EmptyState
+                  icon={<span className="text-4xl">👥</span>}
+                  title="No active sessions"
+                  description="Create a collaboration session to start working with your team on code reviews, pair programming, or team workspaces."
+                  action={{
+                    label: 'Create Session',
+                    onClick: () => setIsCreatingSession(true)
+                  }}
+                />
+              ) : (
               sessions.map((session) => (
                 <div
                   key={session.id}
@@ -274,8 +329,9 @@ export default function CollaborationWorkspace({ userId }: { userId?: string }) 
                   </div>
                 </div>
               ))
-            )}
-          </div>
+              )}
+            </div>
+          )}
         </CardContent>
       </Card>
 

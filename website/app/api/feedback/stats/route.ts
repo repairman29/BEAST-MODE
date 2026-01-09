@@ -1,127 +1,74 @@
-/**
- * Feedback Statistics API
- * Get feedback collection statistics
- */
-
 import { NextRequest, NextResponse } from 'next/server';
+import { getSupabaseClientOrNull } from '../../../../lib/supabase';
 
-// Optional import - module may not exist
-async function getFeedbackCollector() {
-  try {
-    // @ts-ignore - Dynamic import, module may not exist
-    const module = await import(/* webpackIgnore: true */ '../../../../../../lib/mlops/feedbackCollector').catch(() => null);
-    if (!module?.getFeedbackCollector) return null;
-    
-    const collector = await module.getFeedbackCollector();
-    if (collector && !collector.initialized) {
-      await collector.initialize();
-    }
-    return collector;
-  } catch {
-    return null;
-  }
-}
-
+/**
+ * GET /api/feedback/stats
+ * Get ML feedback collection statistics
+ */
 export async function GET(request: NextRequest) {
   try {
-    const collector = await getFeedbackCollector();
-    if (!collector) {
-      // Return empty stats instead of 503 - UI should handle gracefully
+    const supabase = await getSupabaseClientOrNull();
+
+    if (!supabase) {
       return NextResponse.json({
-        success: true,
-        stats: {
-          totalPredictions: 0,
-          withActuals: 0,
-          withoutActuals: 0,
-          feedbackRate: 0,
-          targetRate: 0.05,
-          health: 'critical'
-        },
+        totalPredictions: 0,
+        withFeedback: 0,
+        feedbackRate: 0,
         byService: {},
-        needingFeedback: 0,
-        message: 'Feedback collector not available - returning empty stats'
+        trainingReady: false
       });
     }
-    
-    // Get statistics
-    const stats = await collector.getFeedbackStats();
-    if (!stats) {
-      // Collector exists but Supabase not configured
-      return NextResponse.json({
-        success: true,
-        stats: {
-          totalPredictions: 0,
-          withActuals: 0,
-          withoutActuals: 0,
-          feedbackRate: 0,
-          targetRate: 0.05,
-          health: 'critical'
-        },
-        byService: {},
-        needingFeedback: 0,
-        message: 'Supabase not configured - returning empty stats'
-      });
+
+    // Get total predictions
+    const { count: totalPredictions, error: pError } = await supabase
+      .from('ml_predictions')
+      .select('*', { count: 'exact', head: true });
+
+    if (pError) {
+      console.error('[Feedback Stats] Error getting predictions:', pError);
     }
-    
-    // Get predictions needing feedback
-    const needingFeedback = await collector.getPredictionsNeedingFeedback({
-      limit: 100
+
+    // Get feedback with actual values
+    const { data: feedbackData, error: fError } = await supabase
+      .from('ml_feedback')
+      .select('service_name, prediction_id')
+      .not('feedback_score', 'is', null);
+
+    if (fError) {
+      console.error('[Feedback Stats] Error getting feedback:', fError);
+    }
+
+    const feedbackCount = feedbackData?.length || 0;
+    const feedbackRate = totalPredictions && totalPredictions > 0 
+      ? feedbackCount / totalPredictions 
+      : 0;
+
+    // Group by service
+    const byService: Record<string, number> = {};
+    feedbackData?.forEach(f => {
+      const service = f.service_name || 'unknown';
+      byService[service] = (byService[service] || 0) + 1;
     });
 
-    // Analyze by service
-    const byService: Record<string, any> = {};
-    for (const pred of needingFeedback) {
-      const service = pred.service_name || 'unknown';
-      if (!byService[service]) {
-        byService[service] = {
-          total: 0,
-          recent: 0,
-          old: 0,
-          withContext: 0
-        };
-      }
-      byService[service].total++;
-      
-      const age = Date.now() - new Date(pred.created_at).getTime();
-      if (age < 24 * 60 * 60 * 1000) {
-        byService[service].recent++;
-      } else if (age > 7 * 24 * 60 * 60 * 1000) {
-        byService[service].old++;
-      }
-      
-      if (pred.context && Object.keys(pred.context).length > 0) {
-        byService[service].withContext++;
-      }
-    }
+    // Check training readiness (need 50+ predictions with feedback)
+    const uniquePredictionsWithFeedback = new Set(feedbackData?.map(f => f.prediction_id).filter(Boolean) || []);
+    const trainingReady = uniquePredictionsWithFeedback.size >= 50;
 
     return NextResponse.json({
-      success: true,
-      stats: {
-        totalPredictions: stats.totalPredictions,
-        withActuals: stats.withActuals,
-        withoutActuals: stats.withoutActuals,
-        feedbackRate: typeof stats.feedbackRate === 'string' 
-          ? parseFloat(stats.feedbackRate.replace('%', '')) / 100 
-          : stats.feedbackRate,
-        autoCollected: stats.autoCollected || 0,
-        manualCollected: stats.manualCollected || (stats.withActuals - (stats.autoCollected || 0)),
-        targetRate: 0.05, // 5%
-        health: (typeof stats.feedbackRate === 'string' 
-          ? parseFloat(stats.feedbackRate.replace('%', '')) / 100 
-          : stats.feedbackRate) >= 0.05 ? 'healthy' : 
-                (typeof stats.feedbackRate === 'string' 
-          ? parseFloat(stats.feedbackRate.replace('%', '')) / 100 
-          : stats.feedbackRate) >= 0.01 ? 'needs-attention' : 'critical'
-      },
-      byService: byService,
-      needingFeedback: needingFeedback.length
+      totalPredictions: totalPredictions || 0,
+      withFeedback: feedbackCount,
+      feedbackRate,
+      byService,
+      trainingReady,
+      predictionsWithFeedback: uniquePredictionsWithFeedback.size,
+      targetRate: 0.05, // 5%
+      targetFeedback: Math.ceil((totalPredictions || 0) * 0.05)
     });
   } catch (error: any) {
     console.error('[Feedback Stats] Error:', error);
     return NextResponse.json(
-      { success: false, error: error.message },
+      { error: 'Failed to get feedback stats', details: error.message },
       { status: 500 }
     );
   }
 }
-

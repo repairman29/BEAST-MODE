@@ -79,8 +79,13 @@ export default function PluginUpdates({ userId, onUpdateApplied }: PluginUpdates
           onUpdateApplied(pluginId);
         }
 
-        // Show success notification
+        // Track analytics
         if (typeof window !== 'undefined') {
+          const { getAnalytics } = require('@/lib/analytics');
+          const analytics = getAnalytics();
+          analytics.trackFeatureUse('plugin-update', pluginId);
+          analytics.track('event', 'marketplace', 'plugin-updated', pluginId);
+          
           const event = new CustomEvent('beast-mode-notification', {
             detail: {
               type: 'success',

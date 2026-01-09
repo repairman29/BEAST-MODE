@@ -3,6 +3,8 @@
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
 import { Button } from '../ui/button';
+import LoadingState from '../ui/LoadingState';
+import EmptyState from '../ui/EmptyState';
 
 /**
  * BEAST MODE Health Monitoring & Self-Healing Dashboard
@@ -125,26 +127,25 @@ function HealthDashboard() {
 
   if (isLoading) {
     return (
-      <Card className="bg-slate-900/90 border-slate-800 w-full max-w-6xl">
-        <CardContent className="flex items-center justify-center py-12">
-          <div className="animate-spin w-8 h-8 border-2 border-cyan-500 border-t-transparent rounded-full mr-4"></div>
-          <span className="text-cyan-400">Loading health status...</span>
-        </CardContent>
-      </Card>
+      <div className="p-6">
+        <LoadingState message="Loading health status..." />
+      </div>
     );
   }
 
   if (!healthData) {
     return (
-      <Card className="bg-slate-900/90 border-slate-800 w-full max-w-6xl">
-        <CardContent className="text-center py-12">
-          <div className="text-red-400 text-lg mb-2">❌ Health monitoring unavailable</div>
-          <p className="text-slate-400 text-sm">Unable to fetch health data. Please try again later.</p>
-          <Button onClick={fetchHealthData} className="mt-4 bg-white text-black hover:bg-slate-100">
-            Retry
-          </Button>
-        </CardContent>
-      </Card>
+      <div className="p-6">
+        <EmptyState
+          icon={<span className="text-6xl">💚</span>}
+          title="Health monitoring unavailable"
+          description="Unable to fetch health data. Please try again later."
+          action={{
+            label: 'Retry',
+            onClick: fetchHealthData
+          }}
+        />
+      </div>
     );
   }
 

@@ -3,9 +3,10 @@
 import React, { useState, useEffect } from 'react';
 import { CardEnhanced, CardHeaderEnhanced, CardTitleEnhanced, CardDescriptionEnhanced, CardContentEnhanced } from '../ui/CardEnhanced';
 import { ButtonEnhanced } from '../ui/ButtonEnhanced';
-import { EmptyState } from '../ui/EmptyState';
-import { LoadingState } from '../ui/LoadingState';
+import EmptyState from '../ui/EmptyState';
+import LoadingState from '../ui/LoadingState';
 import { Search, Scan, TrendingUp, AlertCircle, CheckCircle2, Sparkles } from 'lucide-react';
+import QualityExplanationTooltip from '../llm/QualityExplanationTooltip';
 
 /**
  * Enhanced Quality View
@@ -20,7 +21,7 @@ import { Search, Scan, TrendingUp, AlertCircle, CheckCircle2, Sparkles } from 'l
 
 interface QualityViewEnhancedProps {
   data?: any;
-  onScan?: (repo: string) => Promise<void>;
+  onScan?: (repo: string) => Promise<any>;
 }
 
 export default function QualityViewEnhanced({ data, onScan }: QualityViewEnhancedProps) {
@@ -44,20 +45,38 @@ export default function QualityViewEnhanced({ data, onScan }: QualityViewEnhance
     setIsScanning(true);
     try {
       if (onScan) {
-        await onScan(repoInput.trim());
+        const result = await onScan(repoInput.trim());
+        if (result) {
+          setLatestScan(result);
+          setHasScans(true);
+        }
       } else {
-        // Default scan behavior
-        const response = await fetch('/api/repos/quality', {
+        // Default scan behavior - use GitHub scan API
+        const response = await fetch('/api/github/scan', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ repo: repoInput.trim() })
+          body: JSON.stringify({ repo: repoInput.trim(), url: `https://github.com/${repoInput.trim()}` })
         });
+        
+        if (!response.ok) {
+          const error = await response.json();
+          throw new Error(error.error || 'Scan failed');
+        }
+        
         const result = await response.json();
         setLatestScan(result);
         setHasScans(true);
       }
-    } catch (error) {
-      console.error('Scan failed:', error);
+    } catch (error: any) {
+      // Show error to user via notification system
+      if (typeof window !== 'undefined') {
+        window.dispatchEvent(new CustomEvent('beast-mode-notification', {
+          detail: { 
+            type: 'error', 
+            message: error.message || 'Scan failed. Please try again.' 
+          }
+        }));
+      }
     } finally {
       setIsScanning(false);
     }
@@ -201,12 +220,21 @@ export default function QualityViewEnhanced({ data, onScan }: QualityViewEnhance
                 </CardDescriptionEnhanced>
               </div>
               <div className="text-right">
-                <div className={`text-4xl font-bold mb-1 ${
-                  latestScan.score >= 80 ? 'text-green-400' :
-                  latestScan.score >= 60 ? 'text-amber-400' : 'text-red-400'
-                }`}>
-                  {latestScan.score || 0}
-                  <span className="text-2xl text-slate-400">/100</span>
+                <div className="flex items-center justify-end gap-2">
+                  <div className={`text-4xl font-bold mb-1 ${
+                    latestScan.score >= 80 ? 'text-green-400' :
+                    latestScan.score >= 60 ? 'text-amber-400' : 'text-red-400'
+                  }`}>
+                    {latestScan.score || 0}
+                    <span className="text-2xl text-slate-400">/100</span>
+                  </div>
+                  <QualityExplanationTooltip
+                    score={(latestScan.score || 0) / 100}
+                    code={latestScan.codeSnippet || ''}
+                    issues={latestScan.issues || []}
+                    repo={latestScan.repo}
+                    filePath={latestScan.filePath}
+                  />
                 </div>
                 <div className="text-sm text-slate-400">Quality Score</div>
               </div>

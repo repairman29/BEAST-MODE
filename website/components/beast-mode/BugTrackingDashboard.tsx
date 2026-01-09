@@ -3,6 +3,8 @@
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card';
 import { Badge } from '../ui/badge';
+import LoadingState from '../ui/LoadingState';
+import EmptyState from '../ui/EmptyState';
 
 interface BugMetrics {
   total: number;
@@ -77,7 +79,7 @@ export default function BugTrackingDashboard() {
   if (loading && !data) {
     return (
       <div className="p-6">
-        <div className="text-center">Loading bug tracking data...</div>
+        <LoadingState message="Loading bug tracking data..." />
       </div>
     );
   }
@@ -85,13 +87,15 @@ export default function BugTrackingDashboard() {
   if (error) {
     return (
       <div className="p-6">
-        <div className="text-red-600">Error: {error}</div>
-        <button 
-          onClick={fetchBugData}
-          className="mt-4 px-4 py-2 bg-blue-600 text-white rounded"
-        >
-          Retry
-        </button>
+        <EmptyState
+          icon={<span className="text-6xl">🐛</span>}
+          title="Failed to load bug tracking data"
+          description={error}
+          action={{
+            label: 'Retry',
+            onClick: fetchBugData
+          }}
+        />
       </div>
     );
   }
@@ -99,7 +103,11 @@ export default function BugTrackingDashboard() {
   if (!data) {
     return (
       <div className="p-6">
-        <div className="text-center">No bug tracking data available</div>
+        <EmptyState
+          icon={<span className="text-6xl">🐛</span>}
+          title="No bug tracking data available"
+          description="Bug tracking data will appear here as features are generated and tested."
+        />
       </div>
     );
   }

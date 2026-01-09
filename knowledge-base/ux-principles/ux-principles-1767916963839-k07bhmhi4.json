@@ -1,0 +1,17 @@
+{
+  "id": "ux-principles-1767916963839-k07bhmhi4",
+  "category": "ux-principles",
+  "title": "Error Prevention & Recovery",
+  "content": "Prevent errors, but when they happen, make recovery easy. Implement validation before submission, confirmation for destructive actions, clear error messages with solutions, undo/redo capabilities, and graceful degradation.",
+  "metadata": {
+    "source": "UX_PSYCHOLOGY_PRINCIPLES.md",
+    "tags": [
+      "error-handling",
+      "usability",
+      "safety"
+    ],
+    "priority": "high",
+    "createdAt": "2026-01-09T00:02:43.839Z",
+    "updatedAt": "2026-01-09T00:02:43.839Z"
+  }
+}

@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card';
+import { CardEnhanced, CardHeaderEnhanced, CardTitleEnhanced, CardDescriptionEnhanced } from '../ui/CardEnhanced';
 
 const features = [
   {

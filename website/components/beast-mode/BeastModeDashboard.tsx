@@ -35,19 +35,29 @@ import GamificationSystem from './GamificationSystem';
 import MobileNavigation from './MobileNavigation';
 import GitHubConnection from './GitHubConnection';
 import { ErrorBoundary } from '../ui/ErrorBoundary';
+import SectionErrorBoundary from './SectionErrorBoundary';
 import { useUser } from '@/lib/user-context';
 import { getErrorMonitor } from '@/lib/error-monitoring';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { ScanDetailsModal } from '../ui/ScanDetailsModal';
-import UnifiedAnalyticsView from './UnifiedAnalyticsView';
-import JanitorDashboard from './JanitorDashboard';
-import FeedbackDashboard from '../feedback/FeedbackDashboard';
-import ReposQualityTable from './ReposQualityTable';
-import QualityTrendsChart from './QualityTrendsChart';
-import ThemesAndOpportunities from './ThemesAndOpportunities';
-import FeatureGenerator from './FeatureGenerator';
-import CodebaseChat from './CodebaseChat';
-import RealtimeSuggestions from './RealtimeSuggestions';
+import { Suspense, lazy } from 'react';
+import EmptyState from '../ui/EmptyState';
+import LoadingState from '../ui/LoadingState';
+
+// Lazy load heavy components for better performance
+const UnifiedAnalyticsView = lazy(() => import('./UnifiedAnalyticsView'));
+const JanitorDashboard = lazy(() => import('./JanitorDashboard'));
+const FeedbackDashboard = lazy(() => import('../feedback/FeedbackDashboard'));
+const ReposQualityTable = lazy(() => import('./ReposQualityTable'));
+const QualityTrendsChart = lazy(() => import('./QualityTrendsChart'));
+const ThemesAndOpportunities = lazy(() => import('./ThemesAndOpportunities'));
+const FeatureGenerator = lazy(() => import('./FeatureGenerator'));
+const CodebaseChat = lazy(() => import('./CodebaseChat'));
+const RealtimeSuggestions = lazy(() => import('./RealtimeSuggestions'));
+const QualityViewEnhanced = lazy(() => import('./QualityViewEnhanced'));
+const IntelligenceViewEnhanced = lazy(() => import('./IntelligenceViewEnhanced'));
+const AnalyticsDashboard = lazy(() => import('./AnalyticsDashboard'));
+const AdvancedMLFeatures = lazy(() => import('../mlops/AdvancedMLFeatures'));
 
 /**
  * BEAST MODE Enterprise Dashboard
@@ -92,7 +102,7 @@ function BeastModeDashboardInner({ initialView }: BeastModeDashboardInnerProps) 
   useEffect(() => {
     const viewParam = searchParams.get('view') || initialView;
     if (viewParam) {
-      const validViews = ['quality', 'intelligence', 'marketplace', 'self-improve', 'collaboration', 'collaboration-workspace', 'collaboration-dashboard', 'settings', 'auth', 'pricing', 'ml-monitoring', 'unified-analytics', 'janitor'];
+      const validViews = ['quality', 'intelligence', 'marketplace', 'self-improve', 'collaboration', 'collaboration-workspace', 'collaboration-dashboard', 'settings', 'auth', 'pricing', 'ml-monitoring', 'unified-analytics', 'analytics', 'janitor'];
       if (validViews.includes(viewParam)) {
         setCurrentView(viewParam as typeof currentView);
       }
@@ -143,7 +153,7 @@ function BeastModeDashboardInner({ initialView }: BeastModeDashboardInnerProps) 
   });
 
   const [commandInput, setCommandInput] = useState('');
-  const [currentView, setCurrentView] = useState<'quality' | 'intelligence' | 'marketplace' | 'self-improve' | 'collaboration' | 'collaboration-workspace' | 'collaboration-dashboard' | 'settings' | 'auth' | 'pricing' | 'ml-monitoring' | 'unified-analytics' | 'janitor' | null>(
+  const [currentView, setCurrentView] = useState<'quality' | 'intelligence' | 'marketplace' | 'self-improve' | 'collaboration' | 'collaboration-workspace' | 'collaboration-dashboard' | 'settings' | 'auth' | 'pricing' | 'ml-monitoring' | 'unified-analytics' | 'analytics' | 'janitor' | 'advanced-ml' | null>(
     initialView === 'auth' ? 'auth' : initialView === 'pricing' ? 'pricing' : initialView === 'janitor' ? 'janitor' : null
   );
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
@@ -173,6 +183,12 @@ function BeastModeDashboardInner({ initialView }: BeastModeDashboardInnerProps) 
         duration: 5000
       }]
     }));
+    // Also dispatch custom event for components that listen to it
+    if (typeof window !== 'undefined') {
+      window.dispatchEvent(new CustomEvent('beast-mode-notification', {
+        detail: { type, message }
+      }));
+    }
   };
 
   // Add message to intelligence log
@@ -187,8 +203,8 @@ function BeastModeDashboardInner({ initialView }: BeastModeDashboardInnerProps) 
     }));
   };
 
-  // Handle command input
-  const handleCommand = async (e: React.FormEvent) => {
+  // Handle command input (for form submission)
+  const handleCommandForm = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!commandInput.trim()) return;
 
@@ -203,6 +219,26 @@ function BeastModeDashboardInner({ initialView }: BeastModeDashboardInnerProps) 
       } else if (command.toLowerCase().includes('intelligence')) {
         addMessage(`AI Intelligence active. Generated ${beastModeState.intelligence.predictions} predictions with ${beastModeState.intelligence.accuracy}% accuracy. ${beastModeState.intelligence.insights} insights available.`, 'ai');
       } else if (command.toLowerCase().includes('marketplace')) {
+        addMessage(`Plugin marketplace operational. ${beastModeState.marketplace.plugins} plugins available, ${beastModeState.marketplace.downloads} total downloads, $${beastModeState.marketplace.revenue} revenue generated.`, 'ai');
+      } else {
+        addMessage(`BEAST MODE command processed: "${command}". Use keywords like "quality", "intelligence", or "marketplace" for specific insights.`, 'ai');
+      }
+    }, 1000);
+  };
+
+  // Handle command from IntelligenceViewEnhanced (takes string directly)
+  const handleCommandString = async (command: string) => {
+    if (!command.trim()) return;
+    addMessage(command, 'user');
+
+    // Simulate BEAST MODE AI processing
+    setTimeout(() => {
+      const cmd = command.toLowerCase();
+      if (cmd.includes('quality')) {
+        addMessage(`Quality analysis complete. Score: ${beastModeState.quality.score}/100. Found ${beastModeState.quality.issues} issues, ${beastModeState.quality.improvements} improvement opportunities.`, 'ai');
+      } else if (cmd.includes('intelligence')) {
+        addMessage(`AI Intelligence active. Generated ${beastModeState.intelligence.predictions} predictions with ${beastModeState.intelligence.accuracy}% accuracy. ${beastModeState.intelligence.insights} insights available.`, 'ai');
+      } else if (cmd.includes('marketplace')) {
         addMessage(`Plugin marketplace operational. ${beastModeState.marketplace.plugins} plugins available, ${beastModeState.marketplace.downloads} total downloads, $${beastModeState.marketplace.revenue} revenue generated.`, 'ai');
       } else {
         addMessage(`BEAST MODE command processed: "${command}". Use keywords like "quality", "intelligence", or "marketplace" for specific insights.`, 'ai');
@@ -404,7 +440,7 @@ function BeastModeDashboardInner({ initialView }: BeastModeDashboardInnerProps) 
       )}
 
         {/* Center Content - BEAST MODE Views */}
-        <div className="flex-1 flex items-start justify-center overflow-y-auto py-4 md:py-8 px-4 md:px-6 xl:px-12 pb-20 custom-scrollbar relative z-20" style={{ paddingTop: 'calc(4rem + 1rem)', paddingBottom: 'calc(1.5rem + 3rem)' }}>
+        <div className="flex-1 flex items-start justify-center overflow-y-auto py-4 md:py-8 px-2 sm:px-4 md:px-6 xl:px-12 pb-20 custom-scrollbar relative z-20" style={{ paddingTop: 'calc(4rem + 1rem)', paddingBottom: 'calc(1.5rem + 3rem)' }}>
           {currentView === null && (
             <div className="w-full max-w-4xl space-y-6 md:space-y-8 animate-in fade-in duration-300 relative z-30 px-2 md:px-0">
               <div className="text-center mb-8 md:mb-12">
@@ -468,25 +504,55 @@ function BeastModeDashboardInner({ initialView }: BeastModeDashboardInnerProps) 
           )}
 
           {currentView === 'quality' && (
-            <ErrorBoundary>
-              <div className="w-full max-w-7xl relative z-30">
-            <QualityView data={beastModeState.quality} />
-              </div>
-            </ErrorBoundary>
+            <SectionErrorBoundary sectionName="Quality View">
+              <Suspense fallback={<LoadingState message="Loading quality analysis..." />}>
+                <div className="w-full max-w-7xl relative z-30">
+                  <QualityViewEnhanced 
+                    data={beastModeState.quality}
+                    onScan={async (repo: string) => {
+                      // Use the same scan logic as QualityView with retry
+                      const { fetchWithRetry } = require('@/lib/api-retry');
+                      try {
+                        const response = await fetchWithRetry('/api/github/scan', {
+                          method: 'POST',
+                          headers: { 'Content-Type': 'application/json' },
+                          body: JSON.stringify({ repo: repo.trim(), url: `https://github.com/${repo.trim()}` })
+                        }, {
+                          maxRetries: 3,
+                          initialDelay: 1000
+                        });
+                        
+                        if (response.ok) {
+                          const result = await response.json();
+                          // Trigger storage event to refresh other components
+                          window.dispatchEvent(new Event('storage'));
+                          return result;
+                        } else {
+                          const error = await response.json();
+                          throw new Error(error.error || 'Scan failed');
+                        }
+                      } catch (error: any) {
+                        throw new Error(error.message || 'Scan failed');
+                      }
+                    }}
+                  />
+                </div>
+              </Suspense>
+            </SectionErrorBoundary>
           )}
 
           {currentView === 'intelligence' && (
-            <ErrorBoundary>
-              <div className="w-full max-w-7xl relative z-30">
-            <IntelligenceView
-              data={beastModeState.intelligence}
-              messages={beastModeState.messages}
-              onCommand={handleCommand}
-              commandInput={commandInput}
-              setCommandInput={setCommandInput}
-            />
-              </div>
-            </ErrorBoundary>
+            <SectionErrorBoundary sectionName="Intelligence View">
+              <Suspense fallback={<LoadingState message="Loading AI intelligence..." />}>
+                <div className="w-full max-w-7xl relative z-30">
+                  <IntelligenceViewEnhanced
+                    data={beastModeState.intelligence}
+                    messages={beastModeState.messages}
+                    onCommand={handleCommandString}
+                  />
+                </div>
+              </Suspense>
+            </SectionErrorBoundary>
           )}
 
           {currentView === 'marketplace' && (
@@ -584,35 +650,61 @@ function BeastModeDashboardInner({ initialView }: BeastModeDashboardInnerProps) 
           )}
 
           {currentView === 'self-improve' && (
-            <ErrorBoundary>
+            <SectionErrorBoundary sectionName="Self-Improvement">
               <div className="w-full max-w-7xl relative z-30">
                 <SelfImprovement />
               </div>
-            </ErrorBoundary>
+            </SectionErrorBoundary>
           )}
 
           {currentView === 'ml-monitoring' && (
-            <ErrorBoundary>
-              <div className="w-full max-w-7xl relative z-30">
-                <MLMonitoringDashboard />
-              </div>
-            </ErrorBoundary>
+            <SectionErrorBoundary sectionName="ML Monitoring">
+              <Suspense fallback={<LoadingState message="Loading ML monitoring..." />}>
+                <div className="w-full max-w-7xl relative z-30">
+                  <MLMonitoringDashboard />
+                </div>
+              </Suspense>
+            </SectionErrorBoundary>
           )}
 
           {currentView === 'unified-analytics' && (
-            <ErrorBoundary>
-              <div className="w-full max-w-7xl relative z-30">
-                <UnifiedAnalyticsView />
-              </div>
-            </ErrorBoundary>
+            <SectionErrorBoundary sectionName="Unified Analytics">
+              <Suspense fallback={<LoadingState message="Loading analytics..." />}>
+                <div className="w-full max-w-7xl relative z-30">
+                  <UnifiedAnalyticsView />
+                </div>
+              </Suspense>
+            </SectionErrorBoundary>
+          )}
+
+          {currentView === 'analytics' && (
+            <SectionErrorBoundary sectionName="Analytics Dashboard">
+              <Suspense fallback={<LoadingState message="Loading analytics dashboard..." />}>
+                <div className="w-full max-w-7xl relative z-30">
+                  <AnalyticsDashboard />
+                </div>
+              </Suspense>
+            </SectionErrorBoundary>
           )}
 
           {currentView === 'janitor' && (
-            <ErrorBoundary>
-              <div className="w-full max-w-7xl relative z-30">
-                <JanitorDashboard />
-              </div>
-            </ErrorBoundary>
+            <SectionErrorBoundary sectionName="Janitor Dashboard">
+              <Suspense fallback={<LoadingState message="Loading Day 2 Operations..." />}>
+                <div className="w-full max-w-7xl relative z-30">
+                  <JanitorDashboard />
+                </div>
+              </Suspense>
+            </SectionErrorBoundary>
+          )}
+
+          {currentView === 'advanced-ml' && (
+            <SectionErrorBoundary sectionName="Advanced ML Features">
+              <Suspense fallback={<LoadingState message="Loading Advanced ML Features..." />}>
+                <div className="w-full max-w-7xl relative z-30">
+                  <AdvancedMLFeatures />
+                </div>
+              </Suspense>
+            </SectionErrorBoundary>
           )}
         </div>
 
@@ -1061,7 +1153,11 @@ function QualityView({ data }: any): React.JSX.Element {
             
             setAdvancedScanUrl('');
             setShowAdvancedScan(false);
-            alert(`✅ Scan complete! Quality score: ${result.score}/100`);
+            if (typeof window !== 'undefined') {
+              window.dispatchEvent(new CustomEvent('beast-mode-notification', {
+                detail: { type: 'success', message: `✅ Scan complete! Quality score: ${result.score}/100` }
+              }));
+            }
           } else {
             const error = await response.json();
             setScanError(error.error || 'Scan failed');
@@ -1090,7 +1186,11 @@ function QualityView({ data }: any): React.JSX.Element {
             return; // Don't scan yet, let user select a repo
           } else {
             // Not connected, show connection option
-            alert('Please connect your GitHub account first to scan repositories. Go to Settings → GitHub Connection.');
+            if (typeof window !== 'undefined') {
+              window.dispatchEvent(new CustomEvent('beast-mode-notification', {
+                detail: { type: 'warning', message: 'Please connect your GitHub account first to scan repositories. Go to Settings → GitHub Connection.' }
+              }));
+            }
             return;
           }
         }
@@ -1099,7 +1199,11 @@ function QualityView({ data }: any): React.JSX.Element {
       }
       
       // If we get here, no repo entered and not connected
-      alert('Please enter a repository (owner/repo) or connect your GitHub account in Settings.');
+      if (typeof window !== 'undefined') {
+        window.dispatchEvent(new CustomEvent('beast-mode-notification', {
+          detail: { type: 'info', message: 'Please enter a repository (owner/repo) or connect your GitHub account in Settings.' }
+        }));
+      }
       return;
     }
 
@@ -1175,13 +1279,25 @@ function QualityView({ data }: any): React.JSX.Element {
         
         setQuickScanRepo('');
         const mlScore = mlQualityData ? ` (ML: ${(mlQualityData.quality * 100).toFixed(1)}%)` : '';
-        alert(`✅ Scan complete! Quality score: ${result.score}/100${mlScore}`);
+        if (typeof window !== 'undefined') {
+          window.dispatchEvent(new CustomEvent('beast-mode-notification', {
+            detail: { type: 'success', message: `✅ Scan complete! Quality score: ${result.score}/100${mlScore}` }
+          }));
+        }
       } else {
         const error = await response.json();
-        alert(`❌ Scan failed: ${error.error || 'Unknown error'}`);
+        if (typeof window !== 'undefined') {
+          window.dispatchEvent(new CustomEvent('beast-mode-notification', {
+            detail: { type: 'error', message: `❌ Scan failed: ${error.error || 'Unknown error'}` }
+          }));
+        }
       }
     } catch (error: any) {
-      alert(`❌ Scan failed: ${error.message}`);
+      if (typeof window !== 'undefined') {
+        window.dispatchEvent(new CustomEvent('beast-mode-notification', {
+          detail: { type: 'error', message: `❌ Scan failed: ${error.message}` }
+        }));
+      }
     } finally {
       setIsScanning(false);
     }
@@ -1508,7 +1624,11 @@ function QualityView({ data }: any): React.JSX.Element {
                             helpful: true
                           })
                         });
-                        alert('✅ Thank you for your feedback!');
+                        if (typeof window !== 'undefined') {
+                          window.dispatchEvent(new CustomEvent('beast-mode-notification', {
+                            detail: { type: 'success', message: '✅ Thank you for your feedback!' }
+                          }));
+                        }
                       } catch (e) {
                         console.error('Failed to submit feedback:', e);
                       }
@@ -1529,7 +1649,11 @@ function QualityView({ data }: any): React.JSX.Element {
                             helpful: false
                           })
                         });
-                        alert('✅ Thank you for your feedback!');
+                        if (typeof window !== 'undefined') {
+                          window.dispatchEvent(new CustomEvent('beast-mode-notification', {
+                            detail: { type: 'success', message: '✅ Thank you for your feedback!' }
+                          }));
+                        }
                       } catch (e) {
                         console.error('Failed to submit feedback:', e);
                       }
@@ -3378,22 +3502,24 @@ function MarketplaceView({ data }: any) {
       {isLoading ? (
         <Card className="bg-slate-900/90 border-slate-800">
           <CardContent className="flex items-center justify-center py-16">
-            <div className="animate-spin w-8 h-8 border-2 border-cyan-500 border-t-transparent rounded-full mr-4"></div>
-            <span className="text-cyan-400 text-sm">Loading plugins...</span>
-          </CardContent>
-        </Card>
-      ) : filteredPlugins.length === 0 ? (
-        <Card className="bg-slate-900/90 border-slate-800">
-          <CardContent className="text-center py-16 slide-up">
-            <div className="text-6xl mb-4 animate-bounce">📦</div>
-            <div className="text-lg font-semibold text-slate-300 mb-2">
-              {searchQuery ? 'No plugins found' : 'No plugins in this category'}
-          </div>
-            <div className="text-sm text-slate-400">
-              {searchQuery ? 'Try a different search term - we have amazing plugins waiting for you! 🔍' : "Try selecting a different category - there's something for everyone! ✨"}
+            <div className="flex flex-col items-center gap-3">
+              <div className="animate-spin w-8 h-8 border-2 border-cyan-500 border-t-transparent rounded-full"></div>
+              <span className="text-cyan-400 text-sm">Loading plugins...</span>
             </div>
           </CardContent>
         </Card>
+      ) : filteredPlugins.length === 0 ? (
+        <EmptyState
+          icon={<span className="text-6xl">📦</span>}
+          title={searchQuery ? 'No plugins found' : 'No plugins in this category'}
+          description={searchQuery 
+            ? 'Try a different search term - we have amazing plugins waiting for you! 🔍' 
+            : "Try selecting a different category - there's something for everyone! ✨"}
+          action={searchQuery ? {
+            label: 'Clear Search',
+            onClick: () => setSearchQuery('')
+          } : undefined}
+        />
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {filteredPlugins.map((item, idx) => (
@@ -3721,7 +3847,11 @@ function SettingsView({ data }: any) {
       }
     } catch (error) {
       console.error('Failed to create team:', error);
-      alert('Failed to create team');
+      if (typeof window !== 'undefined') {
+        window.dispatchEvent(new CustomEvent('beast-mode-notification', {
+          detail: { type: 'error', message: 'Failed to create team' }
+        }));
+      }
     }
   };
 
@@ -3749,7 +3879,11 @@ function SettingsView({ data }: any) {
       }
     } catch (error) {
       console.error('Failed to update team:', error);
-      alert('Failed to update team');
+      if (typeof window !== 'undefined') {
+        window.dispatchEvent(new CustomEvent('beast-mode-notification', {
+          detail: { type: 'error', message: 'Failed to update team' }
+        }));
+      }
     }
   };
 
@@ -3766,7 +3900,11 @@ function SettingsView({ data }: any) {
       }
     } catch (error) {
       console.error('Failed to delete team:', error);
-      alert('Failed to delete team');
+      if (typeof window !== 'undefined') {
+        window.dispatchEvent(new CustomEvent('beast-mode-notification', {
+          detail: { type: 'error', message: 'Failed to delete team' }
+        }));
+      }
     }
   };
 
@@ -3794,11 +3932,19 @@ function SettingsView({ data }: any) {
         setShowAddUser(false);
       } else {
         const error = await response.json();
-        alert(error.error || 'Failed to invite user');
+        if (typeof window !== 'undefined') {
+          window.dispatchEvent(new CustomEvent('beast-mode-notification', {
+            detail: { type: 'error', message: error.error || 'Failed to invite user' }
+          }));
+        }
       }
     } catch (error) {
       console.error('Failed to invite user:', error);
-      alert('Failed to invite user');
+      if (typeof window !== 'undefined') {
+        window.dispatchEvent(new CustomEvent('beast-mode-notification', {
+          detail: { type: 'error', message: 'Failed to invite user' }
+        }));
+      }
     }
   };
 
@@ -3838,7 +3984,11 @@ function SettingsView({ data }: any) {
       }
     } catch (error) {
       console.error('Failed to update user:', error);
-      alert('Failed to update user');
+      if (typeof window !== 'undefined') {
+        window.dispatchEvent(new CustomEvent('beast-mode-notification', {
+          detail: { type: 'error', message: 'Failed to update user' }
+        }));
+      }
     }
   };
 
@@ -3855,7 +4005,11 @@ function SettingsView({ data }: any) {
       }
     } catch (error) {
       console.error('Failed to remove user:', error);
-      alert('Failed to remove user');
+      if (typeof window !== 'undefined') {
+        window.dispatchEvent(new CustomEvent('beast-mode-notification', {
+          detail: { type: 'error', message: 'Failed to remove user' }
+        }));
+      }
     }
   };
 
@@ -3879,11 +4033,19 @@ function SettingsView({ data }: any) {
         setShowAddRepo(false);
       } else {
         const error = await response.json();
-        alert(error.error || 'Failed to add repository');
+        if (typeof window !== 'undefined') {
+          window.dispatchEvent(new CustomEvent('beast-mode-notification', {
+            detail: { type: 'error', message: error.error || 'Failed to add repository' }
+          }));
+        }
       }
     } catch (error) {
       console.error('Failed to add repository:', error);
-      alert('Failed to add repository');
+      if (typeof window !== 'undefined') {
+        window.dispatchEvent(new CustomEvent('beast-mode-notification', {
+          detail: { type: 'error', message: 'Failed to add repository' }
+        }));
+      }
     }
   };
 
@@ -3916,11 +4078,19 @@ function SettingsView({ data }: any) {
         setShowAddRepo(false);
       } else {
         const error = await response.json();
-        alert(error.error || 'Failed to update repository');
+        if (typeof window !== 'undefined') {
+          window.dispatchEvent(new CustomEvent('beast-mode-notification', {
+            detail: { type: 'error', message: error.error || 'Failed to update repository' }
+          }));
+        }
       }
     } catch (error) {
       console.error('Failed to update repository:', error);
-      alert('Failed to update repository');
+      if (typeof window !== 'undefined') {
+        window.dispatchEvent(new CustomEvent('beast-mode-notification', {
+          detail: { type: 'error', message: 'Failed to update repository' }
+        }));
+      }
     }
   };
 
@@ -3937,7 +4107,11 @@ function SettingsView({ data }: any) {
       }
     } catch (error) {
       console.error('Failed to remove repository:', error);
-      alert('Failed to remove repository');
+      if (typeof window !== 'undefined') {
+        window.dispatchEvent(new CustomEvent('beast-mode-notification', {
+          detail: { type: 'error', message: 'Failed to remove repository' }
+        }));
+      }
     }
   };
 
@@ -3947,15 +4121,10 @@ function SettingsView({ data }: any) {
   };
 
   if (isLoading) {
-  return (
+    return (
       <div className="w-full max-w-7xl space-y-6 mx-auto">
-        <Card className="bg-slate-900/90 border-slate-800">
-          <CardContent className="flex items-center justify-center py-12">
-            <div className="animate-spin w-8 h-8 border-2 border-cyan-500 border-t-transparent rounded-full mr-4"></div>
-            <span className="text-cyan-400">Loading enterprise data...</span>
-          </CardContent>
-        </Card>
-        </div>
+        <LoadingState message="Loading settings and organization data..." />
+      </div>
     );
   }
 
@@ -4057,8 +4226,19 @@ function SettingsView({ data }: any) {
               </div>
             </div>
           )}
-          <div className="space-y-2">
-            {teams.map((team, idx) => (
+          {teams.length === 0 ? (
+            <EmptyState
+              icon={<span className="text-4xl">👥</span>}
+              title="No teams yet"
+              description="Create your first team to organize members and repositories"
+              action={{
+                label: 'Create Team',
+                onClick: () => setShowAddTeam(true)
+              }}
+            />
+          ) : (
+            <div className="space-y-2">
+              {teams.map((team, idx) => (
               <div key={team.id} className="flex items-center justify-between p-4 bg-slate-800/30 rounded-lg hover:bg-slate-800/50 transition-all duration-200 border border-slate-700/50 stagger-item" style={{ animationDelay: `${idx * 0.05}s` }}>
                 <div>
                   <div className="text-white font-medium">{team.name}</div>
@@ -4084,7 +4264,8 @@ function SettingsView({ data }: any) {
                 </div>
               </div>
             ))}
-          </div>
+            </div>
+          )}
         </CardContent>
       </Card>
 
@@ -4167,8 +4348,19 @@ function SettingsView({ data }: any) {
               </div>
             </div>
           )}
-          <div className="space-y-2">
-            {users.map((user, idx) => (
+          {users.length === 0 ? (
+            <EmptyState
+              icon={<span className="text-4xl">👤</span>}
+              title="No users yet"
+              description="Invite team members to collaborate on your projects"
+              action={{
+                label: 'Invite User',
+                onClick: () => setShowAddUser(true)
+              }}
+            />
+          ) : (
+            <div className="space-y-2">
+              {users.map((user, idx) => (
               <div key={user.id} className="flex items-center justify-between p-4 bg-slate-800/30 rounded-lg hover:bg-slate-800/50 transition-all duration-200 border border-slate-700/50 stagger-item" style={{ animationDelay: `${idx * 0.05}s` }}>
                 <div>
                   <div className="text-white font-medium">{user.name || user.email}</div>
@@ -4194,7 +4386,8 @@ function SettingsView({ data }: any) {
                 </div>
               </div>
             ))}
-          </div>
+            </div>
+          )}
         </CardContent>
       </Card>
 
@@ -4260,8 +4453,19 @@ function SettingsView({ data }: any) {
               </div>
             </div>
           )}
-          <div className="space-y-2">
-            {repos.map((repo, idx) => (
+          {repos.length === 0 ? (
+            <EmptyState
+              icon={<span className="text-4xl">📦</span>}
+              title="No repositories yet"
+              description="Add your first GitHub repository to start scanning and improving code quality"
+              action={{
+                label: 'Add Repository',
+                onClick: () => setShowAddRepo(true)
+              }}
+            />
+          ) : (
+            <div className="space-y-2">
+              {repos.map((repo, idx) => (
               <div key={repo.id} className="flex items-center justify-between p-4 bg-slate-800/30 rounded-lg hover:bg-slate-800/50 transition-all duration-200 border border-slate-700/50 stagger-item" style={{ animationDelay: `${idx * 0.05}s` }}>
                 <div>
                   <div className="text-white font-medium">{repo.name}</div>
@@ -4295,7 +4499,8 @@ function SettingsView({ data }: any) {
                 </div>
               </div>
             ))}
-          </div>
+            </div>
+          )}
         </CardContent>
       </Card>
 

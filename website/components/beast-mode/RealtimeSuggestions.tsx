@@ -86,6 +86,12 @@ export default function RealtimeSuggestions({
     if (onSuggestionSelect) {
       onSuggestionSelect(suggestion.text);
     }
+    // Track analytics
+    if (typeof window !== 'undefined') {
+      const { getAnalytics } = require('@/lib/analytics');
+      const analytics = getAnalytics();
+      analytics.trackFeatureUse('realtime-suggestion', suggestion.type);
+    }
   };
 
   const getSeverityColor = (severity: string) => {

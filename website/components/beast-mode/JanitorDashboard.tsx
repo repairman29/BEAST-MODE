@@ -18,6 +18,8 @@ import JanitorOnboarding from './JanitorOnboarding';
 import JanitorQuickActions from './JanitorQuickActions';
 import JanitorStatusIndicator from './JanitorStatusIndicator';
 import JanitorErrorBoundary from './JanitorErrorBoundary';
+import LoadingState from '../ui/LoadingState';
+import EmptyState from '../ui/EmptyState';
 
 interface JanitorStatus {
   enabled: boolean;
@@ -87,51 +89,37 @@ export default function JanitorDashboard() {
 
   const loadJanitorStatus = async () => {
     try {
-      // TODO: Replace with actual API call
+      setLoading(true);
       const response = await fetch('/api/beast-mode/janitor/status');
       if (response.ok) {
         const data = await response.json();
         setStatus(data);
       } else {
-        // Mock data for now
+        const errorData = await response.json().catch(() => ({}));
+        console.error('Failed to load janitor status:', errorData);
+        // Set minimal status to show empty state
         setStatus({
-          enabled: true,
-          silentRefactoring: {
-            enabled: true,
-            overnightMode: true,
-            lastRun: '2025-01-01T02:30:00Z',
-            issuesFixed: 23,
-            prsCreated: 5
-          },
-          architectureEnforcement: {
-            enabled: true,
-            violationsBlocked: 12,
-            lastCheck: '2025-01-01T10:15:00Z'
-          },
-          vibeRestoration: {
-            enabled: true,
-            lastRestore: null,
-            regressionsDetected: 0
-          },
-          repoMemory: {
-            enabled: true,
-            graphSize: 1247,
-            lastUpdate: '2025-01-01T09:00:00Z'
-          },
-          vibeOps: {
-            enabled: true,
-            testsRun: 18,
-            lastTest: '2025-01-01T11:00:00Z'
-          },
-          invisibleCICD: {
-            enabled: true,
-            scansRun: 156,
-            issuesFound: 3
-          }
+          enabled: false,
+          silentRefactoring: { enabled: false, overnightMode: false, lastRun: null, issuesFixed: 0, prsCreated: 0 },
+          architectureEnforcement: { enabled: false, violationsBlocked: 0, lastCheck: null },
+          vibeRestoration: { enabled: false, lastRestore: null, regressionsDetected: 0 },
+          repoMemory: { enabled: false, graphSize: 0, lastUpdate: null },
+          vibeOps: { enabled: false, testsRun: 0, lastTest: null },
+          invisibleCICD: { enabled: false, scansRun: 0, issuesFound: 0 }
         });
       }
     } catch (error) {
       console.error('Failed to load janitor status:', error);
+      // Set minimal status on error
+      setStatus({
+        enabled: false,
+        silentRefactoring: { enabled: false, overnightMode: false, lastRun: null, issuesFixed: 0, prsCreated: 0 },
+        architectureEnforcement: { enabled: false, violationsBlocked: 0, lastCheck: null },
+        vibeRestoration: { enabled: false, lastRestore: null, regressionsDetected: 0 },
+        repoMemory: { enabled: false, graphSize: 0, lastUpdate: null },
+        vibeOps: { enabled: false, testsRun: 0, lastTest: null },
+        invisibleCICD: { enabled: false, scansRun: 0, issuesFound: 0 }
+      });
     } finally {
       setLoading(false);
     }
@@ -139,16 +127,34 @@ export default function JanitorDashboard() {
 
   const toggleFeature = async (feature: string, enabled: boolean) => {
     try {
-      const response = await fetch(`/api/beast-mode/janitor/${feature}`, {
+      // Convert camelCase to kebab-case for API
+      const featureName = feature
+        .replace(/([A-Z])/g, '-$1')
+        .toLowerCase()
+        .replace(/^-/, '');
+      
+      const response = await fetch(`/api/beast-mode/janitor/${featureName}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ enabled })
       });
       if (response.ok) {
         loadJanitorStatus();
+      } else {
+        const error = await response.json();
+        if (typeof window !== 'undefined') {
+          window.dispatchEvent(new CustomEvent('beast-mode-notification', {
+            detail: { type: 'error', message: error.error || `Failed to toggle ${feature}` }
+          }));
+        }
       }
     } catch (error) {
       console.error(`Failed to toggle ${feature}:`, error);
+      if (typeof window !== 'undefined') {
+        window.dispatchEvent(new CustomEvent('beast-mode-notification', {
+          detail: { type: 'error', message: `Failed to toggle ${feature}. Please try again.` }
+        }));
+      }
     }
   };
 
@@ -168,7 +174,7 @@ export default function JanitorDashboard() {
   if (loading || !status) {
     return (
       <div className="p-6">
-        <div className="text-cyan-400 text-xl">Loading Janitor Status...</div>
+        <LoadingState message="Loading Day 2 Operations status..." />
       </div>
     );
   }
@@ -606,9 +612,40 @@ export default function JanitorDashboard() {
             setActiveFeature(null);
           }}
           onSave={async (config) => {
-            // TODO: Save config via API
-            console.log('Saving config:', config);
-            await loadJanitorStatus();
+            if (!activeFeature) return;
+            
+            try {
+              // Convert camelCase to kebab-case for API
+              const featureName = activeFeature
+                .replace(/([A-Z])/g, '-$1')
+                .toLowerCase()
+                .replace(/^-/, '');
+              
+              const response = await fetch(`/api/beast-mode/janitor/${featureName}`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ enabled: config.enabled, config: config.config || {} })
+              });
+              if (response.ok) {
+                await loadJanitorStatus();
+                setShowConfigModal(false);
+                setActiveFeature(null);
+              } else {
+                const error = await response.json();
+                if (typeof window !== 'undefined') {
+                  window.dispatchEvent(new CustomEvent('beast-mode-notification', {
+                    detail: { type: 'error', message: error.error || 'Failed to save configuration' }
+                  }));
+                }
+              }
+            } catch (error) {
+              console.error('Failed to save config:', error);
+              if (typeof window !== 'undefined') {
+                window.dispatchEvent(new CustomEvent('beast-mode-notification', {
+                  detail: { type: 'error', message: 'Failed to save configuration. Please try again.' }
+                }));
+              }
+            }
           }}
         />
       )}

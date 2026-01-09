@@ -3,6 +3,8 @@
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '../ui/card';
 import { Button } from '../ui/button';
+import LoadingState from '../ui/LoadingState';
+import EmptyState from '../ui/EmptyState';
 
 /**
  * Unified Analytics View
@@ -71,10 +73,7 @@ export default function UnifiedAnalyticsView() {
   if (!mounted || isLoading) {
     return (
       <div className="flex items-center justify-center min-h-[400px]">
-        <div className="text-center">
-          <div className="animate-spin mx-auto w-8 h-8 border-2 border-cyan-500 border-t-transparent rounded-full mb-4"></div>
-          <div className="text-slate-400">Loading unified analytics...</div>
-        </div>
+        <LoadingState message="Loading unified analytics..." />
       </div>
     );
   }
@@ -82,21 +81,15 @@ export default function UnifiedAnalyticsView() {
   if (error) {
     return (
       <div className="space-y-6">
-        <Card className="bg-slate-900/90 border-slate-800">
-          <CardContent className="pt-6">
-            <div className="text-center py-12">
-              <div className="text-6xl mb-4">📊</div>
-              <div className="text-lg font-semibold text-slate-300 mb-2">Analytics Unavailable</div>
-              <div className="text-sm text-slate-400 mb-6">{error}</div>
-              <Button
-                onClick={() => window.location.href = '/dashboard?view=settings'}
-                className="bg-cyan-600 hover:bg-cyan-700 text-white"
-              >
-                Connect GitHub Account
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
+        <EmptyState
+          icon={<span className="text-6xl">📊</span>}
+          title="Analytics Unavailable"
+          description={error}
+          action={{
+            label: 'Connect GitHub Account',
+            onClick: () => window.location.href = '/dashboard?view=settings'
+          }}
+        />
       </div>
     );
   }

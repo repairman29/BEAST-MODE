@@ -5,6 +5,7 @@ import React, { Component, ErrorInfo, ReactNode } from 'react';
 // Ensure React is in scope for JSX
 import { Card, CardContent, CardHeader, CardTitle } from './card';
 import { Button } from './button';
+import SmartErrorDisplay from '../llm/SmartErrorDisplay';
 
 export interface Props {
   children: ReactNode;
@@ -51,13 +52,14 @@ class ErrorBoundary extends Component<Props, State> {
     // Send to error monitoring
     if (typeof window !== 'undefined') {
       try {
-        const { getErrorMonitor } = require('../../lib/error-monitoring');
-        const errorMonitor = getErrorMonitor();
-        errorMonitor.captureError(error, {
-          component: 'ErrorBoundary',
+        const { captureError } = require('@/lib/monitoring');
+        captureError(error, {
+          action: 'ErrorBoundary',
           metadata: {
             componentStack: errorInfo.componentStack,
+            errorBoundary: true
           },
+          severity: 'error'
         });
       } catch (e) {
         // Silently fail if error monitoring not available
@@ -88,52 +90,16 @@ class ErrorBoundary extends Component<Props, State> {
 
       return (
         <div className="min-h-screen flex items-center justify-center bg-black p-4">
-          <Card className="bg-slate-900/95 border-red-500/50 max-w-2xl w-full">
-            <CardHeader>
-              <CardTitle className="text-red-400 flex items-center gap-2">
-                <span className="text-2xl">⚠️</span>
-                Something went wrong
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="bg-slate-800/50 rounded-lg p-4 border border-slate-700">
-                <div className="text-sm text-slate-400 mb-2">Error Details:</div>
-                <div className="text-red-300 font-mono text-sm">
-                  {this.state.error?.message || 'An unexpected error occurred'}
-                </div>
-                {this.state.error?.stack && (
-                  <details className="mt-3">
-                    <summary className="text-xs text-slate-500 cursor-pointer hover:text-slate-400">
-                      Show stack trace
-                    </summary>
-                    <pre className="mt-2 text-xs text-slate-500 overflow-auto max-h-40 p-2 bg-slate-900 rounded">
-                      {this.state.error.stack}
-                    </pre>
-                  </details>
-                )}
-              </div>
-
-              <div className="flex gap-3">
-                <Button
-                  onClick={this.handleReset}
-                  className="bg-cyan-600 hover:bg-cyan-700 text-white"
-                >
-                  Try Again
-                </Button>
-                <Button
-                  onClick={this.handleReload}
-                  variant="outline"
-                  className="border-slate-700 text-slate-300 hover:bg-slate-800"
-                >
-                  Reload Page
-                </Button>
-              </div>
-
-              <div className="text-xs text-slate-500 pt-4 border-t border-slate-800">
-                💡 If this error persists, please report it to support@beastmode.dev
-              </div>
-            </CardContent>
-          </Card>
+          <SmartErrorDisplay
+            error={this.state.error || new Error('An unexpected error occurred')}
+            context={{
+              code: this.state.errorInfo?.componentStack || '',
+              userMessage: 'An error occurred in the application',
+              technicalDetails: this.state.error?.stack
+            }}
+            onRetry={this.handleReset}
+            showTechnical={true}
+          />
         </div>
       );
     }

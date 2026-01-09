@@ -3,7 +3,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { CardEnhanced, CardHeaderEnhanced, CardTitleEnhanced, CardContentEnhanced } from '../ui/CardEnhanced';
 import { ButtonEnhanced } from '../ui/ButtonEnhanced';
-import { EmptyState } from '../ui/EmptyState';
+import EmptyState from '../ui/EmptyState';
 import { Send, Sparkles, MessageSquare, History, Lightbulb } from 'lucide-react';
 
 /**

@@ -96,6 +96,14 @@ export default function PluginReviews({
         setUserReview(data.review);
         setShowReviewForm(false);
         await fetchReviews(); // Refresh reviews
+        
+        // Track analytics
+        if (typeof window !== 'undefined') {
+          const { getAnalytics } = require('@/lib/analytics');
+          const analytics = getAnalytics();
+          analytics.trackFeatureUse('plugin-review', pluginId);
+          analytics.track('event', 'marketplace', 'review-submitted', pluginId, userRating);
+        }
       }
     } catch (error) {
       console.error('Failed to submit review:', error);

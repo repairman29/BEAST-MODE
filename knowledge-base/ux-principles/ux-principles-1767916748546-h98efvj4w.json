@@ -1,0 +1,17 @@
+{
+  "id": "ux-principles-1767916748546-h98efvj4w",
+  "category": "ux-principles",
+  "title": "Visual Hierarchy",
+  "content": "Guide user attention through size, color, contrast, and spacing. Primary actions should be large, high contrast, and prominent. Secondary actions should be medium and subtle. Tertiary actions should be small and muted. Use whitespace strategically and maintain a typography scale of 4-5 sizes maximum.",
+  "metadata": {
+    "source": "UX_PSYCHOLOGY_PRINCIPLES.md",
+    "tags": [
+      "visual-design",
+      "hierarchy",
+      "layout"
+    ],
+    "priority": "high",
+    "createdAt": "2026-01-08T23:59:08.546Z",
+    "updatedAt": "2026-01-08T23:59:08.546Z"
+  }
+}
