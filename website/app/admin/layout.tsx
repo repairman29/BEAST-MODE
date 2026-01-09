@@ -2,12 +2,12 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { isAdmin } from '@/lib/auth';
 
 /**
  * Admin Layout
  * 
- * Protects admin pages - requires authentication
- * TODO: Add proper authentication check
+ * Protects admin pages - requires admin authentication
  */
 
 export default function AdminLayout({
@@ -22,19 +22,10 @@ export default function AdminLayout({
     // Check if user is authorized
     const checkAuth = async () => {
       try {
-        // TODO: Replace with actual auth check
-        // For now, check if we're in development or if user has admin cookie
-        const isDev = process.env.NODE_ENV === 'development';
-        const hasAdminCookie = document.cookie.includes('admin=true');
-        
-        if (isDev || hasAdminCookie) {
-          setIsAuthorized(true);
-        } else {
-          // In production, require proper authentication
-          // For now, show warning but allow access
-          setIsAuthorized(true);
-        }
+        const admin = await isAdmin();
+        setIsAuthorized(admin);
       } catch (error) {
+        console.error('Auth check failed:', error);
         setIsAuthorized(false);
       }
     };

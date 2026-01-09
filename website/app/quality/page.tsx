@@ -10,6 +10,8 @@ import EnhancedFeedbackPrompt from '@/components/feedback/EnhancedFeedbackPrompt
 import { getQualityFeedbackTracker } from '@/lib/qualityFeedbackTracker';
 import { QualityWidget } from '@/components/plg/QualityWidget';
 import { RecommendationCards } from '@/components/plg/RecommendationCards';
+import { getUserLimits, canAddRepo, canExport, canCompare, getUserTier } from '@/lib/freemium-limits';
+import { isAuthenticated } from '@/lib/auth';
 
 /**
  * Quality Dashboard MVP
@@ -69,10 +71,14 @@ export default function QualityDashboard() {
   const [trends, setTrends] = useState<Record<string, any>>({});
   const [loadingTrends, setLoadingTrends] = useState<Record<string, boolean>>({});
   const [showFeedbackPrompt, setShowFeedbackPrompt] = useState<string | null>(null);
+  const [userTier, setUserTier] = useState<'free' | 'authenticated' | 'pro'>('free');
+  const [userLimits, setUserLimits] = useState<any>(null);
+  const [isAuth, setIsAuth] = useState(false);
 
-  // Load stats on mount
+  // Load stats and user tier on mount
   useEffect(() => {
     fetchStats();
+    loadUserTier();
     
     // Initialize quality feedback tracker
     const tracker = getQualityFeedbackTracker();
@@ -92,6 +98,15 @@ export default function QualityDashboard() {
     };
   }, []);
 
+  const loadUserTier = async () => {
+    const tier = await getUserTier();
+    const limits = await getUserLimits();
+    const auth = await isAuthenticated();
+    setUserTier(tier);
+    setUserLimits(limits);
+    setIsAuth(auth);
+  };
+
   const fetchStats = async () => {
     try {
       const res = await fetch('/api/repos/quality/monitoring');
@@ -102,8 +117,17 @@ export default function QualityDashboard() {
     }
   };
 
-  const addRepo = () => {
-    if (repoInput.trim() && !repos.includes(repoInput.trim())) {
+  const addRepo = async () => {
+    if (!repoInput.trim()) return;
+    
+    // Check freemium limits
+    const check = await canAddRepo(repos.length);
+    if (!check.allowed) {
+      alert(check.reason);
+      return;
+    }
+    
+    if (!repos.includes(repoInput.trim())) {
       setRepos([...repos, repoInput.trim()]);
       setRepoInput('');
     }
@@ -291,12 +315,46 @@ export default function QualityDashboard() {
           </div>
         )}
 
+        {/* Freemium Banner */}
+        {userTier === 'free' && repos.length >= 2 && (
+          <Card className="bg-cyan-900/20 border-cyan-500/50 mb-6">
+            <CardContent className="pt-6">
+              <div className="flex items-center justify-between flex-wrap gap-4">
+                <div>
+                  <h3 className="text-lg font-semibold text-white mb-1">
+                    🚀 Unlock Unlimited Repos
+                  </h3>
+                  <p className="text-sm text-slate-300">
+                    You've used {repos.length} of {userLimits?.maxRepos || 3} free repos. Sign in for unlimited access, export, and comparison features.
+                  </p>
+                </div>
+                <Button
+                  onClick={() => {
+                    // TODO: Navigate to sign in
+                    alert('Sign in feature coming soon!');
+                  }}
+                  className="bg-cyan-600 hover:bg-cyan-700 text-white whitespace-nowrap"
+                >
+                  Sign In
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        )}
+
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* Input Panel */}
           <Card className="bg-slate-900/90 border-slate-800 lg:col-span-1">
             <CardHeader>
               <CardTitle className="text-white">Add Repositories</CardTitle>
-              <CardDescription>Enter repos in format: owner/repo</CardDescription>
+              <CardDescription>
+                Enter repos in format: owner/repo
+                {userTier === 'free' && userLimits && (
+                  <span className="block mt-1 text-xs text-amber-400">
+                    Free: {repos.length}/{userLimits.maxRepos} repos
+                  </span>
+                )}
+              </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="flex gap-2">
