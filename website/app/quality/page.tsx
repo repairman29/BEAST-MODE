@@ -12,6 +12,7 @@ import { QualityWidget } from '@/components/plg/QualityWidget';
 import { RecommendationCards } from '@/components/plg/RecommendationCards';
 import { getUserLimits, canAddRepo, canExport, canCompare, getUserTier } from '@/lib/freemium-limits';
 import { isAuthenticated } from '@/lib/auth';
+import { ComparisonView } from '@/components/quality/ComparisonView';
 import { exportQualityToCSV, exportQualityToJSON, exportQualityToPDF, QualityExportData } from '@/lib/export-quality-data';
 
 /**
@@ -75,6 +76,7 @@ export default function QualityDashboard() {
   const [userTier, setUserTier] = useState<'free' | 'authenticated' | 'pro'>('free');
   const [userLimits, setUserLimits] = useState<any>(null);
   const [isAuth, setIsAuth] = useState(false);
+  const [showComparison, setShowComparison] = useState(false);
 
   // Load stats and user tier on mount
   useEffect(() => {
