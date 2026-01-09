@@ -2,6 +2,7 @@
 
 **AI-Powered Code Quality, Intelligence & Automation Platform**
 
+[![CI](https://github.com/repairman29/BEAST-MODE/workflows/CI/badge.svg)](https://github.com/repairman29/BEAST-MODE/actions)
 [![Website](https://img.shields.io/badge/website-beast--mode.dev-blue)](https://beast-mode.dev)
 [![Support](https://img.shields.io/badge/support-support%40beast--mode.dev-green)](mailto:support@beast-mode.dev)
 
