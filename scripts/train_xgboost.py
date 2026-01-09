@@ -332,6 +332,18 @@ def main():
         print('=' * 60)
         print('✅ Retraining complete!\n')
         
+        # Auto-log results to database
+        try:
+            import subprocess
+            log_script = Path(__file__).parent / 'auto-log-training-results.py'
+            if log_script.exists():
+                print('📊 Logging training results to database...')
+                subprocess.run(['python3', str(log_script)], check=False)
+                print()
+        except Exception as e:
+            print(f'⚠️  Could not log results to database: {e}')
+            print()
+        
     except Exception as error:
         print(f'❌ Error: {error}')
         import traceback
