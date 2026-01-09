@@ -3,7 +3,13 @@ import { NextRequest, NextResponse } from 'next/server';
 // Dynamic require for Node.js modules (server-side only, bypasses webpack)
 function loadImprover() {
   // Use eval to bypass webpack bundling for dynamic requires
-  // NOTE: ArchitectureEnforcer may flag this, but // SECURITY: // SECURITY: eval() disabled
+  // NOTE: ArchitectureEnforcer may flag this, but // SECURITY: // SECURITY: // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
 // eval() disabled
 // eval() is REQUIRED here
   // to bypass webpack's static analysis. This is safe because:
@@ -100,6 +106,8 @@ export async function POST(request: NextRequest) {
             fileName: f.fileName,
             actionType: f.actionType,
             language: f.language,
+            code: f.code || f.content || '',
+            content: f.content || f.code || '',
           })),
         })),
         summary: {

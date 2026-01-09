@@ -10,7 +10,7 @@ const fs = require('fs').promises;
 const path = require('path');
 const { execSync } = require('child_process');
 
-const REPORTS_DIR = path.join(__dirname, '../reports/repo-reviews');
+const REPORTS_DIR = path.join(__dirname, '../reports/repo-improvements');
 
 // Colors for console output
 const colors = {
@@ -27,30 +27,43 @@ function log(message, color = 'reset') {
   console.log(`${colors[color]}${message}${colors.reset}`);
 }
 
-// Find the latest review report
+// Find the latest improvement report
 async function findLatestReport() {
   try {
     const files = await fs.readdir(REPORTS_DIR);
     const jsonFiles = files
-      .filter(f => f.startsWith('repo-review-') && f.endsWith('.json'))
+      .filter(f => f.startsWith('improvements-') && f.endsWith('.json'))
       .sort()
       .reverse();
     
     if (jsonFiles.length === 0) {
-      throw new Error('No review reports found. Run review script first.');
+      throw new Error('No improvement reports found. Run improve script first: npm run improve:all');
     }
     
     return path.join(REPORTS_DIR, jsonFiles[0]);
   } catch (error) {
-    throw new Error(`Could not find review reports: ${error.message}`);
+    if (error.message.includes('No improvement reports')) {
+      throw error;
+    }
+    throw new Error(`Failed to find improvement report: ${error.message}`);
   }
 }
 
 // Apply fixes from improvement plan
 async function applyFixes(repoResult, workspaceRoot) {
-  const { repo, improvementPlan, localPath } = repoResult;
+  const { repo, plan, localPath } = repoResult;
   
-  if (!improvementPlan || !improvementPlan.generatedFiles || improvementPlan.generatedFiles.length === 0) {
+  // Extract all generated files from plan iterations
+  const generatedFiles = [];
+  if (plan && plan.iterations) {
+    for (const iteration of plan.iterations) {
+      if (iteration.generatedFiles && Array.isArray(iteration.generatedFiles)) {
+        generatedFiles.push(...iteration.generatedFiles);
+      }
+    }
+  }
+  
+  if (generatedFiles.length === 0) {
     log(`  ⚠️  No fixes to apply for ${repo}`, 'yellow');
     return { applied: 0, errors: [] };
   }
@@ -60,10 +73,33 @@ async function applyFixes(repoResult, workspaceRoot) {
   if (!repoPath) {
     // Try to find local path from repo name
     const repoName = repo.split('/').pop();
+    const owner = repo.split('/')[0];
     const possiblePaths = [
       path.join(workspaceRoot, repoName),
       path.join(workspaceRoot, repo.split('/')[1]),
+      path.join(workspaceRoot, '..', repoName), // Check parent directory
+      path.join(workspaceRoot, '..', '..', repoName), // Check grandparent
+      path.join(workspaceRoot, 'smuggler-' + repoName.replace('smuggler-', '')), // Handle smuggler- prefix
+      path.join(workspaceRoot, repoName.replace('smuggler-', '')), // Without prefix
     ];
+    
+    // Also search for directories containing the repo name
+    try {
+      const dirs = await fs.readdir(workspaceRoot);
+      for (const dir of dirs) {
+        const dirPath = path.join(workspaceRoot, dir);
+        try {
+          const stat = await fs.stat(dirPath);
+          if (stat.isDirectory() && (dir.includes(repoName) || repoName.includes(dir))) {
+            possiblePaths.push(dirPath);
+          }
+        } catch (e) {
+          // Skip
+        }
+      }
+    } catch (e) {
+      // Can't read directory
+    }
     
     for (const possiblePath of possiblePaths) {
       try {
@@ -78,29 +114,67 @@ async function applyFixes(repoResult, workspaceRoot) {
   
   if (!repoPath) {
     log(`  ❌ Could not find local path for ${repo}`, 'red');
+    log(`     Tried: ${repo.split('/').pop()}`, 'yellow');
     return { applied: 0, errors: [`Could not find local path for ${repo}`] };
   }
   
-  log(`  📝 Applying fixes to ${repo} at ${repoPath}...`, 'cyan');
+  log(`  📝 Applying ${generatedFiles.length} files to ${repo} at ${repoPath}...`, 'cyan');
   
   const applied = [];
   const errors = [];
   
-  for (const file of improvementPlan.generatedFiles) {
+  for (const file of generatedFiles) {
     try {
-      const filePath = path.join(repoPath, file.fileName || file.path);
+      const fileName = file.fileName || file.path;
+      if (!fileName) {
+        log(`    ⚠️  Skipping file without name`, 'yellow');
+        continue;
+      }
+      
+      const filePath = path.join(repoPath, fileName);
       const fileDir = path.dirname(filePath);
       
       // Create directory if needed
       await fs.mkdir(fileDir, { recursive: true });
       
+      // Get file content
+      let content = file.code || file.content || '';
+      
+      // If no content in report, try to fetch from API
+      if (!content && repoResult.repo) {
+        try {
+          log(`    🔄 Fetching content for ${fileName} from API...`, 'yellow');
+          const axios = require('axios');
+          const response = await axios.post('http://localhost:3000/api/repos/quality/improve', {
+            repo: repoResult.repo,
+            targetQuality: 1.0,
+            dryRun: true,
+          }, { timeout: 30000 });
+          
+          // Find this file in the response
+          const allFiles = response.data?.plan?.iterations?.flatMap(iter => iter.generatedFiles || []) || [];
+          const fileWithContent = allFiles.find(f => (f.fileName || f.path) === fileName);
+          if (fileWithContent) {
+            content = fileWithContent.code || fileWithContent.content || '';
+          }
+        } catch (e) {
+          // API fetch failed, continue without content
+        }
+      }
+      
+      if (!content) {
+        log(`    ⚠️  Skipping ${fileName} (no content available)`, 'yellow');
+        continue;
+      }
+      
       // Write file
-      await fs.writeFile(filePath, file.code || file.content || '', 'utf8');
+      await fs.writeFile(filePath, content, 'utf8');
       applied.push(filePath);
-      log(`    ✅ Created ${file.fileName || file.path}`, 'green');
+      log(`    ✅ Created ${fileName}`, 'green');
     } catch (error) {
-      errors.push(`${file.fileName || file.path}: ${error.message}`);
-      log(`    ❌ Failed to create ${file.fileName || file.path}: ${error.message}`, 'red');
+      const fileName = file.fileName || file.path || 'unknown';
+      errors.push(`${fileName}: ${error.message}`);
+      log(`    ❌ Failed to create ${fileName}: ${error.message}`, 'red');
     }
   }
   
@@ -120,26 +194,33 @@ async function main() {
   
   try {
     // Load latest report
-    log('📊 Loading latest review report...', 'cyan');
+    log('📊 Loading latest improvement report...', 'cyan');
     const reportPath = await findLatestReport();
     log(`  ✅ Found: ${path.basename(reportPath)}\n`, 'green');
     
     const reportData = JSON.parse(await fs.readFile(reportPath, 'utf8'));
     const results = reportData.results || [];
     
-    // Filter repos with fixes
-    const reposWithFixes = results.filter(r => 
-      r.success && 
-      r.improvementPlan && 
-      r.improvementPlan.generatedFiles && 
-      r.improvementPlan.generatedFiles.length > 0 &&
-      (!repoFilter || r.repo.includes(repoFilter))
-    );
+    // Filter repos with fixes (from improvement reports)
+    const reposWithFixes = results.filter(r => {
+      if (!r.success) return false;
+      if (!r.plan || !r.plan.iterations) return false;
+      
+      // Check if any iteration has generated files
+      const hasFiles = r.plan.iterations.some(iter => 
+        iter.generatedFiles && iter.generatedFiles.length > 0
+      );
+      
+      if (!hasFiles) return false;
+      if (repoFilter && !r.repo.includes(repoFilter)) return false;
+      
+      return true;
+    });
     
     if (reposWithFixes.length === 0) {
       log('⚠️  No repositories with fixes found in report', 'yellow');
-      log('\n💡 Run review script with --fix flag first:', 'cyan');
-      log('   npm run review:all-repos:fix\n', 'cyan');
+      log('\n💡 Run improvement script first:', 'cyan');
+      log('   npm run improve:all\n', 'cyan');
       return;
     }
     
@@ -155,7 +236,11 @@ async function main() {
     
     for (const repoResult of reposWithFixes) {
       log(`\n📦 Processing ${repoResult.repo}...`, 'blue');
-      const result = await applyFixes(repoResult, workspaceRoot);
+      const result = await applyFixes({
+        repo: repoResult.repo,
+        plan: repoResult.plan,
+        localPath: repoResult.localPath,
+      }, workspaceRoot);
       
       if (result.applied > 0) {
         summary.applied++;
