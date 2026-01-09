@@ -72,6 +72,30 @@ interface QualityResponse {
       };
     };
   };
+  comparativeAnalysis?: {
+    similarReposCount: number;
+    averageQuality: number;
+    medianQuality: number;
+    percentile: number;
+    comparison: {
+      vsAverage: number;
+      vsMedian: number;
+      vsTop10: number;
+    };
+    differentiators: Array<{
+      feature: string;
+      value: number;
+      average: number;
+      difference: number;
+      percentDifference: number;
+      type: 'strength' | 'weakness';
+    }>;
+    insights: Array<{
+      type: string;
+      message: string;
+      action: string;
+    }>;
+  };
   warning?: string;
   source?: string;
 }
@@ -165,6 +189,228 @@ function explainConfidence(
     factors,
     recommendation
   };
+}
+
+/**
+ * Find similar repositories for comparison
+ */
+async function findSimilarRepos(
+  repo: string,
+  features: Record<string, any>
+): Promise<any[] | null> {
+  try {
+    const { getDatabaseWriter } = require('../../../../../lib/mlops/databaseWriter');
+    const databaseWriter = getDatabaseWriter();
+    
+    if (!databaseWriter || !databaseWriter.supabase) {
+      return null;
+    }
+    
+    // Get language from features or repo metadata
+    const stars = features.stars || 0;
+    const fileCount = features.fileCount || features.totalFiles || 0;
+    const forks = features.forks || 0;
+    
+    // Query similar repos from ml_predictions
+    // Similar = similar size (stars, fileCount), recent predictions
+    const starsMin = Math.max(0, stars * 0.3); // 30% to 300% range
+    const starsMax = stars * 3;
+    const fileCountMin = Math.max(0, fileCount * 0.3);
+    const fileCountMax = fileCount * 3;
+    
+    const { data, error } = await databaseWriter.supabase
+      .from('ml_predictions')
+      .select('predicted_value, context, created_at')
+      .eq('service_name', 'beast-mode')
+      .eq('prediction_type', 'quality')
+      .neq('context->>repo', repo) // Exclude current repo
+      .gte('context->>stars', Math.floor(starsMin).toString())
+      .lte('context->>stars', Math.floor(starsMax).toString())
+      .gte('context->>fileCount', Math.floor(fileCountMin).toString())
+      .lte('context->>fileCount', Math.floor(fileCountMax).toString())
+      .order('created_at', { ascending: false })
+      .limit(50);
+    
+    if (error) {
+      console.warn('[Quality API] Failed to query similar repos:', error.message);
+      return null;
+    }
+    
+    if (!data || data.length === 0) {
+      return null;
+    }
+    
+    // Filter and format results
+    return data
+      .filter(item => {
+        const ctx = item.context || {};
+        const ctxStars = parseInt(ctx.stars || ctx.features?.stars || '0');
+        const ctxFileCount = parseInt(ctx.fileCount || ctx.features?.fileCount || '0');
+        
+        // More strict filtering
+        return ctxStars >= starsMin && ctxStars <= starsMax &&
+               ctxFileCount >= fileCountMin && ctxFileCount <= fileCountMax;
+      })
+      .slice(0, 20) // Top 20 most similar
+      .map(item => ({
+        quality: item.predicted_value || 0,
+        context: item.context || {},
+        features: item.context?.features || {}
+      }));
+  } catch (error: any) {
+    console.warn('[Quality API] Error finding similar repos:', error.message);
+    return null;
+  }
+}
+
+/**
+ * Generate comparative analysis
+ */
+function generateComparativeAnalysis(
+  quality: number,
+  similarRepos: any[],
+  features: Record<string, any>
+): any | null {
+  if (!similarRepos || similarRepos.length === 0) {
+    return null;
+  }
+  
+  // Calculate statistics from similar repos
+  const similarQualities = similarRepos.map(r => r.quality || 0).filter(q => q > 0);
+  if (similarQualities.length === 0) {
+    return null;
+  }
+  
+  const avgSimilarQuality = similarQualities.reduce((a, b) => a + b, 0) / similarQualities.length;
+  const sortedQualities = [...similarQualities].sort((a, b) => a - b);
+  const medianSimilarQuality = sortedQualities[Math.floor(sortedQualities.length / 2)];
+  
+  // Calculate percentile (how many repos are better)
+  const betterCount = similarQualities.filter(q => q > quality).length;
+  const percentile = (betterCount / similarQualities.length) * 100;
+  
+  // Top 10% average
+  const top10Count = Math.max(1, Math.ceil(similarQualities.length * 0.1));
+  const top10Qualities = sortedQualities.slice(-top10Count);
+  const avgTop10 = top10Qualities.reduce((a, b) => a + b, 0) / top10Qualities.length;
+  
+  // Find top differentiators
+  const differentiators = findTopDifferentiators(features, similarRepos);
+  
+  // Generate insights
+  const insights = generateInsights(quality, avgSimilarQuality, percentile, differentiators);
+  
+  return {
+    similarReposCount: similarRepos.length,
+    averageQuality: avgSimilarQuality,
+    medianQuality: medianSimilarQuality,
+    percentile: percentile,
+    comparison: {
+      vsAverage: quality - avgSimilarQuality,
+      vsMedian: quality - medianSimilarQuality,
+      vsTop10: quality - avgTop10
+    },
+    differentiators: differentiators,
+    insights: insights
+  };
+}
+
+/**
+ * Find top differentiators (what makes this repo different)
+ */
+function findTopDifferentiators(features: Record<string, any>, similarRepos: any[]): any[] {
+  const differentiators: any[] = [];
+  
+  // Compare key features
+  const keyFeatures = ['hasTests', 'hasCI', 'hasReadme', 'hasLicense', 'stars', 'forks', 'openIssues', 'codeFileCount'];
+  
+  for (const feature of keyFeatures) {
+    const thisValue = features[feature] || 0;
+    const similarValues = similarRepos
+      .map(r => {
+        const ctx = r.context || {};
+        const feat = r.features || ctx.features || {};
+        return parseFloat(feat[feature] || ctx[feature] || '0') || 0;
+      })
+      .filter(v => !isNaN(v));
+    
+    if (similarValues.length === 0) continue;
+    
+    const avgSimilar = similarValues.reduce((a, b) => a + b, 0) / similarValues.length;
+    
+    const difference = thisValue - avgSimilar;
+    const percentDiff = avgSimilar > 0 ? (difference / avgSimilar) * 100 : (thisValue > 0 ? 100 : 0);
+    
+    // 20% difference threshold
+    if (Math.abs(percentDiff) > 20) {
+      differentiators.push({
+        feature,
+        value: thisValue,
+        average: avgSimilar,
+        difference: difference,
+        percentDifference: percentDiff,
+        type: difference > 0 ? 'strength' : 'weakness'
+      });
+    }
+  }
+  
+  return differentiators
+    .sort((a, b) => Math.abs(b.percentDifference) - Math.abs(a.percentDifference))
+    .slice(0, 5);
+}
+
+/**
+ * Generate insights from comparison
+ */
+function generateInsights(
+  quality: number,
+  avgQuality: number,
+  percentile: number,
+  differentiators: any[]
+): any[] {
+  const insights: any[] = [];
+  
+  if (quality > avgQuality * 1.1) {
+    insights.push({
+      type: 'excellent',
+      message: `Your repo ranks in the top ${(100 - percentile).toFixed(0)}% of similar repos`,
+      action: 'Keep up the excellent work!'
+    });
+  } else if (quality < avgQuality * 0.9) {
+    insights.push({
+      type: 'improvement',
+      message: `Your repo ranks below average compared to similar repos`,
+      action: 'Focus on the top differentiators to improve'
+    });
+  } else {
+    insights.push({
+      type: 'good',
+      message: `Your repo is performing well compared to similar repos`,
+      action: 'Continue maintaining quality standards'
+    });
+  }
+  
+  // Add differentiator insights
+  const strengths = differentiators.filter(d => d.type === 'strength');
+  const weaknesses = differentiators.filter(d => d.type === 'weakness');
+  
+  if (strengths.length > 0) {
+    insights.push({
+      type: 'strength',
+      message: `Your repo excels in: ${strengths.map((s: any) => s.feature.replace(/([A-Z])/g, ' $1').trim()).join(', ')}`,
+      action: 'These are your competitive advantages'
+    });
+  }
+  
+  if (weaknesses.length > 0) {
+    insights.push({
+      type: 'weakness',
+      message: `Areas to improve: ${weaknesses.map((w: any) => w.feature.replace(/([A-Z])/g, ' $1').trim()).join(', ')}`,
+      action: 'Focus on these to catch up to similar repos'
+    });
+  }
+  
+  return insights;
 }
 
 /**
@@ -1114,6 +1360,17 @@ export async function POST(request: NextRequest) {
     // Generate platform-specific insights
     const platformSpecific = generatePlatformSpecific(quality, features, platform);
     
+    // Generate comparative analysis (async, don't block)
+    let comparativeAnalysis: any = null;
+    try {
+      const similarRepos = await findSimilarRepos(repo, features);
+      if (similarRepos && similarRepos.length > 0) {
+        comparativeAnalysis = generateComparativeAnalysis(quality, similarRepos, features);
+      }
+    } catch (error: any) {
+      console.warn('[Quality API] Failed to generate comparative analysis:', error.message);
+    }
+    
     // Track prediction for feedback collection (async, don't block)
     let predictionId: string | undefined;
     try {
@@ -1180,6 +1437,7 @@ export async function POST(request: NextRequest) {
         features: DEFAULT_MODEL_INFO.features
       },
       platformSpecific,
+      ...(comparativeAnalysis && { comparativeAnalysis }),
       // Add metadata about prediction source
       ...(usingFallback && { 
         warning: 'Using fallback prediction - ML model not available',
