@@ -21,11 +21,42 @@ async function getAutoFeedbackCollector() {
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
+    
+    // Handle inferred feedback (new format)
+    if (body.predictionId && body.inferredValue !== undefined) {
+      const { predictionId, inferredValue, context } = body;
+      
+      // Record inferred feedback directly
+      try {
+        const { getFeedbackCollector } = require('../../../../../lib/mlops/feedbackCollector');
+        const collector = await getFeedbackCollector();
+        
+        if (collector) {
+          await collector.recordOutcome(predictionId, inferredValue, {
+            ...context,
+            source: 'auto-inferred',
+            inferred: true
+          });
+          
+          return NextResponse.json({
+            success: true,
+            predictionId,
+            inferredValue,
+            message: 'Inferred feedback recorded'
+          });
+        }
+      } catch (error: any) {
+        console.warn('[Auto Feedback] Failed to record inferred feedback:', error.message);
+        // Continue to fallback
+      }
+    }
+    
+    // Handle action tracking (legacy format)
     const { actions } = body;
 
     if (!actions || !Array.isArray(actions)) {
       return NextResponse.json(
-        { success: false, error: 'Invalid request: actions array required' },
+        { success: false, error: 'Invalid request: actions array or inferred feedback required' },
         { status: 400 }
       );
     }

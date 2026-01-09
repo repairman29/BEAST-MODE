@@ -82,7 +82,7 @@ export async function POST(request: NextRequest) {
         const modelRouter = getModelRouter();
         
         // Get conversation history for context
-        const history = codebaseChat.getHistory(sessionId) || [];
+        const history = await codebaseChat.getHistory(sessionId) || [];
         const messages = [
           ...history.map((h: any) => ({
             role: h.role || 'user',
@@ -213,7 +213,7 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    const history = codebaseChat.getHistory(sessionId);
+    const history = await codebaseChat.getHistory(sessionId);
 
     return NextResponse.json({
       success: true,
@@ -253,7 +253,7 @@ export async function DELETE(request: NextRequest) {
       );
     }
 
-    codebaseChat.clearHistory(sessionId);
+    await codebaseChat.clearHistory(sessionId);
 
     return NextResponse.json({
       success: true,

@@ -5,6 +5,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
+import InlineFeedbackButton from '@/components/feedback/InlineFeedbackButton';
+import { getQualityFeedbackTracker } from '@/lib/qualityFeedbackTracker';
 
 /**
  * Quality Dashboard MVP
@@ -20,6 +22,7 @@ interface QualityResult {
   quality: number;
   confidence: number;
   percentile: number;
+  predictionId?: string; // For feedback collection
   confidenceExplanation?: {
     score: number;
     level: 'very-high' | 'high' | 'medium' | 'low';
@@ -66,6 +69,23 @@ export default function QualityDashboard() {
   // Load stats on mount
   useEffect(() => {
     fetchStats();
+    
+    // Initialize quality feedback tracker
+    const tracker = getQualityFeedbackTracker();
+    
+    // Track time spent viewing results
+    const startTime = Date.now();
+    return () => {
+      const timeSpent = Date.now() - startTime;
+      if (results.length > 0 && timeSpent >= 3000) {
+        // User spent time viewing results, infer positive feedback
+        results.forEach(result => {
+          if (result.predictionId) {
+            tracker.trackTimeSpent(result.predictionId, result.repo, timeSpent);
+          }
+        });
+      }
+    };
   }, []);
 
   const fetchStats = async () => {
@@ -141,7 +161,8 @@ export default function QualityDashboard() {
             ...data,
             quality: data.quality || 0,
             confidence: data.confidence || 0,
-            percentile: data.percentile || 0
+            percentile: data.percentile || 0,
+            predictionId: data.predictionId // Store for feedback collection
           };
         } catch (error: any) {
           return {
@@ -397,6 +418,19 @@ export default function QualityDashboard() {
                             </div>
                           )}
 
+                          {/* Inline Feedback Button */}
+                          {result.predictionId && (
+                            <div className="mb-4 flex items-center justify-between pt-2 border-t border-slate-700">
+                              <span className="text-xs text-slate-400">Was this prediction helpful?</span>
+                              <InlineFeedbackButton
+                                predictionId={result.predictionId}
+                                predictedValue={result.quality}
+                                serviceName="beast-mode"
+                                compact={true}
+                              />
+                            </div>
+                          )}
+
                           {/* Confidence Explanation */}
                           {result.confidenceExplanation && (
                             <Card className="bg-blue-500/10 border-blue-500/30 mb-4">
@@ -485,8 +519,28 @@ export default function QualityDashboard() {
                                   })
                                   .slice(0, 5)
                                   .map((rec: any, idx: number) => (
-                                    <Card key={idx} className="bg-slate-800/50 border-slate-700/50">
+                                    <Card 
+                                      key={idx} 
+                                      className="bg-slate-800/50 border-slate-700/50 cursor-pointer hover:bg-slate-800/70 transition-colors"
+                                      data-recommendation-card
+                                      data-prediction-id={result.predictionId}
+                                      data-repo={result.repo}
+                                      data-recommendation-index={idx}
+                                      data-priority={rec.priority}
+                                      onClick={() => {
+                                        if (result.predictionId) {
+                                          const tracker = getQualityFeedbackTracker();
+                                          tracker.trackRecommendationClick(
+                                            result.predictionId,
+                                            result.repo,
+                                            idx,
+                                            rec
+                                          );
+                                        }
+                                      }}
+                                    >
                                       <CardContent className="p-3">
+                                        <div data-recommendation-action>{rec.action}</div>
                                         <div className="flex items-start justify-between mb-2">
                                           <h4 className="text-sm font-semibold text-white flex-1">{rec.action}</h4>
                                           <div className="flex gap-2 ml-2">
