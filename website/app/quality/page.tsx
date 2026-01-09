@@ -8,6 +8,8 @@ import { Badge } from '@/components/ui/badge';
 import InlineFeedbackButton from '@/components/feedback/InlineFeedbackButton';
 import EnhancedFeedbackPrompt from '@/components/feedback/EnhancedFeedbackPrompt';
 import { getQualityFeedbackTracker } from '@/lib/qualityFeedbackTracker';
+import { QualityWidget } from '@/components/plg/QualityWidget';
+import { RecommendationCards } from '@/components/plg/RecommendationCards';
 
 /**
  * Quality Dashboard MVP
@@ -507,78 +509,15 @@ export default function QualityDashboard() {
                             </div>
                           )}
 
+                          {/* Recommendations - Using PLG Component */}
                           {result.recommendations && result.recommendations.length > 0 && (
                             <div className="mt-4 pt-4 border-t border-slate-700">
                               <div className="text-xs text-slate-400 mb-3 uppercase tracking-wider">Recommendations</div>
-                              <div className="space-y-3">
-                                {result.recommendations
-                                  .sort((a: any, b: any) => {
-                                    // Sort by categorization type (quick-win first) or priority
-                                    if (a.categorization?.type === 'quick-win' && b.categorization?.type !== 'quick-win') return -1;
-                                    if (a.categorization?.type !== 'quick-win' && b.categorization?.type === 'quick-win') return 1;
-                                    if (a.categorization?.roi === 'high' && b.categorization?.roi !== 'high') return -1;
-                                    return (b.estimatedGain || 0) - (a.estimatedGain || 0);
-                                  })
-                                  .slice(0, 5)
-                                  .map((rec: any, idx: number) => (
-                                    <Card 
-                                      key={idx} 
-                                      className="bg-slate-800/50 border-slate-700/50 cursor-pointer hover:bg-slate-800/70 transition-colors"
-                                      data-recommendation-card
-                                      data-prediction-id={result.predictionId}
-                                      data-repo={result.repo}
-                                      data-recommendation-index={idx}
-                                      data-priority={rec.priority}
-                                      onClick={() => {
-                                        if (result.predictionId) {
-                                          const tracker = getQualityFeedbackTracker();
-                                          tracker.trackRecommendationClick(
-                                            result.predictionId,
-                                            result.repo,
-                                            idx,
-                                            rec
-                                          );
-                                        }
-                                      }}
-                                    >
-                                      <CardContent className="p-3">
-                                        <div data-recommendation-action>{rec.action}</div>
-                                        <div className="flex items-start justify-between mb-2">
-                                          <h4 className="text-sm font-semibold text-white flex-1">{rec.action}</h4>
-                                          <div className="flex gap-2 ml-2">
-                                            {rec.categorization && (
-                                              <>
-                                                <Badge className={getCategoryBadgeColor(rec.categorization.type)}>
-                                                  {rec.categorization.type === 'quick-win' ? '⚡' : rec.categorization.type === 'high-impact' ? '🎯' : '🚀'} {rec.categorization.type.replace('-', ' ')}
-                                                </Badge>
-                                                <Badge variant="outline" className={`text-xs ${getROIColor(rec.categorization.roi)}`}>
-                                                  ROI: {rec.categorization.roi}
-                                                </Badge>
-                                              </>
-                                            )}
-                                            {rec.estimatedGain && (
-                                              <Badge className="bg-cyan-500/20 text-cyan-400 border-cyan-500/50 text-xs">
-                                                +{(rec.estimatedGain * 100).toFixed(0)}%
-                                              </Badge>
-                                            )}
-                                          </div>
-                                        </div>
-                                        {rec.impact && (
-                                          <p className="text-xs text-slate-300 mb-2">{rec.impact}</p>
-                                        )}
-                                        {rec.categorization && (
-                                          <div className="flex gap-4 text-xs text-slate-500">
-                                            <span>Effort: <span className="text-slate-400">{rec.categorization.effort}</span></span>
-                                            <span>Timeframe: <span className="text-slate-400">{rec.categorization.timeframe}</span></span>
-                                            {rec.categorization.estimatedHours && (
-                                              <span>Hours: <span className="text-slate-400">{rec.categorization.estimatedHours}</span></span>
-                                            )}
-                                          </div>
-                                        )}
-                                      </CardContent>
-                                    </Card>
-                                  ))}
-                              </div>
+                              <RecommendationCards 
+                                repo={result.repo} 
+                                platform="beast-mode"
+                                limit={5}
+                              />
                             </div>
                           )}
 
