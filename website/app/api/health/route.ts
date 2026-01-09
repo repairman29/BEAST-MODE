@@ -84,7 +84,7 @@ export async function GET(request: NextRequest) {
       environment = (await getConfigValue('NODE_ENV', 'development')) || 'development';
     } catch (error) {
       // Use defaults if config fails
-      version = process.env.npm_package_version || '1.0.0';
+      version = process.env.npm_package_version || process.env.npm_package_version || '1.0.0';
       environment = process.env.NODE_ENV || 'development';
     }
 
@@ -197,6 +197,11 @@ export async function GET(request: NextRequest) {
       } catch (error) {
         // Performance stats not available
       }
+      }
+    } catch (error) {
+      // Service checks failed, but health endpoint should still respond
+      health.status = 'degraded';
+      health.error = error instanceof Error ? error.message : 'Unknown error';
     }
 
     return NextResponse.json(health, {

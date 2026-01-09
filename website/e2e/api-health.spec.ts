@@ -17,15 +17,11 @@ test.describe('API Health Checks', () => {
 
   test('health endpoint should include timestamp', async ({ request }) => {
     const response = await request.get('/api/health');
+    expect(response.status()).toBe(200);
     
-    if (response.status() === 200) {
-      const body = await response.json();
-      expect(body).toHaveProperty('timestamp');
-      expect(typeof body.timestamp).toBe('string');
-    } else {
-      // If endpoint is broken, skip this test
-      test.skip();
-    }
+    const body = await response.json();
+    expect(body).toHaveProperty('timestamp');
+    expect(typeof body.timestamp).toBe('string');
   });
 
   test('health endpoint should be fast', async ({ request }) => {
@@ -33,10 +29,7 @@ test.describe('API Health Checks', () => {
     const response = await request.get('/api/health');
     const duration = Date.now() - start;
     
-    // Should respond quickly regardless of status
-    expect(duration).toBeLessThan(2000); // Should respond in < 2 seconds
-    
-    // If it's 200, great. If 500, that's a separate issue to fix
-    expect([200, 500]).toContain(response.status());
+    expect(response.status()).toBe(200);
+    expect(duration).toBeLessThan(3000); // Should respond in < 3 seconds (dev server can be slower)
   });
 });

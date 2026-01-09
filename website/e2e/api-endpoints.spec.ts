@@ -45,13 +45,9 @@ test.describe('API Endpoints', () => {
 
   test('API should return JSON for JSON endpoints', async ({ request }) => {
     const response = await request.get('/api/health');
+    expect(response.status()).toBe(200);
     
-    if (response.status() === 200) {
-      const contentType = response.headers()['content-type'];
-      expect(contentType).toContain('application/json');
-    } else {
-      // If endpoint is broken, skip content type check
-      test.skip();
-    }
+    const contentType = response.headers()['content-type'];
+    expect(contentType).toContain('application/json');
   });
 });

@@ -49,11 +49,15 @@ test.describe('Critical User Flows', () => {
   });
 
   test('should handle 404 pages gracefully', async ({ page }) => {
-    const response = await page.goto('/non-existent-page-12345');
+    const response = await page.goto('/non-existent-page-12345', { waitUntil: 'networkidle' });
     
     // Should either redirect or show 404
     if (response) {
       expect([200, 404, 307, 308]).toContain(response.status());
+    } else {
+      // If no response, page should still load (Next.js might handle it client-side)
+      await page.waitForLoadState('networkidle');
+      expect(page.url()).toBeTruthy();
     }
   });
 
