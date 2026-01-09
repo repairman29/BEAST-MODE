@@ -497,6 +497,87 @@ export default function QualityDashboard() {
                             </div>
                           )}
 
+                          {/* Comparative Analysis */}
+                          {result.comparativeAnalysis && (
+                            <div className="mt-4 pt-4 border-t border-slate-700">
+                              <div className="text-xs text-slate-400 mb-3 uppercase tracking-wider">Comparative Analysis</div>
+                              
+                              {/* Comparison Stats */}
+                              <div className="grid grid-cols-3 gap-3 mb-4">
+                                <div className="bg-slate-800/50 rounded p-2 border border-slate-700/50">
+                                  <div className="text-xs text-slate-400 mb-1">vs Average</div>
+                                  <div className={`text-sm font-semibold ${
+                                    result.comparativeAnalysis.comparison.vsAverage > 0 ? 'text-green-400' : 'text-red-400'
+                                  }`}>
+                                    {result.comparativeAnalysis.comparison.vsAverage > 0 ? '+' : ''}
+                                    {(result.comparativeAnalysis.comparison.vsAverage * 100).toFixed(1)}%
+                                  </div>
+                                </div>
+                                <div className="bg-slate-800/50 rounded p-2 border border-slate-700/50">
+                                  <div className="text-xs text-slate-400 mb-1">Percentile</div>
+                                  <div className="text-sm font-semibold text-cyan-400">
+                                    {result.comparativeAnalysis.percentile.toFixed(0)}th
+                                  </div>
+                                </div>
+                                <div className="bg-slate-800/50 rounded p-2 border border-slate-700/50">
+                                  <div className="text-xs text-slate-400 mb-1">Similar Repos</div>
+                                  <div className="text-sm font-semibold text-slate-300">
+                                    {result.comparativeAnalysis.similarReposCount}
+                                  </div>
+                                </div>
+                              </div>
+
+                              {/* Differentiators */}
+                              {result.comparativeAnalysis.differentiators && result.comparativeAnalysis.differentiators.length > 0 && (
+                                <div className="mb-4">
+                                  <div className="text-xs text-slate-400 mb-2">Key Differentiators:</div>
+                                  <div className="space-y-2">
+                                    {result.comparativeAnalysis.differentiators.map((diff: any, idx: number) => (
+                                      <div key={idx} className={`bg-slate-800/50 rounded p-2 border ${
+                                        diff.type === 'strength' ? 'border-green-500/50' : 'border-red-500/50'
+                                      }`}>
+                                        <div className="flex items-center justify-between">
+                                          <span className="text-xs text-slate-300 capitalize">
+                                            {diff.feature.replace(/([A-Z])/g, ' $1').trim()}
+                                          </span>
+                                          <Badge className={
+                                            diff.type === 'strength'
+                                              ? 'bg-green-500/20 text-green-400 border-green-500/50'
+                                              : 'bg-red-500/20 text-red-400 border-red-500/50'
+                                          }>
+                                            {diff.type === 'strength' ? '✓' : '⚠'} {Math.abs(diff.percentDifference).toFixed(0)}%
+                                          </Badge>
+                                        </div>
+                                        <div className="text-xs text-slate-400 mt-1">
+                                          You: {diff.value.toFixed(0)} | Avg: {diff.average.toFixed(0)}
+                                        </div>
+                                      </div>
+                                    ))}
+                                  </div>
+                                </div>
+                              )}
+
+                              {/* Insights */}
+                              {result.comparativeAnalysis.insights && result.comparativeAnalysis.insights.length > 0 && (
+                                <div>
+                                  <div className="text-xs text-slate-400 mb-2">Insights:</div>
+                                  <div className="space-y-2">
+                                    {result.comparativeAnalysis.insights.map((insight: any, idx: number) => (
+                                      <div key={idx} className={`bg-slate-800/50 rounded p-2 border ${
+                                        insight.type === 'excellent' ? 'border-green-500/50' :
+                                        insight.type === 'improvement' ? 'border-red-500/50' :
+                                        'border-blue-500/50'
+                                      }`}>
+                                        <div className="text-xs text-slate-300 mb-1">{insight.message}</div>
+                                        <div className="text-xs text-cyan-400 italic">{insight.action}</div>
+                                      </div>
+                                    ))}
+                                  </div>
+                                </div>
+                              )}
+                            </div>
+                          )}
+
                           {result.error && (
                             <div className="mt-4 pt-4 border-t border-slate-700">
                               <div className="text-sm text-red-400">Error: {result.error}</div>
