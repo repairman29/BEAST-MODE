@@ -419,7 +419,7 @@ def main():
                 str(len(feature_names))
             ]
             result = subprocess.run(args, capture_output=True, text=True, check=False)
-            if result.returncode === 0:
+            if result.returncode == 0:
                 print(result.stdout)
             else:
                 print(f'⚠️  Could not log results: {result.stderr}')
