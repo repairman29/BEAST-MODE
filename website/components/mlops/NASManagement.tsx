@@ -36,7 +36,10 @@ export default function NASManagement() {
       const data = await res.json();
       setRuns(data.runs || []);
     } catch (error) {
-      console.error('Failed to fetch NAS runs:', error);
+      // Error handled silently - UI will show empty state
+      if (process.env.NODE_ENV === 'development') {
+        console.error('Failed to fetch NAS runs:', error);
+      }
     } finally {
       setLoading(false);
     }

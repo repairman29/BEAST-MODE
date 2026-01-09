@@ -32,7 +32,10 @@ export default function FineTuningManagement() {
       const data = await res.json();
       setJobs(data.jobs || []);
     } catch (error) {
-      console.error('Failed to fetch fine-tuning jobs:', error);
+      // Error handled silently - UI will show empty state
+      if (process.env.NODE_ENV === 'development') {
+        console.error('Failed to fetch fine-tuning jobs:', error);
+      }
     } finally {
       setLoading(false);
     }

@@ -35,7 +35,10 @@ export default function EnsembleManagement() {
       const data = await res.json();
       setConfigs(data.configs || []);
     } catch (error) {
-      console.error('Failed to fetch ensemble configs:', error);
+      // Error handled silently - UI will show empty state
+      if (process.env.NODE_ENV === 'development') {
+        console.error('Failed to fetch ensemble configs:', error);
+      }
     } finally {
       setLoading(false);
     }

@@ -1,14 +1,26 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '../ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../ui/tabs';
 import EnsembleManagement from './EnsembleManagement';
 import NASManagement from './NASManagement';
 import FineTuningManagement from './FineTuningManagement';
+import { getAnalytics } from '@/lib/analytics';
 
 export default function AdvancedMLFeatures() {
   const [activeTab, setActiveTab] = useState<'ensemble' | 'nas' | 'fine-tuning' | 'cross-domain' | 'caching'>('ensemble');
+  const analytics = getAnalytics();
+
+  useEffect(() => {
+    // Track page view
+    analytics.track('advanced_ml', 'navigation', 'view', activeTab);
+  }, [activeTab, analytics]);
+
+  const handleTabChange = (tab: string) => {
+    setActiveTab(tab as any);
+    analytics.track('advanced_ml', 'navigation', 'tab_changed', `${activeTab}_to_${tab}`);
+  };
 
   return (
     <div className="space-y-6">
@@ -17,7 +29,7 @@ export default function AdvancedMLFeatures() {
         <p className="text-slate-400">Powerful machine learning capabilities for enhanced predictions</p>
       </div>
 
-      <Tabs value={activeTab} onValueChange={(v) => setActiveTab(v as any)}>
+      <Tabs value={activeTab} onValueChange={handleTabChange}>
         <TabsList className="grid w-full grid-cols-5">
           <TabsTrigger value="ensemble">Ensembles</TabsTrigger>
           <TabsTrigger value="nas">NAS</TabsTrigger>
