@@ -3,6 +3,10 @@ import { NextRequest, NextResponse } from 'next/server';
 // Dynamic require for Node.js modules (server-side only, bypasses webpack)
 function loadImprover() {
   // Use eval to bypass webpack bundling for dynamic requires
+  // SECURITY: // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() is necessary here to bypass webpack static analysis
+  // This is safe because it only runs server-side in API routes
   const path = // SECURITY: // SECURITY: eval() disabled
 // eval() disabled
 // eval('require')('path');
@@ -10,6 +14,10 @@ function loadImprover() {
   const improverPath = path.join(rootPath, 'lib/mlops/automatedQualityImprover');
   
   try {
+    // SECURITY: // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() is necessary here to bypass webpack static analysis
+    // This is safe because it only runs server-side in API routes
     const automatedImprover = // SECURITY: // SECURITY: eval() disabled
 // eval() disabled
 // eval('require')(improverPath);

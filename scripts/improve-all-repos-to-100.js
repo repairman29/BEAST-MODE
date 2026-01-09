@@ -47,48 +47,62 @@ async function loadLatestReview() {
   return { data, path: reportPath };
 }
 
-// Improve a single repository
-async function improveRepo(repo, targetQuality = 1.0, dryRun = true) {
-  try {
-    log(`  🔧 Improving ${repo.name} to ${(targetQuality * 100).toFixed(0)}/100...`, 'cyan');
-    
-    const response = await axios.post(`${BASE_URL}/api/repos/quality/improve`, {
-      repo: repo.name,
-      targetQuality: targetQuality,
-      dryRun: dryRun,
-      autoApply: false,
-    }, {
-      timeout: 120000, // 2 minutes
-      validateStatus: () => true,
-    });
-    
-    if (response.status !== 200) {
+// Improve a single repository with retry logic
+async function improveRepo(repo, targetQuality = 1.0, dryRun = true, retries = 2) {
+  for (let attempt = 0; attempt <= retries; attempt++) {
+    try {
+      if (attempt > 0) {
+        log(`  🔄 Retry ${attempt}/${retries} for ${repo.name}...`, 'yellow');
+        await new Promise(resolve => setTimeout(resolve, 2000 * attempt)); // Exponential backoff
+      } else {
+        log(`  🔧 Improving ${repo.name} to ${(targetQuality * 100).toFixed(0)}/100...`, 'cyan');
+      }
+      
+      const response = await axios.post(`${BASE_URL}/api/repos/quality/improve`, {
+        repo: repo.name,
+        targetQuality: targetQuality,
+        dryRun: dryRun,
+        autoApply: false,
+      }, {
+        timeout: 180000, // 3 minutes
+        validateStatus: () => true,
+      });
+      
+      if (response.status === 200 && response.data) {
+        const result = response.data;
+        
+        return {
+          success: result.success !== false,
+          repo: repo.name,
+          currentQuality: result.currentQuality || 0,
+          finalQuality: result.finalQuality || 0,
+          targetQuality: targetQuality,
+          generatedFiles: result.generatedFiles || 0,
+          iterations: result.iterations || 0,
+          plan: result.plan,
+          error: result.error,
+        };
+      } else if (response.status >= 500 && attempt < retries) {
+        // Server error - retry
+        continue;
+      } else {
+        return {
+          success: false,
+          error: response.data?.error || `HTTP ${response.status}`,
+          repo: repo.name,
+        };
+      }
+    } catch (error) {
+      if (attempt < retries && (error.code === 'ECONNRESET' || error.code === 'ETIMEDOUT' || error.response?.status >= 500)) {
+        // Retry on network/server errors
+        continue;
+      }
       return {
         success: false,
-        error: response.data?.error || `HTTP ${response.status}`,
+        error: error.message || error.response?.data?.error || 'Unknown error',
         repo: repo.name,
       };
     }
-    
-    const result = response.data;
-    
-    return {
-      success: result.success !== false,
-      repo: repo.name,
-      currentQuality: result.currentQuality || 0,
-      finalQuality: result.finalQuality || 0,
-      targetQuality: targetQuality,
-      generatedFiles: result.generatedFiles || 0,
-      iterations: result.iterations || 0,
-      plan: result.plan,
-      error: result.error,
-    };
-  } catch (error) {
-    return {
-      success: false,
-      error: error.message,
-      repo: repo.name,
-    };
   }
 }
 
@@ -261,9 +275,27 @@ async function main() {
       return;
     }
     
-    // Step 2: Improve repos iteratively
+    // Step 2: Filter to only repos that need improvement
+    // Load previous results to skip already-improved repos
+    const previousReportPath = path.join(REPORTS_DIR, 'improvements-2026-01-09T06-33-00-623Z.json');
+    let alreadyImproved = new Set();
+    try {
+      const previousData = JSON.parse(await fs.readFile(previousReportPath, 'utf8'));
+      previousData.results
+        .filter(r => r.success && r.finalQuality >= targetQuality)
+        .forEach(r => alreadyImproved.add(r.repo));
+      log(`  ⏭️  Skipping ${alreadyImproved.size} already-improved repos`, 'yellow');
+    } catch (e) {
+      // No previous report, continue with all repos
+    }
+    
+    // Filter to repos that need improvement
+    const reposToImprove = repos.filter(r => !alreadyImproved.has(r.name));
+    log(`  📋 Processing ${reposToImprove.length} repos that need improvement\n`, 'green');
+    
+    // Step 3: Improve repos iteratively
     let allResults = [];
-    let currentRepos = repos;
+    let currentRepos = reposToImprove;
     
     for (let iteration = 1; iteration <= maxIterations; iteration++) {
       log(`\n${'='.repeat(60)}`, 'cyan');
@@ -282,18 +314,23 @@ async function main() {
           currentQuality: r.finalQuality,
         }));
       
+      const successful = results.filter(r => r.success && r.finalQuality >= targetQuality);
+      if (successful.length > 0) {
+        log(`\n✅ ${successful.length} repos reached target quality this iteration!`, 'green');
+      }
+      
       if (currentRepos.length === 0) {
         log(`\n✅ All repositories reached target quality!`, 'green');
         break;
       }
       
       log(`\n📊 After iteration ${iteration}:`, 'cyan');
-      log(`  - Repos at target: ${results.filter(r => r.success && r.finalQuality >= targetQuality).length}`, 'green');
+      log(`  - Repos at target: ${allResults.filter(r => r.success && r.finalQuality >= targetQuality).length}`, 'green');
       log(`  - Still improving: ${currentRepos.length}`, 'yellow');
       
       if (iteration < maxIterations) {
         log(`\n⏳ Waiting before next iteration...`, 'cyan');
-        await new Promise(resolve => setTimeout(resolve, 3000));
+        await new Promise(resolve => setTimeout(resolve, 5000));
       }
     }
     
