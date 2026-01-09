@@ -13,16 +13,20 @@ try {
 
 // Helper function to get config value (TypeScript compatible)
 async function getConfigValue(key: string, defaultValue: string | null = null): Promise<string | null> {
-  if (getUnifiedConfig) {
-    try {
-      const config = await getUnifiedConfig();
-      const value = config.get(key);
-      if (value !== null && value !== undefined && value !== '') {
-        return value;
+  try {
+    if (getUnifiedConfig) {
+      try {
+        const config = await getUnifiedConfig();
+        const value = config.get(key);
+        if (value !== null && value !== undefined && value !== '') {
+          return value;
+        }
+      } catch (error) {
+        // Fallback to process.env
       }
-    } catch (error) {
-      // Fallback to process.env
     }
+  } catch (error) {
+    // Ignore config errors
   }
   // Fallback to process.env for backward compatibility
   return process.env[key] !== undefined && process.env[key] !== '' ? process.env[key] : defaultValue;
@@ -67,24 +71,34 @@ async function getServices() {
  */
 
 export async function GET(request: NextRequest) {
-  const { searchParams } = new URL(request.url);
-  const level = searchParams.get('level') || 'basic';
-
-  // Get config values
-  const version = await getConfigValue('npm_package_version', '1.0.0');
-  const environment = await getConfigValue('NODE_ENV', 'development');
-
-  const health: any = {
-    status: 'healthy',
-    timestamp: new Date().toISOString(),
-    version: version || '1.0.0',
-    environment: environment || 'development'
-  };
-
   try {
-    const { getUnifiedMultiRegionService, getCircuitBreakerService, getDisasterRecoveryService, getPerformanceStats } = await getServices();
+    const { searchParams } = new URL(request.url);
+    const level = searchParams.get('level') || 'basic';
 
-    if (level === 'detailed' || level === 'full') {
+    // Get config values with error handling
+    let version = '1.0.0';
+    let environment = 'development';
+    
+    try {
+      version = (await getConfigValue('npm_package_version', '1.0.0')) || '1.0.0';
+      environment = (await getConfigValue('NODE_ENV', 'development')) || 'development';
+    } catch (error) {
+      // Use defaults if config fails
+      version = process.env.npm_package_version || '1.0.0';
+      environment = process.env.NODE_ENV || 'development';
+    }
+
+    const health: any = {
+      status: 'healthy',
+      timestamp: new Date().toISOString(),
+      version: version,
+      environment: environment
+    };
+
+    try {
+      const { getUnifiedMultiRegionService, getCircuitBreakerService, getDisasterRecoveryService, getPerformanceStats } = await getServices();
+
+      if (level === 'detailed' || level === 'full') {
       // Check service status
       const services: any = {};
 
@@ -155,9 +169,9 @@ export async function GET(request: NextRequest) {
       if (!allHealthy) {
         health.status = 'degraded';
       }
-    }
+      }
 
-    if (level === 'full') {
+      if (level === 'full') {
       // Add system metrics
       health.system = {
         memory: {

@@ -19,7 +19,12 @@
     "test:api": "node scripts/test-features.js",
     "test:ui": "node scripts/test-ui.js",
     "test:experience": "node scripts/test-experience.js",
-    "test:e2e": "node scripts/test-e2e-flows.js",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
+    "test:e2e:headed": "playwright test --headed",
+    "test:e2e:debug": "playwright test --debug",
+    "test:e2e:report": "playwright show-report",
+    "test:e2e:legacy": "node scripts/test-e2e-flows.js",
     "test:e2e:user-flow": "node scripts/test-user-flow-e2e.js",
     "test:final": "node scripts/test-final-mvp.js",
     "test:all": "npm run test:ui && npm run test:experience && npm run test:api && npm run test:e2e",
@@ -62,9 +67,11 @@
     "winston": "^3.19.0"
   },
   "devDependencies": {
+    "@playwright/test": "^1.57.0",
     "critters": "^0.0.23",
     "eslint": "^8.0.0",
     "eslint-config-next": "14.0.0",
+    "playwright": "^1.57.0",
     "postcss": "^8.5.6",
     "tailwindcss": "^4.1.18"
   }
