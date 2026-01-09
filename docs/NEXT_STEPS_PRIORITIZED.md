@@ -1,211 +1,202 @@
-# Next Steps - Prioritized Action Plan
+# Next Steps - Prioritized
 
-**Date:** January 8, 2026  
-**Status:** 🚀 **Ready to Execute**
+**Date:** January 9, 2026  
+**Status:** 📋 **Planning**
 
-## 🎯 Immediate Next Steps (This Week)
+## 🎯 Immediate Priorities (This Week)
 
-### 1. Deploy & Test PLG Components ✅ HIGH PRIORITY
-**Goal:** Get components live and working
+### 1. ✅ Admin Pages Organization - COMPLETE
+- ✅ Created `/admin` directory
+- ✅ Moved admin pages
+- ✅ Added admin layout
+- ⚠️ TODO: Add proper authentication
 
-**Actions:**
-- [ ] Deploy demo page (`/plg-demo`) to production
-- [ ] Test all components with real repos
-- [ ] Verify badge API works (SVG generation)
-- [ ] Test feedback collection end-to-end
-- [ ] Verify usage tracking is working
+### 2. 🔒 Add Authentication to Admin Pages (High Priority)
+**Why:** Security - admin pages should be protected
+**Effort:** Medium (2-4 hours)
+**Value:** High (security)
 
-**Time:** 2-3 hours  
-**Impact:** HIGH - Validates everything works
+**Tasks:**
+- [ ] Implement `lib/admin-auth.ts` with real auth check
+- [ ] Add session management
+- [ ] Add admin role verification
+- [ ] Test access control
+- [ ] Add login page if needed
 
----
-
-### 2. Integrate Components into Existing Pages ✅ HIGH PRIORITY
-**Goal:** Use components where they add value
-
-**Actions:**
-- [ ] Add Quality Widget to `/quality` page
-- [ ] Add Recommendation Cards to quality results
-- [ ] Add Feedback Button to quality predictions
-- [ ] Add Quality Badge to README/docs
-- [ ] Replace existing quality displays with components
-
-**Time:** 3-4 hours  
-**Impact:** HIGH - Immediate value to users
+**Dependencies:**
+- Need to know what auth system you're using (NextAuth, Supabase Auth, etc.)
 
 ---
 
-### 3. Set Up Usage Monitoring ✅ MEDIUM PRIORITY
-**Goal:** Track what's actually being used
+### 3. 🎨 Improve Quality Dashboard UX (High Priority)
+**Why:** Main customer-facing feature - should be excellent
+**Effort:** Medium (4-6 hours)
+**Value:** Very High (customer experience)
 
-**Actions:**
-- [ ] Run database migration for `plg_component_usage` table
-- [ ] Verify tracking API works (`/api/plg/usage`)
-- [ ] Test component tracking (client-side)
-- [ ] Set up weekly usage reports
-- [ ] Create dashboard to view stats
+**Tasks:**
+- [ ] Add freemium limits (3 repos free, unlimited with auth)
+- [ ] Improve mobile responsiveness
+- [ ] Add loading states and skeletons
+- [ ] Add error handling and retry logic
+- [ ] Add export functionality (PDF, CSV)
+- [ ] Add comparison view (side-by-side repos)
+- [ ] Add favorites/bookmarks
 
-**Time:** 2-3 hours  
-**Impact:** MEDIUM - Data-driven decisions
-
----
-
-## 📅 Short-Term (Next 2 Weeks)
-
-### 4. Create Quick Start Guide ✅ HIGH PRIORITY
-**Goal:** Make it easy for new users
-
-**Actions:**
-- [ ] Create "5-Minute Quick Start" guide
-- [ ] Add code examples for each component
-- [ ] Create video/screenshots showing usage
-- [ ] Add to main README
-- [ ] Create landing page for developers
-
-**Time:** 4-5 hours  
-**Impact:** HIGH - Reduces friction for new users
+**Current Issues:**
+- No usage limits
+- Could be more polished
+- Missing some UX polish
 
 ---
 
-### 5. Build Quality Dashboard Using Components ✅ HIGH PRIORITY
-**Goal:** Showcase components in real use case
+### 4. 📊 Enhance PLG Components (Medium Priority)
+**Why:** Self-service adoption - developers need good components
+**Effort:** Medium (3-5 hours)
+**Value:** High (PLG adoption)
 
-**Actions:**
-- [ ] Create enhanced quality dashboard
-- [ ] Use QualityWidget for main display
-- [ ] Use RecommendationCards for insights
-- [ ] Use FeedbackButton for each prediction
-- [ ] Add trends visualization
-- [ ] Make it the default quality page
+**Tasks:**
+- [ ] Add more component examples to `/plg-demo`
+- [ ] Add copy-paste code snippets
+- [ ] Add integration guides (React, Vue, etc.)
+- [ ] Add component playground
+- [ ] Add usage analytics (which components are used most)
 
-**Time:** 6-8 hours  
-**Impact:** HIGH - Demonstrates value
-
----
-
-### 6. Test Integration Templates ✅ MEDIUM PRIORITY
-**Goal:** Validate templates work
-
-**Actions:**
-- [ ] Test GitHub Actions template in real repo
-- [ ] Test Vercel integration template
-- [ ] Test Slack notification template
-- [ ] Fix any issues found
-- [ ] Document any gotchas
-
-**Time:** 3-4 hours  
-**Impact:** MEDIUM - Validates templates
+**Current Status:**
+- Components exist
+- Demo page exists
+- Need more examples and docs
 
 ---
 
-## 🚀 Medium-Term (Next Month)
+## 🚀 Short-term Priorities (Next 2 Weeks)
 
-### 7. Measure & Iterate ✅ HIGH PRIORITY
-**Goal:** Build what users actually use
+### 5. 🤖 Improve ML Model Training (Medium Priority)
+**Why:** Better predictions = better customer value
+**Effort:** High (8-12 hours)
+**Value:** High (product quality)
 
-**Actions:**
-- [ ] Query usage stats weekly
-- [ ] Identify most-used components
-- [ ] Identify unused components
-- [ ] Improve popular components
-- [ ] Remove or simplify unused ones
-- [ ] Build more features using popular patterns
+**Tasks:**
+- [ ] Collect more real feedback (reduce synthetic)
+- [ ] Improve feature engineering
+- [ ] Tune hyperparameters
+- [ ] Add model comparison
+- [ ] Add A/B testing for models
+- [ ] Improve training pipeline
 
-**Time:** Ongoing  
-**Impact:** HIGH - Data-driven development
-
----
-
-### 8. Create SDK/Helper Library ✅ MEDIUM PRIORITY
-**Goal:** Make API usage even easier
-
-**Actions:**
-- [ ] Create TypeScript SDK
-- [ ] Add helper functions
-- [ ] Add type definitions
-- [ ] Create npm package
-- [ ] Document SDK usage
-
-**Time:** 8-10 hours  
-**Impact:** MEDIUM - Better DX
+**Current Status:**
+- Model training works
+- Using synthetic data
+- Need more real feedback
 
 ---
 
-### 9. Build More Templates ✅ LOW PRIORITY
-**Goal:** Cover more common use cases
+### 6. 📧 Automated Weekly Reports (Low Priority)
+**Why:** Customer value - keep them engaged
+**Effort:** Low (2-3 hours)
+**Value:** Medium (customer retention)
 
-**Actions:**
-- [ ] Discord integration template
-- [ ] Email report template
-- [ ] CI/CD integration templates
-- [ ] Webhook templates
-- [ ] API client templates
+**Tasks:**
+- [ ] Test email delivery
+- [ ] Add unsubscribe functionality
+- [ ] Add report customization
+- [ ] Add scheduling options
 
-**Time:** 4-6 hours  
-**Impact:** LOW - Nice to have
+**Current Status:**
+- Weekly reports set up
+- Email delivery works
+- Need polish
+
+---
+
+### 7. 🔍 Add Search and Filtering (Medium Priority)
+**Why:** Quality dashboard needs search/filter
+**Effort:** Medium (4-6 hours)
+**Value:** Medium (UX improvement)
+
+**Tasks:**
+- [ ] Add search by repo name
+- [ ] Add filter by quality score
+- [ ] Add filter by language
+- [ ] Add sort options
+- [ ] Add saved searches
+
+---
+
+## 🎯 Long-term Priorities (Next Month)
+
+### 8. 🏢 Enterprise Features (Low Priority)
+**Why:** Revenue opportunity
+**Effort:** High (20+ hours)
+**Value:** High (revenue)
+
+**Tasks:**
+- [ ] Multi-org support
+- [ ] SSO integration
+- [ ] Advanced analytics
+- [ ] Custom branding
+- [ ] API rate limits
+
+---
+
+### 9. 📱 Mobile App (Very Low Priority)
+**Why:** Convenience
+**Effort:** Very High (40+ hours)
+**Value:** Low (nice to have)
+
+**Tasks:**
+- [ ] React Native app
+- [ ] Push notifications
+- [ ] Offline support
+
+---
+
+## 💡 Quick Wins (Do First)
+
+### 1. Add Freemium Limits to Quality Dashboard
+**Time:** 1-2 hours
+**Value:** High
+**Impact:** Monetization + user engagement
+
+### 2. Improve Mobile Responsiveness
+**Time:** 2-3 hours
+**Value:** High
+**Impact:** Better UX
+
+### 3. Add Export Functionality
+**Time:** 2-3 hours
+**Value:** Medium
+**Impact:** Customer value
+
+### 4. Add More PLG Component Examples
+**Time:** 1-2 hours
+**Value:** Medium
+**Impact:** Developer adoption
 
 ---
 
 ## 🎯 Recommended Order
 
-### Week 1: Deploy & Integrate
-1. **Deploy demo page** (1 hour)
-2. **Integrate components** (3-4 hours)
-3. **Set up monitoring** (2-3 hours)
-4. **Test everything** (2 hours)
-
-**Total:** ~8-10 hours
-
-### Week 2: Improve & Measure
-1. **Create quick start guide** (4-5 hours)
-2. **Build quality dashboard** (6-8 hours)
-3. **Test templates** (3-4 hours)
-
-**Total:** ~13-17 hours
-
-### Week 3-4: Iterate Based on Data
-1. **Measure usage** (ongoing)
-2. **Improve popular components** (as needed)
-3. **Build SDK** (8-10 hours)
-4. **More templates** (if needed)
-
-**Total:** Variable
-
-## 💡 Key Principles
-
-### Do First
-- ✅ Deploy and test (validate it works)
-- ✅ Integrate into existing pages (immediate value)
-- ✅ Measure usage (data-driven decisions)
-
-### Do Next
-- ✅ Improve based on usage data
-- ✅ Build what's popular
-- ✅ Remove what's not used
-
-### Don't Do Yet
-- ❌ Build more components (wait for usage data)
-- ❌ Create SDK (wait for demand)
-- ❌ More templates (wait for requests)
-
-## 🚀 This Week's Focus
-
-**Priority 1: Deploy & Test**
-- Get components live
-- Verify everything works
-- Fix any issues
-
-**Priority 2: Integrate**
-- Use components in existing pages
-- Replace manual implementations
-- Add value immediately
-
-**Priority 3: Monitor**
-- Set up tracking
-- Start collecting data
-- Prepare for iteration
+1. **Add Authentication** (Security first)
+2. **Improve Quality Dashboard UX** (Main product)
+3. **Add Freemium Limits** (Monetization)
+4. **Enhance PLG Components** (Adoption)
+5. **Improve ML Training** (Product quality)
 
 ---
 
-**Status:** ✅ **Ready to Execute**  
-**Next:** Start with Priority 1 - Deploy & Test
+## 📊 Priority Matrix
+
+| Priority | Effort | Value | Do First? |
+|----------|--------|-------|-----------|
+| Auth | Medium | High | ✅ Yes |
+| Quality UX | Medium | Very High | ✅ Yes |
+| Freemium | Low | High | ✅ Yes |
+| PLG Components | Medium | High | ✅ Yes |
+| ML Training | High | High | ⚠️ Later |
+| Weekly Reports | Low | Medium | ⚠️ Later |
+| Search/Filter | Medium | Medium | ⚠️ Later |
+
+---
+
+**Status:** 📋 **Ready to Start**  
+**Next:** Choose priority and begin implementation
