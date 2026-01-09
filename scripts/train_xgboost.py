@@ -148,15 +148,15 @@ def train_xgboost_model(X, y, feature_names):
     # XGBoost parameters
     params = {
         'objective': 'reg:squarederror',
-        'max_depth': 6,
+        'max_depth': 4,  # Reduced from 6 to reduce overfitting
         'learning_rate': 0.1,
         'n_estimators': 100,
         'subsample': 0.8,
         'colsample_bytree': 0.8,
         'min_child_weight': 1,
         'gamma': 0,
-        'reg_alpha': 0,
-        'reg_lambda': 1,
+        'reg_alpha': 0.1,  # Added L1 regularization
+        'reg_lambda': 1.5,  # Increased L2 regularization
         'random_state': 42,
         'eval_metric': 'rmse'
     }
@@ -178,7 +178,7 @@ def train_xgboost_model(X, y, feature_names):
         num_boost_round=params['n_estimators'],
         evals=[(dtrain, 'train'), (dtest, 'test')],
         early_stopping_rounds=10,
-        verbose_eval=10
+        verbose_eval=False  # Reduce output for cleaner logs
     )
     
     # Evaluate

@@ -47,7 +47,7 @@ async function main() {
     .not('actual_value', 'is', null);
 
   const currentCount = withFeedback?.length || 0;
-  const targetCount = 150; // Updated target
+  const targetCount = 500; // Target for improved XGBoost training
   const needed = targetCount - currentCount;
 
   console.log(`📊 Current: ${currentCount} with feedback`);
