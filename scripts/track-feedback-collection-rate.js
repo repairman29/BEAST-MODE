@@ -54,12 +54,13 @@ async function trackFeedbackRate() {
     .order('created_at', { ascending: false })
     .limit(1000);
 
+  let realFeedback = [];
+  let syntheticFeedback = [];
+
   if (!fbError && feedbackEntries) {
     console.log('💡 Feedback Sources:');
     const bySource = {};
     const byType = {};
-    const realFeedback = [];
-    const syntheticFeedback = [];
 
     feedbackEntries.forEach(f => {
       const source = f.metadata?.source || f.feedback_type || 'unknown';
