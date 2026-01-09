@@ -7,7 +7,7 @@ import { test, expect } from '@playwright/test';
  */
 test.describe('Homepage', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('/');
+    await page.goto('/', { waitUntil: 'domcontentloaded', timeout: 30000 });
   });
 
   test('should load homepage successfully', async ({ page }) => {

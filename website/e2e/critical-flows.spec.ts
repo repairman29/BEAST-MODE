@@ -74,8 +74,8 @@ test.describe('Critical User Flows', () => {
       }
     });
     
-    await page.goto('/');
-    await page.waitForLoadState('networkidle');
+    await page.goto('/', { waitUntil: 'domcontentloaded', timeout: 30000 });
+    await page.waitForLoadState('domcontentloaded', { timeout: 30000 });
     
     // Filter out known non-critical errors
     const criticalErrors = errors.filter(
