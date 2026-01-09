@@ -8,11 +8,19 @@ import { NextRequest, NextResponse } from 'next/server';
 // Optional import - module may not exist
 async function getFeedbackCollector() {
   try {
-    // @ts-ignore - Dynamic import, module may not exist
-    const module = await import(/* webpackIgnore: true */ '../../../../../../lib/mlops/feedbackCollector').catch(() => null);
-    return module?.getFeedbackCollector || null;
-  } catch {
-    return null;
+    // Try require first (server-side)
+    const { getFeedbackCollector } = require('../../../../../lib/mlops/feedbackCollector');
+    return await getFeedbackCollector();
+  } catch (error) {
+    // Fallback: try dynamic import
+    try {
+      const module = await import(/* webpackIgnore: true */ '../../../../../../lib/mlops/feedbackCollector').catch(() => null);
+      const getCollector = module?.getFeedbackCollector;
+      return getCollector ? await getCollector() : null;
+    } catch {
+      console.warn('[Feedback Submit] Feedback collector not available:', error.message);
+      return null;
+    }
   }
 }
 
