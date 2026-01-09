@@ -20,14 +20,54 @@ if (!supabaseUrl || !supabaseKey) {
 
 const supabase = createClient(supabaseUrl, supabaseKey);
 
-// Diverse set of repos
+// Diverse set of repos - expanded for more data
 const REPOS = [
+  // Popular JS/TS frameworks
   'facebook/react', 'microsoft/vscode', 'vercel/next.js', 'nodejs/node',
-  'angular/angular', 'vuejs/vue', 'python/cpython', 'django/django',
-  'pytorch/pytorch', 'tensorflow/tensorflow', 'rust-lang/rust', 'golang/go',
-  'kubernetes/kubernetes', 'rails/rails', 'spring-projects/spring-boot',
-  'microsoft/terminal', 'dotnet/core', 'neovim/neovim', 'tmux/tmux',
-  'sveltejs/svelte', 'preactjs/preact', 'flask/flask', 'fastapi/fastapi'
+  'angular/angular', 'vuejs/vue', 'sveltejs/svelte', 'preactjs/preact',
+  'microsoft/TypeScript', 'babel/babel', 'webpack/webpack', 'rollup/rollup',
+  
+  // Python ecosystem
+  'python/cpython', 'django/django', 'pytorch/pytorch', 'tensorflow/tensorflow',
+  'flask/flask', 'fastapi/fastapi', 'scikit-learn/scikit-learn', 'pandas-dev/pandas',
+  'numpy/numpy', 'requests/requests', 'celery/celery', 'scrapy/scrapy',
+  
+  // Rust ecosystem
+  'rust-lang/rust', 'tokio-rs/tokio', 'serde-rs/serde', 'clap-rs/clap',
+  'actix/actix-web', 'diesel-rs/diesel', 'hyperium/hyper', 'rayon-rs/rayon',
+  
+  // Go ecosystem
+  'golang/go', 'kubernetes/kubernetes', 'gohugoio/hugo', 'gin-gonic/gin',
+  'etcd-io/etcd', 'prometheus/prometheus', 'golang/protobuf', 'hashicorp/terraform',
+  
+  // Ruby ecosystem
+  'rails/rails', 'jekyll/jekyll', 'discourse/discourse', 'gitlabhq/gitlabhq',
+  'ruby/ruby', 'carrierwaveuploader/carrierwave', 'sidekiq/sidekiq', 'puma/puma',
+  
+  // Java ecosystem
+  'spring-projects/spring-boot', 'apache/kafka', 'elastic/elasticsearch',
+  'apache/spark', 'apache/flink', 'netty/netty', 'hibernate/hibernate',
+  
+  // C++ ecosystem
+  'microsoft/terminal', 'opencv/opencv', 'bitcoin/bitcoin', 'microsoft/calculator',
+  'tensorflow/tensorflow', 'electron/electron', 'llvm/llvm-project', 'microsoft/cpprestsdk',
+  
+  // C# ecosystem
+  'dotnet/core', 'dotnet/roslyn', 'aspnet/AspNetCore', 'microsoft/dotnet',
+  'microsoft/vscode', 'microsoft/monaco-editor', 'microsoft/ApplicationInsights-dotnet',
+  
+  // Other popular repos
+  'neovim/neovim', 'tmux/tmux', 'ohmyzsh/ohmyzsh', 'nvim-treesitter/nvim-treesitter',
+  'redis/redis', 'postgres/postgres', 'mongodb/mongo', 'apache/airflow',
+  'istio/istio', 'envoyproxy/envoy', 'containerd/containerd', 'docker/docker',
+  
+  // Frontend libraries
+  'mui/material-ui', 'chakra-ui/chakra-ui', 'radix-ui/primitives', 'tailwindlabs/tailwindcss',
+  'storybookjs/storybook', 'jestjs/jest', 'cypress-io/cypress', 'testing-library/react-testing-library',
+  
+  // Developer tools
+  'eslint/eslint', 'prettier/prettier', 'swc-project/swc', 'babel/babel',
+  'webpack/webpack', 'vitejs/vite', 'parcel-bundler/parcel', 'rollup/rollup'
 ];
 
 const BOTS = [
@@ -37,7 +77,7 @@ const BOTS = [
   { name: 'daisy-chain', successRate: 0.65 }
 ];
 
-const TARGET_FEEDBACK = 50;
+const TARGET_FEEDBACK = 500; // Increased target for larger dataset
 
 function generateBasicFeatures(repo) {
   // Generate realistic features based on repo name

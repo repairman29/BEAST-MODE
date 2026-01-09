@@ -1,0 +1,232 @@
+{
+  "timestamp": "2026-01-09T06:41:13.730Z",
+  "targetQuality": 1,
+  "summary": {
+    "total": 43,
+    "successful": 0,
+    "failed": 43,
+    "reachedTarget": 0,
+    "withFiles": 0,
+    "averageCurrentQuality": 0,
+    "averageFinalQuality": 0,
+    "averageImprovement": 0,
+    "totalFilesGenerated": 0
+  },
+  "results": [
+    {
+      "success": false,
+      "error": "HTTP 500",
+      "repo": "repairman29/echeo-web"
+    },
+    {
+      "success": false,
+      "error": "HTTP 500",
+      "repo": "microsoft/TypeScript"
+    },
+    {
+      "success": false,
+      "error": "HTTP 500",
+      "repo": "repairman29/smugglers"
+    },
+    {
+      "success": false,
+      "error": "HTTP 500",
+      "repo": "repairman29/echeo"
+    },
+    {
+      "success": false,
+      "error": "HTTP 500",
+      "repo": "repairman29/daisy-chain"
+    },
+    {
+      "success": false,
+      "error": "HTTP 500",
+      "repo": "repairman29/code-roach"
+    },
+    {
+      "success": false,
+      "error": "HTTP 500",
+      "repo": "repairman29/ai-gm-service"
+    },
+    {
+      "success": false,
+      "error": "HTTP 500",
+      "repo": "repairman29/BEAST-MODE"
+    },
+    {
+      "success": false,
+      "error": "HTTP 500",
+      "repo": "repairman29/oracle"
+    },
+    {
+      "success": false,
+      "error": "HTTP 500",
+      "repo": "repairman29/echeo-internal"
+    },
+    {
+      "success": false,
+      "error": "HTTP 500",
+      "repo": "repairman29/smuggler"
+    },
+    {
+      "success": false,
+      "error": "HTTP 500",
+      "repo": "repairman29/auth-platform-service"
+    },
+    {
+      "success": false,
+      "error": "HTTP 500",
+      "repo": "repairman29/combat-system-service"
+    },
+    {
+      "success": false,
+      "error": "HTTP 500",
+      "repo": "repairman29/character-system-service"
+    },
+    {
+      "success": false,
+      "error": "HTTP 500",
+      "repo": "repairman29/mission-engine-service"
+    },
+    {
+      "success": false,
+      "error": "HTTP 500",
+      "repo": "repairman29/chat-platform-service"
+    },
+    {
+      "success": false,
+      "error": "HTTP 500",
+      "repo": "repairman29/bot-simulation-service"
+    },
+    {
+      "success": false,
+      "error": "HTTP 500",
+      "repo": "repairman29/payment-platform-service"
+    },
+    {
+      "success": false,
+      "error": "HTTP 500",
+      "repo": "repairman29/marketplace-system-service"
+    },
+    {
+      "success": false,
+      "error": "HTTP 500",
+      "repo": "repairman29/economy-system-service"
+    },
+    {
+      "success": false,
+      "error": "HTTP 500",
+      "repo": "repairman29/code-generation-service"
+    },
+    {
+      "success": false,
+      "error": "HTTP 500",
+      "repo": "repairman29/asset-management-service"
+    },
+    {
+      "success": false,
+      "error": "HTTP 500",
+      "repo": "repairman29/audio-generation-service"
+    },
+    {
+      "success": false,
+      "error": "HTTP 500",
+      "repo": "repairman29/coderoach"
+    },
+    {
+      "success": false,
+      "error": "HTTP 500",
+      "repo": "repairman29/slidemate"
+    },
+    {
+      "success": false,
+      "error": "HTTP 500",
+      "repo": "repairman29/mixdown"
+    },
+    {
+      "success": false,
+      "error": "HTTP 500",
+      "repo": "repairman29/echeovid"
+    },
+    {
+      "success": false,
+      "error": "HTTP 500",
+      "repo": "repairman29/postsub"
+    },
+    {
+      "success": false,
+      "error": "HTTP 500",
+      "repo": "repairman29/echeo_old"
+    },
+    {
+      "success": false,
+      "error": "HTTP 500",
+      "repo": "repairman29/trove-web"
+    },
+    {
+      "success": false,
+      "error": "HTTP 500",
+      "repo": "repairman29/coloringbook"
+    },
+    {
+      "success": false,
+      "error": "HTTP 500",
+      "repo": "repairman29/mythseeker2"
+    },
+    {
+      "success": false,
+      "error": "HTTP 500",
+      "repo": "repairman29/MythSeeker"
+    },
+    {
+      "success": false,
+      "error": "HTTP 500",
+      "repo": "repairman29/trove-app"
+    },
+    {
+      "success": false,
+      "error": "HTTP 500",
+      "repo": "repairman29/sheckleshare"
+    },
+    {
+      "success": false,
+      "error": "HTTP 500",
+      "repo": "repairman29/echeo-archived"
+    },
+    {
+      "success": false,
+      "error": "HTTP 500",
+      "repo": "repairman29/echeodev"
+    },
+    {
+      "success": false,
+      "error": "HTTP 500",
+      "repo": "repairman29/project-forge"
+    },
+    {
+      "success": false,
+      "error": "HTTP 500",
+      "repo": "repairman29/echeo-dev"
+    },
+    {
+      "success": false,
+      "error": "HTTP 500",
+      "repo": "repairman29/internal-zendesk-tools"
+    },
+    {
+      "success": false,
+      "error": "HTTP 500",
+      "repo": "repairman29/project_forge"
+    },
+    {
+      "success": false,
+      "error": "HTTP 500",
+      "repo": "repairman29/ims"
+    },
+    {
+      "success": false,
+      "error": "HTTP 500",
+      "repo": "repairman29/2029-versioned"
+    }
+  ]
+}

@@ -24,6 +24,13 @@ interface FeedbackStats {
   }>
 }
 
+/**
+ * Feedback Dashboard
+ * 
+ * INTERNAL ADMIN TOOL - ML feedback collection statistics
+ * Protected by admin layout
+ */
+
 export default function FeedbackDashboard() {
   const [stats, setStats] = useState<FeedbackStats | null>(null)
   const [loading, setLoading] = useState(true)

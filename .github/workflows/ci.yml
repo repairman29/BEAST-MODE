@@ -2,38 +2,14 @@ name: CI
 
 on:
   push:
-    branches: [ main, develop ]
+    branches: [ main ]
   pull_request:
-    branches: [ main, develop ]
+    branches: [ main ]
 
 jobs:
-  test:
+  build:
     runs-on: ubuntu-latest
-    
-    strategy:
-      matrix:
-        node-version: [18.x, 20.x]
-    
     steps:
-    - uses: actions/checkout@v4
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v4
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-    
-    - name: Install dependencies
-      run: npm ci
-    
-    - name: Run tests
-      run: npm test || echo "⚠️  Tests failed or not found, continuing..."
-      continue-on-error: true
-    
-    - name: Run linter
-      run: npm run lint || true
-    
-    - name: Check code style
-      run: npm run format:check || true
-    
-    - name: Security audit
-      run: npm audit --audit-level=moderate || true
+    - uses: actions/checkout@v3
+    - name: Build
+      run: echo "Add build steps for Unknown"

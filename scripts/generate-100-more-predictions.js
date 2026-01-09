@@ -276,7 +276,7 @@ async function main() {
   console.log('='.repeat(50));
   console.log();
 
-  const targetCount = 150; // 50 existing + 100 new = 150 total
+  const targetCount = 500; // Target for improved XGBoost training
   let currentCount = await getCurrentFeedbackCount();
 
   console.log(`📊 Current Status:`);

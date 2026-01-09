@@ -1,0 +1,791 @@
+{
+  "timestamp": "2026-01-09T19:35:16.557Z",
+  "targetQuality": 1,
+  "summary": {
+    "total": 43,
+    "successful": 0,
+    "failed": 43,
+    "reachedTarget": 0,
+    "withFiles": 0,
+    "averageCurrentQuality": 0,
+    "averageFinalQuality": 0,
+    "averageImprovement": 0,
+    "totalFilesGenerated": 0
+  },
+  "results": [
+    {
+      "success": false,
+      "repo": "repairman29/echeo-web",
+      "currentQuality": 0.75,
+      "finalQuality": 0,
+      "targetQuality": 1,
+      "generatedFiles": 0,
+      "iterations": 0,
+      "plan": {
+        "iterations": [],
+        "summary": {
+          "totalFilesToGenerate": 0,
+          "estimatedFinalQuality": null,
+          "willMeetTarget": false
+        }
+      },
+      "error": "Cannot read properties of undefined (reading '0')"
+    },
+    {
+      "success": false,
+      "repo": "microsoft/TypeScript",
+      "currentQuality": 0.75,
+      "finalQuality": 0,
+      "targetQuality": 1,
+      "generatedFiles": 0,
+      "iterations": 0,
+      "plan": {
+        "iterations": [],
+        "summary": {
+          "totalFilesToGenerate": 0,
+          "estimatedFinalQuality": null,
+          "willMeetTarget": false
+        }
+      },
+      "error": "Cannot read properties of undefined (reading '0')"
+    },
+    {
+      "success": false,
+      "repo": "repairman29/smugglers",
+      "currentQuality": 0.75,
+      "finalQuality": 0,
+      "targetQuality": 1,
+      "generatedFiles": 0,
+      "iterations": 0,
+      "plan": {
+        "iterations": [],
+        "summary": {
+          "totalFilesToGenerate": 0,
+          "estimatedFinalQuality": null,
+          "willMeetTarget": false
+        }
+      },
+      "error": "Cannot read properties of undefined (reading '0')"
+    },
+    {
+      "success": false,
+      "repo": "repairman29/echeo",
+      "currentQuality": 0.75,
+      "finalQuality": 0,
+      "targetQuality": 1,
+      "generatedFiles": 0,
+      "iterations": 0,
+      "plan": {
+        "iterations": [],
+        "summary": {
+          "totalFilesToGenerate": 0,
+          "estimatedFinalQuality": null,
+          "willMeetTarget": false
+        }
+      },
+      "error": "Cannot read properties of undefined (reading '0')"
+    },
+    {
+      "success": false,
+      "repo": "repairman29/daisy-chain",
+      "currentQuality": 0.75,
+      "finalQuality": 0,
+      "targetQuality": 1,
+      "generatedFiles": 0,
+      "iterations": 0,
+      "plan": {
+        "iterations": [],
+        "summary": {
+          "totalFilesToGenerate": 0,
+          "estimatedFinalQuality": null,
+          "willMeetTarget": false
+        }
+      },
+      "error": "Cannot read properties of undefined (reading '0')"
+    },
+    {
+      "success": false,
+      "repo": "repairman29/code-roach",
+      "currentQuality": 0.75,
+      "finalQuality": 0,
+      "targetQuality": 1,
+      "generatedFiles": 0,
+      "iterations": 0,
+      "plan": {
+        "iterations": [],
+        "summary": {
+          "totalFilesToGenerate": 0,
+          "estimatedFinalQuality": null,
+          "willMeetTarget": false
+        }
+      },
+      "error": "Cannot read properties of undefined (reading '0')"
+    },
+    {
+      "success": false,
+      "repo": "repairman29/ai-gm-service",
+      "currentQuality": 0.75,
+      "finalQuality": 0,
+      "targetQuality": 1,
+      "generatedFiles": 0,
+      "iterations": 0,
+      "plan": {
+        "iterations": [],
+        "summary": {
+          "totalFilesToGenerate": 0,
+          "estimatedFinalQuality": null,
+          "willMeetTarget": false
+        }
+      },
+      "error": "Cannot read properties of undefined (reading '0')"
+    },
+    {
+      "success": false,
+      "repo": "repairman29/BEAST-MODE",
+      "currentQuality": 0.75,
+      "finalQuality": 0,
+      "targetQuality": 1,
+      "generatedFiles": 0,
+      "iterations": 0,
+      "plan": {
+        "iterations": [],
+        "summary": {
+          "totalFilesToGenerate": 0,
+          "estimatedFinalQuality": null,
+          "willMeetTarget": false
+        }
+      },
+      "error": "Cannot read properties of undefined (reading '0')"
+    },
+    {
+      "success": false,
+      "repo": "repairman29/oracle",
+      "currentQuality": 0.75,
+      "finalQuality": 0,
+      "targetQuality": 1,
+      "generatedFiles": 0,
+      "iterations": 0,
+      "plan": {
+        "iterations": [],
+        "summary": {
+          "totalFilesToGenerate": 0,
+          "estimatedFinalQuality": null,
+          "willMeetTarget": false
+        }
+      },
+      "error": "Cannot read properties of undefined (reading '0')"
+    },
+    {
+      "success": false,
+      "repo": "repairman29/echeo-internal",
+      "currentQuality": 0.75,
+      "finalQuality": 0,
+      "targetQuality": 1,
+      "generatedFiles": 0,
+      "iterations": 0,
+      "plan": {
+        "iterations": [],
+        "summary": {
+          "totalFilesToGenerate": 0,
+          "estimatedFinalQuality": null,
+          "willMeetTarget": false
+        }
+      },
+      "error": "Cannot read properties of undefined (reading '0')"
+    },
+    {
+      "success": false,
+      "repo": "repairman29/smuggler",
+      "currentQuality": 0.75,
+      "finalQuality": 0,
+      "targetQuality": 1,
+      "generatedFiles": 0,
+      "iterations": 0,
+      "plan": {
+        "iterations": [],
+        "summary": {
+          "totalFilesToGenerate": 0,
+          "estimatedFinalQuality": null,
+          "willMeetTarget": false
+        }
+      },
+      "error": "Cannot read properties of undefined (reading '0')"
+    },
+    {
+      "success": false,
+      "repo": "repairman29/auth-platform-service",
+      "currentQuality": 0.75,
+      "finalQuality": 0,
+      "targetQuality": 1,
+      "generatedFiles": 0,
+      "iterations": 0,
+      "plan": {
+        "iterations": [],
+        "summary": {
+          "totalFilesToGenerate": 0,
+          "estimatedFinalQuality": null,
+          "willMeetTarget": false
+        }
+      },
+      "error": "Cannot read properties of undefined (reading '0')"
+    },
+    {
+      "success": false,
+      "repo": "repairman29/combat-system-service",
+      "currentQuality": 0.75,
+      "finalQuality": 0,
+      "targetQuality": 1,
+      "generatedFiles": 0,
+      "iterations": 0,
+      "plan": {
+        "iterations": [],
+        "summary": {
+          "totalFilesToGenerate": 0,
+          "estimatedFinalQuality": null,
+          "willMeetTarget": false
+        }
+      },
+      "error": "Cannot read properties of undefined (reading '0')"
+    },
+    {
+      "success": false,
+      "repo": "repairman29/character-system-service",
+      "currentQuality": 0.75,
+      "finalQuality": 0,
+      "targetQuality": 1,
+      "generatedFiles": 0,
+      "iterations": 0,
+      "plan": {
+        "iterations": [],
+        "summary": {
+          "totalFilesToGenerate": 0,
+          "estimatedFinalQuality": null,
+          "willMeetTarget": false
+        }
+      },
+      "error": "Cannot read properties of undefined (reading '0')"
+    },
+    {
+      "success": false,
+      "repo": "repairman29/mission-engine-service",
+      "currentQuality": 0.75,
+      "finalQuality": 0,
+      "targetQuality": 1,
+      "generatedFiles": 0,
+      "iterations": 0,
+      "plan": {
+        "iterations": [],
+        "summary": {
+          "totalFilesToGenerate": 0,
+          "estimatedFinalQuality": null,
+          "willMeetTarget": false
+        }
+      },
+      "error": "Cannot read properties of undefined (reading '0')"
+    },
+    {
+      "success": false,
+      "repo": "repairman29/chat-platform-service",
+      "currentQuality": 0.75,
+      "finalQuality": 0,
+      "targetQuality": 1,
+      "generatedFiles": 0,
+      "iterations": 0,
+      "plan": {
+        "iterations": [],
+        "summary": {
+          "totalFilesToGenerate": 0,
+          "estimatedFinalQuality": null,
+          "willMeetTarget": false
+        }
+      },
+      "error": "Cannot read properties of undefined (reading '0')"
+    },
+    {
+      "success": false,
+      "repo": "repairman29/bot-simulation-service",
+      "currentQuality": 0.75,
+      "finalQuality": 0,
+      "targetQuality": 1,
+      "generatedFiles": 0,
+      "iterations": 0,
+      "plan": {
+        "iterations": [],
+        "summary": {
+          "totalFilesToGenerate": 0,
+          "estimatedFinalQuality": null,
+          "willMeetTarget": false
+        }
+      },
+      "error": "Cannot read properties of undefined (reading '0')"
+    },
+    {
+      "success": false,
+      "repo": "repairman29/payment-platform-service",
+      "currentQuality": 0.75,
+      "finalQuality": 0,
+      "targetQuality": 1,
+      "generatedFiles": 0,
+      "iterations": 0,
+      "plan": {
+        "iterations": [],
+        "summary": {
+          "totalFilesToGenerate": 0,
+          "estimatedFinalQuality": null,
+          "willMeetTarget": false
+        }
+      },
+      "error": "Cannot read properties of undefined (reading '0')"
+    },
+    {
+      "success": false,
+      "repo": "repairman29/marketplace-system-service",
+      "currentQuality": 0.75,
+      "finalQuality": 0,
+      "targetQuality": 1,
+      "generatedFiles": 0,
+      "iterations": 0,
+      "plan": {
+        "iterations": [],
+        "summary": {
+          "totalFilesToGenerate": 0,
+          "estimatedFinalQuality": null,
+          "willMeetTarget": false
+        }
+      },
+      "error": "Cannot read properties of undefined (reading '0')"
+    },
+    {
+      "success": false,
+      "repo": "repairman29/economy-system-service",
+      "currentQuality": 0.75,
+      "finalQuality": 0,
+      "targetQuality": 1,
+      "generatedFiles": 0,
+      "iterations": 0,
+      "plan": {
+        "iterations": [],
+        "summary": {
+          "totalFilesToGenerate": 0,
+          "estimatedFinalQuality": null,
+          "willMeetTarget": false
+        }
+      },
+      "error": "Cannot read properties of undefined (reading '0')"
+    },
+    {
+      "success": false,
+      "repo": "repairman29/code-generation-service",
+      "currentQuality": 0.75,
+      "finalQuality": 0,
+      "targetQuality": 1,
+      "generatedFiles": 0,
+      "iterations": 0,
+      "plan": {
+        "iterations": [],
+        "summary": {
+          "totalFilesToGenerate": 0,
+          "estimatedFinalQuality": null,
+          "willMeetTarget": false
+        }
+      },
+      "error": "Cannot read properties of undefined (reading '0')"
+    },
+    {
+      "success": false,
+      "repo": "repairman29/asset-management-service",
+      "currentQuality": 0.75,
+      "finalQuality": 0,
+      "targetQuality": 1,
+      "generatedFiles": 0,
+      "iterations": 0,
+      "plan": {
+        "iterations": [],
+        "summary": {
+          "totalFilesToGenerate": 0,
+          "estimatedFinalQuality": null,
+          "willMeetTarget": false
+        }
+      },
+      "error": "Cannot read properties of undefined (reading '0')"
+    },
+    {
+      "success": false,
+      "repo": "repairman29/audio-generation-service",
+      "currentQuality": 0.75,
+      "finalQuality": 0,
+      "targetQuality": 1,
+      "generatedFiles": 0,
+      "iterations": 0,
+      "plan": {
+        "iterations": [],
+        "summary": {
+          "totalFilesToGenerate": 0,
+          "estimatedFinalQuality": null,
+          "willMeetTarget": false
+        }
+      },
+      "error": "Cannot read properties of undefined (reading '0')"
+    },
+    {
+      "success": false,
+      "repo": "repairman29/coderoach",
+      "currentQuality": 0.75,
+      "finalQuality": 0,
+      "targetQuality": 1,
+      "generatedFiles": 0,
+      "iterations": 0,
+      "plan": {
+        "iterations": [],
+        "summary": {
+          "totalFilesToGenerate": 0,
+          "estimatedFinalQuality": null,
+          "willMeetTarget": false
+        }
+      },
+      "error": "Cannot read properties of undefined (reading '0')"
+    },
+    {
+      "success": false,
+      "repo": "repairman29/slidemate",
+      "currentQuality": 0.75,
+      "finalQuality": 0,
+      "targetQuality": 1,
+      "generatedFiles": 0,
+      "iterations": 0,
+      "plan": {
+        "iterations": [],
+        "summary": {
+          "totalFilesToGenerate": 0,
+          "estimatedFinalQuality": null,
+          "willMeetTarget": false
+        }
+      },
+      "error": "Cannot read properties of undefined (reading '0')"
+    },
+    {
+      "success": false,
+      "repo": "repairman29/mixdown",
+      "currentQuality": 0.75,
+      "finalQuality": 0,
+      "targetQuality": 1,
+      "generatedFiles": 0,
+      "iterations": 0,
+      "plan": {
+        "iterations": [],
+        "summary": {
+          "totalFilesToGenerate": 0,
+          "estimatedFinalQuality": null,
+          "willMeetTarget": false
+        }
+      },
+      "error": "Cannot read properties of undefined (reading '0')"
+    },
+    {
+      "success": false,
+      "repo": "repairman29/echeovid",
+      "currentQuality": 0.75,
+      "finalQuality": 0,
+      "targetQuality": 1,
+      "generatedFiles": 0,
+      "iterations": 0,
+      "plan": {
+        "iterations": [],
+        "summary": {
+          "totalFilesToGenerate": 0,
+          "estimatedFinalQuality": null,
+          "willMeetTarget": false
+        }
+      },
+      "error": "Cannot read properties of undefined (reading '0')"
+    },
+    {
+      "success": false,
+      "repo": "repairman29/postsub",
+      "currentQuality": 0.75,
+      "finalQuality": 0,
+      "targetQuality": 1,
+      "generatedFiles": 0,
+      "iterations": 0,
+      "plan": {
+        "iterations": [],
+        "summary": {
+          "totalFilesToGenerate": 0,
+          "estimatedFinalQuality": null,
+          "willMeetTarget": false
+        }
+      },
+      "error": "Cannot read properties of undefined (reading '0')"
+    },
+    {
+      "success": false,
+      "repo": "repairman29/echeo_old",
+      "currentQuality": 0.75,
+      "finalQuality": 0,
+      "targetQuality": 1,
+      "generatedFiles": 0,
+      "iterations": 0,
+      "plan": {
+        "iterations": [],
+        "summary": {
+          "totalFilesToGenerate": 0,
+          "estimatedFinalQuality": null,
+          "willMeetTarget": false
+        }
+      },
+      "error": "Cannot read properties of undefined (reading '0')"
+    },
+    {
+      "success": false,
+      "repo": "repairman29/trove-web",
+      "currentQuality": 0.75,
+      "finalQuality": 0,
+      "targetQuality": 1,
+      "generatedFiles": 0,
+      "iterations": 0,
+      "plan": {
+        "iterations": [],
+        "summary": {
+          "totalFilesToGenerate": 0,
+          "estimatedFinalQuality": null,
+          "willMeetTarget": false
+        }
+      },
+      "error": "Cannot read properties of undefined (reading '0')"
+    },
+    {
+      "success": false,
+      "repo": "repairman29/coloringbook",
+      "currentQuality": 0.75,
+      "finalQuality": 0,
+      "targetQuality": 1,
+      "generatedFiles": 0,
+      "iterations": 0,
+      "plan": {
+        "iterations": [],
+        "summary": {
+          "totalFilesToGenerate": 0,
+          "estimatedFinalQuality": null,
+          "willMeetTarget": false
+        }
+      },
+      "error": "Cannot read properties of undefined (reading '0')"
+    },
+    {
+      "success": false,
+      "repo": "repairman29/mythseeker2",
+      "currentQuality": 0.75,
+      "finalQuality": 0,
+      "targetQuality": 1,
+      "generatedFiles": 0,
+      "iterations": 0,
+      "plan": {
+        "iterations": [],
+        "summary": {
+          "totalFilesToGenerate": 0,
+          "estimatedFinalQuality": null,
+          "willMeetTarget": false
+        }
+      },
+      "error": "Cannot read properties of undefined (reading '0')"
+    },
+    {
+      "success": false,
+      "repo": "repairman29/MythSeeker",
+      "currentQuality": 0.75,
+      "finalQuality": 0,
+      "targetQuality": 1,
+      "generatedFiles": 0,
+      "iterations": 0,
+      "plan": {
+        "iterations": [],
+        "summary": {
+          "totalFilesToGenerate": 0,
+          "estimatedFinalQuality": null,
+          "willMeetTarget": false
+        }
+      },
+      "error": "Cannot read properties of undefined (reading '0')"
+    },
+    {
+      "success": false,
+      "repo": "repairman29/trove-app",
+      "currentQuality": 0.75,
+      "finalQuality": 0,
+      "targetQuality": 1,
+      "generatedFiles": 0,
+      "iterations": 0,
+      "plan": {
+        "iterations": [],
+        "summary": {
+          "totalFilesToGenerate": 0,
+          "estimatedFinalQuality": null,
+          "willMeetTarget": false
+        }
+      },
+      "error": "Cannot read properties of undefined (reading '0')"
+    },
+    {
+      "success": false,
+      "repo": "repairman29/sheckleshare",
+      "currentQuality": 0.75,
+      "finalQuality": 0,
+      "targetQuality": 1,
+      "generatedFiles": 0,
+      "iterations": 0,
+      "plan": {
+        "iterations": [],
+        "summary": {
+          "totalFilesToGenerate": 0,
+          "estimatedFinalQuality": null,
+          "willMeetTarget": false
+        }
+      },
+      "error": "Cannot read properties of undefined (reading '0')"
+    },
+    {
+      "success": false,
+      "repo": "repairman29/echeo-archived",
+      "currentQuality": 0.75,
+      "finalQuality": 0,
+      "targetQuality": 1,
+      "generatedFiles": 0,
+      "iterations": 0,
+      "plan": {
+        "iterations": [],
+        "summary": {
+          "totalFilesToGenerate": 0,
+          "estimatedFinalQuality": null,
+          "willMeetTarget": false
+        }
+      },
+      "error": "Cannot read properties of undefined (reading '0')"
+    },
+    {
+      "success": false,
+      "repo": "repairman29/echeodev",
+      "currentQuality": 0.75,
+      "finalQuality": 0,
+      "targetQuality": 1,
+      "generatedFiles": 0,
+      "iterations": 0,
+      "plan": {
+        "iterations": [],
+        "summary": {
+          "totalFilesToGenerate": 0,
+          "estimatedFinalQuality": null,
+          "willMeetTarget": false
+        }
+      },
+      "error": "Cannot read properties of undefined (reading '0')"
+    },
+    {
+      "success": false,
+      "repo": "repairman29/project-forge",
+      "currentQuality": 0.75,
+      "finalQuality": 0,
+      "targetQuality": 1,
+      "generatedFiles": 0,
+      "iterations": 0,
+      "plan": {
+        "iterations": [],
+        "summary": {
+          "totalFilesToGenerate": 0,
+          "estimatedFinalQuality": null,
+          "willMeetTarget": false
+        }
+      },
+      "error": "Cannot read properties of undefined (reading '0')"
+    },
+    {
+      "success": false,
+      "repo": "repairman29/echeo-dev",
+      "currentQuality": 0.75,
+      "finalQuality": 0,
+      "targetQuality": 1,
+      "generatedFiles": 0,
+      "iterations": 0,
+      "plan": {
+        "iterations": [],
+        "summary": {
+          "totalFilesToGenerate": 0,
+          "estimatedFinalQuality": null,
+          "willMeetTarget": false
+        }
+      },
+      "error": "Cannot read properties of undefined (reading '0')"
+    },
+    {
+      "success": false,
+      "repo": "repairman29/internal-zendesk-tools",
+      "currentQuality": 0.75,
+      "finalQuality": 0,
+      "targetQuality": 1,
+      "generatedFiles": 0,
+      "iterations": 0,
+      "plan": {
+        "iterations": [],
+        "summary": {
+          "totalFilesToGenerate": 0,
+          "estimatedFinalQuality": null,
+          "willMeetTarget": false
+        }
+      },
+      "error": "Cannot read properties of undefined (reading '0')"
+    },
+    {
+      "success": false,
+      "repo": "repairman29/project_forge",
+      "currentQuality": 0.75,
+      "finalQuality": 0,
+      "targetQuality": 1,
+      "generatedFiles": 0,
+      "iterations": 0,
+      "plan": {
+        "iterations": [],
+        "summary": {
+          "totalFilesToGenerate": 0,
+          "estimatedFinalQuality": null,
+          "willMeetTarget": false
+        }
+      },
+      "error": "Cannot read properties of undefined (reading '0')"
+    },
+    {
+      "success": false,
+      "repo": "repairman29/ims",
+      "currentQuality": 0.75,
+      "finalQuality": 0,
+      "targetQuality": 1,
+      "generatedFiles": 0,
+      "iterations": 0,
+      "plan": {
+        "iterations": [],
+        "summary": {
+          "totalFilesToGenerate": 0,
+          "estimatedFinalQuality": null,
+          "willMeetTarget": false
+        }
+      },
+      "error": "Cannot read properties of undefined (reading '0')"
+    },
+    {
+      "success": false,
+      "repo": "repairman29/2029-versioned",
+      "currentQuality": 0.75,
+      "finalQuality": 0,
+      "targetQuality": 1,
+      "generatedFiles": 0,
+      "iterations": 0,
+      "plan": {
+        "iterations": [],
+        "summary": {
+          "totalFilesToGenerate": 0,
+          "estimatedFinalQuality": null,
+          "willMeetTarget": false
+        }
+      },
+      "error": "Cannot read properties of undefined (reading '0')"
+    }
+  ]
+}
