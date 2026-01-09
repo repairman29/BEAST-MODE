@@ -22,7 +22,9 @@ export function RecommendationCards({ repo, platform = 'beast-mode', limit = 5 }
 
   useEffect(() => {
     // Track component usage
-    usePLGTracking('RecommendationCards', 'cards', { repo });
+    if (typeof window !== 'undefined') {
+      usePLGTracking('RecommendationCards', 'cards', { repo });
+    }
     
     async function fetchRecommendations() {
       try {

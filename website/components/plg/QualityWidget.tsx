@@ -23,7 +23,9 @@ export function QualityWidget({ repo, platform = 'beast-mode', className = '' }:
 
   useEffect(() => {
     // Track component usage
-    usePLGTracking('QualityWidget', 'widget', { repo });
+    if (typeof window !== 'undefined') {
+      usePLGTracking('QualityWidget', 'widget', { repo });
+    }
     
     async function fetchQuality() {
       try {

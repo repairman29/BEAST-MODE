@@ -381,6 +381,11 @@ export default function QualityDashboard() {
                         className="bg-slate-800/50 border-slate-700"
                       >
                         <CardContent className="pt-6">
+                          {/* Quality Widget - PLG Component */}
+                          <div className="mb-6">
+                            <QualityWidget repo={result.repo} platform="beast-mode" />
+                          </div>
+
                           <div className="flex items-start justify-between mb-4">
                             <div>
                               <h3 className="text-lg font-semibold text-white mb-1">

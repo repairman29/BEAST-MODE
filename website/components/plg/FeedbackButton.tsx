@@ -28,7 +28,9 @@ export function FeedbackButton({
 
   useEffect(() => {
     // Track component usage
-    usePLGTracking('FeedbackButton', 'button', { predictionId });
+    if (typeof window !== 'undefined') {
+      usePLGTracking('FeedbackButton', 'button', { predictionId });
+    }
   }, [predictionId]);
 
   async function submitFeedback(isHelpful: boolean) {
