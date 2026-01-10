@@ -92,7 +92,7 @@ function generateEmailTemplate(template: string, data: Record<string, any>) {
             <li><strong>Plugins Used:</strong> ${data.pluginsUsed || 0}</li>
             <li><strong>Missions Completed:</strong> ${data.missionsCompleted || 0}</li>
           </ul>
-          <p><a href="https://beastmode.dev/dashboard">View Full Dashboard →</a></p>
+          <p><a href="https://beast-mode.dev/dashboard">View Full Dashboard →</a></p>
         </div>
       `,
       text: `BEAST MODE Weekly Quality Report\n\nQuality Score: ${data.qualityScore || 'N/A'}/100\nIssues Fixed: ${data.issuesFixed || 0}\nPlugins Used: ${data.pluginsUsed || 0}\nMissions Completed: ${data.missionsCompleted || 0}`
@@ -103,7 +103,7 @@ function generateEmailTemplate(template: string, data: Record<string, any>) {
           <h2 style="color: #ff0000;">🚨 Critical Alert</h2>
           <p><strong>${data.title || 'Critical Issue Detected'}</strong></p>
           <p>${data.message || 'A critical issue has been detected in your codebase.'}</p>
-          <p><a href="https://beastmode.dev/dashboard?view=quality">View Details →</a></p>
+          <p><a href="https://beast-mode.dev/dashboard?view=quality">View Details →</a></p>
         </div>
       `,
       text: `Critical Alert: ${data.title || 'Critical Issue Detected'}\n\n${data.message || 'A critical issue has been detected in your codebase.'}`
@@ -116,7 +116,7 @@ function generateEmailTemplate(template: string, data: Record<string, any>) {
           <p><strong>Current Version:</strong> ${data.currentVersion || 'N/A'}</p>
           <p><strong>New Version:</strong> ${data.newVersion || 'N/A'}</p>
           ${data.changelog ? `<p><strong>Changelog:</strong><br>${data.changelog}</p>` : ''}
-          <p><a href="https://beastmode.dev/dashboard?view=marketplace">Update Now →</a></p>
+          <p><a href="https://beast-mode.dev/dashboard?view=marketplace">Update Now →</a></p>
         </div>
       `,
       text: `Plugin Update Available: ${data.pluginName || 'Plugin'}\n\nCurrent: ${data.currentVersion || 'N/A'}\nNew: ${data.newVersion || 'N/A'}`
@@ -129,7 +129,7 @@ function generateEmailTemplate(template: string, data: Record<string, any>) {
           <p><strong>Quality Score:</strong> ${data.qualityScore || 'N/A'}/100</p>
           <p><strong>Issues Found:</strong> ${data.issuesCount || 0}</p>
           <p><strong>Warnings:</strong> ${data.warningsCount || 0}</p>
-          <p><a href="https://beastmode.dev/dashboard?view=quality">View Full Report →</a></p>
+          <p><a href="https://beast-mode.dev/dashboard?view=quality">View Full Report →</a></p>
         </div>
       `,
       text: `Quality Report\n\nRepository: ${data.repository || 'N/A'}\nQuality Score: ${data.qualityScore || 'N/A'}/100\nIssues: ${data.issuesCount || 0}\nWarnings: ${data.warningsCount || 0}`

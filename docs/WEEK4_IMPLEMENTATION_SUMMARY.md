@@ -154,7 +154,7 @@
    - Create cross-references
 
 2. Set up documentation site (if planned):
-   - docs.beastmode.dev
+   - docs.beast-mode.dev
    - Search functionality
    - Versioning
 

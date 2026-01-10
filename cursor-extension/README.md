@@ -44,7 +44,7 @@ Then in Cursor:
 
 Open Cursor Settings (Cmd+,) and search for "BEAST MODE":
 
-- **API URL**: Your BEAST MODE instance URL (default: `https://beastmode.dev`)
+- **API URL**: Your BEAST MODE instance URL (default: `https://beast-mode.dev`)
 - **Enabled**: Toggle tracking on/off
 - **Track File Saves**: Track when you save files
 - **Track File Opens**: Track when you open files

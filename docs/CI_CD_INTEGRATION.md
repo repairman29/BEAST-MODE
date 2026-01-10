@@ -239,11 +239,11 @@ npx @beast-mode/core generate:workflow --platform railway
 
 ## Support
 
-- 📚 [Documentation](https://beastmode.dev/docs)
+- 📚 [Documentation](https://beast-mode.dev/docs)
 - 💬 [Discord](https://discord.gg/beastmode)
 - 🐛 [GitHub Issues](https://github.com/repairman29/BEAST-MODE/issues)
 
 ---
 
-*Powered by [BEAST MODE](https://beastmode.dev) - AI-Powered Development Tools*
+*Powered by [BEAST MODE](https://beast-mode.dev) - AI-Powered Development Tools*
 

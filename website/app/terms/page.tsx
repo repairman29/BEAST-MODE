@@ -100,8 +100,8 @@ export default function TermsPage() {
             <h2 className="text-2xl font-semibold text-cyan-400 mb-4">8. Contact</h2>
             <p>
               For questions about these Terms, contact us at:{' '}
-              <a href="mailto:legal@beastmode.dev" className="text-cyan-400 hover:text-cyan-300">
-                legal@beastmode.dev
+              <a href="mailto:legal@beast-mode.dev" className="text-cyan-400 hover:text-cyan-300">
+                legal@beast-mode.dev
               </a>
             </p>
           </section>

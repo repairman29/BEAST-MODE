@@ -145,7 +145,7 @@ npm run test:e2e
 beast-mode dashboard --open
 
 # Or visit
-https://beastmode.dev/dashboard
+https://beast-mode.dev/dashboard
 ```
 
 ### **2. Calculate Your ROI:**

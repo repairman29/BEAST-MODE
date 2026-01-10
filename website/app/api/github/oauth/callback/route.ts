@@ -109,9 +109,9 @@ export async function GET(request: NextRequest) {
     // Determine correct client ID and secret based on environment
     const nodeEnv = await getConfigValue('NODE_ENV', 'development');
     const isProduction = nodeEnv === 'production' || 
-                         nextPublicUrl?.includes('beastmode.dev') ||
                          nextPublicUrl?.includes('beast-mode.dev') ||
-                         request.url.includes('beastmode.dev') ||
+                         nextPublicUrl?.includes('beast-mode.dev') ||
+                         request.url.includes('beast-mode.dev') ||
                          request.url.includes('beast-mode.dev');
     
     const expectedProdClientId = 'Ov23liDKFkIrnPneWwny';

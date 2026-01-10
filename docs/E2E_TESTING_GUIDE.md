@@ -40,7 +40,7 @@ TEST_API_KEY=your_api_key npm run test:e2e
 
 ### **Custom Base URL:**
 ```bash
-TEST_BASE_URL=https://beastmode.dev npm run test:e2e
+TEST_BASE_URL=https://beast-mode.dev npm run test:e2e
 ```
 
 ---

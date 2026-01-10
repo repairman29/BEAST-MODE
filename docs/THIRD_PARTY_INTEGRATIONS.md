@@ -140,21 +140,21 @@ export SMTP_HOST="smtp.gmail.com"
 export SMTP_PORT="587"
 export SMTP_USER="your-email@gmail.com"
 export SMTP_PASS="your-app-password"
-export EMAIL_FROM="noreply@beastmode.dev"
+export EMAIL_FROM="noreply@beast-mode.dev"
 ```
 
 **SendGrid**:
 ```bash
 export EMAIL_PROVIDER="sendgrid"
 export SENDGRID_API_KEY="your-sendgrid-api-key"
-export EMAIL_FROM="noreply@beastmode.dev"
+export EMAIL_FROM="noreply@beast-mode.dev"
 ```
 
 **Resend**:
 ```bash
 export EMAIL_PROVIDER="resend"
 export RESEND_API_KEY="your-resend-api-key"
-export EMAIL_FROM="noreply@beastmode.dev"
+export EMAIL_FROM="noreply@beast-mode.dev"
 ```
 
 ### Features
@@ -169,7 +169,7 @@ export EMAIL_FROM="noreply@beastmode.dev"
 const EmailIntegration = require('@beast-mode/core/integrations/email');
 const email = new EmailIntegration({
   provider: 'sendgrid',
-  from: 'noreply@beastmode.dev'
+  from: 'noreply@beast-mode.dev'
 });
 
 // Send weekly report
@@ -285,11 +285,11 @@ beast-mode integrations test discord --message "Test notification"
 
 ## Support
 
-- 📚 [Documentation](https://beastmode.dev/docs)
+- 📚 [Documentation](https://beast-mode.dev/docs)
 - 💬 [Discord](https://discord.gg/beastmode)
 - 🐛 [GitHub Issues](https://github.com/repairman29/BEAST-MODE/issues)
 
 ---
 
-*Powered by [BEAST MODE](https://beastmode.dev) - AI-Powered Development Tools*
+*Powered by [BEAST MODE](https://beast-mode.dev) - AI-Powered Development Tools*
 

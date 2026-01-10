@@ -83,8 +83,8 @@ GET  /api/analytics
 
 ## Learn More
 
-- [BEAST MODE Docs](https://beastmode.dev/docs)
-- [API Guide](https://beastmode.dev/docs/api)
+- [BEAST MODE Docs](https://beast-mode.dev/docs)
+- [API Guide](https://beast-mode.dev/docs/api)
 - [Contribute](../CONTRIBUTING.md)
 
 ---

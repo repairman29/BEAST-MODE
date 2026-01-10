@@ -36,7 +36,7 @@ beast-mode quality score
 ---
 
 ### 3. Live Website
-- **URL:** https://beastmode.dev
+- **URL:** https://beast-mode.dev
 - **Status:** Deployed and live
 - **Dashboard:** Fully functional
 - **Documentation:** Complete
@@ -258,7 +258,7 @@ npm run test:ftue
    - See the code. It's real.
 
 3. **Live Website**
-   - https://beastmode.dev
+   - https://beast-mode.dev
    - Use the dashboard. It works.
 
 4. **Example Projects**

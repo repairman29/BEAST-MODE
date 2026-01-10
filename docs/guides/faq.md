@@ -129,7 +129,7 @@ Low scores are normal at first! BEAST MODE exists to help you improve. Try:
 ### How do I report a bug or request a feature?
 
 - **GitHub Issues**: [Report Issues](https://github.com/repairman29/BEAST-MODE/issues)
-- **Support Email**: support@beastmode.dev
+- **Support Email**: support@beast-mode.dev
 - **Community**: Join our community discussions
 
 ---
@@ -150,7 +150,7 @@ See [Enterprise Features](../features/enterprise.md) for details.
 
 ### Do you offer on-premise deployment?
 
-Yes! On-premise deployment is available for Enterprise tier customers. Contact sales@beastmode.dev for details.
+Yes! On-premise deployment is available for Enterprise tier customers. Contact sales@beast-mode.dev for details.
 
 ---
 
@@ -177,7 +177,7 @@ See [Day 2 Operations](../features/day2-operations.md) to get started.
 ## 🆘 Still Need Help?
 
 - **Troubleshooting**: [Troubleshooting Guide](./troubleshooting.md)
-- **Support Email**: support@beastmode.dev
+- **Support Email**: support@beast-mode.dev
 - **GitHub Issues**: [Report Issues](https://github.com/repairman29/BEAST-MODE/issues)
 - **Documentation**: [Complete Index](../README.md)
 

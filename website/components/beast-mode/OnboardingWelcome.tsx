@@ -115,7 +115,7 @@ export default function OnboardingWelcome({ onDismiss }: OnboardingWelcomeProps)
           </p>
           <div className="space-y-2">
             <a
-              href="https://beastmode.dev/docs/3_EASY_STEPS"
+              href="https://beast-mode.dev/docs/3_EASY_STEPS"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 p-3 bg-cyan-600/20 border border-cyan-500/30 rounded-lg hover:bg-cyan-600/30 transition-colors text-cyan-400 font-semibold"
@@ -124,7 +124,7 @@ export default function OnboardingWelcome({ onDismiss }: OnboardingWelcomeProps)
               <span className="text-sm">3 Easy Steps (Start Here!)</span>
             </a>
             <a
-              href="https://beastmode.dev/docs/QUICK_START"
+              href="https://beast-mode.dev/docs/QUICK_START"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 p-3 bg-slate-800/50 rounded-lg hover:bg-slate-800 transition-colors text-slate-300"
@@ -132,7 +132,7 @@ export default function OnboardingWelcome({ onDismiss }: OnboardingWelcomeProps)
               <span className="text-sm">Quick Start Guide (5 minutes)</span>
             </a>
             <a
-              href="https://beastmode.dev/docs/FTUE"
+              href="https://beast-mode.dev/docs/FTUE"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 p-3 bg-slate-800/50 rounded-lg hover:bg-slate-800 transition-colors text-slate-400 text-xs"

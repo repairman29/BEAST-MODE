@@ -71,8 +71,8 @@ Vibe Check provides:
 
 ## Learn More
 
-- [BEAST MODE Docs](https://beastmode.dev/docs)
-- [Dashboard Guide](https://beastmode.dev/docs/dashboard)
+- [BEAST MODE Docs](https://beast-mode.dev/docs)
+- [Dashboard Guide](https://beast-mode.dev/docs/dashboard)
 - [Contribute](../CONTRIBUTING.md)
 
 ---

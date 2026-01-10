@@ -72,8 +72,8 @@ Code Vibe uses BEAST MODE to:
 
 ## Learn More
 
-- [BEAST MODE Docs](https://beastmode.dev/docs)
-- [CLI Development Guide](https://beastmode.dev/docs/cli)
+- [BEAST MODE Docs](https://beast-mode.dev/docs)
+- [CLI Development Guide](https://beast-mode.dev/docs/cli)
 - [Contribute](../CONTRIBUTING.md)
 
 ---

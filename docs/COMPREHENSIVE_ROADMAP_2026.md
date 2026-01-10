@@ -313,7 +313,7 @@ const metrics = [
 - [ ] Add video walkthroughs
 
 **4. Documentation Site (Weeks 6-8)**
-- [ ] Set up docs.beastmode.dev
+- [ ] Set up docs.beast-mode.dev
 - [ ] Implement search functionality
 - [ ] Add versioning
 - [ ] Create documentation structure
@@ -331,7 +331,7 @@ const metrics = [
 **Deliverables:**
 - ✅ Streamlined onboarding docs
 - ✅ Interactive API documentation
-- ✅ Documentation site (docs.beastmode.dev)
+- ✅ Documentation site (docs.beast-mode.dev)
 - ✅ Search and versioning
 
 ---

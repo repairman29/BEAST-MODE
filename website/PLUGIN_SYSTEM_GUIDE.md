@@ -400,7 +400,7 @@ The `MarketplaceView` component provides:
 
 ## 📖 Resources
 
-- **Documentation**: https://docs.beastmode.dev/plugins
+- **Documentation**: https://docs.beast-mode.dev/plugins
 - **Example Plugins**: https://github.com/repairman29/BEAST-MODE/tree/main/plugins
 - **Plugin Template**: https://github.com/repairman29/BEAST-MODE-plugin-template
 - **Submit Plugin**: Marketplace → "Submit Plugin"

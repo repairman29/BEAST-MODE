@@ -14,7 +14,7 @@
 **Proof:**
 - ✅ Published NPM package: `@beast-mode/core@1.0.0`
 - ✅ Working CLI: `beast-mode --version`
-- ✅ Live dashboard: https://beastmode.dev
+- ✅ Live dashboard: https://beast-mode.dev
 - ✅ 100% test coverage: 57/57 tests passing
 - ✅ Working examples: 3 projects ready to use
 - ✅ Open source: GitHub repo with real code

@@ -84,8 +84,8 @@
 2. Click "New OAuth App"
 3. Fill in:
    - **Application name**: BEAST MODE
-   - **Homepage URL**: `https://beastmode.dev` (or your domain)
-   - **Authorization callback URL**: `https://beastmode.dev/api/github/oauth/callback`
+   - **Homepage URL**: `https://beast-mode.dev` (or your domain)
+   - **Authorization callback URL**: `https://beast-mode.dev/api/github/oauth/callback`
 4. Click "Register application"
 5. Copy **Client ID** and generate **Client Secret**
 
@@ -97,7 +97,7 @@ Add to `.env.local`:
 # GitHub OAuth
 GITHUB_CLIENT_ID=your_client_id_here
 GITHUB_CLIENT_SECRET=your_client_secret_here
-GITHUB_REDIRECT_URI=https://beastmode.dev/api/github/oauth/callback
+GITHUB_REDIRECT_URI=https://beast-mode.dev/api/github/oauth/callback
 
 # Token Encryption (generate with: openssl rand -hex 32)
 GITHUB_TOKEN_ENCRYPTION_KEY=your_32_byte_hex_key_here

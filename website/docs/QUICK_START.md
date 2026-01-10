@@ -193,7 +193,7 @@ You've completed the Quick Start! You now know how to:
 - **📚 Full Guide:** See USER_GUIDE.md
 - **❓ FAQs:** See FAQS.md
 - **💬 AI Assistant:** Ask in Intelligence tab
-- **📧 Support:** support@beastmode.dev
+- **📧 Support:** support@beast-mode.dev
 
 ---
 

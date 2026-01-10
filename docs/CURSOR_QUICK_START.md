@@ -37,7 +37,7 @@ If you don't want to install the extension, you can manually track sessions:
 ### Track Session Start
 
 ```bash
-curl -X POST https://beastmode.dev/api/cursor/session \
+curl -X POST https://beast-mode.dev/api/cursor/session \
   -H "Content-Type: application/json" \
   -d '{
     "sessionId": "cursor_manual_123",
@@ -54,7 +54,7 @@ Add to your `.git/hooks/post-commit`:
 
 ```bash
 #!/bin/bash
-curl -X POST https://beastmode.dev/api/cursor/session \
+curl -X POST https://beast-mode.dev/api/cursor/session \
   -H "Content-Type: application/json" \
   -d "{
     \"sessionId\": \"cursor_manual_123\",
@@ -115,7 +115,7 @@ All commands are automatically tracked with session type `cli` and linked to you
 ### Sessions Not Appearing
 
 1. Verify GitHub connection in dashboard
-2. Check API URL in settings (default: `https://beastmode.dev`)
+2. Check API URL in settings (default: `https://beast-mode.dev`)
 3. Ensure tracking is enabled
 4. Check Developer Console: `Help` → `Toggle Developer Tools`
 

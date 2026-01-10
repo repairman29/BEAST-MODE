@@ -237,9 +237,9 @@ export async function POST(request: NextRequest) {
 3. Add JSDoc comments (12 missing)
 
 ### 🚀 Quick Actions:
-- [View Full Report](https://beastmode.dev/quality?repo=owner/repo&pr=123)
-- [Fix Issues Automatically](https://beastmode.dev/dashboard?action=fix&repo=owner/repo&pr=123)
-- [Ask Questions](https://beastmode.dev/dashboard?view=intelligence&repo=owner/repo)
+- [View Full Report](https://beast-mode.dev/quality?repo=owner/repo&pr=123)
+- [Fix Issues Automatically](https://beast-mode.dev/dashboard?action=fix&repo=owner/repo&pr=123)
+- [Ask Questions](https://beast-mode.dev/dashboard?view=intelligence&repo=owner/repo)
 
 ---
 *Updated: 2026-01-09 14:23 UTC | BEAST MODE v1.0.0*
@@ -274,7 +274,7 @@ export async function POST(request: NextRequest) {
 2. Remove console.logs
 3. Add documentation
 
-[View Full Report](https://beastmode.dev/quality?repo=owner/repo&pr=123)
+[View Full Report](https://beast-mode.dev/quality?repo=owner/repo&pr=123)
     `
   },
   annotations: [
@@ -405,7 +405,7 @@ GITHUB_APP_CLIENT_SECRET=...
 1. Go to https://github.com/settings/apps
 2. Click "New GitHub App"
 3. Fill in app details
-4. Set webhook URL: `https://beastmode.dev/api/github/webhook`
+4. Set webhook URL: `https://beast-mode.dev/api/github/webhook`
 5. Set permissions (see above)
 6. Generate private key
 7. Save credentials

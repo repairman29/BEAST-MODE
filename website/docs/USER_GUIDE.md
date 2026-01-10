@@ -447,7 +447,7 @@ A: We support all modern browsers:
 
 1. **Check FAQs** - Most questions are answered here
 2. **Use Intelligence Tab** - Ask the AI assistant
-3. **Contact Support** - support@beastmode.dev
+3. **Contact Support** - support@beast-mode.dev
 4. **GitHub Issues** - Report bugs on GitHub
 
 ---
@@ -502,9 +502,9 @@ A: We support all modern browsers:
 
 ### Need Help?
 
-- **📧 Email:** support@beastmode.dev
+- **📧 Email:** support@beast-mode.dev
 - **💬 Chat:** Use Intelligence tab
-- **📚 Docs:** docs.beastmode.dev
+- **📚 Docs:** docs.beast-mode.dev
 - **🐛 Bugs:** GitHub Issues
 - **💡 Ideas:** GitHub Discussions
 

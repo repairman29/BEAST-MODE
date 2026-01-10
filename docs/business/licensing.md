@@ -289,9 +289,9 @@ BEAST MODE reserves the right to modify licensing terms with 30 days notice. Exi
 
 ## 📞 Support & Contact
 
-- **License Questions:** legal@beastmode.dev
-- **Subscription Questions:** support@beastmode.dev
-- **Enterprise Licensing:** enterprise@beastmode.dev
+- **License Questions:** legal@beast-mode.dev
+- **Subscription Questions:** support@beast-mode.dev
+- **Enterprise Licensing:** enterprise@beast-mode.dev
 ```
 
 ---

@@ -38,9 +38,9 @@
 ```bash
 GITHUB_CLIENT_ID=Ov23liDKFkIrnPneWwny
 GITHUB_CLIENT_SECRET=014c7fab1ba6cc6a7398b5bde04e26463f16f4e9
-GITHUB_REDIRECT_URI=https://beastmode.dev/api/github/oauth/callback
+GITHUB_REDIRECT_URI=https://beast-mode.dev/api/github/oauth/callback
 GITHUB_TOKEN_ENCRYPTION_KEY=<your-64-char-hex-key>
-NEXT_PUBLIC_URL=https://beastmode.dev
+NEXT_PUBLIC_URL=https://beast-mode.dev
 ```
 
 **Development Environment:**
@@ -55,8 +55,8 @@ NEXT_PUBLIC_URL=http://localhost:7777
 ### 3. Verify GitHub OAuth App Settings
 
 **Production App** (Client ID: `Ov23liDKFkIrnPneWwny`):
-- Callback URL: `https://beastmode.dev/api/github/oauth/callback`
-- Homepage URL: `https://beastmode.dev`
+- Callback URL: `https://beast-mode.dev/api/github/oauth/callback`
+- Homepage URL: `https://beast-mode.dev`
 
 **Development App** (Client ID: `Ov23lidLvmp68FVMEqEB`):
 - Callback URL: `http://localhost:7777/api/github/oauth/callback`
@@ -101,7 +101,7 @@ The `product` column allows the same Supabase user to have different GitHub conn
 
 ### OAuth Fails with "redirect_uri_mismatch"
 - Check that callback URL in GitHub OAuth app matches `GITHUB_REDIRECT_URI`
-- Production: `https://beastmode.dev/api/github/oauth/callback`
+- Production: `https://beast-mode.dev/api/github/oauth/callback`
 - Development: `http://localhost:7777/api/github/oauth/callback`
 
 ### Wrong Client ID Warning

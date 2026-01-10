@@ -140,7 +140,7 @@ async function checkEmailConfig() {
  */
 async function main() {
   log('\n📧 BEAST MODE Resend Status Check\n', 'cyan');
-  log('Domain: beastmode.dev', 'blue');
+  log('Domain: beast-mode.dev', 'blue');
   log('='.repeat(60) + '\n');
 
   // Check API key
@@ -187,10 +187,10 @@ async function main() {
   // Summary
   log('\n' + '='.repeat(60), 'cyan');
   log('\n📋 Required Email Addresses:', 'cyan');
-  log('   - notifications@beastmode.dev (sending)', 'blue');
-  log('   - support@beastmode.dev (receiving)', 'blue');
-  log('   - security@beastmode.dev (receiving)', 'blue');
-  log('   - admin@beastmode.dev (optional)', 'blue');
+  log('   - notifications@beast-mode.dev (sending)', 'blue');
+  log('   - support@beast-mode.dev (receiving)', 'blue');
+  log('   - security@beast-mode.dev (receiving)', 'blue');
+  log('   - admin@beast-mode.dev (optional)', 'blue');
   
   log('\n📚 Documentation:', 'cyan');
   log('   - docs/RESEND_EMAIL_SETUP.md', 'blue');

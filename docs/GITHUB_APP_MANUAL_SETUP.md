@@ -23,7 +23,7 @@ AI-powered code quality intelligence platform. Automatically analyzes pull reque
 ---
 
 ### 3. Homepage URL
-**Value:** `https://beastmode.dev`  
+**Value:** `https://beast-mode.dev`  
 **Field:** "Homepage URL *" (required)
 
 ---
@@ -31,7 +31,7 @@ AI-powered code quality intelligence platform. Automatically analyzes pull reque
 ### 4. Identifying and authorizing users
 
 #### Callback URL
-**Value:** `https://beastmode.dev/api/github/app/callback`  
+**Value:** `https://beast-mode.dev/api/github/app/callback`  
 **Field:** "Callback URL"  
 **Action:** Click "Add Callback URL" button
 
@@ -68,7 +68,7 @@ AI-powered code quality intelligence platform. Automatically analyzes pull reque
 **Field:** Checkbox
 
 #### Webhook URL
-**Value:** `https://beastmode.dev/api/github/webhook`  
+**Value:** `https://beast-mode.dev/api/github/webhook`  
 **Field:** "Webhook URL *" (required)
 
 #### Secret

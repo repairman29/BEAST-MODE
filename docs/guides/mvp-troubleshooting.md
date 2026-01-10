@@ -223,7 +223,7 @@
 beast-mode status
 
 # Check API connectivity
-curl https://beastmode.dev/api/health
+curl https://beast-mode.dev/api/health
 
 # Check version
 beast-mode --version
@@ -272,7 +272,7 @@ beast-mode --version
 - [API Documentation](./api.md)
 
 ### **Support:**
-- **Email:** support@beastmode.dev
+- **Email:** support@beast-mode.dev
 - **GitHub Issues:** [Report Issues](https://github.com/repairman29/BEAST-MODE/issues)
 - **Community:** Join discussions
 

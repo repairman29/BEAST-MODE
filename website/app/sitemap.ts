@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://beastmode.dev';
+  const baseUrl = 'https://beast-mode.dev';
   const now = new Date();
 
   return [

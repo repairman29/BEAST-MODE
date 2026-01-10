@@ -107,7 +107,7 @@ User-specific settings including API keys and preferences.
 ```json
 {
   "api": {
-    "baseUrl": "https://beastmode.dev/api",
+    "baseUrl": "https://beast-mode.dev/api",
     "timeout": 30000,
     "retries": 3,
     "rateLimit": {

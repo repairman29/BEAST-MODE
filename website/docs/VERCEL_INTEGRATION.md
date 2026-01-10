@@ -8,7 +8,7 @@ BEAST MODE integrates with Vercel to provide automated quality checks before and
 
 In your Vercel project settings:
 1. Go to **Settings** → **Git** → **Deploy Hooks**
-2. Add a new webhook pointing to: `https://beastmode.dev/api/ci/vercel/webhook`
+2. Add a new webhook pointing to: `https://beast-mode.dev/api/ci/vercel/webhook`
 3. Select events: `deployment.created`, `deployment.ready`
 
 ### 2. Set Environment Variables
@@ -78,7 +78,7 @@ Configure which events trigger quality checks:
 Vercel sends deployment events to:
 
 ```
-POST https://beastmode.dev/api/ci/vercel/webhook
+POST https://beast-mode.dev/api/ci/vercel/webhook
 ```
 
 ### Quality Check Endpoint
@@ -86,7 +86,7 @@ POST https://beastmode.dev/api/ci/vercel/webhook
 Manually trigger quality check:
 
 ```bash
-curl -X POST https://beastmode.dev/api/ci/vercel \
+curl -X POST https://beast-mode.dev/api/ci/vercel \
   -H "Content-Type: application/json" \
   -d '{
     "deploymentId": "dep_xxx",
@@ -135,6 +135,6 @@ curl -X POST https://beastmode.dev/api/ci/vercel \
 
 For issues or questions:
 - GitHub Issues: [BEAST MODE Issues](https://github.com/repairman29/BEAST-MODE/issues)
-- Documentation: [docs.beastmode.dev](https://docs.beastmode.dev)
+- Documentation: [docs.beast-mode.dev](https://docs.beast-mode.dev)
 - Discord: [BEAST MODE Community](https://discord.gg/beastmode)
 

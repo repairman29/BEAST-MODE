@@ -144,7 +144,7 @@ export default function PricingPage() {
   const handleUpgrade = async (tierId: string) => {
     if (tierId === 'enterprise') {
       // Redirect to contact form or email
-      window.location.href = 'mailto:sales@beastmode.dev?subject=Enterprise Inquiry';
+      window.location.href = 'mailto:sales@beast-mode.dev?subject=Enterprise Inquiry';
       return;
     }
 

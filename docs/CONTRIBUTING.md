@@ -156,7 +156,7 @@ Need inspiration? See:
 
 - Open an issue
 - Join Discord
-- Email: support@beastmode.dev
+- Email: support@beast-mode.dev
 
 ---
 

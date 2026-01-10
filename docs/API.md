@@ -4,7 +4,7 @@ Complete API reference for BEAST MODE endpoints.
 
 ## Base URL
 
-- **Production**: `https://beastmode.dev/api`
+- **Production**: `https://beast-mode.dev/api`
 - **Development**: `http://localhost:7777/api`
 
 ## Authentication
@@ -269,7 +269,7 @@ console.log(`Quality Score: ${score.overall}`);
 ### cURL
 
 ```bash
-curl -X GET "https://beastmode.dev/api/github/scan?repo=owner/repo" \
+curl -X GET "https://beast-mode.dev/api/github/scan?repo=owner/repo" \
   -H "Authorization: Bearer YOUR_API_KEY"
 ```
 
@@ -286,7 +286,7 @@ Configure webhooks in the dashboard settings.
 
 ## Support
 
-- **Documentation**: https://beastmode.dev/docs
-- **Support**: support@beastmode.dev
-- **Status**: https://status.beastmode.dev
+- **Documentation**: https://beast-mode.dev/docs
+- **Support**: support@beast-mode.dev
+- **Status**: https://status.beast-mode.dev
 

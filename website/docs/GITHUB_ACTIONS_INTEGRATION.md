@@ -120,7 +120,7 @@ BEAST MODE can receive quality check results via webhook:
 ```yaml
 - name: Send Results to BEAST MODE
   run: |
-    curl -X POST https://beastmode.dev/api/ci/github-actions \
+    curl -X POST https://beast-mode.dev/api/ci/github-actions \
       -H "Content-Type: application/json" \
       -d @quality-report.json
 ```
@@ -151,6 +151,6 @@ BEAST MODE can receive quality check results via webhook:
 
 For issues or questions:
 - GitHub Issues: [BEAST MODE Issues](https://github.com/repairman29/BEAST-MODE/issues)
-- Documentation: [docs.beastmode.dev](https://docs.beastmode.dev)
+- Documentation: [docs.beast-mode.dev](https://docs.beast-mode.dev)
 - Discord: [BEAST MODE Community](https://discord.gg/beastmode)
 

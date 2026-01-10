@@ -28,7 +28,7 @@ The code now **automatically selects the correct client ID** based on your envir
 https://beast-mode.dev/api/github/oauth/callback
 ```
 
-**⚠️ Important:** The domain is `beast-mode.dev` (with dash), not `beastmode.dev`!
+**⚠️ Important:** The domain is `beast-mode.dev` (with dash), not `beast-mode.dev`!
 
 **Steps:**
 1. Click on the production OAuth app

@@ -159,9 +159,17 @@ Built for **vibe coders**—developers who code with passion, build with purpose
    - Blocks secrets in code
    - Prevents database logic in frontend
    - Auto-fixes violations
-   - **Tested:** Detects hardcoded secrets, XSS risks, // SECURITY: // SECURITY: eval() disabled
+   - **Tested:** Detects hardcoded secrets, XSS risks, // SECURITY: // SECURITY: // SECURITY: // SECURITY: eval() disabled
 // eval() disabled
-// // SECURITY: eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
 // eval() usage, architecture violations
 
 3. **Vibe Restoration System** ✅
@@ -718,7 +726,7 @@ beast-mode vibe check
 ## 📞 Contact & Resources
 
 ### Website
-- **URL:** https://beastmode.dev
+- **URL:** https://beast-mode.dev
 - **Status:** ✅ Live and operational (deployed to Vercel)
 
 ### Documentation
@@ -730,15 +738,15 @@ beast-mode vibe check
 - **GitHub:** https://github.com/repairman29/BEAST-MODE
 
 ### Support
-- **Email:** support@beastmode.dev
+- **Email:** support@beast-mode.dev
 - **Discord:** [Community Discord]
 - **Twitter:** @beastmode_dev
 
 ### Press Contact
-- **Email:** press@beastmode.dev
+- **Email:** press@beast-mode.dev
 - **Status:** ✅ Gold Master - Release Candidate
 - **Response Time:** Within 24 hours (48-hour window of interest when press hits)
-- **Note:** Ensure press@beastmode.dev routes to your phone. When this hits, the window of interest is about 48 hours.
+- **Note:** Ensure press@beast-mode.dev routes to your phone. When this hits, the window of interest is about 48 hours.
 
 ---
 
@@ -961,13 +969,13 @@ BEAST MODE was born from the belief that coding should be fun, tools should feel
 - All documentation complete
 - Public launch date: TBD
 - Embargoed access available for press
-- Contact: press@beastmode.dev
+- Contact: press@beast-mode.dev
 
 ---
 
 ## 📞 Press Contact
 
-**Email:** press@beastmode.dev  
+**Email:** press@beast-mode.dev  
 **Status:** ✅ Production ready - Contact for access  
 **Response Time:** Within 24 hours
 

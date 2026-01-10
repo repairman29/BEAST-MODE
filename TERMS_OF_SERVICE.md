@@ -152,9 +152,9 @@ These terms governed by laws of [Your Jurisdiction]. Disputes resolved through b
 ## 13. Contact Information
 
 **BEAST MODE**
-- Email: legal@beastmode.dev
-- Support: support@beastmode.dev
-- Website: https://beastmode.dev
+- Email: legal@beast-mode.dev
+- Support: support@beast-mode.dev
+- Website: https://beast-mode.dev
 
 ## 14. Severability
 

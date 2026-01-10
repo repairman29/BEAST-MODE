@@ -9,10 +9,10 @@
 ### Basic Information
 - **GitHub App name:** `BEAST MODE`
 - **Description:** `AI-powered code quality intelligence platform. Automatically analyzes pull requests, provides quality scores, and suggests improvements.`
-- **Homepage URL:** `https://beastmode.dev`
+- **Homepage URL:** `https://beast-mode.dev`
 
 ### Callback URL
-- **Callback URL:** `https://beastmode.dev/api/github/app/callback`
+- **Callback URL:** `https://beast-mode.dev/api/github/app/callback`
 - **Expire user authorization tokens:** ✅ Checked
 - **Request user authorization (OAuth) during installation:** ⬜ Unchecked
 - **Enable Device Flow:** ⬜ Unchecked
@@ -23,7 +23,7 @@
 
 ### Webhook
 - **Active:** ✅ Checked
-- **Webhook URL:** `https://beastmode.dev/api/github/webhook`
+- **Webhook URL:** `https://beast-mode.dev/api/github/webhook`
 - **Secret:** (generate one - see below)
 
 ### Repository Permissions
@@ -62,9 +62,9 @@ Copy the output and paste it into the "Secret" field.
 ## 📋 Quick Checklist
 
 - [ ] App name: `BEAST MODE`
-- [ ] Homepage URL: `https://beastmode.dev`
-- [ ] Callback URL: `https://beastmode.dev/api/github/app/callback`
-- [ ] Webhook URL: `https://beastmode.dev/api/github/webhook`
+- [ ] Homepage URL: `https://beast-mode.dev`
+- [ ] Callback URL: `https://beast-mode.dev/api/github/app/callback`
+- [ ] Webhook URL: `https://beast-mode.dev/api/github/webhook`
 - [ ] Webhook Secret: (generated)
 - [ ] Permissions: Contents (read), Pull requests (write), Checks (write)
 - [ ] Events: Pull request, Push, Installation, Installation repositories

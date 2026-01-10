@@ -164,7 +164,7 @@ We use these trusted service providers:
 
 **Data Protection Officer: [Your Name]**
 
-- **Email:** privacy@beastmode.dev
+- **Email:** privacy@beast-mode.dev
 - **Response Time:** Within 48 hours
 - **Address:** [Your Business Address]
 

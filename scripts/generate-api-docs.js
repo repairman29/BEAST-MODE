@@ -236,7 +236,7 @@ API requests are rate-limited. Current limits:
 
 ## Support
 
-For API support, please contact: support@beastmode.dev
+For API support, please contact: support@beast-mode.dev
 
 `;
 

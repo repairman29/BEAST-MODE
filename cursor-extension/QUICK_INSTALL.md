@@ -4,7 +4,7 @@
 
 - Node.js 18+ installed
 - Cursor IDE installed
-- BEAST MODE dashboard running (or use https://beastmode.dev)
+- BEAST MODE dashboard running (or use https://beast-mode.dev)
 
 ## Installation Steps
 
@@ -35,7 +35,7 @@ code --install-extension beast-mode-cursor-1.0.0.vsix
 1. Open Cursor Settings (`Cmd+,` or `Ctrl+,`)
 2. Search for "BEAST MODE"
 3. Set API URL:
-   - Production: `https://beastmode.dev`
+   - Production: `https://beast-mode.dev`
    - Local Dev: `http://localhost:7777`
 
 ### 4. Connect GitHub

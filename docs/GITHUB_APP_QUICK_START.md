@@ -70,12 +70,12 @@ The generated manifest includes:
 ```json
 {
   "name": "BEAST MODE",
-  "url": "https://beastmode.dev",
+  "url": "https://beast-mode.dev",
   "hook_attributes": {
-    "url": "https://beastmode.dev/api/github/webhook",
+    "url": "https://beast-mode.dev/api/github/webhook",
     "active": true
   },
-  "redirect_url": "https://beastmode.dev/api/github/app/callback",
+  "redirect_url": "https://beast-mode.dev/api/github/app/callback",
   "public": false,
   "default_permissions": {
     "contents": "read",
@@ -144,7 +144,7 @@ Once configured, BEAST MODE will:
 ## 🐛 Troubleshooting
 
 ### Webhook not receiving events?
-- Check webhook URL is correct: `https://beastmode.dev/api/github/webhook`
+- Check webhook URL is correct: `https://beast-mode.dev/api/github/webhook`
 - Verify webhook secret matches
 - Check webhook deliveries in GitHub App settings
 

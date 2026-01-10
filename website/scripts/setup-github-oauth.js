@@ -132,8 +132,8 @@ GITHUB_TOKEN_ENCRYPTION_KEY=${GITHUB_TOKEN_ENCRYPTION_KEY}
 NEXT_PUBLIC_URL=${NEXT_PUBLIC_URL}
 
 # For production, update:
-# GITHUB_REDIRECT_URI=https://beastmode.dev/api/github/oauth/callback
-# NEXT_PUBLIC_URL=https://beastmode.dev
+# GITHUB_REDIRECT_URI=https://beast-mode.dev/api/github/oauth/callback
+# NEXT_PUBLIC_URL=https://beast-mode.dev
 `;
 
   try {

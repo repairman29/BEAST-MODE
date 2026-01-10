@@ -22,7 +22,7 @@ beast-mode quality check
 - Getting a fresh perspective on your codebase
 
 ### 2. Review Dashboard
-- Open: https://beastmode.dev/dashboard
+- Open: https://beast-mode.dev/dashboard
 - Check Intelligence tab for new recommendations
 - Review any alerts or warnings
 
@@ -269,7 +269,7 @@ beast-mode quality score --trend
 - Often suggests how to fix it
 
 **Step 2:** Check documentation
-- Visit: https://beastmode.dev/docs
+- Visit: https://beast-mode.dev/docs
 - Search for the issue type
 - Read examples
 
@@ -283,7 +283,7 @@ beast-mode quality check --fix
 **Step 4:** Ask for help
 - GitHub Discussions
 - Community Discord
-- support@beastmode.dev
+- support@beast-mode.dev
 
 ### "My score is low and I don't know why"
 
@@ -419,8 +419,8 @@ Track your progress:
 - **Stuck?** Read [FTUE.md](./FTUE.md) - 100-step guide
 - **Quick Start?** See [QUICK_START.md](./QUICK_START.md)
 - **CLI Help?** Run `beast-mode --help`
-- **Documentation?** https://beastmode.dev/docs
-- **Support?** support@beastmode.dev
+- **Documentation?** https://beast-mode.dev/docs
+- **Support?** support@beast-mode.dev
 
 ---
 

@@ -242,7 +242,7 @@ OR OTHER DEALINGS IN THE SOFTWARE.
 - **Legal questions?** Consult a lawyer (we're not lawyers)
 - **Safety concerns?** Check the code (it's open source)
 - **Technical issues?** Open an issue on GitHub
-- **General questions?** support@beastmode.dev
+- **General questions?** support@beast-mode.dev
 
 ---
 

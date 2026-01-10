@@ -96,7 +96,7 @@ function CallToAction() {
   const handlePricingClick = (tierName: string) => {
     if (tierName === 'Enterprise') {
       // For enterprise, could open contact form or email
-      window.location.href = 'mailto:sales@beastmode.dev?subject=Enterprise Inquiry';
+      window.location.href = 'mailto:sales@beast-mode.dev?subject=Enterprise Inquiry';
     } else {
       // For other tiers, go to dashboard with signup
       router.push('/dashboard?view=auth&action=signup');

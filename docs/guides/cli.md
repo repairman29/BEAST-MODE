@@ -584,7 +584,7 @@ beast-mode init --force
 
 ## Support
 
-- **Documentation**: https://beastmode.dev/docs
+- **Documentation**: https://beast-mode.dev/docs
 - **CLI Help**: `beast-mode --help` or `beast-mode <command> --help`
-- **Support**: support@beastmode.dev
+- **Support**: support@beast-mode.dev
 

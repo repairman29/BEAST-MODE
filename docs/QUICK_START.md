@@ -109,7 +109,7 @@ beast-mode intelligence analyze
 1. **Don't Panic**: Low scores are normal at first
 2. **Use Auto-Fix**: `--fix` flag fixes many issues automatically
 3. **Check Daily**: Small improvements add up
-4. **Read the Docs**: https://beastmode.dev/docs
+4. **Read the Docs**: https://beast-mode.dev/docs
 5. **Ask for Help**: Community is friendly!
 
 ---
@@ -118,8 +118,8 @@ beast-mode intelligence analyze
 
 - **Full Guide**: See [FTUE.md](./FTUE.md) for 100-step walkthrough
 - **CLI Help**: `beast-mode --help`
-- **Documentation**: https://beastmode.dev/docs
-- **Support**: support@beastmode.dev
+- **Documentation**: https://beast-mode.dev/docs
+- **Support**: support@beast-mode.dev
 
 ---
 

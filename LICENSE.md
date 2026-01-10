@@ -153,7 +153,7 @@ SOFTWARE.
 - ✅ Custom SLAs
 - ✅ Volume discounts
 
-**Contact:** enterprise@beastmode.dev
+**Contact:** enterprise@beast-mode.dev
 
 ---
 
@@ -279,15 +279,15 @@ For large organizations requiring:
 - On-premise deployment
 - Custom SLAs
 
-**Contact:** enterprise@beastmode.dev
+**Contact:** enterprise@beast-mode.dev
 
 ---
 
 ## 📞 Support & Contact
 
-- **License Questions:** legal@beastmode.dev
-- **Subscription Questions:** support@beastmode.dev
-- **Enterprise Licensing:** enterprise@beastmode.dev
+- **License Questions:** legal@beast-mode.dev
+- **Subscription Questions:** support@beast-mode.dev
+- **Enterprise Licensing:** enterprise@beast-mode.dev
 - **Technical Support:** 
   - Free Tier: Community forum and GitHub issues
   - Developer Tier: Email support within 24 hours

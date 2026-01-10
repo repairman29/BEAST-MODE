@@ -39,7 +39,7 @@ const EMAIL_ADDRESSES = {
     address: 'notifications@beast-mode.dev',
     name: 'BEAST MODE',
     purpose: 'Primary sending address for all transactional emails',
-    replyTo: 'support@beastmode.dev',
+    replyTo: 'support@beast-mode.dev',
     type: 'sending'
   },
   support: {

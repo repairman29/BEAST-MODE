@@ -8,7 +8,7 @@
  * 
  * Usage:
  *   node scripts/test-user-flow-e2e.js
- *   TEST_BASE_URL=https://beastmode.dev node scripts/test-user-flow-e2e.js
+ *   TEST_BASE_URL=https://beast-mode.dev node scripts/test-user-flow-e2e.js
  */
 
 const https = require('https');

@@ -86,7 +86,7 @@ npm install axios
       "properties": {
         "beastMode.apiUrl": {
           "type": "string",
-          "default": "https://beastmode.dev",
+          "default": "https://beast-mode.dev",
           "description": "BEAST MODE API URL"
         },
         "beastMode.enabled": {
@@ -134,7 +134,7 @@ export function activate(context: vscode.ExtensionContext) {
   
   // Get configuration
   const config = vscode.workspace.getConfiguration('beastMode');
-  apiUrl = config.get<string>('apiUrl', 'https://beastmode.dev');
+  apiUrl = config.get<string>('apiUrl', 'https://beast-mode.dev');
   enabled = config.get<boolean>('enabled', true);
   
   // Generate session ID
@@ -293,7 +293,7 @@ You can also manually track Cursor sessions:
 
 ```bash
 # Start a session
-curl -X POST https://beastmode.dev/api/cursor/session \
+curl -X POST https://beast-mode.dev/api/cursor/session \
   -H "Content-Type: application/json" \
   -d '{
     "sessionId": "cursor_123",
@@ -321,7 +321,7 @@ Create `cursor-webhook.sh`:
 #!/bin/bash
 
 # BEAST MODE API URL
-API_URL="https://beastmode.dev/api/cursor/session"
+API_URL="https://beast-mode.dev/api/cursor/session"
 
 # Get session info
 SESSION_ID="cursor_$(date +%s)_$$"
@@ -368,7 +368,7 @@ Add to Cursor's tasks (`.vscode/tasks.json`):
 Set in Cursor's settings or `.env`:
 
 ```bash
-BEAST_MODE_API_URL=https://beastmode.dev
+BEAST_MODE_API_URL=https://beast-mode.dev
 BEAST_MODE_TOKEN=your-token-here
 BEAST_MODE_ENABLED=true
 ```
@@ -379,7 +379,7 @@ Add to `.cursor/settings.json`:
 
 ```json
 {
-  "beastMode.apiUrl": "https://beastmode.dev",
+  "beastMode.apiUrl": "https://beast-mode.dev",
   "beastMode.enabled": true,
   "beastMode.trackFileSaves": true,
   "beastMode.trackFileOpens": true,
@@ -395,7 +395,7 @@ Add to `.cursor/settings.json`:
 
 ```bash
 # Test from terminal
-curl -X POST https://beastmode.dev/api/cursor/session \
+curl -X POST https://beast-mode.dev/api/cursor/session \
   -H "Content-Type: application/json" \
   -d '{
     "sessionId": "test_123",

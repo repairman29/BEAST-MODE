@@ -75,7 +75,7 @@
 
 - **Troubleshooting**: [Troubleshooting Guide](./guides/troubleshooting.md)
 - **FAQ**: [Frequently Asked Questions](./guides/faq.md)
-- **Support Email**: support@beastmode.dev
+- **Support Email**: support@beast-mode.dev
 - **GitHub Issues**: [Report Issues](https://github.com/repairman29/BEAST-MODE/issues)
 
 ---
@@ -139,5 +139,5 @@ docs/
 
 ---
 
-**Need help?** Check the [Troubleshooting Guide](./guides/troubleshooting.md) or email support@beastmode.dev
+**Need help?** Check the [Troubleshooting Guide](./guides/troubleshooting.md) or email support@beast-mode.dev
 

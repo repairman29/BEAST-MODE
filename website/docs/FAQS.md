@@ -175,7 +175,7 @@ Only what's necessary:
 - Account information (for features)
 
 ### Can I delete my data?
-Yes! Contact support@beastmode.dev to request data deletion.
+Yes! Contact support@beast-mode.dev to request data deletion.
 
 ---
 
@@ -203,7 +203,7 @@ All major languages:
 - And more!
 
 ### Do you have an API?
-Yes! See our API documentation at docs.beastmode.dev/api
+Yes! See our API documentation at docs.beast-mode.dev/api
 
 ### Can I integrate with CI/CD?
 Yes! Many plugins support CI/CD integration. Check plugin documentation.
@@ -230,7 +230,7 @@ Yes! Many plugins support CI/CD integration. Check plugin documentation.
 Yes! Change your plan anytime from Settings.
 
 ### Do you offer discounts?
-Yes! Student and open-source discounts available. Contact support@beastmode.dev
+Yes! Student and open-source discounts available. Contact support@beast-mode.dev
 
 ---
 
@@ -273,7 +273,7 @@ Yes! Student and open-source discounts available. Contact support@beastmode.dev
 ### Where can I get help?
 1. **FAQs** - Check this document first
 2. **Intelligence Tab** - Ask the AI assistant
-3. **Email Support** - support@beastmode.dev
+3. **Email Support** - support@beast-mode.dev
 4. **GitHub Issues** - Report bugs
 5. **Discord** - Community support
 
@@ -283,7 +283,7 @@ Yes! Student and open-source discounts available. Contact support@beastmode.dev
 - **Discord:** Community support (real-time)
 
 ### Can I request features?
-Yes! Use GitHub Discussions or email support@beastmode.dev
+Yes! Use GitHub Discussions or email support@beast-mode.dev
 
 ---
 
@@ -296,7 +296,7 @@ Yes! Use GitHub Discussions or email support@beastmode.dev
 - **Documentation** - Full API docs
 
 ### Do you offer training?
-Yes! Contact support@beastmode.dev for:
+Yes! Contact support@beast-mode.dev for:
 - Team training sessions
 - Custom workshops
 - Enterprise onboarding
@@ -343,17 +343,17 @@ We release updates weekly with:
 - Plugin updates
 
 ### Where can I see the roadmap?
-Check our GitHub Projects page or email support@beastmode.dev
+Check our GitHub Projects page or email support@beast-mode.dev
 
 ---
 
 ## Still Have Questions?
 
 **Contact us:**
-- 📧 Email: support@beastmode.dev
+- 📧 Email: support@beast-mode.dev
 - 💬 Discord: Join our community
 - 🐛 GitHub: Open an issue
-- 📚 Docs: docs.beastmode.dev
+- 📚 Docs: docs.beast-mode.dev
 
 **We're here to help!** 🚀
 

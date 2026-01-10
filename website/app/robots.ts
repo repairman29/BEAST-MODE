@@ -9,7 +9,7 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ['/api/', '/_next/', '/admin/'],
       },
     ],
-    sitemap: 'https://beastmode.dev/sitemap.xml',
+    sitemap: 'https://beast-mode.dev/sitemap.xml',
   };
 }
 

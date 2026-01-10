@@ -137,7 +137,7 @@ beast-mode artwork gallery        # See artwork
 - **API Documentation**: [API Guide](../guides/api.md)
 - **CLI Reference**: [CLI Guide](../guides/cli.md)
 - **Troubleshooting**: [Troubleshooting Guide](../guides/troubleshooting.md)
-- **Support**: support@beastmode.dev
+- **Support**: support@beast-mode.dev
 
 ---
 

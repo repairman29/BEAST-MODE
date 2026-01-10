@@ -1,7 +1,7 @@
 # BEAST MODE API Reference
 ## Complete API Documentation
 
-**Base URL:** `https://beastmode.dev/api`  
+**Base URL:** `https://beast-mode.dev/api`  
 **API Version:** 1.0.0  
 **Authentication:** Bearer token (API key)
 
@@ -13,7 +13,7 @@ All API requests require authentication using a BEAST MODE API key.
 
 ### Getting an API Key
 
-1. Sign up at [beastmode.dev](https://beastmode.dev)
+1. Sign up at [beast-mode.dev](https://beast-mode.dev)
 2. Navigate to Dashboard → API Keys
 3. Generate a new API key
 4. **Save the key immediately** - it's only shown once!
@@ -24,7 +24,7 @@ Include your API key in the `Authorization` header:
 
 ```bash
 curl -H "Authorization: Bearer bm_live_your_api_key_here" \
-  https://beastmode.dev/api/auth/validate
+  https://beast-mode.dev/api/auth/validate
 ```
 
 ---
@@ -259,14 +259,14 @@ All errors follow this format:
 ```bash
 # Validate API key
 curl -H "Authorization: Bearer bm_live_your_key" \
-  https://beastmode.dev/api/auth/validate
+  https://beast-mode.dev/api/auth/validate
 
 # Get usage
 curl -H "Authorization: Bearer bm_live_your_key" \
-  https://beastmode.dev/api/auth/usage
+  https://beast-mode.dev/api/auth/usage
 
 # Create API key
-curl -X POST https://beastmode.dev/api/auth/api-keys \
+curl -X POST https://beast-mode.dev/api/auth/api-keys \
   -H "Content-Type: application/json" \
   -d '{"userId": "user_id", "name": "My Key"}'
 ```
@@ -276,7 +276,7 @@ curl -X POST https://beastmode.dev/api/auth/api-keys \
 const apiKey: process.env.APIKEY || '';
 
 // Validate
-const response = await fetch('https://beastmode.dev/api/auth/validate', {
+const response = await fetch('https://beast-mode.dev/api/auth/validate', {
   headers: {
     'Authorization': `Bearer ${apiKey}`
   }
@@ -295,7 +295,7 @@ headers = {'Authorization': f'Bearer {api_key}'}
 
 # Validate
 response = requests.get(
-    'https://beastmode.dev/api/auth/validate',
+    'https://beast-mode.dev/api/auth/validate',
     headers=headers
 )
 print(response.json())

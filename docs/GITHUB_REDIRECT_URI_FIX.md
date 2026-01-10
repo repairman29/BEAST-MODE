@@ -9,7 +9,7 @@ http://localhost:7777/api/github/oauth/callback
 
 **Production:**
 ```
-https://beastmode.dev/api/github/oauth/callback
+https://beast-mode.dev/api/github/oauth/callback
 ```
 
 ## ⚠️ Critical: Must Match GitHub OAuth App
@@ -24,7 +24,7 @@ The redirect URI in your code **MUST EXACTLY MATCH** the "Authorization callback
 
 2. **Set Authorization callback URL:**
    - For local dev: `http://localhost:7777/api/github/oauth/callback`
-   - For production: `https://beastmode.dev/api/github/oauth/callback`
+   - For production: `https://beast-mode.dev/api/github/oauth/callback`
 
 3. **Common Mistakes:**
    - ❌ Trailing slash: `http://localhost:7777/api/github/oauth/callback/`

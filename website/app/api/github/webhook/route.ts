@@ -307,7 +307,7 @@ async function analyzePRQuality(repo: string, prNumber: number, sha: string, ins
   }
 
   // Call existing quality API
-  const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000';
+    const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://beast-mode.dev';
   
   try {
     const response = await fetch(`${baseUrl}/api/repos/quality`, {
@@ -355,7 +355,493 @@ async function postPRComment(repo: string, prNumber: number, analysis: any) {
     
     // Dynamic require for server-side only
     // eslint-disable-next-line no-eval
-    const { getPRCommentService } = // SECURITY: // SECURITY: // SECURITY: // SECURITY: // SECURITY: // SECURITY: // SECURITY: // SECURITY: // SECURITY: // SECURITY: eval() disabled
+    const { getPRCommentService } = // SECURITY: // SECURITY: // SECURITY: // SECURITY: // SECURITY: // SECURITY: // SECURITY: // SECURITY: // SECURITY: // SECURITY: // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: // SECURITY: // SECURITY: // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: // SECURITY: // SECURITY: // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: // SECURITY: // SECURITY: // SECURITY: // SECURITY: // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: // SECURITY: // SECURITY: // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: // SECURITY: // SECURITY: // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: // SECURITY: // SECURITY: // SECURITY: // SECURITY: // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: // SECURITY: // SECURITY: // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: // SECURITY: // SECURITY: // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: // SECURITY: // SECURITY: // SECURITY: // SECURITY: // SECURITY: // SECURITY: // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: // SECURITY: // SECURITY: // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: // SECURITY: // SECURITY: // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: // SECURITY: // SECURITY: // SECURITY: // SECURITY: // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: // SECURITY: // SECURITY: // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: // SECURITY: // SECURITY: // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: // SECURITY: // SECURITY: // SECURITY: // SECURITY: // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: // SECURITY: // SECURITY: // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: // SECURITY: // SECURITY: // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: // SECURITY: // SECURITY: // SECURITY: // SECURITY: // SECURITY: // SECURITY: // SECURITY: // SECURITY: eval() disabled
 // eval() disabled
 // eval() disabled
 // // SECURITY: // SECURITY: eval() disabled

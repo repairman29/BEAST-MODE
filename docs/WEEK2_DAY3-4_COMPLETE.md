@@ -55,7 +55,7 @@
 ```bash
 npm run test:e2e
 TEST_API_KEY=key npm run test:e2e
-TEST_BASE_URL=https://beastmode.dev npm run test:e2e
+TEST_BASE_URL=https://beast-mode.dev npm run test:e2e
 ```
 
 ---

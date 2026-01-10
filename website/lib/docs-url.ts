@@ -7,10 +7,10 @@ export function getDocsUrl(path: string = ''): string {
     return `/docs${path ? `/${path}` : ''}`;
   }
 
-  const isProduction = window.location.hostname.includes('beastmode.dev');
+  const isProduction = window.location.hostname.includes('beast-mode.dev');
   
   if (isProduction) {
-    return `https://beastmode.dev/docs${path ? `/${path}` : ''}`;
+    return `https://beast-mode.dev/docs${path ? `/${path}` : ''}`;
   }
   
   return `/docs${path ? `/${path}` : ''}`;

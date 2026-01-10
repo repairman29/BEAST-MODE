@@ -42,7 +42,7 @@
    - Select "Cached images and files"
    - Clear and retry
 
-**Still not working?** Contact support@beastmode.dev
+**Still not working?** Contact support@beast-mode.dev
 
 ---
 
@@ -552,7 +552,7 @@
 
 ### Contact Support
 
-**Email:** support@beastmode.dev
+**Email:** support@beast-mode.dev
 **Response Time:** Within 24 hours
 
 **Include:**

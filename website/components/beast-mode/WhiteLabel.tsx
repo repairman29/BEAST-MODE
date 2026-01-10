@@ -312,7 +312,7 @@ export default function WhiteLabel({ userId }: WhiteLabelProps) {
               <div className="p-4 bg-slate-950 rounded-lg border border-slate-800">
                 <div className="text-slate-400 text-sm mb-2">DNS Records to Add:</div>
                 <div className="text-slate-300 text-xs font-mono space-y-1">
-                  <div>CNAME: {domain.customDomain} → beastmode.dev</div>
+                  <div>CNAME: {domain.customDomain} → beast-mode.dev</div>
                   <div>TXT: _beastmode.{domain.customDomain} → beastmode-verification=...</div>
                 </div>
               </div>

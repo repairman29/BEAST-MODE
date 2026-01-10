@@ -33,7 +33,7 @@ npm run test:e2e:user-flow
 
 ### **With Custom Base URL:**
 ```bash
-TEST_BASE_URL=https://beastmode.dev npm run test:e2e:user-flow
+TEST_BASE_URL=https://beast-mode.dev npm run test:e2e:user-flow
 ```
 
 ### **With GitHub Token (for GitHub connection test):**

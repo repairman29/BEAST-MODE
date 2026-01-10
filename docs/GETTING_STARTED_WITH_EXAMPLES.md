@@ -168,7 +168,7 @@ npm start
 - Check project READMEs
 - Join Discord
 - Open an issue
-- Email: support@beastmode.dev
+- Email: support@beast-mode.dev
 
 ---
 

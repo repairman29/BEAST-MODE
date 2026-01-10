@@ -105,9 +105,9 @@ export async function GET(request: NextRequest) {
     const nodeEnv = await getConfigValue('NODE_ENV', 'development');
     const nextPublicUrl = await getConfigValue('NEXT_PUBLIC_URL', null);
     const isProduction = nodeEnv === 'production' || 
-                         nextPublicUrl?.includes('beastmode.dev') ||
                          nextPublicUrl?.includes('beast-mode.dev') ||
-                         request.url.includes('beastmode.dev') ||
+                         nextPublicUrl?.includes('beast-mode.dev') ||
+                         request.url.includes('beast-mode.dev') ||
                          request.url.includes('beast-mode.dev');
     
     const expectedProdClientId = 'Ov23liDKFkIrnPneWwny';

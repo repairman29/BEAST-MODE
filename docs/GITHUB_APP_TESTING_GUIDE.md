@@ -119,7 +119,7 @@ This will verify:
 **Problem:** Red X marks in webhook deliveries
 
 **Solution:**
-1. Check webhook URL: `https://beastmode.dev/api/github/webhook`
+1. Check webhook URL: `https://beast-mode.dev/api/github/webhook`
 2. Verify the endpoint is accessible
 3. Check server logs for errors
 4. Verify webhook secret matches

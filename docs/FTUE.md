@@ -145,7 +145,7 @@ beast-mode dashboard --open
 
 **Step 23:** Navigate to the dashboard
 - Default: http://localhost:3001
-- Or visit: https://beastmode.dev/dashboard
+- Or visit: https://beast-mode.dev/dashboard
 
 **Step 24:** Explore the Quality tab
 - See your overall score
@@ -222,7 +222,7 @@ beast-mode marketplace status
 - No extra steps needed!
 
 **Step 38:** Check plugin documentation
-- Visit: https://beastmode.dev/docs/plugins
+- Visit: https://beast-mode.dev/docs/plugins
 - Learn how to configure
 - See examples
 
@@ -357,7 +357,7 @@ beast-mode quality audit --output audit-report.json
 ### Becoming a BEAST MODE Expert
 
 **Step 61:** Read the full documentation
-- Visit: https://beastmode.dev/docs
+- Visit: https://beast-mode.dev/docs
 - Bookmark important pages
 - Reference when needed
 
@@ -602,11 +602,11 @@ beast-mode enterprise analytics
 
 ## 🆘 Getting Help
 
-- **Documentation**: https://beastmode.dev/docs
+- **Documentation**: https://beast-mode.dev/docs
 - **CLI Help**: `beast-mode --help` or `beast-mode <command> --help`
 - **Community**: GitHub Discussions
-- **Support**: support@beastmode.dev
-- **Status**: https://status.beastmode.dev
+- **Support**: support@beast-mode.dev
+- **Status**: https://status.beast-mode.dev
 
 ---
 

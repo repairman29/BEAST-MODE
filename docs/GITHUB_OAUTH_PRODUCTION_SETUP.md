@@ -22,8 +22,8 @@ The best solution is to create **separate OAuth Apps** for development and produ
 2. **Click "New OAuth App"**
 3. **Fill in:**
    - **Application name**: `BEAST MODE Production`
-   - **Homepage URL**: `https://beastmode.dev`
-   - **Authorization callback URL**: `https://beastmode.dev/api/github/oauth/callback`
+   - **Homepage URL**: `https://beast-mode.dev`
+   - **Authorization callback URL**: `https://beast-mode.dev/api/github/oauth/callback`
 4. **Save** and copy the new Client ID and Client Secret
 
 ## Environment Variables
@@ -41,8 +41,8 @@ NEXT_PUBLIC_URL=http://localhost:7777
 # Production OAuth App credentials
 GITHUB_CLIENT_ID=Ov23liDKFkIrnPneWwny
 GITHUB_CLIENT_SECRET=014c7fab1ba6cc6a7398b5bde04e26463f16f4e9
-GITHUB_REDIRECT_URI=https://beastmode.dev/api/github/oauth/callback
-NEXT_PUBLIC_URL=https://beastmode.dev
+GITHUB_REDIRECT_URI=https://beast-mode.dev/api/github/oauth/callback
+NEXT_PUBLIC_URL=https://beast-mode.dev
 ```
 
 **✅ Production credentials configured!**
@@ -78,12 +78,12 @@ So you just need to:
 ## Production Checklist
 
 - [ ] Create new GitHub OAuth App for production
-- [ ] Set production callback URL: `https://beastmode.dev/api/github/oauth/callback`
+- [ ] Set production callback URL: `https://beast-mode.dev/api/github/oauth/callback`
 - [ ] Copy production Client ID and Client Secret
 - [ ] Set `GITHUB_CLIENT_ID` in Vercel (production app)
 - [ ] Set `GITHUB_CLIENT_SECRET` in Vercel (production app)
-- [ ] Set `GITHUB_REDIRECT_URI` in Vercel: `https://beastmode.dev/api/github/oauth/callback`
-- [ ] Set `NEXT_PUBLIC_URL` in Vercel: `https://beastmode.dev`
+- [ ] Set `GITHUB_REDIRECT_URI` in Vercel: `https://beast-mode.dev/api/github/oauth/callback`
+- [ ] Set `NEXT_PUBLIC_URL` in Vercel: `https://beast-mode.dev`
 - [ ] Test OAuth flow in production
 - [ ] Verify callback URL matches exactly (no trailing slash, correct protocol)
 

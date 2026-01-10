@@ -48,13 +48,13 @@ export default function SupportPage() {
               </a>
 
               <a
-                href="mailto:support@beastmode.dev"
+                href="mailto:support@beast-mode.dev"
                 className="p-6 bg-slate-900/50 border border-slate-800 rounded-lg hover:border-cyan-500/50 transition-colors"
               >
                 <Mail className="w-8 h-8 text-cyan-400 mb-4" />
                 <h3 className="text-xl font-semibold mb-2">Email Support</h3>
                 <p className="text-slate-400">
-                  support@beastmode.dev
+                  support@beast-mode.dev
                 </p>
                 <p className="text-sm text-slate-500 mt-2">
                   Response time: 24-48 hours

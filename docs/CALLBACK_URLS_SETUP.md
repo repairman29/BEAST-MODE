@@ -46,10 +46,10 @@ https://beast-mode-website.vercel.app/api/github/oauth/callback
    - `https://beast-mode-website.vercel.app/api/github/oauth/callback` (Vercel preview URLs)
 5. Click "Update application"
 
-**⚠️ Important:** The domain is `beast-mode.dev` (with a dash), not `beastmode.dev` (no dash)!
+**⚠️ Important:** The domain is `beast-mode.dev` (with a dash), not `beast-mode.dev` (no dash)!
 
 **Note:** GitHub allows multiple callback URLs separated by newlines or commas. Add both to support:
-- Custom domain (beastmode.dev)
+- Custom domain (beast-mode.dev)
 - Vercel preview deployments
 
 ---
@@ -85,7 +85,7 @@ However, you DO need to:
    - Should redirect to GitHub and back successfully
 
 2. **Production:**
-   - Go to: `https://beastmode.dev/dashboard`
+   - Go to: `https://beast-mode.dev/dashboard`
    - Click "Connect GitHub"
    - Should redirect to GitHub and back successfully
 

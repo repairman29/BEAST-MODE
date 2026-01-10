@@ -78,7 +78,7 @@ beast-mode dashboard --open
 
 - **Quick questions?** Check our [Quick Start Guide](./QUICK_START.md)
 - **Want to learn more?** See the [Complete Guide](./FTUE.md) (100 steps for when you're ready!)
-- **Stuck?** Join our community or email support@beastmode.dev
+- **Stuck?** Join our community or email support@beast-mode.dev
 
 ---
 

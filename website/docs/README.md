@@ -98,7 +98,7 @@ docs/
 
 ## 🆘 Need Help?
 
-- **📧 Email:** support@beastmode.dev
+- **📧 Email:** support@beast-mode.dev
 - **💬 Discord:** Join our community
 - **🐛 GitHub:** Open an issue
 - **📚 Docs:** Browse all documentation
@@ -111,7 +111,7 @@ We update documentation regularly. Last updated: 2024
 
 **Found an error or have suggestions?** 
 - Open a GitHub issue
-- Email support@beastmode.dev
+- Email support@beast-mode.dev
 - Contribute via pull request
 
 ---

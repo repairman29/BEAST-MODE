@@ -96,7 +96,7 @@ beast-mode init --enterprise
 ```
 
 ### Configure SSO
-Contact sales@beastmode.dev for SSO setup assistance.
+Contact sales@beast-mode.dev for SSO setup assistance.
 
 ### White-Label Setup
 Configure in dashboard:
@@ -144,7 +144,7 @@ beast-mode dashboard --open
 ## 📞 Enterprise Support
 
 ### Contact Sales
-- **Email:** sales@beastmode.dev
+- **Email:** sales@beast-mode.dev
 - **Phone:** (Available for Enterprise customers)
 - **Dedicated Account Manager:** Assigned on signup
 

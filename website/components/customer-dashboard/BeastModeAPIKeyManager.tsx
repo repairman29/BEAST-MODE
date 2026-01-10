@@ -239,9 +239,9 @@ export function BeastModeAPIKeyManager() {
       <div className="mt-6 p-4 bg-slate-800 rounded-lg">
         <h3 className="text-sm font-semibold mb-2">📖 Documentation</h3>
         <ul className="text-sm text-slate-400 space-y-1">
-          <li>• <a href="https://beastmode.dev/docs/api" className="text-cyan-400 hover:text-cyan-300">API Documentation</a></li>
-          <li>• <a href="https://beastmode.dev/docs/licensing" className="text-cyan-400 hover:text-cyan-300">Licensing & Subscriptions</a></li>
-          <li>• <a href="https://beastmode.dev/docs/security" className="text-cyan-400 hover:text-cyan-300">Security Best Practices</a></li>
+          <li>• <a href="https://beast-mode.dev/docs/api" className="text-cyan-400 hover:text-cyan-300">API Documentation</a></li>
+          <li>• <a href="https://beast-mode.dev/docs/licensing" className="text-cyan-400 hover:text-cyan-300">Licensing & Subscriptions</a></li>
+          <li>• <a href="https://beast-mode.dev/docs/security" className="text-cyan-400 hover:text-cyan-300">Security Best Practices</a></li>
         </ul>
       </div>
     </div>

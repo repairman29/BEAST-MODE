@@ -34,7 +34,7 @@ NEXT_PUBLIC_URL=http://localhost:7777
 
 2. **Update Redirect URI for Production:**
    - Development: `http://localhost:7777/api/github/oauth/callback`
-   - Production: `https://beastmode.dev/api/github/oauth/callback`
+   - Production: `https://beast-mode.dev/api/github/oauth/callback`
    
    Update the callback URL in your GitHub OAuth App settings to match.
 
@@ -60,7 +60,7 @@ NEXT_PUBLIC_URL=http://localhost:7777
 ## 📋 GitHub OAuth App Settings
 
 Make sure your GitHub OAuth App has:
-- **Authorization callback URL**: `http://localhost:7777/api/github/oauth/callback` (dev) or `https://beastmode.dev/api/github/oauth/callback` (prod)
+- **Authorization callback URL**: `http://localhost:7777/api/github/oauth/callback` (dev) or `https://beast-mode.dev/api/github/oauth/callback` (prod)
 - **Scopes**: `repo`, `read:user`, `user:email`
 
 ## 🎯 Ready to Use!

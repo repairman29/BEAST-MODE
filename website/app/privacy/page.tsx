@@ -90,8 +90,8 @@ export default function PrivacyPage() {
             <h2 className="text-2xl font-semibold text-cyan-400 mb-4">6. Contact Us</h2>
             <p>
               For questions about this Privacy Policy, contact us at:{' '}
-              <a href="mailto:privacy@beastmode.dev" className="text-cyan-400 hover:text-cyan-300">
-                privacy@beastmode.dev
+              <a href="mailto:privacy@beast-mode.dev" className="text-cyan-400 hover:text-cyan-300">
+                privacy@beast-mode.dev
               </a>
             </p>
           </section>

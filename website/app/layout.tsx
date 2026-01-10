@@ -48,7 +48,7 @@ export const metadata = {
     images: ['/og-image.png'],
   },
   alternates: {
-    canonical: 'https://beastmode.dev',
+    canonical: 'https://beast-mode.dev',
   },
 }
 

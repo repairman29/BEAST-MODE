@@ -266,7 +266,7 @@ const { quality, factors, recommendations } = await response.json();
 // File: echeo-landing/lib/repo-quality-integration.ts
 export async function getRepoQuality(repoUrl: string): Promise<number> {
   // Call BEAST MODE quality API
-  const response = await fetch('https://beastmode.dev/api/repos/quality', {
+  const response = await fetch('https://beast-mode.dev/api/repos/quality', {
     method: 'POST',
     body: JSON.stringify({ repo: repoUrl })
   });
