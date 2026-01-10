@@ -45,17 +45,19 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Plan pricing (in cents)
-    const plans: Record<string, number> = {
-      developer: 2900, // $29/month
-      team: 9900, // $99/month
-      enterprise: 29900 // $299/month
+    // Plan pricing (in cents) - Updated to match monetization strategy
+    const plans: Record<string, { price: number; tier: string }> = {
+      pro: { price: 1900, tier: 'pro' }, // $19/month
+      team: { price: 9900, tier: 'team' }, // $99/month
+      enterprise: { price: 49900, tier: 'enterprise' }, // $499/month (starts at)
+      // Legacy plans
+      developer: { price: 1900, tier: 'pro' }, // Maps to pro
     };
 
-    const priceId = plans[planId];
-    if (!priceId) {
+    const plan = plans[planId];
+    if (!plan) {
       return NextResponse.json(
-        { error: 'Invalid plan ID' },
+        { error: 'Invalid plan ID. Use: pro, team, or enterprise' },
         { status: 400 }
       );
     }
@@ -81,6 +83,11 @@ export async function POST(request: NextRequest) {
       apiVersion: '2025-12-15.clover',
     });
     
+    // Get user ID from request (if available)
+    const userId = request.headers.get('x-user-id') || 
+                   (await request.json().catch(() => ({}))).userId || 
+                   null;
+
     // Create checkout session
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
@@ -88,10 +95,10 @@ export async function POST(request: NextRequest) {
         price_data: {
           currency: 'usd',
           product_data: {
-            name: `BEAST MODE ${planId.charAt(0).toUpperCase() + planId.slice(1)} Plan`,
-            description: `BEAST MODE ${planId} subscription plan`,
+            name: `BEAST MODE ${plan.tier.charAt(0).toUpperCase() + plan.tier.slice(1)} Plan`,
+            description: `BEAST MODE ${plan.tier} subscription - Unlimited PR analysis, advanced features, and more`,
           },
-          unit_amount: priceId,
+          unit_amount: plan.price,
           recurring: {
             interval: 'month',
           },
@@ -100,9 +107,20 @@ export async function POST(request: NextRequest) {
       }],
       mode: 'subscription',
       success_url: `${baseUrl}/dashboard?success=true&session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${baseUrl}/dashboard?canceled=true`,
+      cancel_url: `${baseUrl}/pricing?canceled=true`,
       metadata: {
         planId: planId,
+        tier: plan.tier,
+        userId: userId || '',
+      },
+      // Allow promotion codes
+      allow_promotion_codes: true,
+      // Subscription data
+      subscription_data: {
+        metadata: {
+          tier: plan.tier,
+          userId: userId || '',
+        },
       },
     });
 
