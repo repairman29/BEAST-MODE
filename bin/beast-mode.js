@@ -1306,14 +1306,22 @@ program
                 console.log('✅ Manifest file created:', manifestPath);
             })
     )
-    .addCommand(
-        new Command('save-credentials')
-            .description('Save GitHub App credentials after creating app')
-            .action(async () => {
-                const { saveCredentialsInteractive } = require('../lib/cli/github-app-setup');
-                await saveCredentialsInteractive();
-            })
-    );
+           .addCommand(
+               new Command('save-credentials')
+                   .description('Save GitHub App credentials after creating app')
+                   .action(async () => {
+                       const { saveCredentialsInteractive } = require('../lib/cli/github-app-setup');
+                       await saveCredentialsInteractive();
+                   })
+           )
+           .addCommand(
+               new Command('update-events')
+                   .description('Update GitHub App events via API (workaround for UI limitation)')
+                   .action(async () => {
+                       const { updateAppEvents } = require('../lib/cli/github-app-update-events');
+                       await updateAppEvents();
+                   })
+           );
 
 // GitHub OAuth Commands
 program
