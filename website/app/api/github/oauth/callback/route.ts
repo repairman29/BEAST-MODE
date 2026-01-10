@@ -268,6 +268,32 @@ export async function GET(request: NextRequest) {
     console.log('   Username:', githubUser.login);
     console.log('   User ID:', githubUser.id);
 
+    // Link GitHub installations to user account
+    try {
+      const supabase = await getSupabaseClientOrNull();
+      if (supabase && userId && isSupabaseUser) {
+        // Find any installations for this GitHub account
+        const { data: installations } = await supabase
+          .from('github_installations')
+          .select('*')
+          .eq('account_id', githubUser.id);
+
+        if (installations && installations.length > 0) {
+          // Link installations to user
+          for (const installation of installations) {
+            await supabase
+              .from('github_installations')
+              .update({ user_id: userId })
+              .eq('installation_id', installation.installation_id);
+          }
+          console.log(`✅ [GitHub OAuth] Linked ${installations.length} installation(s) to user ${userId}`);
+        }
+      }
+    } catch (linkError: any) {
+      console.error('⚠️ [GitHub OAuth] Error linking installations (non-fatal):', linkError);
+      // Don't fail OAuth flow if linking fails
+    }
+
     // Store encrypted token in Supabase (with fallback to in-memory)
     console.log('🔄 [GitHub OAuth] Storing token in database...');
     console.log('   User ID:', userId);
