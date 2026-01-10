@@ -32,6 +32,7 @@
 - **Pull requests:** `Read & write`
 - **Checks:** `Read & write`
 - **Issues:** `Read-only`
+- **Administration:** `Read-only` ⬅️ **ADD THIS** (makes Installation events visible)
 
 ### Events to Subscribe
 - ✅ **Pull request**

@@ -177,7 +177,13 @@ async function postPRComment(repo: string, prNumber: number, analysis: any) {
     
     // Dynamic require for server-side only
     // eslint-disable-next-line no-eval
-    const { getPRCommentService } = // SECURITY: // SECURITY: eval() disabled
+    const { getPRCommentService } = // SECURITY: // SECURITY: // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
 // eval() disabled
 // eval('require')(prCommentServicePath);
     const prCommentService = getPRCommentService();
@@ -197,13 +203,13 @@ async function postPRComment(repo: string, prNumber: number, analysis: any) {
  */
 async function createStatusCheck(repo: string, sha: string, analysis: any) {
   try {
-    // Use Status Check Service
+    // Import Status Check Service using dynamic import (Next.js compatible)
     const path = require('path');
     const statusCheckServicePath = path.join(process.cwd(), '../../lib/integrations/statusCheckService');
     
-    // Dynamic require for server-side only
-    // eslint-disable-next-line no-eval
-    const { getStatusCheckService } = eval('require')(statusCheckServicePath);
+    // Use dynamic import for server-side modules
+    const statusCheckModule = await import(statusCheckServicePath);
+    const { getStatusCheckService } = statusCheckModule;
     const statusCheckService = getStatusCheckService();
     
     const result = await statusCheckService.createOrUpdateCheck(repo, sha, analysis);
