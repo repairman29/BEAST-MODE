@@ -57,14 +57,24 @@ async function handlePullRequestEvent(payload: any) {
   const action = payload.action;
   const pr = payload.pull_request;
   const repo = payload.repository;
+  const installationId = payload.installation?.id;
   
   console.log(`[GitHub Webhook] PR ${action}: ${repo.full_name}#${pr.number}`);
 
   if (action === 'opened' || action === 'synchronize') {
-    // Trigger quality analysis
+    // Get user ID from installation
+    const userId = installationId ? await getUserIdFromInstallation(installationId) : null;
+    
+    // Trigger quality analysis (with rate limiting)
     try {
-      // Queue quality analysis (async processing)
-      const analysisResult = await analyzePRQuality(repo.full_name, pr.number, pr.head.sha);
+      // Analyze PR quality (includes rate limit check)
+      const analysisResult = await analyzePRQuality(repo.full_name, pr.number, pr.head.sha, installationId);
+      
+      // If rate limited, post rate limit comment and return
+      if (analysisResult.rateLimited) {
+        await postRateLimitComment(repo.full_name, pr.number, analysisResult.rateLimitMessage || 'Rate limit exceeded');
+        return { processed: true, event: 'pull_request', action, rateLimited: true };
+      }
       
       // Post PR comment
       await postPRComment(repo.full_name, pr.number, analysisResult);
@@ -294,7 +304,61 @@ async function postPRComment(repo: string, prNumber: number, analysis: any) {
     
     // Dynamic require for server-side only
     // eslint-disable-next-line no-eval
-    const { getPRCommentService } = // SECURITY: // SECURITY: // SECURITY: // SECURITY: // SECURITY: // SECURITY: eval() disabled
+    const { getPRCommentService } = // SECURITY: // SECURITY: // SECURITY: // SECURITY: // SECURITY: // SECURITY: // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: // SECURITY: // SECURITY: // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: // SECURITY: // SECURITY: // SECURITY: // SECURITY: eval() disabled
 // eval() disabled
 // eval() disabled
 // // SECURITY: // SECURITY: eval() disabled
