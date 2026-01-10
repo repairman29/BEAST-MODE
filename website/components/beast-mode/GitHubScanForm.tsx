@@ -12,6 +12,7 @@ export default function GitHubScanForm() {
   const [favoriteRepos, setFavoriteRepos] = useState<string[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [expandedScans, setExpandedScans] = useState<Set<number>>(new Set());
+  const [expandedIssues, setExpandedIssues] = useState<Set<string>>(new Set());
 
   // Load favorites from localStorage
   React.useEffect(() => {
@@ -442,7 +443,19 @@ export default function GitHubScanForm() {
                           </h5>
                           <div className="bg-slate-950/50 rounded-lg p-4 space-y-3">
                             {result.detectedIssues.map((issue: any, issueIdx: number) => {
-                              const [isExpanded, setIsExpanded] = useState(false);
+                              const issueKey = `${result.repo}-${issueIdx}`;
+                              const isExpanded = expandedIssues.has(issueKey);
+                              const toggleExpanded = () => {
+                                setExpandedIssues(prev => {
+                                  const next = new Set(prev);
+                                  if (next.has(issueKey)) {
+                                    next.delete(issueKey);
+                                  } else {
+                                    next.add(issueKey);
+                                  }
+                                  return next;
+                                });
+                              };
                               return (
                                 <div 
                                   key={issueIdx}
@@ -498,7 +511,7 @@ export default function GitHubScanForm() {
                                     {issue.context && (
                                       <div className="mt-2">
                                         <button
-                                          onClick={() => setIsExpanded(!isExpanded)}
+                                          onClick={toggleExpanded}
                                           className="text-xs text-cyan-400 hover:text-cyan-300 flex items-center gap-1"
                                         >
                                           <span>{isExpanded ? '▼' : '▶'}</span>

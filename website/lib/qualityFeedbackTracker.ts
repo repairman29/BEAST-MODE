@@ -240,11 +240,11 @@ export function getQualityFeedbackTracker(): QualityFeedbackTracker {
   if (typeof window === 'undefined') {
     // Return a no-op tracker for SSR
     return {
-      trackRecommendationClick: () => {},
-      trackDetailsView: () => {},
-      trackTimeSpent: () => {},
-      trackRecommendationIgnore: () => {},
-      setEnabled: () => {}
+      trackRecommendationClick: (_predictionId: string, _repo: string, _recommendationIndex: number, _recommendation: any) => {},
+      trackDetailsView: (_predictionId: string, _repo: string) => {},
+      trackTimeSpent: (_predictionId: string, _repo: string, _timeSpent: number) => {},
+      trackRecommendationIgnore: (_predictionId: string, _repo: string) => {},
+      setEnabled: (_enabled: boolean) => {}
     } as QualityFeedbackTracker;
   }
 

@@ -1,34 +1,22 @@
 # BEAST-MODE
 
-A high-quality project built with modern best practices.
+A high-quality JavaScript project built with modern best practices.
 
 ## Features
 
-- ✨ Modern Unknown implementation
+- ✨ Modern JavaScript implementation
+
 - ⏳ Tests coming soon
 - ⏳ CI/CD setup in progress
 - 📚 Well-documented codebase
 
+
+
 ## Installation
 
 ```bash
-See installation instructions
+npm install
 ```
-
-## Usage
-
-```unknown
-// Example usage
-```
-
-## Development
-
-```bash
-See development guide
-```
-
-
-
 ## Contributing
 
 Contributions welcome! Please read our contributing guidelines.

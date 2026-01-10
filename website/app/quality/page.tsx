@@ -38,6 +38,23 @@ interface QualityResult {
     recommendation: string;
   };
   factors?: Record<string, { value: number; importance: number }>;
+  comparativeAnalysis?: {
+    comparison: {
+      vsAverage: number;
+    };
+    percentile: number;
+    similarReposCount: number;
+    differentiators?: Array<{
+      type: 'strength' | 'weakness';
+      factor: string;
+      value: number;
+      impact: number;
+    }>;
+    insights?: Array<{
+      type: 'excellent' | 'improvement' | 'neutral';
+      message: string;
+    }>;
+  };
   recommendations?: Array<{
     action: string;
     impact?: string;
@@ -412,12 +429,12 @@ export default function QualityDashboard() {
             <CardHeader>
               <div className="flex items-center justify-between">
                 <div>
-                  <CardTitle className="text-white">Quality Results</CardTitle>
-                  <CardDescription>
-                    {results.length > 0
-                      ? `${results.length} repos analyzed`
-                      : 'Add repos and click Analyze to see results'}
-                  </CardDescription>
+              <CardTitle className="text-white">Quality Results</CardTitle>
+              <CardDescription>
+                {results.length > 0
+                  ? `${results.length} repos analyzed`
+                  : 'Add repos and click Analyze to see results'}
+              </CardDescription>
                 </div>
                 {results.length > 1 && userLimits?.canCompare && (
                   <Button
@@ -577,9 +594,13 @@ export default function QualityDashboard() {
                               <div className="text-xs text-slate-400 mb-2 uppercase tracking-wider">Top Quality Factors</div>
                               <div className="grid grid-cols-2 gap-2">
                                 {Object.entries(result.factors)
-                                  .sort((a, b) => (b[1].importance || 0) - (a[1].importance || 0))
+                                  .sort((a, b) => {
+                                    const aImportance = (a[1] as { value: number; importance: number })?.importance || 0;
+                                    const bImportance = (b[1] as { value: number; importance: number })?.importance || 0;
+                                    return bImportance - aImportance;
+                                  })
                                   .slice(0, 10)
-                                  .map(([factor, data]: [string, any]) => (
+                                  .map(([factor, data]: [string, { value: number; importance: number }]) => (
                                     <div key={factor} className="bg-slate-800/50 rounded p-2 border border-slate-700/50">
                                       <div className="text-xs text-slate-300 font-medium capitalize mb-1">
                                         {factor.replace(/([A-Z])/g, ' $1').trim()}

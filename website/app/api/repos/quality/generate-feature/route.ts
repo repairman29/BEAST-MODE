@@ -10,14 +10,14 @@ let codebaseContextBuilder: any;
 
 // Load modules with error handling and fallback
 try {
-  featureGenerator = loadModule('../../../../../lib/mlops/featureGenerator') || require('../../../../../lib/mlops/featureGenerator');
-  codebaseContextBuilder = loadModule('../../../../../lib/mlops/codebaseContextBuilder') || require('../../../../../lib/mlops/codebaseContextBuilder');
+  featureGenerator = loadModule('../../../../../../lib/mlops/featureGenerator') || require('../../../../../../lib/mlops/featureGenerator');
+  codebaseContextBuilder = loadModule('../../../../../../lib/mlops/codebaseContextBuilder') || require('../../../../../../lib/mlops/codebaseContextBuilder');
 } catch (error) {
   console.warn('[Feature Generation API] Module loading issue:', error);
   // Try direct require as fallback
   try {
-    featureGenerator = require('../../../../../lib/mlops/featureGenerator');
-    codebaseContextBuilder = require('../../../../../lib/mlops/codebaseContextBuilder');
+    featureGenerator = require('../../../../../../lib/mlops/featureGenerator');
+    codebaseContextBuilder = require('../../../../../../lib/mlops/codebaseContextBuilder');
   } catch (fallbackError) {
     console.error('[Feature Generation API] Failed to load modules:', fallbackError);
   }

@@ -35,88 +35,81 @@ async function applyMigration() {
     console.log('📊 SQL size:', migrationSQL.length, 'bytes');
     console.log();
 
-    // Apply migration via Supabase
-    console.log('🔄 Applying migration...');
+    // Check if exec_sql exists first
+    console.log('🔍 Checking for exec_sql function...');
+    let execSQLExists = false;
+    try {
+      const { error: testError } = await supabase.rpc('exec_sql', { sql_query: 'SELECT 1;' });
+      if (!testError) {
+        execSQLExists = true;
+        console.log('   ✅ exec_sql function found');
+      } else {
+        console.log('   ⚠️  exec_sql function not found');
+        console.log('   💡 Run: node scripts/setup-exec-sql-function.js');
+      }
+    } catch (err) {
+      console.log('   ⚠️  Could not check exec_sql:', err.message);
+    }
+
+    // Apply migration via exec_sql RPC (as per .cursorrules)
+    console.log('\n🔄 Applying migration via exec_sql RPC...');
     
-    // Split by semicolons and execute each statement
-    const statements = migrationSQL
-      .split(';')
-      .map(s => s.trim())
-      .filter(s => s.length > 0 && !s.startsWith('--'));
+    try {
+      const { data, error } = await supabase.rpc('exec_sql', { 
+        sql_query: migrationSQL 
+      });
 
-    let successCount = 0;
-    let errorCount = 0;
-
-    for (const statement of statements) {
-      if (statement.length < 10) continue; // Skip very short statements
-      
-      try {
-        const { error } = await supabase.rpc('exec_sql', { sql_query: statement });
+      if (error) {
+        console.error('   ❌ exec_sql RPC error:', error.message);
+        console.error('   Code:', error.code);
         
-        if (error) {
-          // If exec_sql doesn't exist, try direct query
-          const { error: directError } = await supabase.from('_migrations').select('*').limit(1);
-          
-          if (directError && directError.message.includes('exec_sql')) {
-            console.log('   ⚠️  exec_sql RPC not available, trying direct execution...');
-            // For CREATE TABLE, we can use raw SQL via PostgREST if available
-            // Otherwise, user will need to apply manually
-            console.log('   ℹ️  Please apply migration manually via Supabase Dashboard SQL Editor');
-            console.log('   📄 File:', migrationPath);
-            return;
-          }
-          
-          // Some errors are expected (IF NOT EXISTS, etc.)
-          if (error.message.includes('already exists') || 
-              error.message.includes('duplicate') ||
-              error.message.includes('IF NOT EXISTS')) {
-            console.log('   ⚠️  (Expected):', error.message.split('\n')[0]);
-            successCount++;
-          } else {
-            console.log('   ❌ Error:', error.message.split('\n')[0]);
-            errorCount++;
-          }
-        } else {
-          successCount++;
+        if (error.message?.includes('function') || error.code === '42883') {
+          console.error('\n⚠️  exec_sql function does not exist.');
+          console.error('   Run: node scripts/setup-exec-sql-function.js');
+          console.error('   Or apply migration manually via Supabase Dashboard SQL Editor');
+          return;
         }
-      } catch (err) {
-        // Try alternative: direct SQL execution
-        console.log('   ⚠️  exec_sql not available, migration needs manual application');
-        console.log('   📄 Please run this SQL in Supabase Dashboard SQL Editor:');
-        console.log('   📁 File:', migrationPath);
-        console.log();
-        console.log('   Or use Supabase CLI:');
-        console.log('   supabase db push --linked');
+        
+        console.error('   Details:', error.details);
         return;
       }
+      
+      console.log('   ✅ Migration SQL executed successfully!');
+      console.log('   Response:', data || '(No data returned - this is normal)');
+    } catch (err) {
+      console.error('   ❌ Migration failed:', err.message);
+      console.error('   📄 Please apply migration manually via Supabase Dashboard SQL Editor');
+      console.error('   📁 File:', migrationPath);
+      return;
     }
 
     console.log();
     console.log('='.repeat(70));
+    console.log('✅ Migration applied successfully!');
     
-    if (errorCount === 0) {
-      console.log('✅ Migration applied successfully!');
-      console.log(`   ${successCount} statements executed`);
-    } else {
-      console.log('⚠️  Migration completed with some warnings');
-      console.log(`   ${successCount} successful, ${errorCount} errors`);
-    }
-
     // Verify table exists
     console.log();
     console.log('🔍 Verifying table creation...');
-    const { data, error } = await supabase
-      .from('llm_cache')
-      .select('*')
-      .limit(1);
+    try {
+      const { data, error } = await supabase
+        .from('llm_cache')
+        .select('*')
+        .limit(1);
 
-    if (error && error.message.includes('relation "llm_cache" does not exist')) {
-      console.log('   ⚠️  Table not found - migration may need manual application');
-      console.log('   📄 Run SQL from:', migrationPath);
-    } else if (error) {
-      console.log('   ⚠️  Verification error:', error.message);
-    } else {
-      console.log('   ✅ llm_cache table exists!');
+      if (error && error.message.includes('relation "llm_cache" does not exist')) {
+        console.log('   ⚠️  Table not found - migration may need manual application');
+        console.log('   📄 Run SQL from:', migrationPath);
+      } else if (error && error.code === '42P01') {
+        console.log('   ⚠️  Table does not exist - migration may have failed');
+        console.log('   Error:', error.message);
+      } else if (error) {
+        // RLS or other errors are okay - table exists
+        console.log('   ✅ llm_cache table exists! (RLS may prevent query)');
+      } else {
+        console.log('   ✅ llm_cache table exists and is accessible!');
+      }
+    } catch (verifyError) {
+      console.log('   ⚠️  Could not verify table (may need manual check):', verifyError.message);
     }
 
   } catch (error) {

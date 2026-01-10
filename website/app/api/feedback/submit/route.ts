@@ -14,7 +14,7 @@ async function getFeedbackCollector() {
   } catch (error) {
     // Fallback: try dynamic import
     try {
-      const module = await import(/* webpackIgnore: true */ '../../../../../../lib/mlops/feedbackCollector').catch(() => null);
+      const module = await import(/* webpackIgnore: true */ '../../../../../lib/mlops/feedbackCollector').catch(() => null);
       const getCollector = module?.getFeedbackCollector;
       return getCollector ? await getCollector() : null;
     } catch {
@@ -51,16 +51,20 @@ export async function POST(request: NextRequest) {
       }, { status: 503 });
     }
     
-    // Record outcome
-    const result = await collector.recordOutcome(
-      predictionId,
-      actualValue,
-      {
+    // Collect feedback (writes to ml_feedback and updates ml_predictions)
+    const result = await collector.collectFeedback({
+      predictionId: predictionId,
+      serviceName: context.serviceName || 'beast-mode',
+      feedbackType: context.source || 'user',
+      feedbackScore: actualValue,
+      feedbackText: context.feedbackText || null,
+      userId: context.userId || null,
+      metadata: {
         ...context,
         source: 'api',
         submittedAt: new Date().toISOString()
       }
-    );
+    });
 
     if (!result) {
       return NextResponse.json(

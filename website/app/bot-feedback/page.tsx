@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Progress } from '@/components/ui/progress';
+// Progress component not available - using div-based progress bar instead
 
 interface BotFeedbackStats {
   totalBotFeedback: number;
@@ -98,7 +98,9 @@ export default function BotFeedbackPage() {
           </CardHeader>
           <CardContent>
             <div className="text-3xl font-bold">{successRate.toFixed(1)}%</div>
-            <Progress value={successRate} className="mt-2" />
+            <div className="w-full bg-slate-700 rounded-full h-2 mt-2">
+              <div className="bg-cyan-500 h-2 rounded-full" style={{ width: `${successRate}%` }}></div>
+            </div>
           </CardContent>
         </Card>
 
@@ -139,7 +141,9 @@ export default function BotFeedbackPage() {
                       <span className="text-sm font-medium">{bot}</span>
                       <span className="text-sm text-slate-400">{count} ({percentage.toFixed(1)}%)</span>
                     </div>
-                    <Progress value={percentage} className="h-2" />
+                    <div className="w-full bg-slate-700 rounded-full h-2">
+                      <div className="bg-cyan-500 h-2 rounded-full" style={{ width: `${percentage}%` }}></div>
+                    </div>
                   </div>
                 );
               })}

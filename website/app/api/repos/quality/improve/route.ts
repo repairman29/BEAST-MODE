@@ -3,7 +3,25 @@ import { NextRequest, NextResponse } from 'next/server';
 // Dynamic require for Node.js modules (server-side only, bypasses webpack)
 function loadImprover() {
   // Use eval to bypass webpack bundling for dynamic requires
-  // NOTE: ArchitectureEnforcer may flag this, but // SECURITY: // SECURITY: // SECURITY: // SECURITY: eval() disabled
+  // NOTE: ArchitectureEnforcer may flag this, but // SECURITY: // SECURITY: // SECURITY: // SECURITY: // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: // SECURITY: // SECURITY: eval() disabled
 // eval() disabled
 // eval() disabled
 // // SECURITY: // SECURITY: eval() disabled
@@ -147,6 +165,7 @@ export async function POST(request: NextRequest) {
           });
         }
 
+        const prCreator = require('../../../../../lib/github/prCreator');
         prCreator.initialize(userToken);
         const prResult = await prCreator.createImprovementPR(
           repo,

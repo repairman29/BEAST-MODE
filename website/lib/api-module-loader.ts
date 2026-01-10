@@ -19,16 +19,16 @@ export function loadModule<T = any>(modulePath: string): T | null {
 
   try {
     // Try direct require (works in dev and if bundled)
-    const module = require(modulePath);
-    moduleCache.set(modulePath, module);
-    return module as T;
+    const loadedModule = require(modulePath);
+    moduleCache.set(modulePath, loadedModule);
+    return loadedModule as T;
   } catch (error: any) {
     // If direct require fails, try with path resolution
     try {
       const resolvedPath = require.resolve(modulePath);
-      const module = require(resolvedPath);
-      moduleCache.set(modulePath, module);
-      return module as T;
+      const loadedModule = require(resolvedPath);
+      moduleCache.set(modulePath, loadedModule);
+      return loadedModule as T;
     } catch (resolveError: any) {
       console.warn(`[Module Loader] Could not load ${modulePath}:`, error.message);
       return null;

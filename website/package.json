@@ -37,7 +37,9 @@
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.71.2",
+    "@octokit/app": "^16.1.2",
     "@octokit/rest": "^22.0.1",
+    "@octokit/webhooks": "^14.2.0",
     "@supabase/auth-helpers-nextjs": "^0.15.0",
     "@supabase/supabase-js": "^2.89.0",
     "@tailwindcss/postcss": "^4.1.18",

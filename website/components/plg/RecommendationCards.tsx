@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { usePLGTracking } from '@/lib/plg-tracker';
+import { getPLGTracker } from '@/lib/plg-tracker';
 
 /**
  * Recommendation Cards Component
@@ -23,7 +23,8 @@ export function RecommendationCards({ repo, platform = 'beast-mode', limit = 5 }
   useEffect(() => {
     // Track component usage
     if (typeof window !== 'undefined') {
-      usePLGTracking('RecommendationCards', 'cards', { repo });
+      const tracker = getPLGTracker();
+      tracker.trackUsage('RecommendationCards', 'cards', { repo });
     }
     
     async function fetchRecommendations() {
