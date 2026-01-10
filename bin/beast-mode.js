@@ -1321,6 +1321,14 @@ program
                        const { updateAppEvents } = require('../lib/cli/github-app-update-events');
                        await updateAppEvents();
                    })
+           )
+           .addCommand(
+               new Command('test')
+                   .description('Test GitHub App integration (configuration, services, webhooks)')
+                   .action(async () => {
+                       const { runTests } = require('../lib/cli/github-app-test');
+                       await runTests();
+                   })
            );
 
 // GitHub OAuth Commands
