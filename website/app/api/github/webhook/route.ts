@@ -117,11 +117,62 @@ async function handlePushEvent(payload: any) {
 async function handleInstallationEvent(payload: any) {
   const action = payload.action;
   const installation = payload.installation;
+  const account = payload.installation?.account;
   
   console.log(`[GitHub Webhook] Installation ${action}: ${installation.id}`);
 
   // Store installation info in database
   // This allows us to track which repos have the app installed
+  if (action === 'created') {
+    try {
+      const { createClient } = require('@supabase/supabase-js');
+      const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+      const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+      
+      if (supabaseUrl && supabaseKey) {
+        const supabase = createClient(supabaseUrl, supabaseKey);
+        
+        // Try to find user by GitHub account ID or login
+        // Note: This requires user to have linked their GitHub account via OAuth
+        let userId = null;
+        
+        if (account) {
+          // Try to find user by GitHub account ID
+          const { data: githubUser } = await supabase
+            .from('github_installations')
+            .select('user_id')
+            .eq('account_id', account.id)
+            .limit(1)
+            .single();
+          
+          if (githubUser) {
+            userId = githubUser.user_id;
+          }
+        }
+        
+        // Store installation (even if no user linked yet - can link later)
+        await supabase
+          .from('github_installations')
+          .upsert({
+            installation_id: installation.id,
+            account_id: account?.id,
+            account_type: account?.type,
+            account_login: account?.login,
+            repository_selection: installation.repository_selection,
+            user_id: userId, // Will be null if not linked yet
+            installed_at: new Date(installation.created_at || Date.now()).toISOString(),
+            updated_at: new Date().toISOString()
+          }, {
+            onConflict: 'installation_id'
+          });
+        
+        console.log(`[GitHub Webhook] Installation stored: ${installation.id}${userId ? ` (linked to user ${userId})` : ' (not linked to user yet)'}`);
+      }
+    } catch (error: any) {
+      console.error('[GitHub Webhook] Error storing installation:', error);
+      // Don't throw - installation tracking failure shouldn't break webhook
+    }
+  }
   
   return { processed: true, event: 'installation', action, installationId: installation.id };
 }
@@ -304,7 +355,169 @@ async function postPRComment(repo: string, prNumber: number, analysis: any) {
     
     // Dynamic require for server-side only
     // eslint-disable-next-line no-eval
-    const { getPRCommentService } = // SECURITY: // SECURITY: // SECURITY: // SECURITY: // SECURITY: // SECURITY: // SECURITY: // SECURITY: eval() disabled
+    const { getPRCommentService } = // SECURITY: // SECURITY: // SECURITY: // SECURITY: // SECURITY: // SECURITY: // SECURITY: // SECURITY: // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: // SECURITY: // SECURITY: // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: // SECURITY: // SECURITY: // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: // SECURITY: // SECURITY: // SECURITY: // SECURITY: // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: // SECURITY: // SECURITY: // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: // SECURITY: // SECURITY: // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: // SECURITY: // SECURITY: // SECURITY: // SECURITY: // SECURITY: // SECURITY: eval() disabled
 // eval() disabled
 // eval() disabled
 // // SECURITY: // SECURITY: eval() disabled
