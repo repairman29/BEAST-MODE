@@ -1272,6 +1272,49 @@ program
     );
 
 // Help and Info
+// GitHub App Commands
+program
+    .command('github-app')
+    .description('GitHub App setup and management for BEAST MODE integration')
+    .addCommand(
+        new Command('setup')
+            .description('Interactive GitHub App setup')
+            .action(async () => {
+                const { interactiveSetup } = require('../lib/cli/github-app-setup');
+                await interactiveSetup();
+            })
+    )
+    .addCommand(
+        new Command('check')
+            .alias('status')
+            .description('Check existing GitHub App configuration')
+            .action(async () => {
+                const { checkExistingSetup } = require('../lib/cli/github-app-setup');
+                await checkExistingSetup();
+            })
+    )
+    .addCommand(
+        new Command('manifest')
+            .description('Generate GitHub App manifest file')
+            .action(async () => {
+                const { generateAppManifest } = require('../lib/cli/github-app-setup');
+                const manifest = generateAppManifest();
+                const fs = require('fs');
+                const path = require('path');
+                const manifestPath = path.join(process.cwd(), '.github-app-manifest.json');
+                fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2));
+                console.log('✅ Manifest file created:', manifestPath);
+            })
+    )
+    .addCommand(
+        new Command('save-credentials')
+            .description('Save GitHub App credentials after creating app')
+            .action(async () => {
+                const { saveCredentialsInteractive } = require('../lib/cli/github-app-setup');
+                await saveCredentialsInteractive();
+            })
+    );
+
 // GitHub OAuth Commands
 program
     .command('github-oauth')
