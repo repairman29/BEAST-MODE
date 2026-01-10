@@ -170,30 +170,50 @@ async function analyzePRQuality(repo: string, prNumber: number, sha: string) {
  * Post PR comment
  */
 async function postPRComment(repo: string, prNumber: number, analysis: any) {
-  // This will be implemented using GitHub App API
-  // For now, log the action
-  console.log(`[GitHub Webhook] Would post PR comment to ${repo}#${prNumber}`);
-  console.log(`  Quality: ${analysis.quality}/100, Issues: ${analysis.issues}`);
-  
-  // TODO: Implement actual PR comment posting using GitHub App API
-  // Need installation token and GitHub API client
-  
-  return { posted: false, note: 'PR comment posting not yet implemented' };
+  try {
+    // Use PR Comment Service
+    const path = require('path');
+    const prCommentServicePath = path.join(process.cwd(), '../../lib/integrations/prCommentService');
+    
+    // Dynamic require for server-side only
+    // eslint-disable-next-line no-eval
+    const { getPRCommentService } = // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval('require')(prCommentServicePath);
+    const prCommentService = getPRCommentService();
+    
+    const result = await prCommentService.postPRComment(repo, prNumber, analysis);
+    console.log(`[GitHub Webhook] PR comment ${result.created ? 'created' : 'updated'}: ${result.commentId}`);
+    return result;
+  } catch (error: any) {
+    console.error(`[GitHub Webhook] Failed to post PR comment: ${error.message}`);
+    // Don't throw - webhook should still return 200
+    return { posted: false, error: error.message };
+  }
 }
 
 /**
  * Create status check
  */
 async function createStatusCheck(repo: string, sha: string, analysis: any) {
-  // This will be implemented using GitHub App API
-  // For now, log the action
-  console.log(`[GitHub Webhook] Would create status check for ${repo}@${sha}`);
-  console.log(`  Quality: ${analysis.quality}/100`);
-  
-  // TODO: Implement actual status check creation using GitHub App API
-  // Need installation token and GitHub API client
-  
-  return { created: false, note: 'Status check creation not yet implemented' };
+  try {
+    // Use Status Check Service
+    const path = require('path');
+    const statusCheckServicePath = path.join(process.cwd(), '../../lib/integrations/statusCheckService');
+    
+    // Dynamic require for server-side only
+    // eslint-disable-next-line no-eval
+    const { getStatusCheckService } = eval('require')(statusCheckServicePath);
+    const statusCheckService = getStatusCheckService();
+    
+    const result = await statusCheckService.createOrUpdateCheck(repo, sha, analysis);
+    console.log(`[GitHub Webhook] Status check ${result.created ? 'created' : 'updated'}: ${result.checkRunId}`);
+    return result;
+  } catch (error: any) {
+    console.error(`[GitHub Webhook] Failed to create status check: ${error.message}`);
+    // Don't throw - webhook should still return 200
+    return { created: false, error: error.message };
+  }
 }
 
 /**
