@@ -9,8 +9,38 @@
 const { createClient } = require('@supabase/supabase-js');
 const { getRateLimiter } = require('../lib/integrations/rateLimiter');
 
+// Load environment variables from .env.local
+function loadEnvVars() {
+  const fs = require('fs');
+  const path = require('path');
+  
+  // Try to load from website/.env.local
+  const envPath = path.join(__dirname, '../website/.env.local');
+  if (fs.existsSync(envPath)) {
+    const envContent = fs.readFileSync(envPath, 'utf8');
+    envContent.split('\n').forEach(line => {
+      const match = line.match(/^([^#=]+)=(.*)$/);
+      if (match) {
+        const key = match[1].trim();
+        let value = match[2].trim();
+        // Remove quotes
+        if ((value.startsWith('"') && value.endsWith('"')) || 
+            (value.startsWith("'") && value.endsWith("'"))) {
+          value = value.slice(1, -1);
+        }
+        if (!process.env[key]) {
+          process.env[key] = value;
+        }
+      }
+    });
+  }
+}
+
 // Get Supabase config from environment or CLI
 function getSupabaseConfig() {
+  // Load env vars first
+  loadEnvVars();
+  
   // Try environment variables first
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.SUPABASE_URL;
   const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || 

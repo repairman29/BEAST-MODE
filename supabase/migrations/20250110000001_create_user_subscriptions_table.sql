@@ -166,6 +166,29 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql SECURITY DEFINER;
 
+-- Drop function if exists (for idempotency)
+DROP FUNCTION IF EXISTS get_or_create_user_subscription(UUID);
+CREATE OR REPLACE FUNCTION get_or_create_user_subscription(p_user_id UUID)
+RETURNS user_subscriptions AS $$
+DECLARE
+  v_subscription user_subscriptions;
+BEGIN
+  -- Try to get existing subscription
+  SELECT * INTO v_subscription
+  FROM user_subscriptions
+  WHERE user_id = p_user_id;
+  
+  -- If not found, create free tier subscription
+  IF NOT FOUND THEN
+    INSERT INTO user_subscriptions (user_id, tier, status)
+    VALUES (p_user_id, 'free', 'active')
+    RETURNING * INTO v_subscription;
+  END IF;
+  
+  RETURN v_subscription;
+END;
+$$ LANGUAGE plpgsql SECURITY DEFINER;
+
 -- Helper function to get or create user usage for current month
 CREATE OR REPLACE FUNCTION get_or_create_user_usage(p_user_id UUID, p_month DATE DEFAULT DATE_TRUNC('month', CURRENT_DATE))
 RETURNS user_usage AS $$
