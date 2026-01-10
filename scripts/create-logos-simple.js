@@ -42,10 +42,18 @@ const outputDir = path.join(__dirname, '../website/public/logos/final');
 
 function downloadImage(url, filepath) {
   return new Promise((resolve, reject) => {
-    const protocol = url.startsWith('https') ? https : http;
+    // Handle both string URLs and arrays
+    const imageUrl = typeof url === 'string' ? url : (Array.isArray(url) ? url[0] : url);
+    
+    if (!imageUrl || typeof imageUrl !== 'string') {
+      reject(new Error('Invalid image URL'));
+      return;
+    }
+    
+    const protocol = imageUrl.startsWith('https') ? https : http;
     const file = fs.createWriteStream(filepath);
     
-    protocol.get(url, (response) => {
+    protocol.get(imageUrl, (response) => {
       if (response.statusCode !== 200) {
         reject(new Error(`Failed to download: ${response.statusCode}`));
         return;
@@ -81,25 +89,119 @@ async function remixWithReplicate(inputImagePath, prompt, outputPath) {
 
   try {
     console.log('   ⏳ Calling Replicate...');
-    const output = await replicate.run(
-      "black-forest-labs/flux-dev",
-      {
-        input: {
-          image: imageDataUri,
-          prompt: prompt,
-          num_outputs: 1,
-          guidance_scale: 3.5,
-          num_inference_steps: 28,
-          output_format: "png"
+    
+    // Handle rate limiting with retries
+    let retries = 3;
+    let lastError;
+    
+    while (retries > 0) {
+      try {
+        // Try flux-schnell first (faster, cheaper), fallback to flux-dev
+        let model = "black-forest-labs/flux-schnell";
+        let output;
+        
+        try {
+          output = await replicate.run(model, {
+            input: {
+              image: imageDataUri,
+              prompt: prompt,
+              num_outputs: 1,
+              guidance_scale: 3.5,
+              num_inference_steps: 4,
+              output_format: "png"
+            }
+          });
+        } catch (e) {
+          // Fallback to flux-dev if schnell fails
+          console.log('   ⏳ Trying flux-dev...');
+          model = "black-forest-labs/flux-dev";
+          output = await replicate.run(model, {
+            input: {
+              prompt: prompt,
+              num_outputs: 1,
+              guidance_scale: 3.5,
+              num_inference_steps: 28,
+              output_format: "png"
+            }
+          });
+        }
+
+        // Handle different response formats
+        // Replicate returns async iterators or direct URLs
+        let imageUrl;
+        
+        // If it's an async iterator, we need to wait for it
+        if (output && typeof output[Symbol.asyncIterator] === 'function') {
+          console.log('   ⏳ Waiting for async result...');
+          for await (const item of output) {
+            if (typeof item === 'string') {
+              imageUrl = item;
+              break;
+            } else if (item && typeof item === 'object') {
+              imageUrl = item.url || item.image || item;
+              if (typeof imageUrl === 'string') break;
+            }
+          }
+        } else if (typeof output === 'string') {
+          imageUrl = output;
+        } else if (Array.isArray(output)) {
+          // Find first string URL in array
+          for (const item of output) {
+            if (typeof item === 'string' && (item.startsWith('http') || item.startsWith('data:'))) {
+              imageUrl = item;
+              break;
+            } else if (item && typeof item === 'object') {
+              const url = item.url || item.image || item.output;
+              if (typeof url === 'string') {
+                imageUrl = url;
+                break;
+              }
+            }
+          }
+          // If no URL found, try first element
+          if (!imageUrl && output[0]) {
+            imageUrl = output[0];
+          }
+        } else if (output && typeof output === 'object') {
+          imageUrl = output.url || output.image || output.output || output[0];
+        } else {
+          imageUrl = output;
+        }
+
+        // Final check - if still not a string, log and try to extract
+        if (imageUrl && typeof imageUrl === 'object') {
+          imageUrl = imageUrl.url || imageUrl.image || imageUrl[0] || String(imageUrl);
+        }
+
+        if (!imageUrl || typeof imageUrl !== 'string' || (!imageUrl.startsWith('http') && !imageUrl.startsWith('data:'))) {
+          console.log('   ⚠️  Response format:', typeof output, Array.isArray(output) ? `(array[${output.length}])` : '');
+          console.log('   ⚠️  Sample:', JSON.stringify(output).substring(0, 300));
+          throw new Error(`Invalid response format: got ${typeof imageUrl}, expected string URL`);
+        }
+        
+        console.log('   ✅ Got image URL');
+
+        console.log('   ⏳ Downloading...');
+        await downloadImage(imageUrl, outputPath);
+        console.log(`   ✅ Saved`);
+        return outputPath;
+      } catch (error) {
+        lastError = error;
+        
+        // Check for rate limit
+        if (error.message && error.message.includes('429')) {
+          const retryAfter = error.message.match(/retry_after[":\s]+(\d+)/i);
+          const waitTime = retryAfter ? parseInt(retryAfter[1]) * 1000 : 10000;
+          console.log(`   ⏳ Rate limited, waiting ${waitTime/1000}s...`);
+          await new Promise(resolve => setTimeout(resolve, waitTime));
+          retries--;
+        } else {
+          throw error;
         }
       }
-    );
-
-    const imageUrl = Array.isArray(output) ? output[0] : output;
-    console.log('   ⏳ Downloading...');
-    await downloadImage(imageUrl, outputPath);
-    console.log(`   ✅ Saved`);
-    return outputPath;
+    }
+    
+    throw lastError || new Error('Failed after retries');
   } catch (error) {
     console.error(`   ❌ Error: ${error.message}`);
     throw error;
@@ -163,10 +265,11 @@ async function main() {
       await remixWithReplicate(baseImage, variation.prompt, outputPath);
       console.log('');
       
-      // Wait between requests (rate limit)
+      // Wait between requests (rate limit - free tier is 6/min with burst of 1)
       if (i < variations.length - 1) {
-        console.log('   ⏳ Waiting 3 seconds...\n');
-        await new Promise(resolve => setTimeout(resolve, 3000));
+        const waitTime = 12000; // 12 seconds to stay under 6/min limit
+        console.log(`   ⏳ Waiting ${waitTime/1000}s (rate limit)...\n`);
+        await new Promise(resolve => setTimeout(resolve, waitTime));
       }
     } catch (error) {
       console.error(`   ❌ Failed: ${error.message}\n`);
