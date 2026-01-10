@@ -56,7 +56,7 @@ async function createConsistentLogos() {
   const metadata = await baseImage.metadata();
   console.log(`   Base image: ${metadata.width}x${metadata.height}\n`);
 
-  // 1. Beast head primary (light background)
+  // 1. Beast head primary (light background) - white bg
   console.log('[1/5] beast-head-primary.png...');
   await baseImage
     .clone()
@@ -64,11 +64,11 @@ async function createConsistentLogos() {
       fit: 'contain',
       background: { r: 255, g: 255, b: 255, alpha: 1 }
     })
-    .png()
+    .png({ quality: 100, compressionLevel: 6 })
     .toFile(path.join(outputDir, 'beast-head-primary.png'));
   console.log('   ✅ Created (white background)');
 
-  // 2. Beast head dark (dark background)
+  // 2. Beast head dark (dark background) - #1F2937 bg
   console.log('[2/5] beast-head-dark.png...');
   await baseImage
     .clone()
@@ -76,9 +76,9 @@ async function createConsistentLogos() {
       fit: 'contain',
       background: { r: 31, g: 41, b: 55, alpha: 1 } // #1F2937
     })
-    .png()
+    .png({ quality: 100, compressionLevel: 6 })
     .toFile(path.join(outputDir, 'beast-head-dark.png'));
-  console.log('   ✅ Created (dark background)');
+  console.log('   ✅ Created (dark background #1F2937)');
 
   // 3. Full logo horizontal - icon on left, space for text on right
   console.log('[3/5] full-logo-horizontal.png...');
