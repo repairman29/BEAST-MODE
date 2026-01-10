@@ -19,7 +19,7 @@
     "test": "node scripts/run-all-tests.js",
     "test:e2e": "node scripts/e2e-test-suite.js",
     "test:integration": "node scripts/test-custom-model-integration.js",
-    "test:performance": "node scripts/response-time-tracker.js --endpoint=/api/health --duration=10",
+    "test:performance": "node scripts/test-performance-optimization.js",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
     "build": "echo 'ESM library - no build step needed'",
@@ -114,7 +114,6 @@
     "test:model-management": "node scripts/test-model-management.js",
     "test:feature-analytics": "node scripts/test-feature-analytics.js",
     "test:mlops-automation": "node scripts/test-mlops-automation.js",
-    "test:performance": "node scripts/test-performance-optimization.js",
     "test:comprehensive": "node scripts/test-comprehensive.js",
     "test:expanded": "node scripts/test-expanded.js",
     "test:ftue": "node scripts/test-ftue.js",
@@ -156,6 +155,8 @@
     "node": ">=18.0.0"
   },
   "dependencies": {
+    "@octokit/app": "^16.1.2",
+    "@octokit/webhooks": "^14.2.0",
     "@tensorflow/tfjs-node": "^4.22.0",
     "axios": "^1.6.0",
     "boxen": "^8.0.1",
