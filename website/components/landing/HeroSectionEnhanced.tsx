@@ -76,17 +76,18 @@ function HeroSectionEnhanced() {
                 </span>
               </h1>
               
-              {/* Value proposition - clearer hierarchy */}
+              {/* Brand tagline - primary message */}
               <p className="text-2xl md:text-3xl text-cyan-400 max-w-xl leading-tight font-semibold">
-                Stop Guessing If Your Code Is Good
+                Become a better developer, faster.
               </p>
               
+              {/* Value proposition - clearer hierarchy */}
               <p className="text-lg md:text-xl text-slate-300 max-w-xl leading-relaxed">
-                Tired of wondering if your code is production-ready? Spending hours on code reviews? Dealing with bugs that slip into production?
+                See your code quality in 10 seconds. Get automated fixes. Wake up to clean code. All in one platform.
               </p>
               
               <p className="text-lg md:text-xl text-white max-w-xl leading-relaxed font-medium">
-                <strong>BEAST MODE tells you what's wrong, fixes it automatically, and maintains your codebase while you sleep.</strong> All in one platform.
+                <strong>BEAST MODE tells you what's wrong, fixes it automatically, and maintains your codebase while you sleep.</strong>
               </p>
             </div>
 

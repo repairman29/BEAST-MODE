@@ -1,5 +1,18 @@
 @import "tailwindcss";
 
+/* BEAST MODE Brand Colors */
+:root {
+  --beast-blue: #3B82F6;
+  --beast-blue-dark: #2563EB;
+  --beast-blue-light: #60A5FA;
+  --mode-purple: #8B5CF6;
+  --mode-purple-dark: #7C3AED;
+  --mode-purple-light: #A78BFA;
+  --accent-orange: #F97316;
+  --accent-orange-dark: #EA580C;
+  --accent-orange-light: #FB923C;
+}
+
 @theme {
   --font-sans: 'Inter', system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
