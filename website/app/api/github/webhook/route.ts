@@ -129,9 +129,122 @@ async function handleInstallationRepositoriesEvent(payload: any) {
 }
 
 /**
+ * Get user ID from GitHub installation
+ */
+async function getUserIdFromInstallation(installationId: number): Promise<string | null> {
+  try {
+    const { createClient } = require('@supabase/supabase-js');
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+    const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+    
+    if (!supabaseUrl || !supabaseKey) {
+      return null;
+    }
+
+    const supabase = createClient(supabaseUrl, supabaseKey);
+    
+    const { data, error } = await supabase
+      .from('github_installations')
+      .select('user_id')
+      .eq('installation_id', installationId)
+      .single();
+
+    if (error || !data) {
+      return null;
+    }
+
+    return data.user_id;
+  } catch (error) {
+    console.error('[GitHub Webhook] Error getting user ID:', error);
+    return null;
+  }
+}
+
+/**
+ * Check rate limit before analyzing PR
+ */
+async function checkRateLimit(userId: string | null, actionType: 'analyze_pr' | 'scan_repo' | 'api_call') {
+  if (!userId) {
+    // If no user ID, allow but don't track (for backwards compatibility)
+    return { allowed: true, reason: 'No user ID - allowing for backwards compatibility' };
+  }
+
+  try {
+    const path = require('path');
+    const rateLimiterPath = path.join(process.cwd(), '../../lib/integrations/rateLimiter');
+    const { getRateLimiter } = await import(rateLimiterPath);
+    
+    const { createClient } = require('@supabase/supabase-js');
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+    const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+    
+    if (!supabaseUrl || !supabaseKey) {
+      return { allowed: true, reason: 'Supabase not configured - allowing' };
+    }
+
+    const supabase = createClient(supabaseUrl, supabaseKey);
+    const rateLimiter = getRateLimiter(supabase);
+    
+    return await rateLimiter.canPerformAction(userId, actionType);
+  } catch (error: any) {
+    console.error('[GitHub Webhook] Rate limit check error:', error);
+    // On error, allow but log
+    return { allowed: true, reason: 'Rate limit check failed - allowing' };
+  }
+}
+
+/**
+ * Increment usage after action
+ */
+async function incrementUsage(userId: string | null, actionType: 'analyze_pr' | 'scan_repo' | 'api_call') {
+  if (!userId) {
+    return; // Don't track if no user ID
+  }
+
+  try {
+    const path = require('path');
+    const rateLimiterPath = path.join(process.cwd(), '../../lib/integrations/rateLimiter');
+    const { getRateLimiter } = await import(rateLimiterPath);
+    
+    const { createClient } = require('@supabase/supabase-js');
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+    const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+    
+    if (!supabaseUrl || !supabaseKey) {
+      return;
+    }
+
+    const supabase = createClient(supabaseUrl, supabaseKey);
+    const rateLimiter = getRateLimiter(supabase);
+    
+    await rateLimiter.incrementUsage(userId, actionType, 1);
+  } catch (error: any) {
+    console.error('[GitHub Webhook] Usage increment error:', error);
+    // Don't throw - usage tracking failure shouldn't break webhook
+  }
+}
+
+/**
  * Analyze PR quality
  */
-async function analyzePRQuality(repo: string, prNumber: number, sha: string) {
+async function analyzePRQuality(repo: string, prNumber: number, sha: string, installationId?: number) {
+  // Get user ID from installation
+  const userId = installationId ? await getUserIdFromInstallation(installationId) : null;
+  
+  // Check rate limit
+  const rateLimitCheck = await checkRateLimit(userId, 'analyze_pr');
+  if (!rateLimitCheck.allowed) {
+    console.log(`[GitHub Webhook] Rate limit exceeded for user ${userId}: ${rateLimitCheck.reason}`);
+    return {
+      quality: 0,
+      issues: 0,
+      recommendations: [],
+      issuesList: [],
+      rateLimited: true,
+      rateLimitMessage: rateLimitCheck.reason
+    };
+  }
+
   // Call existing quality API
   const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000';
   
@@ -147,6 +260,10 @@ async function analyzePRQuality(repo: string, prNumber: number, sha: string) {
     }
 
     const data = await response.json();
+    
+    // Increment usage after successful analysis
+    await incrementUsage(userId, 'analyze_pr');
+    
     return {
       quality: Math.round((data.quality || data.score || 0) * 100),
       issues: data.issues || data.detectedIssues?.length || 0,
@@ -177,7 +294,25 @@ async function postPRComment(repo: string, prNumber: number, analysis: any) {
     
     // Dynamic require for server-side only
     // eslint-disable-next-line no-eval
-    const { getPRCommentService } = // SECURITY: // SECURITY: // SECURITY: // SECURITY: eval() disabled
+    const { getPRCommentService } = // SECURITY: // SECURITY: // SECURITY: // SECURITY: // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: eval() disabled
+// eval() disabled
+// eval() disabled
+// // SECURITY: // SECURITY: // SECURITY: // SECURITY: eval() disabled
 // eval() disabled
 // eval() disabled
 // // SECURITY: // SECURITY: eval() disabled
