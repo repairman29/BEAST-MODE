@@ -1,0 +1,107 @@
+{
+  "total": 20,
+  "passed": 20,
+  "failed": 0,
+  "features": [
+    {
+      "id": "US-0001",
+      "title": "Create File (keyboard)",
+      "status": "passed"
+    },
+    {
+      "id": "US-0002",
+      "title": "Create File (mouse)",
+      "status": "passed"
+    },
+    {
+      "id": "US-0003",
+      "title": "Create File (command-palette)",
+      "status": "passed"
+    },
+    {
+      "id": "US-0004",
+      "title": "Create File (context-menu)",
+      "status": "passed"
+    },
+    {
+      "id": "US-0005",
+      "title": "Create File (drag-drop)",
+      "status": "passed"
+    },
+    {
+      "id": "US-0006",
+      "title": "Create File (terminal)",
+      "status": "passed"
+    },
+    {
+      "id": "US-0007",
+      "title": "Create File (git)",
+      "status": "passed"
+    },
+    {
+      "id": "US-0008",
+      "title": "Open File (keyboard)",
+      "status": "passed"
+    },
+    {
+      "id": "US-0009",
+      "title": "Open File (mouse)",
+      "status": "passed"
+    },
+    {
+      "id": "US-0010",
+      "title": "Open File (command-palette)",
+      "status": "passed"
+    },
+    {
+      "id": "US-0011",
+      "title": "Open File (context-menu)",
+      "status": "passed"
+    },
+    {
+      "id": "US-0012",
+      "title": "Open File (drag-drop)",
+      "status": "passed"
+    },
+    {
+      "id": "US-0013",
+      "title": "Open File (terminal)",
+      "status": "passed"
+    },
+    {
+      "id": "US-0014",
+      "title": "Open File (git)",
+      "status": "passed"
+    },
+    {
+      "id": "US-0015",
+      "title": "Save File (keyboard)",
+      "status": "passed"
+    },
+    {
+      "id": "US-0016",
+      "title": "Save File (mouse)",
+      "status": "passed"
+    },
+    {
+      "id": "US-0017",
+      "title": "Save File (command-palette)",
+      "status": "passed"
+    },
+    {
+      "id": "US-0018",
+      "title": "Save File (context-menu)",
+      "status": "passed"
+    },
+    {
+      "id": "US-0019",
+      "title": "Save File (drag-drop)",
+      "status": "passed"
+    },
+    {
+      "id": "US-0020",
+      "title": "Save File (terminal)",
+      "status": "passed"
+    }
+  ]
+}
