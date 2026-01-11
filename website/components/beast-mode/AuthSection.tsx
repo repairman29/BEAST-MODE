@@ -28,6 +28,7 @@ export default function AuthSection({ onAuthSuccess }: AuthSectionProps) {
       const auth = params.get('auth');
       const message = params.get('message');
       const githubUsername = params.get('github_username');
+      const prefillEmail = params.get('email');
       
       // Handle ?auth=required (from dashboard redirect)
       if (auth === 'required') {
@@ -36,14 +37,25 @@ export default function AuthSection({ onAuthSuccess }: AuthSectionProps) {
         // Don't clear URL params yet - keep them so the form stays visible
       } else if (action === 'signup') {
         setIsSignIn(false);
+        // Pre-fill email if provided
+        if (prefillEmail) {
+          setEmail(prefillEmail);
+        }
       } else if (action === 'signin') {
         setIsSignIn(true);
+        // Pre-fill email if provided
+        if (prefillEmail) {
+          setEmail(prefillEmail);
+        }
       }
       
       // Show message if GitHub was connected but user needs to sign in
       if (message === 'github_connected' && githubUsername) {
-        setError(`GitHub account (@${githubUsername}) connected! Please sign in with your email and password to continue.`);
-        setIsSignIn(true);
+        if (action === 'signup') {
+          setError(`GitHub account (@${githubUsername}) connected! Please create an account with your email to continue.`);
+        } else {
+          setError(`GitHub account (@${githubUsername}) connected! Please sign in with your email and password to continue.`);
+        }
         // Don't clear URL params yet - keep them so the form stays visible
       }
     }

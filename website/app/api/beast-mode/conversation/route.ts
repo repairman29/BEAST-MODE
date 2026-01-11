@@ -20,57 +20,39 @@ export async function POST(request: NextRequest) {
     if (context?.type === 'code_generation' || context?.task === 'generate_code') {
       try {
         console.log('[BEAST MODE] Code generation request detected');
-        // Use BEAST MODE's code generation capabilities
-        // Use same pattern as codebase/chat route - dynamic require to prevent webpack issues
-        const path = require('path');
-        const fs = require('fs');
-        
-        // Find the mlops directory
-        // In Vercel, __dirname is .next/server/app/api/beast-mode/conversation
-        // Files are copied to .next/server/lib/mlops during build
-        const possiblePaths = [
-          // First: relative from bundled route (most reliable)
-          path.join(__dirname, '..', '..', '..', 'lib', 'mlops'), // .next/server/lib/mlops
-          // Second: from process.cwd() 
-          path.join(process.cwd(), '.next', 'server', 'lib', 'mlops'),
-          path.join(process.cwd(), 'lib', 'mlops'),
-          // Vercel absolute paths
-          '/var/task/website/.next/server/lib/mlops',
-          '/var/task/website/lib/mlops',
-        ];
-        
-        let mlopsPath: string | null = null;
-        console.log('[BEAST MODE] Searching for mlops directory...');
-        console.log('[BEAST MODE] process.cwd():', process.cwd());
-        console.log('[BEAST MODE] __dirname:', __dirname);
-        
-        for (const testPath of possiblePaths) {
-          const testFile = path.join(testPath, 'llmCodeGenerator.js');
-          const exists = fs.existsSync(testFile);
-          console.log(`[BEAST MODE] Checking: ${testPath} -> ${exists ? 'EXISTS' : 'NOT FOUND'}`);
-          if (exists) {
-            mlopsPath = testPath;
-            console.log('[BEAST MODE] ✅ Found mlops directory at:', mlopsPath);
-            break;
+        // Use the existing codebaseChat API which already works
+        // This avoids the module resolution issues with llmCodeGenerator
+        let codebaseChat: any;
+        try {
+          // Use same pattern as codebase/chat route
+          const codebaseChatModule = await import('../../../../../lib/mlops/codebaseChat').catch(() => {
+            // Fallback to require if import fails (CommonJS)
+            try {
+              return require('../../../../../lib/mlops/codebaseChat');
+            } catch (e) {
+              return null;
+            }
+          });
+          
+          if (!codebaseChatModule) {
+            throw new Error('Failed to load codebaseChat module');
           }
+          
+          // Handle both singleton instance and class export
+          codebaseChat = codebaseChatModule.default || codebaseChatModule;
+          // If it's a class, we might need to instantiate it, but check if it has processMessage first
+          if (codebaseChat && typeof codebaseChat.processMessage !== 'function') {
+            // Try to get the instance if it's exported
+            codebaseChat = codebaseChatModule.getCodebaseChat?.() || codebaseChat;
+          }
+        } catch (error: any) {
+          console.error('[BEAST MODE] Failed to load codebaseChat:', error.message);
+          throw error;
         }
         
-        if (!mlopsPath) {
-          console.error('[BEAST MODE] ❌ Could not find mlops directory');
-          console.error('[BEAST MODE] Tried paths:', possiblePaths);
-          // List what's actually in process.cwd()
-          try {
-            const cwdContents = fs.readdirSync(process.cwd());
-            console.error('[BEAST MODE] Contents of process.cwd():', cwdContents.slice(0, 10));
-          } catch (e) {
-            console.error('[BEAST MODE] Could not read process.cwd()');
-          }
-          throw new Error(`Could not find mlops directory. Tried: ${possiblePaths.join(', ')}`);
+        if (!codebaseChat || typeof codebaseChat.processMessage !== 'function') {
+          throw new Error('codebaseChat.processMessage is not available');
         }
-        
-        // Use wrapper to load code generator with proper module resolution
-        const { loadCodeGenerator } = require('../../../../lib/mlops/loadCodeGenerator');
-        const generator = loadCodeGenerator(mlopsPath);
         
         // Build the prompt from context
         const bounty = context.bounty || {};

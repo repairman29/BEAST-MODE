@@ -22,9 +22,22 @@ function loadCodeGenerator(mlopsPath) {
   const knowledgeRAGPath = path.join(absoluteMlopsPath, 'knowledgeRAG.js');
   const llmCodeGeneratorPath = path.join(absoluteMlopsPath, 'llmCodeGenerator.js');
   
-  // Verify files exist
+  // Verify files exist with detailed error messages
+  console.log('[loadCodeGenerator] Verifying files exist...');
+  console.log('[loadCodeGenerator] mlopsPath:', absoluteMlopsPath);
+  console.log('[loadCodeGenerator] modelRouterPath:', modelRouterPath);
+  console.log('[loadCodeGenerator] knowledgeRAGPath:', knowledgeRAGPath);
+  console.log('[loadCodeGenerator] llmCodeGeneratorPath:', llmCodeGeneratorPath);
+  
   if (!fs.existsSync(modelRouterPath)) {
-    throw new Error(`modelRouter.js not found: ${modelRouterPath}`);
+    // List what's actually in the directory
+    try {
+      const dirContents = fs.existsSync(absoluteMlopsPath) ? fs.readdirSync(absoluteMlopsPath) : [];
+      console.error('[loadCodeGenerator] Directory contents:', dirContents.slice(0, 10));
+    } catch (e) {
+      console.error('[loadCodeGenerator] Could not read directory');
+    }
+    throw new Error(`modelRouter.js not found: ${modelRouterPath} (directory exists: ${fs.existsSync(absoluteMlopsPath)})`);
   }
   if (!fs.existsSync(knowledgeRAGPath)) {
     throw new Error(`knowledgeRAG.js not found: ${knowledgeRAGPath}`);
@@ -32,6 +45,8 @@ function loadCodeGenerator(mlopsPath) {
   if (!fs.existsSync(llmCodeGeneratorPath)) {
     throw new Error(`llmCodeGenerator.js not found: ${llmCodeGeneratorPath}`);
   }
+  
+  console.log('[loadCodeGenerator] ✅ All files verified');
   
   // Patch require to resolve relative paths from mlops directory
   const Module = require('module');

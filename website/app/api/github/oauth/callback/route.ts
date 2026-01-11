@@ -402,20 +402,37 @@ export async function GET(request: NextRequest) {
     // Determine redirect based on whether user has Supabase account
     // GitHub OAuth is for connecting GitHub, NOT for site authentication
     // Users must sign in with email/password first, then connect GitHub
-    // ALWAYS redirect to sign-in to prevent authentication loop
     let redirectUrl: string;
     
     // Check if user has Supabase account
     const hasAccount = hasSupabaseAccount || (userId && userId.startsWith('00000000-') && isSupabaseUser);
     
-    // For now, always redirect to sign-in to break the loop
-    // Even if they have an account, they need to sign in to get a session
-    redirectUrl = `${baseUrl}/?action=signin&message=github_connected&github_username=${encodeURIComponent(githubUser.login)}`;
-    console.log('ℹ️ [GitHub OAuth] Redirecting to sign-in page (GitHub connected)');
+    // Build redirect URL with helpful parameters
+    const params = new URLSearchParams();
+    if (hasAccount) {
+      params.set('action', 'signin');
+      params.set('message', 'github_connected');
+      params.set('github_username', githubUser.login);
+      if (githubUser.email) {
+        params.set('email', githubUser.email); // Pre-fill email for convenience
+      }
+      redirectUrl = `${baseUrl}/?${params.toString()}`;
+      console.log('ℹ️ [GitHub OAuth] User has account - redirecting to sign-in (email pre-filled)');
+    } else {
+      params.set('action', 'signup');
+      params.set('message', 'github_connected');
+      params.set('github_username', githubUser.login);
+      if (githubUser.email) {
+        params.set('email', githubUser.email); // Pre-fill email for sign-up
+      }
+      redirectUrl = `${baseUrl}/?${params.toString()}`;
+      console.log('ℹ️ [GitHub OAuth] No account found - redirecting to sign-up (email pre-filled)');
+    }
+    
     console.log('   GitHub username:', githubUser.login);
     console.log('   GitHub email:', githubUser.email || 'not provided');
     console.log('   Has Supabase account:', hasAccount);
-    console.log('   Note: User must sign in to access dashboard (GitHub OAuth is for connecting, not authentication)');
+    console.log('   Redirect URL:', redirectUrl);
 
     // Clear OAuth cookies but keep userId cookie temporarily for token lookup
     const response = NextResponse.redirect(redirectUrl);

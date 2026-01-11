@@ -13,17 +13,29 @@ if (!fs.existsSync(srcDir)) {
   process.exit(1);
 }
 
-// Create destination directory
-fs.mkdirSync(destDir, { recursive: true });
+// Create destination directories
+fs.mkdirSync(destDir1, { recursive: true });
+// destDir2 should already exist, but ensure it does
+if (!fs.existsSync(destDir2)) {
+  fs.mkdirSync(destDir2, { recursive: true });
+}
 
-// Copy all .js files
+// Copy all .js files to both locations
 const files = fs.readdirSync(srcDir).filter(f => f.endsWith('.js'));
 
 files.forEach(file => {
   const srcFile = path.join(srcDir, file);
-  const destFile = path.join(destDir, file);
-  fs.copyFileSync(srcFile, destFile);
+  // Copy to .next/server (for Next.js runtime)
+  const destFile1 = path.join(destDir1, file);
+  fs.copyFileSync(srcFile, destFile1);
   console.log(`Copied ${file} to .next/server/lib/mlops/`);
+  
+  // Also ensure it's in the source location (for Vercel)
+  if (!fs.existsSync(path.join(destDir2, file))) {
+    const destFile2 = path.join(destDir2, file);
+    fs.copyFileSync(srcFile, destFile2);
+    console.log(`Ensured ${file} exists in lib/mlops/`);
+  }
 });
 
-console.log(`✅ Copied ${files.length} mlops files to .next/server/lib/mlops/`);
+console.log(`✅ Copied ${files.length} mlops files to both locations`);
