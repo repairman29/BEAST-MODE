@@ -81,6 +81,24 @@ docs/*PRICING*STRATEGY*.md
 docs/*MARGIN*STRATEGY*.md
 docs/*BUSINESS*STRATEGY*.md
 
+# Marketing & Sales Documents
+docs/*MARKETING*.md
+docs/*SALES*.md
+docs/*MONETIZATION*.md
+docs/*ICP*.md
+docs/*CUSTOMER*.md
+docs/*PLAYBOOK*.md
+docs/*CAMPAIGN*.md
+docs/*AUDIT*.md
+docs/WORKFLOW_GAPS*.md
+docs/GITHUB_APP_VS_FULL_SUITE*.md
+docs/HONEST_MARKETING.md
+docs/COMMUNITY_STRATEGY.md
+docs/BRAND_STRATEGY*.md
+docs/PLG_FAST_DELIVERY*.md
+docs/REAL_WORLD_OPTIMIZATION_STRATEGY.md
+docs/AI_JANITOR_MARKETING*.md
+
 # ML Model Files (Large, may contain proprietary data)
 .beast-mode/models/
 *.model
@@ -98,6 +116,11 @@ all-repos-for-python.json
 *.secret
 secrets/
 .secrets/
+
+# Setup results files (contain secrets)
+stripe-setup-results.json
+*-setup-results.json
+*-results.json
 
 # Database backups
 *.sql.backup
