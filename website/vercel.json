@@ -1,5 +1,8 @@
 {
   "framework": "nextjs",
+  "buildCommand": "npm install && npm run build && node scripts/copy-mlops.js",
+  "outputDirectory": ".next",
+  "installCommand": "npm install",
   "regions": ["iad1"],
   "headers": [
     {
