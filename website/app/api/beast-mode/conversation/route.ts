@@ -21,15 +21,21 @@ export async function POST(request: NextRequest) {
       try {
         console.log('[BEAST MODE] Code generation request detected');
         // Use BEAST MODE's code generation capabilities
-        // Use dynamic require to prevent webpack from analyzing at build time
+        // Use same pattern as codebase/chat route - dynamic require to prevent webpack issues
         let LLMCodeGenerator: any;
         try {
-          LLMCodeGenerator = require('../../../../lib/mlops/llmCodeGenerator');
+          // Try relative path from website/app/api/beast-mode/conversation
+          // Goes up to website, then to root, then to lib/mlops
+          LLMCodeGenerator = require('../../../../../lib/mlops/llmCodeGenerator');
         } catch (e) {
-          // Fallback: try absolute path
-          const path = require('path');
-          const rootPath = path.join(process.cwd(), '..', 'lib', 'mlops', 'llmCodeGenerator.js');
-          LLMCodeGenerator = require(rootPath);
+          console.error('[BEAST MODE] Failed to load from relative path, trying website/lib:', e.message);
+          // Fallback: try website/lib/mlops (copied files)
+          try {
+            LLMCodeGenerator = require('../../../../lib/mlops/llmCodeGenerator');
+          } catch (e2) {
+            console.error('[BEAST MODE] Failed to load from website/lib:', e2.message);
+            throw new Error(`Cannot find llmCodeGenerator: ${e.message}`);
+          }
         }
         const generator = new LLMCodeGenerator();
         
