@@ -1,9 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { createClient } from '@supabase/supabase-js';
-
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY!;
-const supabase = createClient(supabaseUrl, supabaseKey);
+import { getSupabaseClient } from '@/lib/supabase-client';
 
 /**
  * POST /api/feedback/quality
@@ -35,6 +31,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Store feedback in database
+    const supabase = getSupabaseClient();
     const { data, error } = await supabase
       .from('quality_feedback')
       .insert({
@@ -80,6 +77,7 @@ export async function GET(request: NextRequest) {
     const { searchParams } = new URL(request.url);
     const repo = searchParams.get('repo');
 
+    const supabase = getSupabaseClient();
     let query = supabase
       .from('quality_feedback')
       .select('*', { count: 'exact' });
