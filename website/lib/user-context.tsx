@@ -33,13 +33,48 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
     if (token && storedUser) {
       try {
         const parsedUser = JSON.parse(storedUser);
-        setUserState(parsedUser);
+        // Validate user data structure
+        if (parsedUser && parsedUser.id && parsedUser.email) {
+          setUserState(parsedUser);
+        } else {
+          // Invalid user data, clear it
+          localStorage.removeItem('beastModeUser');
+          localStorage.removeItem('beastModeToken');
+        }
       } catch (e) {
         // Invalid stored user, clear it
         localStorage.removeItem('beastModeUser');
         localStorage.removeItem('beastModeToken');
       }
     }
+
+    // Also check Supabase session as fallback
+    // This ensures compatibility with both JWT and Supabase auth
+    const checkSupabaseSession = async () => {
+      try {
+        const { createClient } = await import('@supabase/supabase-js');
+        const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+        const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+        
+        if (supabaseUrl && supabaseKey) {
+          const supabase = createClient(supabaseUrl, supabaseKey);
+          const { data: { session } } = await supabase.auth.getSession();
+          
+          if (session && session.user && !user) {
+            // Supabase session exists but user context doesn't - sync it
+            setUserState({
+              id: session.user.id,
+              email: session.user.email || '',
+              name: session.user.user_metadata?.name,
+              plan: session.user.user_metadata?.plan || 'free'
+            });
+          }
+        }
+      } catch (error) {
+        // Supabase check failed, continue with localStorage user
+        console.error('Supabase session check failed:', error);
+      }
+    };
 
     // Check if this is first time user
     const hasCompletedOnboarding = localStorage.getItem('beastModeOnboardingCompleted');
@@ -50,6 +85,11 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
       localStorage.setItem('beastModeHasVisited', 'true');
     } else if (!hasCompletedOnboarding) {
       setIsFirstTime(true);
+    }
+
+    // Check Supabase session if no localStorage user
+    if (!token || !storedUser) {
+      checkSupabaseSession();
     }
 
     setIsLoading(false);

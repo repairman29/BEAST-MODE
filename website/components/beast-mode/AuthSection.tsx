@@ -218,10 +218,10 @@ function AuthSectionContent({ onAuthSuccess }: AuthSectionProps) {
       const userData: User = data.user;
       setUser(userData);
       localStorage.setItem('beastModeToken', data.token);
+      localStorage.setItem('beastModeUser', JSON.stringify(userData));
       
       // User is now authenticated - verified by successful API response
-      // The dashboard layout will verify authentication (isAuthenticated check) before rendering
-      const isAuthenticated = true; // User just authenticated successfully
+      // Store user data in localStorage so isAuthenticated() can find it
       
       // Clear URL params after successful auth
       if (typeof window !== 'undefined') {
@@ -233,16 +233,14 @@ function AuthSectionContent({ onAuthSuccess }: AuthSectionProps) {
         onAuthSuccess(userData);
       }
       
-      // Redirect to dashboard after successful sign-in
-      // Safe because user is authenticated (isAuthenticated = true)
-      // This redirect is safe - user just authenticated, so dashboard will allow access
-      // The dashboard layout checks auth required before rendering
-      if (typeof window !== 'undefined' && isAuthenticated) {
-        // Redirect to /dashboard - user authenticated, auth required check passed
-        // Error redirect handling: OAuth callback redirects here with error parameter
-        // Redirect to '/dashboard' - user is authenticated (isAuthenticated check passed)
-        window.location.href = '/dashboard';
-      }
+      // Small delay to ensure localStorage is written and isAuthenticated() can read it
+      // Then redirect to dashboard
+      setTimeout(() => {
+        if (typeof window !== 'undefined') {
+          // Use window.location.href for full page reload to ensure auth state is checked
+          window.location.href = '/dashboard';
+        }
+      }, 100);
       
       // Show success message
       if (data.needsVerification) {

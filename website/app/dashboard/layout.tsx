@@ -22,6 +22,9 @@ export default function DashboardLayout({
     // Check if user is authenticated
     const checkAuth = async () => {
       try {
+        // Give a moment for localStorage to be available and user context to initialize
+        await new Promise(resolve => setTimeout(resolve, 100));
+        
         const authenticated = await isAuthenticated();
         setIsAuthorized(authenticated);
         
@@ -35,6 +38,10 @@ export default function DashboardLayout({
       } catch (error) {
         console.error('Auth check failed:', error);
         setIsAuthorized(false);
+        // On error, redirect to sign-in
+        setTimeout(() => {
+          router.push('/?auth=required');
+        }, 500);
       }
     };
 

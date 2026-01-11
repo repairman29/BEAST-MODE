@@ -20,6 +20,9 @@ function getSupabaseClient() {
 
 /**
  * Check if user is authenticated
+ * 
+ * Checks both Supabase sessions and JWT tokens stored in localStorage
+ * This supports both Supabase auth and JWT-based auth flows
  */
 export async function isAuthenticated(): Promise<boolean> {
   if (typeof window === 'undefined') {
@@ -28,12 +31,42 @@ export async function isAuthenticated(): Promise<boolean> {
     return process.env.NODE_ENV === 'development';
   }
 
-  // Client-side: check Supabase session
-  const supabase = getSupabaseClient();
-  if (!supabase) return false;
+  // First, check for JWT token in localStorage (from /api/auth/signin)
+  const jwtToken = localStorage.getItem('beastModeToken');
+  const storedUser = localStorage.getItem('beastModeUser');
+  
+  if (jwtToken && storedUser) {
+    try {
+      // Validate token exists and user data exists
+      const user = JSON.parse(storedUser);
+      if (user && user.id && user.email) {
+        // JWT token exists and user data is valid
+        // Note: In production, you should validate the JWT token signature
+        // For now, we trust that if it's in localStorage and user data exists, user is authenticated
+        return true;
+      }
+    } catch (e) {
+      // Invalid stored user, clear it
+      localStorage.removeItem('beastModeUser');
+      localStorage.removeItem('beastModeToken');
+    }
+  }
 
-  const { data: { session } } = await supabase.auth.getSession();
-  return !!session;
+  // Fallback: check Supabase session (for users who signed in via Supabase directly)
+  const supabase = getSupabaseClient();
+  if (supabase) {
+    try {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (session) {
+        return true;
+      }
+    } catch (error) {
+      // Supabase check failed, continue to return false
+      console.error('Supabase session check failed:', error);
+    }
+  }
+
+  return false;
 }
 
 /**
