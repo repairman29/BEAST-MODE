@@ -42,7 +42,17 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const documentation = await documentationGenerator.generateDocumentation(
+    // Handle both instance and module with default export
+    const generator = (documentationGenerator as any).default || documentationGenerator;
+    
+    if (!generator || typeof generator.generateDocumentation !== 'function') {
+      return NextResponse.json(
+        { error: 'Documentation generator not properly initialized' },
+        { status: 503 }
+      );
+    }
+
+    const documentation = await generator.generateDocumentation(
       code,
       options.filePath || '',
       options.language || 'javascript',
