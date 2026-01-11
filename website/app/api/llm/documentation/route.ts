@@ -13,12 +13,8 @@ import { NextRequest, NextResponse } from 'next/server';
 async function loadDocumentationGenerator() {
   try {
     const docGenModule = await import('../../../../../lib/mlops/documentationGenerator');
-    // The module exports DocumentationGenerator as default
-    const DocumentationGenerator = docGenModule.default || docGenModule.DocumentationGenerator;
-    if (DocumentationGenerator) {
-      return new DocumentationGenerator();
-    }
-    return null;
+    // The module exports an instance directly (module.exports = new DocumentationGenerator())
+    return docGenModule.default || docGenModule;
   } catch (error) {
     console.warn('[Documentation API] Module not available:', error);
     return null;
