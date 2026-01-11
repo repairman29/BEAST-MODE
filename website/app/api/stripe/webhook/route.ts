@@ -329,8 +329,8 @@ async function handleSubscriptionUpdated(
       status: subscription.status === 'active' ? 'active' : 
               subscription.status === 'trialing' ? 'trialing' :
               subscription.status === 'past_due' ? 'past_due' : 'canceled',
-      current_period_start: subscription.current_period_start 
-        ? new Date((subscription.current_period_start as number) * 1000).toISOString()
+      current_period_start: subscription.current_period_start
+        ? new Date((typeof subscription.current_period_start === 'number' ? subscription.current_period_start : subscription.current_period_start) * 1000).toISOString()
         : new Date().toISOString(),
       current_period_end: subscription.current_period_end
         ? new Date((subscription.current_period_end as number) * 1000).toISOString()
