@@ -72,7 +72,15 @@ async function handlePullRequestEvent(payload: any) {
       
       // If rate limited, post rate limit comment and return
       if (analysisResult.rateLimited) {
-        await postRateLimitComment(repo.full_name, pr.number, analysisResult.rateLimitMessage || 'Rate limit exceeded');
+        // Post rate limit comment using PR comment service
+        await postPRComment(repo.full_name, pr.number, {
+          quality: 0,
+          issues: 0,
+          recommendations: [],
+          issuesList: [],
+          rateLimited: true,
+          rateLimitMessage: analysisResult.rateLimitMessage || 'Rate limit exceeded'
+        });
         return { processed: true, event: 'pull_request', action, rateLimited: true };
       }
       
