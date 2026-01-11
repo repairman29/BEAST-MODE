@@ -245,8 +245,12 @@ async function handleCheckoutSessionCompleted(
         stripe_subscription_id: subscriptionId,
         stripe_price_id: priceId,
         status: subscription.status === 'active' ? 'active' : 'trialing',
-        current_period_start: new Date(subscription.current_period_start * 1000).toISOString(),
-        current_period_end: new Date(subscription.current_period_end * 1000).toISOString(),
+        current_period_start: subscription.current_period_start 
+          ? new Date((subscription.current_period_start as number) * 1000).toISOString()
+          : new Date().toISOString(),
+        current_period_end: subscription.current_period_end
+          ? new Date((subscription.current_period_end as number) * 1000).toISOString()
+          : new Date().toISOString(),
         cancel_at_period_end: subscription.cancel_at_period_end || false,
         updated_at: new Date().toISOString()
       }, {
@@ -272,8 +276,12 @@ async function handleCheckoutSessionCompleted(
         stripe_subscription_id: subscriptionId,
         stripe_price_id: priceId,
         status: subscription.status === 'active' ? 'active' : 'trialing',
-        current_period_start: new Date(subscription.current_period_start * 1000).toISOString(),
-        current_period_end: new Date(subscription.current_period_end * 1000).toISOString(),
+        current_period_start: subscription.current_period_start 
+          ? new Date((subscription.current_period_start as number) * 1000).toISOString()
+          : new Date().toISOString(),
+        current_period_end: subscription.current_period_end
+          ? new Date((subscription.current_period_end as number) * 1000).toISOString()
+          : new Date().toISOString(),
         cancel_at_period_end: subscription.cancel_at_period_end || false,
         updated_at: new Date().toISOString()
       })
