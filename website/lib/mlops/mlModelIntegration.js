@@ -363,7 +363,10 @@ class MLModelIntegration {
             // Try to load neural network model first
             if (this.modelPath.includes('neural-network')) {
                 try {
-                    const { NeuralNetworkTrainer } = require('../models/neuralNetworkTrainer');
+                    // Use dynamic require to prevent webpack from analyzing at build time
+                    const neuralNetworkTrainerPath = '../models/neuralNetworkTrainer';
+                    const neuralNetworkTrainerModule = require(neuralNetworkTrainerPath);
+                    const NeuralNetworkTrainer = neuralNetworkTrainerModule.NeuralNetworkTrainer || neuralNetworkTrainerModule.default?.NeuralNetworkTrainer || neuralNetworkTrainerModule;
                     this.qualityPredictor = new NeuralNetworkTrainer();
                     await this.qualityPredictor.loadModel(this.modelPath);
                     log.info('✅ Neural Network ML model loaded and ready');

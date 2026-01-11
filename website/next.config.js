@@ -59,6 +59,17 @@ const nextConfig = {
       };
     }
     
+    // Ignore missing optional dependencies in lib/mlops
+    if (isServer) {
+      const webpack = require('webpack');
+      config.plugins = config.plugins || [];
+      config.plugins.push(
+        new webpack.IgnorePlugin({
+          resourceRegExp: /^\.\.\/models\/neuralNetworkTrainer$/
+        })
+      );
+    }
+    
     // Copy lib/mlops files to output directory so they're available at runtime
     // This is needed for Vercel deployments where files need to be in the output
     if (isServer) {
