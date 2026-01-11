@@ -1,11 +1,28 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+/**
+ * Interceptor Dashboard Component
+ * 
+ * Displays and manages commits intercepted by Brand/Reputation/Secret Interceptor.
+ * Provides statistics, filtering, and status management for intercepted files.
+ * 
+ * Features:
+ * - Real-time statistics (total, recent, critical, pending)
+ * - Advanced filtering (repo, status, severity, search)
+ * - Expandable commit cards with issue details
+ * - Status management (reviewed, approved, rejected)
+ * - Auto-refresh every 30 seconds
+ * - Error handling and loading states
+ * - Performance optimized with useMemo and useCallback
+ */
+
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card';
 import { Button } from '../ui/button';
 import { Badge } from '../ui/badge';
 import LoadingState from '../ui/LoadingState';
 import EmptyState from '../ui/EmptyState';
+import { ErrorBoundary } from '../ui/ErrorBoundary';
 
 interface InterceptedCommit {
   id: string;
@@ -60,44 +77,87 @@ export default function InterceptorDashboard() {
   const [selectedSeverity, setSelectedSeverity] = useState<string>('');
   const [searchQuery, setSearchQuery] = useState('');
   const [expandedCommit, setExpandedCommit] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
+
+  const loadData = useCallback(async () => {
+    try {
+      setLoading(true);
+      
+      // Load stats
+      try {
+        const statsResponse = await fetch('/api/intercepted-commits/stats');
+        if (statsResponse.ok) {
+          const statsData = await statsResponse.json();
+          setStats(statsData.stats);
+        } else {
+          const errorData = await statsResponse.json().catch(() => ({}));
+          if (typeof window !== 'undefined') {
+            window.dispatchEvent(new CustomEvent('beast-mode-notification', {
+              detail: { type: 'error', message: `Failed to load stats: ${errorData.error || 'Unknown error'}` }
+            }));
+          }
+        }
+        } catch (statsError: unknown) {
+        const errorMessage = statsError instanceof Error ? statsError.message : 'Unknown error';
+        console.error('Failed to load stats:', errorMessage);
+        setError('Failed to load statistics');
+        if (typeof window !== 'undefined') {
+          window.dispatchEvent(new CustomEvent('beast-mode-notification', {
+            detail: { type: 'error', message: 'Failed to load statistics' }
+          }));
+        }
+      }
+      
+      // Load commits
+      try {
+        const params = new URLSearchParams();
+        if (selectedRepo) params.append('repo_name', selectedRepo);
+        if (selectedStatus) params.append('status', selectedStatus);
+        params.append('limit', '100');
+        
+        const commitsResponse = await fetch(`/api/intercepted-commits?${params.toString()}`);
+        if (commitsResponse.ok) {
+          const commitsData = await commitsResponse.json();
+          setCommits(commitsData.data || []);
+        } else {
+          const errorData = await commitsResponse.json().catch(() => ({}));
+          if (typeof window !== 'undefined') {
+            window.dispatchEvent(new CustomEvent('beast-mode-notification', {
+              detail: { type: 'error', message: `Failed to load commits: ${errorData.error || 'Unknown error'}` }
+            }));
+          }
+        }
+      } catch (commitsError: unknown) {
+        const errorMessage = commitsError instanceof Error ? commitsError.message : 'Unknown error';
+        console.error('Failed to load commits:', errorMessage);
+        if (typeof window !== 'undefined') {
+          window.dispatchEvent(new CustomEvent('beast-mode-notification', {
+            detail: { type: 'error', message: 'Failed to load intercepted commits' }
+          }));
+        }
+      }
+    } catch (error: unknown) {
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+      console.error('Failed to load interceptor data:', errorMessage);
+      setError('Failed to load interceptor data. Please try again.');
+      if (typeof window !== 'undefined') {
+        window.dispatchEvent(new CustomEvent('beast-mode-notification', {
+          detail: { type: 'error', message: 'Failed to load interceptor data. Please try again.' }
+        }));
+      }
+    } finally {
+      setLoading(false);
+    }
+  }, [selectedRepo, selectedStatus]);
 
   useEffect(() => {
     loadData();
     // Poll every 30 seconds for updates
     const interval = setInterval(loadData, 30000);
     return () => clearInterval(interval);
-  }, []);
+  }, [loadData]);
 
-  const loadData = async () => {
-    try {
-      setLoading(true);
-      
-      // Load stats
-      const statsResponse = await fetch('/api/intercepted-commits/stats');
-      if (statsResponse.ok) {
-        const statsData = await statsResponse.json();
-        setStats(statsData.stats);
-      }
-      
-      // Load commits
-      const params = new URLSearchParams();
-      if (selectedRepo) params.append('repo_name', selectedRepo);
-      if (selectedStatus) params.append('status', selectedStatus);
-      params.append('limit', '100');
-      
-      const commitsResponse = await fetch(`/api/intercepted-commits?${params.toString()}`);
-      if (commitsResponse.ok) {
-        const commitsData = await commitsResponse.json();
-        setCommits(commitsData.data || []);
-      }
-    } catch (error) {
-      console.error('Failed to load interceptor data:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const updateStatus = async (id: string, status: string) => {
+  const updateStatus = useCallback(async (id: string, status: string) => {
     try {
       const response = await fetch('/api/intercepted-commits', {
         method: 'POST',
@@ -106,30 +166,65 @@ export default function InterceptorDashboard() {
       });
       
       if (response.ok) {
-        loadData(); // Reload data
+        await loadData(); // Reload data
         if (typeof window !== 'undefined') {
           window.dispatchEvent(new CustomEvent('beast-mode-notification', {
             detail: { type: 'success', message: `Status updated to ${status}` }
           }));
         }
+      } else {
+        const errorData = await response.json().catch(() => ({}));
+        if (typeof window !== 'undefined') {
+          window.dispatchEvent(new CustomEvent('beast-mode-notification', {
+            detail: { type: 'error', message: `Failed to update status: ${errorData.error || 'Unknown error'}` }
+          }));
+        }
       }
-    } catch (error) {
-      console.error('Failed to update status:', error);
+    } catch (error: unknown) {
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+      console.error('Failed to update status:', errorMessage);
+      if (typeof window !== 'undefined') {
+        window.dispatchEvent(new CustomEvent('beast-mode-notification', {
+          detail: { type: 'error', message: 'Failed to update status. Please try again.' }
+        }));
+      }
     }
-  };
+  }, [loadData]);
 
-  const filteredCommits = commits.filter(commit => {
-    if (selectedRepo && commit.repo_name !== selectedRepo) return false;
-    if (selectedStatus && commit.status !== selectedStatus) return false;
-    if (selectedSeverity && !commit.issues.some(i => i.severity === selectedSeverity)) return false;
-    if (searchQuery && !commit.file_path.toLowerCase().includes(searchQuery.toLowerCase())) return false;
-    return true;
-  });
+  const filteredCommits = useMemo(() => {
+    return commits.filter(commit => {
+      if (selectedRepo && commit.repo_name !== selectedRepo) return false;
+      if (selectedStatus && commit.status !== selectedStatus) return false;
+      if (selectedSeverity && !commit.issues.some(i => i.severity === selectedSeverity)) return false;
+      if (searchQuery && !commit.file_path.toLowerCase().includes(searchQuery.toLowerCase())) return false;
+      return true;
+    });
+  }, [commits, selectedRepo, selectedStatus, selectedSeverity, searchQuery]);
 
-  const uniqueRepos = Array.from(new Set(commits.map(c => c.repo_name))).sort();
+  const uniqueRepos = useMemo(() => {
+    return Array.from(new Set(commits.map(c => c.repo_name))).sort();
+  }, [commits]);
 
   if (loading && !stats) {
     return <LoadingState message="Loading intercepted commits..." />;
+  }
+
+  if (error) {
+    return (
+      <div className="w-full max-w-7xl mx-auto p-6">
+        <Card className="bg-red-950/30 border-red-800">
+          <CardHeader>
+            <CardTitle className="text-red-400">Error Loading Data</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p className="text-slate-300 mb-4">{error}</p>
+            <Button onClick={() => { setError(null); loadData(); }}>
+              Retry
+            </Button>
+          </CardContent>
+        </Card>
+      </div>
+    );
   }
 
   return (
@@ -378,6 +473,7 @@ export default function InterceptorDashboard() {
           )}
         </CardContent>
       </Card>
-    </div>
+      </div>
+    </ErrorBoundary>
   );
 }

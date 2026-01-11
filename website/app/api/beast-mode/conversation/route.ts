@@ -25,23 +25,18 @@ export async function POST(request: NextRequest) {
         const path = require('path');
         const fs = require('fs');
         
-        // Find the mlops directory - in Vercel, files are in /var/task/website
-        // Try multiple possible locations
-        // In Vercel, the .next/server directory contains the bundled code
-        // The original source files might be in different locations
-        // Try to find mlops relative to where we are now
+        // Find the mlops directory
+        // In Vercel, __dirname is .next/server/app/api/beast-mode/conversation
+        // Files are copied to .next/server/lib/mlops during build
         const possiblePaths = [
-          // Try .next/server first (where we copy files during build)
+          // First: relative from bundled route (most reliable)
+          path.join(__dirname, '..', '..', '..', 'lib', 'mlops'), // .next/server/lib/mlops
+          // Second: from process.cwd() 
           path.join(process.cwd(), '.next', 'server', 'lib', 'mlops'),
-          path.join(__dirname, '..', '..', '..', 'lib', 'mlops'), // Relative from .next/server/app/api
-          // Then try source locations
-          path.join(process.cwd(), 'lib', 'mlops'), // If cwd is website
-          path.join(process.cwd(), 'website', 'lib', 'mlops'), // If cwd is root  
-          path.join(__dirname, '..', '..', '..', '..', 'lib', 'mlops'), // Alternative relative
-          // Vercel production paths
-          '/var/task/website/.next/server/lib/mlops', // Copied location
-          '/var/task/website/lib/mlops', // Source location
-          path.join('/var/task', 'lib', 'mlops'),
+          path.join(process.cwd(), 'lib', 'mlops'),
+          // Vercel absolute paths
+          '/var/task/website/.next/server/lib/mlops',
+          '/var/task/website/lib/mlops',
         ];
         
         let mlopsPath: string | null = null;

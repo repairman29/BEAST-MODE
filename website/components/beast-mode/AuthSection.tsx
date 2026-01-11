@@ -25,10 +25,17 @@ export default function AuthSection({ onAuthSuccess }: AuthSectionProps) {
     if (typeof window !== 'undefined') {
       const params = new URLSearchParams(window.location.search);
       const action = params.get('action');
+      const auth = params.get('auth');
       const message = params.get('message');
       const githubUsername = params.get('github_username');
       
-      if (action === 'signup') {
+      // Handle ?auth=required (from dashboard redirect)
+      if (auth === 'required') {
+        setIsSignIn(true);
+        setError('Please sign in to access the dashboard.');
+        // Clear URL params
+        window.history.replaceState({}, '', window.location.pathname);
+      } else if (action === 'signup') {
         setIsSignIn(false);
       } else if (action === 'signin') {
         setIsSignIn(true);
