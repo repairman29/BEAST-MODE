@@ -40,15 +40,31 @@ export async function POST(request: NextRequest) {
         ];
         
         let mlopsPath: string | null = null;
+        console.log('[BEAST MODE] Searching for mlops directory...');
+        console.log('[BEAST MODE] process.cwd():', process.cwd());
+        console.log('[BEAST MODE] __dirname:', __dirname);
+        
         for (const testPath of possiblePaths) {
-          if (fs.existsSync(path.join(testPath, 'llmCodeGenerator.js'))) {
+          const testFile = path.join(testPath, 'llmCodeGenerator.js');
+          const exists = fs.existsSync(testFile);
+          console.log(`[BEAST MODE] Checking: ${testPath} -> ${exists ? 'EXISTS' : 'NOT FOUND'}`);
+          if (exists) {
             mlopsPath = testPath;
-            console.log('[BEAST MODE] Found mlops directory at:', mlopsPath);
+            console.log('[BEAST MODE] ✅ Found mlops directory at:', mlopsPath);
             break;
           }
         }
         
         if (!mlopsPath) {
+          console.error('[BEAST MODE] ❌ Could not find mlops directory');
+          console.error('[BEAST MODE] Tried paths:', possiblePaths);
+          // List what's actually in process.cwd()
+          try {
+            const cwdContents = fs.readdirSync(process.cwd());
+            console.error('[BEAST MODE] Contents of process.cwd():', cwdContents.slice(0, 10));
+          } catch (e) {
+            console.error('[BEAST MODE] Could not read process.cwd()');
+          }
           throw new Error(`Could not find mlops directory. Tried: ${possiblePaths.join(', ')}`);
         }
         
