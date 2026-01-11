@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { useUser } from '@/lib/user-context';
 import { TierBadge } from '../licensing/TierBadge';
 import { LicenseGate } from '../licensing/LicenseGate';
+import { CreditPurchase } from './CreditPurchase';
 
 interface BillingInfo {
   subscription: {
@@ -24,6 +25,7 @@ export function BillingManager() {
   const { user } = useUser();
   const [billing, setBilling] = useState<BillingInfo | null>(null);
   const [loading, setLoading] = useState(true);
+  const [showCreditPurchase, setShowCreditPurchase] = useState(false);
 
   useEffect(() => {
     if (user?.id) {
@@ -45,9 +47,32 @@ export function BillingManager() {
     }
   }
 
+  // Show credit purchase if requested
+  if (showCreditPurchase) {
+    return (
+      <div>
+        <button
+          onClick={() => setShowCreditPurchase(false)}
+          className="mb-4 text-cyan-400 hover:text-cyan-300"
+        >
+          ← Back to Billing
+        </button>
+        <CreditPurchase />
+      </div>
+    );
+  }
+
   return (
     <div className="p-6 bg-slate-900 rounded-lg">
-      <h2 className="text-2xl font-bold mb-6">Billing Management</h2>
+      <div className="flex justify-between items-center mb-6">
+        <h2 className="text-2xl font-bold">Billing Management</h2>
+        <button
+          onClick={() => setShowCreditPurchase(true)}
+          className="px-4 py-2 bg-cyan-500 text-white rounded-lg hover:bg-cyan-600 transition"
+        >
+          Buy Credits
+        </button>
+      </div>
 
       {loading ? (
         <div className="text-center py-8">Loading billing information...</div>
