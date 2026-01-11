@@ -189,28 +189,38 @@ export async function GET(request: NextRequest) {
     if (isProduction) {
       // Production: Use prod credentials (auto-select, ignore env if wrong)
       if (githubClientId === expectedProdClientId && 
-          githubClientSecret === expectedProdClientSecret) {
+          githubClientSecret && githubClientSecret.length > 20) {
         // Env vars are correct
         clientId = githubClientId || expectedProdClientId;
-        clientSecret = githubClientSecret || expectedProdClientSecret;
-      } else {
-        // Auto-fix: use prod credentials (env vars are wrong or missing)
+        clientSecret = githubClientSecret;
+      } else if (expectedProdClientSecret && expectedProdClientSecret.length > 20) {
+        // Use expected prod secret if available
         logger.warn('Auto-fixing: Using PROD credentials (env had wrong/missing values)');
         clientId = expectedProdClientId;
         clientSecret = expectedProdClientSecret;
+      } else {
+        // Last resort: try to use githubClientSecret even if it doesn't match hash
+        logger.warn('Using GITHUB_CLIENT_SECRET as fallback (may not be correct)');
+        clientId = expectedProdClientId;
+        clientSecret = githubClientSecret || secret || '';
       }
     } else {
       // Development: Use dev credentials (auto-select, ignore env if wrong)
       if (githubClientId === expectedDevClientId && 
-          githubClientSecret === expectedDevClientSecret) {
+          githubClientSecret && githubClientSecret.length > 20) {
         // Env vars are correct
         clientId = githubClientId || expectedDevClientId;
-        clientSecret = githubClientSecret || expectedDevClientSecret;
-      } else {
-        // Auto-fix: use dev credentials (env vars are wrong or missing)
+        clientSecret = githubClientSecret;
+      } else if (expectedDevClientSecret && expectedDevClientSecret.length > 20) {
+        // Use expected dev secret if available
         logger.warn('Auto-fixing: Using DEV credentials (env had wrong/missing values)');
         clientId = expectedDevClientId;
         clientSecret = expectedDevClientSecret;
+      } else {
+        // Last resort: try to use githubClientSecret even if it doesn't match hash
+        logger.warn('Using GITHUB_CLIENT_SECRET as fallback (may not be correct)');
+        clientId = expectedDevClientId;
+        clientSecret = githubClientSecret || secret || '';
       }
     }
     
