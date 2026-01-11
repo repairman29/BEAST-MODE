@@ -21,8 +21,16 @@ export async function POST(request: NextRequest) {
       try {
         console.log('[BEAST MODE] Code generation request detected');
         // Use BEAST MODE's code generation capabilities
-        // The lib/mlops folder is copied to website/lib/mlops for Vercel deployment
-        const LLMCodeGenerator = require('../../../../lib/mlops/llmCodeGenerator');
+        // Use dynamic require to prevent webpack from analyzing at build time
+        let LLMCodeGenerator: any;
+        try {
+          LLMCodeGenerator = require('../../../../lib/mlops/llmCodeGenerator');
+        } catch (e) {
+          // Fallback: try absolute path
+          const path = require('path');
+          const rootPath = path.join(process.cwd(), '..', 'lib', 'mlops', 'llmCodeGenerator.js');
+          LLMCodeGenerator = require(rootPath);
+        }
         const generator = new LLMCodeGenerator();
         
         // Build the prompt from context
