@@ -38,6 +38,7 @@
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.71.2",
+    "@monaco-editor/react": "^4.7.0",
     "@octokit/app": "^16.1.2",
     "@octokit/rest": "^22.0.1",
     "@octokit/webhooks": "^14.2.0",
@@ -49,13 +50,17 @@
     "@types/node": "^20.0.0",
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
+    "@xterm/addon-fit": "^0.11.0",
+    "@xterm/xterm": "^6.0.0",
     "autoprefixer": "^10.4.23",
     "axios": "^1.13.2",
     "bcryptjs": "^3.0.3",
     "buffer": "^6.0.3",
     "clsx": "^2.1.1",
+    "copy-webpack-plugin": "^11.0.0",
     "dotenv": "^17.2.3",
     "glob": "^13.0.0",
+    "idb": "^8.0.3",
     "jsonwebtoken": "^9.0.3",
     "lucide-react": "^0.562.0",
     "marked": "^17.0.1",
@@ -70,7 +75,9 @@
     "tailwind-merge": "^3.4.0",
     "typescript": "^5.0.0",
     "winston": "^3.19.0",
-    "copy-webpack-plugin": "^11.0.0"
+    "workbox-window": "^7.4.0",
+    "xterm": "^5.3.0",
+    "zustand": "^5.0.9"
   },
   "devDependencies": {
     "@playwright/test": "^1.57.0",
