@@ -374,42 +374,47 @@ export async function GET(request: NextRequest) {
       // Continue even if storage fails - token is still valid
     }
 
-    // Try to create or sign in Supabase user with GitHub OAuth
-    // This allows GitHub OAuth to also authenticate the user to the site
-    let supabaseSession = null;
-    let supabaseUserId = userId;
+    // Check if user has a Supabase account
+    // GitHub OAuth is for connecting GitHub, not for site authentication
+    // Users need to sign in with email/password first, then connect GitHub
+    let hasSupabaseAccount = false;
     
     try {
       const supabase = await getSupabaseClientOrNull();
       if (supabase && githubUser.email) {
         // Try to find existing user by email
-        const { data: existingUsers } = await supabase.auth.admin.listUsers();
-        const existingUser = existingUsers?.users?.find(u => u.email === githubUser.email);
+        const { data: existingUsers, error: listError } = await supabase.auth.admin.listUsers();
         
-        if (existingUser) {
-          // User exists - we can't create a session server-side without password
-          // But we can set a cookie that the client can use
-          supabaseUserId = existingUser.id;
-          console.log('✅ [GitHub OAuth] Found existing Supabase user:', supabaseUserId);
-        } else {
-          // Create new user with GitHub email
-          // Note: Supabase requires email verification, so we'll redirect to sign-in
-          console.log('ℹ️ [GitHub OAuth] No existing user found, user should sign up first');
+        if (!listError && existingUsers?.users) {
+          const existingUser = existingUsers.users.find(u => u.email === githubUser.email);
+          if (existingUser) {
+            hasSupabaseAccount = true;
+            console.log('✅ [GitHub OAuth] Found existing Supabase user:', existingUser.id);
+          } else {
+            console.log('ℹ️ [GitHub OAuth] No Supabase account found for:', githubUser.email);
+          }
         }
       }
     } catch (supabaseError: any) {
       console.error('⚠️ [GitHub OAuth] Supabase user lookup error (non-fatal):', supabaseError);
     }
 
-    // Determine redirect based on whether user has Supabase session
-    // If userId is a Supabase UUID and we found the user, redirect to dashboard
+    // Determine redirect based on whether user has Supabase account
+    // If userId is a Supabase UUID (starts with 00000000-), they likely have an account
     // Otherwise, redirect to sign-in page with message
     let redirectUrl = `${baseUrl}/dashboard?github_oauth=success`;
     
-    if (!isSupabaseUser || !supabaseUserId.startsWith('00000000-')) {
+    // Check if user has Supabase account
+    const hasAccount = hasSupabaseAccount || (userId && userId.startsWith('00000000-') && isSupabaseUser);
+    
+    if (!hasAccount) {
       // User doesn't have Supabase account - redirect to sign-in with message
       redirectUrl = `${baseUrl}/?action=signin&message=github_connected&github_username=${encodeURIComponent(githubUser.login)}`;
       console.log('ℹ️ [GitHub OAuth] User needs to sign in - redirecting to sign-in page');
+      console.log('   GitHub username:', githubUser.login);
+      console.log('   GitHub email:', githubUser.email);
+    } else {
+      console.log('✅ [GitHub OAuth] User has Supabase account - redirecting to dashboard');
     }
 
     // Clear OAuth cookies but keep userId cookie temporarily for token lookup

@@ -58,6 +58,7 @@ const QualityViewEnhanced = lazy(() => import('./QualityViewEnhanced'));
 const IntelligenceViewEnhanced = lazy(() => import('./IntelligenceViewEnhanced'));
 const AnalyticsDashboard = lazy(() => import('./AnalyticsDashboard'));
 const AdvancedMLFeatures = lazy(() => import('../mlops/AdvancedMLFeatures'));
+const InterceptorDashboard = lazy(() => import('./InterceptorDashboard'));
 
 /**
  * BEAST MODE Enterprise Dashboard
@@ -153,8 +154,8 @@ function BeastModeDashboardInner({ initialView }: BeastModeDashboardInnerProps) 
   });
 
   const [commandInput, setCommandInput] = useState('');
-  const [currentView, setCurrentView] = useState<'quality' | 'intelligence' | 'marketplace' | 'self-improve' | 'collaboration' | 'collaboration-workspace' | 'collaboration-dashboard' | 'settings' | 'auth' | 'pricing' | 'ml-monitoring' | 'unified-analytics' | 'analytics' | 'janitor' | 'advanced-ml' | null>(
-    initialView === 'auth' ? 'auth' : initialView === 'pricing' ? 'pricing' : initialView === 'janitor' ? 'janitor' : null
+  const [currentView, setCurrentView] = useState<'quality' | 'intelligence' | 'marketplace' | 'self-improve' | 'collaboration' | 'collaboration-workspace' | 'collaboration-dashboard' | 'settings' | 'auth' | 'pricing' | 'ml-monitoring' | 'unified-analytics' | 'analytics' | 'janitor' | 'advanced-ml' | 'interceptor' | null>(
+    initialView === 'auth' ? 'auth' : initialView === 'pricing' ? 'pricing' : initialView === 'janitor' ? 'janitor' : initialView === 'interceptor' ? 'interceptor' : null
   );
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
 
@@ -282,9 +283,13 @@ function BeastModeDashboardInner({ initialView }: BeastModeDashboardInnerProps) 
         }
         if (e.key === '5') {
           e.preventDefault();
-          setCurrentView('self-improve');
+          setCurrentView('interceptor');
         }
         if (e.key === '6') {
+          e.preventDefault();
+          setCurrentView('self-improve');
+        }
+        if (e.key === '7') {
           e.preventDefault();
           setCurrentView('settings');
         }

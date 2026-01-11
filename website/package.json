@@ -9,7 +9,8 @@
   },
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build && node scripts/copy-mlops.js",
+    "copy-mlops": "node scripts/copy-mlops.js",
     "start": "next start",
     "lint": "next lint",
     "work": "node scripts/work.js",
@@ -72,6 +73,7 @@
   },
   "devDependencies": {
     "@playwright/test": "^1.57.0",
+    "copy-webpack-plugin": "^11.0.0",
     "critters": "^0.0.23",
     "eslint": "^8.0.0",
     "eslint-config-next": "14.0.0",

@@ -27,12 +27,21 @@ export async function POST(request: NextRequest) {
         
         // Find the mlops directory - in Vercel, files are in /var/task/website
         // Try multiple possible locations
+        // In Vercel, the .next/server directory contains the bundled code
+        // The original source files might be in different locations
+        // Try to find mlops relative to where we are now
         const possiblePaths = [
+          // Try .next/server first (where we copy files during build)
+          path.join(process.cwd(), '.next', 'server', 'lib', 'mlops'),
+          path.join(__dirname, '..', '..', '..', 'lib', 'mlops'), // Relative from .next/server/app/api
+          // Then try source locations
           path.join(process.cwd(), 'lib', 'mlops'), // If cwd is website
-          path.join(process.cwd(), 'website', 'lib', 'mlops'), // If cwd is root
-          path.join(__dirname, '..', '..', '..', '..', 'lib', 'mlops'), // Relative from this file
-          '/var/task/website/lib/mlops', // Vercel production path
-          path.join('/var/task', 'lib', 'mlops'), // Alternative Vercel path
+          path.join(process.cwd(), 'website', 'lib', 'mlops'), // If cwd is root  
+          path.join(__dirname, '..', '..', '..', '..', 'lib', 'mlops'), // Alternative relative
+          // Vercel production paths
+          '/var/task/website/.next/server/lib/mlops', // Copied location
+          '/var/task/website/lib/mlops', // Source location
+          path.join('/var/task', 'lib', 'mlops'),
         ];
         
         let mlopsPath: string | null = null;
