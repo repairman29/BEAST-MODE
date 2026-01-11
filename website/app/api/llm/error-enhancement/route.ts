@@ -10,21 +10,35 @@ import { NextRequest, NextResponse } from 'next/server';
  */
 
 // Use dynamic require to avoid build-time errors
+// Skip this module during build to avoid webpack issues with axios dependencies
 let errorMessageEnhancer: any = null;
 
-try {
-  const enhancerModule = require('../../../../../lib/utils/errorMessageEnhancer');
-  if (enhancerModule.ErrorMessageEnhancer) {
-    errorMessageEnhancer = new enhancerModule.ErrorMessageEnhancer();
-  } else {
-    errorMessageEnhancer = enhancerModule;
+if (typeof window === 'undefined') {
+  // Only load on server-side, skip during build
+  try {
+    // Use dynamic import path to prevent webpack from analyzing
+    const path = require('path');
+    const enhancerPath = path.join(process.cwd(), '../../lib/utils/errorMessageEnhancer');
+    const enhancerModule = require(enhancerPath);
+    if (enhancerModule.ErrorMessageEnhancer) {
+      errorMessageEnhancer = new enhancerModule.ErrorMessageEnhancer();
+    } else {
+      errorMessageEnhancer = enhancerModule;
+    }
+  } catch (error) {
+    // Module not available, will return error in POST handler
   }
-} catch (error) {
-  console.warn('[Error Enhancement API] Module not available:', error);
 }
 
 export async function POST(request: NextRequest) {
   try {
+    if (!errorMessageEnhancer) {
+      return NextResponse.json(
+        { error: 'Error enhancement service not available' },
+        { status: 503 }
+      );
+    }
+    
     const body = await request.json();
     const { error, context = {}, code, options = {} } = body;
 
