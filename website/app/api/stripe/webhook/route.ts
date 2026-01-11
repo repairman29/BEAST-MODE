@@ -155,6 +155,49 @@ async function handleCreditPurchase(
 }
 
 /**
+ * Handle credit purchase via payment intent (alternative flow)
+ */
+async function handleCreditPurchasePaymentIntent(
+  paymentIntent: Stripe.PaymentIntent,
+  supabase: any
+) {
+  console.log(`[Stripe Webhook] Credit purchase payment intent: ${paymentIntent.id}`);
+
+  const userId = paymentIntent.metadata?.userId;
+  const credits = parseInt(paymentIntent.metadata?.credits || '0', 10);
+
+  if (!userId || !credits) {
+    console.error('[Stripe Webhook] Missing userId or credits in payment intent');
+    return;
+  }
+
+  // Add credits to user's balance using the database function
+  const { error } = await supabase.rpc('add_credits_to_user', {
+    p_user_id: userId,
+    p_credits: credits
+  });
+
+  if (error) {
+    console.error('[Stripe Webhook] Error adding credits:', error);
+    return;
+  }
+
+  // Record the purchase
+  await supabase
+    .from('credit_purchases')
+    .insert({
+      user_id: userId,
+      credits: credits,
+      amount: paymentIntent.amount ? paymentIntent.amount / 100 : 0,
+      stripe_payment_intent_id: paymentIntent.id,
+      status: 'completed',
+      purchased_at: new Date().toISOString()
+    });
+
+  console.log(`[Stripe Webhook] Added ${credits} credits to user ${userId} via payment intent`);
+}
+
+/**
  * Handle checkout.session.completed
  * New subscription created - activate user's subscription
  */
