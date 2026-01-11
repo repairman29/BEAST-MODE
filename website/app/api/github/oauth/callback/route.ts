@@ -400,22 +400,22 @@ export async function GET(request: NextRequest) {
     }
 
     // Determine redirect based on whether user has Supabase account
-    // If userId is a Supabase UUID (starts with 00000000-), they likely have an account
-    // Otherwise, redirect to sign-in page with message
-    let redirectUrl = `${baseUrl}/dashboard?github_oauth=success`;
+    // GitHub OAuth is for connecting GitHub, NOT for site authentication
+    // Users must sign in with email/password first, then connect GitHub
+    // ALWAYS redirect to sign-in to prevent authentication loop
+    let redirectUrl: string;
     
     // Check if user has Supabase account
     const hasAccount = hasSupabaseAccount || (userId && userId.startsWith('00000000-') && isSupabaseUser);
     
-    if (!hasAccount) {
-      // User doesn't have Supabase account - redirect to sign-in with message
-      redirectUrl = `${baseUrl}/?action=signin&message=github_connected&github_username=${encodeURIComponent(githubUser.login)}`;
-      console.log('ℹ️ [GitHub OAuth] User needs to sign in - redirecting to sign-in page');
-      console.log('   GitHub username:', githubUser.login);
-      console.log('   GitHub email:', githubUser.email);
-    } else {
-      console.log('✅ [GitHub OAuth] User has Supabase account - redirecting to dashboard');
-    }
+    // For now, always redirect to sign-in to break the loop
+    // Even if they have an account, they need to sign in to get a session
+    redirectUrl = `${baseUrl}/?action=signin&message=github_connected&github_username=${encodeURIComponent(githubUser.login)}`;
+    console.log('ℹ️ [GitHub OAuth] Redirecting to sign-in page (GitHub connected)');
+    console.log('   GitHub username:', githubUser.login);
+    console.log('   GitHub email:', githubUser.email || 'not provided');
+    console.log('   Has Supabase account:', hasAccount);
+    console.log('   Note: User must sign in to access dashboard (GitHub OAuth is for connecting, not authentication)');
 
     // Clear OAuth cookies but keep userId cookie temporarily for token lookup
     const response = NextResponse.redirect(redirectUrl);
