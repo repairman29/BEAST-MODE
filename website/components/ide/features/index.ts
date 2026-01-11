@@ -22,27 +22,201 @@ export { default as US_0017 } from './US_0017';
 export { default as US_0018 } from './US_0018';
 export { default as US_0019 } from './US_0019';
 export { default as US_0020 } from './US_0020';
+export { default as US_0021 } from './US_0021';
+export { default as US_0022 } from './US_0022';
+export { default as US_0023 } from './US_0023';
+export { default as US_0024 } from './US_0024';
+export { default as US_0025 } from './US_0025';
+export { default as US_0026 } from './US_0026';
+export { default as US_0027 } from './US_0027';
+export { default as US_0028 } from './US_0028';
+export { default as US_0029 } from './US_0029';
+export { default as US_0030 } from './US_0030';
+export { default as US_0031 } from './US_0031';
+export { default as US_0032 } from './US_0032';
+export { default as US_0033 } from './US_0033';
+export { default as US_0034 } from './US_0034';
+export { default as US_0035 } from './US_0035';
+export { default as US_0036 } from './US_0036';
+export { default as US_0037 } from './US_0037';
+export { default as US_0038 } from './US_0038';
+export { default as US_0039 } from './US_0039';
+export { default as US_0040 } from './US_0040';
+export { default as US_0041 } from './US_0041';
+export { default as US_0042 } from './US_0042';
+export { default as US_0043 } from './US_0043';
+export { default as US_0044 } from './US_0044';
+export { default as US_0045 } from './US_0045';
+export { default as US_0046 } from './US_0046';
+export { default as US_0047 } from './US_0047';
+export { default as US_0048 } from './US_0048';
+export { default as US_0049 } from './US_0049';
+export { default as US_0050 } from './US_0050';
+export { default as US_0099 } from './US_0099';
+export { default as US_0102 } from './US_0102';
+export { default as US_0105 } from './US_0105';
+export { default as US_0108 } from './US_0108';
+export { default as US_0111 } from './US_0111';
+export { default as US_0114 } from './US_0114';
+export { default as US_0117 } from './US_0117';
+export { default as US_0120 } from './US_0120';
+export { default as US_0123 } from './US_0123';
+export { default as US_0126 } from './US_0126';
+export { default as US_0129 } from './US_0129';
+export { default as US_0132 } from './US_0132';
+export { default as US_0135 } from './US_0135';
+export { default as US_0138 } from './US_0138';
+export { default as US_0141 } from './US_0141';
+export { default as US_0144 } from './US_0144';
+export { default as US_0147 } from './US_0147';
+export { default as US_0150 } from './US_0150';
+export { default as US_0153 } from './US_0153';
+export { default as US_0156 } from './US_0156';
+export { default as US_0159 } from './US_0159';
+export { default as US_0162 } from './US_0162';
+export { default as US_0165 } from './US_0165';
+export { default as US_0168 } from './US_0168';
+export { default as US_0171 } from './US_0171';
+export { default as US_0174 } from './US_0174';
+export { default as US_0177 } from './US_0177';
+export { default as US_0178 } from './US_0178';
+export { default as US_0179 } from './US_0179';
+export { default as US_0180 } from './US_0180';
+export { default as US_0181 } from './US_0181';
+export { default as US_0182 } from './US_0182';
+export { default as US_0183 } from './US_0183';
+export { default as US_0184 } from './US_0184';
+export { default as US_0185 } from './US_0185';
+export { default as US_0186 } from './US_0186';
+export { default as US_0187 } from './US_0187';
+export { default as US_0188 } from './US_0188';
+export { default as US_0189 } from './US_0189';
+export { default as US_0190 } from './US_0190';
+export { default as US_0191 } from './US_0191';
+export { default as US_0192 } from './US_0192';
+export { default as US_0193 } from './US_0193';
+export { default as US_0194 } from './US_0194';
+export { default as US_0195 } from './US_0195';
+export { default as US_0196 } from './US_0196';
+export { default as US_0197 } from './US_0197';
+export { default as US_0198 } from './US_0198';
+export { default as US_0199 } from './US_0199';
+export { default as US_0200 } from './US_0200';
+export { default as US_0201 } from './US_0201';
+export { default as US_0202 } from './US_0202';
+export { default as US_0203 } from './US_0203';
+export { default as US_0204 } from './US_0204';
+export { default as US_0205 } from './US_0205';
+export { default as US_0206 } from './US_0206';
+export { default as US_0207 } from './US_0207';
+export { default as US_0208 } from './US_0208';
+export { default as US_0209 } from './US_0209';
+export { default as US_0210 } from './US_0210';
+export { default as US_0211 } from './US_0211';
+export { default as US_0212 } from './US_0212';
+export { default as US_0213 } from './US_0213';
+export { default as US_0214 } from './US_0214';
+export { default as US_0215 } from './US_0215';
+export { default as US_0216 } from './US_0216';
+export { default as US_0217 } from './US_0217';
+export { default as US_0218 } from './US_0218';
+export { default as US_0219 } from './US_0219';
+export { default as US_0220 } from './US_0220';
+export { default as US_0221 } from './US_0221';
+export { default as US_0222 } from './US_0222';
+export { default as US_0223 } from './US_0223';
+export { default as US_0224 } from './US_0224';
+export { default as US_0225 } from './US_0225';
+export { default as US_0226 } from './US_0226';
+export { default as US_0227 } from './US_0227';
+export { default as US_0228 } from './US_0228';
+export { default as US_0229 } from './US_0229';
+export { default as US_0230 } from './US_0230';
+export { default as US_0231 } from './US_0231';
+export { default as US_0232 } from './US_0232';
+export { default as US_0233 } from './US_0233';
+export { default as US_0234 } from './US_0234';
+export { default as US_0235 } from './US_0235';
+export { default as US_0236 } from './US_0236';
+export { default as US_0237 } from './US_0237';
+export { default as US_0238 } from './US_0238';
+export { default as US_0239 } from './US_0239';
+export { default as US_0240 } from './US_0240';
+export { default as US_0241 } from './US_0241';
+export { default as US_0242 } from './US_0242';
+export { default as US_0243 } from './US_0243';
+export { default as US_0244 } from './US_0244';
+export { default as US_0245 } from './US_0245';
+export { default as US_0246 } from './US_0246';
+export { default as US_0247 } from './US_0247';
+export { default as US_0248 } from './US_0248';
+export { default as US_0249 } from './US_0249';
+export { default as US_0250 } from './US_0250';
+export { default as US_0251 } from './US_0251';
+export { default as US_0252 } from './US_0252';
+export { default as US_0253 } from './US_0253';
+export { default as US_0254 } from './US_0254';
+export { default as US_0255 } from './US_0255';
+export { default as US_0256 } from './US_0256';
+export { default as US_0257 } from './US_0257';
+export { default as US_0258 } from './US_0258';
+export { default as US_0259 } from './US_0259';
+export { default as US_0260 } from './US_0260';
+export { default as US_0265 } from './US_0265';
+export { default as US_0266 } from './US_0266';
+export { default as US_0277 } from './US_0277';
+export { default as US_0278 } from './US_0278';
+export { default as US_0289 } from './US_0289';
+export { default as US_0290 } from './US_0290';
+export { default as US_0301 } from './US_0301';
+export { default as US_0303 } from './US_0303';
+export { default as US_0305 } from './US_0305';
+export { default as US_0307 } from './US_0307';
+export { default as US_0309 } from './US_0309';
+export { default as US_0311 } from './US_0311';
+export { default as US_0313 } from './US_0313';
+export { default as US_0315 } from './US_0315';
+export { default as US_0317 } from './US_0317';
+export { default as US_0319 } from './US_0319';
+export { default as US_0321 } from './US_0321';
+export { default as US_0323 } from './US_0323';
+export { default as US_0325 } from './US_0325';
+export { default as US_0327 } from './US_0327';
+export { default as US_0329 } from './US_0329';
+export { default as US_0331 } from './US_0331';
+export { default as US_0333 } from './US_0333';
+export { default as US_0334 } from './US_0334';
+export { default as US_0335 } from './US_0335';
+export { default as US_0401 } from './US_0401';
+export { default as US_0402 } from './US_0402';
+export { default as US_0403 } from './US_0403';
+export { default as US_0404 } from './US_0404';
+export { default as US_0421 } from './US_0421';
+export { default as US_0422 } from './US_0422';
+export { default as US_0423 } from './US_0423';
+export { default as US_0424 } from './US_0424';
+export { default as US_0441 } from './US_0441';
+export { default as US_0442 } from './US_0442';
+export { default as US_0443 } from './US_0443';
+export { default as US_0456 } from './US_0456';
+export { default as US_0457 } from './US_0457';
+export { default as US_0458 } from './US_0458';
+export { default as US_0477 } from './US_0477';
+export { default as US_0478 } from './US_0478';
+export { default as US_0479 } from './US_0479';
+export { default as US_0501 } from './US_0501';
+export { default as US_0504 } from './US_0504';
+export { default as US_0621 } from './US_0621';
+export { default as US_0622 } from './US_0622';
+export { default as US_0623 } from './US_0623';
+export { default as US_0624 } from './US_0624';
+export { default as US_0644 } from './US_0644';
+export { default as US_0645 } from './US_0645';
+export { default as US_0646 } from './US_0646';
+export { default as US_0668 } from './US_0668';
+export { default as US_0669 } from './US_0669';
+export { default as US_0670 } from './US_0670';
+export { default as US_0671 } from './US_0671';
 
-// Feature metadata
-export const features = [
-  { id: 'US-0001', title: 'Create File (keyboard)', category: 'Core Coding - File Management', file: 'US_0001.tsx' },
-  { id: 'US-0002', title: 'Create File (mouse)', category: 'Core Coding - File Management', file: 'US_0002.tsx' },
-  { id: 'US-0003', title: 'Create File (command-palette)', category: 'Core Coding - File Management', file: 'US_0003.tsx' },
-  { id: 'US-0004', title: 'Create File (context-menu)', category: 'Core Coding - File Management', file: 'US_0004.tsx' },
-  { id: 'US-0005', title: 'Create File (drag-drop)', category: 'Core Coding - File Management', file: 'US_0005.tsx' },
-  { id: 'US-0006', title: 'Create File (terminal)', category: 'Core Coding - File Management', file: 'US_0006.tsx' },
-  { id: 'US-0007', title: 'Create File (git)', category: 'Core Coding - File Management', file: 'US_0007.tsx' },
-  { id: 'US-0008', title: 'Open File (keyboard)', category: 'Core Coding - File Management', file: 'US_0008.tsx' },
-  { id: 'US-0009', title: 'Open File (mouse)', category: 'Core Coding - File Management', file: 'US_0009.tsx' },
-  { id: 'US-0010', title: 'Open File (command-palette)', category: 'Core Coding - File Management', file: 'US_0010.tsx' },
-  { id: 'US-0011', title: 'Open File (context-menu)', category: 'Core Coding - File Management', file: 'US_0011.tsx' },
-  { id: 'US-0012', title: 'Open File (drag-drop)', category: 'Core Coding - File Management', file: 'US_0012.tsx' },
-  { id: 'US-0013', title: 'Open File (terminal)', category: 'Core Coding - File Management', file: 'US_0013.tsx' },
-  { id: 'US-0014', title: 'Open File (git)', category: 'Core Coding - File Management', file: 'US_0014.tsx' },
-  { id: 'US-0015', title: 'Save File (keyboard)', category: 'Core Coding - File Management', file: 'US_0015.tsx' },
-  { id: 'US-0016', title: 'Save File (mouse)', category: 'Core Coding - File Management', file: 'US_0016.tsx' },
-  { id: 'US-0017', title: 'Save File (command-palette)', category: 'Core Coding - File Management', file: 'US_0017.tsx' },
-  { id: 'US-0018', title: 'Save File (context-menu)', category: 'Core Coding - File Management', file: 'US_0018.tsx' },
-  { id: 'US-0019', title: 'Save File (drag-drop)', category: 'Core Coding - File Management', file: 'US_0019.tsx' },
-  { id: 'US-0020', title: 'Save File (terminal)', category: 'Core Coding - File Management', file: 'US_0020.tsx' },
-];
+// Feature metadata - update manually or regenerate
+export const features: Array<{ id: string; title: string; category: string; file: string }> = [];
