@@ -21,7 +21,10 @@ export async function POST(request: NextRequest) {
     let AutomatedCodeReview;
     try {
       // @ts-ignore - Optional module, may not exist
-      const module = await import(/* webpackIgnore: true */ '../../../../../../lib/intelligence/automated-code-review').catch(() => null);
+      // Try website/lib first (for Next.js), then fallback to root lib
+      const module = await import(/* webpackIgnore: true */ '../../../../lib/intelligence/automated-code-review.js').catch(() => 
+        import(/* webpackIgnore: true */ '../../../../../../lib/intelligence/automated-code-review.js').catch(() => null)
+      );
       AutomatedCodeReview = module?.default || module;
       if (!AutomatedCodeReview) {
         return NextResponse.json({

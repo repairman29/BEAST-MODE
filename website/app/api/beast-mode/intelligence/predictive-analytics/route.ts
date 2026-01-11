@@ -21,7 +21,10 @@ export async function POST(request: NextRequest) {
     let PredictiveAnalytics;
     try {
       // @ts-ignore - Dynamic import, module may not exist
-      const module = await import(/* webpackIgnore: true */ '../../../../../../lib/intelligence/predictive-analytics').catch(() => null);
+      // Try website/lib first (for Next.js), then fallback to root lib
+      const module = await import(/* webpackIgnore: true */ '../../../../lib/intelligence/predictive-analytics.js').catch(() => 
+        import(/* webpackIgnore: true */ '../../../../../../lib/intelligence/predictive-analytics.js').catch(() => null)
+      );
       PredictiveAnalytics = module?.default || module;
       if (!PredictiveAnalytics) {
         return NextResponse.json({

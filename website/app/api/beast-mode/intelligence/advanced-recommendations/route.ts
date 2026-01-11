@@ -22,7 +22,10 @@ export async function POST(request: NextRequest) {
     let AdvancedRecommendations;
     try {
       // @ts-ignore - Optional module, may not exist
-      const module = await import(/* webpackIgnore: true */ '../../../../../../lib/intelligence/advanced-recommendations').catch(() => null);
+      // Try website/lib first (for Next.js), then fallback to root lib
+      const module = await import(/* webpackIgnore: true */ '../../../../lib/intelligence/advanced-recommendations.js').catch(() => 
+        import(/* webpackIgnore: true */ '../../../../../../lib/intelligence/advanced-recommendations.js').catch(() => null)
+      );
       AdvancedRecommendations = module?.default || module;
       if (!AdvancedRecommendations) {
         return NextResponse.json({
