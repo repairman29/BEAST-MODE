@@ -70,7 +70,8 @@ export class FeatureRegistry {
         return null;
       }
       
-      const module = await import(`@/components/ide/features/${fileName}`);
+      // Use explicit .tsx extension to avoid webpack matching other files
+      const module = await import(`@/components/ide/features/${fileName}.tsx`);
       const component = module.default;
       
       if (component) {
