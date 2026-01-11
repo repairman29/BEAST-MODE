@@ -16,6 +16,107 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // Check if this is a code generation request
+    if (context?.type === 'code_generation' || context?.task === 'generate_code') {
+      try {
+        console.log('[BEAST MODE] Code generation request detected');
+        // Use BEAST MODE's code generation capabilities
+        const path = require('path');
+        // In Next.js, process.cwd() is the website directory, so go up one level to BEAST-MODE-PRODUCT root
+        const rootPath = path.join(process.cwd(), '..', 'lib', 'mlops', 'llmCodeGenerator.js');
+        const LLMCodeGenerator = require(rootPath);
+        const generator = new LLMCodeGenerator();
+        
+        // Build the prompt from context
+        const bounty = context.bounty || {};
+        const repo = context.repo || {};
+        const dossier = context.dossier || {};
+        
+        let codePrompt = message;
+        if (message.startsWith('CODE GENERATION TASK: ')) {
+          codePrompt = message.substring('CODE GENERATION TASK: '.length);
+        }
+        
+        // Get user ID from context or use default
+        const userId = context.userId || '';
+        
+        // Generate code using model router
+        const generatedCode = await generator.generateWithModelRouter(codePrompt, {
+          model: 'openai:gpt-4', // Can be customized
+          temperature: 0.7,
+          maxTokens: 8000,
+          systemPrompt: `You are an expert software developer. Generate production-ready code that solves the given problem. Return ONLY valid JSON in this exact format:
+{
+  "files": [
+    {
+      "path": "src/path/to/file.ts",
+      "content": "export function solveBounty() { /* full implementation */ }",
+      "language": "typescript"
+    }
+  ],
+  "summary": "Brief description",
+  "test_files": [
+    {
+      "path": "tests/path/to/test.ts",
+      "content": "describe('solution', () => { /* tests */ })",
+      "language": "typescript"
+    }
+  ]
+}
+
+CRITICAL: Return ONLY the JSON, no markdown, no explanations, no code blocks. The "content" field must contain actual, complete, working code.`,
+          userId,
+          useKnowledgeRAG: true,
+          codebaseContext: dossier.code_analysis ? JSON.stringify(dossier.code_analysis) : '',
+        });
+        
+        // Parse the response to extract JSON
+        let codeResponse = generatedCode;
+        if (typeof generatedCode === 'string') {
+          // Try to extract JSON from the response
+          const jsonMatch = generatedCode.match(/\{[\s\S]*"files"[\s\S]*\}/);
+          if (jsonMatch) {
+            try {
+              codeResponse = JSON.parse(jsonMatch[0]);
+            } catch (e) {
+              // If JSON parse fails, return the raw response
+              codeResponse = { response: generatedCode };
+            }
+          } else {
+            codeResponse = { response: generatedCode };
+          }
+        }
+        
+        return NextResponse.json({
+          response: typeof codeResponse === 'string' ? codeResponse : JSON.stringify(codeResponse),
+          intent: 'code_generation',
+          sentiment: 'positive',
+          timestamp: new Date().toISOString(),
+          code: codeResponse, // Include parsed code for easy access
+          context: {
+            type: 'code_generation',
+            task: 'generate_code',
+          }
+        });
+      } catch (error: any) {
+        console.error('[BEAST MODE] Code generation error:', error);
+        console.error('[BEAST MODE] Error stack:', error.stack);
+        // Return error but don't fall through - let caller know code generation failed
+        return NextResponse.json({
+          response: `Code generation failed: ${error.message}. Falling back to conversation mode.`,
+          intent: 'code_generation_error',
+          sentiment: 'neutral',
+          timestamp: new Date().toISOString(),
+          error: error.message,
+          context: {
+            type: 'code_generation',
+            task: 'generate_code',
+            failed: true
+          }
+        }, { status: 500 });
+      }
+    }
+
     // Get recent scan data for context
     let recentScans: any[] = [];
     try {
