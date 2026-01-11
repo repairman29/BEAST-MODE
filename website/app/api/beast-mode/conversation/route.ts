@@ -25,15 +25,27 @@ export async function POST(request: NextRequest) {
         const path = require('path');
         const fs = require('fs');
         
-        // Find the mlops directory - try website/lib/mlops first (for Vercel)
-        let mlopsPath = path.join(process.cwd(), 'lib', 'mlops');
-        if (!fs.existsSync(path.join(mlopsPath, 'llmCodeGenerator.js'))) {
-          // Fallback: try going up one level (if process.cwd() is website)
-          mlopsPath = path.join(process.cwd(), '..', 'lib', 'mlops');
-          if (!fs.existsSync(path.join(mlopsPath, 'llmCodeGenerator.js'))) {
-            // Last resort: try relative from this file
-            mlopsPath = path.join(__dirname, '..', '..', '..', '..', 'lib', 'mlops');
+        // Find the mlops directory - in Vercel, files are in /var/task/website
+        // Try multiple possible locations
+        const possiblePaths = [
+          path.join(process.cwd(), 'lib', 'mlops'), // If cwd is website
+          path.join(process.cwd(), 'website', 'lib', 'mlops'), // If cwd is root
+          path.join(__dirname, '..', '..', '..', '..', 'lib', 'mlops'), // Relative from this file
+          '/var/task/website/lib/mlops', // Vercel production path
+          path.join('/var/task', 'lib', 'mlops'), // Alternative Vercel path
+        ];
+        
+        let mlopsPath: string | null = null;
+        for (const testPath of possiblePaths) {
+          if (fs.existsSync(path.join(testPath, 'llmCodeGenerator.js'))) {
+            mlopsPath = testPath;
+            console.log('[BEAST MODE] Found mlops directory at:', mlopsPath);
+            break;
           }
+        }
+        
+        if (!mlopsPath) {
+          throw new Error(`Could not find mlops directory. Tried: ${possiblePaths.join(', ')}`);
         }
         
         // Use wrapper to load code generator with proper module resolution

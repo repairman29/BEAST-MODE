@@ -374,10 +374,46 @@ export async function GET(request: NextRequest) {
       // Continue even if storage fails - token is still valid
     }
 
+    // Try to create or sign in Supabase user with GitHub OAuth
+    // This allows GitHub OAuth to also authenticate the user to the site
+    let supabaseSession = null;
+    let supabaseUserId = userId;
+    
+    try {
+      const supabase = await getSupabaseClientOrNull();
+      if (supabase && githubUser.email) {
+        // Try to find existing user by email
+        const { data: existingUsers } = await supabase.auth.admin.listUsers();
+        const existingUser = existingUsers?.users?.find(u => u.email === githubUser.email);
+        
+        if (existingUser) {
+          // User exists - we can't create a session server-side without password
+          // But we can set a cookie that the client can use
+          supabaseUserId = existingUser.id;
+          console.log('✅ [GitHub OAuth] Found existing Supabase user:', supabaseUserId);
+        } else {
+          // Create new user with GitHub email
+          // Note: Supabase requires email verification, so we'll redirect to sign-in
+          console.log('ℹ️ [GitHub OAuth] No existing user found, user should sign up first');
+        }
+      }
+    } catch (supabaseError: any) {
+      console.error('⚠️ [GitHub OAuth] Supabase user lookup error (non-fatal):', supabaseError);
+    }
+
+    // Determine redirect based on whether user has Supabase session
+    // If userId is a Supabase UUID and we found the user, redirect to dashboard
+    // Otherwise, redirect to sign-in page with message
+    let redirectUrl = `${baseUrl}/dashboard?github_oauth=success`;
+    
+    if (!isSupabaseUser || !supabaseUserId.startsWith('00000000-')) {
+      // User doesn't have Supabase account - redirect to sign-in with message
+      redirectUrl = `${baseUrl}/?action=signin&message=github_connected&github_username=${encodeURIComponent(githubUser.login)}`;
+      console.log('ℹ️ [GitHub OAuth] User needs to sign in - redirecting to sign-in page');
+    }
+
     // Clear OAuth cookies but keep userId cookie temporarily for token lookup
-    const response = NextResponse.redirect(
-      `${baseUrl}/dashboard?github_oauth=success`
-    );
+    const response = NextResponse.redirect(redirectUrl);
 
     response.cookies.delete('github_oauth_state');
     // Keep github_oauth_user_id cookie for a bit longer so GET /api/github/token can find it

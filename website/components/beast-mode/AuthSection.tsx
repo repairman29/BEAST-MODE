@@ -25,10 +25,21 @@ export default function AuthSection({ onAuthSuccess }: AuthSectionProps) {
     if (typeof window !== 'undefined') {
       const params = new URLSearchParams(window.location.search);
       const action = params.get('action');
+      const message = params.get('message');
+      const githubUsername = params.get('github_username');
+      
       if (action === 'signup') {
         setIsSignIn(false);
       } else if (action === 'signin') {
         setIsSignIn(true);
+      }
+      
+      // Show message if GitHub was connected but user needs to sign in
+      if (message === 'github_connected' && githubUsername) {
+        setError(`GitHub account (@${githubUsername}) connected! Please sign in with your email and password to continue.`);
+        setIsSignIn(true);
+        // Clear URL params
+        window.history.replaceState({}, '', window.location.pathname);
       }
     }
   }, []);
