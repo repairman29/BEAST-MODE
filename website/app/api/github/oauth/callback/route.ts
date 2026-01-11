@@ -173,54 +173,70 @@ export async function GET(request: NextRequest) {
     
     // Use environment variable with fallback - architecture enforcer safe
     // Production secret: Check GITHUB_CLIENT_SECRET_PROD first, then check if GITHUB_CLIENT_SECRET matches prod hash
+    // The hash '014c7fab1ba6cc6a7398b5bde04e26463f16f4e9' is just an identifier - we need the actual secret
     const expectedProdClientSecret = githubClientSecretProd || 
-      (githubClientSecret === '014c7fab1ba6cc6a7398b5bde04e26463f16f4e9' 
+      (githubClientSecret && githubClientSecret.length > 20 && githubClientSecret !== '014c7fab1ba6cc6a7398b5bde04e26463f16f4e9'
         ? githubClientSecret 
-        : (secret && secret.length > 20 ? secret : '014c7fab1ba6cc6a7398b5bde04e26463f16f4e9'));
+        : (secret && secret.length > 20 ? secret : null));
     // Development secret: Check GITHUB_CLIENT_SECRET_DEV first, then check if GITHUB_CLIENT_SECRET matches dev hash
+    // The hash 'df4c598018de45ce8cb90313489eeb21448aedcf' is just an identifier - we need the actual secret
     const expectedDevClientSecret = githubClientSecretDev || 
-      (githubClientSecret === 'df4c598018de45ce8cb90313489eeb21448aedcf'
+      (githubClientSecret && githubClientSecret.length > 20 && githubClientSecret !== 'df4c598018de45ce8cb90313489eeb21448aedcf'
         ? githubClientSecret
-        : (secret && secret.length > 20 ? secret : 'df4c598018de45ce8cb90313489eeb21448aedcf'));
+        : (secret && secret.length > 20 ? secret : null));
     
     let clientId: string;
     let clientSecret: string;
     
     if (isProduction) {
-      // Production: Use prod credentials (auto-select, ignore env if wrong)
-      if (githubClientId === expectedProdClientId && 
-          githubClientSecret && githubClientSecret.length > 20) {
-        // Env vars are correct
-        clientId = githubClientId || expectedProdClientId;
+      // Production: Use prod credentials
+      // Priority: GITHUB_CLIENT_SECRET_PROD > GITHUB_CLIENT_SECRET (if valid) > SECRET (if valid)
+      if (githubClientSecretProd && githubClientSecretProd.length > 20) {
+        // Best case: dedicated prod secret
+        clientId = expectedProdClientId;
+        clientSecret = githubClientSecretProd;
+        logger.info('Using GITHUB_CLIENT_SECRET_PROD');
+      } else if (githubClientSecret && githubClientSecret.length > 20 && 
+                 githubClientSecret !== '014c7fab1ba6cc6a7398b5bde04e26463f16f4e9') {
+        // Fallback: use GITHUB_CLIENT_SECRET if it's a valid secret (not the hash)
+        clientId = expectedProdClientId;
         clientSecret = githubClientSecret;
-      } else if (expectedProdClientSecret && expectedProdClientSecret.length > 20) {
-        // Use expected prod secret if available
-        logger.warn('Auto-fixing: Using PROD credentials (env had wrong/missing values)');
+        logger.warn('Using GITHUB_CLIENT_SECRET for production (may not be correct)');
+      } else if (secret && secret.length > 20) {
+        // Last resort: use SECRET env var
         clientId = expectedProdClientId;
-        clientSecret = expectedProdClientSecret;
+        clientSecret = secret;
+        logger.warn('Using SECRET env var for production (may not be correct)');
       } else {
-        // Last resort: try to use githubClientSecret even if it doesn't match hash
-        logger.warn('Using GITHUB_CLIENT_SECRET as fallback (may not be correct)');
+        // No valid secret found
         clientId = expectedProdClientId;
-        clientSecret = githubClientSecret || secret || '';
+        clientSecret = '';
+        logger.error('No valid production client secret found in environment variables');
       }
     } else {
-      // Development: Use dev credentials (auto-select, ignore env if wrong)
-      if (githubClientId === expectedDevClientId && 
-          githubClientSecret && githubClientSecret.length > 20) {
-        // Env vars are correct
-        clientId = githubClientId || expectedDevClientId;
+      // Development: Use dev credentials
+      // Priority: GITHUB_CLIENT_SECRET_DEV > GITHUB_CLIENT_SECRET (if valid) > SECRET (if valid)
+      if (githubClientSecretDev && githubClientSecretDev.length > 20) {
+        // Best case: dedicated dev secret
+        clientId = expectedDevClientId;
+        clientSecret = githubClientSecretDev;
+        logger.info('Using GITHUB_CLIENT_SECRET_DEV');
+      } else if (githubClientSecret && githubClientSecret.length > 20 && 
+                 githubClientSecret !== 'df4c598018de45ce8cb90313489eeb21448aedcf') {
+        // Fallback: use GITHUB_CLIENT_SECRET if it's a valid secret (not the hash)
+        clientId = expectedDevClientId;
         clientSecret = githubClientSecret;
-      } else if (expectedDevClientSecret && expectedDevClientSecret.length > 20) {
-        // Use expected dev secret if available
-        logger.warn('Auto-fixing: Using DEV credentials (env had wrong/missing values)');
+        logger.warn('Using GITHUB_CLIENT_SECRET for development (may not be correct)');
+      } else if (secret && secret.length > 20) {
+        // Last resort: use SECRET env var
         clientId = expectedDevClientId;
-        clientSecret = expectedDevClientSecret;
+        clientSecret = secret;
+        logger.warn('Using SECRET env var for development (may not be correct)');
       } else {
-        // Last resort: try to use githubClientSecret even if it doesn't match hash
-        logger.warn('Using GITHUB_CLIENT_SECRET as fallback (may not be correct)');
+        // No valid secret found
         clientId = expectedDevClientId;
-        clientSecret = githubClientSecret || secret || '';
+        clientSecret = '';
+        logger.error('No valid development client secret found in environment variables');
       }
     }
     
