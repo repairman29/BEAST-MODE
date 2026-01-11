@@ -62,27 +62,8 @@ export class FeatureRegistry {
       return this.components.get(featureId)!;
     }
 
-    try {
-      // Dynamically import the component
-      // Only import .tsx files, exclude .md, .json, etc.
-      const fileName = featureId.replace(/[^a-zA-Z0-9]/g, '_');
-      if (!fileName.startsWith('US_')) {
-        return null;
-      }
-      
-      // Use explicit .tsx extension to avoid webpack matching other files
-      const module = await import(`@/components/ide/features/${fileName}.tsx`);
-      const component = module.default;
-      
-      if (component) {
-        this.components.set(featureId, component);
-        return component;
-      }
-    } catch (error) {
-      // Silently fail - feature might not exist or be invalid
-      console.debug(`Feature ${featureId} not available:`, error);
-    }
-
+    // For now, return null - features will be loaded on demand via explicit imports
+    // This avoids webpack dynamic import issues
     return null;
   }
 

@@ -19,10 +19,26 @@ export default function FeaturePanel({ onFeatureSelect }: FeaturePanelProps) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const loadFeatures = () => {
-      const allFeatures = featureRegistry.getAllFeatures();
-      setFeatures(allFeatures);
-      setLoading(false);
+    const loadFeatures = async () => {
+      try {
+        // Load features metadata
+        const featuresModule = await import('@/components/ide/features');
+        const featuresList = featuresModule.features || [];
+        
+        // Convert to Feature format
+        const allFeatures: Feature[] = featuresList.map((f: any) => ({
+          id: f.id,
+          title: f.title,
+          category: f.category,
+          file: f.file,
+        }));
+        
+        setFeatures(allFeatures);
+        setLoading(false);
+      } catch (error) {
+        console.error('Failed to load features:', error);
+        setLoading(false);
+      }
     };
 
     loadFeatures();

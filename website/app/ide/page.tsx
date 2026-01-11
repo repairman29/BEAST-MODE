@@ -29,7 +29,17 @@ export default function IDEPage() {
 
   useEffect(() => {
     // Load feature count
-    setFeatureCount(featureRegistry.getFeatureCount());
+    const loadFeatureCount = async () => {
+      try {
+        const featuresModule = await import('@/components/ide/features');
+        const featuresList = featuresModule.features || [];
+        setFeatureCount(featuresList.length);
+      } catch (error) {
+        console.error('Failed to load feature count:', error);
+      }
+    };
+    
+    loadFeatureCount();
   }, []);
 
   return (
