@@ -14,7 +14,7 @@ import dynamic from 'next/dynamic';
 const Editor = dynamic(() => import('@/components/ide/Editor'), { ssr: false });
 const Terminal = dynamic(() => import('@/components/ide/Terminal'), { ssr: false });
 const FileTree = dynamic(() => import('@/components/ide/FileTree'), { ssr: false });
-const Sidebar = dynamic(() => import('@/components/ide/Sidebar'), { ssr: false });
+// Sidebar functionality integrated into FileTree
 
 export default function IDEPage() {
   const [files, setFiles] = useState<Record<string, string>>({});
