@@ -213,7 +213,7 @@ export default function InterceptorDashboard() {
 
   if (error) {
     return (
-      <div className="w-full max-w-7xl mx-auto p-6" role="main"">
+      <div className="w-full max-w-7xl mx-auto p-6" role="main">
         <Card className="bg-red-950/30 border-red-800">
           <CardHeader>
             <CardTitle className="text-red-400">Error Loading Data</CardTitle>
