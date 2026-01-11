@@ -180,7 +180,7 @@ export default function ${story.id.replace(/[^a-zA-Z0-9]/g, '_')}(props: ${story
         
         {/* Implementation for: ${story.criteria.join(', ')} */}
         <div className="space-y-2">
-          {story.criteria.map((criterion, index) => (
+          {${JSON.stringify(story.criteria)}.map((criterion: string, index: number) => (
             <div key={index} className="text-xs text-slate-400">
               ✓ {criterion}
             </div>
