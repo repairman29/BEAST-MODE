@@ -123,7 +123,13 @@ class ModelComparison {
 
       // Test neural network if available
       try {
-        const { NeuralNetworkTrainer } = require('../models/neuralNetworkTrainer');
+        let NeuralNetworkTrainer;
+        try {
+            NeuralNetworkTrainer = require('../models/neuralNetworkTrainer').NeuralNetworkTrainer;
+        } catch (error) {
+            // Neural network trainer not available, skip this comparison
+            return null;
+        }
         const nnModel = new NeuralNetworkTrainer();
         // Would need to load trained model
         // const benchmark = await this.benchmarkModel('neural_network', nnModel, X_test, y_test);

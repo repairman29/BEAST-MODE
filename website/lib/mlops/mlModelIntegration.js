@@ -362,10 +362,15 @@ class MLModelIntegration {
             
             // Try to load neural network model first
             if (this.modelPath.includes('neural-network')) {
-                const { NeuralNetworkTrainer } = require('../models/neuralNetworkTrainer');
-                this.qualityPredictor = new NeuralNetworkTrainer();
-                await this.qualityPredictor.loadModel(this.modelPath);
-                log.info('✅ Neural Network ML model loaded and ready');
+                try {
+                    const { NeuralNetworkTrainer } = require('../models/neuralNetworkTrainer');
+                    this.qualityPredictor = new NeuralNetworkTrainer();
+                    await this.qualityPredictor.loadModel(this.modelPath);
+                    log.info('✅ Neural Network ML model loaded and ready');
+                } catch (error) {
+                    log.warn('Neural network trainer not available, skipping:', error.message);
+                    this.qualityPredictor = null;
+                }
             } else if (this.modelPath.includes('transformer')) {
                 const { TransformerTrainer } = require('../models/transformerTrainer');
                 this.qualityPredictor = new TransformerTrainer();
