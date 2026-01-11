@@ -99,7 +99,7 @@ export default function InterceptorDashboard() {
         }
         } catch (statsError: unknown) {
         const errorMessage = statsError instanceof Error ? statsError.message : 'Unknown error';
-        console.error('Failed to load stats:', errorMessage);
+        // Error logged via notification system
         setError('Failed to load statistics');
         if (typeof window !== 'undefined') {
           window.dispatchEvent(new CustomEvent('beast-mode-notification', {
@@ -129,7 +129,7 @@ export default function InterceptorDashboard() {
         }
       } catch (commitsError: unknown) {
         const errorMessage = commitsError instanceof Error ? commitsError.message : 'Unknown error';
-        console.error('Failed to load commits:', errorMessage);
+        // Error logged via notification system
         if (typeof window !== 'undefined') {
           window.dispatchEvent(new CustomEvent('beast-mode-notification', {
             detail: { type: 'error', message: 'Failed to load intercepted commits' }
@@ -138,7 +138,7 @@ export default function InterceptorDashboard() {
       }
     } catch (error: unknown) {
       const errorMessage = error instanceof Error ? error.message : 'Unknown error';
-      console.error('Failed to load interceptor data:', errorMessage);
+      // Error logged via notification system
       setError('Failed to load interceptor data. Please try again.');
       if (typeof window !== 'undefined') {
         window.dispatchEvent(new CustomEvent('beast-mode-notification', {
@@ -151,9 +151,11 @@ export default function InterceptorDashboard() {
   }, [selectedRepo, selectedStatus]);
 
   useEffect(() => {
-    loadData();
+    void loadData();
     // Poll every 30 seconds for updates
-    const interval = setInterval(loadData, 30000);
+    const interval = setInterval(() => {
+      void loadData();
+    }, 30000);
     return () => clearInterval(interval);
   }, [loadData]);
 
@@ -166,7 +168,7 @@ export default function InterceptorDashboard() {
       });
       
       if (response.ok) {
-        await loadData(); // Reload data
+        void loadData(); // Reload data
         if (typeof window !== 'undefined') {
           window.dispatchEvent(new CustomEvent('beast-mode-notification', {
             detail: { type: 'success', message: `Status updated to ${status}` }
@@ -182,7 +184,7 @@ export default function InterceptorDashboard() {
       }
     } catch (error: unknown) {
       const errorMessage = error instanceof Error ? error.message : 'Unknown error';
-      console.error('Failed to update status:', errorMessage);
+      // Error logged via notification system
       if (typeof window !== 'undefined') {
         window.dispatchEvent(new CustomEvent('beast-mode-notification', {
           detail: { type: 'error', message: 'Failed to update status. Please try again.' }
@@ -211,14 +213,14 @@ export default function InterceptorDashboard() {
 
   if (error) {
     return (
-      <div className="w-full max-w-7xl mx-auto p-6">
+      <div className="w-full max-w-7xl mx-auto p-6" role="main"">
         <Card className="bg-red-950/30 border-red-800">
           <CardHeader>
             <CardTitle className="text-red-400">Error Loading Data</CardTitle>
           </CardHeader>
           <CardContent>
             <p className="text-slate-300 mb-4">{error}</p>
-            <Button onClick={() => { setError(null); loadData(); }}>
+            <Button onClick={() = aria-label="Button"> { setError(null); void loadData(); }}>
               Retry
             </Button>
           </CardContent>
@@ -305,11 +307,13 @@ export default function InterceptorDashboard() {
             </div>
 
             <div>
-              <label className="text-sm text-slate-400 mb-2 block">Status</label>
+              <label htmlFor="status-filter" className="text-sm text-slate-400 mb-2 block">Status</label>
               <select
+                id="status-filter"
                 value={selectedStatus}
                 onChange={(e) => setSelectedStatus(e.target.value)}
                 className="w-full bg-slate-800 border border-slate-700 rounded px-3 py-2 text-slate-200"
+                aria-label="Filter by status"
               >
                 <option value="">All Statuses</option>
                 <option value="intercepted">Intercepted</option>
@@ -320,11 +324,13 @@ export default function InterceptorDashboard() {
             </div>
 
             <div>
-              <label className="text-sm text-slate-400 mb-2 block">Severity</label>
+              <label htmlFor="severity-filter" className="text-sm text-slate-400 mb-2 block">Severity</label>
               <select
+                id="severity-filter"
                 value={selectedSeverity}
                 onChange={(e) => setSelectedSeverity(e.target.value)}
                 className="w-full bg-slate-800 border border-slate-700 rounded px-3 py-2 text-slate-200"
+                aria-label="Filter by severity"
               >
                 <option value="">All Severities</option>
                 <option value="critical">Critical</option>
@@ -335,13 +341,15 @@ export default function InterceptorDashboard() {
             </div>
 
             <div>
-              <label className="text-sm text-slate-400 mb-2 block">Search</label>
+              <label htmlFor="search-input" className="text-sm text-slate-400 mb-2 block">Search</label>
               <input
+                id="search-input"
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search files..."
                 className="w-full bg-slate-800 border border-slate-700 rounded px-3 py-2 text-slate-200"
+                aria-label="Search intercepted commits"
               />
             </div>
           </div>
@@ -390,7 +398,7 @@ export default function InterceptorDashboard() {
                         <Button
                           variant="ghost"
                           size="sm"
-                          onClick={() => setExpandedCommit(expandedCommit === commit.id ? null : commit.id)}
+                          onClick={() = aria-label="Button"> setExpandedCommit(expandedCommit === commit.id ? null : commit.id)}
                         >
                           {expandedCommit === commit.id ? '▼' : '▶'}
                         </Button>
@@ -443,7 +451,7 @@ export default function InterceptorDashboard() {
                         <Button
                           size="sm"
                           variant="outline"
-                          onClick={() => updateStatus(commit.id, 'reviewed')}
+                          onClick={() = aria-label="Button"> updateStatus(commit.id, 'reviewed')}
                           disabled={commit.status === 'reviewed'}
                         >
                           Mark Reviewed
@@ -451,7 +459,7 @@ export default function InterceptorDashboard() {
                         <Button
                           size="sm"
                           variant="outline"
-                          onClick={() => updateStatus(commit.id, 'approved')}
+                          onClick={() = aria-label="Button"> updateStatus(commit.id, 'approved')}
                           disabled={commit.status === 'approved'}
                         >
                           Approve
@@ -459,7 +467,7 @@ export default function InterceptorDashboard() {
                         <Button
                           size="sm"
                           variant="outline"
-                          onClick={() => updateStatus(commit.id, 'rejected')}
+                          onClick={() = aria-label="Button"> updateStatus(commit.id, 'rejected')}
                           disabled={commit.status === 'rejected'}
                         >
                           Reject

@@ -2,9 +2,36 @@ import { NextRequest, NextResponse } from 'next/server';
 import crypto from 'crypto';
 import { getSupabaseClientOrNull } from '../../../../../lib/supabase';
 import { encrypt } from '../../../../../lib/github-token-encrypt';
+import { createApiLogger } from '../../../../../lib/utils/api-logger';
+
+// Types
+interface UnifiedConfig {
+  get(key: string): string | null;
+}
+
+type GetUnifiedConfig = () => Promise<UnifiedConfig>;
+
+interface GitHubUser {
+  login: string;
+  id: number;
+  email?: string | null;
+}
+
+interface TokenData {
+  access_token?: string;
+  error?: string;
+  error_description?: string;
+  scope?: string;
+}
+
+interface Installation {
+  installation_id: number;
+  account_id: number;
+  user_id?: string;
+}
 
 // Use unified config if available
-let getUnifiedConfig: any = null;
+let getUnifiedConfig: GetUnifiedConfig | null = null;
 try {
   const path = require('path');
   const configPath = path.join(process.cwd(), '../../shared-utils/unified-config');
@@ -37,9 +64,12 @@ async function getConfigValue(key: string, defaultValue: string | null = null): 
  * Handles GitHub OAuth callback and stores user's GitHub token
  */
 export async function GET(request: NextRequest) {
-  console.log('🟢 [GitHub OAuth] Callback endpoint called');
-  console.log('   URL:', request.url);
-  console.log('   Search params:', Object.fromEntries(request.nextUrl.searchParams.entries()));
+  const logger = createApiLogger('GitHub OAuth Callback');
+  
+  logger.info('Callback endpoint called', {
+    url: request.url,
+    searchParams: Object.fromEntries(request.nextUrl.searchParams.entries())
+  });
   
   // Get base URL for redirects
   const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 
@@ -51,9 +81,11 @@ export async function GET(request: NextRequest) {
     const state = searchParams.get('state');
     const error = searchParams.get('error');
 
-    console.log('   Code present:', !!code);
-    console.log('   State present:', !!state);
-    console.log('   Error present:', !!error);
+    logger.debug('OAuth parameters received', {
+      codePresent: !!code,
+      statePresent: !!state,
+      errorPresent: !!error
+    });
 
     // Get config values
     const nextPublicUrl = await getConfigValue('NEXT_PUBLIC_URL', 'http://localhost:7777');
@@ -61,18 +93,16 @@ export async function GET(request: NextRequest) {
 
     // Handle OAuth errors
     if (error) {
-      console.error('❌ [GitHub OAuth] Error from GitHub:', error);
+      logger.error('Error from GitHub', { error });
       return NextResponse.redirect(
-        `${baseUrl}/dashboard?github_oauth=error&error=${error}`
+        `${baseUrl}/?action=signin&error=oauth_error&message=${encodeURIComponent(`GitHub OAuth error: ${error}`)}`
       );
     }
 
     if (!code || !state) {
-      console.error('❌ [GitHub OAuth] Missing code or state');
-      console.error('   Code:', code);
-      console.error('   State:', state);
+      logger.error('Missing code or state', { code: !!code, state: !!state });
       return NextResponse.redirect(
-        `${baseUrl}/dashboard?github_oauth=error&error=missing_code_or_state`
+        `${baseUrl}/?action=signin&error=missing_oauth_params&message=Please try signing in with GitHub again.`
       );
     }
 
@@ -81,30 +111,32 @@ export async function GET(request: NextRequest) {
     const userId = request.cookies.get('github_oauth_user_id')?.value;
     const isSupabaseUser = request.cookies.get('github_oauth_is_supabase_user')?.value === 'true';
 
-    console.log('   Stored state:', storedState ? storedState.substring(0, 16) + '...' : 'NOT FOUND');
-    console.log('   Received state:', state.substring(0, 16) + '...');
-    console.log('   User ID:', userId);
+    logger.debug('State validation', {
+      storedStatePresent: !!storedState,
+      receivedStatePrefix: state.substring(0, 16),
+      userIdPresent: !!userId
+    });
 
+    // Validate state to prevent CSRF attacks
     if (!storedState || storedState !== state) {
-      console.error('❌ [GitHub OAuth] State mismatch');
-      console.error('   Stored:', storedState);
-      console.error('   Received:', state);
-      // Instead of redirecting to dashboard (which requires auth), redirect to home with error
+      logger.error('State mismatch - potential CSRF attack', {
+        storedStatePresent: !!storedState,
+        statesMatch: storedState === state
+      });
       return NextResponse.redirect(
         `${baseUrl}/?action=signin&error=oauth_state_mismatch&message=Please try signing in with GitHub again.`
       );
     }
 
     if (!userId) {
-      console.error('❌ [GitHub OAuth] No userId in cookie');
-      // Instead of redirecting to dashboard (which requires auth), redirect to home
+      logger.error('No userId in cookie - session expired');
       return NextResponse.redirect(
         `${baseUrl}/?action=signin&error=oauth_session_expired&message=Your session expired. Please try again.`
       );
     }
 
     // Exchange code for access token
-    console.log('🔄 [GitHub OAuth] Exchanging code for token...');
+    logger.info('Exchanging code for token');
     const githubRedirectUri = await getConfigValue('GITHUB_REDIRECT_URI', null);
     const redirectUri = githubRedirectUri || `${baseUrl}/api/github/oauth/callback`;
     
@@ -147,7 +179,7 @@ export async function GET(request: NextRequest) {
         clientSecret = githubClientSecret || expectedProdClientSecret;
       } else {
         // Auto-fix: use prod credentials (env vars are wrong or missing)
-        console.warn('⚠️ [GitHub OAuth] Auto-fixing: Using PROD credentials (env had wrong/missing values)');
+        logger.warn('Auto-fixing: Using PROD credentials (env had wrong/missing values)');
         clientId = expectedProdClientId;
         clientSecret = expectedProdClientSecret;
       }
@@ -160,24 +192,25 @@ export async function GET(request: NextRequest) {
         clientSecret = githubClientSecret || expectedDevClientSecret;
       } else {
         // Auto-fix: use dev credentials (env vars are wrong or missing)
-        console.warn('⚠️ [GitHub OAuth] Auto-fixing: Using DEV credentials (env had wrong/missing values)');
+        logger.warn('Auto-fixing: Using DEV credentials (env had wrong/missing values)');
         clientId = expectedDevClientId;
         clientSecret = expectedDevClientSecret;
       }
     }
     
-    console.log('   Environment:', isProduction ? 'PRODUCTION' : 'DEVELOPMENT');
-    console.log('   Using redirect URI:', redirectUri);
-    console.log('   Client ID:', clientId);
-    console.log('   Client ID length:', clientId?.length);
-    console.log('   Client Secret present:', !!clientSecret);
-    console.log('   Client Secret length:', clientSecret?.length);
-    console.log('   Code length:', code?.length);
+    logger.debug('OAuth configuration', {
+      environment: isProduction ? 'PRODUCTION' : 'DEVELOPMENT',
+      redirectUri,
+      clientIdLength: clientId?.length,
+      clientSecretPresent: !!clientSecret,
+      codeLength: code?.length
+    });
     
     if (!clientId || !clientSecret) {
-      console.error('❌ [GitHub OAuth] Missing credentials');
-      console.error('   Client ID present:', !!clientId);
-      console.error('   Client Secret present:', !!clientSecret);
+      logger.error('Missing GitHub OAuth credentials', {
+        clientIdPresent: !!clientId,
+        clientSecretPresent: !!clientSecret
+      });
       throw new Error('GitHub OAuth credentials not configured');
     }
     
@@ -188,10 +221,10 @@ export async function GET(request: NextRequest) {
       redirect_uri: redirectUri,
     };
     
-    console.log('   Token request (without secrets):', {
-      client_id: tokenRequest.client_id,
-      code: code?.substring(0, 10) + '...',
-      redirect_uri: tokenRequest.redirect_uri,
+    logger.debug('Token request prepared', {
+      clientId: tokenRequest.client_id,
+      codePrefix: code?.substring(0, 10),
+      redirectUri: tokenRequest.redirect_uri
     });
     
     // GitHub OAuth token endpoint expects form-encoded data, not JSON
@@ -202,8 +235,6 @@ export async function GET(request: NextRequest) {
       redirect_uri: redirectUri,
     });
     
-    console.log('   Using form-encoded request (GitHub standard)');
-    
     const tokenResponse = await fetch('https://github.com/login/oauth/access_token', {
       method: 'POST',
       headers: {
@@ -213,40 +244,47 @@ export async function GET(request: NextRequest) {
       body: formData.toString(),
     });
 
-    console.log('   Token response status:', tokenResponse.status);
-    console.log('   Token response ok:', tokenResponse.ok);
-    console.log('   Token response headers:', Object.fromEntries(tokenResponse.headers.entries()));
+    logger.debug('Token response received', {
+      status: tokenResponse.status,
+      ok: tokenResponse.ok
+    });
 
     if (!tokenResponse.ok) {
       const errorText = await tokenResponse.text();
-      console.error('❌ [GitHub OAuth] Token exchange failed');
-      console.error('   Status:', tokenResponse.status);
-      console.error('   Response:', errorText);
-      console.error('   Request details:', {
-        client_id: githubClientId,
-        redirect_uri: redirectUri,
-        code_present: !!code,
+      logger.error('Token exchange failed', {
+        status: tokenResponse.status,
+        response: errorText,
+        redirectUri
       });
       throw new Error(`Failed to exchange code for token: ${tokenResponse.status} ${errorText}`);
     }
 
-    const tokenData = await tokenResponse.json();
-    console.log('   Token data keys:', Object.keys(tokenData));
-    console.log('   Token data error:', tokenData.error);
+    const tokenData: TokenData = await tokenResponse.json();
+    logger.debug('Token data received', {
+      hasAccessToken: !!tokenData.access_token,
+      error: tokenData.error
+    });
 
     if (tokenData.error) {
-      console.error('❌ [GitHub OAuth] Error in token response:', tokenData.error);
-      console.error('   Error description:', tokenData.error_description);
+      logger.error('Error in token response', {
+        error: tokenData.error,
+        errorDescription: tokenData.error_description
+      });
       return NextResponse.redirect(
-        `${baseUrl}/dashboard?github_oauth=error&error=${tokenData.error}`
+        `${baseUrl}/?action=signin&error=oauth_token_error&message=${encodeURIComponent(tokenData.error_description || tokenData.error)}`
       );
     }
 
+    if (!tokenData.access_token) {
+      logger.error('No access token in response');
+      throw new Error('No access token received from GitHub');
+    }
+
     const accessToken = tokenData.access_token;
-    console.log('✅ [GitHub OAuth] Access token received:', accessToken ? 'YES' : 'NO');
+    logger.info('Access token received successfully');
 
     // Get user info from GitHub
-    console.log('🔄 [GitHub OAuth] Fetching GitHub user info...');
+    logger.info('Fetching GitHub user info');
     const userResponse = await fetch('https://api.github.com/user', {
       headers: {
         'Authorization': `Bearer ${accessToken}`,
@@ -254,21 +292,26 @@ export async function GET(request: NextRequest) {
       },
     });
 
-    console.log('   User response status:', userResponse.status);
-    console.log('   User response ok:', userResponse.ok);
+    logger.debug('User response received', {
+      status: userResponse.status,
+      ok: userResponse.ok
+    });
 
     if (!userResponse.ok) {
       const errorText = await userResponse.text();
-      console.error('❌ [GitHub OAuth] Failed to fetch user info');
-      console.error('   Status:', userResponse.status);
-      console.error('   Response:', errorText);
+      logger.error('Failed to fetch user info', {
+        status: userResponse.status,
+        response: errorText
+      });
       throw new Error(`Failed to fetch GitHub user info: ${userResponse.status} ${errorText}`);
     }
 
-    const githubUser = await userResponse.json();
-    console.log('✅ [GitHub OAuth] User info received');
-    console.log('   Username:', githubUser.login);
-    console.log('   User ID:', githubUser.id);
+    const githubUser: GitHubUser = await userResponse.json();
+    logger.info('User info received', {
+      username: githubUser.login,
+      userId: githubUser.id,
+      email: githubUser.email || 'not provided'
+    });
 
     // Link GitHub installations to user account
     try {
@@ -288,20 +331,27 @@ export async function GET(request: NextRequest) {
               .update({ user_id: userId })
               .eq('installation_id', installation.installation_id);
           }
-          console.log(`✅ [GitHub OAuth] Linked ${installations.length} installation(s) to user ${userId}`);
+          logger.info('Linked GitHub installations to user', {
+            installationCount: installations.length,
+            userId
+          });
         }
       }
-    } catch (linkError: any) {
-      console.error('⚠️ [GitHub OAuth] Error linking installations (non-fatal):', linkError);
+    } catch (linkError: unknown) {
+      const errorMessage = linkError instanceof Error ? linkError.message : 'Unknown error';
+      logger.warn('Error linking installations (non-fatal)', {
+        error: errorMessage
+      });
       // Don't fail OAuth flow if linking fails
     }
 
     // Store encrypted token in Supabase (with fallback to in-memory)
-    console.log('🔄 [GitHub OAuth] Storing token in database...');
-    console.log('   User ID:', userId);
-    console.log('   GitHub Username:', githubUser.login);
-    console.log('   GitHub User ID:', githubUser.id);
-    console.log('   Is Supabase user:', isSupabaseUser);
+    logger.info('Storing token in database', {
+      userId,
+      githubUsername: githubUser.login,
+      githubUserId: githubUser.id,
+      isSupabaseUser
+    });
     
     try {
       // Try to store in Supabase if user is a Supabase user
@@ -328,51 +378,62 @@ export async function GET(request: NextRequest) {
             });
           
           if (error) {
-            console.error('❌ [GitHub OAuth] Supabase storage error:', error);
+            logger.error('Supabase storage error', { error });
             // Fall through to fallback storage
           } else {
-            console.log('✅ [GitHub OAuth] Token stored in Supabase successfully');
+            logger.info('Token stored in Supabase successfully');
             // Success, continue to redirect (don't return early)
           }
         } else {
-          console.log('   Supabase not available, using fallback storage');
+          logger.debug('Supabase not available, using fallback storage');
         }
       }
       
       // Fallback: Store via API route (for non-Supabase users or if Supabase fails)
       if (!isSupabaseUser || !userId || !userId.startsWith('00000000-')) {
         const storeUrl = `${baseUrl}/api/github/token`;
-        console.log('   Using fallback storage via API:', storeUrl);
+        logger.debug('Using fallback storage via API', { storeUrl });
         
-        const storeResponse = await fetch(storeUrl, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            userId,
-            githubToken: accessToken,
-            githubUsername: githubUser.login,
-            githubUserId: githubUser.id,
-          }),
-        });
-        
-        console.log('   Store response status:', storeResponse.status);
-        console.log('   Store response ok:', storeResponse.ok);
-        
-        if (storeResponse.ok) {
-          const storeData = await storeResponse.json();
-          console.log('✅ [GitHub OAuth] Token stored successfully (fallback):', storeData);
-        } else {
-          const errorData = await storeResponse.json().catch(() => ({}));
-          console.error('❌ [GitHub OAuth] Failed to store token');
-          console.error('   Status:', storeResponse.status);
-          console.error('   Error:', errorData);
+        try {
+          const storeResponse = await fetch(storeUrl, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              userId,
+              githubToken: accessToken,
+              githubUsername: githubUser.login,
+              githubUserId: githubUser.id,
+            }),
+          });
+          
+          logger.debug('Store response received', {
+            status: storeResponse.status,
+            ok: storeResponse.ok
+          });
+          
+          if (storeResponse.ok) {
+            logger.info('Token stored successfully (fallback)');
+          } else {
+            const errorData = await storeResponse.json().catch(() => ({}));
+            logger.error('Failed to store token', {
+              status: storeResponse.status,
+              error: errorData
+            });
+          }
+        } catch (fetchError: unknown) {
+          const errorMessage = fetchError instanceof Error ? fetchError.message : 'Unknown error';
+          logger.error('Error calling token storage API', { error: errorMessage });
         }
       }
-    } catch (storeError: any) {
-      console.error('❌ [GitHub OAuth] Error storing token (non-fatal):', storeError);
-      console.error('   Stack:', storeError.stack);
+    } catch (storeError: unknown) {
+      const errorMessage = storeError instanceof Error ? storeError.message : 'Unknown error';
+      const errorStack = storeError instanceof Error ? storeError.stack : undefined;
+      logger.error('Error storing token (non-fatal)', {
+        error: errorMessage,
+        stack: errorStack
+      });
       // Continue even if storage fails - token is still valid
     }
 
@@ -391,14 +452,15 @@ export async function GET(request: NextRequest) {
           const existingUser = existingUsers.users.find(u => u.email === githubUser.email);
           if (existingUser) {
             hasSupabaseAccount = true;
-            console.log('✅ [GitHub OAuth] Found existing Supabase user:', existingUser.id);
+            logger.info('Found existing Supabase user', { userId: existingUser.id });
           } else {
-            console.log('ℹ️ [GitHub OAuth] No Supabase account found for:', githubUser.email);
+            logger.debug('No Supabase account found', { email: githubUser.email });
           }
         }
       }
-    } catch (supabaseError: any) {
-      console.error('⚠️ [GitHub OAuth] Supabase user lookup error (non-fatal):', supabaseError);
+    } catch (supabaseError: unknown) {
+      const errorMessage = supabaseError instanceof Error ? supabaseError.message : 'Unknown error';
+      logger.warn('Supabase user lookup error (non-fatal)', { error: errorMessage });
     }
 
     // Determine redirect based on whether user has Supabase account
@@ -419,7 +481,9 @@ export async function GET(request: NextRequest) {
         params.set('email', githubUser.email); // Pre-fill email for convenience
       }
       redirectUrl = `${baseUrl}/?${params.toString()}`;
-      console.log('ℹ️ [GitHub OAuth] User has account - redirecting to sign-in (email pre-filled)');
+      logger.info('User has account - redirecting to sign-in', {
+        email: githubUser.email || 'not provided'
+      });
     } else {
       params.set('action', 'signup');
       params.set('message', 'github_connected');
@@ -428,13 +492,17 @@ export async function GET(request: NextRequest) {
         params.set('email', githubUser.email); // Pre-fill email for sign-up
       }
       redirectUrl = `${baseUrl}/?${params.toString()}`;
-      console.log('ℹ️ [GitHub OAuth] No account found - redirecting to sign-up (email pre-filled)');
+      logger.info('No account found - redirecting to sign-up', {
+        email: githubUser.email || 'not provided'
+      });
     }
     
-    console.log('   GitHub username:', githubUser.login);
-    console.log('   GitHub email:', githubUser.email || 'not provided');
-    console.log('   Has Supabase account:', hasAccount);
-    console.log('   Redirect URL:', redirectUrl);
+    logger.info('Redirecting user', {
+      githubUsername: githubUser.login,
+      githubEmail: githubUser.email || 'not provided',
+      hasSupabaseAccount: hasAccount,
+      redirectUrl
+    });
 
     // Clear OAuth cookies but keep userId cookie temporarily for token lookup
     const response = NextResponse.redirect(redirectUrl);
@@ -450,12 +518,17 @@ export async function GET(request: NextRequest) {
     });
 
     return response;
-  } catch (error: any) {
-    console.error('❌ [GitHub OAuth] Callback error:', error);
-    console.error('   Message:', error.message);
-    console.error('   Stack:', error.stack);
+  } catch (error: unknown) {
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+    const errorStack = error instanceof Error ? error.stack : undefined;
+    
+    logger.error('Callback error', {
+      message: errorMessage,
+      stack: errorStack
+    });
+    
     return NextResponse.redirect(
-      `${baseUrl}/dashboard?github_oauth=error&error=${encodeURIComponent(error.message)}`
+      `${baseUrl}/?action=signin&error=oauth_callback_error&message=${encodeURIComponent(errorMessage)}`
     );
   }
 }

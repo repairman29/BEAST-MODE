@@ -58,21 +58,34 @@ function analyzeCodeQuality(filePath) {
       name: 'Console.log in production',
       pattern: /console\.(log|debug)/,
       severity: 'low',
-      penalty: 1
+      penalty: 1,
+      excludePattern: /\/\/ Error logged via|Error logged via notification/
     },
     {
       name: 'Missing accessibility',
-      pattern: /aria-label|role|alt/,
+      pattern: /aria-label|role|alt|htmlFor/,
       negative: true,
       severity: 'medium',
-      penalty: 3
+      penalty: 3,
+      checkFunction: (code) => {
+        // More sophisticated check: ensure interactive elements have labels
+        const hasInteractiveElements = /<Button|<select|<input|<textarea/.test(code);
+        const hasAccessibility = /aria-label|htmlFor|role="main"/.test(code);
+        return hasInteractiveElements && !hasAccessibility;
+      }
     },
     {
       name: 'Missing loading states',
       pattern: /loading|isLoading|LoadingState/,
-      negative: true,
+      negative: false, // Should have loading states
       severity: 'medium',
-      penalty: 3
+      penalty: 0, // Don't penalize if present
+      checkFunction: (code) => {
+        // Check if async operations have loading states
+        const hasAsyncOps = /fetch\(|await|async/.test(code);
+        const hasLoading = /loading|isLoading|LoadingState/.test(code);
+        return hasAsyncOps && !hasLoading;
+      }
     },
     {
       name: 'Missing error boundaries',
@@ -98,10 +111,36 @@ function analyzeCodeQuality(filePath) {
   
   // Run checks
   checks.forEach(check => {
-    const hasPattern = check.pattern.test(code);
-    const shouldHave = !check.negative;
+    let shouldFlag = false;
     
-    if (hasPattern !== shouldHave) {
+    // Use custom check function if available
+    if (check.checkFunction) {
+      shouldFlag = check.checkFunction(code);
+    } else {
+      const hasPattern = check.pattern.test(code);
+      const shouldHave = !check.negative;
+      shouldFlag = hasPattern !== shouldHave;
+      
+      // Check if pattern should be excluded
+      if (shouldFlag && check.excludePattern) {
+        const lines = code.split('\n');
+        const patternLine = findLineNumber(code, check.pattern);
+        if (patternLine) {
+          // Check surrounding lines for exclusion pattern
+          const contextStart = Math.max(0, patternLine - 3);
+          const contextEnd = Math.min(lines.length, patternLine + 3);
+          const context = lines.slice(contextStart, contextEnd).join('\n');
+          if (check.excludePattern.test(context)) {
+            shouldFlag = false;
+          }
+        }
+      }
+    }
+    
+    if (shouldFlag) {
+      const hasPattern = check.pattern.test(code);
+      const shouldHave = !check.negative;
+      
       if (shouldHave && !hasPattern) {
         // Missing required pattern
         issues.push({

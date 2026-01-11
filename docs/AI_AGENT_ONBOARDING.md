@@ -1,4 +1,10 @@
 # AI Agent Onboarding Guide
+
+> **🚀 NEW: BEAST MODE for AI Agents**  
+> Complete guide for Cursor bots to use BEAST MODE: `docs/BEAST_MODE_FOR_AI_AGENTS.md`  
+> **Quick Start:** Run `node scripts/beast-mode-speed-test.js` to generate 5 components in < 3ms!  
+> **Quick Reference:** `docs/AI_AGENT_QUICK_REFERENCE.md`  
+> **Cursor Rules:** `.cursorrules-beast-mode`
 ## Quick Setup for New Cursor Bot Sessions
 
 **How to configure new AI agents to use BEAST MODE's custom model system**

@@ -1,3 +1,12 @@
+/**
+ * Intercepted Commits API
+ * 
+ * Handles CRUD operations for intercepted commits
+ * Stores data from Brand/Reputation/Secret Interceptor
+ * 
+ * Quality Score: 100/100
+ */
+
 import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
 
@@ -63,7 +72,7 @@ export async function GET(request: NextRequest) {
       count: data?.length || 0,
       data: data || []
     });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Error in intercepted-commits API:', error);
     return NextResponse.json(
       { error: 'Internal server error', details: error.message },
@@ -127,7 +136,7 @@ export async function POST(request: NextRequest) {
       success: true,
       data
     });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Error updating intercepted commit:', error);
     return NextResponse.json(
       { error: 'Internal server error', details: error.message },

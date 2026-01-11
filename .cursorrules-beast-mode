@@ -1,0 +1,63 @@
+# BEAST MODE Rules for AI Agents
+
+## 🚀 Use BEAST MODE for Speed
+
+When generating code, ALWAYS use BEAST MODE speed scripts:
+
+```bash
+# Generate components + APIs instantly
+node scripts/beast-mode-speed-test.js
+
+# Batch generate features
+node scripts/beast-mode-batch-generate.js [count]
+
+# Extreme speed demo
+node scripts/beast-mode-velocity-demo.js [count]
+```
+
+**Speed:** 20,000+ files/second, 80,000+ lines/second
+
+## 🛠️ Self-Heal After Generation
+
+After generating code, ALWAYS check quality:
+
+```bash
+node scripts/dogfood-self-heal.js
+```
+
+**Target:** 90+ quality score
+
+## 📋 Follow Existing Patterns
+
+- **Components:** Follow `InterceptorDashboard.tsx` pattern
+- **APIs:** Follow `website/app/api/intercepted-commits/route.ts` pattern
+- **UI:** Use components from `website/components/ui/`
+
+## 🔌 Use BEAST MODE APIs
+
+- `/api/codebase/chat` - Generate code
+- `/api/beast-mode/self-improve` - Analyze code
+- `/api/codebase/refactor` - Refactor code
+
+## 📚 Documentation
+
+- **Full Guide:** `docs/BEAST_MODE_FOR_AI_AGENTS.md`
+- **Quick Reference:** `docs/AI_AGENT_QUICK_REFERENCE.md`
+- **Onboarding:** `docs/AI_AGENT_ONBOARDING.md`
+
+## ⚡ Performance Expectations
+
+- Generate 50+ components in < 10ms
+- Generate 150+ files in < 15ms
+- Quality score: 90+/100
+
+## 🎯 Workflow
+
+1. Generate code with speed scripts
+2. Check quality with self-healing
+3. Integrate into dashboard
+4. Iterate and improve
+
+---
+
+**Remember:** BEAST MODE can generate code 12+ million times faster than humans. Use it!

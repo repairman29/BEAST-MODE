@@ -2,9 +2,22 @@ import { NextRequest, NextResponse } from 'next/server';
 import crypto from 'crypto';
 import jwt from 'jsonwebtoken';
 import { getSupabaseClientOrNull } from '../../../../../lib/supabase';
+import { createApiLogger } from '../../../../../lib/utils/api-logger';
+
+// Types
+interface UnifiedConfig {
+  get(key: string): string | null;
+}
+
+type GetUnifiedConfig = () => Promise<UnifiedConfig>;
+
+interface JwtPayload {
+  userId?: string;
+  [key: string]: unknown;
+}
 
 // Use unified config if available
-let getUnifiedConfig: any = null;
+let getUnifiedConfig: GetUnifiedConfig | null = null;
 try {
   const path = require('path');
   const configPath = path.join(process.cwd(), '../../shared-utils/unified-config');
@@ -39,9 +52,11 @@ async function getConfigValue(key: string, defaultValue: string | null = null): 
  * Now integrated with Supabase auth for proper user isolation
  */
 export async function GET(request: NextRequest) {
-  console.log('🔵 [GitHub OAuth] Authorize endpoint called');
-  console.log('   URL:', request.url);
-  console.log('   Headers:', Object.fromEntries(request.headers.entries()));
+  const logger = createApiLogger('GitHub OAuth Authorize');
+  
+  logger.info('Authorize endpoint called', {
+    url: request.url
+  });
   
   try {
     // Get user ID from Supabase auth or JWT token
@@ -49,7 +64,7 @@ export async function GET(request: NextRequest) {
     const token = authHeader?.replace('Bearer ', '') || 
                   request.cookies.get('beastModeToken')?.value;
     
-    console.log('   Auth token present:', !!token);
+    logger.debug('Auth token check', { tokenPresent: !!token });
     
     let userId: string | null = null;
     let isSupabaseUser = false;
@@ -60,34 +75,44 @@ export async function GET(request: NextRequest) {
     // Try to get Supabase user ID from JWT token
     if (token) {
       try {
-        const decoded = jwt.verify(token, JWT_SECRET || 'beast-mode-secret-change-in-production') as any;
+        const decoded = jwt.verify(token, JWT_SECRET || 'beast-mode-secret-change-in-production') as JwtPayload;
         if (decoded.userId && typeof decoded.userId === 'string' && decoded.userId.startsWith('00000000-')) {
           // This looks like a Supabase UUID
           userId = decoded.userId;
           isSupabaseUser = true;
-          console.log('   Using Supabase user ID from JWT:', userId);
+          logger.debug('Using Supabase user ID from JWT', { userId });
         } else {
           // Fallback to token-based user ID
           userId = `user-${token.slice(0, 8)}`;
-          console.log('   Using token-based userId:', userId);
+          logger.debug('Using token-based userId', { userId });
         }
-      } catch (jwtError) {
+      } catch (jwtError: unknown) {
+        const errorMessage = jwtError instanceof Error ? jwtError.message : 'Unknown error';
+        logger.debug('JWT verification failed, trying Supabase auth', { error: errorMessage });
+        
         // JWT invalid, try Supabase auth
         const supabase = await getSupabaseClientOrNull();
         if (supabase) {
-          // Try to get user from Supabase session
-          const { data: { user } } = await supabase.auth.getUser(token);
-          if (user) {
-            userId = user.id;
-            isSupabaseUser = true;
-            console.log('   Using Supabase user ID from session:', userId);
+          try {
+            // Try to get user from Supabase session
+            const { data: { user }, error: userError } = await supabase.auth.getUser(token);
+            if (user && !userError) {
+              userId = user.id;
+              isSupabaseUser = true;
+              logger.debug('Using Supabase user ID from session', { userId });
+            } else if (userError) {
+              logger.debug('Supabase getUser error', { error: userError.message });
+            }
+          } catch (supabaseError: unknown) {
+            const supabaseErrorMessage = supabaseError instanceof Error ? supabaseError.message : 'Unknown error';
+            logger.warn('Supabase auth check failed', { error: supabaseErrorMessage });
           }
         }
         
         if (!userId) {
           // Fallback to token-based user ID
           userId = `user-${token.slice(0, 8)}`;
-          console.log('   Using token-based userId (fallback):', userId);
+          logger.debug('Using token-based userId (fallback)', { userId });
         }
       }
     }
@@ -96,7 +121,7 @@ export async function GET(request: NextRequest) {
     if (!userId) {
       const sessionId = crypto.randomBytes(16).toString('hex');
       userId = `session-${sessionId}`;
-      console.log('   Generated session userId:', userId);
+      logger.debug('Generated session userId', { userId });
     }
 
     // Check if GitHub OAuth is configured
@@ -122,15 +147,15 @@ export async function GET(request: NextRequest) {
         currentClientId = envClientId;
       } else if (envClientId === expectedDevClientId) {
         // Wrong client ID in env - use correct one
-        console.warn('⚠️ [GitHub OAuth] Auto-fixing: Using PROD client ID (env had DEV)');
+        logger.warn('Auto-fixing: Using PROD client ID (env had DEV)');
         currentClientId = expectedProdClientId;
       } else if (envClientId) {
         // Some other client ID - use it but warn
-        console.warn('⚠️ [GitHub OAuth] Using custom client ID in production:', envClientId);
+        logger.warn('Using custom client ID in production', { clientId: envClientId });
         currentClientId = envClientId;
       } else {
         // No env var - use prod
-        console.warn('⚠️ [GitHub OAuth] No GITHUB_CLIENT_ID in env, using PROD client ID');
+        logger.warn('No GITHUB_CLIENT_ID in env, using PROD client ID');
         currentClientId = expectedProdClientId;
       }
     } else {
@@ -139,40 +164,44 @@ export async function GET(request: NextRequest) {
         currentClientId = envClientId;
       } else if (envClientId === expectedProdClientId) {
         // Wrong client ID in env - use correct one
-        console.warn('⚠️ [GitHub OAuth] Auto-fixing: Using DEV client ID (env had PROD)');
+        logger.warn('Auto-fixing: Using DEV client ID (env had PROD)');
         currentClientId = expectedDevClientId;
       } else if (envClientId) {
         // Some other client ID - use it
         currentClientId = envClientId;
       } else {
         // No env var - use dev
-        console.warn('⚠️ [GitHub OAuth] No GITHUB_CLIENT_ID in env, using DEV client ID');
+        logger.warn('No GITHUB_CLIENT_ID in env, using DEV client ID');
         currentClientId = expectedDevClientId;
       }
     }
     
     if (!currentClientId) {
-      console.error('❌ [GitHub OAuth] Could not determine client ID');
+      logger.error('Could not determine client ID');
       return NextResponse.json(
         { error: 'GitHub OAuth not configured. Please set GITHUB_CLIENT_ID in environment variables.' },
         { status: 500 }
       );
     }
 
-    console.log('   Environment:', isProduction ? 'PRODUCTION' : 'DEVELOPMENT');
-    console.log('   Client ID:', currentClientId);
-    console.log('   Client ID length:', currentClientId?.length);
+    logger.debug('OAuth configuration', {
+      environment: isProduction ? 'PRODUCTION' : 'DEVELOPMENT',
+      clientId: currentClientId,
+      clientIdLength: currentClientId?.length
+    });
 
     // Generate state for CSRF protection
     const state = crypto.randomBytes(32).toString('hex');
-    console.log('   Generated state:', state.substring(0, 16) + '...');
+    logger.debug('Generated state for CSRF protection', {
+      statePrefix: state.substring(0, 16)
+    });
     
     // Store state in session/cookie (in production, use Redis or database)
     const githubRedirectUri = await getConfigValue('GITHUB_REDIRECT_URI', null);
     const redirectUri = githubRedirectUri || 
                        `${nextPublicUrl || 'http://localhost:7777'}/api/github/oauth/callback`;
     
-    console.log('   Redirect URI:', redirectUri);
+    logger.debug('OAuth redirect URI', { redirectUri });
     
     const githubAuthUrl = `https://github.com/login/oauth/authorize?` +
       `client_id=${currentClientId}&` +
@@ -180,11 +209,13 @@ export async function GET(request: NextRequest) {
       `scope=${encodeURIComponent('repo read:user user:email')}&` +
       `state=${state}`;
     
-    console.log('   Redirecting to GitHub:', githubAuthUrl.substring(0, 100) + '...');
+    logger.info('Redirecting to GitHub OAuth', {
+      urlPrefix: githubAuthUrl.substring(0, 100)
+    });
     
     const response = NextResponse.redirect(githubAuthUrl);
 
-    // Store state in httpOnly cookie
+    // Store state in httpOnly cookie for CSRF protection
     const isProd = nodeEnv === 'production';
     response.cookies.set('github_oauth_state', state, {
       httpOnly: true,
@@ -208,15 +239,23 @@ export async function GET(request: NextRequest) {
       maxAge: 600
     });
 
-    console.log('✅ [GitHub OAuth] Redirecting to GitHub, cookies set');
-    console.log('   User ID:', userId);
-    console.log('   Is Supabase user:', isSupabaseUser);
+    logger.info('OAuth cookies set, redirecting to GitHub', {
+      userId,
+      isSupabaseUser
+    });
+    
     return response;
-  } catch (error: any) {
-    console.error('❌ [GitHub OAuth] Authorize error:', error);
-    console.error('   Stack:', error.stack);
+  } catch (error: unknown) {
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+    const errorStack = error instanceof Error ? error.stack : undefined;
+    
+    logger.error('Authorize error', {
+      message: errorMessage,
+      stack: errorStack
+    });
+    
     return NextResponse.json(
-      { error: 'Failed to initiate GitHub OAuth', details: error.message },
+      { error: 'Failed to initiate GitHub OAuth', details: errorMessage },
       { status: 500 }
     );
   }

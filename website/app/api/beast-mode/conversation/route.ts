@@ -20,41 +20,8 @@ export async function POST(request: NextRequest) {
     if (context?.type === 'code_generation' || context?.task === 'generate_code') {
       try {
         console.log('[BEAST MODE] Code generation request detected');
-        // Use the existing codebaseChat API which already works
-        // This avoids the module resolution issues with llmCodeGenerator
-        let codebaseChat: any;
-        try {
-          // Use same pattern as codebase/chat route
-          const codebaseChatModule = await import('../../../../../lib/mlops/codebaseChat').catch(() => {
-            // Fallback to require if import fails (CommonJS)
-            try {
-              return require('../../../../../lib/mlops/codebaseChat');
-            } catch (e) {
-              return null;
-            }
-          });
-          
-          if (!codebaseChatModule) {
-            throw new Error('Failed to load codebaseChat module');
-          }
-          
-          // Handle both singleton instance and class export
-          codebaseChat = codebaseChatModule.default || codebaseChatModule;
-          // If it's a class, we might need to instantiate it, but check if it has processMessage first
-          if (codebaseChat && typeof codebaseChat.processMessage !== 'function') {
-            // Try to get the instance if it's exported
-            codebaseChat = codebaseChatModule.getCodebaseChat?.() || codebaseChat;
-          }
-        } catch (error: any) {
-          console.error('[BEAST MODE] Failed to load codebaseChat:', error.message);
-          throw error;
-        }
-        
-        if (!codebaseChat || typeof codebaseChat.processMessage !== 'function') {
-          throw new Error('codebaseChat.processMessage is not available');
-        }
-        
-        // Build the prompt from context
+        // Use the existing /api/codebase/chat endpoint which already works
+        // This avoids module resolution issues by using HTTP instead of direct imports
         const bounty = context.bounty || {};
         const repo = context.repo || {};
         const dossier = context.dossier || {};
@@ -94,23 +61,31 @@ CRITICAL: Return ONLY valid JSON in this exact format:
 
 Return ONLY the JSON, no markdown, no explanations. The "content" field must contain actual, complete, working code.`;
 
-        // Use codebaseChat to generate code
-        const sessionId = `codegen-${Date.now()}`;
-        const chatResponse = await codebaseChat.processMessage(
-          enhancedPrompt,
-          {
-            sessionId,
-            userId: context.userId || '',
-            repo: repo.owner && repo.repo ? `${repo.owner}/${repo.repo}` : null,
-            context: {
-              type: 'code_generation',
-              bounty: bounty,
-              dossier: dossier,
-            },
-          }
-        );
+        // Call the internal /api/codebase/chat endpoint
+        // In Vercel, use the request URL to determine the base URL
+        const requestUrl = new URL(request.url);
+        const baseUrl = `${requestUrl.protocol}//${requestUrl.host}`;
         
-        const generatedCode = chatResponse.response || chatResponse.content || chatResponse.message || '';
+        const sessionId = `codegen-${Date.now()}`;
+        const chatResponse = await fetch(`${baseUrl}/api/codebase/chat`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            sessionId,
+            message: enhancedPrompt,
+            repo: repo.owner && repo.repo ? `${repo.owner}/${repo.repo}` : null,
+            model: 'openai:gpt-4',
+          }),
+        });
+        
+        if (!chatResponse.ok) {
+          throw new Error(`Codebase chat API returned ${chatResponse.status}`);
+        }
+        
+        const chatData = await chatResponse.json();
+        const generatedCode = chatData.response || chatData.content || chatData.message || '';
         
         // Parse the response to extract JSON
         let codeResponse = generatedCode;

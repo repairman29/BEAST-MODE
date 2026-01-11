@@ -32,9 +32,10 @@ export default function AuthSection({ onAuthSuccess }: AuthSectionProps) {
       const error = params.get('error');
       const errorMessage = params.get('message');
       
-      // Handle OAuth errors
+      // Validate and handle OAuth errors
       if (error) {
-        if (error === 'oauth_state_mismatch' || error === 'oauth_session_expired') {
+        const validOAuthErrors = ['oauth_state_mismatch', 'oauth_session_expired', 'oauth_error', 'oauth_token_error', 'oauth_callback_error', 'missing_oauth_params'];
+        if (validOAuthErrors.includes(error)) {
           setError(errorMessage || 'OAuth error occurred. Please try again.');
           setIsSignIn(true);
         }
@@ -47,24 +48,26 @@ export default function AuthSection({ onAuthSuccess }: AuthSectionProps) {
         // Don't clear URL params yet - keep them so the form stays visible
       } else if (action === 'signup') {
         setIsSignIn(false);
-        // Pre-fill email if provided
-        if (prefillEmail) {
+        // Pre-fill email if provided and valid
+        if (prefillEmail && prefillEmail.includes('@')) {
           setEmail(prefillEmail);
         }
       } else if (action === 'signin') {
         setIsSignIn(true);
-        // Pre-fill email if provided
-        if (prefillEmail) {
+        // Pre-fill email if provided and valid
+        if (prefillEmail && prefillEmail.includes('@')) {
           setEmail(prefillEmail);
         }
       }
       
       // Show message if GitHub was connected but user needs to sign in
       if (message === 'github_connected' && githubUsername) {
+        // Validate githubUsername to prevent XSS
+        const safeUsername = githubUsername.replace(/[<>]/g, '');
         if (action === 'signup') {
-          setError(`GitHub account (@${githubUsername}) connected! Please create an account with your email to continue.`);
+          setError(`GitHub account (@${safeUsername}) connected! Please create an account with your email to continue.`);
         } else {
-          setError(`GitHub account (@${githubUsername}) connected! Please sign in with your email and password to continue.`);
+          setError(`GitHub account (@${safeUsername}) connected! Please sign in with your email and password to continue.`);
         }
         // Don't clear URL params yet - keep them so the form stays visible
       }
@@ -93,19 +96,56 @@ export default function AuthSection({ onAuthSuccess }: AuthSectionProps) {
 
     try {
       const endpoint = isSignIn ? '/api/auth/signin' : '/api/auth/signup';
+      
+      // Validate inputs before making request
+      if (!email || !email.includes('@')) {
+        setError('Please enter a valid email address');
+        setIsLoading(false);
+        return;
+      }
+      
+      if (!password || password.length < 6) {
+        setError('Password must be at least 6 characters');
+        setIsLoading(false);
+        return;
+      }
+      
+      if (!isSignIn && (!name || name.trim().length === 0)) {
+        setError('Please enter your name');
+        setIsLoading(false);
+        return;
+      }
+      
       const response = await fetch(endpoint, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password, name: isSignIn ? undefined : name })
+        body: JSON.stringify({ 
+          email: email.trim(), 
+          password, 
+          name: isSignIn ? undefined : name?.trim() 
+        })
       });
 
       if (!response.ok) {
-        const data = await response.json();
-        throw new Error(data.error || 'Authentication failed');
+        let errorMessage = 'Authentication failed';
+        try {
+          const data = await response.json();
+          errorMessage = data.error || errorMessage;
+        } catch {
+          // If JSON parsing fails, use status text
+          errorMessage = response.statusText || errorMessage;
+        }
+        throw new Error(errorMessage);
       }
 
       const data = await response.json();
-      const userData = data.user;
+      
+      // Validate response data
+      if (!data.user || !data.token) {
+        throw new Error('Invalid response from server');
+      }
+      
+      const userData: User = data.user;
       setUser(userData);
       localStorage.setItem('beastModeToken', data.token);
       
@@ -126,10 +166,13 @@ export default function AuthSection({ onAuthSuccess }: AuthSectionProps) {
       
       // Show success message
       if (data.needsVerification) {
-        alert('Account created! Please check your email to verify your account.');
+        // Use a better notification method instead of alert
+        setError('Account created! Please check your email to verify your account.');
+        setTimeout(() => setError(null), 5000);
       }
-    } catch (err: any) {
-      setError(err.message || 'Authentication failed');
+    } catch (err: unknown) {
+      const errorMessage = err instanceof Error ? err.message : 'Authentication failed';
+      setError(errorMessage);
     } finally {
       setIsLoading(false);
     }
@@ -268,8 +311,9 @@ export default function AuthSection({ onAuthSuccess }: AuthSectionProps) {
                         const data = await response.json();
                         throw new Error(data.error || 'Failed to send reset email');
                       }
-                    } catch (err: any) {
-                      setError(err.message);
+                    } catch (err: unknown) {
+                      const errorMessage = err instanceof Error ? err.message : 'Failed to send reset email';
+                      setError(errorMessage);
                     } finally {
                       setIsLoading(false);
                     }
