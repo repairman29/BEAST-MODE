@@ -13,7 +13,7 @@
  * Integrated with generated features
  */
 
-import { useEffect, useRef, useCallback } from 'react';
+import { useEffect, useRef, useCallback, useState } from 'react';
 import Editor from '@monaco-editor/react';
 import type { editor } from 'monaco-editor';
 import { featureRegistry } from '@/lib/ide/featureRegistry';
