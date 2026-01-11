@@ -22,22 +22,23 @@ export async function POST(request: NextRequest) {
         console.log('[BEAST MODE] Code generation request detected');
         // Use BEAST MODE's code generation capabilities
         // Use same pattern as codebase/chat route - dynamic require to prevent webpack issues
-        let LLMCodeGenerator: any;
-        try {
-          // Try relative path from website/app/api/beast-mode/conversation
-          // Goes up to website, then to root, then to lib/mlops
-          LLMCodeGenerator = require('../../../../../lib/mlops/llmCodeGenerator');
-        } catch (e) {
-          console.error('[BEAST MODE] Failed to load from relative path, trying website/lib:', e.message);
-          // Fallback: try website/lib/mlops (copied files)
-          try {
-            LLMCodeGenerator = require('../../../../lib/mlops/llmCodeGenerator');
-          } catch (e2) {
-            console.error('[BEAST MODE] Failed to load from website/lib:', e2.message);
-            throw new Error(`Cannot find llmCodeGenerator: ${e.message}`);
+        const path = require('path');
+        const fs = require('fs');
+        
+        // Find the mlops directory - try website/lib/mlops first (for Vercel)
+        let mlopsPath = path.join(process.cwd(), 'lib', 'mlops');
+        if (!fs.existsSync(path.join(mlopsPath, 'llmCodeGenerator.js'))) {
+          // Fallback: try going up one level (if process.cwd() is website)
+          mlopsPath = path.join(process.cwd(), '..', 'lib', 'mlops');
+          if (!fs.existsSync(path.join(mlopsPath, 'llmCodeGenerator.js'))) {
+            // Last resort: try relative from this file
+            mlopsPath = path.join(__dirname, '..', '..', '..', '..', 'lib', 'mlops');
           }
         }
-        const generator = new LLMCodeGenerator();
+        
+        // Use wrapper to load code generator with proper module resolution
+        const { loadCodeGenerator } = require('../../../../lib/mlops/loadCodeGenerator');
+        const generator = loadCodeGenerator(mlopsPath);
         
         // Build the prompt from context
         const bounty = context.bounty || {};

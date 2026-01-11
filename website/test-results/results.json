@@ -134,25 +134,25 @@
   },
   "suites": [
     {
-      "title": "api-endpoints.spec.ts",
-      "file": "api-endpoints.spec.ts",
+      "title": "credit-purchase-manual-auth.spec.ts",
+      "file": "credit-purchase-manual-auth.spec.ts",
       "column": 0,
       "line": 0,
       "specs": [],
       "suites": [
         {
-          "title": "API Endpoints",
-          "file": "api-endpoints.spec.ts",
-          "line": 8,
+          "title": "Credit Purchase Flow (Manual Auth)",
+          "file": "credit-purchase-manual-auth.spec.ts",
+          "line": 18,
           "column": 6,
           "specs": [
             {
-              "title": "repos quality endpoint should exist",
-              "ok": true,
+              "title": "should complete credit purchase flow with manual authentication",
+              "ok": false,
               "tags": [],
               "tests": [
                 {
-                  "timeout": 60000,
+                  "timeout": 120000,
                   "annotations": [],
                   "expectedStatus": "passed",
                   "projectId": "chromium",
@@ -161,856 +161,147 @@
                     {
                       "workerIndex": 0,
                       "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 60,
-                      "errors": [],
-                      "stdout": [],
+                      "status": "timedOut",
+                      "duration": 120188,
+                      "error": {
+                        "message": "\u001b[31mTest timeout of 120000ms exceeded.\u001b[39m",
+                        "stack": "\u001b[31mTest timeout of 120000ms exceeded.\u001b[39m"
+                      },
+                      "errors": [
+                        {
+                          "message": "\u001b[31mTest timeout of 120000ms exceeded.\u001b[39m"
+                        },
+                        {
+                          "location": {
+                            "file": "/Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/website/e2e/credit-purchase-manual-auth.spec.ts",
+                            "column": 18,
+                            "line": 42
+                          },
+                          "message": "Error: page.waitForURL: Test timeout of 120000ms exceeded.\n=========================== logs ===========================\nwaiting for navigation to \"**/dashboard/**\" until \"load\"\n============================================================\n\n  40 |       \n  41 |       // Wait for URL to change to dashboard (indicating login successful)\n> 42 |       await page.waitForURL('**/dashboard/**', { timeout: 300000 }); // 5 minute timeout\n     |                  ^\n  43 |       console.log('✅ Authentication detected - continuing test\\n');\n  44 |     }\n  45 |\n    at /Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/website/e2e/credit-purchase-manual-auth.spec.ts:42:18"
+                        }
+                      ],
+                      "stdout": [
+                        {
+                          "text": "\n🧪 Credit Purchase Test (Manual Auth)\n\n"
+                        },
+                        {
+                          "text": "💡 This test assumes you are logged in\n\n"
+                        },
+                        {
+                          "text": "📍 If not logged in, please authenticate manually when browser opens\n\n"
+                        },
+                        {
+                          "text": "📋 Step 1: Navigating to billing page...\n"
+                        },
+                        {
+                          "text": "   Current URL: https://beast-mode.dev/?auth=required\n"
+                        },
+                        {
+                          "text": "\n⏸️  PAUSED: Please authenticate manually in the browser\n"
+                        },
+                        {
+                          "text": "   After logging in, the test will continue automatically...\n\n"
+                        }
+                      ],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-01-09T22:12:12.818Z",
+                      "startTime": "2026-01-11T05:19:01.757Z",
                       "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "1283ac53084b38fceb2d-638b360a7d0cad1af0af",
-              "file": "api-endpoints.spec.ts",
-              "line": 9,
-              "column": 7
-            },
-            {
-              "title": "repos quality endpoint should handle errors gracefully",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 60000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "chromium",
-                  "projectName": "chromium",
-                  "results": [
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/website/test-results/credit-purchase-manual-aut-51381--with-manual-authentication-chromium/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/website/test-results/credit-purchase-manual-aut-51381--with-manual-authentication-chromium/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/website/test-results/credit-purchase-manual-aut-51381--with-manual-authentication-chromium/error-context.md"
+                        }
+                      ]
+                    },
                     {
-                      "workerIndex": 0,
+                      "workerIndex": 1,
                       "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 22,
-                      "errors": [],
-                      "stdout": [],
+                      "status": "failed",
+                      "duration": 105471,
+                      "error": {
+                        "message": "Error: page.waitForURL: Target page, context or browser has been closed\n=========================== logs ===========================\nwaiting for navigation to \"**/dashboard/**\" until \"load\"\n  navigated to \"https://github.com/login?client_id=Ov23liDKFkIrnPneWwny&return_to=%2Flogin%2Foauth%2Fauthorize%3Fclient_id%3DOv23liDKFkIrnPneWwny%26redirect_uri%3Dhttps%253A%252F%252Fbeast-mode.dev%252Fapi%252Fgithub%252Foauth%252Fcallback%26scope%3Drepo%2Bread%253Auser%2Buser%253Aemail%26state%3D31f6c5aa5f7b07040470c0492691f92cca6e99fc2cba816a8b1a7c60bc36b412\"\n  navigated to \"https://github.com/login?client_id=Ov23liDKFkIrnPneWwny&return_to=%2Flogin%2Foauth%2Fauthorize%3Fclient_id%3DOv23liDKFkIrnPneWwny%26redirect_uri%3Dhttps%253A%252F%252Fbeast-mode.dev%252Fapi%252Fgithub%252Foauth%252Fcallback%26scope%3Drepo%2Bread%253Auser%2Buser%253Aemail%26state%3D31f6c5aa5f7b07040470c0492691f92cca6e99fc2cba816a8b1a7c60bc36b412\"\n  navigated to \"https://github.com/login?client_id=Ov23liDKFkIrnPneWwny&return_to=%2Flogin%2Foauth%2Fauthorize%3Fclient_id%3DOv23liDKFkIrnPneWwny%26redirect_uri%3Dhttps%253A%252F%252Fbeast-mode.dev%252Fapi%252Fgithub%252Foauth%252Fcallback%26scope%3Drepo%2Bread%253Auser%2Buser%253Aemail%26state%3D31f6c5aa5f7b07040470c0492691f92cca6e99fc2cba816a8b1a7c60bc36b412\"\n  navigated to \"https://github.com/sessions/social/google/initiate?return_to=%2Flogin%2Foauth%2Fauthorize%3Fclient_id%3DOv23liDKFkIrnPneWwny%26redirect_uri%3Dhttps%253A%252F%252Fbeast-mode.dev%252Fapi%252Fgithub%252Foauth%252Fcallback%26scope%3Drepo%2Bread%253Auser%2Buser%253Aemail%26state%3D31f6c5aa5f7b07040470c0492691f92cca6e99fc2cba816a8b1a7c60bc36b412&disable_signup=false\"\n  navigated to \"https://accounts.google.com/v3/signin/identifier?opparams=%253F&dsh=S-2076489951%3A1768108870452624&client_id=1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com&code_challenge=ngnWHbJjkmoiS_GWyFV7ZwcwDpUTr-Sgwe5UJczc8DQ&code_challenge_method=S256&nonce=c08e750348a28be9f2b2818fda8d4ab7&o2v=2&prompt=select_account&redirect_uri=https%3A%2F%2Fgithub.com%2Fsessions%2Fsocial%2Fgoogle%2Fcallback&response_type=code&scope=openid+email+profile&service=lso&state=c27adf9910bd7bc7098d85511ab3e997&flowName=GeneralOAuthFlow&continue=https%3A%2F%2Faccounts.google.com%2Fsignin%2Foauth%2Fconsent%3Fauthuser%3Dunknown%26part%3DAJi8hAPIZN2M5zkynkC55pnfYg-Xmg9yQ8LM52E8PYiuCXcHNUrNBZJBdCNWYODYqT83MQ-Uh5plfzs3xqdZluNXTFUuMc54ueQmlBfCgpX7o-kExVJMVLwNXVFkSWKUQFX7QEp5LJLWbvDK7dX2t5RoRjdV0Sbhv93qQjOatdVRuXo1TrArrq8YYP_UaMDYwkPhAlOpj-lNjQlm-N53usGkOAL9brEbc7SloM_BY-mOKoC3D2zf68eIaQChGDjkY59pnSAteIrYq3hZPzyRCbq7NE-L4dzoU2vlyt2XgrIhmFJaU4ny8hRo3LqSJkw7z4MERVfTpSQmnBVwqGwfUpLVjIhNnW-5lahKs8bBlSPR3wLKyAgxi0kwrNRHha_ggKWud7YfPqumVPjX3WSQzJkgzr7HjfEI3j8QNsmzWS1hMeRVWPId6tvoTr10n_BBor7Vm4Br-FwM5rvSPRYgdPiCxTNLUg7UCQ%26flowName%3DGeneralOAuthFlow%26as%3DS-2076489951%253A1768108870452624%26client_id%3D1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com%26requestPath%3D%252Fsignin%252Foauth%252Fconsent%23&app_domain=https%3A%2F%2Fgithub.com&rart=ANgoxcdHQOzpXDCX3TWwfkroZlP0djR2cyHswV1161tDpbd_WQzCyTNncbXT1KsDL6-aB10oN6fCPCFbS9WUpFu_CNtOC4IxdHxQFeiFrDafNLuXAZ_FiH0\"\n  navigated to \"https://accounts.google.com/v3/signin/identifier?opparams=%253F&dsh=S-2076489951%3A1768108870452624&client_id=1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com&code_challenge=ngnWHbJjkmoiS_GWyFV7ZwcwDpUTr-Sgwe5UJczc8DQ&code_challenge_method=S256&nonce=c08e750348a28be9f2b2818fda8d4ab7&o2v=2&prompt=select_account&redirect_uri=https%3A%2F%2Fgithub.com%2Fsessions%2Fsocial%2Fgoogle%2Fcallback&response_type=code&scope=openid+email+profile&service=lso&state=c27adf9910bd7bc7098d85511ab3e997&flowName=GeneralOAuthFlow&continue=https%3A%2F%2Faccounts.google.com%2Fsignin%2Foauth%2Fconsent%3Fauthuser%3Dunknown%26part%3DAJi8hAPIZN2M5zkynkC55pnfYg-Xmg9yQ8LM52E8PYiuCXcHNUrNBZJBdCNWYODYqT83MQ-Uh5plfzs3xqdZluNXTFUuMc54ueQmlBfCgpX7o-kExVJMVLwNXVFkSWKUQFX7QEp5LJLWbvDK7dX2t5RoRjdV0Sbhv93qQjOatdVRuXo1TrArrq8YYP_UaMDYwkPhAlOpj-lNjQlm-N53usGkOAL9brEbc7SloM_BY-mOKoC3D2zf68eIaQChGDjkY59pnSAteIrYq3hZPzyRCbq7NE-L4dzoU2vlyt2XgrIhmFJaU4ny8hRo3LqSJkw7z4MERVfTpSQmnBVwqGwfUpLVjIhNnW-5lahKs8bBlSPR3wLKyAgxi0kwrNRHha_ggKWud7YfPqumVPjX3WSQzJkgzr7HjfEI3j8QNsmzWS1hMeRVWPId6tvoTr10n_BBor7Vm4Br-FwM5rvSPRYgdPiCxTNLUg7UCQ%26flowName%3DGeneralOAuthFlow%26as%3DS-2076489951%253A1768108870452624%26client_id%3D1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com%26requestPath%3D%252Fsignin%252Foauth%252Fconsent%23&app_domain=https%3A%2F%2Fgithub.com&rart=ANgoxcdHQOzpXDCX3TWwfkroZlP0djR2cyHswV1161tDpbd_WQzCyTNncbXT1KsDL6-aB10oN6fCPCFbS9WUpFu_CNtOC4IxdHxQFeiFrDafNLuXAZ_FiH0\"\n  navigated to \"https://accounts.google.com/v3/signin/rejected?app_domain=https%3A%2F%2Fgithub.com&client_id=1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com&code_challenge=ngnWHbJjkmoiS_GWyFV7ZwcwDpUTr-Sgwe5UJczc8DQ&code_challenge_method=S256&continue=https%3A%2F%2Faccounts.google.com%2Fsignin%2Foauth%2Fconsent%3Fauthuser%3Dunknown%26part%3DAJi8hAPIZN2M5zkynkC55pnfYg-Xmg9yQ8LM52E8PYiuCXcHNUrNBZJBdCNWYODYqT83MQ-Uh5plfzs3xqdZluNXTFUuMc54ueQmlBfCgpX7o-kExVJMVLwNXVFkSWKUQFX7QEp5LJLWbvDK7dX2t5RoRjdV0Sbhv93qQjOatdVRuXo1TrArrq8YYP_UaMDYwkPhAlOpj-lNjQlm-N53usGkOAL9brEbc7SloM_BY-mOKoC3D2zf68eIaQChGDjkY59pnSAteIrYq3hZPzyRCbq7NE-L4dzoU2vlyt2XgrIhmFJaU4ny8hRo3LqSJkw7z4MERVfTpSQmnBVwqGwfUpLVjIhNnW-5lahKs8bBlSPR3wLKyAgxi0kwrNRHha_ggKWud7YfPqumVPjX3WSQzJkgzr7HjfEI3j8QNsmzWS1hMeRVWPId6tvoTr10n_BBor7Vm4Br-FwM5rvSPRYgdPiCxTNLUg7UCQ%26flowName%3DGeneralOAuthFlow%26as%3DS-2076489951%253A1768108870452624%26client_id%3D1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com%26requestPath%3D%252Fsignin%252Foauth%252Fconsent%23&dsh=S-2076489951%3A1768108870452624&epd=AX1IGxuLP4_AFIHEpVE7Gj0I1MxAS5kSmKK_Z7R6Otr6rfb1ooKYLfJuaQ&flowName=GeneralOAuthFlow&idnf=jeffadkins1%40gmail.com&nonce=c08e750348a28be9f2b2818fda8d4ab7&o2v=2&opparams=%253F&prompt=select_account&rart=ANgoxcdHQOzpXDCX3TWwfkroZlP0djR2cyHswV1161tDpbd_WQzCyTNncbXT1KsDL6-aB10oN6fCPCFbS9WUpFu_CNtOC4IxdHxQFeiFrDafNLuXAZ_FiH0&redirect_uri=https%3A%2F%2Fgithub.com%2Fsessions%2Fsocial%2Fgoogle%2Fcallback&response_type=code&rhlk=le&rrk=46&scope=openid%20email%20profile&service=lso&state=c27adf9910bd7bc7098d85511ab3e997\"\n  navigated to \"https://accounts.google.com/v3/signin/identifier?opparams=%253F&dsh=S252840947%3A1768108879902433&app_domain=https%3A%2F%2Fgithub.com&client_id=1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com&code_challenge=ngnWHbJjkmoiS_GWyFV7ZwcwDpUTr-Sgwe5UJczc8DQ&code_challenge_method=S256&continue=https%3A%2F%2Faccounts.google.com%2Fsignin%2Foauth%2Fconsent%3Fauthuser%3Dunknown%26part%3DAJi8hAMFSEgZxvnvppyJZ6xAOJbr2_ls1kJSc8JK5wLYDhhDPeCFx0dtW6yV4Hu2Dg8YyZrnlUDLCfZeV3h2w0fCd41QXgd0f_EAVMaaV6hM7CBti1-BjYbV5Fzz8YcMzn5ZM9SqKT977nuSYPPk7OtgdH0QxV96hq-uGZwXqEYPRrnYixk5SghyHShnTwQ1Pn6AsdFWw8lFli1OWPvhqCKIkL9grB0eePKLFw_-TzsRSADD5ys-6O9fNggBXgLbgrU_y4zqdQ2e_gLTmT-Xh5_LtCFUJtpOgB7g5uMddvnCPSsRInLeTpyDBIRUkBLh6ysuVoT_C1gtA36iojJxhdw7VBGszJgRssirOS7BBR4hD3H98n1OT4BU1SGZAf6JOYjA2eg6mF6Ia8PRzn09UWcWFkv_ir2i2OFb0PxG5OUuh09XLAZjpzlRJwxpaCPnNVYDIDbBrX2o-fL9EfS1f4LZzr8i6bn3nA%26flowName%3DGeneralOAuthFlow%26as%3DS252840947%253A1768108879902433%26client_id%3D1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com%26requestPath%3D%252Fsignin%252Foauth%252Fconsent%23&flowName=GeneralOAuthFlow&nonce=c08e750348a28be9f2b2818fda8d4ab7&o2v=2&prompt=select_account&rart=ANgoxcf9LKoqjKL4lbLwFGdRNyRF_hgqesopMioKcc9krzBUVLN_gnezrPtBjlrmn2i7G2jvGbzatKW88-0RGPqb_d2iB6HmGXJ9YKwSPEeHm-zmmMoDDb8&redirect_uri=https%3A%2F%2Fgithub.com%2Fsessions%2Fsocial%2Fgoogle%2Fcallback&response_type=code&scope=openid+email+profile&service=lso&state=c27adf9910bd7bc7098d85511ab3e997\"\n  navigated to \"https://accounts.google.com/v3/signin/identifier?opparams=%253F&dsh=S252840947%3A1768108879902433&app_domain=https%3A%2F%2Fgithub.com&client_id=1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com&code_challenge=ngnWHbJjkmoiS_GWyFV7ZwcwDpUTr-Sgwe5UJczc8DQ&code_challenge_method=S256&continue=https%3A%2F%2Faccounts.google.com%2Fsignin%2Foauth%2Fconsent%3Fauthuser%3Dunknown%26part%3DAJi8hAMFSEgZxvnvppyJZ6xAOJbr2_ls1kJSc8JK5wLYDhhDPeCFx0dtW6yV4Hu2Dg8YyZrnlUDLCfZeV3h2w0fCd41QXgd0f_EAVMaaV6hM7CBti1-BjYbV5Fzz8YcMzn5ZM9SqKT977nuSYPPk7OtgdH0QxV96hq-uGZwXqEYPRrnYixk5SghyHShnTwQ1Pn6AsdFWw8lFli1OWPvhqCKIkL9grB0eePKLFw_-TzsRSADD5ys-6O9fNggBXgLbgrU_y4zqdQ2e_gLTmT-Xh5_LtCFUJtpOgB7g5uMddvnCPSsRInLeTpyDBIRUkBLh6ysuVoT_C1gtA36iojJxhdw7VBGszJgRssirOS7BBR4hD3H98n1OT4BU1SGZAf6JOYjA2eg6mF6Ia8PRzn09UWcWFkv_ir2i2OFb0PxG5OUuh09XLAZjpzlRJwxpaCPnNVYDIDbBrX2o-fL9EfS1f4LZzr8i6bn3nA%26flowName%3DGeneralOAuthFlow%26as%3DS252840947%253A1768108879902433%26client_id%3D1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com%26requestPath%3D%252Fsignin%252Foauth%252Fconsent%23&flowName=GeneralOAuthFlow&nonce=c08e750348a28be9f2b2818fda8d4ab7&o2v=2&prompt=select_account&rart=ANgoxcf9LKoqjKL4lbLwFGdRNyRF_hgqesopMioKcc9krzBUVLN_gnezrPtBjlrmn2i7G2jvGbzatKW88-0RGPqb_d2iB6HmGXJ9YKwSPEeHm-zmmMoDDb8&redirect_uri=https%3A%2F%2Fgithub.com%2Fsessions%2Fsocial%2Fgoogle%2Fcallback&response_type=code&scope=openid+email+profile&service=lso&state=c27adf9910bd7bc7098d85511ab3e997\"\n  navigated to \"https://accounts.google.com/v3/signin/identifier?opparams=%253F&dsh=S252840947%3A1768108879902433&app_domain=https%3A%2F%2Fgithub.com&client_id=1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com&code_challenge=ngnWHbJjkmoiS_GWyFV7ZwcwDpUTr-Sgwe5UJczc8DQ&code_challenge_method=S256&continue=https%3A%2F%2Faccounts.google.com%2Fsignin%2Foauth%2Fconsent%3Fauthuser%3Dunknown%26part%3DAJi8hAMFSEgZxvnvppyJZ6xAOJbr2_ls1kJSc8JK5wLYDhhDPeCFx0dtW6yV4Hu2Dg8YyZrnlUDLCfZeV3h2w0fCd41QXgd0f_EAVMaaV6hM7CBti1-BjYbV5Fzz8YcMzn5ZM9SqKT977nuSYPPk7OtgdH0QxV96hq-uGZwXqEYPRrnYixk5SghyHShnTwQ1Pn6AsdFWw8lFli1OWPvhqCKIkL9grB0eePKLFw_-TzsRSADD5ys-6O9fNggBXgLbgrU_y4zqdQ2e_gLTmT-Xh5_LtCFUJtpOgB7g5uMddvnCPSsRInLeTpyDBIRUkBLh6ysuVoT_C1gtA36iojJxhdw7VBGszJgRssirOS7BBR4hD3H98n1OT4BU1SGZAf6JOYjA2eg6mF6Ia8PRzn09UWcWFkv_ir2i2OFb0PxG5OUuh09XLAZjpzlRJwxpaCPnNVYDIDbBrX2o-fL9EfS1f4LZzr8i6bn3nA%26flowName%3DGeneralOAuthFlow%26as%3DS252840947%253A1768108879902433%26client_id%3D1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com%26requestPath%3D%252Fsignin%252Foauth%252Fconsent%23&flowName=GeneralOAuthFlow&nonce=c08e750348a28be9f2b2818fda8d4ab7&o2v=2&prompt=select_account&rart=ANgoxcf9LKoqjKL4lbLwFGdRNyRF_hgqesopMioKcc9krzBUVLN_gnezrPtBjlrmn2i7G2jvGbzatKW88-0RGPqb_d2iB6HmGXJ9YKwSPEeHm-zmmMoDDb8&redirect_uri=https%3A%2F%2Fgithub.com%2Fsessions%2Fsocial%2Fgoogle%2Fcallback&response_type=code&scope=openid+email+profile&service=lso&state=c27adf9910bd7bc7098d85511ab3e997\"\n  navigated to \"https://accounts.google.com/v3/signin/identifier?opparams=%253F&dsh=S252840947%3A1768108879902433&app_domain=https%3A%2F%2Fgithub.com&client_id=1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com&code_challenge=ngnWHbJjkmoiS_GWyFV7ZwcwDpUTr-Sgwe5UJczc8DQ&code_challenge_method=S256&continue=https%3A%2F%2Faccounts.google.com%2Fsignin%2Foauth%2Fconsent%3Fauthuser%3Dunknown%26part%3DAJi8hAMFSEgZxvnvppyJZ6xAOJbr2_ls1kJSc8JK5wLYDhhDPeCFx0dtW6yV4Hu2Dg8YyZrnlUDLCfZeV3h2w0fCd41QXgd0f_EAVMaaV6hM7CBti1-BjYbV5Fzz8YcMzn5ZM9SqKT977nuSYPPk7OtgdH0QxV96hq-uGZwXqEYPRrnYixk5SghyHShnTwQ1Pn6AsdFWw8lFli1OWPvhqCKIkL9grB0eePKLFw_-TzsRSADD5ys-6O9fNggBXgLbgrU_y4zqdQ2e_gLTmT-Xh5_LtCFUJtpOgB7g5uMddvnCPSsRInLeTpyDBIRUkBLh6ysuVoT_C1gtA36iojJxhdw7VBGszJgRssirOS7BBR4hD3H98n1OT4BU1SGZAf6JOYjA2eg6mF6Ia8PRzn09UWcWFkv_ir2i2OFb0PxG5OUuh09XLAZjpzlRJwxpaCPnNVYDIDbBrX2o-fL9EfS1f4LZzr8i6bn3nA%26flowName%3DGeneralOAuthFlow%26as%3DS252840947%253A1768108879902433%26client_id%3D1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com%26requestPath%3D%252Fsignin%252Foauth%252Fconsent%23&flowName=GeneralOAuthFlow&nonce=c08e750348a28be9f2b2818fda8d4ab7&o2v=2&prompt=select_account&rart=ANgoxcf9LKoqjKL4lbLwFGdRNyRF_hgqesopMioKcc9krzBUVLN_gnezrPtBjlrmn2i7G2jvGbzatKW88-0RGPqb_d2iB6HmGXJ9YKwSPEeHm-zmmMoDDb8&redirect_uri=https%3A%2F%2Fgithub.com%2Fsessions%2Fsocial%2Fgoogle%2Fcallback&response_type=code&scope=openid+email+profile&service=lso&state=c27adf9910bd7bc7098d85511ab3e997\"\n  navigated to \"https://accounts.google.com/v3/signin/rejected?app_domain=https%3A%2F%2Fgithub.com&client_id=1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com&code_challenge=ngnWHbJjkmoiS_GWyFV7ZwcwDpUTr-Sgwe5UJczc8DQ&code_challenge_method=S256&continue=https%3A%2F%2Faccounts.google.com%2Fsignin%2Foauth%2Fconsent%3Fauthuser%3Dunknown%26part%3DAJi8hAPIZN2M5zkynkC55pnfYg-Xmg9yQ8LM52E8PYiuCXcHNUrNBZJBdCNWYODYqT83MQ-Uh5plfzs3xqdZluNXTFUuMc54ueQmlBfCgpX7o-kExVJMVLwNXVFkSWKUQFX7QEp5LJLWbvDK7dX2t5RoRjdV0Sbhv93qQjOatdVRuXo1TrArrq8YYP_UaMDYwkPhAlOpj-lNjQlm-N53usGkOAL9brEbc7SloM_BY-mOKoC3D2zf68eIaQChGDjkY59pnSAteIrYq3hZPzyRCbq7NE-L4dzoU2vlyt2XgrIhmFJaU4ny8hRo3LqSJkw7z4MERVfTpSQmnBVwqGwfUpLVjIhNnW-5lahKs8bBlSPR3wLKyAgxi0kwrNRHha_ggKWud7YfPqumVPjX3WSQzJkgzr7HjfEI3j8QNsmzWS1hMeRVWPId6tvoTr10n_BBor7Vm4Br-FwM5rvSPRYgdPiCxTNLUg7UCQ%26flowName%3DGeneralOAuthFlow%26as%3DS-2076489951%253A1768108870452624%26client_id%3D1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com%26requestPath%3D%252Fsignin%252Foauth%252Fconsent%23&dsh=S-2076489951%3A1768108870452624&epd=AX1IGxuLP4_AFIHEpVE7Gj0I1MxAS5kSmKK_Z7R6Otr6rfb1ooKYLfJuaQ&flowName=GeneralOAuthFlow&idnf=jeffadkins1%40gmail.com&nonce=c08e750348a28be9f2b2818fda8d4ab7&o2v=2&opparams=%253F&prompt=select_account&rart=ANgoxcdHQOzpXDCX3TWwfkroZlP0djR2cyHswV1161tDpbd_WQzCyTNncbXT1KsDL6-aB10oN6fCPCFbS9WUpFu_CNtOC4IxdHxQFeiFrDafNLuXAZ_FiH0&redirect_uri=https%3A%2F%2Fgithub.com%2Fsessions%2Fsocial%2Fgoogle%2Fcallback&response_type=code&rhlk=le&rrk=46&scope=openid%20email%20profile&service=lso&state=c27adf9910bd7bc7098d85511ab3e997\"\n  navigated to \"https://accounts.google.com/v3/signin/identifier?opparams=%253F&dsh=S-2076489951%3A1768108870452624&client_id=1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com&code_challenge=ngnWHbJjkmoiS_GWyFV7ZwcwDpUTr-Sgwe5UJczc8DQ&code_challenge_method=S256&nonce=c08e750348a28be9f2b2818fda8d4ab7&o2v=2&prompt=select_account&redirect_uri=https%3A%2F%2Fgithub.com%2Fsessions%2Fsocial%2Fgoogle%2Fcallback&response_type=code&scope=openid+email+profile&service=lso&state=c27adf9910bd7bc7098d85511ab3e997&flowName=GeneralOAuthFlow&continue=https%3A%2F%2Faccounts.google.com%2Fsignin%2Foauth%2Fconsent%3Fauthuser%3Dunknown%26part%3DAJi8hAPIZN2M5zkynkC55pnfYg-Xmg9yQ8LM52E8PYiuCXcHNUrNBZJBdCNWYODYqT83MQ-Uh5plfzs3xqdZluNXTFUuMc54ueQmlBfCgpX7o-kExVJMVLwNXVFkSWKUQFX7QEp5LJLWbvDK7dX2t5RoRjdV0Sbhv93qQjOatdVRuXo1TrArrq8YYP_UaMDYwkPhAlOpj-lNjQlm-N53usGkOAL9brEbc7SloM_BY-mOKoC3D2zf68eIaQChGDjkY59pnSAteIrYq3hZPzyRCbq7NE-L4dzoU2vlyt2XgrIhmFJaU4ny8hRo3LqSJkw7z4MERVfTpSQmnBVwqGwfUpLVjIhNnW-5lahKs8bBlSPR3wLKyAgxi0kwrNRHha_ggKWud7YfPqumVPjX3WSQzJkgzr7HjfEI3j8QNsmzWS1hMeRVWPId6tvoTr10n_BBor7Vm4Br-FwM5rvSPRYgdPiCxTNLUg7UCQ%26flowName%3DGeneralOAuthFlow%26as%3DS-2076489951%253A1768108870452624%26client_id%3D1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com%26requestPath%3D%252Fsignin%252Foauth%252Fconsent%23&app_domain=https%3A%2F%2Fgithub.com&rart=ANgoxcdHQOzpXDCX3TWwfkroZlP0djR2cyHswV1161tDpbd_WQzCyTNncbXT1KsDL6-aB10oN6fCPCFbS9WUpFu_CNtOC4IxdHxQFeiFrDafNLuXAZ_FiH0\"\n  navigated to \"https://accounts.google.com/v3/signin/identifier?opparams=%253F&dsh=S-2076489951%3A1768108870452624&client_id=1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com&code_challenge=ngnWHbJjkmoiS_GWyFV7ZwcwDpUTr-Sgwe5UJczc8DQ&code_challenge_method=S256&nonce=c08e750348a28be9f2b2818fda8d4ab7&o2v=2&prompt=select_account&redirect_uri=https%3A%2F%2Fgithub.com%2Fsessions%2Fsocial%2Fgoogle%2Fcallback&response_type=code&scope=openid+email+profile&service=lso&state=c27adf9910bd7bc7098d85511ab3e997&flowName=GeneralOAuthFlow&continue=https%3A%2F%2Faccounts.google.com%2Fsignin%2Foauth%2Fconsent%3Fauthuser%3Dunknown%26part%3DAJi8hAPIZN2M5zkynkC55pnfYg-Xmg9yQ8LM52E8PYiuCXcHNUrNBZJBdCNWYODYqT83MQ-Uh5plfzs3xqdZluNXTFUuMc54ueQmlBfCgpX7o-kExVJMVLwNXVFkSWKUQFX7QEp5LJLWbvDK7dX2t5RoRjdV0Sbhv93qQjOatdVRuXo1TrArrq8YYP_UaMDYwkPhAlOpj-lNjQlm-N53usGkOAL9brEbc7SloM_BY-mOKoC3D2zf68eIaQChGDjkY59pnSAteIrYq3hZPzyRCbq7NE-L4dzoU2vlyt2XgrIhmFJaU4ny8hRo3LqSJkw7z4MERVfTpSQmnBVwqGwfUpLVjIhNnW-5lahKs8bBlSPR3wLKyAgxi0kwrNRHha_ggKWud7YfPqumVPjX3WSQzJkgzr7HjfEI3j8QNsmzWS1hMeRVWPId6tvoTr10n_BBor7Vm4Br-FwM5rvSPRYgdPiCxTNLUg7UCQ%26flowName%3DGeneralOAuthFlow%26as%3DS-2076489951%253A1768108870452624%26client_id%3D1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com%26requestPath%3D%252Fsignin%252Foauth%252Fconsent%23&app_domain=https%3A%2F%2Fgithub.com&rart=ANgoxcdHQOzpXDCX3TWwfkroZlP0djR2cyHswV1161tDpbd_WQzCyTNncbXT1KsDL6-aB10oN6fCPCFbS9WUpFu_CNtOC4IxdHxQFeiFrDafNLuXAZ_FiH0\"\n  navigated to \"https://accounts.google.com/v3/signin/identifier?opparams=%253F&dsh=S-2076489951%3A1768108870452624&client_id=1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com&code_challenge=ngnWHbJjkmoiS_GWyFV7ZwcwDpUTr-Sgwe5UJczc8DQ&code_challenge_method=S256&nonce=c08e750348a28be9f2b2818fda8d4ab7&o2v=2&prompt=select_account&redirect_uri=https%3A%2F%2Fgithub.com%2Fsessions%2Fsocial%2Fgoogle%2Fcallback&response_type=code&scope=openid+email+profile&service=lso&state=c27adf9910bd7bc7098d85511ab3e997&flowName=GeneralOAuthFlow&continue=https%3A%2F%2Faccounts.google.com%2Fsignin%2Foauth%2Fconsent%3Fauthuser%3Dunknown%26part%3DAJi8hAPIZN2M5zkynkC55pnfYg-Xmg9yQ8LM52E8PYiuCXcHNUrNBZJBdCNWYODYqT83MQ-Uh5plfzs3xqdZluNXTFUuMc54ueQmlBfCgpX7o-kExVJMVLwNXVFkSWKUQFX7QEp5LJLWbvDK7dX2t5RoRjdV0Sbhv93qQjOatdVRuXo1TrArrq8YYP_UaMDYwkPhAlOpj-lNjQlm-N53usGkOAL9brEbc7SloM_BY-mOKoC3D2zf68eIaQChGDjkY59pnSAteIrYq3hZPzyRCbq7NE-L4dzoU2vlyt2XgrIhmFJaU4ny8hRo3LqSJkw7z4MERVfTpSQmnBVwqGwfUpLVjIhNnW-5lahKs8bBlSPR3wLKyAgxi0kwrNRHha_ggKWud7YfPqumVPjX3WSQzJkgzr7HjfEI3j8QNsmzWS1hMeRVWPId6tvoTr10n_BBor7Vm4Br-FwM5rvSPRYgdPiCxTNLUg7UCQ%26flowName%3DGeneralOAuthFlow%26as%3DS-2076489951%253A1768108870452624%26client_id%3D1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com%26requestPath%3D%252Fsignin%252Foauth%252Fconsent%23&app_domain=https%3A%2F%2Fgithub.com&rart=ANgoxcdHQOzpXDCX3TWwfkroZlP0djR2cyHswV1161tDpbd_WQzCyTNncbXT1KsDL6-aB10oN6fCPCFbS9WUpFu_CNtOC4IxdHxQFeiFrDafNLuXAZ_FiH0\"\n  navigated to \"https://github.com/login?client_id=Ov23liDKFkIrnPneWwny&return_to=%2Flogin%2Foauth%2Fauthorize%3Fclient_id%3DOv23liDKFkIrnPneWwny%26redirect_uri%3Dhttps%253A%252F%252Fbeast-mode.dev%252Fapi%252Fgithub%252Foauth%252Fcallback%26scope%3Drepo%2Bread%253Auser%2Buser%253Aemail%26state%3D31f6c5aa5f7b07040470c0492691f92cca6e99fc2cba816a8b1a7c60bc36b412\"\n  navigated to \"https://github.com/login?client_id=Ov23liDKFkIrnPneWwny&return_to=%2Flogin%2Foauth%2Fauthorize%3Fclient_id%3DOv23liDKFkIrnPneWwny%26redirect_uri%3Dhttps%253A%252F%252Fbeast-mode.dev%252Fapi%252Fgithub%252Foauth%252Fcallback%26scope%3Drepo%2Bread%253Auser%2Buser%253Aemail%26state%3D31f6c5aa5f7b07040470c0492691f92cca6e99fc2cba816a8b1a7c60bc36b412\"\n  navigated to \"https://github.com/login?client_id=Ov23liDKFkIrnPneWwny&return_to=%2Flogin%2Foauth%2Fauthorize%3Fclient_id%3DOv23liDKFkIrnPneWwny%26redirect_uri%3Dhttps%253A%252F%252Fbeast-mode.dev%252Fapi%252Fgithub%252Foauth%252Fcallback%26scope%3Drepo%2Bread%253Auser%2Buser%253Aemail%26state%3D31f6c5aa5f7b07040470c0492691f92cca6e99fc2cba816a8b1a7c60bc36b412\"\n  navigated to \"https://github.com/login?client_id=Ov23liDKFkIrnPneWwny&return_to=%2Flogin%2Foauth%2Fauthorize%3Fclient_id%3DOv23liDKFkIrnPneWwny%26redirect_uri%3Dhttps%253A%252F%252Fbeast-mode.dev%252Fapi%252Fgithub%252Foauth%252Fcallback%26scope%3Drepo%2Bread%253Auser%2Buser%253Aemail%26state%3D31f6c5aa5f7b07040470c0492691f92cca6e99fc2cba816a8b1a7c60bc36b412\"\n  navigated to \"https://github.com/session\"\n  navigated to \"https://github.com/session\"\n  navigated to \"https://github.com/session\"\n  navigated to \"https://github.com/sessions/social/google/initiate?return_to=%2Flogin%2Foauth%2Fauthorize%3Fclient_id%3DOv23liDKFkIrnPneWwny%26redirect_uri%3Dhttps%253A%252F%252Fbeast-mode.dev%252Fapi%252Fgithub%252Foauth%252Fcallback%26scope%3Drepo%2Bread%253Auser%2Buser%253Aemail%26state%3D31f6c5aa5f7b07040470c0492691f92cca6e99fc2cba816a8b1a7c60bc36b412&disable_signup=false\"\n  navigated to \"https://accounts.google.com/v3/signin/identifier?opparams=%253F&dsh=S-1006023696%3A1768108959632431&client_id=1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com&code_challenge=c6r_V5oDhjg2SpNGJnQOB4wkmTMTO-G7LUvlXBb7ves&code_challenge_method=S256&nonce=9aab2814f59aa5f25675b05fc8f85cd5&o2v=2&prompt=select_account&redirect_uri=https%3A%2F%2Fgithub.com%2Fsessions%2Fsocial%2Fgoogle%2Fcallback&response_type=code&scope=openid+email+profile&service=lso&state=07ff5354968c3b00aa45fa1ec1cb2873&flowName=GeneralOAuthFlow&continue=https%3A%2F%2Faccounts.google.com%2Fsignin%2Foauth%2Fconsent%3Fauthuser%3Dunknown%26part%3DAJi8hAMGek1hSQ-6Tb5rO5aAWN-O1FcVDuzo3luAFR_76FlFCZmoDkAInmQBM8YsPXDrl3vyW04cOOQflBRXs7c9Z7h1yEZ9tegPmpLq4jLFkcv5o3Pd-9otiZt9Gdgdf1VxDIv6SIzWnXZbcFzDCx60kVci9EQ9VsZDsRRvEnRVv0cGQB1rUFfUxA9zrpvEVsBvgbBkkbtZVfdZx-rZjQR2VWKKK3JR46UqYuafjM11xNigH7pYE0yMNnAsVcrcYZZ3I8ey0oNDqoYY9k2ahQ3G8ntem0zC56_YDlaClhlOwmJYvRQjLniRXJqirigo0fYHozpnJc5x5wKtEgDorJPLHr76z6rxMBz9iGSLJSn3AJwYHI0PysZvTOzR0atGcaPMzBAILYmnDLmZcxiYh1aFnZKzsxWJnyTfbDDTn1aYMPEDRgZJScxZy9G3sp12Ac5qyHpXtdJUqOXech4_6EJFgPh8Y9fZVQ%26flowName%3DGeneralOAuthFlow%26as%3DS-1006023696%253A1768108959632431%26client_id%3D1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com%26requestPath%3D%252Fsignin%252Foauth%252Fconsent%23&app_domain=https%3A%2F%2Fgithub.com&rart=ANgoxcdpyqFKJTJ2pUJ9nA66ZyObUi1-DpY0kt8VC_A4y3JOBf6Q0UKSzCK7XYoeHLmhLMS1aXFddAZl20MziA6tt-PHcy_Dq9M42LVFMAUoSuGFfP2XZ4s\"\n  navigated to \"https://accounts.google.com/v3/signin/identifier?opparams=%253F&dsh=S-1006023696%3A1768108959632431&client_id=1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com&code_challenge=c6r_V5oDhjg2SpNGJnQOB4wkmTMTO-G7LUvlXBb7ves&code_challenge_method=S256&nonce=9aab2814f59aa5f25675b05fc8f85cd5&o2v=2&prompt=select_account&redirect_uri=https%3A%2F%2Fgithub.com%2Fsessions%2Fsocial%2Fgoogle%2Fcallback&response_type=code&scope=openid+email+profile&service=lso&state=07ff5354968c3b00aa45fa1ec1cb2873&flowName=GeneralOAuthFlow&continue=https%3A%2F%2Faccounts.google.com%2Fsignin%2Foauth%2Fconsent%3Fauthuser%3Dunknown%26part%3DAJi8hAMGek1hSQ-6Tb5rO5aAWN-O1FcVDuzo3luAFR_76FlFCZmoDkAInmQBM8YsPXDrl3vyW04cOOQflBRXs7c9Z7h1yEZ9tegPmpLq4jLFkcv5o3Pd-9otiZt9Gdgdf1VxDIv6SIzWnXZbcFzDCx60kVci9EQ9VsZDsRRvEnRVv0cGQB1rUFfUxA9zrpvEVsBvgbBkkbtZVfdZx-rZjQR2VWKKK3JR46UqYuafjM11xNigH7pYE0yMNnAsVcrcYZZ3I8ey0oNDqoYY9k2ahQ3G8ntem0zC56_YDlaClhlOwmJYvRQjLniRXJqirigo0fYHozpnJc5x5wKtEgDorJPLHr76z6rxMBz9iGSLJSn3AJwYHI0PysZvTOzR0atGcaPMzBAILYmnDLmZcxiYh1aFnZKzsxWJnyTfbDDTn1aYMPEDRgZJScxZy9G3sp12Ac5qyHpXtdJUqOXech4_6EJFgPh8Y9fZVQ%26flowName%3DGeneralOAuthFlow%26as%3DS-1006023696%253A1768108959632431%26client_id%3D1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com%26requestPath%3D%252Fsignin%252Foauth%252Fconsent%23&app_domain=https%3A%2F%2Fgithub.com&rart=ANgoxcdpyqFKJTJ2pUJ9nA66ZyObUi1-DpY0kt8VC_A4y3JOBf6Q0UKSzCK7XYoeHLmhLMS1aXFddAZl20MziA6tt-PHcy_Dq9M42LVFMAUoSuGFfP2XZ4s\"\n  navigated to \"https://accounts.google.com/v3/signin/rejected?app_domain=https%3A%2F%2Fgithub.com&client_id=1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com&code_challenge=c6r_V5oDhjg2SpNGJnQOB4wkmTMTO-G7LUvlXBb7ves&code_challenge_method=S256&continue=https%3A%2F%2Faccounts.google.com%2Fsignin%2Foauth%2Fconsent%3Fauthuser%3Dunknown%26part%3DAJi8hAMGek1hSQ-6Tb5rO5aAWN-O1FcVDuzo3luAFR_76FlFCZmoDkAInmQBM8YsPXDrl3vyW04cOOQflBRXs7c9Z7h1yEZ9tegPmpLq4jLFkcv5o3Pd-9otiZt9Gdgdf1VxDIv6SIzWnXZbcFzDCx60kVci9EQ9VsZDsRRvEnRVv0cGQB1rUFfUxA9zrpvEVsBvgbBkkbtZVfdZx-rZjQR2VWKKK3JR46UqYuafjM11xNigH7pYE0yMNnAsVcrcYZZ3I8ey0oNDqoYY9k2ahQ3G8ntem0zC56_YDlaClhlOwmJYvRQjLniRXJqirigo0fYHozpnJc5x5wKtEgDorJPLHr76z6rxMBz9iGSLJSn3AJwYHI0PysZvTOzR0atGcaPMzBAILYmnDLmZcxiYh1aFnZKzsxWJnyTfbDDTn1aYMPEDRgZJScxZy9G3sp12Ac5qyHpXtdJUqOXech4_6EJFgPh8Y9fZVQ%26flowName%3DGeneralOAuthFlow%26as%3DS-1006023696%253A1768108959632431%26client_id%3D1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com%26requestPath%3D%252Fsignin%252Foauth%252Fconsent%23&dsh=S-1006023696%3A1768108959632431&epd=AX1IGxuHimiFJ06bu1RNJSwVDeTJEDULBeRSWq_s5SGbjGunRcpY8fZx8Q&flowName=GeneralOAuthFlow&idnf=jeffadkins1%40gmail.com&nonce=9aab2814f59aa5f25675b05fc8f85cd5&o2v=2&opparams=%253F&prompt=select_account&rart=ANgoxcdpyqFKJTJ2pUJ9nA66ZyObUi1-DpY0kt8VC_A4y3JOBf6Q0UKSzCK7XYoeHLmhLMS1aXFddAZl20MziA6tt-PHcy_Dq9M42LVFMAUoSuGFfP2XZ4s&redirect_uri=https%3A%2F%2Fgithub.com%2Fsessions%2Fsocial%2Fgoogle%2Fcallback&response_type=code&rhlk=le&rrk=46&scope=openid%20email%20profile&service=lso&state=07ff5354968c3b00aa45fa1ec1cb2873\"\n  navigated to \"https://accounts.google.com/v3/signin/identifier?opparams=%253F&dsh=S1225954902%3A1768108966562336&app_domain=https%3A%2F%2Fgithub.com&client_id=1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com&code_challenge=c6r_V5oDhjg2SpNGJnQOB4wkmTMTO-G7LUvlXBb7ves&code_challenge_method=S256&continue=https%3A%2F%2Faccounts.google.com%2Fsignin%2Foauth%2Fconsent%3Fauthuser%3Dunknown%26part%3DAJi8hAOytSF98HWsRC4IYH912S0herykXKiwXuh1KLEc9a3GGPTtQJJgMHlG7x2E7GZnld5S2xIgDQhZ7bqyFxlooVsmf2lIsHBtoXGut5Nkj0ZQb4v2_l0RRxT_zhzGHS_A4RDHp0p0rExD3eqmboZ-aO9L4epH4e75qgRm-Fiy4zrxyw76rVyFHGzQXjydAkEHeFfGp5_AAD35S1KmzvDoC0bVJfWlT_8CfGKQxYpT5d1GyaQ9Htvmu8JjilkGYPIOtsjdisJsL_oyRUj-HRdb8q9AkPbqfdJn2M9qP784M-LSFSUVG70O_Kdxp-kqDFrGhv0L7JykrQUlGNHSj5W1LmN8Z_qWKQUYVUWM3IjXZkdfOGUWgnj_CqjYTDtP6AXeqcNNBH2OCOn2jdlYeJRUlfcQ64LCFN6qAPA4or2FCXMNSfsQp8kdLMw8qihmGeDUYODlOy9TxygNF3Rlhbm08RYAO_oscw%26flowName%3DGeneralOAuthFlow%26as%3DS1225954902%253A1768108966562336%26client_id%3D1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com%26requestPath%3D%252Fsignin%252Foauth%252Fconsent%23&flowName=GeneralOAuthFlow&nonce=9aab2814f59aa5f25675b05fc8f85cd5&o2v=2&prompt=select_account&rart=ANgoxccDjJ75Q3WiDHBf96Lb2IqyWDVoEQL8XXYBc3Le7OWEepPsZKCifL4VmqKSwpd30_y6u1ecvxUQVWMIXoYIjgNvyzS3Mtm3DMFQxfHyL_wRC1eZgM8&redirect_uri=https%3A%2F%2Fgithub.com%2Fsessions%2Fsocial%2Fgoogle%2Fcallback&response_type=code&scope=openid+email+profile&service=lso&state=07ff5354968c3b00aa45fa1ec1cb2873\"\n  navigated to \"https://accounts.google.com/v3/signin/identifier?opparams=%253F&dsh=S1225954902%3A1768108966562336&app_domain=https%3A%2F%2Fgithub.com&client_id=1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com&code_challenge=c6r_V5oDhjg2SpNGJnQOB4wkmTMTO-G7LUvlXBb7ves&code_challenge_method=S256&continue=https%3A%2F%2Faccounts.google.com%2Fsignin%2Foauth%2Fconsent%3Fauthuser%3Dunknown%26part%3DAJi8hAOytSF98HWsRC4IYH912S0herykXKiwXuh1KLEc9a3GGPTtQJJgMHlG7x2E7GZnld5S2xIgDQhZ7bqyFxlooVsmf2lIsHBtoXGut5Nkj0ZQb4v2_l0RRxT_zhzGHS_A4RDHp0p0rExD3eqmboZ-aO9L4epH4e75qgRm-Fiy4zrxyw76rVyFHGzQXjydAkEHeFfGp5_AAD35S1KmzvDoC0bVJfWlT_8CfGKQxYpT5d1GyaQ9Htvmu8JjilkGYPIOtsjdisJsL_oyRUj-HRdb8q9AkPbqfdJn2M9qP784M-LSFSUVG70O_Kdxp-kqDFrGhv0L7JykrQUlGNHSj5W1LmN8Z_qWKQUYVUWM3IjXZkdfOGUWgnj_CqjYTDtP6AXeqcNNBH2OCOn2jdlYeJRUlfcQ64LCFN6qAPA4or2FCXMNSfsQp8kdLMw8qihmGeDUYODlOy9TxygNF3Rlhbm08RYAO_oscw%26flowName%3DGeneralOAuthFlow%26as%3DS1225954902%253A1768108966562336%26client_id%3D1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com%26requestPath%3D%252Fsignin%252Foauth%252Fconsent%23&flowName=GeneralOAuthFlow&nonce=9aab2814f59aa5f25675b05fc8f85cd5&o2v=2&prompt=select_account&rart=ANgoxccDjJ75Q3WiDHBf96Lb2IqyWDVoEQL8XXYBc3Le7OWEepPsZKCifL4VmqKSwpd30_y6u1ecvxUQVWMIXoYIjgNvyzS3Mtm3DMFQxfHyL_wRC1eZgM8&redirect_uri=https%3A%2F%2Fgithub.com%2Fsessions%2Fsocial%2Fgoogle%2Fcallback&response_type=code&scope=openid+email+profile&service=lso&state=07ff5354968c3b00aa45fa1ec1cb2873\"\n============================================================",
+                        "stack": "Error: page.waitForURL: Target page, context or browser has been closed\n=========================== logs ===========================\nwaiting for navigation to \"**/dashboard/**\" until \"load\"\n  navigated to \"https://github.com/login?client_id=Ov23liDKFkIrnPneWwny&return_to=%2Flogin%2Foauth%2Fauthorize%3Fclient_id%3DOv23liDKFkIrnPneWwny%26redirect_uri%3Dhttps%253A%252F%252Fbeast-mode.dev%252Fapi%252Fgithub%252Foauth%252Fcallback%26scope%3Drepo%2Bread%253Auser%2Buser%253Aemail%26state%3D31f6c5aa5f7b07040470c0492691f92cca6e99fc2cba816a8b1a7c60bc36b412\"\n  navigated to \"https://github.com/login?client_id=Ov23liDKFkIrnPneWwny&return_to=%2Flogin%2Foauth%2Fauthorize%3Fclient_id%3DOv23liDKFkIrnPneWwny%26redirect_uri%3Dhttps%253A%252F%252Fbeast-mode.dev%252Fapi%252Fgithub%252Foauth%252Fcallback%26scope%3Drepo%2Bread%253Auser%2Buser%253Aemail%26state%3D31f6c5aa5f7b07040470c0492691f92cca6e99fc2cba816a8b1a7c60bc36b412\"\n  navigated to \"https://github.com/login?client_id=Ov23liDKFkIrnPneWwny&return_to=%2Flogin%2Foauth%2Fauthorize%3Fclient_id%3DOv23liDKFkIrnPneWwny%26redirect_uri%3Dhttps%253A%252F%252Fbeast-mode.dev%252Fapi%252Fgithub%252Foauth%252Fcallback%26scope%3Drepo%2Bread%253Auser%2Buser%253Aemail%26state%3D31f6c5aa5f7b07040470c0492691f92cca6e99fc2cba816a8b1a7c60bc36b412\"\n  navigated to \"https://github.com/sessions/social/google/initiate?return_to=%2Flogin%2Foauth%2Fauthorize%3Fclient_id%3DOv23liDKFkIrnPneWwny%26redirect_uri%3Dhttps%253A%252F%252Fbeast-mode.dev%252Fapi%252Fgithub%252Foauth%252Fcallback%26scope%3Drepo%2Bread%253Auser%2Buser%253Aemail%26state%3D31f6c5aa5f7b07040470c0492691f92cca6e99fc2cba816a8b1a7c60bc36b412&disable_signup=false\"\n  navigated to \"https://accounts.google.com/v3/signin/identifier?opparams=%253F&dsh=S-2076489951%3A1768108870452624&client_id=1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com&code_challenge=ngnWHbJjkmoiS_GWyFV7ZwcwDpUTr-Sgwe5UJczc8DQ&code_challenge_method=S256&nonce=c08e750348a28be9f2b2818fda8d4ab7&o2v=2&prompt=select_account&redirect_uri=https%3A%2F%2Fgithub.com%2Fsessions%2Fsocial%2Fgoogle%2Fcallback&response_type=code&scope=openid+email+profile&service=lso&state=c27adf9910bd7bc7098d85511ab3e997&flowName=GeneralOAuthFlow&continue=https%3A%2F%2Faccounts.google.com%2Fsignin%2Foauth%2Fconsent%3Fauthuser%3Dunknown%26part%3DAJi8hAPIZN2M5zkynkC55pnfYg-Xmg9yQ8LM52E8PYiuCXcHNUrNBZJBdCNWYODYqT83MQ-Uh5plfzs3xqdZluNXTFUuMc54ueQmlBfCgpX7o-kExVJMVLwNXVFkSWKUQFX7QEp5LJLWbvDK7dX2t5RoRjdV0Sbhv93qQjOatdVRuXo1TrArrq8YYP_UaMDYwkPhAlOpj-lNjQlm-N53usGkOAL9brEbc7SloM_BY-mOKoC3D2zf68eIaQChGDjkY59pnSAteIrYq3hZPzyRCbq7NE-L4dzoU2vlyt2XgrIhmFJaU4ny8hRo3LqSJkw7z4MERVfTpSQmnBVwqGwfUpLVjIhNnW-5lahKs8bBlSPR3wLKyAgxi0kwrNRHha_ggKWud7YfPqumVPjX3WSQzJkgzr7HjfEI3j8QNsmzWS1hMeRVWPId6tvoTr10n_BBor7Vm4Br-FwM5rvSPRYgdPiCxTNLUg7UCQ%26flowName%3DGeneralOAuthFlow%26as%3DS-2076489951%253A1768108870452624%26client_id%3D1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com%26requestPath%3D%252Fsignin%252Foauth%252Fconsent%23&app_domain=https%3A%2F%2Fgithub.com&rart=ANgoxcdHQOzpXDCX3TWwfkroZlP0djR2cyHswV1161tDpbd_WQzCyTNncbXT1KsDL6-aB10oN6fCPCFbS9WUpFu_CNtOC4IxdHxQFeiFrDafNLuXAZ_FiH0\"\n  navigated to \"https://accounts.google.com/v3/signin/identifier?opparams=%253F&dsh=S-2076489951%3A1768108870452624&client_id=1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com&code_challenge=ngnWHbJjkmoiS_GWyFV7ZwcwDpUTr-Sgwe5UJczc8DQ&code_challenge_method=S256&nonce=c08e750348a28be9f2b2818fda8d4ab7&o2v=2&prompt=select_account&redirect_uri=https%3A%2F%2Fgithub.com%2Fsessions%2Fsocial%2Fgoogle%2Fcallback&response_type=code&scope=openid+email+profile&service=lso&state=c27adf9910bd7bc7098d85511ab3e997&flowName=GeneralOAuthFlow&continue=https%3A%2F%2Faccounts.google.com%2Fsignin%2Foauth%2Fconsent%3Fauthuser%3Dunknown%26part%3DAJi8hAPIZN2M5zkynkC55pnfYg-Xmg9yQ8LM52E8PYiuCXcHNUrNBZJBdCNWYODYqT83MQ-Uh5plfzs3xqdZluNXTFUuMc54ueQmlBfCgpX7o-kExVJMVLwNXVFkSWKUQFX7QEp5LJLWbvDK7dX2t5RoRjdV0Sbhv93qQjOatdVRuXo1TrArrq8YYP_UaMDYwkPhAlOpj-lNjQlm-N53usGkOAL9brEbc7SloM_BY-mOKoC3D2zf68eIaQChGDjkY59pnSAteIrYq3hZPzyRCbq7NE-L4dzoU2vlyt2XgrIhmFJaU4ny8hRo3LqSJkw7z4MERVfTpSQmnBVwqGwfUpLVjIhNnW-5lahKs8bBlSPR3wLKyAgxi0kwrNRHha_ggKWud7YfPqumVPjX3WSQzJkgzr7HjfEI3j8QNsmzWS1hMeRVWPId6tvoTr10n_BBor7Vm4Br-FwM5rvSPRYgdPiCxTNLUg7UCQ%26flowName%3DGeneralOAuthFlow%26as%3DS-2076489951%253A1768108870452624%26client_id%3D1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com%26requestPath%3D%252Fsignin%252Foauth%252Fconsent%23&app_domain=https%3A%2F%2Fgithub.com&rart=ANgoxcdHQOzpXDCX3TWwfkroZlP0djR2cyHswV1161tDpbd_WQzCyTNncbXT1KsDL6-aB10oN6fCPCFbS9WUpFu_CNtOC4IxdHxQFeiFrDafNLuXAZ_FiH0\"\n  navigated to \"https://accounts.google.com/v3/signin/rejected?app_domain=https%3A%2F%2Fgithub.com&client_id=1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com&code_challenge=ngnWHbJjkmoiS_GWyFV7ZwcwDpUTr-Sgwe5UJczc8DQ&code_challenge_method=S256&continue=https%3A%2F%2Faccounts.google.com%2Fsignin%2Foauth%2Fconsent%3Fauthuser%3Dunknown%26part%3DAJi8hAPIZN2M5zkynkC55pnfYg-Xmg9yQ8LM52E8PYiuCXcHNUrNBZJBdCNWYODYqT83MQ-Uh5plfzs3xqdZluNXTFUuMc54ueQmlBfCgpX7o-kExVJMVLwNXVFkSWKUQFX7QEp5LJLWbvDK7dX2t5RoRjdV0Sbhv93qQjOatdVRuXo1TrArrq8YYP_UaMDYwkPhAlOpj-lNjQlm-N53usGkOAL9brEbc7SloM_BY-mOKoC3D2zf68eIaQChGDjkY59pnSAteIrYq3hZPzyRCbq7NE-L4dzoU2vlyt2XgrIhmFJaU4ny8hRo3LqSJkw7z4MERVfTpSQmnBVwqGwfUpLVjIhNnW-5lahKs8bBlSPR3wLKyAgxi0kwrNRHha_ggKWud7YfPqumVPjX3WSQzJkgzr7HjfEI3j8QNsmzWS1hMeRVWPId6tvoTr10n_BBor7Vm4Br-FwM5rvSPRYgdPiCxTNLUg7UCQ%26flowName%3DGeneralOAuthFlow%26as%3DS-2076489951%253A1768108870452624%26client_id%3D1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com%26requestPath%3D%252Fsignin%252Foauth%252Fconsent%23&dsh=S-2076489951%3A1768108870452624&epd=AX1IGxuLP4_AFIHEpVE7Gj0I1MxAS5kSmKK_Z7R6Otr6rfb1ooKYLfJuaQ&flowName=GeneralOAuthFlow&idnf=jeffadkins1%40gmail.com&nonce=c08e750348a28be9f2b2818fda8d4ab7&o2v=2&opparams=%253F&prompt=select_account&rart=ANgoxcdHQOzpXDCX3TWwfkroZlP0djR2cyHswV1161tDpbd_WQzCyTNncbXT1KsDL6-aB10oN6fCPCFbS9WUpFu_CNtOC4IxdHxQFeiFrDafNLuXAZ_FiH0&redirect_uri=https%3A%2F%2Fgithub.com%2Fsessions%2Fsocial%2Fgoogle%2Fcallback&response_type=code&rhlk=le&rrk=46&scope=openid%20email%20profile&service=lso&state=c27adf9910bd7bc7098d85511ab3e997\"\n  navigated to \"https://accounts.google.com/v3/signin/identifier?opparams=%253F&dsh=S252840947%3A1768108879902433&app_domain=https%3A%2F%2Fgithub.com&client_id=1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com&code_challenge=ngnWHbJjkmoiS_GWyFV7ZwcwDpUTr-Sgwe5UJczc8DQ&code_challenge_method=S256&continue=https%3A%2F%2Faccounts.google.com%2Fsignin%2Foauth%2Fconsent%3Fauthuser%3Dunknown%26part%3DAJi8hAMFSEgZxvnvppyJZ6xAOJbr2_ls1kJSc8JK5wLYDhhDPeCFx0dtW6yV4Hu2Dg8YyZrnlUDLCfZeV3h2w0fCd41QXgd0f_EAVMaaV6hM7CBti1-BjYbV5Fzz8YcMzn5ZM9SqKT977nuSYPPk7OtgdH0QxV96hq-uGZwXqEYPRrnYixk5SghyHShnTwQ1Pn6AsdFWw8lFli1OWPvhqCKIkL9grB0eePKLFw_-TzsRSADD5ys-6O9fNggBXgLbgrU_y4zqdQ2e_gLTmT-Xh5_LtCFUJtpOgB7g5uMddvnCPSsRInLeTpyDBIRUkBLh6ysuVoT_C1gtA36iojJxhdw7VBGszJgRssirOS7BBR4hD3H98n1OT4BU1SGZAf6JOYjA2eg6mF6Ia8PRzn09UWcWFkv_ir2i2OFb0PxG5OUuh09XLAZjpzlRJwxpaCPnNVYDIDbBrX2o-fL9EfS1f4LZzr8i6bn3nA%26flowName%3DGeneralOAuthFlow%26as%3DS252840947%253A1768108879902433%26client_id%3D1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com%26requestPath%3D%252Fsignin%252Foauth%252Fconsent%23&flowName=GeneralOAuthFlow&nonce=c08e750348a28be9f2b2818fda8d4ab7&o2v=2&prompt=select_account&rart=ANgoxcf9LKoqjKL4lbLwFGdRNyRF_hgqesopMioKcc9krzBUVLN_gnezrPtBjlrmn2i7G2jvGbzatKW88-0RGPqb_d2iB6HmGXJ9YKwSPEeHm-zmmMoDDb8&redirect_uri=https%3A%2F%2Fgithub.com%2Fsessions%2Fsocial%2Fgoogle%2Fcallback&response_type=code&scope=openid+email+profile&service=lso&state=c27adf9910bd7bc7098d85511ab3e997\"\n  navigated to \"https://accounts.google.com/v3/signin/identifier?opparams=%253F&dsh=S252840947%3A1768108879902433&app_domain=https%3A%2F%2Fgithub.com&client_id=1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com&code_challenge=ngnWHbJjkmoiS_GWyFV7ZwcwDpUTr-Sgwe5UJczc8DQ&code_challenge_method=S256&continue=https%3A%2F%2Faccounts.google.com%2Fsignin%2Foauth%2Fconsent%3Fauthuser%3Dunknown%26part%3DAJi8hAMFSEgZxvnvppyJZ6xAOJbr2_ls1kJSc8JK5wLYDhhDPeCFx0dtW6yV4Hu2Dg8YyZrnlUDLCfZeV3h2w0fCd41QXgd0f_EAVMaaV6hM7CBti1-BjYbV5Fzz8YcMzn5ZM9SqKT977nuSYPPk7OtgdH0QxV96hq-uGZwXqEYPRrnYixk5SghyHShnTwQ1Pn6AsdFWw8lFli1OWPvhqCKIkL9grB0eePKLFw_-TzsRSADD5ys-6O9fNggBXgLbgrU_y4zqdQ2e_gLTmT-Xh5_LtCFUJtpOgB7g5uMddvnCPSsRInLeTpyDBIRUkBLh6ysuVoT_C1gtA36iojJxhdw7VBGszJgRssirOS7BBR4hD3H98n1OT4BU1SGZAf6JOYjA2eg6mF6Ia8PRzn09UWcWFkv_ir2i2OFb0PxG5OUuh09XLAZjpzlRJwxpaCPnNVYDIDbBrX2o-fL9EfS1f4LZzr8i6bn3nA%26flowName%3DGeneralOAuthFlow%26as%3DS252840947%253A1768108879902433%26client_id%3D1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com%26requestPath%3D%252Fsignin%252Foauth%252Fconsent%23&flowName=GeneralOAuthFlow&nonce=c08e750348a28be9f2b2818fda8d4ab7&o2v=2&prompt=select_account&rart=ANgoxcf9LKoqjKL4lbLwFGdRNyRF_hgqesopMioKcc9krzBUVLN_gnezrPtBjlrmn2i7G2jvGbzatKW88-0RGPqb_d2iB6HmGXJ9YKwSPEeHm-zmmMoDDb8&redirect_uri=https%3A%2F%2Fgithub.com%2Fsessions%2Fsocial%2Fgoogle%2Fcallback&response_type=code&scope=openid+email+profile&service=lso&state=c27adf9910bd7bc7098d85511ab3e997\"\n  navigated to \"https://accounts.google.com/v3/signin/identifier?opparams=%253F&dsh=S252840947%3A1768108879902433&app_domain=https%3A%2F%2Fgithub.com&client_id=1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com&code_challenge=ngnWHbJjkmoiS_GWyFV7ZwcwDpUTr-Sgwe5UJczc8DQ&code_challenge_method=S256&continue=https%3A%2F%2Faccounts.google.com%2Fsignin%2Foauth%2Fconsent%3Fauthuser%3Dunknown%26part%3DAJi8hAMFSEgZxvnvppyJZ6xAOJbr2_ls1kJSc8JK5wLYDhhDPeCFx0dtW6yV4Hu2Dg8YyZrnlUDLCfZeV3h2w0fCd41QXgd0f_EAVMaaV6hM7CBti1-BjYbV5Fzz8YcMzn5ZM9SqKT977nuSYPPk7OtgdH0QxV96hq-uGZwXqEYPRrnYixk5SghyHShnTwQ1Pn6AsdFWw8lFli1OWPvhqCKIkL9grB0eePKLFw_-TzsRSADD5ys-6O9fNggBXgLbgrU_y4zqdQ2e_gLTmT-Xh5_LtCFUJtpOgB7g5uMddvnCPSsRInLeTpyDBIRUkBLh6ysuVoT_C1gtA36iojJxhdw7VBGszJgRssirOS7BBR4hD3H98n1OT4BU1SGZAf6JOYjA2eg6mF6Ia8PRzn09UWcWFkv_ir2i2OFb0PxG5OUuh09XLAZjpzlRJwxpaCPnNVYDIDbBrX2o-fL9EfS1f4LZzr8i6bn3nA%26flowName%3DGeneralOAuthFlow%26as%3DS252840947%253A1768108879902433%26client_id%3D1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com%26requestPath%3D%252Fsignin%252Foauth%252Fconsent%23&flowName=GeneralOAuthFlow&nonce=c08e750348a28be9f2b2818fda8d4ab7&o2v=2&prompt=select_account&rart=ANgoxcf9LKoqjKL4lbLwFGdRNyRF_hgqesopMioKcc9krzBUVLN_gnezrPtBjlrmn2i7G2jvGbzatKW88-0RGPqb_d2iB6HmGXJ9YKwSPEeHm-zmmMoDDb8&redirect_uri=https%3A%2F%2Fgithub.com%2Fsessions%2Fsocial%2Fgoogle%2Fcallback&response_type=code&scope=openid+email+profile&service=lso&state=c27adf9910bd7bc7098d85511ab3e997\"\n  navigated to \"https://accounts.google.com/v3/signin/identifier?opparams=%253F&dsh=S252840947%3A1768108879902433&app_domain=https%3A%2F%2Fgithub.com&client_id=1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com&code_challenge=ngnWHbJjkmoiS_GWyFV7ZwcwDpUTr-Sgwe5UJczc8DQ&code_challenge_method=S256&continue=https%3A%2F%2Faccounts.google.com%2Fsignin%2Foauth%2Fconsent%3Fauthuser%3Dunknown%26part%3DAJi8hAMFSEgZxvnvppyJZ6xAOJbr2_ls1kJSc8JK5wLYDhhDPeCFx0dtW6yV4Hu2Dg8YyZrnlUDLCfZeV3h2w0fCd41QXgd0f_EAVMaaV6hM7CBti1-BjYbV5Fzz8YcMzn5ZM9SqKT977nuSYPPk7OtgdH0QxV96hq-uGZwXqEYPRrnYixk5SghyHShnTwQ1Pn6AsdFWw8lFli1OWPvhqCKIkL9grB0eePKLFw_-TzsRSADD5ys-6O9fNggBXgLbgrU_y4zqdQ2e_gLTmT-Xh5_LtCFUJtpOgB7g5uMddvnCPSsRInLeTpyDBIRUkBLh6ysuVoT_C1gtA36iojJxhdw7VBGszJgRssirOS7BBR4hD3H98n1OT4BU1SGZAf6JOYjA2eg6mF6Ia8PRzn09UWcWFkv_ir2i2OFb0PxG5OUuh09XLAZjpzlRJwxpaCPnNVYDIDbBrX2o-fL9EfS1f4LZzr8i6bn3nA%26flowName%3DGeneralOAuthFlow%26as%3DS252840947%253A1768108879902433%26client_id%3D1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com%26requestPath%3D%252Fsignin%252Foauth%252Fconsent%23&flowName=GeneralOAuthFlow&nonce=c08e750348a28be9f2b2818fda8d4ab7&o2v=2&prompt=select_account&rart=ANgoxcf9LKoqjKL4lbLwFGdRNyRF_hgqesopMioKcc9krzBUVLN_gnezrPtBjlrmn2i7G2jvGbzatKW88-0RGPqb_d2iB6HmGXJ9YKwSPEeHm-zmmMoDDb8&redirect_uri=https%3A%2F%2Fgithub.com%2Fsessions%2Fsocial%2Fgoogle%2Fcallback&response_type=code&scope=openid+email+profile&service=lso&state=c27adf9910bd7bc7098d85511ab3e997\"\n  navigated to \"https://accounts.google.com/v3/signin/rejected?app_domain=https%3A%2F%2Fgithub.com&client_id=1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com&code_challenge=ngnWHbJjkmoiS_GWyFV7ZwcwDpUTr-Sgwe5UJczc8DQ&code_challenge_method=S256&continue=https%3A%2F%2Faccounts.google.com%2Fsignin%2Foauth%2Fconsent%3Fauthuser%3Dunknown%26part%3DAJi8hAPIZN2M5zkynkC55pnfYg-Xmg9yQ8LM52E8PYiuCXcHNUrNBZJBdCNWYODYqT83MQ-Uh5plfzs3xqdZluNXTFUuMc54ueQmlBfCgpX7o-kExVJMVLwNXVFkSWKUQFX7QEp5LJLWbvDK7dX2t5RoRjdV0Sbhv93qQjOatdVRuXo1TrArrq8YYP_UaMDYwkPhAlOpj-lNjQlm-N53usGkOAL9brEbc7SloM_BY-mOKoC3D2zf68eIaQChGDjkY59pnSAteIrYq3hZPzyRCbq7NE-L4dzoU2vlyt2XgrIhmFJaU4ny8hRo3LqSJkw7z4MERVfTpSQmnBVwqGwfUpLVjIhNnW-5lahKs8bBlSPR3wLKyAgxi0kwrNRHha_ggKWud7YfPqumVPjX3WSQzJkgzr7HjfEI3j8QNsmzWS1hMeRVWPId6tvoTr10n_BBor7Vm4Br-FwM5rvSPRYgdPiCxTNLUg7UCQ%26flowName%3DGeneralOAuthFlow%26as%3DS-2076489951%253A1768108870452624%26client_id%3D1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com%26requestPath%3D%252Fsignin%252Foauth%252Fconsent%23&dsh=S-2076489951%3A1768108870452624&epd=AX1IGxuLP4_AFIHEpVE7Gj0I1MxAS5kSmKK_Z7R6Otr6rfb1ooKYLfJuaQ&flowName=GeneralOAuthFlow&idnf=jeffadkins1%40gmail.com&nonce=c08e750348a28be9f2b2818fda8d4ab7&o2v=2&opparams=%253F&prompt=select_account&rart=ANgoxcdHQOzpXDCX3TWwfkroZlP0djR2cyHswV1161tDpbd_WQzCyTNncbXT1KsDL6-aB10oN6fCPCFbS9WUpFu_CNtOC4IxdHxQFeiFrDafNLuXAZ_FiH0&redirect_uri=https%3A%2F%2Fgithub.com%2Fsessions%2Fsocial%2Fgoogle%2Fcallback&response_type=code&rhlk=le&rrk=46&scope=openid%20email%20profile&service=lso&state=c27adf9910bd7bc7098d85511ab3e997\"\n  navigated to \"https://accounts.google.com/v3/signin/identifier?opparams=%253F&dsh=S-2076489951%3A1768108870452624&client_id=1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com&code_challenge=ngnWHbJjkmoiS_GWyFV7ZwcwDpUTr-Sgwe5UJczc8DQ&code_challenge_method=S256&nonce=c08e750348a28be9f2b2818fda8d4ab7&o2v=2&prompt=select_account&redirect_uri=https%3A%2F%2Fgithub.com%2Fsessions%2Fsocial%2Fgoogle%2Fcallback&response_type=code&scope=openid+email+profile&service=lso&state=c27adf9910bd7bc7098d85511ab3e997&flowName=GeneralOAuthFlow&continue=https%3A%2F%2Faccounts.google.com%2Fsignin%2Foauth%2Fconsent%3Fauthuser%3Dunknown%26part%3DAJi8hAPIZN2M5zkynkC55pnfYg-Xmg9yQ8LM52E8PYiuCXcHNUrNBZJBdCNWYODYqT83MQ-Uh5plfzs3xqdZluNXTFUuMc54ueQmlBfCgpX7o-kExVJMVLwNXVFkSWKUQFX7QEp5LJLWbvDK7dX2t5RoRjdV0Sbhv93qQjOatdVRuXo1TrArrq8YYP_UaMDYwkPhAlOpj-lNjQlm-N53usGkOAL9brEbc7SloM_BY-mOKoC3D2zf68eIaQChGDjkY59pnSAteIrYq3hZPzyRCbq7NE-L4dzoU2vlyt2XgrIhmFJaU4ny8hRo3LqSJkw7z4MERVfTpSQmnBVwqGwfUpLVjIhNnW-5lahKs8bBlSPR3wLKyAgxi0kwrNRHha_ggKWud7YfPqumVPjX3WSQzJkgzr7HjfEI3j8QNsmzWS1hMeRVWPId6tvoTr10n_BBor7Vm4Br-FwM5rvSPRYgdPiCxTNLUg7UCQ%26flowName%3DGeneralOAuthFlow%26as%3DS-2076489951%253A1768108870452624%26client_id%3D1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com%26requestPath%3D%252Fsignin%252Foauth%252Fconsent%23&app_domain=https%3A%2F%2Fgithub.com&rart=ANgoxcdHQOzpXDCX3TWwfkroZlP0djR2cyHswV1161tDpbd_WQzCyTNncbXT1KsDL6-aB10oN6fCPCFbS9WUpFu_CNtOC4IxdHxQFeiFrDafNLuXAZ_FiH0\"\n  navigated to \"https://accounts.google.com/v3/signin/identifier?opparams=%253F&dsh=S-2076489951%3A1768108870452624&client_id=1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com&code_challenge=ngnWHbJjkmoiS_GWyFV7ZwcwDpUTr-Sgwe5UJczc8DQ&code_challenge_method=S256&nonce=c08e750348a28be9f2b2818fda8d4ab7&o2v=2&prompt=select_account&redirect_uri=https%3A%2F%2Fgithub.com%2Fsessions%2Fsocial%2Fgoogle%2Fcallback&response_type=code&scope=openid+email+profile&service=lso&state=c27adf9910bd7bc7098d85511ab3e997&flowName=GeneralOAuthFlow&continue=https%3A%2F%2Faccounts.google.com%2Fsignin%2Foauth%2Fconsent%3Fauthuser%3Dunknown%26part%3DAJi8hAPIZN2M5zkynkC55pnfYg-Xmg9yQ8LM52E8PYiuCXcHNUrNBZJBdCNWYODYqT83MQ-Uh5plfzs3xqdZluNXTFUuMc54ueQmlBfCgpX7o-kExVJMVLwNXVFkSWKUQFX7QEp5LJLWbvDK7dX2t5RoRjdV0Sbhv93qQjOatdVRuXo1TrArrq8YYP_UaMDYwkPhAlOpj-lNjQlm-N53usGkOAL9brEbc7SloM_BY-mOKoC3D2zf68eIaQChGDjkY59pnSAteIrYq3hZPzyRCbq7NE-L4dzoU2vlyt2XgrIhmFJaU4ny8hRo3LqSJkw7z4MERVfTpSQmnBVwqGwfUpLVjIhNnW-5lahKs8bBlSPR3wLKyAgxi0kwrNRHha_ggKWud7YfPqumVPjX3WSQzJkgzr7HjfEI3j8QNsmzWS1hMeRVWPId6tvoTr10n_BBor7Vm4Br-FwM5rvSPRYgdPiCxTNLUg7UCQ%26flowName%3DGeneralOAuthFlow%26as%3DS-2076489951%253A1768108870452624%26client_id%3D1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com%26requestPath%3D%252Fsignin%252Foauth%252Fconsent%23&app_domain=https%3A%2F%2Fgithub.com&rart=ANgoxcdHQOzpXDCX3TWwfkroZlP0djR2cyHswV1161tDpbd_WQzCyTNncbXT1KsDL6-aB10oN6fCPCFbS9WUpFu_CNtOC4IxdHxQFeiFrDafNLuXAZ_FiH0\"\n  navigated to \"https://accounts.google.com/v3/signin/identifier?opparams=%253F&dsh=S-2076489951%3A1768108870452624&client_id=1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com&code_challenge=ngnWHbJjkmoiS_GWyFV7ZwcwDpUTr-Sgwe5UJczc8DQ&code_challenge_method=S256&nonce=c08e750348a28be9f2b2818fda8d4ab7&o2v=2&prompt=select_account&redirect_uri=https%3A%2F%2Fgithub.com%2Fsessions%2Fsocial%2Fgoogle%2Fcallback&response_type=code&scope=openid+email+profile&service=lso&state=c27adf9910bd7bc7098d85511ab3e997&flowName=GeneralOAuthFlow&continue=https%3A%2F%2Faccounts.google.com%2Fsignin%2Foauth%2Fconsent%3Fauthuser%3Dunknown%26part%3DAJi8hAPIZN2M5zkynkC55pnfYg-Xmg9yQ8LM52E8PYiuCXcHNUrNBZJBdCNWYODYqT83MQ-Uh5plfzs3xqdZluNXTFUuMc54ueQmlBfCgpX7o-kExVJMVLwNXVFkSWKUQFX7QEp5LJLWbvDK7dX2t5RoRjdV0Sbhv93qQjOatdVRuXo1TrArrq8YYP_UaMDYwkPhAlOpj-lNjQlm-N53usGkOAL9brEbc7SloM_BY-mOKoC3D2zf68eIaQChGDjkY59pnSAteIrYq3hZPzyRCbq7NE-L4dzoU2vlyt2XgrIhmFJaU4ny8hRo3LqSJkw7z4MERVfTpSQmnBVwqGwfUpLVjIhNnW-5lahKs8bBlSPR3wLKyAgxi0kwrNRHha_ggKWud7YfPqumVPjX3WSQzJkgzr7HjfEI3j8QNsmzWS1hMeRVWPId6tvoTr10n_BBor7Vm4Br-FwM5rvSPRYgdPiCxTNLUg7UCQ%26flowName%3DGeneralOAuthFlow%26as%3DS-2076489951%253A1768108870452624%26client_id%3D1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com%26requestPath%3D%252Fsignin%252Foauth%252Fconsent%23&app_domain=https%3A%2F%2Fgithub.com&rart=ANgoxcdHQOzpXDCX3TWwfkroZlP0djR2cyHswV1161tDpbd_WQzCyTNncbXT1KsDL6-aB10oN6fCPCFbS9WUpFu_CNtOC4IxdHxQFeiFrDafNLuXAZ_FiH0\"\n  navigated to \"https://github.com/login?client_id=Ov23liDKFkIrnPneWwny&return_to=%2Flogin%2Foauth%2Fauthorize%3Fclient_id%3DOv23liDKFkIrnPneWwny%26redirect_uri%3Dhttps%253A%252F%252Fbeast-mode.dev%252Fapi%252Fgithub%252Foauth%252Fcallback%26scope%3Drepo%2Bread%253Auser%2Buser%253Aemail%26state%3D31f6c5aa5f7b07040470c0492691f92cca6e99fc2cba816a8b1a7c60bc36b412\"\n  navigated to \"https://github.com/login?client_id=Ov23liDKFkIrnPneWwny&return_to=%2Flogin%2Foauth%2Fauthorize%3Fclient_id%3DOv23liDKFkIrnPneWwny%26redirect_uri%3Dhttps%253A%252F%252Fbeast-mode.dev%252Fapi%252Fgithub%252Foauth%252Fcallback%26scope%3Drepo%2Bread%253Auser%2Buser%253Aemail%26state%3D31f6c5aa5f7b07040470c0492691f92cca6e99fc2cba816a8b1a7c60bc36b412\"\n  navigated to \"https://github.com/login?client_id=Ov23liDKFkIrnPneWwny&return_to=%2Flogin%2Foauth%2Fauthorize%3Fclient_id%3DOv23liDKFkIrnPneWwny%26redirect_uri%3Dhttps%253A%252F%252Fbeast-mode.dev%252Fapi%252Fgithub%252Foauth%252Fcallback%26scope%3Drepo%2Bread%253Auser%2Buser%253Aemail%26state%3D31f6c5aa5f7b07040470c0492691f92cca6e99fc2cba816a8b1a7c60bc36b412\"\n  navigated to \"https://github.com/login?client_id=Ov23liDKFkIrnPneWwny&return_to=%2Flogin%2Foauth%2Fauthorize%3Fclient_id%3DOv23liDKFkIrnPneWwny%26redirect_uri%3Dhttps%253A%252F%252Fbeast-mode.dev%252Fapi%252Fgithub%252Foauth%252Fcallback%26scope%3Drepo%2Bread%253Auser%2Buser%253Aemail%26state%3D31f6c5aa5f7b07040470c0492691f92cca6e99fc2cba816a8b1a7c60bc36b412\"\n  navigated to \"https://github.com/session\"\n  navigated to \"https://github.com/session\"\n  navigated to \"https://github.com/session\"\n  navigated to \"https://github.com/sessions/social/google/initiate?return_to=%2Flogin%2Foauth%2Fauthorize%3Fclient_id%3DOv23liDKFkIrnPneWwny%26redirect_uri%3Dhttps%253A%252F%252Fbeast-mode.dev%252Fapi%252Fgithub%252Foauth%252Fcallback%26scope%3Drepo%2Bread%253Auser%2Buser%253Aemail%26state%3D31f6c5aa5f7b07040470c0492691f92cca6e99fc2cba816a8b1a7c60bc36b412&disable_signup=false\"\n  navigated to \"https://accounts.google.com/v3/signin/identifier?opparams=%253F&dsh=S-1006023696%3A1768108959632431&client_id=1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com&code_challenge=c6r_V5oDhjg2SpNGJnQOB4wkmTMTO-G7LUvlXBb7ves&code_challenge_method=S256&nonce=9aab2814f59aa5f25675b05fc8f85cd5&o2v=2&prompt=select_account&redirect_uri=https%3A%2F%2Fgithub.com%2Fsessions%2Fsocial%2Fgoogle%2Fcallback&response_type=code&scope=openid+email+profile&service=lso&state=07ff5354968c3b00aa45fa1ec1cb2873&flowName=GeneralOAuthFlow&continue=https%3A%2F%2Faccounts.google.com%2Fsignin%2Foauth%2Fconsent%3Fauthuser%3Dunknown%26part%3DAJi8hAMGek1hSQ-6Tb5rO5aAWN-O1FcVDuzo3luAFR_76FlFCZmoDkAInmQBM8YsPXDrl3vyW04cOOQflBRXs7c9Z7h1yEZ9tegPmpLq4jLFkcv5o3Pd-9otiZt9Gdgdf1VxDIv6SIzWnXZbcFzDCx60kVci9EQ9VsZDsRRvEnRVv0cGQB1rUFfUxA9zrpvEVsBvgbBkkbtZVfdZx-rZjQR2VWKKK3JR46UqYuafjM11xNigH7pYE0yMNnAsVcrcYZZ3I8ey0oNDqoYY9k2ahQ3G8ntem0zC56_YDlaClhlOwmJYvRQjLniRXJqirigo0fYHozpnJc5x5wKtEgDorJPLHr76z6rxMBz9iGSLJSn3AJwYHI0PysZvTOzR0atGcaPMzBAILYmnDLmZcxiYh1aFnZKzsxWJnyTfbDDTn1aYMPEDRgZJScxZy9G3sp12Ac5qyHpXtdJUqOXech4_6EJFgPh8Y9fZVQ%26flowName%3DGeneralOAuthFlow%26as%3DS-1006023696%253A1768108959632431%26client_id%3D1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com%26requestPath%3D%252Fsignin%252Foauth%252Fconsent%23&app_domain=https%3A%2F%2Fgithub.com&rart=ANgoxcdpyqFKJTJ2pUJ9nA66ZyObUi1-DpY0kt8VC_A4y3JOBf6Q0UKSzCK7XYoeHLmhLMS1aXFddAZl20MziA6tt-PHcy_Dq9M42LVFMAUoSuGFfP2XZ4s\"\n  navigated to \"https://accounts.google.com/v3/signin/identifier?opparams=%253F&dsh=S-1006023696%3A1768108959632431&client_id=1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com&code_challenge=c6r_V5oDhjg2SpNGJnQOB4wkmTMTO-G7LUvlXBb7ves&code_challenge_method=S256&nonce=9aab2814f59aa5f25675b05fc8f85cd5&o2v=2&prompt=select_account&redirect_uri=https%3A%2F%2Fgithub.com%2Fsessions%2Fsocial%2Fgoogle%2Fcallback&response_type=code&scope=openid+email+profile&service=lso&state=07ff5354968c3b00aa45fa1ec1cb2873&flowName=GeneralOAuthFlow&continue=https%3A%2F%2Faccounts.google.com%2Fsignin%2Foauth%2Fconsent%3Fauthuser%3Dunknown%26part%3DAJi8hAMGek1hSQ-6Tb5rO5aAWN-O1FcVDuzo3luAFR_76FlFCZmoDkAInmQBM8YsPXDrl3vyW04cOOQflBRXs7c9Z7h1yEZ9tegPmpLq4jLFkcv5o3Pd-9otiZt9Gdgdf1VxDIv6SIzWnXZbcFzDCx60kVci9EQ9VsZDsRRvEnRVv0cGQB1rUFfUxA9zrpvEVsBvgbBkkbtZVfdZx-rZjQR2VWKKK3JR46UqYuafjM11xNigH7pYE0yMNnAsVcrcYZZ3I8ey0oNDqoYY9k2ahQ3G8ntem0zC56_YDlaClhlOwmJYvRQjLniRXJqirigo0fYHozpnJc5x5wKtEgDorJPLHr76z6rxMBz9iGSLJSn3AJwYHI0PysZvTOzR0atGcaPMzBAILYmnDLmZcxiYh1aFnZKzsxWJnyTfbDDTn1aYMPEDRgZJScxZy9G3sp12Ac5qyHpXtdJUqOXech4_6EJFgPh8Y9fZVQ%26flowName%3DGeneralOAuthFlow%26as%3DS-1006023696%253A1768108959632431%26client_id%3D1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com%26requestPath%3D%252Fsignin%252Foauth%252Fconsent%23&app_domain=https%3A%2F%2Fgithub.com&rart=ANgoxcdpyqFKJTJ2pUJ9nA66ZyObUi1-DpY0kt8VC_A4y3JOBf6Q0UKSzCK7XYoeHLmhLMS1aXFddAZl20MziA6tt-PHcy_Dq9M42LVFMAUoSuGFfP2XZ4s\"\n  navigated to \"https://accounts.google.com/v3/signin/rejected?app_domain=https%3A%2F%2Fgithub.com&client_id=1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com&code_challenge=c6r_V5oDhjg2SpNGJnQOB4wkmTMTO-G7LUvlXBb7ves&code_challenge_method=S256&continue=https%3A%2F%2Faccounts.google.com%2Fsignin%2Foauth%2Fconsent%3Fauthuser%3Dunknown%26part%3DAJi8hAMGek1hSQ-6Tb5rO5aAWN-O1FcVDuzo3luAFR_76FlFCZmoDkAInmQBM8YsPXDrl3vyW04cOOQflBRXs7c9Z7h1yEZ9tegPmpLq4jLFkcv5o3Pd-9otiZt9Gdgdf1VxDIv6SIzWnXZbcFzDCx60kVci9EQ9VsZDsRRvEnRVv0cGQB1rUFfUxA9zrpvEVsBvgbBkkbtZVfdZx-rZjQR2VWKKK3JR46UqYuafjM11xNigH7pYE0yMNnAsVcrcYZZ3I8ey0oNDqoYY9k2ahQ3G8ntem0zC56_YDlaClhlOwmJYvRQjLniRXJqirigo0fYHozpnJc5x5wKtEgDorJPLHr76z6rxMBz9iGSLJSn3AJwYHI0PysZvTOzR0atGcaPMzBAILYmnDLmZcxiYh1aFnZKzsxWJnyTfbDDTn1aYMPEDRgZJScxZy9G3sp12Ac5qyHpXtdJUqOXech4_6EJFgPh8Y9fZVQ%26flowName%3DGeneralOAuthFlow%26as%3DS-1006023696%253A1768108959632431%26client_id%3D1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com%26requestPath%3D%252Fsignin%252Foauth%252Fconsent%23&dsh=S-1006023696%3A1768108959632431&epd=AX1IGxuHimiFJ06bu1RNJSwVDeTJEDULBeRSWq_s5SGbjGunRcpY8fZx8Q&flowName=GeneralOAuthFlow&idnf=jeffadkins1%40gmail.com&nonce=9aab2814f59aa5f25675b05fc8f85cd5&o2v=2&opparams=%253F&prompt=select_account&rart=ANgoxcdpyqFKJTJ2pUJ9nA66ZyObUi1-DpY0kt8VC_A4y3JOBf6Q0UKSzCK7XYoeHLmhLMS1aXFddAZl20MziA6tt-PHcy_Dq9M42LVFMAUoSuGFfP2XZ4s&redirect_uri=https%3A%2F%2Fgithub.com%2Fsessions%2Fsocial%2Fgoogle%2Fcallback&response_type=code&rhlk=le&rrk=46&scope=openid%20email%20profile&service=lso&state=07ff5354968c3b00aa45fa1ec1cb2873\"\n  navigated to \"https://accounts.google.com/v3/signin/identifier?opparams=%253F&dsh=S1225954902%3A1768108966562336&app_domain=https%3A%2F%2Fgithub.com&client_id=1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com&code_challenge=c6r_V5oDhjg2SpNGJnQOB4wkmTMTO-G7LUvlXBb7ves&code_challenge_method=S256&continue=https%3A%2F%2Faccounts.google.com%2Fsignin%2Foauth%2Fconsent%3Fauthuser%3Dunknown%26part%3DAJi8hAOytSF98HWsRC4IYH912S0herykXKiwXuh1KLEc9a3GGPTtQJJgMHlG7x2E7GZnld5S2xIgDQhZ7bqyFxlooVsmf2lIsHBtoXGut5Nkj0ZQb4v2_l0RRxT_zhzGHS_A4RDHp0p0rExD3eqmboZ-aO9L4epH4e75qgRm-Fiy4zrxyw76rVyFHGzQXjydAkEHeFfGp5_AAD35S1KmzvDoC0bVJfWlT_8CfGKQxYpT5d1GyaQ9Htvmu8JjilkGYPIOtsjdisJsL_oyRUj-HRdb8q9AkPbqfdJn2M9qP784M-LSFSUVG70O_Kdxp-kqDFrGhv0L7JykrQUlGNHSj5W1LmN8Z_qWKQUYVUWM3IjXZkdfOGUWgnj_CqjYTDtP6AXeqcNNBH2OCOn2jdlYeJRUlfcQ64LCFN6qAPA4or2FCXMNSfsQp8kdLMw8qihmGeDUYODlOy9TxygNF3Rlhbm08RYAO_oscw%26flowName%3DGeneralOAuthFlow%26as%3DS1225954902%253A1768108966562336%26client_id%3D1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com%26requestPath%3D%252Fsignin%252Foauth%252Fconsent%23&flowName=GeneralOAuthFlow&nonce=9aab2814f59aa5f25675b05fc8f85cd5&o2v=2&prompt=select_account&rart=ANgoxccDjJ75Q3WiDHBf96Lb2IqyWDVoEQL8XXYBc3Le7OWEepPsZKCifL4VmqKSwpd30_y6u1ecvxUQVWMIXoYIjgNvyzS3Mtm3DMFQxfHyL_wRC1eZgM8&redirect_uri=https%3A%2F%2Fgithub.com%2Fsessions%2Fsocial%2Fgoogle%2Fcallback&response_type=code&scope=openid+email+profile&service=lso&state=07ff5354968c3b00aa45fa1ec1cb2873\"\n  navigated to \"https://accounts.google.com/v3/signin/identifier?opparams=%253F&dsh=S1225954902%3A1768108966562336&app_domain=https%3A%2F%2Fgithub.com&client_id=1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com&code_challenge=c6r_V5oDhjg2SpNGJnQOB4wkmTMTO-G7LUvlXBb7ves&code_challenge_method=S256&continue=https%3A%2F%2Faccounts.google.com%2Fsignin%2Foauth%2Fconsent%3Fauthuser%3Dunknown%26part%3DAJi8hAOytSF98HWsRC4IYH912S0herykXKiwXuh1KLEc9a3GGPTtQJJgMHlG7x2E7GZnld5S2xIgDQhZ7bqyFxlooVsmf2lIsHBtoXGut5Nkj0ZQb4v2_l0RRxT_zhzGHS_A4RDHp0p0rExD3eqmboZ-aO9L4epH4e75qgRm-Fiy4zrxyw76rVyFHGzQXjydAkEHeFfGp5_AAD35S1KmzvDoC0bVJfWlT_8CfGKQxYpT5d1GyaQ9Htvmu8JjilkGYPIOtsjdisJsL_oyRUj-HRdb8q9AkPbqfdJn2M9qP784M-LSFSUVG70O_Kdxp-kqDFrGhv0L7JykrQUlGNHSj5W1LmN8Z_qWKQUYVUWM3IjXZkdfOGUWgnj_CqjYTDtP6AXeqcNNBH2OCOn2jdlYeJRUlfcQ64LCFN6qAPA4or2FCXMNSfsQp8kdLMw8qihmGeDUYODlOy9TxygNF3Rlhbm08RYAO_oscw%26flowName%3DGeneralOAuthFlow%26as%3DS1225954902%253A1768108966562336%26client_id%3D1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com%26requestPath%3D%252Fsignin%252Foauth%252Fconsent%23&flowName=GeneralOAuthFlow&nonce=9aab2814f59aa5f25675b05fc8f85cd5&o2v=2&prompt=select_account&rart=ANgoxccDjJ75Q3WiDHBf96Lb2IqyWDVoEQL8XXYBc3Le7OWEepPsZKCifL4VmqKSwpd30_y6u1ecvxUQVWMIXoYIjgNvyzS3Mtm3DMFQxfHyL_wRC1eZgM8&redirect_uri=https%3A%2F%2Fgithub.com%2Fsessions%2Fsocial%2Fgoogle%2Fcallback&response_type=code&scope=openid+email+profile&service=lso&state=07ff5354968c3b00aa45fa1ec1cb2873\"\n============================================================\n    at /Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/website/e2e/credit-purchase-manual-auth.spec.ts:42:18",
+                        "location": {
+                          "file": "/Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/website/e2e/credit-purchase-manual-auth.spec.ts",
+                          "column": 18,
+                          "line": 42
+                        },
+                        "snippet": "  40 |       \n  41 |       // Wait for URL to change to dashboard (indicating login successful)\n> 42 |       await page.waitForURL('**/dashboard/**', { timeout: 300000 }); // 5 minute timeout\n     |                  ^\n  43 |       console.log('✅ Authentication detected - continuing test\\n');\n  44 |     }\n  45 |"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/website/e2e/credit-purchase-manual-auth.spec.ts",
+                            "column": 18,
+                            "line": 42
+                          },
+                          "message": "Error: page.waitForURL: Target page, context or browser has been closed\n=========================== logs ===========================\nwaiting for navigation to \"**/dashboard/**\" until \"load\"\n  navigated to \"https://github.com/login?client_id=Ov23liDKFkIrnPneWwny&return_to=%2Flogin%2Foauth%2Fauthorize%3Fclient_id%3DOv23liDKFkIrnPneWwny%26redirect_uri%3Dhttps%253A%252F%252Fbeast-mode.dev%252Fapi%252Fgithub%252Foauth%252Fcallback%26scope%3Drepo%2Bread%253Auser%2Buser%253Aemail%26state%3D31f6c5aa5f7b07040470c0492691f92cca6e99fc2cba816a8b1a7c60bc36b412\"\n  navigated to \"https://github.com/login?client_id=Ov23liDKFkIrnPneWwny&return_to=%2Flogin%2Foauth%2Fauthorize%3Fclient_id%3DOv23liDKFkIrnPneWwny%26redirect_uri%3Dhttps%253A%252F%252Fbeast-mode.dev%252Fapi%252Fgithub%252Foauth%252Fcallback%26scope%3Drepo%2Bread%253Auser%2Buser%253Aemail%26state%3D31f6c5aa5f7b07040470c0492691f92cca6e99fc2cba816a8b1a7c60bc36b412\"\n  navigated to \"https://github.com/login?client_id=Ov23liDKFkIrnPneWwny&return_to=%2Flogin%2Foauth%2Fauthorize%3Fclient_id%3DOv23liDKFkIrnPneWwny%26redirect_uri%3Dhttps%253A%252F%252Fbeast-mode.dev%252Fapi%252Fgithub%252Foauth%252Fcallback%26scope%3Drepo%2Bread%253Auser%2Buser%253Aemail%26state%3D31f6c5aa5f7b07040470c0492691f92cca6e99fc2cba816a8b1a7c60bc36b412\"\n  navigated to \"https://github.com/sessions/social/google/initiate?return_to=%2Flogin%2Foauth%2Fauthorize%3Fclient_id%3DOv23liDKFkIrnPneWwny%26redirect_uri%3Dhttps%253A%252F%252Fbeast-mode.dev%252Fapi%252Fgithub%252Foauth%252Fcallback%26scope%3Drepo%2Bread%253Auser%2Buser%253Aemail%26state%3D31f6c5aa5f7b07040470c0492691f92cca6e99fc2cba816a8b1a7c60bc36b412&disable_signup=false\"\n  navigated to \"https://accounts.google.com/v3/signin/identifier?opparams=%253F&dsh=S-2076489951%3A1768108870452624&client_id=1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com&code_challenge=ngnWHbJjkmoiS_GWyFV7ZwcwDpUTr-Sgwe5UJczc8DQ&code_challenge_method=S256&nonce=c08e750348a28be9f2b2818fda8d4ab7&o2v=2&prompt=select_account&redirect_uri=https%3A%2F%2Fgithub.com%2Fsessions%2Fsocial%2Fgoogle%2Fcallback&response_type=code&scope=openid+email+profile&service=lso&state=c27adf9910bd7bc7098d85511ab3e997&flowName=GeneralOAuthFlow&continue=https%3A%2F%2Faccounts.google.com%2Fsignin%2Foauth%2Fconsent%3Fauthuser%3Dunknown%26part%3DAJi8hAPIZN2M5zkynkC55pnfYg-Xmg9yQ8LM52E8PYiuCXcHNUrNBZJBdCNWYODYqT83MQ-Uh5plfzs3xqdZluNXTFUuMc54ueQmlBfCgpX7o-kExVJMVLwNXVFkSWKUQFX7QEp5LJLWbvDK7dX2t5RoRjdV0Sbhv93qQjOatdVRuXo1TrArrq8YYP_UaMDYwkPhAlOpj-lNjQlm-N53usGkOAL9brEbc7SloM_BY-mOKoC3D2zf68eIaQChGDjkY59pnSAteIrYq3hZPzyRCbq7NE-L4dzoU2vlyt2XgrIhmFJaU4ny8hRo3LqSJkw7z4MERVfTpSQmnBVwqGwfUpLVjIhNnW-5lahKs8bBlSPR3wLKyAgxi0kwrNRHha_ggKWud7YfPqumVPjX3WSQzJkgzr7HjfEI3j8QNsmzWS1hMeRVWPId6tvoTr10n_BBor7Vm4Br-FwM5rvSPRYgdPiCxTNLUg7UCQ%26flowName%3DGeneralOAuthFlow%26as%3DS-2076489951%253A1768108870452624%26client_id%3D1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com%26requestPath%3D%252Fsignin%252Foauth%252Fconsent%23&app_domain=https%3A%2F%2Fgithub.com&rart=ANgoxcdHQOzpXDCX3TWwfkroZlP0djR2cyHswV1161tDpbd_WQzCyTNncbXT1KsDL6-aB10oN6fCPCFbS9WUpFu_CNtOC4IxdHxQFeiFrDafNLuXAZ_FiH0\"\n  navigated to \"https://accounts.google.com/v3/signin/identifier?opparams=%253F&dsh=S-2076489951%3A1768108870452624&client_id=1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com&code_challenge=ngnWHbJjkmoiS_GWyFV7ZwcwDpUTr-Sgwe5UJczc8DQ&code_challenge_method=S256&nonce=c08e750348a28be9f2b2818fda8d4ab7&o2v=2&prompt=select_account&redirect_uri=https%3A%2F%2Fgithub.com%2Fsessions%2Fsocial%2Fgoogle%2Fcallback&response_type=code&scope=openid+email+profile&service=lso&state=c27adf9910bd7bc7098d85511ab3e997&flowName=GeneralOAuthFlow&continue=https%3A%2F%2Faccounts.google.com%2Fsignin%2Foauth%2Fconsent%3Fauthuser%3Dunknown%26part%3DAJi8hAPIZN2M5zkynkC55pnfYg-Xmg9yQ8LM52E8PYiuCXcHNUrNBZJBdCNWYODYqT83MQ-Uh5plfzs3xqdZluNXTFUuMc54ueQmlBfCgpX7o-kExVJMVLwNXVFkSWKUQFX7QEp5LJLWbvDK7dX2t5RoRjdV0Sbhv93qQjOatdVRuXo1TrArrq8YYP_UaMDYwkPhAlOpj-lNjQlm-N53usGkOAL9brEbc7SloM_BY-mOKoC3D2zf68eIaQChGDjkY59pnSAteIrYq3hZPzyRCbq7NE-L4dzoU2vlyt2XgrIhmFJaU4ny8hRo3LqSJkw7z4MERVfTpSQmnBVwqGwfUpLVjIhNnW-5lahKs8bBlSPR3wLKyAgxi0kwrNRHha_ggKWud7YfPqumVPjX3WSQzJkgzr7HjfEI3j8QNsmzWS1hMeRVWPId6tvoTr10n_BBor7Vm4Br-FwM5rvSPRYgdPiCxTNLUg7UCQ%26flowName%3DGeneralOAuthFlow%26as%3DS-2076489951%253A1768108870452624%26client_id%3D1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com%26requestPath%3D%252Fsignin%252Foauth%252Fconsent%23&app_domain=https%3A%2F%2Fgithub.com&rart=ANgoxcdHQOzpXDCX3TWwfkroZlP0djR2cyHswV1161tDpbd_WQzCyTNncbXT1KsDL6-aB10oN6fCPCFbS9WUpFu_CNtOC4IxdHxQFeiFrDafNLuXAZ_FiH0\"\n  navigated to \"https://accounts.google.com/v3/signin/rejected?app_domain=https%3A%2F%2Fgithub.com&client_id=1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com&code_challenge=ngnWHbJjkmoiS_GWyFV7ZwcwDpUTr-Sgwe5UJczc8DQ&code_challenge_method=S256&continue=https%3A%2F%2Faccounts.google.com%2Fsignin%2Foauth%2Fconsent%3Fauthuser%3Dunknown%26part%3DAJi8hAPIZN2M5zkynkC55pnfYg-Xmg9yQ8LM52E8PYiuCXcHNUrNBZJBdCNWYODYqT83MQ-Uh5plfzs3xqdZluNXTFUuMc54ueQmlBfCgpX7o-kExVJMVLwNXVFkSWKUQFX7QEp5LJLWbvDK7dX2t5RoRjdV0Sbhv93qQjOatdVRuXo1TrArrq8YYP_UaMDYwkPhAlOpj-lNjQlm-N53usGkOAL9brEbc7SloM_BY-mOKoC3D2zf68eIaQChGDjkY59pnSAteIrYq3hZPzyRCbq7NE-L4dzoU2vlyt2XgrIhmFJaU4ny8hRo3LqSJkw7z4MERVfTpSQmnBVwqGwfUpLVjIhNnW-5lahKs8bBlSPR3wLKyAgxi0kwrNRHha_ggKWud7YfPqumVPjX3WSQzJkgzr7HjfEI3j8QNsmzWS1hMeRVWPId6tvoTr10n_BBor7Vm4Br-FwM5rvSPRYgdPiCxTNLUg7UCQ%26flowName%3DGeneralOAuthFlow%26as%3DS-2076489951%253A1768108870452624%26client_id%3D1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com%26requestPath%3D%252Fsignin%252Foauth%252Fconsent%23&dsh=S-2076489951%3A1768108870452624&epd=AX1IGxuLP4_AFIHEpVE7Gj0I1MxAS5kSmKK_Z7R6Otr6rfb1ooKYLfJuaQ&flowName=GeneralOAuthFlow&idnf=jeffadkins1%40gmail.com&nonce=c08e750348a28be9f2b2818fda8d4ab7&o2v=2&opparams=%253F&prompt=select_account&rart=ANgoxcdHQOzpXDCX3TWwfkroZlP0djR2cyHswV1161tDpbd_WQzCyTNncbXT1KsDL6-aB10oN6fCPCFbS9WUpFu_CNtOC4IxdHxQFeiFrDafNLuXAZ_FiH0&redirect_uri=https%3A%2F%2Fgithub.com%2Fsessions%2Fsocial%2Fgoogle%2Fcallback&response_type=code&rhlk=le&rrk=46&scope=openid%20email%20profile&service=lso&state=c27adf9910bd7bc7098d85511ab3e997\"\n  navigated to \"https://accounts.google.com/v3/signin/identifier?opparams=%253F&dsh=S252840947%3A1768108879902433&app_domain=https%3A%2F%2Fgithub.com&client_id=1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com&code_challenge=ngnWHbJjkmoiS_GWyFV7ZwcwDpUTr-Sgwe5UJczc8DQ&code_challenge_method=S256&continue=https%3A%2F%2Faccounts.google.com%2Fsignin%2Foauth%2Fconsent%3Fauthuser%3Dunknown%26part%3DAJi8hAMFSEgZxvnvppyJZ6xAOJbr2_ls1kJSc8JK5wLYDhhDPeCFx0dtW6yV4Hu2Dg8YyZrnlUDLCfZeV3h2w0fCd41QXgd0f_EAVMaaV6hM7CBti1-BjYbV5Fzz8YcMzn5ZM9SqKT977nuSYPPk7OtgdH0QxV96hq-uGZwXqEYPRrnYixk5SghyHShnTwQ1Pn6AsdFWw8lFli1OWPvhqCKIkL9grB0eePKLFw_-TzsRSADD5ys-6O9fNggBXgLbgrU_y4zqdQ2e_gLTmT-Xh5_LtCFUJtpOgB7g5uMddvnCPSsRInLeTpyDBIRUkBLh6ysuVoT_C1gtA36iojJxhdw7VBGszJgRssirOS7BBR4hD3H98n1OT4BU1SGZAf6JOYjA2eg6mF6Ia8PRzn09UWcWFkv_ir2i2OFb0PxG5OUuh09XLAZjpzlRJwxpaCPnNVYDIDbBrX2o-fL9EfS1f4LZzr8i6bn3nA%26flowName%3DGeneralOAuthFlow%26as%3DS252840947%253A1768108879902433%26client_id%3D1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com%26requestPath%3D%252Fsignin%252Foauth%252Fconsent%23&flowName=GeneralOAuthFlow&nonce=c08e750348a28be9f2b2818fda8d4ab7&o2v=2&prompt=select_account&rart=ANgoxcf9LKoqjKL4lbLwFGdRNyRF_hgqesopMioKcc9krzBUVLN_gnezrPtBjlrmn2i7G2jvGbzatKW88-0RGPqb_d2iB6HmGXJ9YKwSPEeHm-zmmMoDDb8&redirect_uri=https%3A%2F%2Fgithub.com%2Fsessions%2Fsocial%2Fgoogle%2Fcallback&response_type=code&scope=openid+email+profile&service=lso&state=c27adf9910bd7bc7098d85511ab3e997\"\n  navigated to \"https://accounts.google.com/v3/signin/identifier?opparams=%253F&dsh=S252840947%3A1768108879902433&app_domain=https%3A%2F%2Fgithub.com&client_id=1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com&code_challenge=ngnWHbJjkmoiS_GWyFV7ZwcwDpUTr-Sgwe5UJczc8DQ&code_challenge_method=S256&continue=https%3A%2F%2Faccounts.google.com%2Fsignin%2Foauth%2Fconsent%3Fauthuser%3Dunknown%26part%3DAJi8hAMFSEgZxvnvppyJZ6xAOJbr2_ls1kJSc8JK5wLYDhhDPeCFx0dtW6yV4Hu2Dg8YyZrnlUDLCfZeV3h2w0fCd41QXgd0f_EAVMaaV6hM7CBti1-BjYbV5Fzz8YcMzn5ZM9SqKT977nuSYPPk7OtgdH0QxV96hq-uGZwXqEYPRrnYixk5SghyHShnTwQ1Pn6AsdFWw8lFli1OWPvhqCKIkL9grB0eePKLFw_-TzsRSADD5ys-6O9fNggBXgLbgrU_y4zqdQ2e_gLTmT-Xh5_LtCFUJtpOgB7g5uMddvnCPSsRInLeTpyDBIRUkBLh6ysuVoT_C1gtA36iojJxhdw7VBGszJgRssirOS7BBR4hD3H98n1OT4BU1SGZAf6JOYjA2eg6mF6Ia8PRzn09UWcWFkv_ir2i2OFb0PxG5OUuh09XLAZjpzlRJwxpaCPnNVYDIDbBrX2o-fL9EfS1f4LZzr8i6bn3nA%26flowName%3DGeneralOAuthFlow%26as%3DS252840947%253A1768108879902433%26client_id%3D1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com%26requestPath%3D%252Fsignin%252Foauth%252Fconsent%23&flowName=GeneralOAuthFlow&nonce=c08e750348a28be9f2b2818fda8d4ab7&o2v=2&prompt=select_account&rart=ANgoxcf9LKoqjKL4lbLwFGdRNyRF_hgqesopMioKcc9krzBUVLN_gnezrPtBjlrmn2i7G2jvGbzatKW88-0RGPqb_d2iB6HmGXJ9YKwSPEeHm-zmmMoDDb8&redirect_uri=https%3A%2F%2Fgithub.com%2Fsessions%2Fsocial%2Fgoogle%2Fcallback&response_type=code&scope=openid+email+profile&service=lso&state=c27adf9910bd7bc7098d85511ab3e997\"\n  navigated to \"https://accounts.google.com/v3/signin/identifier?opparams=%253F&dsh=S252840947%3A1768108879902433&app_domain=https%3A%2F%2Fgithub.com&client_id=1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com&code_challenge=ngnWHbJjkmoiS_GWyFV7ZwcwDpUTr-Sgwe5UJczc8DQ&code_challenge_method=S256&continue=https%3A%2F%2Faccounts.google.com%2Fsignin%2Foauth%2Fconsent%3Fauthuser%3Dunknown%26part%3DAJi8hAMFSEgZxvnvppyJZ6xAOJbr2_ls1kJSc8JK5wLYDhhDPeCFx0dtW6yV4Hu2Dg8YyZrnlUDLCfZeV3h2w0fCd41QXgd0f_EAVMaaV6hM7CBti1-BjYbV5Fzz8YcMzn5ZM9SqKT977nuSYPPk7OtgdH0QxV96hq-uGZwXqEYPRrnYixk5SghyHShnTwQ1Pn6AsdFWw8lFli1OWPvhqCKIkL9grB0eePKLFw_-TzsRSADD5ys-6O9fNggBXgLbgrU_y4zqdQ2e_gLTmT-Xh5_LtCFUJtpOgB7g5uMddvnCPSsRInLeTpyDBIRUkBLh6ysuVoT_C1gtA36iojJxhdw7VBGszJgRssirOS7BBR4hD3H98n1OT4BU1SGZAf6JOYjA2eg6mF6Ia8PRzn09UWcWFkv_ir2i2OFb0PxG5OUuh09XLAZjpzlRJwxpaCPnNVYDIDbBrX2o-fL9EfS1f4LZzr8i6bn3nA%26flowName%3DGeneralOAuthFlow%26as%3DS252840947%253A1768108879902433%26client_id%3D1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com%26requestPath%3D%252Fsignin%252Foauth%252Fconsent%23&flowName=GeneralOAuthFlow&nonce=c08e750348a28be9f2b2818fda8d4ab7&o2v=2&prompt=select_account&rart=ANgoxcf9LKoqjKL4lbLwFGdRNyRF_hgqesopMioKcc9krzBUVLN_gnezrPtBjlrmn2i7G2jvGbzatKW88-0RGPqb_d2iB6HmGXJ9YKwSPEeHm-zmmMoDDb8&redirect_uri=https%3A%2F%2Fgithub.com%2Fsessions%2Fsocial%2Fgoogle%2Fcallback&response_type=code&scope=openid+email+profile&service=lso&state=c27adf9910bd7bc7098d85511ab3e997\"\n  navigated to \"https://accounts.google.com/v3/signin/identifier?opparams=%253F&dsh=S252840947%3A1768108879902433&app_domain=https%3A%2F%2Fgithub.com&client_id=1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com&code_challenge=ngnWHbJjkmoiS_GWyFV7ZwcwDpUTr-Sgwe5UJczc8DQ&code_challenge_method=S256&continue=https%3A%2F%2Faccounts.google.com%2Fsignin%2Foauth%2Fconsent%3Fauthuser%3Dunknown%26part%3DAJi8hAMFSEgZxvnvppyJZ6xAOJbr2_ls1kJSc8JK5wLYDhhDPeCFx0dtW6yV4Hu2Dg8YyZrnlUDLCfZeV3h2w0fCd41QXgd0f_EAVMaaV6hM7CBti1-BjYbV5Fzz8YcMzn5ZM9SqKT977nuSYPPk7OtgdH0QxV96hq-uGZwXqEYPRrnYixk5SghyHShnTwQ1Pn6AsdFWw8lFli1OWPvhqCKIkL9grB0eePKLFw_-TzsRSADD5ys-6O9fNggBXgLbgrU_y4zqdQ2e_gLTmT-Xh5_LtCFUJtpOgB7g5uMddvnCPSsRInLeTpyDBIRUkBLh6ysuVoT_C1gtA36iojJxhdw7VBGszJgRssirOS7BBR4hD3H98n1OT4BU1SGZAf6JOYjA2eg6mF6Ia8PRzn09UWcWFkv_ir2i2OFb0PxG5OUuh09XLAZjpzlRJwxpaCPnNVYDIDbBrX2o-fL9EfS1f4LZzr8i6bn3nA%26flowName%3DGeneralOAuthFlow%26as%3DS252840947%253A1768108879902433%26client_id%3D1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com%26requestPath%3D%252Fsignin%252Foauth%252Fconsent%23&flowName=GeneralOAuthFlow&nonce=c08e750348a28be9f2b2818fda8d4ab7&o2v=2&prompt=select_account&rart=ANgoxcf9LKoqjKL4lbLwFGdRNyRF_hgqesopMioKcc9krzBUVLN_gnezrPtBjlrmn2i7G2jvGbzatKW88-0RGPqb_d2iB6HmGXJ9YKwSPEeHm-zmmMoDDb8&redirect_uri=https%3A%2F%2Fgithub.com%2Fsessions%2Fsocial%2Fgoogle%2Fcallback&response_type=code&scope=openid+email+profile&service=lso&state=c27adf9910bd7bc7098d85511ab3e997\"\n  navigated to \"https://accounts.google.com/v3/signin/rejected?app_domain=https%3A%2F%2Fgithub.com&client_id=1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com&code_challenge=ngnWHbJjkmoiS_GWyFV7ZwcwDpUTr-Sgwe5UJczc8DQ&code_challenge_method=S256&continue=https%3A%2F%2Faccounts.google.com%2Fsignin%2Foauth%2Fconsent%3Fauthuser%3Dunknown%26part%3DAJi8hAPIZN2M5zkynkC55pnfYg-Xmg9yQ8LM52E8PYiuCXcHNUrNBZJBdCNWYODYqT83MQ-Uh5plfzs3xqdZluNXTFUuMc54ueQmlBfCgpX7o-kExVJMVLwNXVFkSWKUQFX7QEp5LJLWbvDK7dX2t5RoRjdV0Sbhv93qQjOatdVRuXo1TrArrq8YYP_UaMDYwkPhAlOpj-lNjQlm-N53usGkOAL9brEbc7SloM_BY-mOKoC3D2zf68eIaQChGDjkY59pnSAteIrYq3hZPzyRCbq7NE-L4dzoU2vlyt2XgrIhmFJaU4ny8hRo3LqSJkw7z4MERVfTpSQmnBVwqGwfUpLVjIhNnW-5lahKs8bBlSPR3wLKyAgxi0kwrNRHha_ggKWud7YfPqumVPjX3WSQzJkgzr7HjfEI3j8QNsmzWS1hMeRVWPId6tvoTr10n_BBor7Vm4Br-FwM5rvSPRYgdPiCxTNLUg7UCQ%26flowName%3DGeneralOAuthFlow%26as%3DS-2076489951%253A1768108870452624%26client_id%3D1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com%26requestPath%3D%252Fsignin%252Foauth%252Fconsent%23&dsh=S-2076489951%3A1768108870452624&epd=AX1IGxuLP4_AFIHEpVE7Gj0I1MxAS5kSmKK_Z7R6Otr6rfb1ooKYLfJuaQ&flowName=GeneralOAuthFlow&idnf=jeffadkins1%40gmail.com&nonce=c08e750348a28be9f2b2818fda8d4ab7&o2v=2&opparams=%253F&prompt=select_account&rart=ANgoxcdHQOzpXDCX3TWwfkroZlP0djR2cyHswV1161tDpbd_WQzCyTNncbXT1KsDL6-aB10oN6fCPCFbS9WUpFu_CNtOC4IxdHxQFeiFrDafNLuXAZ_FiH0&redirect_uri=https%3A%2F%2Fgithub.com%2Fsessions%2Fsocial%2Fgoogle%2Fcallback&response_type=code&rhlk=le&rrk=46&scope=openid%20email%20profile&service=lso&state=c27adf9910bd7bc7098d85511ab3e997\"\n  navigated to \"https://accounts.google.com/v3/signin/identifier?opparams=%253F&dsh=S-2076489951%3A1768108870452624&client_id=1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com&code_challenge=ngnWHbJjkmoiS_GWyFV7ZwcwDpUTr-Sgwe5UJczc8DQ&code_challenge_method=S256&nonce=c08e750348a28be9f2b2818fda8d4ab7&o2v=2&prompt=select_account&redirect_uri=https%3A%2F%2Fgithub.com%2Fsessions%2Fsocial%2Fgoogle%2Fcallback&response_type=code&scope=openid+email+profile&service=lso&state=c27adf9910bd7bc7098d85511ab3e997&flowName=GeneralOAuthFlow&continue=https%3A%2F%2Faccounts.google.com%2Fsignin%2Foauth%2Fconsent%3Fauthuser%3Dunknown%26part%3DAJi8hAPIZN2M5zkynkC55pnfYg-Xmg9yQ8LM52E8PYiuCXcHNUrNBZJBdCNWYODYqT83MQ-Uh5plfzs3xqdZluNXTFUuMc54ueQmlBfCgpX7o-kExVJMVLwNXVFkSWKUQFX7QEp5LJLWbvDK7dX2t5RoRjdV0Sbhv93qQjOatdVRuXo1TrArrq8YYP_UaMDYwkPhAlOpj-lNjQlm-N53usGkOAL9brEbc7SloM_BY-mOKoC3D2zf68eIaQChGDjkY59pnSAteIrYq3hZPzyRCbq7NE-L4dzoU2vlyt2XgrIhmFJaU4ny8hRo3LqSJkw7z4MERVfTpSQmnBVwqGwfUpLVjIhNnW-5lahKs8bBlSPR3wLKyAgxi0kwrNRHha_ggKWud7YfPqumVPjX3WSQzJkgzr7HjfEI3j8QNsmzWS1hMeRVWPId6tvoTr10n_BBor7Vm4Br-FwM5rvSPRYgdPiCxTNLUg7UCQ%26flowName%3DGeneralOAuthFlow%26as%3DS-2076489951%253A1768108870452624%26client_id%3D1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com%26requestPath%3D%252Fsignin%252Foauth%252Fconsent%23&app_domain=https%3A%2F%2Fgithub.com&rart=ANgoxcdHQOzpXDCX3TWwfkroZlP0djR2cyHswV1161tDpbd_WQzCyTNncbXT1KsDL6-aB10oN6fCPCFbS9WUpFu_CNtOC4IxdHxQFeiFrDafNLuXAZ_FiH0\"\n  navigated to \"https://accounts.google.com/v3/signin/identifier?opparams=%253F&dsh=S-2076489951%3A1768108870452624&client_id=1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com&code_challenge=ngnWHbJjkmoiS_GWyFV7ZwcwDpUTr-Sgwe5UJczc8DQ&code_challenge_method=S256&nonce=c08e750348a28be9f2b2818fda8d4ab7&o2v=2&prompt=select_account&redirect_uri=https%3A%2F%2Fgithub.com%2Fsessions%2Fsocial%2Fgoogle%2Fcallback&response_type=code&scope=openid+email+profile&service=lso&state=c27adf9910bd7bc7098d85511ab3e997&flowName=GeneralOAuthFlow&continue=https%3A%2F%2Faccounts.google.com%2Fsignin%2Foauth%2Fconsent%3Fauthuser%3Dunknown%26part%3DAJi8hAPIZN2M5zkynkC55pnfYg-Xmg9yQ8LM52E8PYiuCXcHNUrNBZJBdCNWYODYqT83MQ-Uh5plfzs3xqdZluNXTFUuMc54ueQmlBfCgpX7o-kExVJMVLwNXVFkSWKUQFX7QEp5LJLWbvDK7dX2t5RoRjdV0Sbhv93qQjOatdVRuXo1TrArrq8YYP_UaMDYwkPhAlOpj-lNjQlm-N53usGkOAL9brEbc7SloM_BY-mOKoC3D2zf68eIaQChGDjkY59pnSAteIrYq3hZPzyRCbq7NE-L4dzoU2vlyt2XgrIhmFJaU4ny8hRo3LqSJkw7z4MERVfTpSQmnBVwqGwfUpLVjIhNnW-5lahKs8bBlSPR3wLKyAgxi0kwrNRHha_ggKWud7YfPqumVPjX3WSQzJkgzr7HjfEI3j8QNsmzWS1hMeRVWPId6tvoTr10n_BBor7Vm4Br-FwM5rvSPRYgdPiCxTNLUg7UCQ%26flowName%3DGeneralOAuthFlow%26as%3DS-2076489951%253A1768108870452624%26client_id%3D1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com%26requestPath%3D%252Fsignin%252Foauth%252Fconsent%23&app_domain=https%3A%2F%2Fgithub.com&rart=ANgoxcdHQOzpXDCX3TWwfkroZlP0djR2cyHswV1161tDpbd_WQzCyTNncbXT1KsDL6-aB10oN6fCPCFbS9WUpFu_CNtOC4IxdHxQFeiFrDafNLuXAZ_FiH0\"\n  navigated to \"https://accounts.google.com/v3/signin/identifier?opparams=%253F&dsh=S-2076489951%3A1768108870452624&client_id=1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com&code_challenge=ngnWHbJjkmoiS_GWyFV7ZwcwDpUTr-Sgwe5UJczc8DQ&code_challenge_method=S256&nonce=c08e750348a28be9f2b2818fda8d4ab7&o2v=2&prompt=select_account&redirect_uri=https%3A%2F%2Fgithub.com%2Fsessions%2Fsocial%2Fgoogle%2Fcallback&response_type=code&scope=openid+email+profile&service=lso&state=c27adf9910bd7bc7098d85511ab3e997&flowName=GeneralOAuthFlow&continue=https%3A%2F%2Faccounts.google.com%2Fsignin%2Foauth%2Fconsent%3Fauthuser%3Dunknown%26part%3DAJi8hAPIZN2M5zkynkC55pnfYg-Xmg9yQ8LM52E8PYiuCXcHNUrNBZJBdCNWYODYqT83MQ-Uh5plfzs3xqdZluNXTFUuMc54ueQmlBfCgpX7o-kExVJMVLwNXVFkSWKUQFX7QEp5LJLWbvDK7dX2t5RoRjdV0Sbhv93qQjOatdVRuXo1TrArrq8YYP_UaMDYwkPhAlOpj-lNjQlm-N53usGkOAL9brEbc7SloM_BY-mOKoC3D2zf68eIaQChGDjkY59pnSAteIrYq3hZPzyRCbq7NE-L4dzoU2vlyt2XgrIhmFJaU4ny8hRo3LqSJkw7z4MERVfTpSQmnBVwqGwfUpLVjIhNnW-5lahKs8bBlSPR3wLKyAgxi0kwrNRHha_ggKWud7YfPqumVPjX3WSQzJkgzr7HjfEI3j8QNsmzWS1hMeRVWPId6tvoTr10n_BBor7Vm4Br-FwM5rvSPRYgdPiCxTNLUg7UCQ%26flowName%3DGeneralOAuthFlow%26as%3DS-2076489951%253A1768108870452624%26client_id%3D1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com%26requestPath%3D%252Fsignin%252Foauth%252Fconsent%23&app_domain=https%3A%2F%2Fgithub.com&rart=ANgoxcdHQOzpXDCX3TWwfkroZlP0djR2cyHswV1161tDpbd_WQzCyTNncbXT1KsDL6-aB10oN6fCPCFbS9WUpFu_CNtOC4IxdHxQFeiFrDafNLuXAZ_FiH0\"\n  navigated to \"https://github.com/login?client_id=Ov23liDKFkIrnPneWwny&return_to=%2Flogin%2Foauth%2Fauthorize%3Fclient_id%3DOv23liDKFkIrnPneWwny%26redirect_uri%3Dhttps%253A%252F%252Fbeast-mode.dev%252Fapi%252Fgithub%252Foauth%252Fcallback%26scope%3Drepo%2Bread%253Auser%2Buser%253Aemail%26state%3D31f6c5aa5f7b07040470c0492691f92cca6e99fc2cba816a8b1a7c60bc36b412\"\n  navigated to \"https://github.com/login?client_id=Ov23liDKFkIrnPneWwny&return_to=%2Flogin%2Foauth%2Fauthorize%3Fclient_id%3DOv23liDKFkIrnPneWwny%26redirect_uri%3Dhttps%253A%252F%252Fbeast-mode.dev%252Fapi%252Fgithub%252Foauth%252Fcallback%26scope%3Drepo%2Bread%253Auser%2Buser%253Aemail%26state%3D31f6c5aa5f7b07040470c0492691f92cca6e99fc2cba816a8b1a7c60bc36b412\"\n  navigated to \"https://github.com/login?client_id=Ov23liDKFkIrnPneWwny&return_to=%2Flogin%2Foauth%2Fauthorize%3Fclient_id%3DOv23liDKFkIrnPneWwny%26redirect_uri%3Dhttps%253A%252F%252Fbeast-mode.dev%252Fapi%252Fgithub%252Foauth%252Fcallback%26scope%3Drepo%2Bread%253Auser%2Buser%253Aemail%26state%3D31f6c5aa5f7b07040470c0492691f92cca6e99fc2cba816a8b1a7c60bc36b412\"\n  navigated to \"https://github.com/login?client_id=Ov23liDKFkIrnPneWwny&return_to=%2Flogin%2Foauth%2Fauthorize%3Fclient_id%3DOv23liDKFkIrnPneWwny%26redirect_uri%3Dhttps%253A%252F%252Fbeast-mode.dev%252Fapi%252Fgithub%252Foauth%252Fcallback%26scope%3Drepo%2Bread%253Auser%2Buser%253Aemail%26state%3D31f6c5aa5f7b07040470c0492691f92cca6e99fc2cba816a8b1a7c60bc36b412\"\n  navigated to \"https://github.com/session\"\n  navigated to \"https://github.com/session\"\n  navigated to \"https://github.com/session\"\n  navigated to \"https://github.com/sessions/social/google/initiate?return_to=%2Flogin%2Foauth%2Fauthorize%3Fclient_id%3DOv23liDKFkIrnPneWwny%26redirect_uri%3Dhttps%253A%252F%252Fbeast-mode.dev%252Fapi%252Fgithub%252Foauth%252Fcallback%26scope%3Drepo%2Bread%253Auser%2Buser%253Aemail%26state%3D31f6c5aa5f7b07040470c0492691f92cca6e99fc2cba816a8b1a7c60bc36b412&disable_signup=false\"\n  navigated to \"https://accounts.google.com/v3/signin/identifier?opparams=%253F&dsh=S-1006023696%3A1768108959632431&client_id=1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com&code_challenge=c6r_V5oDhjg2SpNGJnQOB4wkmTMTO-G7LUvlXBb7ves&code_challenge_method=S256&nonce=9aab2814f59aa5f25675b05fc8f85cd5&o2v=2&prompt=select_account&redirect_uri=https%3A%2F%2Fgithub.com%2Fsessions%2Fsocial%2Fgoogle%2Fcallback&response_type=code&scope=openid+email+profile&service=lso&state=07ff5354968c3b00aa45fa1ec1cb2873&flowName=GeneralOAuthFlow&continue=https%3A%2F%2Faccounts.google.com%2Fsignin%2Foauth%2Fconsent%3Fauthuser%3Dunknown%26part%3DAJi8hAMGek1hSQ-6Tb5rO5aAWN-O1FcVDuzo3luAFR_76FlFCZmoDkAInmQBM8YsPXDrl3vyW04cOOQflBRXs7c9Z7h1yEZ9tegPmpLq4jLFkcv5o3Pd-9otiZt9Gdgdf1VxDIv6SIzWnXZbcFzDCx60kVci9EQ9VsZDsRRvEnRVv0cGQB1rUFfUxA9zrpvEVsBvgbBkkbtZVfdZx-rZjQR2VWKKK3JR46UqYuafjM11xNigH7pYE0yMNnAsVcrcYZZ3I8ey0oNDqoYY9k2ahQ3G8ntem0zC56_YDlaClhlOwmJYvRQjLniRXJqirigo0fYHozpnJc5x5wKtEgDorJPLHr76z6rxMBz9iGSLJSn3AJwYHI0PysZvTOzR0atGcaPMzBAILYmnDLmZcxiYh1aFnZKzsxWJnyTfbDDTn1aYMPEDRgZJScxZy9G3sp12Ac5qyHpXtdJUqOXech4_6EJFgPh8Y9fZVQ%26flowName%3DGeneralOAuthFlow%26as%3DS-1006023696%253A1768108959632431%26client_id%3D1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com%26requestPath%3D%252Fsignin%252Foauth%252Fconsent%23&app_domain=https%3A%2F%2Fgithub.com&rart=ANgoxcdpyqFKJTJ2pUJ9nA66ZyObUi1-DpY0kt8VC_A4y3JOBf6Q0UKSzCK7XYoeHLmhLMS1aXFddAZl20MziA6tt-PHcy_Dq9M42LVFMAUoSuGFfP2XZ4s\"\n  navigated to \"https://accounts.google.com/v3/signin/identifier?opparams=%253F&dsh=S-1006023696%3A1768108959632431&client_id=1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com&code_challenge=c6r_V5oDhjg2SpNGJnQOB4wkmTMTO-G7LUvlXBb7ves&code_challenge_method=S256&nonce=9aab2814f59aa5f25675b05fc8f85cd5&o2v=2&prompt=select_account&redirect_uri=https%3A%2F%2Fgithub.com%2Fsessions%2Fsocial%2Fgoogle%2Fcallback&response_type=code&scope=openid+email+profile&service=lso&state=07ff5354968c3b00aa45fa1ec1cb2873&flowName=GeneralOAuthFlow&continue=https%3A%2F%2Faccounts.google.com%2Fsignin%2Foauth%2Fconsent%3Fauthuser%3Dunknown%26part%3DAJi8hAMGek1hSQ-6Tb5rO5aAWN-O1FcVDuzo3luAFR_76FlFCZmoDkAInmQBM8YsPXDrl3vyW04cOOQflBRXs7c9Z7h1yEZ9tegPmpLq4jLFkcv5o3Pd-9otiZt9Gdgdf1VxDIv6SIzWnXZbcFzDCx60kVci9EQ9VsZDsRRvEnRVv0cGQB1rUFfUxA9zrpvEVsBvgbBkkbtZVfdZx-rZjQR2VWKKK3JR46UqYuafjM11xNigH7pYE0yMNnAsVcrcYZZ3I8ey0oNDqoYY9k2ahQ3G8ntem0zC56_YDlaClhlOwmJYvRQjLniRXJqirigo0fYHozpnJc5x5wKtEgDorJPLHr76z6rxMBz9iGSLJSn3AJwYHI0PysZvTOzR0atGcaPMzBAILYmnDLmZcxiYh1aFnZKzsxWJnyTfbDDTn1aYMPEDRgZJScxZy9G3sp12Ac5qyHpXtdJUqOXech4_6EJFgPh8Y9fZVQ%26flowName%3DGeneralOAuthFlow%26as%3DS-1006023696%253A1768108959632431%26client_id%3D1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com%26requestPath%3D%252Fsignin%252Foauth%252Fconsent%23&app_domain=https%3A%2F%2Fgithub.com&rart=ANgoxcdpyqFKJTJ2pUJ9nA66ZyObUi1-DpY0kt8VC_A4y3JOBf6Q0UKSzCK7XYoeHLmhLMS1aXFddAZl20MziA6tt-PHcy_Dq9M42LVFMAUoSuGFfP2XZ4s\"\n  navigated to \"https://accounts.google.com/v3/signin/rejected?app_domain=https%3A%2F%2Fgithub.com&client_id=1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com&code_challenge=c6r_V5oDhjg2SpNGJnQOB4wkmTMTO-G7LUvlXBb7ves&code_challenge_method=S256&continue=https%3A%2F%2Faccounts.google.com%2Fsignin%2Foauth%2Fconsent%3Fauthuser%3Dunknown%26part%3DAJi8hAMGek1hSQ-6Tb5rO5aAWN-O1FcVDuzo3luAFR_76FlFCZmoDkAInmQBM8YsPXDrl3vyW04cOOQflBRXs7c9Z7h1yEZ9tegPmpLq4jLFkcv5o3Pd-9otiZt9Gdgdf1VxDIv6SIzWnXZbcFzDCx60kVci9EQ9VsZDsRRvEnRVv0cGQB1rUFfUxA9zrpvEVsBvgbBkkbtZVfdZx-rZjQR2VWKKK3JR46UqYuafjM11xNigH7pYE0yMNnAsVcrcYZZ3I8ey0oNDqoYY9k2ahQ3G8ntem0zC56_YDlaClhlOwmJYvRQjLniRXJqirigo0fYHozpnJc5x5wKtEgDorJPLHr76z6rxMBz9iGSLJSn3AJwYHI0PysZvTOzR0atGcaPMzBAILYmnDLmZcxiYh1aFnZKzsxWJnyTfbDDTn1aYMPEDRgZJScxZy9G3sp12Ac5qyHpXtdJUqOXech4_6EJFgPh8Y9fZVQ%26flowName%3DGeneralOAuthFlow%26as%3DS-1006023696%253A1768108959632431%26client_id%3D1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com%26requestPath%3D%252Fsignin%252Foauth%252Fconsent%23&dsh=S-1006023696%3A1768108959632431&epd=AX1IGxuHimiFJ06bu1RNJSwVDeTJEDULBeRSWq_s5SGbjGunRcpY8fZx8Q&flowName=GeneralOAuthFlow&idnf=jeffadkins1%40gmail.com&nonce=9aab2814f59aa5f25675b05fc8f85cd5&o2v=2&opparams=%253F&prompt=select_account&rart=ANgoxcdpyqFKJTJ2pUJ9nA66ZyObUi1-DpY0kt8VC_A4y3JOBf6Q0UKSzCK7XYoeHLmhLMS1aXFddAZl20MziA6tt-PHcy_Dq9M42LVFMAUoSuGFfP2XZ4s&redirect_uri=https%3A%2F%2Fgithub.com%2Fsessions%2Fsocial%2Fgoogle%2Fcallback&response_type=code&rhlk=le&rrk=46&scope=openid%20email%20profile&service=lso&state=07ff5354968c3b00aa45fa1ec1cb2873\"\n  navigated to \"https://accounts.google.com/v3/signin/identifier?opparams=%253F&dsh=S1225954902%3A1768108966562336&app_domain=https%3A%2F%2Fgithub.com&client_id=1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com&code_challenge=c6r_V5oDhjg2SpNGJnQOB4wkmTMTO-G7LUvlXBb7ves&code_challenge_method=S256&continue=https%3A%2F%2Faccounts.google.com%2Fsignin%2Foauth%2Fconsent%3Fauthuser%3Dunknown%26part%3DAJi8hAOytSF98HWsRC4IYH912S0herykXKiwXuh1KLEc9a3GGPTtQJJgMHlG7x2E7GZnld5S2xIgDQhZ7bqyFxlooVsmf2lIsHBtoXGut5Nkj0ZQb4v2_l0RRxT_zhzGHS_A4RDHp0p0rExD3eqmboZ-aO9L4epH4e75qgRm-Fiy4zrxyw76rVyFHGzQXjydAkEHeFfGp5_AAD35S1KmzvDoC0bVJfWlT_8CfGKQxYpT5d1GyaQ9Htvmu8JjilkGYPIOtsjdisJsL_oyRUj-HRdb8q9AkPbqfdJn2M9qP784M-LSFSUVG70O_Kdxp-kqDFrGhv0L7JykrQUlGNHSj5W1LmN8Z_qWKQUYVUWM3IjXZkdfOGUWgnj_CqjYTDtP6AXeqcNNBH2OCOn2jdlYeJRUlfcQ64LCFN6qAPA4or2FCXMNSfsQp8kdLMw8qihmGeDUYODlOy9TxygNF3Rlhbm08RYAO_oscw%26flowName%3DGeneralOAuthFlow%26as%3DS1225954902%253A1768108966562336%26client_id%3D1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com%26requestPath%3D%252Fsignin%252Foauth%252Fconsent%23&flowName=GeneralOAuthFlow&nonce=9aab2814f59aa5f25675b05fc8f85cd5&o2v=2&prompt=select_account&rart=ANgoxccDjJ75Q3WiDHBf96Lb2IqyWDVoEQL8XXYBc3Le7OWEepPsZKCifL4VmqKSwpd30_y6u1ecvxUQVWMIXoYIjgNvyzS3Mtm3DMFQxfHyL_wRC1eZgM8&redirect_uri=https%3A%2F%2Fgithub.com%2Fsessions%2Fsocial%2Fgoogle%2Fcallback&response_type=code&scope=openid+email+profile&service=lso&state=07ff5354968c3b00aa45fa1ec1cb2873\"\n  navigated to \"https://accounts.google.com/v3/signin/identifier?opparams=%253F&dsh=S1225954902%3A1768108966562336&app_domain=https%3A%2F%2Fgithub.com&client_id=1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com&code_challenge=c6r_V5oDhjg2SpNGJnQOB4wkmTMTO-G7LUvlXBb7ves&code_challenge_method=S256&continue=https%3A%2F%2Faccounts.google.com%2Fsignin%2Foauth%2Fconsent%3Fauthuser%3Dunknown%26part%3DAJi8hAOytSF98HWsRC4IYH912S0herykXKiwXuh1KLEc9a3GGPTtQJJgMHlG7x2E7GZnld5S2xIgDQhZ7bqyFxlooVsmf2lIsHBtoXGut5Nkj0ZQb4v2_l0RRxT_zhzGHS_A4RDHp0p0rExD3eqmboZ-aO9L4epH4e75qgRm-Fiy4zrxyw76rVyFHGzQXjydAkEHeFfGp5_AAD35S1KmzvDoC0bVJfWlT_8CfGKQxYpT5d1GyaQ9Htvmu8JjilkGYPIOtsjdisJsL_oyRUj-HRdb8q9AkPbqfdJn2M9qP784M-LSFSUVG70O_Kdxp-kqDFrGhv0L7JykrQUlGNHSj5W1LmN8Z_qWKQUYVUWM3IjXZkdfOGUWgnj_CqjYTDtP6AXeqcNNBH2OCOn2jdlYeJRUlfcQ64LCFN6qAPA4or2FCXMNSfsQp8kdLMw8qihmGeDUYODlOy9TxygNF3Rlhbm08RYAO_oscw%26flowName%3DGeneralOAuthFlow%26as%3DS1225954902%253A1768108966562336%26client_id%3D1078992815106-brpsupgvhheqg35tupphbh0qk9c32nq8.apps.googleusercontent.com%26requestPath%3D%252Fsignin%252Foauth%252Fconsent%23&flowName=GeneralOAuthFlow&nonce=9aab2814f59aa5f25675b05fc8f85cd5&o2v=2&prompt=select_account&rart=ANgoxccDjJ75Q3WiDHBf96Lb2IqyWDVoEQL8XXYBc3Le7OWEepPsZKCifL4VmqKSwpd30_y6u1ecvxUQVWMIXoYIjgNvyzS3Mtm3DMFQxfHyL_wRC1eZgM8&redirect_uri=https%3A%2F%2Fgithub.com%2Fsessions%2Fsocial%2Fgoogle%2Fcallback&response_type=code&scope=openid+email+profile&service=lso&state=07ff5354968c3b00aa45fa1ec1cb2873\"\n============================================================\n\n  40 |       \n  41 |       // Wait for URL to change to dashboard (indicating login successful)\n> 42 |       await page.waitForURL('**/dashboard/**', { timeout: 300000 }); // 5 minute timeout\n     |                  ^\n  43 |       console.log('✅ Authentication detected - continuing test\\n');\n  44 |     }\n  45 |\n    at /Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/website/e2e/credit-purchase-manual-auth.spec.ts:42:18"
+                        }
+                      ],
+                      "stdout": [
+                        {
+                          "text": "\n🧪 Credit Purchase Test (Manual Auth)\n\n"
+                        },
+                        {
+                          "text": "💡 This test assumes you are logged in\n\n"
+                        },
+                        {
+                          "text": "📍 If not logged in, please authenticate manually when browser opens\n\n"
+                        },
+                        {
+                          "text": "📋 Step 1: Navigating to billing page...\n"
+                        },
+                        {
+                          "text": "   Current URL: https://beast-mode.dev/?auth=required\n"
+                        },
+                        {
+                          "text": "\n⏸️  PAUSED: Please authenticate manually in the browser\n"
+                        },
+                        {
+                          "text": "   After logging in, the test will continue automatically...\n\n"
+                        }
+                      ],
                       "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-01-09T22:12:12.893Z",
+                      "retry": 1,
+                      "startTime": "2026-01-11T05:21:03.210Z",
                       "annotations": [],
-                      "attachments": []
+                      "attachments": [
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/website/test-results/credit-purchase-manual-aut-51381--with-manual-authentication-chromium-retry1/video.webm"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/website/test-results/credit-purchase-manual-aut-51381--with-manual-authentication-chromium-retry1/trace.zip"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/website/e2e/credit-purchase-manual-auth.spec.ts",
+                        "column": 18,
+                        "line": 42
+                      }
                     }
                   ],
-                  "status": "expected"
+                  "status": "unexpected"
                 }
               ],
-              "id": "1283ac53084b38fceb2d-e3a8f7bd4f3f0a543217",
-              "file": "api-endpoints.spec.ts",
-              "line": 17,
-              "column": 7
-            },
-            {
-              "title": "health endpoint should be accessible",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 60000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "chromium",
-                  "projectName": "chromium",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 20,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-01-09T22:12:12.925Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "1283ac53084b38fceb2d-68a502cd065ebb6a5536",
-              "file": "api-endpoints.spec.ts",
-              "line": 30,
-              "column": 7
-            },
-            {
-              "title": "API should have CORS headers",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 60000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "chromium",
-                  "projectName": "chromium",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 18,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-01-09T22:12:12.955Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "1283ac53084b38fceb2d-8887f6a0dfacac27fc1b",
-              "file": "api-endpoints.spec.ts",
-              "line": 38,
-              "column": 7
-            },
-            {
-              "title": "API should return JSON for JSON endpoints",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 60000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "chromium",
-                  "projectName": "chromium",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 23,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-01-09T22:12:12.979Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "1283ac53084b38fceb2d-dc4935209cac2485f519",
-              "file": "api-endpoints.spec.ts",
-              "line": 46,
-              "column": 7
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "title": "api-health.spec.ts",
-      "file": "api-health.spec.ts",
-      "column": 0,
-      "line": 0,
-      "specs": [],
-      "suites": [
-        {
-          "title": "API Health Checks",
-          "file": "api-health.spec.ts",
-          "line": 8,
-          "column": 6,
-          "specs": [
-            {
-              "title": "health endpoint should return 200",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 60000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "chromium",
-                  "projectName": "chromium",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 24,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-01-09T22:12:13.013Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "ae946921bd1fde7b4bfb-82f3ba9e71f069ac2aa3",
-              "file": "api-health.spec.ts",
-              "line": 9,
-              "column": 7
-            },
-            {
-              "title": "health endpoint should include timestamp",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 60000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "chromium",
-                  "projectName": "chromium",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 21,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-01-09T22:12:13.043Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "ae946921bd1fde7b4bfb-addac26eee3e88ccc19c",
-              "file": "api-health.spec.ts",
-              "line": 18,
-              "column": 7
-            },
-            {
-              "title": "health endpoint should be fast",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 60000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "chromium",
-                  "projectName": "chromium",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 26,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-01-09T22:12:13.071Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "ae946921bd1fde7b4bfb-3ad62759b78fa58b5585",
-              "file": "api-health.spec.ts",
-              "line": 27,
-              "column": 7
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "title": "auth-flow.spec.ts",
-      "file": "auth-flow.spec.ts",
-      "column": 0,
-      "line": 0,
-      "specs": [],
-      "suites": [
-        {
-          "title": "Authentication Flow",
-          "file": "auth-flow.spec.ts",
-          "line": 8,
-          "column": 6,
-          "specs": [
-            {
-              "title": "should have auth endpoints available",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 60000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "chromium",
-                  "projectName": "chromium",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 34,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-01-09T22:12:13.106Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "df6b40174562c70df515-b7e128082f213865787b",
-              "file": "auth-flow.spec.ts",
-              "line": 9,
-              "column": 7
-            },
-            {
-              "title": "should handle unauthenticated requests gracefully",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 60000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "chromium",
-                  "projectName": "chromium",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 1055,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-01-09T22:12:13.146Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "df6b40174562c70df515-31367da3a6b9bcb6a074",
-              "file": "auth-flow.spec.ts",
-              "line": 18,
-              "column": 7
-            },
-            {
-              "title": "should have login/signup options",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 60000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "chromium",
-                  "projectName": "chromium",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 1162,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-01-09T22:12:14.647Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "df6b40174562c70df515-6706848a344b436396c2",
-              "file": "auth-flow.spec.ts",
-              "line": 28,
-              "column": 7
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "title": "critical-flows.spec.ts",
-      "file": "critical-flows.spec.ts",
-      "column": 0,
-      "line": 0,
-      "specs": [],
-      "suites": [
-        {
-          "title": "Critical User Flows",
-          "file": "critical-flows.spec.ts",
-          "line": 8,
-          "column": 6,
-          "specs": [
-            {
-              "title": "should navigate to quality page",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 60000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "chromium",
-                  "projectName": "chromium",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 2974,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-01-09T22:12:15.824Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "542ce40c4d5a94d1bfd5-cd63ae58cc66273fea6d",
-              "file": "critical-flows.spec.ts",
-              "line": 9,
-              "column": 7
-            },
-            {
-              "title": "should navigate to dashboard if available",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 60000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "chromium",
-                  "projectName": "chromium",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 30967,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-01-09T22:12:18.807Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "542ce40c4d5a94d1bfd5-cb74cbe3a8771faa58db",
-              "file": "critical-flows.spec.ts",
-              "line": 35,
-              "column": 7
-            },
-            {
-              "title": "should handle 404 pages gracefully",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 60000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "chromium",
-                  "projectName": "chromium",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 930,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-01-09T22:12:49.782Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "542ce40c4d5a94d1bfd5-f26d07cf99ae997a629a",
-              "file": "critical-flows.spec.ts",
-              "line": 51,
-              "column": 7
-            },
-            {
-              "title": "should load pages without critical JavaScript errors",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 60000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "chromium",
-                  "projectName": "chromium",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 680,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-01-09T22:12:50.719Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "542ce40c4d5a94d1bfd5-2423b271a939f3388e55",
-              "file": "critical-flows.spec.ts",
-              "line": 64,
-              "column": 7
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "title": "homepage.spec.ts",
-      "file": "homepage.spec.ts",
-      "column": 0,
-      "line": 0,
-      "specs": [],
-      "suites": [
-        {
-          "title": "Homepage",
-          "file": "homepage.spec.ts",
-          "line": 8,
-          "column": 6,
-          "specs": [
-            {
-              "title": "should load homepage successfully",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 60000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "chromium",
-                  "projectName": "chromium",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 1215,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-01-09T22:12:51.412Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "84e7eb052e8cbae1c9f0-23065a281364f96fc99e",
-              "file": "homepage.spec.ts",
-              "line": 13,
-              "column": 7
-            },
-            {
-              "title": "should display hero section",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 60000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "chromium",
-                  "projectName": "chromium",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 1634,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-01-09T22:12:52.636Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "84e7eb052e8cbae1c9f0-af05eb0983fdaa0c38a9",
-              "file": "homepage.spec.ts",
-              "line": 25,
-              "column": 7
-            },
-            {
-              "title": "should have working navigation",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 60000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "chromium",
-                  "projectName": "chromium",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 1526,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-01-09T22:12:54.282Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "84e7eb052e8cbae1c9f0-1943b5afa983c2e52c69",
-              "file": "homepage.spec.ts",
-              "line": 40,
-              "column": 7
-            },
-            {
-              "title": "should be responsive on mobile",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 60000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "chromium",
-                  "projectName": "chromium",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 1000,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-01-09T22:12:55.824Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "84e7eb052e8cbae1c9f0-4be05f5cc70b6ba15efc",
-              "file": "homepage.spec.ts",
-              "line": 59,
-              "column": 7
-            },
-            {
-              "title": "should have no critical console errors",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 60000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "chromium",
-                  "projectName": "chromium",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 1339,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-01-09T22:12:56.836Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "84e7eb052e8cbae1c9f0-9298c5688c5b0d78c1db",
-              "file": "homepage.spec.ts",
-              "line": 71,
-              "column": 7
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "title": "performance.spec.ts",
-      "file": "performance.spec.ts",
-      "column": 0,
-      "line": 0,
-      "specs": [],
-      "suites": [
-        {
-          "title": "Performance",
-          "file": "performance.spec.ts",
-          "line": 8,
-          "column": 6,
-          "specs": [
-            {
-              "title": "homepage should load quickly",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 60000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "chromium",
-                  "projectName": "chromium",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 836,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-01-09T22:12:58.187Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "b15d6361b2fc38288977-981f46c28a9ac96e5f3e",
-              "file": "performance.spec.ts",
-              "line": 9,
-              "column": 7
-            },
-            {
-              "title": "API endpoints should respond quickly",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 60000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "chromium",
-                  "projectName": "chromium",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 40,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-01-09T22:12:59.032Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "b15d6361b2fc38288977-0ec4c09c735ccdf08128",
-              "file": "performance.spec.ts",
-              "line": 18,
-              "column": 7
-            },
-            {
-              "title": "should have reasonable page size",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 60000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "chromium",
-                  "projectName": "chromium",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 959,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-01-09T22:12:59.082Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "b15d6361b2fc38288977-c9684d270c48f8738797",
-              "file": "performance.spec.ts",
-              "line": 27,
+              "id": "8448fb5a9df634b835e1-8c4551fbb4b482301c36",
+              "file": "credit-purchase-manual-auth.spec.ts",
+              "line": 19,
               "column": 7
             }
           ]
@@ -1020,11 +311,11 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-01-09T22:12:11.461Z",
-    "duration": 48667.296,
-    "expected": 23,
+    "startTime": "2026-01-11T05:15:59.865Z",
+    "duration": 409948.016,
+    "expected": 0,
     "skipped": 0,
-    "unexpected": 0,
+    "unexpected": 1,
     "flaky": 0
   }
 }

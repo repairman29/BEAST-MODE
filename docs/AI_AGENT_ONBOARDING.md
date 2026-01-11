@@ -18,27 +18,39 @@ I'm working on the BEAST MODE project. Here's what you need to know:
    - Model router: modelRouter.js
    - Documentation: docs/CUSTOM_MODELS_ARCHITECTURE.md
 
-2. Key Files:
+2. Brand/Reputation/Secret Interceptor:
+   - Location: BEAST-MODE-PRODUCT/lib/janitor/brand-reputation-interceptor.js
+   - Prevents committing secrets, internal docs, business content
+   - Stores intercepted data in Supabase for bot access
+   - CLI: beast-mode interceptor check/list/status
+   - API: GET /api/intercepted-commits
+   - Documentation: docs/BRAND_REPUTATION_INTERCEPTOR_GUIDE.md
+
+3. Key Files:
    - Custom models API: website/app/api/models/custom/route.ts
    - Chat endpoint: website/app/api/codebase/chat/route.ts
    - Feature generation: website/app/api/repos/quality/generate-feature/route.ts
+   - Intercepted commits API: website/app/api/intercepted-commits/route.ts
 
-3. Current Setup:
+4. Current Setup:
    - 9 custom models registered
    - 6 provider API keys ready (openai, anthropic, gemini, groq, mistral, together)
    - Auto-selection: Uses custom models first, falls back to providers
+   - Interceptor: Active, pre-commit hook installed
 
-4. How It Works:
+5. How It Works:
    - Smart selector auto-chooses best model
    - Custom models: ~$0.001/1K tokens (97% savings)
    - Provider models: ~$0.03/1K tokens (automatic fallback)
+   - Interceptor: Blocks unsafe commits, stores in Supabase
 
-5. Testing:
+6. Testing:
    - node scripts/build-real-feature.js --user-id=YOUR_USER_ID
    - node scripts/monitor-custom-models.js
    - node scripts/get-user-api-keys.js --user-id=YOUR_USER_ID
+   - beast-mode interceptor check (check staged files)
 
-Read docs/CUSTOM_MODELS_ARCHITECTURE.md for full details.
+Read docs/CUSTOM_MODELS_ARCHITECTURE.md and docs/BRAND_REPUTATION_INTERCEPTOR_GUIDE.md for full details.
 ```
 
 ---
@@ -364,12 +376,16 @@ When starting a new session, verify:
 
 - [ ] Read `.cursorrules` for project context
 - [ ] Read `docs/CUSTOM_MODELS_ARCHITECTURE.md`
+- [ ] Read `docs/BRAND_REPUTATION_INTERCEPTOR_GUIDE.md` (IMPORTANT!)
 - [ ] Understand smart selector logic
 - [ ] Know model router flow
-- [ ] Know current setup (9 custom models, 6 provider keys)
+- [ ] Know interceptor system (prevents unsafe commits)
+- [ ] Know how to access intercepted data via API
+- [ ] Know current setup (9 custom models, 6 provider keys, interceptor active)
 - [ ] Know testing commands
 - [ ] Know monitoring endpoints
 - [ ] Understand fallback strategy
+- [ ] Understand commit safety (interceptor will block unsafe commits)
 
 ---
 

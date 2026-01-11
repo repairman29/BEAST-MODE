@@ -1,0 +1,528 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - navigation [ref=e2]:
+    - generic [ref=e4]:
+      - link "BEAST MODE Code Quality Platform" [ref=e5] [cursor=pointer]:
+        - /url: /
+        - img [ref=e7]
+        - generic [ref=e9]:
+          - text: BEAST MODE
+          - generic [ref=e10]: Code Quality Platform
+      - generic [ref=e11]:
+        - button "Features" [ref=e12]
+        - link "Documentation" [ref=e13] [cursor=pointer]:
+          - /url: /docs
+        - link "Dashboard" [ref=e14] [cursor=pointer]:
+          - /url: /dashboard
+        - link "GitHub" [ref=e15] [cursor=pointer]:
+          - /url: /api/github/oauth/authorize
+          - img [ref=e16]
+          - text: GitHub
+        - button "Get Started" [ref=e18] [cursor=pointer]
+  - alert [ref=e19]
+  - generic [ref=e27]:
+    - generic [ref=e28]:
+      - generic [ref=e30]:
+        - img [ref=e31]
+        - text: Day 2 Operations Platform
+      - generic [ref=e34]:
+        - heading "BEAST MODE Day 2 Operations" [level=1] [ref=e35]:
+          - text: BEAST MODE
+          - text: Day 2 Operations
+        - paragraph [ref=e36]: Become a better developer, faster.
+        - paragraph [ref=e37]: See your code quality in 10 seconds. Get automated fixes. Wake up to clean code. All in one platform.
+        - paragraph [ref=e38]:
+          - strong [ref=e39]: BEAST MODE tells you what's wrong, fixes it automatically, and maintains your codebase while you sleep.
+      - generic [ref=e40]:
+        - button "Join the Vibe" [ref=e41] [cursor=pointer]:
+          - img [ref=e43]
+          - generic [ref=e45]: Join the Vibe
+        - button "See It in Action" [ref=e46] [cursor=pointer]:
+          - generic [ref=e47]: See It in Action
+          - img [ref=e49]
+      - generic [ref=e51]:
+        - generic [ref=e52]:
+          - generic [ref=e53]: ✓
+          - generic [ref=e54]: 10K free calls/month
+        - generic [ref=e55]:
+          - generic [ref=e56]: ✓
+          - generic [ref=e57]: No credit card
+        - generic [ref=e58]:
+          - generic [ref=e59]: ✓
+          - generic [ref=e60]: MIT License (core)
+    - generic [ref=e61]:
+      - generic [ref=e62]:
+        - generic [ref=e69]: beast-mode.js
+        - code [ref=e72]: "import { BeastMode } from '@beast-mode/core'; const beastMode = new BeastMode({ janitor: { enabled: true, overnightMode: true, autoMerge: true } }); await beastMode.initialize(); // Silent refactoring runs 2 AM - 6 AM // Architecture enforcement on every commit // Invisible CI/CD in background // Wake up to clean code const status = await beastMode .janitor.getStatus(); console.log(`Fixed: ${status.fixed}`); // → Fixed: 23 issues // → Merged: 5 PRs // → Security: 3 holes closed"
+        - generic [ref=e75]:
+          - generic [ref=e76]: Silent Janitor Active
+          - generic [ref=e77]: 23 issues fixed • 5 PRs merged
+      - generic [ref=e78]:
+        - generic [ref=e79]:
+          - generic [ref=e80]: 10s
+          - generic [ref=e81]: Quality Score
+        - generic [ref=e82]:
+          - generic [ref=e83]: 0-100
+          - generic [ref=e84]: Score Range
+  - generic [ref=e88]:
+    - generic [ref=e89]:
+      - generic [ref=e90]: 🎯 Day 2 Operations Platform
+      - heading "The AI Janitor That Works While You Sleep" [level=2] [ref=e91]:
+        - text: The AI Janitor
+        - text: That Works While You Sleep
+      - paragraph [ref=e92]:
+        - text: While tools like Cursor, Windsurf, and Replit help you
+        - strong [ref=e93]: generate
+        - text: code, BEAST MODE helps you
+        - strong [ref=e94]: maintain
+        - text: it. Silent refactoring, architecture enforcement, and invisible CI/CD—all automated.
+    - generic [ref=e96]:
+      - generic [ref=e97]:
+        - heading "Solving the 3 Walls of Vibe Coding" [level=3] [ref=e98]
+        - paragraph [ref=e99]: Every vibe coder hits these walls. BEAST MODE breaks through all of them.
+      - generic [ref=e101]:
+        - generic [ref=e102]:
+          - generic [ref=e103]: 🧱
+          - heading "The 90% Wall" [level=3] [ref=e104]
+          - paragraph [ref=e105]: AI forgets architecture as codebase grows
+          - generic [ref=e106]: "✅ Solved: Repo Memory + Architecture Enforcement"
+        - generic [ref=e107]:
+          - generic [ref=e108]: 🏛️
+          - heading "The Brownfield Wall" [level=3] [ref=e109]
+          - paragraph [ref=e110]: Vibe coding useless for legacy monoliths
+          - generic [ref=e111]: "✅ Solved: Safe Mode Wrapper"
+        - generic [ref=e112]:
+          - generic [ref=e113]: 🔒
+          - heading "The Liability Wall" [level=3] [ref=e114]
+          - paragraph [ref=e115]: Hardcoded secrets, security flaws
+          - generic [ref=e116]: "✅ Solved: Invisible CI/CD + Architecture Enforcement"
+    - generic [ref=e117]:
+      - generic [ref=e119]:
+        - generic [ref=e120]: 🧹
+        - heading "Silent Refactoring Engine" [level=3] [ref=e121]
+        - paragraph [ref=e122]: Overnight code cleanup (2 AM - 6 AM). Automatic de-duplication, security fixes, and quality improvements. Wake up to clean code.
+      - generic [ref=e124]:
+        - generic [ref=e125]: 🛡️
+        - heading "Architecture Enforcement" [level=3] [ref=e126]
+        - paragraph [ref=e127]: Pre-commit hooks prevent bad patterns. Blocks secrets, enforces separation of concerns, auto-fixes violations.
+      - generic [ref=e129]:
+        - generic [ref=e130]: ⏮️
+        - heading "Vibe Restoration" [level=3] [ref=e131]
+        - paragraph [ref=e132]: Tracks code state, detects regressions, restores to last good state. Never lose your vibe.
+      - generic [ref=e134]:
+        - generic [ref=e135]: 🧠
+        - heading "Repo-Level Memory" [level=3] [ref=e136]
+        - paragraph [ref=e137]: Semantic graph of your entire codebase. Preserves context, understands architecture, prevents drift.
+      - generic [ref=e139]:
+        - generic [ref=e140]: 🤖
+        - heading "Vibe Ops (QA for English)" [level=3] [ref=e141]
+        - paragraph [ref=e142]: Test in plain English. Visual AI agents spin up browsers, click through flows, report in human language.
+      - generic [ref=e144]:
+        - generic [ref=e145]: 👻
+        - heading "Invisible CI/CD" [level=3] [ref=e146]
+        - paragraph [ref=e147]: Silent linting, background testing, security scanning. Auto-fixes without you seeing the CLI.
+    - generic [ref=e149]:
+      - generic [ref=e150]:
+        - heading "The Governance Layer" [level=3] [ref=e151]
+        - paragraph [ref=e152]: We COMPLEMENT code generation tools. We don't compete. We are the FILTER, not the GENERATOR.
+      - img "BEAST MODE Governance Layer Architecture" [ref=e155]
+    - generic [ref=e157]:
+      - generic [ref=e158]:
+        - heading "The Mullet Strategy" [level=3] [ref=e159]
+        - paragraph [ref=e160]: Same technology, different positioning. BEAST MODE for community energy. SENTINEL for enterprise trust.
+      - img "BEAST MODE / SENTINEL Dual-Brand Strategy" [ref=e163]
+    - generic [ref=e165]:
+      - generic [ref=e166]:
+        - heading "Ready to Wake Up to Clean Code?" [level=3] [ref=e167]
+        - paragraph [ref=e168]: Let BEAST MODE handle the maintenance while you focus on building.
+      - link "Start Free Trial" [ref=e170] [cursor=pointer]:
+        - /url: /dashboard
+  - generic [ref=e174]:
+    - generic [ref=e175]:
+      - heading "Day 2 Operations Built In" [level=2] [ref=e176]:
+        - text: Day 2 Operations
+        - text: Built In
+      - paragraph [ref=e177]: While other tools help you generate code, BEAST MODE helps you maintain it. Six powerful systems that work automatically—fixing bugs, enforcing architecture, and keeping your codebase clean while you focus on building.
+    - generic [ref=e178]:
+      - generic [ref=e180] [cursor=pointer]:
+        - img [ref=e182]
+        - heading "Instant Quality Scoring" [level=3] [ref=e184]
+        - paragraph [ref=e185]: Get your code quality score (0-100) in seconds. See issues found, get recommendations, and track improvement over time. Save hours of manual code review.
+      - generic [ref=e187] [cursor=pointer]:
+        - img [ref=e189]
+        - heading "Automated Code Fixes" [level=3] [ref=e191]
+        - paragraph [ref=e192]: One-click fixes for common issues. Automatically applies improvements, removes console.logs, and fixes security vulnerabilities. Fix issues while you sleep.
+      - generic [ref=e194] [cursor=pointer]:
+        - img [ref=e196]
+        - heading "AI-Powered Analysis" [level=3] [ref=e198]
+        - paragraph [ref=e199]: Ask questions about your code. Get context-aware answers, understand issues, and learn best practices—all based on YOUR codebase.
+      - generic [ref=e201] [cursor=pointer]:
+        - img [ref=e203]
+        - heading "Track Progress Over Time" [level=3] [ref=e205]
+        - paragraph [ref=e206]: See your quality score improve. Track issues found and fixed. Monitor your codebase health with historical data and trends.
+      - generic [ref=e208] [cursor=pointer]:
+        - img [ref=e210]
+        - heading "Smart Tool Discovery" [level=3] [ref=e212]
+        - paragraph [ref=e213]: Get personalized plugin recommendations based on your codebase. Find the right tools for your project with one-click installation.
+      - generic [ref=e215] [cursor=pointer]:
+        - img [ref=e217]
+        - heading "Day 2 Operations" [level=3] [ref=e219]
+        - paragraph [ref=e220]: Silent refactoring, architecture enforcement, and invisible CI/CD. Maintain your codebase automatically while you focus on building. 24/7 AI Janitor saves 10+ hours/week.
+    - generic [ref=e222]:
+      - generic [ref=e223]:
+        - heading "Day 2 Operations Platform" [level=3] [ref=e224]
+        - paragraph [ref=e225]: Six powerful systems work together to maintain your codebase automatically. Architecture enforcement, security scanning, and silent refactoring—all while you focus on building. The AI Janitor works overnight.
+      - link "Explore All Features" [ref=e227] [cursor=pointer]:
+        - /url: /dashboard
+  - generic [ref=e231]:
+    - generic [ref=e232]:
+      - heading "Problems We Solve for Development Teams" [level=2] [ref=e233]
+      - paragraph [ref=e234]: Real problems developers face every day—and how BEAST MODE solves them
+    - generic [ref=e235]:
+      - generic [ref=e237]:
+        - generic [ref=e238]: ❓
+        - heading "Don't Know If Code Is Good" [level=3] [ref=e239]
+        - paragraph [ref=e240]: Get instant quality scores (0-100) in seconds. See exactly what's wrong and how to fix it. No more guessing.
+      - generic [ref=e242]:
+        - generic [ref=e243]: 🐛
+        - heading "Bugs Slip Into Production" [level=3] [ref=e244]
+        - paragraph [ref=e245]: Automated fixes run overnight. Security holes closed automatically. Issues fixed before you even see them.
+      - generic [ref=e247]:
+        - generic [ref=e248]: ⏰
+        - heading "Slow Code Reviews" [level=3] [ref=e249]
+        - paragraph [ref=e250]: Plain English diffs make reviews 3x faster. Automated quality checks catch issues before review.
+      - generic [ref=e252]:
+        - generic [ref=e253]: 🏗️
+        - heading "Technical Debt Accumulates" [level=3] [ref=e254]
+        - paragraph [ref=e255]: Silent refactoring runs overnight. Architecture enforced automatically. Code improves while you sleep.
+      - generic [ref=e257]:
+        - generic [ref=e258]: 👥
+        - heading "Hard to Onboard New Devs" [level=3] [ref=e259]
+        - paragraph [ref=e260]: AI answers questions about YOUR codebase 24/7. New devs productive faster with instant context.
+      - generic [ref=e262]:
+        - generic [ref=e263]: 🔧
+        - heading "Too Many Tools to Manage" [level=3] [ref=e264]
+        - paragraph [ref=e265]: All 9 AI systems in one platform. No juggling multiple tools. One dashboard, everything you need.
+    - generic [ref=e266]:
+      - generic [ref=e268]:
+        - heading "For Solo Developers" [level=3] [ref=e269]
+        - list [ref=e270]:
+          - listitem [ref=e271]:
+            - img [ref=e272]
+            - generic [ref=e274]: No one to review your code? Get instant quality feedback
+          - listitem [ref=e275]:
+            - img [ref=e276]
+            - generic [ref=e278]: Don't know if code is good? See your score (0-100) in seconds
+          - listitem [ref=e279]:
+            - img [ref=e280]
+            - generic [ref=e282]: Hard to find the right tools? Get personalized recommendations
+          - listitem [ref=e283]:
+            - img [ref=e284]
+            - generic [ref=e286]: Questions about your code? AI answers 24/7 based on YOUR codebase
+          - listitem [ref=e287]:
+            - img [ref=e288]
+            - generic [ref=e290]: Want to improve? Track your quality score over time
+          - listitem [ref=e291]:
+            - img [ref=e292]
+            - generic [ref=e294]: "Free forever tier: 10K API calls/month, no credit card required"
+      - generic [ref=e296]:
+        - heading "For Teams" [level=3] [ref=e297]
+        - list [ref=e298]:
+          - listitem [ref=e299]:
+            - img [ref=e300]
+            - generic [ref=e302]: Inconsistent code quality? Team metrics show you exactly where
+          - listitem [ref=e303]:
+            - img [ref=e304]
+            - generic [ref=e306]: Slow code reviews? Plain English diffs make reviews 3x faster
+          - listitem [ref=e307]:
+            - img [ref=e308]
+            - generic [ref=e310]: Hard to onboard new devs? AI answers questions about your codebase
+          - listitem [ref=e311]:
+            - img [ref=e312]
+            - generic [ref=e314]: Technical debt piling up? Silent refactoring fixes it overnight
+          - listitem [ref=e315]:
+            - img [ref=e316]
+            - generic [ref=e318]: Bugs in production? Automated fixes catch issues before they ship
+          - listitem [ref=e319]:
+            - img [ref=e320]
+            - generic [ref=e322]: Too many tools? All 9 AI systems in one platform, one dashboard
+  - generic [ref=e326]:
+    - generic [ref=e327]:
+      - heading "Verified Metrics Transparent Pricing" [level=2] [ref=e328]:
+        - text: Verified Metrics
+        - text: Transparent Pricing
+      - paragraph [ref=e329]: Data-backed information about BEAST MODE's infrastructure costs, pricing, and competitive advantages.
+    - generic [ref=e330]:
+      - generic [ref=e331]:
+        - generic [ref=e332]:
+          - generic [ref=e333]: 💰
+          - heading "Infrastructure Cost" [level=3] [ref=e334]
+          - paragraph [ref=e335]: Verified infrastructure cost (from cost analysis)
+        - generic [ref=e336]:
+          - generic [ref=e337]: $0.0007
+          - generic [ref=e338]: per API call
+      - generic [ref=e339]:
+        - generic [ref=e340]:
+          - generic [ref=e341]: 🎁
+          - heading "Free Tier" [level=3] [ref=e342]
+          - paragraph [ref=e343]: Free forever - no credit card required
+        - generic [ref=e344]:
+          - generic [ref=e345]: 10K
+          - generic [ref=e346]: calls/month
+      - generic [ref=e347]:
+        - generic [ref=e348]:
+          - generic [ref=e349]: 🤖
+          - heading "AI Systems" [level=3] [ref=e350]
+          - paragraph [ref=e351]: All AI capabilities in one platform
+        - generic [ref=e352]:
+          - generic [ref=e353]: "9"
+          - generic [ref=e354]: integrated
+      - generic [ref=e355]:
+        - generic [ref=e356]:
+          - generic [ref=e357]: 💎
+          - heading "Entry Price" [level=3] [ref=e358]
+          - paragraph [ref=e359]: Lower than CodeClimate ($99) and many competitors
+        - generic [ref=e360]:
+          - generic [ref=e361]: $79
+          - generic [ref=e362]: /month
+    - generic [ref=e363]:
+      - heading "Competitive Advantages" [level=3] [ref=e364]
+      - generic [ref=e365]:
+        - generic [ref=e366]:
+          - generic [ref=e367]:
+            - heading "Lower Entry Price" [level=3] [ref=e368]
+            - paragraph [ref=e369]: vs CodeClimate ($99)
+          - generic [ref=e371]:
+            - generic [ref=e372]: $79/month
+            - paragraph [ref=e373]: More affordable than CodeClimate, SonarQube Enterprise, and other code quality tools
+        - generic [ref=e374]:
+          - generic [ref=e375]:
+            - heading "More Generous Free Tier" [level=3] [ref=e376]
+            - paragraph [ref=e377]: vs competitors
+          - generic [ref=e379]:
+            - generic [ref=e380]: 10K calls/month
+            - paragraph [ref=e381]: Most competitors offer trials only. We offer a free forever tier with real value.
+        - generic [ref=e382]:
+          - generic [ref=e383]:
+            - heading "All-in-One Platform" [level=3] [ref=e384]
+            - paragraph [ref=e385]: vs single-purpose tools
+          - generic [ref=e387]:
+            - generic [ref=e388]: 9 AI systems
+            - paragraph [ref=e389]: Quality, analysis, recommendations, marketplace, deployment - all in one place
+    - generic [ref=e390]:
+      - generic [ref=e391]:
+        - heading "Transparent Pricing" [level=3] [ref=e392]
+        - paragraph [ref=e393]: Simple, fair pricing based on verified infrastructure costs and competitive analysis.
+      - generic [ref=e395]:
+        - generic [ref=e396]:
+          - heading "What You Get" [level=4] [ref=e397]
+          - list [ref=e398]:
+            - listitem [ref=e399]:
+              - generic [ref=e400]: ✓
+              - generic [ref=e401]: 9 integrated AI systems in one platform
+            - listitem [ref=e402]:
+              - generic [ref=e403]: ✓
+              - generic [ref=e404]: Day 2 Operations (silent refactoring, architecture enforcement)
+            - listitem [ref=e405]:
+              - generic [ref=e406]: ✓
+              - generic [ref=e407]: Instant code quality scores (0-100)
+            - listitem [ref=e408]:
+              - generic [ref=e409]: ✓
+              - generic [ref=e410]: Automated fixes and recommendations
+        - generic [ref=e411]:
+          - heading "Pricing Tiers" [level=4] [ref=e412]
+          - list [ref=e413]:
+            - listitem [ref=e414]:
+              - generic [ref=e415]: →
+              - generic [ref=e416]: "Free: $0 forever (10K calls/month, MIT license)"
+            - listitem [ref=e417]:
+              - generic [ref=e418]: →
+              - generic [ref=e419]: "Developer: $79/month (100K calls)"
+            - listitem [ref=e420]:
+              - generic [ref=e421]: →
+              - generic [ref=e422]: "Team: $299/month (500K calls)"
+            - listitem [ref=e423]:
+              - generic [ref=e424]: →
+              - generic [ref=e425]: "Enterprise: $799/month (unlimited)"
+  - generic [ref=e429]:
+    - generic [ref=e430]:
+      - heading "Join Early Adopters Shape the Future" [level=2] [ref=e431]:
+        - text: Join Early Adopters
+        - text: Shape the Future
+      - paragraph [ref=e432]: BEAST MODE is in active development. Be among the first to use it and help us build the best developer tools.
+    - generic [ref=e434]:
+      - heading "Early Adopter Program" [level=3] [ref=e435]
+      - paragraph [ref=e436]: "We're looking for early users to help shape BEAST MODE. Join us and get:"
+      - generic [ref=e437]:
+        - generic [ref=e438]:
+          - img [ref=e439]
+          - generic [ref=e441]: Lifetime discount on paid tiers
+        - generic [ref=e442]:
+          - img [ref=e443]
+          - generic [ref=e445]: Direct input on feature development
+        - generic [ref=e446]:
+          - img [ref=e447]
+          - generic [ref=e449]: Priority support
+        - generic [ref=e450]:
+          - img [ref=e451]
+          - generic [ref=e453]: Early access to new features
+    - generic [ref=e456]:
+      - heading "Ready to Try BEAST MODE?" [level=3] [ref=e457]
+      - paragraph [ref=e458]: Start free. No credit card required. Get instant code quality feedback.
+      - link "Get Started Free" [ref=e459] [cursor=pointer]:
+        - /url: /dashboard?view=auth&action=signup
+  - generic [ref=e463]:
+    - generic [ref=e464]:
+      - heading "Simple Pricing" [level=2] [ref=e465]
+      - paragraph [ref=e466]: Start free and scale as you grow. BEAST MODE for vibe coders. SENTINEL for enterprise.
+    - generic [ref=e467]:
+      - generic [ref=e468]:
+        - generic [ref=e469]:
+          - heading "Free" [level=3] [ref=e470]
+          - generic [ref=e471]:
+            - generic [ref=e472]: $0
+            - generic [ref=e473]: forever
+          - paragraph [ref=e474]: Perfect for individual developers
+          - generic [ref=e475]: 10K free calls/month
+        - generic [ref=e476]:
+          - list [ref=e477]:
+            - listitem [ref=e478]:
+              - img [ref=e479]
+              - generic [ref=e481]: 10K API calls/month
+            - listitem [ref=e482]:
+              - img [ref=e483]
+              - generic [ref=e485]: All 9 AI systems
+            - listitem [ref=e486]:
+              - img [ref=e487]
+              - generic [ref=e489]: Community support
+            - listitem [ref=e490]:
+              - img [ref=e491]
+              - generic [ref=e493]: MIT License
+            - listitem [ref=e494]:
+              - img [ref=e495]
+              - generic [ref=e497]: Instant quality scores
+          - generic [ref=e498]:
+            - button "Get Started Free" [ref=e499] [cursor=pointer]
+            - paragraph [ref=e500]: No credit card required
+      - generic [ref=e501]:
+        - generic [ref=e503]: POPULAR
+        - generic [ref=e504]:
+          - heading "Developer" [level=3] [ref=e505]
+          - generic [ref=e506]:
+            - generic [ref=e507]: $79
+            - generic [ref=e508]: /month
+          - paragraph [ref=e509]: For professional developers
+          - generic [ref=e510]: Lower than CodeClimate ($99)
+        - generic [ref=e511]:
+          - list [ref=e512]:
+            - listitem [ref=e513]:
+              - img [ref=e514]
+              - generic [ref=e516]: 100K API calls/month
+            - listitem [ref=e517]:
+              - img [ref=e518]
+              - generic [ref=e520]: Priority support
+            - listitem [ref=e521]:
+              - img [ref=e522]
+              - generic [ref=e524]: Advanced analytics
+            - listitem [ref=e525]:
+              - img [ref=e526]
+              - generic [ref=e528]: Day 2 Operations
+            - listitem [ref=e529]:
+              - img [ref=e530]
+              - generic [ref=e532]: Email support
+          - generic [ref=e533]:
+            - button "Start Free Trial" [ref=e534] [cursor=pointer]
+            - paragraph [ref=e535]: 14-day free trial
+      - generic [ref=e536]:
+        - generic [ref=e537]:
+          - heading "Team" [level=3] [ref=e538]
+          - generic [ref=e539]:
+            - generic [ref=e540]: $299
+            - generic [ref=e541]: /month
+          - paragraph [ref=e542]: For growing teams
+          - generic [ref=e543]: All-in-one platform
+        - generic [ref=e544]:
+          - list [ref=e545]:
+            - listitem [ref=e546]:
+              - img [ref=e547]
+              - generic [ref=e549]: 500K API calls/month
+            - listitem [ref=e550]:
+              - img [ref=e551]
+              - generic [ref=e553]: Team collaboration
+            - listitem [ref=e554]:
+              - img [ref=e555]
+              - generic [ref=e557]: Shared dashboards
+            - listitem [ref=e558]:
+              - img [ref=e559]
+              - generic [ref=e561]: Multi-repo support
+            - listitem [ref=e562]:
+              - img [ref=e563]
+              - generic [ref=e565]: Architecture enforcement
+          - generic [ref=e566]:
+            - button "Start Free Trial" [ref=e567] [cursor=pointer]
+            - paragraph [ref=e568]: 14-day free trial
+      - generic [ref=e569]:
+        - generic [ref=e570]:
+          - heading "Enterprise" [level=3] [ref=e571]
+          - generic [ref=e572]:
+            - generic [ref=e573]: $799
+            - generic [ref=e574]: /month
+          - paragraph [ref=e575]: SENTINEL governance layer
+          - generic [ref=e576]: Unlimited + compliance
+        - generic [ref=e577]:
+          - list [ref=e578]:
+            - listitem [ref=e579]:
+              - img [ref=e580]
+              - generic [ref=e582]: Unlimited API calls
+            - listitem [ref=e583]:
+              - img [ref=e584]
+              - generic [ref=e586]: Plain English reviews
+            - listitem [ref=e587]:
+              - img [ref=e588]
+              - generic [ref=e590]: Compliance & audit logs
+            - listitem [ref=e591]:
+              - img [ref=e592]
+              - generic [ref=e594]: White-label & SSO
+            - listitem [ref=e595]:
+              - img [ref=e596]
+              - generic [ref=e598]: 99.9% confidence threshold
+          - generic [ref=e599]:
+            - button "Contact Sales" [ref=e600] [cursor=pointer]
+            - paragraph [ref=e601]: Custom pricing available
+    - generic [ref=e602]:
+      - generic [ref=e603]:
+        - heading "Stay Updated" [level=3] [ref=e604]
+        - paragraph [ref=e605]: Get updates about new features, improvements, and best practices.
+      - generic [ref=e607]:
+        - textbox "Enter your email" [ref=e608]
+        - button "Subscribe" [ref=e609] [cursor=pointer]
+    - generic [ref=e610]:
+      - heading "Stop Guessing If Your Code Is Good" [level=3] [ref=e611]
+      - paragraph [ref=e612]: Get instant quality scores, automated fixes, and Day 2 Operations. All 9 AI systems in one platform.
+      - generic [ref=e613]:
+        - generic [ref=e614]: ✓ 10K free calls/month
+        - generic [ref=e615]: ✓ No credit card required
+        - generic [ref=e616]: ✓ Start in seconds
+      - button "Get Started Free →" [ref=e617] [cursor=pointer]
+      - paragraph [ref=e618]: Join early adopters shaping the future of code quality
+    - generic [ref=e620]:
+      - generic [ref=e621]:
+        - img [ref=e623]
+        - generic [ref=e625]:
+          - text: BEAST MODE
+          - generic [ref=e626]: AI-Powered Code Quality Platform
+      - generic [ref=e627]:
+        - link "Privacy" [ref=e628] [cursor=pointer]:
+          - /url: /privacy
+        - link "Terms" [ref=e629] [cursor=pointer]:
+          - /url: /terms
+        - link "Support" [ref=e630] [cursor=pointer]:
+          - /url: /support
+        - link "Dashboard" [ref=e631] [cursor=pointer]:
+          - /url: /dashboard
+      - generic [ref=e632]:
+        - generic [ref=e633]: © 2025 BEAST MODE
+        - generic [ref=e634]: Open Source (MIT License)
+```

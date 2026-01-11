@@ -57,6 +57,9 @@ program
 const { getCLISessionTracker } = require('../lib/cli/session-tracker');
 const sessionTracker = getCLISessionTracker();
 
+// Brand/Reputation/Secret Interceptor
+const { BrandReputationInterceptor } = require('../lib/janitor/brand-reputation-interceptor');
+
 // Initialize session tracking on CLI startup
 sessionTracker.initialize().catch(() => {
     // Silently fail - don't break CLI if tracking fails
@@ -870,6 +873,134 @@ program
                     console.log(chalk.green(`\n✅ Review ${reviewId} approved`));
                 } catch (error) {
                     console.log(chalk.red(`\n❌ Failed: ${error.message}`));
+                }
+            })
+    );
+
+// Brand/Reputation/Secret Interceptor Commands
+program
+    .command('interceptor')
+    .description('🛡️ Brand/Reputation/Secret Interceptor - Prevents unsafe commits')
+    .addCommand(
+        new Command('install')
+            .description('Install pre-commit hook to intercept unsafe commits')
+            .action(async () => {
+                const spinner = ora('Installing Brand/Reputation/Secret Interceptor hook...').start();
+                try {
+                    const { execSync } = require('child_process');
+                    execSync('node scripts/install-brand-interceptor-hook.js', { 
+                        cwd: process.cwd(),
+                        stdio: 'inherit'
+                    });
+                    spinner.succeed(chalk.green('✅ Interceptor hook installed'));
+                    console.log(chalk.cyan('\n💡 The hook will now automatically intercept unsafe commits'));
+                    console.log(chalk.cyan('   Intercepted data will be stored in Supabase for bot access'));
+                } catch (error) {
+                    spinner.fail(chalk.red('Failed to install hook'));
+                    console.error(chalk.red(error.message));
+                }
+            })
+    )
+    .addCommand(
+        new Command('check')
+            .description('Check staged files for issues (without blocking)')
+            .action(async () => {
+                const spinner = ora('Checking staged files...').start();
+                try {
+                    const interceptor = new BrandReputationInterceptor({
+                        enabled: true,
+                        strictMode: false, // Don't block, just report
+                        storeInSupabase: true
+                    });
+                    await interceptor.initialize();
+                    const result = await interceptor.checkStagedFiles();
+                    spinner.stop();
+                    
+                    if (result.allowed) {
+                        console.log(chalk.green('\n✅ All files are safe to commit'));
+                    } else {
+                        console.log(chalk.red(`\n❌ Found ${result.issues.length} issue(s) in ${result.interceptedFiles.length} file(s)`));
+                        console.log('\n📋 Issues:');
+                        result.issues.forEach(issue => {
+                            const severityColor = issue.severity === 'critical' ? chalk.red : 
+                                                 issue.severity === 'high' ? chalk.yellow : chalk.gray;
+                            console.log(`   ${severityColor(`[${issue.severity.toUpperCase()}]`)} ${issue.message}`);
+                        });
+                        if (result.interceptedFiles.length > 0) {
+                            console.log(chalk.cyan(`\n💾 Intercepted data stored in Supabase`));
+                            console.log(chalk.cyan(`   Access via: GET /api/intercepted-commits`));
+                        }
+                    }
+                } catch (error) {
+                    spinner.fail(chalk.red('Check failed'));
+                    console.error(chalk.red(error.message));
+                }
+            })
+    )
+    .addCommand(
+        new Command('list')
+            .description('List intercepted commits from Supabase')
+            .option('-r, --repo <repo>', 'Filter by repository name')
+            .option('-l, --limit <limit>', 'Number of records to show', '20')
+            .action(async (options) => {
+                const spinner = ora('Fetching intercepted commits...').start();
+                try {
+                    const interceptor = new BrandReputationInterceptor({
+                        enabled: true,
+                        storeInSupabase: true
+                    });
+                    await interceptor.initialize();
+                    const data = await interceptor.getInterceptedData(options.repo, parseInt(options.limit));
+                    spinner.stop();
+                    
+                    if (data.length === 0) {
+                        console.log(chalk.green('\n✅ No intercepted commits found'));
+                        return;
+                    }
+                    
+                    console.log(chalk.cyan(`\n📋 Intercepted Commits (${data.length}):`));
+                    console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+                    data.forEach((item, i) => {
+                        console.log(`\n${i + 1}. ${chalk.cyan(item.file_path)}`);
+                        console.log(`   Repo: ${item.repo_name}`);
+                        console.log(`   Issues: ${item.issues.length}`);
+                        console.log(`   Status: ${item.status}`);
+                        console.log(`   Intercepted: ${new Date(item.intercepted_at).toLocaleString()}`);
+                        if (item.issues.length > 0) {
+                            console.log(`   First issue: ${item.issues[0].message}`);
+                        }
+                    });
+                    console.log(chalk.cyan(`\n💡 Access full data via: GET /api/intercepted-commits?repo_name=${options.repo || ''}`));
+                } catch (error) {
+                    spinner.fail(chalk.red('Failed to fetch intercepted commits'));
+                    console.error(chalk.red(error.message));
+                }
+            })
+    )
+    .addCommand(
+        new Command('status')
+            .description('Show interceptor status and configuration')
+            .action(async () => {
+                const interceptor = new BrandReputationInterceptor();
+                await interceptor.initialize();
+                
+                console.log(chalk.cyan('\n🛡️  Brand/Reputation/Secret Interceptor Status'));
+                console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+                console.log(`Enabled: ${interceptor.options.enabled ? chalk.green('Yes') : chalk.red('No')}`);
+                console.log(`Strict Mode: ${interceptor.options.strictMode ? chalk.green('Yes') : chalk.yellow('No')}`);
+                console.log(`Store in Supabase: ${interceptor.options.storeInSupabase ? chalk.green('Yes') : chalk.red('No')}`);
+                console.log(`Auto-fix: ${interceptor.options.autoFix ? chalk.green('Enabled') : chalk.red('Disabled')}`);
+                console.log(`Supabase Initialized: ${interceptor.supabase ? chalk.green('Yes') : chalk.yellow('No')}`);
+                
+                // Check if hook is installed
+                const fs = require('fs');
+                const path = require('path');
+                const hookPath = path.join(process.cwd(), '.git', 'hooks', 'pre-commit');
+                const hookInstalled = fs.existsSync(hookPath) && 
+                                     fs.readFileSync(hookPath, 'utf8').includes('BrandReputationInterceptor');
+                console.log(`Pre-commit Hook: ${hookInstalled ? chalk.green('Installed') : chalk.yellow('Not installed')}`);
+                if (!hookInstalled) {
+                    console.log(chalk.cyan('\n💡 Run "beast-mode interceptor install" to install the hook'));
                 }
             })
     );

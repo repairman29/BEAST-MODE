@@ -5,14 +5,33 @@
  * Supports OpenAI, Anthropic, and custom models via modelRouter.
  */
 
-const { getModelRouter } = require('./modelRouter');
-const { getKnowledgeRAG } = require('./knowledgeRAG');
+const path = require('path');
+
+// Factory function to create LLMCodeGenerator with proper module resolution
+// This allows us to pass the mlopsPath at runtime instead of relying on relative requires
+function createLLMCodeGenerator(mlopsPath) {
+  const modelRouterPath = path.join(mlopsPath, 'modelRouter.js');
+  const knowledgeRAGPath = path.join(mlopsPath, 'knowledgeRAG.js');
+  
+  const { getModelRouter } = require(modelRouterPath);
+  const { getKnowledgeRAG } = require(knowledgeRAGPath);
+  
+  // Return the class with dependencies injected
+  return { getModelRouter, getKnowledgeRAG };
+}
+
+// Don't load dependencies at module load time - only when factory is called
+// This prevents Next.js from trying to resolve relative requires at build time
+let getModelRouter, getKnowledgeRAG;
 
 class LLMCodeGenerator {
-  constructor() {
+  constructor(options = {}) {
     this.openai = null;
     this.anthropic = null;
     this.modelRouter = null;
+    // Allow injection of dependencies
+    this.getModelRouter = options.getModelRouter;
+    this.getKnowledgeRAG = options.getKnowledgeRAG;
   }
 
   /**
@@ -81,7 +100,11 @@ class LLMCodeGenerator {
     
     if (useKnowledgeRAG) {
       try {
-        const rag = getKnowledgeRAG();
+        // Use injected getKnowledgeRAG
+        if (!this.getKnowledgeRAG) {
+          throw new Error('getKnowledgeRAG not available');
+        }
+        const rag = this.getKnowledgeRAG();
         
         // Get relevant knowledge for the prompt
         const knowledge = await rag.getRelevantKnowledge(prompt, 3);
@@ -292,5 +315,8 @@ class LLMCodeGenerator {
   }
 }
 
-module.exports = new LLMCodeGenerator();
+// Export factory function and class
+module.exports = LLMCodeGenerator;
+module.exports.createLLMCodeGenerator = createLLMCodeGenerator;
+// Don't export default instance - must use loadCodeGenerator() instead
 

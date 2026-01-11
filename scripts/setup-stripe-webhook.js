@@ -1,113 +1,147 @@
 #!/usr/bin/env node
-
 /**
- * Setup Stripe Webhook for BEAST MODE
- * 
- * Creates webhook endpoint and gets the signing secret
+ * Setup Stripe Webhook Endpoint
+ * Creates webhook endpoint in Stripe and outputs the signing secret
  */
 
-const { execSync } = require('child_process');
-const path = require('path');
-require('dotenv').config({ path: path.join(__dirname, '../website/.env.local') });
+require('dotenv').config({ path: require('path').join(__dirname, '../website/.env.local') });
 
-const STRIPE_SECRET_KEY = process.env.STRIPE_SECRET_KEY;
-const WEBHOOK_URL = process.env.NEXT_PUBLIC_APP_URL 
-  ? `${process.env.NEXT_PUBLIC_APP_URL}/api/stripe/webhook`
-  : 'https://beast-mode.dev/api/stripe/webhook';
+const Stripe = require('stripe');
+const readline = require('readline');
 
-if (!STRIPE_SECRET_KEY) {
-  console.error('❌ STRIPE_SECRET_KEY not found in .env.local');
-  process.exit(1);
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
+  apiVersion: '2025-12-15.clover',
+});
+
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout,
+});
+
+function question(query) {
+  return new Promise(resolve => rl.question(query, resolve));
 }
 
-async function setupStripeWebhook() {
-  console.log('\n🔗 Setting Up Stripe Webhook\n');
-  console.log('='.repeat(60));
+async function setupWebhook() {
+  console.log('🔧 Stripe Webhook Setup\n');
+  console.log('======================================================================\n');
+
+  // Determine webhook URL
+  const webhookUrl = process.env.NEXT_PUBLIC_APP_URL 
+    ? `${process.env.NEXT_PUBLIC_APP_URL}/api/stripe/webhook`
+    : 'https://beast-mode.dev/api/stripe/webhook';
+
+  console.log(`📋 Webhook URL: ${webhookUrl}\n`);
+
+  // Check for existing webhooks
+  console.log('🔍 Checking for existing webhooks...\n');
+  const webhooks = await stripe.webhookEndpoints.list({ limit: 100 });
   
-  console.log(`\n📡 Webhook URL: ${WEBHOOK_URL}`);
-  console.log('\n📋 Events to listen for:');
+  const existing = webhooks.data.find(w => w.url === webhookUrl);
+  
+  if (existing) {
+    console.log(`✅ Found existing webhook: ${existing.id}`);
+    console.log(`   URL: ${existing.url}`);
+    console.log(`   Status: ${existing.status}`);
+    console.log(`   Events: ${existing.enabled_events.length} events\n`);
+    
+    const answer = await question('Webhook exists. Do you want to:\n  1. Use existing (get secret)\n  2. Create new\n  3. Update existing\nChoice (1/2/3): ');
+    
+    if (answer === '1') {
+      console.log('\n📋 To get the signing secret:');
+      console.log('   1. Go to: https://dashboard.stripe.com/webhooks');
+      console.log(`   2. Click on webhook: ${existing.id}`);
+      console.log('   3. Click "Reveal" next to "Signing secret"');
+      console.log(`   4. Add to .env.local: STRIPE_WEBHOOK_SECRET=whsec_...\n`);
+      rl.close();
+      return;
+    } else if (answer === '3') {
+      // Update existing
+      await updateWebhook(existing.id, webhookUrl);
+      rl.close();
+      return;
+    }
+    // Otherwise create new
+  }
+
+  // Create new webhook
+  console.log('📝 Creating new webhook endpoint...\n');
+  
   const events = [
     'checkout.session.completed',
+    'customer.subscription.created',
     'customer.subscription.updated',
     'customer.subscription.deleted',
     'invoice.payment_succeeded',
-    'invoice.payment_failed'
+    'invoice.payment_failed',
+    'payment_intent.succeeded',
   ];
-  
-  events.forEach(event => {
-    console.log(`   • ${event}`);
-  });
-  
-  console.log('\n💡 To create webhook via Stripe CLI:');
-  console.log(`\n   stripe webhooks create \\`);
-  console.log(`     --url="${WEBHOOK_URL}" \\`);
-  console.log(`     --enabled-events="${events.join(' ')}" \\`);
-  console.log(`     --api-key=${STRIPE_SECRET_KEY.substring(0, 20)}...`);
-  
-  console.log('\n📋 Or create manually in Stripe Dashboard:');
-  console.log('   1. Go to: https://dashboard.stripe.com/webhooks');
-  console.log(`   2. Add endpoint: ${WEBHOOK_URL}`);
-  console.log('   3. Select events:');
-  events.forEach(event => {
-    console.log(`      - ${event}`);
-  });
-  console.log('   4. Copy webhook signing secret (starts with whsec_)');
-  console.log('   5. Add to .env.local: STRIPE_WEBHOOK_SECRET=whsec_...');
-  console.log('   6. Add to Vercel environment variables\n');
-  
-  // Try to create via CLI
+
+  console.log('📋 Events to subscribe to:');
+  events.forEach(e => console.log(`   • ${e}`));
+  console.log('');
+
   try {
-    console.log('🔄 Attempting to create webhook via CLI...\n');
-    
-    const cmd = `stripe webhooks create --url="${WEBHOOK_URL}" --enabled-events="${events.join(' ')}" --api-key=${STRIPE_SECRET_KEY}`;
-    const output = execSync(cmd, { encoding: 'utf8', stdio: 'pipe' });
-    const webhook = JSON.parse(output);
-    
-    console.log('✅ Webhook created successfully!');
-    console.log(`\n📋 Webhook Details:`);
+    const webhook = await stripe.webhookEndpoints.create({
+      url: webhookUrl,
+      enabled_events: events,
+      description: 'BEAST MODE - Subscription and payment webhooks',
+    });
+
+    console.log('✅ Webhook created successfully!\n');
+    console.log('======================================================================\n');
+    console.log('📋 Webhook Details:');
     console.log(`   ID: ${webhook.id}`);
     console.log(`   URL: ${webhook.url}`);
     console.log(`   Status: ${webhook.status}`);
-    
-    // Get signing secret
-    try {
-      const secretCmd = `stripe webhooks retrieve ${webhook.id} --api-key=${STRIPE_SECRET_KEY}`;
-      const secretOutput = execSync(secretCmd, { encoding: 'utf8', stdio: 'pipe' });
-      const webhookDetails = JSON.parse(secretOutput);
-      
-      // Get signing secret from webhook endpoint secrets
-      console.log('\n🔑 To get signing secret:');
-      console.log(`   stripe webhook_endpoints retrieve ${webhook.id} --api-key=${STRIPE_SECRET_KEY}`);
-      console.log('\n   Or check in Stripe Dashboard → Webhooks → Click webhook → Signing secret');
-      
-    } catch (secretError) {
-      console.log('\n⚠️  Could not retrieve signing secret automatically');
-      console.log('   Get it from Stripe Dashboard → Webhooks → Signing secret');
-    }
-    
-    console.log('\n📝 Add to .env.local:');
-    console.log('   STRIPE_WEBHOOK_SECRET=whsec_...');
-    console.log('\n📝 Add to Vercel environment variables\n');
-    
+    console.log(`   Events: ${webhook.enabled_events.length} events\n`);
+    console.log('🔑 Signing Secret:');
+    console.log(`   ${webhook.secret}\n`);
+    console.log('======================================================================\n');
+    console.log('⚠️  IMPORTANT: Save this secret!\n');
+    console.log('Add to .env.local:');
+    console.log(`STRIPE_WEBHOOK_SECRET=${webhook.secret}\n`);
+    console.log('Add to Vercel:');
+    console.log(`vercel env add STRIPE_WEBHOOK_SECRET production`);
+    console.log(`# Then paste: ${webhook.secret}\n`);
+
   } catch (error) {
+    console.error('❌ Error creating webhook:', error.message);
     if (error.message.includes('already exists')) {
-      console.log('⚠️  Webhook may already exist');
-      console.log('   Check existing webhooks: stripe webhooks list');
-    } else {
-      console.log('⚠️  Could not create webhook via CLI');
-      console.log(`   Error: ${error.message}`);
-      console.log('\n💡 Create manually in Stripe Dashboard (see instructions above)\n');
+      console.log('\n💡 Webhook URL already exists. Use existing webhook or delete it first.');
     }
+  }
+
+  rl.close();
+}
+
+async function updateWebhook(webhookId, webhookUrl) {
+  console.log('📝 Updating webhook endpoint...\n');
+  
+  const events = [
+    'checkout.session.completed',
+    'customer.subscription.created',
+    'customer.subscription.updated',
+    'customer.subscription.deleted',
+    'invoice.payment_succeeded',
+    'invoice.payment_failed',
+    'payment_intent.succeeded',
+  ];
+
+  try {
+    const webhook = await stripe.webhookEndpoints.update(webhookId, {
+      enabled_events: events,
+      description: 'BEAST MODE - Subscription and payment webhooks',
+    });
+
+    console.log('✅ Webhook updated successfully!\n');
+    console.log('📋 To get the signing secret:');
+    console.log('   1. Go to: https://dashboard.stripe.com/webhooks');
+    console.log(`   2. Click on webhook: ${webhookId}`);
+    console.log('   3. Click "Reveal" next to "Signing secret"\n');
+  } catch (error) {
+    console.error('❌ Error updating webhook:', error.message);
   }
 }
 
-if (require.main === module) {
-  setupStripeWebhook()
-    .then(() => process.exit(0))
-    .catch(error => {
-      console.error('\n❌ Setup failed:', error);
-      process.exit(1);
-    });
-}
-
-module.exports = { setupStripeWebhook };
+setupWebhook().catch(console.error);
