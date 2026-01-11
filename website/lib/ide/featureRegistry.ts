@@ -8,11 +8,22 @@
 // Using dynamic import to avoid build issues
 let features: Array<{ id: string; title: string; category: string; file: string }> = [];
 
-try {
-  const featuresModule = require('@/components/ide/features');
-  features = featuresModule.features || [];
-} catch (error) {
-  console.warn('Failed to load features metadata:', error);
+// Load features metadata at runtime
+if (typeof window !== 'undefined') {
+  // Client-side: load dynamically
+  import('@/components/ide/features').then(module => {
+    features = module.features || [];
+  }).catch(() => {
+    // Features will be loaded on demand
+  });
+} else {
+  // Server-side: try to require
+  try {
+    const featuresModule = require('@/components/ide/features');
+    features = featuresModule.features || [];
+  } catch (error) {
+    // Features will be loaded on demand
+  }
 }
 
 export interface Feature {
@@ -53,7 +64,13 @@ export class FeatureRegistry {
 
     try {
       // Dynamically import the component
-      const module = await import(`@/components/ide/features/${featureId.replace(/[^a-zA-Z0-9]/g, '_')}`);
+      // Only import .tsx files, exclude .md, .json, etc.
+      const fileName = featureId.replace(/[^a-zA-Z0-9]/g, '_');
+      if (!fileName.startsWith('US_')) {
+        return null;
+      }
+      
+      const module = await import(`@/components/ide/features/${fileName}`);
       const component = module.default;
       
       if (component) {
@@ -61,7 +78,8 @@ export class FeatureRegistry {
         return component;
       }
     } catch (error) {
-      console.error(`Failed to load feature ${featureId}:`, error);
+      // Silently fail - feature might not exist or be invalid
+      console.debug(`Feature ${featureId} not available:`, error);
     }
 
     return null;
