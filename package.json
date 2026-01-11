@@ -122,7 +122,18 @@
     "review:all-repos:apply": "node scripts/review-and-fix-all-repos.js --fix --apply",
     "apply:fixes": "node scripts/apply-fixes-to-local-repos.js",
     "improve:all": "node scripts/improve-all-repos-to-100.js",
-    "improve:all:apply": "node scripts/improve-all-repos-to-100.js --apply"
+    "improve:all:apply": "node scripts/improve-all-repos-to-100.js --apply",
+    "generate:component": "node scripts/automate/generate-component.js",
+    "generate:api": "node scripts/automate/generate-api.js",
+    "generate:test": "node scripts/automate/generate-test.js",
+    "fix:all": "node scripts/automate/auto-fix-all.js",
+    "fix:lint": "npm run lint -- --fix",
+    "fix:format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\"",
+    "release:notes": "node scripts/automate/generate-release-notes.js",
+    "release:create": "node scripts/automate/create-release.js",
+    "deploy:staging": "node scripts/automate/auto-deploy.js staging",
+    "deploy:prod": "node scripts/automate/auto-deploy.js production",
+    "automate:all": "npm run fix:all && npm run test && npm run deploy:staging"
   },
   "keywords": [
     "ai",

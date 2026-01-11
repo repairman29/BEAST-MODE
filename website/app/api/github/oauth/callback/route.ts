@@ -219,13 +219,32 @@ export async function GET(request: NextRequest) {
       codeLength: code?.length
     });
     
-    if (!clientId || !clientSecret) {
-      logger.error('Missing GitHub OAuth credentials', {
-        clientIdPresent: !!clientId,
-        clientSecretPresent: !!clientSecret
-      });
-      throw new Error('GitHub OAuth credentials not configured');
-    }
+        // Always use the correct credentials based on environment
+        // If we got here, we should have valid credentials from auto-selection
+        if (!clientId || !clientSecret) {
+          logger.error('Missing GitHub OAuth credentials after auto-selection', {
+            isProduction,
+            clientIdPresent: !!clientId,
+            clientSecretPresent: !!clientSecret,
+            expectedProdClientId,
+            expectedDevClientId
+          });
+          // Fallback: use hardcoded credentials as last resort
+          if (isProduction) {
+            clientId = expectedProdClientId;
+            clientSecret = expectedProdClientSecret;
+            logger.warn('Using fallback production credentials');
+          } else {
+            clientId = expectedDevClientId;
+            clientSecret = expectedDevClientSecret;
+            logger.warn('Using fallback development credentials');
+          }
+          
+          // If still no credentials, throw error
+          if (!clientId || !clientSecret) {
+            throw new Error('GitHub OAuth credentials not configured');
+          }
+        }
     
     const tokenRequest = {
       client_id: clientId,
