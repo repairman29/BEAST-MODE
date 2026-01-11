@@ -90,10 +90,8 @@ describe('Architecture Enforcement Layer', () => {
     });
 
     describe('Eval Detection', () => {
-        test('should detect // SECURITY: eval() disabled
-// eval() usage', async () => {
-            const content = `const result = // SECURITY: eval() disabled
-// eval(userInput);`;
+        test('should detect eval() usage', async () => {
+            const content = `const result = eval(userInput);`;
 
             const violations = await enforcer.checkFile('src/utils.js', content);
             

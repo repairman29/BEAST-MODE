@@ -1,0 +1,199 @@
+{
+  "name": "beast-mode-extension",
+  "displayName": "BEAST MODE",
+  "description": "Enterprise Quality Intelligence Platform - Secret Interceptor, Architecture Enforcement, and Self-Healing",
+  "version": "0.1.0",
+  "publisher": "beast-mode",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other",
+    "Linters",
+    "Machine Learning",
+    "Quality"
+  ],
+  "keywords": [
+    "quality",
+    "security",
+    "architecture",
+    "ai",
+    "code-review",
+    "self-healing"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "beast-mode.interceptor.check",
+        "title": "Check for Secrets",
+        "category": "BEAST MODE"
+      },
+      {
+        "command": "beast-mode.interceptor.install",
+        "title": "Install Pre-Commit Hook",
+        "category": "BEAST MODE"
+      },
+      {
+        "command": "beast-mode.interceptor.list",
+        "title": "View Intercepted Commits",
+        "category": "BEAST MODE"
+      },
+      {
+        "command": "beast-mode.architecture.check",
+        "title": "Check Architecture",
+        "category": "BEAST MODE"
+      },
+      {
+        "command": "beast-mode.architecture.fix",
+        "title": "Auto-Fix Architecture Issues",
+        "category": "BEAST MODE"
+      },
+      {
+        "command": "beast-mode.quality.show",
+        "title": "Show Quality Panel",
+        "category": "BEAST MODE"
+      },
+      {
+        "command": "beast-mode.quality.self-heal",
+        "title": "Run Self-Healing",
+        "category": "BEAST MODE"
+      },
+      {
+        "command": "beast-mode.oracle.chat",
+        "title": "Oracle AI Chat",
+        "category": "BEAST MODE"
+      },
+      {
+        "command": "beast-mode.status",
+        "title": "Show BEAST MODE Status",
+        "category": "BEAST MODE"
+      }
+    ],
+    "menus": {
+      "commandPalette": [
+        {
+          "command": "beast-mode.interceptor.check"
+        },
+        {
+          "command": "beast-mode.interceptor.install"
+        },
+        {
+          "command": "beast-mode.interceptor.list"
+        },
+        {
+          "command": "beast-mode.architecture.check"
+        },
+        {
+          "command": "beast-mode.architecture.fix"
+        },
+        {
+          "command": "beast-mode.quality.show"
+        },
+        {
+          "command": "beast-mode.quality.self-heal"
+        },
+        {
+          "command": "beast-mode.oracle.chat"
+        },
+        {
+          "command": "beast-mode.status"
+        }
+      ],
+      "scm/title": [
+        {
+          "command": "beast-mode.interceptor.check",
+          "when": "scmProvider == git",
+          "group": "navigation"
+        }
+      ]
+    },
+    "views": {
+      "explorer": [
+        {
+          "id": "beastModeQuality",
+          "name": "BEAST MODE Quality",
+          "when": "beast-mode.enabled"
+        },
+        {
+          "id": "beastModeInterceptor",
+          "name": "Interceptor",
+          "when": "beast-mode.enabled"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "BEAST MODE",
+      "properties": {
+        "beast-mode.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable BEAST MODE features"
+        },
+        "beast-mode.interceptor.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable Secret Interceptor"
+        },
+        "beast-mode.interceptor.strictMode": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable strict mode (blocks commits with issues)"
+        },
+        "beast-mode.architecture.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable Architecture Enforcement"
+        },
+        "beast-mode.architecture.autoFix": {
+          "type": "boolean",
+          "default": true,
+          "description": "Automatically fix architecture issues"
+        },
+        "beast-mode.quality.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable Quality Tracking"
+        },
+        "beast-mode.quality.targetScore": {
+          "type": "number",
+          "default": 90,
+          "description": "Target quality score (0-100)"
+        },
+        "beast-mode.oracle.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable Oracle AI Integration"
+        },
+        "beast-mode.supabase.url": {
+          "type": "string",
+          "default": "",
+          "description": "Supabase URL (or use NEXT_PUBLIC_SUPABASE_URL env var)"
+        },
+        "beast-mode.supabase.key": {
+          "type": "string",
+          "default": "",
+          "description": "Supabase Service Role Key (or use SUPABASE_SERVICE_ROLE_KEY env var)"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "package": "vsce package",
+    "publish": "vsce publish"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.85.0",
+    "@types/node": "^20.11.0",
+    "typescript": "^5.3.0"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.39.0"
+  }
+}

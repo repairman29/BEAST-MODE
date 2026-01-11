@@ -1,0 +1,25 @@
+{
+  "suites": [
+    {
+      "name": "E2E Test Suite",
+      "passed": false,
+      "exitCode": 1
+    },
+    {
+      "name": "Custom Model Integration Tests",
+      "passed": true,
+      "exitCode": 0
+    },
+    {
+      "name": "Response Time Tests",
+      "passed": true,
+      "exitCode": 0
+    }
+  ],
+  "total": 3,
+  "passed": 2,
+  "failed": 1,
+  "startTime": 1768112237886,
+  "duration": 14590,
+  "timestamp": "2026-01-11T06:17:32.477Z"
+}

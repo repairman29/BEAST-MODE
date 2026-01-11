@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEAST MODE IDE</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            overflow: hidden;
+            background: #1e1e1e;
+            color: #d4d4d4;
+        }
+        
+        #app {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+        
+        /* Status Bar */
+        #statusbar {
+            height: 22px;
+            background: #007acc;
+            color: white;
+            display: flex;
+            align-items: center;
+            padding: 0 10px;
+            font-size: 12px;
+        }
+        
+        #statusbar .status-item {
+            margin-right: 20px;
+        }
+        
+        /* Main Layout */
+        #main-container {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+        }
+        
+        /* Sidebar */
+        #sidebar {
+            width: 250px;
+            background: #252526;
+            border-right: 1px solid #3e3e42;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        #sidebar-header {
+            padding: 10px;
+            background: #2d2d30;
+            border-bottom: 1px solid #3e3e42;
+            font-weight: bold;
+        }
+        
+        #file-explorer {
+            flex: 1;
+            overflow-y: auto;
+            padding: 10px;
+        }
+        
+        /* Editor Area */
+        #editor-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background: #1e1e1e;
+        }
+        
+        #editor-tabs {
+            height: 35px;
+            background: #2d2d30;
+            display: flex;
+            border-bottom: 1px solid #3e3e42;
+        }
+        
+        .editor-tab {
+            padding: 8px 16px;
+            background: #2d2d30;
+            border-right: 1px solid #3e3e42;
+            cursor: pointer;
+            user-select: none;
+        }
+        
+        .editor-tab.active {
+            background: #1e1e1e;
+        }
+        
+        .editor-tab:hover {
+            background: #37373d;
+        }
+        
+        #monaco-editor {
+            flex: 1;
+        }
+        
+        /* Panels */
+        #panels {
+            width: 300px;
+            background: #252526;
+            border-left: 1px solid #3e3e42;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        #panels-header {
+            padding: 10px;
+            background: #2d2d30;
+            border-bottom: 1px solid #3e3e42;
+            display: flex;
+            gap: 10px;
+        }
+        
+        .panel-tab {
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+        
+        .panel-tab.active {
+            background: #007acc;
+        }
+        
+        #panel-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 10px;
+        }
+        
+        /* Terminal */
+        #terminal {
+            height: 200px;
+            background: #1e1e1e;
+            border-top: 1px solid #3e3e42;
+        }
+        
+        #terminal-header {
+            padding: 5px 10px;
+            background: #2d2d30;
+            border-bottom: 1px solid #3e3e42;
+            font-size: 12px;
+        }
+        
+        #terminal-content {
+            height: calc(100% - 30px);
+            padding: 10px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <!-- Status Bar -->
+        <div id="statusbar">
+            <span class="status-item">🛡️ BEAST MODE</span>
+            <span class="status-item">Quality: 95/100</span>
+            <span class="status-item">Interceptor: ✅</span>
+            <span class="status-item">Architecture: ✅</span>
+        </div>
+        
+        <!-- Main Container -->
+        <div id="main-container">
+            <!-- Sidebar -->
+            <div id="sidebar">
+                <div id="sidebar-header">📁 Explorer</div>
+                <div id="file-explorer">
+                    <!-- File tree will be rendered here -->
+                </div>
+            </div>
+            
+            <!-- Editor Area -->
+            <div id="editor-container">
+                <div id="editor-tabs">
+                    <!-- Tabs will be rendered here -->
+                </div>
+                <div id="monaco-editor"></div>
+                <div id="terminal">
+                    <div id="terminal-header">Terminal</div>
+                    <div id="terminal-content"></div>
+                </div>
+            </div>
+            
+            <!-- Panels -->
+            <div id="panels">
+                <div id="panels-header">
+                    <div class="panel-tab active" data-panel="interceptor">🛡️ Interceptor</div>
+                    <div class="panel-tab" data-panel="quality">✨ Quality</div>
+                    <div class="panel-tab" data-panel="oracle">🧠 Oracle</div>
+                </div>
+                <div id="panel-content">
+                    <!-- Panel content will be rendered here -->
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="app.js"></script>
+</body>
+</html>

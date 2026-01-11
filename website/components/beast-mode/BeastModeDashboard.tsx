@@ -1302,8 +1302,9 @@ function QualityView({ data }: unknown): React.JSX.Element {
       }
     } catch (error: unknown) {
       if (typeof window !== 'undefined') {
+        const errorMessage = error instanceof Error ? error.message : 'Unknown error';
         window.dispatchEvent(new CustomEvent('beast-mode-notification', {
-          detail: { type: 'error', message: `❌ Scan failed: ${error.message}` }
+          detail: { type: 'error', message: `❌ Scan failed: ${errorMessage}` }
         }));
       }
     } finally {
@@ -2037,20 +2038,22 @@ function QualityView({ data }: unknown): React.JSX.Element {
               )}
               {latestScan && (
                 <Button
-                  onClick={() = aria-label="Button" aria-label="Button"> exportReport(latestScan)}
+                  onClick={() => exportReport(latestScan)}
                   variant="outline"
                   size="sm"
                   className="border-slate-700 text-slate-400 hover:bg-slate-800 hover:border-slate-600 smooth-transition"
+                  aria-label="Export latest scan report"
                 >
                   📥 Export Latest
                 </Button>
               )}
               {allScans.length > 1 && !showScanHistory && (
                 <Button
-                  onClick={() = aria-label="Button" aria-label="Button"> setComparisonScan(comparisonScan ? null : allScans[1])}
+                  onClick={() => setComparisonScan(comparisonScan ? null : allScans[1])}
                   variant="outline"
                   size="sm"
                   className="border-slate-700 text-slate-400 hover:bg-slate-800 hover:border-slate-600 smooth-transition"
+                  aria-label={comparisonScan ? 'Hide comparison' : 'Compare with previous scan'}
                 >
                   {comparisonScan ? 'Hide Comparison' : 'Compare with Previous'}
                 </Button>

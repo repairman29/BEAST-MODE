@@ -50,12 +50,21 @@ export async function POST(request: NextRequest) {
     const chatModule = await loadCodebaseChat();
     if (!chatModule) {
       return NextResponse.json(
-        { error: 'Codebase chat service unavailable' },
+        { error: 'Codebase chat service unavailable', success: false },
         { status: 503 }
       );
     }
     
-    const body = await request.json();
+    let body;
+    try {
+      body = await request.json();
+    } catch (error) {
+      return NextResponse.json(
+        { error: 'Invalid JSON in request body', success: false },
+        { status: 400 }
+      );
+    }
+    
     const {
       sessionId,
       message,
@@ -68,7 +77,7 @@ export async function POST(request: NextRequest) {
 
     if (!sessionId || !message) {
       return NextResponse.json(
-        { error: 'Session ID and message are required' },
+        { error: 'Session ID and message are required', success: false },
         { status: 400 }
       );
     }
@@ -160,11 +169,9 @@ export async function POST(request: NextRequest) {
           // Custom model not available - fall through to regular processing
           requestedModel = null;
         } else {
-          // Other errors - return error
-          return NextResponse.json(
-            { error: 'Failed to use custom model', details: error.message },
-            { status: 500 }
-          );
+          // Other errors - fall back to regular processing instead of failing
+          console.warn('[Chat API] Custom model error, falling back to regular processing:', error.message);
+          requestedModel = null; // Fall through to regular processing
         }
       }
     }
@@ -221,8 +228,17 @@ export async function POST(request: NextRequest) {
 
   } catch (error: any) {
     console.error('[Chat API] Error:', error);
+    // Return more detailed error for debugging, but still return JSON
+    const errorMessage = error?.message || 'Unknown error';
+    const errorStack = process.env.NODE_ENV === 'development' ? error?.stack : undefined;
+    
     return NextResponse.json(
-      { error: 'Failed to process chat message', details: error.message },
+      { 
+        error: 'Failed to process chat message', 
+        details: errorMessage,
+        success: false,
+        ...(errorStack && { stack: errorStack })
+      },
       { status: 500 }
     );
   }

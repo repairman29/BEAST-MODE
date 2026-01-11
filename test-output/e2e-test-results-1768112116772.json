@@ -1,0 +1,88 @@
+{
+  "total": 19,
+  "passed": 18,
+  "failed": 1,
+  "skipped": 0,
+  "tests": [
+    {
+      "name": "Health Check",
+      "status": "passed"
+    },
+    {
+      "name": "Models List API",
+      "status": "passed"
+    },
+    {
+      "name": "Custom Models Monitoring API",
+      "status": "passed"
+    },
+    {
+      "name": "Quality API",
+      "status": "passed"
+    },
+    {
+      "name": "Codebase Chat API",
+      "status": "failed",
+      "error": "Chat API failed: 500"
+    },
+    {
+      "name": "Feature Generation API",
+      "status": "passed"
+    },
+    {
+      "name": "Analytics API",
+      "status": "passed"
+    },
+    {
+      "name": "Anomaly Detection API",
+      "status": "passed"
+    },
+    {
+      "name": "Predictive Analysis API",
+      "status": "passed"
+    },
+    {
+      "name": "Bug Tracking API",
+      "status": "passed"
+    },
+    {
+      "name": "Productivity API",
+      "status": "passed"
+    },
+    {
+      "name": "Cost Tracking API",
+      "status": "passed"
+    },
+    {
+      "name": "Model Quality API",
+      "status": "passed"
+    },
+    {
+      "name": "Model Tuning API",
+      "status": "passed"
+    },
+    {
+      "name": "Latency Optimization API",
+      "status": "passed"
+    },
+    {
+      "name": "API Response Time < 500ms",
+      "status": "passed"
+    },
+    {
+      "name": "API Success Rate",
+      "status": "passed"
+    },
+    {
+      "name": "Model Router Integration",
+      "status": "passed"
+    },
+    {
+      "name": "Smart Model Selector Integration",
+      "status": "passed"
+    }
+  ],
+  "startTime": 1768112115620,
+  "endTime": 1768112116772,
+  "duration": 1152
+}

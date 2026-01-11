@@ -1,0 +1,60 @@
+{
+  "name": "beast-mode-ide",
+  "version": "0.1.0",
+  "description": "BEAST MODE IDE - Enterprise Quality Intelligence Platform",
+  "main": "main/main.js",
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron . --dev",
+    "build": "electron-builder",
+    "build:mac": "electron-builder --mac",
+    "build:win": "electron-builder --win",
+    "build:linux": "electron-builder --linux"
+  },
+  "keywords": [
+    "ide",
+    "editor",
+    "quality",
+    "security",
+    "ai"
+  ],
+  "author": "BEAST MODE",
+  "license": "PROPRIETARY",
+  "devDependencies": {
+    "electron": "^28.0.0",
+    "electron-builder": "^24.9.1",
+    "typescript": "^5.3.0",
+    "@types/node": "^20.11.0"
+  },
+  "dependencies": {
+    "monaco-editor": "^0.45.0",
+    "xterm": "^5.3.0",
+    "xterm-addon-fit": "^0.8.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "@supabase/supabase-js": "^2.39.0"
+  },
+  "build": {
+    "appId": "com.beastmode.ide",
+    "productName": "BEAST MODE IDE",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "main/**/*",
+      "renderer/**/*",
+      "src/**/*",
+      "package.json"
+    ],
+    "mac": {
+      "category": "public.app-category.developer-tools",
+      "target": "dmg"
+    },
+    "win": {
+      "target": "nsis"
+    },
+    "linux": {
+      "target": "AppImage"
+    }
+  }
+}
