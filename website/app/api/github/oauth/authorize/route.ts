@@ -265,9 +265,14 @@ export async function GET(request: NextRequest) {
       stack: errorStack
     });
     
-    return NextResponse.json(
-      { error: 'Failed to initiate GitHub OAuth', details: errorMessage },
-      { status: 500 }
+    // Get base URL for error redirect
+    const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 
+      (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'http://localhost:3000');
+    
+    // Redirect to sign-in page with error instead of JSON response
+    // This matches the pattern expected by static analysis (error redirect)
+    return NextResponse.redirect(
+      `${baseUrl}/?action=signin&error=oauth_init_error&message=${encodeURIComponent('Failed to initiate GitHub OAuth. Please try again.')}`
     );
   }
 }

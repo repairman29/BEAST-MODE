@@ -31,8 +31,8 @@ export async function POST(request: NextRequest) {
           codePrompt = message.substring('CODE GENERATION TASK: '.length);
         }
         
-        // Enhance prompt with context
-        const enhancedPrompt = `Generate code solution for this bounty:
+        // Get improved prompt based on error analysis
+        let basePrompt = `Generate code solution for this bounty:
 
 ${bounty.title ? `Title: ${bounty.title}` : ''}
 ${bounty.description ? `Description: ${bounty.description}` : ''}
@@ -61,6 +61,22 @@ CRITICAL: Return ONLY valid JSON in this exact format:
 
 Return ONLY the JSON, no markdown, no explanations. The "content" field must contain actual, complete, working code.`;
 
+        // Get improved prompt from error analysis (learns from failures)
+        let enhancedPrompt = basePrompt;
+        try {
+          const { getErrorAnalysis } = require('@/lib/mlops/errorAnalysis');
+          const errorAnalysis = getErrorAnalysis();
+          enhancedPrompt = await errorAnalysis.generateImprovedPrompt(basePrompt, {
+            bounty,
+            repo,
+            dossier
+          });
+        } catch (error) {
+          // Non-critical - use original prompt if error analysis fails
+          console.warn('[BEAST MODE] Error analysis unavailable, using original prompt:', error.message);
+          enhancedPrompt = basePrompt;
+        }
+
         // Call the internal /api/codebase/chat endpoint
         // In Vercel, use the request URL to determine the base URL
         const requestUrl = new URL(request.url);
@@ -81,11 +97,36 @@ Return ONLY the JSON, no markdown, no explanations. The "content" field must con
         });
         
         if (!chatResponse.ok) {
-          throw new Error(`Codebase chat API returned ${chatResponse.status}`);
+          const errorText = await chatResponse.text();
+          throw new Error(`Codebase chat API returned ${chatResponse.status}: ${errorText}`);
         }
         
         const chatData = await chatResponse.json();
         const generatedCode = chatData.response || chatData.content || chatData.message || '';
+        
+        // Log successful generation for learning
+        try {
+          const { getDatabaseWriter } = require('@/lib/mlops/databaseWriter');
+          const dbWriter = getDatabaseWriter();
+          await dbWriter.writePrediction({
+            serviceName: 'beast-mode-code-generation',
+            predictionType: 'code_generation_success',
+            predictedValue: 1, // Success = 1
+            actualValue: 1,
+            confidence: 0.9,
+            context: {
+              messageLength: message.length,
+              hasBounty: !!bounty.title,
+              hasRepo: !!repo.owner,
+              timestamp: new Date().toISOString(),
+            },
+            modelVersion: 'conversation-api-v1',
+            source: 'success_logging'
+          });
+        } catch (dbError) {
+          // Non-critical
+          console.warn('[BEAST MODE] Failed to log success:', dbError.message);
+        }
         
         // Parse the response to extract JSON
         let codeResponse = generatedCode;
@@ -118,6 +159,32 @@ Return ONLY the JSON, no markdown, no explanations. The "content" field must con
       } catch (error: any) {
         console.error('[BEAST MODE] Code generation error:', error);
         console.error('[BEAST MODE] Error stack:', error.stack);
+        
+        // Log error to database for learning
+        try {
+          const { getDatabaseWriter } = require('@/lib/mlops/databaseWriter');
+          const dbWriter = getDatabaseWriter();
+          await dbWriter.writePrediction({
+            serviceName: 'beast-mode-code-generation',
+            predictionType: 'code_generation_error',
+            predictedValue: 0, // Failed = 0
+            actualValue: 0, // Failed = 0
+            confidence: 0,
+            context: {
+              error: error.message,
+              errorStack: error.stack?.substring(0, 1000), // Truncate long stacks
+              requestContext: context,
+              message: message.substring(0, 500), // Truncate long messages
+              timestamp: new Date().toISOString(),
+            },
+            modelVersion: 'conversation-api-v1',
+            source: 'error_logging'
+          });
+        } catch (dbError) {
+          // Non-critical - don't fail if database logging fails
+          console.warn('[BEAST MODE] Failed to log error to database:', dbError.message);
+        }
+        
         // Return error but don't fall through - let caller know code generation failed
         return NextResponse.json({
           response: `Code generation failed: ${error.message}. Falling back to conversation mode.`,
@@ -133,6 +200,7 @@ Return ONLY the JSON, no markdown, no explanations. The "content" field must con
         }, { status: 500 });
       }
     }
+    
 
     // Get recent scan data for context
     let recentScans: any[] = [];

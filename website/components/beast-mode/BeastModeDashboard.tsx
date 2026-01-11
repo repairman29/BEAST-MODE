@@ -347,7 +347,7 @@ function BeastModeDashboardInner({ initialView }: BeastModeDashboardInnerProps) 
   return (
     <div className="relative w-full h-full min-h-screen bg-black overflow-hidden flex" role="application" aria-label="BEAST MODE Dashboard">
         {/* FTUE Onboarding */}
-        {showOnboarding && (
+        {showOnboarding && FTUEOnboarding && (
           <FTUEOnboarding
             onComplete={() => {
               setShowOnboarding(false);
@@ -601,14 +601,14 @@ function BeastModeDashboardInner({ initialView }: BeastModeDashboardInnerProps) 
                     <CardContent className="pt-4">
                       <div className="flex flex-wrap gap-3">
                         <Button
-                          onClick={() = aria-label="Button" aria-label="Button"> setCurrentView('collaboration-workspace')}
+                          onClick={() => setCurrentView('collaboration-workspace')}
                           className="bg-gradient-to-r from-cyan-600 to-cyan-500 hover:from-cyan-700 hover:to-cyan-600 text-white px-6 py-3 font-semibold shadow-lg shadow-cyan-500/20 transition-all duration-200 hover:scale-105"
                         >
                           <span className="mr-2">👥</span>
                           Team Workspace
                         </Button>
                         <Button
-                          onClick={() = aria-label="Button" aria-label="Button"> setCurrentView('collaboration-dashboard')}
+                          onClick={() => setCurrentView('collaboration-dashboard')}
                           className="bg-gradient-to-r from-purple-600 to-purple-500 hover:from-purple-700 hover:to-purple-600 text-white px-6 py-3 font-semibold shadow-lg shadow-purple-500/20 transition-all duration-200 hover:scale-105"
                         >
                           <span className="mr-2">📊</span>
