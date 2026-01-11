@@ -109,8 +109,12 @@ export class InterceptorService {
             throw new Error('API check failed');
         }
 
-        const result = await response.json();
-        if (!result.allowed) {
+        const result = await response.json() as {
+            allowed?: boolean;
+            issues?: any[];
+            interceptedFiles?: any[];
+        };
+        if (result.allowed === false) {
             this.showIssues(result.issues || [], result.interceptedFiles || []);
         } else {
             vscode.window.showInformationMessage('✅ All files are safe to commit');

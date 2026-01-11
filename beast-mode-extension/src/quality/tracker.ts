@@ -52,7 +52,11 @@ export class QualityTracker {
                 throw new Error('Self-healing API failed');
             }
 
-            const result = await response.json();
+            const result = await response.json() as {
+                issues?: any[];
+                qualityScore?: number;
+                recommendations?: Array<{ action: string; priority: string }>;
+            };
             
             if (result.issues && result.issues.length > 0) {
                 this.outputChannel.appendLine(`📊 Found ${result.issues.length} issue(s)`);
@@ -121,7 +125,7 @@ export class QualityTracker {
             });
 
             if (response.ok) {
-                const result = await response.json();
+                const result = await response.json() as { score?: number };
                 return result.score || null;
             }
         } catch (error) {

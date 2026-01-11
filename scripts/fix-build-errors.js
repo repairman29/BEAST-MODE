@@ -1,63 +1,105 @@
 #!/usr/bin/env node
 
 /**
- * Fix Common Build Errors
+ * BEAST MODE - Fix Build Errors
  * 
- * This script identifies and provides fixes for common TypeScript/build errors
- * related to CommonJS module imports in Next.js
+ * Analyzes build errors and automatically fixes syntax issues
  */
 
+const { execSync } = require('child_process');
 const fs = require('fs');
 const path = require('path');
 
-const routesToFix = [
-  {
-    file: 'website/app/api/llm/code-comments/route.ts',
-    issue: 'commentGenerator.generateComments called with wrong signature',
-    fix: 'Use dynamic require and check method signature'
-  },
-  {
-    file: 'website/app/api/llm/api-documentation/route.ts',
-    issue: 'apiDocumentationGenerator.generate should be generateAPIDocumentation',
-    fix: 'Already fixed'
-  },
-  {
-    file: 'website/app/api/llm/cache/route.ts',
-    issue: 'LLMCache not constructable',
-    fix: 'Already fixed'
-  },
-  {
-    file: 'website/app/api/llm/context-aware-selection/route.ts',
-    issue: 'contextAwareModelSelector.selectModel signature mismatch',
-    fix: 'Already fixed'
-  },
-  {
-    file: 'website/app/api/llm/batch-processing/route.ts',
-    issue: 'requestBatcher.batchProcess does not exist',
-    fix: 'Already fixed'
-  }
+const TARGET_FILES = [
+  'website/components/beast-mode/InterceptorDashboard.tsx',
+  'website/components/beast-mode/BeastModeDashboard.tsx'
 ];
 
-console.log('🔧 Build Error Fixes');
-console.log('='.repeat(60));
-console.log('\nThese routes have been fixed to use dynamic requires:');
-routesToFix.forEach(route => {
-  const exists = fs.existsSync(path.join(__dirname, '..', route.file));
-  console.log(`  ${exists ? '✅' : '❌'} ${route.file}`);
-  if (route.issue) {
-    console.log(`     Issue: ${route.issue}`);
+function fixOnClickHandlers(filePath) {
+  const fullPath = path.join(__dirname, '..', filePath);
+  if (!fs.existsSync(fullPath)) {
+    console.log(`   ⚠️  File not found: ${filePath}`);
+    return false;
   }
-  if (route.fix) {
-    console.log(`     Fix: ${route.fix}`);
+
+  let content = fs.readFileSync(fullPath, 'utf8');
+  let fixed = false;
+
+  // Fix malformed onClick handlers
+  const patterns = [
+    [/onClick=\{\(\) = aria-label="Button" aria-label="Button">/g, 'onClick={() =>'],
+    [/onClick=\{\(e\) = aria-label="Button" aria-label="Button">/g, 'onClick={(e) =>'],
+    [/onClick=\{async \(\) = aria-label="Button" aria-label="Button">/g, 'onClick={async () =>'],
+    [/ aria-label="Button" aria-label="Button">/g, ' aria-label="Button">'],
+  ];
+
+  patterns.forEach(([pattern, replacement]) => {
+    if (pattern.test(content)) {
+      content = content.replace(pattern, replacement);
+      fixed = true;
+    }
+  });
+
+  if (fixed) {
+    fs.writeFileSync(fullPath, content, 'utf8');
+    console.log(`   ✅ Fixed onClick handlers in ${filePath}`);
+    return true;
   }
-});
 
-console.log('\n📋 Remaining Issues:');
-console.log('  - Some module resolution warnings (non-blocking)');
-console.log('  - Critical dependency warnings (webpack, non-blocking)');
-console.log('  - These are expected for dynamic requires');
+  return false;
+}
 
-console.log('\n💡 Solution:');
-console.log('  - All critical TypeScript errors should be fixed');
-console.log('  - Warnings are expected and won\'t block deployment');
-console.log('  - Try building again: cd website && npm run build');
+function runBuild() {
+  console.log('\n🔨 Running build to check for errors...\n');
+  try {
+    execSync('cd website && npm run build', { 
+      stdio: 'inherit',
+      cwd: path.join(__dirname, '..')
+    });
+    return true;
+  } catch (error) {
+    return false;
+  }
+}
+
+async function fixBuildErrors() {
+  console.log('\n🦾 BEAST MODE - Fixing Build Errors');
+  console.log('='.repeat(70));
+  console.log(`\n🎯 Target Files: ${TARGET_FILES.length}\n`);
+
+  let filesFixed = 0;
+
+  // Step 1: Fix known issues
+  console.log('📋 Step 1: Fixing known syntax issues...\n');
+  for (const filePath of TARGET_FILES) {
+    if (fixOnClickHandlers(filePath)) {
+      filesFixed++;
+    }
+  }
+
+  // Step 2: Run build
+  console.log('\n📋 Step 2: Running build...\n');
+  const buildSuccess = runBuild();
+
+  if (buildSuccess) {
+    console.log('\n' + '='.repeat(70));
+    console.log('\n✅ BUILD SUCCESSFUL!\n');
+    console.log(`   Fixed ${filesFixed} file(s)`);
+    console.log('\n🚀 Ready to deploy!\n');
+  } else {
+    console.log('\n' + '='.repeat(70));
+    console.log('\n⚠️  Build still has errors\n');
+    console.log('   Please check the build output above for remaining issues.\n');
+  }
+
+  return buildSuccess;
+}
+
+if (require.main === module) {
+  fixBuildErrors()
+    .then(success => process.exit(success ? 0 : 1))
+    .catch(error => {
+      console.error('\n❌ BEAST MODE build fix failed:', error);
+      process.exit(1);
+    });
+}

@@ -4,6 +4,11 @@
   "description": "Enterprise Quality Intelligence Platform - Secret Interceptor, Architecture Enforcement, and Self-Healing",
   "version": "0.1.0",
   "publisher": "beast-mode",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/repairman29/BEAST-MODE.git"
+  },
+  "license": "PROPRIETARY",
   "engines": {
     "vscode": "^1.85.0"
   },

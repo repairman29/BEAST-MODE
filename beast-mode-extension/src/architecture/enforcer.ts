@@ -29,9 +29,9 @@ export class ArchitectureEnforcer {
         context.subscriptions.push(this.diagnosticCollection);
         context.subscriptions.push(this.outputChannel);
 
-        if (ArchitectureEnforcer) {
+        if (ArchitectureEnforcerClass) {
             const config = vscode.workspace.getConfiguration('beast-mode');
-            this.enforcer = new ArchitectureEnforcer({
+            this.enforcer = new ArchitectureEnforcerClass({
                 enabled: config.get('architecture.enabled', true),
                 autoFix: config.get('architecture.autoFix', true),
                 preCommitHook: false // VS Code handles this differently
@@ -130,7 +130,7 @@ export class ArchitectureEnforcer {
 
         try {
             if (this.enforcer) {
-                const fixes = await this.enforcer.autoFix(filePath, content);
+                const fixes = await this.enforcer.autoFix(filePath, content) as any[];
                 
                 if (fixes && fixes.length > 0) {
                     // Apply fixes
@@ -151,8 +151,9 @@ export class ArchitectureEnforcer {
                     vscode.window.showInformationMessage('✅ No architecture issues to fix');
                 }
             }
-        } catch (error: any) {
-            vscode.window.showErrorMessage(`❌ Auto-fix failed: ${error.message}`);
+        } catch (error: unknown) {
+            const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+            vscode.window.showErrorMessage(`❌ Auto-fix failed: ${errorMessage}`);
         }
     }
 }
