@@ -13,11 +13,10 @@ import { NextRequest, NextResponse } from 'next/server';
 async function loadDocumentationGenerator() {
   try {
     const docGenModule = await import('../../../../../lib/mlops/documentationGenerator');
-    const getDocGen = docGenModule.getDocumentationGenerator || docGenModule.default?.getDocumentationGenerator;
-    if (getDocGen) {
-      return getDocGen();
-    } else if (docGenModule.DocumentationGenerator) {
-      return new docGenModule.DocumentationGenerator();
+    // The module exports DocumentationGenerator as default
+    const DocumentationGenerator = docGenModule.default || docGenModule.DocumentationGenerator;
+    if (DocumentationGenerator) {
+      return new DocumentationGenerator();
     }
     return null;
   } catch (error) {
