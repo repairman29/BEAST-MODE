@@ -1,6 +1,6 @@
 {
-  "total": 20,
-  "passed": 20,
+  "total": 50,
+  "passed": 50,
   "failed": 0,
   "features": [
     {
@@ -101,6 +101,156 @@
     {
       "id": "US-0020",
       "title": "Save File (terminal)",
+      "status": "passed"
+    },
+    {
+      "id": "US-0021",
+      "title": "Save File (git)",
+      "status": "passed"
+    },
+    {
+      "id": "US-0022",
+      "title": "Delete File (keyboard)",
+      "status": "passed"
+    },
+    {
+      "id": "US-0023",
+      "title": "Delete File (mouse)",
+      "status": "passed"
+    },
+    {
+      "id": "US-0024",
+      "title": "Delete File (command-palette)",
+      "status": "passed"
+    },
+    {
+      "id": "US-0025",
+      "title": "Delete File (context-menu)",
+      "status": "passed"
+    },
+    {
+      "id": "US-0026",
+      "title": "Delete File (drag-drop)",
+      "status": "passed"
+    },
+    {
+      "id": "US-0027",
+      "title": "Delete File (terminal)",
+      "status": "passed"
+    },
+    {
+      "id": "US-0028",
+      "title": "Delete File (git)",
+      "status": "passed"
+    },
+    {
+      "id": "US-0029",
+      "title": "Rename File (keyboard)",
+      "status": "passed"
+    },
+    {
+      "id": "US-0030",
+      "title": "Rename File (mouse)",
+      "status": "passed"
+    },
+    {
+      "id": "US-0031",
+      "title": "Rename File (command-palette)",
+      "status": "passed"
+    },
+    {
+      "id": "US-0032",
+      "title": "Rename File (context-menu)",
+      "status": "passed"
+    },
+    {
+      "id": "US-0033",
+      "title": "Rename File (drag-drop)",
+      "status": "passed"
+    },
+    {
+      "id": "US-0034",
+      "title": "Rename File (terminal)",
+      "status": "passed"
+    },
+    {
+      "id": "US-0035",
+      "title": "Rename File (git)",
+      "status": "passed"
+    },
+    {
+      "id": "US-0036",
+      "title": "Duplicate File (keyboard)",
+      "status": "passed"
+    },
+    {
+      "id": "US-0037",
+      "title": "Duplicate File (mouse)",
+      "status": "passed"
+    },
+    {
+      "id": "US-0038",
+      "title": "Duplicate File (command-palette)",
+      "status": "passed"
+    },
+    {
+      "id": "US-0039",
+      "title": "Duplicate File (context-menu)",
+      "status": "passed"
+    },
+    {
+      "id": "US-0040",
+      "title": "Duplicate File (drag-drop)",
+      "status": "passed"
+    },
+    {
+      "id": "US-0041",
+      "title": "Duplicate File (terminal)",
+      "status": "passed"
+    },
+    {
+      "id": "US-0042",
+      "title": "Duplicate File (git)",
+      "status": "passed"
+    },
+    {
+      "id": "US-0043",
+      "title": "Move File (keyboard)",
+      "status": "passed"
+    },
+    {
+      "id": "US-0044",
+      "title": "Move File (mouse)",
+      "status": "passed"
+    },
+    {
+      "id": "US-0045",
+      "title": "Move File (command-palette)",
+      "status": "passed"
+    },
+    {
+      "id": "US-0046",
+      "title": "Move File (context-menu)",
+      "status": "passed"
+    },
+    {
+      "id": "US-0047",
+      "title": "Move File (drag-drop)",
+      "status": "passed"
+    },
+    {
+      "id": "US-0048",
+      "title": "Move File (terminal)",
+      "status": "passed"
+    },
+    {
+      "id": "US-0049",
+      "title": "Move File (git)",
+      "status": "passed"
+    },
+    {
+      "id": "US-0050",
+      "title": "Copy File (keyboard)",
       "status": "passed"
     }
   ]
