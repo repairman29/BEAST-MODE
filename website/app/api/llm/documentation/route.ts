@@ -9,19 +9,21 @@ import { NextRequest, NextResponse } from 'next/server';
  * Documentation Generation API
  */
 
-// Use dynamic require to avoid build-time errors
-let documentationGenerator: any = null;
-
-try {
-  const docGenModule = require('../../../../../lib/mlops/documentationGenerator');
-  const getDocGen = docGenModule.getDocumentationGenerator || docGenModule.default?.getDocumentationGenerator;
-  if (getDocGen) {
-    documentationGenerator = getDocGen();
-  } else if (docGenModule.DocumentationGenerator) {
-    documentationGenerator = new docGenModule.DocumentationGenerator();
+// Use dynamic import to avoid build-time errors
+async function loadDocumentationGenerator() {
+  try {
+    const docGenModule = await import('../../../../../lib/mlops/documentationGenerator');
+    const getDocGen = docGenModule.getDocumentationGenerator || docGenModule.default?.getDocumentationGenerator;
+    if (getDocGen) {
+      return getDocGen();
+    } else if (docGenModule.DocumentationGenerator) {
+      return new docGenModule.DocumentationGenerator();
+    }
+    return null;
+  } catch (error) {
+    console.warn('[Documentation API] Module not available:', error);
+    return null;
   }
-} catch (error) {
-  console.warn('[Documentation API] Module not available:', error);
 }
 
 export async function POST(request: NextRequest) {
@@ -36,6 +38,8 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    const documentationGenerator = await loadDocumentationGenerator();
+    
     if (!documentationGenerator) {
       return NextResponse.json(
         { error: 'Documentation generator not available' },
