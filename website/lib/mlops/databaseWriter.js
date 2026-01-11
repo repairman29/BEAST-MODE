@@ -5,14 +5,33 @@
  * Month 4: Database Integration
  */
 
-// Logger - use console if not available
-const createLogger = (name) => ({
-  info: (...args) => console.log(`[${name}]`, ...args),
-  error: (...args) => console.error(`[${name}]`, ...args),
-  warn: (...args) => console.warn(`[${name}]`, ...args),
-  debug: (...args) => console.debug(`[${name}]`, ...args),
-});
-const log = createLogger('DatabaseWriter');
+// Optional logger - handle gracefully if not available
+let log = null;
+try {
+  // Try to require logger, fallback to console if not available
+let createLogger;
+try {
+  const loggerModule = require('../utils/logger');
+  createLogger = loggerModule.createLogger || loggerModule.default?.createLogger || loggerModule;
+} catch (e) {
+  // Fallback logger
+  createLogger = (name) => ({
+    info: (...args) => console.log(`[${name}]`, ...args),
+    warn: (...args) => console.warn(`[${name}]`, ...args),
+    error: (...args) => console.error(`[${name}]`, ...args),
+    debug: (...args) => console.debug(`[${name}]`, ...args),
+  });
+}
+  log = createLogger('DatabaseWriter');
+} catch (error) {
+  // Logger not available - use console as fallback
+  log = {
+    info: (...args) => console.log('[DatabaseWriter]', ...args),
+    error: (...args) => console.error('[DatabaseWriter]', ...args),
+    warn: (...args) => console.warn('[DatabaseWriter]', ...args),
+    debug: (...args) => console.debug('[DatabaseWriter]', ...args)
+  };
+}
 
 class DatabaseWriter {
     constructor() {
@@ -28,10 +47,23 @@ class DatabaseWriter {
      * Initialize database connection
      */
     async initialize() {
-        if (this.initialized) return;
+        if (this.initialized && this.supabase) return;
 
         try {
-            // Try to get Supabase connection - handle missing dependencies gracefully
+            // First, try environment variables directly
+            const supabaseUrl = process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL;
+            const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+
+            if (supabaseUrl && supabaseKey) {
+                const { createClient } = require('@supabase/supabase-js');
+                this.supabase = createClient(supabaseUrl, supabaseKey);
+                this.initialized = true;
+                this.startFlushTimer();
+                log.info('✅ Database writer initialized (via environment variables)');
+                return;
+            }
+
+            // Try to get Supabase connection from data integration
             const path = require('path');
             const possiblePaths = [
                 path.join(__dirname, './dataIntegration'),
@@ -60,31 +92,20 @@ class DatabaseWriter {
                 }
             }
 
-            // Also try from data integration service (optional)
+            // Also try from data integration service
             if (!supabaseConfig) {
                 try {
-                    // Try to require dataIntegration, but handle gracefully if not available
-                    let dataIntegrationModule;
-                    try {
-                        // dataIntegration module not available yet
-                        dataIntegrationModule = null;
-                    } catch (requireError) {
-                        // dataIntegration not available - skip this path
-                        dataIntegrationModule = null;
-                    }
-                    
-                    if (dataIntegrationModule && dataIntegrationModule.getDataIntegrationService) {
-                        const dataIntegration = await dataIntegrationModule.getDataIntegrationService();
-                        if (dataIntegration && dataIntegration.supabase) {
-                            this.supabase = dataIntegration.supabase;
-                            this.initialized = true;
-                            this.startFlushTimer();
-                            log.info('✅ Database writer initialized (via data integration)');
-                            return;
-                        }
+                    const { getDataIntegrationService } = require('./dataIntegration');
+                    const dataIntegration = await getDataIntegrationService();
+                    if (dataIntegration && dataIntegration.supabase) {
+                        this.supabase = dataIntegration.supabase;
+                        this.initialized = true;
+                        this.startFlushTimer();
+                        log.info('✅ Database writer initialized (via data integration)');
+                        return;
                     }
                 } catch (error) {
-                    // Continue - dataIntegration not available
+                    // Data integration not available - continue
                 }
             }
 
@@ -137,7 +158,13 @@ class DatabaseWriter {
             source
         } = predictionData;
 
+        // Generate ID now so we can return it immediately
+        const predictionId = require('crypto').randomUUID();
+        
+        log.info(`[Database Writer] Writing prediction: id=${predictionId.substring(0, 8)}..., service=${serviceName}, type=${predictionType}, value=${predictedValue?.toFixed(3) || 'N/A'}`);
+        
         const prediction = {
+            id: predictionId, // Include ID in prediction data
             service_name: serviceName,
             prediction_type: predictionType,
             predicted_value: predictedValue,
@@ -151,11 +178,27 @@ class DatabaseWriter {
                 : null
         };
 
-        // Add to queue
+        // Add to queue with ID
         this.writeQueue.push({
             table: 'ml_predictions',
-            data: prediction
+            data: prediction,
+            predictionId: predictionId // Store for return
         });
+
+        // Phase 2: Trigger auto-feedback for high-value predictions
+        try {
+            const { getAutoFeedbackTrigger } = require('./autoFeedbackTrigger');
+            const trigger = getAutoFeedbackTrigger();
+            await trigger.triggerFeedback(predictionId, {
+                service_name: serviceName,
+                prediction_type: predictionType,
+                confidence: confidence,
+                context: context
+            });
+        } catch (error) {
+            // Non-critical - don't fail prediction write if trigger fails
+            log.debug('[Database Writer] Auto-feedback trigger failed:', error.message);
+        }
 
         // Also write to service-specific table if applicable
         const serviceTable = this.getServiceTable(serviceName);
@@ -174,7 +217,11 @@ class DatabaseWriter {
             await this.flushQueue();
         }
 
-        return prediction;
+        // Return prediction with ID
+        return {
+            ...prediction,
+            id: predictionId
+        };
     }
 
     /**
@@ -292,6 +339,151 @@ class DatabaseWriter {
             } catch (error) {
                 log.error(`[Database Writer] Error writing to ${table}:`, error.message);
             }
+        }
+    }
+
+    /**
+     * Generic write method for any table
+     */
+    async write({ table, data }) {
+        await this.initialize();
+        
+        if (!this.supabase) {
+            throw new Error('Supabase not initialized');
+        }
+
+        try {
+            const { data: result, error } = await this.supabase
+                .from(table)
+                .insert(data)
+                .select()
+                .single();
+
+            if (error) {
+                throw error;
+            }
+
+            return result;
+        } catch (error) {
+            log.error(`[Database Writer] Error writing to ${table}:`, error.message);
+            throw error;
+        }
+    }
+
+    /**
+     * Generic read method for any table
+     */
+    async read({ table, filters = {}, select = '*', limit = null, orderBy = null }) {
+        await this.initialize();
+        
+        if (!this.supabase) {
+            throw new Error('Supabase not initialized');
+        }
+
+        try {
+            let query = this.supabase
+                .from(table)
+                .select(select);
+
+            // Apply filters
+            for (const [key, value] of Object.entries(filters)) {
+                if (Array.isArray(value)) {
+                    query = query.in(key, value);
+                } else {
+                    query = query.eq(key, value);
+                }
+            }
+
+            // Apply ordering
+            if (orderBy) {
+                const [column, direction] = orderBy.split(':');
+                query = query.order(column, { ascending: direction !== 'desc' });
+            }
+
+            // Apply limit
+            if (limit) {
+                query = query.limit(limit);
+            }
+
+            const { data, error } = await query;
+
+            if (error) {
+                throw error;
+            }
+
+            return data;
+        } catch (error) {
+            log.error(`[Database Writer] Error reading from ${table}:`, error.message);
+            throw error;
+        }
+    }
+
+    /**
+     * Generic update method for any table
+     */
+    async update({ table, filters, data }) {
+        await this.initialize();
+        
+        if (!this.supabase) {
+            throw new Error('Supabase not initialized');
+        }
+
+        try {
+            let query = this.supabase
+                .from(table);
+
+            // Apply filters
+            for (const [key, value] of Object.entries(filters)) {
+                query = query.eq(key, value);
+            }
+
+            const { data: result, error } = await query
+                .update(data)
+                .select()
+                .single();
+
+            if (error) {
+                throw error;
+            }
+
+            return result;
+        } catch (error) {
+            log.error(`[Database Writer] Error updating ${table}:`, error.message);
+            throw error;
+        }
+    }
+
+    /**
+     * Generic delete method for any table
+     */
+    async delete({ table, filters }) {
+        await this.initialize();
+        
+        if (!this.supabase) {
+            throw new Error('Supabase not initialized');
+        }
+
+        try {
+            let query = this.supabase
+                .from(table);
+
+            // Apply filters
+            for (const [key, value] of Object.entries(filters)) {
+                query = query.eq(key, value);
+            }
+
+            const { data: result, error } = await query
+                .delete()
+                .select();
+
+            if (error) {
+                throw error;
+            }
+
+            return result;
+        } catch (error) {
+            log.error(`[Database Writer] Error deleting from ${table}:`, error.message);
+            throw error;
         }
     }
 

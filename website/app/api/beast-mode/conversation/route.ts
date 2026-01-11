@@ -21,10 +21,8 @@ export async function POST(request: NextRequest) {
       try {
         console.log('[BEAST MODE] Code generation request detected');
         // Use BEAST MODE's code generation capabilities
-        const path = require('path');
-        // In Next.js, process.cwd() is the website directory, so go up one level to BEAST-MODE-PRODUCT root
-        const rootPath = path.join(process.cwd(), '..', 'lib', 'mlops', 'llmCodeGenerator.js');
-        const LLMCodeGenerator = require(rootPath);
+        // The lib/mlops folder is copied to website/lib/mlops for Vercel deployment
+        const LLMCodeGenerator = require('../../../../lib/mlops/llmCodeGenerator');
         const generator = new LLMCodeGenerator();
         
         // Build the prompt from context
