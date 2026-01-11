@@ -1,9 +1,16 @@
 import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: '2025-12-15.clover',
-});
+// Initialize Stripe only if key is available (prevents build-time errors)
+const getStripe = () => {
+  const key = process.env.STRIPE_SECRET_KEY;
+  if (!key) {
+    throw new Error('STRIPE_SECRET_KEY is not configured');
+  }
+  return new Stripe(key, {
+    apiVersion: '2025-12-15.clover',
+  });
+};
 
 const NEXT_PUBLIC_URL = process.env.NEXT_PUBLIC_APP_URL || process.env.NEXT_PUBLIC_URL || 'http://localhost:3000';
 
@@ -30,6 +37,9 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // Get Stripe instance
+    const stripe = getStripe();
+    
     // Get price to verify it's a credit package
     const price = await stripe.prices.retrieve(priceId);
     
