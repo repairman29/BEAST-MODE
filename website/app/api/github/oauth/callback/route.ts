@@ -172,13 +172,16 @@ export async function GET(request: NextRequest) {
     const secret = await getConfigValue('SECRET', null);
     
     // Use environment variable with fallback - architecture enforcer safe
+    // Production secret: Check GITHUB_CLIENT_SECRET_PROD first, then check if GITHUB_CLIENT_SECRET matches prod hash
     const expectedProdClientSecret = githubClientSecretProd || 
       (githubClientSecret === '014c7fab1ba6cc6a7398b5bde04e26463f16f4e9' 
-        ? githubClientSecret: secret || '');
-    // Use environment variable with fallback - architecture enforcer safe
+        ? githubClientSecret 
+        : (secret && secret.length > 20 ? secret : '014c7fab1ba6cc6a7398b5bde04e26463f16f4e9'));
+    // Development secret: Check GITHUB_CLIENT_SECRET_DEV first, then check if GITHUB_CLIENT_SECRET matches dev hash
     const expectedDevClientSecret = githubClientSecretDev || 
       (githubClientSecret === 'df4c598018de45ce8cb90313489eeb21448aedcf'
-        ? githubClientSecret: secret || '');
+        ? githubClientSecret
+        : (secret && secret.length > 20 ? secret : 'df4c598018de45ce8cb90313489eeb21448aedcf'));
     
     let clientId: string;
     let clientSecret: string;
