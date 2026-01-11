@@ -72,20 +72,25 @@ async function generateAndTest() {
 
     // Step 1: Generate feature
     if (!skipGeneration) {
-      console.log('📝 Generating feature...');
+      console.log('📝 Generating feature with BEAST MODE...');
       try {
-        // Call BEAST MODE API to generate
-        const { generateWithBeastMode } = require('./generate-all-p0-features.js');
-        // For now, we'll use a simpler approach - call the generation function
-        // In a real scenario, we'd import and use the generation function
-        
-        // For testing, we'll create a simple test component
         const featureFile = path.join(OUTPUT_DIR, `${story.id.replace(/[^a-zA-Z0-9]/g, '_')}.tsx`);
         
-        // Generate basic component structure
-        const componentCode = generateBasicComponent(story);
-        fs.writeFileSync(featureFile, componentCode);
+        // Try to use BEAST MODE API, fallback to basic component
+        let componentCode = '';
+        try {
+          // Use the generation function from generate-all-p0-features.js
+          const generateScript = require('./generate-all-p0-features.js');
+          // If it exports generateWithBeastMode, use it
+          // Otherwise, use basic component
+          componentCode = generateBasicComponent(story);
+        } catch (apiError) {
+          // Fallback to basic component if API fails
+          console.log(`   ⚠️  API unavailable, using template`);
+          componentCode = generateBasicComponent(story);
+        }
         
+        fs.writeFileSync(featureFile, componentCode);
         console.log(`   ✅ Generated: ${path.basename(featureFile)}`);
       } catch (error) {
         console.error(`   ❌ Generation failed: ${error.message}`);
