@@ -218,9 +218,9 @@ class TestExecutor {
         passed: json.numPassedTests || 0,
         failed: json.numFailedTests || 0,
         total: json.numTotalTests || 0,
-        errors: json.testResults?.flatMap((r: any) => r.message || []) || [],
-        tests: json.testResults?.flatMap((r: any) => 
-          r.assertionResults?.map((a: any) => ({
+        errors: json.testResults?.flatMap((r) => r.message || []) || [],
+        tests: json.testResults?.flatMap((r) => 
+          r.assertionResults?.map((a) => ({
             name: a.title,
             status: a.status,
             duration: a.duration,
@@ -297,9 +297,9 @@ class TestExecutor {
         passed: json.numPassedTests || 0,
         failed: json.numFailedTests || 0,
         total: json.numTotalTests || 0,
-        errors: json.testResults?.flatMap((r: any) => r.errors || []) || [],
-        tests: json.testResults?.flatMap((r: any) => 
-          r.tests?.map((t: any) => ({
+        errors: json.testResults?.flatMap((r) => r.errors || []) || [],
+        tests: json.testResults?.flatMap((r) => 
+          r.tests?.map((t) => ({
             name: t.name,
             status: t.status,
             duration: t.duration,
