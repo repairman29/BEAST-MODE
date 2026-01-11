@@ -89,15 +89,17 @@ export async function GET(request: NextRequest) {
       console.error('❌ [GitHub OAuth] State mismatch');
       console.error('   Stored:', storedState);
       console.error('   Received:', state);
+      // Instead of redirecting to dashboard (which requires auth), redirect to home with error
       return NextResponse.redirect(
-        `${baseUrl}/dashboard?github_oauth=error&error=invalid_state`
+        `${baseUrl}/?action=signin&error=oauth_state_mismatch&message=Please try signing in with GitHub again.`
       );
     }
 
     if (!userId) {
       console.error('❌ [GitHub OAuth] No userId in cookie');
+      // Instead of redirecting to dashboard (which requires auth), redirect to home
       return NextResponse.redirect(
-        `${baseUrl}/dashboard?github_oauth=error&error=session_expired`
+        `${baseUrl}/?action=signin&error=oauth_session_expired&message=Your session expired. Please try again.`
       );
     }
 

@@ -29,6 +29,16 @@ export default function AuthSection({ onAuthSuccess }: AuthSectionProps) {
       const message = params.get('message');
       const githubUsername = params.get('github_username');
       const prefillEmail = params.get('email');
+      const error = params.get('error');
+      const errorMessage = params.get('message');
+      
+      // Handle OAuth errors
+      if (error) {
+        if (error === 'oauth_state_mismatch' || error === 'oauth_session_expired') {
+          setError(errorMessage || 'OAuth error occurred. Please try again.');
+          setIsSignIn(true);
+        }
+      }
       
       // Handle ?auth=required (from dashboard redirect)
       if (auth === 'required') {

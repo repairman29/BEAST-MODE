@@ -64,15 +64,16 @@ export async function POST(request: NextRequest) {
           codePrompt = message.substring('CODE GENERATION TASK: '.length);
         }
         
-        // Get user ID from context or use default
-        const userId = context.userId || '';
-        
-        // Generate code using model router
-        const generatedCode = await generator.generateWithModelRouter(codePrompt, {
-          model: 'openai:gpt-4', // Can be customized
-          temperature: 0.7,
-          maxTokens: 8000,
-          systemPrompt: `You are an expert software developer. Generate production-ready code that solves the given problem. Return ONLY valid JSON in this exact format:
+        // Enhance prompt with context
+        const enhancedPrompt = `Generate code solution for this bounty:
+
+${bounty.title ? `Title: ${bounty.title}` : ''}
+${bounty.description ? `Description: ${bounty.description}` : ''}
+${bounty.tech_stack ? `Tech Stack: ${bounty.tech_stack.join(', ')}` : ''}
+
+${codePrompt}
+
+CRITICAL: Return ONLY valid JSON in this exact format:
 {
   "files": [
     {
@@ -91,11 +92,25 @@ export async function POST(request: NextRequest) {
   ]
 }
 
-CRITICAL: Return ONLY the JSON, no markdown, no explanations, no code blocks. The "content" field must contain actual, complete, working code.`,
-          userId,
-          useKnowledgeRAG: true,
-          codebaseContext: dossier.code_analysis ? JSON.stringify(dossier.code_analysis) : '',
-        });
+Return ONLY the JSON, no markdown, no explanations. The "content" field must contain actual, complete, working code.`;
+
+        // Use codebaseChat to generate code
+        const sessionId = `codegen-${Date.now()}`;
+        const chatResponse = await codebaseChat.processMessage(
+          enhancedPrompt,
+          {
+            sessionId,
+            userId: context.userId || '',
+            repo: repo.owner && repo.repo ? `${repo.owner}/${repo.repo}` : null,
+            context: {
+              type: 'code_generation',
+              bounty: bounty,
+              dossier: dossier,
+            },
+          }
+        );
+        
+        const generatedCode = chatResponse.response || chatResponse.content || chatResponse.message || '';
         
         // Parse the response to extract JSON
         let codeResponse = generatedCode;
