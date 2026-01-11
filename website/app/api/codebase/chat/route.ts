@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getDecryptedToken } from '@/lib/github-token';
+import path from 'path';
 
 // Dynamic require for Node.js modules (server-side only)
 // Use dynamic import to prevent webpack from analyzing at build time
@@ -90,14 +91,29 @@ export async function POST(request: NextRequest) {
     
     if (!requestedModel && userId) {
       try {
-        const { getSmartModelSelector } = require('../../../../../lib/mlops/smartModelSelector');
-        const selector = getSmartModelSelector();
-        const selection = await selector.selectModel(userId, requestedModel);
-        requestedModel = selection.modelId;
+        // Try to load smart model selector, but don't fail if it's not available
+        const smartModelSelectorPath = path.join(process.cwd(), 'lib', 'mlops', 'smartModelSelector.js');
+        const smartModelSelectorModule = await import(smartModelSelectorPath).catch(() => {
+          try {
+            return require('../../../../../lib/mlops/smartModelSelector');
+          } catch (e) {
+            return null;
+          }
+        });
         
-        // Log helpful message for user
-        const message = selector.getModelMessage(selection);
-        console.log(`[Codebase Chat] ${message.message} - ${message.submessage}`);
+        if (smartModelSelectorModule) {
+          const { getSmartModelSelector } = smartModelSelectorModule;
+          const selector = getSmartModelSelector();
+          const selection = await selector.selectModel(userId, requestedModel);
+          requestedModel = selection.modelId;
+          
+          // Log helpful message for user
+          const message = selector.getModelMessage(selection);
+          console.log(`[Codebase Chat] ${message.message} - ${message.submessage}`);
+        } else {
+          // Fallback to default if smart selector not available
+          requestedModel = 'openai:gpt-3.5-turbo';
+        }
       } catch (error) {
         // Fallback to default if auto-selection fails (non-critical)
         console.warn('[Codebase Chat] Auto-selection failed, using default:', error.message);
