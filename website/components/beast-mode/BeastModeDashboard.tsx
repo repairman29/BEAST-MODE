@@ -814,7 +814,7 @@ function ChroniclerView({
           placeholder="Enter command..."
             className="flex-1 bg-slate-900 border border-slate-800 px-3 py-2 text-white text-sm focus:outline-none focus:border-cyan-500 transition-colors rounded-lg"
         />
-        <Button type="submit" className="bg-white text-black hover:bg-slate-100" aria-label="Button" aria-label="Button">
+        <Button type="submit" className="bg-white text-black hover:bg-slate-100" aria-label="Button">
           Send
         </Button>
       </form>
@@ -848,13 +848,13 @@ function TacticalView({ gameState }: unknown) {
           Weapons Array
         </div>
         <div className="space-y-2">
-          <Button variant="outline" className="w-full border-slate-800 text-slate-400 hover:bg-slate-900" aria-label="Button" aria-label="Button">
+          <Button variant="outline" className="w-full border-slate-800 text-slate-400 hover:bg-slate-900" aria-label="Button">
             Plasma Cannon [READY]
           </Button>
-          <Button variant="outline" className="w-full border-slate-800 text-slate-400 hover:bg-slate-900" aria-label="Button" aria-label="Button">
+          <Button variant="outline" className="w-full border-slate-800 text-slate-400 hover:bg-slate-900" aria-label="Button">
             Missile Bay [ARMED]
           </Button>
-          <Button variant="outline" className="w-full border-slate-800 text-slate-500" disabled aria-label="Button" aria-label="Button">
+          <Button variant="outline" className="w-full border-slate-800 text-slate-500" disabled aria-label="Button">
             EMP Device [OFFLINE]
           </Button>
         </div>
@@ -896,12 +896,12 @@ function OperationsView({ gameState }: unknown) {
           Operations Console
         </div>
         <div className="grid grid-cols-3 gap-4">
-          <Button className="bg-white text-black hover:bg-slate-100" aria-label="Button" aria-label="Button">Market</Button>
-          <Button className="bg-white text-black hover:bg-slate-100" aria-label="Button" aria-label="Button">Cargo Hold</Button>
-          <Button className="bg-white text-black hover:bg-slate-100" aria-label="Button" aria-label="Button">Missions</Button>
-          <Button variant="outline" className="border-slate-800 text-slate-400 hover:bg-slate-900" aria-label="Button" aria-label="Button">Crew</Button>
-          <Button variant="outline" className="border-slate-800 text-slate-400 hover:bg-slate-900" aria-label="Button" aria-label="Button">Ship Upgrades</Button>
-          <Button variant="outline" className="border-slate-800 text-slate-400 hover:bg-slate-900" aria-label="Button" aria-label="Button">Territory</Button>
+          <Button className="bg-white text-black hover:bg-slate-100" aria-label="Button">Market</Button>
+          <Button className="bg-white text-black hover:bg-slate-100" aria-label="Button">Cargo Hold</Button>
+          <Button className="bg-white text-black hover:bg-slate-100" aria-label="Button">Missions</Button>
+          <Button variant="outline" className="border-slate-800 text-slate-400 hover:bg-slate-900" aria-label="Button">Crew</Button>
+          <Button variant="outline" className="border-slate-800 text-slate-400 hover:bg-slate-900" aria-label="Button">Ship Upgrades</Button>
+          <Button variant="outline" className="border-slate-800 text-slate-400 hover:bg-slate-900" aria-label="Button">Territory</Button>
         </div>
       </Card>
 
@@ -1387,7 +1387,7 @@ function QualityView({ data }: unknown): React.JSX.Element {
                   <span className="text-sm text-slate-300 font-medium">GitHub Connected</span>
                 </div>
                 <Button
-                  onClick={() = aria-label="Button" aria-label="Button"> {
+                  onClick={() => {
                     if (showRepos) {
                       setShowRepos(false);
                     } else {
@@ -1451,7 +1451,7 @@ function QualityView({ data }: unknown): React.JSX.Element {
                               <Button
                                 size="sm"
                                 className="ml-3 bg-cyan-600 hover:bg-cyan-700 text-white opacity-0 group-hover:opacity-100 transition-opacity"
-                                onClick={(e) = aria-label="Button" aria-label="Button"> {
+                                onClick={(e) => {
                                   e.stopPropagation();
                                   handleSelectRepo(repo);
                                 }}
@@ -1490,7 +1490,7 @@ function QualityView({ data }: unknown): React.JSX.Element {
               onClick={handleQuickScan}
               disabled={isScanning}
               className="bg-cyan-600 hover:bg-cyan-700 text-white smooth-transition hover-lift button-press glow-on-hover disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:transform-none disabled:hover:shadow-none px-6"
-             aria-label="Button" aria-label="Button">
+             aria-label="Button">
               {isScanning ? (
                 <>
                   <span className="animate-spin mr-2">⚡</span>
@@ -1507,7 +1507,7 @@ function QualityView({ data }: unknown): React.JSX.Element {
               onClick={handleScanNow}
               variant="outline"
               className="border-slate-700 text-slate-400 hover:bg-slate-800 hover:border-slate-600 smooth-transition px-4"
-             aria-label="Button" aria-label="Button">
+             aria-label="Button">
               {showAdvancedScan ? 'Hide Advanced' : 'Advanced Scan'}
             </Button>
           </div>
@@ -1527,7 +1527,7 @@ function QualityView({ data }: unknown): React.JSX.Element {
                   onClick={handleAdvancedScan}
                   disabled={isScanning || !advancedScanUrl.trim()}
                   className="bg-cyan-600 hover:bg-cyan-700 text-white"
-                 aria-label="Button" aria-label="Button">
+                 aria-label="Button">
                   Scan
                 </Button>
               </div>
@@ -2028,7 +2028,7 @@ function QualityView({ data }: unknown): React.JSX.Element {
             <div className="flex gap-2">
               {allScans.length > 0 && (
                 <Button
-                  onClick={() = aria-label="Button" aria-label="Button"> setShowScanHistory(!showScanHistory)}
+                  onClick={() => setShowScanHistory(!showScanHistory)}
                   variant="outline"
                   size="sm"
                   className="border-slate-700 text-slate-400 hover:bg-slate-800 hover:border-slate-600 smooth-transition"
@@ -2074,7 +2074,7 @@ function QualityView({ data }: unknown): React.JSX.Element {
               <div className="flex items-center gap-3 flex-wrap">
                 <span className="text-sm text-slate-400">Filter by repo:</span>
                 <Button
-                  onClick={() = aria-label="Button" aria-label="Button"> setSelectedRepoFilter(null)}
+                  onClick={() => setSelectedRepoFilter(null)}
                   size="sm"
                   variant={selectedRepoFilter === null ? 'default' : 'outline'}
                   className={selectedRepoFilter === null ? 'bg-cyan-600 text-white' : 'border-slate-700 text-slate-400'}
@@ -2086,7 +2086,7 @@ function QualityView({ data }: unknown): React.JSX.Element {
                   return (
                     <Button
                       key={repo}
-                      onClick={() = aria-label="Button" aria-label="Button"> setSelectedRepoFilter(selectedRepoFilter === repo ? null : repo)}
+                      onClick={() => setSelectedRepoFilter(selectedRepoFilter === repo ? null : repo)}
                       size="sm"
                       variant={selectedRepoFilter === repo ? 'default' : 'outline'}
                       className={selectedRepoFilter === repo ? 'bg-cyan-600 text-white' : 'border-slate-700 text-slate-400'}
@@ -2147,7 +2147,7 @@ function QualityView({ data }: unknown): React.JSX.Element {
                             </div>
                           </div>
                           <Button
-                            onClick={() = aria-label="Button" aria-label="Button"> {
+                            onClick={() => {
                               setSelectedRepoFilter(repo);
                               setShowScanHistory(false);
                               setQuickScanRepo(repo);
@@ -2190,7 +2190,7 @@ function QualityView({ data }: unknown): React.JSX.Element {
                                   {scan.score}/100
                                 </span>
                                 <Button
-                                  onClick={(e) = aria-label="Button" aria-label="Button"> {
+                                  onClick={(e) => {
                                     e.stopPropagation();
                                     exportReport(scan);
                                   }}
@@ -2300,7 +2300,7 @@ function QualityView({ data }: unknown): React.JSX.Element {
                     </div>
                     {latestScan.detectedIssues.length > 3 && (
                       <Button
-                        onClick={() = aria-label="Button" aria-label="Button"> setShowAllIssues(!showAllIssues)}
+                        onClick={() => setShowAllIssues(!showAllIssues)}
                         variant="outline"
                         size="sm"
                         className="border-slate-800 text-slate-400 hover:bg-slate-900"
@@ -2385,7 +2385,7 @@ function QualityView({ data }: unknown): React.JSX.Element {
                   <div className="flex items-center justify-between mb-3">
                     <div className="text-sm text-slate-400">Quality Trends</div>
                     <Button
-                      onClick={() = aria-label="Button" aria-label="Button"> setShowTrends(!showTrends)}
+                      onClick={() => setShowTrends(!showTrends)}
                       variant="outline"
                       size="sm"
                       className="border-slate-800 text-slate-400 hover:bg-slate-900"
@@ -2464,7 +2464,7 @@ function QualityView({ data }: unknown): React.JSX.Element {
               <Button
                 onClick={handleScanNow}
                 className="bg-cyan-600 hover:bg-cyan-700 text-white smooth-transition hover-lift button-press"
-               aria-label="Button" aria-label="Button">
+               aria-label="Button">
                 <span className="mr-2">🔍</span>
                 Scan Repository
               </Button>
@@ -2718,7 +2718,7 @@ function IntelligenceView({ data, messages, onCommand, commandInput, setCommandI
         <CardContent className="pt-6">
           <div className="flex flex-wrap gap-2">
             <Button
-              onClick={() = aria-label="Button" aria-label="Button"> setActiveSection('chat')}
+              onClick={() => setActiveSection('chat')}
               className={activeSection === 'chat' 
                 ? 'bg-cyan-600 hover:bg-cyan-700 text-white' 
                 : 'bg-slate-800 hover:bg-slate-700 text-slate-300'}
@@ -2726,7 +2726,7 @@ function IntelligenceView({ data, messages, onCommand, commandInput, setCommandI
               💬 Chat
             </Button>
             <Button
-              onClick={() = aria-label="Button" aria-label="Button"> setActiveSection('recommendations')}
+              onClick={() => setActiveSection('recommendations')}
               className={activeSection === 'recommendations' 
                 ? 'bg-cyan-600 hover:bg-cyan-700 text-white' 
                 : 'bg-slate-800 hover:bg-slate-700 text-slate-300'}
@@ -2734,7 +2734,7 @@ function IntelligenceView({ data, messages, onCommand, commandInput, setCommandI
               💡 Recommendations
             </Button>
             <Button
-              onClick={() = aria-label="Button" aria-label="Button"> setActiveSection('missions')}
+              onClick={() => setActiveSection('missions')}
               className={activeSection === 'missions' 
                 ? 'bg-cyan-600 hover:bg-cyan-700 text-white' 
                 : 'bg-slate-800 hover:bg-slate-700 text-slate-300'}
@@ -2742,7 +2742,7 @@ function IntelligenceView({ data, messages, onCommand, commandInput, setCommandI
               🎯 Missions
             </Button>
             <Button
-              onClick={() = aria-label="Button" aria-label="Button"> setActiveSection('predictive')}
+              onClick={() => setActiveSection('predictive')}
               className={activeSection === 'predictive' 
                 ? 'bg-cyan-600 hover:bg-cyan-700 text-white' 
                 : 'bg-slate-800 hover:bg-slate-700 text-slate-300'}
@@ -2750,7 +2750,7 @@ function IntelligenceView({ data, messages, onCommand, commandInput, setCommandI
               📈 Predictive Analytics
             </Button>
             <Button
-              onClick={() = aria-label="Button" aria-label="Button"> setActiveSection('code-review')}
+              onClick={() => setActiveSection('code-review')}
               className={activeSection === 'code-review' 
                 ? 'bg-cyan-600 hover:bg-cyan-700 text-white' 
                 : 'bg-slate-800 hover:bg-slate-700 text-slate-300'}
@@ -2811,7 +2811,7 @@ function IntelligenceView({ data, messages, onCommand, commandInput, setCommandI
                 {exampleQueries.map((query, idx) => (
                   <Button
                     key={idx}
-                    onClick={() = aria-label="Button" aria-label="Button"> handleExampleClick(query)}
+                    onClick={() => handleExampleClick(query)}
                     variant="outline"
                     size="sm"
                     className="border-slate-700 text-slate-300 hover:bg-slate-800 hover:border-slate-600 hover:text-white text-xs smooth-transition"
@@ -2861,7 +2861,7 @@ function IntelligenceView({ data, messages, onCommand, commandInput, setCommandI
                         {Array.isArray(msg.actionableItems) ? msg.actionableItems.map((action: string, idx: number) => (
                           <Button
                             key={idx}
-                            onClick={() = aria-label="Button" aria-label="Button"> {
+                            onClick={() => {
                               if (action.includes('Quality')) {
                                 window.location.href = '/dashboard?view=quality';
                               } else if (action.includes('Scan')) {
@@ -2913,7 +2913,7 @@ function IntelligenceView({ data, messages, onCommand, commandInput, setCommandI
               disabled={isProcessing}
             />
             <Button 
-              onClick={() = aria-label="Button" aria-label="Button"> handleSendMessage()} 
+              onClick={() => handleSendMessage()} 
               disabled={!aiInput.trim() || isProcessing}
               className="bg-cyan-600 hover:bg-cyan-700 text-white glow-on-hover smooth-transition disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:shadow-none px-6"
             >
@@ -2945,7 +2945,7 @@ function IntelligenceView({ data, messages, onCommand, commandInput, setCommandI
             <CardHeader>
               <div className="flex items-center justify-between">
                 <CardTitle className="text-white text-lg font-semibold">💡 We'll Tell You Exactly What to Fix</CardTitle>
-                <Button onClick={fetchRecommendations} disabled={isLoadingRecommendations} className="bg-cyan-600 hover:bg-cyan-700 text-white glow-on-hover smooth-transition disabled:opacity-50 disabled:cursor-not-allowed px-4" aria-label="Button" aria-label="Button">
+                <Button onClick={fetchRecommendations} disabled={isLoadingRecommendations} className="bg-cyan-600 hover:bg-cyan-700 text-white glow-on-hover smooth-transition disabled:opacity-50 disabled:cursor-not-allowed px-4" aria-label="Button">
                   {isLoadingRecommendations ? (
                     <>
                       <span className="animate-spin mr-2">🔄</span>
@@ -3027,7 +3027,7 @@ function IntelligenceView({ data, messages, onCommand, commandInput, setCommandI
                 <div className="text-5xl mb-4">🤔</div>
                 <div className="text-lg font-semibold text-slate-300 mb-2">No recommendations yet</div>
                 <div className="text-sm text-slate-400 mb-6">Click "Get Recommendations" to analyze your project and get personalized suggestions</div>
-                <Button onClick={fetchRecommendations} className="bg-cyan-600 hover:bg-cyan-700 text-white glow-on-hover smooth-transition px-4" aria-label="Button" aria-label="Button">
+                <Button onClick={fetchRecommendations} className="bg-cyan-600 hover:bg-cyan-700 text-white glow-on-hover smooth-transition px-4" aria-label="Button">
                   <span className="mr-2">🔍</span>
                   Get Recommendations
                 </Button>
@@ -3077,7 +3077,7 @@ function IntelligenceView({ data, messages, onCommand, commandInput, setCommandI
             <CardHeader>
               <div className="flex items-center justify-between">
                 <CardTitle className="text-white text-lg font-semibold">🎯 Track Your Improvement Goals</CardTitle>
-                <Button onClick={() = aria-label="Button" aria-label="Button"> setShowCreateMission(true)} className="bg-cyan-600 hover:bg-cyan-700 text-white glow-on-hover smooth-transition px-4">
+                <Button onClick={() => setShowCreateMission(true)} className="bg-cyan-600 hover:bg-cyan-700 text-white glow-on-hover smooth-transition px-4">
                   <span className="mr-2">+</span>
                   New Mission
                 </Button>
@@ -3094,7 +3094,7 @@ function IntelligenceView({ data, messages, onCommand, commandInput, setCommandI
                   <div className="text-6xl mb-4 animate-bounce">🎯</div>
                   <div className="text-lg font-semibold text-slate-300 mb-2">No missions yet</div>
                   <div className="text-sm text-slate-400 mb-6">Create a mission to track what you want to improve. We'll help you get there. Every mission completed makes you a better developer! 🚀</div>
-                  <Button onClick={() = aria-label="Button" aria-label="Button"> setShowCreateMission(true)} className="bg-cyan-600 hover:bg-cyan-700 text-white smooth-transition hover-lift button-press">
+                  <Button onClick={() => setShowCreateMission(true)} className="bg-cyan-600 hover:bg-cyan-700 text-white smooth-transition hover-lift button-press">
                     <span className="mr-2">+</span>
                     Create Mission
                   </Button>
@@ -3118,7 +3118,7 @@ function IntelligenceView({ data, messages, onCommand, commandInput, setCommandI
                           <div className="flex gap-2">
                             {mission.status === 'planning' && (
                               <Button
-                                onClick={async () = aria-label="Button" aria-label="Button"> {
+                                onClick={async () => {
                                   try {
                                     const response = await fetch(`/api/beast-mode/missions/${mission.id}/start`, { method: 'POST' });
                                     if (response.ok) await fetchMissions();
@@ -3132,7 +3132,7 @@ function IntelligenceView({ data, messages, onCommand, commandInput, setCommandI
                             )}
                             {mission.status === 'active' && (
                               <Button
-                                onClick={async () = aria-label="Button" aria-label="Button"> {
+                                onClick={async () => {
                                   if (confirm('Mark as completed?')) {
                                     try {
                                       const response = await fetch(`/api/beast-mode/missions/${mission.id}`, {
@@ -3542,7 +3542,7 @@ function MarketplaceView({ data }: unknown) {
                     ? 'bg-gradient-to-r from-cyan-600 to-cyan-500 hover:from-cyan-700 hover:to-cyan-600 text-white shadow-lg shadow-cyan-500/20 scale-105' 
                     : 'bg-slate-800/50 hover:bg-slate-700/50 text-slate-300 hover:text-white border border-slate-700/50'
                 }`}
-                onClick={() = aria-label="Button" aria-label="Button"> setSelectedCategory(cat)}
+                onClick={() => setSelectedCategory(cat)}
               >
                 {cat.charAt(0).toUpperCase() + cat.slice(1)}
               </Button>
@@ -3681,7 +3681,7 @@ function MarketplaceView({ data }: unknown) {
                   </div>
                   <div className="flex gap-2">
                     <Button
-                      onClick={() = aria-label="Button" aria-label="Button"> {
+                      onClick={() => {
                         setSelectedPlugin(item.pluginId);
                         setShowReviews(true);
                       }}
@@ -3692,7 +3692,7 @@ function MarketplaceView({ data }: unknown) {
                       ⭐ Reviews
                     </Button>
                     <Button
-                      onClick={() = aria-label="Button" aria-label="Button"> installPlugin(item.pluginId, true)}
+                      onClick={() => installPlugin(item.pluginId, true)}
                       disabled={installingPlugins.has(item.pluginId) || installedPlugins.has(item.pluginId)}
                       size="sm"
                       className={`font-semibold transition-all duration-200 ${
@@ -3738,7 +3738,7 @@ function MarketplaceView({ data }: unknown) {
                   {filteredPlugins.find(p => p.pluginId === selectedPlugin)?.plugin.name || 'Plugin'} Reviews
                 </CardTitle>
                 <Button
-                  onClick={() = aria-label="Button" aria-label="Button"> {
+                  onClick={() => {
                     setShowReviews(false);
                     setSelectedPlugin(null);
                   }}
@@ -3822,7 +3822,7 @@ function MarketplaceView({ data }: unknown) {
           
           <div className="flex gap-2">
             <Button
-              onClick={() = aria-label="Button" aria-label="Button"> {
+              onClick={() => {
                 const { getDocsUrl } = require('@/lib/docs-url');
                 window.open(getDocsUrl('plugins/development'), '_blank');
               }}
@@ -3831,14 +3831,14 @@ function MarketplaceView({ data }: unknown) {
               📚 View Documentation
             </Button>
             <Button
-              onClick={() = aria-label="Button" aria-label="Button"> window.open('https://github.com/repairman29/BEAST-MODE/tree/main/plugins', '_blank')}
+              onClick={() => window.open('https://github.com/repairman29/BEAST-MODE/tree/main/plugins', '_blank')}
               variant="outline"
               className="border-slate-700 text-slate-300 hover:bg-slate-800"
             >
               💻 Example Plugins
             </Button>
             <Button
-              onClick={() = aria-label="Button" aria-label="Button"> {
+              onClick={() => {
                 // Open plugin submission form
                 alert('Plugin submission form coming soon! For now, submit via GitHub: https://github.com/repairman29/BEAST-MODE/issues/new?template=plugin-submission.md');
               }}
@@ -4274,7 +4274,7 @@ function SettingsView({ data }: unknown) {
           <div className="flex items-center justify-between mb-2">
             <CardTitle className="text-white text-lg font-semibold">Teams</CardTitle>
             <Button
-              onClick={() = aria-label="Button" aria-label="Button"> setShowAddTeam(!showAddTeam)}
+              onClick={() => setShowAddTeam(!showAddTeam)}
               size="sm"
               className="bg-cyan-600 hover:bg-cyan-700 text-white"
             >
@@ -4301,11 +4301,11 @@ function SettingsView({ data }: unknown) {
                   onClick={editingTeam ? handleUpdateTeam : handleAddTeam} 
                   size="sm" 
                   className="bg-green-600 hover:bg-green-700"
-                 aria-label="Button" aria-label="Button">
+                 aria-label="Button">
                   {editingTeam ? 'Update' : 'Create'}
                 </Button>
                 <Button 
-                  onClick={() = aria-label="Button" aria-label="Button"> { 
+                  onClick={() => { 
                     setShowAddTeam(false); 
                     setNewTeamName(''); 
                     setEditingTeam(null);
@@ -4339,7 +4339,7 @@ function SettingsView({ data }: unknown) {
                 </div>
                 <div className="flex gap-2">
                   <Button 
-                    onClick={() = aria-label="Button" aria-label="Button"> handleEditTeam(team)} 
+                    onClick={() => handleEditTeam(team)} 
                     size="sm" 
                     variant="outline" 
                     className="border-slate-700"
@@ -4347,7 +4347,7 @@ function SettingsView({ data }: unknown) {
                     Edit
                   </Button>
                   <Button 
-                    onClick={() = aria-label="Button" aria-label="Button"> handleDeleteTeam(team.id)} 
+                    onClick={() => handleDeleteTeam(team.id)} 
                     size="sm" 
                     variant="outline" 
                     className="border-red-700 text-red-400 hover:bg-red-500/10"
@@ -4368,7 +4368,7 @@ function SettingsView({ data }: unknown) {
           <div className="flex items-center justify-between mb-2">
             <CardTitle className="text-white text-lg font-semibold">Users</CardTitle>
             <Button
-              onClick={() = aria-label="Button" aria-label="Button"> setShowAddUser(!showAddUser)}
+              onClick={() => setShowAddUser(!showAddUser)}
               size="sm"
               className="bg-cyan-600 hover:bg-cyan-700 text-white"
             >
@@ -4420,11 +4420,11 @@ function SettingsView({ data }: unknown) {
                   onClick={editingUser ? handleUpdateUser : handleAddUser} 
                   size="sm" 
                   className="bg-green-600 hover:bg-green-700"
-                 aria-label="Button" aria-label="Button">
+                 aria-label="Button">
                   {editingUser ? 'Update' : 'Invite'}
                 </Button>
                 <Button 
-                  onClick={() = aria-label="Button" aria-label="Button"> { 
+                  onClick={() => { 
                     setShowAddUser(false); 
                     setNewUserEmail(''); 
                     setNewUserName('');
@@ -4461,7 +4461,7 @@ function SettingsView({ data }: unknown) {
                 </div>
                 <div className="flex gap-2">
                   <Button 
-                    onClick={() = aria-label="Button" aria-label="Button"> handleEditUser(user)} 
+                    onClick={() => handleEditUser(user)} 
                     size="sm" 
                     variant="outline" 
                     className="border-slate-700"
@@ -4469,7 +4469,7 @@ function SettingsView({ data }: unknown) {
                     Edit
                   </Button>
                   <Button 
-                    onClick={() = aria-label="Button" aria-label="Button"> handleDeleteUser(user.id)} 
+                    onClick={() => handleDeleteUser(user.id)} 
                     size="sm" 
                     variant="outline" 
                     className="border-red-700 text-red-400 hover:bg-red-500/10"
@@ -4490,7 +4490,7 @@ function SettingsView({ data }: unknown) {
           <div className="flex items-center justify-between mb-2">
             <CardTitle className="text-white text-lg font-semibold">Repositories</CardTitle>
             <Button
-              onClick={() = aria-label="Button" aria-label="Button"> setShowAddRepo(!showAddRepo)}
+              onClick={() => setShowAddRepo(!showAddRepo)}
               size="sm"
               className="bg-cyan-600 hover:bg-cyan-700 text-white"
             >
@@ -4527,11 +4527,11 @@ function SettingsView({ data }: unknown) {
                   onClick={editingRepo ? handleUpdateRepo : handleAddRepo} 
                   size="sm" 
                   className="bg-green-600 hover:bg-green-700"
-                 aria-label="Button" aria-label="Button">
+                 aria-label="Button">
                   {editingRepo ? 'Update' : 'Add'}
                 </Button>
                 <Button 
-                  onClick={() = aria-label="Button" aria-label="Button"> { 
+                  onClick={() => { 
                     setShowAddRepo(false); 
                     setNewRepoUrl(''); 
                     setNewRepoTeam('');
@@ -4566,7 +4566,7 @@ function SettingsView({ data }: unknown) {
                 </div>
                 <div className="flex gap-2">
                   <Button 
-                    onClick={() = aria-label="Button" aria-label="Button"> handleScanRepo(repo)} 
+                    onClick={() => handleScanRepo(repo)} 
                     size="sm" 
                     variant="outline" 
                     className="border-slate-700"
@@ -4574,7 +4574,7 @@ function SettingsView({ data }: unknown) {
                     Scan Now
                   </Button>
                   <Button 
-                    onClick={() = aria-label="Button" aria-label="Button"> handleEditRepo(repo)} 
+                    onClick={() => handleEditRepo(repo)} 
                     size="sm" 
                     variant="outline" 
                     className="border-slate-700"
@@ -4582,7 +4582,7 @@ function SettingsView({ data }: unknown) {
                     Edit
                   </Button>
                   <Button 
-                    onClick={() = aria-label="Button" aria-label="Button"> handleDeleteRepo(repo.id)} 
+                    onClick={() => handleDeleteRepo(repo.id)} 
                     size="sm" 
                     variant="outline" 
                     className="border-red-700 text-red-400 hover:bg-red-500/10"

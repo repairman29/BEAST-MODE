@@ -1,0 +1,709 @@
+{
+  "endpoint": "/api/health",
+  "duration": 10,
+  "summary": {
+    "totalRequests": 86,
+    "successful": 86,
+    "failed": 0,
+    "successRate": 100,
+    "requestsPerSecond": 8.6
+  },
+  "latency": {
+    "average": 15.511627906976743,
+    "p50": 14,
+    "p95": 22,
+    "p99": 54,
+    "min": 10,
+    "max": 54
+  },
+  "results": [
+    {
+      "success": true,
+      "status": 200,
+      "latency": 44,
+      "hrtimeLatency": 44.363667,
+      "dataSize": 104,
+      "timestamp": "2026-01-11T06:18:01.746Z"
+    },
+    {
+      "success": true,
+      "status": 200,
+      "latency": 15,
+      "hrtimeLatency": 14.92075,
+      "dataSize": 104,
+      "timestamp": "2026-01-11T06:18:01.864Z"
+    },
+    {
+      "success": true,
+      "status": 200,
+      "latency": 22,
+      "hrtimeLatency": 22.484417,
+      "dataSize": 104,
+      "timestamp": "2026-01-11T06:18:01.988Z"
+    },
+    {
+      "success": true,
+      "status": 200,
+      "latency": 16,
+      "hrtimeLatency": 15.951834,
+      "dataSize": 104,
+      "timestamp": "2026-01-11T06:18:02.105Z"
+    },
+    {
+      "success": true,
+      "status": 200,
+      "latency": 16,
+      "hrtimeLatency": 16.294083,
+      "dataSize": 104,
+      "timestamp": "2026-01-11T06:18:02.222Z"
+    },
+    {
+      "success": true,
+      "status": 200,
+      "latency": 15,
+      "hrtimeLatency": 14.596375,
+      "dataSize": 104,
+      "timestamp": "2026-01-11T06:18:02.338Z"
+    },
+    {
+      "success": true,
+      "status": 200,
+      "latency": 13,
+      "hrtimeLatency": 13.204875,
+      "dataSize": 104,
+      "timestamp": "2026-01-11T06:18:02.452Z"
+    },
+    {
+      "success": true,
+      "status": 200,
+      "latency": 17,
+      "hrtimeLatency": 16.387166,
+      "dataSize": 104,
+      "timestamp": "2026-01-11T06:18:02.570Z"
+    },
+    {
+      "success": true,
+      "status": 200,
+      "latency": 16,
+      "hrtimeLatency": 15.890417,
+      "dataSize": 104,
+      "timestamp": "2026-01-11T06:18:02.687Z"
+    },
+    {
+      "success": true,
+      "status": 200,
+      "latency": 16,
+      "hrtimeLatency": 16.1295,
+      "dataSize": 104,
+      "timestamp": "2026-01-11T06:18:02.805Z"
+    },
+    {
+      "success": true,
+      "status": 200,
+      "latency": 14,
+      "hrtimeLatency": 13.882959,
+      "dataSize": 104,
+      "timestamp": "2026-01-11T06:18:02.920Z"
+    },
+    {
+      "success": true,
+      "status": 200,
+      "latency": 15,
+      "hrtimeLatency": 15.794583,
+      "dataSize": 104,
+      "timestamp": "2026-01-11T06:18:03.037Z"
+    },
+    {
+      "success": true,
+      "status": 200,
+      "latency": 16,
+      "hrtimeLatency": 15.299917,
+      "dataSize": 104,
+      "timestamp": "2026-01-11T06:18:03.153Z"
+    },
+    {
+      "success": true,
+      "status": 200,
+      "latency": 13,
+      "hrtimeLatency": 12.864042,
+      "dataSize": 104,
+      "timestamp": "2026-01-11T06:18:03.267Z"
+    },
+    {
+      "success": true,
+      "status": 200,
+      "latency": 14,
+      "hrtimeLatency": 14.061875,
+      "dataSize": 104,
+      "timestamp": "2026-01-11T06:18:03.382Z"
+    },
+    {
+      "success": true,
+      "status": 200,
+      "latency": 17,
+      "hrtimeLatency": 16.83525,
+      "dataSize": 104,
+      "timestamp": "2026-01-11T06:18:03.500Z"
+    },
+    {
+      "success": true,
+      "status": 200,
+      "latency": 16,
+      "hrtimeLatency": 15.879791,
+      "dataSize": 104,
+      "timestamp": "2026-01-11T06:18:03.617Z"
+    },
+    {
+      "success": true,
+      "status": 200,
+      "latency": 14,
+      "hrtimeLatency": 13.532875,
+      "dataSize": 104,
+      "timestamp": "2026-01-11T06:18:03.732Z"
+    },
+    {
+      "success": true,
+      "status": 200,
+      "latency": 16,
+      "hrtimeLatency": 15.866541,
+      "dataSize": 104,
+      "timestamp": "2026-01-11T06:18:03.849Z"
+    },
+    {
+      "success": true,
+      "status": 200,
+      "latency": 16,
+      "hrtimeLatency": 15.814125,
+      "dataSize": 104,
+      "timestamp": "2026-01-11T06:18:03.966Z"
+    },
+    {
+      "success": true,
+      "status": 200,
+      "latency": 16,
+      "hrtimeLatency": 15.422292,
+      "dataSize": 104,
+      "timestamp": "2026-01-11T06:18:04.083Z"
+    },
+    {
+      "success": true,
+      "status": 200,
+      "latency": 14,
+      "hrtimeLatency": 13.200875,
+      "dataSize": 104,
+      "timestamp": "2026-01-11T06:18:04.197Z"
+    },
+    {
+      "success": true,
+      "status": 200,
+      "latency": 14,
+      "hrtimeLatency": 14.95725,
+      "dataSize": 104,
+      "timestamp": "2026-01-11T06:18:04.313Z"
+    },
+    {
+      "success": true,
+      "status": 200,
+      "latency": 15,
+      "hrtimeLatency": 15.417959,
+      "dataSize": 104,
+      "timestamp": "2026-01-11T06:18:04.429Z"
+    },
+    {
+      "success": true,
+      "status": 200,
+      "latency": 14,
+      "hrtimeLatency": 14.802541,
+      "dataSize": 104,
+      "timestamp": "2026-01-11T06:18:04.546Z"
+    },
+    {
+      "success": true,
+      "status": 200,
+      "latency": 15,
+      "hrtimeLatency": 14.75175,
+      "dataSize": 104,
+      "timestamp": "2026-01-11T06:18:04.662Z"
+    },
+    {
+      "success": true,
+      "status": 200,
+      "latency": 15,
+      "hrtimeLatency": 15.053792,
+      "dataSize": 104,
+      "timestamp": "2026-01-11T06:18:04.778Z"
+    },
+    {
+      "success": true,
+      "status": 200,
+      "latency": 14,
+      "hrtimeLatency": 13.777625,
+      "dataSize": 104,
+      "timestamp": "2026-01-11T06:18:04.893Z"
+    },
+    {
+      "success": true,
+      "status": 200,
+      "latency": 14,
+      "hrtimeLatency": 13.844166,
+      "dataSize": 104,
+      "timestamp": "2026-01-11T06:18:05.008Z"
+    },
+    {
+      "success": true,
+      "status": 200,
+      "latency": 18,
+      "hrtimeLatency": 17.613791,
+      "dataSize": 104,
+      "timestamp": "2026-01-11T06:18:05.127Z"
+    },
+    {
+      "success": true,
+      "status": 200,
+      "latency": 22,
+      "hrtimeLatency": 21.91875,
+      "dataSize": 104,
+      "timestamp": "2026-01-11T06:18:05.257Z"
+    },
+    {
+      "success": true,
+      "status": 200,
+      "latency": 15,
+      "hrtimeLatency": 14.386875,
+      "dataSize": 104,
+      "timestamp": "2026-01-11T06:18:05.372Z"
+    },
+    {
+      "success": true,
+      "status": 200,
+      "latency": 14,
+      "hrtimeLatency": 13.58275,
+      "dataSize": 104,
+      "timestamp": "2026-01-11T06:18:05.487Z"
+    },
+    {
+      "success": true,
+      "status": 200,
+      "latency": 13,
+      "hrtimeLatency": 13.330042,
+      "dataSize": 104,
+      "timestamp": "2026-01-11T06:18:05.602Z"
+    },
+    {
+      "success": true,
+      "status": 200,
+      "latency": 12,
+      "hrtimeLatency": 12.536833,
+      "dataSize": 104,
+      "timestamp": "2026-01-11T06:18:05.715Z"
+    },
+    {
+      "success": true,
+      "status": 200,
+      "latency": 13,
+      "hrtimeLatency": 13.052625,
+      "dataSize": 104,
+      "timestamp": "2026-01-11T06:18:05.830Z"
+    },
+    {
+      "success": true,
+      "status": 200,
+      "latency": 16,
+      "hrtimeLatency": 15.493541,
+      "dataSize": 104,
+      "timestamp": "2026-01-11T06:18:05.947Z"
+    },
+    {
+      "success": true,
+      "status": 200,
+      "latency": 14,
+      "hrtimeLatency": 13.880292,
+      "dataSize": 104,
+      "timestamp": "2026-01-11T06:18:06.062Z"
+    },
+    {
+      "success": true,
+      "status": 200,
+      "latency": 13,
+      "hrtimeLatency": 13.171833,
+      "dataSize": 104,
+      "timestamp": "2026-01-11T06:18:06.176Z"
+    },
+    {
+      "success": true,
+      "status": 200,
+      "latency": 12,
+      "hrtimeLatency": 12.10375,
+      "dataSize": 104,
+      "timestamp": "2026-01-11T06:18:06.290Z"
+    },
+    {
+      "success": true,
+      "status": 200,
+      "latency": 14,
+      "hrtimeLatency": 14.180042,
+      "dataSize": 104,
+      "timestamp": "2026-01-11T06:18:06.405Z"
+    },
+    {
+      "success": true,
+      "status": 200,
+      "latency": 14,
+      "hrtimeLatency": 13.252167,
+      "dataSize": 104,
+      "timestamp": "2026-01-11T06:18:06.519Z"
+    },
+    {
+      "success": true,
+      "status": 200,
+      "latency": 13,
+      "hrtimeLatency": 13.214417,
+      "dataSize": 104,
+      "timestamp": "2026-01-11T06:18:06.633Z"
+    },
+    {
+      "success": true,
+      "status": 200,
+      "latency": 14,
+      "hrtimeLatency": 14.699583,
+      "dataSize": 104,
+      "timestamp": "2026-01-11T06:18:06.749Z"
+    },
+    {
+      "success": true,
+      "status": 200,
+      "latency": 14,
+      "hrtimeLatency": 13.952042,
+      "dataSize": 104,
+      "timestamp": "2026-01-11T06:18:06.864Z"
+    },
+    {
+      "success": true,
+      "status": 200,
+      "latency": 14,
+      "hrtimeLatency": 13.558084,
+      "dataSize": 104,
+      "timestamp": "2026-01-11T06:18:06.978Z"
+    },
+    {
+      "success": true,
+      "status": 200,
+      "latency": 13,
+      "hrtimeLatency": 12.476209,
+      "dataSize": 104,
+      "timestamp": "2026-01-11T06:18:07.092Z"
+    },
+    {
+      "success": true,
+      "status": 200,
+      "latency": 13,
+      "hrtimeLatency": 12.91975,
+      "dataSize": 104,
+      "timestamp": "2026-01-11T06:18:07.206Z"
+    },
+    {
+      "success": true,
+      "status": 200,
+      "latency": 22,
+      "hrtimeLatency": 22.18875,
+      "dataSize": 104,
+      "timestamp": "2026-01-11T06:18:07.330Z"
+    },
+    {
+      "success": true,
+      "status": 200,
+      "latency": 13,
+      "hrtimeLatency": 13.218875,
+      "dataSize": 104,
+      "timestamp": "2026-01-11T06:18:07.444Z"
+    },
+    {
+      "success": true,
+      "status": 200,
+      "latency": 12,
+      "hrtimeLatency": 11.998916,
+      "dataSize": 104,
+      "timestamp": "2026-01-11T06:18:07.557Z"
+    },
+    {
+      "success": true,
+      "status": 200,
+      "latency": 15,
+      "hrtimeLatency": 14.535042,
+      "dataSize": 104,
+      "timestamp": "2026-01-11T06:18:07.673Z"
+    },
+    {
+      "success": true,
+      "status": 200,
+      "latency": 13,
+      "hrtimeLatency": 13.310084,
+      "dataSize": 104,
+      "timestamp": "2026-01-11T06:18:07.787Z"
+    },
+    {
+      "success": true,
+      "status": 200,
+      "latency": 13,
+      "hrtimeLatency": 12.626958,
+      "dataSize": 104,
+      "timestamp": "2026-01-11T06:18:07.901Z"
+    },
+    {
+      "success": true,
+      "status": 200,
+      "latency": 12,
+      "hrtimeLatency": 11.099708,
+      "dataSize": 104,
+      "timestamp": "2026-01-11T06:18:08.013Z"
+    },
+    {
+      "success": true,
+      "status": 200,
+      "latency": 10,
+      "hrtimeLatency": 10.289291,
+      "dataSize": 104,
+      "timestamp": "2026-01-11T06:18:08.124Z"
+    },
+    {
+      "success": true,
+      "status": 200,
+      "latency": 14,
+      "hrtimeLatency": 14.8045,
+      "dataSize": 104,
+      "timestamp": "2026-01-11T06:18:08.241Z"
+    },
+    {
+      "success": true,
+      "status": 200,
+      "latency": 16,
+      "hrtimeLatency": 16.384791,
+      "dataSize": 104,
+      "timestamp": "2026-01-11T06:18:08.358Z"
+    },
+    {
+      "success": true,
+      "status": 200,
+      "latency": 17,
+      "hrtimeLatency": 17.231084,
+      "dataSize": 104,
+      "timestamp": "2026-01-11T06:18:08.477Z"
+    },
+    {
+      "success": true,
+      "status": 200,
+      "latency": 17,
+      "hrtimeLatency": 17.240292,
+      "dataSize": 104,
+      "timestamp": "2026-01-11T06:18:08.596Z"
+    },
+    {
+      "success": true,
+      "status": 200,
+      "latency": 24,
+      "hrtimeLatency": 24.067916,
+      "dataSize": 104,
+      "timestamp": "2026-01-11T06:18:08.721Z"
+    },
+    {
+      "success": true,
+      "status": 200,
+      "latency": 14,
+      "hrtimeLatency": 13.410625,
+      "dataSize": 104,
+      "timestamp": "2026-01-11T06:18:08.835Z"
+    },
+    {
+      "success": true,
+      "status": 200,
+      "latency": 13,
+      "hrtimeLatency": 12.808,
+      "dataSize": 104,
+      "timestamp": "2026-01-11T06:18:08.949Z"
+    },
+    {
+      "success": true,
+      "status": 200,
+      "latency": 12,
+      "hrtimeLatency": 12.0445,
+      "dataSize": 104,
+      "timestamp": "2026-01-11T06:18:09.063Z"
+    },
+    {
+      "success": true,
+      "status": 200,
+      "latency": 14,
+      "hrtimeLatency": 14.003333,
+      "dataSize": 104,
+      "timestamp": "2026-01-11T06:18:09.178Z"
+    },
+    {
+      "success": true,
+      "status": 200,
+      "latency": 12,
+      "hrtimeLatency": 11.832792,
+      "dataSize": 104,
+      "timestamp": "2026-01-11T06:18:09.291Z"
+    },
+    {
+      "success": true,
+      "status": 200,
+      "latency": 14,
+      "hrtimeLatency": 13.919667,
+      "dataSize": 104,
+      "timestamp": "2026-01-11T06:18:09.406Z"
+    },
+    {
+      "success": true,
+      "status": 200,
+      "latency": 11,
+      "hrtimeLatency": 11.121458,
+      "dataSize": 104,
+      "timestamp": "2026-01-11T06:18:09.519Z"
+    },
+    {
+      "success": true,
+      "status": 200,
+      "latency": 14,
+      "hrtimeLatency": 14.278375,
+      "dataSize": 104,
+      "timestamp": "2026-01-11T06:18:09.634Z"
+    },
+    {
+      "success": true,
+      "status": 200,
+      "latency": 12,
+      "hrtimeLatency": 11.664792,
+      "dataSize": 104,
+      "timestamp": "2026-01-11T06:18:09.746Z"
+    },
+    {
+      "success": true,
+      "status": 200,
+      "latency": 12,
+      "hrtimeLatency": 12.982042,
+      "dataSize": 104,
+      "timestamp": "2026-01-11T06:18:09.860Z"
+    },
+    {
+      "success": true,
+      "status": 200,
+      "latency": 12,
+      "hrtimeLatency": 11.812291,
+      "dataSize": 104,
+      "timestamp": "2026-01-11T06:18:09.973Z"
+    },
+    {
+      "success": true,
+      "status": 200,
+      "latency": 12,
+      "hrtimeLatency": 12.568958,
+      "dataSize": 104,
+      "timestamp": "2026-01-11T06:18:10.086Z"
+    },
+    {
+      "success": true,
+      "status": 200,
+      "latency": 16,
+      "hrtimeLatency": 15.986042,
+      "dataSize": 104,
+      "timestamp": "2026-01-11T06:18:10.204Z"
+    },
+    {
+      "success": true,
+      "status": 200,
+      "latency": 18,
+      "hrtimeLatency": 18.094459,
+      "dataSize": 104,
+      "timestamp": "2026-01-11T06:18:10.323Z"
+    },
+    {
+      "success": true,
+      "status": 200,
+      "latency": 54,
+      "hrtimeLatency": 53.609292,
+      "dataSize": 104,
+      "timestamp": "2026-01-11T06:18:10.479Z"
+    },
+    {
+      "success": true,
+      "status": 200,
+      "latency": 18,
+      "hrtimeLatency": 18.026291,
+      "dataSize": 104,
+      "timestamp": "2026-01-11T06:18:10.599Z"
+    },
+    {
+      "success": true,
+      "status": 200,
+      "latency": 14,
+      "hrtimeLatency": 14.07975,
+      "dataSize": 104,
+      "timestamp": "2026-01-11T06:18:10.714Z"
+    },
+    {
+      "success": true,
+      "status": 200,
+      "latency": 14,
+      "hrtimeLatency": 13.394625,
+      "dataSize": 104,
+      "timestamp": "2026-01-11T06:18:10.829Z"
+    },
+    {
+      "success": true,
+      "status": 200,
+      "latency": 13,
+      "hrtimeLatency": 13.025334,
+      "dataSize": 104,
+      "timestamp": "2026-01-11T06:18:10.943Z"
+    },
+    {
+      "success": true,
+      "status": 200,
+      "latency": 13,
+      "hrtimeLatency": 12.609292,
+      "dataSize": 104,
+      "timestamp": "2026-01-11T06:18:11.057Z"
+    },
+    {
+      "success": true,
+      "status": 200,
+      "latency": 14,
+      "hrtimeLatency": 14.122459,
+      "dataSize": 104,
+      "timestamp": "2026-01-11T06:18:11.171Z"
+    },
+    {
+      "success": true,
+      "status": 200,
+      "latency": 19,
+      "hrtimeLatency": 19.034083,
+      "dataSize": 104,
+      "timestamp": "2026-01-11T06:18:11.291Z"
+    },
+    {
+      "success": true,
+      "status": 200,
+      "latency": 18,
+      "hrtimeLatency": 18.182875,
+      "dataSize": 104,
+      "timestamp": "2026-01-11T06:18:11.410Z"
+    },
+    {
+      "success": true,
+      "status": 200,
+      "latency": 14,
+      "hrtimeLatency": 13.808833,
+      "dataSize": 104,
+      "timestamp": "2026-01-11T06:18:11.525Z"
+    },
+    {
+      "success": true,
+      "status": 200,
+      "latency": 16,
+      "hrtimeLatency": 16.600416,
+      "dataSize": 104,
+      "timestamp": "2026-01-11T06:18:11.642Z"
+    }
+  ]
+}
