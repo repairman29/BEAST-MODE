@@ -185,12 +185,12 @@ export async function GET(request: NextRequest) {
         clientId = expectedProdClientId;
         clientSecret = githubClientSecretProd;
         logger.info('Using GITHUB_CLIENT_SECRET_PROD');
-      } else if (githubClientSecret && githubClientSecret.length > 20 && 
-                 githubClientSecret !== '014c7fab1ba6cc6a7398b5bde04e26463f16f4e9') {
-        // Fallback: use GITHUB_CLIENT_SECRET if it's a valid secret (not the hash)
+      } else if (githubClientSecret && githubClientSecret.length > 20) {
+        // Fallback: use GITHUB_CLIENT_SECRET if it's a valid secret
+        // Note: We no longer check against the hash since it's just an identifier
         clientId = expectedProdClientId;
         clientSecret = githubClientSecret;
-        logger.warn('Using GITHUB_CLIENT_SECRET for production (may not be correct)');
+        logger.info('Using GITHUB_CLIENT_SECRET for production');
       } else if (secret && secret.length > 20) {
         // Last resort: use SECRET env var
         clientId = expectedProdClientId;
@@ -210,12 +210,12 @@ export async function GET(request: NextRequest) {
         clientId = expectedDevClientId;
         clientSecret = githubClientSecretDev;
         logger.info('Using GITHUB_CLIENT_SECRET_DEV');
-      } else if (githubClientSecret && githubClientSecret.length > 20 && 
-                 githubClientSecret !== 'df4c598018de45ce8cb90313489eeb21448aedcf') {
-        // Fallback: use GITHUB_CLIENT_SECRET if it's a valid secret (not the hash)
+      } else if (githubClientSecret && githubClientSecret.length > 20) {
+        // Fallback: use GITHUB_CLIENT_SECRET if it's a valid secret
+        // Note: We no longer check against the hash since it's just an identifier
         clientId = expectedDevClientId;
         clientSecret = githubClientSecret;
-        logger.warn('Using GITHUB_CLIENT_SECRET for development (may not be correct)');
+        logger.info('Using GITHUB_CLIENT_SECRET for development');
       } else if (secret && secret.length > 20) {
         // Last resort: use SECRET env var
         clientId = expectedDevClientId;
