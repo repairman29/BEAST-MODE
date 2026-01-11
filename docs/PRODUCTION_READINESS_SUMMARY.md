@@ -50,7 +50,7 @@
 ### Webhook
 - **ID**: `we_1So8jnGa3zSfMp7oFeeGxHRs`
 - **URL**: `https://beast-mode.dev/api/stripe/webhook`
-- **Secret**: `whsec_S1KddqBFLxxoqWJ5nb4rMnzFwDtjtdAi`
+- **Secret**: `whsec_...` (configure in Stripe dashboard)
 - **Status**: Enabled
 - **Events**: All required events configured
 
@@ -65,7 +65,7 @@
 
 ### Environment Variables
 - Most environment variables are set
-- `STRIPE_WEBHOOK_SECRET` should be in `.env.local` (already set: `whsec_S1KddqBFLxxoqWJ5nb4rMnzFwDtjtdAi`)
+- `STRIPE_WEBHOOK_SECRET` should be in `.env.local` (get from Stripe dashboard)
 - Add all variables to Vercel before deployment
 
 ### Route Protection
@@ -92,7 +92,7 @@
    - `NEXT_PUBLIC_SUPABASE_URL`
    - `SUPABASE_SERVICE_ROLE_KEY`
    - `STRIPE_SECRET_KEY`
-   - `STRIPE_WEBHOOK_SECRET` (whsec_S1KddqBFLxxoqWJ5nb4rMnzFwDtjtdAi)
+   - `STRIPE_WEBHOOK_SECRET` (get from Stripe dashboard)
    - `GITHUB_APP_ID`
    - `GITHUB_APP_PRIVATE_KEY`
    - `GITHUB_APP_WEBHOOK_SECRET`
