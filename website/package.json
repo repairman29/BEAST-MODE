@@ -32,6 +32,8 @@
     "test:build": "npm run lint && npm run build",
     "ide:generate": "node scripts/build-ide-with-beast-mode.js",
     "ide:generate:all": "node scripts/generate-all-p0-features.js",
+    "ide:test": "node scripts/test-generated-feature.js",
+    "ide:generate:test": "node scripts/generate-and-test-features.js",
     "deploy": "bash ../scripts/deploy-vercel.sh",
     "deploy:auto": "bash ../scripts/deploy-vercel.sh \"fix: Automated deployment\"",
     "deploy:manual": "cd .. && git add -A && git commit -m \"fix: Automated deployment\" && git push origin main && cd website && vercel --prod --yes",
