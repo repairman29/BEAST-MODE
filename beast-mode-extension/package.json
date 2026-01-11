@@ -191,7 +191,8 @@
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./",
     "package": "vsce package",
-    "publish": "vsce publish"
+    "publish": "vsce publish",
+    "test": "node scripts/test-extension.js"
   },
   "devDependencies": {
     "@types/vscode": "^1.85.0",

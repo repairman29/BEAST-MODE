@@ -14,7 +14,8 @@ if (!fs.existsSync(srcDir)) {
 }
 
 // Create destination directories
-fs.mkdirSync(destDir1, { recursive: true });
+// Skip copy-mlops script in production build - not needed
+// fs.mkdirSync(destDir1, { recursive: true });
 // destDir2 should already exist, but ensure it does
 if (!fs.existsSync(destDir2)) {
   fs.mkdirSync(destDir2, { recursive: true });
