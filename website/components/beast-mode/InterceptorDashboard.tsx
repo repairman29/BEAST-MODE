@@ -220,7 +220,7 @@ export default function InterceptorDashboard() {
           </CardHeader>
           <CardContent>
             <p className="text-slate-300 mb-4">{error}</p>
-            <Button onClick={() = aria-label="Button"> { setError(null); void loadData(); }}>
+            <Button onClick={() => { setError(null); void loadData(); }} aria-label="Retry">
               Retry
             </Button>
           </CardContent>
@@ -398,7 +398,7 @@ export default function InterceptorDashboard() {
                         <Button
                           variant="ghost"
                           size="sm"
-                          onClick={() = aria-label="Button"> setExpandedCommit(expandedCommit === commit.id ? null : commit.id)}
+                          onClick={() => setExpandedCommit(expandedCommit === commit.id ? null : commit.id)}
                         >
                           {expandedCommit === commit.id ? '▼' : '▶'}
                         </Button>
@@ -451,7 +451,7 @@ export default function InterceptorDashboard() {
                         <Button
                           size="sm"
                           variant="outline"
-                          onClick={() = aria-label="Button"> updateStatus(commit.id, 'reviewed')}
+                          onClick={() => updateStatus(commit.id, 'reviewed')}
                           disabled={commit.status === 'reviewed'}
                         >
                           Mark Reviewed
@@ -459,7 +459,7 @@ export default function InterceptorDashboard() {
                         <Button
                           size="sm"
                           variant="outline"
-                          onClick={() = aria-label="Button"> updateStatus(commit.id, 'approved')}
+                          onClick={() => updateStatus(commit.id, 'approved')}
                           disabled={commit.status === 'approved'}
                         >
                           Approve
@@ -467,7 +467,7 @@ export default function InterceptorDashboard() {
                         <Button
                           size="sm"
                           variant="outline"
-                          onClick={() = aria-label="Button"> updateStatus(commit.id, 'rejected')}
+                          onClick={() => updateStatus(commit.id, 'rejected')}
                           disabled={commit.status === 'rejected'}
                         >
                           Reject

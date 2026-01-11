@@ -8,11 +8,11 @@ import * as path from 'path';
 import * as fs from 'fs';
 
 // Import BEAST MODE architecture enforcer
-let ArchitectureEnforcer: any;
+let ArchitectureEnforcerClass: any;
 try {
     const enforcerPath = path.join(__dirname, '..', '..', '..', 'lib', 'janitor', 'architecture-enforcer.js');
     if (fs.existsSync(enforcerPath)) {
-        ArchitectureEnforcer = require(enforcerPath).ArchitectureEnforcer;
+        ArchitectureEnforcerClass = require(enforcerPath).ArchitectureEnforcer;
     }
 } catch (error) {
     console.warn('Could not load BEAST MODE architecture enforcer:', error);
@@ -57,23 +57,23 @@ export class ArchitectureEnforcer {
         this.outputChannel.appendLine(`🔍 Checking architecture: ${path.basename(filePath)}`);
 
         try {
-            if (this.enforcer) {
-                // Use local enforcer
-                const violations = await this.enforcer.checkFile(filePath, content);
+        if (this.enforcer) {
+            // Use local enforcer
+            const violations = await this.enforcer.checkFile(filePath, content) as any[];
 
-                if (violations && violations.length > 0) {
-                    this.showViolations(document.uri, violations);
-                    vscode.window.showWarningMessage(
-                        `⚠️ Architecture: ${violations.length} violation(s) found`
-                    );
-                } else {
-                    // Clear diagnostics if no violations
-                    this.diagnosticCollection.delete(document.uri);
-                }
+            if (violations && violations.length > 0) {
+                this.showViolations(document.uri, violations);
+                vscode.window.showWarningMessage(
+                    `⚠️ Architecture: ${violations.length} violation(s) found`
+                );
             } else {
-                // Use API fallback
-                await this.checkViaAPI(document);
+                // Clear diagnostics if no violations
+                this.diagnosticCollection.delete(document.uri);
             }
+        } else {
+            // Use API fallback
+            await this.checkViaAPI(document);
+        }
         } catch (error: any) {
             this.outputChannel.appendLine(`❌ Error: ${error.message}`);
         }
@@ -91,7 +91,7 @@ export class ArchitectureEnforcer {
         });
 
         if (response.ok) {
-            const result = await response.json();
+            const result = await response.json() as { violations?: any[] };
             if (result.violations && result.violations.length > 0) {
                 this.showViolations(document.uri, result.violations);
             }
