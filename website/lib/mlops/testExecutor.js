@@ -251,8 +251,8 @@ class TestExecutor {
         passed: json.stats?.passes || 0,
         failed: json.stats?.failures || 0,
         total: json.stats?.tests || 0,
-        errors: json.failures?.map((f: any) => f.err?.message || '') || [],
-        tests: json.tests?.map((t: any) => ({
+        errors: json.failures?.map((f) => f.err?.message || '') || [],
+        tests: json.tests?.map((t) => ({
           name: t.title,
           status: t.state,
           duration: t.duration,
