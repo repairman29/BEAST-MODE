@@ -1,6 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getSupabaseClientOrNull } from '../../../../lib/supabase';
 import jwt from 'jsonwebtoken';
+import { createApiLogger } from '../../../../lib/utils/api-logger';
+
+const logger = createApiLogger('Auth SignIn');
 
 // Use unified config if available
 let getUnifiedConfig: any = null;
@@ -82,7 +85,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Fallback: Simple mock auth (for development without Supabase)
-    console.warn('Using mock authentication - configure Supabase for production');
+    logger.warn('Using mock authentication - configure Supabase for production');
     const token = jwt.sign(
       { email, userId: `user_${Date.now()}` },
       JWT_SECRET || 'beast-mode-secret-change-in-production',
@@ -98,10 +101,11 @@ export async function POST(request: NextRequest) {
       token
     });
 
-  } catch (error: any) {
-    console.error('Sign in error:', error);
+  } catch (error: unknown) {
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+    logger.error('Sign in error', { error: errorMessage, stack: error instanceof Error ? error.stack : undefined });
     return NextResponse.json(
-      { error: 'Authentication failed', details: error.message },
+      { error: 'Authentication failed', details: errorMessage },
       { status: 500 }
     );
   }

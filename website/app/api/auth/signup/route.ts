@@ -1,6 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getSupabaseClientOrNull } from '../../../../lib/supabase';
 import jwt from 'jsonwebtoken';
+import { createApiLogger } from '../../../../lib/utils/api-logger';
+
+const logger = createApiLogger('Auth SignUp');
 
 // Use unified config if available
 let getUnifiedConfig: any = null;
@@ -97,7 +100,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Fallback: Simple mock registration
-    console.warn('Using mock registration - configure Supabase for production');
+    logger.warn('Using mock registration - configure Supabase for production');
     const token = jwt.sign(
       { email, userId: `user_${Date.now()}` },
       JWT_SECRET || 'beast-mode-secret-change-in-production',
@@ -114,10 +117,11 @@ export async function POST(request: NextRequest) {
       token
     });
 
-  } catch (error: any) {
-    console.error('Sign up error:', error);
+  } catch (error: unknown) {
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+    logger.error('Sign up error', { error: errorMessage, stack: error instanceof Error ? error.stack : undefined });
     return NextResponse.json(
-      { error: 'Registration failed', details: error.message },
+      { error: 'Registration failed', details: errorMessage },
       { status: 500 }
     );
   }

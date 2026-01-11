@@ -101,9 +101,11 @@ function analyzeCodeStatic(code, filePath) {
       pattern: /redirect.*dashboard|dashboard.*redirect/i,
       check: (code) => {
         // Check if redirecting to dashboard when not authenticated
+        // Should PASS if redirecting to dashboard AND checking auth (both true = safe)
         const redirectsToDashboard = /redirect.*['"]\/dashboard/i.test(code);
         const checksAuth = /auth.*required|isAuthenticated/i.test(code);
-        return !(redirectsToDashboard && checksAuth);
+        // Return true if BOTH are present (safe redirect), false if redirect without auth check (unsafe)
+        return redirectsToDashboard && checksAuth;
       },
       penalty: 20
     },
