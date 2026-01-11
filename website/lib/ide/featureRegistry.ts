@@ -4,7 +4,16 @@
  * Manages and loads all generated IDE features
  */
 
-import { features } from '@/components/ide/features';
+// Import features metadata
+// Using dynamic import to avoid build issues
+let features: Array<{ id: string; title: string; category: string; file: string }> = [];
+
+try {
+  const featuresModule = require('@/components/ide/features');
+  features = featuresModule.features || [];
+} catch (error) {
+  console.warn('Failed to load features metadata:', error);
+}
 
 export interface Feature {
   id: string;
