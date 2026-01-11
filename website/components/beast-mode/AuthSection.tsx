@@ -13,63 +13,97 @@ interface User {
 }
 
 interface AuthSectionProps {
+  /** Callback function called when authentication succeeds */
   onAuthSuccess?: (user: User) => void;
 }
 
+/**
+ * Authentication Section Component
+ * 
+ * Provides sign-in and sign-up functionality with:
+ * - Email/password authentication
+ * - GitHub OAuth integration
+ * - Password reset functionality
+ * - URL parameter handling for OAuth callbacks
+ * - Input validation and XSS protection
+ * 
+ * @param props - Component props
+ * @returns JSX element with authentication form
+ */
 export default function AuthSection({ onAuthSuccess }: AuthSectionProps) {
   const { user, setUser } = useUser();
   const [isSignIn, setIsSignIn] = useState(true);
 
-  // Check URL params for initial action
+  /**
+   * Initialize component state from URL parameters
+   * 
+   * Handles OAuth callbacks, error messages, and pre-fills email when available.
+   * Validates all inputs to prevent XSS attacks.
+   */
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      const params = new URLSearchParams(window.location.search);
-      const action = params.get('action');
-      const auth = params.get('auth');
-      const message = params.get('message');
-      const githubUsername = params.get('github_username');
-      const prefillEmail = params.get('email');
-      const error = params.get('error');
-      const errorMessage = params.get('message');
-      
-      // Validate and handle OAuth errors
-      if (error) {
-        const validOAuthErrors = ['oauth_state_mismatch', 'oauth_session_expired', 'oauth_error', 'oauth_token_error', 'oauth_callback_error', 'missing_oauth_params'];
-        if (validOAuthErrors.includes(error)) {
-          setError(errorMessage || 'OAuth error occurred. Please try again.');
+      try {
+        const params = new URLSearchParams(window.location.search);
+        const action = params.get('action');
+        const auth = params.get('auth');
+        const message = params.get('message');
+        const githubUsername = params.get('github_username');
+        const prefillEmail = params.get('email');
+        const error = params.get('error');
+        const errorMessage = params.get('message');
+        
+        // Validate and handle OAuth errors
+        if (error) {
+          const validOAuthErrors = [
+            'oauth_state_mismatch',
+            'oauth_session_expired',
+            'oauth_error',
+            'oauth_token_error',
+            'oauth_callback_error',
+            'missing_oauth_params'
+          ];
+          if (validOAuthErrors.includes(error)) {
+            const safeErrorMessage = errorMessage 
+              ? errorMessage.replace(/[<>]/g, '') 
+              : 'OAuth error occurred. Please try again.';
+            setError(safeErrorMessage);
+            setIsSignIn(true);
+          }
+        }
+        
+        // Handle ?auth=required (from dashboard redirect)
+        if (auth === 'required') {
           setIsSignIn(true);
+          setError('Please sign in to access the dashboard.');
+          // Don't clear URL params yet - keep them so the form stays visible
+        } else if (action === 'signup') {
+          setIsSignIn(false);
+          // Pre-fill email if provided and valid
+          if (prefillEmail && prefillEmail.includes('@') && prefillEmail.length < 255) {
+            setEmail(prefillEmail.trim());
+          }
+        } else if (action === 'signin') {
+          setIsSignIn(true);
+          // Pre-fill email if provided and valid
+          if (prefillEmail && prefillEmail.includes('@') && prefillEmail.length < 255) {
+            setEmail(prefillEmail.trim());
+          }
         }
-      }
-      
-      // Handle ?auth=required (from dashboard redirect)
-      if (auth === 'required') {
-        setIsSignIn(true);
-        setError('Please sign in to access the dashboard.');
-        // Don't clear URL params yet - keep them so the form stays visible
-      } else if (action === 'signup') {
-        setIsSignIn(false);
-        // Pre-fill email if provided and valid
-        if (prefillEmail && prefillEmail.includes('@')) {
-          setEmail(prefillEmail);
+        
+        // Show message if GitHub was connected but user needs to sign in
+        if (message === 'github_connected' && githubUsername) {
+          // Validate githubUsername to prevent XSS (remove HTML tags and limit length)
+          const safeUsername = githubUsername.replace(/[<>]/g, '').substring(0, 39);
+          if (action === 'signup') {
+            setError(`GitHub account (@${safeUsername}) connected! Please create an account with your email to continue.`);
+          } else {
+            setError(`GitHub account (@${safeUsername}) connected! Please sign in with your email and password to continue.`);
+          }
+          // Don't clear URL params yet - keep them so the form stays visible
         }
-      } else if (action === 'signin') {
-        setIsSignIn(true);
-        // Pre-fill email if provided and valid
-        if (prefillEmail && prefillEmail.includes('@')) {
-          setEmail(prefillEmail);
-        }
-      }
-      
-      // Show message if GitHub was connected but user needs to sign in
-      if (message === 'github_connected' && githubUsername) {
-        // Validate githubUsername to prevent XSS
-        const safeUsername = githubUsername.replace(/[<>]/g, '');
-        if (action === 'signup') {
-          setError(`GitHub account (@${safeUsername}) connected! Please create an account with your email to continue.`);
-        } else {
-          setError(`GitHub account (@${safeUsername}) connected! Please sign in with your email and password to continue.`);
-        }
-        // Don't clear URL params yet - keep them so the form stays visible
+      } catch (urlError) {
+        // Silently handle URL parsing errors to prevent crashes
+        console.error('Error parsing URL parameters:', urlError);
       }
     }
   }, []);
@@ -89,6 +123,14 @@ export default function AuthSection({ onAuthSuccess }: AuthSectionProps) {
     }
   }, [user]);
 
+  /**
+   * Handle authentication form submission
+   * 
+   * Validates inputs, calls appropriate API endpoint (sign-in or sign-up),
+   * handles response, stores token, and redirects to dashboard.
+   * 
+   * @param e - Form submission event
+   */
   const handleAuth = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
@@ -178,6 +220,11 @@ export default function AuthSection({ onAuthSuccess }: AuthSectionProps) {
     }
   };
 
+  /**
+   * Handle user sign out
+   * 
+   * Clears user state and removes authentication token from localStorage
+   */
   const handleSignOut = () => {
     setUser(null);
     localStorage.removeItem('beastModeToken');
@@ -215,7 +262,8 @@ export default function AuthSection({ onAuthSuccess }: AuthSectionProps) {
   }
 
   return (
-    <Card className="bg-slate-950/90 backdrop-blur-sm border-slate-800 shadow-2xl w-full">
+    <ErrorBoundary>
+      <Card className="bg-slate-950/90 backdrop-blur-sm border-slate-800 shadow-2xl w-full">
       <CardHeader>
         <CardTitle className="text-white text-2xl">
           {isSignIn ? 'Sign In' : 'Sign Up'}
@@ -248,6 +296,9 @@ export default function AuthSection({ onAuthSuccess }: AuthSectionProps) {
               placeholder="Enter your email"
               className="w-full bg-slate-900/80 border border-slate-700 rounded-lg px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 transition-all"
               required
+              aria-label="Email address"
+              aria-required
+              autoComplete="email"
             />
           </div>
           <div>
@@ -271,6 +322,9 @@ export default function AuthSection({ onAuthSuccess }: AuthSectionProps) {
               className="w-full bg-slate-900/80 border border-slate-700 rounded-lg px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 transition-all"
               required={!showPasswordReset}
               disabled={showPasswordReset}
+              aria-label="Password"
+              aria-required={!showPasswordReset}
+              autoComplete={isSignIn ? 'current-password' : 'new-password'}
             />
           </div>
           {showPasswordReset && (
@@ -283,6 +337,8 @@ export default function AuthSection({ onAuthSuccess }: AuthSectionProps) {
                   onChange={(e) => setResetEmail(e.target.value)}
                   placeholder="Enter your email"
                   className="w-full bg-slate-900/80 border border-slate-700 rounded-lg px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 transition-all"
+                  aria-label="Email for password reset"
+                  autoComplete="email"
                 />
               </div>
               {resetSent ? (
@@ -293,23 +349,37 @@ export default function AuthSection({ onAuthSuccess }: AuthSectionProps) {
                 <Button
                   type="button"
                   onClick={async () => {
-                    if (!resetEmail) {
-                      setError('Please enter your email');
+                    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                    if (!resetEmail || !emailRegex.test(resetEmail.trim())) {
+                      setError('Please enter a valid email address');
                       return;
                     }
+                    
+                    if (resetEmail.length > 255) {
+                      setError('Email address is too long');
+                      return;
+                    }
+                    
                     setIsLoading(true);
                     try {
                       const response = await fetch('/api/auth/reset-password', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ email: resetEmail })
+                        body: JSON.stringify({ email: resetEmail.trim() })
                       });
                       if (response.ok) {
                         setResetSent(true);
                         setError(null);
                       } else {
-                        const data = await response.json();
-                        throw new Error(data.error || 'Failed to send reset email');
+                        let errorMessage = 'Failed to send reset email';
+                        try {
+                          const data = await response.json();
+                          errorMessage = data.error || errorMessage;
+                        } catch {
+                          // If JSON parsing fails, use status text
+                          errorMessage = response.statusText || errorMessage;
+                        }
+                        throw new Error(errorMessage);
                       }
                     } catch (err: unknown) {
                       const errorMessage = err instanceof Error ? err.message : 'Failed to send reset email';
@@ -338,7 +408,11 @@ export default function AuthSection({ onAuthSuccess }: AuthSectionProps) {
             </div>
           )}
           {error && (
-            <div className="text-red-400 text-sm bg-red-500/10 border border-red-500/20 rounded-lg p-3">
+            <div 
+              className="text-red-400 text-sm bg-red-500/10 border border-red-500/20 rounded-lg p-3"
+              role="alert"
+              aria-live="polite"
+            >
               {error}
             </div>
           )}
@@ -346,6 +420,8 @@ export default function AuthSection({ onAuthSuccess }: AuthSectionProps) {
             type="submit" 
             disabled={isLoading}
             className="w-full bg-white text-black hover:bg-slate-100"
+            aria-label={isSignIn ? 'Sign in to your account' : 'Create a new account'}
+            aria-busy={isLoading}
           >
             {isLoading ? 'Loading...' : (isSignIn ? 'Sign In' : 'Sign Up')}
           </Button>

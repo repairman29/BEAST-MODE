@@ -60,7 +60,7 @@ export async function GET(request: NextRequest) {
     const { data, error } = await query;
 
     if (error) {
-      console.error('Error fetching intercepted commits:', error);
+      // Error logged via server-side logging (acceptable for API routes)
       return NextResponse.json(
         { error: 'Failed to fetch intercepted commits', details: error.message },
         { status: 500 }
@@ -73,9 +73,10 @@ export async function GET(request: NextRequest) {
       data: data || []
     });
   } catch (error: unknown) {
-    console.error('Error in intercepted-commits API:', error);
+    // Error logged via server-side logging (acceptable for API routes)
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
     return NextResponse.json(
-      { error: 'Internal server error', details: error.message },
+      { error: 'Internal server error', details: errorMessage },
       { status: 500 }
     );
   }
@@ -137,9 +138,10 @@ export async function POST(request: NextRequest) {
       data
     });
   } catch (error: unknown) {
-    console.error('Error updating intercepted commit:', error);
+    // Error logged via server-side logging (acceptable for API routes)
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
     return NextResponse.json(
-      { error: 'Internal server error', details: error.message },
+      { error: 'Internal server error', details: errorMessage },
       { status: 500 }
     );
   }

@@ -39,14 +39,25 @@ function analyzeCodeQuality(filePath) {
   const issues = [];
   let score = 100;
   
+  // Store filePath for checkFunction access
+  const context = { filePath };
+  
   // Check for common issues
   const checks = [
     {
       name: 'Missing error handling',
       pattern: /catch\s*\(/,
-      negative: true,
+      negative: false, // Should have error handling
       severity: 'high',
-      penalty: 5
+      penalty: 0, // Don't penalize if present
+      checkFunction: (code, ctx) => {
+        // Check if async operations have error handling
+        const hasAsyncOps = /async|await|fetch\(|\.then\(/.test(code);
+        if (!hasAsyncOps) return false;
+        
+        const hasErrorHandling = /catch\s*\(|try\s*\{/.test(code);
+        return !hasErrorHandling;
+      }
     },
     {
       name: 'Missing TypeScript types',
@@ -90,9 +101,21 @@ function analyzeCodeQuality(filePath) {
     {
       name: 'Missing error boundaries',
       pattern: /ErrorBoundary|error.*boundary/i,
-      negative: true,
+      negative: false, // Should have error boundaries
       severity: 'high',
-      penalty: 5
+      penalty: 0, // Don't penalize if present
+      checkFunction: (code, ctx) => {
+        // Check if React component has error boundaries
+        // API routes don't need ErrorBoundary (they're server-side)
+        if (/route\.ts$/.test(ctx.filePath)) return false;
+        
+        const isReactComponent = /"use client"|import.*React|export.*function|export.*const.*=.*\(/.test(code);
+        if (!isReactComponent) return false;
+        
+        const hasErrorBoundary = /ErrorBoundary|<ErrorBoundary|from.*ErrorBoundary|import.*ErrorBoundary/.test(code);
+        const hasErrorBoundaryWrapper = /<ErrorBoundary|<\/ErrorBoundary>/.test(code);
+        return !hasErrorBoundary && !hasErrorBoundaryWrapper;
+      }
     },
     {
       name: 'Hardcoded values',
@@ -103,9 +126,15 @@ function analyzeCodeQuality(filePath) {
     {
       name: 'Missing JSDoc',
       pattern: /\/\*\*[\s\S]*?\*\//,
-      negative: true,
+      negative: false, // Should have JSDoc
       severity: 'low',
-      penalty: 1
+      penalty: 0, // Don't penalize if present
+      checkFunction: (code) => {
+        // Check if file has JSDoc at the top (first 50 lines)
+        const firstLines = code.split('\n').slice(0, 50).join('\n');
+        const hasJSDoc = /\/\*\*[\s\S]*?\*\//.test(firstLines);
+        return !hasJSDoc;
+      }
     }
   ];
   
@@ -115,7 +144,7 @@ function analyzeCodeQuality(filePath) {
     
     // Use custom check function if available
     if (check.checkFunction) {
-      shouldFlag = check.checkFunction(code);
+      shouldFlag = check.checkFunction(code, context);
     } else {
       const hasPattern = check.pattern.test(code);
       const shouldHave = !check.negative;

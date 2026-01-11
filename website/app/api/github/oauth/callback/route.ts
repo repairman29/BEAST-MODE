@@ -41,7 +41,13 @@ try {
   // Unified config not available
 }
 
-// Helper function to get config value (TypeScript compatible)
+/**
+ * Get configuration value from unified config or environment variables
+ * 
+ * @param key - Configuration key to retrieve
+ * @param defaultValue - Default value if key is not found
+ * @returns Configuration value or default value
+ */
 async function getConfigValue(key: string, defaultValue: string | null = null): Promise<string | null> {
   if (getUnifiedConfig) {
     try {
@@ -59,9 +65,16 @@ async function getConfigValue(key: string, defaultValue: string | null = null): 
 }
 
 /**
- * GitHub OAuth Callback
+ * GitHub OAuth Callback Handler
  * 
- * Handles GitHub OAuth callback and stores user's GitHub token
+ * Handles the OAuth callback from GitHub after user authorization.
+ * Validates state (CSRF protection), exchanges code for access token,
+ * fetches user info, stores token securely, and redirects appropriately.
+ * 
+ * @param request - Next.js request object with OAuth callback parameters
+ * @returns NextResponse redirecting to sign-in/sign-up page with appropriate parameters
+ * 
+ * @throws Redirects to error page if OAuth fails or state validation fails
  */
 export async function GET(request: NextRequest) {
   const logger = createApiLogger('GitHub OAuth Callback');

@@ -219,7 +219,7 @@ class SmartModelSelector {
       }
 
       // Paid tier users can use provider models
-      const { getUserApiKeys } = require('../../website/lib/api-keys-decrypt');
+      const { getUserApiKeys } = require('../api-keys-decrypt');
       const userKeys = await getUserApiKeys(userId);
       const provider = requestedModel.split(':')[0];
       const apiKey = userKeys[provider] || null;
@@ -321,7 +321,7 @@ class SmartModelSelector {
 
     // Paid tier users can use provider models
     // Try to get user's API keys for provider models
-    const { getUserApiKeys } = require('../../website/lib/api-keys-decrypt');
+    const { getUserApiKeys } = require('../api-keys-decrypt');
     const userKeys = await getUserApiKeys(userId);
     
     if (userKeys.openai) {

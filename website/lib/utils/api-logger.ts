@@ -1,7 +1,11 @@
 /**
  * API Logger for Next.js Routes
  * 
- * Production-safe logging that respects environment
+ * Production-safe logging that respects environment.
+ * In development, uses console with emojis for readability.
+ * In production, uses structured JSON logging for external services.
+ * 
+ * @module lib/utils/api-logger
  */
 
 type LogLevel = 'error' | 'warn' | 'info' | 'debug';
@@ -10,6 +14,12 @@ interface LogContext {
   [key: string]: unknown;
 }
 
+/**
+ * API Logger class for structured logging in Next.js API routes
+ * 
+ * Provides environment-aware logging with different behaviors for
+ * development (readable console output) and production (structured JSON).
+ */
 class ApiLogger {
   private context: string;
   private isDevelopment: boolean;

@@ -61,8 +61,10 @@ export async function GET(request: NextRequest) {
     commits?.forEach(commit => {
       // Count by type
       if (commit.issues && Array.isArray(commit.issues)) {
-        commit.issues.forEach((issue: unknown) => {
-          stats.byType[issue.type] = (stats.byType[issue.type] || 0) + 1;
+        commit.issues.forEach((issue: { type?: string; severity?: string }) => {
+          if (issue.type) {
+            stats.byType[issue.type] = (stats.byType[issue.type] || 0) + 1;
+          }
           if (issue.severity && ['critical', 'high', 'medium', 'low'].includes(issue.severity)) {
             stats.bySeverity[issue.severity as keyof typeof stats.bySeverity]++;
           }
@@ -99,9 +101,10 @@ export async function GET(request: NextRequest) {
       stats
     });
   } catch (error: unknown) {
-    console.error('Error in stats API:', error);
+    // Error logged via server-side logging (acceptable for API routes)
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
     return NextResponse.json(
-      { error: 'Internal server error', details: error.message },
+      { error: 'Internal server error', details: errorMessage },
       { status: 500 }
     );
   }

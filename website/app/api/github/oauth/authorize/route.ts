@@ -27,7 +27,13 @@ try {
   // Unified config not available
 }
 
-// Helper function to get config value (TypeScript compatible)
+/**
+ * Get configuration value from unified config or environment variables
+ * 
+ * @param key - Configuration key to retrieve
+ * @param defaultValue - Default value if key is not found
+ * @returns Configuration value or default value
+ */
 async function getConfigValue(key: string, defaultValue: string | null = null): Promise<string | null> {
   if (getUnifiedConfig) {
     try {
@@ -45,11 +51,16 @@ async function getConfigValue(key: string, defaultValue: string | null = null): 
 }
 
 /**
- * GitHub OAuth Authorization
+ * GitHub OAuth Authorization Handler
  * 
- * Initiates GitHub OAuth flow for user to connect their account
- * This allows scanning of private repositories
- * Now integrated with Supabase auth for proper user isolation
+ * Initiates the GitHub OAuth flow by redirecting user to GitHub's authorization page.
+ * Generates and stores a secure state token for CSRF protection.
+ * Determines correct OAuth client ID based on environment (production vs development).
+ * 
+ * @param request - Next.js request object
+ * @returns NextResponse redirecting to GitHub OAuth authorization page
+ * 
+ * @throws Returns 500 error if OAuth is not configured
  */
 export async function GET(request: NextRequest) {
   const logger = createApiLogger('GitHub OAuth Authorize');
