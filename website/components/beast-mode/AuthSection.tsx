@@ -33,8 +33,7 @@ export default function AuthSection({ onAuthSuccess }: AuthSectionProps) {
       if (auth === 'required') {
         setIsSignIn(true);
         setError('Please sign in to access the dashboard.');
-        // Clear URL params
-        window.history.replaceState({}, '', window.location.pathname);
+        // Don't clear URL params yet - keep them so the form stays visible
       } else if (action === 'signup') {
         setIsSignIn(false);
       } else if (action === 'signin') {
@@ -45,8 +44,7 @@ export default function AuthSection({ onAuthSuccess }: AuthSectionProps) {
       if (message === 'github_connected' && githubUsername) {
         setError(`GitHub account (@${githubUsername}) connected! Please sign in with your email and password to continue.`);
         setIsSignIn(true);
-        // Clear URL params
-        window.history.replaceState({}, '', window.location.pathname);
+        // Don't clear URL params yet - keep them so the form stays visible
       }
     }
   }, []);
@@ -89,9 +87,19 @@ export default function AuthSection({ onAuthSuccess }: AuthSectionProps) {
       setUser(userData);
       localStorage.setItem('beastModeToken', data.token);
       
+      // Clear URL params after successful auth
+      if (typeof window !== 'undefined') {
+        window.history.replaceState({}, '', window.location.pathname);
+      }
+      
       // Notify parent component
       if (onAuthSuccess) {
         onAuthSuccess(userData);
+      }
+      
+      // Redirect to dashboard after successful sign-in
+      if (typeof window !== 'undefined') {
+        window.location.href = '/dashboard';
       }
       
       // Show success message

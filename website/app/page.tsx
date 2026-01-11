@@ -15,9 +15,10 @@ function HomeContent() {
   const searchParams = useSearchParams();
   const auth = searchParams.get('auth');
   const action = searchParams.get('action');
+  const message = searchParams.get('message');
   
-  // Show auth form if ?auth=required or ?action=signin/signup
-  const showAuth = auth === 'required' || action === 'signin' || action === 'signup';
+  // Show auth form if ?auth=required or ?action=signin/signup or ?message=github_connected
+  const showAuth = auth === 'required' || action === 'signin' || action === 'signup' || message === 'github_connected';
 
   if (showAuth) {
     return (
