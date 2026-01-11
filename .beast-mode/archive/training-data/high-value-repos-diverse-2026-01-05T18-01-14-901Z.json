@@ -1,0 +1,4569 @@
+{
+  "metadata": {
+    "discoveredAt": "2026-01-05T18:01:14.901Z",
+    "strategy": "diverse",
+    "targetCount": 500,
+    "searched": 500,
+    "criteria": {
+      "search": {
+        "languages": [
+          "javascript",
+          "typescript",
+          "python",
+          "rust",
+          "go",
+          "java",
+          "cpp",
+          "csharp",
+          "ruby",
+          "php",
+          "swift",
+          "kotlin",
+          "scala",
+          "clojure",
+          "haskell",
+          "elixir",
+          "dart",
+          "r"
+        ],
+        "minStars": 10,
+        "maxStars": 100000,
+        "minForks": 5,
+        "hasLicense": true
+      },
+      "diversity": {
+        "minPerLanguage": 20,
+        "maxPerLanguage": 100,
+        "languageDistribution": "balanced"
+      }
+    }
+  },
+  "statistics": {
+    "total": 500,
+    "byLanguage": {
+      "JavaScript": 27,
+      "TypeScript": 41,
+      "Python": 27,
+      "Rust": 27,
+      "Go": 27,
+      "Java": 27,
+      "C++": 27,
+      "C#": 27,
+      "Ruby": 27,
+      "PHP": 27,
+      "Swift": 27,
+      "Kotlin": 27,
+      "Clojure": 27,
+      "Haskell": 27,
+      "Elixir": 27,
+      "Dart": 27,
+      "R": 27,
+      "Scala": 27
+    },
+    "avgScore": 98.45,
+    "minScore": 91,
+    "maxScore": 100
+  },
+  "repositories": [
+    {
+      "fullName": "gorhill/uBlock",
+      "url": "https://github.com/gorhill/uBlock",
+      "language": "JavaScript",
+      "stars": 60760,
+      "forks": 3887,
+      "score": 100,
+      "license": "GPL-3.0"
+    },
+    {
+      "fullName": "iamkun/dayjs",
+      "url": "https://github.com/iamkun/dayjs",
+      "language": "JavaScript",
+      "stars": 48464,
+      "forks": 2407,
+      "score": 100,
+      "license": "MIT"
+    },
+    {
+      "fullName": "nwjs/nw.js",
+      "url": "https://github.com/nwjs/nw.js",
+      "language": "JavaScript",
+      "stars": 41567,
+      "forks": 3875,
+      "score": 100,
+      "license": "MIT"
+    },
+    {
+      "fullName": "remoteintech/remote-jobs",
+      "url": "https://github.com/remoteintech/remote-jobs",
+      "language": "JavaScript",
+      "stars": 39892,
+      "forks": 3919,
+      "score": 100,
+      "license": "CC0-1.0"
+    },
+    {
+      "fullName": "usebruno/bruno",
+      "url": "https://github.com/usebruno/bruno",
+      "language": "JavaScript",
+      "stars": 39649,
+      "forks": 2036,
+      "score": 100,
+      "license": "MIT"
+    },
+    {
+      "fullName": "preactjs/preact",
+      "url": "https://github.com/preactjs/preact",
+      "language": "JavaScript",
+      "stars": 38255,
+      "forks": 2028,
+      "score": 100,
+      "license": "MIT"
+    },
+    {
+      "fullName": "naptha/tesseract.js",
+      "url": "https://github.com/naptha/tesseract.js",
+      "language": "JavaScript",
+      "stars": 37680,
+      "forks": 2355,
+      "score": 100,
+      "license": "Apache-2.0"
+    },
+    {
+      "fullName": "drawdb-io/drawdb",
+      "url": "https://github.com/drawdb-io/drawdb",
+      "language": "JavaScript",
+      "stars": 35301,
+      "forks": 2750,
+      "score": 100,
+      "license": "AGPL-3.0"
+    },
+    {
+      "fullName": "lutzroeder/netron",
+      "url": "https://github.com/lutzroeder/netron",
+      "language": "JavaScript",
+      "stars": 32139,
+      "forks": 3055,
+      "score": 100,
+      "license": "MIT"
+    },
+    {
+      "fullName": "lovell/sharp",
+      "url": "https://github.com/lovell/sharp",
+      "language": "JavaScript",
+      "stars": 31682,
+      "forks": 1374,
+      "score": 100,
+      "license": "Apache-2.0"
+    },
+    {
+      "fullName": "gethomepage/homepage",
+      "url": "https://github.com/gethomepage/homepage",
+      "language": "JavaScript",
+      "stars": 27657,
+      "forks": 1745,
+      "score": 100,
+      "license": "GPL-3.0"
+    },
+    {
+      "fullName": "koodo-reader/koodo-reader",
+      "url": "https://github.com/koodo-reader/koodo-reader",
+      "language": "JavaScript",
+      "stars": 25578,
+      "forks": 1923,
+      "score": 100,
+      "license": "AGPL-3.0"
+    },
+    {
+      "fullName": "semantic-release/semantic-release",
+      "url": "https://github.com/semantic-release/semantic-release",
+      "language": "JavaScript",
+      "stars": 23147,
+      "forks": 1790,
+      "score": 100,
+      "license": "MIT"
+    },
+    {
+      "fullName": "semantic-release/semantic-release",
+      "url": "https://github.com/semantic-release/semantic-release",
+      "language": "JavaScript",
+      "stars": 23147,
+      "forks": 1790,
+      "score": 100,
+      "license": "MIT"
+    },
+    {
+      "fullName": "jsdom/jsdom",
+      "url": "https://github.com/jsdom/jsdom",
+      "language": "JavaScript",
+      "stars": 21404,
+      "forks": 1761,
+      "score": 100,
+      "license": "MIT"
+    },
+    {
+      "fullName": "yjs/yjs",
+      "url": "https://github.com/yjs/yjs",
+      "language": "JavaScript",
+      "stars": 20937,
+      "forks": 737,
+      "score": 100,
+      "license": "NOASSERTION"
+    },
+    {
+      "fullName": "yarnpkg/yarn",
+      "url": "https://github.com/yarnpkg/yarn",
+      "language": "JavaScript",
+      "stars": 41543,
+      "forks": 2736,
+      "score": 99,
+      "license": "NOASSERTION"
+    },
+    {
+      "fullName": "remy/nodemon",
+      "url": "https://github.com/remy/nodemon",
+      "language": "JavaScript",
+      "stars": 26680,
+      "forks": 1743,
+      "score": 99,
+      "license": "MIT"
+    },
+    {
+      "fullName": "copy/v86",
+      "url": "https://github.com/copy/v86",
+      "language": "JavaScript",
+      "stars": 22067,
+      "forks": 1662,
+      "score": 99,
+      "license": "BSD-2-Clause"
+    },
+    {
+      "fullName": "copy/v86",
+      "url": "https://github.com/copy/v86",
+      "language": "JavaScript",
+      "stars": 22067,
+      "forks": 1662,
+      "score": 99,
+      "license": "BSD-2-Clause"
+    },
+    {
+      "fullName": "trekhleb/javascript-algorithms",
+      "url": "https://github.com/trekhleb/javascript-algorithms",
+      "language": "JavaScript",
+      "stars": 195275,
+      "forks": 31110,
+      "score": 98,
+      "license": "MIT"
+    },
+    {
+      "fullName": "Chalarangelo/30-seconds-of-code",
+      "url": "https://github.com/Chalarangelo/30-seconds-of-code",
+      "language": "JavaScript",
+      "stars": 126213,
+      "forks": 12393,
+      "score": 98,
+      "license": "CC-BY-4.0"
+    },
+    {
+      "fullName": "axios/axios",
+      "url": "https://github.com/axios/axios",
+      "language": "JavaScript",
+      "stars": 108428,
+      "forks": 11471,
+      "score": 98,
+      "license": "MIT"
+    },
+    {
+      "fullName": "jaywcjlove/awesome-mac",
+      "url": "https://github.com/jaywcjlove/awesome-mac",
+      "language": "JavaScript",
+      "stars": 97291,
+      "forks": 7292,
+      "score": 98,
+      "license": "CC0-1.0"
+    },
+    {
+      "fullName": "leonardomso/33-js-concepts",
+      "url": "https://github.com/leonardomso/33-js-concepts",
+      "language": "JavaScript",
+      "stars": 66010,
+      "forks": 9190,
+      "score": 98,
+      "license": "MIT"
+    },
+    {
+      "fullName": "webpack/webpack",
+      "url": "https://github.com/webpack/webpack",
+      "language": "JavaScript",
+      "stars": 65868,
+      "forks": 9211,
+      "score": 98,
+      "license": "MIT"
+    },
+    {
+      "fullName": "gatsbyjs/gatsby",
+      "url": "https://github.com/gatsbyjs/gatsby",
+      "language": "JavaScript",
+      "stars": 55959,
+      "forks": 10253,
+      "score": 98,
+      "license": "MIT"
+    },
+    {
+      "fullName": "freeCodeCamp/freeCodeCamp",
+      "url": "https://github.com/freeCodeCamp/freeCodeCamp",
+      "language": "TypeScript",
+      "stars": 435558,
+      "forks": 42999,
+      "score": 100,
+      "license": "BSD-3-Clause"
+    },
+    {
+      "fullName": "iptv-org/iptv",
+      "url": "https://github.com/iptv-org/iptv",
+      "language": "TypeScript",
+      "stars": 108548,
+      "forks": 5235,
+      "score": 100,
+      "license": "Unlicense"
+    },
+    {
+      "fullName": "shadcn-ui/ui",
+      "url": "https://github.com/shadcn-ui/ui",
+      "language": "TypeScript",
+      "stars": 104087,
+      "forks": 7596,
+      "score": 100,
+      "license": "MIT"
+    },
+    {
+      "fullName": "tailwindlabs/tailwindcss",
+      "url": "https://github.com/tailwindlabs/tailwindcss",
+      "language": "TypeScript",
+      "stars": 91832,
+      "forks": 4859,
+      "score": 100,
+      "license": "MIT"
+    },
+    {
+      "fullName": "clash-verge-rev/clash-verge-rev",
+      "url": "https://github.com/clash-verge-rev/clash-verge-rev",
+      "language": "TypeScript",
+      "stars": 90425,
+      "forks": 6642,
+      "score": 100,
+      "license": "GPL-3.0"
+    },
+    {
+      "fullName": "immich-app/immich",
+      "url": "https://github.com/immich-app/immich",
+      "language": "TypeScript",
+      "stars": 88365,
+      "forks": 4677,
+      "score": 100,
+      "license": "AGPL-3.0"
+    },
+    {
+      "fullName": "mermaid-js/mermaid",
+      "url": "https://github.com/mermaid-js/mermaid",
+      "language": "TypeScript",
+      "stars": 85081,
+      "forks": 8463,
+      "score": 100,
+      "license": "MIT"
+    },
+    {
+      "fullName": "microsoft/playwright",
+      "url": "https://github.com/microsoft/playwright",
+      "language": "TypeScript",
+      "stars": 80842,
+      "forks": 4972,
+      "score": 100,
+      "license": "Apache-2.0"
+    },
+    {
+      "fullName": "hoppscotch/hoppscotch",
+      "url": "https://github.com/hoppscotch/hoppscotch",
+      "language": "TypeScript",
+      "stars": 77457,
+      "forks": 5496,
+      "score": 100,
+      "license": "MIT"
+    },
+    {
+      "fullName": "Stirling-Tools/Stirling-PDF",
+      "url": "https://github.com/Stirling-Tools/Stirling-PDF",
+      "language": "TypeScript",
+      "stars": 72742,
+      "forks": 6190,
+      "score": 100,
+      "license": "NOASSERTION"
+    },
+    {
+      "fullName": "toeverything/AFFiNE",
+      "url": "https://github.com/toeverything/AFFiNE",
+      "language": "TypeScript",
+      "stars": 61405,
+      "forks": 4239,
+      "score": 100,
+      "license": "NOASSERTION"
+    },
+    {
+      "fullName": "withastro/astro",
+      "url": "https://github.com/withastro/astro",
+      "language": "TypeScript",
+      "stars": 55338,
+      "forks": 3052,
+      "score": 100,
+      "license": "NOASSERTION"
+    },
+    {
+      "fullName": "cypress-io/cypress",
+      "url": "https://github.com/cypress-io/cypress",
+      "language": "TypeScript",
+      "stars": 49492,
+      "forks": 3384,
+      "score": 100,
+      "license": "MIT"
+    },
+    {
+      "fullName": "TanStack/query",
+      "url": "https://github.com/TanStack/query",
+      "language": "TypeScript",
+      "stars": 48004,
+      "forks": 3637,
+      "score": 100,
+      "license": "MIT"
+    },
+    {
+      "fullName": "prisma/prisma",
+      "url": "https://github.com/prisma/prisma",
+      "language": "TypeScript",
+      "stars": 44969,
+      "forks": 2017,
+      "score": 100,
+      "license": "Apache-2.0"
+    },
+    {
+      "fullName": "react-hook-form/react-hook-form",
+      "url": "https://github.com/react-hook-form/react-hook-form",
+      "language": "TypeScript",
+      "stars": 44364,
+      "forks": 2341,
+      "score": 100,
+      "license": "MIT"
+    },
+    {
+      "fullName": "makeplane/plane",
+      "url": "https://github.com/makeplane/plane",
+      "language": "TypeScript",
+      "stars": 42830,
+      "forks": 3198,
+      "score": 100,
+      "license": "AGPL-3.0"
+    },
+    {
+      "fullName": "upscayl/upscayl",
+      "url": "https://github.com/upscayl/upscayl",
+      "language": "TypeScript",
+      "stars": 42161,
+      "forks": 2013,
+      "score": 100,
+      "license": "AGPL-3.0"
+    },
+    {
+      "fullName": "colinhacks/zod",
+      "url": "https://github.com/colinhacks/zod",
+      "language": "TypeScript",
+      "stars": 41300,
+      "forks": 1752,
+      "score": 100,
+      "license": "MIT"
+    },
+    {
+      "fullName": "siyuan-note/siyuan",
+      "url": "https://github.com/siyuan-note/siyuan",
+      "language": "TypeScript",
+      "stars": 40293,
+      "forks": 2507,
+      "score": 100,
+      "license": "AGPL-3.0"
+    },
+    {
+      "fullName": "chakra-ui/chakra-ui",
+      "url": "https://github.com/chakra-ui/chakra-ui",
+      "language": "TypeScript",
+      "stars": 40115,
+      "forks": 3557,
+      "score": 100,
+      "license": "MIT"
+    },
+    {
+      "fullName": "janhq/jan",
+      "url": "https://github.com/janhq/jan",
+      "language": "TypeScript",
+      "stars": 39966,
+      "forks": 2470,
+      "score": 100,
+      "license": "NOASSERTION"
+    },
+    {
+      "fullName": "payloadcms/payload",
+      "url": "https://github.com/payloadcms/payload",
+      "language": "TypeScript",
+      "stars": 39697,
+      "forks": 3240,
+      "score": 100,
+      "license": "MIT"
+    },
+    {
+      "fullName": "trpc/trpc",
+      "url": "https://github.com/trpc/trpc",
+      "language": "TypeScript",
+      "stars": 39259,
+      "forks": 1454,
+      "score": 100,
+      "license": "MIT"
+    },
+    {
+      "fullName": "Kong/insomnia",
+      "url": "https://github.com/Kong/insomnia",
+      "language": "TypeScript",
+      "stars": 37767,
+      "forks": 2195,
+      "score": 100,
+      "license": "Apache-2.0"
+    },
+    {
+      "fullName": "outline/outline",
+      "url": "https://github.com/outline/outline",
+      "language": "TypeScript",
+      "stars": 36549,
+      "forks": 3004,
+      "score": 100,
+      "license": "NOASSERTION"
+    },
+    {
+      "fullName": "lerna/lerna",
+      "url": "https://github.com/lerna/lerna",
+      "language": "TypeScript",
+      "stars": 36052,
+      "forks": 2271,
+      "score": 100,
+      "license": "MIT"
+    },
+    {
+      "fullName": "langflow-ai/langflow",
+      "url": "https://github.com/langflow-ai/langflow",
+      "language": "Python",
+      "stars": 142822,
+      "forks": 8242,
+      "score": 100,
+      "license": "MIT"
+    },
+    {
+      "fullName": "fastapi/fastapi",
+      "url": "https://github.com/fastapi/fastapi",
+      "language": "Python",
+      "stars": 93743,
+      "forks": 8474,
+      "score": 100,
+      "license": "MIT"
+    },
+    {
+      "fullName": "localstack/localstack",
+      "url": "https://github.com/localstack/localstack",
+      "language": "Python",
+      "stars": 63939,
+      "forks": 4484,
+      "score": 100,
+      "license": "NOASSERTION"
+    },
+    {
+      "fullName": "OpenBB-finance/OpenBB",
+      "url": "https://github.com/OpenBB-finance/OpenBB",
+      "language": "Python",
+      "stars": 57095,
+      "forks": 5543,
+      "score": 100,
+      "license": "NOASSERTION"
+    },
+    {
+      "fullName": "pathwaycom/pathway",
+      "url": "https://github.com/pathwaycom/pathway",
+      "language": "Python",
+      "stars": 56435,
+      "forks": 1539,
+      "score": 100,
+      "license": "NOASSERTION"
+    },
+    {
+      "fullName": "unslothai/unsloth",
+      "url": "https://github.com/unslothai/unsloth",
+      "language": "Python",
+      "stars": 50371,
+      "forks": 4159,
+      "score": 100,
+      "license": "Apache-2.0"
+    },
+    {
+      "fullName": "charlax/professional-programming",
+      "url": "https://github.com/charlax/professional-programming",
+      "language": "Python",
+      "stars": 50101,
+      "forks": 3940,
+      "score": 100,
+      "license": "MIT"
+    },
+    {
+      "fullName": "streamlit/streamlit",
+      "url": "https://github.com/streamlit/streamlit",
+      "language": "Python",
+      "stars": 42963,
+      "forks": 4017,
+      "score": 100,
+      "license": "Apache-2.0"
+    },
+    {
+      "fullName": "gradio-app/gradio",
+      "url": "https://github.com/gradio-app/gradio",
+      "language": "Python",
+      "stars": 41205,
+      "forks": 3217,
+      "score": 100,
+      "license": "Apache-2.0"
+    },
+    {
+      "fullName": "9001/copyparty",
+      "url": "https://github.com/9001/copyparty",
+      "language": "Python",
+      "stars": 40223,
+      "forks": 1657,
+      "score": 100,
+      "license": "MIT"
+    },
+    {
+      "fullName": "paperless-ngx/paperless-ngx",
+      "url": "https://github.com/paperless-ngx/paperless-ngx",
+      "language": "Python",
+      "stars": 35362,
+      "forks": 2230,
+      "score": 100,
+      "license": "GPL-3.0"
+    },
+    {
+      "fullName": "python-poetry/poetry",
+      "url": "https://github.com/python-poetry/poetry",
+      "language": "Python",
+      "stars": 34147,
+      "forks": 2391,
+      "score": 100,
+      "license": "MIT"
+    },
+    {
+      "fullName": "Textualize/textual",
+      "url": "https://github.com/Textualize/textual",
+      "language": "Python",
+      "stars": 33477,
+      "forks": 1062,
+      "score": 100,
+      "license": "MIT"
+    },
+    {
+      "fullName": "khoj-ai/khoj",
+      "url": "https://github.com/khoj-ai/khoj",
+      "language": "Python",
+      "stars": 32103,
+      "forks": 1918,
+      "score": 100,
+      "license": "AGPL-3.0"
+    },
+    {
+      "fullName": "nicolargo/glances",
+      "url": "https://github.com/nicolargo/glances",
+      "language": "Python",
+      "stars": 31132,
+      "forks": 1665,
+      "score": 100,
+      "license": "NOASSERTION"
+    },
+    {
+      "fullName": "PostHog/posthog",
+      "url": "https://github.com/PostHog/posthog",
+      "language": "Python",
+      "stars": 30689,
+      "forks": 2163,
+      "score": 100,
+      "license": "NOASSERTION"
+    },
+    {
+      "fullName": "kovidgoyal/kitty",
+      "url": "https://github.com/kovidgoyal/kitty",
+      "language": "Python",
+      "stars": 30516,
+      "forks": 1239,
+      "score": 100,
+      "license": "GPL-3.0"
+    },
+    {
+      "fullName": "dgtlmoon/changedetection.io",
+      "url": "https://github.com/dgtlmoon/changedetection.io",
+      "language": "Python",
+      "stars": 29694,
+      "forks": 1637,
+      "score": 100,
+      "license": "Apache-2.0"
+    },
+    {
+      "fullName": "StevenBlack/hosts",
+      "url": "https://github.com/StevenBlack/hosts",
+      "language": "Python",
+      "stars": 29569,
+      "forks": 2377,
+      "score": 100,
+      "license": "MIT"
+    },
+    {
+      "fullName": "khoj-ai/khoj",
+      "url": "https://github.com/khoj-ai/khoj",
+      "language": "Python",
+      "stars": 32103,
+      "forks": 1918,
+      "score": 100,
+      "license": "AGPL-3.0"
+    },
+    {
+      "fullName": "nicolargo/glances",
+      "url": "https://github.com/nicolargo/glances",
+      "language": "Python",
+      "stars": 31132,
+      "forks": 1665,
+      "score": 100,
+      "license": "NOASSERTION"
+    },
+    {
+      "fullName": "PostHog/posthog",
+      "url": "https://github.com/PostHog/posthog",
+      "language": "Python",
+      "stars": 30689,
+      "forks": 2163,
+      "score": 100,
+      "license": "NOASSERTION"
+    },
+    {
+      "fullName": "kovidgoyal/kitty",
+      "url": "https://github.com/kovidgoyal/kitty",
+      "language": "Python",
+      "stars": 30516,
+      "forks": 1239,
+      "score": 100,
+      "license": "GPL-3.0"
+    },
+    {
+      "fullName": "dgtlmoon/changedetection.io",
+      "url": "https://github.com/dgtlmoon/changedetection.io",
+      "language": "Python",
+      "stars": 29694,
+      "forks": 1637,
+      "score": 100,
+      "license": "Apache-2.0"
+    },
+    {
+      "fullName": "StevenBlack/hosts",
+      "url": "https://github.com/StevenBlack/hosts",
+      "language": "Python",
+      "stars": 29569,
+      "forks": 2377,
+      "score": 100,
+      "license": "MIT"
+    },
+    {
+      "fullName": "ArchiveBox/ArchiveBox",
+      "url": "https://github.com/ArchiveBox/ArchiveBox",
+      "language": "Python",
+      "stars": 26314,
+      "forks": 1428,
+      "score": 100,
+      "license": "MIT"
+    },
+    {
+      "fullName": "langgenius/dify",
+      "url": "https://github.com/langgenius/dify",
+      "language": "Python",
+      "stars": 124798,
+      "forks": 19402,
+      "score": 98,
+      "license": "NOASSERTION"
+    },
+    {
+      "fullName": "tauri-apps/tauri",
+      "url": "https://github.com/tauri-apps/tauri",
+      "language": "Rust",
+      "stars": 100802,
+      "forks": 3274,
+      "score": 100,
+      "license": "Apache-2.0"
+    },
+    {
+      "fullName": "unionlabs/union",
+      "url": "https://github.com/unionlabs/union",
+      "language": "Rust",
+      "stars": 74423,
+      "forks": 3839,
+      "score": 100,
+      "license": "Apache-2.0"
+    },
+    {
+      "fullName": "meilisearch/meilisearch",
+      "url": "https://github.com/meilisearch/meilisearch",
+      "language": "Rust",
+      "stars": 55244,
+      "forks": 2325,
+      "score": 100,
+      "license": "NOASSERTION"
+    },
+    {
+      "fullName": "starship/starship",
+      "url": "https://github.com/starship/starship",
+      "language": "Rust",
+      "stars": 53169,
+      "forks": 2331,
+      "score": 100,
+      "license": "ISC"
+    },
+    {
+      "fullName": "dani-garcia/vaultwarden",
+      "url": "https://github.com/dani-garcia/vaultwarden",
+      "language": "Rust",
+      "stars": 52925,
+      "forks": 2445,
+      "score": 100,
+      "license": "AGPL-3.0"
+    },
+    {
+      "fullName": "astral-sh/ruff",
+      "url": "https://github.com/astral-sh/ruff",
+      "language": "Rust",
+      "stars": 44950,
+      "forks": 1681,
+      "score": 100,
+      "license": "MIT"
+    },
+    {
+      "fullName": "bevyengine/bevy",
+      "url": "https://github.com/bevyengine/bevy",
+      "language": "Rust",
+      "stars": 43857,
+      "forks": 4307,
+      "score": 100,
+      "license": "Apache-2.0"
+    },
+    {
+      "fullName": "sharkdp/fd",
+      "url": "https://github.com/sharkdp/fd",
+      "language": "Rust",
+      "stars": 41045,
+      "forks": 960,
+      "score": 100,
+      "license": "Apache-2.0"
+    },
+    {
+      "fullName": "lapce/lapce",
+      "url": "https://github.com/lapce/lapce",
+      "language": "Rust",
+      "stars": 37809,
+      "forks": 1208,
+      "score": 100,
+      "license": "Apache-2.0"
+    },
+    {
+      "fullName": "pola-rs/polars",
+      "url": "https://github.com/pola-rs/polars",
+      "language": "Rust",
+      "stars": 36829,
+      "forks": 2544,
+      "score": 100,
+      "license": "NOASSERTION"
+    },
+    {
+      "fullName": "spacedriveapp/spacedrive",
+      "url": "https://github.com/spacedriveapp/spacedrive",
+      "language": "Rust",
+      "stars": 36467,
+      "forks": 1168,
+      "score": 100,
+      "license": "AGPL-3.0"
+    },
+    {
+      "fullName": "servo/servo",
+      "url": "https://github.com/servo/servo",
+      "language": "Rust",
+      "stars": 34891,
+      "forks": 3428,
+      "score": 100,
+      "license": "MPL-2.0"
+    },
+    {
+      "fullName": "DioxusLabs/dioxus",
+      "url": "https://github.com/DioxusLabs/dioxus",
+      "language": "Rust",
+      "stars": 32988,
+      "forks": 1432,
+      "score": 100,
+      "license": "Apache-2.0"
+    },
+    {
+      "fullName": "google/comprehensive-rust",
+      "url": "https://github.com/google/comprehensive-rust",
+      "language": "Rust",
+      "stars": 32484,
+      "forks": 1953,
+      "score": 100,
+      "license": "Apache-2.0"
+    },
+    {
+      "fullName": "yewstack/yew",
+      "url": "https://github.com/yewstack/yew",
+      "language": "Rust",
+      "stars": 32273,
+      "forks": 1454,
+      "score": 100,
+      "license": "Apache-2.0"
+    },
+    {
+      "fullName": "sxyazi/yazi",
+      "url": "https://github.com/sxyazi/yazi",
+      "language": "Rust",
+      "stars": 31176,
+      "forks": 675,
+      "score": 100,
+      "license": "MIT"
+    },
+    {
+      "fullName": "surrealdb/surrealdb",
+      "url": "https://github.com/surrealdb/surrealdb",
+      "language": "Rust",
+      "stars": 30717,
+      "forks": 1092,
+      "score": 100,
+      "license": "NOASSERTION"
+    },
+    {
+      "fullName": "vercel/turborepo",
+      "url": "https://github.com/vercel/turborepo",
+      "language": "Rust",
+      "stars": 29421,
+      "forks": 2205,
+      "score": 100,
+      "license": "MIT"
+    },
+    {
+      "fullName": "qdrant/qdrant",
+      "url": "https://github.com/qdrant/qdrant",
+      "language": "Rust",
+      "stars": 28005,
+      "forks": 1974,
+      "score": 100,
+      "license": "Apache-2.0"
+    },
+    {
+      "fullName": "qarmin/czkawka",
+      "url": "https://github.com/qarmin/czkawka",
+      "language": "Rust",
+      "stars": 27892,
+      "forks": 899,
+      "score": 100,
+      "license": "NOASSERTION"
+    },
+    {
+      "fullName": "emilk/egui",
+      "url": "https://github.com/emilk/egui",
+      "language": "Rust",
+      "stars": 27634,
+      "forks": 1915,
+      "score": 100,
+      "license": "Apache-2.0"
+    },
+    {
+      "fullName": "chroma-core/chroma",
+      "url": "https://github.com/chroma-core/chroma",
+      "language": "Rust",
+      "stars": 25321,
+      "forks": 1991,
+      "score": 100,
+      "license": "Apache-2.0"
+    },
+    {
+      "fullName": "jj-vcs/jj",
+      "url": "https://github.com/jj-vcs/jj",
+      "language": "Rust",
+      "stars": 24250,
+      "forks": 869,
+      "score": 100,
+      "license": "Apache-2.0"
+    },
+    {
+      "fullName": "actix/actix-web",
+      "url": "https://github.com/actix/actix-web",
+      "language": "Rust",
+      "stars": 24155,
+      "forks": 1827,
+      "score": 100,
+      "license": "Apache-2.0"
+    },
+    {
+      "fullName": "GraphiteEditor/Graphite",
+      "url": "https://github.com/GraphiteEditor/Graphite",
+      "language": "Rust",
+      "stars": 23437,
+      "forks": 1029,
+      "score": 100,
+      "license": "Apache-2.0"
+    },
+    {
+      "fullName": "Schniz/fnm",
+      "url": "https://github.com/Schniz/fnm",
+      "language": "Rust",
+      "stars": 23251,
+      "forks": 597,
+      "score": 100,
+      "license": "GPL-3.0"
+    },
+    {
+      "fullName": "tree-sitter/tree-sitter",
+      "url": "https://github.com/tree-sitter/tree-sitter",
+      "language": "Rust",
+      "stars": 23236,
+      "forks": 2322,
+      "score": 100,
+      "license": "MIT"
+    },
+    {
+      "fullName": "ollama/ollama",
+      "url": "https://github.com/ollama/ollama",
+      "language": "Go",
+      "stars": 158834,
+      "forks": 14070,
+      "score": 100,
+      "license": "MIT"
+    },
+    {
+      "fullName": "gin-gonic/gin",
+      "url": "https://github.com/gin-gonic/gin",
+      "language": "Go",
+      "stars": 87606,
+      "forks": 8529,
+      "score": 100,
+      "license": "MIT"
+    },
+    {
+      "fullName": "gohugoio/hugo",
+      "url": "https://github.com/gohugoio/hugo",
+      "language": "Go",
+      "stars": 85845,
+      "forks": 8161,
+      "score": 100,
+      "license": "Apache-2.0"
+    },
+    {
+      "fullName": "caddyserver/caddy",
+      "url": "https://github.com/caddyserver/caddy",
+      "language": "Go",
+      "stars": 68957,
+      "forks": 4586,
+      "score": 100,
+      "license": "Apache-2.0"
+    },
+    {
+      "fullName": "rclone/rclone",
+      "url": "https://github.com/rclone/rclone",
+      "language": "Go",
+      "stars": 54848,
+      "forks": 4837,
+      "score": 100,
+      "license": "MIT"
+    },
+    {
+      "fullName": "usememos/memos",
+      "url": "https://github.com/usememos/memos",
+      "language": "Go",
+      "stars": 51774,
+      "forks": 3726,
+      "score": 100,
+      "license": "MIT"
+    },
+    {
+      "fullName": "milvus-io/milvus",
+      "url": "https://github.com/milvus-io/milvus",
+      "language": "Go",
+      "stars": 42072,
+      "forks": 3751,
+      "score": 100,
+      "license": "Apache-2.0"
+    },
+    {
+      "fullName": "mudler/LocalAI",
+      "url": "https://github.com/mudler/LocalAI",
+      "language": "Go",
+      "stars": 41063,
+      "forks": 3347,
+      "score": 100,
+      "license": "MIT"
+    },
+    {
+      "fullName": "photoprism/photoprism",
+      "url": "https://github.com/photoprism/photoprism",
+      "language": "Go",
+      "stars": 39055,
+      "forks": 2189,
+      "score": 100,
+      "license": "NOASSERTION"
+    },
+    {
+      "fullName": "harness/harness",
+      "url": "https://github.com/harness/harness",
+      "language": "Go",
+      "stars": 33770,
+      "forks": 2885,
+      "score": 100,
+      "license": "Apache-2.0"
+    },
+    {
+      "fullName": "1Panel-dev/1Panel",
+      "url": "https://github.com/1Panel-dev/1Panel",
+      "language": "Go",
+      "stars": 32713,
+      "forks": 2894,
+      "score": 100,
+      "license": "GPL-3.0"
+    },
+    {
+      "fullName": "derailed/k9s",
+      "url": "https://github.com/derailed/k9s",
+      "language": "Go",
+      "stars": 32364,
+      "forks": 2041,
+      "score": 100,
+      "license": "Apache-2.0"
+    },
+    {
+      "fullName": "aquasecurity/trivy",
+      "url": "https://github.com/aquasecurity/trivy",
+      "language": "Go",
+      "stars": 30825,
+      "forks": 2866,
+      "score": 100,
+      "license": "Apache-2.0"
+    },
+    {
+      "fullName": "containers/podman",
+      "url": "https://github.com/containers/podman",
+      "language": "Go",
+      "stars": 30231,
+      "forks": 2928,
+      "score": 100,
+      "license": "Apache-2.0"
+    },
+    {
+      "fullName": "grafana/k6",
+      "url": "https://github.com/grafana/k6",
+      "language": "Go",
+      "stars": 29579,
+      "forks": 1475,
+      "score": 100,
+      "license": "AGPL-3.0"
+    },
+    {
+      "fullName": "seaweedfs/seaweedfs",
+      "url": "https://github.com/seaweedfs/seaweedfs",
+      "language": "Go",
+      "stars": 29341,
+      "forks": 2652,
+      "score": 100,
+      "license": "Apache-2.0"
+    },
+    {
+      "fullName": "binwiederhier/ntfy",
+      "url": "https://github.com/binwiederhier/ntfy",
+      "language": "Go",
+      "stars": 28037,
+      "forks": 1145,
+      "score": 100,
+      "license": "Apache-2.0"
+    },
+    {
+      "fullName": "fyne-io/fyne",
+      "url": "https://github.com/fyne-io/fyne",
+      "language": "Go",
+      "stars": 27735,
+      "forks": 1503,
+      "score": 100,
+      "license": "NOASSERTION"
+    },
+    {
+      "fullName": "authelia/authelia",
+      "url": "https://github.com/authelia/authelia",
+      "language": "Go",
+      "stars": 26308,
+      "forks": 1315,
+      "score": 100,
+      "license": "Apache-2.0"
+    },
+    {
+      "fullName": "asdf-vm/asdf",
+      "url": "https://github.com/asdf-vm/asdf",
+      "language": "Go",
+      "stars": 24881,
+      "forks": 914,
+      "score": 100,
+      "license": "MIT"
+    },
+    {
+      "fullName": "urfave/cli",
+      "url": "https://github.com/urfave/cli",
+      "language": "Go",
+      "stars": 23799,
+      "forks": 1758,
+      "score": 100,
+      "license": "MIT"
+    },
+    {
+      "fullName": "slimtoolkit/slim",
+      "url": "https://github.com/slimtoolkit/slim",
+      "language": "Go",
+      "stars": 22658,
+      "forks": 803,
+      "score": 100,
+      "license": "Apache-2.0"
+    },
+    {
+      "fullName": "GopeedLab/gopeed",
+      "url": "https://github.com/GopeedLab/gopeed",
+      "language": "Go",
+      "stars": 22309,
+      "forks": 1537,
+      "score": 100,
+      "license": "GPL-3.0"
+    },
+    {
+      "fullName": "netbirdio/netbird",
+      "url": "https://github.com/netbirdio/netbird",
+      "language": "Go",
+      "stars": 20673,
+      "forks": 1006,
+      "score": 100,
+      "license": "NOASSERTION"
+    },
+    {
+      "fullName": "qax-os/excelize",
+      "url": "https://github.com/qax-os/excelize",
+      "language": "Go",
+      "stars": 20151,
+      "forks": 1860,
+      "score": 100,
+      "license": "BSD-3-Clause"
+    },
+    {
+      "fullName": "casbin/casbin",
+      "url": "https://github.com/casbin/casbin",
+      "language": "Go",
+      "stars": 19650,
+      "forks": 1713,
+      "score": 100,
+      "license": "Apache-2.0"
+    },
+    {
+      "fullName": "nats-io/nats-server",
+      "url": "https://github.com/nats-io/nats-server",
+      "language": "Go",
+      "stars": 18913,
+      "forks": 1712,
+      "score": 100,
+      "license": "Apache-2.0"
+    },
+    {
+      "fullName": "TeamNewPipe/NewPipe",
+      "url": "https://github.com/TeamNewPipe/NewPipe",
+      "language": "Java",
+      "stars": 36162,
+      "forks": 3361,
+      "score": 100,
+      "license": "GPL-3.0"
+    },
+    {
+      "fullName": "conductor-oss/conductor",
+      "url": "https://github.com/conductor-oss/conductor",
+      "language": "Java",
+      "stars": 31624,
+      "forks": 798,
+      "score": 100,
+      "license": "Apache-2.0"
+    },
+    {
+      "fullName": "kestra-io/kestra",
+      "url": "https://github.com/kestra-io/kestra",
+      "language": "Java",
+      "stars": 26209,
+      "forks": 2437,
+      "score": 100,
+      "license": "Apache-2.0"
+    },
+    {
+      "fullName": "questdb/questdb",
+      "url": "https://github.com/questdb/questdb",
+      "language": "Java",
+      "stars": 16527,
+      "forks": 1524,
+      "score": 100,
+      "license": "Apache-2.0"
+    },
+    {
+      "fullName": "Konloch/bytecode-viewer",
+      "url": "https://github.com/Konloch/bytecode-viewer",
+      "language": "Java",
+      "stars": 15367,
+      "forks": 1219,
+      "score": 100,
+      "license": "GPL-3.0"
+    },
+    {
+      "fullName": "supertokens/supertokens-core",
+      "url": "https://github.com/supertokens/supertokens-core",
+      "language": "Java",
+      "stars": 14822,
+      "forks": 635,
+      "score": 100,
+      "license": "NOASSERTION"
+    },
+    {
+      "fullName": "theonedev/onedev",
+      "url": "https://github.com/theonedev/onedev",
+      "language": "Java",
+      "stars": 14602,
+      "forks": 933,
+      "score": 100,
+      "license": "MIT"
+    },
+    {
+      "fullName": "cryptomator/cryptomator",
+      "url": "https://github.com/cryptomator/cryptomator",
+      "language": "Java",
+      "stars": 14302,
+      "forks": 1251,
+      "score": 100,
+      "license": "GPL-3.0"
+    },
+    {
+      "fullName": "xpipe-io/xpipe",
+      "url": "https://github.com/xpipe-io/xpipe",
+      "language": "Java",
+      "stars": 12333,
+      "forks": 478,
+      "score": 100,
+      "license": "Apache-2.0"
+    },
+    {
+      "fullName": "xpipe-io/xpipe",
+      "url": "https://github.com/xpipe-io/xpipe",
+      "language": "Java",
+      "stars": 12333,
+      "forks": 478,
+      "score": 100,
+      "license": "Apache-2.0"
+    },
+    {
+      "fullName": "oracle/graal",
+      "url": "https://github.com/oracle/graal",
+      "language": "Java",
+      "stars": 21397,
+      "forks": 1763,
+      "score": 99,
+      "license": "NOASSERTION"
+    },
+    {
+      "fullName": "krahets/hello-algo",
+      "url": "https://github.com/krahets/hello-algo",
+      "language": "Java",
+      "stars": 121137,
+      "forks": 14735,
+      "score": 98,
+      "license": "NOASSERTION"
+    },
+    {
+      "fullName": "termux/termux-app",
+      "url": "https://github.com/termux/termux-app",
+      "language": "Java",
+      "stars": 48494,
+      "forks": 5796,
+      "score": 98,
+      "license": "NOASSERTION"
+    },
+    {
+      "fullName": "yuliskov/SmartTube",
+      "url": "https://github.com/yuliskov/SmartTube",
+      "language": "Java",
+      "stars": 27401,
+      "forks": 1472,
+      "score": 98,
+      "license": "NOASSERTION"
+    },
+    {
+      "fullName": "bazelbuild/bazel",
+      "url": "https://github.com/bazelbuild/bazel",
+      "language": "Java",
+      "stars": 24964,
+      "forks": 4378,
+      "score": 98,
+      "license": "Apache-2.0"
+    },
+    {
+      "fullName": "dataease/dataease",
+      "url": "https://github.com/dataease/dataease",
+      "language": "Java",
+      "stars": 23043,
+      "forks": 3959,
+      "score": 98,
+      "license": "GPL-3.0"
+    },
+    {
+      "fullName": "antlr/antlr4",
+      "url": "https://github.com/antlr/antlr4",
+      "language": "Java",
+      "stars": 18608,
+      "forks": 3422,
+      "score": 98,
+      "license": "BSD-3-Clause"
+    },
+    {
+      "fullName": "lionsoul2014/ip2region",
+      "url": "https://github.com/lionsoul2014/ip2region",
+      "language": "Java",
+      "stars": 18558,
+      "forks": 2950,
+      "score": 98,
+      "license": "Apache-2.0"
+    },
+    {
+      "fullName": "dromara/Sa-Token",
+      "url": "https://github.com/dromara/Sa-Token",
+      "language": "Java",
+      "stars": 18467,
+      "forks": 2872,
+      "score": 98,
+      "license": "Apache-2.0"
+    },
+    {
+      "fullName": "Tencent/APIJSON",
+      "url": "https://github.com/Tencent/APIJSON",
+      "language": "Java",
+      "stars": 18378,
+      "forks": 2273,
+      "score": 98,
+      "license": "NOASSERTION"
+    },
+    {
+      "fullName": "eclipse-vertx/vert.x",
+      "url": "https://github.com/eclipse-vertx/vert.x",
+      "language": "Java",
+      "stars": 14622,
+      "forks": 2105,
+      "score": 98,
+      "license": "NOASSERTION"
+    },
+    {
+      "fullName": "amitshekhariitbhu/android-interview-questions",
+      "url": "https://github.com/amitshekhariitbhu/android-interview-questions",
+      "language": "Java",
+      "stars": 12228,
+      "forks": 2371,
+      "score": 98,
+      "license": "Apache-2.0"
+    },
+    {
+      "fullName": "OpenRefine/OpenRefine",
+      "url": "https://github.com/OpenRefine/OpenRefine",
+      "language": "Java",
+      "stars": 11666,
+      "forks": 2115,
+      "score": 98,
+      "license": "BSD-3-Clause"
+    },
+    {
+      "fullName": "amitshekhariitbhu/android-interview-questions",
+      "url": "https://github.com/amitshekhariitbhu/android-interview-questions",
+      "language": "Java",
+      "stars": 12228,
+      "forks": 2371,
+      "score": 98,
+      "license": "Apache-2.0"
+    },
+    {
+      "fullName": "OpenRefine/OpenRefine",
+      "url": "https://github.com/OpenRefine/OpenRefine",
+      "language": "Java",
+      "stars": 11666,
+      "forks": 2115,
+      "score": 98,
+      "license": "BSD-3-Clause"
+    },
+    {
+      "fullName": "resilience4j/resilience4j",
+      "url": "https://github.com/resilience4j/resilience4j",
+      "language": "Java",
+      "stars": 10503,
+      "forks": 1439,
+      "score": 98,
+      "license": "Apache-2.0"
+    },
+    {
+      "fullName": "langchain4j/langchain4j",
+      "url": "https://github.com/langchain4j/langchain4j",
+      "language": "Java",
+      "stars": 10248,
+      "forks": 1862,
+      "score": 98,
+      "license": "Apache-2.0"
+    },
+    {
+      "fullName": "WerWolv/ImHex",
+      "url": "https://github.com/WerWolv/ImHex",
+      "language": "C++",
+      "stars": 52195,
+      "forks": 2322,
+      "score": 100,
+      "license": "GPL-2.0"
+    },
+    {
+      "fullName": "x64dbg/x64dbg",
+      "url": "https://github.com/x64dbg/x64dbg",
+      "language": "C++",
+      "stars": 47482,
+      "forks": 2649,
+      "score": 100,
+      "license": "NOASSERTION"
+    },
+    {
+      "fullName": "duckdb/duckdb",
+      "url": "https://github.com/duckdb/duckdb",
+      "language": "C++",
+      "stars": 35178,
+      "forks": 2828,
+      "score": 100,
+      "license": "MIT"
+    },
+    {
+      "fullName": "carbon-language/carbon-lang",
+      "url": "https://github.com/carbon-language/carbon-lang",
+      "language": "C++",
+      "stars": 33605,
+      "forks": 1512,
+      "score": 100,
+      "license": "NOASSERTION"
+    },
+    {
+      "fullName": "shadps4-emu/shadPS4",
+      "url": "https://github.com/shadps4-emu/shadPS4",
+      "language": "C++",
+      "stars": 27430,
+      "forks": 1864,
+      "score": 100,
+      "license": "GPL-2.0"
+    },
+    {
+      "fullName": "keepassxreboot/keepassxc",
+      "url": "https://github.com/keepassxreboot/keepassxc",
+      "language": "C++",
+      "stars": 25395,
+      "forks": 1672,
+      "score": 100,
+      "license": "NOASSERTION"
+    },
+    {
+      "fullName": "typesense/typesense",
+      "url": "https://github.com/typesense/typesense",
+      "language": "C++",
+      "stars": 24931,
+      "forks": 847,
+      "score": 100,
+      "license": "GPL-3.0"
+    },
+    {
+      "fullName": "sqlitebrowser/sqlitebrowser",
+      "url": "https://github.com/sqlitebrowser/sqlitebrowser",
+      "language": "C++",
+      "stars": 23449,
+      "forks": 2301,
+      "score": 100,
+      "license": "NOASSERTION"
+    },
+    {
+      "fullName": "simdjson/simdjson",
+      "url": "https://github.com/simdjson/simdjson",
+      "language": "C++",
+      "stars": 23060,
+      "forks": 1200,
+      "score": 100,
+      "license": "Apache-2.0"
+    },
+    {
+      "fullName": "kyleneideck/BackgroundMusic",
+      "url": "https://github.com/kyleneideck/BackgroundMusic",
+      "language": "C++",
+      "stars": 18397,
+      "forks": 733,
+      "score": 100,
+      "license": "GPL-2.0"
+    },
+    {
+      "fullName": "rizinorg/cutter",
+      "url": "https://github.com/rizinorg/cutter",
+      "language": "C++",
+      "stars": 18219,
+      "forks": 1319,
+      "score": 100,
+      "license": "GPL-3.0"
+    },
+    {
+      "fullName": "microsoft/react-native-windows",
+      "url": "https://github.com/microsoft/react-native-windows",
+      "language": "C++",
+      "stars": 17129,
+      "forks": 1183,
+      "score": 100,
+      "license": "NOASSERTION"
+    },
+    {
+      "fullName": "doitsujin/dxvk",
+      "url": "https://github.com/doitsujin/dxvk",
+      "language": "C++",
+      "stars": 16298,
+      "forks": 1043,
+      "score": 100,
+      "license": "Zlib"
+    },
+    {
+      "fullName": "apple/foundationdb",
+      "url": "https://github.com/apple/foundationdb",
+      "language": "C++",
+      "stars": 16065,
+      "forks": 1462,
+      "score": 100,
+      "license": "Apache-2.0"
+    },
+    {
+      "fullName": "AaronFeng753/Waifu2x-Extension-GUI",
+      "url": "https://github.com/AaronFeng753/Waifu2x-Extension-GUI",
+      "language": "C++",
+      "stars": 15916,
+      "forks": 1027,
+      "score": 100,
+      "license": "NOASSERTION"
+    },
+    {
+      "fullName": "moonlight-stream/moonlight-qt",
+      "url": "https://github.com/moonlight-stream/moonlight-qt",
+      "language": "C++",
+      "stars": 15710,
+      "forks": 939,
+      "score": 100,
+      "license": "GPL-3.0"
+    },
+    {
+      "fullName": "hoffstadt/DearPyGui",
+      "url": "https://github.com/hoffstadt/DearPyGui",
+      "language": "C++",
+      "stars": 15074,
+      "forks": 767,
+      "score": 100,
+      "license": "MIT"
+    },
+    {
+      "fullName": "xournalpp/xournalpp",
+      "url": "https://github.com/xournalpp/xournalpp",
+      "language": "C++",
+      "stars": 14112,
+      "forks": 986,
+      "score": 100,
+      "license": "GPL-2.0"
+    },
+    {
+      "fullName": "arangodb/arangodb",
+      "url": "https://github.com/arangodb/arangodb",
+      "language": "C++",
+      "stars": 14051,
+      "forks": 875,
+      "score": 100,
+      "license": "NOASSERTION"
+    },
+    {
+      "fullName": "mltframework/shotcut",
+      "url": "https://github.com/mltframework/shotcut",
+      "language": "C++",
+      "stars": 13197,
+      "forks": 1292,
+      "score": 100,
+      "license": "GPL-3.0"
+    },
+    {
+      "fullName": "M2Team/NanaZip",
+      "url": "https://github.com/M2Team/NanaZip",
+      "language": "C++",
+      "stars": 12746,
+      "forks": 317,
+      "score": 100,
+      "license": "NOASSERTION"
+    },
+    {
+      "fullName": "skypjack/entt",
+      "url": "https://github.com/skypjack/entt",
+      "language": "C++",
+      "stars": 12126,
+      "forks": 1036,
+      "score": 100,
+      "license": "MIT"
+    },
+    {
+      "fullName": "mltframework/shotcut",
+      "url": "https://github.com/mltframework/shotcut",
+      "language": "C++",
+      "stars": 13197,
+      "forks": 1292,
+      "score": 100,
+      "license": "GPL-3.0"
+    },
+    {
+      "fullName": "M2Team/NanaZip",
+      "url": "https://github.com/M2Team/NanaZip",
+      "language": "C++",
+      "stars": 12746,
+      "forks": 317,
+      "score": 100,
+      "license": "NOASSERTION"
+    },
+    {
+      "fullName": "skypjack/entt",
+      "url": "https://github.com/skypjack/entt",
+      "language": "C++",
+      "stars": 12126,
+      "forks": 1036,
+      "score": 100,
+      "license": "MIT"
+    },
+    {
+      "fullName": "manticoresoftware/manticoresearch",
+      "url": "https://github.com/manticoresoftware/manticoresearch",
+      "language": "C++",
+      "stars": 11577,
+      "forks": 622,
+      "score": 100,
+      "license": "GPL-3.0"
+    },
+    {
+      "fullName": "WasmEdge/WasmEdge",
+      "url": "https://github.com/WasmEdge/WasmEdge",
+      "language": "C++",
+      "stars": 10324,
+      "forks": 936,
+      "score": 100,
+      "license": "Apache-2.0"
+    },
+    {
+      "fullName": "microsoft/PowerToys",
+      "url": "https://github.com/microsoft/PowerToys",
+      "language": "C#",
+      "stars": 127086,
+      "forks": 7564,
+      "score": 100,
+      "license": "MIT"
+    },
+    {
+      "fullName": "files-community/Files",
+      "url": "https://github.com/files-community/Files",
+      "language": "C#",
+      "stars": 41040,
+      "forks": 2565,
+      "score": 100,
+      "license": "MIT"
+    },
+    {
+      "fullName": "AvaloniaUI/Avalonia",
+      "url": "https://github.com/AvaloniaUI/Avalonia",
+      "language": "C#",
+      "stars": 29703,
+      "forks": 2576,
+      "score": 100,
+      "license": "MIT"
+    },
+    {
+      "fullName": "marticliment/UniGetUI",
+      "url": "https://github.com/marticliment/UniGetUI",
+      "language": "C#",
+      "stars": 19768,
+      "forks": 661,
+      "score": 100,
+      "license": "MIT"
+    },
+    {
+      "fullName": "rocksdanister/lively",
+      "url": "https://github.com/rocksdanister/lively",
+      "language": "C#",
+      "stars": 17910,
+      "forks": 1215,
+      "score": 100,
+      "license": "GPL-3.0"
+    },
+    {
+      "fullName": "bitwarden/server",
+      "url": "https://github.com/bitwarden/server",
+      "language": "C#",
+      "stars": 17765,
+      "forks": 1494,
+      "score": 100,
+      "license": "NOASSERTION"
+    },
+    {
+      "fullName": "App-vNext/Polly",
+      "url": "https://github.com/App-vNext/Polly",
+      "language": "C#",
+      "stars": 14070,
+      "forks": 1260,
+      "score": 100,
+      "license": "BSD-3-Clause"
+    },
+    {
+      "fullName": "QuestPDF/QuestPDF",
+      "url": "https://github.com/QuestPDF/QuestPDF",
+      "language": "C#",
+      "stars": 13688,
+      "forks": 745,
+      "score": 100,
+      "license": "NOASSERTION"
+    },
+    {
+      "fullName": "Flow-Launcher/Flow.Launcher",
+      "url": "https://github.com/Flow-Launcher/Flow.Launcher",
+      "language": "C#",
+      "stars": 13043,
+      "forks": 525,
+      "score": 100,
+      "license": "MIT"
+    },
+    {
+      "fullName": "JustArchiNET/ArchiSteamFarm",
+      "url": "https://github.com/JustArchiNET/ArchiSteamFarm",
+      "language": "C#",
+      "stars": 12815,
+      "forks": 1095,
+      "score": 100,
+      "license": "Apache-2.0"
+    },
+    {
+      "fullName": "babalae/better-genshin-impact",
+      "url": "https://github.com/babalae/better-genshin-impact",
+      "language": "C#",
+      "stars": 11882,
+      "forks": 840,
+      "score": 100,
+      "license": "GPL-3.0"
+    },
+    {
+      "fullName": "seerge/g-helper",
+      "url": "https://github.com/seerge/g-helper",
+      "language": "C#",
+      "stars": 11846,
+      "forks": 424,
+      "score": 100,
+      "license": "GPL-3.0"
+    },
+    {
+      "fullName": "microsoft/garnet",
+      "url": "https://github.com/microsoft/garnet",
+      "language": "C#",
+      "stars": 11642,
+      "forks": 629,
+      "score": 100,
+      "license": "MIT"
+    },
+    {
+      "fullName": "spectreconsole/spectre.console",
+      "url": "https://github.com/spectreconsole/spectre.console",
+      "language": "C#",
+      "stars": 11037,
+      "forks": 625,
+      "score": 100,
+      "license": "MIT"
+    },
+    {
+      "fullName": "Cysharp/UniTask",
+      "url": "https://github.com/Cysharp/UniTask",
+      "language": "C#",
+      "stars": 10350,
+      "forks": 964,
+      "score": 100,
+      "license": "MIT"
+    },
+    {
+      "fullName": "Kareadita/Kavita",
+      "url": "https://github.com/Kareadita/Kavita",
+      "language": "C#",
+      "stars": 9542,
+      "forks": 534,
+      "score": 100,
+      "license": "GPL-3.0"
+    },
+    {
+      "fullName": "reactiveui/refit",
+      "url": "https://github.com/reactiveui/refit",
+      "language": "C#",
+      "stars": 9345,
+      "forks": 775,
+      "score": 100,
+      "license": "MIT"
+    },
+    {
+      "fullName": "BornToBeRoot/NETworkManager",
+      "url": "https://github.com/BornToBeRoot/NETworkManager",
+      "language": "C#",
+      "stars": 7956,
+      "forks": 787,
+      "score": 100,
+      "license": "GPL-3.0"
+    },
+    {
+      "fullName": "LykosAI/StabilityMatrix",
+      "url": "https://github.com/LykosAI/StabilityMatrix",
+      "language": "C#",
+      "stars": 7172,
+      "forks": 499,
+      "score": 100,
+      "license": "AGPL-3.0"
+    },
+    {
+      "fullName": "PixiEditor/PixiEditor",
+      "url": "https://github.com/PixiEditor/PixiEditor",
+      "language": "C#",
+      "stars": 6999,
+      "forks": 277,
+      "score": 100,
+      "license": "LGPL-3.0"
+    },
+    {
+      "fullName": "louthy/language-ext",
+      "url": "https://github.com/louthy/language-ext",
+      "language": "C#",
+      "stars": 6993,
+      "forks": 447,
+      "score": 100,
+      "license": "MIT"
+    },
+    {
+      "fullName": "Prowlarr/Prowlarr",
+      "url": "https://github.com/Prowlarr/Prowlarr",
+      "language": "C#",
+      "stars": 5806,
+      "forks": 274,
+      "score": 100,
+      "license": "GPL-3.0"
+    },
+    {
+      "fullName": "Prowlarr/Prowlarr",
+      "url": "https://github.com/Prowlarr/Prowlarr",
+      "language": "C#",
+      "stars": 5806,
+      "forks": 274,
+      "score": 100,
+      "license": "GPL-3.0"
+    },
+    {
+      "fullName": "jellyfin/jellyfin",
+      "url": "https://github.com/jellyfin/jellyfin",
+      "language": "C#",
+      "stars": 47358,
+      "forks": 4281,
+      "score": 99,
+      "license": "GPL-2.0"
+    },
+    {
+      "fullName": "JosefNemec/Playnite",
+      "url": "https://github.com/JosefNemec/Playnite",
+      "language": "C#",
+      "stars": 12207,
+      "forks": 592,
+      "score": 99,
+      "license": "MIT"
+    },
+    {
+      "fullName": "STranslate/STranslate",
+      "url": "https://github.com/STranslate/STranslate",
+      "language": "C#",
+      "stars": 5082,
+      "forks": 285,
+      "score": 99,
+      "license": "MIT"
+    },
+    {
+      "fullName": "2dust/v2rayN",
+      "url": "https://github.com/2dust/v2rayN",
+      "language": "C#",
+      "stars": 93913,
+      "forks": 13974,
+      "score": 98,
+      "license": "GPL-3.0"
+    },
+    {
+      "fullName": "huginn/huginn",
+      "url": "https://github.com/huginn/huginn",
+      "language": "Ruby",
+      "stars": 48451,
+      "forks": 4212,
+      "score": 100,
+      "license": "MIT"
+    },
+    {
+      "fullName": "postalserver/postal",
+      "url": "https://github.com/postalserver/postal",
+      "language": "Ruby",
+      "stars": 16176,
+      "forks": 1192,
+      "score": 100,
+      "license": "MIT"
+    },
+    {
+      "fullName": "ubicloud/ubicloud",
+      "url": "https://github.com/ubicloud/ubicloud",
+      "language": "Ruby",
+      "stars": 11644,
+      "forks": 532,
+      "score": 100,
+      "license": "AGPL-3.0"
+    },
+    {
+      "fullName": "ankane/chartkick",
+      "url": "https://github.com/ankane/chartkick",
+      "language": "Ruby",
+      "stars": 6491,
+      "forks": 565,
+      "score": 100,
+      "license": "MIT"
+    },
+    {
+      "fullName": "mastodon/mastodon",
+      "url": "https://github.com/mastodon/mastodon",
+      "language": "Ruby",
+      "stars": 49452,
+      "forks": 7375,
+      "score": 98,
+      "license": "AGPL-3.0"
+    },
+    {
+      "fullName": "discourse/discourse",
+      "url": "https://github.com/discourse/discourse",
+      "language": "Ruby",
+      "stars": 45930,
+      "forks": 8775,
+      "score": 98,
+      "license": "GPL-2.0"
+    },
+    {
+      "fullName": "fastlane/fastlane",
+      "url": "https://github.com/fastlane/fastlane",
+      "language": "Ruby",
+      "stars": 40849,
+      "forks": 5968,
+      "score": 98,
+      "license": "MIT"
+    },
+    {
+      "fullName": "fluent/fluentd",
+      "url": "https://github.com/fluent/fluentd",
+      "language": "Ruby",
+      "stars": 13432,
+      "forks": 1380,
+      "score": 98,
+      "license": "Apache-2.0"
+    },
+    {
+      "fullName": "docusealco/docuseal",
+      "url": "https://github.com/docusealco/docuseal",
+      "language": "Ruby",
+      "stars": 11101,
+      "forks": 915,
+      "score": 98,
+      "license": "AGPL-3.0"
+    },
+    {
+      "fullName": "heartcombo/simple_form",
+      "url": "https://github.com/heartcombo/simple_form",
+      "language": "Ruby",
+      "stars": 8230,
+      "forks": 1309,
+      "score": 98,
+      "license": "MIT"
+    },
+    {
+      "fullName": "Freika/dawarich",
+      "url": "https://github.com/Freika/dawarich",
+      "language": "Ruby",
+      "stars": 7622,
+      "forks": 238,
+      "score": 98,
+      "license": "AGPL-3.0"
+    },
+    {
+      "fullName": "presidentbeef/brakeman",
+      "url": "https://github.com/presidentbeef/brakeman",
+      "language": "Ruby",
+      "stars": 7177,
+      "forks": 762,
+      "score": 98,
+      "license": "NOASSERTION"
+    },
+    {
+      "fullName": "pry/pry",
+      "url": "https://github.com/pry/pry",
+      "language": "Ruby",
+      "stars": 6820,
+      "forks": 604,
+      "score": 98,
+      "license": "NOASSERTION"
+    },
+    {
+      "fullName": "norman/friendly_id",
+      "url": "https://github.com/norman/friendly_id",
+      "language": "Ruby",
+      "stars": 6230,
+      "forks": 592,
+      "score": 98,
+      "license": "MIT"
+    },
+    {
+      "fullName": "danger/danger",
+      "url": "https://github.com/danger/danger",
+      "language": "Ruby",
+      "stars": 5629,
+      "forks": 492,
+      "score": 98,
+      "license": "MIT"
+    },
+    {
+      "fullName": "slim-template/slim",
+      "url": "https://github.com/slim-template/slim",
+      "language": "Ruby",
+      "stars": 5361,
+      "forks": 497,
+      "score": 98,
+      "license": "MIT"
+    },
+    {
+      "fullName": "zammad/zammad",
+      "url": "https://github.com/zammad/zammad",
+      "language": "Ruby",
+      "stars": 5307,
+      "forks": 917,
+      "score": 98,
+      "license": "AGPL-3.0"
+    },
+    {
+      "fullName": "shakacode/react_on_rails",
+      "url": "https://github.com/shakacode/react_on_rails",
+      "language": "Ruby",
+      "stars": 5201,
+      "forks": 633,
+      "score": 98,
+      "license": "NOASSERTION"
+    },
+    {
+      "fullName": "athityakumar/colorls",
+      "url": "https://github.com/athityakumar/colorls",
+      "language": "Ruby",
+      "stars": 5107,
+      "forks": 395,
+      "score": 98,
+      "license": "MIT"
+    },
+    {
+      "fullName": "hahwul/WebHackersWeapons",
+      "url": "https://github.com/hahwul/WebHackersWeapons",
+      "language": "Ruby",
+      "stars": 4467,
+      "forks": 752,
+      "score": 98,
+      "license": "MIT"
+    },
+    {
+      "fullName": "hashicorp/vagrant",
+      "url": "https://github.com/hashicorp/vagrant",
+      "language": "Ruby",
+      "stars": 27180,
+      "forks": 4444,
+      "score": 97,
+      "license": "NOASSERTION"
+    },
+    {
+      "fullName": "capistrano/capistrano",
+      "url": "https://github.com/capistrano/capistrano",
+      "language": "Ruby",
+      "stars": 12906,
+      "forks": 1759,
+      "score": 97,
+      "license": "MIT"
+    },
+    {
+      "fullName": "ruby-grape/grape",
+      "url": "https://github.com/ruby-grape/grape",
+      "language": "Ruby",
+      "stars": 9985,
+      "forks": 1229,
+      "score": 97,
+      "license": "MIT"
+    },
+    {
+      "fullName": "jekyll/jekyll",
+      "url": "https://github.com/jekyll/jekyll",
+      "language": "Ruby",
+      "stars": 51290,
+      "forks": 10283,
+      "score": 96,
+      "license": "MIT"
+    },
+    {
+      "fullName": "Homebrew/brew",
+      "url": "https://github.com/Homebrew/brew",
+      "language": "Ruby",
+      "stars": 46078,
+      "forks": 10857,
+      "score": 96,
+      "license": "BSD-2-Clause"
+    },
+    {
+      "fullName": "chatwoot/chatwoot",
+      "url": "https://github.com/chatwoot/chatwoot",
+      "language": "Ruby",
+      "stars": 26771,
+      "forks": 6049,
+      "score": 96,
+      "license": "NOASSERTION"
+    },
+    {
+      "fullName": "spree/spree",
+      "url": "https://github.com/spree/spree",
+      "language": "Ruby",
+      "stars": 15125,
+      "forks": 5208,
+      "score": 96,
+      "license": "NOASSERTION"
+    },
+    {
+      "fullName": "coollabsio/coolify",
+      "url": "https://github.com/coollabsio/coolify",
+      "language": "PHP",
+      "stars": 49196,
+      "forks": 3386,
+      "score": 100,
+      "license": "Apache-2.0"
+    },
+    {
+      "fullName": "Seldaek/monolog",
+      "url": "https://github.com/Seldaek/monolog",
+      "language": "PHP",
+      "stars": 21372,
+      "forks": 1898,
+      "score": 100,
+      "license": "MIT"
+    },
+    {
+      "fullName": "krayin/laravel-crm",
+      "url": "https://github.com/krayin/laravel-crm",
+      "language": "PHP",
+      "stars": 20640,
+      "forks": 1333,
+      "score": 100,
+      "license": "MIT"
+    },
+    {
+      "fullName": "phpstan/phpstan",
+      "url": "https://github.com/phpstan/phpstan",
+      "language": "PHP",
+      "stars": 13761,
+      "forks": 934,
+      "score": 100,
+      "license": "MIT"
+    },
+    {
+      "fullName": "wallabag/wallabag",
+      "url": "https://github.com/wallabag/wallabag",
+      "language": "PHP",
+      "stars": 12325,
+      "forks": 848,
+      "score": 100,
+      "license": "MIT"
+    },
+    {
+      "fullName": "Qloapps/QloApps",
+      "url": "https://github.com/Qloapps/QloApps",
+      "language": "PHP",
+      "stars": 11469,
+      "forks": 693,
+      "score": 100,
+      "license": "OSL-3.0"
+    },
+    {
+      "fullName": "rectorphp/rector",
+      "url": "https://github.com/rectorphp/rector",
+      "language": "PHP",
+      "stars": 10144,
+      "forks": 738,
+      "score": 100,
+      "license": "MIT"
+    },
+    {
+      "fullName": "symfony/console",
+      "url": "https://github.com/symfony/console",
+      "language": "PHP",
+      "stars": 9834,
+      "forks": 265,
+      "score": 100,
+      "license": "MIT"
+    },
+    {
+      "fullName": "Leantime/leantime",
+      "url": "https://github.com/Leantime/leantime",
+      "language": "PHP",
+      "stars": 8823,
+      "forks": 868,
+      "score": 100,
+      "license": "AGPL-3.0"
+    },
+    {
+      "fullName": "timber/timber",
+      "url": "https://github.com/timber/timber",
+      "language": "PHP",
+      "stars": 5641,
+      "forks": 511,
+      "score": 100,
+      "license": "MIT"
+    },
+    {
+      "fullName": "pestphp/pest",
+      "url": "https://github.com/pestphp/pest",
+      "language": "PHP",
+      "stars": 11187,
+      "forks": 438,
+      "score": 99,
+      "license": "MIT"
+    },
+    {
+      "fullName": "symfony/http-foundation",
+      "url": "https://github.com/symfony/http-foundation",
+      "language": "PHP",
+      "stars": 8660,
+      "forks": 306,
+      "score": 99,
+      "license": "MIT"
+    },
+    {
+      "fullName": "filamentphp/filament",
+      "url": "https://github.com/filamentphp/filament",
+      "language": "PHP",
+      "stars": 28491,
+      "forks": 4015,
+      "score": 98,
+      "license": "MIT"
+    },
+    {
+      "fullName": "BookStackApp/BookStack",
+      "url": "https://github.com/BookStackApp/BookStack",
+      "language": "PHP",
+      "stars": 18010,
+      "forks": 2302,
+      "score": 98,
+      "license": "MIT"
+    },
+    {
+      "fullName": "getgrav/grav",
+      "url": "https://github.com/getgrav/grav",
+      "language": "PHP",
+      "stars": 15341,
+      "forks": 1423,
+      "score": 98,
+      "license": "MIT"
+    },
+    {
+      "fullName": "librespeed/speedtest",
+      "url": "https://github.com/librespeed/speedtest",
+      "language": "PHP",
+      "stars": 14079,
+      "forks": 2414,
+      "score": 98,
+      "license": "LGPL-3.0"
+    },
+    {
+      "fullName": "vlucas/phpdotenv",
+      "url": "https://github.com/vlucas/phpdotenv",
+      "language": "PHP",
+      "stars": 13498,
+      "forks": 652,
+      "score": 98,
+      "license": "BSD-3-Clause"
+    },
+    {
+      "fullName": "ramsey/uuid",
+      "url": "https://github.com/ramsey/uuid",
+      "language": "PHP",
+      "stars": 12616,
+      "forks": 517,
+      "score": 98,
+      "license": "MIT"
+    },
+    {
+      "fullName": "slimphp/Slim",
+      "url": "https://github.com/slimphp/Slim",
+      "language": "PHP",
+      "stars": 12220,
+      "forks": 1964,
+      "score": 98,
+      "license": "MIT"
+    },
+    {
+      "fullName": "YOURLS/YOURLS",
+      "url": "https://github.com/YOURLS/YOURLS",
+      "language": "PHP",
+      "stars": 11778,
+      "forks": 2073,
+      "score": 98,
+      "license": "MIT"
+    },
+    {
+      "fullName": "walkor/workerman",
+      "url": "https://github.com/walkor/workerman",
+      "language": "PHP",
+      "stars": 11504,
+      "forks": 2272,
+      "score": 98,
+      "license": "MIT"
+    },
+    {
+      "fullName": "octobercms/october",
+      "url": "https://github.com/octobercms/october",
+      "language": "PHP",
+      "stars": 11145,
+      "forks": 2215,
+      "score": 98,
+      "license": "NOASSERTION"
+    },
+    {
+      "fullName": "unopim/unopim",
+      "url": "https://github.com/unopim/unopim",
+      "language": "PHP",
+      "stars": 8152,
+      "forks": 109,
+      "score": 98,
+      "license": "MIT"
+    },
+    {
+      "fullName": "symfony/routing",
+      "url": "https://github.com/symfony/routing",
+      "language": "PHP",
+      "stars": 7634,
+      "forks": 93,
+      "score": 98,
+      "license": "MIT"
+    },
+    {
+      "fullName": "symfony/var-dumper",
+      "url": "https://github.com/symfony/var-dumper",
+      "language": "PHP",
+      "stars": 7451,
+      "forks": 99,
+      "score": 98,
+      "license": "MIT"
+    },
+    {
+      "fullName": "ellite/Wallos",
+      "url": "https://github.com/ellite/Wallos",
+      "language": "PHP",
+      "stars": 7076,
+      "forks": 314,
+      "score": 98,
+      "license": "GPL-3.0"
+    },
+    {
+      "fullName": "roots/bedrock",
+      "url": "https://github.com/roots/bedrock",
+      "language": "PHP",
+      "stars": 6440,
+      "forks": 1193,
+      "score": 98,
+      "license": "MIT"
+    },
+    {
+      "fullName": "Caldis/Mos",
+      "url": "https://github.com/Caldis/Mos",
+      "language": "Swift",
+      "stars": 18248,
+      "forks": 583,
+      "score": 100,
+      "license": "NOASSERTION"
+    },
+    {
+      "fullName": "nikitabobko/AeroSpace",
+      "url": "https://github.com/nikitabobko/AeroSpace",
+      "language": "Swift",
+      "stars": 17939,
+      "forks": 380,
+      "score": 100,
+      "license": "MIT"
+    },
+    {
+      "fullName": "tisfeng/Easydict",
+      "url": "https://github.com/tisfeng/Easydict",
+      "language": "Swift",
+      "stars": 11394,
+      "forks": 566,
+      "score": 100,
+      "license": "GPL-3.0"
+    },
+    {
+      "fullName": "apple/swift-nio",
+      "url": "https://github.com/apple/swift-nio",
+      "language": "Swift",
+      "stars": 8378,
+      "forks": 722,
+      "score": 100,
+      "license": "Apache-2.0"
+    },
+    {
+      "fullName": "Finb/Bark",
+      "url": "https://github.com/Finb/Bark",
+      "language": "Swift",
+      "stars": 7338,
+      "forks": 585,
+      "score": 100,
+      "license": "MIT"
+    },
+    {
+      "fullName": "tw93/MiaoYan",
+      "url": "https://github.com/tw93/MiaoYan",
+      "language": "Swift",
+      "stars": 7266,
+      "forks": 421,
+      "score": 100,
+      "license": "MIT"
+    },
+    {
+      "fullName": "jacklandrin/OnlySwitch",
+      "url": "https://github.com/jacklandrin/OnlySwitch",
+      "language": "Swift",
+      "stars": 5385,
+      "forks": 229,
+      "score": 100,
+      "license": "MIT"
+    },
+    {
+      "fullName": "amosgyamfi/open-swiftui-animations",
+      "url": "https://github.com/amosgyamfi/open-swiftui-animations",
+      "language": "Swift",
+      "stars": 5258,
+      "forks": 284,
+      "score": 100,
+      "license": "Unlicense"
+    },
+    {
+      "fullName": "scinfu/SwiftSoup",
+      "url": "https://github.com/scinfu/SwiftSoup",
+      "language": "Swift",
+      "stars": 5014,
+      "forks": 378,
+      "score": 100,
+      "license": "NOASSERTION"
+    },
+    {
+      "fullName": "jacklandrin/OnlySwitch",
+      "url": "https://github.com/jacklandrin/OnlySwitch",
+      "language": "Swift",
+      "stars": 5385,
+      "forks": 229,
+      "score": 100,
+      "license": "MIT"
+    },
+    {
+      "fullName": "amosgyamfi/open-swiftui-animations",
+      "url": "https://github.com/amosgyamfi/open-swiftui-animations",
+      "language": "Swift",
+      "stars": 5258,
+      "forks": 284,
+      "score": 100,
+      "license": "Unlicense"
+    },
+    {
+      "fullName": "scinfu/SwiftSoup",
+      "url": "https://github.com/scinfu/SwiftSoup",
+      "language": "Swift",
+      "stars": 5014,
+      "forks": 378,
+      "score": 100,
+      "license": "NOASSERTION"
+    },
+    {
+      "fullName": "ianyh/Amethyst",
+      "url": "https://github.com/ianyh/Amethyst",
+      "language": "Swift",
+      "stars": 15927,
+      "forks": 506,
+      "score": 99,
+      "license": "MIT"
+    },
+    {
+      "fullName": "maxgoedjen/secretive",
+      "url": "https://github.com/maxgoedjen/secretive",
+      "language": "Swift",
+      "stars": 8035,
+      "forks": 184,
+      "score": 99,
+      "license": "MIT"
+    },
+    {
+      "fullName": "onevcat/Kingfisher",
+      "url": "https://github.com/onevcat/Kingfisher",
+      "language": "Swift",
+      "stars": 24232,
+      "forks": 2744,
+      "score": 98,
+      "license": "MIT"
+    },
+    {
+      "fullName": "CodeEditApp/CodeEdit",
+      "url": "https://github.com/CodeEditApp/CodeEdit",
+      "language": "Swift",
+      "stars": 22583,
+      "forks": 1140,
+      "score": 98,
+      "license": "MIT"
+    },
+    {
+      "fullName": "pointfreeco/swift-composable-architecture",
+      "url": "https://github.com/pointfreeco/swift-composable-architecture",
+      "language": "Swift",
+      "stars": 14220,
+      "forks": 1618,
+      "score": 98,
+      "license": "MIT"
+    },
+    {
+      "fullName": "kickstarter/ios-oss",
+      "url": "https://github.com/kickstarter/ios-oss",
+      "language": "Swift",
+      "stars": 8605,
+      "forks": 1223,
+      "score": 98,
+      "license": "Apache-2.0"
+    },
+    {
+      "fullName": "intitni/CopilotForXcode",
+      "url": "https://github.com/intitni/CopilotForXcode",
+      "language": "Swift",
+      "stars": 8249,
+      "forks": 428,
+      "score": 98,
+      "license": "MIT"
+    },
+    {
+      "fullName": "groue/GRDB.swift",
+      "url": "https://github.com/groue/GRDB.swift",
+      "language": "Swift",
+      "stars": 8078,
+      "forks": 820,
+      "score": 98,
+      "license": "MIT"
+    },
+    {
+      "fullName": "AndrewHartAR/ARKit-CoreLocation",
+      "url": "https://github.com/AndrewHartAR/ARKit-CoreLocation",
+      "language": "Swift",
+      "stars": 5527,
+      "forks": 731,
+      "score": 98,
+      "license": "MIT"
+    },
+    {
+      "fullName": "AndrewHartAR/ARKit-CoreLocation",
+      "url": "https://github.com/AndrewHartAR/ARKit-CoreLocation",
+      "language": "Swift",
+      "stars": 5527,
+      "forks": 731,
+      "score": 98,
+      "license": "MIT"
+    },
+    {
+      "fullName": "MonitorControl/MonitorControl",
+      "url": "https://github.com/MonitorControl/MonitorControl",
+      "language": "Swift",
+      "stars": 32025,
+      "forks": 914,
+      "score": 96,
+      "license": "MIT"
+    },
+    {
+      "fullName": "airbnb/lottie-ios",
+      "url": "https://github.com/airbnb/lottie-ios",
+      "language": "Swift",
+      "stars": 26609,
+      "forks": 3828,
+      "score": 96,
+      "license": "Apache-2.0"
+    },
+    {
+      "fullName": "hackiftekhar/IQKeyboardManager",
+      "url": "https://github.com/hackiftekhar/IQKeyboardManager",
+      "language": "Swift",
+      "stars": 16626,
+      "forks": 2452,
+      "score": 96,
+      "license": "MIT"
+    },
+    {
+      "fullName": "SwifterSwift/SwifterSwift",
+      "url": "https://github.com/SwifterSwift/SwifterSwift",
+      "language": "Swift",
+      "stars": 14868,
+      "forks": 1672,
+      "score": 96,
+      "license": "MIT"
+    },
+    {
+      "fullName": "sunnyyoung/WeChatTweak",
+      "url": "https://github.com/sunnyyoung/WeChatTweak",
+      "language": "Swift",
+      "stars": 13210,
+      "forks": 1545,
+      "score": 96,
+      "license": "AGPL-3.0"
+    },
+    {
+      "fullName": "ktorio/ktor",
+      "url": "https://github.com/ktorio/ktor",
+      "language": "Kotlin",
+      "stars": 14202,
+      "forks": 1215,
+      "score": 100,
+      "license": "Apache-2.0"
+    },
+    {
+      "fullName": "open-ani/animeko",
+      "url": "https://github.com/open-ani/animeko",
+      "language": "Kotlin",
+      "stars": 14005,
+      "forks": 351,
+      "score": 100,
+      "license": "AGPL-3.0"
+    },
+    {
+      "fullName": "YiiGuxing/TranslationPlugin",
+      "url": "https://github.com/YiiGuxing/TranslationPlugin",
+      "language": "Kotlin",
+      "stars": 11740,
+      "forks": 816,
+      "score": 100,
+      "license": "MIT"
+    },
+    {
+      "fullName": "coil-kt/coil",
+      "url": "https://github.com/coil-kt/coil",
+      "language": "Kotlin",
+      "stars": 11644,
+      "forks": 739,
+      "score": 100,
+      "license": "Apache-2.0"
+    },
+    {
+      "fullName": "T8RIN/ImageToolbox",
+      "url": "https://github.com/T8RIN/ImageToolbox",
+      "language": "Kotlin",
+      "stars": 11140,
+      "forks": 491,
+      "score": 100,
+      "license": "Apache-2.0"
+    },
+    {
+      "fullName": "florisboard/florisboard",
+      "url": "https://github.com/florisboard/florisboard",
+      "language": "Kotlin",
+      "stars": 7851,
+      "forks": 561,
+      "score": 100,
+      "license": "Apache-2.0"
+    },
+    {
+      "fullName": "skydoves/android-developer-roadmap",
+      "url": "https://github.com/skydoves/android-developer-roadmap",
+      "language": "Kotlin",
+      "stars": 7682,
+      "forks": 724,
+      "score": 100,
+      "license": "Apache-2.0"
+    },
+    {
+      "fullName": "deniscerri/ytdlnis",
+      "url": "https://github.com/deniscerri/ytdlnis",
+      "language": "Kotlin",
+      "stars": 7188,
+      "forks": 297,
+      "score": 100,
+      "license": "GPL-3.0"
+    },
+    {
+      "fullName": "maxrave-dev/SimpMusic",
+      "url": "https://github.com/maxrave-dev/SimpMusic",
+      "language": "Kotlin",
+      "stars": 6907,
+      "forks": 313,
+      "score": 100,
+      "license": "GPL-3.0"
+    },
+    {
+      "fullName": "arrow-kt/arrow",
+      "url": "https://github.com/arrow-kt/arrow",
+      "language": "Kotlin",
+      "stars": 6502,
+      "forks": 463,
+      "score": 100,
+      "license": "NOASSERTION"
+    },
+    {
+      "fullName": "Kunzisoft/KeePassDX",
+      "url": "https://github.com/Kunzisoft/KeePassDX",
+      "language": "Kotlin",
+      "stars": 6147,
+      "forks": 338,
+      "score": 100,
+      "license": "GPL-3.0"
+    },
+    {
+      "fullName": "gotson/komga",
+      "url": "https://github.com/gotson/komga",
+      "language": "Kotlin",
+      "stars": 5752,
+      "forks": 339,
+      "score": 100,
+      "license": "MIT"
+    },
+    {
+      "fullName": "aistra0528/Hail",
+      "url": "https://github.com/aistra0528/Hail",
+      "language": "Kotlin",
+      "stars": 4811,
+      "forks": 167,
+      "score": 100,
+      "license": "GPL-3.0"
+    },
+    {
+      "fullName": "kittinunf/fuel",
+      "url": "https://github.com/kittinunf/fuel",
+      "language": "Kotlin",
+      "stars": 4654,
+      "forks": 435,
+      "score": 100,
+      "license": "MIT"
+    },
+    {
+      "fullName": "ChuckerTeam/chucker",
+      "url": "https://github.com/ChuckerTeam/chucker",
+      "language": "Kotlin",
+      "stars": 4421,
+      "forks": 425,
+      "score": 100,
+      "license": "Apache-2.0"
+    },
+    {
+      "fullName": "skydoves/Balloon",
+      "url": "https://github.com/skydoves/Balloon",
+      "language": "Kotlin",
+      "stars": 3929,
+      "forks": 308,
+      "score": 100,
+      "license": "Apache-2.0"
+    },
+    {
+      "fullName": "FooIbar/EhViewer",
+      "url": "https://github.com/FooIbar/EhViewer",
+      "language": "Kotlin",
+      "stars": 3901,
+      "forks": 230,
+      "score": 100,
+      "license": "GPL-3.0"
+    },
+    {
+      "fullName": "skydoves/Balloon",
+      "url": "https://github.com/skydoves/Balloon",
+      "language": "Kotlin",
+      "stars": 3929,
+      "forks": 308,
+      "score": 100,
+      "license": "Apache-2.0"
+    },
+    {
+      "fullName": "FooIbar/EhViewer",
+      "url": "https://github.com/FooIbar/EhViewer",
+      "language": "Kotlin",
+      "stars": 3901,
+      "forks": 230,
+      "score": 100,
+      "license": "GPL-3.0"
+    },
+    {
+      "fullName": "joreilly/PeopleInSpace",
+      "url": "https://github.com/joreilly/PeopleInSpace",
+      "language": "Kotlin",
+      "stars": 3290,
+      "forks": 291,
+      "score": 100,
+      "license": "Apache-2.0"
+    },
+    {
+      "fullName": "ReVanced/revanced-patcher",
+      "url": "https://github.com/ReVanced/revanced-patcher",
+      "language": "Kotlin",
+      "stars": 3145,
+      "forks": 269,
+      "score": 100,
+      "license": "GPL-3.0"
+    },
+    {
+      "fullName": "LibChecker/LibChecker",
+      "url": "https://github.com/LibChecker/LibChecker",
+      "language": "Kotlin",
+      "stars": 6409,
+      "forks": 392,
+      "score": 99,
+      "license": "Apache-2.0"
+    },
+    {
+      "fullName": "NeoApplications/Neo-Store",
+      "url": "https://github.com/NeoApplications/Neo-Store",
+      "language": "Kotlin",
+      "stars": 4182,
+      "forks": 144,
+      "score": 99,
+      "license": "GPL-3.0"
+    },
+    {
+      "fullName": "2dust/v2rayNG",
+      "url": "https://github.com/2dust/v2rayNG",
+      "language": "Kotlin",
+      "stars": 49130,
+      "forks": 6774,
+      "score": 98,
+      "license": "GPL-3.0"
+    },
+    {
+      "fullName": "gkd-kit/gkd",
+      "url": "https://github.com/gkd-kit/gkd",
+      "language": "Kotlin",
+      "stars": 34879,
+      "forks": 1693,
+      "score": 98,
+      "license": "GPL-3.0"
+    },
+    {
+      "fullName": "JunkFood02/Seal",
+      "url": "https://github.com/JunkFood02/Seal",
+      "language": "Kotlin",
+      "stars": 23764,
+      "forks": 1005,
+      "score": 98,
+      "license": "GPL-3.0"
+    },
+    {
+      "fullName": "JetBrains/compose-multiplatform",
+      "url": "https://github.com/JetBrains/compose-multiplatform",
+      "language": "Kotlin",
+      "stars": 18675,
+      "forks": 1365,
+      "score": 98,
+      "license": "Apache-2.0"
+    },
+    {
+      "fullName": "penpot/penpot",
+      "url": "https://github.com/penpot/penpot",
+      "language": "Clojure",
+      "stars": 43601,
+      "forks": 2406,
+      "score": 100,
+      "license": "MPL-2.0"
+    },
+    {
+      "fullName": "logseq/logseq",
+      "url": "https://github.com/logseq/logseq",
+      "language": "Clojure",
+      "stars": 40131,
+      "forks": 2406,
+      "score": 100,
+      "license": "AGPL-3.0"
+    },
+    {
+      "fullName": "babashka/babashka",
+      "url": "https://github.com/babashka/babashka",
+      "language": "Clojure",
+      "stars": 4394,
+      "forks": 263,
+      "score": 100,
+      "license": "EPL-1.0"
+    },
+    {
+      "fullName": "clj-commons/aleph",
+      "url": "https://github.com/clj-commons/aleph",
+      "language": "Clojure",
+      "stars": 2578,
+      "forks": 241,
+      "score": 100,
+      "license": "MIT"
+    },
+    {
+      "fullName": "metabase/metabase",
+      "url": "https://github.com/metabase/metabase",
+      "language": "Clojure",
+      "stars": 45469,
+      "forks": 6152,
+      "score": 98,
+      "license": "NOASSERTION"
+    },
+    {
+      "fullName": "day8/re-frame",
+      "url": "https://github.com/day8/re-frame",
+      "language": "Clojure",
+      "stars": 5515,
+      "forks": 715,
+      "score": 98,
+      "license": "MIT"
+    },
+    {
+      "fullName": "clj-kondo/clj-kondo",
+      "url": "https://github.com/clj-kondo/clj-kondo",
+      "language": "Clojure",
+      "stars": 1814,
+      "forks": 295,
+      "score": 98,
+      "license": "EPL-1.0"
+    },
+    {
+      "fullName": "replikativ/datahike",
+      "url": "https://github.com/replikativ/datahike",
+      "language": "Clojure",
+      "stars": 1712,
+      "forks": 101,
+      "score": 98,
+      "license": "EPL-1.0"
+    },
+    {
+      "fullName": "fulcrologic/fulcro",
+      "url": "https://github.com/fulcrologic/fulcro",
+      "language": "Clojure",
+      "stars": 1596,
+      "forks": 146,
+      "score": 98,
+      "license": "MIT"
+    },
+    {
+      "fullName": "babashka/sci",
+      "url": "https://github.com/babashka/sci",
+      "language": "Clojure",
+      "stars": 1332,
+      "forks": 98,
+      "score": 98,
+      "license": "EPL-1.0"
+    },
+    {
+      "fullName": "tonsky/datascript",
+      "url": "https://github.com/tonsky/datascript",
+      "language": "Clojure",
+      "stars": 5688,
+      "forks": 312,
+      "score": 96,
+      "license": "EPL-1.0"
+    },
+    {
+      "fullName": "xtdb/xtdb",
+      "url": "https://github.com/xtdb/xtdb",
+      "language": "Clojure",
+      "stars": 2884,
+      "forks": 183,
+      "score": 96,
+      "license": "MPL-2.0"
+    },
+    {
+      "fullName": "metosin/malli",
+      "url": "https://github.com/metosin/malli",
+      "language": "Clojure",
+      "stars": 1685,
+      "forks": 227,
+      "score": 96,
+      "license": "EPL-2.0"
+    },
+    {
+      "fullName": "clojure-lsp/clojure-lsp",
+      "url": "https://github.com/clojure-lsp/clojure-lsp",
+      "language": "Clojure",
+      "stars": 1273,
+      "forks": 171,
+      "score": 96,
+      "license": "MIT"
+    },
+    {
+      "fullName": "yogthos/Selmer",
+      "url": "https://github.com/yogthos/Selmer",
+      "language": "Clojure",
+      "stars": 1032,
+      "forks": 118,
+      "score": 95,
+      "license": "EPL-1.0"
+    },
+    {
+      "fullName": "day8/re-com",
+      "url": "https://github.com/day8/re-com",
+      "language": "Clojure",
+      "stars": 821,
+      "forks": 142,
+      "score": 95,
+      "license": "MIT"
+    },
+    {
+      "fullName": "lilactown/helix",
+      "url": "https://github.com/lilactown/helix",
+      "language": "Clojure",
+      "stars": 663,
+      "forks": 53,
+      "score": 95,
+      "license": "EPL-2.0"
+    },
+    {
+      "fullName": "lilactown/helix",
+      "url": "https://github.com/lilactown/helix",
+      "language": "Clojure",
+      "stars": 663,
+      "forks": 53,
+      "score": 95,
+      "license": "EPL-2.0"
+    },
+    {
+      "fullName": "jepsen-io/maelstrom",
+      "url": "https://github.com/jepsen-io/maelstrom",
+      "language": "Clojure",
+      "stars": 3457,
+      "forks": 197,
+      "score": 94,
+      "license": "EPL-1.0"
+    },
+    {
+      "fullName": "metosin/reitit",
+      "url": "https://github.com/metosin/reitit",
+      "language": "Clojure",
+      "stars": 1545,
+      "forks": 262,
+      "score": 94,
+      "license": "EPL-1.0"
+    },
+    {
+      "fullName": "cljfx/cljfx",
+      "url": "https://github.com/cljfx/cljfx",
+      "language": "Clojure",
+      "stars": 1047,
+      "forks": 50,
+      "score": 94,
+      "license": "MIT"
+    },
+    {
+      "fullName": "nextjournal/clerk",
+      "url": "https://github.com/nextjournal/clerk",
+      "language": "Clojure",
+      "stars": 2008,
+      "forks": 87,
+      "score": 93,
+      "license": "ISC"
+    },
+    {
+      "fullName": "clj-commons/manifold",
+      "url": "https://github.com/clj-commons/manifold",
+      "language": "Clojure",
+      "stars": 1042,
+      "forks": 109,
+      "score": 93,
+      "license": "None"
+    },
+    {
+      "fullName": "swarmpit/swarmpit",
+      "url": "https://github.com/swarmpit/swarmpit",
+      "language": "Clojure",
+      "stars": 3369,
+      "forks": 305,
+      "score": 92,
+      "license": "EPL-1.0"
+    },
+    {
+      "fullName": "thheller/shadow-cljs",
+      "url": "https://github.com/thheller/shadow-cljs",
+      "language": "Clojure",
+      "stars": 2374,
+      "forks": 184,
+      "score": 92,
+      "license": "EPL-1.0"
+    },
+    {
+      "fullName": "flow-storm/flow-storm-debugger",
+      "url": "https://github.com/flow-storm/flow-storm-debugger",
+      "language": "Clojure",
+      "stars": 830,
+      "forks": 38,
+      "score": 92,
+      "license": "Unlicense"
+    },
+    {
+      "fullName": "day8/re-frame-10x",
+      "url": "https://github.com/day8/re-frame-10x",
+      "language": "Clojure",
+      "stars": 649,
+      "forks": 69,
+      "score": 92,
+      "license": "MIT"
+    },
+    {
+      "fullName": "koalaman/shellcheck",
+      "url": "https://github.com/koalaman/shellcheck",
+      "language": "Haskell",
+      "stars": 38769,
+      "forks": 1892,
+      "score": 100,
+      "license": "GPL-3.0"
+    },
+    {
+      "fullName": "simonmichael/hledger",
+      "url": "https://github.com/simonmichael/hledger",
+      "language": "Haskell",
+      "stars": 3679,
+      "forks": 346,
+      "score": 100,
+      "license": "GPL-3.0"
+    },
+    {
+      "fullName": "xmonad/xmonad",
+      "url": "https://github.com/xmonad/xmonad",
+      "language": "Haskell",
+      "stars": 3520,
+      "forks": 295,
+      "score": 100,
+      "license": "BSD-3-Clause"
+    },
+    {
+      "fullName": "diku-dk/futhark",
+      "url": "https://github.com/diku-dk/futhark",
+      "language": "Haskell",
+      "stars": 2642,
+      "forks": 190,
+      "score": 100,
+      "license": "ISC"
+    },
+    {
+      "fullName": "fosskers/aura",
+      "url": "https://github.com/fosskers/aura",
+      "language": "Haskell",
+      "stars": 1877,
+      "forks": 121,
+      "score": 100,
+      "license": "GPL-3.0"
+    },
+    {
+      "fullName": "hadolint/hadolint",
+      "url": "https://github.com/hadolint/hadolint",
+      "language": "Haskell",
+      "stars": 11817,
+      "forks": 484,
+      "score": 98,
+      "license": "GPL-3.0"
+    },
+    {
+      "fullName": "simplex-chat/simplex-chat",
+      "url": "https://github.com/simplex-chat/simplex-chat",
+      "language": "Haskell",
+      "stars": 10162,
+      "forks": 539,
+      "score": 98,
+      "license": "AGPL-3.0"
+    },
+    {
+      "fullName": "digitallyinduced/ihp",
+      "url": "https://github.com/digitallyinduced/ihp",
+      "language": "Haskell",
+      "stars": 5190,
+      "forks": 214,
+      "score": 98,
+      "license": "MIT"
+    },
+    {
+      "fullName": "scotty-web/scotty",
+      "url": "https://github.com/scotty-web/scotty",
+      "language": "Haskell",
+      "stars": 1763,
+      "forks": 131,
+      "score": 98,
+      "license": "BSD-3-Clause"
+    },
+    {
+      "fullName": "matterhorn-chat/matterhorn",
+      "url": "https://github.com/matterhorn-chat/matterhorn",
+      "language": "Haskell",
+      "stars": 1109,
+      "forks": 79,
+      "score": 98,
+      "license": "BSD-3-Clause"
+    },
+    {
+      "fullName": "purescript/purescript",
+      "url": "https://github.com/purescript/purescript",
+      "language": "Haskell",
+      "stars": 8820,
+      "forks": 571,
+      "score": 96,
+      "license": "NOASSERTION"
+    },
+    {
+      "fullName": "b3nj5m1n/xdg-ninja",
+      "url": "https://github.com/b3nj5m1n/xdg-ninja",
+      "language": "Haskell",
+      "stars": 3066,
+      "forks": 178,
+      "score": 96,
+      "license": "MIT"
+    },
+    {
+      "fullName": "haskell/haskell-language-server",
+      "url": "https://github.com/haskell/haskell-language-server",
+      "language": "Haskell",
+      "stars": 2873,
+      "forks": 414,
+      "score": 96,
+      "license": "Apache-2.0"
+    },
+    {
+      "fullName": "jgm/pandoc",
+      "url": "https://github.com/jgm/pandoc",
+      "language": "Haskell",
+      "stars": 41219,
+      "forks": 3735,
+      "score": 95,
+      "license": "GPL-2.0"
+    },
+    {
+      "fullName": "PostgREST/postgrest",
+      "url": "https://github.com/PostgREST/postgrest",
+      "language": "Haskell",
+      "stars": 26314,
+      "forks": 1145,
+      "score": 95,
+      "license": "MIT"
+    },
+    {
+      "fullName": "dmjio/miso",
+      "url": "https://github.com/dmjio/miso",
+      "language": "Haskell",
+      "stars": 2356,
+      "forks": 158,
+      "score": 95,
+      "license": "BSD-3-Clause"
+    },
+    {
+      "fullName": "carp-lang/Carp",
+      "url": "https://github.com/carp-lang/Carp",
+      "language": "Haskell",
+      "stars": 5788,
+      "forks": 180,
+      "score": 94,
+      "license": "Apache-2.0"
+    },
+    {
+      "fullName": "agda/agda",
+      "url": "https://github.com/agda/agda",
+      "language": "Haskell",
+      "stars": 2773,
+      "forks": 394,
+      "score": 94,
+      "license": "NOASSERTION"
+    },
+    {
+      "fullName": "jtdaugherty/brick",
+      "url": "https://github.com/jtdaugherty/brick",
+      "language": "Haskell",
+      "stars": 1690,
+      "forks": 170,
+      "score": 94,
+      "license": "BSD-3-Clause"
+    },
+    {
+      "fullName": "reflex-frp/reflex",
+      "url": "https://github.com/reflex-frp/reflex",
+      "language": "Haskell",
+      "stars": 1100,
+      "forks": 150,
+      "score": 94,
+      "license": "BSD-3-Clause"
+    },
+    {
+      "fullName": "thma/LtuPatternFactory",
+      "url": "https://github.com/thma/LtuPatternFactory",
+      "language": "Haskell",
+      "stars": 1001,
+      "forks": 37,
+      "score": 94,
+      "license": "Apache-2.0"
+    },
+    {
+      "fullName": "unisonweb/unison",
+      "url": "https://github.com/unisonweb/unison",
+      "language": "Haskell",
+      "stars": 6458,
+      "forks": 291,
+      "score": 93,
+      "license": "NOASSERTION"
+    },
+    {
+      "fullName": "crytic/echidna",
+      "url": "https://github.com/crytic/echidna",
+      "language": "Haskell",
+      "stars": 3062,
+      "forks": 419,
+      "score": 93,
+      "license": "AGPL-3.0"
+    },
+    {
+      "fullName": "lamdu/lamdu",
+      "url": "https://github.com/lamdu/lamdu",
+      "language": "Haskell",
+      "stars": 1880,
+      "forks": 73,
+      "score": 93,
+      "license": "GPL-3.0"
+    },
+    {
+      "fullName": "maralorn/nix-output-monitor",
+      "url": "https://github.com/maralorn/nix-output-monitor",
+      "language": "Haskell",
+      "stars": 1342,
+      "forks": 45,
+      "score": 93,
+      "license": "AGPL-3.0"
+    },
+    {
+      "fullName": "mrkkrp/megaparsec",
+      "url": "https://github.com/mrkkrp/megaparsec",
+      "language": "Haskell",
+      "stars": 966,
+      "forks": 91,
+      "score": 93,
+      "license": "NOASSERTION"
+    },
+    {
+      "fullName": "AccelerateHS/accelerate",
+      "url": "https://github.com/AccelerateHS/accelerate",
+      "language": "Haskell",
+      "stars": 944,
+      "forks": 130,
+      "score": 93,
+      "license": "NOASSERTION"
+    },
+    {
+      "fullName": "plausible/analytics",
+      "url": "https://github.com/plausible/analytics",
+      "language": "Elixir",
+      "stars": 24028,
+      "forks": 1332,
+      "score": 100,
+      "license": "AGPL-3.0"
+    },
+    {
+      "fullName": "firezone/firezone",
+      "url": "https://github.com/firezone/firezone",
+      "language": "Elixir",
+      "stars": 8338,
+      "forks": 399,
+      "score": 100,
+      "license": "Apache-2.0"
+    },
+    {
+      "fullName": "supabase/realtime",
+      "url": "https://github.com/supabase/realtime",
+      "language": "Elixir",
+      "stars": 7453,
+      "forks": 409,
+      "score": 100,
+      "license": "Apache-2.0"
+    },
+    {
+      "fullName": "livebook-dev/livebook",
+      "url": "https://github.com/livebook-dev/livebook",
+      "language": "Elixir",
+      "stars": 5650,
+      "forks": 483,
+      "score": 100,
+      "license": "Apache-2.0"
+    },
+    {
+      "fullName": "rrrene/credo",
+      "url": "https://github.com/rrrene/credo",
+      "language": "Elixir",
+      "stars": 5113,
+      "forks": 433,
+      "score": 100,
+      "license": "MIT"
+    },
+    {
+      "fullName": "mtrudel/bandit",
+      "url": "https://github.com/mtrudel/bandit",
+      "language": "Elixir",
+      "stars": 1861,
+      "forks": 101,
+      "score": 100,
+      "license": "MIT"
+    },
+    {
+      "fullName": "elixir-nx/bumblebee",
+      "url": "https://github.com/elixir-nx/bumblebee",
+      "language": "Elixir",
+      "stars": 1569,
+      "forks": 123,
+      "score": 100,
+      "license": "Apache-2.0"
+    },
+    {
+      "fullName": "teslamate-org/teslamate",
+      "url": "https://github.com/teslamate-org/teslamate",
+      "language": "Elixir",
+      "stars": 7476,
+      "forks": 892,
+      "score": 98,
+      "license": "MIT"
+    },
+    {
+      "fullName": "thechangelog/changelog.com",
+      "url": "https://github.com/thechangelog/changelog.com",
+      "language": "Elixir",
+      "stars": 2760,
+      "forks": 247,
+      "score": 98,
+      "license": "NOASSERTION"
+    },
+    {
+      "fullName": "dashbitco/broadway",
+      "url": "https://github.com/dashbitco/broadway",
+      "language": "Elixir",
+      "stars": 2599,
+      "forks": 170,
+      "score": 98,
+      "license": "Apache-2.0"
+    },
+    {
+      "fullName": "philss/floki",
+      "url": "https://github.com/philss/floki",
+      "language": "Elixir",
+      "stars": 2131,
+      "forks": 163,
+      "score": 98,
+      "license": "MIT"
+    },
+    {
+      "fullName": "elixir-tesla/tesla",
+      "url": "https://github.com/elixir-tesla/tesla",
+      "language": "Elixir",
+      "stars": 2062,
+      "forks": 357,
+      "score": 98,
+      "license": "MIT"
+    },
+    {
+      "fullName": "sequinstream/sequin",
+      "url": "https://github.com/sequinstream/sequin",
+      "language": "Elixir",
+      "stars": 1870,
+      "forks": 104,
+      "score": 98,
+      "license": "MIT"
+    },
+    {
+      "fullName": "whitfin/cachex",
+      "url": "https://github.com/whitfin/cachex",
+      "language": "Elixir",
+      "stars": 1720,
+      "forks": 117,
+      "score": 98,
+      "license": "MIT"
+    },
+    {
+      "fullName": "mirego/accent",
+      "url": "https://github.com/mirego/accent",
+      "language": "Elixir",
+      "stars": 1462,
+      "forks": 116,
+      "score": 98,
+      "license": "BSD-3-Clause"
+    },
+    {
+      "fullName": "elixirs/faker",
+      "url": "https://github.com/elixirs/faker",
+      "language": "Elixir",
+      "stars": 1169,
+      "forks": 226,
+      "score": 98,
+      "license": "MIT"
+    },
+    {
+      "fullName": "beam-community/bamboo",
+      "url": "https://github.com/beam-community/bamboo",
+      "language": "Elixir",
+      "stars": 1950,
+      "forks": 340,
+      "score": 97,
+      "license": "MIT"
+    },
+    {
+      "fullName": "asciinema/asciinema-server",
+      "url": "https://github.com/asciinema/asciinema-server",
+      "language": "Elixir",
+      "stars": 2433,
+      "forks": 281,
+      "score": 96,
+      "license": "Apache-2.0"
+    },
+    {
+      "fullName": "supabase/supavisor",
+      "url": "https://github.com/supabase/supavisor",
+      "language": "Elixir",
+      "stars": 2120,
+      "forks": 88,
+      "score": 96,
+      "license": "Apache-2.0"
+    },
+    {
+      "fullName": "elixir-lsp/elixir-ls",
+      "url": "https://github.com/elixir-lsp/elixir-ls",
+      "language": "Elixir",
+      "stars": 1719,
+      "forks": 223,
+      "score": 96,
+      "license": "Apache-2.0"
+    },
+    {
+      "fullName": "beam-community/elixir-companies",
+      "url": "https://github.com/beam-community/elixir-companies",
+      "language": "Elixir",
+      "stars": 1661,
+      "forks": 382,
+      "score": 96,
+      "license": "MIT"
+    },
+    {
+      "fullName": "woutdp/live_svelte",
+      "url": "https://github.com/woutdp/live_svelte",
+      "language": "Elixir",
+      "stars": 1610,
+      "forks": 73,
+      "score": 96,
+      "license": "MIT"
+    },
+    {
+      "fullName": "membraneframework/membrane_core",
+      "url": "https://github.com/membraneframework/membrane_core",
+      "language": "Elixir",
+      "stars": 1447,
+      "forks": 43,
+      "score": 96,
+      "license": "Apache-2.0"
+    },
+    {
+      "fullName": "elixir-mint/mint",
+      "url": "https://github.com/elixir-mint/mint",
+      "language": "Elixir",
+      "stars": 1408,
+      "forks": 115,
+      "score": 96,
+      "license": "Apache-2.0"
+    },
+    {
+      "fullName": "elixir-nebulex/nebulex",
+      "url": "https://github.com/elixir-nebulex/nebulex",
+      "language": "Elixir",
+      "stars": 1370,
+      "forks": 78,
+      "score": 96,
+      "license": "MIT"
+    },
+    {
+      "fullName": "BeaconCMS/beacon",
+      "url": "https://github.com/BeaconCMS/beacon",
+      "language": "Elixir",
+      "stars": 1219,
+      "forks": 123,
+      "score": 96,
+      "license": "MIT"
+    },
+    {
+      "fullName": "brainlid/langchain",
+      "url": "https://github.com/brainlid/langchain",
+      "language": "Elixir",
+      "stars": 1033,
+      "forks": 176,
+      "score": 96,
+      "license": "NOASSERTION"
+    },
+    {
+      "fullName": "wanghongenpin/proxypin",
+      "url": "https://github.com/wanghongenpin/proxypin",
+      "language": "Dart",
+      "stars": 11341,
+      "forks": 992,
+      "score": 100,
+      "license": "Apache-2.0"
+    },
+    {
+      "fullName": "leoafarias/fvm",
+      "url": "https://github.com/leoafarias/fvm",
+      "language": "Dart",
+      "stars": 5289,
+      "forks": 272,
+      "score": 100,
+      "license": "MIT"
+    },
+    {
+      "fullName": "fzyzcjy/flutter_rust_bridge",
+      "url": "https://github.com/fzyzcjy/flutter_rust_bridge",
+      "language": "Dart",
+      "stars": 5031,
+      "forks": 377,
+      "score": 100,
+      "license": "MIT"
+    },
+    {
+      "fullName": "namidaco/namida",
+      "url": "https://github.com/namidaco/namida",
+      "language": "Dart",
+      "stars": 4653,
+      "forks": 260,
+      "score": 100,
+      "license": "NOASSERTION"
+    },
+    {
+      "fullName": "jiangtian616/JHenTai",
+      "url": "https://github.com/jiangtian616/JHenTai",
+      "language": "Dart",
+      "stars": 4582,
+      "forks": 131,
+      "score": 100,
+      "license": "Apache-2.0"
+    },
+    {
+      "fullName": "harmonoid/harmonoid",
+      "url": "https://github.com/harmonoid/harmonoid",
+      "language": "Dart",
+      "stars": 4316,
+      "forks": 237,
+      "score": 100,
+      "license": "NOASSERTION"
+    },
+    {
+      "fullName": "deckerst/aves",
+      "url": "https://github.com/deckerst/aves",
+      "language": "Dart",
+      "stars": 4270,
+      "forks": 155,
+      "score": 100,
+      "license": "BSD-3-Clause"
+    },
+    {
+      "fullName": "saber-notes/saber",
+      "url": "https://github.com/saber-notes/saber",
+      "language": "Dart",
+      "stars": 3968,
+      "forks": 260,
+      "score": 100,
+      "license": "GPL-3.0"
+    },
+    {
+      "fullName": "gokadzev/Musify",
+      "url": "https://github.com/gokadzev/Musify",
+      "language": "Dart",
+      "stars": 3568,
+      "forks": 330,
+      "score": 100,
+      "license": "GPL-3.0"
+    },
+    {
+      "fullName": "VeryGoodOpenSource/very_good_cli",
+      "url": "https://github.com/VeryGoodOpenSource/very_good_cli",
+      "language": "Dart",
+      "stars": 2326,
+      "forks": 228,
+      "score": 100,
+      "license": "MIT"
+    },
+    {
+      "fullName": "kubenav/kubenav",
+      "url": "https://github.com/kubenav/kubenav",
+      "language": "Dart",
+      "stars": 2236,
+      "forks": 141,
+      "score": 100,
+      "license": "MIT"
+    },
+    {
+      "fullName": "kubenav/kubenav",
+      "url": "https://github.com/kubenav/kubenav",
+      "language": "Dart",
+      "stars": 2236,
+      "forks": 141,
+      "score": 100,
+      "license": "MIT"
+    },
+    {
+      "fullName": "LinwoodDev/Butterfly",
+      "url": "https://github.com/LinwoodDev/Butterfly",
+      "language": "Dart",
+      "stars": 1642,
+      "forks": 123,
+      "score": 100,
+      "license": "AGPL-3.0"
+    },
+    {
+      "fullName": "localsend/localsend",
+      "url": "https://github.com/localsend/localsend",
+      "language": "Dart",
+      "stars": 72770,
+      "forks": 3894,
+      "score": 99,
+      "license": "Apache-2.0"
+    },
+    {
+      "fullName": "mulaRahul/keyviz",
+      "url": "https://github.com/mulaRahul/keyviz",
+      "language": "Dart",
+      "stars": 8702,
+      "forks": 298,
+      "score": 99,
+      "license": "GPL-3.0"
+    },
+    {
+      "fullName": "sass/dart-sass",
+      "url": "https://github.com/sass/dart-sass",
+      "language": "Dart",
+      "stars": 4163,
+      "forks": 373,
+      "score": 99,
+      "license": "MIT"
+    },
+    {
+      "fullName": "shorebirdtech/shorebird",
+      "url": "https://github.com/shorebirdtech/shorebird",
+      "language": "Dart",
+      "stars": 2879,
+      "forks": 198,
+      "score": 99,
+      "license": "NOASSERTION"
+    },
+    {
+      "fullName": "flutter/flutter",
+      "url": "https://github.com/flutter/flutter",
+      "language": "Dart",
+      "stars": 174568,
+      "forks": 29789,
+      "score": 98,
+      "license": "BSD-3-Clause"
+    },
+    {
+      "fullName": "AppFlowy-IO/AppFlowy",
+      "url": "https://github.com/AppFlowy-IO/AppFlowy",
+      "language": "Dart",
+      "stars": 67328,
+      "forks": 4820,
+      "score": 98,
+      "license": "AGPL-3.0"
+    },
+    {
+      "fullName": "KRTirtho/spotube",
+      "url": "https://github.com/KRTirtho/spotube",
+      "language": "Dart",
+      "stars": 43478,
+      "forks": 1950,
+      "score": 98,
+      "license": "NOASSERTION"
+    },
+    {
+      "fullName": "chen08209/FlClash",
+      "url": "https://github.com/chen08209/FlClash",
+      "language": "Dart",
+      "stars": 28708,
+      "forks": 1730,
+      "score": 98,
+      "license": "GPL-3.0"
+    },
+    {
+      "fullName": "bagisto/opensource-ecommerce-mobile-app",
+      "url": "https://github.com/bagisto/opensource-ecommerce-mobile-app",
+      "language": "Dart",
+      "stars": 13450,
+      "forks": 239,
+      "score": 98,
+      "license": "MIT"
+    },
+    {
+      "fullName": "cfug/dio",
+      "url": "https://github.com/cfug/dio",
+      "language": "Dart",
+      "stars": 12780,
+      "forks": 1550,
+      "score": 98,
+      "license": "MIT"
+    },
+    {
+      "fullName": "rrousselGit/riverpod",
+      "url": "https://github.com/rrousselGit/riverpod",
+      "language": "Dart",
+      "stars": 7068,
+      "forks": 1061,
+      "score": 98,
+      "license": "MIT"
+    },
+    {
+      "fullName": "ComicSparks/jasmine",
+      "url": "https://github.com/ComicSparks/jasmine",
+      "language": "Dart",
+      "stars": 4758,
+      "forks": 344,
+      "score": 98,
+      "license": "MIT"
+    },
+    {
+      "fullName": "CarGuo/gsy_flutter_demo",
+      "url": "https://github.com/CarGuo/gsy_flutter_demo",
+      "language": "Dart",
+      "stars": 3349,
+      "forks": 535,
+      "score": 98,
+      "license": "MIT"
+    },
+    {
+      "fullName": "simolus3/drift",
+      "url": "https://github.com/simolus3/drift",
+      "language": "Dart",
+      "stars": 3112,
+      "forks": 438,
+      "score": 98,
+      "license": "MIT"
+    },
+    {
+      "fullName": "IndrajeetPatil/ggstatsplot",
+      "url": "https://github.com/IndrajeetPatil/ggstatsplot",
+      "language": "R",
+      "stars": 2150,
+      "forks": 204,
+      "score": 98,
+      "license": "NOASSERTION"
+    },
+    {
+      "fullName": "paul-buerkner/brms",
+      "url": "https://github.com/paul-buerkner/brms",
+      "language": "R",
+      "stars": 1372,
+      "forks": 207,
+      "score": 98,
+      "license": "GPL-2.0"
+    },
+    {
+      "fullName": "slowkow/ggrepel",
+      "url": "https://github.com/slowkow/ggrepel",
+      "language": "R",
+      "stars": 1246,
+      "forks": 94,
+      "score": 98,
+      "license": "GPL-3.0"
+    },
+    {
+      "fullName": "easystats/performance",
+      "url": "https://github.com/easystats/performance",
+      "language": "R",
+      "stars": 1119,
+      "forks": 104,
+      "score": 98,
+      "license": "GPL-3.0"
+    },
+    {
+      "fullName": "rstudio/gt",
+      "url": "https://github.com/rstudio/gt",
+      "language": "R",
+      "stars": 2136,
+      "forks": 218,
+      "score": 96,
+      "license": "NOASSERTION"
+    },
+    {
+      "fullName": "ddsjoberg/gtsummary",
+      "url": "https://github.com/ddsjoberg/gtsummary",
+      "language": "R",
+      "stars": 1159,
+      "forks": 141,
+      "score": 96,
+      "license": "NOASSERTION"
+    },
+    {
+      "fullName": "ropensci/targets",
+      "url": "https://github.com/ropensci/targets",
+      "language": "R",
+      "stars": 1039,
+      "forks": 78,
+      "score": 96,
+      "license": "NOASSERTION"
+    },
+    {
+      "fullName": "EmilHvitfeldt/paletteer",
+      "url": "https://github.com/EmilHvitfeldt/paletteer",
+      "language": "R",
+      "stars": 1021,
+      "forks": 52,
+      "score": 95,
+      "license": "NOASSERTION"
+    },
+    {
+      "fullName": "MichelNivard/gptstudio",
+      "url": "https://github.com/MichelNivard/gptstudio",
+      "language": "R",
+      "stars": 980,
+      "forks": 120,
+      "score": 95,
+      "license": "NOASSERTION"
+    },
+    {
+      "fullName": "rich-iannone/DiagrammeR",
+      "url": "https://github.com/rich-iannone/DiagrammeR",
+      "language": "R",
+      "stars": 1731,
+      "forks": 248,
+      "score": 94,
+      "license": "NOASSERTION"
+    },
+    {
+      "fullName": "mlr-org/mlr3",
+      "url": "https://github.com/mlr-org/mlr3",
+      "language": "R",
+      "stars": 1044,
+      "forks": 94,
+      "score": 93,
+      "license": "LGPL-3.0"
+    },
+    {
+      "fullName": "easystats/see",
+      "url": "https://github.com/easystats/see",
+      "language": "R",
+      "stars": 937,
+      "forks": 46,
+      "score": 93,
+      "license": "NOASSERTION"
+    },
+    {
+      "fullName": "gesiscss/awesome-computational-social-science",
+      "url": "https://github.com/gesiscss/awesome-computational-social-science",
+      "language": "R",
+      "stars": 802,
+      "forks": 96,
+      "score": 93,
+      "license": "CC0-1.0"
+    },
+    {
+      "fullName": "nanxstats/ggsci",
+      "url": "https://github.com/nanxstats/ggsci",
+      "language": "R",
+      "stars": 717,
+      "forks": 68,
+      "score": 93,
+      "license": "GPL-3.0"
+    },
+    {
+      "fullName": "nanxstats/ggsci",
+      "url": "https://github.com/nanxstats/ggsci",
+      "language": "R",
+      "stars": 717,
+      "forks": 68,
+      "score": 93,
+      "license": "GPL-3.0"
+    },
+    {
+      "fullName": "massimoaria/bibliometrix",
+      "url": "https://github.com/massimoaria/bibliometrix",
+      "language": "R",
+      "stars": 593,
+      "forks": 163,
+      "score": 93,
+      "license": "NOASSERTION"
+    },
+    {
+      "fullName": "easystats/bayestestR",
+      "url": "https://github.com/easystats/bayestestR",
+      "language": "R",
+      "stars": 587,
+      "forks": 62,
+      "score": 93,
+      "license": "GPL-3.0"
+    },
+    {
+      "fullName": "juliasilge/tidytext",
+      "url": "https://github.com/juliasilge/tidytext",
+      "language": "R",
+      "stars": 1198,
+      "forks": 183,
+      "score": 92,
+      "license": "NOASSERTION"
+    },
+    {
+      "fullName": "rstudio/tinytex",
+      "url": "https://github.com/rstudio/tinytex",
+      "language": "R",
+      "stars": 1070,
+      "forks": 122,
+      "score": 92,
+      "license": "NOASSERTION"
+    },
+    {
+      "fullName": "rstudio/pointblank",
+      "url": "https://github.com/rstudio/pointblank",
+      "language": "R",
+      "stars": 1017,
+      "forks": 59,
+      "score": 92,
+      "license": "NOASSERTION"
+    },
+    {
+      "fullName": "easystats/easystats",
+      "url": "https://github.com/easystats/easystats",
+      "language": "R",
+      "stars": 1149,
+      "forks": 84,
+      "score": 91,
+      "license": "NOASSERTION"
+    },
+    {
+      "fullName": "dselivanov/text2vec",
+      "url": "https://github.com/dselivanov/text2vec",
+      "language": "R",
+      "stars": 867,
+      "forks": 134,
+      "score": 91,
+      "license": "NOASSERTION"
+    },
+    {
+      "fullName": "daattali/shinyjs",
+      "url": "https://github.com/daattali/shinyjs",
+      "language": "R",
+      "stars": 748,
+      "forks": 118,
+      "score": 91,
+      "license": "NOASSERTION"
+    },
+    {
+      "fullName": "easystats/report",
+      "url": "https://github.com/easystats/report",
+      "language": "R",
+      "stars": 710,
+      "forks": 73,
+      "score": 91,
+      "license": "NOASSERTION"
+    },
+    {
+      "fullName": "r-lidar/lidR",
+      "url": "https://github.com/r-lidar/lidR",
+      "language": "R",
+      "stars": 668,
+      "forks": 138,
+      "score": 91,
+      "license": "GPL-3.0"
+    },
+    {
+      "fullName": "easystats/report",
+      "url": "https://github.com/easystats/report",
+      "language": "R",
+      "stars": 710,
+      "forks": 73,
+      "score": 91,
+      "license": "NOASSERTION"
+    },
+    {
+      "fullName": "r-lidar/lidR",
+      "url": "https://github.com/r-lidar/lidR",
+      "language": "R",
+      "stars": 668,
+      "forks": 138,
+      "score": 91,
+      "license": "GPL-3.0"
+    },
+    {
+      "fullName": "scalalandio/chimney",
+      "url": "https://github.com/scalalandio/chimney",
+      "language": "Scala",
+      "stars": 1239,
+      "forks": 109,
+      "score": 100,
+      "license": "Apache-2.0"
+    },
+    {
+      "fullName": "lichess-org/lila",
+      "url": "https://github.com/lichess-org/lila",
+      "language": "Scala",
+      "stars": 17549,
+      "forks": 2530,
+      "score": 98,
+      "license": "AGPL-3.0"
+    },
+    {
+      "fullName": "softwaremill/elasticmq",
+      "url": "https://github.com/softwaremill/elasticmq",
+      "language": "Scala",
+      "stars": 2782,
+      "forks": 202,
+      "score": 98,
+      "license": "Apache-2.0"
+    },
+    {
+      "fullName": "com-lihaoyi/mill",
+      "url": "https://github.com/com-lihaoyi/mill",
+      "language": "Scala",
+      "stars": 2662,
+      "forks": 425,
+      "score": 98,
+      "license": "MIT"
+    },
+    {
+      "fullName": "scalikejdbc/scalikejdbc",
+      "url": "https://github.com/scalikejdbc/scalikejdbc",
+      "language": "Scala",
+      "stars": 1279,
+      "forks": 229,
+      "score": 98,
+      "license": "Apache-2.0"
+    },
+    {
+      "fullName": "gitbucket/gitbucket",
+      "url": "https://github.com/gitbucket/gitbucket",
+      "language": "Scala",
+      "stars": 9335,
+      "forks": 1260,
+      "score": 97,
+      "license": "Apache-2.0"
+    },
+    {
+      "fullName": "scala/scala",
+      "url": "https://github.com/scala/scala",
+      "language": "Scala",
+      "stars": 14436,
+      "forks": 3102,
+      "score": 96,
+      "license": "Apache-2.0"
+    },
+    {
+      "fullName": "akka/akka-core",
+      "url": "https://github.com/akka/akka-core",
+      "language": "Scala",
+      "stars": 13249,
+      "forks": 3584,
+      "score": 96,
+      "license": "NOASSERTION"
+    },
+    {
+      "fullName": "playframework/playframework",
+      "url": "https://github.com/playframework/playframework",
+      "language": "Scala",
+      "stars": 12620,
+      "forks": 4072,
+      "score": 96,
+      "license": "Apache-2.0"
+    },
+    {
+      "fullName": "apache/openwhisk",
+      "url": "https://github.com/apache/openwhisk",
+      "language": "Scala",
+      "stars": 6743,
+      "forks": 1174,
+      "score": 96,
+      "license": "Apache-2.0"
+    },
+    {
+      "fullName": "zio/zio",
+      "url": "https://github.com/zio/zio",
+      "language": "Scala",
+      "stars": 4331,
+      "forks": 1382,
+      "score": 96,
+      "license": "Apache-2.0"
+    },
+    {
+      "fullName": "scalatra/scalatra",
+      "url": "https://github.com/scalatra/scalatra",
+      "language": "Scala",
+      "stars": 2650,
+      "forks": 341,
+      "score": 96,
+      "license": "NOASSERTION"
+    },
+    {
+      "fullName": "spotify/scio",
+      "url": "https://github.com/spotify/scio",
+      "language": "Scala",
+      "stars": 2613,
+      "forks": 525,
+      "score": 96,
+      "license": "Apache-2.0"
+    },
+    {
+      "fullName": "ucb-bar/chipyard",
+      "url": "https://github.com/ucb-bar/chipyard",
+      "language": "Scala",
+      "stars": 2088,
+      "forks": 799,
+      "score": 96,
+      "license": "BSD-3-Clause"
+    },
+    {
+      "fullName": "foundweekends/giter8",
+      "url": "https://github.com/foundweekends/giter8",
+      "language": "Scala",
+      "stars": 1754,
+      "forks": 225,
+      "score": 96,
+      "license": "Apache-2.0"
+    },
+    {
+      "fullName": "pureconfig/pureconfig",
+      "url": "https://github.com/pureconfig/pureconfig",
+      "language": "Scala",
+      "stars": 1529,
+      "forks": 181,
+      "score": 96,
+      "license": "MPL-2.0"
+    },
+    {
+      "fullName": "apache/pekko",
+      "url": "https://github.com/apache/pekko",
+      "language": "Scala",
+      "stars": 1511,
+      "forks": 186,
+      "score": 96,
+      "license": "Apache-2.0"
+    },
+    {
+      "fullName": "lloydmeta/enumeratum",
+      "url": "https://github.com/lloydmeta/enumeratum",
+      "language": "Scala",
+      "stars": 1219,
+      "forks": 152,
+      "score": 96,
+      "license": "MIT"
+    },
+    {
+      "fullName": "scala-steward-org/scala-steward",
+      "url": "https://github.com/scala-steward-org/scala-steward",
+      "language": "Scala",
+      "stars": 1189,
+      "forks": 510,
+      "score": 96,
+      "license": "Apache-2.0"
+    },
+    {
+      "fullName": "graphframes/graphframes",
+      "url": "https://github.com/graphframes/graphframes",
+      "language": "Scala",
+      "stars": 1128,
+      "forks": 260,
+      "score": 96,
+      "license": "Apache-2.0"
+    },
+    {
+      "fullName": "apache/spark",
+      "url": "https://github.com/apache/spark",
+      "language": "Scala",
+      "stars": 42591,
+      "forks": 28989,
+      "score": 95,
+      "license": "Apache-2.0"
+    },
+    {
+      "fullName": "scala-native/scala-native",
+      "url": "https://github.com/scala-native/scala-native",
+      "language": "Scala",
+      "stars": 4623,
+      "forks": 379,
+      "score": 95,
+      "license": "NOASSERTION"
+    },
+    {
+      "fullName": "ThoughtWorksInc/Binding.scala",
+      "url": "https://github.com/ThoughtWorksInc/Binding.scala",
+      "language": "Scala",
+      "stars": 1584,
+      "forks": 102,
+      "score": 95,
+      "license": "MIT"
+    },
+    {
+      "fullName": "wavesplatform/Waves",
+      "url": "https://github.com/wavesplatform/Waves",
+      "language": "Scala",
+      "stars": 1173,
+      "forks": 428,
+      "score": 95,
+      "license": "MIT"
+    },
+    {
+      "fullName": "sscarduzio/elasticsearch-readonlyrest-plugin",
+      "url": "https://github.com/sscarduzio/elasticsearch-readonlyrest-plugin",
+      "language": "Scala",
+      "stars": 956,
+      "forks": 162,
+      "score": 95,
+      "license": "GPL-3.0"
+    },
+    {
+      "fullName": "raquo/Laminar",
+      "url": "https://github.com/raquo/Laminar",
+      "language": "Scala",
+      "stars": 820,
+      "forks": 56,
+      "score": 95,
+      "license": "MIT"
+    },
+    {
+      "fullName": "sscarduzio/elasticsearch-readonlyrest-plugin",
+      "url": "https://github.com/sscarduzio/elasticsearch-readonlyrest-plugin",
+      "language": "Scala",
+      "stars": 956,
+      "forks": 162,
+      "score": 95,
+      "license": "GPL-3.0"
+    },
+    {
+      "fullName": "xyflow/xyflow",
+      "url": "https://github.com/xyflow/xyflow",
+      "language": "TypeScript",
+      "stars": 34611,
+      "forks": 2260,
+      "score": 100,
+      "license": "MIT"
+    },
+    {
+      "fullName": "ueberdosis/tiptap",
+      "url": "https://github.com/ueberdosis/tiptap",
+      "language": "TypeScript",
+      "stars": 34367,
+      "forks": 2818,
+      "score": 100,
+      "license": "MIT"
+    },
+    {
+      "fullName": "TriliumNext/Trilium",
+      "url": "https://github.com/TriliumNext/Trilium",
+      "language": "TypeScript",
+      "stars": 33882,
+      "forks": 2248,
+      "score": 100,
+      "license": "AGPL-3.0"
+    },
+    {
+      "fullName": "refinedev/refine",
+      "url": "https://github.com/refinedev/refine",
+      "language": "TypeScript",
+      "stars": 33784,
+      "forks": 2889,
+      "score": 100,
+      "license": "MIT"
+    },
+    {
+      "fullName": "hasura/graphql-engine",
+      "url": "https://github.com/hasura/graphql-engine",
+      "language": "TypeScript",
+      "stars": 31865,
+      "forks": 2853,
+      "score": 100,
+      "license": "Apache-2.0"
+    },
+    {
+      "fullName": "motiondivision/motion",
+      "url": "https://github.com/motiondivision/motion",
+      "language": "TypeScript",
+      "stars": 30661,
+      "forks": 1074,
+      "score": 100,
+      "license": "MIT"
+    },
+    {
+      "fullName": "transloadit/uppy",
+      "url": "https://github.com/transloadit/uppy",
+      "language": "TypeScript",
+      "stars": 30555,
+      "forks": 2090,
+      "score": 100,
+      "license": "MIT"
+    },
+    {
+      "fullName": "refined-github/refined-github",
+      "url": "https://github.com/refined-github/refined-github",
+      "language": "TypeScript",
+      "stars": 30016,
+      "forks": 1645,
+      "score": 100,
+      "license": "MIT"
+    },
+    {
+      "fullName": "cheeriojs/cheerio",
+      "url": "https://github.com/cheeriojs/cheerio",
+      "language": "TypeScript",
+      "stars": 29988,
+      "forks": 1681,
+      "score": 100,
+      "license": "MIT"
+    },
+    {
+      "fullName": "bigint/hey",
+      "url": "https://github.com/bigint/hey",
+      "language": "TypeScript",
+      "stars": 29517,
+      "forks": 1800,
+      "score": 100,
+      "license": "GPL-3.0"
+    },
+    {
+      "fullName": "statelyai/xstate",
+      "url": "https://github.com/statelyai/xstate",
+      "language": "TypeScript",
+      "stars": 29097,
+      "forks": 1342,
+      "score": 100,
+      "license": "MIT"
+    },
+    {
+      "fullName": "blakeblackshear/frigate",
+      "url": "https://github.com/blakeblackshear/frigate",
+      "language": "TypeScript",
+      "stars": 28574,
+      "forks": 2672,
+      "score": 100,
+      "license": "MIT"
+    },
+    {
+      "fullName": "nrwl/nx",
+      "url": "https://github.com/nrwl/nx",
+      "language": "TypeScript",
+      "stars": 27854,
+      "forks": 2643,
+      "score": 100,
+      "license": "MIT"
+    },
+    {
+      "fullName": "Budibase/budibase",
+      "url": "https://github.com/Budibase/budibase",
+      "language": "TypeScript",
+      "stars": 27515,
+      "forks": 2066,
+      "score": 100,
+      "license": "NOASSERTION"
+    }
+  ]
+}

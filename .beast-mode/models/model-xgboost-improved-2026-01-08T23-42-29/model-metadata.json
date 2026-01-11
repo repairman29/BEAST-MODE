@@ -1,0 +1,105 @@
+{
+  "model_type": "xgboost",
+  "version": "improved-v1.0.0",
+  "training_date": "2026-01-08T23-42-29",
+  "training_size": 500,
+  "features": 34,
+  "metrics": {
+    "r2_train": 0.013659477233886719,
+    "r2_test": 0.006008803844451904,
+    "r2": 0.006008803844451904,
+    "r2_cv_mean": -0.023201191425323488,
+    "r2_cv_std": 0.018878547000092855,
+    "mae": 0.08580605685710907,
+    "rmse": 0.11603280848908419
+  },
+  "top_features": [
+    [
+      "stars",
+      0.15723365545272827
+    ],
+    [
+      "openIssues",
+      0.11267780512571335
+    ],
+    [
+      "engagement_rate",
+      0.10183601081371307
+    ],
+    [
+      "codeFileCount",
+      0.1015438437461853
+    ],
+    [
+      "forks",
+      0
+    ],
+    [
+      "fileCount",
+      0
+    ],
+    [
+      "totalFiles",
+      0
+    ],
+    [
+      "hasReadme",
+      0
+    ],
+    [
+      "hasTests",
+      0
+    ],
+    [
+      "hasCI",
+      0
+    ],
+    [
+      "hasLicense",
+      0
+    ],
+    [
+      "hasDocker",
+      0
+    ],
+    [
+      "hasDescription",
+      0
+    ],
+    [
+      "repoAgeDays",
+      0
+    ],
+    [
+      "daysSincePush",
+      0
+    ],
+    [
+      "isActive",
+      0
+    ],
+    [
+      "codeFileRatio",
+      0
+    ],
+    [
+      "starsForksRatio",
+      0
+    ],
+    [
+      "starsPerFile",
+      0
+    ],
+    [
+      "engagementPerIssue",
+      0
+    ]
+  ],
+  "hyperparameters": {
+    "max_depth": 3,
+    "learning_rate": 0.05,
+    "n_estimators": 200,
+    "reg_alpha": 0.2,
+    "reg_lambda": 2.0
+  }
+}

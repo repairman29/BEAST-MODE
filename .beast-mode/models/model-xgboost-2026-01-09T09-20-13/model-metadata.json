@@ -1,0 +1,142 @@
+{
+  "algorithm": "xgboost",
+  "metrics": {
+    "r2_train": 0.1303814496634954,
+    "r2_test": -0.024945499882170097,
+    "r2": -0.024945499882170097,
+    "r2_cv_mean": 0.018843081310784205,
+    "r2_cv_std": 0.013807431467523206,
+    "mae": 0.08967759151757917,
+    "rmse": 0.11852977747992899
+  },
+  "feature_names": [
+    "avgFileSize",
+    "blankLines",
+    "codeFileCount",
+    "codeFileRatio",
+    "codeLines",
+    "codeQualityScore",
+    "commentLines",
+    "commitCount",
+    "communityHealth",
+    "contributorCount",
+    "daysSinceCreated",
+    "daysSincePush",
+    "daysSinceUpdate",
+    "daysSinceUpdated",
+    "engagementPerIssue",
+    "fileCount",
+    "forks",
+    "hasCI",
+    "hasChangelog",
+    "hasConfig",
+    "hasContributing",
+    "hasDescription",
+    "hasDocker",
+    "hasDocumentation",
+    "hasExamples",
+    "hasLicense",
+    "hasReadme",
+    "hasReleases",
+    "hasSecurityPolicy",
+    "hasTests",
+    "hasTopics",
+    "isActive",
+    "languageCount",
+    "openIssues",
+    "readmeLength",
+    "repoAgeDays",
+    "repoSizeKB",
+    "stars",
+    "starsForksRatio",
+    "starsPerFile",
+    "testCoverage",
+    "totalFiles",
+    "totalIssues",
+    "totalLines",
+    "watchers"
+  ],
+  "feature_importance": [
+    [
+      "engagementPerIssue",
+      0.039140455424785614
+    ],
+    [
+      "daysSincePush",
+      0.037272319197654724
+    ],
+    [
+      "totalFiles",
+      0.034093912690877914
+    ],
+    [
+      "openIssues",
+      0.03199495002627373
+    ],
+    [
+      "starsPerFile",
+      0.028846552595496178
+    ],
+    [
+      "communityHealth",
+      0.028077909722924232
+    ],
+    [
+      "hasDescription",
+      0.026596957817673683
+    ],
+    [
+      "codeFileCount",
+      0.024643491953611374
+    ],
+    [
+      "stars",
+      0.024529267102479935
+    ],
+    [
+      "forks",
+      0.022778667509555817
+    ],
+    [
+      "repoAgeDays",
+      0.02082364819943905
+    ],
+    [
+      "daysSinceUpdate",
+      0.02074788510799408
+    ],
+    [
+      "hasDocker",
+      0.019950760528445244
+    ],
+    [
+      "hasReadme",
+      0.017279591411352158
+    ],
+    [
+      "codeQualityScore",
+      0.016546733677387238
+    ],
+    [
+      "codeFileRatio",
+      0.01387625653296709
+    ],
+    [
+      "fileCount",
+      0.013826635666191578
+    ],
+    [
+      "starsForksRatio",
+      0.007131610065698624
+    ],
+    [
+      "hasLicense",
+      0.00016749650239944458
+    ],
+    [
+      "avgFileSize",
+      0
+    ]
+  ],
+  "trainedAt": "2026-01-09T09:20:13.262394"
+}

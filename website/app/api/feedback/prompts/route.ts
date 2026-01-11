@@ -42,7 +42,7 @@ async function getFeedbackCollector() {
       // Fallback: try dynamic import
     try {
       // @ts-expect-error - Dynamic import path, module may not exist at build time
-      const module = await import(/* webpackIgnore: true */ '../../../../../../lib/mlops/feedbackCollector').catch(() => null);
+      const module = await import(/* webpackIgnore: true */ '@/lib/mlops/feedbackCollector').catch(() => null);
       if (module?.getFeedbackCollector) {
         const collector = await module.getFeedbackCollector();
         if (collector && !collector.initialized) {

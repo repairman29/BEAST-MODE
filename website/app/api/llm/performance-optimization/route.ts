@@ -13,7 +13,7 @@ import { NextRequest, NextResponse } from 'next/server';
 let performanceOptimizer: any = null;
 
 try {
-  const optimizerModule = require('../../../../../lib/mlops/performanceOptimizer');
+  const optimizerModule = require('@/lib/mlops/performanceOptimizer');
   if (optimizerModule.PerformanceOptimizer) {
     performanceOptimizer = new optimizerModule.PerformanceOptimizer();
   } else {

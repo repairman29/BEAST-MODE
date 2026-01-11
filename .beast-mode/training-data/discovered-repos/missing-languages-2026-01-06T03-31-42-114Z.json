@@ -1,0 +1,155 @@
+{
+  "metadata": {
+    "discoveredAt": "2026-01-06T03:31:42.116Z",
+    "priority": "critical",
+    "totalRepos": 20,
+    "languages": [
+      "Rust",
+      "C#",
+      "Java",
+      "Go"
+    ]
+  },
+  "repositories": [
+    {
+      "repo": "rust-lang/rust",
+      "url": "https://github.com/rust-lang/rust",
+      "stars": 109155,
+      "language": "Rust",
+      "description": "Empowering everyone to build reliable and efficient software."
+    },
+    {
+      "repo": "denoland/deno",
+      "url": "https://github.com/denoland/deno",
+      "stars": 105740,
+      "language": "Rust",
+      "description": "A modern runtime for JavaScript and TypeScript."
+    },
+    {
+      "repo": "rustdesk/rustdesk",
+      "url": "https://github.com/rustdesk/rustdesk",
+      "stars": 105219,
+      "language": "Rust",
+      "description": "An open-source remote desktop application designed for self-hosting, as an alternative to TeamViewer."
+    },
+    {
+      "repo": "tauri-apps/tauri",
+      "url": "https://github.com/tauri-apps/tauri",
+      "stars": 100808,
+      "language": "Rust",
+      "description": "Build smaller, faster, and more secure desktop and mobile applications with a web frontend."
+    },
+    {
+      "repo": "astral-sh/uv",
+      "url": "https://github.com/astral-sh/uv",
+      "stars": 76324,
+      "language": "Rust",
+      "description": "An extremely fast Python package and project manager, written in Rust."
+    },
+    {
+      "repo": "unionlabs/union",
+      "url": "https://github.com/unionlabs/union",
+      "stars": 74421,
+      "language": "Rust",
+      "description": "The trust-minimized, zero-knowledge bridging protocol, designed for censorship resistance, extremely high security, and usage in decentralized finance."
+    },
+    {
+      "repo": "zed-industries/zed",
+      "url": "https://github.com/zed-industries/zed",
+      "stars": 72646,
+      "language": "Rust",
+      "description": "Code at the speed of thought – Zed is a high-performance, multiplayer code editor from the creators of Atom and Tree-sitter."
+    },
+    {
+      "repo": "FuelLabs/sway",
+      "url": "https://github.com/FuelLabs/sway",
+      "stars": 62021,
+      "language": "Rust",
+      "description": "🌴 Empowering everyone to build reliable and efficient smart contracts."
+    },
+    {
+      "repo": "alacritty/alacritty",
+      "url": "https://github.com/alacritty/alacritty",
+      "stars": 61744,
+      "language": "Rust",
+      "description": "A cross-platform, OpenGL terminal emulator."
+    },
+    {
+      "repo": "rust-lang/rustlings",
+      "url": "https://github.com/rust-lang/rustlings",
+      "stars": 61309,
+      "language": "Rust",
+      "description": ":crab: Small exercises to get you used to reading and writing Rust code!"
+    },
+    {
+      "repo": "BurntSushi/ripgrep",
+      "url": "https://github.com/BurntSushi/ripgrep",
+      "stars": 58643,
+      "language": "Rust",
+      "description": "ripgrep recursively searches directories for a regex pattern while respecting your gitignore"
+    },
+    {
+      "repo": "topjohnwu/Magisk",
+      "url": "https://github.com/topjohnwu/Magisk",
+      "stars": 57970,
+      "language": "Rust",
+      "description": "The Magic Mask for Android"
+    },
+    {
+      "repo": "FuelLabs/fuel-core",
+      "url": "https://github.com/FuelLabs/fuel-core",
+      "stars": 57418,
+      "language": "Rust",
+      "description": "Rust full node implementation of the Fuel v2 protocol."
+    },
+    {
+      "repo": "sharkdp/bat",
+      "url": "https://github.com/sharkdp/bat",
+      "stars": 56492,
+      "language": "Rust",
+      "description": "A cat(1) clone with wings."
+    },
+    {
+      "repo": "openai/codex",
+      "url": "https://github.com/openai/codex",
+      "stars": 55293,
+      "language": "Rust",
+      "description": "Lightweight coding agent that runs in your terminal"
+    },
+    {
+      "repo": "meilisearch/meilisearch",
+      "url": "https://github.com/meilisearch/meilisearch",
+      "stars": 55249,
+      "language": "Rust",
+      "description": "A lightning-fast search engine API bringing AI-powered hybrid search to your sites and applications."
+    },
+    {
+      "repo": "rust-unofficial/awesome-rust",
+      "url": "https://github.com/rust-unofficial/awesome-rust",
+      "stars": 54824,
+      "language": "Rust",
+      "description": "A curated list of Rust code and resources."
+    },
+    {
+      "repo": "lencx/ChatGPT",
+      "url": "https://github.com/lencx/ChatGPT",
+      "stars": 54379,
+      "language": "Rust",
+      "description": "🔮 ChatGPT Desktop Application (Mac, Windows and Linux)"
+    },
+    {
+      "repo": "starship/starship",
+      "url": "https://github.com/starship/starship",
+      "stars": 53179,
+      "language": "Rust",
+      "description": "☄🌌️  The minimal, blazing-fast, and infinitely customizable prompt for any shell!"
+    },
+    {
+      "repo": "dani-garcia/vaultwarden",
+      "url": "https://github.com/dani-garcia/vaultwarden",
+      "stars": 52939,
+      "language": "Rust",
+      "description": "Unofficial Bitwarden compatible server written in Rust, formerly known as bitwarden_rs"
+    }
+  ]
+}

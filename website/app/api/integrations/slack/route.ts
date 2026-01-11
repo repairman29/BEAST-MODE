@@ -8,8 +8,8 @@ import { loadModule } from '../../../../lib/api-module-loader';
 let slackIntegration: any;
 
 try {
-  const slackModule = loadModule('../../../../../lib/integrations/slack') ||
-                      require('../../../../../lib/integrations/slack');
+  const slackModule = loadModule('@/lib/integrations/slack') ||
+                      require('@/lib/integrations/slack');
   slackIntegration = slackModule?.getSlackIntegration
     ? slackModule.getSlackIntegration()
     : slackModule;

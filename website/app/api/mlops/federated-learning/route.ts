@@ -11,7 +11,7 @@ import { NextRequest, NextResponse } from 'next/server';
 let service: any = null;
 
 try {
-  const serviceModule = require('../../../../../lib/mlops/federatedLearningService');
+  const serviceModule = require('@/lib/mlops/federatedLearningService');
   if (serviceModule.getFederatedLearningService) {
     service = serviceModule.getFederatedLearningService();
   } else if (serviceModule.FederatedLearningService) {

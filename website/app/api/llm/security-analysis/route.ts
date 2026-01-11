@@ -13,7 +13,7 @@ import { NextRequest, NextResponse } from 'next/server';
 let securityAnalyzer: any = null;
 
 try {
-  const analyzerModule = require('../../../../../lib/mlops/securityAnalyzer');
+  const analyzerModule = require('@/lib/mlops/securityAnalyzer');
   if (analyzerModule.SecurityAnalyzer) {
     securityAnalyzer = new analyzerModule.SecurityAnalyzer();
   } else {

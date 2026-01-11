@@ -14,7 +14,7 @@ export const dynamic = 'force-dynamic';
 async function getFeedbackCollector() {
   try {
     // @ts-ignore - Dynamic import, module may not exist
-    const module = await import(/* webpackIgnore: true */ '../../../../../../lib/mlops/feedbackCollector').catch(() => null);
+    const module = await import(/* webpackIgnore: true */ '@/lib/mlops/feedbackCollector').catch(() => null);
     return module?.getFeedbackCollector || null;
   } catch {
     return null;

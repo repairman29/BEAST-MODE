@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from 'next/server';
 // Dynamic require for Node.js modules
 let qualityValidator: any;
 try {
-  qualityValidator = require('../../../../../lib/mlops/qualityValidator');
+  qualityValidator = require('@/lib/mlops/qualityValidator');
 } catch (error) {
   console.error('[Quality Validation API] Failed to load modules:', error);
 }

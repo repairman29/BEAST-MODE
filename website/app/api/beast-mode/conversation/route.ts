@@ -77,32 +77,121 @@ Return ONLY the JSON, no markdown, no explanations. The "content" field must con
           enhancedPrompt = basePrompt;
         }
 
-        // Call the internal /api/codebase/chat endpoint
-        // In Vercel, use the request URL to determine the base URL
-        const requestUrl = new URL(request.url);
-        const baseUrl = `${requestUrl.protocol}//${requestUrl.host}`;
-        
-        const sessionId = `codegen-${Date.now()}`;
-        const chatResponse = await fetch(`${baseUrl}/api/codebase/chat`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            sessionId,
-            message: enhancedPrompt,
-            repo: repo.owner && repo.repo ? `${repo.owner}/${repo.repo}` : null,
-            model: 'openai:gpt-4',
-          }),
-        });
-        
-        if (!chatResponse.ok) {
-          const errorText = await chatResponse.text();
-          throw new Error(`Codebase chat API returned ${chatResponse.status}: ${errorText}`);
+        // Use LLMCodeGenerator directly for code generation
+        // This is the proper way to generate code with BEAST MODE
+        let generator: any;
+        try {
+          // Load dependencies first
+          const modelRouterModule = require('@/lib/mlops/modelRouter');
+          const knowledgeRAGModule = require('@/lib/mlops/knowledgeRAG');
+          
+          // Get the factory functions
+          const getModelRouter = modelRouterModule.getModelRouter;
+          const getKnowledgeRAG = knowledgeRAGModule.getKnowledgeRAG;
+          
+          // Verify they are functions
+          if (typeof getModelRouter !== 'function') {
+            throw new Error(`getModelRouter is not a function, got: ${typeof getModelRouter}`);
+          }
+          if (typeof getKnowledgeRAG !== 'function') {
+            throw new Error(`getKnowledgeRAG is not a function, got: ${typeof getKnowledgeRAG}`);
+          }
+          
+          // Create generator instance with dependencies injected
+          const LLMCodeGenerator = require('@/lib/mlops/llmCodeGenerator');
+          generator = new LLMCodeGenerator({
+            getModelRouter,
+            getKnowledgeRAG,
+          });
+          
+          // Initialize model router
+          await generator.initializeModelRouter();
+        } catch (importError: any) {
+          console.error('[BEAST MODE] Failed to import LLMCodeGenerator:', importError.message);
+          console.error('[BEAST MODE] Import error stack:', importError.stack);
+          throw new Error(`Failed to load code generator: ${importError.message}`);
         }
         
-        const chatData = await chatResponse.json();
-        const generatedCode = chatData.response || chatData.content || chatData.message || '';
+        const userId = request.headers.get('x-user-id') || 'system';
+        
+        // Generate code using model router
+        const generatedResult = await generator.generateWithModelRouter(
+          enhancedPrompt,
+          {
+            userId,
+            repo: repo.owner && repo.repo ? `${repo.owner}/${repo.repo}` : null,
+            techStack: bounty.tech_stack || [],
+            context: {
+              type: 'code_generation',
+              task: 'generate_code',
+              bounty: bounty.title || 'Unknown',
+            },
+          }
+        );
+        
+        // Parse the generated result
+        // generateWithModelRouter returns a string (the LLM response)
+        // We need to parse it to extract the JSON structure
+        let generatedCode: any;
+        
+        if (typeof generatedResult === 'string') {
+          // Try to parse as JSON first
+          try {
+            generatedCode = JSON.parse(generatedResult);
+          } catch (e) {
+            // If not JSON, try to extract JSON from markdown code blocks
+            const jsonMatch = generatedResult.match(/\{[\s\S]*"files"[\s\S]*\}/);
+            if (jsonMatch) {
+              try {
+                generatedCode = JSON.parse(jsonMatch[0]);
+              } catch (e2) {
+                // If JSON extraction fails, create structure from raw response
+                const techStack = Array.isArray(bounty.tech_stack) ? bounty.tech_stack : [];
+                const primaryLang = techStack[0] || 'typescript';
+                generatedCode = {
+                  files: [{
+                    path: `solution.${primaryLang === 'typescript' ? 'ts' : primaryLang === 'python' ? 'py' : 'js'}`,
+                    language: primaryLang,
+                    content: generatedResult,
+                  }],
+                  summary: 'Generated code solution',
+                  test_files: [],
+                };
+              }
+            } else {
+              // No JSON found, create structure from raw response
+              const techStack = Array.isArray(bounty.tech_stack) ? bounty.tech_stack : [];
+              const primaryLang = techStack[0] || 'typescript';
+              generatedCode = {
+                files: [{
+                  path: `solution.${primaryLang === 'typescript' ? 'ts' : primaryLang === 'python' ? 'py' : 'js'}`,
+                  language: primaryLang,
+                  content: generatedResult,
+                }],
+                summary: 'Generated code solution',
+                test_files: [],
+              };
+            }
+          }
+        } else {
+          // Already an object
+          generatedCode = generatedResult;
+        }
+        
+        // Ensure generatedCode has the expected structure
+        if (!generatedCode.files || !Array.isArray(generatedCode.files)) {
+          const techStack = Array.isArray(bounty.tech_stack) ? bounty.tech_stack : [];
+          const primaryLang = techStack[0] || 'typescript';
+          generatedCode = {
+            files: [{
+              path: `solution.${primaryLang === 'typescript' ? 'ts' : primaryLang === 'python' ? 'py' : 'js'}`,
+              language: primaryLang,
+              content: typeof generatedResult === 'string' ? generatedResult : JSON.stringify(generatedResult),
+            }],
+            summary: generatedCode.summary || 'Generated code solution',
+            test_files: generatedCode.test_files || [],
+          };
+        }
         
         // Log successful generation for learning
         try {

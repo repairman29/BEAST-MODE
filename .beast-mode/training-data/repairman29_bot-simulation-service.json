@@ -1,0 +1,39 @@
+{
+  "repo": "repairman29/bot-simulation-service",
+  "url": "https://github.com/repairman29/bot-simulation-service",
+  "features": {
+    "qualityScore": 89,
+    "stars": 0,
+    "forks": 0,
+    "openIssues": 0,
+    "fileCount": 0,
+    "codeFileCount": 0,
+    "hasLicense": 0,
+    "hasDescription": 1,
+    "hasTopics": 0,
+    "hasReadme": 1,
+    "hasTests": 1,
+    "hasCI": 1,
+    "hasDocker": 0,
+    "hasConfig": 0,
+    "issues": 2,
+    "improvements": 2,
+    "languages": [
+      "JavaScript",
+      "HTML",
+      "Shell"
+    ],
+    "primaryLanguage": "Unknown"
+  },
+  "quality": 89,
+  "timestamp": "2026-01-05T04:02:29.388Z",
+  "metadata": {
+    "languages": [
+      "JavaScript",
+      "HTML",
+      "Shell"
+    ],
+    "fileCount": 0,
+    "codeFileCount": 0
+  }
+}

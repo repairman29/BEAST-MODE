@@ -1,0 +1,37 @@
+{
+  "repo": "repairman29/economy-system-service",
+  "url": "https://github.com/repairman29/economy-system-service",
+  "features": {
+    "qualityScore": 75,
+    "stars": 0,
+    "forks": 0,
+    "openIssues": 0,
+    "fileCount": 0,
+    "codeFileCount": 0,
+    "hasLicense": 0,
+    "hasDescription": 1,
+    "hasTopics": 0,
+    "hasReadme": 1,
+    "hasTests": 0,
+    "hasCI": 1,
+    "hasDocker": 1,
+    "hasConfig": 0,
+    "issues": 2,
+    "improvements": 2,
+    "languages": [
+      "JavaScript",
+      "Dockerfile"
+    ],
+    "primaryLanguage": "Unknown"
+  },
+  "quality": 75,
+  "timestamp": "2026-01-05T04:02:30.571Z",
+  "metadata": {
+    "languages": [
+      "JavaScript",
+      "Dockerfile"
+    ],
+    "fileCount": 0,
+    "codeFileCount": 0
+  }
+}

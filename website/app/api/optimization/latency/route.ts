@@ -10,8 +10,8 @@ let latencyOptimizer: any;
 let customModelMonitoring: any;
 
 try {
-  latencyOptimizer = loadModule('../../../../../lib/mlops/latencyOptimizer');
-  customModelMonitoring = loadModule('../../../../../lib/mlops/customModelMonitoring');
+  latencyOptimizer = loadModule('@/lib/mlops/latencyOptimizer');
+  customModelMonitoring = loadModule('@/lib/mlops/customModelMonitoring');
 } catch (error) {
   console.warn('[Latency Optimization API] Some modules not available:', error);
 }

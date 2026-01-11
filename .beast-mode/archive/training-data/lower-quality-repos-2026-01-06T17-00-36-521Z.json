@@ -1,0 +1,3365 @@
+{
+  "metadata": {
+    "discoveredAt": "2026-01-06T17:00:36.524Z",
+    "source": "quality-balancing",
+    "totalDiscovered": 372,
+    "starRanges": [
+      "10-50",
+      "50-100",
+      "100-500",
+      "500-1000",
+      "1000-5000"
+    ],
+    "purpose": "Balance dataset quality distribution for better model training"
+  },
+  "repositories": [
+    {
+      "repo": "miskibin/py-draughts",
+      "url": "https://github.com/miskibin/py-draughts",
+      "stars": 12,
+      "forks": 2,
+      "language": "Python",
+      "description": "A checkers library with modern web GUI,  Supprots multiple variants of game.",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "indmdev/Telegram-Store-MiniApp",
+      "url": "https://github.com/indmdev/Telegram-Store-MiniApp",
+      "stars": 13,
+      "forks": 2,
+      "language": "Unknown",
+      "description": "Beautiful Telegram Store MiniApp. A Telegram Store Mini App by InDMDev Teams. The best Telegram Shop MiniApp and the latest Telegram Shop Mini App every seller should have. This telegram mini app is designed for speed, simplicity, and scalability. Try the Auto shop bot now.",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "MayNiklas/eduroam-flake",
+      "url": "https://github.com/MayNiklas/eduroam-flake",
+      "stars": 38,
+      "forks": 17,
+      "language": "Nix",
+      "description": "install eduroam on Nix systems",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "MrAbolfazlNorouzi/iran-configs",
+      "url": "https://github.com/MrAbolfazlNorouzi/iran-configs",
+      "stars": 12,
+      "forks": 0,
+      "language": "Python",
+      "description": "v2ray server",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "thephpleague/uri-src",
+      "url": "https://github.com/thephpleague/uri-src",
+      "stars": 44,
+      "forks": 17,
+      "language": "PHP",
+      "description": "URI toolkit Library",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "HubSpot/HubSpot-public-api-spec-collection",
+      "url": "https://github.com/HubSpot/HubSpot-public-api-spec-collection",
+      "stars": 30,
+      "forks": 11,
+      "language": "Unknown",
+      "description": null,
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "alphagov/govuk-chat",
+      "url": "https://github.com/alphagov/govuk-chat",
+      "stars": 11,
+      "forks": 3,
+      "language": "Ruby",
+      "description": "A web application that provides a LLM powered chat experience based on GOV.UK content.",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "galihru/hbd",
+      "url": "https://github.com/galihru/hbd",
+      "stars": 14,
+      "forks": 0,
+      "language": "JavaScript",
+      "description": "HAPPY BIRTHDAY: Happy Birthday Animation created using Javascript automation generation files",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "flarialmc/launcher",
+      "url": "https://github.com/flarialmc/launcher",
+      "stars": 26,
+      "forks": 20,
+      "language": "C#",
+      "description": null,
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "statsig-io/statsigstatus",
+      "url": "https://github.com/statsig-io/statsigstatus",
+      "stars": 50,
+      "forks": 28,
+      "language": "JavaScript",
+      "description": "Statsig's Status Page, forked from our open-source template.",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "Azure-Peak/Azure-Peak",
+      "url": "https://github.com/Azure-Peak/Azure-Peak",
+      "stars": 42,
+      "forks": 399,
+      "language": "DM",
+      "description": "Medieval Fantasy Game based on SS13.",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "iHeyTang/HeyFun",
+      "url": "https://github.com/iHeyTang/HeyFun",
+      "stars": 25,
+      "forks": 8,
+      "language": "TypeScript",
+      "description": "AI Creative Platform",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "Motion-Core/motion-core",
+      "url": "https://github.com/Motion-Core/motion-core",
+      "stars": 10,
+      "forks": 0,
+      "language": "Svelte",
+      "description": "Curated Motion Core Svelte components",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "kubevirt-ui/kubevirt-plugin",
+      "url": "https://github.com/kubevirt-ui/kubevirt-plugin",
+      "stars": 19,
+      "forks": 53,
+      "language": "TypeScript",
+      "description": "Kubevirt plugin for Openshift Console",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "open-ci-io/openci",
+      "url": "https://github.com/open-ci-io/openci",
+      "stars": 46,
+      "forks": 1,
+      "language": "TypeScript",
+      "description": null,
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "btravers/amqp-contract",
+      "url": "https://github.com/btravers/amqp-contract",
+      "stars": 10,
+      "forks": 0,
+      "language": "TypeScript",
+      "description": "End-to-end type safety and automatic validation for AMQP messaging",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "BuddyChewChew/buddylive",
+      "url": "https://github.com/BuddyChewChew/buddylive",
+      "stars": 42,
+      "forks": 6,
+      "language": "Python",
+      "description": "✅ 📺 Live TV",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "fastly/vscode-fastly-vcl",
+      "url": "https://github.com/fastly/vscode-fastly-vcl",
+      "stars": 15,
+      "forks": 0,
+      "language": "TypeScript",
+      "description": "A Visual Studio Code extension which adds syntax highlighting for Fastly Varnish Configuration Language (VCL) files.",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "gAlAxYnINJaTE/Binance_Smart_Chain-Bot",
+      "url": "https://github.com/gAlAxYnINJaTE/Binance_Smart_Chain-Bot",
+      "stars": 27,
+      "forks": 18,
+      "language": "Python",
+      "description": "local trading of BNB and Meme Rush tokens on Binance Smart Chain",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "external-mirrors/phoenix",
+      "url": "https://github.com/external-mirrors/phoenix",
+      "stars": 19,
+      "forks": 0,
+      "language": "Zig",
+      "description": null,
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "frescobaldi/qpageview",
+      "url": "https://github.com/frescobaldi/qpageview",
+      "stars": 25,
+      "forks": 13,
+      "language": "Python",
+      "description": "page-based viewer widget for Qt6/PyQt6",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "indmdev/indmshopbot",
+      "url": "https://github.com/indmdev/indmshopbot",
+      "stars": 15,
+      "forks": 3,
+      "language": "Unknown",
+      "description": "InDMShopBot: The best Telegram Shopping Bot For Sellers, The Shop Bot is a Classic and Premium e-commerce bot created for sellers to own a store  for selling products and services on telegram. Try the Auto shop bot now.",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "carbon-design-system/carbon-labs",
+      "url": "https://github.com/carbon-design-system/carbon-labs",
+      "stars": 37,
+      "forks": 48,
+      "language": "JavaScript",
+      "description": "An innovation space for the creation of components leveraging Carbon Design System",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "Baskerville42/outage-data-ua",
+      "url": "https://github.com/Baskerville42/outage-data-ua",
+      "stars": 20,
+      "forks": 4,
+      "language": "JavaScript",
+      "description": "Публічне сховище даних про планові відключення електроенергії в Україні.",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "datablueprint/api",
+      "url": "https://github.com/datablueprint/api",
+      "stars": 12,
+      "forks": 0,
+      "language": "Unknown",
+      "description": "数巨蓝图（Datablueprint）是专注于海外主流社交媒体平台数据采集与分析的技术服务商。我们通过自研API接口，为全球企业提供合规、实时、结构化的多平台数据服务，覆盖 Facebook、Instagram、YouTube、Twitter(X)、TikTok、LinkedIn、Quora七大核心平台，提供最稳定的API接口，爬虫我们最在行，视频下载我们最拿手",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "Kwisma/ASN-List",
+      "url": "https://github.com/Kwisma/ASN-List",
+      "stars": 23,
+      "forks": 2,
+      "language": "JavaScript",
+      "description": "ASN 规则集(RULE-SET)，包含 ASN-China, 兼容 ClashX Pro、Clash for Windows 等基于 Clash Premium 内核的客户端。",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "vanilla/garden-schema",
+      "url": "https://github.com/vanilla/garden-schema",
+      "stars": 21,
+      "forks": 3,
+      "language": "PHP",
+      "description": "A simple data validation and cleaning library based on OpenAPI 3.0 Schema.",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "OrionFinanceAI/protocol",
+      "url": "https://github.com/OrionFinanceAI/protocol",
+      "stars": 17,
+      "forks": 2,
+      "language": "TypeScript",
+      "description": "Vault infrastructure for verifiable, privacy-preserving portfolio management.",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "0xsend/sendapp",
+      "url": "https://github.com/0xsend/sendapp",
+      "stars": 33,
+      "forks": 17,
+      "language": "TypeScript",
+      "description": "The Send App monorepo.",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "Moyuyanli/HuYanEconomy",
+      "url": "https://github.com/Moyuyanli/HuYanEconomy",
+      "stars": 10,
+      "forks": 7,
+      "language": "Kotlin",
+      "description": "壶言经济",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "broadinstitute/viral-assemble",
+      "url": "https://github.com/broadinstitute/viral-assemble",
+      "stars": 10,
+      "forks": 3,
+      "language": "Python",
+      "description": "viral-ngs: genome assembly and scaffolding",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "RawatKartik1411/linux-priv-esc-audit",
+      "url": "https://github.com/RawatKartik1411/linux-priv-esc-audit",
+      "stars": 10,
+      "forks": 0,
+      "language": "Shell",
+      "description": "🛡️ Audit Linux systems for privilege escalation risks and hardening opportunities in both root and user modes to enhance security and minimize exposure.",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "V2RAYCONFIGSPOOL/V2RAY_SUB",
+      "url": "https://github.com/V2RAYCONFIGSPOOL/V2RAY_SUB",
+      "stars": 38,
+      "forks": 2,
+      "language": "Unknown",
+      "description": "UPLOADING V2RAY CONFIGURATIONS NONSTOP, 24/7.",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "backendbuilderdev/Pal-Sandeep",
+      "url": "https://github.com/backendbuilderdev/Pal-Sandeep",
+      "stars": 12,
+      "forks": 4,
+      "language": "Unknown",
+      "description": "Don't just fork it. Star it, please!",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "bugbounted/auto-commit",
+      "url": "https://github.com/bugbounted/auto-commit",
+      "stars": 13,
+      "forks": 3,
+      "language": "Unknown",
+      "description": "🌳 Making green your Github stats, powered by Github Actions",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "plexinc/react-lightning",
+      "url": "https://github.com/plexinc/react-lightning",
+      "stars": 14,
+      "forks": 6,
+      "language": "TypeScript",
+      "description": "React reconciler for rendering React apps with Lightning.js",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "qt4cg/qtspecs",
+      "url": "https://github.com/qt4cg/qtspecs",
+      "stars": 37,
+      "forks": 20,
+      "language": "XSLT",
+      "description": "QT4 specifications",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "cuentoneta/cuentoneta",
+      "url": "https://github.com/cuentoneta/cuentoneta",
+      "stars": 28,
+      "forks": 30,
+      "language": "TypeScript",
+      "description": "Plataforma digital de lectura de relatos breves",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "RainbowMetalPigeon/ExtremeYellow",
+      "url": "https://github.com/RainbowMetalPigeon/ExtremeYellow",
+      "stars": 32,
+      "forks": 8,
+      "language": "Assembly",
+      "description": "Kanto at its max (and beyond!)",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "Nielioo/Nielioo",
+      "url": "https://github.com/Nielioo/Nielioo",
+      "stars": 16,
+      "forks": 0,
+      "language": "Python",
+      "description": "My Personal Repository",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "fabriqaai/specs.md",
+      "url": "https://github.com/fabriqaai/specs.md",
+      "stars": 12,
+      "forks": 1,
+      "language": "HTML",
+      "description": null,
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "VedaWebProject/Tekst",
+      "url": "https://github.com/VedaWebProject/Tekst",
+      "stars": 11,
+      "forks": 1,
+      "language": "Python",
+      "description": "A collaborative research platform for resources on natural language texts",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "2Pz/me3-manager",
+      "url": "https://github.com/2Pz/me3-manager",
+      "stars": 20,
+      "forks": 6,
+      "language": "Python",
+      "description": "A GUI manager tool designed to simplify the use of Mod Engine 3. https://github.com/garyttierney/me3",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "jhl-labs/sepilot_desktop",
+      "url": "https://github.com/jhl-labs/sepilot_desktop",
+      "stars": 41,
+      "forks": 1,
+      "language": "TypeScript",
+      "description": "like caude desktop",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "gwcctv/ICTV",
+      "url": "https://github.com/gwcctv/ICTV",
+      "stars": 17,
+      "forks": 1,
+      "language": "PHP",
+      "description": null,
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "ooyyh/Cloudflare-Clist",
+      "url": "https://github.com/ooyyh/Cloudflare-Clist",
+      "stars": 36,
+      "forks": 7,
+      "language": "TypeScript",
+      "description": "☁A cloud storage aggregation service deployed on Cloudflare Workers with D1 database support.",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "LC044/TrailSnap",
+      "url": "https://github.com/LC044/TrailSnap",
+      "stars": 43,
+      "forks": 3,
+      "language": "Python",
+      "description": "行影集——专属于你的AI智能相册",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "sufloret/iTV",
+      "url": "https://github.com/sufloret/iTV",
+      "stars": 33,
+      "forks": 3,
+      "language": "JavaScript",
+      "description": "✯ IPTV自用仓库 ✯",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "genz27/Modified_Sora2api",
+      "url": "https://github.com/genz27/Modified_Sora2api",
+      "stars": 11,
+      "forks": 6,
+      "language": "Python",
+      "description": "Modified_Sora2api",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "upciti/ops2deb",
+      "url": "https://github.com/upciti/ops2deb",
+      "stars": 29,
+      "forks": 5,
+      "language": "Python",
+      "description": "Generate Debian packages for common devops tools such as kubectl, kustomize, helm, ...",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "bitwarden/gh-actions",
+      "url": "https://github.com/bitwarden/gh-actions",
+      "stars": 35,
+      "forks": 15,
+      "language": "JavaScript",
+      "description": "Bitwarden-utilized GitHub Actions.",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "forwardsoftware/react-native-toolbox",
+      "url": "https://github.com/forwardsoftware/react-native-toolbox",
+      "stars": 29,
+      "forks": 1,
+      "language": "TypeScript",
+      "description": "A set of scripts to simplify React Native development",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "taoalpha/npm-trending",
+      "url": "https://github.com/taoalpha/npm-trending",
+      "stars": 10,
+      "forks": 1,
+      "language": "TypeScript",
+      "description": "Daily top popular packages!",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "sitehostnz/ip-ua-data",
+      "url": "https://github.com/sitehostnz/ip-ua-data",
+      "stars": 12,
+      "forks": 7,
+      "language": "DIGITAL Command Language",
+      "description": "A repository with interesting IP addresses and User Agents",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "auto-shift/autoshiftv2",
+      "url": "https://github.com/auto-shift/autoshiftv2",
+      "stars": 13,
+      "forks": 8,
+      "language": "Shell",
+      "description": "AutoShiftv2 is an opinionated Infrastructure-as-Code (IaC) framework designed to manage infrastructure components after an OpenShift installation using Advanced Cluster Management (ACM) and OpenShift GitOps",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "canonical/mongodb-operator",
+      "url": "https://github.com/canonical/mongodb-operator",
+      "stars": 13,
+      "forks": 15,
+      "language": "HCL",
+      "description": "Operator charm for MongoDB on VM",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "joris97jansen/borrowser",
+      "url": "https://github.com/joris97jansen/borrowser",
+      "stars": 21,
+      "forks": 0,
+      "language": "Rust",
+      "description": "Built on-top of the Borrow Checker, not borrowed from Chromium.",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "joeseos/mundamanager",
+      "url": "https://github.com/joeseos/mundamanager",
+      "stars": 13,
+      "forks": 5,
+      "language": "TypeScript",
+      "description": null,
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "dsadsadsss/nodejs-wanju2",
+      "url": "https://github.com/dsadsadsss/nodejs-wanju2",
+      "stars": 23,
+      "forks": 40,
+      "language": "JavaScript",
+      "description": null,
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "aldyjrz/katanyaStealer",
+      "url": "https://github.com/aldyjrz/katanyaStealer",
+      "stars": 10,
+      "forks": 7,
+      "language": "Unknown",
+      "description": null,
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "galihru/hbd",
+      "url": "https://github.com/galihru/hbd",
+      "stars": 14,
+      "forks": 0,
+      "language": "JavaScript",
+      "description": "HAPPY BIRTHDAY: Happy Birthday Animation created using Javascript automation generation files",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "statsig-io/statsigstatus",
+      "url": "https://github.com/statsig-io/statsigstatus",
+      "stars": 50,
+      "forks": 28,
+      "language": "JavaScript",
+      "description": "Statsig's Status Page, forked from our open-source template.",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "carbon-design-system/carbon-labs",
+      "url": "https://github.com/carbon-design-system/carbon-labs",
+      "stars": 37,
+      "forks": 48,
+      "language": "JavaScript",
+      "description": "An innovation space for the creation of components leveraging Carbon Design System",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "Baskerville42/outage-data-ua",
+      "url": "https://github.com/Baskerville42/outage-data-ua",
+      "stars": 20,
+      "forks": 4,
+      "language": "JavaScript",
+      "description": "Публічне сховище даних про планові відключення електроенергії в Україні.",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "Kwisma/ASN-List",
+      "url": "https://github.com/Kwisma/ASN-List",
+      "stars": 23,
+      "forks": 2,
+      "language": "JavaScript",
+      "description": "ASN 规则集(RULE-SET)，包含 ASN-China, 兼容 ClashX Pro、Clash for Windows 等基于 Clash Premium 内核的客户端。",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "miskibin/py-draughts",
+      "url": "https://github.com/miskibin/py-draughts",
+      "stars": 12,
+      "forks": 2,
+      "language": "Python",
+      "description": "A checkers library with modern web GUI,  Supprots multiple variants of game.",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "MrAbolfazlNorouzi/iran-configs",
+      "url": "https://github.com/MrAbolfazlNorouzi/iran-configs",
+      "stars": 12,
+      "forks": 0,
+      "language": "Python",
+      "description": "v2ray server",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "BuddyChewChew/buddylive",
+      "url": "https://github.com/BuddyChewChew/buddylive",
+      "stars": 42,
+      "forks": 6,
+      "language": "Python",
+      "description": "✅ 📺 Live TV",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "gAlAxYnINJaTE/Binance_Smart_Chain-Bot",
+      "url": "https://github.com/gAlAxYnINJaTE/Binance_Smart_Chain-Bot",
+      "stars": 27,
+      "forks": 18,
+      "language": "Python",
+      "description": "local trading of BNB and Meme Rush tokens on Binance Smart Chain",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "frescobaldi/qpageview",
+      "url": "https://github.com/frescobaldi/qpageview",
+      "stars": 25,
+      "forks": 13,
+      "language": "Python",
+      "description": "page-based viewer widget for Qt6/PyQt6",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "iHeyTang/HeyFun",
+      "url": "https://github.com/iHeyTang/HeyFun",
+      "stars": 25,
+      "forks": 8,
+      "language": "TypeScript",
+      "description": "AI Creative Platform",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "kubevirt-ui/kubevirt-plugin",
+      "url": "https://github.com/kubevirt-ui/kubevirt-plugin",
+      "stars": 19,
+      "forks": 53,
+      "language": "TypeScript",
+      "description": "Kubevirt plugin for Openshift Console",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "open-ci-io/openci",
+      "url": "https://github.com/open-ci-io/openci",
+      "stars": 46,
+      "forks": 1,
+      "language": "TypeScript",
+      "description": null,
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "btravers/amqp-contract",
+      "url": "https://github.com/btravers/amqp-contract",
+      "stars": 10,
+      "forks": 0,
+      "language": "TypeScript",
+      "description": "End-to-end type safety and automatic validation for AMQP messaging",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "fastly/vscode-fastly-vcl",
+      "url": "https://github.com/fastly/vscode-fastly-vcl",
+      "stars": 15,
+      "forks": 0,
+      "language": "TypeScript",
+      "description": "A Visual Studio Code extension which adds syntax highlighting for Fastly Varnish Configuration Language (VCL) files.",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "fdciabdul/Vpngate-Scraper-API",
+      "url": "https://github.com/fdciabdul/Vpngate-Scraper-API",
+      "stars": 70,
+      "forks": 28,
+      "language": "JavaScript",
+      "description": "fresh oVPN config from vpngate.net ",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "REIJI007/Adblock-Rule-Collection",
+      "url": "https://github.com/REIJI007/Adblock-Rule-Collection",
+      "stars": 83,
+      "forks": 7,
+      "language": "Python",
+      "description": "一个收集众多广告过滤器规则，进行转化、合并、去重的广告过滤器，兼容常见的广告过滤应用程序（如Adblock Plus、uBlock Origin、AdGuard 等），每20分钟更新一次，确保即时同步上游减少误杀",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "indmdev/Free-Telegram-Store-Bot",
+      "url": "https://github.com/indmdev/Free-Telegram-Store-Bot",
+      "stars": 75,
+      "forks": 29,
+      "language": "Python",
+      "description": "This is 100% Free Shop Bot, Is a Telegram Store Bot you can use for selling your products and services and managing your products and orders. You customers can  easily shop on you store with confidence using this Auto shop bot.",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "statsig-io/statsigstatus",
+      "url": "https://github.com/statsig-io/statsigstatus",
+      "stars": 50,
+      "forks": 28,
+      "language": "JavaScript",
+      "description": "Statsig's Status Page, forked from our open-source template.",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "Twcash/Aquarion",
+      "url": "https://github.com/Twcash/Aquarion",
+      "stars": 76,
+      "forks": 16,
+      "language": "Java",
+      "description": "Face your sins in the watery deep. Or smth idk",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "taksssss/tv",
+      "url": "https://github.com/taksssss/tv",
+      "stars": 57,
+      "forks": 32,
+      "language": "Python",
+      "description": "epg mirrors",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "iordv/Droppy",
+      "url": "https://github.com/iordv/Droppy",
+      "stars": 54,
+      "forks": 2,
+      "language": "Swift",
+      "description": "The ultimate productivity tool for macOS. Notch Shelf • Floating Basket • Clipboard Manager",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "layer5labs/meshery-extensions-packages",
+      "url": "https://github.com/layer5labs/meshery-extensions-packages",
+      "stars": 56,
+      "forks": 71,
+      "language": "HTML",
+      "description": "Public registry for Meshery remote provider packages",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "yztz/MsgGo",
+      "url": "https://github.com/yztz/MsgGo",
+      "stars": 57,
+      "forks": 2,
+      "language": "Java",
+      "description": "群发短信app，发送短信，支持多卡，支持魔法变量替换，导入excel，自定义短信内容；SMS Sender, Batch Send",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "ministryofjustice/cloud-platform-environments",
+      "url": "https://github.com/ministryofjustice/cloud-platform-environments",
+      "stars": 76,
+      "forks": 38,
+      "language": "HCL",
+      "description": "Environment configuration for the Cloud Platform",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "qoretechnologies/qore",
+      "url": "https://github.com/qoretechnologies/qore",
+      "stars": 62,
+      "forks": 10,
+      "language": "C++",
+      "description": "Qore Programming Language",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "scipy/scipy-stubs",
+      "url": "https://github.com/scipy/scipy-stubs",
+      "stars": 78,
+      "forks": 24,
+      "language": "Python",
+      "description": "Typing Stubs for SciPy",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "martincostello/openapi-extensions",
+      "url": "https://github.com/martincostello/openapi-extensions",
+      "stars": 99,
+      "forks": 2,
+      "language": "C#",
+      "description": "Extensions for Microsoft.AspNetCore.OpenApi",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "Danialsamadi/v2go",
+      "url": "https://github.com/Danialsamadi/v2go",
+      "stars": 77,
+      "forks": 12,
+      "language": "Go",
+      "description": "v2go is a blazingly fast Go V2Ray config aggregator that processes 20,000+ configurations in 11 seconds (99.7% faster than Python), automatically removing duplicates and generating fresh subscription files every 6 hours.",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "emu-sync/EmuSync",
+      "url": "https://github.com/emu-sync/EmuSync",
+      "stars": 69,
+      "forks": 0,
+      "language": "JavaScript",
+      "description": "Game save sync tool for PC games and emulated games",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "owlboy/greatpug-public",
+      "url": "https://github.com/owlboy/greatpug-public",
+      "stars": 56,
+      "forks": 6,
+      "language": "Shell",
+      "description": "A Bar in the Metaverse (VRChat)",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "Automattic/msm-sitemap",
+      "url": "https://github.com/Automattic/msm-sitemap",
+      "stars": 82,
+      "forks": 39,
+      "language": "PHP",
+      "description": "Comprehensive sitemaps for your WordPress VIP site. Joint collaboration between Metro.co.uk, WordPress VIP, Alley Interactive, Maker Media, 10up, and others.",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "PAIR-code/deliberate-lab",
+      "url": "https://github.com/PAIR-code/deliberate-lab",
+      "stars": 55,
+      "forks": 23,
+      "language": "TypeScript",
+      "description": "Platform for running online research experiments on human + LLM group dynamics.",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "Mister-leo/fssh",
+      "url": "https://github.com/Mister-leo/fssh",
+      "stars": 68,
+      "forks": 3,
+      "language": "Go",
+      "description": "fssh: The macOS SSH agent for managing keys with Touch ID and OTP. Secure your SSH private keys with biometric authentication and interactive shell completion.",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "zapplyjobs/New-Grad-Jobs-2026",
+      "url": "https://github.com/zapplyjobs/New-Grad-Jobs-2026",
+      "stars": 88,
+      "forks": 7,
+      "language": "CSS",
+      "description": "Daily-updated tech jobs for new grads | FAANG, startups & more | 2026",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "xhyrom/discord-datamining",
+      "url": "https://github.com/xhyrom/discord-datamining",
+      "stars": 61,
+      "forks": 7,
+      "language": "JavaScript",
+      "description": "repository offering datamining and analyzing web builds, host builds, articles, blog posts, policies, jobs, @discord github and their domain(s)",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "MarcelMeurer/WVD-Hydra",
+      "url": "https://github.com/MarcelMeurer/WVD-Hydra",
+      "stars": 92,
+      "forks": 13,
+      "language": "JavaScript",
+      "description": null,
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "mitchross/talos-argocd-proxmox",
+      "url": "https://github.com/mitchross/talos-argocd-proxmox",
+      "stars": 54,
+      "forks": 15,
+      "language": "Shell",
+      "description": "Talos ArgoCD Homelab. My personal production Cluster. ",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "penhandev/AutoAiVPN",
+      "url": "https://github.com/penhandev/AutoAiVPN",
+      "stars": 50,
+      "forks": 6,
+      "language": "Unknown",
+      "description": "use these v2ray configs for free",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "databrickslabs/ontos",
+      "url": "https://github.com/databrickslabs/ontos",
+      "stars": 92,
+      "forks": 18,
+      "language": "Python",
+      "description": "Business Semantics for Unity Catalog",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "mc36/freeRtr",
+      "url": "https://github.com/mc36/freeRtr",
+      "stars": 96,
+      "forks": 18,
+      "language": "Scilab",
+      "description": "freeRouter - networking swiss army knife",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "htlin222/dotfiles",
+      "url": "https://github.com/htlin222/dotfiles",
+      "stars": 61,
+      "forks": 3,
+      "language": "Lua",
+      "description": "my dotfile on macOS, include neovim, zshrc, .etc",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "mengxinzxz/HuoDong-update",
+      "url": "https://github.com/mengxinzxz/HuoDong-update",
+      "stars": 80,
+      "forks": 18,
+      "language": "JavaScript",
+      "description": "MengXin's HuoDong-update",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "netuno-org/platform",
+      "url": "https://github.com/netuno-org/platform",
+      "stars": 67,
+      "forks": 4,
+      "language": "JavaScript",
+      "description": "🚀 All Netuno core capabilities, such as CLI and Web Server.",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "Casualtek/Cyberwatch",
+      "url": "https://github.com/Casualtek/Cyberwatch",
+      "stars": 72,
+      "forks": 21,
+      "language": "HTML",
+      "description": "Building a consolidated RSS feed for articles about cyberattacks",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "dpangestuw/Free-Proxy",
+      "url": "https://github.com/dpangestuw/Free-Proxy",
+      "stars": 97,
+      "forks": 21,
+      "language": "Unknown",
+      "description": "Free Proxy List 🔄 Update Every 5 Minutes",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "screenappai/meeting-bot",
+      "url": "https://github.com/screenappai/meeting-bot",
+      "stars": 68,
+      "forks": 26,
+      "language": "TypeScript",
+      "description": "Universal meeting  bot to record Google Meet, Zoom, and Microsoft Teams — with a single API. Runs in production. Free to use, extend, and scale.",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "parserpp/ip_ports",
+      "url": "https://github.com/parserpp/ip_ports",
+      "stars": 75,
+      "forks": 13,
+      "language": "JavaScript",
+      "description": "免费代理资源 .  https://github.com/parserpp/Every15m_runner-get_proxy_2   和https://github.com/parserpp/parser_proxy_1   ",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "mattermost/mattermost-developer-documentation",
+      "url": "https://github.com/mattermost/mattermost-developer-documentation",
+      "stars": 86,
+      "forks": 444,
+      "language": "CSS",
+      "description": "Mattermost developer documentation.",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "V2RayRoot/V2RayConfig",
+      "url": "https://github.com/V2RayRoot/V2RayConfig",
+      "stars": 90,
+      "forks": 5,
+      "language": "Python",
+      "description": "Automatically fetch free V2Ray configs from Telegram channels.",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "carbon-design-system/carbon-addons-iot-react",
+      "url": "https://github.com/carbon-design-system/carbon-addons-iot-react",
+      "stars": 99,
+      "forks": 84,
+      "language": "JavaScript",
+      "description": "A collection of React components shared between IBM Maximo Asset Monitor (Watson IoT), IBM Maximo Visual Inspection, and Graphite products.",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "hengband/hengband",
+      "url": "https://github.com/hengband/hengband",
+      "stars": 80,
+      "forks": 30,
+      "language": "C++",
+      "description": "変愚蛮怒のメインリポジトリ",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "Portable-Linux-Apps/Portable-Linux-Apps.github.io",
+      "url": "https://github.com/Portable-Linux-Apps/Portable-Linux-Apps.github.io",
+      "stars": 58,
+      "forks": 26,
+      "language": "HTML",
+      "description": "Census, cataloging and distribution of all AppImages and portable apps for GNU/Linux, through the \"AM\" package manager. Largest AppImages collection!",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "wikimedia/operations-mediawiki-config",
+      "url": "https://github.com/wikimedia/operations-mediawiki-config",
+      "stars": 88,
+      "forks": 54,
+      "language": "HTML",
+      "description": " ⚙️ Configuration for Wikimedia Foundation wikis. This is a mirror from https://gerrit.wikimedia.org/g/operations/mediawiki-config/. See https://www.mediawiki.org/wiki/Developer_access for contributing.",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "Crossoufire/MyLists",
+      "url": "https://github.com/Crossoufire/MyLists",
+      "stars": 69,
+      "forks": 7,
+      "language": "TypeScript",
+      "description": "MyLists: organize series, anime, movies, games, books and manga, all in one place.",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "Myuuiii/DAWPresence",
+      "url": "https://github.com/Myuuiii/DAWPresence",
+      "stars": 88,
+      "forks": 9,
+      "language": "C#",
+      "description": "A Discord Rich Presence app for several DAWs like FL Studio and Ableton",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "richard-unterberg/leaflet-nextjs-ts-starter",
+      "url": "https://github.com/richard-unterberg/leaflet-nextjs-ts-starter",
+      "stars": 73,
+      "forks": 11,
+      "language": "TypeScript",
+      "description": "Starter template for next.js and the leaflet-maps-react plugin.",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "flathub/com.github.Matoking.protontricks",
+      "url": "https://github.com/flathub/com.github.Matoking.protontricks",
+      "stars": 51,
+      "forks": 7,
+      "language": "Unknown",
+      "description": null,
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "iboxz/free-v2ray-collector",
+      "url": "https://github.com/iboxz/free-v2ray-collector",
+      "stars": 70,
+      "forks": 2,
+      "language": "CSS",
+      "description": "V2Ray config collector, multiple protocols support Mix, Reality, VLESS, VMESS, Shadowsocks, Trojan",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "cdlewis/snowboardkids2-decomp",
+      "url": "https://github.com/cdlewis/snowboardkids2-decomp",
+      "stars": 61,
+      "forks": 2,
+      "language": "C",
+      "description": "Decompilation of snowboard kids 2 (N64)",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "conda-forge/feedstocks",
+      "url": "https://github.com/conda-forge/feedstocks",
+      "stars": 67,
+      "forks": 40,
+      "language": "Unknown",
+      "description": "All conda-forge feedstocks, in one convenient place",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "orangekame3/mirrormate",
+      "url": "https://github.com/orangekame3/mirrormate",
+      "stars": 54,
+      "forks": 1,
+      "language": "TypeScript",
+      "description": "Self-hosted personalized AI in a mirror.",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "libdriver/nrf905",
+      "url": "https://github.com/libdriver/nrf905",
+      "stars": 76,
+      "forks": 32,
+      "language": "C",
+      "description": "NRF905 full-featured driver library for general-purpose MCU and Linux.",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "BrianRVP/Bflix34567",
+      "url": "https://github.com/BrianRVP/Bflix34567",
+      "stars": 73,
+      "forks": 22,
+      "language": "Roff",
+      "description": null,
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "heypoom/patchies",
+      "url": "https://github.com/heypoom/patchies",
+      "stars": 98,
+      "forks": 3,
+      "language": "TypeScript",
+      "description": "Patchies is a creative coding patcher for audio-visual things that runs on the web, with libraries you already use.",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "CumulusNetworks/docs",
+      "url": "https://github.com/CumulusNetworks/docs",
+      "stars": 65,
+      "forks": 124,
+      "language": "HTML",
+      "description": "NVIDIA Ethernet Software Documentation Repo",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "homeserverhq/hshq",
+      "url": "https://github.com/homeserverhq/hshq",
+      "stars": 54,
+      "forks": 6,
+      "language": "Shell",
+      "description": "HomeServer Infrastructure and Integrated Installer",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "FiltersHeroes/PolishAnnoyanceFilters",
+      "url": "https://github.com/FiltersHeroes/PolishAnnoyanceFilters",
+      "stars": 53,
+      "forks": 4,
+      "language": "Adblock Filter List",
+      "description": "Polskie Filtry Elementów Irytujących ukrywają i blokują wyskakujące okienka, widgety, newslettery, powiadomienia push, strzałki, niezgodne z tematem artykułów otagowane linki wewnętrzne i inne drażniące elementy (Polskie Filtry RODO-Ciasteczkowe są już w nich zawarte).",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "Gerschtli/nix-config",
+      "url": "https://github.com/Gerschtli/nix-config",
+      "stars": 83,
+      "forks": 1,
+      "language": "Nix",
+      "description": "A collection of my system configs and dotfiles",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "dragon1086/kospi-kosdaq-stock-server",
+      "url": "https://github.com/dragon1086/kospi-kosdaq-stock-server",
+      "stars": 60,
+      "forks": 20,
+      "language": "Python",
+      "description": "An MCP server that provides KOSPI/KOSDAQ stock data using FastMCP",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "Mati365/ckeditor5-phoenix",
+      "url": "https://github.com/Mati365/ckeditor5-phoenix",
+      "stars": 83,
+      "forks": 7,
+      "language": "Elixir",
+      "description": "🚀 CKEditor 5 for Phoenix - smooth WYSIWYG integration for Elixir apps! ⚡ Works seamlessly with LiveView or traditional forms. 💡 Easy setup, supports custom builds, dynamic loading, and localization. 🔧 Plug-and-play modules, JS hooks, and full customization support. 🎯 Ready for both open-source and commercial use!",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "schumijo/iptv",
+      "url": "https://github.com/schumijo/iptv",
+      "stars": 77,
+      "forks": 7,
+      "language": "Python",
+      "description": null,
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "jekil/UDPot",
+      "url": "https://github.com/jekil/UDPot",
+      "stars": 52,
+      "forks": 12,
+      "language": "Python",
+      "description": "Simple UDP honeypot script",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "souk4711/hakoniwa",
+      "url": "https://github.com/souk4711/hakoniwa",
+      "stars": 54,
+      "forks": 6,
+      "language": "Rust",
+      "description": "Process isolation for Linux using namespaces, resource limits, landlock and seccomp.",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "REIJI007/Adblock-Rule-Collection",
+      "url": "https://github.com/REIJI007/Adblock-Rule-Collection",
+      "stars": 83,
+      "forks": 7,
+      "language": "Python",
+      "description": "一个收集众多广告过滤器规则，进行转化、合并、去重的广告过滤器，兼容常见的广告过滤应用程序（如Adblock Plus、uBlock Origin、AdGuard 等），每20分钟更新一次，确保即时同步上游减少误杀",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "fdciabdul/Vpngate-Scraper-API",
+      "url": "https://github.com/fdciabdul/Vpngate-Scraper-API",
+      "stars": 70,
+      "forks": 28,
+      "language": "JavaScript",
+      "description": "fresh oVPN config from vpngate.net ",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "statsig-io/statsigstatus",
+      "url": "https://github.com/statsig-io/statsigstatus",
+      "stars": 50,
+      "forks": 28,
+      "language": "JavaScript",
+      "description": "Statsig's Status Page, forked from our open-source template.",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "emu-sync/EmuSync",
+      "url": "https://github.com/emu-sync/EmuSync",
+      "stars": 69,
+      "forks": 0,
+      "language": "JavaScript",
+      "description": "Game save sync tool for PC games and emulated games",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "xhyrom/discord-datamining",
+      "url": "https://github.com/xhyrom/discord-datamining",
+      "stars": 61,
+      "forks": 7,
+      "language": "JavaScript",
+      "description": "repository offering datamining and analyzing web builds, host builds, articles, blog posts, policies, jobs, @discord github and their domain(s)",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "MarcelMeurer/WVD-Hydra",
+      "url": "https://github.com/MarcelMeurer/WVD-Hydra",
+      "stars": 92,
+      "forks": 13,
+      "language": "JavaScript",
+      "description": null,
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "REIJI007/Adblock-Rule-Collection",
+      "url": "https://github.com/REIJI007/Adblock-Rule-Collection",
+      "stars": 83,
+      "forks": 7,
+      "language": "Python",
+      "description": "一个收集众多广告过滤器规则，进行转化、合并、去重的广告过滤器，兼容常见的广告过滤应用程序（如Adblock Plus、uBlock Origin、AdGuard 等），每20分钟更新一次，确保即时同步上游减少误杀",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "indmdev/Free-Telegram-Store-Bot",
+      "url": "https://github.com/indmdev/Free-Telegram-Store-Bot",
+      "stars": 75,
+      "forks": 29,
+      "language": "Python",
+      "description": "This is 100% Free Shop Bot, Is a Telegram Store Bot you can use for selling your products and services and managing your products and orders. You customers can  easily shop on you store with confidence using this Auto shop bot.",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "taksssss/tv",
+      "url": "https://github.com/taksssss/tv",
+      "stars": 57,
+      "forks": 32,
+      "language": "Python",
+      "description": "epg mirrors",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "scipy/scipy-stubs",
+      "url": "https://github.com/scipy/scipy-stubs",
+      "stars": 78,
+      "forks": 24,
+      "language": "Python",
+      "description": "Typing Stubs for SciPy",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "databrickslabs/ontos",
+      "url": "https://github.com/databrickslabs/ontos",
+      "stars": 92,
+      "forks": 18,
+      "language": "Python",
+      "description": "Business Semantics for Unity Catalog",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "PAIR-code/deliberate-lab",
+      "url": "https://github.com/PAIR-code/deliberate-lab",
+      "stars": 55,
+      "forks": 23,
+      "language": "TypeScript",
+      "description": "Platform for running online research experiments on human + LLM group dynamics.",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "screenappai/meeting-bot",
+      "url": "https://github.com/screenappai/meeting-bot",
+      "stars": 68,
+      "forks": 26,
+      "language": "TypeScript",
+      "description": "Universal meeting  bot to record Google Meet, Zoom, and Microsoft Teams — with a single API. Runs in production. Free to use, extend, and scale.",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "Crossoufire/MyLists",
+      "url": "https://github.com/Crossoufire/MyLists",
+      "stars": 69,
+      "forks": 7,
+      "language": "TypeScript",
+      "description": "MyLists: organize series, anime, movies, games, books and manga, all in one place.",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "richard-unterberg/leaflet-nextjs-ts-starter",
+      "url": "https://github.com/richard-unterberg/leaflet-nextjs-ts-starter",
+      "stars": 73,
+      "forks": 11,
+      "language": "TypeScript",
+      "description": "Starter template for next.js and the leaflet-maps-react plugin.",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "orangekame3/mirrormate",
+      "url": "https://github.com/orangekame3/mirrormate",
+      "stars": 54,
+      "forks": 1,
+      "language": "TypeScript",
+      "description": "Self-hosted personalized AI in a mirror.",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "dbt-labs/docs.getdbt.com",
+      "url": "https://github.com/dbt-labs/docs.getdbt.com",
+      "stars": 184,
+      "forks": 1139,
+      "language": "JavaScript",
+      "description": "The code behind docs.getdbt.com",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "ZettaScaleLabs/ros-z",
+      "url": "https://github.com/ZettaScaleLabs/ros-z",
+      "stars": 102,
+      "forks": 8,
+      "language": "Rust",
+      "description": null,
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "REIJI007/AdBlock_Rule_For_Sing-box",
+      "url": "https://github.com/REIJI007/AdBlock_Rule_For_Sing-box",
+      "stars": 123,
+      "forks": 19,
+      "language": "PowerShell",
+      "description": "适用于Sing-box的广告域名拦截RULE-SET规则集，每20分钟更新一次",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "kubernetes-sigs/vsphere-csi-driver",
+      "url": "https://github.com/kubernetes-sigs/vsphere-csi-driver",
+      "stars": 340,
+      "forks": 201,
+      "language": "Go",
+      "description": "vSphere storage Container Storage Interface (CSI) plugin",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "DeltaV-Station/Delta-v",
+      "url": "https://github.com/DeltaV-Station/Delta-v",
+      "stars": 120,
+      "forks": 587,
+      "language": "C#",
+      "description": "A fork of Space Station 14, embracing a mixture of classic SS13 chaos and experimentation only possible with the new engine",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "ShatakVPN/ConfigForge-V2Ray",
+      "url": "https://github.com/ShatakVPN/ConfigForge-V2Ray",
+      "stars": 108,
+      "forks": 29,
+      "language": "Python",
+      "description": "A powerful tool to automatically download, parse, and organize VPN configurations (VLESS, VMess, Shadowsocks, etc.) and push updates to GitHub.",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "jkitchin/pycse",
+      "url": "https://github.com/jkitchin/pycse",
+      "stars": 268,
+      "forks": 73,
+      "language": "Jupyter Notebook",
+      "description": "Python computations in science and engineering",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "None9527/None_Z-image-Turbo_trainer",
+      "url": "https://github.com/None9527/None_Z-image-Turbo_trainer",
+      "stars": 103,
+      "forks": 10,
+      "language": "Python",
+      "description": null,
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "EthanAlgoX/LLM-TradeBot",
+      "url": "https://github.com/EthanAlgoX/LLM-TradeBot",
+      "stars": 110,
+      "forks": 21,
+      "language": "Python",
+      "description": "A multi-agent AI trading system using LLMs to optimize strategies and adapt to market conditions in real-time.",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "medusajs/medusa-starter-default",
+      "url": "https://github.com/medusajs/medusa-starter-default",
+      "stars": 189,
+      "forks": 344,
+      "language": "TypeScript",
+      "description": null,
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "AztecProtocol/aztec-packages",
+      "url": "https://github.com/AztecProtocol/aztec-packages",
+      "stars": 417,
+      "forks": 578,
+      "language": "C++",
+      "description": null,
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "meta-pytorch/torchcomms",
+      "url": "https://github.com/meta-pytorch/torchcomms",
+      "stars": 317,
+      "forks": 52,
+      "language": "C++",
+      "description": "torchcomms: a modern PyTorch communications API",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "REIJI007/AdBlock_Rule_For_Clash",
+      "url": "https://github.com/REIJI007/AdBlock_Rule_For_Clash",
+      "stars": 277,
+      "forks": 15,
+      "language": "PowerShell",
+      "description": "适用于Clash（premium核心与mihomo核心）的广告域名拦截RULE-SET规则集，每20分钟更新一次",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "alex-ilgayev/MCPSpy",
+      "url": "https://github.com/alex-ilgayev/MCPSpy",
+      "stars": 486,
+      "forks": 70,
+      "language": "C",
+      "description": "MCP Monitoring with eBPF",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "StressOzz/Zapret-Manager",
+      "url": "https://github.com/StressOzz/Zapret-Manager",
+      "stars": 337,
+      "forks": 9,
+      "language": "Shell",
+      "description": "Скрипт для установки и настройки Zapret на OpenWRT.",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "PrairieLearn/PrairieLearn",
+      "url": "https://github.com/PrairieLearn/PrairieLearn",
+      "stars": 419,
+      "forks": 356,
+      "language": "TypeScript",
+      "description": "Online problem-driven learning system",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "devopness/devopness",
+      "url": "https://github.com/devopness/devopness",
+      "stars": 333,
+      "forks": 132,
+      "language": "Python",
+      "description": "DevOps Happiness: 1-click or 1-prompt MCP. Deploy apps + infra + CI/CD on your cloud. Happy humans + reliable agents. 🚀",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "tbeu/matio",
+      "url": "https://github.com/tbeu/matio",
+      "stars": 385,
+      "forks": 102,
+      "language": "C",
+      "description": "MATLAB MAT File I/O Library",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "Washington-University/workbench",
+      "url": "https://github.com/Washington-University/workbench",
+      "stars": 212,
+      "forks": 66,
+      "language": "C++",
+      "description": "Connectome Workbench",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "department-of-veterans-affairs/va.gov-team",
+      "url": "https://github.com/department-of-veterans-affairs/va.gov-team",
+      "stars": 356,
+      "forks": 240,
+      "language": "HTML",
+      "description": "Public resources for building on and in support of VA.gov. Visit complete Knowledge Hub:",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "celetor/epg",
+      "url": "https://github.com/celetor/epg",
+      "stars": 114,
+      "forks": 55,
+      "language": "JavaScript",
+      "description": null,
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "opendatateam/udata",
+      "url": "https://github.com/opendatateam/udata",
+      "stars": 252,
+      "forks": 93,
+      "language": "Python",
+      "description": "Customizable and skinnable social platform dedicated to open data.",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "kismetpro/NodeSuber",
+      "url": "https://github.com/kismetpro/NodeSuber",
+      "stars": 106,
+      "forks": 8,
+      "language": "Python",
+      "description": "Vless, Vmess, Tuic, Trojan, ShadowsocksR, Hysteria2, VPN, 虚拟网络, 配置, 订阅链接, 协议, 免费, 实时, 订阅, 节点, 大量, 高质量, 更新, 科学上网, 梯子, 翻墙, 防火墙, شبکه مجازی, پیکربندی, لینک اشتراک, پروتکل, رایگان, بلادرنگ, اشتراک, گره, حجم زیاد, کیفیت بالا, به‌روزرسانی, دیوار آتش, виртуальная сеть, конфигурация, ссылка подписки, протокол, бесплатно, в реальном времени, подписка",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "rvdbreemen/OTGW-firmware",
+      "url": "https://github.com/rvdbreemen/OTGW-firmware",
+      "stars": 161,
+      "forks": 37,
+      "language": "C++",
+      "description": "A ESP8266 devkit firmware for the Nodoshop version of the Opentherm Gateway (OTGW) ",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "ipstreet312/freeiptv",
+      "url": "https://github.com/ipstreet312/freeiptv",
+      "stars": 327,
+      "forks": 62,
+      "language": "Python",
+      "description": "free iptv channels install since 2021 avec l'esprit \"bouquet\" :)",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "MicrosoftDocs/azure-docs-cli",
+      "url": "https://github.com/MicrosoftDocs/azure-docs-cli",
+      "stars": 235,
+      "forks": 522,
+      "language": "Unknown",
+      "description": "Repository for Azure CLI command documentation published on learn.microsoft.com",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "netxms/netxms",
+      "url": "https://github.com/netxms/netxms",
+      "stars": 309,
+      "forks": 63,
+      "language": "C++",
+      "description": "NetXMS - Open Source network and infrastructure monitoring and management",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "SoliSpirit/v2ray-configs",
+      "url": "https://github.com/SoliSpirit/v2ray-configs",
+      "stars": 326,
+      "forks": 40,
+      "language": "Unknown",
+      "description": "V2Ray configs for multiple protocols and countries, updated every 15 minutes for fast, secure connections!",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "openmm/openmmforcefields",
+      "url": "https://github.com/openmm/openmmforcefields",
+      "stars": 340,
+      "forks": 86,
+      "language": "Rich Text Format",
+      "description": "CHARMM and AMBER forcefields for OpenMM (with small molecule support)",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "MizuchiLabs/mantrae",
+      "url": "https://github.com/MizuchiLabs/mantrae",
+      "stars": 397,
+      "forks": 11,
+      "language": "TypeScript",
+      "description": "Web UI for managing Traefik",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "versatiles-org/versatiles-rs",
+      "url": "https://github.com/versatiles-org/versatiles-rs",
+      "stars": 272,
+      "forks": 9,
+      "language": "Rust",
+      "description": "Core Rust implementation of the VersaTiles toolkit for converting, validating, and serving map tiles in multiple formats.",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "pipecat-ai/pipecat-examples",
+      "url": "https://github.com/pipecat-ai/pipecat-examples",
+      "stars": 174,
+      "forks": 74,
+      "language": "Python",
+      "description": "Pipecat example applications. Use and learn from these patterns to build your own voice AI applications.",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "abusaeeidx/IPTV-Scraper-Zilla",
+      "url": "https://github.com/abusaeeidx/IPTV-Scraper-Zilla",
+      "stars": 118,
+      "forks": 36,
+      "language": "Python",
+      "description": "IPTV Scraper Zilla — High-quality, auto-updating IPTV playlist generator with thousands of live channels including sports, movies, anime, and more. Fast, lightweight, and perfect for seamless streaming across all devices.",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "andir/npins",
+      "url": "https://github.com/andir/npins",
+      "stars": 451,
+      "forks": 35,
+      "language": "Rust",
+      "description": "Nix dependency pinning. Very similar to Niv but has a few features that I personally wanted.",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "podusowski/walkers",
+      "url": "https://github.com/podusowski/walkers",
+      "stars": 241,
+      "forks": 49,
+      "language": "Rust",
+      "description": "slippy map (openstreetmap) widget for egui",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "SeldomQA/XTestRunner",
+      "url": "https://github.com/SeldomQA/XTestRunner",
+      "stars": 178,
+      "forks": 131,
+      "language": "Python",
+      "description": "Modern style test report based on unittest framework.",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "miladtahanian/V2RayCFGDumper",
+      "url": "https://github.com/miladtahanian/V2RayCFGDumper",
+      "stars": 138,
+      "forks": 14,
+      "language": "Python",
+      "description": "کافیگ V2Ray جدید هر 15 دقیقه",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "wireapp/wire-android",
+      "url": "https://github.com/wireapp/wire-android",
+      "stars": 217,
+      "forks": 45,
+      "language": "Kotlin",
+      "description": "🤖 Wire client for Android",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "Chil30/vless-all-in-one",
+      "url": "https://github.com/Chil30/vless-all-in-one",
+      "stars": 411,
+      "forks": 100,
+      "language": "Shell",
+      "description": "All-in-One Proxy Script: One-click deployment for 14 protocols including VLESS Reality, Hysteria2, TUIC v5, NaïveProxy, and Snell. Features multi-protocol coexistence, smart BBR optimization, traffic routing with WARP/chain proxy, and subscription management. Supports Debian, Ubuntu, CentOS, and Alpine.",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "microsoft/vsmarketplace",
+      "url": "https://github.com/microsoft/vsmarketplace",
+      "stars": 147,
+      "forks": 31,
+      "language": "PowerShell",
+      "description": "Customer feedback and issue tracker repository for Visual Studio Marketplace",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "couchbase/couchbase-ruby-client",
+      "url": "https://github.com/couchbase/couchbase-ruby-client",
+      "stars": 109,
+      "forks": 55,
+      "language": "Ruby",
+      "description": "Couchbase Ruby Client Library (Official)",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "1024pix/pix",
+      "url": "https://github.com/1024pix/pix",
+      "stars": 268,
+      "forks": 59,
+      "language": "JavaScript",
+      "description": "Service public d'évaluation et de certification des compétences numériques pour tous.",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "GrokImageCompression/grok",
+      "url": "https://github.com/GrokImageCompression/grok",
+      "stars": 266,
+      "forks": 53,
+      "language": "C++",
+      "description": "World's Leading Open Source JPEG 2000 Codec",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "remorses/termcast",
+      "url": "https://github.com/remorses/termcast",
+      "stars": 103,
+      "forks": 1,
+      "language": "TypeScript",
+      "description": "Turn any Raycast extension into a TUI. Powered by opentui",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "Shashankss1205/CodeGraphContext",
+      "url": "https://github.com/Shashankss1205/CodeGraphContext",
+      "stars": 318,
+      "forks": 273,
+      "language": "Python",
+      "description": "An MCP server plus a CLI tool that indexes local code into a graph database to provide context to AI assistants.",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "themiralay/Proxy-List-World",
+      "url": "https://github.com/themiralay/Proxy-List-World",
+      "stars": 144,
+      "forks": 10,
+      "language": "Unknown",
+      "description": "ICE Proxy list produces new proxies by collectively scanning the entire open source list in the world. Proxies are updated every 2 - 3 minutes. New Proxy sources will be added day by day. The list is always open source.",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "cncf/people",
+      "url": "https://github.com/cncf/people",
+      "stars": 147,
+      "forks": 533,
+      "language": "Makefile",
+      "description": "Stores the data that will populate the various people listings on cncf.io",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "joyanhui/ikuai-bypass",
+      "url": "https://github.com/joyanhui/ikuai-bypass",
+      "stars": 447,
+      "forks": 48,
+      "language": "HTML",
+      "description": "爱快分流规则维护：用更完善更灵活的方式，自动将通过指定的远程配置文件把区域ip，域名等，整理到到爱快的端口分流、自定义运营商、域名分流、广告屏蔽等",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "awslabs/aws-media-replay-engine",
+      "url": "https://github.com/awslabs/aws-media-replay-engine",
+      "stars": 105,
+      "forks": 27,
+      "language": "Python",
+      "description": "Media Replay Engine (MRE) is a framework to build automated video clipping and replay (highlight) generation pipelines for live and video-on-demand content.",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "igareck/vpn-configs-for-russia",
+      "url": "https://github.com/igareck/vpn-configs-for-russia",
+      "stars": 389,
+      "forks": 13,
+      "language": "Unknown",
+      "description": "🗽Бесплатные и проверенные VPN конфигурации, работающие в РФ ⚪ Белые списки / обход белых списков ⚪ Free and checked VPN configurations that work in Russia ⚪ Whitelists bypass",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "JetBrains/youtrackdb",
+      "url": "https://github.com/JetBrains/youtrackdb",
+      "stars": 118,
+      "forks": 9,
+      "language": "Java",
+      "description": "YouTrackDB is a general use an object-oriented graph database supporting full-text and geospatial models in one product. YouTrackDB supports Gremlin queries, ACID transactions, full-text indexing queries.",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "hartwork/jawanndenn",
+      "url": "https://github.com/hartwork/jawanndenn",
+      "stars": 197,
+      "forks": 27,
+      "language": "Python",
+      "description": ":date: Simple alternative to Doodle polls and scheduling (Python, Django, TypeScript, React, MUI)",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "Bittu5134/ORV-Reader",
+      "url": "https://github.com/Bittu5134/ORV-Reader",
+      "stars": 133,
+      "forks": 100,
+      "language": "Python",
+      "description": "ORV-Reader: A website for reading the webnovel Omniscient Reader's Viewpoint and its Side Stories.",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "ml-explore/mlx-c",
+      "url": "https://github.com/ml-explore/mlx-c",
+      "stars": 158,
+      "forks": 29,
+      "language": "C++",
+      "description": "C API for MLX",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "fdciabdul/Google-Trends-Keywords-Scraper",
+      "url": "https://github.com/fdciabdul/Google-Trends-Keywords-Scraper",
+      "stars": 131,
+      "forks": 44,
+      "language": "JavaScript",
+      "description": "Scraping Trends Keywords from Google ( All Country)",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "ros2/rosbag2",
+      "url": "https://github.com/ros2/rosbag2",
+      "stars": 382,
+      "forks": 292,
+      "language": "C++",
+      "description": null,
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "vakhov/fresh-proxy-list",
+      "url": "https://github.com/vakhov/fresh-proxy-list",
+      "stars": 316,
+      "forks": 29,
+      "language": "PHP",
+      "description": "Provides a list of fresh, working proxy servers (HTTP, HTTPS, SOCKS4 & SOCKS5) with multiple formats available for download.",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "Redlnn/lemon-new-tab-page",
+      "url": "https://github.com/Redlnn/lemon-new-tab-page",
+      "stars": 109,
+      "forks": 14,
+      "language": "Vue",
+      "description": "一个简约的纯本地新标签页扩展",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "prehisle/relay-pulse",
+      "url": "https://github.com/prehisle/relay-pulse",
+      "stars": 200,
+      "forks": 26,
+      "language": "Go",
+      "description": "企业级 LLM 中转服务可用性监控系统，实时追踪服务状态并提供可视化仪表板。",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "department-of-veterans-affairs/vets-api",
+      "url": "https://github.com/department-of-veterans-affairs/vets-api",
+      "stars": 251,
+      "forks": 85,
+      "language": "Ruby",
+      "description": "API powering VA.gov",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "Maloy-Android/Muzza",
+      "url": "https://github.com/Maloy-Android/Muzza",
+      "stars": 474,
+      "forks": 22,
+      "language": "Kotlin",
+      "description": "A Material 3 YouTube Music client for Android",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "aces/Loris",
+      "url": "https://github.com/aces/Loris",
+      "stars": 158,
+      "forks": 191,
+      "language": "PHP",
+      "description": "LORIS is a web-accessible database solution for longitudinal multi-site studies.",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "apollographql/rover",
+      "url": "https://github.com/apollographql/rover",
+      "stars": 442,
+      "forks": 92,
+      "language": "Rust",
+      "description": "The CLI for Apollo GraphOS",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "roots/docs",
+      "url": "https://github.com/roots/docs",
+      "stars": 170,
+      "forks": 181,
+      "language": "Unknown",
+      "description": "📝 Documentation for Roots projects",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "EPFL-LAP/dynamatic",
+      "url": "https://github.com/EPFL-LAP/dynamatic",
+      "stars": 155,
+      "forks": 42,
+      "language": "VHDL",
+      "description": "DHLS (Dynamic High-Level Synthesis) compiler based on MLIR ",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "guardian/dotcom-rendering",
+      "url": "https://github.com/guardian/dotcom-rendering",
+      "stars": 260,
+      "forks": 30,
+      "language": "TypeScript",
+      "description": "The Guardian web rendering service (aka DCR/DCAR)",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "pbatard/Mosby",
+      "url": "https://github.com/pbatard/Mosby",
+      "stars": 118,
+      "forks": 12,
+      "language": "C",
+      "description": "Mosby – More Secure Secure Boot",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "LaurenzV/krilla",
+      "url": "https://github.com/LaurenzV/krilla",
+      "stars": 320,
+      "forks": 23,
+      "language": "Rust",
+      "description": "A high-level, ergonomic Rust library for creating PDF documents.",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "HDVinnie/TrackerHub",
+      "url": "https://github.com/HDVinnie/TrackerHub",
+      "stars": 139,
+      "forks": 3,
+      "language": "Markdown",
+      "description": "Monitor tracker uptime",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "Love4vn/love4vn",
+      "url": "https://github.com/Love4vn/love4vn",
+      "stars": 125,
+      "forks": 27,
+      "language": "Python",
+      "description": null,
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "livekit/node-sdks",
+      "url": "https://github.com/livekit/node-sdks",
+      "stars": 244,
+      "forks": 102,
+      "language": "TypeScript",
+      "description": "LiveKit realtime and server SDKs for Node.JS",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "zezhishao/DailyArXiv",
+      "url": "https://github.com/zezhishao/DailyArXiv",
+      "stars": 399,
+      "forks": 88,
+      "language": "Python",
+      "description": "Daily ArXiv Papers.",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "zloi-user/hideip.me",
+      "url": "https://github.com/zloi-user/hideip.me",
+      "stars": 405,
+      "forks": 26,
+      "language": "Unknown",
+      "description": "  proxy list that updates every 10 minutes",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "simonw/simonw",
+      "url": "https://github.com/simonw/simonw",
+      "stars": 415,
+      "forks": 139,
+      "language": "Python",
+      "description": "https://simonwillison.net/2020/Jul/10/self-updating-profile-readme/",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "PentHertz/RF-Swift",
+      "url": "https://github.com/PentHertz/RF-Swift",
+      "stars": 267,
+      "forks": 13,
+      "language": "Go",
+      "description": "🚀 A powerful multi-platform RF toolbox that deploys specialized radio tools in seconds on Linux, Windows, and macOS—supporting x86_64, ARM64 (Raspberry Pi, Apple Silicon), and RISC-V architectures without disrupting your primary OS. 📡✨",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "Writeopia/Writeopia",
+      "url": "https://github.com/Writeopia/Writeopia",
+      "stars": 256,
+      "forks": 19,
+      "language": "Kotlin",
+      "description": "Write like nobody’s watching. Because they aren't.",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "rubycentral/cfp-app",
+      "url": "https://github.com/rubycentral/cfp-app",
+      "stars": 231,
+      "forks": 163,
+      "language": "Ruby",
+      "description": "Rails app for managing a conference CFP",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "OSGeo/OSGeoLive",
+      "url": "https://github.com/OSGeo/OSGeoLive",
+      "stars": 170,
+      "forks": 109,
+      "language": "Shell",
+      "description": "OSGeo-Live is a self-contained bootable DVD, USB thumb drive or Virtual Machine based on LUbuntu, that allows you to try a wide variety of open source geospatial software without installing anything. It is composed entirely of FOSS, allowing it to be openly reproduced and distributed.",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "zwrt/IPTV",
+      "url": "https://github.com/zwrt/IPTV",
+      "stars": 152,
+      "forks": 17,
+      "language": "Unknown",
+      "description": null,
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "NNTmux/newznab-tmux",
+      "url": "https://github.com/NNTmux/newznab-tmux",
+      "stars": 253,
+      "forks": 59,
+      "language": "PHP",
+      "description": "Laravel based usenet indexer",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "pengelana/blocklist",
+      "url": "https://github.com/pengelana/blocklist",
+      "stars": 389,
+      "forks": 27,
+      "language": "AppleScript",
+      "description": "Privacy DNS",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "Infomaniak/android-kMail",
+      "url": "https://github.com/Infomaniak/android-kMail",
+      "stars": 176,
+      "forks": 10,
+      "language": "Kotlin",
+      "description": "Infomaniak Mail application for Android",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "SaladDay/cc-switch-cli",
+      "url": "https://github.com/SaladDay/cc-switch-cli",
+      "stars": 282,
+      "forks": 13,
+      "language": "Rust",
+      "description": "⭐️ A cross-platform CLI All-in-One assistant tool for Claude Code, Codex & Gemini CLI.",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "dragon1086/prism-insight",
+      "url": "https://github.com/dragon1086/prism-insight",
+      "stars": 343,
+      "forks": 130,
+      "language": "Python",
+      "description": "AI-based stock analysis and trading system",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "team-ocean/veros",
+      "url": "https://github.com/team-ocean/veros",
+      "stars": 380,
+      "forks": 57,
+      "language": "Python",
+      "description": "The versatile ocean simulator, in pure Python, powered by JAX.",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "equalitie/ouisync-app",
+      "url": "https://github.com/equalitie/ouisync-app",
+      "stars": 117,
+      "forks": 10,
+      "language": "Dart",
+      "description": null,
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "GOFONCK/remnawave-STEALTHNET-Panel",
+      "url": "https://github.com/GOFONCK/remnawave-STEALTHNET-Panel",
+      "stars": 133,
+      "forks": 8,
+      "language": "Python",
+      "description": "Сайт для продажи подписок с интеграцией Remnawave + админка  https://remna.st/",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "smithery-ai/cli",
+      "url": "https://github.com/smithery-ai/cli",
+      "stars": 462,
+      "forks": 68,
+      "language": "TypeScript",
+      "description": "Install, manage and develop MCP servers",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "quay/claircore",
+      "url": "https://github.com/quay/claircore",
+      "stars": 149,
+      "forks": 89,
+      "language": "Go",
+      "description": "foundation modules for scanning container packages and reporting vulnerabilities",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "speakeasy-api/gram",
+      "url": "https://github.com/speakeasy-api/gram",
+      "stars": 184,
+      "forks": 18,
+      "language": "TypeScript",
+      "description": "Platform to create, curate and host MCP servers ⚒️ Build production quality tools for your agents.",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "dbt-labs/docs.getdbt.com",
+      "url": "https://github.com/dbt-labs/docs.getdbt.com",
+      "stars": 184,
+      "forks": 1139,
+      "language": "JavaScript",
+      "description": "The code behind docs.getdbt.com",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "celetor/epg",
+      "url": "https://github.com/celetor/epg",
+      "stars": 114,
+      "forks": 55,
+      "language": "JavaScript",
+      "description": null,
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "1024pix/pix",
+      "url": "https://github.com/1024pix/pix",
+      "stars": 268,
+      "forks": 59,
+      "language": "JavaScript",
+      "description": "Service public d'évaluation et de certification des compétences numériques pour tous.",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "fdciabdul/Google-Trends-Keywords-Scraper",
+      "url": "https://github.com/fdciabdul/Google-Trends-Keywords-Scraper",
+      "stars": 131,
+      "forks": 44,
+      "language": "JavaScript",
+      "description": "Scraping Trends Keywords from Google ( All Country)",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "nurrony/hlsdownloader",
+      "url": "https://github.com/nurrony/hlsdownloader",
+      "stars": 121,
+      "forks": 21,
+      "language": "JavaScript",
+      "description": "Downloads HLS Playlist file and TS chunks. You can use it for content pre-fetching from CDN to Edge Server for your end viewers.",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "vanodevium/node-framework-stars",
+      "url": "https://github.com/vanodevium/node-framework-stars",
+      "stars": 217,
+      "forks": 19,
+      "language": "JavaScript",
+      "description": "A list of popular GitHub projects related to Node.js web frameworks (ranked by stars)",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "TerraFirmaGreg-Team/Modpack-Modern",
+      "url": "https://github.com/TerraFirmaGreg-Team/Modpack-Modern",
+      "stars": 286,
+      "forks": 154,
+      "language": "JavaScript",
+      "description": "An innovative modpack that contains GregTech and TerraFirmaCraft on 1.20.x.",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "hongbo-miao/hongbomiao.com",
+      "url": "https://github.com/hongbo-miao/hongbomiao.com",
+      "stars": 280,
+      "forks": 46,
+      "language": "Python",
+      "description": "A personal research and development (R&D) lab that facilitates the sharing of knowledge.",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "ShatakVPN/ConfigForge-V2Ray",
+      "url": "https://github.com/ShatakVPN/ConfigForge-V2Ray",
+      "stars": 108,
+      "forks": 29,
+      "language": "Python",
+      "description": "A powerful tool to automatically download, parse, and organize VPN configurations (VLESS, VMess, Shadowsocks, etc.) and push updates to GitHub.",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "None9527/None_Z-image-Turbo_trainer",
+      "url": "https://github.com/None9527/None_Z-image-Turbo_trainer",
+      "stars": 103,
+      "forks": 10,
+      "language": "Python",
+      "description": null,
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "EthanAlgoX/LLM-TradeBot",
+      "url": "https://github.com/EthanAlgoX/LLM-TradeBot",
+      "stars": 110,
+      "forks": 21,
+      "language": "Python",
+      "description": "A multi-agent AI trading system using LLMs to optimize strategies and adapt to market conditions in real-time.",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "devopness/devopness",
+      "url": "https://github.com/devopness/devopness",
+      "stars": 333,
+      "forks": 132,
+      "language": "Python",
+      "description": "DevOps Happiness: 1-click or 1-prompt MCP. Deploy apps + infra + CI/CD on your cloud. Happy humans + reliable agents. 🚀",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "opendatateam/udata",
+      "url": "https://github.com/opendatateam/udata",
+      "stars": 252,
+      "forks": 93,
+      "language": "Python",
+      "description": "Customizable and skinnable social platform dedicated to open data.",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "kismetpro/NodeSuber",
+      "url": "https://github.com/kismetpro/NodeSuber",
+      "stars": 106,
+      "forks": 8,
+      "language": "Python",
+      "description": "Vless, Vmess, Tuic, Trojan, ShadowsocksR, Hysteria2, VPN, 虚拟网络, 配置, 订阅链接, 协议, 免费, 实时, 订阅, 节点, 大量, 高质量, 更新, 科学上网, 梯子, 翻墙, 防火墙, شبکه مجازی, پیکربندی, لینک اشتراک, پروتکل, رایگان, بلادرنگ, اشتراک, گره, حجم زیاد, کیفیت بالا, به‌روزرسانی, دیوار آتش, виртуальная сеть, конфигурация, ссылка подписки, протокол, бесплатно, в реальном времени, подписка",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "medusajs/medusa-starter-default",
+      "url": "https://github.com/medusajs/medusa-starter-default",
+      "stars": 189,
+      "forks": 344,
+      "language": "TypeScript",
+      "description": null,
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "PrairieLearn/PrairieLearn",
+      "url": "https://github.com/PrairieLearn/PrairieLearn",
+      "stars": 419,
+      "forks": 356,
+      "language": "TypeScript",
+      "description": "Online problem-driven learning system",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "MizuchiLabs/mantrae",
+      "url": "https://github.com/MizuchiLabs/mantrae",
+      "stars": 397,
+      "forks": 11,
+      "language": "TypeScript",
+      "description": "Web UI for managing Traefik",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "remorses/termcast",
+      "url": "https://github.com/remorses/termcast",
+      "stars": 103,
+      "forks": 1,
+      "language": "TypeScript",
+      "description": "Turn any Raycast extension into a TUI. Powered by opentui",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "guardian/dotcom-rendering",
+      "url": "https://github.com/guardian/dotcom-rendering",
+      "stars": 260,
+      "forks": 30,
+      "language": "TypeScript",
+      "description": "The Guardian web rendering service (aka DCR/DCAR)",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "livekit/node-sdks",
+      "url": "https://github.com/livekit/node-sdks",
+      "stars": 244,
+      "forks": 102,
+      "language": "TypeScript",
+      "description": "LiveKit realtime and server SDKs for Node.JS",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "smithery-ai/cli",
+      "url": "https://github.com/smithery-ai/cli",
+      "stars": 462,
+      "forks": 68,
+      "language": "TypeScript",
+      "description": "Install, manage and develop MCP servers",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "roosterkid/openproxylist",
+      "url": "https://github.com/roosterkid/openproxylist",
+      "stars": 722,
+      "forks": 109,
+      "language": "Unknown",
+      "description": "List of Free HTTPS, SOCKS4, SOCKS5 & V2Ray Proxy (Hourly Updates!)",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "thephpleague/uri-interfaces",
+      "url": "https://github.com/thephpleague/uri-interfaces",
+      "stars": 527,
+      "forks": 9,
+      "language": "PHP",
+      "description": "[READ-ONLY] League URI common ",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "Proektsoftbg/Calcpad",
+      "url": "https://github.com/Proektsoftbg/Calcpad",
+      "stars": 617,
+      "forks": 85,
+      "language": "HTML",
+      "description": "Free and open source software for mathematical and engineering calculations.",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "jenish-sojitra/JSAnalyzer",
+      "url": "https://github.com/jenish-sojitra/JSAnalyzer",
+      "stars": 536,
+      "forks": 101,
+      "language": "Python",
+      "description": null,
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "RustCrypto/RSA",
+      "url": "https://github.com/RustCrypto/RSA",
+      "stars": 643,
+      "forks": 175,
+      "language": "Rust",
+      "description": "RSA implementation in pure Rust",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "piceaTech/node-gitlab-2-github",
+      "url": "https://github.com/piceaTech/node-gitlab-2-github",
+      "stars": 585,
+      "forks": 149,
+      "language": "TypeScript",
+      "description": "Migrate Issues, milestones etc from gitlab to github",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "hookzof/socks5_list",
+      "url": "https://github.com/hookzof/socks5_list",
+      "stars": 877,
+      "forks": 168,
+      "language": "Unknown",
+      "description": "Auto-updated SOCKS5 proxy list + proxies for Telegram",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "GeneralLibrary/GeneralUpdate",
+      "url": "https://github.com/GeneralLibrary/GeneralUpdate",
+      "stars": 686,
+      "forks": 55,
+      "language": "C#",
+      "description": "Unlimited Updates, Boundless Upgrades.",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "rust-lang/crates.io-index",
+      "url": "https://github.com/rust-lang/crates.io-index",
+      "stars": 672,
+      "forks": 259,
+      "language": "Tcl",
+      "description": "Registry index for crates.io",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "elixir-protobuf/protobuf",
+      "url": "https://github.com/elixir-protobuf/protobuf",
+      "stars": 891,
+      "forks": 153,
+      "language": "Elixir",
+      "description": "A pure Elixir implementation of Google Protobuf.",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "shanteacontrols/OpenDeck",
+      "url": "https://github.com/shanteacontrols/OpenDeck",
+      "stars": 812,
+      "forks": 57,
+      "language": "C++",
+      "description": "Software and hardware platform for simpler building of MIDI controllers.",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "googleapis/google-cloud-cpp",
+      "url": "https://github.com/googleapis/google-cloud-cpp",
+      "stars": 634,
+      "forks": 433,
+      "language": "C++",
+      "description": "C++ Client Libraries for Google Cloud Services",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "markuplint/markuplint",
+      "url": "https://github.com/markuplint/markuplint",
+      "stars": 597,
+      "forks": 62,
+      "language": "TypeScript",
+      "description": "An HTML linter for all markup developers.",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "fabriziosalmi/certmate",
+      "url": "https://github.com/fabriziosalmi/certmate",
+      "stars": 977,
+      "forks": 56,
+      "language": "Python",
+      "description": "SSL Certificate Management System (API + UI)",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "opensanctions/opensanctions",
+      "url": "https://github.com/opensanctions/opensanctions",
+      "stars": 663,
+      "forks": 153,
+      "language": "Python",
+      "description": "An open database of international sanctions data, persons of interest and politically exposed persons",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "MajkiIT/polish-ads-filter",
+      "url": "https://github.com/MajkiIT/polish-ads-filter",
+      "stars": 716,
+      "forks": 96,
+      "language": "Adblock Filter List",
+      "description": "CertyficateIT - Oficjalne polskie filtry do Adblock, uBlock Origin, Adguard",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "AzureAD/microsoft-authentication-library-for-python",
+      "url": "https://github.com/AzureAD/microsoft-authentication-library-for-python",
+      "stars": 938,
+      "forks": 212,
+      "language": "Python",
+      "description": "Microsoft Authentication Library (MSAL) for Python makes it easy to authenticate to Microsoft Entra ID. General docs are available here https://learn.microsoft.com/entra/msal/python/ Stable APIs are documented here https://msal-python.readthedocs.io. Questions can be asked on www.stackoverflow.com with tag \"msal\" + \"python\".",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "linode/manager",
+      "url": "https://github.com/linode/manager",
+      "stars": 730,
+      "forks": 391,
+      "language": "TypeScript",
+      "description": "The Akamai Cloud Manager is an open-source, single-page application serving as the official UI for interacting with the Linode API. It is trusted by hundreds of thousands of customers to manage their Linode services.",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "ryan4yin/knowledge",
+      "url": "https://github.com/ryan4yin/knowledge",
+      "stars": 521,
+      "forks": 51,
+      "language": "Jupyter Notebook",
+      "description": "(Chinese Only)Everything I know: DevOps & CloudNative, Linux, Embedded, Homelab, Music, Blockchain, AI, etc...",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "monetr/monetr",
+      "url": "https://github.com/monetr/monetr",
+      "stars": 539,
+      "forks": 40,
+      "language": "Go",
+      "description": "monetr is a budgeting application focused on planning for recurring expenses.",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "Arize-ai/openinference",
+      "url": "https://github.com/Arize-ai/openinference",
+      "stars": 792,
+      "forks": 174,
+      "language": "Python",
+      "description": "OpenTelemetry Instrumentation for AI Observability",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "planetscale/cli",
+      "url": "https://github.com/planetscale/cli",
+      "stars": 636,
+      "forks": 56,
+      "language": "Go",
+      "description": "The CLI for PlanetScale Database",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "agentscope-ai/ReMe",
+      "url": "https://github.com/agentscope-ai/ReMe",
+      "stars": 844,
+      "forks": 76,
+      "language": "Python",
+      "description": "ReMe: Memory Management Kit for Agents - Remember Me, Refine Me.",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "rubyevents/rubyevents",
+      "url": "https://github.com/rubyevents/rubyevents",
+      "stars": 520,
+      "forks": 148,
+      "language": "Ruby",
+      "description": "On a mission to index all Ruby events.",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "open-telemetry/community",
+      "url": "https://github.com/open-telemetry/community",
+      "stars": 987,
+      "forks": 276,
+      "language": "Python",
+      "description": "OpenTelemetry community content",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "LaurenzV/hayro",
+      "url": "https://github.com/LaurenzV/hayro",
+      "stars": 511,
+      "forks": 30,
+      "language": "Rust",
+      "description": "A PDF interpreter and renderer in pure Rust.",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "ARM-software/optimized-routines",
+      "url": "https://github.com/ARM-software/optimized-routines",
+      "stars": 679,
+      "forks": 116,
+      "language": "C",
+      "description": "Optimized implementations of various library functions for ARM architecture processors",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "zubanls/zuban",
+      "url": "https://github.com/zubanls/zuban",
+      "stars": 740,
+      "forks": 17,
+      "language": "Rust",
+      "description": "Python Type Checker / Language Server",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "mdtraj/mdtraj",
+      "url": "https://github.com/mdtraj/mdtraj",
+      "stars": 682,
+      "forks": 291,
+      "language": "Python",
+      "description": "An open library for the analysis of molecular dynamics trajectories",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "ACINQ/phoenix",
+      "url": "https://github.com/ACINQ/phoenix",
+      "stars": 810,
+      "forks": 126,
+      "language": "Kotlin",
+      "description": "Phoenix is a self-custodial Bitcoin wallet using Lightning to send/receive payments.",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "laravel/vue-starter-kit",
+      "url": "https://github.com/laravel/vue-starter-kit",
+      "stars": 554,
+      "forks": 249,
+      "language": "Vue",
+      "description": null,
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "coder/mux",
+      "url": "https://github.com/coder/mux",
+      "stars": 817,
+      "forks": 36,
+      "language": "TypeScript",
+      "description": "A desktop app for isolated, parallel agentic development",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "google-deepmind/mujoco_warp",
+      "url": "https://github.com/google-deepmind/mujoco_warp",
+      "stars": 976,
+      "forks": 109,
+      "language": "Python",
+      "description": "GPU-optimized version of the MuJoCo physics simulator, designed for NVIDIA hardware.",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "badrisnarayanan/antigravity-claude-proxy",
+      "url": "https://github.com/badrisnarayanan/antigravity-claude-proxy",
+      "stars": 998,
+      "forks": 122,
+      "language": "JavaScript",
+      "description": "Proxy that exposes Antigravity provided claude / gemini models, so we can use them in Claude Code",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "ivan-hc/AM",
+      "url": "https://github.com/ivan-hc/AM",
+      "stars": 996,
+      "forks": 80,
+      "language": "Shell",
+      "description": "AppImage Package Manager: AppImage sandboxing, local and system installation, update all AppImages, an extensible database of AppImages and portable apps, lists for AppImages and other GNU/Linux binaries, integrate AppImages by drag/drop or install unlisted AppImages, conversion of old AppImage types... and more! Manage AppImages like never before!",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "xRyul/obsidian-image-converter",
+      "url": "https://github.com/xRyul/obsidian-image-converter",
+      "stars": 630,
+      "forks": 42,
+      "language": "TypeScript",
+      "description": "⚡️ Convert, compress, resize, annotate, markup, draw, crop, rotate, flip, align images directly in Obsidian. Drag-resize, rename with variables, batch process. WEBP, JPG, PNG, HEIC, TIF.",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "JuliaRegistries/General",
+      "url": "https://github.com/JuliaRegistries/General",
+      "stars": 683,
+      "forks": 530,
+      "language": "Julia",
+      "description": "The official registry of general Julia packages",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "lxgw/LxgwWenKai-Lite",
+      "url": "https://github.com/lxgw/LxgwWenKai-Lite",
+      "stars": 505,
+      "forks": 15,
+      "language": "Shell",
+      "description": "The lite edition of LXGW WenKai.",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "appfeel/node-pushnotifications",
+      "url": "https://github.com/appfeel/node-pushnotifications",
+      "stars": 549,
+      "forks": 129,
+      "language": "JavaScript",
+      "description": "Push notifications for GCM, APNS, MPNS, AMZ (automatic detection from device token)",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "neondatabase/mcp-server-neon",
+      "url": "https://github.com/neondatabase/mcp-server-neon",
+      "stars": 531,
+      "forks": 96,
+      "language": "TypeScript",
+      "description": "MCP server for interacting with Neon Management API and databases",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "fal-ai/fal",
+      "url": "https://github.com/fal-ai/fal",
+      "stars": 840,
+      "forks": 86,
+      "language": "Python",
+      "description": "⚡ Fastest way to serve open source ML models to millions",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "digital-asset/daml",
+      "url": "https://github.com/digital-asset/daml",
+      "stars": 859,
+      "forks": 242,
+      "language": "Scala",
+      "description": "The Daml smart contract language",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "kubernetes-sigs/image-builder",
+      "url": "https://github.com/kubernetes-sigs/image-builder",
+      "stars": 511,
+      "forks": 470,
+      "language": "Shell",
+      "description": "Tools for building Kubernetes disk images",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "CodeBeamOrg/CodeBeam.MudBlazor.Extensions",
+      "url": "https://github.com/CodeBeamOrg/CodeBeam.MudBlazor.Extensions",
+      "stars": 555,
+      "forks": 96,
+      "language": "C#",
+      "description": "Useful third party extension components for MudBlazor, from the contributors.",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "shuaidaoya/FreeNodes",
+      "url": "https://github.com/shuaidaoya/FreeNodes",
+      "stars": 548,
+      "forks": 95,
+      "language": "Unknown",
+      "description": "每小时自动更新🤖，支持v2ray、clash等各种代理软件，利用SubsCheck-Win-GUI自动从节点池爬取免费节点分享",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "DataDog/documentation",
+      "url": "https://github.com/DataDog/documentation",
+      "stars": 570,
+      "forks": 1242,
+      "language": "HTML",
+      "description": "The source for Datadog's documentation site.",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "halcyon/asdf-java",
+      "url": "https://github.com/halcyon/asdf-java",
+      "stars": 544,
+      "forks": 98,
+      "language": "Shell",
+      "description": "A Java plugin for asdf-vm.",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "sledgeh4w/chomper",
+      "url": "https://github.com/sledgeh4w/chomper",
+      "stars": 565,
+      "forks": 138,
+      "language": "Python",
+      "description": "A lightweight emulation framework for emulating security algorithms in iOS executables and libraries.",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "ghimiresunil/Top-AI-Tools",
+      "url": "https://github.com/ghimiresunil/Top-AI-Tools",
+      "stars": 709,
+      "forks": 414,
+      "language": "Unknown",
+      "description": "Curated list of AI Tools",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "suitenumerique/meet",
+      "url": "https://github.com/suitenumerique/meet",
+      "stars": 965,
+      "forks": 103,
+      "language": "TypeScript",
+      "description": "Open source video conferencing app powered by LiveKit.",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "Rivens7/Livelist",
+      "url": "https://github.com/Rivens7/Livelist",
+      "stars": 967,
+      "forks": 173,
+      "language": "Unknown",
+      "description": "IPTV-ipv6直播源同步及常看直播",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "deezertidal/private",
+      "url": "https://github.com/deezertidal/private",
+      "stars": 810,
+      "forks": 71,
+      "language": "JavaScript",
+      "description": "Loon配置 脚本 插件 plugin 规则 分流 破解 解锁",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "deezertidal/freevpn",
+      "url": "https://github.com/deezertidal/freevpn",
+      "stars": 753,
+      "forks": 29,
+      "language": "Unknown",
+      "description": "免费公益机场节点分享",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "mbailey/voicemode",
+      "url": "https://github.com/mbailey/voicemode",
+      "stars": 538,
+      "forks": 73,
+      "language": "Python",
+      "description": "VoiceMode MCP brings natural conversations to Claude Code",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "GearsProgress/Poke_Transporter_GB",
+      "url": "https://github.com/GearsProgress/Poke_Transporter_GB",
+      "stars": 584,
+      "forks": 20,
+      "language": "C++",
+      "description": "A Pokémon Generation I/II to Generation III transfer tool",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "postcss/postcss-cli",
+      "url": "https://github.com/postcss/postcss-cli",
+      "stars": 857,
+      "forks": 94,
+      "language": "JavaScript",
+      "description": "CLI for postcss",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "petabridge/akkadotnet-code-samples",
+      "url": "https://github.com/petabridge/akkadotnet-code-samples",
+      "stars": 560,
+      "forks": 264,
+      "language": "C#",
+      "description": "Akka.NET professional reference code samples",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "bitrise-io/bitrise",
+      "url": "https://github.com/bitrise-io/bitrise",
+      "stars": 881,
+      "forks": 128,
+      "language": "Go",
+      "description": "Bitrise runner CLI - run your automations on your Mac or Linux machine -",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "immisterio/Lampac",
+      "url": "https://github.com/immisterio/Lampac",
+      "stars": 595,
+      "forks": 111,
+      "language": "C#",
+      "description": null,
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "ItzLevvie/MicrosoftTeams-msinternal",
+      "url": "https://github.com/ItzLevvie/MicrosoftTeams-msinternal",
+      "stars": 530,
+      "forks": 35,
+      "language": "PowerShell",
+      "description": "This project was created from PowerShell which allows people to download the latest internal build of Microsoft Teams.",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "badrisnarayanan/antigravity-claude-proxy",
+      "url": "https://github.com/badrisnarayanan/antigravity-claude-proxy",
+      "stars": 998,
+      "forks": 122,
+      "language": "JavaScript",
+      "description": "Proxy that exposes Antigravity provided claude / gemini models, so we can use them in Claude Code",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "appfeel/node-pushnotifications",
+      "url": "https://github.com/appfeel/node-pushnotifications",
+      "stars": 549,
+      "forks": 129,
+      "language": "JavaScript",
+      "description": "Push notifications for GCM, APNS, MPNS, AMZ (automatic detection from device token)",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "deezertidal/private",
+      "url": "https://github.com/deezertidal/private",
+      "stars": 810,
+      "forks": 71,
+      "language": "JavaScript",
+      "description": "Loon配置 脚本 插件 plugin 规则 分流 破解 解锁",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "postcss/postcss-cli",
+      "url": "https://github.com/postcss/postcss-cli",
+      "stars": 857,
+      "forks": 94,
+      "language": "JavaScript",
+      "description": "CLI for postcss",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "dwmkerr/effective-shell",
+      "url": "https://github.com/dwmkerr/effective-shell",
+      "stars": 751,
+      "forks": 89,
+      "language": "JavaScript",
+      "description": "Text, samples and website for my 'Effective Shell' series.",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "jenish-sojitra/JSAnalyzer",
+      "url": "https://github.com/jenish-sojitra/JSAnalyzer",
+      "stars": 536,
+      "forks": 101,
+      "language": "Python",
+      "description": null,
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "fabriziosalmi/certmate",
+      "url": "https://github.com/fabriziosalmi/certmate",
+      "stars": 977,
+      "forks": 56,
+      "language": "Python",
+      "description": "SSL Certificate Management System (API + UI)",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "opensanctions/opensanctions",
+      "url": "https://github.com/opensanctions/opensanctions",
+      "stars": 663,
+      "forks": 153,
+      "language": "Python",
+      "description": "An open database of international sanctions data, persons of interest and politically exposed persons",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "AzureAD/microsoft-authentication-library-for-python",
+      "url": "https://github.com/AzureAD/microsoft-authentication-library-for-python",
+      "stars": 938,
+      "forks": 212,
+      "language": "Python",
+      "description": "Microsoft Authentication Library (MSAL) for Python makes it easy to authenticate to Microsoft Entra ID. General docs are available here https://learn.microsoft.com/entra/msal/python/ Stable APIs are documented here https://msal-python.readthedocs.io. Questions can be asked on www.stackoverflow.com with tag \"msal\" + \"python\".",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "Arize-ai/openinference",
+      "url": "https://github.com/Arize-ai/openinference",
+      "stars": 792,
+      "forks": 174,
+      "language": "Python",
+      "description": "OpenTelemetry Instrumentation for AI Observability",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "piceaTech/node-gitlab-2-github",
+      "url": "https://github.com/piceaTech/node-gitlab-2-github",
+      "stars": 585,
+      "forks": 149,
+      "language": "TypeScript",
+      "description": "Migrate Issues, milestones etc from gitlab to github",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "markuplint/markuplint",
+      "url": "https://github.com/markuplint/markuplint",
+      "stars": 597,
+      "forks": 62,
+      "language": "TypeScript",
+      "description": "An HTML linter for all markup developers.",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "linode/manager",
+      "url": "https://github.com/linode/manager",
+      "stars": 730,
+      "forks": 391,
+      "language": "TypeScript",
+      "description": "The Akamai Cloud Manager is an open-source, single-page application serving as the official UI for interacting with the Linode API. It is trusted by hundreds of thousands of customers to manage their Linode services.",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "coder/mux",
+      "url": "https://github.com/coder/mux",
+      "stars": 817,
+      "forks": 36,
+      "language": "TypeScript",
+      "description": "A desktop app for isolated, parallel agentic development",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "xRyul/obsidian-image-converter",
+      "url": "https://github.com/xRyul/obsidian-image-converter",
+      "stars": 630,
+      "forks": 42,
+      "language": "TypeScript",
+      "description": "⚡️ Convert, compress, resize, annotate, markup, draw, crop, rotate, flip, align images directly in Obsidian. Drag-resize, rename with variables, batch process. WEBP, JPG, PNG, HEIC, TIF.",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "ZhiXuanWang/cf-speed-dns",
+      "url": "https://github.com/ZhiXuanWang/cf-speed-dns",
+      "stars": 1197,
+      "forks": 352,
+      "language": "Python",
+      "description": "CF优选IP工具。动态获取Cloudflare优选IP，CloudflareSpeedTest测速。",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "vortex-data/vortex",
+      "url": "https://github.com/vortex-data/vortex",
+      "stars": 2446,
+      "forks": 112,
+      "language": "Rust",
+      "description": "An extensible, state of the art columnar file format. Formerly at @spiraldb, now an Incubation Stage project at LFAI&Data, part of the Linux Foundation.",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "stellar/go-stellar-sdk",
+      "url": "https://github.com/stellar/go-stellar-sdk",
+      "stars": 1369,
+      "forks": 543,
+      "language": "Go",
+      "description": "Stellar's Go SDK",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "opnsense/core",
+      "url": "https://github.com/opnsense/core",
+      "stars": 4158,
+      "forks": 893,
+      "language": "PHP",
+      "description": "OPNsense GUI, API and systems backend",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "clawdbot/clawdbot",
+      "url": "https://github.com/clawdbot/clawdbot",
+      "stars": 2167,
+      "forks": 305,
+      "language": "TypeScript",
+      "description": "Your own personal AI assistant. Any OS. Any Platform.",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "redpanda-data/console",
+      "url": "https://github.com/redpanda-data/console",
+      "stars": 4209,
+      "forks": 409,
+      "language": "TypeScript",
+      "description": "Redpanda Console is a developer-friendly UI for managing your Kafka/Redpanda workloads. Console gives you a simple, interactive approach for gaining visibility into your topics, masking data, managing consumer groups, and exploring real-time data with time-travel debugging.",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "Checkmk/checkmk",
+      "url": "https://github.com/Checkmk/checkmk",
+      "stars": 2139,
+      "forks": 527,
+      "language": "Python",
+      "description": "Checkmk - Best-in-class infrastructure & application monitoring",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "react-native-datetimepicker/datetimepicker",
+      "url": "https://github.com/react-native-datetimepicker/datetimepicker",
+      "stars": 2826,
+      "forks": 455,
+      "language": "JavaScript",
+      "description": "React Native date & time picker component for iOS, Android and Windows",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "minio/minio-go",
+      "url": "https://github.com/minio/minio-go",
+      "stars": 2883,
+      "forks": 717,
+      "language": "Go",
+      "description": "MinIO Go client SDK for S3 compatible object storage",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "pawurb/hotpath-rs",
+      "url": "https://github.com/pawurb/hotpath-rs",
+      "stars": 1268,
+      "forks": 24,
+      "language": "Rust",
+      "description": "Simple async Rust profiler with memory and data-flow insights - quickly find and debug performance bottlenecks.",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "FedoraQt/MediaWriter",
+      "url": "https://github.com/FedoraQt/MediaWriter",
+      "stars": 1074,
+      "forks": 196,
+      "language": "C++",
+      "description": "Fedora Media Writer - Write Fedora Images to Portable Media",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "sktime/pytorch-forecasting",
+      "url": "https://github.com/sktime/pytorch-forecasting",
+      "stars": 4724,
+      "forks": 746,
+      "language": "Python",
+      "description": "Time series forecasting with PyTorch",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "dtolnay/quote",
+      "url": "https://github.com/dtolnay/quote",
+      "stars": 1509,
+      "forks": 110,
+      "language": "Rust",
+      "description": "Rust quasi-quoting",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "dust-tt/dust",
+      "url": "https://github.com/dust-tt/dust",
+      "stars": 1263,
+      "forks": 193,
+      "language": "TypeScript",
+      "description": "Custom AI agent platform to speed up your work.",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "lowRISC/opentitan",
+      "url": "https://github.com/lowRISC/opentitan",
+      "stars": 3081,
+      "forks": 931,
+      "language": "SystemVerilog",
+      "description": "OpenTitan: Open source silicon root of trust",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "opengrep/opengrep",
+      "url": "https://github.com/opengrep/opengrep",
+      "stars": 1994,
+      "forks": 162,
+      "language": "OCaml",
+      "description": "🔎 Static code analysis engine to find security issues in code.",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "void-linux/void-packages",
+      "url": "https://github.com/void-linux/void-packages",
+      "stars": 2986,
+      "forks": 2466,
+      "language": "Shell",
+      "description": "The Void source packages collection",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "run-house/kubetorch",
+      "url": "https://github.com/run-house/kubetorch",
+      "stars": 1143,
+      "forks": 48,
+      "language": "Python",
+      "description": "Distribute and run AI workloads on Kubernetes magically in Python, like PyTorch for ML infra.",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "pytorch/torchtitan",
+      "url": "https://github.com/pytorch/torchtitan",
+      "stars": 4932,
+      "forks": 660,
+      "language": "Python",
+      "description": "A PyTorch native platform for training generative AI models",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "Kiln-AI/Kiln",
+      "url": "https://github.com/Kiln-AI/Kiln",
+      "stars": 4523,
+      "forks": 336,
+      "language": "Python",
+      "description": "Easily build AI systems with Evals, RAG, Agents, fine-tuning, synthetic data, and more.",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "proxifly/free-proxy-list",
+      "url": "https://github.com/proxifly/free-proxy-list",
+      "stars": 3359,
+      "forks": 391,
+      "language": "Unknown",
+      "description": "🚀 Free HTTP, SOCKS4, & SOCKS5 Proxy List * Updated every 5 minutes *",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "kubermatic/kubermatic",
+      "url": "https://github.com/kubermatic/kubermatic",
+      "stars": 1248,
+      "forks": 194,
+      "language": "Go",
+      "description": "Kubermatic Kubernetes Platform - the Central Kubernetes Management Platform For Any Infrastructure ",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "ring-lang/ring",
+      "url": "https://github.com/ring-lang/ring",
+      "stars": 1418,
+      "forks": 431,
+      "language": "C",
+      "description": "A simple, lightweight, flexible, embeddable, portable and multi-paradigm dynamic programming language for developing applications, tools, and domain-specific languages",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "msasikanth/twine",
+      "url": "https://github.com/msasikanth/twine",
+      "stars": 2207,
+      "forks": 110,
+      "language": "Kotlin",
+      "description": "Twine: A multiplatform RSS reader built using Kotlin and Compose",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "trailofbits/publications",
+      "url": "https://github.com/trailofbits/publications",
+      "stars": 1697,
+      "forks": 210,
+      "language": "Python",
+      "description": "Publications from Trail of Bits",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "systemd/mkosi",
+      "url": "https://github.com/systemd/mkosi",
+      "stars": 1712,
+      "forks": 400,
+      "language": "Python",
+      "description": "💽 Build Bespoke OS Images",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "AnswerOverflow/AnswerOverflow",
+      "url": "https://github.com/AnswerOverflow/AnswerOverflow",
+      "stars": 1372,
+      "forks": 73,
+      "language": "TypeScript",
+      "description": "Powering Discord content discovery by making web pages from threads for some of the largest servers, including Valorant, Cloudflare, C#, and Nuxt.",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "AvenCores/goida-vpn-configs",
+      "url": "https://github.com/AvenCores/goida-vpn-configs",
+      "stars": 1092,
+      "forks": 62,
+      "language": "Python",
+      "description": "🛡 Бесплатные VPN конфиги 🌍",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "eclipse-zenoh/zenoh",
+      "url": "https://github.com/eclipse-zenoh/zenoh",
+      "stars": 2380,
+      "forks": 228,
+      "language": "Rust",
+      "description": "zenoh unifies data in motion, data in-use, data at rest and computations. It carefully blends traditional pub/sub with geo-distributed storages, queries and computations, while retaining a level of time and space efficiency that is well beyond any of the mainstream stacks.",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "Enalean/tuleap",
+      "url": "https://github.com/Enalean/tuleap",
+      "stars": 1104,
+      "forks": 299,
+      "language": "PHP",
+      "description": "Tuleap is an Open Source Suite to improve management of software developments and collaboration. With a single web-based solution, project managers, developers & quality managers can easily build, deploy software projects.",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "react-native-datetimepicker/datetimepicker",
+      "url": "https://github.com/react-native-datetimepicker/datetimepicker",
+      "stars": 2826,
+      "forks": 455,
+      "language": "JavaScript",
+      "description": "React Native date & time picker component for iOS, Android and Windows",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "DefiLlama/DefiLlama-Adapters",
+      "url": "https://github.com/DefiLlama/DefiLlama-Adapters",
+      "stars": 1101,
+      "forks": 6788,
+      "language": "JavaScript",
+      "description": null,
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "ZhiXuanWang/cf-speed-dns",
+      "url": "https://github.com/ZhiXuanWang/cf-speed-dns",
+      "stars": 1197,
+      "forks": 352,
+      "language": "Python",
+      "description": "CF优选IP工具。动态获取Cloudflare优选IP，CloudflareSpeedTest测速。",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "Checkmk/checkmk",
+      "url": "https://github.com/Checkmk/checkmk",
+      "stars": 2139,
+      "forks": 527,
+      "language": "Python",
+      "description": "Checkmk - Best-in-class infrastructure & application monitoring",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "clawdbot/clawdbot",
+      "url": "https://github.com/clawdbot/clawdbot",
+      "stars": 2167,
+      "forks": 305,
+      "language": "TypeScript",
+      "description": "Your own personal AI assistant. Any OS. Any Platform.",
+      "_targetQuality": "low"
+    },
+    {
+      "repo": "redpanda-data/console",
+      "url": "https://github.com/redpanda-data/console",
+      "stars": 4209,
+      "forks": 409,
+      "language": "TypeScript",
+      "description": "Redpanda Console is a developer-friendly UI for managing your Kafka/Redpanda workloads. Console gives you a simple, interactive approach for gaining visibility into your topics, masking data, managing consumer groups, and exploring real-time data with time-travel debugging.",
+      "_targetQuality": "low"
+    }
+  ]
+}

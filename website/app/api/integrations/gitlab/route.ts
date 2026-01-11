@@ -8,8 +8,8 @@ import { loadModule } from '../../../../lib/api-module-loader';
 let gitlabIntegration: any;
 
 try {
-  const gitlabModule = loadModule('../../../../../lib/integrations/gitlab') ||
-                       require('../../../../../lib/integrations/gitlab');
+  const gitlabModule = loadModule('@/lib/integrations/gitlab') ||
+                       require('@/lib/integrations/gitlab');
   gitlabIntegration = gitlabModule?.getGitLabIntegration
     ? gitlabModule.getGitLabIntegration()
     : gitlabModule;

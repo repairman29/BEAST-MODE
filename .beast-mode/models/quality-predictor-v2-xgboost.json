@@ -1,0 +1,90 @@
+{
+  "model": {
+    "type": "ensemble_boosted_trees",
+    "trees": [
+      {
+        "feature": 0,
+        "threshold": 0,
+        "leftValue": 0,
+        "rightValue": 0
+      },
+      {
+        "feature": 0,
+        "threshold": 0,
+        "leftValue": 0,
+        "rightValue": 0
+      },
+      {
+        "feature": 0,
+        "threshold": 0,
+        "leftValue": 0,
+        "rightValue": 0
+      },
+      {
+        "feature": 0,
+        "threshold": 0,
+        "leftValue": 0,
+        "rightValue": 0
+      },
+      {
+        "feature": 0,
+        "threshold": 0,
+        "leftValue": 0,
+        "rightValue": 0
+      },
+      {
+        "feature": 0,
+        "threshold": 0,
+        "leftValue": 0,
+        "rightValue": 0
+      },
+      {
+        "feature": 0,
+        "threshold": 0,
+        "leftValue": 0,
+        "rightValue": 0
+      },
+      {
+        "feature": 0,
+        "threshold": 0,
+        "leftValue": 0,
+        "rightValue": 0
+      },
+      {
+        "feature": 0,
+        "threshold": 0,
+        "leftValue": 0,
+        "rightValue": 0
+      },
+      {
+        "feature": 0,
+        "threshold": 0,
+        "leftValue": 0,
+        "rightValue": 0
+      }
+    ],
+    "nTrees": 10,
+    "featureNames": [
+      "codeQuality",
+      "testCoverage",
+      "security",
+      "performance",
+      "maintainability",
+      "complexity",
+      "csat"
+    ],
+    "trainedAt": "2025-12-30T22:31:21.558Z"
+  },
+  "featureNames": [
+    "codeQuality",
+    "testCoverage",
+    "security",
+    "performance",
+    "maintainability",
+    "complexity",
+    "csat"
+  ],
+  "trained": true,
+  "version": "2.0",
+  "algorithm": "xgboost_ensemble"
+}

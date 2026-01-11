@@ -11,7 +11,7 @@ import { NextRequest, NextResponse } from 'next/server';
 let service: any = null;
 
 try {
-  const serviceModule = require('../../../../../lib/mlops/autonomousEvolutionService');
+  const serviceModule = require('@/lib/mlops/autonomousEvolutionService');
   if (serviceModule.getAutonomousEvolutionService) {
     service = serviceModule.getAutonomousEvolutionService();
   } else if (serviceModule.AutonomousEvolutionService) {

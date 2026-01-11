@@ -4,7 +4,7 @@
  */
 
 import { NextRequest, NextResponse } from 'next/server';
-import issueRecommender from '../../../../../lib/mlops/issueRecommender';
+import issueRecommender from '@/lib/mlops/issueRecommender';
 
 export async function POST(request: NextRequest) {
   try {

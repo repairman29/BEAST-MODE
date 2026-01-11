@@ -20,7 +20,7 @@ async function getService() {
   try {
     // Use dynamic require with webpackIgnore to prevent bundling
     // @ts-ignore - Dynamic require for CommonJS module
-    const serviceModule = eval('require')('../../../../../lib/mlops/realTimeModelUpdates');
+    const serviceModule = eval('require')('@/lib/mlops/realTimeModelUpdates');
     if (serviceModule && serviceModule.getRealTimeModelUpdates) {
       service = serviceModule.getRealTimeModelUpdates();
     } else if (serviceModule && serviceModule.RealTimeModelUpdates) {

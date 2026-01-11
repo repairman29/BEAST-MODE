@@ -12,7 +12,7 @@ import { NextRequest, NextResponse } from 'next/server';
 // Use dynamic import to avoid build-time errors
 async function loadDocumentationGenerator() {
   try {
-    const docGenModule = await import('../../../../../lib/mlops/documentationGenerator');
+    const docGenModule = await import('@/lib/mlops/documentationGenerator');
     // The module exports an instance directly (module.exports = new DocumentationGenerator())
     return docGenModule.default || docGenModule;
   } catch (error) {

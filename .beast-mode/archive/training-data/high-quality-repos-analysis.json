@@ -1,0 +1,8603 @@
+{
+  "metadata": {
+    "totalRepos": 869,
+    "analyzedAt": "2026-01-05T19:14:23.638Z",
+    "qualityStats": {
+      "min": 0.6652319397076966,
+      "max": 1,
+      "mean": 0.9885526610606069,
+      "std": 0.03977748558182111
+    }
+  },
+  "top50": [
+    {
+      "repo": "gorhill/uBlock",
+      "quality": 1,
+      "stars": 60759,
+      "forks": 3887,
+      "language": "Unknown",
+      "ageDays": 3932.022335335648
+    },
+    {
+      "repo": "iamkun/dayjs",
+      "quality": 1,
+      "stars": 48464,
+      "forks": 2407,
+      "language": "Unknown",
+      "ageDays": 2827.372647835648
+    },
+    {
+      "repo": "nwjs/nw.js",
+      "quality": 1,
+      "stars": 41567,
+      "forks": 3875,
+      "language": "Unknown",
+      "ageDays": 5115.501513576389
+    },
+    {
+      "repo": "remoteintech/remote-jobs",
+      "quality": 1,
+      "stars": 39892,
+      "forks": 3919,
+      "language": "Unknown",
+      "ageDays": 3737.6068955324076
+    },
+    {
+      "repo": "usebruno/bruno",
+      "quality": 1,
+      "stars": 39649,
+      "forks": 2036,
+      "language": "Unknown",
+      "ageDays": 1195.8969418287038
+    },
+    {
+      "repo": "preactjs/preact",
+      "quality": 1,
+      "stars": 38255,
+      "forks": 2028,
+      "language": "Unknown",
+      "ageDays": 3769.6548932175924
+    },
+    {
+      "repo": "naptha/tesseract.js",
+      "quality": 1,
+      "stars": 37680,
+      "forks": 2355,
+      "language": "Unknown",
+      "ageDays": 3848.648249699074
+    },
+    {
+      "repo": "drawdb-io/drawdb",
+      "quality": 1,
+      "stars": 35301,
+      "forks": 2750,
+      "language": "Unknown",
+      "ageDays": 904.0513978472222
+    },
+    {
+      "repo": "lutzroeder/netron",
+      "quality": 1,
+      "stars": 32139,
+      "forks": 3055,
+      "language": "Unknown",
+      "ageDays": 5489.2289094212965
+    },
+    {
+      "repo": "lovell/sharp",
+      "quality": 1,
+      "stars": 31682,
+      "forks": 1374,
+      "language": "Unknown",
+      "ageDays": 4521.9159348842595
+    },
+    {
+      "repo": "gethomepage/homepage",
+      "quality": 1,
+      "stars": 27657,
+      "forks": 1745,
+      "language": "Unknown",
+      "ageDays": 1230.4539209953705
+    },
+    {
+      "repo": "koodo-reader/koodo-reader",
+      "quality": 1,
+      "stars": 25579,
+      "forks": 1923,
+      "language": "Unknown",
+      "ageDays": 2132.6700321180556
+    },
+    {
+      "repo": "semantic-release/semantic-release",
+      "quality": 1,
+      "stars": 23147,
+      "forks": 1790,
+      "language": "Unknown",
+      "ageDays": 4130.08672193287
+    },
+    {
+      "repo": "jsdom/jsdom",
+      "quality": 1,
+      "stars": 21404,
+      "forks": 1761,
+      "language": "Unknown",
+      "ageDays": 5830.477798321759
+    },
+    {
+      "repo": "yjs/yjs",
+      "quality": 1,
+      "stars": 20937,
+      "forks": 737,
+      "language": "Unknown",
+      "ageDays": 4177.953886284722
+    },
+    {
+      "repo": "yarnpkg/yarn",
+      "quality": 1,
+      "stars": 41543,
+      "forks": 2736,
+      "language": "Unknown",
+      "ageDays": 3639.030610821759
+    },
+    {
+      "repo": "remy/nodemon",
+      "quality": 1,
+      "stars": 26680,
+      "forks": 1743,
+      "language": "Unknown",
+      "ageDays": 5573.230888599537
+    },
+    {
+      "repo": "copy/v86",
+      "quality": 1,
+      "stars": 22067,
+      "forks": 1662,
+      "language": "Unknown",
+      "ageDays": 4443.757740462963
+    },
+    {
+      "repo": "trekhleb/javascript-algorithms",
+      "quality": 1,
+      "stars": 195275,
+      "forks": 31110,
+      "language": "Unknown",
+      "ageDays": 2844.4418608333335
+    },
+    {
+      "repo": "Chalarangelo/30-seconds-of-code",
+      "quality": 1,
+      "stars": 126213,
+      "forks": 12393,
+      "language": "Unknown",
+      "ageDays": 2959.0335390740743
+    },
+    {
+      "repo": "axios/axios",
+      "quality": 1,
+      "stars": 108428,
+      "forks": 11471,
+      "language": "Unknown",
+      "ageDays": 4157.828400185185
+    },
+    {
+      "repo": "jaywcjlove/awesome-mac",
+      "quality": 1,
+      "stars": 97291,
+      "forks": 7292,
+      "language": "Unknown",
+      "ageDays": 3459.117752037037
+    },
+    {
+      "repo": "leonardomso/33-js-concepts",
+      "quality": 1,
+      "stars": 66010,
+      "forks": 9190,
+      "language": "Unknown",
+      "ageDays": 2680.205749722222
+    },
+    {
+      "repo": "webpack/webpack",
+      "quality": 1,
+      "stars": 65868,
+      "forks": 9211,
+      "language": "Unknown",
+      "ageDays": 5049.3438284259255
+    },
+    {
+      "repo": "gatsbyjs/gatsby",
+      "quality": 1,
+      "stars": 55959,
+      "forks": 10253,
+      "language": "Unknown",
+      "ageDays": 3881.819627037037
+    },
+    {
+      "repo": "freeCodeCamp/freeCodeCamp",
+      "quality": 1,
+      "stars": 435558,
+      "forks": 42999,
+      "language": "Unknown",
+      "ageDays": 4030.0236316666665
+    },
+    {
+      "repo": "iptv-org/iptv",
+      "quality": 1,
+      "stars": 108549,
+      "forks": 5235,
+      "language": "Unknown",
+      "ageDays": 2608.8488862962963
+    },
+    {
+      "repo": "shadcn-ui/ui",
+      "quality": 1,
+      "stars": 104087,
+      "forks": 7596,
+      "language": "Unknown",
+      "ageDays": 1097.2360390740741
+    },
+    {
+      "repo": "tailwindlabs/tailwindcss",
+      "quality": 1,
+      "stars": 91832,
+      "forks": 4859,
+      "language": "Unknown",
+      "ageDays": 3013.1417450925924
+    },
+    {
+      "repo": "clash-verge-rev/clash-verge-rev",
+      "quality": 1,
+      "stars": 90425,
+      "forks": 6642,
+      "language": "Unknown",
+      "ageDays": 775.9995112962963
+    },
+    {
+      "repo": "immich-app/immich",
+      "quality": 1,
+      "stars": 88366,
+      "forks": 4677,
+      "language": "Unknown",
+      "ageDays": 1432.1020112962963
+    },
+    {
+      "repo": "mermaid-js/mermaid",
+      "quality": 1,
+      "stars": 85081,
+      "forks": 8463,
+      "language": "Unknown",
+      "ageDays": 4082.7713978703705
+    },
+    {
+      "repo": "microsoft/playwright",
+      "quality": 1,
+      "stars": 80843,
+      "forks": 4972,
+      "language": "Unknown",
+      "ageDays": 2242.9935043518517
+    },
+    {
+      "repo": "hoppscotch/hoppscotch",
+      "quality": 1,
+      "stars": 77457,
+      "forks": 5496,
+      "language": "Unknown",
+      "ageDays": 2329.213851574074
+    },
+    {
+      "repo": "Stirling-Tools/Stirling-PDF",
+      "quality": 1,
+      "stars": 72743,
+      "forks": 6190,
+      "language": "Unknown",
+      "ageDays": 1074.0004487962963
+    },
+    {
+      "repo": "toeverything/AFFiNE",
+      "quality": 1,
+      "stars": 61405,
+      "forks": 4239,
+      "language": "Unknown",
+      "ageDays": 1253.9847196296296
+    },
+    {
+      "repo": "withastro/astro",
+      "quality": 1,
+      "stars": 55339,
+      "forks": 3052,
+      "language": "Unknown",
+      "ageDays": 1757.0441409259258
+    },
+    {
+      "repo": "cypress-io/cypress",
+      "quality": 1,
+      "stars": 49492,
+      "forks": 3384,
+      "language": "Unknown",
+      "ageDays": 3960.7339441782406
+    },
+    {
+      "repo": "TanStack/query",
+      "quality": 1,
+      "stars": 48004,
+      "forks": 3637,
+      "language": "Unknown",
+      "ageDays": 2308.957902511574
+    },
+    {
+      "repo": "prisma/prisma",
+      "quality": 1,
+      "stars": 44969,
+      "forks": 2017,
+      "language": "Unknown",
+      "ageDays": 2391.2010853819443
+    },
+    {
+      "repo": "react-hook-form/react-hook-form",
+      "quality": 1,
+      "stars": 44364,
+      "forks": 2341,
+      "language": "Unknown",
+      "ageDays": 2497.7751247337965
+    },
+    {
+      "repo": "makeplane/plane",
+      "quality": 1,
+      "stars": 42830,
+      "forks": 3198,
+      "language": "Unknown",
+      "ageDays": 1143.2280066782407
+    },
+    {
+      "repo": "upscayl/upscayl",
+      "quality": 1,
+      "stars": 42161,
+      "forks": 2013,
+      "language": "Unknown",
+      "ageDays": 1255.0444534375
+    },
+    {
+      "repo": "colinhacks/zod",
+      "quality": 1,
+      "stars": 41300,
+      "forks": 1752,
+      "language": "Unknown",
+      "ageDays": 2129.891814548611
+    },
+    {
+      "repo": "siyuan-note/siyuan",
+      "quality": 1,
+      "stars": 40294,
+      "forks": 2507,
+      "language": "Unknown",
+      "ageDays": 1954.3762242708333
+    },
+    {
+      "repo": "chakra-ui/chakra-ui",
+      "quality": 1,
+      "stars": 40115,
+      "forks": 3557,
+      "language": "Unknown",
+      "ageDays": 2333.163504363426
+    },
+    {
+      "repo": "janhq/jan",
+      "quality": 1,
+      "stars": 39966,
+      "forks": 2470,
+      "language": "Unknown",
+      "ageDays": 872.6709580671296
+    },
+    {
+      "repo": "payloadcms/payload",
+      "quality": 1,
+      "stars": 39697,
+      "forks": 3240,
+      "language": "Unknown",
+      "ageDays": 1825.9816640856482
+    },
+    {
+      "repo": "trpc/trpc",
+      "quality": 1,
+      "stars": 39259,
+      "forks": 1454,
+      "language": "Unknown",
+      "ageDays": 1997.7126131597222
+    },
+    {
+      "repo": "Kong/insomnia",
+      "quality": 1,
+      "stars": 37767,
+      "forks": 2195,
+      "language": "Unknown",
+      "ageDays": 3544.603411770833
+    }
+  ],
+  "top100": [
+    {
+      "repo": "gorhill/uBlock",
+      "quality": 1,
+      "stars": 60759,
+      "forks": 3887,
+      "language": "Unknown"
+    },
+    {
+      "repo": "iamkun/dayjs",
+      "quality": 1,
+      "stars": 48464,
+      "forks": 2407,
+      "language": "Unknown"
+    },
+    {
+      "repo": "nwjs/nw.js",
+      "quality": 1,
+      "stars": 41567,
+      "forks": 3875,
+      "language": "Unknown"
+    },
+    {
+      "repo": "remoteintech/remote-jobs",
+      "quality": 1,
+      "stars": 39892,
+      "forks": 3919,
+      "language": "Unknown"
+    },
+    {
+      "repo": "usebruno/bruno",
+      "quality": 1,
+      "stars": 39649,
+      "forks": 2036,
+      "language": "Unknown"
+    },
+    {
+      "repo": "preactjs/preact",
+      "quality": 1,
+      "stars": 38255,
+      "forks": 2028,
+      "language": "Unknown"
+    },
+    {
+      "repo": "naptha/tesseract.js",
+      "quality": 1,
+      "stars": 37680,
+      "forks": 2355,
+      "language": "Unknown"
+    },
+    {
+      "repo": "drawdb-io/drawdb",
+      "quality": 1,
+      "stars": 35301,
+      "forks": 2750,
+      "language": "Unknown"
+    },
+    {
+      "repo": "lutzroeder/netron",
+      "quality": 1,
+      "stars": 32139,
+      "forks": 3055,
+      "language": "Unknown"
+    },
+    {
+      "repo": "lovell/sharp",
+      "quality": 1,
+      "stars": 31682,
+      "forks": 1374,
+      "language": "Unknown"
+    },
+    {
+      "repo": "gethomepage/homepage",
+      "quality": 1,
+      "stars": 27657,
+      "forks": 1745,
+      "language": "Unknown"
+    },
+    {
+      "repo": "koodo-reader/koodo-reader",
+      "quality": 1,
+      "stars": 25579,
+      "forks": 1923,
+      "language": "Unknown"
+    },
+    {
+      "repo": "semantic-release/semantic-release",
+      "quality": 1,
+      "stars": 23147,
+      "forks": 1790,
+      "language": "Unknown"
+    },
+    {
+      "repo": "jsdom/jsdom",
+      "quality": 1,
+      "stars": 21404,
+      "forks": 1761,
+      "language": "Unknown"
+    },
+    {
+      "repo": "yjs/yjs",
+      "quality": 1,
+      "stars": 20937,
+      "forks": 737,
+      "language": "Unknown"
+    },
+    {
+      "repo": "yarnpkg/yarn",
+      "quality": 1,
+      "stars": 41543,
+      "forks": 2736,
+      "language": "Unknown"
+    },
+    {
+      "repo": "remy/nodemon",
+      "quality": 1,
+      "stars": 26680,
+      "forks": 1743,
+      "language": "Unknown"
+    },
+    {
+      "repo": "copy/v86",
+      "quality": 1,
+      "stars": 22067,
+      "forks": 1662,
+      "language": "Unknown"
+    },
+    {
+      "repo": "trekhleb/javascript-algorithms",
+      "quality": 1,
+      "stars": 195275,
+      "forks": 31110,
+      "language": "Unknown"
+    },
+    {
+      "repo": "Chalarangelo/30-seconds-of-code",
+      "quality": 1,
+      "stars": 126213,
+      "forks": 12393,
+      "language": "Unknown"
+    },
+    {
+      "repo": "axios/axios",
+      "quality": 1,
+      "stars": 108428,
+      "forks": 11471,
+      "language": "Unknown"
+    },
+    {
+      "repo": "jaywcjlove/awesome-mac",
+      "quality": 1,
+      "stars": 97291,
+      "forks": 7292,
+      "language": "Unknown"
+    },
+    {
+      "repo": "leonardomso/33-js-concepts",
+      "quality": 1,
+      "stars": 66010,
+      "forks": 9190,
+      "language": "Unknown"
+    },
+    {
+      "repo": "webpack/webpack",
+      "quality": 1,
+      "stars": 65868,
+      "forks": 9211,
+      "language": "Unknown"
+    },
+    {
+      "repo": "gatsbyjs/gatsby",
+      "quality": 1,
+      "stars": 55959,
+      "forks": 10253,
+      "language": "Unknown"
+    },
+    {
+      "repo": "freeCodeCamp/freeCodeCamp",
+      "quality": 1,
+      "stars": 435558,
+      "forks": 42999,
+      "language": "Unknown"
+    },
+    {
+      "repo": "iptv-org/iptv",
+      "quality": 1,
+      "stars": 108549,
+      "forks": 5235,
+      "language": "Unknown"
+    },
+    {
+      "repo": "shadcn-ui/ui",
+      "quality": 1,
+      "stars": 104087,
+      "forks": 7596,
+      "language": "Unknown"
+    },
+    {
+      "repo": "tailwindlabs/tailwindcss",
+      "quality": 1,
+      "stars": 91832,
+      "forks": 4859,
+      "language": "Unknown"
+    },
+    {
+      "repo": "clash-verge-rev/clash-verge-rev",
+      "quality": 1,
+      "stars": 90425,
+      "forks": 6642,
+      "language": "Unknown"
+    },
+    {
+      "repo": "immich-app/immich",
+      "quality": 1,
+      "stars": 88366,
+      "forks": 4677,
+      "language": "Unknown"
+    },
+    {
+      "repo": "mermaid-js/mermaid",
+      "quality": 1,
+      "stars": 85081,
+      "forks": 8463,
+      "language": "Unknown"
+    },
+    {
+      "repo": "microsoft/playwright",
+      "quality": 1,
+      "stars": 80843,
+      "forks": 4972,
+      "language": "Unknown"
+    },
+    {
+      "repo": "hoppscotch/hoppscotch",
+      "quality": 1,
+      "stars": 77457,
+      "forks": 5496,
+      "language": "Unknown"
+    },
+    {
+      "repo": "Stirling-Tools/Stirling-PDF",
+      "quality": 1,
+      "stars": 72743,
+      "forks": 6190,
+      "language": "Unknown"
+    },
+    {
+      "repo": "toeverything/AFFiNE",
+      "quality": 1,
+      "stars": 61405,
+      "forks": 4239,
+      "language": "Unknown"
+    },
+    {
+      "repo": "withastro/astro",
+      "quality": 1,
+      "stars": 55339,
+      "forks": 3052,
+      "language": "Unknown"
+    },
+    {
+      "repo": "cypress-io/cypress",
+      "quality": 1,
+      "stars": 49492,
+      "forks": 3384,
+      "language": "Unknown"
+    },
+    {
+      "repo": "TanStack/query",
+      "quality": 1,
+      "stars": 48004,
+      "forks": 3637,
+      "language": "Unknown"
+    },
+    {
+      "repo": "prisma/prisma",
+      "quality": 1,
+      "stars": 44969,
+      "forks": 2017,
+      "language": "Unknown"
+    },
+    {
+      "repo": "react-hook-form/react-hook-form",
+      "quality": 1,
+      "stars": 44364,
+      "forks": 2341,
+      "language": "Unknown"
+    },
+    {
+      "repo": "makeplane/plane",
+      "quality": 1,
+      "stars": 42830,
+      "forks": 3198,
+      "language": "Unknown"
+    },
+    {
+      "repo": "upscayl/upscayl",
+      "quality": 1,
+      "stars": 42161,
+      "forks": 2013,
+      "language": "Unknown"
+    },
+    {
+      "repo": "colinhacks/zod",
+      "quality": 1,
+      "stars": 41300,
+      "forks": 1752,
+      "language": "Unknown"
+    },
+    {
+      "repo": "siyuan-note/siyuan",
+      "quality": 1,
+      "stars": 40294,
+      "forks": 2507,
+      "language": "Unknown"
+    },
+    {
+      "repo": "chakra-ui/chakra-ui",
+      "quality": 1,
+      "stars": 40115,
+      "forks": 3557,
+      "language": "Unknown"
+    },
+    {
+      "repo": "janhq/jan",
+      "quality": 1,
+      "stars": 39966,
+      "forks": 2470,
+      "language": "Unknown"
+    },
+    {
+      "repo": "payloadcms/payload",
+      "quality": 1,
+      "stars": 39697,
+      "forks": 3240,
+      "language": "Unknown"
+    },
+    {
+      "repo": "trpc/trpc",
+      "quality": 1,
+      "stars": 39259,
+      "forks": 1454,
+      "language": "Unknown"
+    },
+    {
+      "repo": "Kong/insomnia",
+      "quality": 1,
+      "stars": 37767,
+      "forks": 2195,
+      "language": "Unknown"
+    },
+    {
+      "repo": "outline/outline",
+      "quality": 1,
+      "stars": 36549,
+      "forks": 3004,
+      "language": "Unknown"
+    },
+    {
+      "repo": "lerna/lerna",
+      "quality": 1,
+      "stars": 36052,
+      "forks": 2271,
+      "language": "Unknown"
+    },
+    {
+      "repo": "langflow-ai/langflow",
+      "quality": 1,
+      "stars": 142824,
+      "forks": 8242,
+      "language": "Unknown"
+    },
+    {
+      "repo": "fastapi/fastapi",
+      "quality": 1,
+      "stars": 93743,
+      "forks": 8474,
+      "language": "Unknown"
+    },
+    {
+      "repo": "localstack/localstack",
+      "quality": 1,
+      "stars": 63940,
+      "forks": 4484,
+      "language": "Unknown"
+    },
+    {
+      "repo": "OpenBB-finance/OpenBB",
+      "quality": 1,
+      "stars": 57097,
+      "forks": 5543,
+      "language": "Unknown"
+    },
+    {
+      "repo": "pathwaycom/pathway",
+      "quality": 1,
+      "stars": 56436,
+      "forks": 1539,
+      "language": "Unknown"
+    },
+    {
+      "repo": "unslothai/unsloth",
+      "quality": 1,
+      "stars": 50372,
+      "forks": 4159,
+      "language": "Unknown"
+    },
+    {
+      "repo": "charlax/professional-programming",
+      "quality": 1,
+      "stars": 50101,
+      "forks": 3940,
+      "language": "Unknown"
+    },
+    {
+      "repo": "streamlit/streamlit",
+      "quality": 1,
+      "stars": 42963,
+      "forks": 4017,
+      "language": "Unknown"
+    },
+    {
+      "repo": "gradio-app/gradio",
+      "quality": 1,
+      "stars": 41205,
+      "forks": 3217,
+      "language": "Unknown"
+    },
+    {
+      "repo": "9001/copyparty",
+      "quality": 1,
+      "stars": 40224,
+      "forks": 1657,
+      "language": "Unknown"
+    },
+    {
+      "repo": "paperless-ngx/paperless-ngx",
+      "quality": 1,
+      "stars": 35362,
+      "forks": 2231,
+      "language": "Unknown"
+    },
+    {
+      "repo": "python-poetry/poetry",
+      "quality": 1,
+      "stars": 34147,
+      "forks": 2391,
+      "language": "Unknown"
+    },
+    {
+      "repo": "Textualize/textual",
+      "quality": 1,
+      "stars": 33477,
+      "forks": 1062,
+      "language": "Unknown"
+    },
+    {
+      "repo": "khoj-ai/khoj",
+      "quality": 1,
+      "stars": 32103,
+      "forks": 1918,
+      "language": "Unknown"
+    },
+    {
+      "repo": "nicolargo/glances",
+      "quality": 1,
+      "stars": 31132,
+      "forks": 1665,
+      "language": "Unknown"
+    },
+    {
+      "repo": "PostHog/posthog",
+      "quality": 1,
+      "stars": 30690,
+      "forks": 2163,
+      "language": "Unknown"
+    },
+    {
+      "repo": "kovidgoyal/kitty",
+      "quality": 1,
+      "stars": 30516,
+      "forks": 1239,
+      "language": "Unknown"
+    },
+    {
+      "repo": "dgtlmoon/changedetection.io",
+      "quality": 1,
+      "stars": 29696,
+      "forks": 1637,
+      "language": "Unknown"
+    },
+    {
+      "repo": "StevenBlack/hosts",
+      "quality": 1,
+      "stars": 29569,
+      "forks": 2377,
+      "language": "Unknown"
+    },
+    {
+      "repo": "ArchiveBox/ArchiveBox",
+      "quality": 1,
+      "stars": 26314,
+      "forks": 1428,
+      "language": "Unknown"
+    },
+    {
+      "repo": "langgenius/dify",
+      "quality": 1,
+      "stars": 124799,
+      "forks": 19402,
+      "language": "Unknown"
+    },
+    {
+      "repo": "tauri-apps/tauri",
+      "quality": 1,
+      "stars": 100803,
+      "forks": 3274,
+      "language": "Unknown"
+    },
+    {
+      "repo": "unionlabs/union",
+      "quality": 1,
+      "stars": 74423,
+      "forks": 3839,
+      "language": "Unknown"
+    },
+    {
+      "repo": "meilisearch/meilisearch",
+      "quality": 1,
+      "stars": 55244,
+      "forks": 2325,
+      "language": "Unknown"
+    },
+    {
+      "repo": "starship/starship",
+      "quality": 1,
+      "stars": 53170,
+      "forks": 2331,
+      "language": "Unknown"
+    },
+    {
+      "repo": "dani-garcia/vaultwarden",
+      "quality": 1,
+      "stars": 52925,
+      "forks": 2445,
+      "language": "Unknown"
+    },
+    {
+      "repo": "astral-sh/ruff",
+      "quality": 1,
+      "stars": 44950,
+      "forks": 1681,
+      "language": "Unknown"
+    },
+    {
+      "repo": "bevyengine/bevy",
+      "quality": 1,
+      "stars": 43857,
+      "forks": 4307,
+      "language": "Unknown"
+    },
+    {
+      "repo": "sharkdp/fd",
+      "quality": 1,
+      "stars": 41045,
+      "forks": 960,
+      "language": "Unknown"
+    },
+    {
+      "repo": "lapce/lapce",
+      "quality": 1,
+      "stars": 37809,
+      "forks": 1208,
+      "language": "Unknown"
+    },
+    {
+      "repo": "pola-rs/polars",
+      "quality": 1,
+      "stars": 36829,
+      "forks": 2544,
+      "language": "Unknown"
+    },
+    {
+      "repo": "spacedriveapp/spacedrive",
+      "quality": 1,
+      "stars": 36466,
+      "forks": 1168,
+      "language": "Unknown"
+    },
+    {
+      "repo": "servo/servo",
+      "quality": 1,
+      "stars": 34891,
+      "forks": 3428,
+      "language": "Unknown"
+    },
+    {
+      "repo": "DioxusLabs/dioxus",
+      "quality": 1,
+      "stars": 32988,
+      "forks": 1432,
+      "language": "Unknown"
+    },
+    {
+      "repo": "google/comprehensive-rust",
+      "quality": 1,
+      "stars": 32484,
+      "forks": 1953,
+      "language": "Unknown"
+    },
+    {
+      "repo": "yewstack/yew",
+      "quality": 1,
+      "stars": 32273,
+      "forks": 1454,
+      "language": "Unknown"
+    },
+    {
+      "repo": "sxyazi/yazi",
+      "quality": 1,
+      "stars": 31176,
+      "forks": 675,
+      "language": "Unknown"
+    },
+    {
+      "repo": "surrealdb/surrealdb",
+      "quality": 1,
+      "stars": 30717,
+      "forks": 1092,
+      "language": "Unknown"
+    },
+    {
+      "repo": "vercel/turborepo",
+      "quality": 1,
+      "stars": 29421,
+      "forks": 2205,
+      "language": "Unknown"
+    },
+    {
+      "repo": "qdrant/qdrant",
+      "quality": 1,
+      "stars": 28005,
+      "forks": 1974,
+      "language": "Unknown"
+    },
+    {
+      "repo": "qarmin/czkawka",
+      "quality": 1,
+      "stars": 27892,
+      "forks": 899,
+      "language": "Unknown"
+    },
+    {
+      "repo": "emilk/egui",
+      "quality": 1,
+      "stars": 27634,
+      "forks": 1915,
+      "language": "Unknown"
+    },
+    {
+      "repo": "chroma-core/chroma",
+      "quality": 1,
+      "stars": 25321,
+      "forks": 1991,
+      "language": "Unknown"
+    },
+    {
+      "repo": "jj-vcs/jj",
+      "quality": 1,
+      "stars": 24251,
+      "forks": 869,
+      "language": "Unknown"
+    },
+    {
+      "repo": "actix/actix-web",
+      "quality": 1,
+      "stars": 24155,
+      "forks": 1827,
+      "language": "Unknown"
+    },
+    {
+      "repo": "GraphiteEditor/Graphite",
+      "quality": 1,
+      "stars": 23437,
+      "forks": 1029,
+      "language": "Unknown"
+    },
+    {
+      "repo": "Schniz/fnm",
+      "quality": 1,
+      "stars": 23251,
+      "forks": 597,
+      "language": "Unknown"
+    },
+    {
+      "repo": "tree-sitter/tree-sitter",
+      "quality": 1,
+      "stars": 23236,
+      "forks": 2322,
+      "language": "Unknown"
+    }
+  ],
+  "top200": [
+    {
+      "repo": "gorhill/uBlock",
+      "quality": 1,
+      "stars": 60759,
+      "forks": 3887,
+      "language": "Unknown"
+    },
+    {
+      "repo": "iamkun/dayjs",
+      "quality": 1,
+      "stars": 48464,
+      "forks": 2407,
+      "language": "Unknown"
+    },
+    {
+      "repo": "nwjs/nw.js",
+      "quality": 1,
+      "stars": 41567,
+      "forks": 3875,
+      "language": "Unknown"
+    },
+    {
+      "repo": "remoteintech/remote-jobs",
+      "quality": 1,
+      "stars": 39892,
+      "forks": 3919,
+      "language": "Unknown"
+    },
+    {
+      "repo": "usebruno/bruno",
+      "quality": 1,
+      "stars": 39649,
+      "forks": 2036,
+      "language": "Unknown"
+    },
+    {
+      "repo": "preactjs/preact",
+      "quality": 1,
+      "stars": 38255,
+      "forks": 2028,
+      "language": "Unknown"
+    },
+    {
+      "repo": "naptha/tesseract.js",
+      "quality": 1,
+      "stars": 37680,
+      "forks": 2355,
+      "language": "Unknown"
+    },
+    {
+      "repo": "drawdb-io/drawdb",
+      "quality": 1,
+      "stars": 35301,
+      "forks": 2750,
+      "language": "Unknown"
+    },
+    {
+      "repo": "lutzroeder/netron",
+      "quality": 1,
+      "stars": 32139,
+      "forks": 3055,
+      "language": "Unknown"
+    },
+    {
+      "repo": "lovell/sharp",
+      "quality": 1,
+      "stars": 31682,
+      "forks": 1374,
+      "language": "Unknown"
+    },
+    {
+      "repo": "gethomepage/homepage",
+      "quality": 1,
+      "stars": 27657,
+      "forks": 1745,
+      "language": "Unknown"
+    },
+    {
+      "repo": "koodo-reader/koodo-reader",
+      "quality": 1,
+      "stars": 25579,
+      "forks": 1923,
+      "language": "Unknown"
+    },
+    {
+      "repo": "semantic-release/semantic-release",
+      "quality": 1,
+      "stars": 23147,
+      "forks": 1790,
+      "language": "Unknown"
+    },
+    {
+      "repo": "jsdom/jsdom",
+      "quality": 1,
+      "stars": 21404,
+      "forks": 1761,
+      "language": "Unknown"
+    },
+    {
+      "repo": "yjs/yjs",
+      "quality": 1,
+      "stars": 20937,
+      "forks": 737,
+      "language": "Unknown"
+    },
+    {
+      "repo": "yarnpkg/yarn",
+      "quality": 1,
+      "stars": 41543,
+      "forks": 2736,
+      "language": "Unknown"
+    },
+    {
+      "repo": "remy/nodemon",
+      "quality": 1,
+      "stars": 26680,
+      "forks": 1743,
+      "language": "Unknown"
+    },
+    {
+      "repo": "copy/v86",
+      "quality": 1,
+      "stars": 22067,
+      "forks": 1662,
+      "language": "Unknown"
+    },
+    {
+      "repo": "trekhleb/javascript-algorithms",
+      "quality": 1,
+      "stars": 195275,
+      "forks": 31110,
+      "language": "Unknown"
+    },
+    {
+      "repo": "Chalarangelo/30-seconds-of-code",
+      "quality": 1,
+      "stars": 126213,
+      "forks": 12393,
+      "language": "Unknown"
+    },
+    {
+      "repo": "axios/axios",
+      "quality": 1,
+      "stars": 108428,
+      "forks": 11471,
+      "language": "Unknown"
+    },
+    {
+      "repo": "jaywcjlove/awesome-mac",
+      "quality": 1,
+      "stars": 97291,
+      "forks": 7292,
+      "language": "Unknown"
+    },
+    {
+      "repo": "leonardomso/33-js-concepts",
+      "quality": 1,
+      "stars": 66010,
+      "forks": 9190,
+      "language": "Unknown"
+    },
+    {
+      "repo": "webpack/webpack",
+      "quality": 1,
+      "stars": 65868,
+      "forks": 9211,
+      "language": "Unknown"
+    },
+    {
+      "repo": "gatsbyjs/gatsby",
+      "quality": 1,
+      "stars": 55959,
+      "forks": 10253,
+      "language": "Unknown"
+    },
+    {
+      "repo": "freeCodeCamp/freeCodeCamp",
+      "quality": 1,
+      "stars": 435558,
+      "forks": 42999,
+      "language": "Unknown"
+    },
+    {
+      "repo": "iptv-org/iptv",
+      "quality": 1,
+      "stars": 108549,
+      "forks": 5235,
+      "language": "Unknown"
+    },
+    {
+      "repo": "shadcn-ui/ui",
+      "quality": 1,
+      "stars": 104087,
+      "forks": 7596,
+      "language": "Unknown"
+    },
+    {
+      "repo": "tailwindlabs/tailwindcss",
+      "quality": 1,
+      "stars": 91832,
+      "forks": 4859,
+      "language": "Unknown"
+    },
+    {
+      "repo": "clash-verge-rev/clash-verge-rev",
+      "quality": 1,
+      "stars": 90425,
+      "forks": 6642,
+      "language": "Unknown"
+    },
+    {
+      "repo": "immich-app/immich",
+      "quality": 1,
+      "stars": 88366,
+      "forks": 4677,
+      "language": "Unknown"
+    },
+    {
+      "repo": "mermaid-js/mermaid",
+      "quality": 1,
+      "stars": 85081,
+      "forks": 8463,
+      "language": "Unknown"
+    },
+    {
+      "repo": "microsoft/playwright",
+      "quality": 1,
+      "stars": 80843,
+      "forks": 4972,
+      "language": "Unknown"
+    },
+    {
+      "repo": "hoppscotch/hoppscotch",
+      "quality": 1,
+      "stars": 77457,
+      "forks": 5496,
+      "language": "Unknown"
+    },
+    {
+      "repo": "Stirling-Tools/Stirling-PDF",
+      "quality": 1,
+      "stars": 72743,
+      "forks": 6190,
+      "language": "Unknown"
+    },
+    {
+      "repo": "toeverything/AFFiNE",
+      "quality": 1,
+      "stars": 61405,
+      "forks": 4239,
+      "language": "Unknown"
+    },
+    {
+      "repo": "withastro/astro",
+      "quality": 1,
+      "stars": 55339,
+      "forks": 3052,
+      "language": "Unknown"
+    },
+    {
+      "repo": "cypress-io/cypress",
+      "quality": 1,
+      "stars": 49492,
+      "forks": 3384,
+      "language": "Unknown"
+    },
+    {
+      "repo": "TanStack/query",
+      "quality": 1,
+      "stars": 48004,
+      "forks": 3637,
+      "language": "Unknown"
+    },
+    {
+      "repo": "prisma/prisma",
+      "quality": 1,
+      "stars": 44969,
+      "forks": 2017,
+      "language": "Unknown"
+    },
+    {
+      "repo": "react-hook-form/react-hook-form",
+      "quality": 1,
+      "stars": 44364,
+      "forks": 2341,
+      "language": "Unknown"
+    },
+    {
+      "repo": "makeplane/plane",
+      "quality": 1,
+      "stars": 42830,
+      "forks": 3198,
+      "language": "Unknown"
+    },
+    {
+      "repo": "upscayl/upscayl",
+      "quality": 1,
+      "stars": 42161,
+      "forks": 2013,
+      "language": "Unknown"
+    },
+    {
+      "repo": "colinhacks/zod",
+      "quality": 1,
+      "stars": 41300,
+      "forks": 1752,
+      "language": "Unknown"
+    },
+    {
+      "repo": "siyuan-note/siyuan",
+      "quality": 1,
+      "stars": 40294,
+      "forks": 2507,
+      "language": "Unknown"
+    },
+    {
+      "repo": "chakra-ui/chakra-ui",
+      "quality": 1,
+      "stars": 40115,
+      "forks": 3557,
+      "language": "Unknown"
+    },
+    {
+      "repo": "janhq/jan",
+      "quality": 1,
+      "stars": 39966,
+      "forks": 2470,
+      "language": "Unknown"
+    },
+    {
+      "repo": "payloadcms/payload",
+      "quality": 1,
+      "stars": 39697,
+      "forks": 3240,
+      "language": "Unknown"
+    },
+    {
+      "repo": "trpc/trpc",
+      "quality": 1,
+      "stars": 39259,
+      "forks": 1454,
+      "language": "Unknown"
+    },
+    {
+      "repo": "Kong/insomnia",
+      "quality": 1,
+      "stars": 37767,
+      "forks": 2195,
+      "language": "Unknown"
+    },
+    {
+      "repo": "outline/outline",
+      "quality": 1,
+      "stars": 36549,
+      "forks": 3004,
+      "language": "Unknown"
+    },
+    {
+      "repo": "lerna/lerna",
+      "quality": 1,
+      "stars": 36052,
+      "forks": 2271,
+      "language": "Unknown"
+    },
+    {
+      "repo": "langflow-ai/langflow",
+      "quality": 1,
+      "stars": 142824,
+      "forks": 8242,
+      "language": "Unknown"
+    },
+    {
+      "repo": "fastapi/fastapi",
+      "quality": 1,
+      "stars": 93743,
+      "forks": 8474,
+      "language": "Unknown"
+    },
+    {
+      "repo": "localstack/localstack",
+      "quality": 1,
+      "stars": 63940,
+      "forks": 4484,
+      "language": "Unknown"
+    },
+    {
+      "repo": "OpenBB-finance/OpenBB",
+      "quality": 1,
+      "stars": 57097,
+      "forks": 5543,
+      "language": "Unknown"
+    },
+    {
+      "repo": "pathwaycom/pathway",
+      "quality": 1,
+      "stars": 56436,
+      "forks": 1539,
+      "language": "Unknown"
+    },
+    {
+      "repo": "unslothai/unsloth",
+      "quality": 1,
+      "stars": 50372,
+      "forks": 4159,
+      "language": "Unknown"
+    },
+    {
+      "repo": "charlax/professional-programming",
+      "quality": 1,
+      "stars": 50101,
+      "forks": 3940,
+      "language": "Unknown"
+    },
+    {
+      "repo": "streamlit/streamlit",
+      "quality": 1,
+      "stars": 42963,
+      "forks": 4017,
+      "language": "Unknown"
+    },
+    {
+      "repo": "gradio-app/gradio",
+      "quality": 1,
+      "stars": 41205,
+      "forks": 3217,
+      "language": "Unknown"
+    },
+    {
+      "repo": "9001/copyparty",
+      "quality": 1,
+      "stars": 40224,
+      "forks": 1657,
+      "language": "Unknown"
+    },
+    {
+      "repo": "paperless-ngx/paperless-ngx",
+      "quality": 1,
+      "stars": 35362,
+      "forks": 2231,
+      "language": "Unknown"
+    },
+    {
+      "repo": "python-poetry/poetry",
+      "quality": 1,
+      "stars": 34147,
+      "forks": 2391,
+      "language": "Unknown"
+    },
+    {
+      "repo": "Textualize/textual",
+      "quality": 1,
+      "stars": 33477,
+      "forks": 1062,
+      "language": "Unknown"
+    },
+    {
+      "repo": "khoj-ai/khoj",
+      "quality": 1,
+      "stars": 32103,
+      "forks": 1918,
+      "language": "Unknown"
+    },
+    {
+      "repo": "nicolargo/glances",
+      "quality": 1,
+      "stars": 31132,
+      "forks": 1665,
+      "language": "Unknown"
+    },
+    {
+      "repo": "PostHog/posthog",
+      "quality": 1,
+      "stars": 30690,
+      "forks": 2163,
+      "language": "Unknown"
+    },
+    {
+      "repo": "kovidgoyal/kitty",
+      "quality": 1,
+      "stars": 30516,
+      "forks": 1239,
+      "language": "Unknown"
+    },
+    {
+      "repo": "dgtlmoon/changedetection.io",
+      "quality": 1,
+      "stars": 29696,
+      "forks": 1637,
+      "language": "Unknown"
+    },
+    {
+      "repo": "StevenBlack/hosts",
+      "quality": 1,
+      "stars": 29569,
+      "forks": 2377,
+      "language": "Unknown"
+    },
+    {
+      "repo": "ArchiveBox/ArchiveBox",
+      "quality": 1,
+      "stars": 26314,
+      "forks": 1428,
+      "language": "Unknown"
+    },
+    {
+      "repo": "langgenius/dify",
+      "quality": 1,
+      "stars": 124799,
+      "forks": 19402,
+      "language": "Unknown"
+    },
+    {
+      "repo": "tauri-apps/tauri",
+      "quality": 1,
+      "stars": 100803,
+      "forks": 3274,
+      "language": "Unknown"
+    },
+    {
+      "repo": "unionlabs/union",
+      "quality": 1,
+      "stars": 74423,
+      "forks": 3839,
+      "language": "Unknown"
+    },
+    {
+      "repo": "meilisearch/meilisearch",
+      "quality": 1,
+      "stars": 55244,
+      "forks": 2325,
+      "language": "Unknown"
+    },
+    {
+      "repo": "starship/starship",
+      "quality": 1,
+      "stars": 53170,
+      "forks": 2331,
+      "language": "Unknown"
+    },
+    {
+      "repo": "dani-garcia/vaultwarden",
+      "quality": 1,
+      "stars": 52925,
+      "forks": 2445,
+      "language": "Unknown"
+    },
+    {
+      "repo": "astral-sh/ruff",
+      "quality": 1,
+      "stars": 44950,
+      "forks": 1681,
+      "language": "Unknown"
+    },
+    {
+      "repo": "bevyengine/bevy",
+      "quality": 1,
+      "stars": 43857,
+      "forks": 4307,
+      "language": "Unknown"
+    },
+    {
+      "repo": "sharkdp/fd",
+      "quality": 1,
+      "stars": 41045,
+      "forks": 960,
+      "language": "Unknown"
+    },
+    {
+      "repo": "lapce/lapce",
+      "quality": 1,
+      "stars": 37809,
+      "forks": 1208,
+      "language": "Unknown"
+    },
+    {
+      "repo": "pola-rs/polars",
+      "quality": 1,
+      "stars": 36829,
+      "forks": 2544,
+      "language": "Unknown"
+    },
+    {
+      "repo": "spacedriveapp/spacedrive",
+      "quality": 1,
+      "stars": 36466,
+      "forks": 1168,
+      "language": "Unknown"
+    },
+    {
+      "repo": "servo/servo",
+      "quality": 1,
+      "stars": 34891,
+      "forks": 3428,
+      "language": "Unknown"
+    },
+    {
+      "repo": "DioxusLabs/dioxus",
+      "quality": 1,
+      "stars": 32988,
+      "forks": 1432,
+      "language": "Unknown"
+    },
+    {
+      "repo": "google/comprehensive-rust",
+      "quality": 1,
+      "stars": 32484,
+      "forks": 1953,
+      "language": "Unknown"
+    },
+    {
+      "repo": "yewstack/yew",
+      "quality": 1,
+      "stars": 32273,
+      "forks": 1454,
+      "language": "Unknown"
+    },
+    {
+      "repo": "sxyazi/yazi",
+      "quality": 1,
+      "stars": 31176,
+      "forks": 675,
+      "language": "Unknown"
+    },
+    {
+      "repo": "surrealdb/surrealdb",
+      "quality": 1,
+      "stars": 30717,
+      "forks": 1092,
+      "language": "Unknown"
+    },
+    {
+      "repo": "vercel/turborepo",
+      "quality": 1,
+      "stars": 29421,
+      "forks": 2205,
+      "language": "Unknown"
+    },
+    {
+      "repo": "qdrant/qdrant",
+      "quality": 1,
+      "stars": 28005,
+      "forks": 1974,
+      "language": "Unknown"
+    },
+    {
+      "repo": "qarmin/czkawka",
+      "quality": 1,
+      "stars": 27892,
+      "forks": 899,
+      "language": "Unknown"
+    },
+    {
+      "repo": "emilk/egui",
+      "quality": 1,
+      "stars": 27634,
+      "forks": 1915,
+      "language": "Unknown"
+    },
+    {
+      "repo": "chroma-core/chroma",
+      "quality": 1,
+      "stars": 25321,
+      "forks": 1991,
+      "language": "Unknown"
+    },
+    {
+      "repo": "jj-vcs/jj",
+      "quality": 1,
+      "stars": 24251,
+      "forks": 869,
+      "language": "Unknown"
+    },
+    {
+      "repo": "actix/actix-web",
+      "quality": 1,
+      "stars": 24155,
+      "forks": 1827,
+      "language": "Unknown"
+    },
+    {
+      "repo": "GraphiteEditor/Graphite",
+      "quality": 1,
+      "stars": 23437,
+      "forks": 1029,
+      "language": "Unknown"
+    },
+    {
+      "repo": "Schniz/fnm",
+      "quality": 1,
+      "stars": 23251,
+      "forks": 597,
+      "language": "Unknown"
+    },
+    {
+      "repo": "tree-sitter/tree-sitter",
+      "quality": 1,
+      "stars": 23236,
+      "forks": 2322,
+      "language": "Unknown"
+    },
+    {
+      "repo": "ollama/ollama",
+      "quality": 1,
+      "stars": 158835,
+      "forks": 14070,
+      "language": "Unknown"
+    },
+    {
+      "repo": "gin-gonic/gin",
+      "quality": 1,
+      "stars": 87606,
+      "forks": 8529,
+      "language": "Unknown"
+    },
+    {
+      "repo": "gohugoio/hugo",
+      "quality": 1,
+      "stars": 85845,
+      "forks": 8161,
+      "language": "Unknown"
+    },
+    {
+      "repo": "caddyserver/caddy",
+      "quality": 1,
+      "stars": 68957,
+      "forks": 4586,
+      "language": "Unknown"
+    },
+    {
+      "repo": "rclone/rclone",
+      "quality": 1,
+      "stars": 54848,
+      "forks": 4837,
+      "language": "Unknown"
+    },
+    {
+      "repo": "usememos/memos",
+      "quality": 1,
+      "stars": 51775,
+      "forks": 3726,
+      "language": "Unknown"
+    },
+    {
+      "repo": "milvus-io/milvus",
+      "quality": 1,
+      "stars": 42072,
+      "forks": 3751,
+      "language": "Unknown"
+    },
+    {
+      "repo": "mudler/LocalAI",
+      "quality": 1,
+      "stars": 41063,
+      "forks": 3347,
+      "language": "Unknown"
+    },
+    {
+      "repo": "photoprism/photoprism",
+      "quality": 1,
+      "stars": 39055,
+      "forks": 2189,
+      "language": "Unknown"
+    },
+    {
+      "repo": "harness/harness",
+      "quality": 1,
+      "stars": 33770,
+      "forks": 2885,
+      "language": "Unknown"
+    },
+    {
+      "repo": "1Panel-dev/1Panel",
+      "quality": 1,
+      "stars": 32714,
+      "forks": 2894,
+      "language": "Unknown"
+    },
+    {
+      "repo": "derailed/k9s",
+      "quality": 1,
+      "stars": 32364,
+      "forks": 2041,
+      "language": "Unknown"
+    },
+    {
+      "repo": "aquasecurity/trivy",
+      "quality": 1,
+      "stars": 30825,
+      "forks": 2866,
+      "language": "Unknown"
+    },
+    {
+      "repo": "containers/podman",
+      "quality": 1,
+      "stars": 30231,
+      "forks": 2928,
+      "language": "Unknown"
+    },
+    {
+      "repo": "grafana/k6",
+      "quality": 1,
+      "stars": 29579,
+      "forks": 1475,
+      "language": "Unknown"
+    },
+    {
+      "repo": "seaweedfs/seaweedfs",
+      "quality": 1,
+      "stars": 29342,
+      "forks": 2652,
+      "language": "Unknown"
+    },
+    {
+      "repo": "binwiederhier/ntfy",
+      "quality": 1,
+      "stars": 28037,
+      "forks": 1145,
+      "language": "Unknown"
+    },
+    {
+      "repo": "fyne-io/fyne",
+      "quality": 1,
+      "stars": 27735,
+      "forks": 1503,
+      "language": "Unknown"
+    },
+    {
+      "repo": "authelia/authelia",
+      "quality": 1,
+      "stars": 26308,
+      "forks": 1315,
+      "language": "Unknown"
+    },
+    {
+      "repo": "asdf-vm/asdf",
+      "quality": 1,
+      "stars": 24881,
+      "forks": 914,
+      "language": "Unknown"
+    },
+    {
+      "repo": "urfave/cli",
+      "quality": 1,
+      "stars": 23799,
+      "forks": 1758,
+      "language": "Unknown"
+    },
+    {
+      "repo": "slimtoolkit/slim",
+      "quality": 1,
+      "stars": 22658,
+      "forks": 803,
+      "language": "Unknown"
+    },
+    {
+      "repo": "GopeedLab/gopeed",
+      "quality": 1,
+      "stars": 22309,
+      "forks": 1537,
+      "language": "Unknown"
+    },
+    {
+      "repo": "netbirdio/netbird",
+      "quality": 1,
+      "stars": 20673,
+      "forks": 1006,
+      "language": "Unknown"
+    },
+    {
+      "repo": "qax-os/excelize",
+      "quality": 1,
+      "stars": 20151,
+      "forks": 1860,
+      "language": "Unknown"
+    },
+    {
+      "repo": "casbin/casbin",
+      "quality": 1,
+      "stars": 19650,
+      "forks": 1713,
+      "language": "Unknown"
+    },
+    {
+      "repo": "nats-io/nats-server",
+      "quality": 1,
+      "stars": 18913,
+      "forks": 1712,
+      "language": "Unknown"
+    },
+    {
+      "repo": "TeamNewPipe/NewPipe",
+      "quality": 1,
+      "stars": 36162,
+      "forks": 3361,
+      "language": "Unknown"
+    },
+    {
+      "repo": "conductor-oss/conductor",
+      "quality": 1,
+      "stars": 31624,
+      "forks": 798,
+      "language": "Unknown"
+    },
+    {
+      "repo": "kestra-io/kestra",
+      "quality": 1,
+      "stars": 26209,
+      "forks": 2437,
+      "language": "Unknown"
+    },
+    {
+      "repo": "questdb/questdb",
+      "quality": 1,
+      "stars": 16527,
+      "forks": 1524,
+      "language": "Unknown"
+    },
+    {
+      "repo": "Konloch/bytecode-viewer",
+      "quality": 1,
+      "stars": 15367,
+      "forks": 1219,
+      "language": "Unknown"
+    },
+    {
+      "repo": "supertokens/supertokens-core",
+      "quality": 1,
+      "stars": 14822,
+      "forks": 635,
+      "language": "Unknown"
+    },
+    {
+      "repo": "theonedev/onedev",
+      "quality": 1,
+      "stars": 14603,
+      "forks": 933,
+      "language": "Unknown"
+    },
+    {
+      "repo": "cryptomator/cryptomator",
+      "quality": 1,
+      "stars": 14302,
+      "forks": 1251,
+      "language": "Unknown"
+    },
+    {
+      "repo": "xpipe-io/xpipe",
+      "quality": 1,
+      "stars": 12334,
+      "forks": 478,
+      "language": "Unknown"
+    },
+    {
+      "repo": "oracle/graal",
+      "quality": 1,
+      "stars": 21397,
+      "forks": 1763,
+      "language": "Unknown"
+    },
+    {
+      "repo": "krahets/hello-algo",
+      "quality": 1,
+      "stars": 121138,
+      "forks": 14735,
+      "language": "Unknown"
+    },
+    {
+      "repo": "termux/termux-app",
+      "quality": 1,
+      "stars": 48494,
+      "forks": 5796,
+      "language": "Unknown"
+    },
+    {
+      "repo": "yuliskov/SmartTube",
+      "quality": 1,
+      "stars": 27402,
+      "forks": 1472,
+      "language": "Unknown"
+    },
+    {
+      "repo": "bazelbuild/bazel",
+      "quality": 1,
+      "stars": 24965,
+      "forks": 4379,
+      "language": "Unknown"
+    },
+    {
+      "repo": "dataease/dataease",
+      "quality": 1,
+      "stars": 23043,
+      "forks": 3959,
+      "language": "Unknown"
+    },
+    {
+      "repo": "antlr/antlr4",
+      "quality": 1,
+      "stars": 18608,
+      "forks": 3422,
+      "language": "Unknown"
+    },
+    {
+      "repo": "lionsoul2014/ip2region",
+      "quality": 1,
+      "stars": 18558,
+      "forks": 2950,
+      "language": "Unknown"
+    },
+    {
+      "repo": "dromara/Sa-Token",
+      "quality": 1,
+      "stars": 18467,
+      "forks": 2872,
+      "language": "Unknown"
+    },
+    {
+      "repo": "eclipse-vertx/vert.x",
+      "quality": 1,
+      "stars": 14622,
+      "forks": 2105,
+      "language": "Unknown"
+    },
+    {
+      "repo": "OpenRefine/OpenRefine",
+      "quality": 1,
+      "stars": 11666,
+      "forks": 2115,
+      "language": "Unknown"
+    },
+    {
+      "repo": "resilience4j/resilience4j",
+      "quality": 1,
+      "stars": 10503,
+      "forks": 1439,
+      "language": "Unknown"
+    },
+    {
+      "repo": "langchain4j/langchain4j",
+      "quality": 1,
+      "stars": 10248,
+      "forks": 1862,
+      "language": "Unknown"
+    },
+    {
+      "repo": "WerWolv/ImHex",
+      "quality": 1,
+      "stars": 52195,
+      "forks": 2322,
+      "language": "Unknown"
+    },
+    {
+      "repo": "x64dbg/x64dbg",
+      "quality": 1,
+      "stars": 47482,
+      "forks": 2650,
+      "language": "Unknown"
+    },
+    {
+      "repo": "duckdb/duckdb",
+      "quality": 1,
+      "stars": 35178,
+      "forks": 2828,
+      "language": "Unknown"
+    },
+    {
+      "repo": "carbon-language/carbon-lang",
+      "quality": 1,
+      "stars": 33605,
+      "forks": 1512,
+      "language": "Unknown"
+    },
+    {
+      "repo": "shadps4-emu/shadPS4",
+      "quality": 1,
+      "stars": 27430,
+      "forks": 1864,
+      "language": "Unknown"
+    },
+    {
+      "repo": "keepassxreboot/keepassxc",
+      "quality": 1,
+      "stars": 25395,
+      "forks": 1672,
+      "language": "Unknown"
+    },
+    {
+      "repo": "typesense/typesense",
+      "quality": 1,
+      "stars": 24932,
+      "forks": 847,
+      "language": "Unknown"
+    },
+    {
+      "repo": "sqlitebrowser/sqlitebrowser",
+      "quality": 1,
+      "stars": 23449,
+      "forks": 2301,
+      "language": "Unknown"
+    },
+    {
+      "repo": "simdjson/simdjson",
+      "quality": 1,
+      "stars": 23060,
+      "forks": 1200,
+      "language": "Unknown"
+    },
+    {
+      "repo": "kyleneideck/BackgroundMusic",
+      "quality": 1,
+      "stars": 18397,
+      "forks": 733,
+      "language": "Unknown"
+    },
+    {
+      "repo": "rizinorg/cutter",
+      "quality": 1,
+      "stars": 18219,
+      "forks": 1319,
+      "language": "Unknown"
+    },
+    {
+      "repo": "microsoft/react-native-windows",
+      "quality": 1,
+      "stars": 17130,
+      "forks": 1183,
+      "language": "Unknown"
+    },
+    {
+      "repo": "doitsujin/dxvk",
+      "quality": 1,
+      "stars": 16298,
+      "forks": 1043,
+      "language": "Unknown"
+    },
+    {
+      "repo": "apple/foundationdb",
+      "quality": 1,
+      "stars": 16065,
+      "forks": 1462,
+      "language": "Unknown"
+    },
+    {
+      "repo": "AaronFeng753/Waifu2x-Extension-GUI",
+      "quality": 1,
+      "stars": 15916,
+      "forks": 1027,
+      "language": "Unknown"
+    },
+    {
+      "repo": "moonlight-stream/moonlight-qt",
+      "quality": 1,
+      "stars": 15710,
+      "forks": 939,
+      "language": "Unknown"
+    },
+    {
+      "repo": "hoffstadt/DearPyGui",
+      "quality": 1,
+      "stars": 15074,
+      "forks": 767,
+      "language": "Unknown"
+    },
+    {
+      "repo": "xournalpp/xournalpp",
+      "quality": 1,
+      "stars": 14112,
+      "forks": 986,
+      "language": "Unknown"
+    },
+    {
+      "repo": "arangodb/arangodb",
+      "quality": 1,
+      "stars": 14051,
+      "forks": 875,
+      "language": "Unknown"
+    },
+    {
+      "repo": "mltframework/shotcut",
+      "quality": 1,
+      "stars": 13197,
+      "forks": 1292,
+      "language": "Unknown"
+    },
+    {
+      "repo": "M2Team/NanaZip",
+      "quality": 1,
+      "stars": 12746,
+      "forks": 317,
+      "language": "Unknown"
+    },
+    {
+      "repo": "skypjack/entt",
+      "quality": 1,
+      "stars": 12126,
+      "forks": 1036,
+      "language": "Unknown"
+    },
+    {
+      "repo": "manticoresoftware/manticoresearch",
+      "quality": 1,
+      "stars": 11577,
+      "forks": 622,
+      "language": "Unknown"
+    },
+    {
+      "repo": "WasmEdge/WasmEdge",
+      "quality": 1,
+      "stars": 10324,
+      "forks": 936,
+      "language": "Unknown"
+    },
+    {
+      "repo": "microsoft/PowerToys",
+      "quality": 1,
+      "stars": 127086,
+      "forks": 7564,
+      "language": "Unknown"
+    },
+    {
+      "repo": "files-community/Files",
+      "quality": 1,
+      "stars": 41040,
+      "forks": 2565,
+      "language": "Unknown"
+    },
+    {
+      "repo": "AvaloniaUI/Avalonia",
+      "quality": 1,
+      "stars": 29703,
+      "forks": 2576,
+      "language": "Unknown"
+    },
+    {
+      "repo": "marticliment/UniGetUI",
+      "quality": 1,
+      "stars": 19767,
+      "forks": 661,
+      "language": "Unknown"
+    },
+    {
+      "repo": "bitwarden/server",
+      "quality": 1,
+      "stars": 17765,
+      "forks": 1494,
+      "language": "Unknown"
+    },
+    {
+      "repo": "App-vNext/Polly",
+      "quality": 1,
+      "stars": 14070,
+      "forks": 1260,
+      "language": "Unknown"
+    },
+    {
+      "repo": "QuestPDF/QuestPDF",
+      "quality": 1,
+      "stars": 13688,
+      "forks": 745,
+      "language": "Unknown"
+    },
+    {
+      "repo": "Flow-Launcher/Flow.Launcher",
+      "quality": 1,
+      "stars": 13043,
+      "forks": 525,
+      "language": "Unknown"
+    },
+    {
+      "repo": "JustArchiNET/ArchiSteamFarm",
+      "quality": 1,
+      "stars": 12815,
+      "forks": 1095,
+      "language": "Unknown"
+    },
+    {
+      "repo": "babalae/better-genshin-impact",
+      "quality": 1,
+      "stars": 11882,
+      "forks": 840,
+      "language": "Unknown"
+    },
+    {
+      "repo": "microsoft/garnet",
+      "quality": 1,
+      "stars": 11642,
+      "forks": 629,
+      "language": "Unknown"
+    },
+    {
+      "repo": "spectreconsole/spectre.console",
+      "quality": 1,
+      "stars": 11037,
+      "forks": 625,
+      "language": "Unknown"
+    },
+    {
+      "repo": "Cysharp/UniTask",
+      "quality": 1,
+      "stars": 10350,
+      "forks": 964,
+      "language": "Unknown"
+    },
+    {
+      "repo": "Kareadita/Kavita",
+      "quality": 1,
+      "stars": 9542,
+      "forks": 534,
+      "language": "Unknown"
+    },
+    {
+      "repo": "BornToBeRoot/NETworkManager",
+      "quality": 1,
+      "stars": 7956,
+      "forks": 787,
+      "language": "Unknown"
+    },
+    {
+      "repo": "LykosAI/StabilityMatrix",
+      "quality": 1,
+      "stars": 7172,
+      "forks": 499,
+      "language": "Unknown"
+    },
+    {
+      "repo": "PixiEditor/PixiEditor",
+      "quality": 1,
+      "stars": 6999,
+      "forks": 277,
+      "language": "Unknown"
+    },
+    {
+      "repo": "Prowlarr/Prowlarr",
+      "quality": 1,
+      "stars": 5806,
+      "forks": 274,
+      "language": "Unknown"
+    },
+    {
+      "repo": "jellyfin/jellyfin",
+      "quality": 1,
+      "stars": 47358,
+      "forks": 4281,
+      "language": "Unknown"
+    },
+    {
+      "repo": "JosefNemec/Playnite",
+      "quality": 1,
+      "stars": 12207,
+      "forks": 592,
+      "language": "Unknown"
+    },
+    {
+      "repo": "2dust/v2rayN",
+      "quality": 1,
+      "stars": 93913,
+      "forks": 13974,
+      "language": "Unknown"
+    },
+    {
+      "repo": "huginn/huginn",
+      "quality": 1,
+      "stars": 48451,
+      "forks": 4212,
+      "language": "Unknown"
+    },
+    {
+      "repo": "postalserver/postal",
+      "quality": 1,
+      "stars": 16176,
+      "forks": 1192,
+      "language": "Unknown"
+    },
+    {
+      "repo": "ubicloud/ubicloud",
+      "quality": 1,
+      "stars": 11644,
+      "forks": 532,
+      "language": "Unknown"
+    },
+    {
+      "repo": "ankane/chartkick",
+      "quality": 1,
+      "stars": 6491,
+      "forks": 565,
+      "language": "Unknown"
+    },
+    {
+      "repo": "mastodon/mastodon",
+      "quality": 1,
+      "stars": 49452,
+      "forks": 7375,
+      "language": "Unknown"
+    },
+    {
+      "repo": "discourse/discourse",
+      "quality": 1,
+      "stars": 45930,
+      "forks": 8775,
+      "language": "Unknown"
+    }
+  ],
+  "allRepos": [
+    {
+      "repo": "gorhill/uBlock",
+      "quality": 1,
+      "stars": 60759,
+      "forks": 3887,
+      "language": "Unknown"
+    },
+    {
+      "repo": "iamkun/dayjs",
+      "quality": 1,
+      "stars": 48464,
+      "forks": 2407,
+      "language": "Unknown"
+    },
+    {
+      "repo": "nwjs/nw.js",
+      "quality": 1,
+      "stars": 41567,
+      "forks": 3875,
+      "language": "Unknown"
+    },
+    {
+      "repo": "remoteintech/remote-jobs",
+      "quality": 1,
+      "stars": 39892,
+      "forks": 3919,
+      "language": "Unknown"
+    },
+    {
+      "repo": "usebruno/bruno",
+      "quality": 1,
+      "stars": 39649,
+      "forks": 2036,
+      "language": "Unknown"
+    },
+    {
+      "repo": "preactjs/preact",
+      "quality": 1,
+      "stars": 38255,
+      "forks": 2028,
+      "language": "Unknown"
+    },
+    {
+      "repo": "naptha/tesseract.js",
+      "quality": 1,
+      "stars": 37680,
+      "forks": 2355,
+      "language": "Unknown"
+    },
+    {
+      "repo": "drawdb-io/drawdb",
+      "quality": 1,
+      "stars": 35301,
+      "forks": 2750,
+      "language": "Unknown"
+    },
+    {
+      "repo": "lutzroeder/netron",
+      "quality": 1,
+      "stars": 32139,
+      "forks": 3055,
+      "language": "Unknown"
+    },
+    {
+      "repo": "lovell/sharp",
+      "quality": 1,
+      "stars": 31682,
+      "forks": 1374,
+      "language": "Unknown"
+    },
+    {
+      "repo": "gethomepage/homepage",
+      "quality": 1,
+      "stars": 27657,
+      "forks": 1745,
+      "language": "Unknown"
+    },
+    {
+      "repo": "koodo-reader/koodo-reader",
+      "quality": 1,
+      "stars": 25579,
+      "forks": 1923,
+      "language": "Unknown"
+    },
+    {
+      "repo": "semantic-release/semantic-release",
+      "quality": 1,
+      "stars": 23147,
+      "forks": 1790,
+      "language": "Unknown"
+    },
+    {
+      "repo": "jsdom/jsdom",
+      "quality": 1,
+      "stars": 21404,
+      "forks": 1761,
+      "language": "Unknown"
+    },
+    {
+      "repo": "yjs/yjs",
+      "quality": 1,
+      "stars": 20937,
+      "forks": 737,
+      "language": "Unknown"
+    },
+    {
+      "repo": "yarnpkg/yarn",
+      "quality": 1,
+      "stars": 41543,
+      "forks": 2736,
+      "language": "Unknown"
+    },
+    {
+      "repo": "remy/nodemon",
+      "quality": 1,
+      "stars": 26680,
+      "forks": 1743,
+      "language": "Unknown"
+    },
+    {
+      "repo": "copy/v86",
+      "quality": 1,
+      "stars": 22067,
+      "forks": 1662,
+      "language": "Unknown"
+    },
+    {
+      "repo": "trekhleb/javascript-algorithms",
+      "quality": 1,
+      "stars": 195275,
+      "forks": 31110,
+      "language": "Unknown"
+    },
+    {
+      "repo": "Chalarangelo/30-seconds-of-code",
+      "quality": 1,
+      "stars": 126213,
+      "forks": 12393,
+      "language": "Unknown"
+    },
+    {
+      "repo": "axios/axios",
+      "quality": 1,
+      "stars": 108428,
+      "forks": 11471,
+      "language": "Unknown"
+    },
+    {
+      "repo": "jaywcjlove/awesome-mac",
+      "quality": 1,
+      "stars": 97291,
+      "forks": 7292,
+      "language": "Unknown"
+    },
+    {
+      "repo": "leonardomso/33-js-concepts",
+      "quality": 1,
+      "stars": 66010,
+      "forks": 9190,
+      "language": "Unknown"
+    },
+    {
+      "repo": "webpack/webpack",
+      "quality": 1,
+      "stars": 65868,
+      "forks": 9211,
+      "language": "Unknown"
+    },
+    {
+      "repo": "gatsbyjs/gatsby",
+      "quality": 1,
+      "stars": 55959,
+      "forks": 10253,
+      "language": "Unknown"
+    },
+    {
+      "repo": "freeCodeCamp/freeCodeCamp",
+      "quality": 1,
+      "stars": 435558,
+      "forks": 42999,
+      "language": "Unknown"
+    },
+    {
+      "repo": "iptv-org/iptv",
+      "quality": 1,
+      "stars": 108549,
+      "forks": 5235,
+      "language": "Unknown"
+    },
+    {
+      "repo": "shadcn-ui/ui",
+      "quality": 1,
+      "stars": 104087,
+      "forks": 7596,
+      "language": "Unknown"
+    },
+    {
+      "repo": "tailwindlabs/tailwindcss",
+      "quality": 1,
+      "stars": 91832,
+      "forks": 4859,
+      "language": "Unknown"
+    },
+    {
+      "repo": "clash-verge-rev/clash-verge-rev",
+      "quality": 1,
+      "stars": 90425,
+      "forks": 6642,
+      "language": "Unknown"
+    },
+    {
+      "repo": "immich-app/immich",
+      "quality": 1,
+      "stars": 88366,
+      "forks": 4677,
+      "language": "Unknown"
+    },
+    {
+      "repo": "mermaid-js/mermaid",
+      "quality": 1,
+      "stars": 85081,
+      "forks": 8463,
+      "language": "Unknown"
+    },
+    {
+      "repo": "microsoft/playwright",
+      "quality": 1,
+      "stars": 80843,
+      "forks": 4972,
+      "language": "Unknown"
+    },
+    {
+      "repo": "hoppscotch/hoppscotch",
+      "quality": 1,
+      "stars": 77457,
+      "forks": 5496,
+      "language": "Unknown"
+    },
+    {
+      "repo": "Stirling-Tools/Stirling-PDF",
+      "quality": 1,
+      "stars": 72743,
+      "forks": 6190,
+      "language": "Unknown"
+    },
+    {
+      "repo": "toeverything/AFFiNE",
+      "quality": 1,
+      "stars": 61405,
+      "forks": 4239,
+      "language": "Unknown"
+    },
+    {
+      "repo": "withastro/astro",
+      "quality": 1,
+      "stars": 55339,
+      "forks": 3052,
+      "language": "Unknown"
+    },
+    {
+      "repo": "cypress-io/cypress",
+      "quality": 1,
+      "stars": 49492,
+      "forks": 3384,
+      "language": "Unknown"
+    },
+    {
+      "repo": "TanStack/query",
+      "quality": 1,
+      "stars": 48004,
+      "forks": 3637,
+      "language": "Unknown"
+    },
+    {
+      "repo": "prisma/prisma",
+      "quality": 1,
+      "stars": 44969,
+      "forks": 2017,
+      "language": "Unknown"
+    },
+    {
+      "repo": "react-hook-form/react-hook-form",
+      "quality": 1,
+      "stars": 44364,
+      "forks": 2341,
+      "language": "Unknown"
+    },
+    {
+      "repo": "makeplane/plane",
+      "quality": 1,
+      "stars": 42830,
+      "forks": 3198,
+      "language": "Unknown"
+    },
+    {
+      "repo": "upscayl/upscayl",
+      "quality": 1,
+      "stars": 42161,
+      "forks": 2013,
+      "language": "Unknown"
+    },
+    {
+      "repo": "colinhacks/zod",
+      "quality": 1,
+      "stars": 41300,
+      "forks": 1752,
+      "language": "Unknown"
+    },
+    {
+      "repo": "siyuan-note/siyuan",
+      "quality": 1,
+      "stars": 40294,
+      "forks": 2507,
+      "language": "Unknown"
+    },
+    {
+      "repo": "chakra-ui/chakra-ui",
+      "quality": 1,
+      "stars": 40115,
+      "forks": 3557,
+      "language": "Unknown"
+    },
+    {
+      "repo": "janhq/jan",
+      "quality": 1,
+      "stars": 39966,
+      "forks": 2470,
+      "language": "Unknown"
+    },
+    {
+      "repo": "payloadcms/payload",
+      "quality": 1,
+      "stars": 39697,
+      "forks": 3240,
+      "language": "Unknown"
+    },
+    {
+      "repo": "trpc/trpc",
+      "quality": 1,
+      "stars": 39259,
+      "forks": 1454,
+      "language": "Unknown"
+    },
+    {
+      "repo": "Kong/insomnia",
+      "quality": 1,
+      "stars": 37767,
+      "forks": 2195,
+      "language": "Unknown"
+    },
+    {
+      "repo": "outline/outline",
+      "quality": 1,
+      "stars": 36549,
+      "forks": 3004,
+      "language": "Unknown"
+    },
+    {
+      "repo": "lerna/lerna",
+      "quality": 1,
+      "stars": 36052,
+      "forks": 2271,
+      "language": "Unknown"
+    },
+    {
+      "repo": "langflow-ai/langflow",
+      "quality": 1,
+      "stars": 142824,
+      "forks": 8242,
+      "language": "Unknown"
+    },
+    {
+      "repo": "fastapi/fastapi",
+      "quality": 1,
+      "stars": 93743,
+      "forks": 8474,
+      "language": "Unknown"
+    },
+    {
+      "repo": "localstack/localstack",
+      "quality": 1,
+      "stars": 63940,
+      "forks": 4484,
+      "language": "Unknown"
+    },
+    {
+      "repo": "OpenBB-finance/OpenBB",
+      "quality": 1,
+      "stars": 57097,
+      "forks": 5543,
+      "language": "Unknown"
+    },
+    {
+      "repo": "pathwaycom/pathway",
+      "quality": 1,
+      "stars": 56436,
+      "forks": 1539,
+      "language": "Unknown"
+    },
+    {
+      "repo": "unslothai/unsloth",
+      "quality": 1,
+      "stars": 50372,
+      "forks": 4159,
+      "language": "Unknown"
+    },
+    {
+      "repo": "charlax/professional-programming",
+      "quality": 1,
+      "stars": 50101,
+      "forks": 3940,
+      "language": "Unknown"
+    },
+    {
+      "repo": "streamlit/streamlit",
+      "quality": 1,
+      "stars": 42963,
+      "forks": 4017,
+      "language": "Unknown"
+    },
+    {
+      "repo": "gradio-app/gradio",
+      "quality": 1,
+      "stars": 41205,
+      "forks": 3217,
+      "language": "Unknown"
+    },
+    {
+      "repo": "9001/copyparty",
+      "quality": 1,
+      "stars": 40224,
+      "forks": 1657,
+      "language": "Unknown"
+    },
+    {
+      "repo": "paperless-ngx/paperless-ngx",
+      "quality": 1,
+      "stars": 35362,
+      "forks": 2231,
+      "language": "Unknown"
+    },
+    {
+      "repo": "python-poetry/poetry",
+      "quality": 1,
+      "stars": 34147,
+      "forks": 2391,
+      "language": "Unknown"
+    },
+    {
+      "repo": "Textualize/textual",
+      "quality": 1,
+      "stars": 33477,
+      "forks": 1062,
+      "language": "Unknown"
+    },
+    {
+      "repo": "khoj-ai/khoj",
+      "quality": 1,
+      "stars": 32103,
+      "forks": 1918,
+      "language": "Unknown"
+    },
+    {
+      "repo": "nicolargo/glances",
+      "quality": 1,
+      "stars": 31132,
+      "forks": 1665,
+      "language": "Unknown"
+    },
+    {
+      "repo": "PostHog/posthog",
+      "quality": 1,
+      "stars": 30690,
+      "forks": 2163,
+      "language": "Unknown"
+    },
+    {
+      "repo": "kovidgoyal/kitty",
+      "quality": 1,
+      "stars": 30516,
+      "forks": 1239,
+      "language": "Unknown"
+    },
+    {
+      "repo": "dgtlmoon/changedetection.io",
+      "quality": 1,
+      "stars": 29696,
+      "forks": 1637,
+      "language": "Unknown"
+    },
+    {
+      "repo": "StevenBlack/hosts",
+      "quality": 1,
+      "stars": 29569,
+      "forks": 2377,
+      "language": "Unknown"
+    },
+    {
+      "repo": "ArchiveBox/ArchiveBox",
+      "quality": 1,
+      "stars": 26314,
+      "forks": 1428,
+      "language": "Unknown"
+    },
+    {
+      "repo": "langgenius/dify",
+      "quality": 1,
+      "stars": 124799,
+      "forks": 19402,
+      "language": "Unknown"
+    },
+    {
+      "repo": "tauri-apps/tauri",
+      "quality": 1,
+      "stars": 100803,
+      "forks": 3274,
+      "language": "Unknown"
+    },
+    {
+      "repo": "unionlabs/union",
+      "quality": 1,
+      "stars": 74423,
+      "forks": 3839,
+      "language": "Unknown"
+    },
+    {
+      "repo": "meilisearch/meilisearch",
+      "quality": 1,
+      "stars": 55244,
+      "forks": 2325,
+      "language": "Unknown"
+    },
+    {
+      "repo": "starship/starship",
+      "quality": 1,
+      "stars": 53170,
+      "forks": 2331,
+      "language": "Unknown"
+    },
+    {
+      "repo": "dani-garcia/vaultwarden",
+      "quality": 1,
+      "stars": 52925,
+      "forks": 2445,
+      "language": "Unknown"
+    },
+    {
+      "repo": "astral-sh/ruff",
+      "quality": 1,
+      "stars": 44950,
+      "forks": 1681,
+      "language": "Unknown"
+    },
+    {
+      "repo": "bevyengine/bevy",
+      "quality": 1,
+      "stars": 43857,
+      "forks": 4307,
+      "language": "Unknown"
+    },
+    {
+      "repo": "sharkdp/fd",
+      "quality": 1,
+      "stars": 41045,
+      "forks": 960,
+      "language": "Unknown"
+    },
+    {
+      "repo": "lapce/lapce",
+      "quality": 1,
+      "stars": 37809,
+      "forks": 1208,
+      "language": "Unknown"
+    },
+    {
+      "repo": "pola-rs/polars",
+      "quality": 1,
+      "stars": 36829,
+      "forks": 2544,
+      "language": "Unknown"
+    },
+    {
+      "repo": "spacedriveapp/spacedrive",
+      "quality": 1,
+      "stars": 36466,
+      "forks": 1168,
+      "language": "Unknown"
+    },
+    {
+      "repo": "servo/servo",
+      "quality": 1,
+      "stars": 34891,
+      "forks": 3428,
+      "language": "Unknown"
+    },
+    {
+      "repo": "DioxusLabs/dioxus",
+      "quality": 1,
+      "stars": 32988,
+      "forks": 1432,
+      "language": "Unknown"
+    },
+    {
+      "repo": "google/comprehensive-rust",
+      "quality": 1,
+      "stars": 32484,
+      "forks": 1953,
+      "language": "Unknown"
+    },
+    {
+      "repo": "yewstack/yew",
+      "quality": 1,
+      "stars": 32273,
+      "forks": 1454,
+      "language": "Unknown"
+    },
+    {
+      "repo": "sxyazi/yazi",
+      "quality": 1,
+      "stars": 31176,
+      "forks": 675,
+      "language": "Unknown"
+    },
+    {
+      "repo": "surrealdb/surrealdb",
+      "quality": 1,
+      "stars": 30717,
+      "forks": 1092,
+      "language": "Unknown"
+    },
+    {
+      "repo": "vercel/turborepo",
+      "quality": 1,
+      "stars": 29421,
+      "forks": 2205,
+      "language": "Unknown"
+    },
+    {
+      "repo": "qdrant/qdrant",
+      "quality": 1,
+      "stars": 28005,
+      "forks": 1974,
+      "language": "Unknown"
+    },
+    {
+      "repo": "qarmin/czkawka",
+      "quality": 1,
+      "stars": 27892,
+      "forks": 899,
+      "language": "Unknown"
+    },
+    {
+      "repo": "emilk/egui",
+      "quality": 1,
+      "stars": 27634,
+      "forks": 1915,
+      "language": "Unknown"
+    },
+    {
+      "repo": "chroma-core/chroma",
+      "quality": 1,
+      "stars": 25321,
+      "forks": 1991,
+      "language": "Unknown"
+    },
+    {
+      "repo": "jj-vcs/jj",
+      "quality": 1,
+      "stars": 24251,
+      "forks": 869,
+      "language": "Unknown"
+    },
+    {
+      "repo": "actix/actix-web",
+      "quality": 1,
+      "stars": 24155,
+      "forks": 1827,
+      "language": "Unknown"
+    },
+    {
+      "repo": "GraphiteEditor/Graphite",
+      "quality": 1,
+      "stars": 23437,
+      "forks": 1029,
+      "language": "Unknown"
+    },
+    {
+      "repo": "Schniz/fnm",
+      "quality": 1,
+      "stars": 23251,
+      "forks": 597,
+      "language": "Unknown"
+    },
+    {
+      "repo": "tree-sitter/tree-sitter",
+      "quality": 1,
+      "stars": 23236,
+      "forks": 2322,
+      "language": "Unknown"
+    },
+    {
+      "repo": "ollama/ollama",
+      "quality": 1,
+      "stars": 158835,
+      "forks": 14070,
+      "language": "Unknown"
+    },
+    {
+      "repo": "gin-gonic/gin",
+      "quality": 1,
+      "stars": 87606,
+      "forks": 8529,
+      "language": "Unknown"
+    },
+    {
+      "repo": "gohugoio/hugo",
+      "quality": 1,
+      "stars": 85845,
+      "forks": 8161,
+      "language": "Unknown"
+    },
+    {
+      "repo": "caddyserver/caddy",
+      "quality": 1,
+      "stars": 68957,
+      "forks": 4586,
+      "language": "Unknown"
+    },
+    {
+      "repo": "rclone/rclone",
+      "quality": 1,
+      "stars": 54848,
+      "forks": 4837,
+      "language": "Unknown"
+    },
+    {
+      "repo": "usememos/memos",
+      "quality": 1,
+      "stars": 51775,
+      "forks": 3726,
+      "language": "Unknown"
+    },
+    {
+      "repo": "milvus-io/milvus",
+      "quality": 1,
+      "stars": 42072,
+      "forks": 3751,
+      "language": "Unknown"
+    },
+    {
+      "repo": "mudler/LocalAI",
+      "quality": 1,
+      "stars": 41063,
+      "forks": 3347,
+      "language": "Unknown"
+    },
+    {
+      "repo": "photoprism/photoprism",
+      "quality": 1,
+      "stars": 39055,
+      "forks": 2189,
+      "language": "Unknown"
+    },
+    {
+      "repo": "harness/harness",
+      "quality": 1,
+      "stars": 33770,
+      "forks": 2885,
+      "language": "Unknown"
+    },
+    {
+      "repo": "1Panel-dev/1Panel",
+      "quality": 1,
+      "stars": 32714,
+      "forks": 2894,
+      "language": "Unknown"
+    },
+    {
+      "repo": "derailed/k9s",
+      "quality": 1,
+      "stars": 32364,
+      "forks": 2041,
+      "language": "Unknown"
+    },
+    {
+      "repo": "aquasecurity/trivy",
+      "quality": 1,
+      "stars": 30825,
+      "forks": 2866,
+      "language": "Unknown"
+    },
+    {
+      "repo": "containers/podman",
+      "quality": 1,
+      "stars": 30231,
+      "forks": 2928,
+      "language": "Unknown"
+    },
+    {
+      "repo": "grafana/k6",
+      "quality": 1,
+      "stars": 29579,
+      "forks": 1475,
+      "language": "Unknown"
+    },
+    {
+      "repo": "seaweedfs/seaweedfs",
+      "quality": 1,
+      "stars": 29342,
+      "forks": 2652,
+      "language": "Unknown"
+    },
+    {
+      "repo": "binwiederhier/ntfy",
+      "quality": 1,
+      "stars": 28037,
+      "forks": 1145,
+      "language": "Unknown"
+    },
+    {
+      "repo": "fyne-io/fyne",
+      "quality": 1,
+      "stars": 27735,
+      "forks": 1503,
+      "language": "Unknown"
+    },
+    {
+      "repo": "authelia/authelia",
+      "quality": 1,
+      "stars": 26308,
+      "forks": 1315,
+      "language": "Unknown"
+    },
+    {
+      "repo": "asdf-vm/asdf",
+      "quality": 1,
+      "stars": 24881,
+      "forks": 914,
+      "language": "Unknown"
+    },
+    {
+      "repo": "urfave/cli",
+      "quality": 1,
+      "stars": 23799,
+      "forks": 1758,
+      "language": "Unknown"
+    },
+    {
+      "repo": "slimtoolkit/slim",
+      "quality": 1,
+      "stars": 22658,
+      "forks": 803,
+      "language": "Unknown"
+    },
+    {
+      "repo": "GopeedLab/gopeed",
+      "quality": 1,
+      "stars": 22309,
+      "forks": 1537,
+      "language": "Unknown"
+    },
+    {
+      "repo": "netbirdio/netbird",
+      "quality": 1,
+      "stars": 20673,
+      "forks": 1006,
+      "language": "Unknown"
+    },
+    {
+      "repo": "qax-os/excelize",
+      "quality": 1,
+      "stars": 20151,
+      "forks": 1860,
+      "language": "Unknown"
+    },
+    {
+      "repo": "casbin/casbin",
+      "quality": 1,
+      "stars": 19650,
+      "forks": 1713,
+      "language": "Unknown"
+    },
+    {
+      "repo": "nats-io/nats-server",
+      "quality": 1,
+      "stars": 18913,
+      "forks": 1712,
+      "language": "Unknown"
+    },
+    {
+      "repo": "TeamNewPipe/NewPipe",
+      "quality": 1,
+      "stars": 36162,
+      "forks": 3361,
+      "language": "Unknown"
+    },
+    {
+      "repo": "conductor-oss/conductor",
+      "quality": 1,
+      "stars": 31624,
+      "forks": 798,
+      "language": "Unknown"
+    },
+    {
+      "repo": "kestra-io/kestra",
+      "quality": 1,
+      "stars": 26209,
+      "forks": 2437,
+      "language": "Unknown"
+    },
+    {
+      "repo": "questdb/questdb",
+      "quality": 1,
+      "stars": 16527,
+      "forks": 1524,
+      "language": "Unknown"
+    },
+    {
+      "repo": "Konloch/bytecode-viewer",
+      "quality": 1,
+      "stars": 15367,
+      "forks": 1219,
+      "language": "Unknown"
+    },
+    {
+      "repo": "supertokens/supertokens-core",
+      "quality": 1,
+      "stars": 14822,
+      "forks": 635,
+      "language": "Unknown"
+    },
+    {
+      "repo": "theonedev/onedev",
+      "quality": 1,
+      "stars": 14603,
+      "forks": 933,
+      "language": "Unknown"
+    },
+    {
+      "repo": "cryptomator/cryptomator",
+      "quality": 1,
+      "stars": 14302,
+      "forks": 1251,
+      "language": "Unknown"
+    },
+    {
+      "repo": "xpipe-io/xpipe",
+      "quality": 1,
+      "stars": 12334,
+      "forks": 478,
+      "language": "Unknown"
+    },
+    {
+      "repo": "oracle/graal",
+      "quality": 1,
+      "stars": 21397,
+      "forks": 1763,
+      "language": "Unknown"
+    },
+    {
+      "repo": "krahets/hello-algo",
+      "quality": 1,
+      "stars": 121138,
+      "forks": 14735,
+      "language": "Unknown"
+    },
+    {
+      "repo": "termux/termux-app",
+      "quality": 1,
+      "stars": 48494,
+      "forks": 5796,
+      "language": "Unknown"
+    },
+    {
+      "repo": "yuliskov/SmartTube",
+      "quality": 1,
+      "stars": 27402,
+      "forks": 1472,
+      "language": "Unknown"
+    },
+    {
+      "repo": "bazelbuild/bazel",
+      "quality": 1,
+      "stars": 24965,
+      "forks": 4379,
+      "language": "Unknown"
+    },
+    {
+      "repo": "dataease/dataease",
+      "quality": 1,
+      "stars": 23043,
+      "forks": 3959,
+      "language": "Unknown"
+    },
+    {
+      "repo": "antlr/antlr4",
+      "quality": 1,
+      "stars": 18608,
+      "forks": 3422,
+      "language": "Unknown"
+    },
+    {
+      "repo": "lionsoul2014/ip2region",
+      "quality": 1,
+      "stars": 18558,
+      "forks": 2950,
+      "language": "Unknown"
+    },
+    {
+      "repo": "dromara/Sa-Token",
+      "quality": 1,
+      "stars": 18467,
+      "forks": 2872,
+      "language": "Unknown"
+    },
+    {
+      "repo": "eclipse-vertx/vert.x",
+      "quality": 1,
+      "stars": 14622,
+      "forks": 2105,
+      "language": "Unknown"
+    },
+    {
+      "repo": "OpenRefine/OpenRefine",
+      "quality": 1,
+      "stars": 11666,
+      "forks": 2115,
+      "language": "Unknown"
+    },
+    {
+      "repo": "resilience4j/resilience4j",
+      "quality": 1,
+      "stars": 10503,
+      "forks": 1439,
+      "language": "Unknown"
+    },
+    {
+      "repo": "langchain4j/langchain4j",
+      "quality": 1,
+      "stars": 10248,
+      "forks": 1862,
+      "language": "Unknown"
+    },
+    {
+      "repo": "WerWolv/ImHex",
+      "quality": 1,
+      "stars": 52195,
+      "forks": 2322,
+      "language": "Unknown"
+    },
+    {
+      "repo": "x64dbg/x64dbg",
+      "quality": 1,
+      "stars": 47482,
+      "forks": 2650,
+      "language": "Unknown"
+    },
+    {
+      "repo": "duckdb/duckdb",
+      "quality": 1,
+      "stars": 35178,
+      "forks": 2828,
+      "language": "Unknown"
+    },
+    {
+      "repo": "carbon-language/carbon-lang",
+      "quality": 1,
+      "stars": 33605,
+      "forks": 1512,
+      "language": "Unknown"
+    },
+    {
+      "repo": "shadps4-emu/shadPS4",
+      "quality": 1,
+      "stars": 27430,
+      "forks": 1864,
+      "language": "Unknown"
+    },
+    {
+      "repo": "keepassxreboot/keepassxc",
+      "quality": 1,
+      "stars": 25395,
+      "forks": 1672,
+      "language": "Unknown"
+    },
+    {
+      "repo": "typesense/typesense",
+      "quality": 1,
+      "stars": 24932,
+      "forks": 847,
+      "language": "Unknown"
+    },
+    {
+      "repo": "sqlitebrowser/sqlitebrowser",
+      "quality": 1,
+      "stars": 23449,
+      "forks": 2301,
+      "language": "Unknown"
+    },
+    {
+      "repo": "simdjson/simdjson",
+      "quality": 1,
+      "stars": 23060,
+      "forks": 1200,
+      "language": "Unknown"
+    },
+    {
+      "repo": "kyleneideck/BackgroundMusic",
+      "quality": 1,
+      "stars": 18397,
+      "forks": 733,
+      "language": "Unknown"
+    },
+    {
+      "repo": "rizinorg/cutter",
+      "quality": 1,
+      "stars": 18219,
+      "forks": 1319,
+      "language": "Unknown"
+    },
+    {
+      "repo": "microsoft/react-native-windows",
+      "quality": 1,
+      "stars": 17130,
+      "forks": 1183,
+      "language": "Unknown"
+    },
+    {
+      "repo": "doitsujin/dxvk",
+      "quality": 1,
+      "stars": 16298,
+      "forks": 1043,
+      "language": "Unknown"
+    },
+    {
+      "repo": "apple/foundationdb",
+      "quality": 1,
+      "stars": 16065,
+      "forks": 1462,
+      "language": "Unknown"
+    },
+    {
+      "repo": "AaronFeng753/Waifu2x-Extension-GUI",
+      "quality": 1,
+      "stars": 15916,
+      "forks": 1027,
+      "language": "Unknown"
+    },
+    {
+      "repo": "moonlight-stream/moonlight-qt",
+      "quality": 1,
+      "stars": 15710,
+      "forks": 939,
+      "language": "Unknown"
+    },
+    {
+      "repo": "hoffstadt/DearPyGui",
+      "quality": 1,
+      "stars": 15074,
+      "forks": 767,
+      "language": "Unknown"
+    },
+    {
+      "repo": "xournalpp/xournalpp",
+      "quality": 1,
+      "stars": 14112,
+      "forks": 986,
+      "language": "Unknown"
+    },
+    {
+      "repo": "arangodb/arangodb",
+      "quality": 1,
+      "stars": 14051,
+      "forks": 875,
+      "language": "Unknown"
+    },
+    {
+      "repo": "mltframework/shotcut",
+      "quality": 1,
+      "stars": 13197,
+      "forks": 1292,
+      "language": "Unknown"
+    },
+    {
+      "repo": "M2Team/NanaZip",
+      "quality": 1,
+      "stars": 12746,
+      "forks": 317,
+      "language": "Unknown"
+    },
+    {
+      "repo": "skypjack/entt",
+      "quality": 1,
+      "stars": 12126,
+      "forks": 1036,
+      "language": "Unknown"
+    },
+    {
+      "repo": "manticoresoftware/manticoresearch",
+      "quality": 1,
+      "stars": 11577,
+      "forks": 622,
+      "language": "Unknown"
+    },
+    {
+      "repo": "WasmEdge/WasmEdge",
+      "quality": 1,
+      "stars": 10324,
+      "forks": 936,
+      "language": "Unknown"
+    },
+    {
+      "repo": "microsoft/PowerToys",
+      "quality": 1,
+      "stars": 127086,
+      "forks": 7564,
+      "language": "Unknown"
+    },
+    {
+      "repo": "files-community/Files",
+      "quality": 1,
+      "stars": 41040,
+      "forks": 2565,
+      "language": "Unknown"
+    },
+    {
+      "repo": "AvaloniaUI/Avalonia",
+      "quality": 1,
+      "stars": 29703,
+      "forks": 2576,
+      "language": "Unknown"
+    },
+    {
+      "repo": "marticliment/UniGetUI",
+      "quality": 1,
+      "stars": 19767,
+      "forks": 661,
+      "language": "Unknown"
+    },
+    {
+      "repo": "bitwarden/server",
+      "quality": 1,
+      "stars": 17765,
+      "forks": 1494,
+      "language": "Unknown"
+    },
+    {
+      "repo": "App-vNext/Polly",
+      "quality": 1,
+      "stars": 14070,
+      "forks": 1260,
+      "language": "Unknown"
+    },
+    {
+      "repo": "QuestPDF/QuestPDF",
+      "quality": 1,
+      "stars": 13688,
+      "forks": 745,
+      "language": "Unknown"
+    },
+    {
+      "repo": "Flow-Launcher/Flow.Launcher",
+      "quality": 1,
+      "stars": 13043,
+      "forks": 525,
+      "language": "Unknown"
+    },
+    {
+      "repo": "JustArchiNET/ArchiSteamFarm",
+      "quality": 1,
+      "stars": 12815,
+      "forks": 1095,
+      "language": "Unknown"
+    },
+    {
+      "repo": "babalae/better-genshin-impact",
+      "quality": 1,
+      "stars": 11882,
+      "forks": 840,
+      "language": "Unknown"
+    },
+    {
+      "repo": "microsoft/garnet",
+      "quality": 1,
+      "stars": 11642,
+      "forks": 629,
+      "language": "Unknown"
+    },
+    {
+      "repo": "spectreconsole/spectre.console",
+      "quality": 1,
+      "stars": 11037,
+      "forks": 625,
+      "language": "Unknown"
+    },
+    {
+      "repo": "Cysharp/UniTask",
+      "quality": 1,
+      "stars": 10350,
+      "forks": 964,
+      "language": "Unknown"
+    },
+    {
+      "repo": "Kareadita/Kavita",
+      "quality": 1,
+      "stars": 9542,
+      "forks": 534,
+      "language": "Unknown"
+    },
+    {
+      "repo": "BornToBeRoot/NETworkManager",
+      "quality": 1,
+      "stars": 7956,
+      "forks": 787,
+      "language": "Unknown"
+    },
+    {
+      "repo": "LykosAI/StabilityMatrix",
+      "quality": 1,
+      "stars": 7172,
+      "forks": 499,
+      "language": "Unknown"
+    },
+    {
+      "repo": "PixiEditor/PixiEditor",
+      "quality": 1,
+      "stars": 6999,
+      "forks": 277,
+      "language": "Unknown"
+    },
+    {
+      "repo": "Prowlarr/Prowlarr",
+      "quality": 1,
+      "stars": 5806,
+      "forks": 274,
+      "language": "Unknown"
+    },
+    {
+      "repo": "jellyfin/jellyfin",
+      "quality": 1,
+      "stars": 47358,
+      "forks": 4281,
+      "language": "Unknown"
+    },
+    {
+      "repo": "JosefNemec/Playnite",
+      "quality": 1,
+      "stars": 12207,
+      "forks": 592,
+      "language": "Unknown"
+    },
+    {
+      "repo": "2dust/v2rayN",
+      "quality": 1,
+      "stars": 93913,
+      "forks": 13974,
+      "language": "Unknown"
+    },
+    {
+      "repo": "huginn/huginn",
+      "quality": 1,
+      "stars": 48451,
+      "forks": 4212,
+      "language": "Unknown"
+    },
+    {
+      "repo": "postalserver/postal",
+      "quality": 1,
+      "stars": 16176,
+      "forks": 1192,
+      "language": "Unknown"
+    },
+    {
+      "repo": "ubicloud/ubicloud",
+      "quality": 1,
+      "stars": 11644,
+      "forks": 532,
+      "language": "Unknown"
+    },
+    {
+      "repo": "ankane/chartkick",
+      "quality": 1,
+      "stars": 6491,
+      "forks": 565,
+      "language": "Unknown"
+    },
+    {
+      "repo": "mastodon/mastodon",
+      "quality": 1,
+      "stars": 49452,
+      "forks": 7375,
+      "language": "Unknown"
+    },
+    {
+      "repo": "discourse/discourse",
+      "quality": 1,
+      "stars": 45930,
+      "forks": 8775,
+      "language": "Unknown"
+    },
+    {
+      "repo": "fastlane/fastlane",
+      "quality": 1,
+      "stars": 40849,
+      "forks": 5968,
+      "language": "Unknown"
+    },
+    {
+      "repo": "fluent/fluentd",
+      "quality": 1,
+      "stars": 13432,
+      "forks": 1380,
+      "language": "Unknown"
+    },
+    {
+      "repo": "docusealco/docuseal",
+      "quality": 1,
+      "stars": 11101,
+      "forks": 915,
+      "language": "Unknown"
+    },
+    {
+      "repo": "heartcombo/simple_form",
+      "quality": 1,
+      "stars": 8230,
+      "forks": 1309,
+      "language": "Unknown"
+    },
+    {
+      "repo": "Freika/dawarich",
+      "quality": 1,
+      "stars": 7622,
+      "forks": 238,
+      "language": "Unknown"
+    },
+    {
+      "repo": "presidentbeef/brakeman",
+      "quality": 1,
+      "stars": 7177,
+      "forks": 762,
+      "language": "Unknown"
+    },
+    {
+      "repo": "pry/pry",
+      "quality": 1,
+      "stars": 6820,
+      "forks": 604,
+      "language": "Unknown"
+    },
+    {
+      "repo": "norman/friendly_id",
+      "quality": 1,
+      "stars": 6230,
+      "forks": 592,
+      "language": "Unknown"
+    },
+    {
+      "repo": "danger/danger",
+      "quality": 1,
+      "stars": 5629,
+      "forks": 492,
+      "language": "Unknown"
+    },
+    {
+      "repo": "slim-template/slim",
+      "quality": 1,
+      "stars": 5361,
+      "forks": 497,
+      "language": "Unknown"
+    },
+    {
+      "repo": "zammad/zammad",
+      "quality": 1,
+      "stars": 5307,
+      "forks": 917,
+      "language": "Unknown"
+    },
+    {
+      "repo": "shakacode/react_on_rails",
+      "quality": 1,
+      "stars": 5201,
+      "forks": 633,
+      "language": "Unknown"
+    },
+    {
+      "repo": "athityakumar/colorls",
+      "quality": 1,
+      "stars": 5107,
+      "forks": 395,
+      "language": "Unknown"
+    },
+    {
+      "repo": "hahwul/WebHackersWeapons",
+      "quality": 1,
+      "stars": 4467,
+      "forks": 752,
+      "language": "Unknown"
+    },
+    {
+      "repo": "hashicorp/vagrant",
+      "quality": 1,
+      "stars": 27180,
+      "forks": 4444,
+      "language": "Unknown"
+    },
+    {
+      "repo": "capistrano/capistrano",
+      "quality": 1,
+      "stars": 12906,
+      "forks": 1759,
+      "language": "Unknown"
+    },
+    {
+      "repo": "ruby-grape/grape",
+      "quality": 1,
+      "stars": 9985,
+      "forks": 1229,
+      "language": "Unknown"
+    },
+    {
+      "repo": "jekyll/jekyll",
+      "quality": 1,
+      "stars": 51290,
+      "forks": 10283,
+      "language": "Unknown"
+    },
+    {
+      "repo": "Homebrew/brew",
+      "quality": 1,
+      "stars": 46078,
+      "forks": 10857,
+      "language": "Unknown"
+    },
+    {
+      "repo": "chatwoot/chatwoot",
+      "quality": 1,
+      "stars": 26771,
+      "forks": 6049,
+      "language": "Unknown"
+    },
+    {
+      "repo": "spree/spree",
+      "quality": 1,
+      "stars": 15125,
+      "forks": 5208,
+      "language": "Unknown"
+    },
+    {
+      "repo": "coollabsio/coolify",
+      "quality": 1,
+      "stars": 49196,
+      "forks": 3386,
+      "language": "Unknown"
+    },
+    {
+      "repo": "Seldaek/monolog",
+      "quality": 1,
+      "stars": 21372,
+      "forks": 1898,
+      "language": "Unknown"
+    },
+    {
+      "repo": "krayin/laravel-crm",
+      "quality": 1,
+      "stars": 20641,
+      "forks": 1333,
+      "language": "Unknown"
+    },
+    {
+      "repo": "phpstan/phpstan",
+      "quality": 1,
+      "stars": 13761,
+      "forks": 934,
+      "language": "Unknown"
+    },
+    {
+      "repo": "wallabag/wallabag",
+      "quality": 1,
+      "stars": 12325,
+      "forks": 848,
+      "language": "Unknown"
+    },
+    {
+      "repo": "Qloapps/QloApps",
+      "quality": 1,
+      "stars": 11470,
+      "forks": 693,
+      "language": "Unknown"
+    },
+    {
+      "repo": "rectorphp/rector",
+      "quality": 1,
+      "stars": 10144,
+      "forks": 738,
+      "language": "Unknown"
+    },
+    {
+      "repo": "symfony/console",
+      "quality": 1,
+      "stars": 9834,
+      "forks": 265,
+      "language": "Unknown"
+    },
+    {
+      "repo": "Leantime/leantime",
+      "quality": 1,
+      "stars": 8823,
+      "forks": 868,
+      "language": "Unknown"
+    },
+    {
+      "repo": "timber/timber",
+      "quality": 1,
+      "stars": 5641,
+      "forks": 511,
+      "language": "Unknown"
+    },
+    {
+      "repo": "pestphp/pest",
+      "quality": 1,
+      "stars": 11187,
+      "forks": 438,
+      "language": "Unknown"
+    },
+    {
+      "repo": "symfony/http-foundation",
+      "quality": 1,
+      "stars": 8660,
+      "forks": 306,
+      "language": "Unknown"
+    },
+    {
+      "repo": "filamentphp/filament",
+      "quality": 1,
+      "stars": 28491,
+      "forks": 4015,
+      "language": "Unknown"
+    },
+    {
+      "repo": "BookStackApp/BookStack",
+      "quality": 1,
+      "stars": 18010,
+      "forks": 2302,
+      "language": "Unknown"
+    },
+    {
+      "repo": "getgrav/grav",
+      "quality": 1,
+      "stars": 15342,
+      "forks": 1423,
+      "language": "Unknown"
+    },
+    {
+      "repo": "librespeed/speedtest",
+      "quality": 1,
+      "stars": 14080,
+      "forks": 2414,
+      "language": "Unknown"
+    },
+    {
+      "repo": "vlucas/phpdotenv",
+      "quality": 1,
+      "stars": 13498,
+      "forks": 652,
+      "language": "Unknown"
+    },
+    {
+      "repo": "ramsey/uuid",
+      "quality": 1,
+      "stars": 12617,
+      "forks": 517,
+      "language": "Unknown"
+    },
+    {
+      "repo": "slimphp/Slim",
+      "quality": 1,
+      "stars": 12220,
+      "forks": 1964,
+      "language": "Unknown"
+    },
+    {
+      "repo": "YOURLS/YOURLS",
+      "quality": 1,
+      "stars": 11778,
+      "forks": 2073,
+      "language": "Unknown"
+    },
+    {
+      "repo": "walkor/workerman",
+      "quality": 1,
+      "stars": 11504,
+      "forks": 2272,
+      "language": "Unknown"
+    },
+    {
+      "repo": "octobercms/october",
+      "quality": 1,
+      "stars": 11145,
+      "forks": 2215,
+      "language": "Unknown"
+    },
+    {
+      "repo": "unopim/unopim",
+      "quality": 1,
+      "stars": 8153,
+      "forks": 109,
+      "language": "Unknown"
+    },
+    {
+      "repo": "symfony/routing",
+      "quality": 1,
+      "stars": 7634,
+      "forks": 93,
+      "language": "Unknown"
+    },
+    {
+      "repo": "ellite/Wallos",
+      "quality": 1,
+      "stars": 7077,
+      "forks": 314,
+      "language": "Unknown"
+    },
+    {
+      "repo": "nikitabobko/AeroSpace",
+      "quality": 1,
+      "stars": 17939,
+      "forks": 380,
+      "language": "Unknown"
+    },
+    {
+      "repo": "apple/swift-nio",
+      "quality": 1,
+      "stars": 8378,
+      "forks": 722,
+      "language": "Unknown"
+    },
+    {
+      "repo": "Finb/Bark",
+      "quality": 1,
+      "stars": 7338,
+      "forks": 585,
+      "language": "Unknown"
+    },
+    {
+      "repo": "scinfu/SwiftSoup",
+      "quality": 1,
+      "stars": 5014,
+      "forks": 378,
+      "language": "Unknown"
+    },
+    {
+      "repo": "ianyh/Amethyst",
+      "quality": 1,
+      "stars": 15927,
+      "forks": 506,
+      "language": "Unknown"
+    },
+    {
+      "repo": "maxgoedjen/secretive",
+      "quality": 1,
+      "stars": 8035,
+      "forks": 184,
+      "language": "Unknown"
+    },
+    {
+      "repo": "onevcat/Kingfisher",
+      "quality": 1,
+      "stars": 24232,
+      "forks": 2744,
+      "language": "Unknown"
+    },
+    {
+      "repo": "CodeEditApp/CodeEdit",
+      "quality": 1,
+      "stars": 22583,
+      "forks": 1140,
+      "language": "Unknown"
+    },
+    {
+      "repo": "pointfreeco/swift-composable-architecture",
+      "quality": 1,
+      "stars": 14220,
+      "forks": 1618,
+      "language": "Unknown"
+    },
+    {
+      "repo": "intitni/CopilotForXcode",
+      "quality": 1,
+      "stars": 8249,
+      "forks": 428,
+      "language": "Unknown"
+    },
+    {
+      "repo": "groue/GRDB.swift",
+      "quality": 1,
+      "stars": 8078,
+      "forks": 820,
+      "language": "Unknown"
+    },
+    {
+      "repo": "airbnb/lottie-ios",
+      "quality": 1,
+      "stars": 26609,
+      "forks": 3828,
+      "language": "Unknown"
+    },
+    {
+      "repo": "hackiftekhar/IQKeyboardManager",
+      "quality": 1,
+      "stars": 16626,
+      "forks": 2452,
+      "language": "Unknown"
+    },
+    {
+      "repo": "SwifterSwift/SwifterSwift",
+      "quality": 1,
+      "stars": 14868,
+      "forks": 1672,
+      "language": "Unknown"
+    },
+    {
+      "repo": "ktorio/ktor",
+      "quality": 1,
+      "stars": 14202,
+      "forks": 1215,
+      "language": "Unknown"
+    },
+    {
+      "repo": "open-ani/animeko",
+      "quality": 1,
+      "stars": 14005,
+      "forks": 351,
+      "language": "Unknown"
+    },
+    {
+      "repo": "YiiGuxing/TranslationPlugin",
+      "quality": 1,
+      "stars": 11740,
+      "forks": 816,
+      "language": "Unknown"
+    },
+    {
+      "repo": "coil-kt/coil",
+      "quality": 1,
+      "stars": 11644,
+      "forks": 739,
+      "language": "Unknown"
+    },
+    {
+      "repo": "T8RIN/ImageToolbox",
+      "quality": 1,
+      "stars": 11141,
+      "forks": 491,
+      "language": "Unknown"
+    },
+    {
+      "repo": "florisboard/florisboard",
+      "quality": 1,
+      "stars": 7851,
+      "forks": 561,
+      "language": "Unknown"
+    },
+    {
+      "repo": "maxrave-dev/SimpMusic",
+      "quality": 1,
+      "stars": 6907,
+      "forks": 313,
+      "language": "Unknown"
+    },
+    {
+      "repo": "arrow-kt/arrow",
+      "quality": 1,
+      "stars": 6502,
+      "forks": 463,
+      "language": "Unknown"
+    },
+    {
+      "repo": "gotson/komga",
+      "quality": 1,
+      "stars": 5752,
+      "forks": 339,
+      "language": "Unknown"
+    },
+    {
+      "repo": "kittinunf/fuel",
+      "quality": 1,
+      "stars": 4654,
+      "forks": 435,
+      "language": "Unknown"
+    },
+    {
+      "repo": "ChuckerTeam/chucker",
+      "quality": 1,
+      "stars": 4421,
+      "forks": 425,
+      "language": "Unknown"
+    },
+    {
+      "repo": "2dust/v2rayNG",
+      "quality": 1,
+      "stars": 49132,
+      "forks": 6774,
+      "language": "Unknown"
+    },
+    {
+      "repo": "gkd-kit/gkd",
+      "quality": 1,
+      "stars": 34880,
+      "forks": 1693,
+      "language": "Unknown"
+    },
+    {
+      "repo": "JunkFood02/Seal",
+      "quality": 1,
+      "stars": 23765,
+      "forks": 1005,
+      "language": "Unknown"
+    },
+    {
+      "repo": "JetBrains/compose-multiplatform",
+      "quality": 1,
+      "stars": 18675,
+      "forks": 1365,
+      "language": "Unknown"
+    },
+    {
+      "repo": "penpot/penpot",
+      "quality": 1,
+      "stars": 43601,
+      "forks": 2406,
+      "language": "Unknown"
+    },
+    {
+      "repo": "logseq/logseq",
+      "quality": 1,
+      "stars": 40131,
+      "forks": 2406,
+      "language": "Unknown"
+    },
+    {
+      "repo": "babashka/babashka",
+      "quality": 1,
+      "stars": 4394,
+      "forks": 263,
+      "language": "Unknown"
+    },
+    {
+      "repo": "metabase/metabase",
+      "quality": 1,
+      "stars": 45469,
+      "forks": 6152,
+      "language": "Unknown"
+    },
+    {
+      "repo": "day8/re-frame",
+      "quality": 1,
+      "stars": 5515,
+      "forks": 715,
+      "language": "Unknown"
+    },
+    {
+      "repo": "clj-kondo/clj-kondo",
+      "quality": 1,
+      "stars": 1814,
+      "forks": 295,
+      "language": "Unknown"
+    },
+    {
+      "repo": "replikativ/datahike",
+      "quality": 1,
+      "stars": 1712,
+      "forks": 101,
+      "language": "Unknown"
+    },
+    {
+      "repo": "tonsky/datascript",
+      "quality": 1,
+      "stars": 5688,
+      "forks": 312,
+      "language": "Unknown"
+    },
+    {
+      "repo": "xtdb/xtdb",
+      "quality": 1,
+      "stars": 2884,
+      "forks": 183,
+      "language": "Unknown"
+    },
+    {
+      "repo": "swarmpit/swarmpit",
+      "quality": 1,
+      "stars": 3369,
+      "forks": 305,
+      "language": "Unknown"
+    },
+    {
+      "repo": "koalaman/shellcheck",
+      "quality": 1,
+      "stars": 38769,
+      "forks": 1892,
+      "language": "Unknown"
+    },
+    {
+      "repo": "simonmichael/hledger",
+      "quality": 1,
+      "stars": 3679,
+      "forks": 346,
+      "language": "Unknown"
+    },
+    {
+      "repo": "xmonad/xmonad",
+      "quality": 1,
+      "stars": 3520,
+      "forks": 295,
+      "language": "Unknown"
+    },
+    {
+      "repo": "fosskers/aura",
+      "quality": 1,
+      "stars": 1877,
+      "forks": 121,
+      "language": "Unknown"
+    },
+    {
+      "repo": "hadolint/hadolint",
+      "quality": 1,
+      "stars": 11817,
+      "forks": 484,
+      "language": "Unknown"
+    },
+    {
+      "repo": "simplex-chat/simplex-chat",
+      "quality": 1,
+      "stars": 10162,
+      "forks": 539,
+      "language": "Unknown"
+    },
+    {
+      "repo": "digitallyinduced/ihp",
+      "quality": 1,
+      "stars": 5190,
+      "forks": 214,
+      "language": "Unknown"
+    },
+    {
+      "repo": "purescript/purescript",
+      "quality": 1,
+      "stars": 8820,
+      "forks": 571,
+      "language": "Unknown"
+    },
+    {
+      "repo": "b3nj5m1n/xdg-ninja",
+      "quality": 1,
+      "stars": 3066,
+      "forks": 178,
+      "language": "Unknown"
+    },
+    {
+      "repo": "haskell/haskell-language-server",
+      "quality": 1,
+      "stars": 2873,
+      "forks": 414,
+      "language": "Unknown"
+    },
+    {
+      "repo": "jgm/pandoc",
+      "quality": 1,
+      "stars": 41219,
+      "forks": 3735,
+      "language": "Unknown"
+    },
+    {
+      "repo": "PostgREST/postgrest",
+      "quality": 1,
+      "stars": 26314,
+      "forks": 1145,
+      "language": "Unknown"
+    },
+    {
+      "repo": "dmjio/miso",
+      "quality": 1,
+      "stars": 2356,
+      "forks": 158,
+      "language": "Unknown"
+    },
+    {
+      "repo": "carp-lang/Carp",
+      "quality": 1,
+      "stars": 5788,
+      "forks": 180,
+      "language": "Unknown"
+    },
+    {
+      "repo": "agda/agda",
+      "quality": 1,
+      "stars": 2773,
+      "forks": 394,
+      "language": "Unknown"
+    },
+    {
+      "repo": "unisonweb/unison",
+      "quality": 1,
+      "stars": 6458,
+      "forks": 291,
+      "language": "Unknown"
+    },
+    {
+      "repo": "crytic/echidna",
+      "quality": 1,
+      "stars": 3062,
+      "forks": 419,
+      "language": "Unknown"
+    },
+    {
+      "repo": "lamdu/lamdu",
+      "quality": 1,
+      "stars": 1880,
+      "forks": 73,
+      "language": "Unknown"
+    },
+    {
+      "repo": "plausible/analytics",
+      "quality": 1,
+      "stars": 24028,
+      "forks": 1332,
+      "language": "Unknown"
+    },
+    {
+      "repo": "firezone/firezone",
+      "quality": 1,
+      "stars": 8338,
+      "forks": 399,
+      "language": "Unknown"
+    },
+    {
+      "repo": "supabase/realtime",
+      "quality": 1,
+      "stars": 7453,
+      "forks": 409,
+      "language": "Unknown"
+    },
+    {
+      "repo": "livebook-dev/livebook",
+      "quality": 1,
+      "stars": 5650,
+      "forks": 483,
+      "language": "Unknown"
+    },
+    {
+      "repo": "rrrene/credo",
+      "quality": 1,
+      "stars": 5113,
+      "forks": 433,
+      "language": "Unknown"
+    },
+    {
+      "repo": "teslamate-org/teslamate",
+      "quality": 1,
+      "stars": 7476,
+      "forks": 892,
+      "language": "Unknown"
+    },
+    {
+      "repo": "thechangelog/changelog.com",
+      "quality": 1,
+      "stars": 2760,
+      "forks": 247,
+      "language": "Unknown"
+    },
+    {
+      "repo": "mirego/accent",
+      "quality": 1,
+      "stars": 1462,
+      "forks": 116,
+      "language": "Unknown"
+    },
+    {
+      "repo": "asciinema/asciinema-server",
+      "quality": 1,
+      "stars": 2433,
+      "forks": 281,
+      "language": "Unknown"
+    },
+    {
+      "repo": "elixir-lsp/elixir-ls",
+      "quality": 1,
+      "stars": 1719,
+      "forks": 223,
+      "language": "Unknown"
+    },
+    {
+      "repo": "beam-community/elixir-companies",
+      "quality": 1,
+      "stars": 1661,
+      "forks": 382,
+      "language": "Unknown"
+    },
+    {
+      "repo": "leoafarias/fvm",
+      "quality": 1,
+      "stars": 5289,
+      "forks": 272,
+      "language": "Unknown"
+    },
+    {
+      "repo": "fzyzcjy/flutter_rust_bridge",
+      "quality": 1,
+      "stars": 5031,
+      "forks": 377,
+      "language": "Unknown"
+    },
+    {
+      "repo": "saber-notes/saber",
+      "quality": 1,
+      "stars": 3968,
+      "forks": 260,
+      "language": "Unknown"
+    },
+    {
+      "repo": "localsend/localsend",
+      "quality": 1,
+      "stars": 72771,
+      "forks": 3894,
+      "language": "Unknown"
+    },
+    {
+      "repo": "mulaRahul/keyviz",
+      "quality": 1,
+      "stars": 8702,
+      "forks": 298,
+      "language": "Unknown"
+    },
+    {
+      "repo": "sass/dart-sass",
+      "quality": 1,
+      "stars": 4163,
+      "forks": 373,
+      "language": "Unknown"
+    },
+    {
+      "repo": "shorebirdtech/shorebird",
+      "quality": 1,
+      "stars": 2879,
+      "forks": 198,
+      "language": "Unknown"
+    },
+    {
+      "repo": "flutter/flutter",
+      "quality": 1,
+      "stars": 174568,
+      "forks": 29789,
+      "language": "Unknown"
+    },
+    {
+      "repo": "AppFlowy-IO/AppFlowy",
+      "quality": 1,
+      "stars": 67330,
+      "forks": 4820,
+      "language": "Unknown"
+    },
+    {
+      "repo": "KRTirtho/spotube",
+      "quality": 1,
+      "stars": 43478,
+      "forks": 1950,
+      "language": "Unknown"
+    },
+    {
+      "repo": "chen08209/FlClash",
+      "quality": 1,
+      "stars": 28708,
+      "forks": 1730,
+      "language": "Unknown"
+    },
+    {
+      "repo": "cfug/dio",
+      "quality": 1,
+      "stars": 12780,
+      "forks": 1550,
+      "language": "Unknown"
+    },
+    {
+      "repo": "rrousselGit/riverpod",
+      "quality": 1,
+      "stars": 7068,
+      "forks": 1061,
+      "language": "Unknown"
+    },
+    {
+      "repo": "simolus3/drift",
+      "quality": 1,
+      "stars": 3112,
+      "forks": 438,
+      "language": "Unknown"
+    },
+    {
+      "repo": "lichess-org/lila",
+      "quality": 1,
+      "stars": 17549,
+      "forks": 2530,
+      "language": "Unknown"
+    },
+    {
+      "repo": "softwaremill/elasticmq",
+      "quality": 1,
+      "stars": 2782,
+      "forks": 202,
+      "language": "Unknown"
+    },
+    {
+      "repo": "com-lihaoyi/mill",
+      "quality": 1,
+      "stars": 2662,
+      "forks": 425,
+      "language": "Unknown"
+    },
+    {
+      "repo": "gitbucket/gitbucket",
+      "quality": 1,
+      "stars": 9335,
+      "forks": 1260,
+      "language": "Unknown"
+    },
+    {
+      "repo": "scala/scala",
+      "quality": 1,
+      "stars": 14436,
+      "forks": 3102,
+      "language": "Unknown"
+    },
+    {
+      "repo": "akka/akka-core",
+      "quality": 1,
+      "stars": 13249,
+      "forks": 3584,
+      "language": "Unknown"
+    },
+    {
+      "repo": "playframework/playframework",
+      "quality": 1,
+      "stars": 12620,
+      "forks": 4072,
+      "language": "Unknown"
+    },
+    {
+      "repo": "apache/openwhisk",
+      "quality": 1,
+      "stars": 6743,
+      "forks": 1174,
+      "language": "Unknown"
+    },
+    {
+      "repo": "zio/zio",
+      "quality": 1,
+      "stars": 4331,
+      "forks": 1382,
+      "language": "Unknown"
+    },
+    {
+      "repo": "scalatra/scalatra",
+      "quality": 1,
+      "stars": 2650,
+      "forks": 341,
+      "language": "Unknown"
+    },
+    {
+      "repo": "spotify/scio",
+      "quality": 1,
+      "stars": 2613,
+      "forks": 525,
+      "language": "Unknown"
+    },
+    {
+      "repo": "ucb-bar/chipyard",
+      "quality": 1,
+      "stars": 2088,
+      "forks": 799,
+      "language": "Unknown"
+    },
+    {
+      "repo": "graphframes/graphframes",
+      "quality": 1,
+      "stars": 1128,
+      "forks": 260,
+      "language": "Unknown"
+    },
+    {
+      "repo": "apache/spark",
+      "quality": 1,
+      "stars": 42591,
+      "forks": 28989,
+      "language": "Unknown"
+    },
+    {
+      "repo": "scala-native/scala-native",
+      "quality": 1,
+      "stars": 4623,
+      "forks": 379,
+      "language": "Unknown"
+    },
+    {
+      "repo": "wavesplatform/Waves",
+      "quality": 1,
+      "stars": 1173,
+      "forks": 428,
+      "language": "Unknown"
+    },
+    {
+      "repo": "xyflow/xyflow",
+      "quality": 1,
+      "stars": 34612,
+      "forks": 2260,
+      "language": "Unknown"
+    },
+    {
+      "repo": "ueberdosis/tiptap",
+      "quality": 1,
+      "stars": 34367,
+      "forks": 2818,
+      "language": "Unknown"
+    },
+    {
+      "repo": "TriliumNext/Trilium",
+      "quality": 1,
+      "stars": 33882,
+      "forks": 2248,
+      "language": "Unknown"
+    },
+    {
+      "repo": "refinedev/refine",
+      "quality": 1,
+      "stars": 33783,
+      "forks": 2889,
+      "language": "Unknown"
+    },
+    {
+      "repo": "hasura/graphql-engine",
+      "quality": 1,
+      "stars": 31865,
+      "forks": 2853,
+      "language": "Unknown"
+    },
+    {
+      "repo": "motiondivision/motion",
+      "quality": 1,
+      "stars": 30661,
+      "forks": 1074,
+      "language": "Unknown"
+    },
+    {
+      "repo": "transloadit/uppy",
+      "quality": 1,
+      "stars": 30555,
+      "forks": 2090,
+      "language": "Unknown"
+    },
+    {
+      "repo": "refined-github/refined-github",
+      "quality": 1,
+      "stars": 30016,
+      "forks": 1645,
+      "language": "Unknown"
+    },
+    {
+      "repo": "cheeriojs/cheerio",
+      "quality": 1,
+      "stars": 29988,
+      "forks": 1681,
+      "language": "Unknown"
+    },
+    {
+      "repo": "bigint/hey",
+      "quality": 1,
+      "stars": 29517,
+      "forks": 1800,
+      "language": "Unknown"
+    },
+    {
+      "repo": "statelyai/xstate",
+      "quality": 1,
+      "stars": 29097,
+      "forks": 1342,
+      "language": "Unknown"
+    },
+    {
+      "repo": "blakeblackshear/frigate",
+      "quality": 1,
+      "stars": 28575,
+      "forks": 2672,
+      "language": "Unknown"
+    },
+    {
+      "repo": "nrwl/nx",
+      "quality": 1,
+      "stars": 27854,
+      "forks": 2643,
+      "language": "Unknown"
+    },
+    {
+      "repo": "Budibase/budibase",
+      "quality": 1,
+      "stars": 27515,
+      "forks": 2066,
+      "language": "Unknown"
+    },
+    {
+      "repo": "tabler/tabler-icons",
+      "quality": 1,
+      "stars": 19995,
+      "forks": 1061,
+      "language": "Unknown"
+    },
+    {
+      "repo": "maboloshi/github-chinese",
+      "quality": 1,
+      "stars": 19588,
+      "forks": 1084,
+      "language": "Unknown"
+    },
+    {
+      "repo": "4ian/GDevelop",
+      "quality": 1,
+      "stars": 19100,
+      "forks": 1210,
+      "language": "Unknown"
+    },
+    {
+      "repo": "sweetalert2/sweetalert2",
+      "quality": 1,
+      "stars": 18018,
+      "forks": 1645,
+      "language": "Unknown"
+    },
+    {
+      "repo": "commitizen/cz-cli",
+      "quality": 1,
+      "stars": 17414,
+      "forks": 561,
+      "language": "Unknown"
+    },
+    {
+      "repo": "Foundry376/Mailspring",
+      "quality": 1,
+      "stars": 17006,
+      "forks": 956,
+      "language": "Unknown"
+    },
+    {
+      "repo": "cure53/DOMPurify",
+      "quality": 1,
+      "stars": 16450,
+      "forks": 821,
+      "language": "Unknown"
+    },
+    {
+      "repo": "josdejong/mathjs",
+      "quality": 1,
+      "stars": 14975,
+      "forks": 1300,
+      "language": "Unknown"
+    },
+    {
+      "repo": "marko-js/marko",
+      "quality": 1,
+      "stars": 14284,
+      "forks": 663,
+      "language": "Unknown"
+    },
+    {
+      "repo": "electerm/electerm",
+      "quality": 1,
+      "stars": 13430,
+      "forks": 1090,
+      "language": "Unknown"
+    },
+    {
+      "repo": "forwardemail/supertest",
+      "quality": 1,
+      "stars": 14274,
+      "forks": 781,
+      "language": "Unknown"
+    },
+    {
+      "repo": "Mintplex-Labs/anything-llm",
+      "quality": 1,
+      "stars": 52929,
+      "forks": 5681,
+      "language": "Unknown"
+    },
+    {
+      "repo": "serverless/serverless",
+      "quality": 1,
+      "stars": 46934,
+      "forks": 5735,
+      "language": "Unknown"
+    },
+    {
+      "repo": "parcel-bundler/parcel",
+      "quality": 1,
+      "stars": 44032,
+      "forks": 2275,
+      "language": "Unknown"
+    },
+    {
+      "repo": "HeyPuter/puter",
+      "quality": 1,
+      "stars": 38458,
+      "forks": 3369,
+      "language": "Unknown"
+    },
+    {
+      "repo": "ToolJet/ToolJet",
+      "quality": 1,
+      "stars": 37128,
+      "forks": 4921,
+      "language": "Unknown"
+    },
+    {
+      "repo": "immerjs/immer",
+      "quality": 1,
+      "stars": 28806,
+      "forks": 864,
+      "language": "Unknown"
+    },
+    {
+      "repo": "Automattic/mongoose",
+      "quality": 1,
+      "stars": 27438,
+      "forks": 3959,
+      "language": "Unknown"
+    },
+    {
+      "repo": "fanmingming/live",
+      "quality": 1,
+      "stars": 26979,
+      "forks": 4060,
+      "language": "Unknown"
+    },
+    {
+      "repo": "Modernizr/Modernizr",
+      "quality": 1,
+      "stars": 25669,
+      "forks": 2957,
+      "language": "Unknown"
+    },
+    {
+      "repo": "processing/p5.js",
+      "quality": 1,
+      "stars": 23305,
+      "forks": 3671,
+      "language": "Unknown"
+    },
+    {
+      "repo": "MagicMirrorOrg/MagicMirror",
+      "quality": 1,
+      "stars": 23132,
+      "forks": 4500,
+      "language": "Unknown"
+    },
+    {
+      "repo": "mochajs/mocha",
+      "quality": 1,
+      "stars": 22861,
+      "forks": 3062,
+      "language": "Unknown"
+    },
+    {
+      "repo": "websockets/ws",
+      "quality": 1,
+      "stars": 22576,
+      "forks": 2511,
+      "language": "Unknown"
+    },
+    {
+      "repo": "spicetify/cli",
+      "quality": 1,
+      "stars": 21865,
+      "forks": 828,
+      "language": "Unknown"
+    },
+    {
+      "repo": "handsontable/handsontable",
+      "quality": 1,
+      "stars": 21715,
+      "forks": 3187,
+      "language": "Unknown"
+    },
+    {
+      "repo": "wekan/wekan",
+      "quality": 1,
+      "stars": 20789,
+      "forks": 2955,
+      "language": "Unknown"
+    },
+    {
+      "repo": "docmirror/dev-sidecar",
+      "quality": 1,
+      "stars": 20645,
+      "forks": 2533,
+      "language": "Unknown"
+    },
+    {
+      "repo": "knex/knex",
+      "quality": 1,
+      "stars": 20155,
+      "forks": 2183,
+      "language": "Unknown"
+    },
+    {
+      "repo": "11ty/eleventy",
+      "quality": 1,
+      "stars": 19173,
+      "forks": 556,
+      "language": "Unknown"
+    },
+    {
+      "repo": "plotly/plotly.js",
+      "quality": 1,
+      "stars": 18022,
+      "forks": 1970,
+      "language": "Unknown"
+    },
+    {
+      "repo": "mjmlio/mjml",
+      "quality": 1,
+      "stars": 17822,
+      "forks": 983,
+      "language": "Unknown"
+    },
+    {
+      "repo": "infernojs/inferno",
+      "quality": 1,
+      "stars": 16399,
+      "forks": 640,
+      "language": "Unknown"
+    },
+    {
+      "repo": "pqina/filepond",
+      "quality": 1,
+      "stars": 16243,
+      "forks": 857,
+      "language": "Unknown"
+    },
+    {
+      "repo": "lowlighter/metrics",
+      "quality": 1,
+      "stars": 15916,
+      "forks": 2100,
+      "language": "Unknown"
+    },
+    {
+      "repo": "NodeBB/NodeBB",
+      "quality": 1,
+      "stars": 14884,
+      "forks": 2932,
+      "language": "Unknown"
+    },
+    {
+      "repo": "showdownjs/showdown",
+      "quality": 1,
+      "stars": 14783,
+      "forks": 1575,
+      "language": "Unknown"
+    },
+    {
+      "repo": "QuantumNous/new-api",
+      "quality": 1,
+      "stars": 14628,
+      "forks": 2863,
+      "language": "Unknown"
+    },
+    {
+      "repo": "playcanvas/engine",
+      "quality": 1,
+      "stars": 14302,
+      "forks": 1708,
+      "language": "Unknown"
+    },
+    {
+      "repo": "automatisch/automatisch",
+      "quality": 1,
+      "stars": 13490,
+      "forks": 1024,
+      "language": "Unknown"
+    },
+    {
+      "repo": "emberjs/ember.js",
+      "quality": 1,
+      "stars": 22582,
+      "forks": 4198,
+      "language": "Unknown"
+    },
+    {
+      "repo": "jasmine/jasmine",
+      "quality": 1,
+      "stars": 15839,
+      "forks": 2242,
+      "language": "Unknown"
+    },
+    {
+      "repo": "huggingface/transformers.js",
+      "quality": 1,
+      "stars": 15160,
+      "forks": 1061,
+      "language": "Unknown"
+    },
+    {
+      "repo": "mui/material-ui",
+      "quality": 1,
+      "stars": 97556,
+      "forks": 32790,
+      "language": "Unknown"
+    },
+    {
+      "repo": "microsoft/Web-Dev-For-Beginners",
+      "quality": 1,
+      "stars": 94889,
+      "forks": 14969,
+      "language": "Unknown"
+    },
+    {
+      "repo": "anuraghazra/github-readme-stats",
+      "quality": 1,
+      "stars": 77798,
+      "forks": 28954,
+      "language": "Unknown"
+    },
+    {
+      "repo": "h5bp/html5-boilerplate",
+      "quality": 1,
+      "stars": 57329,
+      "forks": 12326,
+      "language": "Unknown"
+    },
+    {
+      "repo": "marktext/marktext",
+      "quality": 1,
+      "stars": 53057,
+      "forks": 3912,
+      "language": "Unknown"
+    },
+    {
+      "repo": "TryGhost/Ghost",
+      "quality": 1,
+      "stars": 51527,
+      "forks": 11248,
+      "language": "Unknown"
+    },
+    {
+      "repo": "Leaflet/Leaflet",
+      "quality": 1,
+      "stars": 44244,
+      "forks": 6066,
+      "language": "Unknown"
+    },
+    {
+      "repo": "Unitech/pm2",
+      "quality": 1,
+      "stars": 42831,
+      "forks": 2675,
+      "language": "Unknown"
+    },
+    {
+      "repo": "phaserjs/phaser",
+      "quality": 1,
+      "stars": 38799,
+      "forks": 7129,
+      "language": "Unknown"
+    },
+    {
+      "repo": "carbon-app/carbon",
+      "quality": 1,
+      "stars": 35844,
+      "forks": 1973,
+      "language": "Unknown"
+    },
+    {
+      "repo": "qishibo/AnotherRedisDesktopManager",
+      "quality": 1,
+      "stars": 33702,
+      "forks": 2691,
+      "language": "Unknown"
+    },
+    {
+      "repo": "layui/layui",
+      "quality": 1,
+      "stars": 30484,
+      "forks": 7422,
+      "language": "Unknown"
+    },
+    {
+      "repo": "swagger-api/swagger-ui",
+      "quality": 1,
+      "stars": 28497,
+      "forks": 9249,
+      "language": "Unknown"
+    },
+    {
+      "repo": "badges/shields",
+      "quality": 1,
+      "stars": 25846,
+      "forks": 5568,
+      "language": "Unknown"
+    },
+    {
+      "repo": "eyaltoledano/claude-task-master",
+      "quality": 1,
+      "stars": 24615,
+      "forks": 2371,
+      "language": "Unknown"
+    },
+    {
+      "repo": "pure-css/pure",
+      "quality": 1,
+      "stars": 23760,
+      "forks": 2438,
+      "language": "Unknown"
+    },
+    {
+      "repo": "postcss/autoprefixer",
+      "quality": 1,
+      "stars": 22612,
+      "forks": 1274,
+      "language": "Unknown"
+    },
+    {
+      "repo": "appium/appium",
+      "quality": 1,
+      "stars": 21008,
+      "forks": 6277,
+      "language": "Unknown"
+    },
+    {
+      "repo": "avajs/ava",
+      "quality": 1,
+      "stars": 20853,
+      "forks": 1405,
+      "language": "Unknown"
+    },
+    {
+      "repo": "pedroslopez/whatsapp-web.js",
+      "quality": 1,
+      "stars": 20481,
+      "forks": 4749,
+      "language": "Unknown"
+    },
+    {
+      "repo": "qeeqbox/social-analyzer",
+      "quality": 1,
+      "stars": 20215,
+      "forks": 1867,
+      "language": "Unknown"
+    },
+    {
+      "repo": "MobSF/Mobile-Security-Framework-MobSF",
+      "quality": 1,
+      "stars": 20108,
+      "forks": 3555,
+      "language": "Unknown"
+    },
+    {
+      "repo": "Molunerfinn/PicGo",
+      "quality": 1,
+      "stars": 26140,
+      "forks": 2330,
+      "language": "Unknown"
+    },
+    {
+      "repo": "NativeScript/NativeScript",
+      "quality": 1,
+      "stars": 25378,
+      "forks": 1729,
+      "language": "Unknown"
+    },
+    {
+      "repo": "SigNoz/signoz",
+      "quality": 1,
+      "stars": 25156,
+      "forks": 1882,
+      "language": "Unknown"
+    },
+    {
+      "repo": "neoclide/coc.nvim",
+      "quality": 1,
+      "stars": 25107,
+      "forks": 968,
+      "language": "Unknown"
+    },
+    {
+      "repo": "Infisical/infisical",
+      "quality": 1,
+      "stars": 24372,
+      "forks": 1654,
+      "language": "Unknown"
+    },
+    {
+      "repo": "hcengineering/platform",
+      "quality": 1,
+      "stars": 24045,
+      "forks": 1674,
+      "language": "Unknown"
+    },
+    {
+      "repo": "pubkey/rxdb",
+      "quality": 1,
+      "stars": 22933,
+      "forks": 1143,
+      "language": "Unknown"
+    },
+    {
+      "repo": "beekeeper-studio/beekeeper-studio",
+      "quality": 1,
+      "stars": 21619,
+      "forks": 1402,
+      "language": "Unknown"
+    },
+    {
+      "repo": "SBoudrias/Inquirer.js",
+      "quality": 1,
+      "stars": 21351,
+      "forks": 1343,
+      "language": "Unknown"
+    },
+    {
+      "repo": "apify/crawlee",
+      "quality": 1,
+      "stars": 20956,
+      "forks": 1137,
+      "language": "Unknown"
+    },
+    {
+      "repo": "teableio/teable",
+      "quality": 1,
+      "stars": 20655,
+      "forks": 1183,
+      "language": "Unknown"
+    },
+    {
+      "repo": "lucide-icons/lucide",
+      "quality": 1,
+      "stars": 20453,
+      "forks": 1120,
+      "language": "Unknown"
+    },
+    {
+      "repo": "langfuse/langfuse",
+      "quality": 1,
+      "stars": 20172,
+      "forks": 1972,
+      "language": "Unknown"
+    },
+    {
+      "repo": "eggjs/egg",
+      "quality": 1,
+      "stars": 19002,
+      "forks": 1815,
+      "language": "Unknown"
+    },
+    {
+      "repo": "adonisjs/core",
+      "quality": 1,
+      "stars": 18554,
+      "forks": 656,
+      "language": "Unknown"
+    },
+    {
+      "repo": "docmost/docmost",
+      "quality": 1,
+      "stars": 18432,
+      "forks": 1051,
+      "language": "Unknown"
+    },
+    {
+      "repo": "teambit/bit",
+      "quality": 1,
+      "stars": 18327,
+      "forks": 946,
+      "language": "Unknown"
+    },
+    {
+      "repo": "wasp-lang/wasp",
+      "quality": 1,
+      "stars": 18034,
+      "forks": 1414,
+      "language": "Unknown"
+    },
+    {
+      "repo": "openobserve/openobserve",
+      "quality": 1,
+      "stars": 17649,
+      "forks": 717,
+      "language": "Unknown"
+    },
+    {
+      "repo": "mountain-loop/yaak",
+      "quality": 1,
+      "stars": 17313,
+      "forks": 665,
+      "language": "Unknown"
+    },
+    {
+      "repo": "super-productivity/super-productivity",
+      "quality": 1,
+      "stars": 16793,
+      "forks": 1375,
+      "language": "Unknown"
+    },
+    {
+      "repo": "linkwarden/linkwarden",
+      "quality": 1,
+      "stars": 16614,
+      "forks": 654,
+      "language": "Unknown"
+    },
+    {
+      "repo": "CapSoftware/Cap",
+      "quality": 1,
+      "stars": 16189,
+      "forks": 1128,
+      "language": "Unknown"
+    },
+    {
+      "repo": "omnivore-app/omnivore",
+      "quality": 1,
+      "stars": 15754,
+      "forks": 1247,
+      "language": "Unknown"
+    },
+    {
+      "repo": "redis/ioredis",
+      "quality": 1,
+      "stars": 15161,
+      "forks": 1223,
+      "language": "Unknown"
+    },
+    {
+      "repo": "heroui-inc/heroui",
+      "quality": 1,
+      "stars": 27801,
+      "forks": 2027,
+      "language": "Unknown"
+    },
+    {
+      "repo": "lit/lit",
+      "quality": 1,
+      "stars": 21034,
+      "forks": 1041,
+      "language": "Unknown"
+    },
+    {
+      "repo": "kamranahmedse/developer-roadmap",
+      "quality": 1,
+      "stars": 346717,
+      "forks": 43596,
+      "language": "Unknown"
+    },
+    {
+      "repo": "f/awesome-chatgpt-prompts",
+      "quality": 1,
+      "stars": 141611,
+      "forks": 18792,
+      "language": "Unknown"
+    },
+    {
+      "repo": "excalidraw/excalidraw",
+      "quality": 1,
+      "stars": 113758,
+      "forks": 12040,
+      "language": "Unknown"
+    },
+    {
+      "repo": "supabase/supabase",
+      "quality": 1,
+      "stars": 95675,
+      "forks": 11174,
+      "language": "Unknown"
+    },
+    {
+      "repo": "storybookjs/storybook",
+      "quality": 1,
+      "stars": 88953,
+      "forks": 9817,
+      "language": "Unknown"
+    },
+    {
+      "repo": "nestjs/nest",
+      "quality": 1,
+      "stars": 74127,
+      "forks": 8158,
+      "language": "Unknown"
+    },
+    {
+      "repo": "firecrawl/firecrawl",
+      "quality": 1,
+      "stars": 73106,
+      "forks": 5671,
+      "language": "Unknown"
+    },
+    {
+      "repo": "grafana/grafana",
+      "quality": 1,
+      "stars": 71557,
+      "forks": 13322,
+      "language": "Unknown"
+    },
+    {
+      "repo": "strapi/strapi",
+      "quality": 1,
+      "stars": 70883,
+      "forks": 9346,
+      "language": "Unknown"
+    },
+    {
+      "repo": "facebook/docusaurus",
+      "quality": 1,
+      "stars": 63240,
+      "forks": 9637,
+      "language": "Unknown"
+    },
+    {
+      "repo": "laurent22/joplin",
+      "quality": 1,
+      "stars": 52789,
+      "forks": 5662,
+      "language": "Unknown"
+    },
+    {
+      "repo": "pixijs/pixijs",
+      "quality": 1,
+      "stars": 46352,
+      "forks": 4932,
+      "language": "Unknown"
+    },
+    {
+      "repo": "babel/babel",
+      "quality": 1,
+      "stars": 43838,
+      "forks": 5787,
+      "language": "Unknown"
+    },
+    {
+      "repo": "AykutSarac/jsoncrack.com",
+      "quality": 1,
+      "stars": 42685,
+      "forks": 3420,
+      "language": "Unknown"
+    },
+    {
+      "repo": "hexojs/hexo",
+      "quality": 1,
+      "stars": 41123,
+      "forks": 5032,
+      "language": "Unknown"
+    },
+    {
+      "repo": "novuhq/novu",
+      "quality": 1,
+      "stars": 38390,
+      "forks": 4190,
+      "language": "Unknown"
+    },
+    {
+      "repo": "twentyhq/twenty",
+      "quality": 1,
+      "stars": 37836,
+      "forks": 4834,
+      "language": "Unknown"
+    },
+    {
+      "repo": "CherryHQ/cherry-studio",
+      "quality": 1,
+      "stars": 37280,
+      "forks": 3441,
+      "language": "Unknown"
+    },
+    {
+      "repo": "NervJS/taro",
+      "quality": 1,
+      "stars": 37196,
+      "forks": 4884,
+      "language": "Unknown"
+    },
+    {
+      "repo": "mifi/lossless-cut",
+      "quality": 1,
+      "stars": 36801,
+      "forks": 1785,
+      "language": "Unknown"
+    },
+    {
+      "repo": "typeorm/typeorm",
+      "quality": 1,
+      "stars": 36186,
+      "forks": 6476,
+      "language": "Unknown"
+    },
+    {
+      "repo": "solidjs/solid",
+      "quality": 1,
+      "stars": 34859,
+      "forks": 1028,
+      "language": "Unknown"
+    },
+    {
+      "repo": "umami-software/umami",
+      "quality": 1,
+      "stars": 34564,
+      "forks": 6203,
+      "language": "Unknown"
+    },
+    {
+      "repo": "AmruthPillai/Reactive-Resume",
+      "quality": 1,
+      "stars": 34323,
+      "forks": 3763,
+      "language": "Unknown"
+    },
+    {
+      "repo": "directus/directus",
+      "quality": 1,
+      "stars": 33864,
+      "forks": 4510,
+      "language": "Unknown"
+    },
+    {
+      "repo": "danny-avila/LibreChat",
+      "quality": 1,
+      "stars": 32856,
+      "forks": 6547,
+      "language": "Unknown"
+    },
+    {
+      "repo": "floating-ui/floating-ui",
+      "quality": 1,
+      "stars": 32285,
+      "forks": 1664,
+      "language": "Unknown"
+    },
+    {
+      "repo": "plotly/dash",
+      "quality": 1,
+      "stars": 24376,
+      "forks": 2245,
+      "language": "Unknown"
+    },
+    {
+      "repo": "subframe7536/maple-font",
+      "quality": 1,
+      "stars": 22438,
+      "forks": 863,
+      "language": "Unknown"
+    },
+    {
+      "repo": "PrefectHQ/prefect",
+      "quality": 1,
+      "stars": 21245,
+      "forks": 2056,
+      "language": "Unknown"
+    },
+    {
+      "repo": "mlc-ai/mlc-llm",
+      "quality": 1,
+      "stars": 21832,
+      "forks": 1893,
+      "language": "Unknown"
+    },
+    {
+      "repo": "comfyanonymous/ComfyUI",
+      "quality": 1,
+      "stars": 99125,
+      "forks": 11252,
+      "language": "Unknown"
+    },
+    {
+      "repo": "sherlock-project/sherlock",
+      "quality": 1,
+      "stars": 71427,
+      "forks": 8439,
+      "language": "Unknown"
+    },
+    {
+      "repo": "infiniflow/ragflow",
+      "quality": 1,
+      "stars": 70931,
+      "forks": 7746,
+      "language": "Unknown"
+    },
+    {
+      "repo": "PaddlePaddle/PaddleOCR",
+      "quality": 1,
+      "stars": 67483,
+      "forks": 9603,
+      "language": "Unknown"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "quality": 1,
+      "stars": 66869,
+      "forks": 12388,
+      "language": "Unknown"
+    },
+    {
+      "repo": "hiyouga/LlamaFactory",
+      "quality": 1,
+      "stars": 64941,
+      "forks": 7882,
+      "language": "Unknown"
+    },
+    {
+      "repo": "scrapy/scrapy",
+      "quality": 1,
+      "stars": 59382,
+      "forks": 11204,
+      "language": "Unknown"
+    },
+    {
+      "repo": "Textualize/rich",
+      "quality": 1,
+      "stars": 55017,
+      "forks": 1990,
+      "language": "Unknown"
+    },
+    {
+      "repo": "opendatalab/MinerU",
+      "quality": 1,
+      "stars": 51574,
+      "forks": 4285,
+      "language": "Unknown"
+    },
+    {
+      "repo": "run-llama/llama_index",
+      "quality": 1,
+      "stars": 46163,
+      "forks": 6683,
+      "language": "Unknown"
+    },
+    {
+      "repo": "getsentry/sentry",
+      "quality": 1,
+      "stars": 42834,
+      "forks": 4567,
+      "language": "Unknown"
+    },
+    {
+      "repo": "crewAIInc/crewAI",
+      "quality": 1,
+      "stars": 42261,
+      "forks": 5656,
+      "language": "Unknown"
+    },
+    {
+      "repo": "mitmproxy/mitmproxy",
+      "quality": 1,
+      "stars": 41806,
+      "forks": 4412,
+      "language": "Unknown"
+    },
+    {
+      "repo": "deepspeedai/DeepSpeed",
+      "quality": 1,
+      "stars": 41154,
+      "forks": 4678,
+      "language": "Unknown"
+    },
+    {
+      "repo": "ray-project/ray",
+      "quality": 1,
+      "stars": 40618,
+      "forks": 7068,
+      "language": "Unknown"
+    },
+    {
+      "repo": "mindsdb/mindsdb",
+      "quality": 1,
+      "stars": 38181,
+      "forks": 6080,
+      "language": "Unknown"
+    },
+    {
+      "repo": "agno-agi/agno",
+      "quality": 1,
+      "stars": 36647,
+      "forks": 4842,
+      "language": "Unknown"
+    },
+    {
+      "repo": "huggingface/pytorch-image-models",
+      "quality": 1,
+      "stars": 36135,
+      "forks": 5097,
+      "language": "Unknown"
+    },
+    {
+      "repo": "microsoft/qlib",
+      "quality": 1,
+      "stars": 35207,
+      "forks": 5480,
+      "language": "Unknown"
+    },
+    {
+      "repo": "BerriAI/litellm",
+      "quality": 1,
+      "stars": 33322,
+      "forks": 5222,
+      "language": "Unknown"
+    },
+    {
+      "repo": "ocrmypdf/OCRmyPDF",
+      "quality": 1,
+      "stars": 32184,
+      "forks": 2254,
+      "language": "Unknown"
+    },
+    {
+      "repo": "OWASP/CheatSheetSeries",
+      "quality": 1,
+      "stars": 31024,
+      "forks": 4323,
+      "language": "Unknown"
+    },
+    {
+      "repo": "jumpserver/jumpserver",
+      "quality": 1,
+      "stars": 29345,
+      "forks": 5622,
+      "language": "Unknown"
+    },
+    {
+      "repo": "getredash/redash",
+      "quality": 1,
+      "stars": 28128,
+      "forks": 4538,
+      "language": "Unknown"
+    },
+    {
+      "repo": "keon/algorithms",
+      "quality": 1,
+      "stars": 24927,
+      "forks": 4710,
+      "language": "Unknown"
+    },
+    {
+      "repo": "searxng/searxng",
+      "quality": 1,
+      "stars": 23950,
+      "forks": 2397,
+      "language": "Unknown"
+    },
+    {
+      "repo": "kovidgoyal/calibre",
+      "quality": 1,
+      "stars": 23274,
+      "forks": 2516,
+      "language": "Unknown"
+    },
+    {
+      "repo": "jlowin/fastmcp",
+      "quality": 1,
+      "stars": 21707,
+      "forks": 1626,
+      "language": "Unknown"
+    },
+    {
+      "repo": "serengil/deepface",
+      "quality": 1,
+      "stars": 21418,
+      "forks": 2907,
+      "language": "Unknown"
+    },
+    {
+      "repo": "mingrammer/diagrams",
+      "quality": 1,
+      "stars": 41891,
+      "forks": 2698,
+      "language": "Unknown"
+    },
+    {
+      "repo": "MetaCubeX/mihomo",
+      "quality": 1,
+      "stars": 25741,
+      "forks": 3539,
+      "language": "Unknown"
+    },
+    {
+      "repo": "Vonng/ddia",
+      "quality": 1,
+      "stars": 22440,
+      "forks": 4478,
+      "language": "Unknown"
+    },
+    {
+      "repo": "vinta/awesome-python",
+      "quality": 1,
+      "stars": 276908,
+      "forks": 27030,
+      "language": "Unknown"
+    },
+    {
+      "repo": "Significant-Gravitas/AutoGPT",
+      "quality": 1,
+      "stars": 180858,
+      "forks": 46253,
+      "language": "Unknown"
+    },
+    {
+      "repo": "huggingface/transformers",
+      "quality": 1,
+      "stars": 154610,
+      "forks": 31634,
+      "language": "Unknown"
+    },
+    {
+      "repo": "django/django",
+      "quality": 1,
+      "stars": 86369,
+      "forks": 33435,
+      "language": "Unknown"
+    },
+    {
+      "repo": "home-assistant/core",
+      "quality": 1,
+      "stars": 83905,
+      "forks": 36413,
+      "language": "Unknown"
+    },
+    {
+      "repo": "hacksider/Deep-Live-Cam",
+      "quality": 1,
+      "stars": 76781,
+      "forks": 11237,
+      "language": "Unknown"
+    },
+    {
+      "repo": "browser-use/browser-use",
+      "quality": 1,
+      "stars": 74669,
+      "forks": 8916,
+      "language": "Unknown"
+    },
+    {
+      "repo": "swisskyrepo/PayloadsAllTheThings",
+      "quality": 1,
+      "stars": 74150,
+      "forks": 16477,
+      "language": "Unknown"
+    },
+    {
+      "repo": "xtekky/gpt4free",
+      "quality": 1,
+      "stars": 65660,
+      "forks": 13695,
+      "language": "Unknown"
+    },
+    {
+      "repo": "commaai/openpilot",
+      "quality": 1,
+      "stars": 59564,
+      "forks": 10548,
+      "language": "Unknown"
+    },
+    {
+      "repo": "CorentinJ/Real-Time-Voice-Cloning",
+      "quality": 1,
+      "stars": 59149,
+      "forks": 9412,
+      "language": "Unknown"
+    },
+    {
+      "repo": "RVC-Boss/GPT-SoVITS",
+      "quality": 1,
+      "stars": 53805,
+      "forks": 5894,
+      "language": "Unknown"
+    },
+    {
+      "repo": "pandas-dev/pandas",
+      "quality": 1,
+      "stars": 47482,
+      "forks": 19471,
+      "language": "Unknown"
+    },
+    {
+      "repo": "apache/airflow",
+      "quality": 1,
+      "stars": 43736,
+      "forks": 16239,
+      "language": "Unknown"
+    },
+    {
+      "repo": "hpcaitech/ColossalAI",
+      "quality": 1,
+      "stars": 41316,
+      "forks": 4545,
+      "language": "Unknown"
+    },
+    {
+      "repo": "ccxt/ccxt",
+      "quality": 1,
+      "stars": 40439,
+      "forks": 8447,
+      "language": "Unknown"
+    },
+    {
+      "repo": "666ghj/BettaFish",
+      "quality": 1,
+      "stars": 34051,
+      "forks": 6562,
+      "language": "Unknown"
+    },
+    {
+      "repo": "certbot/certbot",
+      "quality": 1,
+      "stars": 32730,
+      "forks": 3476,
+      "language": "Unknown"
+    },
+    {
+      "repo": "huggingface/diffusers",
+      "quality": 1,
+      "stars": 32335,
+      "forks": 6660,
+      "language": "Unknown"
+    },
+    {
+      "repo": "frappe/erpnext",
+      "quality": 1,
+      "stars": 30893,
+      "forks": 10102,
+      "language": "Unknown"
+    },
+    {
+      "repo": "Lightning-AI/pytorch-lightning",
+      "quality": 1,
+      "stars": 30675,
+      "forks": 3639,
+      "language": "Unknown"
+    },
+    {
+      "repo": "microsoft/graphrag",
+      "quality": 1,
+      "stars": 30148,
+      "forks": 3180,
+      "language": "Unknown"
+    },
+    {
+      "repo": "AtsushiSakai/PythonRobotics",
+      "quality": 1,
+      "stars": 27609,
+      "forks": 7095,
+      "language": "Unknown"
+    },
+    {
+      "repo": "HKUDS/LightRAG",
+      "quality": 1,
+      "stars": 27007,
+      "forks": 3842,
+      "language": "Unknown"
+    },
+    {
+      "repo": "WZMIAOMIAO/deep-learning-for-image-processing",
+      "quality": 1,
+      "stars": 25968,
+      "forks": 8257,
+      "language": "Unknown"
+    },
+    {
+      "repo": "lucidrains/vit-pytorch",
+      "quality": 1,
+      "stars": 24803,
+      "forks": 3479,
+      "language": "Unknown"
+    },
+    {
+      "repo": "assafelovic/gpt-researcher",
+      "quality": 1,
+      "stars": 24727,
+      "forks": 3270,
+      "language": "Unknown"
+    },
+    {
+      "repo": "zulip/zulip",
+      "quality": 1,
+      "stars": 24169,
+      "forks": 9264,
+      "language": "Unknown"
+    },
+    {
+      "repo": "mlflow/mlflow",
+      "quality": 1,
+      "stars": 23555,
+      "forks": 5123,
+      "language": "Unknown"
+    },
+    {
+      "repo": "spotDL/spotify-downloader",
+      "quality": 1,
+      "stars": 23472,
+      "forks": 2036,
+      "language": "Unknown"
+    },
+    {
+      "repo": "sinaptik-ai/pandas-ai",
+      "quality": 1,
+      "stars": 22947,
+      "forks": 2249,
+      "language": "Unknown"
+    },
+    {
+      "repo": "saleor/saleor",
+      "quality": 1,
+      "stars": 22454,
+      "forks": 5889,
+      "language": "Unknown"
+    },
+    {
+      "repo": "sgl-project/sglang",
+      "quality": 1,
+      "stars": 22156,
+      "forks": 3951,
+      "language": "Unknown"
+    },
+    {
+      "repo": "vanna-ai/vanna",
+      "quality": 1,
+      "stars": 22118,
+      "forks": 2122,
+      "language": "Unknown"
+    },
+    {
+      "repo": "microsoft/unilm",
+      "quality": 1,
+      "stars": 21926,
+      "forks": 2688,
+      "language": "Unknown"
+    },
+    {
+      "repo": "huggingface/datasets",
+      "quality": 1,
+      "stars": 21052,
+      "forks": 3059,
+      "language": "Unknown"
+    },
+    {
+      "repo": "yt-dlp/yt-dlp",
+      "quality": 1,
+      "stars": 140714,
+      "forks": 11375,
+      "language": "Unknown"
+    },
+    {
+      "repo": "psf/black",
+      "quality": 1,
+      "stars": 41256,
+      "forks": 2695,
+      "language": "Unknown"
+    },
+    {
+      "repo": "Aider-AI/aider",
+      "quality": 1,
+      "stars": 39498,
+      "forks": 3798,
+      "language": "Unknown"
+    },
+    {
+      "repo": "roboflow/supervision",
+      "quality": 1,
+      "stars": 36261,
+      "forks": 3069,
+      "language": "Unknown"
+    },
+    {
+      "repo": "trailofbits/algo",
+      "quality": 1,
+      "stars": 30214,
+      "forks": 2357,
+      "language": "Unknown"
+    },
+    {
+      "repo": "ianstormtaylor/slate",
+      "quality": 1,
+      "stars": 31401,
+      "forks": 3334,
+      "language": "Unknown"
+    },
+    {
+      "repo": "continuedev/continue",
+      "quality": 1,
+      "stars": 30680,
+      "forks": 3988,
+      "language": "Unknown"
+    },
+    {
+      "repo": "sequelize/sequelize",
+      "quality": 1,
+      "stars": 30301,
+      "forks": 4313,
+      "language": "Unknown"
+    },
+    {
+      "repo": "Dokploy/dokploy",
+      "quality": 1,
+      "stars": 28748,
+      "forks": 1906,
+      "language": "Unknown"
+    },
+    {
+      "repo": "t3-oss/create-t3-app",
+      "quality": 1,
+      "stars": 28407,
+      "forks": 1427,
+      "language": "Unknown"
+    },
+    {
+      "repo": "tailwindlabs/headlessui",
+      "quality": 1,
+      "stars": 28265,
+      "forks": 1184,
+      "language": "Unknown"
+    },
+    {
+      "repo": "CopilotKit/CopilotKit",
+      "quality": 1,
+      "stars": 27757,
+      "forks": 3607,
+      "language": "Unknown"
+    },
+    {
+      "repo": "TanStack/table",
+      "quality": 1,
+      "stars": 27518,
+      "forks": 3450,
+      "language": "Unknown"
+    },
+    {
+      "repo": "invoke-ai/InvokeAI",
+      "quality": 1,
+      "stars": 26510,
+      "forks": 2756,
+      "language": "Unknown"
+    },
+    {
+      "repo": "discordjs/discord.js",
+      "quality": 1,
+      "stars": 26458,
+      "forks": 4055,
+      "language": "Unknown"
+    },
+    {
+      "repo": "fingerprintjs/fingerprintjs",
+      "quality": 1,
+      "stars": 26209,
+      "forks": 2478,
+      "language": "Unknown"
+    },
+    {
+      "repo": "HumanSignal/label-studio",
+      "quality": 1,
+      "stars": 26054,
+      "forks": 3299,
+      "language": "Unknown"
+    },
+    {
+      "repo": "gitroomhq/postiz-app",
+      "quality": 1,
+      "stars": 25855,
+      "forks": 4378,
+      "language": "Unknown"
+    },
+    {
+      "repo": "srbhr/Resume-Matcher",
+      "quality": 1,
+      "stars": 25476,
+      "forks": 4597,
+      "language": "Unknown"
+    },
+    {
+      "repo": "Redocly/redoc",
+      "quality": 1,
+      "stars": 25353,
+      "forks": 2379,
+      "language": "Unknown"
+    },
+    {
+      "repo": "BabylonJS/Babylon.js",
+      "quality": 1,
+      "stars": 24940,
+      "forks": 3600,
+      "language": "Unknown"
+    },
+    {
+      "repo": "nextai-translator/nextai-translator",
+      "quality": 1,
+      "stars": 24800,
+      "forks": 1833,
+      "language": "Unknown"
+    },
+    {
+      "repo": "better-auth/better-auth",
+      "quality": 1,
+      "stars": 24757,
+      "forks": 2113,
+      "language": "Unknown"
+    },
+    {
+      "repo": "responsively-org/responsively-app",
+      "quality": 1,
+      "stars": 24585,
+      "forks": 1319,
+      "language": "Unknown"
+    },
+    {
+      "repo": "kriasoft/react-starter-kit",
+      "quality": 1,
+      "stars": 23445,
+      "forks": 4222,
+      "language": "Unknown"
+    },
+    {
+      "repo": "dubinc/dub",
+      "quality": 1,
+      "stars": 22855,
+      "forks": 2804,
+      "language": "Unknown"
+    },
+    {
+      "repo": "karakeep-app/karakeep",
+      "quality": 1,
+      "stars": 22482,
+      "forks": 1003,
+      "language": "Unknown"
+    },
+    {
+      "repo": "jhipster/generator-jhipster",
+      "quality": 1,
+      "stars": 22305,
+      "forks": 4138,
+      "language": "Unknown"
+    },
+    {
+      "repo": "vueuse/vueuse",
+      "quality": 1,
+      "stars": 21991,
+      "forks": 2852,
+      "language": "Unknown"
+    },
+    {
+      "repo": "react-grid-layout/react-grid-layout",
+      "quality": 1,
+      "stars": 21884,
+      "forks": 2693,
+      "language": "Unknown"
+    },
+    {
+      "repo": "louislam/dockge",
+      "quality": 1,
+      "stars": 21305,
+      "forks": 664,
+      "language": "Unknown"
+    },
+    {
+      "repo": "eclipse-theia/theia",
+      "quality": 1,
+      "stars": 21288,
+      "forks": 2764,
+      "language": "Unknown"
+    },
+    {
+      "repo": "nocobase/nocobase",
+      "quality": 1,
+      "stars": 21035,
+      "forks": 2364,
+      "language": "Unknown"
+    },
+    {
+      "repo": "yamadashy/repomix",
+      "quality": 1,
+      "stars": 20987,
+      "forks": 965,
+      "language": "Unknown"
+    },
+    {
+      "repo": "pmndrs/jotai",
+      "quality": 1,
+      "stars": 20882,
+      "forks": 703,
+      "language": "Unknown"
+    },
+    {
+      "repo": "chartdb/chartdb",
+      "quality": 1,
+      "stars": 20716,
+      "forks": 1213,
+      "language": "Unknown"
+    },
+    {
+      "repo": "vercel/ai",
+      "quality": 1,
+      "stars": 20608,
+      "forks": 3592,
+      "language": "Unknown"
+    },
+    {
+      "repo": "renovatebot/renovate",
+      "quality": 1,
+      "stars": 20489,
+      "forks": 2886,
+      "language": "Unknown"
+    },
+    {
+      "repo": "activepieces/activepieces",
+      "quality": 1,
+      "stars": 20219,
+      "forks": 3128,
+      "language": "Unknown"
+    },
+    {
+      "repo": "pavlobu/deskreen",
+      "quality": 1,
+      "stars": 20023,
+      "forks": 1119,
+      "language": "Unknown"
+    },
+    {
+      "repo": "microsoft/fluentui",
+      "quality": 1,
+      "stars": 19780,
+      "forks": 2858,
+      "language": "Unknown"
+    },
+    {
+      "repo": "apollographql/apollo-client",
+      "quality": 1,
+      "stars": 19693,
+      "forks": 2704,
+      "language": "Unknown"
+    },
+    {
+      "repo": "infinitered/ignite",
+      "quality": 1,
+      "stars": 19480,
+      "forks": 1511,
+      "language": "Unknown"
+    },
+    {
+      "repo": "mastra-ai/mastra",
+      "quality": 1,
+      "stars": 19134,
+      "forks": 1380,
+      "language": "Unknown"
+    },
+    {
+      "repo": "whyour/qinglong",
+      "quality": 1,
+      "stars": 18944,
+      "forks": 3221,
+      "language": "Unknown"
+    },
+    {
+      "repo": "compiler-explorer/compiler-explorer",
+      "quality": 1,
+      "stars": 18410,
+      "forks": 1977,
+      "language": "Unknown"
+    },
+    {
+      "repo": "radix-ui/primitives",
+      "quality": 1,
+      "stars": 18384,
+      "forks": 1100,
+      "language": "Unknown"
+    },
+    {
+      "repo": "ether/etherpad-lite",
+      "quality": 1,
+      "stars": 18037,
+      "forks": 2998,
+      "language": "Unknown"
+    },
+    {
+      "repo": "fosrl/pangolin",
+      "quality": 1,
+      "stars": 17728,
+      "forks": 523,
+      "language": "Unknown"
+    },
+    {
+      "repo": "nukeop/nuclear",
+      "quality": 1,
+      "stars": 16937,
+      "forks": 1261,
+      "language": "Unknown"
+    },
+    {
+      "repo": "labring/sealos",
+      "quality": 1,
+      "stars": 16728,
+      "forks": 2334,
+      "language": "Unknown"
+    },
+    {
+      "repo": "foambubble/foam",
+      "quality": 1,
+      "stars": 16702,
+      "forks": 749,
+      "language": "Unknown"
+    },
+    {
+      "repo": "moeru-ai/airi",
+      "quality": 1,
+      "stars": 16600,
+      "forks": 1553,
+      "language": "Unknown"
+    },
+    {
+      "repo": "umijs/qiankun",
+      "quality": 1,
+      "stars": 16519,
+      "forks": 2077,
+      "language": "Unknown"
+    },
+    {
+      "repo": "video-dev/hls.js",
+      "quality": 1,
+      "stars": 16364,
+      "forks": 2717,
+      "language": "Unknown"
+    },
+    {
+      "repo": "clauderic/dnd-kit",
+      "quality": 1,
+      "stars": 16361,
+      "forks": 830,
+      "language": "Unknown"
+    },
+    {
+      "repo": "sindresorhus/ky",
+      "quality": 1,
+      "stars": 16161,
+      "forks": 444,
+      "language": "Unknown"
+    },
+    {
+      "repo": "readest/readest",
+      "quality": 1,
+      "stars": 16106,
+      "forks": 868,
+      "language": "Unknown"
+    },
+    {
+      "repo": "typescript-eslint/typescript-eslint",
+      "quality": 1,
+      "stars": 16041,
+      "forks": 2856,
+      "language": "Unknown"
+    },
+    {
+      "repo": "tinymce/tinymce",
+      "quality": 1,
+      "stars": 16029,
+      "forks": 2321,
+      "language": "Unknown"
+    },
+    {
+      "repo": "rjsf-team/react-jsonschema-form",
+      "quality": 1,
+      "stars": 15549,
+      "forks": 2297,
+      "language": "Unknown"
+    },
+    {
+      "repo": "ag-grid/ag-grid",
+      "quality": 1,
+      "stars": 14903,
+      "forks": 2033,
+      "language": "Unknown"
+    },
+    {
+      "repo": "microsoft/TypeScript",
+      "quality": 1,
+      "stars": 107335,
+      "forks": 13201,
+      "language": "Unknown"
+    },
+    {
+      "repo": "styled-components/styled-components",
+      "quality": 1,
+      "stars": 41009,
+      "forks": 2527,
+      "language": "Unknown"
+    },
+    {
+      "repo": "testing-library/react-testing-library",
+      "quality": 1,
+      "stars": 19495,
+      "forks": 1151,
+      "language": "Unknown"
+    },
+    {
+      "repo": "you-dont-need/You-Dont-Need-Lodash-Underscore",
+      "quality": 1,
+      "stars": 19156,
+      "forks": 826,
+      "language": "Unknown"
+    },
+    {
+      "repo": "emotion-js/emotion",
+      "quality": 1,
+      "stars": 17952,
+      "forks": 1137,
+      "language": "Unknown"
+    },
+    {
+      "repo": "pot-app/pot-desktop",
+      "quality": 1,
+      "stars": 16564,
+      "forks": 790,
+      "language": "Unknown"
+    },
+    {
+      "repo": "ai-shifu/ChatALL",
+      "quality": 1,
+      "stars": 16213,
+      "forks": 1706,
+      "language": "Unknown"
+    },
+    {
+      "repo": "OptimalBits/bull",
+      "quality": 1,
+      "stars": 16209,
+      "forks": 1432,
+      "language": "Unknown"
+    },
+    {
+      "repo": "auchenberg/volkswagen",
+      "quality": 1,
+      "stars": 15407,
+      "forks": 242,
+      "language": "Unknown"
+    },
+    {
+      "repo": "MithrilJS/mithril.js",
+      "quality": 1,
+      "stars": 14642,
+      "forks": 928,
+      "language": "Unknown"
+    },
+    {
+      "repo": "lint-staged/lint-staged",
+      "quality": 1,
+      "stars": 14365,
+      "forks": 457,
+      "language": "Unknown"
+    },
+    {
+      "repo": "http-party/http-server",
+      "quality": 1,
+      "stars": 14122,
+      "forks": 1550,
+      "language": "Unknown"
+    },
+    {
+      "repo": "HabitRPG/habitica",
+      "quality": 1,
+      "stars": 13583,
+      "forks": 4386,
+      "language": "Unknown"
+    },
+    {
+      "repo": "n8n-io/n8n",
+      "quality": 1,
+      "stars": 166667,
+      "forks": 53090,
+      "language": "Unknown"
+    },
+    {
+      "repo": "lobehub/lobe-chat",
+      "quality": 1,
+      "stars": 69816,
+      "forks": 14357,
+      "language": "Unknown"
+    },
+    {
+      "repo": "apache/superset",
+      "quality": 1,
+      "stars": 69647,
+      "forks": 16421,
+      "language": "Unknown"
+    },
+    {
+      "repo": "apache/echarts",
+      "quality": 1,
+      "stars": 65366,
+      "forks": 19823,
+      "language": "Unknown"
+    },
+    {
+      "repo": "ionic-team/ionic-framework",
+      "quality": 1,
+      "stars": 52275,
+      "forks": 13422,
+      "language": "Unknown"
+    },
+    {
+      "repo": "expo/expo",
+      "quality": 1,
+      "stars": 46142,
+      "forks": 10495,
+      "language": "Unknown"
+    },
+    {
+      "repo": "RocketChat/Rocket.Chat",
+      "quality": 1,
+      "stars": 44264,
+      "forks": 12869,
+      "language": "Unknown"
+    },
+    {
+      "repo": "daytonaio/daytona",
+      "quality": 1,
+      "stars": 42838,
+      "forks": 3875,
+      "language": "Unknown"
+    },
+    {
+      "repo": "fastapi/full-stack-fastapi-template",
+      "quality": 1,
+      "stars": 40435,
+      "forks": 7862,
+      "language": "Unknown"
+    },
+    {
+      "repo": "appsmithorg/appsmith",
+      "quality": 1,
+      "stars": 38828,
+      "forks": 4418,
+      "language": "Unknown"
+    },
+    {
+      "repo": "mattermost/mattermost",
+      "quality": 1,
+      "stars": 34827,
+      "forks": 8244,
+      "language": "Unknown"
+    },
+    {
+      "repo": "backstage/backstage",
+      "quality": 1,
+      "stars": 32229,
+      "forks": 6996,
+      "language": "Unknown"
+    },
+    {
+      "repo": "jitsi/jitsi-meet",
+      "quality": 1,
+      "stars": 28254,
+      "forks": 7677,
+      "language": "Unknown"
+    },
+    {
+      "repo": "ItzCrazyKns/Perplexica",
+      "quality": 1,
+      "stars": 27987,
+      "forks": 2944,
+      "language": "Unknown"
+    },
+    {
+      "repo": "Lissy93/web-check",
+      "quality": 1,
+      "stars": 27290,
+      "forks": 2206,
+      "language": "Unknown"
+    },
+    {
+      "repo": "labring/FastGPT",
+      "quality": 1,
+      "stars": 26774,
+      "forks": 6861,
+      "language": "Unknown"
+    },
+    {
+      "repo": "marmelab/react-admin",
+      "quality": 1,
+      "stars": 26444,
+      "forks": 5428,
+      "language": "Unknown"
+    },
+    {
+      "repo": "ComposioHQ/composio",
+      "quality": 1,
+      "stars": 26283,
+      "forks": 4395,
+      "language": "Unknown"
+    },
+    {
+      "repo": "mattermost-community/focalboard",
+      "quality": 1,
+      "stars": 25676,
+      "forks": 2443,
+      "language": "Unknown"
+    },
+    {
+      "repo": "GrapesJS/grapesjs",
+      "quality": 1,
+      "stars": 25354,
+      "forks": 4520,
+      "language": "Unknown"
+    },
+    {
+      "repo": "kamranahmedse/driver.js",
+      "quality": 1,
+      "stars": 25197,
+      "forks": 1150,
+      "language": "Unknown"
+    },
+    {
+      "repo": "youzan/vant",
+      "quality": 1,
+      "stars": 24191,
+      "forks": 9478,
+      "language": "Unknown"
+    },
+    {
+      "repo": "onlook-dev/onlook",
+      "quality": 1,
+      "stars": 23655,
+      "forks": 1752,
+      "language": "Unknown"
+    },
+    {
+      "repo": "wechaty/wechaty",
+      "quality": 1,
+      "stars": 22286,
+      "forks": 2772,
+      "language": "Unknown"
+    },
+    {
+      "repo": "RealKai42/qwerty-learner",
+      "quality": 1,
+      "stars": 21255,
+      "forks": 2311,
+      "language": "Unknown"
+    },
+    {
+      "repo": "bytedance/UI-TARS-desktop",
+      "quality": 1,
+      "stars": 20401,
+      "forks": 1951,
+      "language": "Unknown"
+    },
+    {
+      "repo": "aidenybai/react-scan",
+      "quality": 1,
+      "stars": 20333,
+      "forks": 338,
+      "language": "Unknown"
+    },
+    {
+      "repo": "bokeh/bokeh",
+      "quality": 1,
+      "stars": 20282,
+      "forks": 4248,
+      "language": "Unknown"
+    },
+    {
+      "repo": "birobirobiro/awesome-shadcn-ui",
+      "quality": 1,
+      "stars": 18524,
+      "forks": 1105,
+      "language": "Unknown"
+    },
+    {
+      "repo": "tusen-ai/naive-ui",
+      "quality": 1,
+      "stars": 18033,
+      "forks": 1839,
+      "language": "Unknown"
+    },
+    {
+      "repo": "TibixDev/winboat",
+      "quality": 1,
+      "stars": 17454,
+      "forks": 447,
+      "language": "Unknown"
+    },
+    {
+      "repo": "lfnovo/open-notebook",
+      "quality": 1,
+      "stars": 17291,
+      "forks": 1818,
+      "language": "Unknown"
+    },
+    {
+      "repo": "graphql/graphiql",
+      "quality": 1,
+      "stars": 16756,
+      "forks": 1808,
+      "language": "Unknown"
+    },
+    {
+      "repo": "mediar-ai/screenpipe",
+      "quality": 1,
+      "stars": 16349,
+      "forks": 1314,
+      "language": "Unknown"
+    },
+    {
+      "repo": "amplication/amplication",
+      "quality": 1,
+      "stars": 15994,
+      "forks": 1559,
+      "language": "Unknown"
+    },
+    {
+      "repo": "infinitered/reactotron",
+      "quality": 1,
+      "stars": 15442,
+      "forks": 962,
+      "language": "Unknown"
+    },
+    {
+      "repo": "apitable/apitable",
+      "quality": 1,
+      "stars": 15196,
+      "forks": 1380,
+      "language": "Unknown"
+    },
+    {
+      "repo": "alibaba/hooks",
+      "quality": 1,
+      "stars": 14859,
+      "forks": 2803,
+      "language": "Unknown"
+    },
+    {
+      "repo": "louislam/uptime-kuma",
+      "quality": 1,
+      "stars": 80829,
+      "forks": 7204,
+      "language": "Unknown"
+    },
+    {
+      "repo": "expressjs/express",
+      "quality": 1,
+      "stars": 68492,
+      "forks": 22045,
+      "language": "Unknown"
+    },
+    {
+      "repo": "lodash/lodash",
+      "quality": 1,
+      "stars": 61527,
+      "forks": 7109,
+      "language": "Unknown"
+    },
+    {
+      "repo": "prettier/prettier",
+      "quality": 1,
+      "stars": 51351,
+      "forks": 4627,
+      "language": "Unknown"
+    },
+    {
+      "repo": "bigskysoftware/htmx",
+      "quality": 1,
+      "stars": 47045,
+      "forks": 1557,
+      "language": "Unknown"
+    },
+    {
+      "repo": "typescript-cheatsheets/react",
+      "quality": 1,
+      "stars": 46874,
+      "forks": 4271,
+      "language": "Unknown"
+    },
+    {
+      "repo": "microsoft/monaco-editor",
+      "quality": 1,
+      "stars": 45155,
+      "forks": 3952,
+      "language": "Unknown"
+    },
+    {
+      "repo": "dcloudio/uni-app",
+      "quality": 1,
+      "stars": 41358,
+      "forks": 3717,
+      "language": "Unknown"
+    },
+    {
+      "repo": "fastify/fastify",
+      "quality": 1,
+      "stars": 35342,
+      "forks": 2544,
+      "language": "Unknown"
+    },
+    {
+      "repo": "svg/svgo",
+      "quality": 1,
+      "stars": 22230,
+      "forks": 1433,
+      "language": "Unknown"
+    },
+    {
+      "repo": "be5invis/Iosevka",
+      "quality": 1,
+      "stars": 21508,
+      "forks": 645,
+      "language": "Unknown"
+    },
+    {
+      "repo": "basecamp/trix",
+      "quality": 1,
+      "stars": 19878,
+      "forks": 1142,
+      "language": "Unknown"
+    },
+    {
+      "repo": "KaTeX/KaTeX",
+      "quality": 1,
+      "stars": 19692,
+      "forks": 1272,
+      "language": "Unknown"
+    },
+    {
+      "repo": "mdx-js/mdx",
+      "quality": 1,
+      "stars": 19140,
+      "forks": 1175,
+      "language": "Unknown"
+    },
+    {
+      "repo": "Shopify/draggable",
+      "quality": 1,
+      "stars": 18427,
+      "forks": 1116,
+      "language": "Unknown"
+    },
+    {
+      "repo": "pinojs/pino",
+      "quality": 1,
+      "stars": 17108,
+      "forks": 936,
+      "language": "Unknown"
+    },
+    {
+      "repo": "jsdoc/jsdoc",
+      "quality": 1,
+      "stars": 15386,
+      "forks": 1483,
+      "language": "Unknown"
+    },
+    {
+      "repo": "avwo/whistle",
+      "quality": 1,
+      "stars": 15307,
+      "forks": 1146,
+      "language": "Unknown"
+    },
+    {
+      "repo": "apexcharts/apexcharts.js",
+      "quality": 1,
+      "stars": 15030,
+      "forks": 1380,
+      "language": "Unknown"
+    },
+    {
+      "repo": "shelljs/shelljs",
+      "quality": 1,
+      "stars": 14378,
+      "forks": 743,
+      "language": "Unknown"
+    },
+    {
+      "repo": "graphql/dataloader",
+      "quality": 1,
+      "stars": 13521,
+      "forks": 518,
+      "language": "Unknown"
+    },
+    {
+      "repo": "ant-design/ant-design",
+      "quality": 1,
+      "stars": 97164,
+      "forks": 54325,
+      "language": "Unknown"
+    },
+    {
+      "repo": "vitejs/vite",
+      "quality": 1,
+      "stars": 77397,
+      "forks": 7670,
+      "language": "Unknown"
+    },
+    {
+      "repo": "coder/code-server",
+      "quality": 1,
+      "stars": 75659,
+      "forks": 6443,
+      "language": "Unknown"
+    },
+    {
+      "repo": "Eugeny/tabby",
+      "quality": 1,
+      "stars": 67993,
+      "forks": 3806,
+      "language": "Unknown"
+    },
+    {
+      "repo": "nocodb/nocodb",
+      "quality": 1,
+      "stars": 60860,
+      "forks": 4521,
+      "language": "Unknown"
+    },
+    {
+      "repo": "nuxt/nuxt",
+      "quality": 1,
+      "stars": 59235,
+      "forks": 5485,
+      "language": "Unknown"
+    },
+    {
+      "repo": "pmndrs/zustand",
+      "quality": 1,
+      "stars": 56400,
+      "forks": 1914,
+      "language": "Unknown"
+    },
+    {
+      "repo": "appwrite/appwrite",
+      "quality": 1,
+      "stars": 54216,
+      "forks": 4919,
+      "language": "Unknown"
+    },
+    {
+      "repo": "DefinitelyTyped/DefinitelyTyped",
+      "quality": 1,
+      "stars": 50782,
+      "forks": 30542,
+      "language": "Unknown"
+    },
+    {
+      "repo": "tldraw/tldraw",
+      "quality": 1,
+      "stars": 44451,
+      "forks": 2914,
+      "language": "Unknown"
+    },
+    {
+      "repo": "slidevjs/slidev",
+      "quality": 1,
+      "stars": 43469,
+      "forks": 1865,
+      "language": "Unknown"
+    },
+    {
+      "repo": "upstash/context7",
+      "quality": 1,
+      "stars": 40929,
+      "forks": 2015,
+      "language": "Unknown"
+    },
+    {
+      "repo": "markedjs/marked",
+      "quality": 1,
+      "stars": 36381,
+      "forks": 3501,
+      "language": "Unknown"
+    },
+    {
+      "repo": "portainer/portainer",
+      "quality": 1,
+      "stars": 36051,
+      "forks": 2748,
+      "language": "Unknown"
+    },
+    {
+      "repo": "vadimdemedes/ink",
+      "quality": 1,
+      "stars": 33704,
+      "forks": 800,
+      "language": "Unknown"
+    },
+    {
+      "repo": "pnpm/pnpm",
+      "quality": 1,
+      "stars": 33605,
+      "forks": 1273,
+      "language": "Unknown"
+    },
+    {
+      "repo": "vercel/swr",
+      "quality": 1,
+      "stars": 32233,
+      "forks": 1310,
+      "language": "Unknown"
+    },
+    {
+      "repo": "codex-team/editor.js",
+      "quality": 1,
+      "stars": 31356,
+      "forks": 2225,
+      "language": "Unknown"
+    },
+    {
+      "repo": "pear-devs/pear-desktop",
+      "quality": 1,
+      "stars": 30335,
+      "forks": 1717,
+      "language": "Unknown"
+    },
+    {
+      "repo": "mantinedev/mantine",
+      "quality": 1,
+      "stars": 30333,
+      "forks": 2215,
+      "language": "Unknown"
+    },
+    {
+      "repo": "pmndrs/react-three-fiber",
+      "quality": 1,
+      "stars": 30059,
+      "forks": 1767,
+      "language": "Unknown"
+    },
+    {
+      "repo": "pmndrs/react-spring",
+      "quality": 1,
+      "stars": 29009,
+      "forks": 1219,
+      "language": "Unknown"
+    },
+    {
+      "repo": "postcss/postcss",
+      "quality": 1,
+      "stars": 28927,
+      "forks": 1587,
+      "language": "Unknown"
+    },
+    {
+      "repo": "mobxjs/mobx",
+      "quality": 1,
+      "stars": 28145,
+      "forks": 1802,
+      "language": "Unknown"
+    },
+    {
+      "repo": "honojs/hono",
+      "quality": 1,
+      "stars": 28060,
+      "forks": 888,
+      "language": "Unknown"
+    },
+    {
+      "repo": "recharts/recharts",
+      "quality": 1,
+      "stars": 26446,
+      "forks": 1867,
+      "language": "Unknown"
+    },
+    {
+      "repo": "angular/components",
+      "quality": 1,
+      "stars": 24955,
+      "forks": 6837,
+      "language": "Unknown"
+    },
+    {
+      "repo": "xtermjs/xterm.js",
+      "quality": 1,
+      "stars": 19675,
+      "forks": 1789,
+      "language": "Unknown"
+    },
+    {
+      "repo": "rrweb-io/rrweb",
+      "quality": 1,
+      "stars": 19019,
+      "forks": 1605,
+      "language": "Unknown"
+    },
+    {
+      "repo": "unocss/unocss",
+      "quality": 1,
+      "stars": 18427,
+      "forks": 953,
+      "language": "Unknown"
+    },
+    {
+      "repo": "verdaccio/verdaccio",
+      "quality": 1,
+      "stars": 17391,
+      "forks": 1437,
+      "language": "Unknown"
+    },
+    {
+      "repo": "leon-ai/leon",
+      "quality": 1,
+      "stars": 16869,
+      "forks": 1414,
+      "language": "Unknown"
+    },
+    {
+      "repo": "sindresorhus/type-fest",
+      "quality": 1,
+      "stars": 16706,
+      "forks": 662,
+      "language": "Unknown"
+    },
+    {
+      "repo": "elysiajs/elysia",
+      "quality": 1,
+      "stars": 16470,
+      "forks": 443,
+      "language": "Unknown"
+    },
+    {
+      "repo": "Fission-AI/OpenSpec",
+      "quality": 1,
+      "stars": 15387,
+      "forks": 1071,
+      "language": "Unknown"
+    },
+    {
+      "repo": "feathersjs/feathers",
+      "quality": 1,
+      "stars": 15237,
+      "forks": 793,
+      "language": "Unknown"
+    },
+    {
+      "repo": "reflex-dev/reflex",
+      "quality": 1,
+      "stars": 27889,
+      "forks": 1671,
+      "language": "Unknown"
+    },
+    {
+      "repo": "pydantic/pydantic",
+      "quality": 1,
+      "stars": 26364,
+      "forks": 2378,
+      "language": "Unknown"
+    },
+    {
+      "repo": "jgraph/drawio-desktop",
+      "quality": 1,
+      "stars": 58776,
+      "forks": 5556,
+      "language": "Unknown"
+    },
+    {
+      "repo": "poteto/hiring-without-whiteboards",
+      "quality": 1,
+      "stars": 50292,
+      "forks": 3884,
+      "language": "Unknown"
+    },
+    {
+      "repo": "sudheerj/reactjs-interview-questions",
+      "quality": 1,
+      "stars": 43992,
+      "forks": 10250,
+      "language": "Unknown"
+    },
+    {
+      "repo": "NaiboWang/EasySpider",
+      "quality": 1,
+      "stars": 43801,
+      "forks": 5371,
+      "language": "Unknown"
+    },
+    {
+      "repo": "alvarotrigo/fullPage.js",
+      "quality": 1,
+      "stars": 35485,
+      "forks": 7203,
+      "language": "Unknown"
+    },
+    {
+      "repo": "AMAI-GmbH/AI-Expert-Roadmap",
+      "quality": 1,
+      "stars": 30617,
+      "forks": 2555,
+      "language": "Unknown"
+    },
+    {
+      "repo": "GoogleChrome/lighthouse",
+      "quality": 1,
+      "stars": 29685,
+      "forks": 9630,
+      "language": "Unknown"
+    },
+    {
+      "repo": "standard/standard",
+      "quality": 1,
+      "stars": 29413,
+      "forks": 2318,
+      "language": "Unknown"
+    },
+    {
+      "repo": "songquanpeng/one-api",
+      "quality": 1,
+      "stars": 28845,
+      "forks": 5626,
+      "language": "Unknown"
+    },
+    {
+      "repo": "quasarframework/quasar",
+      "quality": 1,
+      "stars": 27025,
+      "forks": 3679,
+      "language": "Unknown"
+    },
+    {
+      "repo": "highlightjs/highlight.js",
+      "quality": 1,
+      "stars": 24788,
+      "forks": 3715,
+      "language": "Unknown"
+    },
+    {
+      "repo": "eip-work/kuboard-press",
+      "quality": 1,
+      "stars": 24715,
+      "forks": 1601,
+      "language": "Unknown"
+    },
+    {
+      "repo": "brave/brave-browser",
+      "quality": 1,
+      "stars": 21015,
+      "forks": 2917,
+      "language": "Unknown"
+    },
+    {
+      "repo": "modood/Administrative-divisions-of-China",
+      "quality": 1,
+      "stars": 20420,
+      "forks": 7220,
+      "language": "Unknown"
+    },
+    {
+      "repo": "motdotla/dotenv",
+      "quality": 1,
+      "stars": 20204,
+      "forks": 921,
+      "language": "Unknown"
+    },
+    {
+      "repo": "amark/gun",
+      "quality": 1,
+      "stars": 18833,
+      "forks": 1223,
+      "language": "Unknown"
+    },
+    {
+      "repo": "framework7io/framework7",
+      "quality": 1,
+      "stars": 18567,
+      "forks": 3219,
+      "language": "Unknown"
+    },
+    {
+      "repo": "browsh-org/browsh",
+      "quality": 1,
+      "stars": 18195,
+      "forks": 450,
+      "language": "Unknown"
+    },
+    {
+      "repo": "aframevr/aframe",
+      "quality": 1,
+      "stars": 17443,
+      "forks": 4291,
+      "language": "Unknown"
+    },
+    {
+      "repo": "CesiumGS/cesium",
+      "quality": 1,
+      "stars": 14681,
+      "forks": 3724,
+      "language": "Unknown"
+    },
+    {
+      "repo": "bootstrap-vue/bootstrap-vue",
+      "quality": 1,
+      "stars": 14494,
+      "forks": 1872,
+      "language": "Unknown"
+    },
+    {
+      "repo": "nextapps-de/flexsearch",
+      "quality": 1,
+      "stars": 13519,
+      "forks": 520,
+      "language": "Unknown"
+    },
+    {
+      "repo": "yangshun/tech-interview-handbook",
+      "quality": 1,
+      "stars": 136590,
+      "forks": 16348,
+      "language": "Unknown"
+    },
+    {
+      "repo": "google-gemini/gemini-cli",
+      "quality": 1,
+      "stars": 89749,
+      "forks": 10360,
+      "language": "Unknown"
+    },
+    {
+      "repo": "CarGuo/gsy_flutter_demo",
+      "quality": 0.9998872862005719,
+      "stars": 3349,
+      "forks": 535,
+      "language": "Unknown"
+    },
+    {
+      "repo": "sscarduzio/elasticsearch-readonlyrest-plugin",
+      "quality": 0.9987154953394702,
+      "stars": 956,
+      "forks": 162,
+      "language": "Unknown"
+    },
+    {
+      "repo": "rstudio/gt",
+      "quality": 0.9983176690596435,
+      "stars": 2136,
+      "forks": 218,
+      "language": "Unknown"
+    },
+    {
+      "repo": "day8/re-com",
+      "quality": 0.9956054152001862,
+      "stars": 821,
+      "forks": 142,
+      "language": "Unknown"
+    },
+    {
+      "repo": "rich-iannone/DiagrammeR",
+      "quality": 0.9940191043332386,
+      "stars": 1731,
+      "forks": 248,
+      "language": "Unknown"
+    },
+    {
+      "repo": "scalalandio/chimney",
+      "quality": 0.9927455915866232,
+      "stars": 1239,
+      "forks": 109,
+      "language": "Unknown"
+    },
+    {
+      "repo": "deniscerri/ytdlnis",
+      "quality": 0.9916313360976161,
+      "stars": 7188,
+      "forks": 297,
+      "language": "Unknown"
+    },
+    {
+      "repo": "elixir-tesla/tesla",
+      "quality": 0.9913995967968425,
+      "stars": 2062,
+      "forks": 357,
+      "language": "Unknown"
+    },
+    {
+      "repo": "ComicSparks/jasmine",
+      "quality": 0.9910549964629323,
+      "stars": 4758,
+      "forks": 344,
+      "language": "Unknown"
+    },
+    {
+      "repo": "wanghongenpin/proxypin",
+      "quality": 0.9906410534494208,
+      "stars": 11341,
+      "forks": 992,
+      "language": "Unknown"
+    },
+    {
+      "repo": "vitejs/awesome-vite",
+      "quality": 0.9905750638929567,
+      "stars": 16715,
+      "forks": 1309,
+      "language": "Unknown"
+    },
+    {
+      "repo": "elixir-mint/mint",
+      "quality": 0.9905114423144571,
+      "stars": 1408,
+      "forks": 115,
+      "language": "Unknown"
+    },
+    {
+      "repo": "diku-dk/futhark",
+      "quality": 0.9904080785744716,
+      "stars": 2642,
+      "forks": 190,
+      "language": "Unknown"
+    },
+    {
+      "repo": "Tencent/APIJSON",
+      "quality": 0.9900430020368165,
+      "stars": 18378,
+      "forks": 2273,
+      "language": "Unknown"
+    },
+    {
+      "repo": "harmonoid/harmonoid",
+      "quality": 0.9891533787732976,
+      "stars": 4316,
+      "forks": 237,
+      "language": "Unknown"
+    },
+    {
+      "repo": "LeCoupa/awesome-cheatsheets",
+      "quality": 0.9875485850232517,
+      "stars": 45086,
+      "forks": 6643,
+      "language": "Unknown"
+    },
+    {
+      "repo": "LinwoodDev/Butterfly",
+      "quality": 0.9872256297763021,
+      "stars": 1642,
+      "forks": 123,
+      "language": "Unknown"
+    },
+    {
+      "repo": "skydoves/Balloon",
+      "quality": 0.9868546987041094,
+      "stars": 3929,
+      "forks": 308,
+      "language": "Unknown"
+    },
+    {
+      "repo": "beam-community/bamboo",
+      "quality": 0.9866157473658512,
+      "stars": 1950,
+      "forks": 340,
+      "language": "Unknown"
+    },
+    {
+      "repo": "deckerst/aves",
+      "quality": 0.9865069490842048,
+      "stars": 4270,
+      "forks": 155,
+      "language": "Unknown"
+    },
+    {
+      "repo": "hiroi-sora/Umi-OCR",
+      "quality": 0.9859462823490694,
+      "stars": 41105,
+      "forks": 4070,
+      "language": "Unknown"
+    },
+    {
+      "repo": "joreilly/PeopleInSpace",
+      "quality": 0.9825581433440754,
+      "stars": 3290,
+      "forks": 291,
+      "language": "Unknown"
+    },
+    {
+      "repo": "namidaco/namida",
+      "quality": 0.9823662660553637,
+      "stars": 4653,
+      "forks": 260,
+      "language": "Unknown"
+    },
+    {
+      "repo": "scala-steward-org/scala-steward",
+      "quality": 0.9796258749069493,
+      "stars": 1189,
+      "forks": 510,
+      "language": "Unknown"
+    },
+    {
+      "repo": "FooIbar/EhViewer",
+      "quality": 0.977901737963253,
+      "stars": 3901,
+      "forks": 230,
+      "language": "Unknown"
+    },
+    {
+      "repo": "xifangczy/cat-catch",
+      "quality": 0.9773465355303228,
+      "stars": 17492,
+      "forks": 1505,
+      "language": "Unknown"
+    },
+    {
+      "repo": "foundweekends/giter8",
+      "quality": 0.9773316477356337,
+      "stars": 1754,
+      "forks": 225,
+      "language": "Unknown"
+    },
+    {
+      "repo": "supabase/supavisor",
+      "quality": 0.9769282595114487,
+      "stars": 2120,
+      "forks": 88,
+      "language": "Unknown"
+    },
+    {
+      "repo": "paul-buerkner/brms",
+      "quality": 0.9763618359135495,
+      "stars": 1372,
+      "forks": 207,
+      "language": "Unknown"
+    },
+    {
+      "repo": "apache/pekko",
+      "quality": 0.9762545357747587,
+      "stars": 1511,
+      "forks": 186,
+      "language": "Unknown"
+    },
+    {
+      "repo": "gokadzev/Musify",
+      "quality": 0.9755776707027506,
+      "stars": 3569,
+      "forks": 330,
+      "language": "Unknown"
+    },
+    {
+      "repo": "BeaconCMS/beacon",
+      "quality": 0.9750402421966972,
+      "stars": 1219,
+      "forks": 123,
+      "language": "Unknown"
+    },
+    {
+      "repo": "metosin/reitit",
+      "quality": 0.9743611326681345,
+      "stars": 1545,
+      "forks": 262,
+      "language": "Unknown"
+    },
+    {
+      "repo": "sequinstream/sequin",
+      "quality": 0.9743504681661642,
+      "stars": 1870,
+      "forks": 104,
+      "language": "Unknown"
+    },
+    {
+      "repo": "IndrajeetPatil/ggstatsplot",
+      "quality": 0.9729670528462346,
+      "stars": 2150,
+      "forks": 204,
+      "language": "Unknown"
+    },
+    {
+      "repo": "philss/floki",
+      "quality": 0.9725097775731641,
+      "stars": 2131,
+      "forks": 163,
+      "language": "Unknown"
+    },
+    {
+      "repo": "scotty-web/scotty",
+      "quality": 0.9711585836829801,
+      "stars": 1763,
+      "forks": 131,
+      "language": "Unknown"
+    },
+    {
+      "repo": "jiangtian616/JHenTai",
+      "quality": 0.9711035944254784,
+      "stars": 4582,
+      "forks": 131,
+      "language": "Unknown"
+    },
+    {
+      "repo": "metosin/malli",
+      "quality": 0.9702185503829082,
+      "stars": 1685,
+      "forks": 227,
+      "language": "Unknown"
+    },
+    {
+      "repo": "pureconfig/pureconfig",
+      "quality": 0.9677170453336112,
+      "stars": 1529,
+      "forks": 181,
+      "language": "Unknown"
+    },
+    {
+      "repo": "scalikejdbc/scalikejdbc",
+      "quality": 0.9673510014709135,
+      "stars": 1279,
+      "forks": 229,
+      "language": "Unknown"
+    },
+    {
+      "repo": "elixirs/faker",
+      "quality": 0.9672072755479981,
+      "stars": 1169,
+      "forks": 226,
+      "language": "Unknown"
+    },
+    {
+      "repo": "ReVanced/revanced-patcher",
+      "quality": 0.965919702191566,
+      "stars": 3145,
+      "forks": 269,
+      "language": "Unknown"
+    },
+    {
+      "repo": "roots/bedrock",
+      "quality": 0.9654504795513285,
+      "stars": 6440,
+      "forks": 1193,
+      "language": "Unknown"
+    },
+    {
+      "repo": "jtdaugherty/brick",
+      "quality": 0.9648893404633787,
+      "stars": 1690,
+      "forks": 170,
+      "language": "Unknown"
+    },
+    {
+      "repo": "clojure-lsp/clojure-lsp",
+      "quality": 0.9643085021430821,
+      "stars": 1273,
+      "forks": 171,
+      "language": "Unknown"
+    },
+    {
+      "repo": "VeryGoodOpenSource/very_good_cli",
+      "quality": 0.9641014741771563,
+      "stars": 2326,
+      "forks": 228,
+      "language": "Unknown"
+    },
+    {
+      "repo": "dashbitco/broadway",
+      "quality": 0.9630113878118174,
+      "stars": 2599,
+      "forks": 170,
+      "language": "Unknown"
+    },
+    {
+      "repo": "gildas-lormeau/SingleFile",
+      "quality": 0.9607906592840515,
+      "stars": 19918,
+      "forks": 1256,
+      "language": "Unknown"
+    },
+    {
+      "repo": "reflex-frp/reflex",
+      "quality": 0.9589716291136096,
+      "stars": 1100,
+      "forks": 150,
+      "language": "Unknown"
+    },
+    {
+      "repo": "lloydmeta/enumeratum",
+      "quality": 0.9568079623984783,
+      "stars": 1218,
+      "forks": 152,
+      "language": "Unknown"
+    },
+    {
+      "repo": "juliasilge/tidytext",
+      "quality": 0.9560064260388998,
+      "stars": 1198,
+      "forks": 183,
+      "language": "Unknown"
+    },
+    {
+      "repo": "AccelerateHS/accelerate",
+      "quality": 0.955751896249017,
+      "stars": 944,
+      "forks": 130,
+      "language": "Unknown"
+    },
+    {
+      "repo": "whitfin/cachex",
+      "quality": 0.9557118298053342,
+      "stars": 1720,
+      "forks": 117,
+      "language": "Unknown"
+    },
+    {
+      "repo": "kubenav/kubenav",
+      "quality": 0.9537604376728721,
+      "stars": 2236,
+      "forks": 141,
+      "language": "Unknown"
+    },
+    {
+      "repo": "fulcrologic/fulcro",
+      "quality": 0.9529122435567814,
+      "stars": 1596,
+      "forks": 146,
+      "language": "Unknown"
+    },
+    {
+      "repo": "bagisto/opensource-ecommerce-mobile-app",
+      "quality": 0.9517115072995336,
+      "stars": 13451,
+      "forks": 239,
+      "language": "Unknown"
+    },
+    {
+      "repo": "tisfeng/Easydict",
+      "quality": 0.9481485403387989,
+      "stars": 11394,
+      "forks": 566,
+      "language": "Unknown"
+    },
+    {
+      "repo": "slowkow/ggrepel",
+      "quality": 0.946288379030597,
+      "stars": 1246,
+      "forks": 94,
+      "language": "Unknown"
+    },
+    {
+      "repo": "reactiveui/refit",
+      "quality": 0.9431000883880443,
+      "stars": 9345,
+      "forks": 775,
+      "language": "Unknown"
+    },
+    {
+      "repo": "yogthos/Selmer",
+      "quality": 0.9424728391181934,
+      "stars": 1032,
+      "forks": 118,
+      "language": "Unknown"
+    },
+    {
+      "repo": "seerge/g-helper",
+      "quality": 0.9409950354435986,
+      "stars": 11846,
+      "forks": 424,
+      "language": "Unknown"
+    },
+    {
+      "repo": "r-lidar/lidR",
+      "quality": 0.9396065346448539,
+      "stars": 668,
+      "forks": 138,
+      "language": "Unknown"
+    },
+    {
+      "repo": "babashka/sci",
+      "quality": 0.9368454327548438,
+      "stars": 1332,
+      "forks": 98,
+      "language": "Unknown"
+    },
+    {
+      "repo": "ddsjoberg/gtsummary",
+      "quality": 0.9368448005228474,
+      "stars": 1159,
+      "forks": 141,
+      "language": "Unknown"
+    },
+    {
+      "repo": "rstudio/tinytex",
+      "quality": 0.9357908813155777,
+      "stars": 1070,
+      "forks": 122,
+      "language": "Unknown"
+    },
+    {
+      "repo": "easystats/performance",
+      "quality": 0.9354921549663866,
+      "stars": 1119,
+      "forks": 104,
+      "language": "Unknown"
+    },
+    {
+      "repo": "nextjournal/clerk",
+      "quality": 0.9350952953406315,
+      "stars": 2008,
+      "forks": 87,
+      "language": "Unknown"
+    },
+    {
+      "repo": "mtrudel/bandit",
+      "quality": 0.9344075489026877,
+      "stars": 1861,
+      "forks": 101,
+      "language": "Unknown"
+    },
+    {
+      "repo": "mrkkrp/megaparsec",
+      "quality": 0.9339557012462669,
+      "stars": 966,
+      "forks": 91,
+      "language": "Unknown"
+    },
+    {
+      "repo": "elixir-nebulex/nebulex",
+      "quality": 0.9329772395365803,
+      "stars": 1370,
+      "forks": 78,
+      "language": "Unknown"
+    },
+    {
+      "repo": "rstudio/pointblank",
+      "quality": 0.929071366098242,
+      "stars": 1017,
+      "forks": 59,
+      "language": "Unknown"
+    },
+    {
+      "repo": "easystats/easystats",
+      "quality": 0.9273374906132066,
+      "stars": 1149,
+      "forks": 84,
+      "language": "Unknown"
+    },
+    {
+      "repo": "membraneframework/membrane_core",
+      "quality": 0.9270801887792216,
+      "stars": 1447,
+      "forks": 43,
+      "language": "Unknown"
+    },
+    {
+      "repo": "elixir-nx/bumblebee",
+      "quality": 0.9267539361059345,
+      "stars": 1569,
+      "forks": 123,
+      "language": "Unknown"
+    },
+    {
+      "repo": "mlr-org/mlr3",
+      "quality": 0.9253740663067376,
+      "stars": 1044,
+      "forks": 94,
+      "language": "Unknown"
+    },
+    {
+      "repo": "alyssaxuu/screenity",
+      "quality": 0.9248703912793104,
+      "stars": 17765,
+      "forks": 1424,
+      "language": "Unknown"
+    },
+    {
+      "repo": "DavidHDev/react-bits",
+      "quality": 0.9234563068979119,
+      "stars": 33166,
+      "forks": 1464,
+      "language": "Unknown"
+    },
+    {
+      "repo": "brainlid/langchain",
+      "quality": 0.91918532154962,
+      "stars": 1033,
+      "forks": 176,
+      "language": "Unknown"
+    },
+    {
+      "repo": "raquo/Laminar",
+      "quality": 0.9139855027289017,
+      "stars": 820,
+      "forks": 56,
+      "language": "Unknown"
+    },
+    {
+      "repo": "symfony/var-dumper",
+      "quality": 0.9132515230816137,
+      "stars": 7451,
+      "forks": 99,
+      "language": "Unknown"
+    },
+    {
+      "repo": "MichelNivard/gptstudio",
+      "quality": 0.9125658671389757,
+      "stars": 980,
+      "forks": 120,
+      "language": "Unknown"
+    },
+    {
+      "repo": "ropensci/targets",
+      "quality": 0.9123717386043848,
+      "stars": 1039,
+      "forks": 78,
+      "language": "Unknown"
+    },
+    {
+      "repo": "day8/re-frame-10x",
+      "quality": 0.911517065176285,
+      "stars": 649,
+      "forks": 69,
+      "language": "Unknown"
+    },
+    {
+      "repo": "Kunzisoft/KeePassDX",
+      "quality": 0.9110297659334622,
+      "stars": 6147,
+      "forks": 338,
+      "language": "Unknown"
+    },
+    {
+      "repo": "cljfx/cljfx",
+      "quality": 0.9095359512978295,
+      "stars": 1047,
+      "forks": 50,
+      "language": "Unknown"
+    },
+    {
+      "repo": "kickstarter/ios-oss",
+      "quality": 0.9090764876148063,
+      "stars": 8605,
+      "forks": 1223,
+      "language": "Unknown"
+    },
+    {
+      "repo": "maralorn/nix-output-monitor",
+      "quality": 0.9090075025952662,
+      "stars": 1342,
+      "forks": 45,
+      "language": "Unknown"
+    },
+    {
+      "repo": "EmilHvitfeldt/paletteer",
+      "quality": 0.9088052605524164,
+      "stars": 1021,
+      "forks": 52,
+      "language": "Unknown"
+    },
+    {
+      "repo": "jepsen-io/maelstrom",
+      "quality": 0.9042942788789718,
+      "stars": 3457,
+      "forks": 197,
+      "language": "Unknown"
+    },
+    {
+      "repo": "easystats/see",
+      "quality": 0.9014209701391995,
+      "stars": 937,
+      "forks": 46,
+      "language": "Unknown"
+    },
+    {
+      "repo": "easystats/bayestestR",
+      "quality": 0.8972942219503603,
+      "stars": 587,
+      "forks": 62,
+      "language": "Unknown"
+    },
+    {
+      "repo": "lilactown/helix",
+      "quality": 0.893219155905947,
+      "stars": 663,
+      "forks": 53,
+      "language": "Unknown"
+    },
+    {
+      "repo": "Caldis/Mos",
+      "quality": 0.8912852396448206,
+      "stars": 18248,
+      "forks": 583,
+      "language": "Unknown"
+    },
+    {
+      "repo": "amitshekhariitbhu/android-interview-questions",
+      "quality": 0.8871258659473088,
+      "stars": 12228,
+      "forks": 2371,
+      "language": "Unknown"
+    },
+    {
+      "repo": "AndrewHartAR/ARKit-CoreLocation",
+      "quality": 0.8836861022823701,
+      "stars": 5527,
+      "forks": 731,
+      "language": "Unknown"
+    },
+    {
+      "repo": "louthy/language-ext",
+      "quality": 0.8810917227047704,
+      "stars": 6993,
+      "forks": 447,
+      "language": "Unknown"
+    },
+    {
+      "repo": "thheller/shadow-cljs",
+      "quality": 0.8748258266861886,
+      "stars": 2374,
+      "forks": 184,
+      "language": "Unknown"
+    },
+    {
+      "repo": "chatanywhere/GPT_API_free",
+      "quality": 0.8725566430553064,
+      "stars": 35350,
+      "forks": 2504,
+      "language": "Unknown"
+    },
+    {
+      "repo": "rocksdanister/lively",
+      "quality": 0.8684266243621908,
+      "stars": 17910,
+      "forks": 1215,
+      "language": "Unknown"
+    },
+    {
+      "repo": "clj-commons/aleph",
+      "quality": 0.8608923447680218,
+      "stars": 2578,
+      "forks": 241,
+      "language": "Unknown"
+    },
+    {
+      "repo": "MonitorControl/MonitorControl",
+      "quality": 0.8560984372264813,
+      "stars": 32025,
+      "forks": 914,
+      "language": "Unknown"
+    },
+    {
+      "repo": "ThoughtWorksInc/Binding.scala",
+      "quality": 0.8533055179192284,
+      "stars": 1584,
+      "forks": 102,
+      "language": "Unknown"
+    },
+    {
+      "repo": "sunnyyoung/WeChatTweak",
+      "quality": 0.8516381707204014,
+      "stars": 13210,
+      "forks": 1545,
+      "language": "Unknown"
+    },
+    {
+      "repo": "skydoves/android-developer-roadmap",
+      "quality": 0.8375579391870567,
+      "stars": 7682,
+      "forks": 724,
+      "language": "Unknown"
+    },
+    {
+      "repo": "LibChecker/LibChecker",
+      "quality": 0.8349392552995404,
+      "stars": 6409,
+      "forks": 392,
+      "language": "Unknown"
+    },
+    {
+      "repo": "daattali/shinyjs",
+      "quality": 0.8347183739780201,
+      "stars": 748,
+      "forks": 118,
+      "language": "Unknown"
+    },
+    {
+      "repo": "jacklandrin/OnlySwitch",
+      "quality": 0.8310586622743964,
+      "stars": 5385,
+      "forks": 229,
+      "language": "Unknown"
+    },
+    {
+      "repo": "xcanwin/KeepChatGPT",
+      "quality": 0.8305967461922797,
+      "stars": 14907,
+      "forks": 741,
+      "language": "Unknown"
+    },
+    {
+      "repo": "NeoApplications/Neo-Store",
+      "quality": 0.8226957998667634,
+      "stars": 4182,
+      "forks": 144,
+      "language": "Unknown"
+    },
+    {
+      "repo": "easystats/report",
+      "quality": 0.8136912099952569,
+      "stars": 710,
+      "forks": 73,
+      "language": "Unknown"
+    },
+    {
+      "repo": "woutdp/live_svelte",
+      "quality": 0.811261943661825,
+      "stars": 1610,
+      "forks": 73,
+      "language": "Unknown"
+    },
+    {
+      "repo": "STranslate/STranslate",
+      "quality": 0.7989095378476151,
+      "stars": 5082,
+      "forks": 285,
+      "language": "Unknown"
+    },
+    {
+      "repo": "aistra0528/Hail",
+      "quality": 0.7980267533990554,
+      "stars": 4811,
+      "forks": 167,
+      "language": "Unknown"
+    },
+    {
+      "repo": "thma/LtuPatternFactory",
+      "quality": 0.7969318799764307,
+      "stars": 1001,
+      "forks": 37,
+      "language": "Unknown"
+    },
+    {
+      "repo": "matterhorn-chat/matterhorn",
+      "quality": 0.7813395552510701,
+      "stars": 1109,
+      "forks": 79,
+      "language": "Unknown"
+    },
+    {
+      "repo": "massimoaria/bibliometrix",
+      "quality": 0.7520827535667299,
+      "stars": 593,
+      "forks": 163,
+      "language": "Unknown"
+    },
+    {
+      "repo": "clj-commons/manifold",
+      "quality": 0.7417025150045957,
+      "stars": 1042,
+      "forks": 109,
+      "language": "Unknown"
+    },
+    {
+      "repo": "nanxstats/ggsci",
+      "quality": 0.7347879566569767,
+      "stars": 717,
+      "forks": 68,
+      "language": "Unknown"
+    },
+    {
+      "repo": "flow-storm/flow-storm-debugger",
+      "quality": 0.7340519689635647,
+      "stars": 830,
+      "forks": 38,
+      "language": "Unknown"
+    },
+    {
+      "repo": "gesiscss/awesome-computational-social-science",
+      "quality": 0.7131749764121359,
+      "stars": 802,
+      "forks": 96,
+      "language": "Unknown"
+    },
+    {
+      "repo": "dselivanov/text2vec",
+      "quality": 0.7122820398114229,
+      "stars": 867,
+      "forks": 134,
+      "language": "Unknown"
+    },
+    {
+      "repo": "tw93/MiaoYan",
+      "quality": 0.7020142166093338,
+      "stars": 7266,
+      "forks": 421,
+      "language": "Unknown"
+    },
+    {
+      "repo": "amosgyamfi/open-swiftui-animations",
+      "quality": 0.6652319397076966,
+      "stars": 5258,
+      "forks": 284,
+      "language": "Unknown"
+    }
+  ]
+}

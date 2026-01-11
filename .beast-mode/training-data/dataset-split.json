@@ -1,0 +1,2352 @@
+{
+  "train": [
+    {
+      "repo": "repairman29/services-dashboard",
+      "url": "https://github.com/repairman29/services-dashboard",
+      "features": {
+        "qualityScore": 62,
+        "stars": 0,
+        "forks": 0,
+        "openIssues": 0,
+        "fileCount": 0,
+        "codeFileCount": 0,
+        "hasLicense": 0,
+        "hasDescription": 1,
+        "hasTopics": 0,
+        "hasReadme": 0,
+        "hasTests": 0,
+        "hasCI": 0,
+        "hasDocker": 0,
+        "hasConfig": 0,
+        "issues": 6,
+        "improvements": 6,
+        "languages": [
+          "CSS",
+          "HTML",
+          "JavaScript"
+        ],
+        "primaryLanguage": "Unknown"
+      },
+      "quality": 62,
+      "timestamp": "2026-01-05T04:02:28.172Z",
+      "metadata": {
+        "languages": [
+          "CSS",
+          "HTML",
+          "JavaScript"
+        ],
+        "fileCount": 0,
+        "codeFileCount": 0
+      }
+    },
+    {
+      "repo": "repairman29/auth-platform-service",
+      "url": "https://github.com/repairman29/auth-platform-service",
+      "features": {
+        "qualityScore": 86,
+        "stars": 0,
+        "forks": 0,
+        "openIssues": 0,
+        "fileCount": 0,
+        "codeFileCount": 0,
+        "hasLicense": 0,
+        "hasDescription": 1,
+        "hasTopics": 0,
+        "hasReadme": 1,
+        "hasTests": 1,
+        "hasCI": 1,
+        "hasDocker": 1,
+        "hasConfig": 0,
+        "issues": 1,
+        "improvements": 1,
+        "languages": [
+          "JavaScript",
+          "Dockerfile"
+        ],
+        "primaryLanguage": "Unknown"
+      },
+      "quality": 86,
+      "timestamp": "2026-01-05T04:02:27.096Z",
+      "metadata": {
+        "languages": [
+          "JavaScript",
+          "Dockerfile"
+        ],
+        "fileCount": 0,
+        "codeFileCount": 0
+      }
+    },
+    {
+      "repo": "repairman29/internal-zendesk-tools",
+      "url": "https://github.com/repairman29/internal-zendesk-tools",
+      "features": {
+        "qualityScore": 74,
+        "stars": 0,
+        "forks": 0,
+        "openIssues": 0,
+        "fileCount": 0,
+        "codeFileCount": 0,
+        "hasLicense": 0,
+        "hasDescription": 0,
+        "hasTopics": 0,
+        "hasReadme": 1,
+        "hasTests": 1,
+        "hasCI": 1,
+        "hasDocker": 0,
+        "hasConfig": 0,
+        "issues": 3,
+        "improvements": 3,
+        "languages": [
+          "JavaScript",
+          "CSS",
+          "TypeScript",
+          "HTML"
+        ],
+        "primaryLanguage": "Unknown"
+      },
+      "quality": 74,
+      "timestamp": "2026-01-05T04:07:35.326Z",
+      "metadata": {
+        "languages": [
+          "JavaScript",
+          "CSS",
+          "TypeScript",
+          "HTML"
+        ],
+        "fileCount": 0,
+        "codeFileCount": 0
+      }
+    },
+    {
+      "repo": "repairman29/echeovid",
+      "url": "https://github.com/repairman29/echeovid",
+      "features": {
+        "qualityScore": 85,
+        "stars": 0,
+        "forks": 0,
+        "openIssues": 0,
+        "fileCount": 0,
+        "codeFileCount": 0,
+        "hasLicense": 0,
+        "hasDescription": 0,
+        "hasTopics": 0,
+        "hasReadme": 1,
+        "hasTests": 1,
+        "hasCI": 1,
+        "hasDocker": 0,
+        "hasConfig": 0,
+        "issues": 3,
+        "improvements": 3,
+        "languages": [
+          "TypeScript",
+          "JavaScript",
+          "HTML",
+          "CSS",
+          "Shell"
+        ],
+        "primaryLanguage": "Unknown"
+      },
+      "quality": 85,
+      "timestamp": "2026-01-05T04:02:31.658Z",
+      "metadata": {
+        "languages": [
+          "TypeScript",
+          "JavaScript",
+          "HTML",
+          "CSS",
+          "Shell"
+        ],
+        "fileCount": 0,
+        "codeFileCount": 0
+      }
+    },
+    {
+      "repo": "repairman29/BEAST-MODE",
+      "url": "https://github.com/repairman29/BEAST-MODE",
+      "features": {
+        "qualityScore": 95,
+        "stars": 0,
+        "forks": 0,
+        "openIssues": 0,
+        "fileCount": 0,
+        "codeFileCount": 0,
+        "hasLicense": 0,
+        "hasDescription": 1,
+        "hasTopics": 0,
+        "hasReadme": 1,
+        "hasTests": 1,
+        "hasCI": 1,
+        "hasDocker": 0,
+        "hasConfig": 0,
+        "issues": 1,
+        "improvements": 1,
+        "languages": [
+          "TypeScript",
+          "JavaScript",
+          "HTML",
+          "Shell",
+          "Python",
+          "CSS",
+          "Mermaid"
+        ],
+        "primaryLanguage": "Unknown"
+      },
+      "quality": 95,
+      "timestamp": "2026-01-05T04:02:23.491Z",
+      "metadata": {
+        "languages": [
+          "TypeScript",
+          "JavaScript",
+          "HTML",
+          "Shell",
+          "Python",
+          "CSS",
+          "Mermaid"
+        ],
+        "fileCount": 0,
+        "codeFileCount": 0
+      }
+    },
+    {
+      "repo": "repairman29/analytics-platform-service",
+      "url": "https://github.com/repairman29/analytics-platform-service",
+      "features": {
+        "qualityScore": 72,
+        "stars": 0,
+        "forks": 0,
+        "openIssues": 0,
+        "fileCount": 0,
+        "codeFileCount": 0,
+        "hasLicense": 0,
+        "hasDescription": 1,
+        "hasTopics": 0,
+        "hasReadme": 1,
+        "hasTests": 0,
+        "hasCI": 0,
+        "hasDocker": 1,
+        "hasConfig": 0,
+        "issues": 3,
+        "improvements": 3,
+        "languages": [
+          "JavaScript",
+          "Dockerfile"
+        ],
+        "primaryLanguage": "Unknown"
+      },
+      "quality": 72,
+      "timestamp": "2026-01-05T04:02:28.173Z",
+      "metadata": {
+        "languages": [
+          "JavaScript",
+          "Dockerfile"
+        ],
+        "fileCount": 0,
+        "codeFileCount": 0
+      }
+    },
+    {
+      "repo": "repairman29/workbench",
+      "url": "https://github.com/repairman29/workbench",
+      "features": {
+        "qualityScore": 79,
+        "stars": 0,
+        "forks": 0,
+        "openIssues": 0,
+        "fileCount": 0,
+        "codeFileCount": 0,
+        "hasLicense": 0,
+        "hasDescription": 0,
+        "hasTopics": 0,
+        "hasReadme": 1,
+        "hasTests": 1,
+        "hasCI": 0,
+        "hasDocker": 0,
+        "hasConfig": 0,
+        "issues": 4,
+        "improvements": 4,
+        "languages": [
+          "JavaScript",
+          "TypeScript",
+          "CSS",
+          "Shell",
+          "HTML"
+        ],
+        "primaryLanguage": "Unknown"
+      },
+      "quality": 79,
+      "timestamp": "2026-01-05T04:02:33.752Z",
+      "metadata": {
+        "languages": [
+          "JavaScript",
+          "TypeScript",
+          "CSS",
+          "Shell",
+          "HTML"
+        ],
+        "fileCount": 0,
+        "codeFileCount": 0
+      }
+    },
+    {
+      "repo": "repairman29/code-roach",
+      "url": "https://github.com/repairman29/code-roach",
+      "features": {
+        "qualityScore": 96,
+        "stars": 0,
+        "forks": 0,
+        "openIssues": 0,
+        "fileCount": 0,
+        "codeFileCount": 0,
+        "hasLicense": 0,
+        "hasDescription": 1,
+        "hasTopics": 0,
+        "hasReadme": 1,
+        "hasTests": 1,
+        "hasCI": 1,
+        "hasDocker": 1,
+        "hasConfig": 0,
+        "issues": 0,
+        "improvements": 0,
+        "languages": [
+          "JavaScript",
+          "HTML",
+          "PLpgSQL",
+          "Shell",
+          "Dockerfile"
+        ],
+        "primaryLanguage": "Unknown"
+      },
+      "quality": 96,
+      "timestamp": "2026-01-05T04:02:25.438Z",
+      "metadata": {
+        "languages": [
+          "JavaScript",
+          "HTML",
+          "PLpgSQL",
+          "Shell",
+          "Dockerfile"
+        ],
+        "fileCount": 0,
+        "codeFileCount": 0
+      }
+    },
+    {
+      "repo": "repairman29/postsub",
+      "url": "https://github.com/repairman29/postsub",
+      "features": {
+        "qualityScore": 86,
+        "stars": 0,
+        "forks": 0,
+        "openIssues": 0,
+        "fileCount": 0,
+        "codeFileCount": 0,
+        "hasLicense": 0,
+        "hasDescription": 0,
+        "hasTopics": 0,
+        "hasReadme": 1,
+        "hasTests": 1,
+        "hasCI": 1,
+        "hasDocker": 0,
+        "hasConfig": 0,
+        "issues": 3,
+        "improvements": 3,
+        "languages": [
+          "TypeScript",
+          "JavaScript",
+          "HTML",
+          "CSS",
+          "Shell"
+        ],
+        "primaryLanguage": "Unknown"
+      },
+      "quality": 86,
+      "timestamp": "2026-01-05T04:02:31.659Z",
+      "metadata": {
+        "languages": [
+          "TypeScript",
+          "JavaScript",
+          "HTML",
+          "CSS",
+          "Shell"
+        ],
+        "fileCount": 0,
+        "codeFileCount": 0
+      }
+    },
+    {
+      "repo": "repairman29/mock-services",
+      "url": "https://github.com/repairman29/mock-services",
+      "features": {
+        "qualityScore": 65,
+        "stars": 0,
+        "forks": 0,
+        "openIssues": 0,
+        "fileCount": 0,
+        "codeFileCount": 0,
+        "hasLicense": 0,
+        "hasDescription": 1,
+        "hasTopics": 0,
+        "hasReadme": 0,
+        "hasTests": 0,
+        "hasCI": 0,
+        "hasDocker": 1,
+        "hasConfig": 0,
+        "issues": 4,
+        "improvements": 4,
+        "languages": [
+          "JavaScript"
+        ],
+        "primaryLanguage": "Unknown"
+      },
+      "quality": 65,
+      "timestamp": "2026-01-05T04:02:27.085Z",
+      "metadata": {
+        "languages": [
+          "JavaScript"
+        ],
+        "fileCount": 0,
+        "codeFileCount": 0
+      }
+    },
+    {
+      "repo": "repairman29/echeo-dev",
+      "url": "https://github.com/repairman29/echeo-dev",
+      "features": {
+        "qualityScore": 94,
+        "stars": 0,
+        "forks": 0,
+        "openIssues": 0,
+        "fileCount": 0,
+        "codeFileCount": 0,
+        "hasLicense": 0,
+        "hasDescription": 0,
+        "hasTopics": 0,
+        "hasReadme": 1,
+        "hasTests": 1,
+        "hasCI": 1,
+        "hasDocker": 1,
+        "hasConfig": 0,
+        "issues": 1,
+        "improvements": 1,
+        "languages": [
+          "TypeScript",
+          "HTML",
+          "JavaScript",
+          "Shell",
+          "CSS",
+          "Nix",
+          "HCL"
+        ],
+        "primaryLanguage": "Unknown"
+      },
+      "quality": 94,
+      "timestamp": "2026-01-05T04:02:35.225Z",
+      "metadata": {
+        "languages": [
+          "TypeScript",
+          "HTML",
+          "JavaScript",
+          "Shell",
+          "CSS",
+          "Nix",
+          "HCL"
+        ],
+        "fileCount": 0,
+        "codeFileCount": 0
+      }
+    },
+    {
+      "repo": "repairman29/mission-engine-service",
+      "url": "https://github.com/repairman29/mission-engine-service",
+      "features": {
+        "qualityScore": 76,
+        "stars": 0,
+        "forks": 0,
+        "openIssues": 0,
+        "fileCount": 0,
+        "codeFileCount": 0,
+        "hasLicense": 0,
+        "hasDescription": 1,
+        "hasTopics": 0,
+        "hasReadme": 1,
+        "hasTests": 0,
+        "hasCI": 1,
+        "hasDocker": 1,
+        "hasConfig": 0,
+        "issues": 2,
+        "improvements": 2,
+        "languages": [
+          "JavaScript",
+          "Dockerfile"
+        ],
+        "primaryLanguage": "Unknown"
+      },
+      "quality": 76,
+      "timestamp": "2026-01-05T04:02:28.170Z",
+      "metadata": {
+        "languages": [
+          "JavaScript",
+          "Dockerfile"
+        ],
+        "fileCount": 0,
+        "codeFileCount": 0
+      }
+    },
+    {
+      "repo": "repairman29/echeodev",
+      "url": "https://github.com/repairman29/echeodev",
+      "features": {
+        "qualityScore": 94,
+        "stars": 0,
+        "forks": 0,
+        "openIssues": 0,
+        "fileCount": 0,
+        "codeFileCount": 0,
+        "hasLicense": 0,
+        "hasDescription": 0,
+        "hasTopics": 0,
+        "hasReadme": 1,
+        "hasTests": 1,
+        "hasCI": 1,
+        "hasDocker": 1,
+        "hasConfig": 0,
+        "issues": 1,
+        "improvements": 1,
+        "languages": [
+          "TypeScript",
+          "HTML",
+          "JavaScript",
+          "Shell",
+          "CSS",
+          "Nix",
+          "HCL"
+        ],
+        "primaryLanguage": "Unknown"
+      },
+      "quality": 94,
+      "timestamp": "2026-01-05T04:02:35.209Z",
+      "metadata": {
+        "languages": [
+          "TypeScript",
+          "HTML",
+          "JavaScript",
+          "Shell",
+          "CSS",
+          "Nix",
+          "HCL"
+        ],
+        "fileCount": 0,
+        "codeFileCount": 0
+      }
+    },
+    {
+      "repo": "repairman29/smuggler",
+      "url": "https://github.com/repairman29/smugglers",
+      "features": {
+        "qualityScore": 92,
+        "stars": 0,
+        "forks": 0,
+        "openIssues": 0,
+        "fileCount": 0,
+        "codeFileCount": 0,
+        "hasLicense": 0,
+        "hasDescription": 1,
+        "hasTopics": 0,
+        "hasReadme": 1,
+        "hasTests": 1,
+        "hasCI": 1,
+        "hasDocker": 1,
+        "hasConfig": 0,
+        "issues": 1,
+        "improvements": 1,
+        "languages": [
+          "JavaScript",
+          "TypeScript",
+          "HTML",
+          "RouterOS Script",
+          "CSS",
+          "PLpgSQL",
+          "Dockerfile"
+        ],
+        "primaryLanguage": "Unknown"
+      },
+      "quality": 92,
+      "timestamp": "2026-01-05T04:02:25.551Z",
+      "metadata": {
+        "languages": [
+          "JavaScript",
+          "TypeScript",
+          "HTML",
+          "RouterOS Script",
+          "CSS",
+          "PLpgSQL",
+          "Dockerfile"
+        ],
+        "fileCount": 0,
+        "codeFileCount": 0
+      }
+    },
+    {
+      "repo": "repairman29/asset-management-service",
+      "url": "https://github.com/repairman29/asset-management-service",
+      "features": {
+        "qualityScore": 74,
+        "stars": 0,
+        "forks": 0,
+        "openIssues": 0,
+        "fileCount": 0,
+        "codeFileCount": 0,
+        "hasLicense": 0,
+        "hasDescription": 1,
+        "hasTopics": 0,
+        "hasReadme": 1,
+        "hasTests": 0,
+        "hasCI": 1,
+        "hasDocker": 1,
+        "hasConfig": 0,
+        "issues": 2,
+        "improvements": 2,
+        "languages": [
+          "JavaScript",
+          "Dockerfile"
+        ],
+        "primaryLanguage": "Unknown"
+      },
+      "quality": 74,
+      "timestamp": "2026-01-05T04:02:29.510Z",
+      "metadata": {
+        "languages": [
+          "JavaScript",
+          "Dockerfile"
+        ],
+        "fileCount": 0,
+        "codeFileCount": 0
+      }
+    },
+    {
+      "repo": "repairman29/mixdown",
+      "url": "https://github.com/repairman29/mixdown",
+      "features": {
+        "qualityScore": 78,
+        "stars": 0,
+        "forks": 0,
+        "openIssues": 0,
+        "fileCount": 0,
+        "codeFileCount": 0,
+        "hasLicense": 0,
+        "hasDescription": 0,
+        "hasTopics": 0,
+        "hasReadme": 1,
+        "hasTests": 1,
+        "hasCI": 1,
+        "hasDocker": 0,
+        "hasConfig": 0,
+        "issues": 2,
+        "improvements": 2,
+        "languages": [
+          "Python",
+          "JavaScript",
+          "Shell",
+          "CSS",
+          "HTML"
+        ],
+        "primaryLanguage": "Unknown"
+      },
+      "quality": 78,
+      "timestamp": "2026-01-05T04:02:31.656Z",
+      "metadata": {
+        "languages": [
+          "Python",
+          "JavaScript",
+          "Shell",
+          "CSS",
+          "HTML"
+        ],
+        "fileCount": 0,
+        "codeFileCount": 0
+      }
+    },
+    {
+      "repo": "repairman29/mythseeker2",
+      "url": "https://github.com/repairman29/mythseeker2",
+      "features": {
+        "qualityScore": 86,
+        "stars": 0,
+        "forks": 0,
+        "openIssues": 0,
+        "fileCount": 0,
+        "codeFileCount": 0,
+        "hasLicense": 0,
+        "hasDescription": 0,
+        "hasTopics": 0,
+        "hasReadme": 1,
+        "hasTests": 1,
+        "hasCI": 1,
+        "hasDocker": 0,
+        "hasConfig": 0,
+        "issues": 3,
+        "improvements": 3,
+        "languages": [
+          "TypeScript",
+          "Shell",
+          "JavaScript",
+          "CSS",
+          "HTML"
+        ],
+        "primaryLanguage": "Unknown"
+      },
+      "quality": 86,
+      "timestamp": "2026-01-05T04:02:32.711Z",
+      "metadata": {
+        "languages": [
+          "TypeScript",
+          "Shell",
+          "JavaScript",
+          "CSS",
+          "HTML"
+        ],
+        "fileCount": 0,
+        "codeFileCount": 0
+      }
+    },
+    {
+      "repo": "repairman29/coderoach",
+      "url": "https://github.com/repairman29/coderoach",
+      "features": {
+        "qualityScore": 88,
+        "stars": 0,
+        "forks": 0,
+        "openIssues": 0,
+        "fileCount": 0,
+        "codeFileCount": 0,
+        "hasLicense": 0,
+        "hasDescription": 0,
+        "hasTopics": 0,
+        "hasReadme": 1,
+        "hasTests": 1,
+        "hasCI": 1,
+        "hasDocker": 0,
+        "hasConfig": 0,
+        "issues": 2,
+        "improvements": 2,
+        "languages": [
+          "JavaScript",
+          "HTML",
+          "Shell",
+          "PLpgSQL"
+        ],
+        "primaryLanguage": "Unknown"
+      },
+      "quality": 88,
+      "timestamp": "2026-01-05T04:02:30.571Z",
+      "metadata": {
+        "languages": [
+          "JavaScript",
+          "HTML",
+          "Shell",
+          "PLpgSQL"
+        ],
+        "fileCount": 0,
+        "codeFileCount": 0
+      }
+    },
+    {
+      "repo": "repairman29/bot-simulation-service",
+      "url": "https://github.com/repairman29/bot-simulation-service",
+      "features": {
+        "qualityScore": 89,
+        "stars": 0,
+        "forks": 0,
+        "openIssues": 0,
+        "fileCount": 0,
+        "codeFileCount": 0,
+        "hasLicense": 0,
+        "hasDescription": 1,
+        "hasTopics": 0,
+        "hasReadme": 1,
+        "hasTests": 1,
+        "hasCI": 1,
+        "hasDocker": 0,
+        "hasConfig": 0,
+        "issues": 2,
+        "improvements": 2,
+        "languages": [
+          "JavaScript",
+          "HTML",
+          "Shell"
+        ],
+        "primaryLanguage": "Unknown"
+      },
+      "quality": 89,
+      "timestamp": "2026-01-05T04:02:29.388Z",
+      "metadata": {
+        "languages": [
+          "JavaScript",
+          "HTML",
+          "Shell"
+        ],
+        "fileCount": 0,
+        "codeFileCount": 0
+      }
+    },
+    {
+      "repo": "repairman29/2029",
+      "url": "https://github.com/repairman29/2029",
+      "features": {
+        "qualityScore": 89,
+        "stars": 0,
+        "forks": 0,
+        "openIssues": 0,
+        "fileCount": 0,
+        "codeFileCount": 0,
+        "hasLicense": 0,
+        "hasDescription": 1,
+        "hasTopics": 0,
+        "hasReadme": 1,
+        "hasTests": 1,
+        "hasCI": 0,
+        "hasDocker": 0,
+        "hasConfig": 0,
+        "issues": 2,
+        "improvements": 2,
+        "languages": [
+          "Python",
+          "Cython",
+          "C",
+          "C++",
+          "HTML",
+          "XSLT",
+          "JavaScript",
+          "Fortran",
+          "Cuda",
+          "CSS",
+          "Mako",
+          "SCSS",
+          "PowerShell",
+          "Jinja",
+          "Shell",
+          "Smarty",
+          "Roff",
+          "Meson",
+          "Jupyter Notebook"
+        ],
+        "primaryLanguage": "Unknown"
+      },
+      "quality": 89,
+      "timestamp": "2026-01-05T04:02:36.270Z",
+      "metadata": {
+        "languages": [
+          "Python",
+          "Cython",
+          "C",
+          "C++",
+          "HTML",
+          "XSLT",
+          "JavaScript",
+          "Fortran",
+          "Cuda",
+          "CSS",
+          "Mako",
+          "SCSS",
+          "PowerShell",
+          "Jinja",
+          "Shell",
+          "Smarty",
+          "Roff",
+          "Meson",
+          "Jupyter Notebook"
+        ],
+        "fileCount": 0,
+        "codeFileCount": 0
+      }
+    },
+    {
+      "repo": "repairman29/MythSeeker",
+      "url": "https://github.com/repairman29/MythSeeker",
+      "features": {
+        "qualityScore": 93,
+        "stars": 0,
+        "forks": 0,
+        "openIssues": 0,
+        "fileCount": 0,
+        "codeFileCount": 0,
+        "hasLicense": 0,
+        "hasDescription": 1,
+        "hasTopics": 0,
+        "hasReadme": 1,
+        "hasTests": 1,
+        "hasCI": 1,
+        "hasDocker": 1,
+        "hasConfig": 0,
+        "issues": 1,
+        "improvements": 1,
+        "languages": [
+          "TypeScript",
+          "JavaScript",
+          "CSS",
+          "Shell",
+          "Dockerfile",
+          "HTML"
+        ],
+        "primaryLanguage": "Unknown"
+      },
+      "quality": 93,
+      "timestamp": "2026-01-05T04:02:33.751Z",
+      "metadata": {
+        "languages": [
+          "TypeScript",
+          "JavaScript",
+          "CSS",
+          "Shell",
+          "Dockerfile",
+          "HTML"
+        ],
+        "fileCount": 0,
+        "codeFileCount": 0
+      }
+    },
+    {
+      "repo": "repairman29/messaging-demo",
+      "url": "https://github.com/repairman29/messaging-demo",
+      "features": {
+        "qualityScore": 56,
+        "stars": 0,
+        "forks": 0,
+        "openIssues": 0,
+        "fileCount": 0,
+        "codeFileCount": 0,
+        "hasLicense": 0,
+        "hasDescription": 0,
+        "hasTopics": 0,
+        "hasReadme": 1,
+        "hasTests": 0,
+        "hasCI": 0,
+        "hasDocker": 0,
+        "hasConfig": 0,
+        "issues": 7,
+        "improvements": 7,
+        "languages": [
+          "HTML",
+          "JavaScript",
+          "CSS"
+        ],
+        "primaryLanguage": "Unknown"
+      },
+      "quality": 56,
+      "timestamp": "2026-01-05T04:02:32.709Z",
+      "metadata": {
+        "languages": [
+          "HTML",
+          "JavaScript",
+          "CSS"
+        ],
+        "fileCount": 0,
+        "codeFileCount": 0
+      }
+    },
+    {
+      "repo": "repairman29/berry-avenue-codes",
+      "url": "https://github.com/repairman29/berry-avenue-codes",
+      "features": {
+        "qualityScore": 61,
+        "stars": 0,
+        "forks": 0,
+        "openIssues": 0,
+        "fileCount": 0,
+        "codeFileCount": 0,
+        "hasLicense": 0,
+        "hasDescription": 1,
+        "hasTopics": 0,
+        "hasReadme": 1,
+        "hasTests": 0,
+        "hasCI": 0,
+        "hasDocker": 0,
+        "hasConfig": 0,
+        "issues": 5,
+        "improvements": 5,
+        "languages": [
+          "JavaScript",
+          "CSS",
+          "HTML",
+          "Swift"
+        ],
+        "primaryLanguage": "Unknown"
+      },
+      "quality": 61,
+      "timestamp": "2026-01-05T04:02:33.753Z",
+      "metadata": {
+        "languages": [
+          "JavaScript",
+          "CSS",
+          "HTML",
+          "Swift"
+        ],
+        "fileCount": 0,
+        "codeFileCount": 0
+      }
+    },
+    {
+      "repo": "repairman29/dice",
+      "url": "https://github.com/repairman29/dice",
+      "features": {
+        "qualityScore": 61,
+        "stars": 0,
+        "forks": 0,
+        "openIssues": 0,
+        "fileCount": 0,
+        "codeFileCount": 0,
+        "hasLicense": 0,
+        "hasDescription": 0,
+        "hasTopics": 0,
+        "hasReadme": 1,
+        "hasTests": 0,
+        "hasCI": 0,
+        "hasDocker": 0,
+        "hasConfig": 0,
+        "issues": 5,
+        "improvements": 5,
+        "languages": [
+          "TypeScript",
+          "JavaScript",
+          "Shell",
+          "CSS",
+          "HTML"
+        ],
+        "primaryLanguage": "Unknown"
+      },
+      "quality": 61,
+      "timestamp": "2026-01-05T04:02:31.660Z",
+      "metadata": {
+        "languages": [
+          "TypeScript",
+          "JavaScript",
+          "Shell",
+          "CSS",
+          "HTML"
+        ],
+        "fileCount": 0,
+        "codeFileCount": 0
+      }
+    },
+    {
+      "repo": "repairman29/ims",
+      "url": "https://github.com/repairman29/ims",
+      "features": {
+        "qualityScore": 83,
+        "stars": 0,
+        "forks": 0,
+        "openIssues": 0,
+        "fileCount": 0,
+        "codeFileCount": 0,
+        "hasLicense": 0,
+        "hasDescription": 0,
+        "hasTopics": 0,
+        "hasReadme": 1,
+        "hasTests": 1,
+        "hasCI": 1,
+        "hasDocker": 1,
+        "hasConfig": 0,
+        "issues": 2,
+        "improvements": 2,
+        "languages": [
+          "HTML",
+          "Python",
+          "JavaScript",
+          "CSS",
+          "Shell",
+          "Mako"
+        ],
+        "primaryLanguage": "Unknown"
+      },
+      "quality": 83,
+      "timestamp": "2026-01-05T04:02:36.269Z",
+      "metadata": {
+        "languages": [
+          "HTML",
+          "Python",
+          "JavaScript",
+          "CSS",
+          "Shell",
+          "Mako"
+        ],
+        "fileCount": 0,
+        "codeFileCount": 0
+      }
+    },
+    {
+      "repo": "repairman29/project_forge",
+      "url": "https://github.com/repairman29/project_forge",
+      "features": {
+        "qualityScore": 94,
+        "stars": 1,
+        "forks": 0,
+        "openIssues": 0,
+        "fileCount": 0,
+        "codeFileCount": 0,
+        "hasLicense": 0,
+        "hasDescription": 0,
+        "hasTopics": 0,
+        "hasReadme": 1,
+        "hasTests": 1,
+        "hasCI": 1,
+        "hasDocker": 1,
+        "hasConfig": 0,
+        "issues": 1,
+        "improvements": 1,
+        "languages": [
+          "HTML",
+          "TypeScript",
+          "JavaScript",
+          "CSS",
+          "Shell"
+        ],
+        "primaryLanguage": "Unknown"
+      },
+      "quality": 94,
+      "timestamp": "2026-01-05T04:02:36.270Z",
+      "metadata": {
+        "languages": [
+          "HTML",
+          "TypeScript",
+          "JavaScript",
+          "CSS",
+          "Shell"
+        ],
+        "fileCount": 0,
+        "codeFileCount": 0
+      }
+    },
+    {
+      "repo": "repairman29/chat-platform-service",
+      "url": "https://github.com/repairman29/chat-platform-service",
+      "features": {
+        "qualityScore": 75,
+        "stars": 0,
+        "forks": 0,
+        "openIssues": 0,
+        "fileCount": 0,
+        "codeFileCount": 0,
+        "hasLicense": 0,
+        "hasDescription": 1,
+        "hasTopics": 0,
+        "hasReadme": 1,
+        "hasTests": 0,
+        "hasCI": 1,
+        "hasDocker": 1,
+        "hasConfig": 0,
+        "issues": 2,
+        "improvements": 2,
+        "languages": [
+          "JavaScript",
+          "Dockerfile"
+        ],
+        "primaryLanguage": "Unknown"
+      },
+      "quality": 75,
+      "timestamp": "2026-01-05T04:02:28.171Z",
+      "metadata": {
+        "languages": [
+          "JavaScript",
+          "Dockerfile"
+        ],
+        "fileCount": 0,
+        "codeFileCount": 0
+      }
+    },
+    {
+      "repo": "repairman29/service-frontends",
+      "url": "https://github.com/repairman29/service-frontends",
+      "features": {
+        "qualityScore": 59,
+        "stars": 0,
+        "forks": 0,
+        "openIssues": 0,
+        "fileCount": 0,
+        "codeFileCount": 0,
+        "hasLicense": 0,
+        "hasDescription": 1,
+        "hasTopics": 0,
+        "hasReadme": 0,
+        "hasTests": 0,
+        "hasCI": 0,
+        "hasDocker": 0,
+        "hasConfig": 0,
+        "issues": 6,
+        "improvements": 6,
+        "languages": [
+          "CSS",
+          "HTML",
+          "JavaScript"
+        ],
+        "primaryLanguage": "Unknown"
+      },
+      "quality": 59,
+      "timestamp": "2026-01-05T04:02:29.358Z",
+      "metadata": {
+        "languages": [
+          "CSS",
+          "HTML",
+          "JavaScript"
+        ],
+        "fileCount": 0,
+        "codeFileCount": 0
+      }
+    },
+    {
+      "repo": "repairman29/echeo",
+      "url": "https://github.com/repairman29/echeo-web",
+      "features": {
+        "qualityScore": 84,
+        "stars": 0,
+        "forks": 0,
+        "openIssues": 0,
+        "fileCount": 0,
+        "codeFileCount": 0,
+        "hasLicense": 0,
+        "hasDescription": 1,
+        "hasTopics": 0,
+        "hasReadme": 1,
+        "hasTests": 1,
+        "hasCI": 1,
+        "hasDocker": 0,
+        "hasConfig": 0,
+        "issues": 1,
+        "improvements": 1,
+        "languages": [
+          "Rust",
+          "Python",
+          "JavaScript",
+          "Shell"
+        ],
+        "primaryLanguage": "Unknown"
+      },
+      "quality": 84,
+      "timestamp": "2026-01-05T04:02:25.404Z",
+      "metadata": {
+        "languages": [
+          "Rust",
+          "Python",
+          "JavaScript",
+          "Shell"
+        ],
+        "fileCount": 0,
+        "codeFileCount": 0
+      }
+    },
+    {
+      "repo": "repairman29/biomeweavers",
+      "url": "https://github.com/repairman29/biomeweavers",
+      "features": {
+        "qualityScore": 59,
+        "stars": 0,
+        "forks": 0,
+        "openIssues": 0,
+        "fileCount": 0,
+        "codeFileCount": 0,
+        "hasLicense": 0,
+        "hasDescription": 0,
+        "hasTopics": 0,
+        "hasReadme": 1,
+        "hasTests": 0,
+        "hasCI": 0,
+        "hasDocker": 0,
+        "hasConfig": 0,
+        "issues": 5,
+        "improvements": 5,
+        "languages": [
+          "TypeScript",
+          "HTML"
+        ],
+        "primaryLanguage": "Unknown"
+      },
+      "quality": 59,
+      "timestamp": "2026-01-05T04:02:35.218Z",
+      "metadata": {
+        "languages": [
+          "TypeScript",
+          "HTML"
+        ],
+        "fileCount": 0,
+        "codeFileCount": 0
+      }
+    },
+    {
+      "repo": "repairman29/economy-system-service",
+      "url": "https://github.com/repairman29/economy-system-service",
+      "features": {
+        "qualityScore": 75,
+        "stars": 0,
+        "forks": 0,
+        "openIssues": 0,
+        "fileCount": 0,
+        "codeFileCount": 0,
+        "hasLicense": 0,
+        "hasDescription": 1,
+        "hasTopics": 0,
+        "hasReadme": 1,
+        "hasTests": 0,
+        "hasCI": 1,
+        "hasDocker": 1,
+        "hasConfig": 0,
+        "issues": 2,
+        "improvements": 2,
+        "languages": [
+          "JavaScript",
+          "Dockerfile"
+        ],
+        "primaryLanguage": "Unknown"
+      },
+      "quality": 75,
+      "timestamp": "2026-01-05T04:02:30.571Z",
+      "metadata": {
+        "languages": [
+          "JavaScript",
+          "Dockerfile"
+        ],
+        "fileCount": 0,
+        "codeFileCount": 0
+      }
+    },
+    {
+      "repo": "repairman29/echeo-web",
+      "url": "https://github.com/repairman29/echeo-web",
+      "features": {
+        "qualityScore": 84,
+        "stars": 0,
+        "forks": 0,
+        "openIssues": 0,
+        "fileCount": 0,
+        "codeFileCount": 0,
+        "hasLicense": 0,
+        "hasDescription": 1,
+        "hasTopics": 0,
+        "hasReadme": 1,
+        "hasTests": 1,
+        "hasCI": 0,
+        "hasDocker": 0,
+        "hasConfig": 0,
+        "issues": 3,
+        "improvements": 3,
+        "languages": [
+          "TypeScript",
+          "JavaScript",
+          "HTML",
+          "PLpgSQL",
+          "Shell",
+          "CSS",
+          "Python"
+        ],
+        "primaryLanguage": "Unknown"
+      },
+      "quality": 84,
+      "timestamp": "2026-01-05T04:02:23.494Z",
+      "metadata": {
+        "languages": [
+          "TypeScript",
+          "JavaScript",
+          "HTML",
+          "PLpgSQL",
+          "Shell",
+          "CSS",
+          "Python"
+        ],
+        "fileCount": 0,
+        "codeFileCount": 0
+      }
+    },
+    {
+      "repo": "repairman29/beast-mode-website",
+      "url": "https://github.com/repairman29/beast-mode-website",
+      "features": {
+        "qualityScore": 57,
+        "stars": 0,
+        "forks": 0,
+        "openIssues": 0,
+        "fileCount": 0,
+        "codeFileCount": 0,
+        "hasLicense": 0,
+        "hasDescription": 1,
+        "hasTopics": 0,
+        "hasReadme": 0,
+        "hasTests": 0,
+        "hasCI": 0,
+        "hasDocker": 0,
+        "hasConfig": 0,
+        "issues": 6,
+        "improvements": 5,
+        "languages": [
+          "HTML"
+        ],
+        "primaryLanguage": "Unknown"
+      },
+      "quality": 57,
+      "timestamp": "2026-01-05T04:02:27.090Z",
+      "metadata": {
+        "languages": [
+          "HTML"
+        ],
+        "fileCount": 0,
+        "codeFileCount": 0
+      }
+    },
+    {
+      "repo": "repairman29/sheckleshare",
+      "url": "https://github.com/repairman29/sheckleshare",
+      "features": {
+        "qualityScore": 89,
+        "stars": 0,
+        "forks": 0,
+        "openIssues": 0,
+        "fileCount": 0,
+        "codeFileCount": 0,
+        "hasLicense": 0,
+        "hasDescription": 1,
+        "hasTopics": 0,
+        "hasReadme": 1,
+        "hasTests": 1,
+        "hasCI": 1,
+        "hasDocker": 0,
+        "hasConfig": 0,
+        "issues": 2,
+        "improvements": 2,
+        "languages": [
+          "JavaScript",
+          "CSS",
+          "HTML",
+          "Shell"
+        ],
+        "primaryLanguage": "Unknown"
+      },
+      "quality": 89,
+      "timestamp": "2026-01-05T04:02:33.752Z",
+      "metadata": {
+        "languages": [
+          "JavaScript",
+          "CSS",
+          "HTML",
+          "Shell"
+        ],
+        "fileCount": 0,
+        "codeFileCount": 0
+      }
+    },
+    {
+      "repo": "repairman29/coloringbook",
+      "url": "https://github.com/repairman29/coloringbook",
+      "features": {
+        "qualityScore": 89,
+        "stars": 0,
+        "forks": 0,
+        "openIssues": 0,
+        "fileCount": 0,
+        "codeFileCount": 0,
+        "hasLicense": 0,
+        "hasDescription": 0,
+        "hasTopics": 0,
+        "hasReadme": 1,
+        "hasTests": 1,
+        "hasCI": 1,
+        "hasDocker": 1,
+        "hasConfig": 0,
+        "issues": 2,
+        "improvements": 2,
+        "languages": [
+          "JavaScript",
+          "CSS",
+          "Python",
+          "HTML",
+          "Dockerfile"
+        ],
+        "primaryLanguage": "Unknown"
+      },
+      "quality": 89,
+      "timestamp": "2026-01-05T04:02:32.710Z",
+      "metadata": {
+        "languages": [
+          "JavaScript",
+          "CSS",
+          "Python",
+          "HTML",
+          "Dockerfile"
+        ],
+        "fileCount": 0,
+        "codeFileCount": 0
+      }
+    },
+    {
+      "repo": "repairman29/project2029",
+      "url": "https://github.com/repairman29/project2029",
+      "features": {
+        "qualityScore": 58,
+        "stars": 0,
+        "forks": 0,
+        "openIssues": 0,
+        "fileCount": 0,
+        "codeFileCount": 0,
+        "hasLicense": 0,
+        "hasDescription": 1,
+        "hasTopics": 0,
+        "hasReadme": 1,
+        "hasTests": 0,
+        "hasCI": 0,
+        "hasDocker": 0,
+        "hasConfig": 0,
+        "issues": 6,
+        "improvements": 5,
+        "languages": [],
+        "primaryLanguage": "Unknown"
+      },
+      "quality": 58,
+      "timestamp": "2026-01-05T04:02:36.270Z",
+      "metadata": {
+        "languages": [],
+        "fileCount": 0,
+        "codeFileCount": 0
+      }
+    },
+    {
+      "repo": "repairman29/audio-generation-service",
+      "url": "https://github.com/repairman29/audio-generation-service",
+      "features": {
+        "qualityScore": 75,
+        "stars": 0,
+        "forks": 0,
+        "openIssues": 0,
+        "fileCount": 0,
+        "codeFileCount": 0,
+        "hasLicense": 0,
+        "hasDescription": 1,
+        "hasTopics": 0,
+        "hasReadme": 1,
+        "hasTests": 0,
+        "hasCI": 1,
+        "hasDocker": 1,
+        "hasConfig": 0,
+        "issues": 2,
+        "improvements": 2,
+        "languages": [
+          "JavaScript",
+          "Dockerfile"
+        ],
+        "primaryLanguage": "Unknown"
+      },
+      "quality": 75,
+      "timestamp": "2026-01-05T04:02:30.568Z",
+      "metadata": {
+        "languages": [
+          "JavaScript",
+          "Dockerfile"
+        ],
+        "fileCount": 0,
+        "codeFileCount": 0
+      }
+    },
+    {
+      "repo": "repairman29/code-generation-service",
+      "url": "https://github.com/repairman29/code-generation-service",
+      "features": {
+        "qualityScore": 74,
+        "stars": 0,
+        "forks": 0,
+        "openIssues": 0,
+        "fileCount": 0,
+        "codeFileCount": 0,
+        "hasLicense": 0,
+        "hasDescription": 1,
+        "hasTopics": 0,
+        "hasReadme": 1,
+        "hasTests": 0,
+        "hasCI": 1,
+        "hasDocker": 1,
+        "hasConfig": 0,
+        "issues": 2,
+        "improvements": 2,
+        "languages": [
+          "JavaScript",
+          "Dockerfile"
+        ],
+        "primaryLanguage": "Unknown"
+      },
+      "quality": 74,
+      "timestamp": "2026-01-05T04:02:29.508Z",
+      "metadata": {
+        "languages": [
+          "JavaScript",
+          "Dockerfile"
+        ],
+        "fileCount": 0,
+        "codeFileCount": 0
+      }
+    },
+    {
+      "repo": "repairman29/smugglers",
+      "url": "https://github.com/repairman29/smugglers",
+      "features": {
+        "qualityScore": 87,
+        "stars": 0,
+        "forks": 0,
+        "openIssues": 0,
+        "fileCount": 0,
+        "codeFileCount": 0,
+        "hasLicense": 0,
+        "hasDescription": 0,
+        "hasTopics": 0,
+        "hasReadme": 1,
+        "hasTests": 1,
+        "hasCI": 1,
+        "hasDocker": 1,
+        "hasConfig": 0,
+        "issues": 2,
+        "improvements": 2,
+        "languages": [
+          "JavaScript",
+          "CSS",
+          "HTML",
+          "TypeScript",
+          "PLpgSQL",
+          "Shell",
+          "Dockerfile",
+          "Makefile",
+          "Procfile"
+        ],
+        "primaryLanguage": "Unknown"
+      },
+      "quality": 87,
+      "timestamp": "2026-01-05T04:02:23.484Z",
+      "metadata": {
+        "languages": [
+          "JavaScript",
+          "CSS",
+          "HTML",
+          "TypeScript",
+          "PLpgSQL",
+          "Shell",
+          "Dockerfile",
+          "Makefile",
+          "Procfile"
+        ],
+        "fileCount": 0,
+        "codeFileCount": 0
+      }
+    }
+  ],
+  "val": [
+    {
+      "repo": "repairman29/daisy-chain",
+      "url": "https://github.com/repairman29/daisy-chain",
+      "features": {
+        "qualityScore": 89,
+        "stars": 0,
+        "forks": 0,
+        "openIssues": 0,
+        "fileCount": 0,
+        "codeFileCount": 0,
+        "hasLicense": 0,
+        "hasDescription": 1,
+        "hasTopics": 0,
+        "hasReadme": 1,
+        "hasTests": 1,
+        "hasCI": 1,
+        "hasDocker": 1,
+        "hasConfig": 0,
+        "issues": 0,
+        "improvements": 0,
+        "languages": [
+          "JavaScript",
+          "Shell",
+          "Dockerfile"
+        ],
+        "primaryLanguage": "Unknown"
+      },
+      "quality": 89,
+      "timestamp": "2026-01-05T04:02:23.495Z",
+      "metadata": {
+        "languages": [
+          "JavaScript",
+          "Shell",
+          "Dockerfile"
+        ],
+        "fileCount": 0,
+        "codeFileCount": 0
+      }
+    },
+    {
+      "repo": "repairman29/echeo-internal",
+      "url": "https://github.com/repairman29/echeo-internal",
+      "features": {
+        "qualityScore": 79,
+        "stars": 0,
+        "forks": 0,
+        "openIssues": 0,
+        "fileCount": 0,
+        "codeFileCount": 0,
+        "hasLicense": 0,
+        "hasDescription": 1,
+        "hasTopics": 0,
+        "hasReadme": 1,
+        "hasTests": 1,
+        "hasCI": 1,
+        "hasDocker": 0,
+        "hasConfig": 0,
+        "issues": 2,
+        "improvements": 2,
+        "languages": [
+          "Rust",
+          "Python",
+          "JavaScript",
+          "Shell"
+        ],
+        "primaryLanguage": "Unknown"
+      },
+      "quality": 79,
+      "timestamp": "2026-01-05T04:02:25.465Z",
+      "metadata": {
+        "languages": [
+          "Rust",
+          "Python",
+          "JavaScript",
+          "Shell"
+        ],
+        "fileCount": 0,
+        "codeFileCount": 0
+      }
+    },
+    {
+      "repo": "repairman29/commercial-platform",
+      "url": "https://github.com/repairman29/commercial-platform",
+      "features": {
+        "qualityScore": 60,
+        "stars": 0,
+        "forks": 0,
+        "openIssues": 0,
+        "fileCount": 0,
+        "codeFileCount": 0,
+        "hasLicense": 0,
+        "hasDescription": 1,
+        "hasTopics": 0,
+        "hasReadme": 0,
+        "hasTests": 0,
+        "hasCI": 0,
+        "hasDocker": 0,
+        "hasConfig": 0,
+        "issues": 5,
+        "improvements": 5,
+        "languages": [
+          "JavaScript"
+        ],
+        "primaryLanguage": "Unknown"
+      },
+      "quality": 60,
+      "timestamp": "2026-01-05T04:02:27.093Z",
+      "metadata": {
+        "languages": [
+          "JavaScript"
+        ],
+        "fileCount": 0,
+        "codeFileCount": 0
+      }
+    },
+    {
+      "repo": "repairman29/ai-gm-service",
+      "url": "https://github.com/repairman29/ai-gm-service",
+      "features": {
+        "qualityScore": 88,
+        "stars": 0,
+        "forks": 0,
+        "openIssues": 0,
+        "fileCount": 0,
+        "codeFileCount": 0,
+        "hasLicense": 0,
+        "hasDescription": 1,
+        "hasTopics": 0,
+        "hasReadme": 1,
+        "hasTests": 1,
+        "hasCI": 1,
+        "hasDocker": 1,
+        "hasConfig": 0,
+        "issues": 1,
+        "improvements": 1,
+        "languages": [
+          "JavaScript",
+          "HTML",
+          "Shell",
+          "PLpgSQL",
+          "Dockerfile"
+        ],
+        "primaryLanguage": "Unknown"
+      },
+      "quality": 88,
+      "timestamp": "2026-01-05T04:02:23.489Z",
+      "metadata": {
+        "languages": [
+          "JavaScript",
+          "HTML",
+          "Shell",
+          "PLpgSQL",
+          "Dockerfile"
+        ],
+        "fileCount": 0,
+        "codeFileCount": 0
+      }
+    },
+    {
+      "repo": "repairman29/payment-platform-service",
+      "url": "https://github.com/repairman29/payment-platform-service",
+      "features": {
+        "qualityScore": 75,
+        "stars": 0,
+        "forks": 0,
+        "openIssues": 0,
+        "fileCount": 0,
+        "codeFileCount": 0,
+        "hasLicense": 0,
+        "hasDescription": 1,
+        "hasTopics": 0,
+        "hasReadme": 1,
+        "hasTests": 0,
+        "hasCI": 1,
+        "hasDocker": 1,
+        "hasConfig": 0,
+        "issues": 2,
+        "improvements": 2,
+        "languages": [
+          "JavaScript",
+          "Dockerfile"
+        ],
+        "primaryLanguage": "Unknown"
+      },
+      "quality": 75,
+      "timestamp": "2026-01-05T04:02:30.572Z",
+      "metadata": {
+        "languages": [
+          "JavaScript",
+          "Dockerfile"
+        ],
+        "fileCount": 0,
+        "codeFileCount": 0
+      }
+    },
+    {
+      "repo": "repairman29/echeo-archived",
+      "url": "https://github.com/repairman29/echeo-archived",
+      "features": {
+        "qualityScore": 78,
+        "stars": 0,
+        "forks": 0,
+        "openIssues": 0,
+        "fileCount": 0,
+        "codeFileCount": 0,
+        "hasLicense": 0,
+        "hasDescription": 0,
+        "hasTopics": 0,
+        "hasReadme": 1,
+        "hasTests": 1,
+        "hasCI": 1,
+        "hasDocker": 1,
+        "hasConfig": 0,
+        "issues": 2,
+        "improvements": 2,
+        "languages": [
+          "JavaScript",
+          "Shell",
+          "Dockerfile"
+        ],
+        "primaryLanguage": "Unknown"
+      },
+      "quality": 78,
+      "timestamp": "2026-01-05T04:02:35.216Z",
+      "metadata": {
+        "languages": [
+          "JavaScript",
+          "Shell",
+          "Dockerfile"
+        ],
+        "fileCount": 0,
+        "codeFileCount": 0
+      }
+    },
+    {
+      "repo": "repairman29/trove-app",
+      "url": "https://github.com/repairman29/trove-app",
+      "features": {
+        "qualityScore": 88,
+        "stars": 0,
+        "forks": 0,
+        "openIssues": 0,
+        "fileCount": 0,
+        "codeFileCount": 0,
+        "hasLicense": 0,
+        "hasDescription": 0,
+        "hasTopics": 0,
+        "hasReadme": 1,
+        "hasTests": 1,
+        "hasCI": 1,
+        "hasDocker": 1,
+        "hasConfig": 0,
+        "issues": 2,
+        "improvements": 2,
+        "languages": [
+          "Python",
+          "TypeScript",
+          "JavaScript",
+          "C",
+          "Tcl",
+          "Shell",
+          "Makefile",
+          "C++",
+          "CSS",
+          "Roff",
+          "Smarty",
+          "HTML",
+          "PowerShell",
+          "Batchfile",
+          "BitBake",
+          "Dockerfile"
+        ],
+        "primaryLanguage": "Unknown"
+      },
+      "quality": 88,
+      "timestamp": "2026-01-05T04:02:33.752Z",
+      "metadata": {
+        "languages": [
+          "Python",
+          "TypeScript",
+          "JavaScript",
+          "C",
+          "Tcl",
+          "Shell",
+          "Makefile",
+          "C++",
+          "CSS",
+          "Roff",
+          "Smarty",
+          "HTML",
+          "PowerShell",
+          "Batchfile",
+          "BitBake",
+          "Dockerfile"
+        ],
+        "fileCount": 0,
+        "codeFileCount": 0
+      }
+    },
+    {
+      "repo": "repairman29/marketplace-system-service",
+      "url": "https://github.com/repairman29/marketplace-system-service",
+      "features": {
+        "qualityScore": 74,
+        "stars": 0,
+        "forks": 0,
+        "openIssues": 0,
+        "fileCount": 0,
+        "codeFileCount": 0,
+        "hasLicense": 0,
+        "hasDescription": 1,
+        "hasTopics": 0,
+        "hasReadme": 1,
+        "hasTests": 0,
+        "hasCI": 1,
+        "hasDocker": 1,
+        "hasConfig": 0,
+        "issues": 2,
+        "improvements": 2,
+        "languages": [
+          "JavaScript",
+          "Dockerfile"
+        ],
+        "primaryLanguage": "Unknown"
+      },
+      "quality": 74,
+      "timestamp": "2026-01-05T04:02:29.405Z",
+      "metadata": {
+        "languages": [
+          "JavaScript",
+          "Dockerfile"
+        ],
+        "fileCount": 0,
+        "codeFileCount": 0
+      }
+    }
+  ],
+  "test": [
+    {
+      "repo": "repairman29/slidemate",
+      "url": "https://github.com/repairman29/slidemate",
+      "features": {
+        "qualityScore": 78,
+        "stars": 0,
+        "forks": 0,
+        "openIssues": 0,
+        "fileCount": 0,
+        "codeFileCount": 0,
+        "hasLicense": 0,
+        "hasDescription": 0,
+        "hasTopics": 0,
+        "hasReadme": 1,
+        "hasTests": 1,
+        "hasCI": 1,
+        "hasDocker": 1,
+        "hasConfig": 0,
+        "issues": 3,
+        "improvements": 3,
+        "languages": [
+          "TypeScript",
+          "JavaScript",
+          "HTML",
+          "Shell",
+          "Python",
+          "Ruby",
+          "PLpgSQL",
+          "CSS",
+          "Makefile",
+          "Dockerfile"
+        ],
+        "primaryLanguage": "Unknown"
+      },
+      "quality": 78,
+      "timestamp": "2026-01-05T04:02:30.571Z",
+      "metadata": {
+        "languages": [
+          "TypeScript",
+          "JavaScript",
+          "HTML",
+          "Shell",
+          "Python",
+          "Ruby",
+          "PLpgSQL",
+          "CSS",
+          "Makefile",
+          "Dockerfile"
+        ],
+        "fileCount": 0,
+        "codeFileCount": 0
+      }
+    },
+    {
+      "repo": "repairman29/trove-web",
+      "url": "https://github.com/repairman29/trove-web",
+      "features": {
+        "qualityScore": 85,
+        "stars": 0,
+        "forks": 0,
+        "openIssues": 0,
+        "fileCount": 0,
+        "codeFileCount": 0,
+        "hasLicense": 0,
+        "hasDescription": 0,
+        "hasTopics": 0,
+        "hasReadme": 1,
+        "hasTests": 1,
+        "hasCI": 1,
+        "hasDocker": 0,
+        "hasConfig": 0,
+        "issues": 3,
+        "improvements": 3,
+        "languages": [
+          "TypeScript",
+          "JavaScript",
+          "Shell",
+          "CSS",
+          "PowerShell",
+          "Nix"
+        ],
+        "primaryLanguage": "Unknown"
+      },
+      "quality": 85,
+      "timestamp": "2026-01-05T04:02:32.710Z",
+      "metadata": {
+        "languages": [
+          "TypeScript",
+          "JavaScript",
+          "Shell",
+          "CSS",
+          "PowerShell",
+          "Nix"
+        ],
+        "fileCount": 0,
+        "codeFileCount": 0
+      }
+    },
+    {
+      "repo": "repairman29/project-forge",
+      "url": "https://github.com/repairman29/project-forge",
+      "features": {
+        "qualityScore": 99,
+        "stars": 0,
+        "forks": 0,
+        "openIssues": 0,
+        "fileCount": 0,
+        "codeFileCount": 0,
+        "hasLicense": 0,
+        "hasDescription": 1,
+        "hasTopics": 0,
+        "hasReadme": 1,
+        "hasTests": 1,
+        "hasCI": 1,
+        "hasDocker": 1,
+        "hasConfig": 0,
+        "issues": 0,
+        "improvements": 0,
+        "languages": [
+          "TypeScript",
+          "HTML",
+          "JavaScript",
+          "Shell",
+          "CSS",
+          "Nix",
+          "HCL"
+        ],
+        "primaryLanguage": "Unknown"
+      },
+      "quality": 99,
+      "timestamp": "2026-01-05T04:02:35.229Z",
+      "metadata": {
+        "languages": [
+          "TypeScript",
+          "HTML",
+          "JavaScript",
+          "Shell",
+          "CSS",
+          "Nix",
+          "HCL"
+        ],
+        "fileCount": 0,
+        "codeFileCount": 0
+      }
+    },
+    {
+      "repo": "repairman29/oracle",
+      "url": "https://github.com/repairman29/oracle",
+      "features": {
+        "qualityScore": 92,
+        "stars": 0,
+        "forks": 0,
+        "openIssues": 0,
+        "fileCount": 0,
+        "codeFileCount": 0,
+        "hasLicense": 0,
+        "hasDescription": 1,
+        "hasTopics": 0,
+        "hasReadme": 1,
+        "hasTests": 1,
+        "hasCI": 1,
+        "hasDocker": 1,
+        "hasConfig": 0,
+        "issues": 0,
+        "improvements": 0,
+        "languages": [
+          "JavaScript",
+          "Python",
+          "TypeScript",
+          "Shell",
+          "Dockerfile"
+        ],
+        "primaryLanguage": "Unknown"
+      },
+      "quality": 92,
+      "timestamp": "2026-01-05T04:02:25.369Z",
+      "metadata": {
+        "languages": [
+          "JavaScript",
+          "Python",
+          "TypeScript",
+          "Shell",
+          "Dockerfile"
+        ],
+        "fileCount": 0,
+        "codeFileCount": 0
+      }
+    },
+    {
+      "repo": "repairman29/character-system-service",
+      "url": "https://github.com/repairman29/character-system-service",
+      "features": {
+        "qualityScore": 75,
+        "stars": 0,
+        "forks": 0,
+        "openIssues": 0,
+        "fileCount": 0,
+        "codeFileCount": 0,
+        "hasLicense": 0,
+        "hasDescription": 1,
+        "hasTopics": 0,
+        "hasReadme": 1,
+        "hasTests": 0,
+        "hasCI": 1,
+        "hasDocker": 1,
+        "hasConfig": 0,
+        "issues": 2,
+        "improvements": 2,
+        "languages": [
+          "JavaScript",
+          "Dockerfile"
+        ],
+        "primaryLanguage": "Unknown"
+      },
+      "quality": 75,
+      "timestamp": "2026-01-05T04:02:28.172Z",
+      "metadata": {
+        "languages": [
+          "JavaScript",
+          "Dockerfile"
+        ],
+        "fileCount": 0,
+        "codeFileCount": 0
+      }
+    },
+    {
+      "repo": "repairman29/combat-system-service",
+      "url": "https://github.com/repairman29/combat-system-service",
+      "features": {
+        "qualityScore": 84,
+        "stars": 0,
+        "forks": 0,
+        "openIssues": 0,
+        "fileCount": 0,
+        "codeFileCount": 0,
+        "hasLicense": 0,
+        "hasDescription": 1,
+        "hasTopics": 0,
+        "hasReadme": 1,
+        "hasTests": 1,
+        "hasCI": 1,
+        "hasDocker": 1,
+        "hasConfig": 0,
+        "issues": 1,
+        "improvements": 1,
+        "languages": [
+          "JavaScript",
+          "Dockerfile"
+        ],
+        "primaryLanguage": "Unknown"
+      },
+      "quality": 84,
+      "timestamp": "2026-01-05T04:02:27.095Z",
+      "metadata": {
+        "languages": [
+          "JavaScript",
+          "Dockerfile"
+        ],
+        "fileCount": 0,
+        "codeFileCount": 0
+      }
+    },
+    {
+      "repo": "repairman29/okr",
+      "url": "https://github.com/repairman29/okr",
+      "features": {
+        "qualityScore": 50,
+        "stars": 0,
+        "forks": 0,
+        "openIssues": 0,
+        "fileCount": 0,
+        "codeFileCount": 0,
+        "hasLicense": 0,
+        "hasDescription": 0,
+        "hasTopics": 0,
+        "hasReadme": 0,
+        "hasTests": 0,
+        "hasCI": 0,
+        "hasDocker": 0,
+        "hasConfig": 0,
+        "issues": 8,
+        "improvements": 7,
+        "languages": [],
+        "primaryLanguage": "Unknown"
+      },
+      "quality": 50,
+      "timestamp": "2026-01-05T04:02:36.270Z",
+      "metadata": {
+        "languages": [],
+        "fileCount": 0,
+        "codeFileCount": 0
+      }
+    },
+    {
+      "repo": "repairman29/slides",
+      "url": "https://github.com/repairman29/slides",
+      "features": {
+        "qualityScore": 50,
+        "stars": 0,
+        "forks": 0,
+        "openIssues": 0,
+        "fileCount": 0,
+        "codeFileCount": 0,
+        "hasLicense": 0,
+        "hasDescription": 0,
+        "hasTopics": 0,
+        "hasReadme": 0,
+        "hasTests": 0,
+        "hasCI": 0,
+        "hasDocker": 0,
+        "hasConfig": 0,
+        "issues": 8,
+        "improvements": 7,
+        "languages": [],
+        "primaryLanguage": "Unknown"
+      },
+      "quality": 50,
+      "timestamp": "2026-01-05T04:02:32.709Z",
+      "metadata": {
+        "languages": [],
+        "fileCount": 0,
+        "codeFileCount": 0
+      }
+    },
+    {
+      "repo": "repairman29/echeo_old",
+      "url": "https://github.com/repairman29/echeo_old",
+      "features": {
+        "qualityScore": 87,
+        "stars": 0,
+        "forks": 0,
+        "openIssues": 0,
+        "fileCount": 0,
+        "codeFileCount": 0,
+        "hasLicense": 0,
+        "hasDescription": 0,
+        "hasTopics": 0,
+        "hasReadme": 1,
+        "hasTests": 1,
+        "hasCI": 1,
+        "hasDocker": 1,
+        "hasConfig": 0,
+        "issues": 2,
+        "improvements": 2,
+        "languages": [
+          "TypeScript",
+          "JavaScript",
+          "Shell",
+          "HTML",
+          "Makefile",
+          "CSS",
+          "Dockerfile",
+          "Python"
+        ],
+        "primaryLanguage": "Unknown"
+      },
+      "quality": 87,
+      "timestamp": "2026-01-05T04:02:31.658Z",
+      "metadata": {
+        "languages": [
+          "TypeScript",
+          "JavaScript",
+          "Shell",
+          "HTML",
+          "Makefile",
+          "CSS",
+          "Dockerfile",
+          "Python"
+        ],
+        "fileCount": 0,
+        "codeFileCount": 0
+      }
+    }
+  ],
+  "metadata": {
+    "trainSize": 39,
+    "valSize": 8,
+    "testSize": 9,
+    "total": 56
+  }
+}

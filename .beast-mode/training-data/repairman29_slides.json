@@ -1,0 +1,31 @@
+{
+  "repo": "repairman29/slides",
+  "url": "https://github.com/repairman29/slides",
+  "features": {
+    "qualityScore": 50,
+    "stars": 0,
+    "forks": 0,
+    "openIssues": 0,
+    "fileCount": 0,
+    "codeFileCount": 0,
+    "hasLicense": 0,
+    "hasDescription": 0,
+    "hasTopics": 0,
+    "hasReadme": 0,
+    "hasTests": 0,
+    "hasCI": 0,
+    "hasDocker": 0,
+    "hasConfig": 0,
+    "issues": 8,
+    "improvements": 7,
+    "languages": [],
+    "primaryLanguage": "Unknown"
+  },
+  "quality": 50,
+  "timestamp": "2026-01-05T04:02:32.709Z",
+  "metadata": {
+    "languages": [],
+    "fileCount": 0,
+    "codeFileCount": 0
+  }
+}

@@ -8,7 +8,7 @@ import { NextRequest, NextResponse } from 'next/server';
 let cache: any = null;
 
 try {
-  const llmCacheModule = require('../../../../../lib/mlops/llmCache');
+  const llmCacheModule = require('@/lib/mlops/llmCache');
   const getLLMCache = llmCacheModule.getLLMCache || llmCacheModule.default?.getLLMCache;
   if (getLLMCache) {
     cache = getLLMCache({ enabled: true });

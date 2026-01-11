@@ -10,7 +10,7 @@ import { NextRequest, NextResponse } from 'next/server';
 let service: any = null;
 
 try {
-  const serviceModule = require('../../../../../lib/mlops/modelComparison');
+  const serviceModule = require('@/lib/mlops/modelComparison');
   if (serviceModule.getModelComparison) {
     service = serviceModule.getModelComparison();
   } else if (serviceModule.ModelComparison) {

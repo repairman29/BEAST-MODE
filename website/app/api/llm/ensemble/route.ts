@@ -13,7 +13,7 @@ import { NextRequest, NextResponse } from 'next/server';
 let ensembleGenerator: any = null;
 
 try {
-  const ensembleModule = require('../../../../../lib/mlops/ensembleGenerator');
+  const ensembleModule = require('@/lib/mlops/ensembleGenerator');
   if (ensembleModule.EnsembleGenerator) {
     ensembleGenerator = new ensembleModule.EnsembleGenerator();
   } else {

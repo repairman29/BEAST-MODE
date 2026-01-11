@@ -4,7 +4,8 @@
  */
 
 import { NextRequest, NextResponse } from 'next/server';
-import refactoringSuggestions from '../../../../../lib/mlops/refactoringSuggestions';
+// Use @/ alias for website/lib/mlops (copied from root lib/mlops)
+import refactoringSuggestions from '@/lib/mlops/refactoringSuggestions';
 
 export async function POST(request: NextRequest) {
   try {

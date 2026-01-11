@@ -13,7 +13,7 @@ import { NextRequest, NextResponse } from 'next/server';
 let qualityRouter: any = null;
 
 try {
-  const routerModule = require('../../../../../lib/mlops/qualityRouter');
+  const routerModule = require('@/lib/mlops/qualityRouter');
   if (routerModule.QualityRouter) {
     qualityRouter = new routerModule.QualityRouter();
   } else {

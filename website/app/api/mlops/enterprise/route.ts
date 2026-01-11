@@ -11,7 +11,7 @@ import { NextRequest, NextResponse } from 'next/server';
 let service: any = null;
 
 try {
-  const serviceModule = require('../../../../../lib/mlops/enterpriseService');
+  const serviceModule = require('@/lib/mlops/enterpriseService');
   if (serviceModule.getEnterpriseService) {
     service = serviceModule.getEnterpriseService();
   } else if (serviceModule.EnterpriseService) {

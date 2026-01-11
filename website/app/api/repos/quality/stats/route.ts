@@ -5,7 +5,7 @@ import { NextRequest, NextResponse } from 'next/server';
 let getQualityCache: any;
 
 try {
-  const qualityCache = require('../../../../../../lib/mlops/qualityCache');
+  const qualityCache = require('@/lib/mlops/qualityCache');
   getQualityCache = qualityCache.getQualityCache || qualityCache.default?.getQualityCache;
 } catch (error) {
   // Fallback if module doesn't exist

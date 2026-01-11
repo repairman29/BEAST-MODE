@@ -1,194 +1,111 @@
-/**
- * Monaco Editor Integration for BEAST MODE IDE
- */
-
 import * as monaco from 'monaco-editor';
+import { editor } from 'monaco-editor';
 
-export class MonacoEditorManager {
-    private editor: monaco.editor.IStandaloneCodeEditor | null = null;
-    private container: HTMLElement;
+export class MonacoEditorService {
+  private editor: editor.IStandaloneCodeEditor | null = null;
+  private container: HTMLElement | null = null;
 
-    constructor(containerId: string) {
-        const container = document.getElementById(containerId);
-        if (!container) {
-            throw new Error(`Container ${containerId} not found`);
+  async initialize(containerId: string, options: editor.IStandaloneEditorConstructionOptions = {}) {
+    this.container = document.getElementById(containerId);
+    if (!this.container) {
+      throw new Error(`Container ${containerId} not found`);
+    }
+
+    // Set up Monaco environment
+    if (typeof window !== 'undefined' && (window as any).MonacoEnvironment) {
+      (window as any).MonacoEnvironment.getWorkerUrl = (_moduleId: string, label: string) => {
+        if (label === 'json') {
+          return '/monaco-editor/esm/vs/language/json/json.worker.js';
         }
-        this.container = container;
-    }
-
-    initialize() {
-        // Create Monaco editor
-        this.editor = monaco.editor.create(this.container, {
-            value: '// Welcome to BEAST MODE IDE\n// Start coding...\n',
-            language: 'typescript',
-            theme: 'vs-dark',
-            automaticLayout: true,
-            minimap: {
-                enabled: true
-            },
-            fontSize: 14,
-            fontFamily: "'JetBrains Mono', 'Fira Code', monospace",
-            lineNumbers: 'on',
-            roundedSelection: false,
-            scrollBeyondLastLine: false,
-            readOnly: false,
-            cursorStyle: 'line',
-            wordWrap: 'on'
-        });
-
-        // Add BEAST MODE specific features
-        this.setupBeastModeFeatures();
-    }
-
-    private setupBeastModeFeatures() {
-        if (!this.editor) return;
-
-        // Register custom actions
-        this.editor.addAction({
-            id: 'beast-mode.interceptor.check',
-            label: 'Check for Secrets',
-            keybindings: [
-                monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyS,
-                monaco.KeyMod.Shift | monaco.KeyCode.KeyS
-            ],
-            run: () => {
-                this.checkSecrets();
-            }
-        });
-
-        this.editor.addAction({
-            id: 'beast-mode.architecture.check',
-            label: 'Check Architecture',
-            keybindings: [
-                monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyA,
-                monaco.KeyMod.Shift | monaco.KeyCode.KeyA
-            ],
-            run: () => {
-                this.checkArchitecture();
-            }
-        });
-    }
-
-    private async checkSecrets() {
-        if (!this.editor) return;
-
-        const content = this.editor.getValue();
-        const filePath = this.getCurrentFilePath();
-
-        // Call BEAST MODE interceptor API
-        try {
-            const response = await fetch('http://localhost:3000/api/interceptor/check', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    filePath,
-                    content
-                })
-            });
-
-            const result = await response.json();
-            if (!result.allowed) {
-                this.showIssues(result.issues);
-            }
-        } catch (error) {
-            console.error('Interceptor check failed:', error);
+        if (label === 'css' || label === 'scss' || label === 'less') {
+          return '/monaco-editor/esm/vs/language/css/css.worker.js';
         }
-    }
-
-    private async checkArchitecture() {
-        if (!this.editor) return;
-
-        const content = this.editor.getValue();
-        const filePath = this.getCurrentFilePath();
-
-        // Call BEAST MODE architecture API
-        try {
-            const response = await fetch('http://localhost:3000/api/architecture/check', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    filePath,
-                    content
-                })
-            });
-
-            const result = await response.json();
-            if (result.violations && result.violations.length > 0) {
-                this.showViolations(result.violations);
-            }
-        } catch (error) {
-            console.error('Architecture check failed:', error);
+        if (label === 'html' || label === 'handlebars' || label === 'razor') {
+          return '/monaco-editor/esm/vs/language/html/html.worker.js';
         }
-    }
-
-    private showIssues(issues: any[]) {
-        if (!this.editor) return;
-
-        const markers: monaco.editor.IMarkerData[] = issues.map(issue => ({
-            severity: this.getSeverity(issue.severity),
-            message: issue.message || issue.name,
-            startLineNumber: issue.line || 1,
-            startColumn: 1,
-            endLineNumber: issue.line || 1,
-            endColumn: 1000
-        }));
-
-        monaco.editor.setModelMarkers(
-            this.editor.getModel()!,
-            'beast-mode-interceptor',
-            markers
-        );
-    }
-
-    private showViolations(violations: any[]) {
-        if (!this.editor) return;
-
-        const markers: monaco.editor.IMarkerData[] = violations.map(violation => ({
-            severity: monaco.MarkerSeverity.Warning,
-            message: violation.message || violation.name,
-            startLineNumber: violation.line || 1,
-            startColumn: 1,
-            endLineNumber: violation.line || 1,
-            endColumn: 1000
-        }));
-
-        monaco.editor.setModelMarkers(
-            this.editor.getModel()!,
-            'beast-mode-architecture',
-            markers
-        );
-    }
-
-    private getSeverity(severity: string): monaco.MarkerSeverity {
-        switch (severity?.toLowerCase()) {
-            case 'critical':
-                return monaco.MarkerSeverity.Error;
-            case 'high':
-                return monaco.MarkerSeverity.Warning;
-            default:
-                return monaco.MarkerSeverity.Info;
+        if (label === 'typescript' || label === 'javascript') {
+          return '/monaco-editor/esm/vs/language/typescript/ts.worker.js';
         }
+        return '/monaco-editor/esm/vs/editor/editor.worker.js';
+      };
     }
 
-    private getCurrentFilePath(): string {
-        // Get current file path from editor state
-        return 'current-file.ts'; // TODO: Implement file path tracking
-    }
+    // Create editor
+    this.editor = monaco.editor.create(this.container, {
+      value: '// Welcome to BEAST MODE IDE\n// Start coding with enterprise-grade quality intelligence\n\n',
+      language: 'typescript',
+      theme: 'vs-dark',
+      automaticLayout: true,
+      minimap: { enabled: true },
+      fontSize: 14,
+      fontFamily: "'JetBrains Mono', 'Fira Code', monospace",
+      lineNumbers: 'on',
+      wordWrap: 'on',
+      cursorStyle: 'line',
+      ...options
+    });
 
-    setValue(value: string) {
-        if (this.editor) {
-            this.editor.setValue(value);
-        }
-    }
+    // Add BEAST MODE commands
+    this.editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyS, () => {
+      this.checkSecrets();
+    });
 
-    getValue(): string {
-        return this.editor?.getValue() || '';
-    }
+    this.editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyA, () => {
+      this.checkArchitecture();
+    });
 
-    dispose() {
-        if (this.editor) {
-            this.editor.dispose();
-            this.editor = null;
-        }
+    console.log('✅ Monaco Editor initialized');
+    return this.editor;
+  }
+
+  getValue(): string {
+    return this.editor?.getValue() || '';
+  }
+
+  setValue(value: string): void {
+    this.editor?.setValue(value);
+  }
+
+  async checkSecrets() {
+    const content = this.getValue();
+    // Call BEAST MODE interceptor API
+    try {
+      const response = await fetch('http://localhost:3000/api/interceptor/check', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ files: [{ content, path: 'current-file.ts' }] })
+      });
+      const result = await response.json();
+      if (!result.allowed) {
+        alert(`🛡️ Found ${result.issues?.length || 0} secret(s)!`);
+      }
+    } catch (error) {
+      console.error('Secret check failed:', error);
     }
+  }
+
+  async checkArchitecture() {
+    const content = this.getValue();
+    // Call BEAST MODE architecture API
+    try {
+      const response = await fetch('http://localhost:3000/api/architecture/check', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ filePath: 'current-file.ts', content })
+      });
+      const result = await response.json();
+      if (result.violations && result.violations.length > 0) {
+        alert(`🏗️ Found ${result.violations.length} architecture violation(s)!`);
+      }
+    } catch (error) {
+      console.error('Architecture check failed:', error);
+    }
+  }
+
+  dispose() {
+    this.editor?.dispose();
+    this.editor = null;
+  }
 }
+
+export default MonacoEditorService;

@@ -1,0 +1,3255 @@
+{
+  "metadata": {
+    "scannedAt": "2026-01-06T04:33:40.835Z",
+    "source": "missing-languages-discovery",
+    "totalRepos": 70,
+    "successful": 70,
+    "failed": 0,
+    "languages": [
+      "Shell"
+    ]
+  },
+  "trainingData": [
+    {
+      "repo": "ohmyzsh/ohmyzsh",
+      "url": "https://github.com/ohmyzsh/ohmyzsh",
+      "features": {
+        "metadata": {
+          "metadata": {
+            "repo": "ohmyzsh/ohmyzsh",
+            "url": "https://github.com/ohmyzsh/ohmyzsh",
+            "stars": 183754,
+            "forks": 26304,
+            "openIssues": 528,
+            "hasLicense": 1,
+            "hasDescription": 1,
+            "hasTopics": 1,
+            "language": "Shell",
+            "languages": [
+              "Shell",
+              "Python",
+              "Makefile"
+            ],
+            "createdAt": "2009-08-28T18:15:37Z",
+            "updatedAt": "2026-01-06T02:47:52Z",
+            "pushedAt": "2026-01-05T12:07:41Z",
+            "license": "MIT",
+            "licenseName": "MIT License",
+            "isFork": false,
+            "archived": false,
+            "disabled": false,
+            "fileCount": 1076,
+            "codeFileCount": 8,
+            "hasTests": 1,
+            "hasCI": 1,
+            "hasDocker": 1,
+            "hasConfig": 1,
+            "hasReadme": 1
+          },
+          "source": "public-repo",
+          "scannedAt": "2026-01-06T04:31:53.903Z",
+          "optedOut": false,
+          "repo": "ohmyzsh/ohmyzsh",
+          "language": "Shell",
+          "primaryLanguage": "Shell"
+        }
+      },
+      "language": "Shell"
+    },
+    {
+      "repo": "d3/d3",
+      "url": "https://github.com/d3/d3",
+      "features": {
+        "metadata": {
+          "metadata": {
+            "repo": "d3/d3",
+            "url": "https://github.com/d3/d3",
+            "stars": 112095,
+            "forks": 22849,
+            "openIssues": 26,
+            "hasLicense": 1,
+            "hasDescription": 1,
+            "hasTopics": 1,
+            "language": "Shell",
+            "languages": [
+              "Shell",
+              "JavaScript"
+            ],
+            "createdAt": "2010-09-27T17:22:42Z",
+            "updatedAt": "2026-01-06T04:05:15Z",
+            "pushedAt": "2025-12-02T17:48:19Z",
+            "license": "ISC",
+            "licenseName": "ISC License",
+            "isFork": false,
+            "archived": false,
+            "disabled": false,
+            "fileCount": 175,
+            "codeFileCount": 15,
+            "hasTests": 1,
+            "hasCI": 1,
+            "hasDocker": 0,
+            "hasConfig": 1,
+            "hasReadme": 1
+          },
+          "source": "public-repo",
+          "scannedAt": "2026-01-06T04:31:55.579Z",
+          "optedOut": false,
+          "repo": "d3/d3",
+          "language": "Shell",
+          "primaryLanguage": "Shell"
+        }
+      },
+      "language": "Shell"
+    },
+    {
+      "repo": "papers-we-love/papers-we-love",
+      "url": "https://github.com/papers-we-love/papers-we-love",
+      "features": {
+        "metadata": {
+          "metadata": {
+            "repo": "papers-we-love/papers-we-love",
+            "url": "https://github.com/papers-we-love/papers-we-love",
+            "stars": 102105,
+            "forks": 6241,
+            "openIssues": 2,
+            "hasLicense": 0,
+            "hasDescription": 1,
+            "hasTopics": 1,
+            "language": "Shell",
+            "languages": [
+              "Shell"
+            ],
+            "createdAt": "2013-12-15T14:31:41Z",
+            "updatedAt": "2026-01-06T04:31:56Z",
+            "pushedAt": "2025-10-10T15:35:14Z",
+            "license": "None",
+            "licenseName": "No License",
+            "isFork": false,
+            "archived": false,
+            "disabled": false,
+            "fileCount": 300,
+            "codeFileCount": 0,
+            "hasTests": 1,
+            "hasCI": 1,
+            "hasDocker": 0,
+            "hasConfig": 0,
+            "hasReadme": 1
+          },
+          "source": "public-repo",
+          "scannedAt": "2026-01-06T04:31:57.210Z",
+          "optedOut": false,
+          "repo": "papers-we-love/papers-we-love",
+          "language": "Shell",
+          "primaryLanguage": "Shell"
+        }
+      },
+      "language": "Shell"
+    },
+    {
+      "repo": "nvm-sh/nvm",
+      "url": "https://github.com/nvm-sh/nvm",
+      "features": {
+        "metadata": {
+          "metadata": {
+            "repo": "nvm-sh/nvm",
+            "url": "https://github.com/nvm-sh/nvm",
+            "stars": 90702,
+            "forks": 9738,
+            "openIssues": 379,
+            "hasLicense": 1,
+            "hasDescription": 1,
+            "hasTopics": 1,
+            "language": "Shell",
+            "languages": [
+              "Shell",
+              "Makefile",
+              "Dockerfile",
+              "JavaScript"
+            ],
+            "createdAt": "2010-04-15T17:47:47Z",
+            "updatedAt": "2026-01-06T04:26:40Z",
+            "pushedAt": "2025-12-03T20:06:59Z",
+            "license": "MIT",
+            "licenseName": "MIT License",
+            "isFork": false,
+            "archived": false,
+            "disabled": false,
+            "fileCount": 356,
+            "codeFileCount": 1,
+            "hasTests": 1,
+            "hasCI": 1,
+            "hasDocker": 1,
+            "hasConfig": 1,
+            "hasReadme": 1
+          },
+          "source": "public-repo",
+          "scannedAt": "2026-01-06T04:31:58.861Z",
+          "optedOut": false,
+          "repo": "nvm-sh/nvm",
+          "language": "Shell",
+          "primaryLanguage": "Shell"
+        }
+      },
+      "language": "Shell"
+    },
+    {
+      "repo": "youngyangyang04/leetcode-master",
+      "url": "https://github.com/youngyangyang04/leetcode-master",
+      "features": {
+        "metadata": {
+          "metadata": {
+            "repo": "youngyangyang04/leetcode-master",
+            "url": "https://github.com/youngyangyang04/leetcode-master",
+            "stars": 59838,
+            "forks": 12302,
+            "openIssues": 237,
+            "hasLicense": 0,
+            "hasDescription": 1,
+            "hasTopics": 1,
+            "language": "Shell",
+            "languages": [
+              "Shell"
+            ],
+            "createdAt": "2019-12-14T12:05:42Z",
+            "updatedAt": "2026-01-06T04:21:23Z",
+            "pushedAt": "2025-11-07T09:41:14Z",
+            "license": "None",
+            "licenseName": "No License",
+            "isFork": false,
+            "archived": false,
+            "disabled": false,
+            "fileCount": 326,
+            "codeFileCount": 0,
+            "hasTests": 1,
+            "hasCI": 0,
+            "hasDocker": 0,
+            "hasConfig": 0,
+            "hasReadme": 1
+          },
+          "source": "public-repo",
+          "scannedAt": "2026-01-06T04:32:00.269Z",
+          "optedOut": false,
+          "repo": "youngyangyang04/leetcode-master",
+          "language": "Shell",
+          "primaryLanguage": "Shell"
+        }
+      },
+      "language": "Shell"
+    },
+    {
+      "repo": "pi-hole/pi-hole",
+      "url": "https://github.com/pi-hole/pi-hole",
+      "features": {
+        "metadata": {
+          "metadata": {
+            "repo": "pi-hole/pi-hole",
+            "url": "https://github.com/pi-hole/pi-hole",
+            "stars": 55100,
+            "forks": 2952,
+            "openIssues": 52,
+            "hasLicense": 1,
+            "hasDescription": 1,
+            "hasTopics": 1,
+            "language": "Shell",
+            "languages": [
+              "Shell",
+              "Python",
+              "Dockerfile",
+              "Roff"
+            ],
+            "createdAt": "2014-06-08T15:02:55Z",
+            "updatedAt": "2026-01-06T03:07:08Z",
+            "pushedAt": "2026-01-04T13:08:33Z",
+            "license": "NOASSERTION",
+            "licenseName": "Other",
+            "isFork": false,
+            "archived": false,
+            "disabled": false,
+            "fileCount": 102,
+            "codeFileCount": 6,
+            "hasTests": 1,
+            "hasCI": 1,
+            "hasDocker": 1,
+            "hasConfig": 1,
+            "hasReadme": 1
+          },
+          "source": "public-repo",
+          "scannedAt": "2026-01-06T04:32:01.898Z",
+          "optedOut": false,
+          "repo": "pi-hole/pi-hole",
+          "language": "Shell",
+          "primaryLanguage": "Shell"
+        }
+      },
+      "language": "Shell"
+    },
+    {
+      "repo": "romkatv/powerlevel10k",
+      "url": "https://github.com/romkatv/powerlevel10k",
+      "features": {
+        "metadata": {
+          "metadata": {
+            "repo": "romkatv/powerlevel10k",
+            "url": "https://github.com/romkatv/powerlevel10k",
+            "stars": 52236,
+            "forks": 2382,
+            "openIssues": 134,
+            "hasLicense": 1,
+            "hasDescription": 1,
+            "hasTopics": 1,
+            "language": "Shell",
+            "languages": [
+              "Shell",
+              "C++",
+              "Makefile"
+            ],
+            "createdAt": "2019-02-24T19:09:45Z",
+            "updatedAt": "2026-01-06T03:25:08Z",
+            "pushedAt": "2025-04-29T13:00:59Z",
+            "license": "MIT",
+            "licenseName": "MIT License",
+            "isFork": false,
+            "archived": false,
+            "disabled": false,
+            "fileCount": 86,
+            "codeFileCount": 0,
+            "hasTests": 0,
+            "hasCI": 0,
+            "hasDocker": 0,
+            "hasConfig": 1,
+            "hasReadme": 1
+          },
+          "source": "public-repo",
+          "scannedAt": "2026-01-06T04:32:03.326Z",
+          "optedOut": false,
+          "repo": "romkatv/powerlevel10k",
+          "language": "Shell",
+          "primaryLanguage": "Shell"
+        }
+      },
+      "language": "Shell"
+    },
+    {
+      "repo": "sickcodes/Docker-OSX",
+      "url": "https://github.com/sickcodes/Docker-OSX",
+      "features": {
+        "metadata": {
+          "metadata": {
+            "repo": "sickcodes/Docker-OSX",
+            "url": "https://github.com/sickcodes/Docker-OSX",
+            "stars": 51949,
+            "forks": 2886,
+            "openIssues": 411,
+            "hasLicense": 1,
+            "hasDescription": 1,
+            "hasTopics": 1,
+            "language": "Shell",
+            "languages": [
+              "Shell",
+              "Dockerfile",
+              "Python",
+              "Mustache"
+            ],
+            "createdAt": "2020-06-04T11:01:37Z",
+            "updatedAt": "2026-01-06T00:04:13Z",
+            "pushedAt": "2025-11-11T05:23:57Z",
+            "license": "GPL-3.0",
+            "licenseName": "GNU General Public License v3.0",
+            "isFork": false,
+            "archived": false,
+            "disabled": false,
+            "fileCount": 57,
+            "codeFileCount": 2,
+            "hasTests": 1,
+            "hasCI": 1,
+            "hasDocker": 1,
+            "hasConfig": 1,
+            "hasReadme": 1
+          },
+          "source": "public-repo",
+          "scannedAt": "2026-01-06T04:32:04.677Z",
+          "optedOut": false,
+          "repo": "sickcodes/Docker-OSX",
+          "language": "Shell",
+          "primaryLanguage": "Shell"
+        }
+      },
+      "language": "Shell"
+    },
+    {
+      "repo": "anthropics/claude-code",
+      "url": "https://github.com/anthropics/claude-code",
+      "features": {
+        "metadata": {
+          "metadata": {
+            "repo": "anthropics/claude-code",
+            "url": "https://github.com/anthropics/claude-code",
+            "stars": 51757,
+            "forks": 3718,
+            "openIssues": 5826,
+            "hasLicense": 0,
+            "hasDescription": 1,
+            "hasTopics": 0,
+            "language": "Shell",
+            "languages": [
+              "Shell",
+              "Python",
+              "TypeScript",
+              "PowerShell",
+              "Dockerfile"
+            ],
+            "createdAt": "2025-02-22T17:41:21Z",
+            "updatedAt": "2026-01-06T04:24:03Z",
+            "pushedAt": "2026-01-05T20:20:12Z",
+            "license": "None",
+            "licenseName": "No License",
+            "isFork": false,
+            "archived": false,
+            "disabled": false,
+            "fileCount": 173,
+            "codeFileCount": 14,
+            "hasTests": 1,
+            "hasCI": 1,
+            "hasDocker": 1,
+            "hasConfig": 1,
+            "hasReadme": 1
+          },
+          "source": "public-repo",
+          "scannedAt": "2026-01-06T04:32:06.463Z",
+          "optedOut": false,
+          "repo": "anthropics/claude-code",
+          "language": "Shell",
+          "primaryLanguage": "Shell"
+        }
+      },
+      "language": "Shell"
+    },
+    {
+      "repo": "dockur/windows",
+      "url": "https://github.com/dockur/windows",
+      "features": {
+        "metadata": {
+          "metadata": {
+            "repo": "dockur/windows",
+            "url": "https://github.com/dockur/windows",
+            "stars": 49359,
+            "forks": 3857,
+            "openIssues": 80,
+            "hasLicense": 1,
+            "hasDescription": 1,
+            "hasTopics": 1,
+            "language": "Shell",
+            "languages": [
+              "Shell",
+              "Dockerfile"
+            ],
+            "createdAt": "2024-01-14T13:09:40Z",
+            "updatedAt": "2026-01-06T03:37:37Z",
+            "pushedAt": "2025-11-22T04:09:00Z",
+            "license": "MIT",
+            "licenseName": "MIT License",
+            "isFork": false,
+            "archived": false,
+            "disabled": false,
+            "fileCount": 89,
+            "codeFileCount": 0,
+            "hasTests": 1,
+            "hasCI": 1,
+            "hasDocker": 1,
+            "hasConfig": 1,
+            "hasReadme": 1
+          },
+          "source": "public-repo",
+          "scannedAt": "2026-01-06T04:32:08.058Z",
+          "optedOut": false,
+          "repo": "dockur/windows",
+          "language": "Shell",
+          "primaryLanguage": "Shell"
+        }
+      },
+      "language": "Shell"
+    },
+    {
+      "repo": "acmesh-official/acme.sh",
+      "url": "https://github.com/acmesh-official/acme.sh",
+      "features": {
+        "metadata": {
+          "metadata": {
+            "repo": "acmesh-official/acme.sh",
+            "url": "https://github.com/acmesh-official/acme.sh",
+            "stars": 45208,
+            "forks": 5467,
+            "openIssues": 1345,
+            "hasLicense": 1,
+            "hasDescription": 1,
+            "hasTopics": 1,
+            "language": "Shell",
+            "languages": [
+              "Shell",
+              "Dockerfile"
+            ],
+            "createdAt": "2015-12-26T12:56:33Z",
+            "updatedAt": "2026-01-06T04:16:15Z",
+            "pushedAt": "2026-01-05T21:06:56Z",
+            "license": "GPL-3.0",
+            "licenseName": "GNU General Public License v3.0",
+            "isFork": false,
+            "archived": false,
+            "disabled": false,
+            "fileCount": 269,
+            "codeFileCount": 0,
+            "hasTests": 0,
+            "hasCI": 1,
+            "hasDocker": 1,
+            "hasConfig": 1,
+            "hasReadme": 1
+          },
+          "source": "public-repo",
+          "scannedAt": "2026-01-06T04:32:09.666Z",
+          "optedOut": false,
+          "repo": "acmesh-official/acme.sh",
+          "language": "Shell",
+          "primaryLanguage": "Shell"
+        }
+      },
+      "language": "Shell"
+    },
+    {
+      "repo": "dylanaraps/pure-bash-bible",
+      "url": "https://github.com/dylanaraps/pure-bash-bible",
+      "features": {
+        "metadata": {
+          "metadata": {
+            "repo": "dylanaraps/pure-bash-bible",
+            "url": "https://github.com/dylanaraps/pure-bash-bible",
+            "stars": 41016,
+            "forks": 3624,
+            "openIssues": 62,
+            "hasLicense": 1,
+            "hasDescription": 1,
+            "hasTopics": 1,
+            "language": "Shell",
+            "languages": [
+              "Shell"
+            ],
+            "createdAt": "2018-06-13T01:39:33Z",
+            "updatedAt": "2026-01-05T21:27:06Z",
+            "pushedAt": "2023-11-28T03:26:23Z",
+            "license": "MIT",
+            "licenseName": "MIT License",
+            "isFork": false,
+            "archived": true,
+            "disabled": false,
+            "fileCount": 27,
+            "codeFileCount": 0,
+            "hasTests": 1,
+            "hasCI": 0,
+            "hasDocker": 0,
+            "hasConfig": 0,
+            "hasReadme": 1
+          },
+          "source": "public-repo",
+          "scannedAt": "2026-01-06T04:32:11.043Z",
+          "optedOut": false,
+          "repo": "dylanaraps/pure-bash-bible",
+          "language": "Shell",
+          "primaryLanguage": "Shell"
+        }
+      },
+      "language": "Shell"
+    },
+    {
+      "repo": "inkonchain/node",
+      "url": "https://github.com/inkonchain/node",
+      "features": {
+        "metadata": {
+          "metadata": {
+            "repo": "inkonchain/node",
+            "url": "https://github.com/inkonchain/node",
+            "stars": 36853,
+            "forks": 629,
+            "openIssues": 19,
+            "hasLicense": 1,
+            "hasDescription": 1,
+            "hasTopics": 0,
+            "language": "Shell",
+            "languages": [
+              "Shell"
+            ],
+            "createdAt": "2024-05-13T23:20:40Z",
+            "updatedAt": "2026-01-05T13:25:34Z",
+            "pushedAt": "2025-11-17T21:44:12Z",
+            "license": "MIT",
+            "licenseName": "MIT License",
+            "isFork": false,
+            "archived": false,
+            "disabled": false,
+            "fileCount": 26,
+            "codeFileCount": 0,
+            "hasTests": 0,
+            "hasCI": 1,
+            "hasDocker": 1,
+            "hasConfig": 0,
+            "hasReadme": 1
+          },
+          "source": "public-repo",
+          "scannedAt": "2026-01-06T04:32:12.707Z",
+          "optedOut": false,
+          "repo": "inkonchain/node",
+          "language": "Shell",
+          "primaryLanguage": "Shell"
+        }
+      },
+      "language": "Shell"
+    },
+    {
+      "repo": "open-guides/og-aws",
+      "url": "https://github.com/open-guides/og-aws",
+      "features": {
+        "metadata": {
+          "metadata": {
+            "repo": "open-guides/og-aws",
+            "url": "https://github.com/open-guides/og-aws",
+            "stars": 36615,
+            "forks": 3914,
+            "openIssues": 159,
+            "hasLicense": 1,
+            "hasDescription": 1,
+            "hasTopics": 0,
+            "language": "Shell",
+            "languages": [
+              "Shell"
+            ],
+            "createdAt": "2016-07-13T17:30:16Z",
+            "updatedAt": "2026-01-06T01:12:04Z",
+            "pushedAt": "2024-08-16T02:51:54Z",
+            "license": "CC-BY-4.0",
+            "licenseName": "Creative Commons Attribution 4.0 International",
+            "isFork": false,
+            "archived": false,
+            "disabled": false,
+            "fileCount": 16,
+            "codeFileCount": 0,
+            "hasTests": 0,
+            "hasCI": 1,
+            "hasDocker": 0,
+            "hasConfig": 0,
+            "hasReadme": 1
+          },
+          "source": "public-repo",
+          "scannedAt": "2026-01-06T04:32:14.299Z",
+          "optedOut": false,
+          "repo": "open-guides/og-aws",
+          "language": "Shell",
+          "primaryLanguage": "Shell"
+        }
+      },
+      "language": "Shell"
+    },
+    {
+      "repo": "zsh-users/zsh-autosuggestions",
+      "url": "https://github.com/zsh-users/zsh-autosuggestions",
+      "features": {
+        "metadata": {
+          "metadata": {
+            "repo": "zsh-users/zsh-autosuggestions",
+            "url": "https://github.com/zsh-users/zsh-autosuggestions",
+            "stars": 34525,
+            "forks": 1922,
+            "openIssues": 194,
+            "hasLicense": 1,
+            "hasDescription": 1,
+            "hasTopics": 1,
+            "language": "Shell",
+            "languages": [
+              "Shell",
+              "Ruby",
+              "Makefile",
+              "Dockerfile"
+            ],
+            "createdAt": "2013-10-26T16:09:37Z",
+            "updatedAt": "2026-01-06T01:51:08Z",
+            "pushedAt": "2025-06-24T16:15:03Z",
+            "license": "MIT",
+            "licenseName": "MIT License",
+            "isFork": false,
+            "archived": false,
+            "disabled": false,
+            "fileCount": 61,
+            "codeFileCount": 27,
+            "hasTests": 1,
+            "hasCI": 1,
+            "hasDocker": 1,
+            "hasConfig": 1,
+            "hasReadme": 1
+          },
+          "source": "public-repo",
+          "scannedAt": "2026-01-06T04:32:15.876Z",
+          "optedOut": false,
+          "repo": "zsh-users/zsh-autosuggestions",
+          "language": "Shell",
+          "primaryLanguage": "Shell"
+        }
+      },
+      "language": "Shell"
+    },
+    {
+      "repo": "dokku/dokku",
+      "url": "https://github.com/dokku/dokku",
+      "features": {
+        "metadata": {
+          "metadata": {
+            "repo": "dokku/dokku",
+            "url": "https://github.com/dokku/dokku",
+            "stars": 31720,
+            "forks": 2018,
+            "openIssues": 34,
+            "hasLicense": 1,
+            "hasDescription": 1,
+            "hasTopics": 1,
+            "language": "Shell",
+            "languages": [
+              "Shell",
+              "Go",
+              "Makefile",
+              "Python",
+              "HTML",
+              "Dockerfile",
+              "Procfile",
+              "JavaScript",
+              "Scala",
+              "HCL",
+              "Smarty",
+              "Java",
+              "Clojure",
+              "Ruby",
+              "SCSS",
+              "PHP"
+            ],
+            "createdAt": "2013-06-08T10:26:57Z",
+            "updatedAt": "2026-01-06T00:34:49Z",
+            "pushedAt": "2026-01-05T20:40:01Z",
+            "license": "MIT",
+            "licenseName": "MIT License",
+            "isFork": false,
+            "archived": false,
+            "disabled": false,
+            "fileCount": 1550,
+            "codeFileCount": 218,
+            "hasTests": 1,
+            "hasCI": 1,
+            "hasDocker": 1,
+            "hasConfig": 1,
+            "hasReadme": 1
+          },
+          "source": "public-repo",
+          "scannedAt": "2026-01-06T04:32:17.426Z",
+          "optedOut": false,
+          "repo": "dokku/dokku",
+          "language": "Shell",
+          "primaryLanguage": "Shell"
+        }
+      },
+      "language": "Shell"
+    },
+    {
+      "repo": "mathiasbynens/dotfiles",
+      "url": "https://github.com/mathiasbynens/dotfiles",
+      "features": {
+        "metadata": {
+          "metadata": {
+            "repo": "mathiasbynens/dotfiles",
+            "url": "https://github.com/mathiasbynens/dotfiles",
+            "stars": 31157,
+            "forks": 8658,
+            "openIssues": 186,
+            "hasLicense": 1,
+            "hasDescription": 1,
+            "hasTopics": 1,
+            "language": "Shell",
+            "languages": [
+              "Shell",
+              "Vim Script",
+              "GDB"
+            ],
+            "createdAt": "2011-09-05T18:07:54Z",
+            "updatedAt": "2026-01-05T09:06:59Z",
+            "pushedAt": "2024-08-05T19:06:13Z",
+            "license": "MIT",
+            "licenseName": "MIT License",
+            "isFork": false,
+            "archived": false,
+            "disabled": false,
+            "fileCount": 36,
+            "codeFileCount": 0,
+            "hasTests": 1,
+            "hasCI": 0,
+            "hasDocker": 0,
+            "hasConfig": 1,
+            "hasReadme": 1
+          },
+          "source": "public-repo",
+          "scannedAt": "2026-01-06T04:32:18.841Z",
+          "optedOut": false,
+          "repo": "mathiasbynens/dotfiles",
+          "language": "Shell",
+          "primaryLanguage": "Shell"
+        }
+      },
+      "language": "Shell"
+    },
+    {
+      "repo": "VSCodium/vscodium",
+      "url": "https://github.com/VSCodium/vscodium",
+      "features": {
+        "metadata": {
+          "metadata": {
+            "repo": "VSCodium/vscodium",
+            "url": "https://github.com/VSCodium/vscodium",
+            "stars": 29667,
+            "forks": 1510,
+            "openIssues": 135,
+            "hasLicense": 1,
+            "hasDescription": 1,
+            "hasTopics": 1,
+            "language": "Shell",
+            "languages": [
+              "Shell",
+              "XSLT",
+              "PowerShell",
+              "Python"
+            ],
+            "createdAt": "2018-08-13T14:26:58Z",
+            "updatedAt": "2026-01-06T03:40:32Z",
+            "pushedAt": "2026-01-05T14:03:18Z",
+            "license": "MIT",
+            "licenseName": "MIT License",
+            "isFork": false,
+            "archived": false,
+            "disabled": false,
+            "fileCount": 359,
+            "codeFileCount": 0,
+            "hasTests": 0,
+            "hasCI": 1,
+            "hasDocker": 0,
+            "hasConfig": 1,
+            "hasReadme": 1
+          },
+          "source": "public-repo",
+          "scannedAt": "2026-01-06T04:32:20.573Z",
+          "optedOut": false,
+          "repo": "VSCodium/vscodium",
+          "language": "Shell",
+          "primaryLanguage": "Shell"
+        }
+      },
+      "language": "Shell"
+    },
+    {
+      "repo": "MichaelCade/90DaysOfDevOps",
+      "url": "https://github.com/MichaelCade/90DaysOfDevOps",
+      "features": {
+        "metadata": {
+          "metadata": {
+            "repo": "MichaelCade/90DaysOfDevOps",
+            "url": "https://github.com/MichaelCade/90DaysOfDevOps",
+            "stars": 29230,
+            "forks": 6713,
+            "openIssues": 14,
+            "hasLicense": 1,
+            "hasDescription": 1,
+            "hasTopics": 1,
+            "language": "Shell",
+            "languages": [
+              "Shell",
+              "Go",
+              "Python",
+              "HCL",
+              "Dockerfile",
+              "Jinja",
+              "PowerShell",
+              "Makefile",
+              "HTML"
+            ],
+            "createdAt": "2021-12-26T13:55:18Z",
+            "updatedAt": "2026-01-05T19:53:13Z",
+            "pushedAt": "2025-06-04T02:09:07Z",
+            "license": "NOASSERTION",
+            "licenseName": "Other",
+            "isFork": false,
+            "archived": false,
+            "disabled": false,
+            "fileCount": 7363,
+            "codeFileCount": 95,
+            "hasTests": 1,
+            "hasCI": 1,
+            "hasDocker": 1,
+            "hasConfig": 1,
+            "hasReadme": 1
+          },
+          "source": "public-repo",
+          "scannedAt": "2026-01-06T04:32:22.219Z",
+          "optedOut": false,
+          "repo": "MichaelCade/90DaysOfDevOps",
+          "language": "Shell",
+          "primaryLanguage": "Shell"
+        }
+      },
+      "language": "Shell"
+    },
+    {
+      "repo": "shengxinjing/programmer-job-blacklist",
+      "url": "https://github.com/shengxinjing/programmer-job-blacklist",
+      "features": {
+        "metadata": {
+          "metadata": {
+            "repo": "shengxinjing/programmer-job-blacklist",
+            "url": "https://github.com/shengxinjing/programmer-job-blacklist",
+            "stars": 28470,
+            "forks": 1790,
+            "openIssues": 171,
+            "hasLicense": 1,
+            "hasDescription": 1,
+            "hasTopics": 0,
+            "language": "Shell",
+            "languages": [
+              "Shell"
+            ],
+            "createdAt": "2016-06-25T06:09:10Z",
+            "updatedAt": "2026-01-05T12:29:55Z",
+            "pushedAt": "2024-06-09T14:56:42Z",
+            "license": "MIT",
+            "licenseName": "MIT License",
+            "isFork": false,
+            "archived": false,
+            "disabled": false,
+            "fileCount": 73,
+            "codeFileCount": 12,
+            "hasTests": 0,
+            "hasCI": 0,
+            "hasDocker": 0,
+            "hasConfig": 1,
+            "hasReadme": 1
+          },
+          "source": "public-repo",
+          "scannedAt": "2026-01-06T04:32:23.705Z",
+          "optedOut": false,
+          "repo": "shengxinjing/programmer-job-blacklist",
+          "language": "Shell",
+          "primaryLanguage": "Shell"
+        }
+      },
+      "language": "Shell"
+    },
+    {
+      "repo": "233boy/v2ray",
+      "url": "https://github.com/233boy/v2ray",
+      "features": {
+        "metadata": {
+          "metadata": {
+            "repo": "233boy/v2ray",
+            "url": "https://github.com/233boy/v2ray",
+            "stars": 27811,
+            "forks": 16691,
+            "openIssues": 275,
+            "hasLicense": 1,
+            "hasDescription": 1,
+            "hasTopics": 1,
+            "language": "Shell",
+            "languages": [
+              "Shell"
+            ],
+            "createdAt": "2017-11-18T12:52:18Z",
+            "updatedAt": "2026-01-06T03:46:20Z",
+            "pushedAt": "2025-10-13T08:28:18Z",
+            "license": "GPL-3.0",
+            "licenseName": "GNU General Public License v3.0",
+            "isFork": false,
+            "archived": false,
+            "disabled": false,
+            "fileCount": 15,
+            "codeFileCount": 0,
+            "hasTests": 0,
+            "hasCI": 1,
+            "hasDocker": 0,
+            "hasConfig": 0,
+            "hasReadme": 1
+          },
+          "source": "public-repo",
+          "scannedAt": "2026-01-06T04:32:25.104Z",
+          "optedOut": false,
+          "repo": "233boy/v2ray",
+          "language": "Shell",
+          "primaryLanguage": "Shell"
+        }
+      },
+      "language": "Shell"
+    },
+    {
+      "repo": "hwdsl2/setup-ipsec-vpn",
+      "url": "https://github.com/hwdsl2/setup-ipsec-vpn",
+      "features": {
+        "metadata": {
+          "metadata": {
+            "repo": "hwdsl2/setup-ipsec-vpn",
+            "url": "https://github.com/hwdsl2/setup-ipsec-vpn",
+            "stars": 27209,
+            "forks": 6511,
+            "openIssues": 0,
+            "hasLicense": 1,
+            "hasDescription": 1,
+            "hasTopics": 1,
+            "language": "Shell",
+            "languages": [
+              "Shell"
+            ],
+            "createdAt": "2016-01-07T16:44:12Z",
+            "updatedAt": "2026-01-06T03:38:15Z",
+            "pushedAt": "2026-01-06T03:38:10Z",
+            "license": "NOASSERTION",
+            "licenseName": "Other",
+            "isFork": false,
+            "archived": false,
+            "disabled": false,
+            "fileCount": 75,
+            "codeFileCount": 0,
+            "hasTests": 1,
+            "hasCI": 1,
+            "hasDocker": 0,
+            "hasConfig": 0,
+            "hasReadme": 1
+          },
+          "source": "public-repo",
+          "scannedAt": "2026-01-06T04:32:26.667Z",
+          "optedOut": false,
+          "repo": "hwdsl2/setup-ipsec-vpn",
+          "language": "Shell",
+          "primaryLanguage": "Shell"
+        }
+      },
+      "language": "Shell"
+    },
+    {
+      "repo": "nvie/gitflow",
+      "url": "https://github.com/nvie/gitflow",
+      "features": {
+        "metadata": {
+          "metadata": {
+            "repo": "nvie/gitflow",
+            "url": "https://github.com/nvie/gitflow",
+            "stars": 26874,
+            "forks": 2650,
+            "openIssues": 0,
+            "hasLicense": 1,
+            "hasDescription": 1,
+            "hasTopics": 0,
+            "language": "Shell",
+            "languages": [
+              "Shell",
+              "Makefile",
+              "Batchfile"
+            ],
+            "createdAt": "2010-01-20T23:14:12Z",
+            "updatedAt": "2026-01-05T15:58:12Z",
+            "pushedAt": "2025-10-14T09:12:50Z",
+            "license": "NOASSERTION",
+            "licenseName": "Other",
+            "isFork": false,
+            "archived": true,
+            "disabled": false,
+            "fileCount": 19,
+            "codeFileCount": 0,
+            "hasTests": 0,
+            "hasCI": 0,
+            "hasDocker": 0,
+            "hasConfig": 0,
+            "hasReadme": 1
+          },
+          "source": "public-repo",
+          "scannedAt": "2026-01-06T04:32:28.237Z",
+          "optedOut": false,
+          "repo": "nvie/gitflow",
+          "language": "Shell",
+          "primaryLanguage": "Shell"
+        }
+      },
+      "language": "Shell"
+    },
+    {
+      "repo": "mbadolato/iTerm2-Color-Schemes",
+      "url": "https://github.com/mbadolato/iTerm2-Color-Schemes",
+      "features": {
+        "metadata": {
+          "metadata": {
+            "repo": "mbadolato/iTerm2-Color-Schemes",
+            "url": "https://github.com/mbadolato/iTerm2-Color-Schemes",
+            "stars": 26319,
+            "forks": 6486,
+            "openIssues": 21,
+            "hasLicense": 1,
+            "hasDescription": 1,
+            "hasTopics": 1,
+            "language": "Shell",
+            "languages": [
+              "Shell",
+              "Vim Script",
+              "Python",
+              "CSS",
+              "Ruby",
+              "Swift",
+              "Jinja",
+              "Dockerfile",
+              "Makefile",
+              "JavaScript"
+            ],
+            "createdAt": "2011-04-01T04:01:46Z",
+            "updatedAt": "2026-01-06T03:37:09Z",
+            "pushedAt": "2025-12-29T15:05:43Z",
+            "license": "NOASSERTION",
+            "licenseName": "Other",
+            "isFork": false,
+            "archived": false,
+            "disabled": false,
+            "fileCount": 15992,
+            "codeFileCount": 21,
+            "hasTests": 1,
+            "hasCI": 1,
+            "hasDocker": 1,
+            "hasConfig": 1,
+            "hasReadme": 1
+          },
+          "source": "public-repo",
+          "scannedAt": "2026-01-06T04:32:30.040Z",
+          "optedOut": false,
+          "repo": "mbadolato/iTerm2-Color-Schemes",
+          "language": "Shell",
+          "primaryLanguage": "Shell"
+        }
+      },
+      "language": "Shell"
+    },
+    {
+      "repo": "powerline/fonts",
+      "url": "https://github.com/powerline/fonts",
+      "features": {
+        "metadata": {
+          "metadata": {
+            "repo": "powerline/fonts",
+            "url": "https://github.com/powerline/fonts",
+            "stars": 26203,
+            "forks": 3174,
+            "openIssues": 181,
+            "hasLicense": 0,
+            "hasDescription": 1,
+            "hasTopics": 0,
+            "language": "Shell",
+            "languages": [
+              "Shell",
+              "PowerShell"
+            ],
+            "createdAt": "2012-12-19T13:31:50Z",
+            "updatedAt": "2026-01-04T20:34:51Z",
+            "pushedAt": "2024-03-22T16:47:30Z",
+            "license": "None",
+            "licenseName": "No License",
+            "isFork": false,
+            "archived": false,
+            "disabled": false,
+            "fileCount": 285,
+            "codeFileCount": 0,
+            "hasTests": 1,
+            "hasCI": 0,
+            "hasDocker": 0,
+            "hasConfig": 1,
+            "hasReadme": 1
+          },
+          "source": "public-repo",
+          "scannedAt": "2026-01-06T04:32:31.602Z",
+          "optedOut": false,
+          "repo": "powerline/fonts",
+          "language": "Shell",
+          "primaryLanguage": "Shell"
+        }
+      },
+      "language": "Shell"
+    },
+    {
+      "repo": "tw93/Mole",
+      "url": "https://github.com/tw93/Mole",
+      "features": {
+        "metadata": {
+          "metadata": {
+            "repo": "tw93/Mole",
+            "url": "https://github.com/tw93/Mole",
+            "stars": 25618,
+            "forks": 683,
+            "openIssues": 0,
+            "hasLicense": 1,
+            "hasDescription": 1,
+            "hasTopics": 1,
+            "language": "Shell",
+            "languages": [
+              "Shell",
+              "Go",
+              "Makefile"
+            ],
+            "createdAt": "2025-09-23T06:38:40Z",
+            "updatedAt": "2026-01-06T04:31:34Z",
+            "pushedAt": "2026-01-06T01:52:00Z",
+            "license": "MIT",
+            "licenseName": "MIT License",
+            "isFork": false,
+            "archived": false,
+            "disabled": false,
+            "fileCount": 123,
+            "codeFileCount": 27,
+            "hasTests": 1,
+            "hasCI": 1,
+            "hasDocker": 0,
+            "hasConfig": 1,
+            "hasReadme": 1
+          },
+          "source": "public-repo",
+          "scannedAt": "2026-01-06T04:32:33.088Z",
+          "optedOut": false,
+          "repo": "tw93/Mole",
+          "language": "Shell",
+          "primaryLanguage": "Shell"
+        }
+      },
+      "language": "Shell"
+    },
+    {
+      "repo": "yuaotian/go-cursor-help",
+      "url": "https://github.com/yuaotian/go-cursor-help",
+      "features": {
+        "metadata": {
+          "metadata": {
+            "repo": "yuaotian/go-cursor-help",
+            "url": "https://github.com/yuaotian/go-cursor-help",
+            "stars": 25471,
+            "forks": 3094,
+            "openIssues": 9,
+            "hasLicense": 1,
+            "hasDescription": 1,
+            "hasTopics": 1,
+            "language": "Shell",
+            "languages": [
+              "Shell",
+              "PowerShell",
+              "JavaScript"
+            ],
+            "createdAt": "2024-12-09T07:07:09Z",
+            "updatedAt": "2026-01-06T04:02:58Z",
+            "pushedAt": "2025-12-21T13:40:45Z",
+            "license": "MIT",
+            "licenseName": "MIT License",
+            "isFork": false,
+            "archived": false,
+            "disabled": false,
+            "fileCount": 31,
+            "codeFileCount": 1,
+            "hasTests": 0,
+            "hasCI": 1,
+            "hasDocker": 0,
+            "hasConfig": 0,
+            "hasReadme": 1
+          },
+          "source": "public-repo",
+          "scannedAt": "2026-01-06T04:32:34.546Z",
+          "optedOut": false,
+          "repo": "yuaotian/go-cursor-help",
+          "language": "Shell",
+          "primaryLanguage": "Shell"
+        }
+      },
+      "language": "Shell"
+    },
+    {
+      "repo": "community-scripts/ProxmoxVE",
+      "url": "https://github.com/community-scripts/ProxmoxVE",
+      "features": {
+        "metadata": {
+          "metadata": {
+            "repo": "community-scripts/ProxmoxVE",
+            "url": "https://github.com/community-scripts/ProxmoxVE",
+            "stars": 24678,
+            "forks": 2233,
+            "openIssues": 17,
+            "hasLicense": 1,
+            "hasDescription": 1,
+            "hasTopics": 1,
+            "language": "Shell",
+            "languages": [
+              "Shell",
+              "TypeScript",
+              "Go",
+              "CSS",
+              "JavaScript"
+            ],
+            "createdAt": "2024-11-01T14:06:43Z",
+            "updatedAt": "2026-01-06T04:01:42Z",
+            "pushedAt": "2026-01-06T00:27:06Z",
+            "license": "MIT",
+            "licenseName": "MIT License",
+            "isFork": false,
+            "archived": false,
+            "disabled": false,
+            "fileCount": 1998,
+            "codeFileCount": 95,
+            "hasTests": 1,
+            "hasCI": 1,
+            "hasDocker": 0,
+            "hasConfig": 1,
+            "hasReadme": 1
+          },
+          "source": "public-repo",
+          "scannedAt": "2026-01-06T04:32:36.172Z",
+          "optedOut": false,
+          "repo": "community-scripts/ProxmoxVE",
+          "language": "Shell",
+          "primaryLanguage": "Shell"
+        }
+      },
+      "language": "Shell"
+    },
+    {
+      "repo": "gpakosz/.tmux",
+      "url": "https://github.com/gpakosz/.tmux",
+      "features": {
+        "metadata": {
+          "metadata": {
+            "repo": "gpakosz/.tmux",
+            "url": "https://github.com/gpakosz/.tmux",
+            "stars": 23988,
+            "forks": 3532,
+            "openIssues": 21,
+            "hasLicense": 1,
+            "hasDescription": 1,
+            "hasTopics": 1,
+            "language": "Shell",
+            "languages": [
+              "Shell"
+            ],
+            "createdAt": "2012-08-23T13:26:29Z",
+            "updatedAt": "2026-01-06T03:27:55Z",
+            "pushedAt": "2026-01-05T21:29:56Z",
+            "license": "MIT",
+            "licenseName": "MIT License",
+            "isFork": false,
+            "archived": false,
+            "disabled": false,
+            "fileCount": 12,
+            "codeFileCount": 0,
+            "hasTests": 0,
+            "hasCI": 0,
+            "hasDocker": 0,
+            "hasConfig": 0,
+            "hasReadme": 1
+          },
+          "source": "public-repo",
+          "scannedAt": "2026-01-06T04:32:37.605Z",
+          "optedOut": false,
+          "repo": "gpakosz/.tmux",
+          "language": "Shell",
+          "primaryLanguage": "Shell"
+        }
+      },
+      "language": "Shell"
+    },
+    {
+      "repo": "StreisandEffect/streisand",
+      "url": "https://github.com/StreisandEffect/streisand",
+      "features": {
+        "metadata": {
+          "metadata": {
+            "repo": "StreisandEffect/streisand",
+            "url": "https://github.com/StreisandEffect/streisand",
+            "stars": 23708,
+            "forks": 1977,
+            "openIssues": 237,
+            "hasLicense": 1,
+            "hasDescription": 1,
+            "hasTopics": 1,
+            "language": "Shell",
+            "languages": [
+              "Shell",
+              "Python",
+              "HTML"
+            ],
+            "createdAt": "2014-03-23T21:56:19Z",
+            "updatedAt": "2026-01-05T14:43:47Z",
+            "pushedAt": "2021-05-04T09:42:40Z",
+            "license": "NOASSERTION",
+            "licenseName": "Other",
+            "isFork": false,
+            "archived": true,
+            "disabled": false,
+            "fileCount": 387,
+            "codeFileCount": 4,
+            "hasTests": 1,
+            "hasCI": 1,
+            "hasDocker": 0,
+            "hasConfig": 1,
+            "hasReadme": 1
+          },
+          "source": "public-repo",
+          "scannedAt": "2026-01-06T04:32:39.142Z",
+          "optedOut": false,
+          "repo": "StreisandEffect/streisand",
+          "language": "Shell",
+          "primaryLanguage": "Shell"
+        }
+      },
+      "language": "Shell"
+    },
+    {
+      "repo": "dylanaraps/neofetch",
+      "url": "https://github.com/dylanaraps/neofetch",
+      "features": {
+        "metadata": {
+          "metadata": {
+            "repo": "dylanaraps/neofetch",
+            "url": "https://github.com/dylanaraps/neofetch",
+            "stars": 23448,
+            "forks": 1785,
+            "openIssues": 470,
+            "hasLicense": 1,
+            "hasDescription": 1,
+            "hasTopics": 1,
+            "language": "Shell",
+            "languages": [
+              "Shell",
+              "Roff",
+              "Makefile"
+            ],
+            "createdAt": "2015-12-30T10:19:46Z",
+            "updatedAt": "2026-01-05T17:48:33Z",
+            "pushedAt": "2024-07-19T20:19:01Z",
+            "license": "MIT",
+            "licenseName": "MIT License",
+            "isFork": false,
+            "archived": true,
+            "disabled": false,
+            "fileCount": 9,
+            "codeFileCount": 0,
+            "hasTests": 0,
+            "hasCI": 0,
+            "hasDocker": 0,
+            "hasConfig": 0,
+            "hasReadme": 1
+          },
+          "source": "public-repo",
+          "scannedAt": "2026-01-06T04:32:40.532Z",
+          "optedOut": false,
+          "repo": "dylanaraps/neofetch",
+          "language": "Shell",
+          "primaryLanguage": "Shell"
+        }
+      },
+      "language": "Shell"
+    },
+    {
+      "repo": "kholia/OSX-KVM",
+      "url": "https://github.com/kholia/OSX-KVM",
+      "features": {
+        "metadata": {
+          "metadata": {
+            "repo": "kholia/OSX-KVM",
+            "url": "https://github.com/kholia/OSX-KVM",
+            "stars": 22658,
+            "forks": 1980,
+            "openIssues": 12,
+            "hasLicense": 0,
+            "hasDescription": 1,
+            "hasTopics": 1,
+            "language": "Shell",
+            "languages": [
+              "Shell",
+              "Python",
+              "Makefile",
+              "Nix"
+            ],
+            "createdAt": "2015-11-06T12:27:28Z",
+            "updatedAt": "2026-01-06T03:31:21Z",
+            "pushedAt": "2025-10-24T05:27:39Z",
+            "license": "None",
+            "licenseName": "No License",
+            "isFork": false,
+            "archived": false,
+            "disabled": false,
+            "fileCount": 589,
+            "codeFileCount": 3,
+            "hasTests": 0,
+            "hasCI": 0,
+            "hasDocker": 0,
+            "hasConfig": 1,
+            "hasReadme": 1
+          },
+          "source": "public-repo",
+          "scannedAt": "2026-01-06T04:32:42.028Z",
+          "optedOut": false,
+          "repo": "kholia/OSX-KVM",
+          "language": "Shell",
+          "primaryLanguage": "Shell"
+        }
+      },
+      "language": "Shell"
+    },
+    {
+      "repo": "lxgw/LxgwWenKai",
+      "url": "https://github.com/lxgw/LxgwWenKai",
+      "features": {
+        "metadata": {
+          "metadata": {
+            "repo": "lxgw/LxgwWenKai",
+            "url": "https://github.com/lxgw/LxgwWenKai",
+            "stars": 22616,
+            "forks": 596,
+            "openIssues": 5,
+            "hasLicense": 1,
+            "hasDescription": 1,
+            "hasTopics": 1,
+            "language": "Shell",
+            "languages": [
+              "Shell",
+              "Makefile"
+            ],
+            "createdAt": "2021-01-30T15:41:52Z",
+            "updatedAt": "2026-01-06T01:04:57Z",
+            "pushedAt": "2026-01-05T18:38:55Z",
+            "license": "OFL-1.1",
+            "licenseName": "SIL Open Font License 1.1",
+            "isFork": false,
+            "archived": false,
+            "disabled": false,
+            "fileCount": 73,
+            "codeFileCount": 0,
+            "hasTests": 0,
+            "hasCI": 1,
+            "hasDocker": 0,
+            "hasConfig": 0,
+            "hasReadme": 1
+          },
+          "source": "public-repo",
+          "scannedAt": "2026-01-06T04:32:43.457Z",
+          "optedOut": false,
+          "repo": "lxgw/LxgwWenKai",
+          "language": "Shell",
+          "primaryLanguage": "Shell"
+        }
+      },
+      "language": "Shell"
+    },
+    {
+      "repo": "zsh-users/zsh-syntax-highlighting",
+      "url": "https://github.com/zsh-users/zsh-syntax-highlighting",
+      "features": {
+        "metadata": {
+          "metadata": {
+            "repo": "zsh-users/zsh-syntax-highlighting",
+            "url": "https://github.com/zsh-users/zsh-syntax-highlighting",
+            "stars": 22078,
+            "forks": 1364,
+            "openIssues": 203,
+            "hasLicense": 1,
+            "hasDescription": 1,
+            "hasTopics": 1,
+            "language": "Shell",
+            "languages": [
+              "Shell",
+              "Perl",
+              "Makefile"
+            ],
+            "createdAt": "2010-12-25T17:28:55Z",
+            "updatedAt": "2026-01-05T20:24:23Z",
+            "pushedAt": "2024-11-21T15:11:08Z",
+            "license": "BSD-3-Clause",
+            "licenseName": "BSD 3-Clause \"New\" or \"Revised\" License",
+            "isFork": false,
+            "archived": false,
+            "disabled": false,
+            "fileCount": 349,
+            "codeFileCount": 0,
+            "hasTests": 1,
+            "hasCI": 1,
+            "hasDocker": 0,
+            "hasConfig": 1,
+            "hasReadme": 1
+          },
+          "source": "public-repo",
+          "scannedAt": "2026-01-06T04:32:45.098Z",
+          "optedOut": false,
+          "repo": "zsh-users/zsh-syntax-highlighting",
+          "language": "Shell",
+          "primaryLanguage": "Shell"
+        }
+      },
+      "language": "Shell"
+    },
+    {
+      "repo": "lewagon/dotfiles",
+      "url": "https://github.com/lewagon/dotfiles",
+      "features": {
+        "metadata": {
+          "metadata": {
+            "repo": "lewagon/dotfiles",
+            "url": "https://github.com/lewagon/dotfiles",
+            "stars": 21566,
+            "forks": 28204,
+            "openIssues": 4,
+            "hasLicense": 1,
+            "hasDescription": 1,
+            "hasTopics": 0,
+            "language": "Shell",
+            "languages": [
+              "Shell"
+            ],
+            "createdAt": "2014-04-04T14:54:29Z",
+            "updatedAt": "2026-01-06T00:46:04Z",
+            "pushedAt": "2025-12-02T09:42:55Z",
+            "license": "MIT",
+            "licenseName": "MIT License",
+            "isFork": false,
+            "archived": false,
+            "disabled": false,
+            "fileCount": 14,
+            "codeFileCount": 0,
+            "hasTests": 1,
+            "hasCI": 0,
+            "hasDocker": 0,
+            "hasConfig": 1,
+            "hasReadme": 1
+          },
+          "source": "public-repo",
+          "scannedAt": "2026-01-06T04:32:46.757Z",
+          "optedOut": false,
+          "repo": "lewagon/dotfiles",
+          "language": "Shell",
+          "primaryLanguage": "Shell"
+        }
+      },
+      "language": "Shell"
+    },
+    {
+      "repo": "a2aproject/A2A",
+      "url": "https://github.com/a2aproject/A2A",
+      "features": {
+        "metadata": {
+          "metadata": {
+            "repo": "a2aproject/A2A",
+            "url": "https://github.com/a2aproject/A2A",
+            "stars": 21316,
+            "forks": 2174,
+            "openIssues": 174,
+            "hasLicense": 1,
+            "hasDescription": 1,
+            "hasTopics": 1,
+            "language": "Shell",
+            "languages": [
+              "Shell"
+            ],
+            "createdAt": "2025-03-25T18:44:21Z",
+            "updatedAt": "2026-01-06T03:13:28Z",
+            "pushedAt": "2026-01-05T23:41:36Z",
+            "license": "Apache-2.0",
+            "licenseName": "Apache License 2.0",
+            "isFork": false,
+            "archived": false,
+            "disabled": false,
+            "fileCount": 102,
+            "codeFileCount": 3,
+            "hasTests": 1,
+            "hasCI": 1,
+            "hasDocker": 0,
+            "hasConfig": 1,
+            "hasReadme": 1
+          },
+          "source": "public-repo",
+          "scannedAt": "2026-01-06T04:32:48.294Z",
+          "optedOut": false,
+          "repo": "a2aproject/A2A",
+          "language": "Shell",
+          "primaryLanguage": "Shell"
+        }
+      },
+      "language": "Shell"
+    },
+    {
+      "repo": "Nyr/openvpn-install",
+      "url": "https://github.com/Nyr/openvpn-install",
+      "features": {
+        "metadata": {
+          "metadata": {
+            "repo": "Nyr/openvpn-install",
+            "url": "https://github.com/Nyr/openvpn-install",
+            "stars": 20349,
+            "forks": 5075,
+            "openIssues": 0,
+            "hasLicense": 1,
+            "hasDescription": 1,
+            "hasTopics": 1,
+            "language": "Shell",
+            "languages": [
+              "Shell"
+            ],
+            "createdAt": "2013-05-14T12:03:29Z",
+            "updatedAt": "2026-01-04T23:39:26Z",
+            "pushedAt": "2025-12-16T17:23:54Z",
+            "license": "MIT",
+            "licenseName": "MIT License",
+            "isFork": false,
+            "archived": false,
+            "disabled": false,
+            "fileCount": 3,
+            "codeFileCount": 0,
+            "hasTests": 0,
+            "hasCI": 0,
+            "hasDocker": 0,
+            "hasConfig": 0,
+            "hasReadme": 1
+          },
+          "source": "public-repo",
+          "scannedAt": "2026-01-06T04:32:50.104Z",
+          "optedOut": false,
+          "repo": "Nyr/openvpn-install",
+          "language": "Shell",
+          "primaryLanguage": "Shell"
+        }
+      },
+      "language": "Shell"
+    },
+    {
+      "repo": "spaceship-prompt/spaceship-prompt",
+      "url": "https://github.com/spaceship-prompt/spaceship-prompt",
+      "features": {
+        "metadata": {
+          "metadata": {
+            "repo": "spaceship-prompt/spaceship-prompt",
+            "url": "https://github.com/spaceship-prompt/spaceship-prompt",
+            "stars": 20332,
+            "forks": 970,
+            "openIssues": 125,
+            "hasLicense": 1,
+            "hasDescription": 1,
+            "hasTopics": 1,
+            "language": "Shell",
+            "languages": [
+              "Shell",
+              "Makefile",
+              "Dockerfile"
+            ],
+            "createdAt": "2016-01-30T13:50:02Z",
+            "updatedAt": "2026-01-05T23:27:41Z",
+            "pushedAt": "2025-12-24T12:10:54Z",
+            "license": "MIT",
+            "licenseName": "MIT License",
+            "isFork": false,
+            "archived": false,
+            "disabled": false,
+            "fileCount": 353,
+            "codeFileCount": 1,
+            "hasTests": 1,
+            "hasCI": 1,
+            "hasDocker": 1,
+            "hasConfig": 1,
+            "hasReadme": 1
+          },
+          "source": "public-repo",
+          "scannedAt": "2026-01-06T04:32:51.719Z",
+          "optedOut": false,
+          "repo": "spaceship-prompt/spaceship-prompt",
+          "language": "Shell",
+          "primaryLanguage": "Shell"
+        }
+      },
+      "language": "Shell"
+    },
+    {
+      "repo": "rockerBOO/awesome-neovim",
+      "url": "https://github.com/rockerBOO/awesome-neovim",
+      "features": {
+        "metadata": {
+          "metadata": {
+            "repo": "rockerBOO/awesome-neovim",
+            "url": "https://github.com/rockerBOO/awesome-neovim",
+            "stars": 19855,
+            "forks": 923,
+            "openIssues": 13,
+            "hasLicense": 1,
+            "hasDescription": 1,
+            "hasTopics": 1,
+            "language": "Shell",
+            "languages": [
+              "Shell"
+            ],
+            "createdAt": "2020-09-18T18:40:59Z",
+            "updatedAt": "2026-01-06T04:17:02Z",
+            "pushedAt": "2026-01-05T19:52:13Z",
+            "license": "CC0-1.0",
+            "licenseName": "Creative Commons Zero v1.0 Universal",
+            "isFork": false,
+            "archived": false,
+            "disabled": false,
+            "fileCount": 19,
+            "codeFileCount": 0,
+            "hasTests": 0,
+            "hasCI": 1,
+            "hasDocker": 0,
+            "hasConfig": 0,
+            "hasReadme": 1
+          },
+          "source": "public-repo",
+          "scannedAt": "2026-01-06T04:32:53.090Z",
+          "optedOut": false,
+          "repo": "rockerBOO/awesome-neovim",
+          "language": "Shell",
+          "primaryLanguage": "Shell"
+        }
+      },
+      "language": "Shell"
+    },
+    {
+      "repo": "tj/n",
+      "url": "https://github.com/tj/n",
+      "features": {
+        "metadata": {
+          "metadata": {
+            "repo": "tj/n",
+            "url": "https://github.com/tj/n",
+            "stars": 19456,
+            "forks": 765,
+            "openIssues": 3,
+            "hasLicense": 1,
+            "hasDescription": 1,
+            "hasTopics": 0,
+            "language": "Shell",
+            "languages": [
+              "Shell",
+              "Makefile"
+            ],
+            "createdAt": "2011-01-05T14:53:19Z",
+            "updatedAt": "2026-01-05T21:38:47Z",
+            "pushedAt": "2025-11-27T21:17:20Z",
+            "license": "MIT",
+            "licenseName": "MIT License",
+            "isFork": false,
+            "archived": false,
+            "disabled": false,
+            "fileCount": 43,
+            "codeFileCount": 0,
+            "hasTests": 1,
+            "hasCI": 0,
+            "hasDocker": 1,
+            "hasConfig": 1,
+            "hasReadme": 1
+          },
+          "source": "public-repo",
+          "scannedAt": "2026-01-06T04:32:54.474Z",
+          "optedOut": false,
+          "repo": "tj/n",
+          "language": "Shell",
+          "primaryLanguage": "Shell"
+        }
+      },
+      "language": "Shell"
+    },
+    {
+      "repo": "basecamp/omarchy",
+      "url": "https://github.com/basecamp/omarchy",
+      "features": {
+        "metadata": {
+          "metadata": {
+            "repo": "basecamp/omarchy",
+            "url": "https://github.com/basecamp/omarchy",
+            "stars": 18930,
+            "forks": 1858,
+            "openIssues": 508,
+            "hasLicense": 1,
+            "hasDescription": 1,
+            "hasTopics": 0,
+            "language": "Shell",
+            "languages": [
+              "Shell",
+              "CSS",
+              "Lua",
+              "JavaScript"
+            ],
+            "createdAt": "2025-06-01T07:26:22Z",
+            "updatedAt": "2026-01-06T02:59:51Z",
+            "pushedAt": "2026-01-05T22:54:56Z",
+            "license": "MIT",
+            "licenseName": "MIT License",
+            "isFork": false,
+            "archived": false,
+            "disabled": false,
+            "fileCount": 852,
+            "codeFileCount": 1,
+            "hasTests": 0,
+            "hasCI": 0,
+            "hasDocker": 0,
+            "hasConfig": 1,
+            "hasReadme": 1
+          },
+          "source": "public-repo",
+          "scannedAt": "2026-01-06T04:32:56.135Z",
+          "optedOut": false,
+          "repo": "basecamp/omarchy",
+          "language": "Shell",
+          "primaryLanguage": "Shell"
+        }
+      },
+      "language": "Shell"
+    },
+    {
+      "repo": "agarrharr/awesome-cli-apps",
+      "url": "https://github.com/agarrharr/awesome-cli-apps",
+      "features": {
+        "metadata": {
+          "metadata": {
+            "repo": "agarrharr/awesome-cli-apps",
+            "url": "https://github.com/agarrharr/awesome-cli-apps",
+            "stars": 18356,
+            "forks": 1048,
+            "openIssues": 59,
+            "hasLicense": 0,
+            "hasDescription": 1,
+            "hasTopics": 1,
+            "language": "Shell",
+            "languages": [
+              "Shell"
+            ],
+            "createdAt": "2015-07-09T16:44:07Z",
+            "updatedAt": "2026-01-06T04:10:42Z",
+            "pushedAt": "2026-01-04T18:51:42Z",
+            "license": "None",
+            "licenseName": "No License",
+            "isFork": false,
+            "archived": false,
+            "disabled": false,
+            "fileCount": 5,
+            "codeFileCount": 0,
+            "hasTests": 0,
+            "hasCI": 0,
+            "hasDocker": 0,
+            "hasConfig": 0,
+            "hasReadme": 1
+          },
+          "source": "public-repo",
+          "scannedAt": "2026-01-06T04:32:57.475Z",
+          "optedOut": false,
+          "repo": "agarrharr/awesome-cli-apps",
+          "language": "Shell",
+          "primaryLanguage": "Shell"
+        }
+      },
+      "language": "Shell"
+    },
+    {
+      "repo": "deviantony/docker-elk",
+      "url": "https://github.com/deviantony/docker-elk",
+      "features": {
+        "metadata": {
+          "metadata": {
+            "repo": "deviantony/docker-elk",
+            "url": "https://github.com/deviantony/docker-elk",
+            "stars": 18249,
+            "forks": 6990,
+            "openIssues": 5,
+            "hasLicense": 1,
+            "hasDescription": 1,
+            "hasTopics": 1,
+            "language": "Shell",
+            "languages": [
+              "Shell",
+              "Dockerfile"
+            ],
+            "createdAt": "2014-11-18T20:07:47Z",
+            "updatedAt": "2026-01-06T03:28:35Z",
+            "pushedAt": "2025-12-21T10:05:55Z",
+            "license": "MIT",
+            "licenseName": "MIT License",
+            "isFork": false,
+            "archived": false,
+            "disabled": false,
+            "fileCount": 68,
+            "codeFileCount": 0,
+            "hasTests": 1,
+            "hasCI": 1,
+            "hasDocker": 1,
+            "hasConfig": 1,
+            "hasReadme": 1
+          },
+          "source": "public-repo",
+          "scannedAt": "2026-01-06T04:32:58.860Z",
+          "optedOut": false,
+          "repo": "deviantony/docker-elk",
+          "language": "Shell",
+          "primaryLanguage": "Shell"
+        }
+      },
+      "language": "Shell"
+    },
+    {
+      "repo": "mack-a/v2ray-agent",
+      "url": "https://github.com/mack-a/v2ray-agent",
+      "features": {
+        "metadata": {
+          "metadata": {
+            "repo": "mack-a/v2ray-agent",
+            "url": "https://github.com/mack-a/v2ray-agent",
+            "stars": 18238,
+            "forks": 5229,
+            "openIssues": 15,
+            "hasLicense": 1,
+            "hasDescription": 1,
+            "hasTopics": 1,
+            "language": "Shell",
+            "languages": [
+              "Shell"
+            ],
+            "createdAt": "2019-11-06T02:41:38Z",
+            "updatedAt": "2026-01-06T03:05:27Z",
+            "pushedAt": "2026-01-03T14:29:49Z",
+            "license": "AGPL-3.0",
+            "licenseName": "GNU Affero General Public License v3.0",
+            "isFork": false,
+            "archived": false,
+            "disabled": false,
+            "fileCount": 32,
+            "codeFileCount": 0,
+            "hasTests": 0,
+            "hasCI": 1,
+            "hasDocker": 0,
+            "hasConfig": 0,
+            "hasReadme": 1
+          },
+          "source": "public-repo",
+          "scannedAt": "2026-01-06T04:33:00.382Z",
+          "optedOut": false,
+          "repo": "mack-a/v2ray-agent",
+          "language": "Shell",
+          "primaryLanguage": "Shell"
+        }
+      },
+      "language": "Shell"
+    },
+    {
+      "repo": "dockur/macos",
+      "url": "https://github.com/dockur/macos",
+      "features": {
+        "metadata": {
+          "metadata": {
+            "repo": "dockur/macos",
+            "url": "https://github.com/dockur/macos",
+            "stars": 18078,
+            "forks": 862,
+            "openIssues": 22,
+            "hasLicense": 1,
+            "hasDescription": 1,
+            "hasTopics": 1,
+            "language": "Shell",
+            "languages": [
+              "Shell",
+              "Dockerfile"
+            ],
+            "createdAt": "2024-06-02T19:42:37Z",
+            "updatedAt": "2026-01-06T02:28:07Z",
+            "pushedAt": "2025-12-08T21:09:11Z",
+            "license": "MIT",
+            "licenseName": "MIT License",
+            "isFork": false,
+            "archived": false,
+            "disabled": false,
+            "fileCount": 31,
+            "codeFileCount": 0,
+            "hasTests": 1,
+            "hasCI": 1,
+            "hasDocker": 1,
+            "hasConfig": 1,
+            "hasReadme": 1
+          },
+          "source": "public-repo",
+          "scannedAt": "2026-01-06T04:33:01.961Z",
+          "optedOut": false,
+          "repo": "dockur/macos",
+          "language": "Shell",
+          "primaryLanguage": "Shell"
+        }
+      },
+      "language": "Shell"
+    },
+    {
+      "repo": "tj/git-extras",
+      "url": "https://github.com/tj/git-extras",
+      "features": {
+        "metadata": {
+          "metadata": {
+            "repo": "tj/git-extras",
+            "url": "https://github.com/tj/git-extras",
+            "stars": 17945,
+            "forks": 1224,
+            "openIssues": 91,
+            "hasLicense": 1,
+            "hasDescription": 1,
+            "hasTopics": 1,
+            "language": "Shell",
+            "languages": [
+              "Shell",
+              "Python",
+              "Batchfile",
+              "Makefile"
+            ],
+            "createdAt": "2010-08-04T16:32:07Z",
+            "updatedAt": "2026-01-05T19:37:26Z",
+            "pushedAt": "2025-12-18T20:40:24Z",
+            "license": "MIT",
+            "licenseName": "MIT License",
+            "isFork": false,
+            "archived": false,
+            "disabled": false,
+            "fileCount": 368,
+            "codeFileCount": 10,
+            "hasTests": 1,
+            "hasCI": 1,
+            "hasDocker": 0,
+            "hasConfig": 1,
+            "hasReadme": 1
+          },
+          "source": "public-repo",
+          "scannedAt": "2026-01-06T04:33:03.445Z",
+          "optedOut": false,
+          "repo": "tj/git-extras",
+          "language": "Shell",
+          "primaryLanguage": "Shell"
+        }
+      },
+      "language": "Shell"
+    },
+    {
+      "repo": "githubnext/monaspace",
+      "url": "https://github.com/githubnext/monaspace",
+      "features": {
+        "metadata": {
+          "metadata": {
+            "repo": "githubnext/monaspace",
+            "url": "https://github.com/githubnext/monaspace",
+            "stars": 17756,
+            "forks": 310,
+            "openIssues": 60,
+            "hasLicense": 1,
+            "hasDescription": 1,
+            "hasTopics": 1,
+            "language": "Shell",
+            "languages": [
+              "Shell"
+            ],
+            "createdAt": "2023-09-25T18:56:17Z",
+            "updatedAt": "2026-01-06T04:22:02Z",
+            "pushedAt": "2025-09-04T21:03:01Z",
+            "license": "OFL-1.1",
+            "licenseName": "SIL Open Font License 1.1",
+            "isFork": false,
+            "archived": false,
+            "disabled": false,
+            "fileCount": 1533,
+            "codeFileCount": 0,
+            "hasTests": 0,
+            "hasCI": 1,
+            "hasDocker": 0,
+            "hasConfig": 0,
+            "hasReadme": 1
+          },
+          "source": "public-repo",
+          "scannedAt": "2026-01-06T04:33:05.167Z",
+          "optedOut": false,
+          "repo": "githubnext/monaspace",
+          "language": "Shell",
+          "primaryLanguage": "Shell"
+        }
+      },
+      "language": "Shell"
+    },
+    {
+      "repo": "docker-mailserver/docker-mailserver",
+      "url": "https://github.com/docker-mailserver/docker-mailserver",
+      "features": {
+        "metadata": {
+          "metadata": {
+            "repo": "docker-mailserver/docker-mailserver",
+            "url": "https://github.com/docker-mailserver/docker-mailserver",
+            "stars": 17680,
+            "forks": 1996,
+            "openIssues": 94,
+            "hasLicense": 1,
+            "hasDescription": 1,
+            "hasTopics": 1,
+            "language": "Shell",
+            "languages": [
+              "Shell",
+              "Dockerfile",
+              "Makefile",
+              "BitBake",
+              "Python",
+              "Sieve",
+              "C++"
+            ],
+            "createdAt": "2015-03-28T14:56:28Z",
+            "updatedAt": "2026-01-06T00:44:26Z",
+            "pushedAt": "2026-01-03T11:51:44Z",
+            "license": "MIT",
+            "licenseName": "MIT License",
+            "isFork": false,
+            "archived": false,
+            "disabled": false,
+            "fileCount": 427,
+            "codeFileCount": 1,
+            "hasTests": 1,
+            "hasCI": 1,
+            "hasDocker": 1,
+            "hasConfig": 1,
+            "hasReadme": 1
+          },
+          "source": "public-repo",
+          "scannedAt": "2026-01-06T04:33:06.764Z",
+          "optedOut": false,
+          "repo": "docker-mailserver/docker-mailserver",
+          "language": "Shell",
+          "primaryLanguage": "Shell"
+        }
+      },
+      "language": "Shell"
+    },
+    {
+      "repo": "unixorn/awesome-zsh-plugins",
+      "url": "https://github.com/unixorn/awesome-zsh-plugins",
+      "features": {
+        "metadata": {
+          "metadata": {
+            "repo": "unixorn/awesome-zsh-plugins",
+            "url": "https://github.com/unixorn/awesome-zsh-plugins",
+            "stars": 17236,
+            "forks": 587,
+            "openIssues": 6,
+            "hasLicense": 1,
+            "hasDescription": 1,
+            "hasTopics": 1,
+            "language": "Shell",
+            "languages": [
+              "Shell"
+            ],
+            "createdAt": "2014-10-07T06:11:17Z",
+            "updatedAt": "2026-01-06T02:44:08Z",
+            "pushedAt": "2026-01-03T05:34:27Z",
+            "license": "BSD-3-Clause",
+            "licenseName": "BSD 3-Clause \"New\" or \"Revised\" License",
+            "isFork": false,
+            "archived": false,
+            "disabled": false,
+            "fileCount": 16,
+            "codeFileCount": 0,
+            "hasTests": 0,
+            "hasCI": 1,
+            "hasDocker": 0,
+            "hasConfig": 1,
+            "hasReadme": 1
+          },
+          "source": "public-repo",
+          "scannedAt": "2026-01-06T04:33:08.177Z",
+          "optedOut": false,
+          "repo": "unixorn/awesome-zsh-plugins",
+          "language": "Shell",
+          "primaryLanguage": "Shell"
+        }
+      },
+      "language": "Shell"
+    },
+    {
+      "repo": "taizilongxu/interview_python",
+      "url": "https://github.com/taizilongxu/interview_python",
+      "features": {
+        "metadata": {
+          "metadata": {
+            "repo": "taizilongxu/interview_python",
+            "url": "https://github.com/taizilongxu/interview_python",
+            "stars": 17154,
+            "forks": 5553,
+            "openIssues": 30,
+            "hasLicense": 0,
+            "hasDescription": 1,
+            "hasTopics": 0,
+            "language": "Shell",
+            "languages": [
+              "Shell"
+            ],
+            "createdAt": "2015-04-05T02:59:59Z",
+            "updatedAt": "2026-01-05T22:15:35Z",
+            "pushedAt": "2025-03-05T09:14:51Z",
+            "license": "None",
+            "licenseName": "No License",
+            "isFork": false,
+            "archived": false,
+            "disabled": false,
+            "fileCount": 7,
+            "codeFileCount": 0,
+            "hasTests": 0,
+            "hasCI": 0,
+            "hasDocker": 0,
+            "hasConfig": 0,
+            "hasReadme": 1
+          },
+          "source": "public-repo",
+          "scannedAt": "2026-01-06T04:33:09.604Z",
+          "optedOut": false,
+          "repo": "taizilongxu/interview_python",
+          "language": "Shell",
+          "primaryLanguage": "Shell"
+        }
+      },
+      "language": "Shell"
+    },
+    {
+      "repo": "source-foundry/Hack",
+      "url": "https://github.com/source-foundry/Hack",
+      "features": {
+        "metadata": {
+          "metadata": {
+            "repo": "source-foundry/Hack",
+            "url": "https://github.com/source-foundry/Hack",
+            "stars": 17096,
+            "forks": 654,
+            "openIssues": 141,
+            "hasLicense": 1,
+            "hasDescription": 1,
+            "hasTopics": 1,
+            "language": "Shell",
+            "languages": [
+              "Shell",
+              "Python",
+              "CSS",
+              "Makefile"
+            ],
+            "createdAt": "2015-06-21T22:47:58Z",
+            "updatedAt": "2026-01-05T09:07:39Z",
+            "pushedAt": "2022-11-21T18:05:33Z",
+            "license": "NOASSERTION",
+            "licenseName": "Other",
+            "isFork": false,
+            "archived": false,
+            "disabled": false,
+            "fileCount": 6506,
+            "codeFileCount": 3,
+            "hasTests": 1,
+            "hasCI": 0,
+            "hasDocker": 0,
+            "hasConfig": 1,
+            "hasReadme": 1
+          },
+          "source": "public-repo",
+          "scannedAt": "2026-01-06T04:33:11.244Z",
+          "optedOut": false,
+          "repo": "source-foundry/Hack",
+          "language": "Shell",
+          "primaryLanguage": "Shell"
+        }
+      },
+      "language": "Shell"
+    },
+    {
+      "repo": "rupa/z",
+      "url": "https://github.com/rupa/z",
+      "features": {
+        "metadata": {
+          "metadata": {
+            "repo": "rupa/z",
+            "url": "https://github.com/rupa/z",
+            "stars": 16905,
+            "forks": 1180,
+            "openIssues": 104,
+            "hasLicense": 1,
+            "hasDescription": 1,
+            "hasTopics": 0,
+            "language": "Shell",
+            "languages": [
+              "Shell",
+              "Roff",
+              "Makefile"
+            ],
+            "createdAt": "2009-06-25T22:31:23Z",
+            "updatedAt": "2026-01-05T23:47:55Z",
+            "pushedAt": "2024-06-19T08:00:48Z",
+            "license": "WTFPL",
+            "licenseName": "Do What The F*ck You Want To Public License",
+            "isFork": false,
+            "archived": false,
+            "disabled": false,
+            "fileCount": 5,
+            "codeFileCount": 0,
+            "hasTests": 0,
+            "hasCI": 0,
+            "hasDocker": 0,
+            "hasConfig": 0,
+            "hasReadme": 1
+          },
+          "source": "public-repo",
+          "scannedAt": "2026-01-06T04:33:12.666Z",
+          "optedOut": false,
+          "repo": "rupa/z",
+          "language": "Shell",
+          "primaryLanguage": "Shell"
+        }
+      },
+      "language": "Shell"
+    },
+    {
+      "repo": "rbenv/rbenv",
+      "url": "https://github.com/rbenv/rbenv",
+      "features": {
+        "metadata": {
+          "metadata": {
+            "repo": "rbenv/rbenv",
+            "url": "https://github.com/rbenv/rbenv",
+            "stars": 16622,
+            "forks": 1427,
+            "openIssues": 13,
+            "hasLicense": 1,
+            "hasDescription": 1,
+            "hasTopics": 1,
+            "language": "Shell",
+            "languages": [
+              "Shell",
+              "Ruby",
+              "Makefile",
+              "Vim Script"
+            ],
+            "createdAt": "2011-08-01T20:51:48Z",
+            "updatedAt": "2026-01-05T00:55:45Z",
+            "pushedAt": "2025-11-25T01:39:14Z",
+            "license": "MIT",
+            "licenseName": "MIT License",
+            "isFork": false,
+            "archived": false,
+            "disabled": false,
+            "fileCount": 71,
+            "codeFileCount": 1,
+            "hasTests": 1,
+            "hasCI": 1,
+            "hasDocker": 0,
+            "hasConfig": 1,
+            "hasReadme": 1
+          },
+          "source": "public-repo",
+          "scannedAt": "2026-01-06T04:33:14.543Z",
+          "optedOut": false,
+          "repo": "rbenv/rbenv",
+          "language": "Shell",
+          "primaryLanguage": "Shell"
+        }
+      },
+      "language": "Shell"
+    },
+    {
+      "repo": "ramitsurana/awesome-kubernetes",
+      "url": "https://github.com/ramitsurana/awesome-kubernetes",
+      "features": {
+        "metadata": {
+          "metadata": {
+            "repo": "ramitsurana/awesome-kubernetes",
+            "url": "https://github.com/ramitsurana/awesome-kubernetes",
+            "stars": 15755,
+            "forks": 2346,
+            "openIssues": 63,
+            "hasLicense": 1,
+            "hasDescription": 1,
+            "hasTopics": 1,
+            "language": "Shell",
+            "languages": [
+              "Shell",
+              "Makefile",
+              "Dockerfile"
+            ],
+            "createdAt": "2015-10-15T12:14:48Z",
+            "updatedAt": "2026-01-05T22:43:23Z",
+            "pushedAt": "2025-08-28T14:41:12Z",
+            "license": "NOASSERTION",
+            "licenseName": "Other",
+            "isFork": false,
+            "archived": false,
+            "disabled": false,
+            "fileCount": 39,
+            "codeFileCount": 0,
+            "hasTests": 0,
+            "hasCI": 1,
+            "hasDocker": 1,
+            "hasConfig": 0,
+            "hasReadme": 1
+          },
+          "source": "public-repo",
+          "scannedAt": "2026-01-06T04:33:15.979Z",
+          "optedOut": false,
+          "repo": "ramitsurana/awesome-kubernetes",
+          "language": "Shell",
+          "primaryLanguage": "Shell"
+        }
+      },
+      "language": "Shell"
+    },
+    {
+      "repo": "thibmaek/awesome-raspberry-pi",
+      "url": "https://github.com/thibmaek/awesome-raspberry-pi",
+      "features": {
+        "metadata": {
+          "metadata": {
+            "repo": "thibmaek/awesome-raspberry-pi",
+            "url": "https://github.com/thibmaek/awesome-raspberry-pi",
+            "stars": 15682,
+            "forks": 1074,
+            "openIssues": 7,
+            "hasLicense": 1,
+            "hasDescription": 1,
+            "hasTopics": 1,
+            "language": "Shell",
+            "languages": [
+              "Shell",
+              "Makefile",
+              "Ruby"
+            ],
+            "createdAt": "2016-09-16T13:05:57Z",
+            "updatedAt": "2026-01-05T22:48:47Z",
+            "pushedAt": "2026-01-03T17:50:53Z",
+            "license": "NOASSERTION",
+            "licenseName": "Other",
+            "isFork": false,
+            "archived": false,
+            "disabled": false,
+            "fileCount": 30,
+            "codeFileCount": 0,
+            "hasTests": 0,
+            "hasCI": 1,
+            "hasDocker": 0,
+            "hasConfig": 1,
+            "hasReadme": 1
+          },
+          "source": "public-repo",
+          "scannedAt": "2026-01-06T04:33:17.402Z",
+          "optedOut": false,
+          "repo": "thibmaek/awesome-raspberry-pi",
+          "language": "Shell",
+          "primaryLanguage": "Shell"
+        }
+      },
+      "language": "Shell"
+    },
+    {
+      "repo": "termux/termux-packages",
+      "url": "https://github.com/termux/termux-packages",
+      "features": {
+        "metadata": {
+          "metadata": {
+            "repo": "termux/termux-packages",
+            "url": "https://github.com/termux/termux-packages",
+            "stars": 15501,
+            "forks": 3819,
+            "openIssues": 949,
+            "hasLicense": 1,
+            "hasDescription": 1,
+            "hasTopics": 1,
+            "language": "Shell",
+            "languages": [
+              "Shell",
+              "C",
+              "C++",
+              "CMake",
+              "Python",
+              "Roff",
+              "HTML",
+              "Perl",
+              "RAML",
+              "JavaScript",
+              "Assembly",
+              "Vim Script",
+              "Java",
+              "Dockerfile",
+              "PowerShell",
+              "Nushell",
+              "Emacs Lisp",
+              "Meson"
+            ],
+            "createdAt": "2015-06-12T21:48:33Z",
+            "updatedAt": "2026-01-06T04:26:30Z",
+            "pushedAt": "2026-01-06T01:26:28Z",
+            "license": "NOASSERTION",
+            "licenseName": "Other",
+            "isFork": false,
+            "archived": false,
+            "disabled": false,
+            "fileCount": 9222,
+            "codeFileCount": 90,
+            "hasTests": 1,
+            "hasCI": 1,
+            "hasDocker": 1,
+            "hasConfig": 1,
+            "hasReadme": 1
+          },
+          "source": "public-repo",
+          "scannedAt": "2026-01-06T04:33:19.192Z",
+          "optedOut": false,
+          "repo": "termux/termux-packages",
+          "language": "Shell",
+          "primaryLanguage": "Shell"
+        }
+      },
+      "language": "Shell"
+    },
+    {
+      "repo": "angristan/openvpn-install",
+      "url": "https://github.com/angristan/openvpn-install",
+      "features": {
+        "metadata": {
+          "metadata": {
+            "repo": "angristan/openvpn-install",
+            "url": "https://github.com/angristan/openvpn-install",
+            "stars": 15455,
+            "forks": 3259,
+            "openIssues": 1,
+            "hasLicense": 1,
+            "hasDescription": 1,
+            "hasTopics": 1,
+            "language": "Shell",
+            "languages": [
+              "Shell",
+              "Makefile"
+            ],
+            "createdAt": "2016-11-20T12:18:45Z",
+            "updatedAt": "2026-01-06T01:53:59Z",
+            "pushedAt": "2025-12-31T10:20:30Z",
+            "license": "MIT",
+            "licenseName": "MIT License",
+            "isFork": false,
+            "archived": false,
+            "disabled": false,
+            "fileCount": 24,
+            "codeFileCount": 0,
+            "hasTests": 1,
+            "hasCI": 1,
+            "hasDocker": 1,
+            "hasConfig": 1,
+            "hasReadme": 1
+          },
+          "source": "public-repo",
+          "scannedAt": "2026-01-06T04:33:20.581Z",
+          "optedOut": false,
+          "repo": "angristan/openvpn-install",
+          "language": "Shell",
+          "primaryLanguage": "Shell"
+        }
+      },
+      "language": "Shell"
+    },
+    {
+      "repo": "kaldi-asr/kaldi",
+      "url": "https://github.com/kaldi-asr/kaldi",
+      "features": {
+        "metadata": {
+          "metadata": {
+            "repo": "kaldi-asr/kaldi",
+            "url": "https://github.com/kaldi-asr/kaldi",
+            "stars": 15297,
+            "forks": 5365,
+            "openIssues": 252,
+            "hasLicense": 1,
+            "hasDescription": 1,
+            "hasTopics": 1,
+            "language": "Shell",
+            "languages": [
+              "Shell",
+              "C++",
+              "Python",
+              "Perl",
+              "C",
+              "TeX",
+              "Cuda",
+              "HTML",
+              "Makefile",
+              "BibTeX Style",
+              "CMake",
+              "Java",
+              "MATLAB",
+              "Dockerfile",
+              "Awk",
+              "Cython"
+            ],
+            "createdAt": "2015-04-20T17:23:16Z",
+            "updatedAt": "2026-01-05T16:29:27Z",
+            "pushedAt": "2025-09-22T07:06:00Z",
+            "license": "NOASSERTION",
+            "licenseName": "Other",
+            "isFork": false,
+            "archived": false,
+            "disabled": false,
+            "fileCount": 8295,
+            "codeFileCount": 566,
+            "hasTests": 1,
+            "hasCI": 1,
+            "hasDocker": 1,
+            "hasConfig": 1,
+            "hasReadme": 1
+          },
+          "source": "public-repo",
+          "scannedAt": "2026-01-06T04:33:22.552Z",
+          "optedOut": false,
+          "repo": "kaldi-asr/kaldi",
+          "language": "Shell",
+          "primaryLanguage": "Shell"
+        }
+      },
+      "language": "Shell"
+    },
+    {
+      "repo": "tteck/Proxmox",
+      "url": "https://github.com/tteck/Proxmox",
+      "features": {
+        "metadata": {
+          "metadata": {
+            "repo": "tteck/Proxmox",
+            "url": "https://github.com/tteck/Proxmox",
+            "stars": 15133,
+            "forks": 2602,
+            "openIssues": 0,
+            "hasLicense": 1,
+            "hasDescription": 1,
+            "hasTopics": 1,
+            "language": "Shell",
+            "languages": [
+              "Shell"
+            ],
+            "createdAt": "2021-11-30T02:23:37Z",
+            "updatedAt": "2026-01-06T02:34:59Z",
+            "pushedAt": "2024-11-02T12:58:46Z",
+            "license": "MIT",
+            "licenseName": "MIT License",
+            "isFork": false,
+            "archived": true,
+            "disabled": false,
+            "fileCount": 437,
+            "codeFileCount": 0,
+            "hasTests": 0,
+            "hasCI": 0,
+            "hasDocker": 0,
+            "hasConfig": 1,
+            "hasReadme": 1
+          },
+          "source": "public-repo",
+          "scannedAt": "2026-01-06T04:33:23.984Z",
+          "optedOut": false,
+          "repo": "tteck/Proxmox",
+          "language": "Shell",
+          "primaryLanguage": "Shell"
+        }
+      },
+      "language": "Shell"
+    },
+    {
+      "repo": "CISOfy/lynis",
+      "url": "https://github.com/CISOfy/lynis",
+      "features": {
+        "metadata": {
+          "metadata": {
+            "repo": "CISOfy/lynis",
+            "url": "https://github.com/CISOfy/lynis",
+            "stars": 15040,
+            "forks": 1568,
+            "openIssues": 181,
+            "hasLicense": 1,
+            "hasDescription": 1,
+            "hasTopics": 1,
+            "language": "Shell",
+            "languages": [
+              "Shell",
+              "Roff",
+              "Ruby"
+            ],
+            "createdAt": "2013-12-10T14:00:49Z",
+            "updatedAt": "2026-01-05T21:00:56Z",
+            "pushedAt": "2025-11-25T12:08:44Z",
+            "license": "GPL-3.0",
+            "licenseName": "GNU General Public License v3.0",
+            "isFork": false,
+            "archived": false,
+            "disabled": false,
+            "fileCount": 132,
+            "codeFileCount": 0,
+            "hasTests": 1,
+            "hasCI": 0,
+            "hasDocker": 0,
+            "hasConfig": 1,
+            "hasReadme": 1
+          },
+          "source": "public-repo",
+          "scannedAt": "2026-01-06T04:33:25.587Z",
+          "optedOut": false,
+          "repo": "CISOfy/lynis",
+          "language": "Shell",
+          "primaryLanguage": "Shell"
+        }
+      },
+      "language": "Shell"
+    },
+    {
+      "repo": "Bash-it/bash-it",
+      "url": "https://github.com/Bash-it/bash-it",
+      "features": {
+        "metadata": {
+          "metadata": {
+            "repo": "Bash-it/bash-it",
+            "url": "https://github.com/Bash-it/bash-it",
+            "stars": 14894,
+            "forks": 2325,
+            "openIssues": 5,
+            "hasLicense": 1,
+            "hasDescription": 1,
+            "hasTopics": 1,
+            "language": "Shell",
+            "languages": [
+              "Shell"
+            ],
+            "createdAt": "2010-10-02T18:36:17Z",
+            "updatedAt": "2026-01-06T02:26:13Z",
+            "pushedAt": "2025-10-18T17:26:54Z",
+            "license": "MIT",
+            "licenseName": "MIT License",
+            "isFork": false,
+            "archived": false,
+            "disabled": false,
+            "fileCount": 479,
+            "codeFileCount": 1,
+            "hasTests": 1,
+            "hasCI": 1,
+            "hasDocker": 1,
+            "hasConfig": 1,
+            "hasReadme": 1
+          },
+          "source": "public-repo",
+          "scannedAt": "2026-01-06T04:33:27.184Z",
+          "optedOut": false,
+          "repo": "Bash-it/bash-it",
+          "language": "Shell",
+          "primaryLanguage": "Shell"
+        }
+      },
+      "language": "Shell"
+    },
+    {
+      "repo": "sorin-ionescu/prezto",
+      "url": "https://github.com/sorin-ionescu/prezto",
+      "features": {
+        "metadata": {
+          "metadata": {
+            "repo": "sorin-ionescu/prezto",
+            "url": "https://github.com/sorin-ionescu/prezto",
+            "stars": 14433,
+            "forks": 4480,
+            "openIssues": 188,
+            "hasLicense": 1,
+            "hasDescription": 1,
+            "hasTopics": 1,
+            "language": "Shell",
+            "languages": [
+              "Shell"
+            ],
+            "createdAt": "2010-12-16T08:07:04Z",
+            "updatedAt": "2026-01-05T23:04:35Z",
+            "pushedAt": "2025-10-17T19:51:04Z",
+            "license": "MIT",
+            "licenseName": "MIT License",
+            "isFork": false,
+            "archived": false,
+            "disabled": false,
+            "fileCount": 177,
+            "codeFileCount": 0,
+            "hasTests": 1,
+            "hasCI": 0,
+            "hasDocker": 0,
+            "hasConfig": 1,
+            "hasReadme": 1
+          },
+          "source": "public-repo",
+          "scannedAt": "2026-01-06T04:33:28.615Z",
+          "optedOut": false,
+          "repo": "sorin-ionescu/prezto",
+          "language": "Shell",
+          "primaryLanguage": "Shell"
+        }
+      },
+      "language": "Shell"
+    },
+    {
+      "repo": "trimstray/nginx-admins-handbook",
+      "url": "https://github.com/trimstray/nginx-admins-handbook",
+      "features": {
+        "metadata": {
+          "metadata": {
+            "repo": "trimstray/nginx-admins-handbook",
+            "url": "https://github.com/trimstray/nginx-admins-handbook",
+            "stars": 14129,
+            "forks": 1122,
+            "openIssues": 3,
+            "hasLicense": 1,
+            "hasDescription": 1,
+            "hasTopics": 1,
+            "language": "Shell",
+            "languages": [
+              "Shell",
+              "HTML",
+              "Vim Script",
+              "Python",
+              "CSS",
+              "GDB"
+            ],
+            "createdAt": "2019-01-28T13:24:15Z",
+            "updatedAt": "2026-01-05T00:07:18Z",
+            "pushedAt": "2024-11-19T13:58:35Z",
+            "license": "MIT",
+            "licenseName": "MIT License",
+            "isFork": false,
+            "archived": false,
+            "disabled": false,
+            "fileCount": 134,
+            "codeFileCount": 1,
+            "hasTests": 0,
+            "hasCI": 0,
+            "hasDocker": 0,
+            "hasConfig": 1,
+            "hasReadme": 1
+          },
+          "source": "public-repo",
+          "scannedAt": "2026-01-06T04:33:30.100Z",
+          "optedOut": false,
+          "repo": "trimstray/nginx-admins-handbook",
+          "language": "Shell",
+          "primaryLanguage": "Shell"
+        }
+      },
+      "language": "Shell"
+    },
+    {
+      "repo": "obra/superpowers",
+      "url": "https://github.com/obra/superpowers",
+      "features": {
+        "metadata": {
+          "metadata": {
+            "repo": "obra/superpowers",
+            "url": "https://github.com/obra/superpowers",
+            "stars": 14000,
+            "forks": 1150,
+            "openIssues": 52,
+            "hasLicense": 1,
+            "hasDescription": 1,
+            "hasTopics": 0,
+            "language": "Shell",
+            "languages": [
+              "Shell",
+              "JavaScript",
+              "Python",
+              "TypeScript",
+              "Batchfile"
+            ],
+            "createdAt": "2025-10-09T19:45:18Z",
+            "updatedAt": "2026-01-06T04:17:11Z",
+            "pushedAt": "2025-12-27T04:58:41Z",
+            "license": "MIT",
+            "licenseName": "MIT License",
+            "isFork": false,
+            "archived": false,
+            "disabled": false,
+            "fileCount": 104,
+            "codeFileCount": 5,
+            "hasTests": 1,
+            "hasCI": 0,
+            "hasDocker": 0,
+            "hasConfig": 0,
+            "hasReadme": 1
+          },
+          "source": "public-repo",
+          "scannedAt": "2026-01-06T04:33:31.489Z",
+          "optedOut": false,
+          "repo": "obra/superpowers",
+          "language": "Shell",
+          "primaryLanguage": "Shell"
+        }
+      },
+      "language": "Shell"
+    },
+    {
+      "repo": "sindresorhus/pure",
+      "url": "https://github.com/sindresorhus/pure",
+      "features": {
+        "metadata": {
+          "metadata": {
+            "repo": "sindresorhus/pure",
+            "url": "https://github.com/sindresorhus/pure",
+            "stars": 13986,
+            "forks": 1001,
+            "openIssues": 31,
+            "hasLicense": 1,
+            "hasDescription": 1,
+            "hasTopics": 1,
+            "language": "Shell",
+            "languages": [
+              "Shell"
+            ],
+            "createdAt": "2012-09-20T18:14:58Z",
+            "updatedAt": "2026-01-05T20:40:19Z",
+            "pushedAt": "2025-11-15T09:16:24Z",
+            "license": "MIT",
+            "licenseName": "MIT License",
+            "isFork": false,
+            "archived": false,
+            "disabled": false,
+            "fileCount": 15,
+            "codeFileCount": 0,
+            "hasTests": 0,
+            "hasCI": 0,
+            "hasDocker": 0,
+            "hasConfig": 1,
+            "hasReadme": 1
+          },
+          "source": "public-repo",
+          "scannedAt": "2026-01-06T04:33:32.970Z",
+          "optedOut": false,
+          "repo": "sindresorhus/pure",
+          "language": "Shell",
+          "primaryLanguage": "Shell"
+        }
+      },
+      "language": "Shell"
+    },
+    {
+      "repo": "tmux-plugins/tpm",
+      "url": "https://github.com/tmux-plugins/tpm",
+      "features": {
+        "metadata": {
+          "metadata": {
+            "repo": "tmux-plugins/tpm",
+            "url": "https://github.com/tmux-plugins/tpm",
+            "stars": 13899,
+            "forks": 471,
+            "openIssues": 146,
+            "hasLicense": 1,
+            "hasDescription": 1,
+            "hasTopics": 0,
+            "language": "Shell",
+            "languages": [
+              "Shell"
+            ],
+            "createdAt": "2014-05-19T09:18:38Z",
+            "updatedAt": "2026-01-05T15:52:35Z",
+            "pushedAt": "2024-08-05T08:25:43Z",
+            "license": "MIT",
+            "licenseName": "MIT License",
+            "isFork": false,
+            "archived": false,
+            "disabled": false,
+            "fileCount": 44,
+            "codeFileCount": 0,
+            "hasTests": 1,
+            "hasCI": 0,
+            "hasDocker": 0,
+            "hasConfig": 0,
+            "hasReadme": 1
+          },
+          "source": "public-repo",
+          "scannedAt": "2026-01-06T04:33:34.672Z",
+          "optedOut": false,
+          "repo": "tmux-plugins/tpm",
+          "language": "Shell",
+          "primaryLanguage": "Shell"
+        }
+      },
+      "language": "Shell"
+    },
+    {
+      "repo": "foxlet/macOS-Simple-KVM",
+      "url": "https://github.com/foxlet/macOS-Simple-KVM",
+      "features": {
+        "metadata": {
+          "metadata": {
+            "repo": "foxlet/macOS-Simple-KVM",
+            "url": "https://github.com/foxlet/macOS-Simple-KVM",
+            "stars": 13887,
+            "forks": 1144,
+            "openIssues": 365,
+            "hasLicense": 0,
+            "hasDescription": 1,
+            "hasTopics": 1,
+            "language": "Shell",
+            "languages": [
+              "Shell",
+              "Python"
+            ],
+            "createdAt": "2019-04-22T07:25:20Z",
+            "updatedAt": "2026-01-02T21:55:38Z",
+            "pushedAt": "2024-04-04T15:48:46Z",
+            "license": "None",
+            "licenseName": "No License",
+            "isFork": false,
+            "archived": false,
+            "disabled": false,
+            "fileCount": 29,
+            "codeFileCount": 1,
+            "hasTests": 0,
+            "hasCI": 0,
+            "hasDocker": 0,
+            "hasConfig": 0,
+            "hasReadme": 1
+          },
+          "source": "public-repo",
+          "scannedAt": "2026-01-06T04:33:36.128Z",
+          "optedOut": false,
+          "repo": "foxlet/macOS-Simple-KVM",
+          "language": "Shell",
+          "primaryLanguage": "Shell"
+        }
+      },
+      "language": "Shell"
+    },
+    {
+      "repo": "nodesource/distributions",
+      "url": "https://github.com/nodesource/distributions",
+      "features": {
+        "metadata": {
+          "metadata": {
+            "repo": "nodesource/distributions",
+            "url": "https://github.com/nodesource/distributions",
+            "stars": 13796,
+            "forks": 3107,
+            "openIssues": 37,
+            "hasLicense": 1,
+            "hasDescription": 1,
+            "hasTopics": 1,
+            "language": "Shell",
+            "languages": [
+              "Shell"
+            ],
+            "createdAt": "2014-08-14T02:44:10Z",
+            "updatedAt": "2026-01-06T01:06:52Z",
+            "pushedAt": "2025-11-05T15:08:11Z",
+            "license": "MIT",
+            "licenseName": "MIT License",
+            "isFork": false,
+            "archived": false,
+            "disabled": false,
+            "fileCount": 37,
+            "codeFileCount": 0,
+            "hasTests": 0,
+            "hasCI": 1,
+            "hasDocker": 0,
+            "hasConfig": 0,
+            "hasReadme": 1
+          },
+          "source": "public-repo",
+          "scannedAt": "2026-01-06T04:33:37.746Z",
+          "optedOut": false,
+          "repo": "nodesource/distributions",
+          "language": "Shell",
+          "primaryLanguage": "Shell"
+        }
+      },
+      "language": "Shell"
+    },
+    {
+      "repo": "winapps-org/winapps",
+      "url": "https://github.com/winapps-org/winapps",
+      "features": {
+        "metadata": {
+          "metadata": {
+            "repo": "winapps-org/winapps",
+            "url": "https://github.com/winapps-org/winapps",
+            "stars": 13742,
+            "forks": 428,
+            "openIssues": 89,
+            "hasLicense": 1,
+            "hasDescription": 1,
+            "hasTopics": 1,
+            "language": "Shell",
+            "languages": [
+              "Shell",
+              "PowerShell",
+              "Nix",
+              "Batchfile"
+            ],
+            "createdAt": "2023-07-05T15:05:25Z",
+            "updatedAt": "2026-01-06T01:39:51Z",
+            "pushedAt": "2026-01-03T15:48:45Z",
+            "license": "NOASSERTION",
+            "licenseName": "Other",
+            "isFork": false,
+            "archived": false,
+            "disabled": false,
+            "fileCount": 244,
+            "codeFileCount": 0,
+            "hasTests": 0,
+            "hasCI": 0,
+            "hasDocker": 0,
+            "hasConfig": 1,
+            "hasReadme": 1
+          },
+          "source": "public-repo",
+          "scannedAt": "2026-01-06T04:33:39.302Z",
+          "optedOut": false,
+          "repo": "winapps-org/winapps",
+          "language": "Shell",
+          "primaryLanguage": "Shell"
+        }
+      },
+      "language": "Shell"
+    },
+    {
+      "repo": "quickemu-project/quickemu",
+      "url": "https://github.com/quickemu-project/quickemu",
+      "features": {
+        "metadata": {
+          "metadata": {
+            "repo": "quickemu-project/quickemu",
+            "url": "https://github.com/quickemu-project/quickemu",
+            "stars": 13604,
+            "forks": 590,
+            "openIssues": 107,
+            "hasLicense": 1,
+            "hasDescription": 1,
+            "hasTopics": 1,
+            "language": "Shell",
+            "languages": [
+              "Shell",
+              "Nix",
+              "Python",
+              "Ruby"
+            ],
+            "createdAt": "2020-03-15T23:11:47Z",
+            "updatedAt": "2026-01-06T02:54:59Z",
+            "pushedAt": "2025-12-28T13:43:54Z",
+            "license": "MIT",
+            "licenseName": "MIT License",
+            "isFork": false,
+            "archived": false,
+            "disabled": false,
+            "fileCount": 48,
+            "codeFileCount": 1,
+            "hasTests": 1,
+            "hasCI": 1,
+            "hasDocker": 0,
+            "hasConfig": 1,
+            "hasReadme": 1
+          },
+          "source": "public-repo",
+          "scannedAt": "2026-01-06T04:33:40.834Z",
+          "optedOut": false,
+          "repo": "quickemu-project/quickemu",
+          "language": "Shell",
+          "primaryLanguage": "Shell"
+        }
+      },
+      "language": "Shell"
+    }
+  ]
+}

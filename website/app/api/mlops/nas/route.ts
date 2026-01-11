@@ -11,7 +11,7 @@ import { NextRequest, NextResponse } from 'next/server';
 let service: any = null;
 
 try {
-  const serviceModule = require('../../../../../lib/mlops/nasService');
+  const serviceModule = require('@/lib/mlops/nasService');
   if (serviceModule.getNASService) {
     service = serviceModule.getNASService();
   } else if (serviceModule.NASService) {

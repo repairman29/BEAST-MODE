@@ -61,7 +61,7 @@ export async function GET(request: NextRequest) {
 
     try {
       // @ts-expect-error - Dynamic import path, module may not exist at build time
-      const module = await import(/* webpackIgnore: true */ '../../../../../../lib/mlops/feedbackCollector');
+      const module = await import(/* webpackIgnore: true */ '@/lib/mlops/feedbackCollector');
       moduleInfo = {
         hasModule: !!module,
         hasGetFeedbackCollector: !!module?.getFeedbackCollector,

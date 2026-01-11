@@ -1,0 +1,37 @@
+{
+  "repo": "repairman29/auth-platform-service",
+  "url": "https://github.com/repairman29/auth-platform-service",
+  "features": {
+    "qualityScore": 86,
+    "stars": 0,
+    "forks": 0,
+    "openIssues": 0,
+    "fileCount": 0,
+    "codeFileCount": 0,
+    "hasLicense": 0,
+    "hasDescription": 1,
+    "hasTopics": 0,
+    "hasReadme": 1,
+    "hasTests": 1,
+    "hasCI": 1,
+    "hasDocker": 1,
+    "hasConfig": 0,
+    "issues": 1,
+    "improvements": 1,
+    "languages": [
+      "JavaScript",
+      "Dockerfile"
+    ],
+    "primaryLanguage": "Unknown"
+  },
+  "quality": 86,
+  "timestamp": "2026-01-05T04:02:27.096Z",
+  "metadata": {
+    "languages": [
+      "JavaScript",
+      "Dockerfile"
+    ],
+    "fileCount": 0,
+    "codeFileCount": 0
+  }
+}

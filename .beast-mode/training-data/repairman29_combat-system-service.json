@@ -1,0 +1,37 @@
+{
+  "repo": "repairman29/combat-system-service",
+  "url": "https://github.com/repairman29/combat-system-service",
+  "features": {
+    "qualityScore": 84,
+    "stars": 0,
+    "forks": 0,
+    "openIssues": 0,
+    "fileCount": 0,
+    "codeFileCount": 0,
+    "hasLicense": 0,
+    "hasDescription": 1,
+    "hasTopics": 0,
+    "hasReadme": 1,
+    "hasTests": 1,
+    "hasCI": 1,
+    "hasDocker": 1,
+    "hasConfig": 0,
+    "issues": 1,
+    "improvements": 1,
+    "languages": [
+      "JavaScript",
+      "Dockerfile"
+    ],
+    "primaryLanguage": "Unknown"
+  },
+  "quality": 84,
+  "timestamp": "2026-01-05T04:02:27.095Z",
+  "metadata": {
+    "languages": [
+      "JavaScript",
+      "Dockerfile"
+    ],
+    "fileCount": 0,
+    "codeFileCount": 0
+  }
+}

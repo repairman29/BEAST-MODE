@@ -6,7 +6,7 @@ let codebaseIndexer: any;
 let githubFileFetcher: any;
 try {
   // Path: website/app/api/codebase/index -> BEAST-MODE-PRODUCT/lib/mlops
-  codebaseIndexer = require('../../../../../lib/mlops/codebaseIndexer');
+  codebaseIndexer = require('@/lib/mlops/codebaseIndexer');
   githubFileFetcher = require('../../../../../lib/github/fileFetcher');
 } catch (error) {
   console.error('[Codebase Index API] Failed to load modules:', error);

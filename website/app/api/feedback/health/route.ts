@@ -11,7 +11,7 @@ import { NextRequest, NextResponse } from 'next/server';
 async function getFeedbackMonitor() {
   try {
     // @ts-ignore - Dynamic import, module may not exist
-    const module = await import(/* webpackIgnore: true */ '../../../../../../lib/mlops/feedbackMonitor').catch(() => null);
+    const module = await import(/* webpackIgnore: true */ '@/lib/mlops/feedbackMonitor').catch(() => null);
     return module?.getFeedbackMonitor || null;
   } catch {
     return null;
@@ -21,7 +21,7 @@ async function getFeedbackMonitor() {
 async function getFeedbackCollector() {
   try {
     // @ts-ignore - Dynamic import, module may not exist
-    const module = await import(/* webpackIgnore: true */ '../../../../../../lib/mlops/feedbackCollector').catch(() => null);
+    const module = await import(/* webpackIgnore: true */ '@/lib/mlops/feedbackCollector').catch(() => null);
     return module?.getFeedbackCollector || null;
   } catch {
     return null;

@@ -19,18 +19,21 @@ function createWindow() {
             nodeIntegration: false,
             contextIsolation: true,
             preload: path.join(__dirname, 'preload.js'),
-            enableRemoteModule: false
+            enableRemoteModule: false,
+            webSecurity: false, // Allow loading Monaco from CDN
+            allowRunningInsecureContent: true
         },
         titleBarStyle: 'default',
         show: false // Don't show until ready
     });
 
-    // Load the app
+    // Load the app - always use local file
+    const htmlPath = path.join(__dirname, '../renderer/index.html');
+    mainWindow.loadFile(htmlPath);
+    
+    // Open dev tools in dev mode
     if (isDev) {
-        mainWindow.loadURL('http://localhost:3000/ide');
         mainWindow.webContents.openDevTools();
-    } else {
-        mainWindow.loadFile(path.join(__dirname, '../renderer/index.html'));
     }
 
     // Show when ready

@@ -1,0 +1,505 @@
+{
+  "metadata": {
+    "discoveredAt": "2026-01-06T03:31:53.817Z",
+    "priority": "critical",
+    "totalRepos": 70,
+    "languages": [
+      "Rust",
+      "C#",
+      "Java",
+      "Go"
+    ]
+  },
+  "repositories": [
+    {
+      "repo": "rust-lang/rust",
+      "url": "https://github.com/rust-lang/rust",
+      "stars": 109155,
+      "language": "Rust",
+      "description": "Empowering everyone to build reliable and efficient software."
+    },
+    {
+      "repo": "denoland/deno",
+      "url": "https://github.com/denoland/deno",
+      "stars": 105740,
+      "language": "Rust",
+      "description": "A modern runtime for JavaScript and TypeScript."
+    },
+    {
+      "repo": "rustdesk/rustdesk",
+      "url": "https://github.com/rustdesk/rustdesk",
+      "stars": 105219,
+      "language": "Rust",
+      "description": "An open-source remote desktop application designed for self-hosting, as an alternative to TeamViewer."
+    },
+    {
+      "repo": "tauri-apps/tauri",
+      "url": "https://github.com/tauri-apps/tauri",
+      "stars": 100808,
+      "language": "Rust",
+      "description": "Build smaller, faster, and more secure desktop and mobile applications with a web frontend."
+    },
+    {
+      "repo": "astral-sh/uv",
+      "url": "https://github.com/astral-sh/uv",
+      "stars": 76324,
+      "language": "Rust",
+      "description": "An extremely fast Python package and project manager, written in Rust."
+    },
+    {
+      "repo": "unionlabs/union",
+      "url": "https://github.com/unionlabs/union",
+      "stars": 74421,
+      "language": "Rust",
+      "description": "The trust-minimized, zero-knowledge bridging protocol, designed for censorship resistance, extremely high security, and usage in decentralized finance."
+    },
+    {
+      "repo": "zed-industries/zed",
+      "url": "https://github.com/zed-industries/zed",
+      "stars": 72646,
+      "language": "Rust",
+      "description": "Code at the speed of thought – Zed is a high-performance, multiplayer code editor from the creators of Atom and Tree-sitter."
+    },
+    {
+      "repo": "FuelLabs/sway",
+      "url": "https://github.com/FuelLabs/sway",
+      "stars": 62021,
+      "language": "Rust",
+      "description": "🌴 Empowering everyone to build reliable and efficient smart contracts."
+    },
+    {
+      "repo": "alacritty/alacritty",
+      "url": "https://github.com/alacritty/alacritty",
+      "stars": 61744,
+      "language": "Rust",
+      "description": "A cross-platform, OpenGL terminal emulator."
+    },
+    {
+      "repo": "rust-lang/rustlings",
+      "url": "https://github.com/rust-lang/rustlings",
+      "stars": 61309,
+      "language": "Rust",
+      "description": ":crab: Small exercises to get you used to reading and writing Rust code!"
+    },
+    {
+      "repo": "BurntSushi/ripgrep",
+      "url": "https://github.com/BurntSushi/ripgrep",
+      "stars": 58643,
+      "language": "Rust",
+      "description": "ripgrep recursively searches directories for a regex pattern while respecting your gitignore"
+    },
+    {
+      "repo": "topjohnwu/Magisk",
+      "url": "https://github.com/topjohnwu/Magisk",
+      "stars": 57970,
+      "language": "Rust",
+      "description": "The Magic Mask for Android"
+    },
+    {
+      "repo": "FuelLabs/fuel-core",
+      "url": "https://github.com/FuelLabs/fuel-core",
+      "stars": 57418,
+      "language": "Rust",
+      "description": "Rust full node implementation of the Fuel v2 protocol."
+    },
+    {
+      "repo": "sharkdp/bat",
+      "url": "https://github.com/sharkdp/bat",
+      "stars": 56492,
+      "language": "Rust",
+      "description": "A cat(1) clone with wings."
+    },
+    {
+      "repo": "openai/codex",
+      "url": "https://github.com/openai/codex",
+      "stars": 55293,
+      "language": "Rust",
+      "description": "Lightweight coding agent that runs in your terminal"
+    },
+    {
+      "repo": "meilisearch/meilisearch",
+      "url": "https://github.com/meilisearch/meilisearch",
+      "stars": 55249,
+      "language": "Rust",
+      "description": "A lightning-fast search engine API bringing AI-powered hybrid search to your sites and applications."
+    },
+    {
+      "repo": "rust-unofficial/awesome-rust",
+      "url": "https://github.com/rust-unofficial/awesome-rust",
+      "stars": 54824,
+      "language": "Rust",
+      "description": "A curated list of Rust code and resources."
+    },
+    {
+      "repo": "lencx/ChatGPT",
+      "url": "https://github.com/lencx/ChatGPT",
+      "stars": 54379,
+      "language": "Rust",
+      "description": "🔮 ChatGPT Desktop Application (Mac, Windows and Linux)"
+    },
+    {
+      "repo": "starship/starship",
+      "url": "https://github.com/starship/starship",
+      "stars": 53179,
+      "language": "Rust",
+      "description": "☄🌌️  The minimal, blazing-fast, and infinitely customizable prompt for any shell!"
+    },
+    {
+      "repo": "dani-garcia/vaultwarden",
+      "url": "https://github.com/dani-garcia/vaultwarden",
+      "stars": 52939,
+      "language": "Rust",
+      "description": "Unofficial Bitwarden compatible server written in Rust, formerly known as bitwarden_rs"
+    },
+    {
+      "repo": "typst/typst",
+      "url": "https://github.com/typst/typst",
+      "stars": 50162,
+      "language": "Rust",
+      "description": "A markup-based typesetting system that is powerful and easy to learn."
+    },
+    {
+      "repo": "astral-sh/ruff",
+      "url": "https://github.com/astral-sh/ruff",
+      "stars": 44960,
+      "language": "Rust",
+      "description": "An extremely fast Python linter and code formatter, written in Rust."
+    },
+    {
+      "repo": "tw93/Pake",
+      "url": "https://github.com/tw93/Pake",
+      "stars": 44516,
+      "language": "Rust",
+      "description": "🤱🏻 Turn any webpage into a desktop app with one command."
+    },
+    {
+      "repo": "bevyengine/bevy",
+      "url": "https://github.com/bevyengine/bevy",
+      "stars": 43865,
+      "language": "Rust",
+      "description": "A refreshingly simple data-driven game engine built in Rust"
+    },
+    {
+      "repo": "FuelLabs/fuels-rs",
+      "url": "https://github.com/FuelLabs/fuels-rs",
+      "stars": 43481,
+      "language": "Rust",
+      "description": "Fuel Network Rust SDK"
+    },
+    {
+      "repo": "helix-editor/helix",
+      "url": "https://github.com/helix-editor/helix",
+      "stars": 42260,
+      "language": "Rust",
+      "description": "A post-modern modal text editor."
+    },
+    {
+      "repo": "sharkdp/fd",
+      "url": "https://github.com/sharkdp/fd",
+      "stars": 41048,
+      "language": "Rust",
+      "description": "A simple, fast and user-friendly alternative to 'find'"
+    },
+    {
+      "repo": "juspay/hyperswitch",
+      "url": "https://github.com/juspay/hyperswitch",
+      "stars": 39299,
+      "language": "Rust",
+      "description": "An open source payments switch written in Rust to make payments fast, reliable and affordable"
+    },
+    {
+      "repo": "lapce/lapce",
+      "url": "https://github.com/lapce/lapce",
+      "stars": 37814,
+      "language": "Rust",
+      "description": "Lightning-fast and Powerful Code Editor written in Rust"
+    },
+    {
+      "repo": "nushell/nushell",
+      "url": "https://github.com/nushell/nushell",
+      "stars": 37761,
+      "language": "Rust",
+      "description": "A new type of shell"
+    },
+    {
+      "repo": "pola-rs/polars",
+      "url": "https://github.com/pola-rs/polars",
+      "stars": 36836,
+      "language": "Rust",
+      "description": "Extremely fast Query Engine for DataFrames, written in Rust"
+    },
+    {
+      "repo": "microsoft/PowerToys",
+      "url": "https://github.com/microsoft/PowerToys",
+      "stars": 127105,
+      "language": "C#",
+      "description": "Microsoft PowerToys is a collection of utilities that help you customize Windows and streamline everyday tasks"
+    },
+    {
+      "repo": "2dust/v2rayN",
+      "url": "https://github.com/2dust/v2rayN",
+      "stars": 93928,
+      "language": "C#",
+      "description": "A GUI client for Windows, Linux and macOS, support Xray and sing-box and others"
+    },
+    {
+      "repo": "shadowsocks/shadowsocks-windows",
+      "url": "https://github.com/shadowsocks/shadowsocks-windows",
+      "stars": 59183,
+      "language": "C#",
+      "description": "A C# port of shadowsocks"
+    },
+    {
+      "repo": "PowerShell/PowerShell",
+      "url": "https://github.com/PowerShell/PowerShell",
+      "stars": 51139,
+      "language": "C#",
+      "description": "PowerShell for every system!"
+    },
+    {
+      "repo": "jellyfin/jellyfin",
+      "url": "https://github.com/jellyfin/jellyfin",
+      "stars": 47370,
+      "language": "C#",
+      "description": "The Free Software Media System - Server Backend & API"
+    },
+    {
+      "repo": "files-community/Files",
+      "url": "https://github.com/files-community/Files",
+      "stars": 41048,
+      "language": "C#",
+      "description": "A modern file manager that helps users organize their files and folders."
+    },
+    {
+      "repo": "dotnet/aspnetcore",
+      "url": "https://github.com/dotnet/aspnetcore",
+      "stars": 37574,
+      "language": "C#",
+      "description": "ASP.NET Core is a cross-platform .NET framework for building modern cloud-based web applications on Windows, Mac, or Linux."
+    },
+    {
+      "repo": "huiyadanli/RevokeMsgPatcher",
+      "url": "https://github.com/huiyadanli/RevokeMsgPatcher",
+      "stars": 36126,
+      "language": "C#",
+      "description": ":trollface: A hex editor for WeChat/QQ/TIM - PC版微信/QQ/TIM防撤回补丁（我已经看到了，撤回也没用了）"
+    },
+    {
+      "repo": "ShareX/ShareX",
+      "url": "https://github.com/ShareX/ShareX",
+      "stars": 35073,
+      "language": "C#",
+      "description": "ShareX is a free and open-source application that enables users to capture or record any area of their screen with a single keystroke. It also supports uploading images, text, and various file types to a wide range of destinations."
+    },
+    {
+      "repo": "DevToys-app/DevToys",
+      "url": "https://github.com/DevToys-app/DevToys",
+      "stars": 30680,
+      "language": "C#",
+      "description": "A Swiss Army knife for developers."
+    },
+    {
+      "repo": "AvaloniaUI/Avalonia",
+      "url": "https://github.com/AvaloniaUI/Avalonia",
+      "stars": 29705,
+      "language": "C#",
+      "description": "Develop Desktop, Embedded, Mobile and WebAssembly apps with C# and XAML. The most popular .NET UI client technology"
+    },
+    {
+      "repo": "dnSpy/dnSpy",
+      "url": "https://github.com/dnSpy/dnSpy",
+      "stars": 28772,
+      "language": "C#",
+      "description": ".NET debugger and assembly editor"
+    },
+    {
+      "repo": "microsoft/semantic-kernel",
+      "url": "https://github.com/microsoft/semantic-kernel",
+      "stars": 26968,
+      "language": "C#",
+      "description": "Integrate cutting-edge LLM technology quickly and easily into your apps"
+    },
+    {
+      "repo": "NickeManarin/ScreenToGif",
+      "url": "https://github.com/NickeManarin/ScreenToGif",
+      "stars": 26160,
+      "language": "C#",
+      "description": "🎬 ScreenToGif allows you to record a selected area of your screen, edit and save it as a gif or video."
+    },
+    {
+      "repo": "mxgmn/WaveFunctionCollapse",
+      "url": "https://github.com/mxgmn/WaveFunctionCollapse",
+      "stars": 24534,
+      "language": "C#",
+      "description": "Bitmap & tilemap generation from a single example with the help of ideas from quantum mechanics"
+    },
+    {
+      "repo": "dotnet-architecture/eShopOnContainers",
+      "url": "https://github.com/dotnet-architecture/eShopOnContainers",
+      "stars": 24440,
+      "language": "C#",
+      "description": "Cross-platform .NET sample microservices and container based application that runs on Linux Windows and macOS. Powered by .NET 7, Docker Containers and Azure Kubernetes Services. Supports Visual Studio, VS for Mac and CLI based environments with Docker CLI, dotnet CLI, VS Code or any other code editor. Moved to https://github.com/dotnet/eShop."
+    },
+    {
+      "repo": "wshobson/agents",
+      "url": "https://github.com/wshobson/agents",
+      "stars": 24405,
+      "language": "C#",
+      "description": "Intelligent automation and multi-agent orchestration for Claude Code"
+    },
+    {
+      "repo": "icsharpcode/ILSpy",
+      "url": "https://github.com/icsharpcode/ILSpy",
+      "stars": 24332,
+      "language": "C#",
+      "description": ".NET Decompiler with support for PDB generation, ReadyToRun, Metadata (&more) - cross-platform!"
+    },
+    {
+      "repo": "BeyondDimension/SteamTools",
+      "url": "https://github.com/BeyondDimension/SteamTools",
+      "stars": 24178,
+      "language": "C#",
+      "description": "🛠「Watt Toolkit」是一个开源跨平台的多功能 Steam 工具箱。"
+    },
+    {
+      "repo": "dotnet/maui",
+      "url": "https://github.com/dotnet/maui",
+      "stars": 23116,
+      "language": "C#",
+      "description": ".NET MAUI is the .NET Multi-platform App UI, a framework for building native device applications spanning mobile, tablet, and desktop."
+    },
+    {
+      "repo": "CodeHubApp/CodeHub",
+      "url": "https://github.com/CodeHubApp/CodeHub",
+      "stars": 22677,
+      "language": "C#",
+      "description": "CodeHub is an iOS application written using Xamarin"
+    },
+    {
+      "repo": "QL-Win/QuickLook",
+      "url": "https://github.com/QL-Win/QuickLook",
+      "stars": 21825,
+      "language": "C#",
+      "description": "Bring macOS “Quick Look” feature to Windows"
+    },
+    {
+      "repo": "thangchung/awesome-dotnet-core",
+      "url": "https://github.com/thangchung/awesome-dotnet-core",
+      "stars": 21013,
+      "language": "C#",
+      "description": ":honeybee: A collection of awesome .NET core libraries, tools, frameworks and software"
+    },
+    {
+      "repo": "dotnet/roslyn",
+      "url": "https://github.com/dotnet/roslyn",
+      "stars": 20130,
+      "language": "C#",
+      "description": "The Roslyn .NET compiler provides C# and Visual Basic languages with rich code analysis APIs."
+    },
+    {
+      "repo": "Snailclimb/JavaGuide",
+      "url": "https://github.com/Snailclimb/JavaGuide",
+      "stars": 153348,
+      "language": "Java",
+      "description": "Java 学习&面试指南（Go、Python 后端面试通用,计算机基础面试总结）。准备后端技术面试，首选 JavaGuide！"
+    },
+    {
+      "repo": "krahets/hello-algo",
+      "url": "https://github.com/krahets/hello-algo",
+      "stars": 121146,
+      "language": "Java",
+      "description": "《Hello 算法》：动画图解、一键运行的数据结构与算法教程。支持简中、繁中、English、日本語，提供 Python, Java, C++, C, C#, JS, Go, Swift, Rust, Ruby, Kotlin, TS, Dart 等代码实现"
+    },
+    {
+      "repo": "GrowingGit/GitHub-Chinese-Top-Charts",
+      "url": "https://github.com/GrowingGit/GitHub-Chinese-Top-Charts",
+      "stars": 104925,
+      "language": "Java",
+      "description": ":cn: GitHub中文排行榜，各语言分设「软件 | 资料」榜单，精准定位中文好项目。各取所需，高效学习。"
+    },
+    {
+      "repo": "iluwatar/java-design-patterns",
+      "url": "https://github.com/iluwatar/java-design-patterns",
+      "stars": 93579,
+      "language": "Java",
+      "description": "Design patterns implemented in Java"
+    },
+    {
+      "repo": "macrozheng/mall",
+      "url": "https://github.com/macrozheng/mall",
+      "stars": 82620,
+      "language": "Java",
+      "description": "mall项目是一套电商系统，包括前台商城系统及后台管理系统，基于Spring Boot+MyBatis实现，采用Docker容器化部署。 前台商城系统包含首页门户、商品推荐、商品搜索、商品展示、购物车、订单流程、会员中心、客户服务、帮助中心等模块。 后台管理系统包含商品管理、订单管理、会员管理、促销管理、运营管理、内容管理、统计报表、财务管理、权限管理、设置等模块。"
+    },
+    {
+      "repo": "spring-projects/spring-boot",
+      "url": "https://github.com/spring-projects/spring-boot",
+      "stars": 79571,
+      "language": "Java",
+      "description": "Spring Boot helps you to create Spring-powered, production-grade applications and services with absolute minimum fuss."
+    },
+    {
+      "repo": "doocs/advanced-java",
+      "url": "https://github.com/doocs/advanced-java",
+      "stars": 78708,
+      "language": "Java",
+      "description": "😮 Core Interview Questions & Answers For Experienced Java(Backend) Developers | 互联网 Java 工程师进阶知识完全扫盲：涵盖高并发、分布式、高可用、微服务、海量数据处理等领域知识"
+    },
+    {
+      "repo": "MisterBooo/LeetCodeAnimation",
+      "url": "https://github.com/MisterBooo/LeetCodeAnimation",
+      "stars": 76693,
+      "language": "Java",
+      "description": "Demonstrate all the questions on LeetCode in the form of animation.（用动画的形式呈现解LeetCode题目的思路）"
+    },
+    {
+      "repo": "avelino/awesome-go",
+      "url": "https://github.com/avelino/awesome-go",
+      "stars": 161861,
+      "language": "Go",
+      "description": "A curated list of awesome Go frameworks, libraries and software"
+    },
+    {
+      "repo": "ollama/ollama",
+      "url": "https://github.com/ollama/ollama",
+      "stars": 158854,
+      "language": "Go",
+      "description": "Get up and running with OpenAI gpt-oss, DeepSeek-R1, Gemma 3 and other models."
+    },
+    {
+      "repo": "golang/go",
+      "url": "https://github.com/golang/go",
+      "stars": 131792,
+      "language": "Go",
+      "description": "The Go programming language"
+    },
+    {
+      "repo": "kubernetes/kubernetes",
+      "url": "https://github.com/kubernetes/kubernetes",
+      "stars": 119648,
+      "language": "Go",
+      "description": "Production-Grade Container Scheduling and Management"
+    },
+    {
+      "repo": "fatedier/frp",
+      "url": "https://github.com/fatedier/frp",
+      "stars": 103093,
+      "language": "Go",
+      "description": "A fast reverse proxy to help you expose a local server behind a NAT or firewall to the internet."
+    },
+    {
+      "repo": "gin-gonic/gin",
+      "url": "https://github.com/gin-gonic/gin",
+      "stars": 87610,
+      "language": "Go",
+      "description": "Gin is a high-performance HTTP web framework written in Go. It provides a Martini-like API but with significantly better performance—up to 40 times faster—thanks to httprouter. Gin is designed for building REST APIs, web applications, and microservices."
+    },
+    {
+      "repo": "gohugoio/hugo",
+      "url": "https://github.com/gohugoio/hugo",
+      "stars": 85856,
+      "language": "Go",
+      "description": "The world’s fastest framework for building websites."
+    }
+  ]
+}

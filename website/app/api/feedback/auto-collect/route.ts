@@ -11,7 +11,7 @@ import { NextRequest, NextResponse } from 'next/server';
 async function getAutoFeedbackCollector() {
   try {
     // @ts-ignore - Dynamic import, module may not exist
-    const module = await import(/* webpackIgnore: true */ '../../../../../../lib/mlops/autoFeedbackCollector').catch(() => null);
+    const module = await import(/* webpackIgnore: true */ '@/lib/mlops/autoFeedbackCollector').catch(() => null);
     return module?.getAutoFeedbackCollector || null;
   } catch {
     return null;
@@ -28,7 +28,7 @@ export async function POST(request: NextRequest) {
       
       // Record inferred feedback directly
       try {
-        const { getFeedbackCollector } = require('../../../../../lib/mlops/feedbackCollector');
+        const { getFeedbackCollector } = require('@/lib/mlops/feedbackCollector');
         const collector = await getFeedbackCollector();
         
         if (collector) {

@@ -11,7 +11,7 @@ import { NextRequest, NextResponse } from 'next/server';
 let service: any = null;
 
 try {
-  const serviceModule = require('../../../../../lib/mlops/analyticsService');
+  const serviceModule = require('@/lib/mlops/analyticsService');
   if (serviceModule.getAnalyticsService) {
     service = serviceModule.getAnalyticsService();
   } else if (serviceModule.AnalyticsService) {

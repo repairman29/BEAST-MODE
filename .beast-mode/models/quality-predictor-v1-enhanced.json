@@ -1,0 +1,54 @@
+{
+  "model": {
+    "type": "linear_regression",
+    "coefficients": [
+      0
+    ],
+    "intercept": 72.25053916651001,
+    "featureNames": [
+      "codeQuality",
+      "testCoverage",
+      "security",
+      "performance",
+      "maintainability",
+      "complexity",
+      "csat",
+      "qualityScore",
+      "healthScore",
+      "qualityComplexityRatio",
+      "coverageComplexityRatio",
+      "securityPerformanceBalance",
+      "csatQualityCorrelation",
+      "historical_avg_quality",
+      "historical_avg_csat",
+      "historical_consistency",
+      "time_of_day",
+      "day_of_week",
+      "recency"
+    ],
+    "trainedAt": "2025-12-30T22:39:26.354Z"
+  },
+  "featureNames": [
+    "codeQuality",
+    "testCoverage",
+    "security",
+    "performance",
+    "maintainability",
+    "complexity",
+    "csat",
+    "qualityScore",
+    "healthScore",
+    "qualityComplexityRatio",
+    "coverageComplexityRatio",
+    "securityPerformanceBalance",
+    "csatQualityCorrelation",
+    "historical_avg_quality",
+    "historical_avg_csat",
+    "historical_consistency",
+    "time_of_day",
+    "day_of_week",
+    "recency"
+  ],
+  "trained": true,
+  "version": "1.0"
+}

@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BEAST MODE IDE</title>
+    <!-- Monaco Editor from CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs/loader.js"></script>
     <style>
         * {
             margin: 0;
@@ -148,6 +150,90 @@
             background: #2d2d30;
             border-bottom: 1px solid #3e3e42;
             font-size: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        #terminal-header .terminal-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .copy-btn {
+            padding: 4px 8px;
+            background: #007acc;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 11px;
+            transition: background 0.2s;
+        }
+        
+        .copy-btn:hover {
+            background: #005a9e;
+        }
+        
+        .copy-btn:active {
+            background: #004578;
+        }
+        
+        .copy-btn.copied {
+            background: #00ff00;
+            color: #000;
+        }
+        
+        .error-message {
+            position: relative;
+            padding: 10px;
+            margin: 5px 0;
+            background: #3a1f1f;
+            border-left: 3px solid #ff6b6b;
+            border-radius: 3px;
+        }
+        
+        .error-message .copy-error-btn {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            padding: 4px 8px;
+            background: #007acc;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 10px;
+        }
+        
+        .console-entry {
+            transition: background 0.2s;
+        }
+        
+        .console-entry:hover {
+            background: #2d2d30 !important;
+        }
+        
+        #console-output {
+            scrollbar-width: thin;
+            scrollbar-color: #3e3e42 #1e1e1e;
+        }
+        
+        #console-output::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        #console-output::-webkit-scrollbar-track {
+            background: #1e1e1e;
+        }
+        
+        #console-output::-webkit-scrollbar-thumb {
+            background: #3e3e42;
+            border-radius: 4px;
+        }
+        
+        #console-output::-webkit-scrollbar-thumb:hover {
+            background: #4e4e52;
         }
         
         #terminal-content {
@@ -156,6 +242,10 @@
             font-family: 'Courier New', monospace;
             font-size: 12px;
             overflow-y: auto;
+        }
+        
+        .xterm .xterm-selection {
+            background: #264f78;
         }
     </style>
 </head>
@@ -186,7 +276,13 @@
                 </div>
                 <div id="monaco-editor"></div>
                 <div id="terminal">
-                    <div id="terminal-header">Terminal</div>
+                    <div id="terminal-header">
+                        <span>Terminal</span>
+                        <div class="terminal-actions">
+                            <button class="copy-btn" id="copy-terminal-btn" title="Copy all terminal output">📋 Copy All</button>
+                            <button class="copy-btn" id="clear-terminal-btn" title="Clear terminal">🗑️ Clear</button>
+                        </div>
+                    </div>
                     <div id="terminal-content"></div>
                 </div>
             </div>
@@ -197,6 +293,7 @@
                     <div class="panel-tab active" data-panel="interceptor">🛡️ Interceptor</div>
                     <div class="panel-tab" data-panel="quality">✨ Quality</div>
                     <div class="panel-tab" data-panel="oracle">🧠 Oracle</div>
+                    <div class="panel-tab" data-panel="console">📋 Console</div>
                 </div>
                 <div id="panel-content">
                     <!-- Panel content will be rendered here -->
@@ -205,6 +302,24 @@
         </div>
     </div>
     
+    <script>
+        // Fallback: Show basic UI if app.js fails
+        window.addEventListener('error', (e) => {
+            console.error('Script error:', e);
+            if (e.filename && e.filename.includes('app.js')) {
+                document.getElementById('monaco-editor').innerHTML = `
+                    <div style="padding: 40px; text-align: center; color: #d4d4d4;">
+                        <h2>⚠️ Loading Error</h2>
+                        <p>Error: ${e.message}</p>
+                        <p style="margin-top: 20px; color: #888;">Check DevTools console for details (Cmd+Option+I)</p>
+                        <button onclick="location.reload()" style="margin-top: 20px; padding: 10px 20px; background: #007acc; color: white; border: none; cursor: pointer; border-radius: 3px;">
+                            Reload
+                        </button>
+                    </div>
+                `;
+            }
+        });
+    </script>
     <script type="module" src="app.js"></script>
 </body>
 </html>

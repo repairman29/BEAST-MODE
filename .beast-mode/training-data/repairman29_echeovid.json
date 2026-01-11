@@ -1,0 +1,43 @@
+{
+  "repo": "repairman29/echeovid",
+  "url": "https://github.com/repairman29/echeovid",
+  "features": {
+    "qualityScore": 85,
+    "stars": 0,
+    "forks": 0,
+    "openIssues": 0,
+    "fileCount": 0,
+    "codeFileCount": 0,
+    "hasLicense": 0,
+    "hasDescription": 0,
+    "hasTopics": 0,
+    "hasReadme": 1,
+    "hasTests": 1,
+    "hasCI": 1,
+    "hasDocker": 0,
+    "hasConfig": 0,
+    "issues": 3,
+    "improvements": 3,
+    "languages": [
+      "TypeScript",
+      "JavaScript",
+      "HTML",
+      "CSS",
+      "Shell"
+    ],
+    "primaryLanguage": "Unknown"
+  },
+  "quality": 85,
+  "timestamp": "2026-01-05T04:02:31.658Z",
+  "metadata": {
+    "languages": [
+      "TypeScript",
+      "JavaScript",
+      "HTML",
+      "CSS",
+      "Shell"
+    ],
+    "fileCount": 0,
+    "codeFileCount": 0
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "repo": "repairman29/echeo",
+  "url": "https://github.com/repairman29/echeo-web",
+  "features": {
+    "qualityScore": 84,
+    "stars": 0,
+    "forks": 0,
+    "openIssues": 0,
+    "fileCount": 0,
+    "codeFileCount": 0,
+    "hasLicense": 0,
+    "hasDescription": 1,
+    "hasTopics": 0,
+    "hasReadme": 1,
+    "hasTests": 1,
+    "hasCI": 1,
+    "hasDocker": 0,
+    "hasConfig": 0,
+    "issues": 1,
+    "improvements": 1,
+    "languages": [
+      "Rust",
+      "Python",
+      "JavaScript",
+      "Shell"
+    ],
+    "primaryLanguage": "Unknown"
+  },
+  "quality": 84,
+  "timestamp": "2026-01-05T04:02:25.404Z",
+  "metadata": {
+    "languages": [
+      "Rust",
+      "Python",
+      "JavaScript",
+      "Shell"
+    ],
+    "fileCount": 0,
+    "codeFileCount": 0
+  }
+}

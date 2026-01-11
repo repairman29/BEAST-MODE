@@ -1,0 +1,105 @@
+{
+  "model_type": "xgboost",
+  "version": "improved-v1.0.0",
+  "training_date": "2026-01-08T23-47-12",
+  "training_size": 500,
+  "features": 37,
+  "metrics": {
+    "r2_train": -8.463859558105469e-06,
+    "r2_test": -0.003945112228393555,
+    "r2": -0.003945112228393555,
+    "r2_cv_mean": -0.007661604881286621,
+    "r2_cv_std": 0.008523381562065757,
+    "mae": 0.07716336101293564,
+    "rmse": 0.08720186886773838
+  },
+  "top_features": [
+    [
+      "forks",
+      0
+    ],
+    [
+      "hasCI",
+      0
+    ],
+    [
+      "stars",
+      0
+    ],
+    [
+      "hasTests",
+      0
+    ],
+    [
+      "isActive",
+      0
+    ],
+    [
+      "fileCount",
+      0
+    ],
+    [
+      "hasDocker",
+      0
+    ],
+    [
+      "hasReadme",
+      0
+    ],
+    [
+      "hasLicense",
+      0
+    ],
+    [
+      "openIssues",
+      0
+    ],
+    [
+      "totalFiles",
+      0
+    ],
+    [
+      "repoAgeDays",
+      0
+    ],
+    [
+      "starsPerFile",
+      0
+    ],
+    [
+      "codeFileCount",
+      0
+    ],
+    [
+      "codeFileRatio",
+      0
+    ],
+    [
+      "daysSincePush",
+      0
+    ],
+    [
+      "hasDescription",
+      0
+    ],
+    [
+      "communityHealth",
+      0
+    ],
+    [
+      "daysSinceUpdate",
+      0
+    ],
+    [
+      "starsForksRatio",
+      0
+    ]
+  ],
+  "hyperparameters": {
+    "max_depth": 3,
+    "learning_rate": 0.05,
+    "n_estimators": 200,
+    "reg_alpha": 0.2,
+    "reg_lambda": 2.0
+  }
+}

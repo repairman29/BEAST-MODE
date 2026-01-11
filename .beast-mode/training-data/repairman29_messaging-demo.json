@@ -1,0 +1,39 @@
+{
+  "repo": "repairman29/messaging-demo",
+  "url": "https://github.com/repairman29/messaging-demo",
+  "features": {
+    "qualityScore": 56,
+    "stars": 0,
+    "forks": 0,
+    "openIssues": 0,
+    "fileCount": 0,
+    "codeFileCount": 0,
+    "hasLicense": 0,
+    "hasDescription": 0,
+    "hasTopics": 0,
+    "hasReadme": 1,
+    "hasTests": 0,
+    "hasCI": 0,
+    "hasDocker": 0,
+    "hasConfig": 0,
+    "issues": 7,
+    "improvements": 7,
+    "languages": [
+      "HTML",
+      "JavaScript",
+      "CSS"
+    ],
+    "primaryLanguage": "Unknown"
+  },
+  "quality": 56,
+  "timestamp": "2026-01-05T04:02:32.709Z",
+  "metadata": {
+    "languages": [
+      "HTML",
+      "JavaScript",
+      "CSS"
+    ],
+    "fileCount": 0,
+    "codeFileCount": 0
+  }
+}

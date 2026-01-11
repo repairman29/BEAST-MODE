@@ -1,0 +1,11 @@
+{
+  "metadata": {
+    "scannedAt": "2026-01-06T03:55:01.992Z",
+    "source": "missing-languages-discovery",
+    "totalRepos": 250,
+    "successful": 0,
+    "failed": 250,
+    "languages": []
+  },
+  "trainingData": []
+}

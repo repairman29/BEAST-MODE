@@ -11,7 +11,7 @@ import { NextRequest, NextResponse } from 'next/server';
 let service: any = null;
 
 try {
-  const serviceModule = require('../../../../../lib/mlops/teamCollaborationService');
+  const serviceModule = require('@/lib/mlops/teamCollaborationService');
   if (serviceModule.getTeamCollaborationService) {
     service = serviceModule.getTeamCollaborationService();
   } else if (serviceModule.TeamCollaborationService) {

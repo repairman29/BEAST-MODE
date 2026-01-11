@@ -5,7 +5,7 @@ import { getDecryptedToken } from '@/lib/github-token';
 let patternAnalyzer: any;
 let githubFileFetcher: any;
 try {
-  patternAnalyzer = require('../../../../../lib/mlops/patternAnalyzer');
+  patternAnalyzer = require('@/lib/mlops/patternAnalyzer');
   githubFileFetcher = require('../../../../../lib/github/fileFetcher');
 } catch (error) {
   console.error('[Themes API] Failed to load modules:', error);

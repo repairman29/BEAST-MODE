@@ -9,8 +9,8 @@ import { loadModule } from '../../../../lib/api-module-loader';
 
 let deliveryMetrics: any;
 try {
-  const deliveryMetricsModule = loadModule('../../../../../lib/mlops/deliveryMetrics') || 
-                                 require('../../../../../lib/mlops/deliveryMetrics');
+  const deliveryMetricsModule = loadModule('@/lib/mlops/deliveryMetrics') || 
+                                 require('@/lib/mlops/deliveryMetrics');
   deliveryMetrics = deliveryMetricsModule?.getDeliveryMetrics 
     ? deliveryMetricsModule.getDeliveryMetrics()
     : deliveryMetricsModule;

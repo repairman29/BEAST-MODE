@@ -1,0 +1,125 @@
+{
+  "algorithm": "xgboost",
+  "metrics": {
+    "r2_train": -1.999306130695544e-05,
+    "r2_test": -0.023088481872965527,
+    "r2": -0.023088481872965527,
+    "r2_cv_mean": -0.03044848971446501,
+    "r2_cv_std": 0.027802010264508993,
+    "mae": 0.09092496331532794,
+    "rmse": 0.12054098876546446
+  },
+  "feature_names": [
+    "avg_file_size",
+    "blank_lines",
+    "code_lines",
+    "comment_lines",
+    "commit_count",
+    "contributor_count",
+    "days_since_created",
+    "days_since_updated",
+    "file_count",
+    "forks",
+    "has_changelog",
+    "has_ci",
+    "has_contributing",
+    "has_documentation",
+    "has_examples",
+    "has_license",
+    "has_readme",
+    "has_security_policy",
+    "has_tests",
+    "language_count",
+    "open_issues",
+    "readme_length",
+    "repo_size_kb",
+    "stars",
+    "test_coverage",
+    "total_issues",
+    "total_lines",
+    "watchers"
+  ],
+  "feature_importance": [
+    [
+      "avg_file_size",
+      0
+    ],
+    [
+      "blank_lines",
+      0
+    ],
+    [
+      "code_lines",
+      0
+    ],
+    [
+      "comment_lines",
+      0
+    ],
+    [
+      "commit_count",
+      0
+    ],
+    [
+      "contributor_count",
+      0
+    ],
+    [
+      "days_since_created",
+      0
+    ],
+    [
+      "days_since_updated",
+      0
+    ],
+    [
+      "file_count",
+      0
+    ],
+    [
+      "forks",
+      0
+    ],
+    [
+      "has_changelog",
+      0
+    ],
+    [
+      "has_ci",
+      0
+    ],
+    [
+      "has_contributing",
+      0
+    ],
+    [
+      "has_documentation",
+      0
+    ],
+    [
+      "has_examples",
+      0
+    ],
+    [
+      "has_license",
+      0
+    ],
+    [
+      "has_readme",
+      0
+    ],
+    [
+      "has_security_policy",
+      0
+    ],
+    [
+      "has_tests",
+      0
+    ],
+    [
+      "language_count",
+      0
+    ]
+  ],
+  "trainedAt": "2026-01-08T23:05:48.918002"
+}

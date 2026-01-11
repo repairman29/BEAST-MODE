@@ -8,8 +8,8 @@ import { loadModule } from '../../../../lib/api-module-loader';
 let jiraIntegration: any;
 
 try {
-  const jiraModule = loadModule('../../../../../lib/integrations/jira') ||
-                     require('../../../../../lib/integrations/jira');
+  const jiraModule = loadModule('@/lib/integrations/jira') ||
+                     require('@/lib/integrations/jira');
   jiraIntegration = jiraModule?.getJiraIntegration
     ? jiraModule.getJiraIntegration()
     : jiraModule;

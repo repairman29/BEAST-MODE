@@ -1,0 +1,105 @@
+{
+  "model_type": "xgboost",
+  "version": "improved-v1.0.0",
+  "training_date": "2026-01-10T12-13-26",
+  "training_size": 500,
+  "features": 37,
+  "metrics": {
+    "r2_train": 0.40683412551879883,
+    "r2_test": -0.016787409782409668,
+    "r2": -0.016787409782409668,
+    "r2_cv_mean": -0.015415775775909423,
+    "r2_cv_std": 0.08250109601894662,
+    "mae": 0.18061481416225433,
+    "rmse": 0.22212633853770947
+  },
+  "top_features": [
+    [
+      "stars_per_file",
+      0.29107871651649475
+    ],
+    [
+      "openIssues",
+      0.26411429047584534
+    ],
+    [
+      "fileCount_log",
+      0.26153451204299927
+    ],
+    [
+      "stars_log",
+      0.25599586963653564
+    ],
+    [
+      "fileCount",
+      0.2498813420534134
+    ],
+    [
+      "daysSincePush",
+      0.22552798688411713
+    ],
+    [
+      "openIssues_log",
+      0.2254955768585205
+    ],
+    [
+      "hasCI",
+      0.21059727668762207
+    ],
+    [
+      "engagement_rate",
+      0.2105916142463684
+    ],
+    [
+      "stars",
+      0.20109494030475616
+    ],
+    [
+      "forks_log",
+      0.18690340220928192
+    ],
+    [
+      "forks",
+      0.18648186326026917
+    ],
+    [
+      "repoAgeDays",
+      0.1853533536195755
+    ],
+    [
+      "tests_and_ci",
+      0.17197644710540771
+    ],
+    [
+      "stars_forks_ratio",
+      0.16958314180374146
+    ],
+    [
+      "is_very_active",
+      0.16900354623794556
+    ],
+    [
+      "hasTests",
+      0
+    ],
+    [
+      "hasReadme",
+      0
+    ],
+    [
+      "hasLicense",
+      0
+    ],
+    [
+      "hasDescription",
+      0
+    ]
+  ],
+  "hyperparameters": {
+    "max_depth": 3,
+    "learning_rate": 0.05,
+    "n_estimators": 200,
+    "reg_alpha": 0.2,
+    "reg_lambda": 2.0
+  }
+}

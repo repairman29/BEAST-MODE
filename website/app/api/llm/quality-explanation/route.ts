@@ -4,7 +4,7 @@
  */
 
 import { NextRequest, NextResponse } from 'next/server';
-import qualityExplainer from '../../../../../lib/mlops/qualityExplainer';
+import qualityExplainer from '@/lib/mlops/qualityExplainer';
 
 export async function POST(request: NextRequest) {
   try {

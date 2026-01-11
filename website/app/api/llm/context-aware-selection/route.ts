@@ -13,7 +13,7 @@ import { NextRequest, NextResponse } from 'next/server';
 let contextAwareModelSelector: any = null;
 
 try {
-  const selectorModule = require('../../../../../lib/mlops/contextAwareModelSelector');
+  const selectorModule = require('@/lib/mlops/contextAwareModelSelector');
   const getContextAwareModelSelector = selectorModule.getContextAwareModelSelector;
   if (getContextAwareModelSelector) {
     contextAwareModelSelector = getContextAwareModelSelector();

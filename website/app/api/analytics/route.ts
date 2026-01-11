@@ -12,10 +12,10 @@ let anomalyDetector: any;
 let predictiveAnalyzer: any;
 
 try {
-  customModelMonitoring = loadModule('../../../../../lib/mlops/customModelMonitoring');
-  deliveryMetrics = loadModule('../../../../../lib/mlops/deliveryMetrics');
-  anomalyDetector = loadModule('../../../../../lib/mlops/anomalyDetector');
-  predictiveAnalyzer = loadModule('../../../../../lib/mlops/predictiveAnalyzer');
+  customModelMonitoring = loadModule('@/lib/mlops/customModelMonitoring');
+  deliveryMetrics = loadModule('@/lib/mlops/deliveryMetrics');
+  anomalyDetector = loadModule('@/lib/mlops/anomalyDetector');
+  predictiveAnalyzer = loadModule('@/lib/mlops/predictiveAnalyzer');
 } catch (error) {
   console.warn('[Analytics API] Some modules not available:', error);
 }

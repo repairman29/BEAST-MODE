@@ -1,0 +1,41 @@
+{
+  "repo": "repairman29/coderoach",
+  "url": "https://github.com/repairman29/coderoach",
+  "features": {
+    "qualityScore": 88,
+    "stars": 0,
+    "forks": 0,
+    "openIssues": 0,
+    "fileCount": 0,
+    "codeFileCount": 0,
+    "hasLicense": 0,
+    "hasDescription": 0,
+    "hasTopics": 0,
+    "hasReadme": 1,
+    "hasTests": 1,
+    "hasCI": 1,
+    "hasDocker": 0,
+    "hasConfig": 0,
+    "issues": 2,
+    "improvements": 2,
+    "languages": [
+      "JavaScript",
+      "HTML",
+      "Shell",
+      "PLpgSQL"
+    ],
+    "primaryLanguage": "Unknown"
+  },
+  "quality": 88,
+  "timestamp": "2026-01-05T04:02:30.571Z",
+  "metadata": {
+    "languages": [
+      "JavaScript",
+      "HTML",
+      "Shell",
+      "PLpgSQL"
+    ],
+    "fileCount": 0,
+    "codeFileCount": 0
+  }
+}

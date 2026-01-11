@@ -8,8 +8,8 @@ import { loadModule } from '../../../../lib/api-module-loader';
 let predictiveAnalyzer: any;
 
 try {
-  const predictiveAnalyzerModule = loadModule('../../../../../lib/mlops/predictiveAnalyzer') ||
-                                   require('../../../../../lib/mlops/predictiveAnalyzer');
+  const predictiveAnalyzerModule = loadModule('@/lib/mlops/predictiveAnalyzer') ||
+                                   require('@/lib/mlops/predictiveAnalyzer');
   predictiveAnalyzer = predictiveAnalyzerModule?.getPredictiveAnalyzer
     ? predictiveAnalyzerModule.getPredictiveAnalyzer()
     : predictiveAnalyzerModule;

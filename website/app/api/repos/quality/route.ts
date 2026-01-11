@@ -199,7 +199,7 @@ async function findSimilarRepos(
   features: Record<string, any>
 ): Promise<any[] | null> {
   try {
-    const { getDatabaseWriter } = require('../../../../../lib/mlops/databaseWriter');
+    const { getDatabaseWriter } = require('@/lib/mlops/databaseWriter');
     const databaseWriter = getDatabaseWriter();
     
     if (!databaseWriter || !databaseWriter.supabase) {
@@ -512,7 +512,7 @@ function predictTree(tree: any, row: number[]): number {
 async function loadLatestModel() {
   try {
     // Use Storage-first loader (falls back to local if Storage unavailable)
-    const { loadModel } = require('../../../../../lib/mlops/loadTrainingData');
+    const { loadModel } = require('@/lib/mlops/loadTrainingData');
     const model = await loadModel('model-notable-quality-*.json');
     
     if (model) {
@@ -1078,7 +1078,7 @@ async function getMLIntegration() {
     const possiblePaths = [
       path.join(process.cwd(), '../lib/mlops/mlModelIntegration'),
       path.join(process.cwd(), 'lib/mlops/mlModelIntegration'),
-      path.join(__dirname, '../../../../../lib/mlops/mlModelIntegration'),
+      path.join(__dirname, '@/lib/mlops/mlModelIntegration'),
       path.join(process.cwd(), 'BEAST-MODE-PRODUCT/lib/mlops/mlModelIntegration'),
     ];
     
@@ -1127,8 +1127,8 @@ export async function POST(request: NextRequest) {
   const startTime = Date.now();
   
     // Initialize monitoring and cache
-    const { getQualityMonitoring } = require('../../../../../lib/mlops/qualityMonitoring');
-    const { getQualityCache } = require('../../../../../lib/mlops/qualityCache');
+    const { getQualityMonitoring } = require('@/lib/mlops/qualityMonitoring');
+    const { getQualityCache } = require('@/lib/mlops/qualityCache');
   const monitoring = getQualityMonitoring();
   const cache = getQualityCache();
   
@@ -1374,7 +1374,7 @@ export async function POST(request: NextRequest) {
     // Track prediction for feedback collection (async, don't block)
     let predictionId: string | undefined;
     try {
-      const { getDatabaseWriter } = require('../../../../../lib/mlops/databaseWriter');
+      const { getDatabaseWriter } = require('@/lib/mlops/databaseWriter');
       const databaseWriter = getDatabaseWriter();
       if (databaseWriter) {
         const predictionPromise = databaseWriter.writePrediction({

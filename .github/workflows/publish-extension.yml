@@ -1,0 +1,33 @@
+name: Publish VS Code Extension
+
+on:
+  release:
+    types: [created]
+  workflow_dispatch:
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+      
+      - name: Install dependencies
+        run: |
+          cd beast-mode-extension
+          npm ci
+      
+      - name: Compile extension
+        run: |
+          cd beast-mode-extension
+          npm run compile
+      
+      - name: Publish to VS Code Marketplace
+        uses: HaaLeo/publish-vscode-extension@v1
+        with:
+          pat: ${{ secrets.VSCODE_MARKETPLACE_TOKEN }}
+          extensionFile: 'beast-mode-extension/beast-mode-extension-*.vsix'

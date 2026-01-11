@@ -11,7 +11,7 @@ import { NextRequest, NextResponse } from 'next/server';
 let service: any = null;
 
 try {
-  const serviceModule = require('../../../../../lib/mlops/advancedCachingService');
+  const serviceModule = require('@/lib/mlops/advancedCachingService');
   if (serviceModule.getAdvancedCachingService) {
     service = serviceModule.getAdvancedCachingService();
   } else if (serviceModule.AdvancedCachingService) {

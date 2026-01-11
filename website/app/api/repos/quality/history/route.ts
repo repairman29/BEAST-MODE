@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from 'next/server';
 // Dynamic require for Node.js modules
 let qualitySupabase: any;
 try {
-  qualitySupabase = require('../../../../../lib/mlops/qualitySupabaseIntegration');
+  qualitySupabase = require('@/lib/mlops/qualitySupabaseIntegration');
 } catch (error) {
   console.error('[Quality History API] Failed to load module:', error);
 }

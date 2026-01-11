@@ -1,0 +1,35 @@
+{
+  "repo": "repairman29/mock-services",
+  "url": "https://github.com/repairman29/mock-services",
+  "features": {
+    "qualityScore": 65,
+    "stars": 0,
+    "forks": 0,
+    "openIssues": 0,
+    "fileCount": 0,
+    "codeFileCount": 0,
+    "hasLicense": 0,
+    "hasDescription": 1,
+    "hasTopics": 0,
+    "hasReadme": 0,
+    "hasTests": 0,
+    "hasCI": 0,
+    "hasDocker": 1,
+    "hasConfig": 0,
+    "issues": 4,
+    "improvements": 4,
+    "languages": [
+      "JavaScript"
+    ],
+    "primaryLanguage": "Unknown"
+  },
+  "quality": 65,
+  "timestamp": "2026-01-05T04:02:27.085Z",
+  "metadata": {
+    "languages": [
+      "JavaScript"
+    ],
+    "fileCount": 0,
+    "codeFileCount": 0
+  }
+}

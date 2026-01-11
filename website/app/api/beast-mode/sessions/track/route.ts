@@ -64,7 +64,7 @@ export async function POST(request: NextRequest) {
 
     // Write to Supabase (ML database)
     try {
-      const { getDatabaseWriter } = await import('../../../../../lib/mlops/databaseWriter');
+      const { getDatabaseWriter } = await import('@/lib/mlops/databaseWriter');
       const dbWriter = getDatabaseWriter();
       
       await dbWriter.writePrediction({

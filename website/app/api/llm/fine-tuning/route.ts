@@ -13,7 +13,7 @@ import { NextRequest, NextResponse } from 'next/server';
 let modelFineTuner: any = null;
 
 try {
-  const fineTunerModule = require('../../../../../lib/mlops/modelFineTuner');
+  const fineTunerModule = require('@/lib/mlops/modelFineTuner');
   if (fineTunerModule.ModelFineTuner) {
     modelFineTuner = new fineTunerModule.ModelFineTuner();
   } else {

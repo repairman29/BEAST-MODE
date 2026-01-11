@@ -13,7 +13,7 @@ import { NextRequest, NextResponse } from 'next/server';
 let taskModelSelector: any = null;
 
 try {
-  const selectorModule = require('../../../../../lib/mlops/taskModelSelector');
+  const selectorModule = require('@/lib/mlops/taskModelSelector');
   const getTaskModelSelector = selectorModule.getTaskModelSelector;
   if (getTaskModelSelector) {
     taskModelSelector = getTaskModelSelector();

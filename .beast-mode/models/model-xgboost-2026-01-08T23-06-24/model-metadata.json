@@ -1,0 +1,127 @@
+{
+  "algorithm": "xgboost",
+  "metrics": {
+    "r2_train": -1.999306130695544e-05,
+    "r2_test": -0.023088481872965527,
+    "r2": -0.023088481872965527,
+    "r2_cv_mean": -0.03044848971446501,
+    "r2_cv_std": 0.027802010264508993,
+    "mae": 0.09092496331532794,
+    "rmse": 0.12054098876546446
+  },
+  "feature_names": [
+    "avgFileSize",
+    "blankLines",
+    "codeLines",
+    "commentLines",
+    "commitCount",
+    "contributorCount",
+    "daysSinceCreated",
+    "daysSinceUpdated",
+    "fileCount",
+    "forks",
+    "hasCI",
+    "hasChangelog",
+    "hasContributing",
+    "hasDocumentation",
+    "hasExamples",
+    "hasLicense",
+    "hasReadme",
+    "hasReleases",
+    "hasSecurityPolicy",
+    "hasTests",
+    "isActive",
+    "languageCount",
+    "openIssues",
+    "readmeLength",
+    "repoSizeKB",
+    "stars",
+    "testCoverage",
+    "totalIssues",
+    "totalLines",
+    "watchers"
+  ],
+  "feature_importance": [
+    [
+      "avgFileSize",
+      0
+    ],
+    [
+      "blankLines",
+      0
+    ],
+    [
+      "codeLines",
+      0
+    ],
+    [
+      "commentLines",
+      0
+    ],
+    [
+      "commitCount",
+      0
+    ],
+    [
+      "contributorCount",
+      0
+    ],
+    [
+      "daysSinceCreated",
+      0
+    ],
+    [
+      "daysSinceUpdated",
+      0
+    ],
+    [
+      "fileCount",
+      0
+    ],
+    [
+      "forks",
+      0
+    ],
+    [
+      "hasCI",
+      0
+    ],
+    [
+      "hasChangelog",
+      0
+    ],
+    [
+      "hasContributing",
+      0
+    ],
+    [
+      "hasDocumentation",
+      0
+    ],
+    [
+      "hasExamples",
+      0
+    ],
+    [
+      "hasLicense",
+      0
+    ],
+    [
+      "hasReadme",
+      0
+    ],
+    [
+      "hasReleases",
+      0
+    ],
+    [
+      "hasSecurityPolicy",
+      0
+    ],
+    [
+      "hasTests",
+      0
+    ]
+  ],
+  "trainedAt": "2026-01-08T23:06:24.480543"
+}

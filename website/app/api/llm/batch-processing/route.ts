@@ -14,7 +14,7 @@ import { NextRequest, NextResponse } from 'next/server';
 let requestBatcher: any = null;
 
 try {
-  const requestBatcherModule = require('../../../../../lib/mlops/requestBatcher');
+  const requestBatcherModule = require('@/lib/mlops/requestBatcher');
   requestBatcher = requestBatcherModule.getRequestBatcher ? 
     requestBatcherModule.getRequestBatcher() : 
     requestBatcherModule;

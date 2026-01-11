@@ -4,12 +4,6 @@
   "outputDirectory": "website/.next",
   "installCommand": "cd website && npm install",
   "regions": ["iad1"],
-  "functions": {
-    "website/app/api/**/*.ts": {
-      "runtime": "nodejs22.x",
-      "maxDuration": 30
-    }
-  },
   "headers": [
     {
       "source": "/static/(.*)",

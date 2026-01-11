@@ -11,7 +11,7 @@ import { NextRequest, NextResponse } from 'next/server';
 let service: any = null;
 
 try {
-  const serviceModule = require('../../../../../lib/mlops/crossDomainService');
+  const serviceModule = require('@/lib/mlops/crossDomainService');
   if (serviceModule.getCrossDomainService) {
     service = serviceModule.getCrossDomainService();
   } else if (serviceModule.CrossDomainService) {

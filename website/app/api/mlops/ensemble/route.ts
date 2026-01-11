@@ -10,7 +10,7 @@ import { NextRequest, NextResponse } from 'next/server';
 let service: any = null;
 
 try {
-  const serviceModule = require('../../../../../lib/mlops/advancedEnsemble');
+  const serviceModule = require('@/lib/mlops/advancedEnsemble');
   if (serviceModule.getAdvancedEnsemble) {
     service = serviceModule.getAdvancedEnsemble();
   } else if (serviceModule.AdvancedEnsemble) {

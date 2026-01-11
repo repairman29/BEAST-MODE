@@ -8,8 +8,8 @@ import { loadModule } from '../../../../lib/api-module-loader';
 let anomalyDetector: any;
 
 try {
-  const anomalyDetectorModule = loadModule('../../../../../lib/mlops/anomalyDetector') ||
-                                 require('../../../../../lib/mlops/anomalyDetector');
+  const anomalyDetectorModule = loadModule('@/lib/mlops/anomalyDetector') ||
+                                 require('@/lib/mlops/anomalyDetector');
   anomalyDetector = anomalyDetectorModule?.getAnomalyDetector
     ? anomalyDetectorModule.getAnomalyDetector()
     : anomalyDetectorModule;

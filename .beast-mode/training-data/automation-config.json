@@ -1,0 +1,26 @@
+{
+  "version": "1.0.0",
+  "createdAt": "2026-01-06T02:52:28.604Z",
+  "model": {
+    "version": "2.0.0",
+    "performance": {
+      "r2": -0.0078058282846904525,
+      "mae": 0.004660172034913601,
+      "rmse": 0.008946279645787258
+    },
+    "featureCount": 0
+  },
+  "automation": {
+    "retraining": {
+      "enabled": true,
+      "schedule": "weekly",
+      "trigger": "performance_drop",
+      "threshold": 0.05
+    },
+    "monitoring": {
+      "enabled": true,
+      "checkInterval": "daily",
+      "alertThreshold": 0.8
+    }
+  }
+}

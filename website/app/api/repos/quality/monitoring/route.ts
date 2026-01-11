@@ -6,8 +6,8 @@ let getQualityMonitoring: any;
 let getQualityCache: any;
 
 try {
-  const qualityMonitoring = require('../../../../../../lib/mlops/qualityMonitoring');
-  const qualityCache = require('../../../../../../lib/mlops/qualityCache');
+  const qualityMonitoring = require('@/lib/mlops/qualityMonitoring');
+  const qualityCache = require('@/lib/mlops/qualityCache');
   getQualityMonitoring = qualityMonitoring.getQualityMonitoring || qualityMonitoring.default?.getQualityMonitoring;
   getQualityCache = qualityCache.getQualityCache || qualityCache.default?.getQualityCache;
 } catch (error) {

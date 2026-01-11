@@ -1,0 +1,39 @@
+{
+  "repo": "repairman29/service-frontends",
+  "url": "https://github.com/repairman29/service-frontends",
+  "features": {
+    "qualityScore": 59,
+    "stars": 0,
+    "forks": 0,
+    "openIssues": 0,
+    "fileCount": 0,
+    "codeFileCount": 0,
+    "hasLicense": 0,
+    "hasDescription": 1,
+    "hasTopics": 0,
+    "hasReadme": 0,
+    "hasTests": 0,
+    "hasCI": 0,
+    "hasDocker": 0,
+    "hasConfig": 0,
+    "issues": 6,
+    "improvements": 6,
+    "languages": [
+      "CSS",
+      "HTML",
+      "JavaScript"
+    ],
+    "primaryLanguage": "Unknown"
+  },
+  "quality": 59,
+  "timestamp": "2026-01-05T04:02:29.358Z",
+  "metadata": {
+    "languages": [
+      "CSS",
+      "HTML",
+      "JavaScript"
+    ],
+    "fileCount": 0,
+    "codeFileCount": 0
+  }
+}

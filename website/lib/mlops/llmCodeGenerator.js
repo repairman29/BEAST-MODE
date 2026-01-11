@@ -39,7 +39,12 @@ class LLMCodeGenerator {
    */
   async initializeModelRouter() {
     if (!this.modelRouter) {
-      this.modelRouter = getModelRouter();
+      // Use injected getModelRouter if available, otherwise use module-level
+      const routerGetter = this.getModelRouter || getModelRouter;
+      if (!routerGetter || typeof routerGetter !== 'function') {
+        throw new Error('getModelRouter is not available. Please inject it via constructor options.');
+      }
+      this.modelRouter = routerGetter();
       await this.modelRouter.initialize();
     }
     return this.modelRouter;
@@ -265,7 +270,21 @@ class LLMCodeGenerator {
     
     // If no file blocks found, treat entire output as single file
     if (files.length === 0) {
-      const primaryLanguage = context?.techStack?.languages?.[0] || 'JavaScript';
+      // Handle different techStack formats
+      let primaryLanguage = 'JavaScript';
+      if (context?.techStack) {
+        if (Array.isArray(context.techStack)) {
+          primaryLanguage = context.techStack[0] || 'JavaScript';
+        } else if (context.techStack.languages && Array.isArray(context.techStack.languages)) {
+          primaryLanguage = context.techStack.languages[0] || 'JavaScript';
+        } else if (typeof context.techStack === 'string') {
+          primaryLanguage = context.techStack;
+        }
+      }
+      // Ensure language is a valid string
+      if (!primaryLanguage || typeof primaryLanguage !== 'string') {
+        primaryLanguage = 'JavaScript';
+      }
       const ext = this.getExtension(primaryLanguage);
       files.push({
         fileName: `generated-feature.${ext}`,
@@ -281,6 +300,9 @@ class LLMCodeGenerator {
    * Get file extension from language
    */
   getExtension(language) {
+    if (!language || typeof language !== 'string') {
+      return 'js'; // Default to JavaScript
+    }
     const extMap = {
       'javascript': 'js',
       'typescript': 'ts',
@@ -301,6 +323,9 @@ class LLMCodeGenerator {
    * Map language name
    */
   mapLanguage(language) {
+    if (!language || typeof language !== 'string') {
+      return 'JavaScript'; // Default to JavaScript
+    }
     const langMap = {
       'javascript': 'JavaScript',
       'typescript': 'TypeScript',

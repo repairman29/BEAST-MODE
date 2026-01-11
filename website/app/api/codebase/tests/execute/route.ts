@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from 'next/server';
 // Dynamic require for Node.js modules
 let testExecutor: any;
 try {
-  testExecutor = require('../../../../../lib/mlops/testExecutor');
+  testExecutor = require('@/lib/mlops/testExecutor');
 } catch (error) {
   console.error('[Test Execution API] Failed to load modules:', error);
 }

@@ -11,7 +11,7 @@ import { NextRequest, NextResponse } from 'next/server';
 let service: any = null;
 
 try {
-  const serviceModule = require('../../../../../lib/mlops/fineTuningService');
+  const serviceModule = require('@/lib/mlops/fineTuningService');
   if (serviceModule.getFineTuningService) {
     service = serviceModule.getFineTuningService();
   } else if (serviceModule.FineTuningService) {

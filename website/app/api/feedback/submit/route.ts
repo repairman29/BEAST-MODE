@@ -9,12 +9,12 @@ import { NextRequest, NextResponse } from 'next/server';
 async function getFeedbackCollector() {
   try {
     // Try require first (server-side)
-    const { getFeedbackCollector } = require('../../../../../lib/mlops/feedbackCollector');
+    const { getFeedbackCollector } = require('@/lib/mlops/feedbackCollector');
     return await getFeedbackCollector();
   } catch (error) {
     // Fallback: try dynamic import
     try {
-      const module = await import(/* webpackIgnore: true */ '../../../../../lib/mlops/feedbackCollector').catch(() => null);
+      const module = await import(/* webpackIgnore: true */ '@/lib/mlops/feedbackCollector').catch(() => null);
       const getCollector = module?.getFeedbackCollector;
       return getCollector ? await getCollector() : null;
     } catch {

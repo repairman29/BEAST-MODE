@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from 'next/server';
 let automatedTesting: any;
 try {
   // Path: website/app/api/codebase/tests/generate -> BEAST-MODE-PRODUCT/lib/mlops
-  automatedTesting = require('../../../../../../lib/mlops/automatedTesting');
+  automatedTesting = require('@/lib/mlops/automatedTesting');
 } catch (error) {
   console.error('[Test Generation API] Failed to load modules:', error);
 }

@@ -4,7 +4,7 @@
  */
 
 import { NextRequest, NextResponse } from 'next/server';
-import testGenerator from '../../../../../lib/mlops/testGenerator';
+import testGenerator from '@/lib/mlops/testGenerator';
 
 export async function POST(request: NextRequest) {
   try {

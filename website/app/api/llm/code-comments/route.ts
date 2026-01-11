@@ -4,7 +4,7 @@
  */
 
 import { NextRequest, NextResponse } from 'next/server';
-import commentGenerator from '../../../../../lib/mlops/commentGenerator';
+import commentGenerator from '@/lib/mlops/commentGenerator';
 
 export async function POST(request: NextRequest) {
   try {
@@ -21,7 +21,7 @@ export async function POST(request: NextRequest) {
     // Use dynamic require to avoid build-time errors
     let commentGen: any = null;
     try {
-      commentGen = require('../../../../../lib/mlops/commentGenerator');
+      commentGen = require('@/lib/mlops/commentGenerator');
     } catch (error) {
       console.warn('[Code Comments API] Module not available:', error);
     }

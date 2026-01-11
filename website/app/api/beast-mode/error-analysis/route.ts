@@ -13,11 +13,17 @@ async function loadErrorAnalysis() {
   if (errorAnalysis) return errorAnalysis;
   
   try {
-    const errorAnalysisModule = await import('../../../../../lib/mlops/errorAnalysis').catch(() => {
+    // Use @/ alias for website/lib/mlops (copied from root lib/mlops)
+    const errorAnalysisModule = await import('@/lib/mlops/errorAnalysis').catch(() => {
       try {
-        return require('../../../../../lib/mlops/errorAnalysis');
+        return require('@/lib/mlops/errorAnalysis');
       } catch (e) {
-        return null;
+        // Fallback to relative path
+        try {
+          return require('../../lib/mlops/errorAnalysis');
+        } catch (e2) {
+          return null;
+        }
       }
     });
     

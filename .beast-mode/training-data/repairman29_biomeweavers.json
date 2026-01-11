@@ -1,0 +1,37 @@
+{
+  "repo": "repairman29/biomeweavers",
+  "url": "https://github.com/repairman29/biomeweavers",
+  "features": {
+    "qualityScore": 59,
+    "stars": 0,
+    "forks": 0,
+    "openIssues": 0,
+    "fileCount": 0,
+    "codeFileCount": 0,
+    "hasLicense": 0,
+    "hasDescription": 0,
+    "hasTopics": 0,
+    "hasReadme": 1,
+    "hasTests": 0,
+    "hasCI": 0,
+    "hasDocker": 0,
+    "hasConfig": 0,
+    "issues": 5,
+    "improvements": 5,
+    "languages": [
+      "TypeScript",
+      "HTML"
+    ],
+    "primaryLanguage": "Unknown"
+  },
+  "quality": 59,
+  "timestamp": "2026-01-05T04:02:35.218Z",
+  "metadata": {
+    "languages": [
+      "TypeScript",
+      "HTML"
+    ],
+    "fileCount": 0,
+    "codeFileCount": 0
+  }
+}

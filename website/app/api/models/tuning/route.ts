@@ -10,8 +10,8 @@ let modelPerformanceTuner: any;
 let customModelMonitoring: any;
 
 try {
-  modelPerformanceTuner = loadModule('../../../../../lib/mlops/modelPerformanceTuner');
-  customModelMonitoring = loadModule('../../../../../lib/mlops/customModelMonitoring');
+  modelPerformanceTuner = loadModule('@/lib/mlops/modelPerformanceTuner');
+  customModelMonitoring = loadModule('@/lib/mlops/customModelMonitoring');
 } catch (error) {
   console.warn('[Model Tuning API] Some modules not available:', error);
 }

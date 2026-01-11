@@ -1,0 +1,120 @@
+{
+  "algorithm": "xgboost",
+  "metrics": {
+    "r2_train": 0.9999438117028213,
+    "r2_test": 0.8746060648568378,
+    "r2": 0.8746060648568378,
+    "mae": 0.015925298539566837,
+    "rmse": 0.025594092058480233
+  },
+  "feature_names": [
+    "codeFileCount",
+    "codeFileRatio",
+    "codeQualityScore",
+    "communityHealth",
+    "daysSincePush",
+    "daysSinceUpdate",
+    "engagementPerIssue",
+    "fileCount",
+    "forks",
+    "hasCI",
+    "hasConfig",
+    "hasDescription",
+    "hasDocker",
+    "hasLicense",
+    "hasReadme",
+    "hasTests",
+    "hasTopics",
+    "isActive",
+    "openIssues",
+    "repoAgeDays",
+    "stars",
+    "starsForksRatio",
+    "starsPerFile",
+    "totalFiles",
+    "totalLines"
+  ],
+  "feature_importance": [
+    [
+      "hasCI",
+      0.013077790848910809
+    ],
+    [
+      "hasTests",
+      0.0034963293001055717
+    ],
+    [
+      "stars",
+      0.000827255193144083
+    ],
+    [
+      "forks",
+      0.00041396854794584215
+    ],
+    [
+      "starsForksRatio",
+      0.00032089301384985447
+    ],
+    [
+      "starsPerFile",
+      0.00026060439995490015
+    ],
+    [
+      "fileCount",
+      0.00025820310111157596
+    ],
+    [
+      "codeFileCount",
+      0.00024658182519488037
+    ],
+    [
+      "daysSincePush",
+      0.00024058681447058916
+    ],
+    [
+      "isActive",
+      0.00020282479817979038
+    ],
+    [
+      "openIssues",
+      0.0001327927311649546
+    ],
+    [
+      "repoAgeDays",
+      0.00013112611486576498
+    ],
+    [
+      "engagementPerIssue",
+      0.0001036439134622924
+    ],
+    [
+      "codeFileRatio",
+      9.926992061082274e-05
+    ],
+    [
+      "daysSinceUpdate",
+      6.079046943341382e-05
+    ],
+    [
+      "hasDocker",
+      4.32204979006201e-05
+    ],
+    [
+      "hasLicense",
+      3.9716222090646625e-05
+    ],
+    [
+      "hasConfig",
+      3.2097395887831226e-05
+    ],
+    [
+      "hasTopics",
+      2.9352175261010416e-05
+    ],
+    [
+      "codeQualityScore",
+      0
+    ]
+  ],
+  "trainedAt": "2026-01-06T19:00:47.820243"
+}

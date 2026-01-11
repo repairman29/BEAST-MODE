@@ -1,0 +1,42 @@
+{
+  "metadata": {
+    "discoveredAt": "2026-01-05T15:14:29.446Z",
+    "targetCount": 500,
+    "searched": 0,
+    "criteria": {
+      "search": {
+        "languages": [
+          "javascript",
+          "typescript",
+          "python",
+          "rust",
+          "go",
+          "java",
+          "cpp",
+          "csharp",
+          "ruby",
+          "php",
+          "swift",
+          "kotlin"
+        ],
+        "minStars": 10,
+        "maxStars": 100000,
+        "minForks": 5,
+        "hasLicense": true
+      },
+      "diversity": {
+        "minPerLanguage": 20,
+        "maxPerLanguage": 100,
+        "languageDistribution": "balanced"
+      }
+    }
+  },
+  "statistics": {
+    "total": 0,
+    "byLanguage": {},
+    "avgScore": null,
+    "minScore": null,
+    "maxScore": null
+  },
+  "repositories": []
+}

@@ -5,7 +5,7 @@ import { getDecryptedToken } from '@/lib/github-token';
 let fileQualityScorer: any;
 let githubFileFetcher: any;
 try {
-  fileQualityScorer = require('../../../../../lib/mlops/fileQualityScorer').fileQualityScorer;
+  fileQualityScorer = require('@/lib/mlops/fileQualityScorer').fileQualityScorer;
   githubFileFetcher = require('../../../../../lib/github/fileFetcher');
 } catch (error) {
   console.error('[File Quality API] Failed to load modules:', error);

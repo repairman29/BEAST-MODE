@@ -1,0 +1,39 @@
+{
+  "repo": "repairman29/echeo-archived",
+  "url": "https://github.com/repairman29/echeo-archived",
+  "features": {
+    "qualityScore": 78,
+    "stars": 0,
+    "forks": 0,
+    "openIssues": 0,
+    "fileCount": 0,
+    "codeFileCount": 0,
+    "hasLicense": 0,
+    "hasDescription": 0,
+    "hasTopics": 0,
+    "hasReadme": 1,
+    "hasTests": 1,
+    "hasCI": 1,
+    "hasDocker": 1,
+    "hasConfig": 0,
+    "issues": 2,
+    "improvements": 2,
+    "languages": [
+      "JavaScript",
+      "Shell",
+      "Dockerfile"
+    ],
+    "primaryLanguage": "Unknown"
+  },
+  "quality": 78,
+  "timestamp": "2026-01-05T04:02:35.216Z",
+  "metadata": {
+    "languages": [
+      "JavaScript",
+      "Shell",
+      "Dockerfile"
+    ],
+    "fileCount": 0,
+    "codeFileCount": 0
+  }
+}

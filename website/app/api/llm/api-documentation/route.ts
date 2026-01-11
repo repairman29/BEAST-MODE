@@ -4,7 +4,8 @@
  */
 
 import { NextRequest, NextResponse } from 'next/server';
-import apiDocumentationGenerator from '../../../../../lib/mlops/apiDocumentationGenerator';
+// Use @/ alias for website/lib/mlops (copied from root lib/mlops)
+import apiDocumentationGenerator from '@/lib/mlops/apiDocumentationGenerator';
 
 export async function POST(request: NextRequest) {
   try {

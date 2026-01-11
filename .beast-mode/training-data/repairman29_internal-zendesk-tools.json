@@ -1,0 +1,41 @@
+{
+  "repo": "repairman29/internal-zendesk-tools",
+  "url": "https://github.com/repairman29/internal-zendesk-tools",
+  "features": {
+    "qualityScore": 74,
+    "stars": 0,
+    "forks": 0,
+    "openIssues": 0,
+    "fileCount": 0,
+    "codeFileCount": 0,
+    "hasLicense": 0,
+    "hasDescription": 0,
+    "hasTopics": 0,
+    "hasReadme": 1,
+    "hasTests": 1,
+    "hasCI": 1,
+    "hasDocker": 0,
+    "hasConfig": 0,
+    "issues": 3,
+    "improvements": 3,
+    "languages": [
+      "JavaScript",
+      "CSS",
+      "TypeScript",
+      "HTML"
+    ],
+    "primaryLanguage": "Unknown"
+  },
+  "quality": 74,
+  "timestamp": "2026-01-05T04:07:35.326Z",
+  "metadata": {
+    "languages": [
+      "JavaScript",
+      "CSS",
+      "TypeScript",
+      "HTML"
+    ],
+    "fileCount": 0,
+    "codeFileCount": 0
+  }
+}

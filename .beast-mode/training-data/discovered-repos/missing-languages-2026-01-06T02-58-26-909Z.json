@@ -1,0 +1,14 @@
+{
+  "metadata": {
+    "discoveredAt": "2026-01-06T02:58:26.911Z",
+    "priority": "critical",
+    "totalRepos": 0,
+    "languages": [
+      "Rust",
+      "C#",
+      "Java",
+      "Go"
+    ]
+  },
+  "repositories": []
+}

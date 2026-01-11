@@ -8,8 +8,8 @@ import { loadModule } from '../../../../lib/api-module-loader';
 let githubActions: any;
 
 try {
-  const githubActionsModule = loadModule('../../../../../lib/integrations/githubActions') ||
-                              require('../../../../../lib/integrations/githubActions');
+  const githubActionsModule = loadModule('@/lib/integrations/githubActions') ||
+                              require('@/lib/integrations/githubActions');
   githubActions = githubActionsModule?.getGitHubActionsIntegration
     ? githubActionsModule.getGitHubActionsIntegration()
     : githubActionsModule;

@@ -1,0 +1,142 @@
+{
+  "algorithm": "xgboost",
+  "metrics": {
+    "r2_train": 0.21767160257494267,
+    "r2_test": -0.01304940559458001,
+    "r2": -0.01304940559458001,
+    "r2_cv_mean": -0.03183363479108954,
+    "r2_cv_std": 0.05705577728053797,
+    "mae": 0.11599901356392882,
+    "rmse": 0.16390872957086658
+  },
+  "feature_names": [
+    "avgFileSize",
+    "blankLines",
+    "codeFileCount",
+    "codeFileRatio",
+    "codeLines",
+    "codeQualityScore",
+    "commentLines",
+    "commitCount",
+    "communityHealth",
+    "contributorCount",
+    "daysSinceCreated",
+    "daysSincePush",
+    "daysSinceUpdate",
+    "daysSinceUpdated",
+    "engagementPerIssue",
+    "fileCount",
+    "forks",
+    "hasCI",
+    "hasChangelog",
+    "hasConfig",
+    "hasContributing",
+    "hasDescription",
+    "hasDocker",
+    "hasDocumentation",
+    "hasExamples",
+    "hasLicense",
+    "hasReadme",
+    "hasReleases",
+    "hasSecurityPolicy",
+    "hasTests",
+    "hasTopics",
+    "isActive",
+    "languageCount",
+    "openIssues",
+    "readmeLength",
+    "repoAgeDays",
+    "repoSizeKB",
+    "stars",
+    "starsForksRatio",
+    "starsPerFile",
+    "testCoverage",
+    "totalFiles",
+    "totalIssues",
+    "totalLines",
+    "watchers"
+  ],
+  "feature_importance": [
+    [
+      "codeQualityScore",
+      0.12022105604410172
+    ],
+    [
+      "hasDescription",
+      0.11190176010131836
+    ],
+    [
+      "fileCount",
+      0.06944097578525543
+    ],
+    [
+      "openIssues",
+      0.03734635189175606
+    ],
+    [
+      "daysSincePush",
+      0.034744616597890854
+    ],
+    [
+      "stars",
+      0.03400034457445145
+    ],
+    [
+      "forks",
+      0.033715296536684036
+    ],
+    [
+      "repoAgeDays",
+      0.03048456646502018
+    ],
+    [
+      "daysSinceUpdate",
+      0.029301082715392113
+    ],
+    [
+      "codeFileCount",
+      0.027208490297198296
+    ],
+    [
+      "engagementPerIssue",
+      0.023015538230538368
+    ],
+    [
+      "hasDocker",
+      0.018780531361699104
+    ],
+    [
+      "totalFiles",
+      0.01652292162179947
+    ],
+    [
+      "starsForksRatio",
+      0.01600184291601181
+    ],
+    [
+      "starsPerFile",
+      0.014079253189265728
+    ],
+    [
+      "codeFileRatio",
+      0.013305487111210823
+    ],
+    [
+      "hasTests",
+      0.013113833963871002
+    ],
+    [
+      "communityHealth",
+      0.010398328304290771
+    ],
+    [
+      "hasReadme",
+      0.003691278398036957
+    ],
+    [
+      "avgFileSize",
+      0
+    ]
+  ],
+  "trainedAt": "2026-01-09T09:33:57.074043"
+}

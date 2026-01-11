@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
-import { getRateLimiter } from '../../../../../lib/integrations/rateLimiter';
+import { getRateLimiter } from '@/lib/integrations/rateLimiter';
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
 const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
@@ -25,7 +25,7 @@ export async function GET(request: NextRequest) {
     const usage = await rateLimiter.getUserUsage(userId);
 
     // Get limits for tier
-    const { TIER_LIMITS } = require('../../../../../lib/integrations/rateLimiter');
+    const { TIER_LIMITS } = require('@/lib/integrations/rateLimiter');
     const limits = TIER_LIMITS[tier] || TIER_LIMITS.free;
 
     // Check if user can perform actions

@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from 'next/server';
 // Dynamic require for Node.js modules
 let automatedRefactoring: any;
 try {
-  automatedRefactoring = require('../../../../../lib/mlops/automatedRefactoring');
+  automatedRefactoring = require('@/lib/mlops/automatedRefactoring');
 } catch (error) {
   console.error('[Refactoring API] Failed to load modules:', error);
 }

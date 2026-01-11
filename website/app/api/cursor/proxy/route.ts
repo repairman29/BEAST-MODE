@@ -12,12 +12,18 @@ import { getSupabaseClientOrNull } from '@/lib/supabase';
 async function loadModelRouter() {
   try {
     // Use dynamic import to prevent webpack from analyzing at build time
-    const modelRouterModule = await import('../../../../../lib/mlops/modelRouter').catch(() => {
+    // Use @/ alias for website/lib/mlops (copied from root lib/mlops)
+    const modelRouterModule = await import('@/lib/mlops/modelRouter').catch(() => {
       // Fallback to require if import fails (CommonJS)
       try {
-        return require('../../../../../lib/mlops/modelRouter');
+        return require('@/lib/mlops/modelRouter');
       } catch (e) {
-        return null;
+        // Fallback to relative path
+        try {
+          return require('../../lib/mlops/modelRouter');
+        } catch (e2) {
+          return null;
+        }
       }
     });
     

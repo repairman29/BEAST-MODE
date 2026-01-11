@@ -24,7 +24,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Get database writer
-    const { getDatabaseWriter } = require('../../../../../../lib/mlops/databaseWriter');
+    const { getDatabaseWriter } = require('@/lib/mlops/databaseWriter');
     const databaseWriter = getDatabaseWriter();
 
     if (!databaseWriter || !databaseWriter.supabase) {

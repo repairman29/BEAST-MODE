@@ -1,0 +1,1767 @@
+{
+  "metadata": {
+    "discoveredAt": "2026-01-06T03:32:07.114Z",
+    "priority": "high",
+    "totalRepos": 250,
+    "languages": [
+      "Shell",
+      "C",
+      "HTML",
+      "CSS",
+      "Ruby",
+      "Swift"
+    ]
+  },
+  "repositories": [
+    {
+      "repo": "ohmyzsh/ohmyzsh",
+      "url": "https://github.com/ohmyzsh/ohmyzsh",
+      "stars": 183754,
+      "language": "Shell",
+      "description": "🙃   A delightful community-driven (with 2,400+ contributors) framework for managing your zsh configuration. Includes 300+ optional plugins (rails, git, macOS, hub, docker, homebrew, node, php, python, etc), 140+ themes to spice up your morning, and an auto-update tool that makes it easy to keep up with the latest updates from the community."
+    },
+    {
+      "repo": "d3/d3",
+      "url": "https://github.com/d3/d3",
+      "stars": 112094,
+      "language": "Shell",
+      "description": "Bring data to life with SVG, Canvas and HTML. :bar_chart::chart_with_upwards_trend::tada:"
+    },
+    {
+      "repo": "papers-we-love/papers-we-love",
+      "url": "https://github.com/papers-we-love/papers-we-love",
+      "stars": 102102,
+      "language": "Shell",
+      "description": "Papers from the computer science community to read and discuss."
+    },
+    {
+      "repo": "nvm-sh/nvm",
+      "url": "https://github.com/nvm-sh/nvm",
+      "stars": 90700,
+      "language": "Shell",
+      "description": "Node Version Manager - POSIX-compliant bash script to manage multiple active node.js versions"
+    },
+    {
+      "repo": "youngyangyang04/leetcode-master",
+      "url": "https://github.com/youngyangyang04/leetcode-master",
+      "stars": 59836,
+      "language": "Shell",
+      "description": "《代码随想录》LeetCode 刷题攻略：200道经典题目刷题顺序，共60w字的详细图解，视频难点剖析，50余张思维导图，支持C++，Java，Python，Go，JavaScript等多语言版本，从此算法学习不再迷茫！🔥🔥 来看看，你会发现相见恨晚！🚀 "
+    },
+    {
+      "repo": "pi-hole/pi-hole",
+      "url": "https://github.com/pi-hole/pi-hole",
+      "stars": 55100,
+      "language": "Shell",
+      "description": "A black hole for Internet advertisements"
+    },
+    {
+      "repo": "romkatv/powerlevel10k",
+      "url": "https://github.com/romkatv/powerlevel10k",
+      "stars": 52236,
+      "language": "Shell",
+      "description": "A Zsh theme"
+    },
+    {
+      "repo": "sickcodes/Docker-OSX",
+      "url": "https://github.com/sickcodes/Docker-OSX",
+      "stars": 51949,
+      "language": "Shell",
+      "description": "Run macOS VM in a Docker! Run near native OSX-KVM in Docker! X11 Forwarding! CI/CD for OS X Security Research! Docker mac Containers."
+    },
+    {
+      "repo": "anthropics/claude-code",
+      "url": "https://github.com/anthropics/claude-code",
+      "stars": 51732,
+      "language": "Shell",
+      "description": "Claude Code is an agentic coding tool that lives in your terminal, understands your codebase, and helps you code faster by executing routine tasks, explaining complex code, and handling git workflows - all through natural language commands."
+    },
+    {
+      "repo": "dockur/windows",
+      "url": "https://github.com/dockur/windows",
+      "stars": 49358,
+      "language": "Shell",
+      "description": "Windows inside a Docker container."
+    },
+    {
+      "repo": "acmesh-official/acme.sh",
+      "url": "https://github.com/acmesh-official/acme.sh",
+      "stars": 45207,
+      "language": "Shell",
+      "description": "A pure Unix shell script ACME client for SSL / TLS certificate automation"
+    },
+    {
+      "repo": "dylanaraps/pure-bash-bible",
+      "url": "https://github.com/dylanaraps/pure-bash-bible",
+      "stars": 41016,
+      "language": "Shell",
+      "description": "📖 A collection of pure bash alternatives to external processes."
+    },
+    {
+      "repo": "inkonchain/node",
+      "url": "https://github.com/inkonchain/node",
+      "stars": 36853,
+      "language": "Shell",
+      "description": "How to run an Ink Node"
+    },
+    {
+      "repo": "open-guides/og-aws",
+      "url": "https://github.com/open-guides/og-aws",
+      "stars": 36615,
+      "language": "Shell",
+      "description": "📙 Amazon Web Services — a practical guide"
+    },
+    {
+      "repo": "zsh-users/zsh-autosuggestions",
+      "url": "https://github.com/zsh-users/zsh-autosuggestions",
+      "stars": 34525,
+      "language": "Shell",
+      "description": "Fish-like autosuggestions for zsh"
+    },
+    {
+      "repo": "dokku/dokku",
+      "url": "https://github.com/dokku/dokku",
+      "stars": 31720,
+      "language": "Shell",
+      "description": "A docker-powered PaaS that helps you build and manage the lifecycle of applications"
+    },
+    {
+      "repo": "mathiasbynens/dotfiles",
+      "url": "https://github.com/mathiasbynens/dotfiles",
+      "stars": 31157,
+      "language": "Shell",
+      "description": ":wrench: .files, including ~/.macos — sensible hacker defaults for macOS"
+    },
+    {
+      "repo": "VSCodium/vscodium",
+      "url": "https://github.com/VSCodium/vscodium",
+      "stars": 29666,
+      "language": "Shell",
+      "description": "binary releases of VS Code without MS branding/telemetry/licensing"
+    },
+    {
+      "repo": "MichaelCade/90DaysOfDevOps",
+      "url": "https://github.com/MichaelCade/90DaysOfDevOps",
+      "stars": 29230,
+      "language": "Shell",
+      "description": "This repository started out as a learning in public project for myself and has now become a structured learning map for many in the community. We have 3 years under our belt covering all things DevOps, including Principles, Processes, Tooling and Use Cases surrounding this vast topic. "
+    },
+    {
+      "repo": "shengxinjing/programmer-job-blacklist",
+      "url": "https://github.com/shengxinjing/programmer-job-blacklist",
+      "stars": 28470,
+      "language": "Shell",
+      "description": ":see_no_evil:程序员找工作黑名单，换工作和当技术合伙人需谨慎啊 更新有赞"
+    },
+    {
+      "repo": "233boy/v2ray",
+      "url": "https://github.com/233boy/v2ray",
+      "stars": 27810,
+      "language": "Shell",
+      "description": "最好用的 V2Ray 一键安装脚本 & 管理脚本"
+    },
+    {
+      "repo": "hwdsl2/setup-ipsec-vpn",
+      "url": "https://github.com/hwdsl2/setup-ipsec-vpn",
+      "stars": 27209,
+      "language": "Shell",
+      "description": "Scripts to build your own IPsec VPN server, with IPsec/L2TP, Cisco IPsec and IKEv2"
+    },
+    {
+      "repo": "nvie/gitflow",
+      "url": "https://github.com/nvie/gitflow",
+      "stars": 26874,
+      "language": "Shell",
+      "description": "Git extensions to provide high-level repository operations for Vincent Driessen's branching model."
+    },
+    {
+      "repo": "mbadolato/iTerm2-Color-Schemes",
+      "url": "https://github.com/mbadolato/iTerm2-Color-Schemes",
+      "stars": 26318,
+      "language": "Shell",
+      "description": "Over 425 terminal color schemes/themes for iTerm/iTerm2. Includes ports to Terminal, Konsole, PuTTY, Xresources, XRDB, Remmina, Termite, XFCE, Tilda, FreeBSD VT, Terminator, Kitty, MobaXterm, LXTerminal, Microsoft's Windows Terminal, Visual Studio, Alacritty, Ghostty, and many more"
+    },
+    {
+      "repo": "powerline/fonts",
+      "url": "https://github.com/powerline/fonts",
+      "stars": 26203,
+      "language": "Shell",
+      "description": "Patched fonts for Powerline users."
+    },
+    {
+      "repo": "tw93/Mole",
+      "url": "https://github.com/tw93/Mole",
+      "stars": 25593,
+      "language": "Shell",
+      "description": "🐹 Deep clean and optimize your Mac."
+    },
+    {
+      "repo": "yuaotian/go-cursor-help",
+      "url": "https://github.com/yuaotian/go-cursor-help",
+      "stars": 25470,
+      "language": "Shell",
+      "description": "解决Cursor在免费订阅期间出现以下提示的问题:  Your request has been blocked as our system has detected suspicious activity / You've reached your trial request limit.  /  Too many free trial accounts used on this machine."
+    },
+    {
+      "repo": "community-scripts/ProxmoxVE",
+      "url": "https://github.com/community-scripts/ProxmoxVE",
+      "stars": 24676,
+      "language": "Shell",
+      "description": "Proxmox VE Helper-Scripts (Community Edition) "
+    },
+    {
+      "repo": "gpakosz/.tmux",
+      "url": "https://github.com/gpakosz/.tmux",
+      "stars": 23988,
+      "language": "Shell",
+      "description": "Oh my tmux! My self-contained, pretty & versatile tmux configuration made with 💛🩷💙🖤❤️🤍"
+    },
+    {
+      "repo": "StreisandEffect/streisand",
+      "url": "https://github.com/StreisandEffect/streisand",
+      "stars": 23708,
+      "language": "Shell",
+      "description": "Streisand sets up a new server running your choice of WireGuard, OpenConnect, OpenSSH, OpenVPN, Shadowsocks, sslh, Stunnel, or a Tor bridge. It also generates custom instructions for all of these services. At the end of the run you are given an HTML file with instructions that can be shared with friends, family members, and fellow activists."
+    },
+    {
+      "repo": "dylanaraps/neofetch",
+      "url": "https://github.com/dylanaraps/neofetch",
+      "stars": 23448,
+      "language": "Shell",
+      "description": "🖼️  A command-line system information tool written in bash 3.2+"
+    },
+    {
+      "repo": "kholia/OSX-KVM",
+      "url": "https://github.com/kholia/OSX-KVM",
+      "stars": 22658,
+      "language": "Shell",
+      "description": "Run macOS on QEMU/KVM. With OpenCore + Monterey + Ventura + Sonoma support now! Only commercial (paid) support is available now to avoid spammy issues. No Mac system is required."
+    },
+    {
+      "repo": "lxgw/LxgwWenKai",
+      "url": "https://github.com/lxgw/LxgwWenKai",
+      "stars": 22616,
+      "language": "Shell",
+      "description": "An unprofessional open-source Chinese font derived from Fontworks' Klee One. 一款非专业的开源中文字体，基于 FONTWORKS 出品字体 Klee One 衍生。  "
+    },
+    {
+      "repo": "zsh-users/zsh-syntax-highlighting",
+      "url": "https://github.com/zsh-users/zsh-syntax-highlighting",
+      "stars": 22078,
+      "language": "Shell",
+      "description": "Fish shell like syntax highlighting for Zsh."
+    },
+    {
+      "repo": "lewagon/dotfiles",
+      "url": "https://github.com/lewagon/dotfiles",
+      "stars": 21566,
+      "language": "Shell",
+      "description": "Default configuration for Le Wagon's students"
+    },
+    {
+      "repo": "a2aproject/A2A",
+      "url": "https://github.com/a2aproject/A2A",
+      "stars": 21316,
+      "language": "Shell",
+      "description": "An open protocol enabling communication and interoperability between opaque agentic applications."
+    },
+    {
+      "repo": "Nyr/openvpn-install",
+      "url": "https://github.com/Nyr/openvpn-install",
+      "stars": 20349,
+      "language": "Shell",
+      "description": "OpenVPN road warrior installer for Ubuntu, Debian, AlmaLinux, Rocky Linux, CentOS and Fedora"
+    },
+    {
+      "repo": "spaceship-prompt/spaceship-prompt",
+      "url": "https://github.com/spaceship-prompt/spaceship-prompt",
+      "stars": 20332,
+      "language": "Shell",
+      "description": "🚀✨ Minimalistic, powerful and extremely customizable Zsh prompt"
+    },
+    {
+      "repo": "rockerBOO/awesome-neovim",
+      "url": "https://github.com/rockerBOO/awesome-neovim",
+      "stars": 19856,
+      "language": "Shell",
+      "description": "Collections of awesome neovim plugins."
+    },
+    {
+      "repo": "tj/n",
+      "url": "https://github.com/tj/n",
+      "stars": 19456,
+      "language": "Shell",
+      "description": "Node version management"
+    },
+    {
+      "repo": "basecamp/omarchy",
+      "url": "https://github.com/basecamp/omarchy",
+      "stars": 18930,
+      "language": "Shell",
+      "description": "Beautiful, Modern & Opinionated Linux"
+    },
+    {
+      "repo": "agarrharr/awesome-cli-apps",
+      "url": "https://github.com/agarrharr/awesome-cli-apps",
+      "stars": 18357,
+      "language": "Shell",
+      "description": "🖥 📊 🕹 🛠 A curated list of command line apps"
+    },
+    {
+      "repo": "deviantony/docker-elk",
+      "url": "https://github.com/deviantony/docker-elk",
+      "stars": 18249,
+      "language": "Shell",
+      "description": "The Elastic stack (ELK) powered by Docker and Compose."
+    },
+    {
+      "repo": "mack-a/v2ray-agent",
+      "url": "https://github.com/mack-a/v2ray-agent",
+      "stars": 18238,
+      "language": "Shell",
+      "description": "Xray、Tuic、hysteria2、sing-box 八合一一键脚本"
+    },
+    {
+      "repo": "dockur/macos",
+      "url": "https://github.com/dockur/macos",
+      "stars": 18078,
+      "language": "Shell",
+      "description": "MacOS inside a Docker container."
+    },
+    {
+      "repo": "tj/git-extras",
+      "url": "https://github.com/tj/git-extras",
+      "stars": 17945,
+      "language": "Shell",
+      "description": "GIT utilities -- repo summary, repl, changelog population, author commit percentages and more"
+    },
+    {
+      "repo": "githubnext/monaspace",
+      "url": "https://github.com/githubnext/monaspace",
+      "stars": 17754,
+      "language": "Shell",
+      "description": "An innovative superfamily of fonts for code"
+    },
+    {
+      "repo": "docker-mailserver/docker-mailserver",
+      "url": "https://github.com/docker-mailserver/docker-mailserver",
+      "stars": 17680,
+      "language": "Shell",
+      "description": "Production-ready fullstack but simple mail server (SMTP, IMAP, LDAP, Antispam, Antivirus, etc.) running inside a container."
+    },
+    {
+      "repo": "unixorn/awesome-zsh-plugins",
+      "url": "https://github.com/unixorn/awesome-zsh-plugins",
+      "stars": 17236,
+      "language": "Shell",
+      "description": "A collection of ZSH frameworks, plugins, themes and tutorials."
+    },
+    {
+      "repo": "taizilongxu/interview_python",
+      "url": "https://github.com/taizilongxu/interview_python",
+      "stars": 17154,
+      "language": "Shell",
+      "description": "关于Python的面试题"
+    },
+    {
+      "repo": "source-foundry/Hack",
+      "url": "https://github.com/source-foundry/Hack",
+      "stars": 17096,
+      "language": "Shell",
+      "description": "A typeface designed for source code"
+    },
+    {
+      "repo": "rupa/z",
+      "url": "https://github.com/rupa/z",
+      "stars": 16905,
+      "language": "Shell",
+      "description": "z - jump around"
+    },
+    {
+      "repo": "rbenv/rbenv",
+      "url": "https://github.com/rbenv/rbenv",
+      "stars": 16622,
+      "language": "Shell",
+      "description": "Manage your app's Ruby environment"
+    },
+    {
+      "repo": "ramitsurana/awesome-kubernetes",
+      "url": "https://github.com/ramitsurana/awesome-kubernetes",
+      "stars": 15755,
+      "language": "Shell",
+      "description": "A curated list for awesome kubernetes sources :ship::tada:"
+    },
+    {
+      "repo": "thibmaek/awesome-raspberry-pi",
+      "url": "https://github.com/thibmaek/awesome-raspberry-pi",
+      "stars": 15682,
+      "language": "Shell",
+      "description": "📝 A curated list of awesome Raspberry Pi tools, projects, images and resources"
+    },
+    {
+      "repo": "termux/termux-packages",
+      "url": "https://github.com/termux/termux-packages",
+      "stars": 15500,
+      "language": "Shell",
+      "description": "A package build system for Termux."
+    },
+    {
+      "repo": "angristan/openvpn-install",
+      "url": "https://github.com/angristan/openvpn-install",
+      "stars": 15455,
+      "language": "Shell",
+      "description": "Set up your own OpenVPN server on Debian, Ubuntu, Fedora, CentOS, Arch Linux and more"
+    },
+    {
+      "repo": "kaldi-asr/kaldi",
+      "url": "https://github.com/kaldi-asr/kaldi",
+      "stars": 15297,
+      "language": "Shell",
+      "description": "kaldi-asr/kaldi is the official location of the Kaldi project."
+    },
+    {
+      "repo": "tteck/Proxmox",
+      "url": "https://github.com/tteck/Proxmox",
+      "stars": 15133,
+      "language": "Shell",
+      "description": "Proxmox VE Helper-Scripts"
+    },
+    {
+      "repo": "CISOfy/lynis",
+      "url": "https://github.com/CISOfy/lynis",
+      "stars": 15040,
+      "language": "Shell",
+      "description": "Lynis - Security auditing tool for Linux, macOS, and UNIX-based systems. Assists with compliance testing (HIPAA/ISO27001/PCI DSS) and system hardening. Agentless, and installation optional."
+    },
+    {
+      "repo": "Bash-it/bash-it",
+      "url": "https://github.com/Bash-it/bash-it",
+      "stars": 14894,
+      "language": "Shell",
+      "description": "A community Bash framework."
+    },
+    {
+      "repo": "sorin-ionescu/prezto",
+      "url": "https://github.com/sorin-ionescu/prezto",
+      "stars": 14433,
+      "language": "Shell",
+      "description": "The configuration framework for Zsh"
+    },
+    {
+      "repo": "trimstray/nginx-admins-handbook",
+      "url": "https://github.com/trimstray/nginx-admins-handbook",
+      "stars": 14129,
+      "language": "Shell",
+      "description": "How to improve NGINX performance, security, and other important things."
+    },
+    {
+      "repo": "obra/superpowers",
+      "url": "https://github.com/obra/superpowers",
+      "stars": 13993,
+      "language": "Shell",
+      "description": "Claude Code superpowers: core skills library"
+    },
+    {
+      "repo": "sindresorhus/pure",
+      "url": "https://github.com/sindresorhus/pure",
+      "stars": 13986,
+      "language": "Shell",
+      "description": "Pretty, minimal and fast ZSH prompt"
+    },
+    {
+      "repo": "tmux-plugins/tpm",
+      "url": "https://github.com/tmux-plugins/tpm",
+      "stars": 13899,
+      "language": "Shell",
+      "description": "Tmux Plugin Manager"
+    },
+    {
+      "repo": "foxlet/macOS-Simple-KVM",
+      "url": "https://github.com/foxlet/macOS-Simple-KVM",
+      "stars": 13887,
+      "language": "Shell",
+      "description": "Tools to set up a quick macOS VM in QEMU, accelerated by KVM."
+    },
+    {
+      "repo": "nodesource/distributions",
+      "url": "https://github.com/nodesource/distributions",
+      "stars": 13796,
+      "language": "Shell",
+      "description": "NodeSource Node.js Binary Distributions"
+    },
+    {
+      "repo": "winapps-org/winapps",
+      "url": "https://github.com/winapps-org/winapps",
+      "stars": 13742,
+      "language": "Shell",
+      "description": " Run Windows apps such as Microsoft Office/Adobe in Linux (Ubuntu/Fedora) and GNOME/KDE as if they were a part of the native OS, including Nautilus integration. Hard fork of https://github.com/Fmstrat/winapps/"
+    },
+    {
+      "repo": "quickemu-project/quickemu",
+      "url": "https://github.com/quickemu-project/quickemu",
+      "stars": 13604,
+      "language": "Shell",
+      "description": "Quickly create and run optimised Windows, macOS and Linux virtual machines"
+    },
+    {
+      "repo": "myspaghetti/macos-virtualbox",
+      "url": "https://github.com/myspaghetti/macos-virtualbox",
+      "stars": 13559,
+      "language": "Shell",
+      "description": "Push-button installer of macOS Catalina, Mojave, and High Sierra guests in Virtualbox on x86 CPUs for Windows, Linux, and macOS"
+    },
+    {
+      "repo": "Powerlevel9k/powerlevel9k",
+      "url": "https://github.com/Powerlevel9k/powerlevel9k",
+      "stars": 13437,
+      "language": "Shell",
+      "description": "Powerlevel9k was a tool for building a beautiful and highly functional CLI, customized for you. P9k had a substantial impact on CLI UX, and its legacy is now continued by P10k."
+    },
+    {
+      "repo": "hq450/fancyss",
+      "url": "https://github.com/hq450/fancyss",
+      "stars": 13230,
+      "language": "Shell",
+      "description": "fancyss is a project providing tools to across the GFW on asuswrt/merlin based router."
+    },
+    {
+      "repo": "awslabs/git-secrets",
+      "url": "https://github.com/awslabs/git-secrets",
+      "stars": 13098,
+      "language": "Shell",
+      "description": "Prevents you from committing secrets and credentials into git repositories"
+    },
+    {
+      "repo": "haoel/haoel.github.io",
+      "url": "https://github.com/haoel/haoel.github.io",
+      "stars": 12994,
+      "language": "Shell",
+      "description": null
+    },
+    {
+      "repo": "itzg/docker-minecraft-server",
+      "url": "https://github.com/itzg/docker-minecraft-server",
+      "stars": 12854,
+      "language": "Shell",
+      "description": "Docker image that provides a Minecraft Server for Java Edition that automatically installs/upgrades versions, modloaders, modpacks and more at startup"
+    },
+    {
+      "repo": "k4m4/terminals-are-sexy",
+      "url": "https://github.com/k4m4/terminals-are-sexy",
+      "stars": 12830,
+      "language": "Shell",
+      "description": "💥 A curated list of Terminal frameworks, plugins & resources for CLI lovers."
+    },
+    {
+      "repo": "DaoCloud/public-image-mirror",
+      "url": "https://github.com/DaoCloud/public-image-mirror",
+      "stars": 12798,
+      "language": "Shell",
+      "description": "很多镜像都在国外。比如 gcr 。国内下载很慢，需要加速。致力于提供连接全世界的稳定可靠安全的容器镜像服务。"
+    },
+    {
+      "repo": "p8952/bocker",
+      "url": "https://github.com/p8952/bocker",
+      "stars": 12600,
+      "language": "Shell",
+      "description": "Docker implemented in around 100 lines of bash"
+    },
+    {
+      "repo": "alex000kim/nsfw_data_scraper",
+      "url": "https://github.com/alex000kim/nsfw_data_scraper",
+      "stars": 12522,
+      "language": "Shell",
+      "description": "Collection of scripts to aggregate image data for the purposes of training an NSFW Image Classifier"
+    },
+    {
+      "repo": "torvalds/linux",
+      "url": "https://github.com/torvalds/linux",
+      "stars": 212661,
+      "language": "C",
+      "description": "Linux kernel source tree"
+    },
+    {
+      "repo": "Genymobile/scrcpy",
+      "url": "https://github.com/Genymobile/scrcpy",
+      "stars": 133632,
+      "language": "C",
+      "description": "Display and control your Android device"
+    },
+    {
+      "repo": "netdata/netdata",
+      "url": "https://github.com/netdata/netdata",
+      "stars": 77242,
+      "language": "C",
+      "description": "The fastest path to AI-powered full stack observability, even for lean teams."
+    },
+    {
+      "repo": "ventoy/Ventoy",
+      "url": "https://github.com/ventoy/Ventoy",
+      "stars": 73556,
+      "language": "C",
+      "description": "A new bootable USB solution."
+    },
+    {
+      "repo": "redis/redis",
+      "url": "https://github.com/redis/redis",
+      "stars": 72398,
+      "language": "C",
+      "description": "For developers, who are building real-time data-driven applications, Redis is the preferred, fastest, and most feature-rich cache, data structure server, and document and vector query engine."
+    },
+    {
+      "repo": "obsproject/obs-studio",
+      "url": "https://github.com/obsproject/obs-studio",
+      "stars": 69502,
+      "language": "C",
+      "description": "OBS Studio - Free and open source software for live streaming and screen recording"
+    },
+    {
+      "repo": "git/git",
+      "url": "https://github.com/git/git",
+      "stars": 58426,
+      "language": "C",
+      "description": "Git Source Code Mirror - This is a publish-only repository but pull requests can be turned into patches to the mailing list via GitGitGadget (https://gitgitgadget.github.io/). Please follow Documentation/SubmittingPatches procedure for any of your improvements."
+    },
+    {
+      "repo": "FFmpeg/FFmpeg",
+      "url": "https://github.com/FFmpeg/FFmpeg",
+      "stars": 56027,
+      "language": "C",
+      "description": "Mirror of https://git.ffmpeg.org/ffmpeg.git"
+    },
+    {
+      "repo": "tmux/tmux",
+      "url": "https://github.com/tmux/tmux",
+      "stars": 40580,
+      "language": "C",
+      "description": "tmux source code"
+    },
+    {
+      "repo": "curl/curl",
+      "url": "https://github.com/curl/curl",
+      "stars": 40323,
+      "language": "C",
+      "description": "A command line tool and library for transferring data with URL syntax, supporting DICT, FILE, FTP, FTPS, GOPHER, GOPHERS, HTTP, HTTPS, IMAP, IMAPS, LDAP, LDAPS, MQTT, POP3, POP3S, RTMP, RTMPS, RTSP, SCP, SFTP, SMB, SMBS, SMTP, SMTPS, TELNET, TFTP, WS and WSS. libcurl offers a myriad of powerful features"
+    },
+    {
+      "repo": "wg/wrk",
+      "url": "https://github.com/wg/wrk",
+      "stars": 39967,
+      "language": "C",
+      "description": "Modern HTTP benchmarking tool"
+    },
+    {
+      "repo": "php/php-src",
+      "url": "https://github.com/php/php-src",
+      "stars": 39758,
+      "language": "C",
+      "description": "The PHP Interpreter"
+    },
+    {
+      "repo": "pbatard/rufus",
+      "url": "https://github.com/pbatard/rufus",
+      "stars": 34223,
+      "language": "C",
+      "description": "The Reliable USB Formatting Utility"
+    },
+    {
+      "repo": "mpv-player/mpv",
+      "url": "https://github.com/mpv-player/mpv",
+      "stars": 33306,
+      "language": "C",
+      "description": "🎥 Command line media player"
+    },
+    {
+      "repo": "jqlang/jq",
+      "url": "https://github.com/jqlang/jq",
+      "stars": 33288,
+      "language": "C",
+      "description": "Command-line JSON processor"
+    },
+    {
+      "repo": "bilibili/ijkplayer",
+      "url": "https://github.com/bilibili/ijkplayer",
+      "stars": 33085,
+      "language": "C",
+      "description": "Android/iOS video player based on FFmpeg n3.4, with MediaCodec, VideoToolbox support."
+    },
+    {
+      "repo": "lizongying/my-tv",
+      "url": "https://github.com/lizongying/my-tv",
+      "stars": 32210,
+      "language": "C",
+      "description": "我的电视 电视直播软件，安装即可使用"
+    },
+    {
+      "repo": "coolsnowwolf/lede",
+      "url": "https://github.com/coolsnowwolf/lede",
+      "stars": 31220,
+      "language": "C",
+      "description": "Lean's LEDE source"
+    },
+    {
+      "repo": "valinet/ExplorerPatcher",
+      "url": "https://github.com/valinet/ExplorerPatcher",
+      "stars": 31062,
+      "language": "C",
+      "description": "This project aims to enhance the working environment on Windows"
+    },
+    {
+      "repo": "nothings/stb",
+      "url": "https://github.com/nothings/stb",
+      "stars": 31038,
+      "language": "C",
+      "description": "stb single-file public domain libraries for C/C++"
+    },
+    {
+      "repo": "raysan5/raylib",
+      "url": "https://github.com/raysan5/raylib",
+      "stars": 30114,
+      "language": "C",
+      "description": "A simple and easy-to-use library to enjoy videogames programming"
+    },
+    {
+      "repo": "cfenollosa/os-tutorial",
+      "url": "https://github.com/cfenollosa/os-tutorial",
+      "stars": 29985,
+      "language": "C",
+      "description": "How to create an OS from scratch"
+    },
+    {
+      "repo": "openssl/openssl",
+      "url": "https://github.com/openssl/openssl",
+      "stars": 29328,
+      "language": "C",
+      "description": "TLS/SSL and crypto library"
+    },
+    {
+      "repo": "kingToolbox/WindTerm",
+      "url": "https://github.com/kingToolbox/WindTerm",
+      "stars": 29283,
+      "language": "C",
+      "description": "A professional cross-platform SSH/Sftp/Shell/Telnet/Tmux/Serial terminal."
+    },
+    {
+      "repo": "nginx/nginx",
+      "url": "https://github.com/nginx/nginx",
+      "stars": 29008,
+      "language": "C",
+      "description": "The official NGINX Open Source repository."
+    },
+    {
+      "repo": "asmvik/yabai",
+      "url": "https://github.com/asmvik/yabai",
+      "stars": 27830,
+      "language": "C",
+      "description": "A tiling window manager for macOS based on binary space partitioning"
+    },
+    {
+      "repo": "ValdikSS/GoodbyeDPI",
+      "url": "https://github.com/ValdikSS/GoodbyeDPI",
+      "stars": 27681,
+      "language": "C",
+      "description": "GoodbyeDPI — Deep Packet Inspection circumvention utility (for Windows)"
+    },
+    {
+      "repo": "ggreer/the_silver_searcher",
+      "url": "https://github.com/ggreer/the_silver_searcher",
+      "stars": 27189,
+      "language": "C",
+      "description": "A code-searching tool similar to ack, but faster."
+    },
+    {
+      "repo": "libuv/libuv",
+      "url": "https://github.com/libuv/libuv",
+      "stars": 26430,
+      "language": "C",
+      "description": "Cross-platform asynchronous I/O"
+    },
+    {
+      "repo": "pjreddie/darknet",
+      "url": "https://github.com/pjreddie/darknet",
+      "stars": 26423,
+      "language": "C",
+      "description": "Convolutional Neural Networks"
+    },
+    {
+      "repo": "facebook/zstd",
+      "url": "https://github.com/facebook/zstd",
+      "stars": 26343,
+      "language": "C",
+      "description": "Zstandard - Fast real-time compression algorithm"
+    },
+    {
+      "repo": "robertdavidgraham/masscan",
+      "url": "https://github.com/robertdavidgraham/masscan",
+      "stars": 25197,
+      "language": "C",
+      "description": "TCP port scanner, spews SYN packets asynchronously, scanning entire Internet in under 5 minutes."
+    },
+    {
+      "repo": "hashcat/hashcat",
+      "url": "https://github.com/hashcat/hashcat",
+      "stars": 25073,
+      "language": "C",
+      "description": "World's fastest and most advanced password recovery utility"
+    },
+    {
+      "repo": "openwrt/openwrt",
+      "url": "https://github.com/openwrt/openwrt",
+      "stars": 25057,
+      "language": "C",
+      "description": "This repository is a mirror of https://git.openwrt.org/openwrt/openwrt.git It is for reference only and is not active for check-ins.  We will continue to accept Pull Requests here. They will be merged via staging trees then into openwrt.git."
+    },
+    {
+      "repo": "taosdata/TDengine",
+      "url": "https://github.com/taosdata/TDengine",
+      "stars": 24635,
+      "language": "C",
+      "description": "High-performance, scalable time-series database designed for Industrial IoT (IIoT) scenarios"
+    },
+    {
+      "repo": "valkey-io/valkey",
+      "url": "https://github.com/valkey-io/valkey",
+      "stars": 24332,
+      "language": "C",
+      "description": "A flexible distributed key-value database that is optimized for caching and other realtime workloads."
+    },
+    {
+      "repo": "arendst/Tasmota",
+      "url": "https://github.com/arendst/Tasmota",
+      "stars": 24014,
+      "language": "C",
+      "description": "Alternative firmware for ESP8266 and ESP32 based devices with easy configuration using webUI, OTA updates, automation using timers or rules, expandability and entirely local control over MQTT, HTTP, Serial or KNX. Full documentation at"
+    },
+    {
+      "repo": "mozilla-ai/llamafile",
+      "url": "https://github.com/mozilla-ai/llamafile",
+      "stars": 23597,
+      "language": "C",
+      "description": "Distribute and run LLMs with a single file."
+    },
+    {
+      "repo": "radareorg/radare2",
+      "url": "https://github.com/radareorg/radare2",
+      "stars": 22840,
+      "language": "C",
+      "description": "UNIX-like reverse engineering framework and command-line toolset"
+    },
+    {
+      "repo": "SamyPesse/How-to-Make-a-Computer-Operating-System",
+      "url": "https://github.com/SamyPesse/How-to-Make-a-Computer-Operating-System",
+      "stars": 22758,
+      "language": "C",
+      "description": "How to Make a Computer Operating System in C++"
+    },
+    {
+      "repo": "lvgl/lvgl",
+      "url": "https://github.com/lvgl/lvgl",
+      "stars": 22377,
+      "language": "C",
+      "description": "Embedded graphics library to create beautiful UIs for any MCU, MPU and display type. "
+    },
+    {
+      "repo": "iovisor/bcc",
+      "url": "https://github.com/iovisor/bcc",
+      "stars": 22114,
+      "language": "C",
+      "description": "BCC - Tools for BPF-based Linux IO analysis, networking, monitoring, and more"
+    },
+    {
+      "repo": "HandBrake/HandBrake",
+      "url": "https://github.com/HandBrake/HandBrake",
+      "stars": 21961,
+      "language": "C",
+      "description": "HandBrake's development repository "
+    },
+    {
+      "repo": "xiaojieonly/Ehviewer_CN_SXJ",
+      "url": "https://github.com/xiaojieonly/Ehviewer_CN_SXJ",
+      "stars": 21669,
+      "language": "C",
+      "description": "ehviewer，用爱发电，快乐前行"
+    },
+    {
+      "repo": "TheAlgorithms/C",
+      "url": "https://github.com/TheAlgorithms/C",
+      "stars": 21535,
+      "language": "C",
+      "description": "Collection of various algorithms in mathematics, machine learning, computer science, physics, etc implemented in C for educational purposes."
+    },
+    {
+      "repo": "julycoding/The-Art-Of-Programming-By-July-2nd",
+      "url": "https://github.com/julycoding/The-Art-Of-Programming-By-July-2nd",
+      "stars": 21517,
+      "language": "C",
+      "description": "本项目曾冲到全球第一，干货集锦见本页面最底部，另完整精致的纸质版《编程之法：面试和算法心得》已在京东/当当上销售"
+    },
+    {
+      "repo": "timescale/timescaledb",
+      "url": "https://github.com/timescale/timescaledb",
+      "stars": 21345,
+      "language": "C",
+      "description": "A time-series database for high-performance real-time analytics packaged as a Postgres extension"
+    },
+    {
+      "repo": "micropython/micropython",
+      "url": "https://github.com/micropython/micropython",
+      "stars": 21304,
+      "language": "C",
+      "description": "MicroPython - a lean and efficient Python implementation for microcontrollers and constrained systems"
+    },
+    {
+      "repo": "gentilkiwi/mimikatz",
+      "url": "https://github.com/gentilkiwi/mimikatz",
+      "stars": 21153,
+      "language": "C",
+      "description": "A little tool to play with Windows security"
+    },
+    {
+      "repo": "jarun/nnn",
+      "url": "https://github.com/jarun/nnn",
+      "stars": 21030,
+      "language": "C",
+      "description": "n³ The unorthodox terminal file manager"
+    },
+    {
+      "repo": "DarkFlippers/unleashed-firmware",
+      "url": "https://github.com/DarkFlippers/unleashed-firmware",
+      "stars": 20783,
+      "language": "C",
+      "description": "Flipper Zero Unleashed Firmware"
+    },
+    {
+      "repo": "jart/cosmopolitan",
+      "url": "https://github.com/jart/cosmopolitan",
+      "stars": 20324,
+      "language": "C",
+      "description": "build-once run-anywhere c library"
+    },
+    {
+      "repo": "allinurl/goaccess",
+      "url": "https://github.com/allinurl/goaccess",
+      "stars": 20108,
+      "language": "C",
+      "description": "GoAccess is a real-time web log analyzer and interactive viewer that runs in a terminal in *nix systems or through your browser."
+    },
+    {
+      "repo": "qmk/qmk_firmware",
+      "url": "https://github.com/qmk/qmk_firmware",
+      "stars": 20005,
+      "language": "C",
+      "description": "Open-source keyboard firmware for Atmel AVR and Arm USB families"
+    },
+    {
+      "repo": "Awesome-HarmonyOS/HarmonyOS",
+      "url": "https://github.com/Awesome-HarmonyOS/HarmonyOS",
+      "stars": 19807,
+      "language": "C",
+      "description": "A curated list of awesome things related to HarmonyOS. 华为鸿蒙操作系统。"
+    },
+    {
+      "repo": "postgres/postgres",
+      "url": "https://github.com/postgres/postgres",
+      "stars": 19521,
+      "language": "C",
+      "description": "Mirror of the official PostgreSQL GIT repository. Note that this is just a *mirror* - we don't work with pull requests on github. To contribute, please see https://wiki.postgresql.org/wiki/Submitting_a_Patch"
+    },
+    {
+      "repo": "fastfetch-cli/fastfetch",
+      "url": "https://github.com/fastfetch-cli/fastfetch",
+      "stars": 19153,
+      "language": "C",
+      "description": "A maintained, feature-rich and performance oriented, neofetch like system information tool."
+    },
+    {
+      "repo": "pgvector/pgvector",
+      "url": "https://github.com/pgvector/pgvector",
+      "stars": 19111,
+      "language": "C",
+      "description": "Open-source vector similarity search for Postgres"
+    },
+    {
+      "repo": "karpathy/llama2.c",
+      "url": "https://github.com/karpathy/llama2.c",
+      "stars": 19084,
+      "language": "C",
+      "description": "Inference Llama 2 in one file of pure C"
+    },
+    {
+      "repo": "ish-app/ish",
+      "url": "https://github.com/ish-app/ish",
+      "stars": 19058,
+      "language": "C",
+      "description": "Linux shell for iOS"
+    },
+    {
+      "repo": "ExistentialAudio/BlackHole",
+      "url": "https://github.com/ExistentialAudio/BlackHole",
+      "stars": 18052,
+      "language": "C",
+      "description": "BlackHole is a modern macOS audio loopback driver that allows applications to pass audio to other applications with zero additional latency."
+    },
+    {
+      "repo": "videolan/vlc",
+      "url": "https://github.com/videolan/vlc",
+      "stars": 17267,
+      "language": "C",
+      "description": "VLC media player - All pull requests are ignored, please use MRs on https://code.videolan.org/videolan/vlc"
+    },
+    {
+      "repo": "espressif/esp-idf",
+      "url": "https://github.com/espressif/esp-idf",
+      "stars": 17003,
+      "language": "C",
+      "description": "Espressif IoT Development Framework. Official development framework for Espressif SoCs."
+    },
+    {
+      "repo": "ffmpegwasm/ffmpeg.wasm",
+      "url": "https://github.com/ffmpegwasm/ffmpeg.wasm",
+      "stars": 16994,
+      "language": "C",
+      "description": "FFmpeg for browser, powered by WebAssembly"
+    },
+    {
+      "repo": "woltapp/blurhash",
+      "url": "https://github.com/woltapp/blurhash",
+      "stars": 16862,
+      "language": "C",
+      "description": "A very compact representation of a placeholder for an image."
+    },
+    {
+      "repo": "reactos/reactos",
+      "url": "https://github.com/reactos/reactos",
+      "stars": 16761,
+      "language": "C",
+      "description": "A free Windows-compatible Operating System"
+    },
+    {
+      "repo": "sandboxie-plus/Sandboxie",
+      "url": "https://github.com/sandboxie-plus/Sandboxie",
+      "stars": 16713,
+      "language": "C",
+      "description": "Sandboxie Plus & Classic"
+    },
+    {
+      "repo": "NVIDIA/open-gpu-kernel-modules",
+      "url": "https://github.com/NVIDIA/open-gpu-kernel-modules",
+      "stars": 16576,
+      "language": "C",
+      "description": "NVIDIA Linux open GPU kernel module source"
+    },
+    {
+      "repo": "skywind3000/kcp",
+      "url": "https://github.com/skywind3000/kcp",
+      "stars": 16528,
+      "language": "C",
+      "description": ":zap: KCP - A Fast and Reliable ARQ Protocol"
+    },
+    {
+      "repo": "UberGuidoZ/Flipper",
+      "url": "https://github.com/UberGuidoZ/Flipper",
+      "stars": 16425,
+      "language": "C",
+      "description": "Playground (and dump) of stuff I make or modify for the Flipper Zero"
+    },
+    {
+      "repo": "swaywm/sway",
+      "url": "https://github.com/swaywm/sway",
+      "stars": 16391,
+      "language": "C",
+      "description": "i3-compatible Wayland compositor"
+    },
+    {
+      "repo": "nicbarker/clay",
+      "url": "https://github.com/nicbarker/clay",
+      "stars": 16254,
+      "language": "C",
+      "description": "High performance UI layout library in C."
+    },
+    {
+      "repo": "shadowsocks/shadowsocks-libev",
+      "url": "https://github.com/shadowsocks/shadowsocks-libev",
+      "stars": 16087,
+      "language": "C",
+      "description": "Bug-fix-only libev port of shadowsocks. Future development moved to shadowsocks-rust"
+    },
+    {
+      "repo": "brunodev85/winlator",
+      "url": "https://github.com/brunodev85/winlator",
+      "stars": 16046,
+      "language": "C",
+      "description": "Android application for running Windows applications with Wine and Box86/Box64"
+    },
+    {
+      "repo": "tursodatabase/libsql",
+      "url": "https://github.com/tursodatabase/libsql",
+      "stars": 16027,
+      "language": "C",
+      "description": "libSQL is a fork of SQLite that is both Open Source, and Open Contributions."
+    },
+    {
+      "repo": "sumatrapdfreader/sumatrapdf",
+      "url": "https://github.com/sumatrapdfreader/sumatrapdf",
+      "stars": 15904,
+      "language": "C",
+      "description": "SumatraPDF reader"
+    },
+    {
+      "repo": "davatorium/rofi",
+      "url": "https://github.com/davatorium/rofi",
+      "stars": 15564,
+      "language": "C",
+      "description": "Rofi: A window switcher, application launcher and dmenu replacement"
+    },
+    {
+      "repo": "flipperdevices/flipperzero-firmware",
+      "url": "https://github.com/flipperdevices/flipperzero-firmware",
+      "stars": 15343,
+      "language": "C",
+      "description": "Flipper Zero firmware source code"
+    },
+    {
+      "repo": "ImageMagick/ImageMagick",
+      "url": "https://github.com/ImageMagick/ImageMagick",
+      "stars": 15315,
+      "language": "C",
+      "description": "ImageMagick is a free, open-source software suite for creating, editing, converting, and displaying images. It supports 200+ formats and offers powerful command-line tools and APIs for automation, scripting, and integration across platforms."
+    },
+    {
+      "repo": "systemd/systemd",
+      "url": "https://github.com/systemd/systemd",
+      "stars": 15076,
+      "language": "C",
+      "description": "The systemd System and Service Manager "
+    },
+    {
+      "repo": "ossu/computer-science",
+      "url": "https://github.com/ossu/computer-science",
+      "stars": 199852,
+      "language": "HTML",
+      "description": "🎓 Path to a free self-taught education in Computer Science!"
+    },
+    {
+      "repo": "DigitalPlatDev/FreeDomain",
+      "url": "https://github.com/DigitalPlatDev/FreeDomain",
+      "stars": 137603,
+      "language": "HTML",
+      "description": "DigitalPlat FreeDomain: Free Domain For Everyone"
+    },
+    {
+      "repo": "ripienaar/free-for-dev",
+      "url": "https://github.com/ripienaar/free-for-dev",
+      "stars": 117041,
+      "language": "HTML",
+      "description": "A list of SaaS, PaaS and IaaS offerings that have free tiers of interest to devops and infradev"
+    },
+    {
+      "repo": "PKUFlyingPig/cs-self-learning",
+      "url": "https://github.com/PKUFlyingPig/cs-self-learning",
+      "stars": 70507,
+      "language": "HTML",
+      "description": "计算机自学指南"
+    },
+    {
+      "repo": "square/retrofit",
+      "url": "https://github.com/square/retrofit",
+      "stars": 43853,
+      "language": "HTML",
+      "description": "A type-safe HTTP client for Android and the JVM"
+    },
+    {
+      "repo": "docker/awesome-compose",
+      "url": "https://github.com/docker/awesome-compose",
+      "stars": 43280,
+      "language": "HTML",
+      "description": "Awesome Docker Compose samples"
+    },
+    {
+      "repo": "tabler/tabler",
+      "url": "https://github.com/tabler/tabler",
+      "stars": 40596,
+      "language": "HTML",
+      "description": "Tabler is free and open-source HTML Dashboard UI Kit built on Bootstrap"
+    },
+    {
+      "repo": "QSCTech/zju-icicles",
+      "url": "https://github.com/QSCTech/zju-icicles",
+      "stars": 40063,
+      "language": "HTML",
+      "description": "浙江大学课程攻略共享计划"
+    },
+    {
+      "repo": "google/styleguide",
+      "url": "https://github.com/google/styleguide",
+      "stars": 38813,
+      "language": "HTML",
+      "description": "Style guides for Google-originated open-source projects"
+    },
+    {
+      "repo": "PKUanonym/REKCARC-TSC-UHT",
+      "url": "https://github.com/PKUanonym/REKCARC-TSC-UHT",
+      "stars": 36363,
+      "language": "HTML",
+      "description": "清华大学计算机系课程攻略 Guidance for courses in Department of Computer Science and Technology, Tsinghua University"
+    },
+    {
+      "repo": "fengdu78/Coursera-ML-AndrewNg-Notes",
+      "url": "https://github.com/fengdu78/Coursera-ML-AndrewNg-Notes",
+      "stars": 36008,
+      "language": "HTML",
+      "description": "吴恩达老师的机器学习课程个人笔记"
+    },
+    {
+      "repo": "opentofu/manifesto",
+      "url": "https://github.com/opentofu/manifesto",
+      "stars": 35970,
+      "language": "HTML",
+      "description": "The OpenTF Manifesto expresses concern over HashiCorp's switch of the Terraform license from open-source to the Business Source License (BSL) and calls for the tool's return to a truly open-source license."
+    },
+    {
+      "repo": "google/material-design-lite",
+      "url": "https://github.com/google/material-design-lite",
+      "stars": 32229,
+      "language": "HTML",
+      "description": "Material Design Components in HTML/CSS/JS"
+    },
+    {
+      "repo": "alpinejs/alpine",
+      "url": "https://github.com/alpinejs/alpine",
+      "stars": 30948,
+      "language": "HTML",
+      "description": "A rugged, minimal framework for composing JavaScript behavior in your markup. "
+    },
+    {
+      "repo": "foundation/foundation-sites",
+      "url": "https://github.com/foundation/foundation-sites",
+      "stars": 29782,
+      "language": "HTML",
+      "description": "The most advanced responsive front-end framework in the world. Quickly create prototypes and production code for sites that work on any kind of device."
+    },
+    {
+      "repo": "wesbos/JavaScript30",
+      "url": "https://github.com/wesbos/JavaScript30",
+      "stars": 28978,
+      "language": "HTML",
+      "description": "30 Day Vanilla JS Challenge"
+    },
+    {
+      "repo": "MHSanaei/3x-ui",
+      "url": "https://github.com/MHSanaei/3x-ui",
+      "stars": 28194,
+      "language": "HTML",
+      "description": "Xray panel supporting multi-protocol multi-user expire day & traffic & IP limit (Vmess, Vless, Trojan, ShadowSocks, Wireguard, Tunnel, Mixed, HTTP) "
+    },
+    {
+      "repo": "Tencent/weui",
+      "url": "https://github.com/Tencent/weui",
+      "stars": 27390,
+      "language": "HTML",
+      "description": "A UI library by WeChat official design team, includes the most useful widgets/modules in mobile web applications."
+    },
+    {
+      "repo": "dwmkerr/hacker-laws",
+      "url": "https://github.com/dwmkerr/hacker-laws",
+      "stars": 26974,
+      "language": "HTML",
+      "description": "🧠 Laws, Theories, Principles and Patterns for developers and technologists."
+    },
+    {
+      "repo": "facebookresearch/fastText",
+      "url": "https://github.com/facebookresearch/fastText",
+      "stars": 26467,
+      "language": "HTML",
+      "description": "Library for fast text representation and classification."
+    },
+    {
+      "repo": "Igglybuff/awesome-piracy",
+      "url": "https://github.com/Igglybuff/awesome-piracy",
+      "stars": 25953,
+      "language": "HTML",
+      "description": "A curated list of awesome warez and piracy links"
+    },
+    {
+      "repo": "javascript-tutorial/en.javascript.info",
+      "url": "https://github.com/javascript-tutorial/en.javascript.info",
+      "stars": 25042,
+      "language": "HTML",
+      "description": "Modern JavaScript Tutorial "
+    },
+    {
+      "repo": "bitcoinbook/bitcoinbook",
+      "url": "https://github.com/bitcoinbook/bitcoinbook",
+      "stars": 25006,
+      "language": "HTML",
+      "description": "Mastering Bitcoin 3rd Edition - Programming the Open Blockchain"
+    },
+    {
+      "repo": "luong-komorebi/Awesome-Linux-Software",
+      "url": "https://github.com/luong-komorebi/Awesome-Linux-Software",
+      "stars": 24687,
+      "language": "HTML",
+      "description": "🐧 A list of awesome Linux softwares "
+    },
+    {
+      "repo": "vernesong/OpenClash",
+      "url": "https://github.com/vernesong/OpenClash",
+      "stars": 23437,
+      "language": "HTML",
+      "description": "A Clash Client For OpenWrt"
+    },
+    {
+      "repo": "liguodongiot/llm-action",
+      "url": "https://github.com/liguodongiot/llm-action",
+      "stars": 22650,
+      "language": "HTML",
+      "description": "本项目旨在分享大模型相关技术原理以及实战经验（大模型工程化、大模型应用落地）"
+    },
+    {
+      "repo": "harvesthq/chosen",
+      "url": "https://github.com/harvesthq/chosen",
+      "stars": 22337,
+      "language": "HTML",
+      "description": "Deprecated - Chosen is a library for making long, unwieldy select boxes more friendly."
+    },
+    {
+      "repo": "Polymer/polymer",
+      "url": "https://github.com/Polymer/polymer",
+      "stars": 22071,
+      "language": "HTML",
+      "description": "Our original Web Component library."
+    },
+    {
+      "repo": "dibingfa/flash-linux0.11-talk",
+      "url": "https://github.com/dibingfa/flash-linux0.11-talk",
+      "stars": 21948,
+      "language": "HTML",
+      "description": "你管这破玩意叫操作系统源码 — 像小说一样品读 Linux 0.11 核心代码"
+    },
+    {
+      "repo": "ColorlibHQ/gentelella",
+      "url": "https://github.com/ColorlibHQ/gentelella",
+      "stars": 21295,
+      "language": "HTML",
+      "description": "Free Bootstrap 5 Admin Dashboard Template"
+    },
+    {
+      "repo": "rough-stuff/rough",
+      "url": "https://github.com/rough-stuff/rough",
+      "stars": 20743,
+      "language": "HTML",
+      "description": "Create graphics with a hand-drawn, sketchy, appearance"
+    },
+    {
+      "repo": "davideuler/architecture.of.internet-product",
+      "url": "https://github.com/davideuler/architecture.of.internet-product",
+      "stars": 20603,
+      "language": "HTML",
+      "description": "互联网公司技术架构，微信/淘宝/微博/腾讯/阿里/美团点评/百度/OpenAI/Google/Facebook/Amazon/eBay的架构，欢迎PR补充"
+    },
+    {
+      "repo": "WeNeedHome/SummaryOfLoanSuspension",
+      "url": "https://github.com/WeNeedHome/SummaryOfLoanSuspension",
+      "stars": 20578,
+      "language": "HTML",
+      "description": "全国各省市停贷通知汇总"
+    },
+    {
+      "repo": "you-dont-need/You-Dont-Need-JavaScript",
+      "url": "https://github.com/you-dont-need/You-Dont-Need-JavaScript",
+      "stars": 20445,
+      "language": "HTML",
+      "description": "CSS is powerful, you can do a lot of things without JS."
+    },
+    {
+      "repo": "TeamStuQ/skill-map",
+      "url": "https://github.com/TeamStuQ/skill-map",
+      "stars": 20211,
+      "language": "HTML",
+      "description": "程序员技能图谱"
+    },
+    {
+      "repo": "fengdu78/deeplearning_ai_books",
+      "url": "https://github.com/fengdu78/deeplearning_ai_books",
+      "stars": 20085,
+      "language": "HTML",
+      "description": "deeplearning.ai（吴恩达老师的深度学习课程笔记及资源）"
+    },
+    {
+      "repo": "google/fonts",
+      "url": "https://github.com/google/fonts",
+      "stars": 19578,
+      "language": "HTML",
+      "description": "Font files available from Google Fonts, and a public issue tracker for all things Google Fonts"
+    },
+    {
+      "repo": "nndl/nndl.github.io",
+      "url": "https://github.com/nndl/nndl.github.io",
+      "stars": 18682,
+      "language": "HTML",
+      "description": "《神经网络与深度学习》 邱锡鹏著 Neural Network and Deep Learning "
+    },
+    {
+      "repo": "Chuyu-Team/Dism-Multi-language",
+      "url": "https://github.com/Chuyu-Team/Dism-Multi-language",
+      "stars": 18649,
+      "language": "HTML",
+      "description": "Dism++ Multi-language Support & BUG Report"
+    },
+    {
+      "repo": "ftlabs/fastclick",
+      "url": "https://github.com/ftlabs/fastclick",
+      "stars": 18578,
+      "language": "HTML",
+      "description": "Polyfill to remove click delays on browsers with touch UIs"
+    },
+    {
+      "repo": "uikit/uikit",
+      "url": "https://github.com/uikit/uikit",
+      "stars": 18531,
+      "language": "HTML",
+      "description": "A lightweight and modular front-end framework for developing fast and powerful web interfaces"
+    },
+    {
+      "repo": "Prinzhorn/skrollr",
+      "url": "https://github.com/Prinzhorn/skrollr",
+      "stars": 18468,
+      "language": "HTML",
+      "description": "Stand-alone parallax scrolling library for mobile (Android + iOS) and desktop. No jQuery. Just plain JavaScript (and some love)."
+    },
+    {
+      "repo": "google/web-starter-kit",
+      "url": "https://github.com/google/web-starter-kit",
+      "stars": 18361,
+      "language": "HTML",
+      "description": "Web Starter Kit - a workflow for multi-device websites"
+    },
+    {
+      "repo": "twitter/twemoji",
+      "url": "https://github.com/twitter/twemoji",
+      "stars": 17312,
+      "language": "HTML",
+      "description": "Emoji for everyone. https://twemoji.twitter.com/"
+    },
+    {
+      "repo": "phil-opp/blog_os",
+      "url": "https://github.com/phil-opp/blog_os",
+      "stars": 17189,
+      "language": "HTML",
+      "description": "Writing an OS in Rust"
+    },
+    {
+      "repo": "desandro/masonry",
+      "url": "https://github.com/desandro/masonry",
+      "stars": 16693,
+      "language": "HTML",
+      "description": ":love_hotel: Cascading grid layout plugin"
+    },
+    {
+      "repo": "emilwallner/Screenshot-to-code",
+      "url": "https://github.com/emilwallner/Screenshot-to-code",
+      "stars": 16516,
+      "language": "HTML",
+      "description": "A neural network that transforms a design mock-up into a static website."
+    },
+    {
+      "repo": "jeromeetienne/AR.js",
+      "url": "https://github.com/jeromeetienne/AR.js",
+      "stars": 15831,
+      "language": "HTML",
+      "description": "Efficient Augmented Reality for the Web - 60fps on mobile!"
+    },
+    {
+      "repo": "gustavoguanabara/html-css",
+      "url": "https://github.com/gustavoguanabara/html-css",
+      "stars": 15818,
+      "language": "HTML",
+      "description": "Curso de HTML5 e CSS3"
+    },
+    {
+      "repo": "tc39/ecma262",
+      "url": "https://github.com/tc39/ecma262",
+      "stars": 15569,
+      "language": "HTML",
+      "description": "Status, process, and documents for ECMA-262"
+    },
+    {
+      "repo": "animate-css/animate.css",
+      "url": "https://github.com/animate-css/animate.css",
+      "stars": 82556,
+      "language": "CSS",
+      "description": "🍿 A cross-browser library of CSS animations. As easy to use as an easy thing."
+    },
+    {
+      "repo": "ryanoasis/nerd-fonts",
+      "url": "https://github.com/ryanoasis/nerd-fonts",
+      "stars": 61115,
+      "language": "CSS",
+      "description": "Iconic font aggregator, collection, & patcher. 3,600+ icons, 50+ patched fonts: Hack, Source Code Pro, more. Glyph collections: Font Awesome, Material Design Icons, Octicons, & more"
+    },
+    {
+      "repo": "necolas/normalize.css",
+      "url": "https://github.com/necolas/normalize.css",
+      "stars": 53749,
+      "language": "CSS",
+      "description": "A modern alternative to CSS resets"
+    },
+    {
+      "repo": "jgthms/bulma",
+      "url": "https://github.com/jgthms/bulma",
+      "stars": 50040,
+      "language": "CSS",
+      "description": "Modern CSS framework based on Flexbox"
+    },
+    {
+      "repo": "ColorlibHQ/AdminLTE",
+      "url": "https://github.com/ColorlibHQ/AdminLTE",
+      "stars": 45252,
+      "language": "CSS",
+      "description": "AdminLTE - Free admin dashboard template based on Bootstrap 5"
+    },
+    {
+      "repo": "isocpp/CppCoreGuidelines",
+      "url": "https://github.com/isocpp/CppCoreGuidelines",
+      "stars": 44671,
+      "language": "CSS",
+      "description": "The C++ Core Guidelines are a set of tried-and-true guidelines, rules, and best practices about coding in C++"
+    },
+    {
+      "repo": "bradtraversy/50projects50days",
+      "url": "https://github.com/bradtraversy/50projects50days",
+      "stars": 40333,
+      "language": "CSS",
+      "description": "50+ mini web projects using HTML, CSS & JS"
+    },
+    {
+      "repo": "FreeCodeCampChina/freecodecamp.cn",
+      "url": "https://github.com/FreeCodeCampChina/freecodecamp.cn",
+      "stars": 37609,
+      "language": "CSS",
+      "description": "FCC China open source codebase and curriculum. Learn to code and help nonprofits."
+    },
+    {
+      "repo": "hehonghui/awesome-english-ebooks",
+      "url": "https://github.com/hehonghui/awesome-english-ebooks",
+      "stars": 27944,
+      "language": "CSS",
+      "description": "经济学人(含音频)、纽约客、卫报、连线、大西洋月刊等英语杂志免费下载,支持epub、mobi、pdf格式, 每周更新"
+    },
+    {
+      "repo": "houshanren/hangzhou_house_knowledge",
+      "url": "https://github.com/houshanren/hangzhou_house_knowledge",
+      "stars": 27174,
+      "language": "CSS",
+      "description": "2017年买房经历总结出来的买房购房知识分享给大家，希望对大家有所帮助。买房不易，且买且珍惜。Sharing the knowledge of buy an own house that according  to the experience at hangzhou in 2017 to all the people. It's not easy to buy a own house, so I hope that it would be useful to everyone."
+    },
+    {
+      "repo": "adobe-fonts/source-code-pro",
+      "url": "https://github.com/adobe-fonts/source-code-pro",
+      "stars": 20346,
+      "language": "CSS",
+      "description": "Monospaced font family for user interface and coding environments"
+    },
+    {
+      "repo": "dhg/Skeleton",
+      "url": "https://github.com/dhg/Skeleton",
+      "stars": 19814,
+      "language": "CSS",
+      "description": "Skeleton: A Dead Simple, Responsive Boilerplate for Mobile-Friendly Development"
+    },
+    {
+      "repo": "tobiasahlin/SpinKit",
+      "url": "https://github.com/tobiasahlin/SpinKit",
+      "stars": 19382,
+      "language": "CSS",
+      "description": "A collection of loading indicators animated with CSS"
+    },
+    {
+      "repo": "uvdesk/community-skeleton",
+      "url": "https://github.com/uvdesk/community-skeleton",
+      "stars": 17062,
+      "language": "CSS",
+      "description": "UVdesk Open Source Community Helpdesk is a comprehensive ticketing support system designed for everyone, offering robust features to streamline customer support and collaboration."
+    },
+    {
+      "repo": "picocss/pico",
+      "url": "https://github.com/picocss/pico",
+      "stars": 16154,
+      "language": "CSS",
+      "description": "Minimal CSS Framework for semantic HTML"
+    },
+    {
+      "repo": "Chalarangelo/30-seconds-of-css",
+      "url": "https://github.com/Chalarangelo/30-seconds-of-css",
+      "stars": 16083,
+      "language": "CSS",
+      "description": "Short CSS code snippets for all your development needs"
+    },
+    {
+      "repo": "CodeByZach/pace",
+      "url": "https://github.com/CodeByZach/pace",
+      "stars": 15661,
+      "language": "CSS",
+      "description": "Automatically add a progress bar to your site."
+    },
+    {
+      "repo": "twbs/ratchet",
+      "url": "https://github.com/twbs/ratchet",
+      "stars": 14659,
+      "language": "CSS",
+      "description": "Build mobile apps with simple HTML, CSS, and JavaScript components. "
+    },
+    {
+      "repo": "chriskempson/tomorrow-theme",
+      "url": "https://github.com/chriskempson/tomorrow-theme",
+      "stars": 13953,
+      "language": "CSS",
+      "description": "Tomorrow Theme"
+    },
+    {
+      "repo": "cocktailpeanut/dalai",
+      "url": "https://github.com/cocktailpeanut/dalai",
+      "stars": 13018,
+      "language": "CSS",
+      "description": "The simplest way to run LLaMA on your local machine"
+    },
+    {
+      "repo": "philipwalton/solved-by-flexbox",
+      "url": "https://github.com/philipwalton/solved-by-flexbox",
+      "stars": 12960,
+      "language": "CSS",
+      "description": "A showcase of problems once hard or impossible to solve with CSS alone, now made trivially easy with Flexbox."
+    },
+    {
+      "repo": "tachyons-css/tachyons",
+      "url": "https://github.com/tachyons-css/tachyons",
+      "stars": 11697,
+      "language": "CSS",
+      "description": "Functional css for humans"
+    },
+    {
+      "repo": "devicons/devicon",
+      "url": "https://github.com/devicons/devicon",
+      "stars": 11354,
+      "language": "CSS",
+      "description": "Set of icons representing programming languages, designing & development tools"
+    },
+    {
+      "repo": "picturepan2/spectre",
+      "url": "https://github.com/picturepan2/spectre",
+      "stars": 11349,
+      "language": "CSS",
+      "description": "Spectre.css - A Lightweight, Responsive and Modern CSS Framework"
+    },
+    {
+      "repo": "IBM/plex",
+      "url": "https://github.com/IBM/plex",
+      "stars": 11122,
+      "language": "CSS",
+      "description": "The package of IBM’s typeface, IBM Plex."
+    },
+    {
+      "repo": "Automattic/_s",
+      "url": "https://github.com/Automattic/_s",
+      "stars": 11024,
+      "language": "CSS",
+      "description": "Inactive project – please visit https://themeshaper.com/block-themes/ to learn more about the future of WordPress themes with Block Themes."
+    },
+    {
+      "repo": "chokcoco/CSS-Inspiration",
+      "url": "https://github.com/chokcoco/CSS-Inspiration",
+      "stars": 10869,
+      "language": "CSS",
+      "description": "CSS Inspiration，在这里找到写 CSS 的灵感！"
+    },
+    {
+      "repo": "h5bp/Effeckt.css",
+      "url": "https://github.com/h5bp/Effeckt.css",
+      "stars": 10851,
+      "language": "CSS",
+      "description": "This repo is archived. Thanks!"
+    },
+    {
+      "repo": "jdan/98.css",
+      "url": "https://github.com/jdan/98.css",
+      "stars": 10802,
+      "language": "CSS",
+      "description": "A design system for building faithful recreations of old UIs"
+    },
+    {
+      "repo": "ConnorAtherton/loaders.css",
+      "url": "https://github.com/ConnorAtherton/loaders.css",
+      "stars": 10263,
+      "language": "CSS",
+      "description": "Delightful, performance-focused pure css loading animations."
+    },
+    {
+      "repo": "connors/photon",
+      "url": "https://github.com/connors/photon",
+      "stars": 10074,
+      "language": "CSS",
+      "description": "The fastest way to build beautiful Electron apps using simple HTML and CSS"
+    },
+    {
+      "repo": "StylishThemes/GitHub-Dark",
+      "url": "https://github.com/StylishThemes/GitHub-Dark",
+      "stars": 9897,
+      "language": "CSS",
+      "description": ":octocat: Dark GitHub style"
+    },
+    {
+      "repo": "dunovank/jupyter-themes",
+      "url": "https://github.com/dunovank/jupyter-themes",
+      "stars": 9830,
+      "language": "CSS",
+      "description": "Custom Jupyter Notebook Themes"
+    },
+    {
+      "repo": "mrmrs/colors",
+      "url": "https://github.com/mrmrs/colors",
+      "stars": 9371,
+      "language": "CSS",
+      "description": "Smarter defaults for colors on the web."
+    },
+    {
+      "repo": "fgnass/spin.js",
+      "url": "https://github.com/fgnass/spin.js",
+      "stars": 9289,
+      "language": "CSS",
+      "description": "A spinning activity indicator"
+    },
+    {
+      "repo": "codeguy/php-the-right-way",
+      "url": "https://github.com/codeguy/php-the-right-way",
+      "stars": 9265,
+      "language": "CSS",
+      "description": "An easy-to-read, quick reference for PHP best practices, accepted coding standards, and links to authoritative tutorials around the Web"
+    },
+    {
+      "repo": "scaffold-eth/scaffold-eth",
+      "url": "https://github.com/scaffold-eth/scaffold-eth",
+      "stars": 9127,
+      "language": "CSS",
+      "description": "🏗 forkable Ethereum dev stack focused on fast product iterations "
+    },
+    {
+      "repo": "troxler/awesome-css-frameworks",
+      "url": "https://github.com/troxler/awesome-css-frameworks",
+      "stars": 9124,
+      "language": "CSS",
+      "description": "List of awesome CSS frameworks in 2025"
+    },
+    {
+      "repo": "thewhiteh4t/seeker",
+      "url": "https://github.com/thewhiteh4t/seeker",
+      "stars": 8889,
+      "language": "CSS",
+      "description": "Accurately Locate Smartphones using Social Engineering "
+    },
+    {
+      "repo": "spring-projects/spring-petclinic",
+      "url": "https://github.com/spring-projects/spring-petclinic",
+      "stars": 8851,
+      "language": "CSS",
+      "description": "A sample Spring-based application"
+    }
+  ]
+}

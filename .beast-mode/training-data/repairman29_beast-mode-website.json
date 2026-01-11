@@ -1,0 +1,35 @@
+{
+  "repo": "repairman29/beast-mode-website",
+  "url": "https://github.com/repairman29/beast-mode-website",
+  "features": {
+    "qualityScore": 57,
+    "stars": 0,
+    "forks": 0,
+    "openIssues": 0,
+    "fileCount": 0,
+    "codeFileCount": 0,
+    "hasLicense": 0,
+    "hasDescription": 1,
+    "hasTopics": 0,
+    "hasReadme": 0,
+    "hasTests": 0,
+    "hasCI": 0,
+    "hasDocker": 0,
+    "hasConfig": 0,
+    "issues": 6,
+    "improvements": 5,
+    "languages": [
+      "HTML"
+    ],
+    "primaryLanguage": "Unknown"
+  },
+  "quality": 57,
+  "timestamp": "2026-01-05T04:02:27.090Z",
+  "metadata": {
+    "languages": [
+      "HTML"
+    ],
+    "fileCount": 0,
+    "codeFileCount": 0
+  }
+}

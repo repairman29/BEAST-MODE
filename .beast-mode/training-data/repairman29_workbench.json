@@ -1,0 +1,43 @@
+{
+  "repo": "repairman29/workbench",
+  "url": "https://github.com/repairman29/workbench",
+  "features": {
+    "qualityScore": 79,
+    "stars": 0,
+    "forks": 0,
+    "openIssues": 0,
+    "fileCount": 0,
+    "codeFileCount": 0,
+    "hasLicense": 0,
+    "hasDescription": 0,
+    "hasTopics": 0,
+    "hasReadme": 1,
+    "hasTests": 1,
+    "hasCI": 0,
+    "hasDocker": 0,
+    "hasConfig": 0,
+    "issues": 4,
+    "improvements": 4,
+    "languages": [
+      "JavaScript",
+      "TypeScript",
+      "CSS",
+      "Shell",
+      "HTML"
+    ],
+    "primaryLanguage": "Unknown"
+  },
+  "quality": 79,
+  "timestamp": "2026-01-05T04:02:33.752Z",
+  "metadata": {
+    "languages": [
+      "JavaScript",
+      "TypeScript",
+      "CSS",
+      "Shell",
+      "HTML"
+    ],
+    "fileCount": 0,
+    "codeFileCount": 0
+  }
+}

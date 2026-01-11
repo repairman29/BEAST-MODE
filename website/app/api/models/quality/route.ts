@@ -10,8 +10,8 @@ let customModelMonitoring: any;
 let modelQualityScorer: any;
 
 try {
-  customModelMonitoring = loadModule('../../../../../lib/mlops/customModelMonitoring');
-  modelQualityScorer = loadModule('../../../../../lib/mlops/modelQualityScorer');
+  customModelMonitoring = loadModule('@/lib/mlops/customModelMonitoring');
+  modelQualityScorer = loadModule('@/lib/mlops/modelQualityScorer');
 } catch (error) {
   console.warn('[Model Quality API] Some modules not available:', error);
 }

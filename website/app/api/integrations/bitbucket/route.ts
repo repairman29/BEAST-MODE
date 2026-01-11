@@ -8,8 +8,8 @@ import { loadModule } from '../../../../lib/api-module-loader';
 let bitbucketIntegration: any;
 
 try {
-  const bitbucketModule = loadModule('../../../../../lib/integrations/bitbucket') ||
-                         require('../../../../../lib/integrations/bitbucket');
+  const bitbucketModule = loadModule('@/lib/integrations/bitbucket') ||
+                         require('@/lib/integrations/bitbucket');
   bitbucketIntegration = bitbucketModule?.getBitbucketIntegration
     ? bitbucketModule.getBitbucketIntegration()
     : bitbucketModule;

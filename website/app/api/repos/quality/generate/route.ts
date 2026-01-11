@@ -4,8 +4,8 @@ import { NextRequest, NextResponse } from 'next/server';
 let qualityToCodeMapper: any;
 let codeGenerator: any;
 try {
-  qualityToCodeMapper = require('../../../../../lib/mlops/qualityToCodeMapper');
-  codeGenerator = require('../../../../../lib/mlops/codeGenerator');
+  qualityToCodeMapper = require('@/lib/mlops/qualityToCodeMapper');
+  codeGenerator = require('@/lib/mlops/codeGenerator');
 } catch (error) {
   console.error('[Code Generation API] Failed to load modules:', error);
 }

@@ -1,42 +1,35 @@
-# Dependencies
-node_modules/
-.pnp
-.pnp.js
-
-# Testing
-coverage/
-.nyc_output
-
-# Production
-build/
-dist/
-.next/
-out/
-
-# Misc
-.DS_Store
-*.pem
+# Environment variables
 .env
-.env*.local
-.env.production
+.env.local
+.env.*.local
 
-# Debug
+# Personal Access Tokens and Secrets
+*_PAT.txt
+*_TOKEN.txt
+*.pat
+*.token
+secrets/
+*.secret
+
+# VS Code Extension
+beast-mode-extension/*.vsix
+beast-mode-extension/.vscode-test/
+
+# IDE
+beast-mode-ide/dist/
+beast-mode-ide/out/
+
+# Node
+node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# Local env files
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
-
-# Vercel
-.vercel
-
-# TypeScript
+# Build outputs
+dist/
+build/
+out/
 *.tsbuildinfo
-next-env.d.ts
 
 # IDE
 .vscode/
@@ -49,96 +42,6 @@ next-env.d.ts
 .DS_Store
 Thumbs.db
 
-# Sensitive Business Documents (DO NOT COMMIT TO PUBLIC REPO)
-# These contain pricing strategies, margins, costs, and business plans
-
-# Pricing & Cost Analysis
-docs/PRICING_90_PERCENT_MARGIN_STRATEGY.md
-docs/PRICING_MODEL_DESIGN.md
-docs/PRICING_STRATEGY_REVIEW.md
-docs/COMPETITIVE_PRICING_ANALYSIS.md
-docs/INFRASTRUCTURE_COST_ANALYSIS.md
-docs/*PRICING*.md
-docs/*MARGIN*.md
-docs/*COST*.md
-
-# Business Strategy & Plans
-docs/business/
-docs/business/**
-docs/STRATEGIC_ROADMAP*.md
-docs/ACTIONABLE_IMPLEMENTATION_PLAN.md
-docs/IMMEDIATE_INTEGRATION_WORK.md
-docs/CRITICAL_INTEGRATION_CHECKLIST.md
-docs/MODEL_BUSINESS_VALUE_STRATEGY.md
-docs/EXECUTIVE_SUMMARY*.md
-docs/EXECUTIVE_SUMMARY_XGBOOST.md
-
-# Strategy Documents (business-related only - technical strategies are OK)
-# Note: Some strategy docs are technical (ML_STORAGE_STRATEGY, etc.) and are OK
-# Only exclude business/margin/pricing strategies
-docs/NPM_PACKAGING_LICENSING_STRATEGY.md
-docs/*PRICING*STRATEGY*.md
-docs/*MARGIN*STRATEGY*.md
-docs/*BUSINESS*STRATEGY*.md
-
-# Marketing & Sales Documents
-docs/*MARKETING*.md
-docs/*SALES*.md
-docs/*MONETIZATION*.md
-docs/*ICP*.md
-docs/*CUSTOMER*.md
-docs/*PLAYBOOK*.md
-docs/*CAMPAIGN*.md
-docs/*AUDIT*.md
-docs/WORKFLOW_GAPS*.md
-docs/GITHUB_APP_VS_FULL_SUITE*.md
-docs/HONEST_MARKETING.md
-docs/COMMUNITY_STRATEGY.md
-docs/BRAND_STRATEGY*.md
-docs/PLG_FAST_DELIVERY*.md
-docs/REAL_WORLD_OPTIMIZATION_STRATEGY.md
-docs/AI_JANITOR_MARKETING*.md
-
-# Content & Social Media Documents
-docs/*SOCIAL*.md
-docs/*CONTENT*.md
-docs/*PRESS*.md
-docs/*BRAND*.md
-docs/*LAUNCH*.md
-docs/*STORY*.md
-docs/*EXECUTION*.md
-docs/*EXECUTION*.md
-docs/SENTINEL_BRAND_GUIDE.md
-docs/NO_FAKE_CONTENT_POLICY.md
-website/COMMIT_STRATEGY.md
-
-# ML Model Files (Large, may contain proprietary data)
-.beast-mode/models/
-*.model
-*.pkl
-*.h5
-
-# Training Data (May contain proprietary information)
-training-data/
-scanned-repos-*.json
-all-repos-for-python.json
-
-# API Keys and Secrets (Never commit)
-*.key
-*.pem
-*.secret
-secrets/
-.secrets/
-
-# Setup results files (contain secrets)
-stripe-setup-results.json
-*-setup-results.json
-*-results.json
-
-# Database backups
-*.sql.backup
-*.db.backup
-
 # Logs
 logs/
 *.log
@@ -147,3 +50,11 @@ logs/
 tmp/
 temp/
 *.tmp
+
+# Test coverage
+coverage/
+.nyc_output/
+
+# Package files
+*.vsix
+*.tgz

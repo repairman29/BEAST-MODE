@@ -1,0 +1,51 @@
+{
+  "repo": "repairman29/smugglers",
+  "url": "https://github.com/repairman29/smugglers",
+  "features": {
+    "qualityScore": 87,
+    "stars": 0,
+    "forks": 0,
+    "openIssues": 0,
+    "fileCount": 0,
+    "codeFileCount": 0,
+    "hasLicense": 0,
+    "hasDescription": 0,
+    "hasTopics": 0,
+    "hasReadme": 1,
+    "hasTests": 1,
+    "hasCI": 1,
+    "hasDocker": 1,
+    "hasConfig": 0,
+    "issues": 2,
+    "improvements": 2,
+    "languages": [
+      "JavaScript",
+      "CSS",
+      "HTML",
+      "TypeScript",
+      "PLpgSQL",
+      "Shell",
+      "Dockerfile",
+      "Makefile",
+      "Procfile"
+    ],
+    "primaryLanguage": "Unknown"
+  },
+  "quality": 87,
+  "timestamp": "2026-01-05T04:02:23.484Z",
+  "metadata": {
+    "languages": [
+      "JavaScript",
+      "CSS",
+      "HTML",
+      "TypeScript",
+      "PLpgSQL",
+      "Shell",
+      "Dockerfile",
+      "Makefile",
+      "Procfile"
+    ],
+    "fileCount": 0,
+    "codeFileCount": 0
+  }
+}

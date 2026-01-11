@@ -1,0 +1,47 @@
+{
+  "repo": "repairman29/echeo-dev",
+  "url": "https://github.com/repairman29/echeo-dev",
+  "features": {
+    "qualityScore": 94,
+    "stars": 0,
+    "forks": 0,
+    "openIssues": 0,
+    "fileCount": 0,
+    "codeFileCount": 0,
+    "hasLicense": 0,
+    "hasDescription": 0,
+    "hasTopics": 0,
+    "hasReadme": 1,
+    "hasTests": 1,
+    "hasCI": 1,
+    "hasDocker": 1,
+    "hasConfig": 0,
+    "issues": 1,
+    "improvements": 1,
+    "languages": [
+      "TypeScript",
+      "HTML",
+      "JavaScript",
+      "Shell",
+      "CSS",
+      "Nix",
+      "HCL"
+    ],
+    "primaryLanguage": "Unknown"
+  },
+  "quality": 94,
+  "timestamp": "2026-01-05T04:02:35.225Z",
+  "metadata": {
+    "languages": [
+      "TypeScript",
+      "HTML",
+      "JavaScript",
+      "Shell",
+      "CSS",
+      "Nix",
+      "HCL"
+    ],
+    "fileCount": 0,
+    "codeFileCount": 0
+  }
+}

@@ -11,10 +11,10 @@ async function loadCodebaseChat() {
   try {
     // Use dynamic require to prevent webpack from parsing at build time
     // This is a server-side only module
-    const codebaseChatModule = await import('../../../../../lib/mlops/codebaseChat').catch(() => {
+    const codebaseChatModule = await import('@/lib/mlops/codebaseChat').catch(() => {
       // Fallback to require if import fails (CommonJS)
       try {
-        return require('../../../../../lib/mlops/codebaseChat');
+        return require('@/lib/mlops/codebaseChat');
       } catch (e) {
         return null;
       }
@@ -92,12 +92,17 @@ export async function POST(request: NextRequest) {
     if (!requestedModel && userId) {
       try {
         // Try to load smart model selector, but don't fail if it's not available
-        const smartModelSelectorPath = path.join(process.cwd(), 'lib', 'mlops', 'smartModelSelector.js');
-        const smartModelSelectorModule = await import(smartModelSelectorPath).catch(() => {
+        // Use website/lib/mlops path (copied from root lib/mlops)
+        const smartModelSelectorModule = await import('@/lib/mlops/smartModelSelector').catch(() => {
           try {
-            return require('../../../../../lib/mlops/smartModelSelector');
+            return require('@/lib/mlops/smartModelSelector');
           } catch (e) {
-            return null;
+            // Fallback to relative path
+            try {
+              return require('../../lib/mlops/smartModelSelector');
+            } catch (e2) {
+              return null;
+            }
           }
         });
         
@@ -127,12 +132,18 @@ export async function POST(request: NextRequest) {
     if (requestedModel && requestedModel.startsWith('custom:')) {
       try {
         // Load model router at runtime (server-side only)
-        const modelRouterModule = await import('../../../../../lib/mlops/modelRouter').catch(() => {
+        // Use @/ alias for website/lib/mlops (copied from root lib/mlops)
+        const modelRouterModule = await import('@/lib/mlops/modelRouter').catch(() => {
           // Fallback to require if import fails (CommonJS)
           try {
-            return require('../../../../../lib/mlops/modelRouter');
+            return require('@/lib/mlops/modelRouter');
           } catch (e) {
-            return null;
+            // Fallback to relative path
+            try {
+              return require('../../lib/mlops/modelRouter');
+            } catch (e2) {
+              return null;
+            }
           }
         });
         

@@ -6,8 +6,8 @@ let realtimeSuggestions: any;
 let codebaseIndexer: any;
 try {
   // Path: website/app/api/codebase/suggestions -> BEAST-MODE-PRODUCT/lib/mlops
-  realtimeSuggestions = require('../../../../../lib/mlops/realtimeSuggestions');
-  codebaseIndexer = require('../../../../../lib/mlops/codebaseIndexer');
+  realtimeSuggestions = require('@/lib/mlops/realtimeSuggestions');
+  codebaseIndexer = require('@/lib/mlops/codebaseIndexer');
 } catch (error) {
   console.error('[Suggestions API] Failed to load modules:', error);
 }

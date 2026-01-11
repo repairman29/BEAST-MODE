@@ -9,7 +9,7 @@ import { NextRequest, NextResponse } from 'next/server';
 // Dynamic require for Node.js modules
 let customModelMonitoring: any;
 try {
-  customModelMonitoring = require('../../../../../../lib/mlops/customModelMonitoring');
+  customModelMonitoring = require('@/lib/mlops/customModelMonitoring');
 } catch (error) {
   console.error('[Monitoring API] Failed to load modules:', error);
 }
