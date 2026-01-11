@@ -1,20 +1,41 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getDecryptedToken } from '@/lib/github-token';
 
-// Dynamic require for Node.js modules
+// Dynamic require for Node.js modules (server-side only)
+// Use dynamic import to prevent webpack from analyzing at build time
 let codebaseChat: any;
-try {
-  // Path: website/app/api/codebase/chat -> BEAST-MODE-PRODUCT/lib/mlops
-  const codebaseChatModule = require('../../../../../lib/mlops/codebaseChat');
-  // Handle both singleton instance and class export
-  codebaseChat = codebaseChatModule.default || codebaseChatModule;
-  // If it's a class, we might need to instantiate it, but check if it has processMessage first
-  if (codebaseChat && typeof codebaseChat.processMessage !== 'function') {
-    // Try to get the instance if it's exported
-    codebaseChat = codebaseChatModule.getCodebaseChat?.() || codebaseChat;
+async function loadCodebaseChat() {
+  if (codebaseChat) return codebaseChat;
+  
+  try {
+    // Use dynamic require to prevent webpack from parsing at build time
+    // This is a server-side only module
+    const codebaseChatModule = await import('../../../../../lib/mlops/codebaseChat').catch(() => {
+      // Fallback to require if import fails (CommonJS)
+      try {
+        return require('../../../../../lib/mlops/codebaseChat');
+      } catch (e) {
+        return null;
+      }
+    });
+    
+    if (!codebaseChatModule) {
+      throw new Error('Failed to load codebaseChat module');
+    }
+    
+    // Handle both singleton instance and class export
+    codebaseChat = codebaseChatModule.default || codebaseChatModule;
+    // If it's a class, we might need to instantiate it, but check if it has processMessage first
+    if (codebaseChat && typeof codebaseChat.processMessage !== 'function') {
+      // Try to get the instance if it's exported
+      codebaseChat = codebaseChatModule.getCodebaseChat?.() || codebaseChat;
+    }
+    
+    return codebaseChat;
+  } catch (error) {
+    console.error('[Chat API] Failed to load modules:', error);
+    return null;
   }
-} catch (error) {
-  console.error('[Chat API] Failed to load modules:', error);
 }
 
 /**
@@ -25,6 +46,15 @@ try {
  */
 export async function POST(request: NextRequest) {
   try {
+    // Load codebaseChat module (server-side only, loaded at runtime)
+    const chatModule = await loadCodebaseChat();
+    if (!chatModule) {
+      return NextResponse.json(
+        { error: 'Codebase chat service unavailable' },
+        { status: 503 }
+      );
+    }
+    
     const body = await request.json();
     const {
       sessionId,
@@ -40,13 +70,6 @@ export async function POST(request: NextRequest) {
       return NextResponse.json(
         { error: 'Session ID and message are required' },
         { status: 400 }
-      );
-    }
-
-    if (!codebaseChat) {
-      return NextResponse.json(
-        { error: 'Codebase chat not available' },
-        { status: 500 }
       );
     }
 
@@ -78,11 +101,25 @@ export async function POST(request: NextRequest) {
     // If custom model is specified, use model router
     if (requestedModel && requestedModel.startsWith('custom:')) {
       try {
-        const { getModelRouter } = require('../../../../../lib/mlops/modelRouter');
-        const modelRouter = getModelRouter();
+        // Load model router at runtime (server-side only)
+        const modelRouterModule = await import('../../../../../lib/mlops/modelRouter').catch(() => {
+          // Fallback to require if import fails (CommonJS)
+          try {
+            return require('../../../../../lib/mlops/modelRouter');
+          } catch (e) {
+            return null;
+          }
+        });
+        
+        if (!modelRouterModule) {
+          throw new Error('Model router not available');
+        }
+        
+        const getModelRouter = modelRouterModule.getModelRouter || modelRouterModule.default?.getModelRouter;
+        const modelRouter = getModelRouter ? getModelRouter() : modelRouterModule;
         
         // Get conversation history for context
-        const history = await codebaseChat.getHistory(sessionId) || [];
+        const history = await chatModule.getHistory(sessionId) || [];
         const messages = [
           ...history.map((h: any) => ({
             role: h.role || 'user',
@@ -99,11 +136,11 @@ export async function POST(request: NextRequest) {
         }, userId || '');
 
         // Save to conversation history
-        codebaseChat.addToHistory(sessionId, {
+        chatModule.addToHistory(sessionId, {
           role: 'user',
           message
         });
-        codebaseChat.addToHistory(sessionId, {
+        chatModule.addToHistory(sessionId, {
           role: 'assistant',
           message: modelResponse.content
         });
@@ -156,9 +193,9 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    // Process chat message (existing flow)
-    const response = await codebaseChat.processMessage(
-      sessionId,
+          // Process chat message (existing flow)
+          const response = await chatModule.processMessage(
+            sessionId,
       message,
       {
         repo,
@@ -206,14 +243,15 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    if (!codebaseChat) {
+    const chatModule = await loadCodebaseChat();
+    if (!chatModule) {
       return NextResponse.json(
-        { error: 'Codebase chat not available' },
-        { status: 500 }
+        { error: 'Codebase chat service unavailable' },
+        { status: 503 }
       );
     }
 
-    const history = await codebaseChat.getHistory(sessionId);
+    const history = await chatModule.getHistory(sessionId);
 
     return NextResponse.json({
       success: true,
@@ -246,14 +284,15 @@ export async function DELETE(request: NextRequest) {
       );
     }
 
-    if (!codebaseChat) {
+    const chatModule = await loadCodebaseChat();
+    if (!chatModule) {
       return NextResponse.json(
-        { error: 'Codebase chat not available' },
-        { status: 500 }
+        { error: 'Codebase chat service unavailable' },
+        { status: 503 }
       );
     }
 
-    await codebaseChat.clearHistory(sessionId);
+    await chatModule.clearHistory(sessionId);
 
     return NextResponse.json({
       success: true,

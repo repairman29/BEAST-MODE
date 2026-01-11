@@ -36,6 +36,47 @@ const nextConfig = {
     // Set roots for module resolution
     config.resolve.roots = [projectRoot];
     
+    // Exclude CommonJS lib/mlops from webpack analysis
+    // These are server-side only and loaded at runtime via require()
+    // Webpack should not try to parse them during build
+    if (!isServer) {
+      // Client-side: Don't try to bundle server-only modules
+      config.resolve.fallback = {
+        ...config.resolve.fallback,
+        fs: false,
+        path: false,
+        crypto: false,
+      };
+    }
+    
+    // For server-side builds, mark lib/mlops as external
+    // This tells webpack to not bundle them - they'll be loaded at runtime
+    if (isServer) {
+      const originalExternals = config.externals || [];
+      const externalsArray = Array.isArray(originalExternals) ? originalExternals : [originalExternals];
+      
+      // Add function to handle lib/mlops modules
+      config.externals = [
+        ...externalsArray,
+        ({ request, context }, callback) => {
+          // If request is for lib/mlops, mark as external (don't bundle)
+          if (request && (
+            request.includes('lib/mlops/modelRouter') ||
+            request.includes('lib/mlops/codebaseChat') ||
+            (context && context.includes('lib/mlops'))
+          )) {
+            // Return as external - will be loaded at runtime via require()
+            return callback(null, `commonjs ${request}`);
+          }
+          // For other modules, use default externalization
+          if (typeof originalExternals === 'function') {
+            return originalExternals({ request, context }, callback);
+          }
+          callback();
+        }
+      ];
+    }
+    
     // For serverless (production), bundle our lib modules instead of externalizing
     if (isServer) {
       // Don't externalize our internal lib modules - bundle them

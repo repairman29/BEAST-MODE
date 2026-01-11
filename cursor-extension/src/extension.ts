@@ -2,6 +2,7 @@ import * as vscode from 'vscode';
 import axios from 'axios';
 import { ModelSelector } from './modelSelector';
 import { BeastModeClient } from './beastModeClient';
+import { QualityStatusBar } from './qualityStatusBar';
 
 let sessionId: string;
 let apiUrl: string;
@@ -11,6 +12,7 @@ let trackFileOpens: boolean;
 let trackCommands: boolean;
 let sessionStartTime: number;
 let statusBarItem: vscode.StatusBarItem;
+let qualityStatusBar: QualityStatusBar;
 let modelSelector: ModelSelector;
 let beastModeClient: BeastModeClient;
 
@@ -29,6 +31,7 @@ export function activate(context: vscode.ExtensionContext) {
   // Initialize BEAST MODE components
   modelSelector = new ModelSelector(apiUrl);
   beastModeClient = new BeastModeClient(apiUrl);
+  qualityStatusBar = new QualityStatusBar(beastModeClient);
   
   // Generate session ID
   sessionStartTime = Date.now();
@@ -40,6 +43,12 @@ export function activate(context: vscode.ExtensionContext) {
   updateStatusBar();
   statusBarItem.show();
   context.subscriptions.push(statusBarItem);
+
+  // Activate quality status bar if enabled
+  const config = vscode.workspace.getConfiguration('beastMode');
+  if (config.get<boolean>('enableQualityStatusBar', true)) {
+    qualityStatusBar.activate(context);
+  }
   
   // Track session start
   trackEvent('session_start', {

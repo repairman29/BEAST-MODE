@@ -2,21 +2,20 @@ name: BEAST MODE Quality Check
 
 on:
   pull_request:
-    branches: [ main, develop ]
+    types: [opened, synchronize, reopened]
   push:
-    branches: [ main, develop ]
-  workflow_dispatch:
+    branches: [main, master]
 
 jobs:
   quality-check:
     runs-on: ubuntu-latest
-    name: Quality Check
+    name: Code Quality Analysis
     
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # Full history for better analysis
+          fetch-depth: 0  # Fetch all history for PR comparison
       
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -29,94 +28,76 @@ jobs:
       
       - name: Run BEAST MODE Quality Check
         id: quality-check
-        continue-on-error: true
+        env:
+          BEAST_MODE_API_URL: ${{ secrets.BEAST_MODE_API_URL || 'https://beast-mode.dev' }}
+          BEAST_MODE_API_KEY: ${{ secrets.BEAST_MODE_API_KEY }}
         run: |
-          # Try to run quality check using local BEAST MODE
-          SCORE=75
-          ISSUES=0
-          PASSED=true
-          
-          if [ -f "lib/quality.js" ]; then
-            node -e "
-              try {
-                const { QualityEngine } = require('./lib/quality.js');
-                const engine = new QualityEngine();
-                engine.calculateScore().then(result => {
-                  const score = Math.round((result.score || 0.75) * 100);
-                  console.log('score=' + score);
-                  console.log('issues=' + (result.issues?.length || 0));
-                  console.log('passed=' + (score >= 80 ? 'true' : 'false'));
-                }).catch(err => {
-                  console.error('Quality check error:', err.message);
-                  console.log('score=75');
-                  console.log('issues=0');
-                  console.log('passed=true');
-                });
-              } catch(err) {
-                console.error('Failed to load quality engine:', err.message);
-                console.log('score=75');
-                console.log('issues=0');
-                console.log('passed=true');
-              }
-            " > /tmp/quality-output.txt 2>&1 || true
-            
-            if [ -f /tmp/quality-output.txt ]; then
-              SCORE=$(grep '^score=' /tmp/quality-output.txt | cut -d= -f2 || echo "75")
-              ISSUES=$(grep '^issues=' /tmp/quality-output.txt | cut -d= -f2 || echo "0")
-              PASSED=$(grep '^passed=' /tmp/quality-output.txt | cut -d= -f2 || echo "true")
-            fi
+          # Get PR diff or changed files
+          if [ "${{ github.event_name }}" == "pull_request" ]; then
+            BASE_SHA="${{ github.event.pull_request.base.sha }}"
+            HEAD_SHA="${{ github.event.pull_request.head.sha }}"
+            CHANGED_FILES=$(git diff --name-only $BASE_SHA $HEAD_SHA | grep -E '\.(js|ts|jsx|tsx|py|rs|go)$' || echo "")
           else
-            echo "BEAST MODE not found, using defaults"
+            CHANGED_FILES=$(git diff --name-only HEAD~1 HEAD | grep -E '\.(js|ts|jsx|tsx|py|rs|go)$' || echo "")
           fi
           
-          echo "score=$SCORE" >> $GITHUB_OUTPUT
-          echo "issues=$ISSUES" >> $GITHUB_OUTPUT
-          echo "passed=$PASSED" >> $GITHUB_OUTPUT
+          if [ -z "$CHANGED_FILES" ]; then
+            echo "No code files changed, skipping quality check"
+            echo "quality_score=100" >> $GITHUB_OUTPUT
+            echo "quality_passed=true" >> $GITHUB_OUTPUT
+            exit 0
+          fi
           
-          echo "✅ Quality check completed: Score=$SCORE, Issues=$ISSUES, Passed=$PASSED"
+          # Call BEAST MODE API for quality analysis
+          RESPONSE=$(curl -s -X POST "$BEAST_MODE_API_URL/api/repos/quality" \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $BEAST_MODE_API_KEY" \
+            -d "{
+              \"repo\": \"${{ github.repository }}\",
+              \"platform\": \"github\",
+              \"pr\": ${{ github.event.pull_request.number || 'null' }},
+              \"sha\": \"${{ github.sha }}\",
+              \"changedFiles\": [$(echo "$CHANGED_FILES" | sed 's/^/"/;s/$/"/' | tr '\n' ',' | sed 's/,$//')]
+            }")
+          
+          QUALITY_SCORE=$(echo $RESPONSE | jq -r '.quality // .score // 0')
+          QUALITY_PASSED=$(echo "$QUALITY_SCORE >= 60" | bc)
+          
+          echo "quality_score=$QUALITY_SCORE" >> $GITHUB_OUTPUT
+          echo "quality_passed=$QUALITY_PASSED" >> $GITHUB_OUTPUT
+          echo "Quality Score: $QUALITY_SCORE/100"
       
-      - name: Comment PR with Quality Report
+      - name: Comment PR with Quality Results
         if: github.event_name == 'pull_request'
         uses: actions/github-script@v7
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const score = ${{ steps.quality-check.outputs.score }};
-            const issues = ${{ steps.quality-check.outputs.issues }};
-            const passed = ${{ steps.quality-check.outputs.passed }} === 'true';
+            const qualityScore = ${{ steps.quality-check.outputs.quality_score }};
+            const qualityPassed = ${{ steps.quality-check.outputs.quality_passed }};
             
-            const status = passed ? '✅ PASSED' : '⚠️ NEEDS ATTENTION';
-            const emoji = passed ? '🎉' : '🔍';
+            const emoji = qualityScore >= 80 ? '🟢' : qualityScore >= 60 ? '🟡' : '🔴';
+            const status = qualityPassed ? '✅ Passed' : '❌ Failed';
             
-            const body = `## ${emoji} BEAST MODE Quality Check ${status}
+            const comment = `## ${emoji} BEAST MODE Quality Check
             
-            **Quality Score:** ${score}/100
-            **Issues Found:** ${issues}
+            **Quality Score:** ${qualityScore}/100
+            **Status:** ${status}
             
-            ${passed 
-              ? '✨ Your code quality looks great! Ready to merge.' 
-              : '📋 Please review the issues below and address them before merging.'}
-            
-            ### Quality Breakdown
-            - **Code Quality:** ${score >= 90 ? 'Excellent' : score >= 80 ? 'Good' : 'Needs Improvement'}
-            - **Best Practices:** ${score >= 85 ? 'Following' : 'Review Recommended'}
-            - **Performance:** ${score >= 80 ? 'Optimized' : 'Could Be Better'}
+            ${qualityPassed ? '✅ Code quality meets standards' : '⚠️ Code quality below threshold (60%)'}
             
             ---
-            *Powered by [BEAST MODE](https://beastmode.dev) - AI-Powered Development Tools*`;
+            *Powered by [BEAST MODE](https://beast-mode.dev)*`;
             
             github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: body
+              body: comment
             });
       
-      - name: Quality Gate
-        if: steps.quality-check.outputs.passed != 'true'
-        continue-on-error: true
+      - name: Set Quality Gate Status
+        if: steps.quality-check.outputs.quality_passed == 'false'
         run: |
-          echo "⚠️  Quality check below threshold. Score: ${{ steps.quality-check.outputs.score }}/100"
-          echo "Minimum required score: 80"
-          echo "Continuing anyway (non-blocking)"
-
+          echo "❌ Quality check failed (score: ${{ steps.quality-check.outputs.quality_score }})"
+          exit 1

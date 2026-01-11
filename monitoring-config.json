@@ -1,0 +1,50 @@
+{
+  "metrics": [
+    {
+      "name": "Credit Purchases Today",
+      "query": "creditPurchasesToday",
+      "type": "count",
+      "alertThreshold": {
+        "min": 0
+      }
+    },
+    {
+      "name": "Credit Purchases This Week",
+      "query": "creditPurchasesThisWeek",
+      "type": "count",
+      "alertThreshold": {
+        "min": 0
+      }
+    },
+    {
+      "name": "Webhook Failures (24h)",
+      "query": "webhookFailures",
+      "type": "count",
+      "alertThreshold": {
+        "max": 5
+      }
+    },
+    {
+      "name": "Total Credit Revenue",
+      "query": "creditPurchasesToday",
+      "type": "revenue",
+      "alertThreshold": {
+        "min": 0
+      }
+    }
+  ],
+  "alerts": [
+    {
+      "name": "High Webhook Failure Rate",
+      "condition": "webhookFailures > 5",
+      "severity": "high",
+      "action": "notify_admin"
+    },
+    {
+      "name": "Credit Purchase Spike",
+      "condition": "creditPurchasesToday > 100",
+      "severity": "info",
+      "action": "log"
+    }
+  ]
+}

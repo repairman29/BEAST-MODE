@@ -3,11 +3,13 @@ import { BeastModeClient } from './beastModeClient';
 import { SuggestionProvider } from './suggestionProvider';
 import { QualityHintsProvider } from './qualityHintsProvider';
 import { ChatProvider } from './chatProvider';
+import { QualityStatusBar } from './qualityStatusBar';
 
 let beastModeClient: BeastModeClient;
 let suggestionProvider: SuggestionProvider;
 let qualityHintsProvider: QualityHintsProvider;
 let chatProvider: ChatProvider;
+let qualityStatusBar: QualityStatusBar;
 
 export function activate(context: vscode.ExtensionContext) {
   console.log('BEAST MODE extension is now active!');
@@ -20,6 +22,7 @@ export function activate(context: vscode.ExtensionContext) {
   suggestionProvider = new SuggestionProvider(beastModeClient);
   qualityHintsProvider = new QualityHintsProvider(beastModeClient);
   chatProvider = new ChatProvider(beastModeClient);
+  qualityStatusBar = new QualityStatusBar(beastModeClient);
 
   // Register commands
   const commands = [
@@ -289,6 +292,11 @@ export function activate(context: vscode.ExtensionContext) {
   // Register quality hints if enabled
   if (config.get<boolean>('enableQualityHints', true)) {
     qualityHintsProvider.activate(context);
+  }
+
+  // Register quality status bar if enabled
+  if (config.get<boolean>('enableQualityStatusBar', true)) {
+    qualityStatusBar.activate(context);
   }
 }
 

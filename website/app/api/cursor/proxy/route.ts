@@ -8,12 +8,29 @@ import { getSupabaseClientOrNull } from '@/lib/supabase';
  * Provides OpenAI-compatible interface for Cursor
  */
 
-// Dynamic require for model router
-let modelRouter: any;
-try {
-  modelRouter = require('../../../../../lib/mlops/modelRouter');
-} catch (error) {
-  console.error('[Cursor Proxy] Failed to load model router:', error);
+// Dynamic require for model router (server-side only, loaded at runtime)
+async function loadModelRouter() {
+  try {
+    // Use dynamic import to prevent webpack from analyzing at build time
+    const modelRouterModule = await import('../../../../../lib/mlops/modelRouter').catch(() => {
+      // Fallback to require if import fails (CommonJS)
+      try {
+        return require('../../../../../lib/mlops/modelRouter');
+      } catch (e) {
+        return null;
+      }
+    });
+    
+    if (!modelRouterModule) {
+      return null;
+    }
+    
+    // Handle both default export and named export
+    return modelRouterModule.default || modelRouterModule.getModelRouter?.() || modelRouterModule;
+  } catch (error) {
+    console.error('[Cursor Proxy] Failed to load model router:', error);
+    return null;
+  }
 }
 
 /**
@@ -50,15 +67,19 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // If model router not available, return error
+    // Load model router at runtime (server-side only)
+    const modelRouter = await loadModelRouter();
     if (!modelRouter) {
       return NextResponse.json(
         { error: 'Model router not available' },
-        { status: 500 }
+        { status: 503 }
       );
     }
 
-    const router = modelRouter.getModelRouter();
+    // Get router instance
+    const router = typeof modelRouter.getModelRouter === 'function' 
+      ? modelRouter.getModelRouter() 
+      : modelRouter;
 
     try {
       // Route request to appropriate model
