@@ -80,7 +80,7 @@ export async function POST(request: NextRequest) {
         }
       });
       
-      imageUrl = Array.isArray(output) ? output[0] : output as string;
+      imageUrl = Array.isArray(output) ? output[0] : (typeof output === 'string' ? output : String(output));
     } else {
       return NextResponse.json(
         { error: `Unknown model: ${model}. Use 'dalle-3', 'stable-diffusion', or 'flux'` },
