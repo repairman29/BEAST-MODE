@@ -1,0 +1,17 @@
+{
+  "id": "US-0720",
+  "title": "snippets",
+  "category": "Developer Experience - Productivity",
+  "priority": "P1",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use snippets",
+  "soThat": "so that I can work faster",
+  "criteria": [
+    "snippets works",
+    "snippets is fast",
+    "snippets is discoverable"
+  ],
+  "effort": "Medium"
+}

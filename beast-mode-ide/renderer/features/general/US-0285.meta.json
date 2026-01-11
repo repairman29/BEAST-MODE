@@ -1,0 +1,17 @@
+{
+  "id": "US-0285",
+  "title": "type-hints for php",
+  "category": "Core Coding - Code Completion",
+  "priority": "P1",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use type-hints when coding in php",
+  "soThat": "so that I can write php code faster",
+  "criteria": [
+    "type-hints works for php",
+    "type-hints is accurate",
+    "type-hints is fast"
+  ],
+  "effort": "Medium"
+}

@@ -1,0 +1,17 @@
+{
+  "id": "US-0608",
+  "title": "Generate middleware (from-spec, python)",
+  "category": "AI Assistance - Code Generation",
+  "priority": "P1",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to generate middleware from-spec in python",
+  "soThat": "so that I can code faster",
+  "criteria": [
+    "Generated middleware is correct",
+    "Generated middleware follows best practices",
+    "Generated middleware is well-documented"
+  ],
+  "effort": "Medium"
+}

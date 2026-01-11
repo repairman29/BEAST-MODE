@@ -1,0 +1,17 @@
+{
+  "id": "US-0611",
+  "title": "voice-chat (5-users)",
+  "category": "Collaboration - Real-Time",
+  "priority": "P1",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to voice chat with 5-users",
+  "soThat": "so that we can collaborate",
+  "criteria": [
+    "voice-chat works with 5-users",
+    "voice-chat is smooth",
+    "voice-chat is reliable"
+  ],
+  "effort": "Medium"
+}

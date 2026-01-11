@@ -1,0 +1,17 @@
+{
+  "id": "US-0620",
+  "title": "notifications",
+  "category": "Collaboration - Code Review",
+  "priority": "P1",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use notifications",
+  "soThat": "so that code reviews are efficient",
+  "criteria": [
+    "notifications works correctly",
+    "notifications is intuitive",
+    "notifications provides feedback"
+  ],
+  "effort": "Medium"
+}

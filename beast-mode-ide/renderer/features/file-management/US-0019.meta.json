@@ -1,0 +1,17 @@
+{
+  "id": "US-0019",
+  "title": "Save File (drag-drop)",
+  "category": "Core Coding - File Management",
+  "priority": "P0",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to save files using drag-drop",
+  "soThat": "so that I can manage files efficiently",
+  "criteria": [
+    "File save works with drag-drop",
+    "Error handling for invalid operations",
+    "Feedback provided for all actions"
+  ],
+  "effort": "Small"
+}

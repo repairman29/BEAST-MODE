@@ -1,0 +1,17 @@
+{
+  "id": "US-0127",
+  "title": "line numbers (advanced)",
+  "category": "Core Coding - Code Editing",
+  "priority": "P1",
+  "userType": "Intermediate",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use line-numbers at advanced level",
+  "soThat": "so that I can edit code efficiently",
+  "criteria": [
+    "line-numbers works correctly",
+    "line-numbers is performant",
+    "line-numbers is accessible"
+  ],
+  "effort": "Medium"
+}

@@ -1,0 +1,17 @@
+{
+  "id": "US-0710",
+  "title": "Customize fonts (basic)",
+  "category": "Developer Experience - Customization",
+  "priority": "P0",
+  "userType": "Beginner",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to customize fonts at basic level",
+  "soThat": "so that the IDE works for me",
+  "criteria": [
+    "fonts customization works",
+    "fonts customization is intuitive",
+    "fonts customization is saved"
+  ],
+  "effort": "Small"
+}

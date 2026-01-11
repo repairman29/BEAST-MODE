@@ -1,0 +1,17 @@
+{
+  "id": "US-0174",
+  "title": "render control chars (basic)",
+  "category": "Core Coding - Code Editing",
+  "priority": "P0",
+  "userType": "Beginner",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use render-control-chars at basic level",
+  "soThat": "so that I can edit code efficiently",
+  "criteria": [
+    "render-control-chars works correctly",
+    "render-control-chars is performant",
+    "render-control-chars is accessible"
+  ],
+  "effort": "Small"
+}

@@ -1,0 +1,17 @@
+{
+  "id": "US-0077",
+  "title": "Watch File (git)",
+  "category": "Core Coding - File Management",
+  "priority": "P1",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to watch files using git",
+  "soThat": "so that I can manage files efficiently",
+  "criteria": [
+    "File watch works with git",
+    "Error handling for invalid operations",
+    "Feedback provided for all actions"
+  ],
+  "effort": "Medium"
+}

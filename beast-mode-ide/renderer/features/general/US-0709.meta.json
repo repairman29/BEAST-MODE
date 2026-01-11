@@ -1,0 +1,17 @@
+{
+  "id": "US-0709",
+  "title": "Customize layout (expert)",
+  "category": "Developer Experience - Customization",
+  "priority": "P1",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to customize layout at expert level",
+  "soThat": "so that the IDE works for me",
+  "criteria": [
+    "layout customization works",
+    "layout customization is intuitive",
+    "layout customization is saved"
+  ],
+  "effort": "Medium"
+}

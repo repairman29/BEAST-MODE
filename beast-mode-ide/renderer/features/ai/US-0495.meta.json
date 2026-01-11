@@ -1,0 +1,17 @@
+{
+  "id": "US-0495",
+  "title": "Generate type (from-test, go)",
+  "category": "AI Assistance - Code Generation",
+  "priority": "P1",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to generate type from-test in go",
+  "soThat": "so that I can code faster",
+  "criteria": [
+    "Generated type is correct",
+    "Generated type follows best practices",
+    "Generated type is well-documented"
+  ],
+  "effort": "Medium"
+}

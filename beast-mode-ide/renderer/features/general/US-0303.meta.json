@@ -1,0 +1,17 @@
+{
+  "id": "US-0303",
+  "title": "Git diff (basic)",
+  "category": "Core Coding - Git Integration",
+  "priority": "P0",
+  "userType": "Beginner",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to perform git diff operations",
+  "soThat": "so that I can manage version control",
+  "criteria": [
+    "Git diff works correctly",
+    "Git diff shows clear feedback",
+    "Git diff handles errors gracefully"
+  ],
+  "effort": "Small"
+}

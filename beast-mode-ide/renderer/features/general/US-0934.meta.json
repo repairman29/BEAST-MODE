@@ -1,0 +1,17 @@
+{
+  "id": "US-0934",
+  "title": "small-projects (Windows)",
+  "category": "Edge Cases - Compatibility",
+  "priority": "P1",
+  "userType": "All",
+  "platform": "Windows",
+  "as": "a developer",
+  "want": "to use small projects on Windows",
+  "soThat": "so that the IDE works everywhere",
+  "criteria": [
+    "small-projects works on Windows",
+    "small-projects is performant",
+    "small-projects is reliable"
+  ],
+  "effort": "Medium"
+}

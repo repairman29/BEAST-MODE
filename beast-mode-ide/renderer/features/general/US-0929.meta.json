@@ -1,0 +1,17 @@
+{
+  "id": "US-0929",
+  "title": "multiple-languages (Linux)",
+  "category": "Edge Cases - Compatibility",
+  "priority": "P1",
+  "userType": "All",
+  "platform": "Linux",
+  "as": "a developer",
+  "want": "to use multiple languages on Linux",
+  "soThat": "so that the IDE works everywhere",
+  "criteria": [
+    "multiple-languages works on Linux",
+    "multiple-languages is performant",
+    "multiple-languages is reliable"
+  ],
+  "effort": "Medium"
+}

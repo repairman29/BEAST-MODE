@@ -1,0 +1,17 @@
+{
+  "id": "US-0395",
+  "title": "Generate hook (from-example, go)",
+  "category": "AI Assistance - Code Generation",
+  "priority": "P1",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to generate hook from-example in go",
+  "soThat": "so that I can code faster",
+  "criteria": [
+    "Generated hook is correct",
+    "Generated hook follows best practices",
+    "Generated hook is well-documented"
+  ],
+  "effort": "Medium"
+}

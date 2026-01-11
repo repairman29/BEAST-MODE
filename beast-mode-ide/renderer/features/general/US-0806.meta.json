@@ -1,0 +1,17 @@
+{
+  "id": "US-0806",
+  "title": "user management",
+  "category": "Enterprise - Management",
+  "priority": "P1",
+  "userType": "Enterprise Admin",
+  "platform": "All",
+  "as": "an enterprise admin",
+  "want": "to manage user management",
+  "soThat": "so that the platform is managed",
+  "criteria": [
+    "user-management works",
+    "user-management is comprehensive",
+    "user-management provides insights"
+  ],
+  "effort": "Medium"
+}

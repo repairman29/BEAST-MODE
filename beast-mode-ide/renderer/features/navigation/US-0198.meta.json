@@ -1,0 +1,17 @@
+{
+  "id": "US-0198",
+  "title": "Navigate breadcrumb (mouse)",
+  "category": "Core Coding - Navigation",
+  "priority": "P0",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to navigate breadcrumb using mouse",
+  "soThat": "so that I can find code quickly",
+  "criteria": [
+    "Navigation works with mouse",
+    "Navigation is fast",
+    "Navigation is intuitive"
+  ],
+  "effort": "Small"
+}

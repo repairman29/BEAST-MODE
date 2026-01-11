@@ -1,0 +1,17 @@
+{
+  "id": "US-0225",
+  "title": "Generate function (from-test, go)",
+  "category": "AI Assistance - Code Generation",
+  "priority": "P0",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to generate function from-test in go",
+  "soThat": "so that I can code faster",
+  "criteria": [
+    "Generated function is correct",
+    "Generated function follows best practices",
+    "Generated function is well-documented"
+  ],
+  "effort": "Small"
+}

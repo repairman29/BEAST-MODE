@@ -1,0 +1,17 @@
+{
+  "id": "US-0940",
+  "title": "low-memory (desktop)",
+  "category": "Edge Cases - Performance",
+  "priority": "P0",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use IDE with low memory on desktop",
+  "soThat": "so that the IDE works on any device",
+  "criteria": [
+    "low-memory works on desktop",
+    "low-memory is efficient",
+    "low-memory doesn't degrade UX"
+  ],
+  "effort": "Small"
+}

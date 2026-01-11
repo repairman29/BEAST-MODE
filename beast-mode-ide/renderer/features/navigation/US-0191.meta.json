@@ -1,0 +1,17 @@
+{
+  "id": "US-0191",
+  "title": "Navigate reference (search)",
+  "category": "Core Coding - Navigation",
+  "priority": "P0",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to navigate reference using search",
+  "soThat": "so that I can find code quickly",
+  "criteria": [
+    "Navigation works with search",
+    "Navigation is fast",
+    "Navigation is intuitive"
+  ],
+  "effort": "Small"
+}

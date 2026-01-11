@@ -1,0 +1,17 @@
+{
+  "id": "US-0108",
+  "title": "code folding (basic)",
+  "category": "Core Coding - Code Editing",
+  "priority": "P0",
+  "userType": "Beginner",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use code-folding at basic level",
+  "soThat": "so that I can edit code efficiently",
+  "criteria": [
+    "code-folding works correctly",
+    "code-folding is performant",
+    "code-folding is accessible"
+  ],
+  "effort": "Small"
+}

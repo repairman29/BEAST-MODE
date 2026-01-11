@@ -1,0 +1,17 @@
+{
+  "id": "US-0292",
+  "title": "documentation for java",
+  "category": "Core Coding - Code Completion",
+  "priority": "P1",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use documentation when coding in java",
+  "soThat": "so that I can write java code faster",
+  "criteria": [
+    "documentation works for java",
+    "documentation is accurate",
+    "documentation is fast"
+  ],
+  "effort": "Medium"
+}

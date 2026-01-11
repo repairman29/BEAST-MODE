@@ -1,0 +1,17 @@
+{
+  "id": "US-0229",
+  "title": "imports for typescript",
+  "category": "Core Coding - Code Completion",
+  "priority": "P0",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use imports when coding in typescript",
+  "soThat": "so that I can write typescript code faster",
+  "criteria": [
+    "imports works for typescript",
+    "imports is accurate",
+    "imports is fast"
+  ],
+  "effort": "Small"
+}

@@ -1,0 +1,17 @@
+{
+  "id": "US-0513",
+  "title": "cpu fast",
+  "category": "Performance - IDE Performance",
+  "priority": "P0",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to have fast cpu",
+  "soThat": "so that the IDE is responsive",
+  "criteria": [
+    "cpu is fast",
+    "cpu doesn't block",
+    "cpu scales well"
+  ],
+  "effort": "Small"
+}

@@ -1,0 +1,17 @@
+{
+  "id": "US-0302",
+  "title": "Git status (advanced)",
+  "category": "Core Coding - Git Integration",
+  "priority": "P1",
+  "userType": "Intermediate",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to perform git status operations",
+  "soThat": "so that I can manage version control",
+  "criteria": [
+    "Git status works correctly",
+    "Git status shows clear feedback",
+    "Git status handles errors gracefully"
+  ],
+  "effort": "Medium"
+}

@@ -1,0 +1,17 @@
+{
+  "id": "US-0280",
+  "title": "type-hints for java",
+  "category": "Core Coding - Code Completion",
+  "priority": "P1",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use type-hints when coding in java",
+  "soThat": "so that I can write java code faster",
+  "criteria": [
+    "type-hints works for java",
+    "type-hints is accurate",
+    "type-hints is fast"
+  ],
+  "effort": "Medium"
+}

@@ -1,0 +1,17 @@
+{
+  "id": "US-0271",
+  "title": "auto-import for cpp",
+  "category": "Core Coding - Code Completion",
+  "priority": "P1",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use auto-import when coding in cpp",
+  "soThat": "so that I can write cpp code faster",
+  "criteria": [
+    "auto-import works for cpp",
+    "auto-import is accurate",
+    "auto-import is fast"
+  ],
+  "effort": "Medium"
+}

@@ -1,0 +1,17 @@
+{
+  "id": "US-0713",
+  "title": "Customize colors (basic)",
+  "category": "Developer Experience - Customization",
+  "priority": "P0",
+  "userType": "Beginner",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to customize colors at basic level",
+  "soThat": "so that the IDE works for me",
+  "criteria": [
+    "colors customization works",
+    "colors customization is intuitive",
+    "colors customization is saved"
+  ],
+  "effort": "Small"
+}

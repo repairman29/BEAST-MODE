@@ -1,0 +1,17 @@
+{
+  "id": "US-0538",
+  "title": "formatting < 2s",
+  "category": "Performance - Code Performance",
+  "priority": "P1",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to have formatting complete in < 2s",
+  "soThat": "so that I don't wait",
+  "criteria": [
+    "formatting completes in < 2s",
+    "formatting is accurate",
+    "formatting doesn't block"
+  ],
+  "effort": "Medium"
+}

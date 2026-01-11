@@ -1,0 +1,17 @@
+{
+  "id": "US-0255",
+  "title": "Generate class (from-test, go)",
+  "category": "AI Assistance - Code Generation",
+  "priority": "P0",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to generate class from-test in go",
+  "soThat": "so that I can code faster",
+  "criteria": [
+    "Generated class is correct",
+    "Generated class follows best practices",
+    "Generated class is well-documented"
+  ],
+  "effort": "Small"
+}

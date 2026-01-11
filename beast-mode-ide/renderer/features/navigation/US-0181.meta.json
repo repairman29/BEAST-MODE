@@ -1,0 +1,17 @@
+{
+  "id": "US-0181",
+  "title": "Navigate symbol (keyboard)",
+  "category": "Core Coding - Navigation",
+  "priority": "P0",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to navigate symbol using keyboard",
+  "soThat": "so that I can find code quickly",
+  "criteria": [
+    "Navigation works with keyboard",
+    "Navigation is fast",
+    "Navigation is intuitive"
+  ],
+  "effort": "Small"
+}

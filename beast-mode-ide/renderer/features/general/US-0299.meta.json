@@ -1,0 +1,17 @@
+{
+  "id": "US-0299",
+  "title": "documentation for kotlin",
+  "category": "Core Coding - Code Completion",
+  "priority": "P1",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use documentation when coding in kotlin",
+  "soThat": "so that I can write kotlin code faster",
+  "criteria": [
+    "documentation works for kotlin",
+    "documentation is accurate",
+    "documentation is fast"
+  ],
+  "effort": "Medium"
+}

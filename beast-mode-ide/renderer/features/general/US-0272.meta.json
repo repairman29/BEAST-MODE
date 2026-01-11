@@ -1,0 +1,17 @@
+{
+  "id": "US-0272",
+  "title": "auto-import for ruby",
+  "category": "Core Coding - Code Completion",
+  "priority": "P1",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use auto-import when coding in ruby",
+  "soThat": "so that I can write ruby code faster",
+  "criteria": [
+    "auto-import works for ruby",
+    "auto-import is accurate",
+    "auto-import is fast"
+  ],
+  "effort": "Medium"
+}

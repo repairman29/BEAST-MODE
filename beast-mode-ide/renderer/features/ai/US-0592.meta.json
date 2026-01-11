@@ -1,0 +1,17 @@
+{
+  "id": "US-0592",
+  "title": "Generate middleware (from-comment, javascript)",
+  "category": "AI Assistance - Code Generation",
+  "priority": "P1",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to generate middleware from-comment in javascript",
+  "soThat": "so that I can code faster",
+  "criteria": [
+    "Generated middleware is correct",
+    "Generated middleware follows best practices",
+    "Generated middleware is well-documented"
+  ],
+  "effort": "Medium"
+}

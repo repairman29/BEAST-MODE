@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BEAST MODE IDE</title>
-    <!-- Monaco Editor from CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs/loader.js"></script>
+    <!-- Design System -->
+    <link rel="stylesheet" href="styles/design-system.css">
+    <!-- Monaco Editor will be bundled via webpack (offline support) -->
     <style>
         * {
             margin: 0;
@@ -320,6 +321,27 @@
             }
         });
     </script>
-    <script type="module" src="app.js"></script>
+    <!-- Error Boundary (load first) -->
+    <script src="ErrorBoundary.js"></script>
+    <script src="features/feature-loader.js"></script>
+    
+    <!-- Minimal UI (load early) -->
+    <script src="ui/MinimalUI.js"></script>
+    
+    <!-- Load bundled app (webpack) or fallback to module -->
+    <script>
+        // Try to load bundled version first (if exists)
+        const bundlePath = '../dist/renderer.bundle.js';
+        const script = document.createElement('script');
+        script.src = bundlePath;
+        script.onerror = () => {
+            // Fallback to module if bundle doesn't exist
+            const moduleScript = document.createElement('script');
+            moduleScript.type = 'module';
+            moduleScript.src = 'app.js';
+            document.body.appendChild(moduleScript);
+        };
+        document.body.appendChild(script);
+    </script>
 </body>
 </html>

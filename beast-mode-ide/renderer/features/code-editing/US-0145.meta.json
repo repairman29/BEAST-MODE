@@ -1,0 +1,17 @@
+{
+  "id": "US-0145",
+  "title": "quick fix (advanced)",
+  "category": "Core Coding - Code Editing",
+  "priority": "P1",
+  "userType": "Intermediate",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use quick-fix at advanced level",
+  "soThat": "so that I can edit code efficiently",
+  "criteria": [
+    "quick-fix works correctly",
+    "quick-fix is performant",
+    "quick-fix is accessible"
+  ],
+  "effort": "Medium"
+}

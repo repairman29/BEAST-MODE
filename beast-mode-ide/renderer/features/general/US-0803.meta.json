@@ -1,0 +1,17 @@
+{
+  "id": "US-0803",
+  "title": "RBAC",
+  "category": "Enterprise - Security",
+  "priority": "P0",
+  "userType": "Enterprise Admin",
+  "platform": "All",
+  "as": "an enterprise admin",
+  "want": "to use RBAC",
+  "soThat": "so that security is managed",
+  "criteria": [
+    "rbac works",
+    "rbac is secure",
+    "rbac is auditable"
+  ],
+  "effort": "Small"
+}

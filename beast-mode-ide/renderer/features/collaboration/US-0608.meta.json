@@ -1,0 +1,17 @@
+{
+  "id": "US-0608",
+  "title": "live-editing (5-users)",
+  "category": "Collaboration - Real-Time",
+  "priority": "P1",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to live editing with 5-users",
+  "soThat": "so that we can collaborate",
+  "criteria": [
+    "live-editing works with 5-users",
+    "live-editing is smooth",
+    "live-editing is reliable"
+  ],
+  "effort": "Medium"
+}

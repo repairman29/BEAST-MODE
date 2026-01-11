@@ -1,0 +1,17 @@
+{
+  "id": "US-0325",
+  "title": "Git rebase (basic)",
+  "category": "Core Coding - Git Integration",
+  "priority": "P0",
+  "userType": "Beginner",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to perform git rebase operations",
+  "soThat": "so that I can manage version control",
+  "criteria": [
+    "Git rebase works correctly",
+    "Git rebase shows clear feedback",
+    "Git rebase handles errors gracefully"
+  ],
+  "effort": "Small"
+}

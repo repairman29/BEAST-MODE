@@ -1,0 +1,17 @@
+{
+  "id": "US-0079",
+  "title": "Ignore File (mouse)",
+  "category": "Core Coding - File Management",
+  "priority": "P1",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to ignore files using mouse",
+  "soThat": "so that I can manage files efficiently",
+  "criteria": [
+    "File ignore works with mouse",
+    "Error handling for invalid operations",
+    "Feedback provided for all actions"
+  ],
+  "effort": "Medium"
+}

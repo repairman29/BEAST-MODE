@@ -1,0 +1,17 @@
+{
+  "id": "US-0053",
+  "title": "Copy File (context-menu)",
+  "category": "Core Coding - File Management",
+  "priority": "P1",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to copy files using context-menu",
+  "soThat": "so that I can manage files efficiently",
+  "criteria": [
+    "File copy works with context-menu",
+    "Error handling for invalid operations",
+    "Feedback provided for all actions"
+  ],
+  "effort": "Medium"
+}

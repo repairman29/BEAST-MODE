@@ -1,0 +1,17 @@
+{
+  "id": "US-0507",
+  "title": "large-files fast",
+  "category": "Performance - IDE Performance",
+  "priority": "P0",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to have fast large-files",
+  "soThat": "so that the IDE is responsive",
+  "criteria": [
+    "large-files is fast",
+    "large-files doesn't block",
+    "large-files scales well"
+  ],
+  "effort": "Small"
+}

@@ -1,0 +1,17 @@
+{
+  "id": "US-0682",
+  "title": "Convert java to javascript",
+  "category": "AI Assistance - Code Transformation",
+  "priority": "P1",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to convert code from java to javascript",
+  "soThat": "so that I can port code easily",
+  "criteria": [
+    "Conversion is accurate",
+    "Conversion preserves functionality",
+    "Conversion follows javascript best practices"
+  ],
+  "effort": "Medium"
+}

@@ -1,0 +1,17 @@
+{
+  "id": "US-0026",
+  "title": "Delete File (drag-drop)",
+  "category": "Core Coding - File Management",
+  "priority": "P0",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to delete files using drag-drop",
+  "soThat": "so that I can manage files efficiently",
+  "criteria": [
+    "File delete works with drag-drop",
+    "Error handling for invalid operations",
+    "Feedback provided for all actions"
+  ],
+  "effort": "Small"
+}

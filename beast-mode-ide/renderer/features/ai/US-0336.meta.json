@@ -1,0 +1,17 @@
+{
+  "id": "US-0336",
+  "title": "Generate api-route (from-spec, typescript)",
+  "category": "AI Assistance - Code Generation",
+  "priority": "P1",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to generate api-route from-spec in typescript",
+  "soThat": "so that I can code faster",
+  "criteria": [
+    "Generated api-route is correct",
+    "Generated api-route follows best practices",
+    "Generated api-route is well-documented"
+  ],
+  "effort": "Medium"
+}

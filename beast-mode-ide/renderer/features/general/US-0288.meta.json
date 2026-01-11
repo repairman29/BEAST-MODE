@@ -1,0 +1,17 @@
+{
+  "id": "US-0288",
+  "title": "type-hints for dart",
+  "category": "Core Coding - Code Completion",
+  "priority": "P1",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use type-hints when coding in dart",
+  "soThat": "so that I can write dart code faster",
+  "criteria": [
+    "type-hints works for dart",
+    "type-hints is accurate",
+    "type-hints is fast"
+  ],
+  "effort": "Medium"
+}

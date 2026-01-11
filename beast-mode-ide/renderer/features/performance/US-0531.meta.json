@@ -1,0 +1,17 @@
+{
+  "id": "US-0531",
+  "title": "linting < 1s",
+  "category": "Performance - Code Performance",
+  "priority": "P0",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to have linting complete in < 1s",
+  "soThat": "so that I don't wait",
+  "criteria": [
+    "linting completes in < 1s",
+    "linting is accurate",
+    "linting doesn't block"
+  ],
+  "effort": "Small"
+}

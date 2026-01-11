@@ -1,0 +1,17 @@
+{
+  "id": "US-0290",
+  "title": "documentation for javascript",
+  "category": "Core Coding - Code Completion",
+  "priority": "P0",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use documentation when coding in javascript",
+  "soThat": "so that I can write javascript code faster",
+  "criteria": [
+    "documentation works for javascript",
+    "documentation is accurate",
+    "documentation is fast"
+  ],
+  "effort": "Small"
+}

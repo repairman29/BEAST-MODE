@@ -1,0 +1,17 @@
+{
+  "id": "US-0313",
+  "title": "Git log (basic)",
+  "category": "Core Coding - Git Integration",
+  "priority": "P0",
+  "userType": "Beginner",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to perform git log operations",
+  "soThat": "so that I can manage version control",
+  "criteria": [
+    "Git log works correctly",
+    "Git log shows clear feedback",
+    "Git log handles errors gracefully"
+  ],
+  "effort": "Small"
+}

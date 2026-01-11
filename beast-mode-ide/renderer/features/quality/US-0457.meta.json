@@ -1,0 +1,17 @@
+{
+  "id": "US-0457",
+  "title": "Security secret-detection (project)",
+  "category": "Quality Assurance - Security",
+  "priority": "P0",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to check security secret-detection for project",
+  "soThat": "so that code is secure",
+  "criteria": [
+    "Security secret-detection works for project",
+    "Security secret-detection is accurate",
+    "Security secret-detection provides clear feedback"
+  ],
+  "effort": "Small"
+}

@@ -1,0 +1,17 @@
+{
+  "id": "US-0460",
+  "title": "Generate interface (from-spec, go)",
+  "category": "AI Assistance - Code Generation",
+  "priority": "P1",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to generate interface from-spec in go",
+  "soThat": "so that I can code faster",
+  "criteria": [
+    "Generated interface is correct",
+    "Generated interface follows best practices",
+    "Generated interface is well-documented"
+  ],
+  "effort": "Medium"
+}

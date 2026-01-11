@@ -1,0 +1,17 @@
+{
+  "id": "US-0919",
+  "title": "network-issues (api-error)",
+  "category": "Edge Cases - Error Handling",
+  "priority": "P1",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to handle api-error with network issues",
+  "soThat": "so that the IDE works reliably",
+  "criteria": [
+    "network-issues works for api-error",
+    "network-issues provides feedback",
+    "network-issues doesn't lose data"
+  ],
+  "effort": "Medium"
+}

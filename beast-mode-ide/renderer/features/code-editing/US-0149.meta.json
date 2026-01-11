@@ -1,0 +1,17 @@
+{
+  "id": "US-0149",
+  "title": "refactor (expert)",
+  "category": "Core Coding - Code Editing",
+  "priority": "P2",
+  "userType": "Expert",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use refactor at expert level",
+  "soThat": "so that I can edit code efficiently",
+  "criteria": [
+    "refactor works correctly",
+    "refactor is performant",
+    "refactor is accessible"
+  ],
+  "effort": "Large"
+}

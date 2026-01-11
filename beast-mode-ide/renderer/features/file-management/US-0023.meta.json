@@ -1,0 +1,17 @@
+{
+  "id": "US-0023",
+  "title": "Delete File (mouse)",
+  "category": "Core Coding - File Management",
+  "priority": "P0",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to delete files using mouse",
+  "soThat": "so that I can manage files efficiently",
+  "criteria": [
+    "File delete works with mouse",
+    "Error handling for invalid operations",
+    "Feedback provided for all actions"
+  ],
+  "effort": "Small"
+}

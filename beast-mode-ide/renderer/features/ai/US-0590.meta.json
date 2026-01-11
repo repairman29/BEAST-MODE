@@ -1,0 +1,17 @@
+{
+  "id": "US-0590",
+  "title": "Generate utility (from-usage, go)",
+  "category": "AI Assistance - Code Generation",
+  "priority": "P1",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to generate utility from-usage in go",
+  "soThat": "so that I can code faster",
+  "criteria": [
+    "Generated utility is correct",
+    "Generated utility follows best practices",
+    "Generated utility is well-documented"
+  ],
+  "effort": "Medium"
+}

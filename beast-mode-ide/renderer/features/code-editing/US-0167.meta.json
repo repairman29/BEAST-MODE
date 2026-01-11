@@ -1,0 +1,17 @@
+{
+  "id": "US-0167",
+  "title": "selection highlight (expert)",
+  "category": "Core Coding - Code Editing",
+  "priority": "P2",
+  "userType": "Expert",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use selection-highlight at expert level",
+  "soThat": "so that I can edit code efficiently",
+  "criteria": [
+    "selection-highlight works correctly",
+    "selection-highlight is performant",
+    "selection-highlight is accessible"
+  ],
+  "effort": "Large"
+}

@@ -1,0 +1,17 @@
+{
+  "id": "US-0364",
+  "title": "Generate component (from-example, java)",
+  "category": "AI Assistance - Code Generation",
+  "priority": "P1",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to generate component from-example in java",
+  "soThat": "so that I can code faster",
+  "criteria": [
+    "Generated component is correct",
+    "Generated component follows best practices",
+    "Generated component is well-documented"
+  ],
+  "effort": "Medium"
+}

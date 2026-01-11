@@ -1,0 +1,17 @@
+{
+  "id": "US-0716",
+  "title": "templates",
+  "category": "Developer Experience - Productivity",
+  "priority": "P1",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use templates",
+  "soThat": "so that I can work faster",
+  "criteria": [
+    "templates works",
+    "templates is fast",
+    "templates is discoverable"
+  ],
+  "effort": "Medium"
+}

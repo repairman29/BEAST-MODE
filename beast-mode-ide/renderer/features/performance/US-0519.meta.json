@@ -1,0 +1,17 @@
+{
+  "id": "US-0519",
+  "title": "autocomplete fast",
+  "category": "Performance - IDE Performance",
+  "priority": "P0",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to have fast autocomplete",
+  "soThat": "so that the IDE is responsive",
+  "criteria": [
+    "autocomplete is fast",
+    "autocomplete doesn't block",
+    "autocomplete scales well"
+  ],
+  "effort": "Small"
+}

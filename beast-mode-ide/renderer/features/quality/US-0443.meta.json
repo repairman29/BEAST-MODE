@@ -1,0 +1,17 @@
+{
+  "id": "US-0443",
+  "title": "e2e test run",
+  "category": "Quality Assurance - Testing",
+  "priority": "P0",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to run e2e tests",
+  "soThat": "so that I can ensure code quality",
+  "criteria": [
+    "e2e test run works",
+    "e2e test run is fast",
+    "e2e test run is reliable"
+  ],
+  "effort": "Small"
+}

@@ -1,0 +1,17 @@
+{
+  "id": "US-0607",
+  "title": "live-editing (2-users)",
+  "category": "Collaboration - Real-Time",
+  "priority": "P0",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to live editing with 2-users",
+  "soThat": "so that we can collaborate",
+  "criteria": [
+    "live-editing works with 2-users",
+    "live-editing is smooth",
+    "live-editing is reliable"
+  ],
+  "effort": "Small"
+}

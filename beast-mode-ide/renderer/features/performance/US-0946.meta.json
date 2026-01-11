@@ -1,0 +1,17 @@
+{
+  "id": "US-0946",
+  "title": "background-processing (desktop)",
+  "category": "Edge Cases - Performance",
+  "priority": "P1",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use IDE with background processing on desktop",
+  "soThat": "so that the IDE works on any device",
+  "criteria": [
+    "background-processing works on desktop",
+    "background-processing is efficient",
+    "background-processing doesn't degrade UX"
+  ],
+  "effort": "Medium"
+}

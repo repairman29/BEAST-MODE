@@ -1,0 +1,17 @@
+{
+  "id": "US-0915",
+  "title": "offline-mode (api-error)",
+  "category": "Edge Cases - Error Handling",
+  "priority": "P1",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to handle api-error with offline mode",
+  "soThat": "so that the IDE works reliably",
+  "criteria": [
+    "offline-mode works for api-error",
+    "offline-mode provides feedback",
+    "offline-mode doesn't lose data"
+  ],
+  "effort": "Medium"
+}

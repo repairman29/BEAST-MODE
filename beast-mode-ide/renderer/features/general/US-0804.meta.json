@@ -1,0 +1,17 @@
+{
+  "id": "US-0804",
+  "title": "ENCRYPTION",
+  "category": "Enterprise - Security",
+  "priority": "P0",
+  "userType": "Enterprise Admin",
+  "platform": "All",
+  "as": "an enterprise admin",
+  "want": "to use ENCRYPTION",
+  "soThat": "so that security is managed",
+  "criteria": [
+    "encryption works",
+    "encryption is secure",
+    "encryption is auditable"
+  ],
+  "effort": "Small"
+}

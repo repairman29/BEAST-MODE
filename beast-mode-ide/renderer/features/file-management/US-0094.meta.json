@@ -1,0 +1,17 @@
+{
+  "id": "US-0094",
+  "title": "Merge File (command-palette)",
+  "category": "Core Coding - File Management",
+  "priority": "P2",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to merge files using command-palette",
+  "soThat": "so that I can manage files efficiently",
+  "criteria": [
+    "File merge works with command-palette",
+    "Error handling for invalid operations",
+    "Feedback provided for all actions"
+  ],
+  "effort": "Large"
+}

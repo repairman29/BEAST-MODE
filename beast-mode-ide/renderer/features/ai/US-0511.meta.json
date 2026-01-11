@@ -1,0 +1,17 @@
+{
+  "id": "US-0511",
+  "title": "Generate enum (from-example, typescript)",
+  "category": "AI Assistance - Code Generation",
+  "priority": "P1",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to generate enum from-example in typescript",
+  "soThat": "so that I can code faster",
+  "criteria": [
+    "Generated enum is correct",
+    "Generated enum follows best practices",
+    "Generated enum is well-documented"
+  ],
+  "effort": "Medium"
+}

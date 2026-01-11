@@ -1,0 +1,17 @@
+{
+  "id": "US-0113",
+  "title": "multiple cursors (expert)",
+  "category": "Core Coding - Code Editing",
+  "priority": "P2",
+  "userType": "Expert",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use multiple-cursors at expert level",
+  "soThat": "so that I can edit code efficiently",
+  "criteria": [
+    "multiple-cursors works correctly",
+    "multiple-cursors is performant",
+    "multiple-cursors is accessible"
+  ],
+  "effort": "Large"
+}

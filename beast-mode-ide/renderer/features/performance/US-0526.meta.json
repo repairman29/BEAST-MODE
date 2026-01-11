@@ -1,0 +1,17 @@
+{
+  "id": "US-0526",
+  "title": "analysis < 2s",
+  "category": "Performance - Code Performance",
+  "priority": "P1",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to have analysis complete in < 2s",
+  "soThat": "so that I don't wait",
+  "criteria": [
+    "analysis completes in < 2s",
+    "analysis is accurate",
+    "analysis doesn't block"
+  ],
+  "effort": "Medium"
+}

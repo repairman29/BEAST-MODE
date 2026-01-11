@@ -1,0 +1,17 @@
+{
+  "id": "US-0130",
+  "title": "word wrap (advanced)",
+  "category": "Core Coding - Code Editing",
+  "priority": "P1",
+  "userType": "Intermediate",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use word-wrap at advanced level",
+  "soThat": "so that I can edit code efficiently",
+  "criteria": [
+    "word-wrap works correctly",
+    "word-wrap is performant",
+    "word-wrap is accessible"
+  ],
+  "effort": "Medium"
+}

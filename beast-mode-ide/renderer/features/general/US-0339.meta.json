@@ -1,0 +1,17 @@
+{
+  "id": "US-0339",
+  "title": "Terminal split (Mac)",
+  "category": "Core Coding - Terminal",
+  "priority": "P1",
+  "userType": "All",
+  "platform": "Mac",
+  "as": "a developer",
+  "want": "to use terminal split on Mac",
+  "soThat": "so that I can run commands efficiently",
+  "criteria": [
+    "Terminal split works on Mac",
+    "Terminal split is performant",
+    "Terminal split is accessible"
+  ],
+  "effort": "Medium"
+}

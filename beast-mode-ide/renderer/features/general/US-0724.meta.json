@@ -1,0 +1,17 @@
+{
+  "id": "US-0724",
+  "title": "font size",
+  "category": "Developer Experience - Accessibility",
+  "priority": "P0",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use font size",
+  "soThat": "so that the IDE is accessible",
+  "criteria": [
+    "font-size works",
+    "font-size is complete",
+    "font-size follows standards"
+  ],
+  "effort": "Small"
+}

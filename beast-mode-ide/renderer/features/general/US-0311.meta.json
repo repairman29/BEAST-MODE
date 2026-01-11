@@ -1,0 +1,17 @@
+{
+  "id": "US-0311",
+  "title": "Git blame (basic)",
+  "category": "Core Coding - Git Integration",
+  "priority": "P0",
+  "userType": "Beginner",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to perform git blame operations",
+  "soThat": "so that I can manage version control",
+  "criteria": [
+    "Git blame works correctly",
+    "Git blame shows clear feedback",
+    "Git blame handles errors gracefully"
+  ],
+  "effort": "Small"
+}

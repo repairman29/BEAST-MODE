@@ -1,0 +1,17 @@
+{
+  "id": "US-0811",
+  "title": "ci-cd integration",
+  "category": "Enterprise - Integration",
+  "priority": "P1",
+  "userType": "Enterprise Developer",
+  "platform": "All",
+  "as": "an enterprise developer",
+  "want": "to integrate with ci cd",
+  "soThat": "so that workflows are connected",
+  "criteria": [
+    "Integration works",
+    "Integration is reliable",
+    "Integration is documented"
+  ],
+  "effort": "Medium"
+}

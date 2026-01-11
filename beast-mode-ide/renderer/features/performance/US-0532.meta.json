@@ -1,0 +1,17 @@
+{
+  "id": "US-0532",
+  "title": "linting < 2s",
+  "category": "Performance - Code Performance",
+  "priority": "P1",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to have linting complete in < 2s",
+  "soThat": "so that I don't wait",
+  "criteria": [
+    "linting completes in < 2s",
+    "linting is accurate",
+    "linting doesn't block"
+  ],
+  "effort": "Medium"
+}

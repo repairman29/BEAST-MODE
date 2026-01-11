@@ -1,0 +1,17 @@
+{
+  "id": "US-0153",
+  "title": "code actions (basic)",
+  "category": "Core Coding - Code Editing",
+  "priority": "P0",
+  "userType": "Beginner",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use code-actions at basic level",
+  "soThat": "so that I can edit code efficiently",
+  "criteria": [
+    "code-actions works correctly",
+    "code-actions is performant",
+    "code-actions is accessible"
+  ],
+  "effort": "Small"
+}

@@ -1,0 +1,17 @@
+{
+  "id": "US-0141",
+  "title": "hover info (basic)",
+  "category": "Core Coding - Code Editing",
+  "priority": "P0",
+  "userType": "Beginner",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use hover-info at basic level",
+  "soThat": "so that I can edit code efficiently",
+  "criteria": [
+    "hover-info works correctly",
+    "hover-info is performant",
+    "hover-info is accessible"
+  ],
+  "effort": "Small"
+}

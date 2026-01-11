@@ -1,0 +1,17 @@
+{
+  "id": "US-0155",
+  "title": "code actions (expert)",
+  "category": "Core Coding - Code Editing",
+  "priority": "P2",
+  "userType": "Expert",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use code-actions at expert level",
+  "soThat": "so that I can edit code efficiently",
+  "criteria": [
+    "code-actions works correctly",
+    "code-actions is performant",
+    "code-actions is accessible"
+  ],
+  "effort": "Large"
+}

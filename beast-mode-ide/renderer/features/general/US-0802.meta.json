@@ -1,0 +1,17 @@
+{
+  "id": "US-0802",
+  "title": "AUDIT-LOGS",
+  "category": "Enterprise - Security",
+  "priority": "P0",
+  "userType": "Enterprise Admin",
+  "platform": "All",
+  "as": "an enterprise admin",
+  "want": "to use AUDIT-LOGS",
+  "soThat": "so that security is managed",
+  "criteria": [
+    "audit-logs works",
+    "audit-logs is secure",
+    "audit-logs is auditable"
+  ],
+  "effort": "Small"
+}

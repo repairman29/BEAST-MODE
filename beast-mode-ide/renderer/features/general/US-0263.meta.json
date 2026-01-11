@@ -1,0 +1,17 @@
+{
+  "id": "US-0263",
+  "title": "quick-fix for kotlin",
+  "category": "Core Coding - Code Completion",
+  "priority": "P1",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use quick-fix when coding in kotlin",
+  "soThat": "so that I can write kotlin code faster",
+  "criteria": [
+    "quick-fix works for kotlin",
+    "quick-fix is accurate",
+    "quick-fix is fast"
+  ],
+  "effort": "Medium"
+}

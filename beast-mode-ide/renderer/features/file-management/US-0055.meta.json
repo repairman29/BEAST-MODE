@@ -1,0 +1,17 @@
+{
+  "id": "US-0055",
+  "title": "Copy File (terminal)",
+  "category": "Core Coding - File Management",
+  "priority": "P1",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to copy files using terminal",
+  "soThat": "so that I can manage files efficiently",
+  "criteria": [
+    "File copy works with terminal",
+    "Error handling for invalid operations",
+    "Feedback provided for all actions"
+  ],
+  "effort": "Medium"
+}

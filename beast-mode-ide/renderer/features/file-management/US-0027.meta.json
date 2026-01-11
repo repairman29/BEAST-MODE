@@ -1,0 +1,17 @@
+{
+  "id": "US-0027",
+  "title": "Delete File (terminal)",
+  "category": "Core Coding - File Management",
+  "priority": "P0",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to delete files using terminal",
+  "soThat": "so that I can manage files efficiently",
+  "criteria": [
+    "File delete works with terminal",
+    "Error handling for invalid operations",
+    "Feedback provided for all actions"
+  ],
+  "effort": "Small"
+}

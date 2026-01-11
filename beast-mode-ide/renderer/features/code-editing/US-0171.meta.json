@@ -1,0 +1,17 @@
+{
+  "id": "US-0171",
+  "title": "whitespace (basic)",
+  "category": "Core Coding - Code Editing",
+  "priority": "P0",
+  "userType": "Beginner",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use whitespace at basic level",
+  "soThat": "so that I can edit code efficiently",
+  "criteria": [
+    "whitespace works correctly",
+    "whitespace is performant",
+    "whitespace is accessible"
+  ],
+  "effort": "Small"
+}

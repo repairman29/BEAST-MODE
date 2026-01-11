@@ -1,0 +1,17 @@
+{
+  "id": "US-0103",
+  "title": "auto indent (advanced)",
+  "category": "Core Coding - Code Editing",
+  "priority": "P1",
+  "userType": "Intermediate",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use auto-indent at advanced level",
+  "soThat": "so that I can edit code efficiently",
+  "criteria": [
+    "auto-indent works correctly",
+    "auto-indent is performant",
+    "auto-indent is accessible"
+  ],
+  "effort": "Medium"
+}

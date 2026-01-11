@@ -1,0 +1,17 @@
+{
+  "id": "US-0178",
+  "title": "Navigate file (mouse)",
+  "category": "Core Coding - Navigation",
+  "priority": "P0",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to navigate file using mouse",
+  "soThat": "so that I can find code quickly",
+  "criteria": [
+    "Navigation works with mouse",
+    "Navigation is fast",
+    "Navigation is intuitive"
+  ],
+  "effort": "Small"
+}

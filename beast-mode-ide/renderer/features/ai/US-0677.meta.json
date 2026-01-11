@@ -1,0 +1,17 @@
+{
+  "id": "US-0677",
+  "title": "Convert javascript to python",
+  "category": "AI Assistance - Code Transformation",
+  "priority": "P1",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to convert code from javascript to python",
+  "soThat": "so that I can port code easily",
+  "criteria": [
+    "Conversion is accurate",
+    "Conversion preserves functionality",
+    "Conversion follows python best practices"
+  ],
+  "effort": "Medium"
+}

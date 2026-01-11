@@ -1,0 +1,17 @@
+{
+  "id": "US-0812",
+  "title": "issue-tracking integration",
+  "category": "Enterprise - Integration",
+  "priority": "P1",
+  "userType": "Enterprise Developer",
+  "platform": "All",
+  "as": "an enterprise developer",
+  "want": "to integrate with issue tracking",
+  "soThat": "so that workflows are connected",
+  "criteria": [
+    "Integration works",
+    "Integration is reliable",
+    "Integration is documented"
+  ],
+  "effort": "Medium"
+}

@@ -1,0 +1,17 @@
+{
+  "id": "US-0218",
+  "title": "snippets for javascript",
+  "category": "Core Coding - Code Completion",
+  "priority": "P0",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use snippets when coding in javascript",
+  "soThat": "so that I can write javascript code faster",
+  "criteria": [
+    "snippets works for javascript",
+    "snippets is accurate",
+    "snippets is fast"
+  ],
+  "effort": "Small"
+}

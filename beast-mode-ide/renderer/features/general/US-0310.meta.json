@@ -1,0 +1,17 @@
+{
+  "id": "US-0310",
+  "title": "Git merge (advanced)",
+  "category": "Core Coding - Git Integration",
+  "priority": "P1",
+  "userType": "Intermediate",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to perform git merge operations",
+  "soThat": "so that I can manage version control",
+  "criteria": [
+    "Git merge works correctly",
+    "Git merge shows clear feedback",
+    "Git merge handles errors gracefully"
+  ],
+  "effort": "Medium"
+}

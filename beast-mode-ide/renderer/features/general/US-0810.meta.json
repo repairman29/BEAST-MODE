@@ -1,0 +1,17 @@
+{
+  "id": "US-0810",
+  "title": "billing",
+  "category": "Enterprise - Management",
+  "priority": "P1",
+  "userType": "Enterprise Admin",
+  "platform": "All",
+  "as": "an enterprise admin",
+  "want": "to manage billing",
+  "soThat": "so that the platform is managed",
+  "criteria": [
+    "billing works",
+    "billing is comprehensive",
+    "billing provides insights"
+  ],
+  "effort": "Medium"
+}

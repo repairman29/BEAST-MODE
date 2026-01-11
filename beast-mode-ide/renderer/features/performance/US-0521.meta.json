@@ -1,0 +1,17 @@
+{
+  "id": "US-0521",
+  "title": "autocomplete optimized",
+  "category": "Performance - IDE Performance",
+  "priority": "P1",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to have optimized autocomplete",
+  "soThat": "so that the IDE is responsive",
+  "criteria": [
+    "autocomplete is optimized",
+    "autocomplete doesn't block",
+    "autocomplete scales well"
+  ],
+  "effort": "Medium"
+}

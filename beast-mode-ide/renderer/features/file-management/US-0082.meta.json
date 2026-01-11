@@ -1,0 +1,17 @@
+{
+  "id": "US-0082",
+  "title": "Ignore File (drag-drop)",
+  "category": "Core Coding - File Management",
+  "priority": "P2",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to ignore files using drag-drop",
+  "soThat": "so that I can manage files efficiently",
+  "criteria": [
+    "File ignore works with drag-drop",
+    "Error handling for invalid operations",
+    "Feedback provided for all actions"
+  ],
+  "effort": "Large"
+}

@@ -1,0 +1,17 @@
+{
+  "id": "US-0402",
+  "title": "Quality score (function)",
+  "category": "Quality Assurance - Code Quality",
+  "priority": "P0",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to see quality score for function",
+  "soThat": "so that I can track code quality",
+  "criteria": [
+    "score is accurate",
+    "score is visible",
+    "score is actionable"
+  ],
+  "effort": "Small"
+}

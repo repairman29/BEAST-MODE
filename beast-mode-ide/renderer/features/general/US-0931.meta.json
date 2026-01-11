@@ -1,0 +1,17 @@
+{
+  "id": "US-0931",
+  "title": "large-projects (Windows)",
+  "category": "Edge Cases - Compatibility",
+  "priority": "P1",
+  "userType": "All",
+  "platform": "Windows",
+  "as": "a developer",
+  "want": "to use large projects on Windows",
+  "soThat": "so that the IDE works everywhere",
+  "criteria": [
+    "large-projects works on Windows",
+    "large-projects is performant",
+    "large-projects is reliable"
+  ],
+  "effort": "Medium"
+}

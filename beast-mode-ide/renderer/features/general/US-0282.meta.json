@@ -1,0 +1,17 @@
+{
+  "id": "US-0282",
+  "title": "type-hints for rust",
+  "category": "Core Coding - Code Completion",
+  "priority": "P1",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use type-hints when coding in rust",
+  "soThat": "so that I can write rust code faster",
+  "criteria": [
+    "type-hints works for rust",
+    "type-hints is accurate",
+    "type-hints is fast"
+  ],
+  "effort": "Medium"
+}

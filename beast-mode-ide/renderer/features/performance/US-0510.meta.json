@@ -1,0 +1,17 @@
+{
+  "id": "US-0510",
+  "title": "memory fast",
+  "category": "Performance - IDE Performance",
+  "priority": "P0",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to have fast memory",
+  "soThat": "so that the IDE is responsive",
+  "criteria": [
+    "memory is fast",
+    "memory doesn't block",
+    "memory scales well"
+  ],
+  "effort": "Small"
+}

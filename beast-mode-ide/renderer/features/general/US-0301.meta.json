@@ -1,0 +1,17 @@
+{
+  "id": "US-0301",
+  "title": "Git status (basic)",
+  "category": "Core Coding - Git Integration",
+  "priority": "P0",
+  "userType": "Beginner",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to perform git status operations",
+  "soThat": "so that I can manage version control",
+  "criteria": [
+    "Git status works correctly",
+    "Git status shows clear feedback",
+    "Git status handles errors gracefully"
+  ],
+  "effort": "Small"
+}

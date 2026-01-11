@@ -1,0 +1,17 @@
+{
+  "id": "US-0172",
+  "title": "whitespace (advanced)",
+  "category": "Core Coding - Code Editing",
+  "priority": "P1",
+  "userType": "Intermediate",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use whitespace at advanced level",
+  "soThat": "so that I can edit code efficiently",
+  "criteria": [
+    "whitespace works correctly",
+    "whitespace is performant",
+    "whitespace is accessible"
+  ],
+  "effort": "Medium"
+}

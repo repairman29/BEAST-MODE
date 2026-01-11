@@ -1,0 +1,17 @@
+{
+  "id": "US-0306",
+  "title": "Git commit (advanced)",
+  "category": "Core Coding - Git Integration",
+  "priority": "P1",
+  "userType": "Intermediate",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to perform git commit operations",
+  "soThat": "so that I can manage version control",
+  "criteria": [
+    "Git commit works correctly",
+    "Git commit shows clear feedback",
+    "Git commit handles errors gracefully"
+  ],
+  "effort": "Medium"
+}

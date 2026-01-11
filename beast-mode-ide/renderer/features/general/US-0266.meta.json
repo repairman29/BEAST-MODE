@@ -1,0 +1,17 @@
+{
+  "id": "US-0266",
+  "title": "auto-import for javascript",
+  "category": "Core Coding - Code Completion",
+  "priority": "P0",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use auto-import when coding in javascript",
+  "soThat": "so that I can write javascript code faster",
+  "criteria": [
+    "auto-import works for javascript",
+    "auto-import is accurate",
+    "auto-import is fast"
+  ],
+  "effort": "Small"
+}

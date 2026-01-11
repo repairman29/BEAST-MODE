@@ -1,0 +1,17 @@
+{
+  "id": "US-0805",
+  "title": "COMPLIANCE",
+  "category": "Enterprise - Security",
+  "priority": "P0",
+  "userType": "Enterprise Admin",
+  "platform": "All",
+  "as": "an enterprise admin",
+  "want": "to use COMPLIANCE",
+  "soThat": "so that security is managed",
+  "criteria": [
+    "compliance works",
+    "compliance is secure",
+    "compliance is auditable"
+  ],
+  "effort": "Small"
+}

@@ -1,0 +1,17 @@
+{
+  "id": "US-0671",
+  "title": "Chat about error (optimization)",
+  "category": "AI Assistance - Code Chat",
+  "priority": "P0",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to optimization about error",
+  "soThat": "so that I can get help quickly",
+  "criteria": [
+    "Chat response is relevant",
+    "Chat response is fast",
+    "Chat response is actionable"
+  ],
+  "effort": "Small"
+}

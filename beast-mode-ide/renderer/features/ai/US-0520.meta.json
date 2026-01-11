@@ -1,0 +1,17 @@
+{
+  "id": "US-0520",
+  "title": "Generate enum (from-spec, go)",
+  "category": "AI Assistance - Code Generation",
+  "priority": "P1",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to generate enum from-spec in go",
+  "soThat": "so that I can code faster",
+  "criteria": [
+    "Generated enum is correct",
+    "Generated enum follows best practices",
+    "Generated enum is well-documented"
+  ],
+  "effort": "Medium"
+}

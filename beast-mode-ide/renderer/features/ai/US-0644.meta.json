@@ -1,0 +1,17 @@
+{
+  "id": "US-0644",
+  "title": "Explain error (simple)",
+  "category": "AI Assistance - Code Explanation",
+  "priority": "P0",
+  "userType": "Beginner",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to get simple explanation of error",
+  "soThat": "so that I understand the code",
+  "criteria": [
+    "Explanation is clear",
+    "Explanation is accurate",
+    "Explanation is helpful"
+  ],
+  "effort": "Small"
+}

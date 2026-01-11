@@ -1,0 +1,17 @@
+{
+  "id": "US-0265",
+  "title": "auto-import for typescript",
+  "category": "Core Coding - Code Completion",
+  "priority": "P0",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use auto-import when coding in typescript",
+  "soThat": "so that I can write typescript code faster",
+  "criteria": [
+    "auto-import works for typescript",
+    "auto-import is accurate",
+    "auto-import is fast"
+  ],
+  "effort": "Small"
+}

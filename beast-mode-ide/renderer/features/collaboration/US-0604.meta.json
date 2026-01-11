@@ -1,0 +1,17 @@
+{
+  "id": "US-0604",
+  "title": "live-cursors (2-users)",
+  "category": "Collaboration - Real-Time",
+  "priority": "P0",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to live cursors with 2-users",
+  "soThat": "so that we can collaborate",
+  "criteria": [
+    "live-cursors works with 2-users",
+    "live-cursors is smooth",
+    "live-cursors is reliable"
+  ],
+  "effort": "Small"
+}

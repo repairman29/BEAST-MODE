@@ -1,0 +1,17 @@
+{
+  "id": "US-0184",
+  "title": "Navigate symbol (command)",
+  "category": "Core Coding - Navigation",
+  "priority": "P0",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to navigate symbol using command",
+  "soThat": "so that I can find code quickly",
+  "criteria": [
+    "Navigation works with command",
+    "Navigation is fast",
+    "Navigation is intuitive"
+  ],
+  "effort": "Small"
+}

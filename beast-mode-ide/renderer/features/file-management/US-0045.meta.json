@@ -1,0 +1,17 @@
+{
+  "id": "US-0045",
+  "title": "Move File (command-palette)",
+  "category": "Core Coding - File Management",
+  "priority": "P0",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to move files using command-palette",
+  "soThat": "so that I can manage files efficiently",
+  "criteria": [
+    "File move works with command-palette",
+    "Error handling for invalid operations",
+    "Feedback provided for all actions"
+  ],
+  "effort": "Small"
+}

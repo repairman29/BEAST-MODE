@@ -1,0 +1,17 @@
+{
+  "id": "US-0106",
+  "title": "bracket matching (advanced)",
+  "category": "Core Coding - Code Editing",
+  "priority": "P1",
+  "userType": "Intermediate",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use bracket-matching at advanced level",
+  "soThat": "so that I can edit code efficiently",
+  "criteria": [
+    "bracket-matching works correctly",
+    "bracket-matching is performant",
+    "bracket-matching is accessible"
+  ],
+  "effort": "Medium"
+}

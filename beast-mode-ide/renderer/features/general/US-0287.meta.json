@@ -1,0 +1,17 @@
+{
+  "id": "US-0287",
+  "title": "type-hints for kotlin",
+  "category": "Core Coding - Code Completion",
+  "priority": "P1",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use type-hints when coding in kotlin",
+  "soThat": "so that I can write kotlin code faster",
+  "criteria": [
+    "type-hints works for kotlin",
+    "type-hints is accurate",
+    "type-hints is fast"
+  ],
+  "effort": "Medium"
+}

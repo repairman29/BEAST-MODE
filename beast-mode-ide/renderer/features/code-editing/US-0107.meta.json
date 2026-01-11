@@ -1,0 +1,17 @@
+{
+  "id": "US-0107",
+  "title": "bracket matching (expert)",
+  "category": "Core Coding - Code Editing",
+  "priority": "P2",
+  "userType": "Expert",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use bracket-matching at expert level",
+  "soThat": "so that I can edit code efficiently",
+  "criteria": [
+    "bracket-matching works correctly",
+    "bracket-matching is performant",
+    "bracket-matching is accessible"
+  ],
+  "effort": "Large"
+}

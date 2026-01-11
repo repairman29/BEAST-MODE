@@ -1,0 +1,17 @@
+{
+  "id": "US-0139",
+  "title": "inline errors (advanced)",
+  "category": "Core Coding - Code Editing",
+  "priority": "P1",
+  "userType": "Intermediate",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use inline-errors at advanced level",
+  "soThat": "so that I can edit code efficiently",
+  "criteria": [
+    "inline-errors works correctly",
+    "inline-errors is performant",
+    "inline-errors is accessible"
+  ],
+  "effort": "Medium"
+}

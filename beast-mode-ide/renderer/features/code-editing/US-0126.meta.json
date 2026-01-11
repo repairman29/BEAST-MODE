@@ -1,0 +1,17 @@
+{
+  "id": "US-0126",
+  "title": "line numbers (basic)",
+  "category": "Core Coding - Code Editing",
+  "priority": "P0",
+  "userType": "Beginner",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use line-numbers at basic level",
+  "soThat": "so that I can edit code efficiently",
+  "criteria": [
+    "line-numbers works correctly",
+    "line-numbers is performant",
+    "line-numbers is accessible"
+  ],
+  "effort": "Small"
+}

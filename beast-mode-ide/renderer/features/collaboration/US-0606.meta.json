@@ -1,0 +1,17 @@
+{
+  "id": "US-0606",
+  "title": "live-cursors (10-users)",
+  "category": "Collaboration - Real-Time",
+  "priority": "P1",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to live cursors with 10-users",
+  "soThat": "so that we can collaborate",
+  "criteria": [
+    "live-cursors works with 10-users",
+    "live-cursors is smooth",
+    "live-cursors is reliable"
+  ],
+  "effort": "Medium"
+}

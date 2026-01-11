@@ -1,0 +1,17 @@
+{
+  "id": "US-0169",
+  "title": "indent guides (advanced)",
+  "category": "Core Coding - Code Editing",
+  "priority": "P1",
+  "userType": "Intermediate",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use indent-guides at advanced level",
+  "soThat": "so that I can edit code efficiently",
+  "criteria": [
+    "indent-guides works correctly",
+    "indent-guides is performant",
+    "indent-guides is accessible"
+  ],
+  "effort": "Medium"
+}

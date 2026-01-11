@@ -1,0 +1,17 @@
+{
+  "id": "US-0906",
+  "title": "error-recovery (network-error)",
+  "category": "Edge Cases - Error Handling",
+  "priority": "P0",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to handle network-error with error recovery",
+  "soThat": "so that the IDE works reliably",
+  "criteria": [
+    "error-recovery works for network-error",
+    "error-recovery provides feedback",
+    "error-recovery doesn't lose data"
+  ],
+  "effort": "Small"
+}

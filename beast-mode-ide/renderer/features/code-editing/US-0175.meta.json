@@ -1,0 +1,17 @@
+{
+  "id": "US-0175",
+  "title": "render control chars (advanced)",
+  "category": "Core Coding - Code Editing",
+  "priority": "P1",
+  "userType": "Intermediate",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use render-control-chars at advanced level",
+  "soThat": "so that I can edit code efficiently",
+  "criteria": [
+    "render-control-chars works correctly",
+    "render-control-chars is performant",
+    "render-control-chars is accessible"
+  ],
+  "effort": "Medium"
+}

@@ -1,0 +1,17 @@
+{
+  "id": "US-0298",
+  "title": "documentation for swift",
+  "category": "Core Coding - Code Completion",
+  "priority": "P1",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use documentation when coding in swift",
+  "soThat": "so that I can write swift code faster",
+  "criteria": [
+    "documentation works for swift",
+    "documentation is accurate",
+    "documentation is fast"
+  ],
+  "effort": "Medium"
+}

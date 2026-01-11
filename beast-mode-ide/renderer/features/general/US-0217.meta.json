@@ -1,0 +1,17 @@
+{
+  "id": "US-0217",
+  "title": "snippets for typescript",
+  "category": "Core Coding - Code Completion",
+  "priority": "P0",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use snippets when coding in typescript",
+  "soThat": "so that I can write typescript code faster",
+  "criteria": [
+    "snippets works for typescript",
+    "snippets is accurate",
+    "snippets is fast"
+  ],
+  "effort": "Small"
+}

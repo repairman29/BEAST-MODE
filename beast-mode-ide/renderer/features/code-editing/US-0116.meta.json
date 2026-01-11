@@ -1,0 +1,17 @@
+{
+  "id": "US-0116",
+  "title": "find replace (expert)",
+  "category": "Core Coding - Code Editing",
+  "priority": "P2",
+  "userType": "Expert",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use find-replace at expert level",
+  "soThat": "so that I can edit code efficiently",
+  "criteria": [
+    "find-replace works correctly",
+    "find-replace is performant",
+    "find-replace is accessible"
+  ],
+  "effort": "Large"
+}

@@ -1,0 +1,17 @@
+{
+  "id": "US-0030",
+  "title": "Rename File (mouse)",
+  "category": "Core Coding - File Management",
+  "priority": "P0",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to rename files using mouse",
+  "soThat": "so that I can manage files efficiently",
+  "criteria": [
+    "File rename works with mouse",
+    "Error handling for invalid operations",
+    "Feedback provided for all actions"
+  ],
+  "effort": "Small"
+}

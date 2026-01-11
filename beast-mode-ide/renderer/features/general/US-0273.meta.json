@@ -1,0 +1,17 @@
+{
+  "id": "US-0273",
+  "title": "auto-import for php",
+  "category": "Core Coding - Code Completion",
+  "priority": "P1",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use auto-import when coding in php",
+  "soThat": "so that I can write php code faster",
+  "criteria": [
+    "auto-import works for php",
+    "auto-import is accurate",
+    "auto-import is fast"
+  ],
+  "effort": "Medium"
+}

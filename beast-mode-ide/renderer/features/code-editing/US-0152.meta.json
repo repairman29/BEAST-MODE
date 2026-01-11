@@ -1,0 +1,17 @@
+{
+  "id": "US-0152",
+  "title": "rename symbol (expert)",
+  "category": "Core Coding - Code Editing",
+  "priority": "P2",
+  "userType": "Expert",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use rename-symbol at expert level",
+  "soThat": "so that I can edit code efficiently",
+  "criteria": [
+    "rename-symbol works correctly",
+    "rename-symbol is performant",
+    "rename-symbol is accessible"
+  ],
+  "effort": "Large"
+}

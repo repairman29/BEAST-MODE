@@ -1,0 +1,17 @@
+{
+  "id": "US-0615",
+  "title": "screen-share (10-users)",
+  "category": "Collaboration - Real-Time",
+  "priority": "P1",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to screen share with 10-users",
+  "soThat": "so that we can collaborate",
+  "criteria": [
+    "screen-share works with 10-users",
+    "screen-share is smooth",
+    "screen-share is reliable"
+  ],
+  "effort": "Medium"
+}

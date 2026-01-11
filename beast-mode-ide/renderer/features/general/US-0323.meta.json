@@ -1,0 +1,17 @@
+{
+  "id": "US-0323",
+  "title": "Git fetch (basic)",
+  "category": "Core Coding - Git Integration",
+  "priority": "P0",
+  "userType": "Beginner",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to perform git fetch operations",
+  "soThat": "so that I can manage version control",
+  "criteria": [
+    "Git fetch works correctly",
+    "Git fetch shows clear feedback",
+    "Git fetch handles errors gracefully"
+  ],
+  "effort": "Small"
+}

@@ -1,0 +1,17 @@
+{
+  "id": "US-0801",
+  "title": "SSO",
+  "category": "Enterprise - Security",
+  "priority": "P0",
+  "userType": "Enterprise Admin",
+  "platform": "All",
+  "as": "an enterprise admin",
+  "want": "to use SSO",
+  "soThat": "so that security is managed",
+  "criteria": [
+    "sso works",
+    "sso is secure",
+    "sso is auditable"
+  ],
+  "effort": "Small"
+}

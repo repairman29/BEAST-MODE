@@ -1,0 +1,17 @@
+{
+  "id": "US-0234",
+  "title": "Generate class (from-comment, java)",
+  "category": "AI Assistance - Code Generation",
+  "priority": "P0",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to generate class from-comment in java",
+  "soThat": "so that I can code faster",
+  "criteria": [
+    "Generated class is correct",
+    "Generated class follows best practices",
+    "Generated class is well-documented"
+  ],
+  "effort": "Small"
+}

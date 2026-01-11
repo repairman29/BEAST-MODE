@@ -1,0 +1,17 @@
+{
+  "id": "US-0501",
+  "title": "startup fast",
+  "category": "Performance - IDE Performance",
+  "priority": "P0",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to have fast startup",
+  "soThat": "so that the IDE is responsive",
+  "criteria": [
+    "startup is fast",
+    "startup doesn't block",
+    "startup scales well"
+  ],
+  "effort": "Small"
+}

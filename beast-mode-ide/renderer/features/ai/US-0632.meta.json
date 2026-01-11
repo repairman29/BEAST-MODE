@@ -1,0 +1,17 @@
+{
+  "id": "US-0632",
+  "title": "multi-line suggestion (command)",
+  "category": "AI Assistance - Code Suggestions",
+  "priority": "P1",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to get multi-line suggestions when command",
+  "soThat": "so that I can write better code",
+  "criteria": [
+    "Suggestions are relevant",
+    "Suggestions are fast (< 2s)",
+    "Suggestions are accurate"
+  ],
+  "effort": "Medium"
+}

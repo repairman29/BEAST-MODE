@@ -1,0 +1,17 @@
+{
+  "id": "US-0316",
+  "title": "Git stash (advanced)",
+  "category": "Core Coding - Git Integration",
+  "priority": "P1",
+  "userType": "Intermediate",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to perform git stash operations",
+  "soThat": "so that I can manage version control",
+  "criteria": [
+    "Git stash works correctly",
+    "Git stash shows clear feedback",
+    "Git stash handles errors gracefully"
+  ],
+  "effort": "Medium"
+}

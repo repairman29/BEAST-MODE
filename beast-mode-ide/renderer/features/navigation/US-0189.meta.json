@@ -1,0 +1,17 @@
+{
+  "id": "US-0189",
+  "title": "Navigate reference (keyboard)",
+  "category": "Core Coding - Navigation",
+  "priority": "P0",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to navigate reference using keyboard",
+  "soThat": "so that I can find code quickly",
+  "criteria": [
+    "Navigation works with keyboard",
+    "Navigation is fast",
+    "Navigation is intuitive"
+  ],
+  "effort": "Small"
+}

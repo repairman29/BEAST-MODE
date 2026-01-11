@@ -1,0 +1,17 @@
+{
+  "id": "US-0194",
+  "title": "Navigate outline (mouse)",
+  "category": "Core Coding - Navigation",
+  "priority": "P0",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to navigate outline using mouse",
+  "soThat": "so that I can find code quickly",
+  "criteria": [
+    "Navigation works with mouse",
+    "Navigation is fast",
+    "Navigation is intuitive"
+  ],
+  "effort": "Small"
+}

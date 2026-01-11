@@ -1,0 +1,17 @@
+{
+  "id": "US-0526",
+  "title": "Generate enum (from-usage, typescript)",
+  "category": "AI Assistance - Code Generation",
+  "priority": "P1",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to generate enum from-usage in typescript",
+  "soThat": "so that I can code faster",
+  "criteria": [
+    "Generated enum is correct",
+    "Generated enum follows best practices",
+    "Generated enum is well-documented"
+  ],
+  "effort": "Medium"
+}

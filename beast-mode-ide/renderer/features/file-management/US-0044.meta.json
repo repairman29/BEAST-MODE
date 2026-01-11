@@ -1,0 +1,17 @@
+{
+  "id": "US-0044",
+  "title": "Move File (mouse)",
+  "category": "Core Coding - File Management",
+  "priority": "P0",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to move files using mouse",
+  "soThat": "so that I can manage files efficiently",
+  "criteria": [
+    "File move works with mouse",
+    "Error handling for invalid operations",
+    "Feedback provided for all actions"
+  ],
+  "effort": "Small"
+}

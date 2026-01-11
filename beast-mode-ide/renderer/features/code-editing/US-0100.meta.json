@@ -1,0 +1,17 @@
+{
+  "id": "US-0100",
+  "title": "syntax highlighting (advanced)",
+  "category": "Core Coding - Code Editing",
+  "priority": "P1",
+  "userType": "Intermediate",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use syntax-highlighting at advanced level",
+  "soThat": "so that I can edit code efficiently",
+  "criteria": [
+    "syntax-highlighting works correctly",
+    "syntax-highlighting is performant",
+    "syntax-highlighting is accessible"
+  ],
+  "effort": "Medium"
+}

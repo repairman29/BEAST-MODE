@@ -1,0 +1,17 @@
+{
+  "id": "US-0808",
+  "title": "analytics",
+  "category": "Enterprise - Management",
+  "priority": "P1",
+  "userType": "Enterprise Admin",
+  "platform": "All",
+  "as": "an enterprise admin",
+  "want": "to manage analytics",
+  "soThat": "so that the platform is managed",
+  "criteria": [
+    "analytics works",
+    "analytics is comprehensive",
+    "analytics provides insights"
+  ],
+  "effort": "Medium"
+}

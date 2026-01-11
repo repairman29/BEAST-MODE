@@ -1,0 +1,17 @@
+{
+  "id": "US-0318",
+  "title": "Git revert (advanced)",
+  "category": "Core Coding - Git Integration",
+  "priority": "P1",
+  "userType": "Intermediate",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to perform git revert operations",
+  "soThat": "so that I can manage version control",
+  "criteria": [
+    "Git revert works correctly",
+    "Git revert shows clear feedback",
+    "Git revert handles errors gracefully"
+  ],
+  "effort": "Medium"
+}

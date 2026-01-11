@@ -1,0 +1,17 @@
+{
+  "id": "US-0205",
+  "title": "intellisense for typescript",
+  "category": "Core Coding - Code Completion",
+  "priority": "P0",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use intellisense when coding in typescript",
+  "soThat": "so that I can write typescript code faster",
+  "criteria": [
+    "intellisense works for typescript",
+    "intellisense is accurate",
+    "intellisense is fast"
+  ],
+  "effort": "Small"
+}

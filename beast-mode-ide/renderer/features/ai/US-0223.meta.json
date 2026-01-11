@@ -1,0 +1,17 @@
+{
+  "id": "US-0223",
+  "title": "Generate function (from-test, python)",
+  "category": "AI Assistance - Code Generation",
+  "priority": "P0",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to generate function from-test in python",
+  "soThat": "so that I can code faster",
+  "criteria": [
+    "Generated function is correct",
+    "Generated function follows best practices",
+    "Generated function is well-documented"
+  ],
+  "effort": "Small"
+}

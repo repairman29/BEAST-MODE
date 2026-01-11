@@ -1,0 +1,17 @@
+{
+  "id": "US-0950",
+  "title": "resource-limits (server)",
+  "category": "Edge Cases - Performance",
+  "priority": "P1",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use IDE with resource limits on server",
+  "soThat": "so that the IDE works on any device",
+  "criteria": [
+    "resource-limits works on server",
+    "resource-limits is efficient",
+    "resource-limits doesn't degrade UX"
+  ],
+  "effort": "Medium"
+}

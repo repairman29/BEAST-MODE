@@ -1,0 +1,17 @@
+{
+  "id": "US-0534",
+  "title": "testing < 1s",
+  "category": "Performance - Code Performance",
+  "priority": "P0",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to have testing complete in < 1s",
+  "soThat": "so that I don't wait",
+  "criteria": [
+    "testing completes in < 1s",
+    "testing is accurate",
+    "testing doesn't block"
+  ],
+  "effort": "Small"
+}

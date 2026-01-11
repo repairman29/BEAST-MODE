@@ -1,0 +1,17 @@
+{
+  "id": "US-0618",
+  "title": "approval",
+  "category": "Collaboration - Code Review",
+  "priority": "P1",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use approval",
+  "soThat": "so that code reviews are efficient",
+  "criteria": [
+    "approval works correctly",
+    "approval is intuitive",
+    "approval provides feedback"
+  ],
+  "effort": "Medium"
+}

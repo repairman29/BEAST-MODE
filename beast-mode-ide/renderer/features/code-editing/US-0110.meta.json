@@ -1,0 +1,17 @@
+{
+  "id": "US-0110",
+  "title": "code folding (expert)",
+  "category": "Core Coding - Code Editing",
+  "priority": "P2",
+  "userType": "Expert",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use code-folding at expert level",
+  "soThat": "so that I can edit code efficiently",
+  "criteria": [
+    "code-folding works correctly",
+    "code-folding is performant",
+    "code-folding is accessible"
+  ],
+  "effort": "Large"
+}

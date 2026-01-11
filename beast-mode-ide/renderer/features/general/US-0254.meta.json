@@ -1,0 +1,17 @@
+{
+  "id": "US-0254",
+  "title": "quick-fix for javascript",
+  "category": "Core Coding - Code Completion",
+  "priority": "P0",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use quick-fix when coding in javascript",
+  "soThat": "so that I can write javascript code faster",
+  "criteria": [
+    "quick-fix works for javascript",
+    "quick-fix is accurate",
+    "quick-fix is fast"
+  ],
+  "effort": "Small"
+}

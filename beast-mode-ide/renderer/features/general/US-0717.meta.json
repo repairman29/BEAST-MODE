@@ -1,0 +1,17 @@
+{
+  "id": "US-0717",
+  "title": "macros",
+  "category": "Developer Experience - Productivity",
+  "priority": "P1",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use macros",
+  "soThat": "so that I can work faster",
+  "criteria": [
+    "macros works",
+    "macros is fast",
+    "macros is discoverable"
+  ],
+  "effort": "Medium"
+}

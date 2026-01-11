@@ -1,0 +1,17 @@
+{
+  "id": "US-0320",
+  "title": "Git push (advanced)",
+  "category": "Core Coding - Git Integration",
+  "priority": "P1",
+  "userType": "Intermediate",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to perform git push operations",
+  "soThat": "so that I can manage version control",
+  "criteria": [
+    "Git push works correctly",
+    "Git push shows clear feedback",
+    "Git push handles errors gracefully"
+  ],
+  "effort": "Medium"
+}

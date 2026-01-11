@@ -1,0 +1,17 @@
+{
+  "id": "US-0276",
+  "title": "auto-import for dart",
+  "category": "Core Coding - Code Completion",
+  "priority": "P1",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use auto-import when coding in dart",
+  "soThat": "so that I can write dart code faster",
+  "criteria": [
+    "auto-import works for dart",
+    "auto-import is accurate",
+    "auto-import is fast"
+  ],
+  "effort": "Medium"
+}

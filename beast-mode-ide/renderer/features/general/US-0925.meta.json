@@ -1,0 +1,17 @@
+{
+  "id": "US-0925",
+  "title": "legacy-code (Windows)",
+  "category": "Edge Cases - Compatibility",
+  "priority": "P1",
+  "userType": "All",
+  "platform": "Windows",
+  "as": "a developer",
+  "want": "to use legacy code on Windows",
+  "soThat": "so that the IDE works everywhere",
+  "criteria": [
+    "legacy-code works on Windows",
+    "legacy-code is performant",
+    "legacy-code is reliable"
+  ],
+  "effort": "Medium"
+}

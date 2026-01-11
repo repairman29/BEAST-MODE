@@ -1,0 +1,17 @@
+{
+  "id": "US-0616",
+  "title": "inline comments",
+  "category": "Collaboration - Code Review",
+  "priority": "P0",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use inline comments",
+  "soThat": "so that code reviews are efficient",
+  "criteria": [
+    "inline-comments works correctly",
+    "inline-comments is intuitive",
+    "inline-comments provides feedback"
+  ],
+  "effort": "Small"
+}

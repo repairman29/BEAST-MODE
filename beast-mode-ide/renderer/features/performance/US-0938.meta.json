@@ -1,0 +1,17 @@
+{
+  "id": "US-0938",
+  "title": "slow-machine (server)",
+  "category": "Edge Cases - Performance",
+  "priority": "P1",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use IDE with slow machine on server",
+  "soThat": "so that the IDE works on any device",
+  "criteria": [
+    "slow-machine works on server",
+    "slow-machine is efficient",
+    "slow-machine doesn't degrade UX"
+  ],
+  "effort": "Medium"
+}

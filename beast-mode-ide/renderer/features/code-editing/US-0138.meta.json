@@ -1,0 +1,17 @@
+{
+  "id": "US-0138",
+  "title": "inline errors (basic)",
+  "category": "Core Coding - Code Editing",
+  "priority": "P0",
+  "userType": "Beginner",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use inline-errors at basic level",
+  "soThat": "so that I can edit code efficiently",
+  "criteria": [
+    "inline-errors works correctly",
+    "inline-errors is performant",
+    "inline-errors is accessible"
+  ],
+  "effort": "Small"
+}

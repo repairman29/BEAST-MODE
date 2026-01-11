@@ -1,0 +1,17 @@
+{
+  "id": "US-0091",
+  "title": "Compare File (git)",
+  "category": "Core Coding - File Management",
+  "priority": "P2",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to compare files using git",
+  "soThat": "so that I can manage files efficiently",
+  "criteria": [
+    "File compare works with git",
+    "Error handling for invalid operations",
+    "Feedback provided for all actions"
+  ],
+  "effort": "Large"
+}

@@ -1,0 +1,17 @@
+{
+  "id": "US-0573",
+  "title": "Generate utility (from-example, python)",
+  "category": "AI Assistance - Code Generation",
+  "priority": "P1",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to generate utility from-example in python",
+  "soThat": "so that I can code faster",
+  "criteria": [
+    "Generated utility is correct",
+    "Generated utility follows best practices",
+    "Generated utility is well-documented"
+  ],
+  "effort": "Medium"
+}

@@ -1,0 +1,17 @@
+{
+  "id": "US-0701",
+  "title": "Customize themes (basic)",
+  "category": "Developer Experience - Customization",
+  "priority": "P0",
+  "userType": "Beginner",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to customize themes at basic level",
+  "soThat": "so that the IDE works for me",
+  "criteria": [
+    "themes customization works",
+    "themes customization is intuitive",
+    "themes customization is saved"
+  ],
+  "effort": "Small"
+}

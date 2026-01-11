@@ -1,0 +1,17 @@
+{
+  "id": "US-0921",
+  "title": "multi-platform (Mac)",
+  "category": "Edge Cases - Compatibility",
+  "priority": "P0",
+  "userType": "All",
+  "platform": "Mac",
+  "as": "a developer",
+  "want": "to use multi platform on Mac",
+  "soThat": "so that the IDE works everywhere",
+  "criteria": [
+    "multi-platform works on Mac",
+    "multi-platform is performant",
+    "multi-platform is reliable"
+  ],
+  "effort": "Small"
+}

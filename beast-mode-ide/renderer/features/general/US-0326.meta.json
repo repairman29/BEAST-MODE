@@ -1,0 +1,17 @@
+{
+  "id": "US-0326",
+  "title": "Git rebase (advanced)",
+  "category": "Core Coding - Git Integration",
+  "priority": "P1",
+  "userType": "Intermediate",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to perform git rebase operations",
+  "soThat": "so that I can manage version control",
+  "criteria": [
+    "Git rebase works correctly",
+    "Git rebase shows clear feedback",
+    "Git rebase handles errors gracefully"
+  ],
+  "effort": "Medium"
+}

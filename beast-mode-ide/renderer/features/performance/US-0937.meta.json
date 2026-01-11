@@ -1,0 +1,17 @@
+{
+  "id": "US-0937",
+  "title": "slow-machine (desktop)",
+  "category": "Edge Cases - Performance",
+  "priority": "P1",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use IDE with slow machine on desktop",
+  "soThat": "so that the IDE works on any device",
+  "criteria": [
+    "slow-machine works on desktop",
+    "slow-machine is efficient",
+    "slow-machine doesn't degrade UX"
+  ],
+  "effort": "Medium"
+}

@@ -1,0 +1,17 @@
+{
+  "id": "US-0389",
+  "title": "Generate hook (from-description, java)",
+  "category": "AI Assistance - Code Generation",
+  "priority": "P1",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to generate hook from-description in java",
+  "soThat": "so that I can code faster",
+  "criteria": [
+    "Generated hook is correct",
+    "Generated hook follows best practices",
+    "Generated hook is well-documented"
+  ],
+  "effort": "Medium"
+}

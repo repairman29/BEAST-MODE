@@ -1,0 +1,17 @@
+{
+  "id": "US-0309",
+  "title": "Git merge (basic)",
+  "category": "Core Coding - Git Integration",
+  "priority": "P0",
+  "userType": "Beginner",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to perform git merge operations",
+  "soThat": "so that I can manage version control",
+  "criteria": [
+    "Git merge works correctly",
+    "Git merge shows clear feedback",
+    "Git merge handles errors gracefully"
+  ],
+  "effort": "Small"
+}

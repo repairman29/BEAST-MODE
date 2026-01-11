@@ -1,0 +1,17 @@
+{
+  "id": "US-0625",
+  "title": "Team workspace",
+  "category": "Collaboration - Team Features",
+  "priority": "P1",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use team workspace",
+  "soThat": "so that team collaboration is easy",
+  "criteria": [
+    "Team workspace works",
+    "Team workspace is useful",
+    "Team workspace is accessible"
+  ],
+  "effort": "Medium"
+}

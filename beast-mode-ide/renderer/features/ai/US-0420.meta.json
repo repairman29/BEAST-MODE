@@ -1,0 +1,17 @@
+{
+  "id": "US-0420",
+  "title": "Generate service (from-description, go)",
+  "category": "AI Assistance - Code Generation",
+  "priority": "P1",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to generate service from-description in go",
+  "soThat": "so that I can code faster",
+  "criteria": [
+    "Generated service is correct",
+    "Generated service follows best practices",
+    "Generated service is well-documented"
+  ],
+  "effort": "Medium"
+}

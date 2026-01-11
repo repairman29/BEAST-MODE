@@ -1,0 +1,17 @@
+{
+  "id": "US-0136",
+  "title": "code lens (advanced)",
+  "category": "Core Coding - Code Editing",
+  "priority": "P1",
+  "userType": "Intermediate",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use code-lens at advanced level",
+  "soThat": "so that I can edit code efficiently",
+  "criteria": [
+    "code-lens works correctly",
+    "code-lens is performant",
+    "code-lens is accessible"
+  ],
+  "effort": "Medium"
+}

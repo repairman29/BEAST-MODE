@@ -1,0 +1,17 @@
+{
+  "id": "US-0617",
+  "title": "review requests",
+  "category": "Collaboration - Code Review",
+  "priority": "P1",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use review requests",
+  "soThat": "so that code reviews are efficient",
+  "criteria": [
+    "review-requests works correctly",
+    "review-requests is intuitive",
+    "review-requests provides feedback"
+  ],
+  "effort": "Medium"
+}

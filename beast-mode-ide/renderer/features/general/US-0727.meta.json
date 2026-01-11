@@ -1,0 +1,17 @@
+{
+  "id": "US-0727",
+  "title": "tips",
+  "category": "Developer Experience - Learning",
+  "priority": "P1",
+  "userType": "Beginner",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to access tips",
+  "soThat": "so that I can learn the IDE",
+  "criteria": [
+    "tips is helpful",
+    "tips is clear",
+    "tips is discoverable"
+  ],
+  "effort": "Medium"
+}

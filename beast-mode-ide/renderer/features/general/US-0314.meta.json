@@ -1,0 +1,17 @@
+{
+  "id": "US-0314",
+  "title": "Git log (advanced)",
+  "category": "Core Coding - Git Integration",
+  "priority": "P1",
+  "userType": "Intermediate",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to perform git log operations",
+  "soThat": "so that I can manage version control",
+  "criteria": [
+    "Git log works correctly",
+    "Git log shows clear feedback",
+    "Git log handles errors gracefully"
+  ],
+  "effort": "Medium"
+}

@@ -1,0 +1,17 @@
+{
+  "id": "US-0213",
+  "title": "Generate function (from-example, python)",
+  "category": "AI Assistance - Code Generation",
+  "priority": "P0",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to generate function from-example in python",
+  "soThat": "so that I can code faster",
+  "criteria": [
+    "Generated function is correct",
+    "Generated function follows best practices",
+    "Generated function is well-documented"
+  ],
+  "effort": "Small"
+}

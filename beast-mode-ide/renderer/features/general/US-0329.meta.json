@@ -1,0 +1,17 @@
+{
+  "id": "US-0329",
+  "title": "Git tag (basic)",
+  "category": "Core Coding - Git Integration",
+  "priority": "P0",
+  "userType": "Beginner",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to perform git tag operations",
+  "soThat": "so that I can manage version control",
+  "criteria": [
+    "Git tag works correctly",
+    "Git tag shows clear feedback",
+    "Git tag handles errors gracefully"
+  ],
+  "effort": "Small"
+}

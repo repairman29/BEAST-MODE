@@ -1,0 +1,17 @@
+{
+  "id": "US-0422",
+  "title": "Linting real-time (javascript)",
+  "category": "Quality Assurance - Linting",
+  "priority": "P0",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use linting real-time for javascript",
+  "soThat": "so that code follows standards",
+  "criteria": [
+    "Linting real-time works for javascript",
+    "Linting real-time is fast",
+    "Linting real-time is accurate"
+  ],
+  "effort": "Small"
+}

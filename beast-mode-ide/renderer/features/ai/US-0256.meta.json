@@ -1,0 +1,17 @@
+{
+  "id": "US-0256",
+  "title": "Generate class (from-usage, typescript)",
+  "category": "AI Assistance - Code Generation",
+  "priority": "P0",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to generate class from-usage in typescript",
+  "soThat": "so that I can code faster",
+  "criteria": [
+    "Generated class is correct",
+    "Generated class follows best practices",
+    "Generated class is well-documented"
+  ],
+  "effort": "Small"
+}

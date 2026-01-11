@@ -1,0 +1,17 @@
+{
+  "id": "US-0523",
+  "title": "build efficient",
+  "category": "Performance - IDE Performance",
+  "priority": "P1",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to have efficient build",
+  "soThat": "so that the IDE is responsive",
+  "criteria": [
+    "build is efficient",
+    "build doesn't block",
+    "build scales well"
+  ],
+  "effort": "Medium"
+}

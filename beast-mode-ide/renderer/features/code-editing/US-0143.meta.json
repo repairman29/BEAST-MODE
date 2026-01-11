@@ -1,0 +1,17 @@
+{
+  "id": "US-0143",
+  "title": "hover info (expert)",
+  "category": "Core Coding - Code Editing",
+  "priority": "P2",
+  "userType": "Expert",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use hover-info at expert level",
+  "soThat": "so that I can edit code efficiently",
+  "criteria": [
+    "hover-info works correctly",
+    "hover-info is performant",
+    "hover-info is accessible"
+  ],
+  "effort": "Large"
+}

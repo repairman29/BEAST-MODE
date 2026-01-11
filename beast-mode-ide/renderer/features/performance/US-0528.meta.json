@@ -1,0 +1,17 @@
+{
+  "id": "US-0528",
+  "title": "ai-response < 1s",
+  "category": "Performance - Code Performance",
+  "priority": "P0",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to have ai-response complete in < 1s",
+  "soThat": "so that I don't wait",
+  "criteria": [
+    "ai-response completes in < 1s",
+    "ai-response is accurate",
+    "ai-response doesn't block"
+  ],
+  "effort": "Small"
+}

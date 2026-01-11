@@ -1,0 +1,17 @@
+{
+  "id": "US-0268",
+  "title": "auto-import for java",
+  "category": "Core Coding - Code Completion",
+  "priority": "P1",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use auto-import when coding in java",
+  "soThat": "so that I can write java code faster",
+  "criteria": [
+    "auto-import works for java",
+    "auto-import is accurate",
+    "auto-import is fast"
+  ],
+  "effort": "Medium"
+}

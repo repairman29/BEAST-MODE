@@ -1,0 +1,17 @@
+{
+  "id": "US-0705",
+  "title": "Customize keybindings (advanced)",
+  "category": "Developer Experience - Customization",
+  "priority": "P1",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to customize keybindings at advanced level",
+  "soThat": "so that the IDE works for me",
+  "criteria": [
+    "keybindings customization works",
+    "keybindings customization is intuitive",
+    "keybindings customization is saved"
+  ],
+  "effort": "Medium"
+}

@@ -1,0 +1,17 @@
+{
+  "id": "US-0289",
+  "title": "documentation for typescript",
+  "category": "Core Coding - Code Completion",
+  "priority": "P0",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use documentation when coding in typescript",
+  "soThat": "so that I can write typescript code faster",
+  "criteria": [
+    "documentation works for typescript",
+    "documentation is accurate",
+    "documentation is fast"
+  ],
+  "effort": "Small"
+}

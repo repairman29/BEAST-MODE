@@ -1,0 +1,17 @@
+{
+  "id": "US-0403",
+  "title": "Quality score (class)",
+  "category": "Quality Assurance - Code Quality",
+  "priority": "P0",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to see quality score for class",
+  "soThat": "so that I can track code quality",
+  "criteria": [
+    "score is accurate",
+    "score is visible",
+    "score is actionable"
+  ],
+  "effort": "Small"
+}

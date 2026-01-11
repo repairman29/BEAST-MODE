@@ -1,0 +1,17 @@
+{
+  "id": "US-0728",
+  "title": "shortcuts",
+  "category": "Developer Experience - Learning",
+  "priority": "P1",
+  "userType": "Beginner",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to access shortcuts",
+  "soThat": "so that I can learn the IDE",
+  "criteria": [
+    "shortcuts is helpful",
+    "shortcuts is clear",
+    "shortcuts is discoverable"
+  ],
+  "effort": "Medium"
+}

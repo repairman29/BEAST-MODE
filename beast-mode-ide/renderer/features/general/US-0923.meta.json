@@ -1,0 +1,17 @@
+{
+  "id": "US-0923",
+  "title": "multi-platform (Linux)",
+  "category": "Edge Cases - Compatibility",
+  "priority": "P0",
+  "userType": "All",
+  "platform": "Linux",
+  "as": "a developer",
+  "want": "to use multi platform on Linux",
+  "soThat": "so that the IDE works everywhere",
+  "criteria": [
+    "multi-platform works on Linux",
+    "multi-platform is performant",
+    "multi-platform is reliable"
+  ],
+  "effort": "Small"
+}

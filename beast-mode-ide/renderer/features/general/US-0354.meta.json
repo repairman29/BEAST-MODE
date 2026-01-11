@@ -1,0 +1,17 @@
+{
+  "id": "US-0354",
+  "title": "Terminal tasks (Mac)",
+  "category": "Core Coding - Terminal",
+  "priority": "P1",
+  "userType": "All",
+  "platform": "Mac",
+  "as": "a developer",
+  "want": "to use terminal tasks on Mac",
+  "soThat": "so that I can run commands efficiently",
+  "criteria": [
+    "Terminal tasks works on Mac",
+    "Terminal tasks is performant",
+    "Terminal tasks is accessible"
+  ],
+  "effort": "Medium"
+}

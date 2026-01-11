@@ -1,0 +1,17 @@
+{
+  "id": "US-0157",
+  "title": "peek definition (advanced)",
+  "category": "Core Coding - Code Editing",
+  "priority": "P1",
+  "userType": "Intermediate",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use peek-definition at advanced level",
+  "soThat": "so that I can edit code efficiently",
+  "criteria": [
+    "peek-definition works correctly",
+    "peek-definition is performant",
+    "peek-definition is accessible"
+  ],
+  "effort": "Medium"
+}

@@ -1,0 +1,17 @@
+{
+  "id": "US-0294",
+  "title": "documentation for rust",
+  "category": "Core Coding - Code Completion",
+  "priority": "P1",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use documentation when coding in rust",
+  "soThat": "so that I can write rust code faster",
+  "criteria": [
+    "documentation works for rust",
+    "documentation is accurate",
+    "documentation is fast"
+  ],
+  "effort": "Medium"
+}

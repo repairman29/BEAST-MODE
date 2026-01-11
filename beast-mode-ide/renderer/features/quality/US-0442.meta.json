@@ -1,0 +1,17 @@
+{
+  "id": "US-0442",
+  "title": "integration test run",
+  "category": "Quality Assurance - Testing",
+  "priority": "P0",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to run integration tests",
+  "soThat": "so that I can ensure code quality",
+  "criteria": [
+    "integration test run works",
+    "integration test run is fast",
+    "integration test run is reliable"
+  ],
+  "effort": "Small"
+}

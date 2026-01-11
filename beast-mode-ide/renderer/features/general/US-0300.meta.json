@@ -1,0 +1,17 @@
+{
+  "id": "US-0300",
+  "title": "documentation for dart",
+  "category": "Core Coding - Code Completion",
+  "priority": "P1",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use documentation when coding in dart",
+  "soThat": "so that I can write dart code faster",
+  "criteria": [
+    "documentation works for dart",
+    "documentation is accurate",
+    "documentation is fast"
+  ],
+  "effort": "Medium"
+}

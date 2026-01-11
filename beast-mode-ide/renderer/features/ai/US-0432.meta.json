@@ -1,0 +1,17 @@
+{
+  "id": "US-0432",
+  "title": "Generate service (from-test, javascript)",
+  "category": "AI Assistance - Code Generation",
+  "priority": "P1",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to generate service from-test in javascript",
+  "soThat": "so that I can code faster",
+  "criteria": [
+    "Generated service is correct",
+    "Generated service follows best practices",
+    "Generated service is well-documented"
+  ],
+  "effort": "Medium"
+}

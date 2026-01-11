@@ -1,0 +1,134 @@
+{
+  "total": 1093,
+  "byCategory": [
+    {
+      "category": "Core Coding - File Management",
+      "count": 98
+    },
+    {
+      "category": "Core Coding - Code Editing",
+      "count": 78
+    },
+    {
+      "category": "Core Coding - Navigation",
+      "count": 28
+    },
+    {
+      "category": "Core Coding - Code Completion",
+      "count": 96
+    },
+    {
+      "category": "Core Coding - Git Integration",
+      "count": 32
+    },
+    {
+      "category": "Core Coding - Terminal",
+      "count": 30
+    },
+    {
+      "category": "AI Assistance - Code Generation",
+      "count": 420
+    },
+    {
+      "category": "AI Assistance - Code Suggestions",
+      "count": 20
+    },
+    {
+      "category": "AI Assistance - Code Explanation",
+      "count": 15
+    },
+    {
+      "category": "AI Assistance - Code Chat",
+      "count": 20
+    },
+    {
+      "category": "AI Assistance - Code Transformation",
+      "count": 12
+    },
+    {
+      "category": "Quality Assurance - Code Quality",
+      "count": 20
+    },
+    {
+      "category": "Quality Assurance - Linting",
+      "count": 20
+    },
+    {
+      "category": "Quality Assurance - Testing",
+      "count": 15
+    },
+    {
+      "category": "Quality Assurance - Security",
+      "count": 15
+    },
+    {
+      "category": "Quality Assurance - Performance",
+      "count": 15
+    },
+    {
+      "category": "Performance - IDE Performance",
+      "count": 24
+    },
+    {
+      "category": "Performance - Code Performance",
+      "count": 15
+    },
+    {
+      "category": "Collaboration - Real-Time",
+      "count": 15
+    },
+    {
+      "category": "Collaboration - Code Review",
+      "count": 5
+    },
+    {
+      "category": "Collaboration - Team Features",
+      "count": 5
+    },
+    {
+      "category": "Developer Experience - Customization",
+      "count": 15
+    },
+    {
+      "category": "Developer Experience - Productivity",
+      "count": 5
+    },
+    {
+      "category": "Developer Experience - Accessibility",
+      "count": 5
+    },
+    {
+      "category": "Developer Experience - Learning",
+      "count": 5
+    },
+    {
+      "category": "Enterprise - Security",
+      "count": 5
+    },
+    {
+      "category": "Enterprise - Management",
+      "count": 5
+    },
+    {
+      "category": "Enterprise - Integration",
+      "count": 5
+    },
+    {
+      "category": "Edge Cases - Error Handling",
+      "count": 20
+    },
+    {
+      "category": "Edge Cases - Compatibility",
+      "count": 15
+    },
+    {
+      "category": "Edge Cases - Performance",
+      "count": 15
+    }
+  ],
+  "byPriority": {
+    "P0": 269,
+    "P1": 775,
+    "P2": 49
+  }
+}

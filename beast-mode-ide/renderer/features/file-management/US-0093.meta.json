@@ -1,0 +1,17 @@
+{
+  "id": "US-0093",
+  "title": "Merge File (mouse)",
+  "category": "Core Coding - File Management",
+  "priority": "P2",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to merge files using mouse",
+  "soThat": "so that I can manage files efficiently",
+  "criteria": [
+    "File merge works with mouse",
+    "Error handling for invalid operations",
+    "Feedback provided for all actions"
+  ],
+  "effort": "Large"
+}

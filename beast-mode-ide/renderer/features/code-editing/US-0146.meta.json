@@ -1,0 +1,17 @@
+{
+  "id": "US-0146",
+  "title": "quick fix (expert)",
+  "category": "Core Coding - Code Editing",
+  "priority": "P2",
+  "userType": "Expert",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use quick-fix at expert level",
+  "soThat": "so that I can edit code efficiently",
+  "criteria": [
+    "quick-fix works correctly",
+    "quick-fix is performant",
+    "quick-fix is accessible"
+  ],
+  "effort": "Large"
+}

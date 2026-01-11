@@ -1,0 +1,17 @@
+{
+  "id": "US-0327",
+  "title": "Git cherry-pick (basic)",
+  "category": "Core Coding - Git Integration",
+  "priority": "P0",
+  "userType": "Beginner",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to perform git cherry-pick operations",
+  "soThat": "so that I can manage version control",
+  "criteria": [
+    "Git cherry-pick works correctly",
+    "Git cherry-pick shows clear feedback",
+    "Git cherry-pick handles errors gracefully"
+  ],
+  "effort": "Small"
+}

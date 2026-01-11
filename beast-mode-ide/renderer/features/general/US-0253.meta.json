@@ -1,0 +1,17 @@
+{
+  "id": "US-0253",
+  "title": "quick-fix for typescript",
+  "category": "Core Coding - Code Completion",
+  "priority": "P0",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use quick-fix when coding in typescript",
+  "soThat": "so that I can write typescript code faster",
+  "criteria": [
+    "quick-fix works for typescript",
+    "quick-fix is accurate",
+    "quick-fix is fast"
+  ],
+  "effort": "Small"
+}

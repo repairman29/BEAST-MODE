@@ -1,0 +1,17 @@
+{
+  "id": "US-0277",
+  "title": "type-hints for typescript",
+  "category": "Core Coding - Code Completion",
+  "priority": "P0",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use type-hints when coding in typescript",
+  "soThat": "so that I can write typescript code faster",
+  "criteria": [
+    "type-hints works for typescript",
+    "type-hints is accurate",
+    "type-hints is fast"
+  ],
+  "effort": "Small"
+}

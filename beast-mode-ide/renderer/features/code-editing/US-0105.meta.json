@@ -1,0 +1,17 @@
+{
+  "id": "US-0105",
+  "title": "bracket matching (basic)",
+  "category": "Core Coding - Code Editing",
+  "priority": "P0",
+  "userType": "Beginner",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use bracket-matching at basic level",
+  "soThat": "so that I can edit code efficiently",
+  "criteria": [
+    "bracket-matching works correctly",
+    "bracket-matching is performant",
+    "bracket-matching is accessible"
+  ],
+  "effort": "Small"
+}

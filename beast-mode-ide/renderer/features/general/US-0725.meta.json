@@ -1,0 +1,17 @@
+{
+  "id": "US-0725",
+  "title": "color blind",
+  "category": "Developer Experience - Accessibility",
+  "priority": "P0",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use color blind",
+  "soThat": "so that the IDE is accessible",
+  "criteria": [
+    "color-blind works",
+    "color-blind is complete",
+    "color-blind follows standards"
+  ],
+  "effort": "Small"
+}

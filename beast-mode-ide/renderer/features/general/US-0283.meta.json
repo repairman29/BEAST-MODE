@@ -1,0 +1,17 @@
+{
+  "id": "US-0283",
+  "title": "type-hints for cpp",
+  "category": "Core Coding - Code Completion",
+  "priority": "P1",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use type-hints when coding in cpp",
+  "soThat": "so that I can write cpp code faster",
+  "criteria": [
+    "type-hints works for cpp",
+    "type-hints is accurate",
+    "type-hints is fast"
+  ],
+  "effort": "Medium"
+}

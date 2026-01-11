@@ -1,0 +1,17 @@
+{
+  "id": "US-0602",
+  "title": "share-session (5-users)",
+  "category": "Collaboration - Real-Time",
+  "priority": "P1",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to share session with 5-users",
+  "soThat": "so that we can collaborate",
+  "criteria": [
+    "share-session works with 5-users",
+    "share-session is smooth",
+    "share-session is reliable"
+  ],
+  "effort": "Medium"
+}

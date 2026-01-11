@@ -1,0 +1,16 @@
+{
+  "totalFeatures": 842,
+  "categories": 8,
+  "byCategory": {
+    "ai": 380,
+    "code-editing": 78,
+    "collaboration": 22,
+    "file-management": 93,
+    "general": 192,
+    "navigation": 24,
+    "performance": 36,
+    "quality": 17
+  },
+  "integrated": true,
+  "timestamp": "2026-01-11T19:31:49.269Z"
+}

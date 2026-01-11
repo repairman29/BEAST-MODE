@@ -1,0 +1,17 @@
+{
+  "id": "US-0721",
+  "title": "screen reader",
+  "category": "Developer Experience - Accessibility",
+  "priority": "P0",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use screen reader",
+  "soThat": "so that the IDE is accessible",
+  "criteria": [
+    "screen-reader works",
+    "screen-reader is complete",
+    "screen-reader follows standards"
+  ],
+  "effort": "Small"
+}

@@ -1,0 +1,17 @@
+{
+  "id": "US-0441",
+  "title": "unit test run",
+  "category": "Quality Assurance - Testing",
+  "priority": "P0",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to run unit tests",
+  "soThat": "so that I can ensure code quality",
+  "criteria": [
+    "unit test run works",
+    "unit test run is fast",
+    "unit test run is reliable"
+  ],
+  "effort": "Small"
+}

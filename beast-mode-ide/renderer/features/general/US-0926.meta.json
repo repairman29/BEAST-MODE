@@ -1,0 +1,17 @@
+{
+  "id": "US-0926",
+  "title": "legacy-code (Linux)",
+  "category": "Edge Cases - Compatibility",
+  "priority": "P1",
+  "userType": "All",
+  "platform": "Linux",
+  "as": "a developer",
+  "want": "to use legacy code on Linux",
+  "soThat": "so that the IDE works everywhere",
+  "criteria": [
+    "legacy-code works on Linux",
+    "legacy-code is performant",
+    "legacy-code is reliable"
+  ],
+  "effort": "Medium"
+}

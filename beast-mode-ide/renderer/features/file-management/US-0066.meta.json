@@ -1,0 +1,17 @@
+{
+  "id": "US-0066",
+  "title": "Filter File (command-palette)",
+  "category": "Core Coding - File Management",
+  "priority": "P1",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to filter files using command-palette",
+  "soThat": "so that I can manage files efficiently",
+  "criteria": [
+    "File filter works with command-palette",
+    "Error handling for invalid operations",
+    "Feedback provided for all actions"
+  ],
+  "effort": "Medium"
+}

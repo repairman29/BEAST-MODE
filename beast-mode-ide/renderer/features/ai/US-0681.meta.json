@@ -1,0 +1,17 @@
+{
+  "id": "US-0681",
+  "title": "Convert java to python",
+  "category": "AI Assistance - Code Transformation",
+  "priority": "P1",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to convert code from java to python",
+  "soThat": "so that I can port code easily",
+  "criteria": [
+    "Conversion is accurate",
+    "Conversion preserves functionality",
+    "Conversion follows python best practices"
+  ],
+  "effort": "Medium"
+}

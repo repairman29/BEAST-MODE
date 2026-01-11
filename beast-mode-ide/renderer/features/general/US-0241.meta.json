@@ -1,0 +1,17 @@
+{
+  "id": "US-0241",
+  "title": "parameters for typescript",
+  "category": "Core Coding - Code Completion",
+  "priority": "P0",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use parameters when coding in typescript",
+  "soThat": "so that I can write typescript code faster",
+  "criteria": [
+    "parameters works for typescript",
+    "parameters is accurate",
+    "parameters is fast"
+  ],
+  "effort": "Small"
+}

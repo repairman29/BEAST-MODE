@@ -1,0 +1,17 @@
+{
+  "id": "US-0270",
+  "title": "auto-import for rust",
+  "category": "Core Coding - Code Completion",
+  "priority": "P1",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use auto-import when coding in rust",
+  "soThat": "so that I can write rust code faster",
+  "criteria": [
+    "auto-import works for rust",
+    "auto-import is accurate",
+    "auto-import is fast"
+  ],
+  "effort": "Medium"
+}

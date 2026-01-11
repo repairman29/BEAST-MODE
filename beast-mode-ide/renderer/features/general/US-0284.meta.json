@@ -1,0 +1,17 @@
+{
+  "id": "US-0284",
+  "title": "type-hints for ruby",
+  "category": "Core Coding - Code Completion",
+  "priority": "P1",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use type-hints when coding in ruby",
+  "soThat": "so that I can write ruby code faster",
+  "criteria": [
+    "type-hints works for ruby",
+    "type-hints is accurate",
+    "type-hints is fast"
+  ],
+  "effort": "Medium"
+}

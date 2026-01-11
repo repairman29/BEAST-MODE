@@ -1,0 +1,17 @@
+{
+  "id": "US-0112",
+  "title": "multiple cursors (advanced)",
+  "category": "Core Coding - Code Editing",
+  "priority": "P1",
+  "userType": "Intermediate",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use multiple-cursors at advanced level",
+  "soThat": "so that I can edit code efficiently",
+  "criteria": [
+    "multiple-cursors works correctly",
+    "multiple-cursors is performant",
+    "multiple-cursors is accessible"
+  ],
+  "effort": "Medium"
+}

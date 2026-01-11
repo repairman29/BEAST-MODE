@@ -1,0 +1,17 @@
+{
+  "id": "US-0183",
+  "title": "Navigate symbol (search)",
+  "category": "Core Coding - Navigation",
+  "priority": "P0",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to navigate symbol using search",
+  "soThat": "so that I can find code quickly",
+  "criteria": [
+    "Navigation works with search",
+    "Navigation is fast",
+    "Navigation is intuitive"
+  ],
+  "effort": "Small"
+}

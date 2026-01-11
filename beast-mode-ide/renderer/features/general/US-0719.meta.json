@@ -1,0 +1,17 @@
+{
+  "id": "US-0719",
+  "title": "shortcuts",
+  "category": "Developer Experience - Productivity",
+  "priority": "P1",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use shortcuts",
+  "soThat": "so that I can work faster",
+  "criteria": [
+    "shortcuts works",
+    "shortcuts is fast",
+    "shortcuts is discoverable"
+  ],
+  "effort": "Medium"
+}

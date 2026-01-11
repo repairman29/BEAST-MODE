@@ -1,0 +1,17 @@
+{
+  "id": "US-0943",
+  "title": "battery-saving (desktop)",
+  "category": "Edge Cases - Performance",
+  "priority": "P1",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use IDE with battery saving on desktop",
+  "soThat": "so that the IDE works on any device",
+  "criteria": [
+    "battery-saving works on desktop",
+    "battery-saving is efficient",
+    "battery-saving doesn't degrade UX"
+  ],
+  "effort": "Medium"
+}

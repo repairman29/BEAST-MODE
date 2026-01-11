@@ -1,0 +1,17 @@
+{
+  "id": "US-0307",
+  "title": "Git branch (basic)",
+  "category": "Core Coding - Git Integration",
+  "priority": "P0",
+  "userType": "Beginner",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to perform git branch operations",
+  "soThat": "so that I can manage version control",
+  "criteria": [
+    "Git branch works correctly",
+    "Git branch shows clear feedback",
+    "Git branch handles errors gracefully"
+  ],
+  "effort": "Small"
+}

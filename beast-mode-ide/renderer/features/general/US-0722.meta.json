@@ -1,0 +1,17 @@
+{
+  "id": "US-0722",
+  "title": "high contrast",
+  "category": "Developer Experience - Accessibility",
+  "priority": "P0",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use high contrast",
+  "soThat": "so that the IDE is accessible",
+  "criteria": [
+    "high-contrast works",
+    "high-contrast is complete",
+    "high-contrast follows standards"
+  ],
+  "effort": "Small"
+}

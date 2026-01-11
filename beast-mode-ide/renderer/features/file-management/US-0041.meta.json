@@ -1,0 +1,17 @@
+{
+  "id": "US-0041",
+  "title": "Duplicate File (terminal)",
+  "category": "Core Coding - File Management",
+  "priority": "P0",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to duplicate files using terminal",
+  "soThat": "so that I can manage files efficiently",
+  "criteria": [
+    "File duplicate works with terminal",
+    "Error handling for invalid operations",
+    "Feedback provided for all actions"
+  ],
+  "effort": "Small"
+}

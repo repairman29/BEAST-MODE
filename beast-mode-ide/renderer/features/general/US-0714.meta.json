@@ -1,0 +1,17 @@
+{
+  "id": "US-0714",
+  "title": "Customize colors (advanced)",
+  "category": "Developer Experience - Customization",
+  "priority": "P1",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to customize colors at advanced level",
+  "soThat": "so that the IDE works for me",
+  "criteria": [
+    "colors customization works",
+    "colors customization is intuitive",
+    "colors customization is saved"
+  ],
+  "effort": "Medium"
+}

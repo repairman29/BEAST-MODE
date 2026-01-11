@@ -1,0 +1,17 @@
+{
+  "id": "US-0286",
+  "title": "type-hints for swift",
+  "category": "Core Coding - Code Completion",
+  "priority": "P1",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use type-hints when coding in swift",
+  "soThat": "so that I can write swift code faster",
+  "criteria": [
+    "type-hints works for swift",
+    "type-hints is accurate",
+    "type-hints is fast"
+  ],
+  "effort": "Medium"
+}

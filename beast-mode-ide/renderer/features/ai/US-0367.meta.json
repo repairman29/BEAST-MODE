@@ -1,0 +1,17 @@
+{
+  "id": "US-0367",
+  "title": "Generate component (from-spec, javascript)",
+  "category": "AI Assistance - Code Generation",
+  "priority": "P1",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to generate component from-spec in javascript",
+  "soThat": "so that I can code faster",
+  "criteria": [
+    "Generated component is correct",
+    "Generated component follows best practices",
+    "Generated component is well-documented"
+  ],
+  "effort": "Medium"
+}

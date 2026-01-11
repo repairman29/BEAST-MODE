@@ -1,0 +1,17 @@
+{
+  "id": "US-0922",
+  "title": "multi-platform (Windows)",
+  "category": "Edge Cases - Compatibility",
+  "priority": "P0",
+  "userType": "All",
+  "platform": "Windows",
+  "as": "a developer",
+  "want": "to use multi platform on Windows",
+  "soThat": "so that the IDE works everywhere",
+  "criteria": [
+    "multi-platform works on Windows",
+    "multi-platform is performant",
+    "multi-platform is reliable"
+  ],
+  "effort": "Small"
+}

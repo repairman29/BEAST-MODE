@@ -1,0 +1,17 @@
+{
+  "id": "US-0439",
+  "title": "Generate service (from-usage, java)",
+  "category": "AI Assistance - Code Generation",
+  "priority": "P1",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to generate service from-usage in java",
+  "soThat": "so that I can code faster",
+  "criteria": [
+    "Generated service is correct",
+    "Generated service follows best practices",
+    "Generated service is well-documented"
+  ],
+  "effort": "Medium"
+}

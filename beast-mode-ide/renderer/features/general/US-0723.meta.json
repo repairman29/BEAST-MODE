@@ -1,0 +1,17 @@
+{
+  "id": "US-0723",
+  "title": "keyboard nav",
+  "category": "Developer Experience - Accessibility",
+  "priority": "P0",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use keyboard nav",
+  "soThat": "so that the IDE is accessible",
+  "criteria": [
+    "keyboard-nav works",
+    "keyboard-nav is complete",
+    "keyboard-nav follows standards"
+  ],
+  "effort": "Small"
+}

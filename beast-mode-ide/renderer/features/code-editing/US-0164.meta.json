@@ -1,0 +1,17 @@
+{
+  "id": "US-0164",
+  "title": "symbol highlight (expert)",
+  "category": "Core Coding - Code Editing",
+  "priority": "P2",
+  "userType": "Expert",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use symbol-highlight at expert level",
+  "soThat": "so that I can edit code efficiently",
+  "criteria": [
+    "symbol-highlight works correctly",
+    "symbol-highlight is performant",
+    "symbol-highlight is accessible"
+  ],
+  "effort": "Large"
+}

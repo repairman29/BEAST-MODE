@@ -1,0 +1,17 @@
+{
+  "id": "US-0647",
+  "title": "Explain algorithm (simple)",
+  "category": "AI Assistance - Code Explanation",
+  "priority": "P1",
+  "userType": "Beginner",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to get simple explanation of algorithm",
+  "soThat": "so that I understand the code",
+  "criteria": [
+    "Explanation is clear",
+    "Explanation is accurate",
+    "Explanation is helpful"
+  ],
+  "effort": "Medium"
+}

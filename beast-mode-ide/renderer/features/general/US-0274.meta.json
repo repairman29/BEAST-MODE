@@ -1,0 +1,17 @@
+{
+  "id": "US-0274",
+  "title": "auto-import for swift",
+  "category": "Core Coding - Code Completion",
+  "priority": "P1",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use auto-import when coding in swift",
+  "soThat": "so that I can write swift code faster",
+  "criteria": [
+    "auto-import works for swift",
+    "auto-import is accurate",
+    "auto-import is fast"
+  ],
+  "effort": "Medium"
+}

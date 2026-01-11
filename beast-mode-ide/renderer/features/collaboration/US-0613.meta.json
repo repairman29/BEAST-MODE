@@ -1,0 +1,17 @@
+{
+  "id": "US-0613",
+  "title": "screen-share (2-users)",
+  "category": "Collaboration - Real-Time",
+  "priority": "P0",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to screen share with 2-users",
+  "soThat": "so that we can collaborate",
+  "criteria": [
+    "screen-share works with 2-users",
+    "screen-share is smooth",
+    "screen-share is reliable"
+  ],
+  "effort": "Small"
+}

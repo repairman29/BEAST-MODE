@@ -1,0 +1,17 @@
+{
+  "id": "US-0122",
+  "title": "go to references (expert)",
+  "category": "Core Coding - Code Editing",
+  "priority": "P2",
+  "userType": "Expert",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use go-to-references at expert level",
+  "soThat": "so that I can edit code efficiently",
+  "criteria": [
+    "go-to-references works correctly",
+    "go-to-references is performant",
+    "go-to-references is accessible"
+  ],
+  "effort": "Large"
+}

@@ -1,0 +1,17 @@
+{
+  "id": "US-0322",
+  "title": "Git pull (advanced)",
+  "category": "Core Coding - Git Integration",
+  "priority": "P1",
+  "userType": "Intermediate",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to perform git pull operations",
+  "soThat": "so that I can manage version control",
+  "criteria": [
+    "Git pull works correctly",
+    "Git pull shows clear feedback",
+    "Git pull handles errors gracefully"
+  ],
+  "effort": "Medium"
+}

@@ -1,0 +1,17 @@
+{
+  "id": "US-0104",
+  "title": "auto indent (expert)",
+  "category": "Core Coding - Code Editing",
+  "priority": "P2",
+  "userType": "Expert",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use auto-indent at expert level",
+  "soThat": "so that I can edit code efficiently",
+  "criteria": [
+    "auto-indent works correctly",
+    "auto-indent is performant",
+    "auto-indent is accessible"
+  ],
+  "effort": "Large"
+}

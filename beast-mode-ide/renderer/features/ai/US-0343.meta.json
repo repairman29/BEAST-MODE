@@ -1,0 +1,17 @@
+{
+  "id": "US-0343",
+  "title": "Generate api-route (from-test, python)",
+  "category": "AI Assistance - Code Generation",
+  "priority": "P1",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to generate api-route from-test in python",
+  "soThat": "so that I can code faster",
+  "criteria": [
+    "Generated api-route is correct",
+    "Generated api-route follows best practices",
+    "Generated api-route is well-documented"
+  ],
+  "effort": "Medium"
+}

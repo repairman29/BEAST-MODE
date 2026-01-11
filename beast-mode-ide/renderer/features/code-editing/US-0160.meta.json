@@ -1,0 +1,17 @@
+{
+  "id": "US-0160",
+  "title": "peek references (advanced)",
+  "category": "Core Coding - Code Editing",
+  "priority": "P1",
+  "userType": "Intermediate",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use peek-references at advanced level",
+  "soThat": "so that I can edit code efficiently",
+  "criteria": [
+    "peek-references works correctly",
+    "peek-references is performant",
+    "peek-references is accessible"
+  ],
+  "effort": "Medium"
+}

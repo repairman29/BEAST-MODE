@@ -1,0 +1,17 @@
+{
+  "id": "US-0304",
+  "title": "Git diff (advanced)",
+  "category": "Core Coding - Git Integration",
+  "priority": "P1",
+  "userType": "Intermediate",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to perform git diff operations",
+  "soThat": "so that I can manage version control",
+  "criteria": [
+    "Git diff works correctly",
+    "Git diff shows clear feedback",
+    "Git diff handles errors gracefully"
+  ],
+  "effort": "Medium"
+}

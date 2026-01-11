@@ -1,0 +1,17 @@
+{
+  "id": "US-0446",
+  "title": "Generate interface (from-description, typescript)",
+  "category": "AI Assistance - Code Generation",
+  "priority": "P1",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to generate interface from-description in typescript",
+  "soThat": "so that I can code faster",
+  "criteria": [
+    "Generated interface is correct",
+    "Generated interface follows best practices",
+    "Generated interface is well-documented"
+  ],
+  "effort": "Medium"
+}

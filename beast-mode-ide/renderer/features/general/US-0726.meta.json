@@ -1,0 +1,17 @@
+{
+  "id": "US-0726",
+  "title": "tutorials",
+  "category": "Developer Experience - Learning",
+  "priority": "P1",
+  "userType": "Beginner",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to access tutorials",
+  "soThat": "so that I can learn the IDE",
+  "criteria": [
+    "tutorials is helpful",
+    "tutorials is clear",
+    "tutorials is discoverable"
+  ],
+  "effort": "Medium"
+}

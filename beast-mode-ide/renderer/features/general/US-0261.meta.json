@@ -1,0 +1,17 @@
+{
+  "id": "US-0261",
+  "title": "quick-fix for php",
+  "category": "Core Coding - Code Completion",
+  "priority": "P1",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use quick-fix when coding in php",
+  "soThat": "so that I can write php code faster",
+  "criteria": [
+    "quick-fix works for php",
+    "quick-fix is accurate",
+    "quick-fix is fast"
+  ],
+  "effort": "Medium"
+}

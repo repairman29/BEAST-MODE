@@ -1,0 +1,17 @@
+{
+  "id": "US-0941",
+  "title": "low-memory (server)",
+  "category": "Edge Cases - Performance",
+  "priority": "P0",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use IDE with low memory on server",
+  "soThat": "so that the IDE works on any device",
+  "criteria": [
+    "low-memory works on server",
+    "low-memory is efficient",
+    "low-memory doesn't degrade UX"
+  ],
+  "effort": "Small"
+}

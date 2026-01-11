@@ -1,0 +1,17 @@
+{
+  "id": "US-0673",
+  "title": "Chat about architecture (suggestion)",
+  "category": "AI Assistance - Code Chat",
+  "priority": "P1",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to suggestion about architecture",
+  "soThat": "so that I can get help quickly",
+  "criteria": [
+    "Chat response is relevant",
+    "Chat response is fast",
+    "Chat response is actionable"
+  ],
+  "effort": "Medium"
+}

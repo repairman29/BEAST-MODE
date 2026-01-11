@@ -1,0 +1,17 @@
+{
+  "id": "US-0478",
+  "title": "Performance warnings (file)",
+  "category": "Quality Assurance - Performance",
+  "priority": "P0",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to analyze performance warnings for file",
+  "soThat": "so that code is efficient",
+  "criteria": [
+    "Performance warnings works for file",
+    "Performance warnings is accurate",
+    "Performance warnings is actionable"
+  ],
+  "effort": "Small"
+}

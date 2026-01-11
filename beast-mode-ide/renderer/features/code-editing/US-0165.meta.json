@@ -1,0 +1,17 @@
+{
+  "id": "US-0165",
+  "title": "selection highlight (basic)",
+  "category": "Core Coding - Code Editing",
+  "priority": "P0",
+  "userType": "Beginner",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use selection-highlight at basic level",
+  "soThat": "so that I can edit code efficiently",
+  "criteria": [
+    "selection-highlight works correctly",
+    "selection-highlight is performant",
+    "selection-highlight is accessible"
+  ],
+  "effort": "Small"
+}

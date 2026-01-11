@@ -1,0 +1,17 @@
+{
+  "id": "US-0622",
+  "title": "inline suggestion (selection)",
+  "category": "AI Assistance - Code Suggestions",
+  "priority": "P0",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to get inline suggestions when selection",
+  "soThat": "so that I can write better code",
+  "criteria": [
+    "Suggestions are relevant",
+    "Suggestions are fast (< 2s)",
+    "Suggestions are accurate"
+  ],
+  "effort": "Small"
+}

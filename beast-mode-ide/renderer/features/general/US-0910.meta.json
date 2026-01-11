@@ -1,0 +1,17 @@
+{
+  "id": "US-0910",
+  "title": "error-reporting (network-error)",
+  "category": "Edge Cases - Error Handling",
+  "priority": "P1",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to handle network-error with error reporting",
+  "soThat": "so that the IDE works reliably",
+  "criteria": [
+    "error-reporting works for network-error",
+    "error-reporting provides feedback",
+    "error-reporting doesn't lose data"
+  ],
+  "effort": "Medium"
+}

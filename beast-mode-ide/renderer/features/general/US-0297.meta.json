@@ -1,0 +1,17 @@
+{
+  "id": "US-0297",
+  "title": "documentation for php",
+  "category": "Core Coding - Code Completion",
+  "priority": "P1",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use documentation when coding in php",
+  "soThat": "so that I can write php code faster",
+  "criteria": [
+    "documentation works for php",
+    "documentation is accurate",
+    "documentation is fast"
+  ],
+  "effort": "Medium"
+}

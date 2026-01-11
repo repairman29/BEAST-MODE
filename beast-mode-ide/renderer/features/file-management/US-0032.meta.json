@@ -1,0 +1,17 @@
+{
+  "id": "US-0032",
+  "title": "Rename File (context-menu)",
+  "category": "Core Coding - File Management",
+  "priority": "P0",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to rename files using context-menu",
+  "soThat": "so that I can manage files efficiently",
+  "criteria": [
+    "File rename works with context-menu",
+    "Error handling for invalid operations",
+    "Feedback provided for all actions"
+  ],
+  "effort": "Small"
+}

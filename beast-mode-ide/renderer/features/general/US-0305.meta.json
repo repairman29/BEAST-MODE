@@ -1,0 +1,17 @@
+{
+  "id": "US-0305",
+  "title": "Git commit (basic)",
+  "category": "Core Coding - Git Integration",
+  "priority": "P0",
+  "userType": "Beginner",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to perform git commit operations",
+  "soThat": "so that I can manage version control",
+  "criteria": [
+    "Git commit works correctly",
+    "Git commit shows clear feedback",
+    "Git commit handles errors gracefully"
+  ],
+  "effort": "Small"
+}

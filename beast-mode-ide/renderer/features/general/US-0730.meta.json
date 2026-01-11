@@ -1,0 +1,17 @@
+{
+  "id": "US-0730",
+  "title": "onboarding",
+  "category": "Developer Experience - Learning",
+  "priority": "P1",
+  "userType": "Beginner",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to access onboarding",
+  "soThat": "so that I can learn the IDE",
+  "criteria": [
+    "onboarding is helpful",
+    "onboarding is clear",
+    "onboarding is discoverable"
+  ],
+  "effort": "Medium"
+}

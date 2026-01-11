@@ -1,0 +1,17 @@
+{
+  "id": "US-0275",
+  "title": "auto-import for kotlin",
+  "category": "Core Coding - Code Completion",
+  "priority": "P1",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use auto-import when coding in kotlin",
+  "soThat": "so that I can write kotlin code faster",
+  "criteria": [
+    "auto-import works for kotlin",
+    "auto-import is accurate",
+    "auto-import is fast"
+  ],
+  "effort": "Medium"
+}

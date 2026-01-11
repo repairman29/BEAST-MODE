@@ -1,0 +1,17 @@
+{
+  "id": "US-0930",
+  "title": "large-projects (Mac)",
+  "category": "Edge Cases - Compatibility",
+  "priority": "P1",
+  "userType": "All",
+  "platform": "Mac",
+  "as": "a developer",
+  "want": "to use large projects on Mac",
+  "soThat": "so that the IDE works everywhere",
+  "criteria": [
+    "large-projects works on Mac",
+    "large-projects is performant",
+    "large-projects is reliable"
+  ],
+  "effort": "Medium"
+}

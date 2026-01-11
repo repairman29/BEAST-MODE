@@ -1,0 +1,17 @@
+{
+  "id": "US-0332",
+  "title": "Git reset (advanced)",
+  "category": "Core Coding - Git Integration",
+  "priority": "P1",
+  "userType": "Intermediate",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to perform git reset operations",
+  "soThat": "so that I can manage version control",
+  "criteria": [
+    "Git reset works correctly",
+    "Git reset shows clear feedback",
+    "Git reset handles errors gracefully"
+  ],
+  "effort": "Medium"
+}

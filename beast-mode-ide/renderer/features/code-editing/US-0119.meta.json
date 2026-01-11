@@ -1,0 +1,17 @@
+{
+  "id": "US-0119",
+  "title": "go to definition (expert)",
+  "category": "Core Coding - Code Editing",
+  "priority": "P2",
+  "userType": "Expert",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use go-to-definition at expert level",
+  "soThat": "so that I can edit code efficiently",
+  "criteria": [
+    "go-to-definition works correctly",
+    "go-to-definition is performant",
+    "go-to-definition is accessible"
+  ],
+  "effort": "Large"
+}

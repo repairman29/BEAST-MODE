@@ -1,0 +1,17 @@
+{
+  "id": "US-0125",
+  "title": "code formatting (expert)",
+  "category": "Core Coding - Code Editing",
+  "priority": "P2",
+  "userType": "Expert",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use code-formatting at expert level",
+  "soThat": "so that I can edit code efficiently",
+  "criteria": [
+    "code-formatting works correctly",
+    "code-formatting is performant",
+    "code-formatting is accessible"
+  ],
+  "effort": "Large"
+}

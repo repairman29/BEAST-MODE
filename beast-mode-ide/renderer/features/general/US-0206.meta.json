@@ -1,0 +1,17 @@
+{
+  "id": "US-0206",
+  "title": "intellisense for javascript",
+  "category": "Core Coding - Code Completion",
+  "priority": "P0",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use intellisense when coding in javascript",
+  "soThat": "so that I can write javascript code faster",
+  "criteria": [
+    "intellisense works for javascript",
+    "intellisense is accurate",
+    "intellisense is fast"
+  ],
+  "effort": "Small"
+}

@@ -1,0 +1,17 @@
+{
+  "id": "US-0680",
+  "title": "Convert java to typescript",
+  "category": "AI Assistance - Code Transformation",
+  "priority": "P1",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to convert code from java to typescript",
+  "soThat": "so that I can port code easily",
+  "criteria": [
+    "Conversion is accurate",
+    "Conversion preserves functionality",
+    "Conversion follows typescript best practices"
+  ],
+  "effort": "Medium"
+}

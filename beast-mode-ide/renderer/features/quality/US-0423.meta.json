@@ -1,0 +1,17 @@
+{
+  "id": "US-0423",
+  "title": "Linting real-time (python)",
+  "category": "Quality Assurance - Linting",
+  "priority": "P0",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use linting real-time for python",
+  "soThat": "so that code follows standards",
+  "criteria": [
+    "Linting real-time works for python",
+    "Linting real-time is fast",
+    "Linting real-time is accurate"
+  ],
+  "effort": "Small"
+}

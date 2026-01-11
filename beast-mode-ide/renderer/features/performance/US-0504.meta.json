@@ -1,0 +1,17 @@
+{
+  "id": "US-0504",
+  "title": "scrolling fast",
+  "category": "Performance - IDE Performance",
+  "priority": "P0",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to have fast scrolling",
+  "soThat": "so that the IDE is responsive",
+  "criteria": [
+    "scrolling is fast",
+    "scrolling doesn't block",
+    "scrolling scales well"
+  ],
+  "effort": "Small"
+}

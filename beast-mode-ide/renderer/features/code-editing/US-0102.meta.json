@@ -1,0 +1,17 @@
+{
+  "id": "US-0102",
+  "title": "auto indent (basic)",
+  "category": "Core Coding - Code Editing",
+  "priority": "P0",
+  "userType": "Beginner",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use auto-indent at basic level",
+  "soThat": "so that I can edit code efficiently",
+  "criteria": [
+    "auto-indent works correctly",
+    "auto-indent is performant",
+    "auto-indent is accessible"
+  ],
+  "effort": "Small"
+}

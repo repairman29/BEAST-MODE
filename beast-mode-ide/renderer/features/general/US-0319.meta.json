@@ -1,0 +1,17 @@
+{
+  "id": "US-0319",
+  "title": "Git push (basic)",
+  "category": "Core Coding - Git Integration",
+  "priority": "P0",
+  "userType": "Beginner",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to perform git push operations",
+  "soThat": "so that I can manage version control",
+  "criteria": [
+    "Git push works correctly",
+    "Git push shows clear feedback",
+    "Git push handles errors gracefully"
+  ],
+  "effort": "Small"
+}

@@ -1,0 +1,17 @@
+{
+  "id": "US-0729",
+  "title": "discovery",
+  "category": "Developer Experience - Learning",
+  "priority": "P1",
+  "userType": "Beginner",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to access discovery",
+  "soThat": "so that I can learn the IDE",
+  "criteria": [
+    "discovery is helpful",
+    "discovery is clear",
+    "discovery is discoverable"
+  ],
+  "effort": "Medium"
+}

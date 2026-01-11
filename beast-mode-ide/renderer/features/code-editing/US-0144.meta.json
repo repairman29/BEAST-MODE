@@ -1,0 +1,17 @@
+{
+  "id": "US-0144",
+  "title": "quick fix (basic)",
+  "category": "Core Coding - Code Editing",
+  "priority": "P0",
+  "userType": "Beginner",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use quick-fix at basic level",
+  "soThat": "so that I can edit code efficiently",
+  "criteria": [
+    "quick-fix works correctly",
+    "quick-fix is performant",
+    "quick-fix is accessible"
+  ],
+  "effort": "Small"
+}

@@ -1,0 +1,17 @@
+{
+  "id": "US-0101",
+  "title": "syntax highlighting (expert)",
+  "category": "Core Coding - Code Editing",
+  "priority": "P2",
+  "userType": "Expert",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use syntax-highlighting at expert level",
+  "soThat": "so that I can edit code efficiently",
+  "criteria": [
+    "syntax-highlighting works correctly",
+    "syntax-highlighting is performant",
+    "syntax-highlighting is accessible"
+  ],
+  "effort": "Large"
+}

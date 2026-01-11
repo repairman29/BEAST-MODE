@@ -1,0 +1,17 @@
+{
+  "id": "US-0242",
+  "title": "parameters for javascript",
+  "category": "Core Coding - Code Completion",
+  "priority": "P0",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use parameters when coding in javascript",
+  "soThat": "so that I can write javascript code faster",
+  "criteria": [
+    "parameters works for javascript",
+    "parameters is accurate",
+    "parameters is fast"
+  ],
+  "effort": "Small"
+}

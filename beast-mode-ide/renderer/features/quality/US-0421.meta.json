@@ -1,0 +1,17 @@
+{
+  "id": "US-0421",
+  "title": "Linting real-time (typescript)",
+  "category": "Quality Assurance - Linting",
+  "priority": "P0",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use linting real-time for typescript",
+  "soThat": "so that code follows standards",
+  "criteria": [
+    "Linting real-time works for typescript",
+    "Linting real-time is fast",
+    "Linting real-time is accurate"
+  ],
+  "effort": "Small"
+}

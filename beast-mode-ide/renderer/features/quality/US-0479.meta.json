@@ -1,0 +1,17 @@
+{
+  "id": "US-0479",
+  "title": "Performance warnings (project)",
+  "category": "Quality Assurance - Performance",
+  "priority": "P0",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to analyze performance warnings for project",
+  "soThat": "so that code is efficient",
+  "criteria": [
+    "Performance warnings works for project",
+    "Performance warnings is accurate",
+    "Performance warnings is actionable"
+  ],
+  "effort": "Small"
+}

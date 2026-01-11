@@ -1,0 +1,17 @@
+{
+  "id": "US-0296",
+  "title": "documentation for ruby",
+  "category": "Core Coding - Code Completion",
+  "priority": "P1",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use documentation when coding in ruby",
+  "soThat": "so that I can write ruby code faster",
+  "criteria": [
+    "documentation works for ruby",
+    "documentation is accurate",
+    "documentation is fast"
+  ],
+  "effort": "Medium"
+}

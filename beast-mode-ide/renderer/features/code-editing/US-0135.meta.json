@@ -1,0 +1,17 @@
+{
+  "id": "US-0135",
+  "title": "code lens (basic)",
+  "category": "Core Coding - Code Editing",
+  "priority": "P0",
+  "userType": "Beginner",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use code-lens at basic level",
+  "soThat": "so that I can edit code efficiently",
+  "criteria": [
+    "code-lens works correctly",
+    "code-lens is performant",
+    "code-lens is accessible"
+  ],
+  "effort": "Small"
+}

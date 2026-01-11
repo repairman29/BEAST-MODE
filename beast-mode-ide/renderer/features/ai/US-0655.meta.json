@@ -1,0 +1,17 @@
+{
+  "id": "US-0655",
+  "title": "Explain performance (with-examples)",
+  "category": "AI Assistance - Code Explanation",
+  "priority": "P1",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to get with-examples explanation of performance",
+  "soThat": "so that I understand the code",
+  "criteria": [
+    "Explanation is clear",
+    "Explanation is accurate",
+    "Explanation is helpful"
+  ],
+  "effort": "Medium"
+}

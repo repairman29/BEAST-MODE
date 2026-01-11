@@ -1,0 +1,17 @@
+{
+  "id": "US-0814",
+  "title": "monitoring integration",
+  "category": "Enterprise - Integration",
+  "priority": "P1",
+  "userType": "Enterprise Developer",
+  "platform": "All",
+  "as": "an enterprise developer",
+  "want": "to integrate with monitoring",
+  "soThat": "so that workflows are connected",
+  "criteria": [
+    "Integration works",
+    "Integration is reliable",
+    "Integration is documented"
+  ],
+  "effort": "Medium"
+}

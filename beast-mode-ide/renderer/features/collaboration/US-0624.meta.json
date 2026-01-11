@@ -1,0 +1,17 @@
+{
+  "id": "US-0624",
+  "title": "Team presence",
+  "category": "Collaboration - Team Features",
+  "priority": "P0",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use team presence",
+  "soThat": "so that team collaboration is easy",
+  "criteria": [
+    "Team presence works",
+    "Team presence is useful",
+    "Team presence is accessible"
+  ],
+  "effort": "Small"
+}

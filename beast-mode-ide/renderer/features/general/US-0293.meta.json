@@ -1,0 +1,17 @@
+{
+  "id": "US-0293",
+  "title": "documentation for go",
+  "category": "Core Coding - Code Completion",
+  "priority": "P1",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use documentation when coding in go",
+  "soThat": "so that I can write go code faster",
+  "criteria": [
+    "documentation works for go",
+    "documentation is accurate",
+    "documentation is fast"
+  ],
+  "effort": "Medium"
+}

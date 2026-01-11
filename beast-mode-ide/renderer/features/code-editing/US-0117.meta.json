@@ -1,0 +1,17 @@
+{
+  "id": "US-0117",
+  "title": "go to definition (basic)",
+  "category": "Core Coding - Code Editing",
+  "priority": "P0",
+  "userType": "Beginner",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use go-to-definition at basic level",
+  "soThat": "so that I can edit code efficiently",
+  "criteria": [
+    "go-to-definition works correctly",
+    "go-to-definition is performant",
+    "go-to-definition is accessible"
+  ],
+  "effort": "Small"
+}

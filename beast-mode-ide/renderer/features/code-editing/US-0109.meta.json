@@ -1,0 +1,17 @@
+{
+  "id": "US-0109",
+  "title": "code folding (advanced)",
+  "category": "Core Coding - Code Editing",
+  "priority": "P1",
+  "userType": "Intermediate",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use code-folding at advanced level",
+  "soThat": "so that I can edit code efficiently",
+  "criteria": [
+    "code-folding works correctly",
+    "code-folding is performant",
+    "code-folding is accessible"
+  ],
+  "effort": "Medium"
+}

@@ -1,0 +1,17 @@
+{
+  "id": "US-0163",
+  "title": "symbol highlight (advanced)",
+  "category": "Core Coding - Code Editing",
+  "priority": "P1",
+  "userType": "Intermediate",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use symbol-highlight at advanced level",
+  "soThat": "so that I can edit code efficiently",
+  "criteria": [
+    "symbol-highlight works correctly",
+    "symbol-highlight is performant",
+    "symbol-highlight is accessible"
+  ],
+  "effort": "Medium"
+}

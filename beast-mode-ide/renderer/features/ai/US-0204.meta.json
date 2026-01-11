@@ -1,0 +1,17 @@
+{
+  "id": "US-0204",
+  "title": "Generate function (from-comment, java)",
+  "category": "AI Assistance - Code Generation",
+  "priority": "P0",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to generate function from-comment in java",
+  "soThat": "so that I can code faster",
+  "criteria": [
+    "Generated function is correct",
+    "Generated function follows best practices",
+    "Generated function is well-documented"
+  ],
+  "effort": "Small"
+}

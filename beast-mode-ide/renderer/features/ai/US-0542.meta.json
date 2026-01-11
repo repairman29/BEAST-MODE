@@ -1,0 +1,17 @@
+{
+  "id": "US-0542",
+  "title": "Generate constant (from-example, javascript)",
+  "category": "AI Assistance - Code Generation",
+  "priority": "P1",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to generate constant from-example in javascript",
+  "soThat": "so that I can code faster",
+  "criteria": [
+    "Generated constant is correct",
+    "Generated constant follows best practices",
+    "Generated constant is well-documented"
+  ],
+  "effort": "Medium"
+}

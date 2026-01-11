@@ -1,0 +1,17 @@
+{
+  "id": "US-0308",
+  "title": "Git branch (advanced)",
+  "category": "Core Coding - Git Integration",
+  "priority": "P1",
+  "userType": "Intermediate",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to perform git branch operations",
+  "soThat": "so that I can manage version control",
+  "criteria": [
+    "Git branch works correctly",
+    "Git branch shows clear feedback",
+    "Git branch handles errors gracefully"
+  ],
+  "effort": "Medium"
+}

@@ -1,0 +1,17 @@
+{
+  "id": "US-0291",
+  "title": "documentation for python",
+  "category": "Core Coding - Code Completion",
+  "priority": "P1",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use documentation when coding in python",
+  "soThat": "so that I can write python code faster",
+  "criteria": [
+    "documentation works for python",
+    "documentation is accurate",
+    "documentation is fast"
+  ],
+  "effort": "Medium"
+}

@@ -1,0 +1,17 @@
+{
+  "id": "US-0901",
+  "title": "graceful-degradation (file-error)",
+  "category": "Edge Cases - Error Handling",
+  "priority": "P1",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to handle file-error with graceful degradation",
+  "soThat": "so that the IDE works reliably",
+  "criteria": [
+    "graceful-degradation works for file-error",
+    "graceful-degradation provides feedback",
+    "graceful-degradation doesn't lose data"
+  ],
+  "effort": "Medium"
+}

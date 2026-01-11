@@ -1,0 +1,17 @@
+{
+  "id": "US-0166",
+  "title": "selection highlight (advanced)",
+  "category": "Core Coding - Code Editing",
+  "priority": "P1",
+  "userType": "Intermediate",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use selection-highlight at advanced level",
+  "soThat": "so that I can edit code efficiently",
+  "criteria": [
+    "selection-highlight works correctly",
+    "selection-highlight is performant",
+    "selection-highlight is accessible"
+  ],
+  "effort": "Medium"
+}

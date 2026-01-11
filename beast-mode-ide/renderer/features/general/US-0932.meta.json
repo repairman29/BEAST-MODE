@@ -1,0 +1,17 @@
+{
+  "id": "US-0932",
+  "title": "large-projects (Linux)",
+  "category": "Edge Cases - Compatibility",
+  "priority": "P1",
+  "userType": "All",
+  "platform": "Linux",
+  "as": "a developer",
+  "want": "to use large projects on Linux",
+  "soThat": "so that the IDE works everywhere",
+  "criteria": [
+    "large-projects works on Linux",
+    "large-projects is performant",
+    "large-projects is reliable"
+  ],
+  "effort": "Medium"
+}

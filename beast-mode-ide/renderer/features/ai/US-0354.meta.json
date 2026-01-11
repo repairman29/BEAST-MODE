@@ -1,0 +1,17 @@
+{
+  "id": "US-0354",
+  "title": "Generate component (from-comment, java)",
+  "category": "AI Assistance - Code Generation",
+  "priority": "P1",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to generate component from-comment in java",
+  "soThat": "so that I can code faster",
+  "criteria": [
+    "Generated component is correct",
+    "Generated component follows best practices",
+    "Generated component is well-documented"
+  ],
+  "effort": "Medium"
+}

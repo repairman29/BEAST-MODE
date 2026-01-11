@@ -1,0 +1,17 @@
+{
+  "id": "US-0718",
+  "title": "command palette",
+  "category": "Developer Experience - Productivity",
+  "priority": "P0",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use command palette",
+  "soThat": "so that I can work faster",
+  "criteria": [
+    "command-palette works",
+    "command-palette is fast",
+    "command-palette is discoverable"
+  ],
+  "effort": "Small"
+}

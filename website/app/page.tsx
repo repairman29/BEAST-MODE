@@ -9,7 +9,7 @@ import StatsSection from '../components/landing/StatsSection'
 import ValueSection from '../components/landing/ValueSection'
 import TestimonialsSection from '../components/landing/TestimonialsSection'
 import CallToAction from '../components/landing/CallToAction'
-import { AuthSection } from '../components/beast-mode/AuthSection'
+import AuthSection from '../components/beast-mode/AuthSection'
 
 function HomeContent() {
   const searchParams = useSearchParams();

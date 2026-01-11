@@ -1,0 +1,17 @@
+{
+  "id": "US-0230",
+  "title": "imports for javascript",
+  "category": "Core Coding - Code Completion",
+  "priority": "P0",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use imports when coding in javascript",
+  "soThat": "so that I can write javascript code faster",
+  "criteria": [
+    "imports works for javascript",
+    "imports is accurate",
+    "imports is fast"
+  ],
+  "effort": "Small"
+}

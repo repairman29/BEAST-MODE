@@ -1,0 +1,17 @@
+{
+  "id": "US-0129",
+  "title": "word wrap (basic)",
+  "category": "Core Coding - Code Editing",
+  "priority": "P0",
+  "userType": "Beginner",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use word-wrap at basic level",
+  "soThat": "so that I can edit code efficiently",
+  "criteria": [
+    "word-wrap works correctly",
+    "word-wrap is performant",
+    "word-wrap is accessible"
+  ],
+  "effort": "Small"
+}

@@ -1,0 +1,17 @@
+{
+  "id": "US-0712",
+  "title": "Customize fonts (expert)",
+  "category": "Developer Experience - Customization",
+  "priority": "P1",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to customize fonts at expert level",
+  "soThat": "so that the IDE works for me",
+  "criteria": [
+    "fonts customization works",
+    "fonts customization is intuitive",
+    "fonts customization is saved"
+  ],
+  "effort": "Medium"
+}

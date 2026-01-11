@@ -1,0 +1,17 @@
+{
+  "id": "US-0809",
+  "title": "cost tracking",
+  "category": "Enterprise - Management",
+  "priority": "P1",
+  "userType": "Enterprise Admin",
+  "platform": "All",
+  "as": "an enterprise admin",
+  "want": "to manage cost tracking",
+  "soThat": "so that the platform is managed",
+  "criteria": [
+    "cost-tracking works",
+    "cost-tracking is comprehensive",
+    "cost-tracking provides insights"
+  ],
+  "effort": "Medium"
+}

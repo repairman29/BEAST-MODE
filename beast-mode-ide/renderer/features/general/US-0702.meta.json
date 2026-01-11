@@ -1,0 +1,17 @@
+{
+  "id": "US-0702",
+  "title": "Customize themes (advanced)",
+  "category": "Developer Experience - Customization",
+  "priority": "P1",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to customize themes at advanced level",
+  "soThat": "so that the IDE works for me",
+  "criteria": [
+    "themes customization works",
+    "themes customization is intuitive",
+    "themes customization is saved"
+  ],
+  "effort": "Medium"
+}

@@ -1,0 +1,17 @@
+{
+  "id": "US-0523",
+  "title": "Generate enum (from-test, python)",
+  "category": "AI Assistance - Code Generation",
+  "priority": "P1",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to generate enum from-test in python",
+  "soThat": "so that I can code faster",
+  "criteria": [
+    "Generated enum is correct",
+    "Generated enum follows best practices",
+    "Generated enum is well-documented"
+  ],
+  "effort": "Medium"
+}

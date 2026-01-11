@@ -1,0 +1,17 @@
+{
+  "id": "US-0363",
+  "title": "Generate component (from-example, python)",
+  "category": "AI Assistance - Code Generation",
+  "priority": "P1",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to generate component from-example in python",
+  "soThat": "so that I can code faster",
+  "criteria": [
+    "Generated component is correct",
+    "Generated component follows best practices",
+    "Generated component is well-documented"
+  ],
+  "effort": "Medium"
+}

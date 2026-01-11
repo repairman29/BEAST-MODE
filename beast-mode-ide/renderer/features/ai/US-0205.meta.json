@@ -1,0 +1,17 @@
+{
+  "id": "US-0205",
+  "title": "Generate function (from-comment, go)",
+  "category": "AI Assistance - Code Generation",
+  "priority": "P0",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to generate function from-comment in go",
+  "soThat": "so that I can code faster",
+  "criteria": [
+    "Generated function is correct",
+    "Generated function follows best practices",
+    "Generated function is well-documented"
+  ],
+  "effort": "Small"
+}

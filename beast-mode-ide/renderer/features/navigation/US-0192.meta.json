@@ -1,0 +1,17 @@
+{
+  "id": "US-0192",
+  "title": "Navigate reference (command)",
+  "category": "Core Coding - Navigation",
+  "priority": "P0",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to navigate reference using command",
+  "soThat": "so that I can find code quickly",
+  "criteria": [
+    "Navigation works with command",
+    "Navigation is fast",
+    "Navigation is intuitive"
+  ],
+  "effort": "Small"
+}

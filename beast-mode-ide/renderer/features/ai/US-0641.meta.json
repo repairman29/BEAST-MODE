@@ -1,0 +1,17 @@
+{
+  "id": "US-0641",
+  "title": "Explain code-block (simple)",
+  "category": "AI Assistance - Code Explanation",
+  "priority": "P1",
+  "userType": "Beginner",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to get simple explanation of code-block",
+  "soThat": "so that I understand the code",
+  "criteria": [
+    "Explanation is clear",
+    "Explanation is accurate",
+    "Explanation is helpful"
+  ],
+  "effort": "Medium"
+}

@@ -1,0 +1,17 @@
+{
+  "id": "US-0516",
+  "title": "search fast",
+  "category": "Performance - IDE Performance",
+  "priority": "P0",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to have fast search",
+  "soThat": "so that the IDE is responsive",
+  "criteria": [
+    "search is fast",
+    "search doesn't block",
+    "search scales well"
+  ],
+  "effort": "Small"
+}

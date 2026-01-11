@@ -1,0 +1,17 @@
+{
+  "id": "US-0524",
+  "title": "build optimized",
+  "category": "Performance - IDE Performance",
+  "priority": "P1",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to have optimized build",
+  "soThat": "so that the IDE is responsive",
+  "criteria": [
+    "build is optimized",
+    "build doesn't block",
+    "build scales well"
+  ],
+  "effort": "Medium"
+}

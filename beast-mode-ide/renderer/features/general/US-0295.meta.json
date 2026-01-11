@@ -1,0 +1,17 @@
+{
+  "id": "US-0295",
+  "title": "documentation for cpp",
+  "category": "Core Coding - Code Completion",
+  "priority": "P1",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to use documentation when coding in cpp",
+  "soThat": "so that I can write cpp code faster",
+  "criteria": [
+    "documentation works for cpp",
+    "documentation is accurate",
+    "documentation is fast"
+  ],
+  "effort": "Medium"
+}

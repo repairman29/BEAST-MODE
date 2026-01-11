@@ -1,0 +1,17 @@
+{
+  "id": "US-0935",
+  "title": "small-projects (Linux)",
+  "category": "Edge Cases - Compatibility",
+  "priority": "P1",
+  "userType": "All",
+  "platform": "Linux",
+  "as": "a developer",
+  "want": "to use small projects on Linux",
+  "soThat": "so that the IDE works everywhere",
+  "criteria": [
+    "small-projects works on Linux",
+    "small-projects is performant",
+    "small-projects is reliable"
+  ],
+  "effort": "Medium"
+}

@@ -1,0 +1,17 @@
+{
+  "id": "US-0708",
+  "title": "Customize layout (advanced)",
+  "category": "Developer Experience - Customization",
+  "priority": "P1",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to customize layout at advanced level",
+  "soThat": "so that the IDE works for me",
+  "criteria": [
+    "layout customization works",
+    "layout customization is intuitive",
+    "layout customization is saved"
+  ],
+  "effort": "Medium"
+}

@@ -1,0 +1,17 @@
+{
+  "id": "US-0035",
+  "title": "Rename File (git)",
+  "category": "Core Coding - File Management",
+  "priority": "P0",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to rename files using git",
+  "soThat": "so that I can manage files efficiently",
+  "criteria": [
+    "File rename works with git",
+    "Error handling for invalid operations",
+    "Feedback provided for all actions"
+  ],
+  "effort": "Small"
+}

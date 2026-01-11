@@ -1,0 +1,17 @@
+{
+  "id": "US-0399",
+  "title": "Generate hook (from-spec, java)",
+  "category": "AI Assistance - Code Generation",
+  "priority": "P1",
+  "userType": "All",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to generate hook from-spec in java",
+  "soThat": "so that I can code faster",
+  "criteria": [
+    "Generated hook is correct",
+    "Generated hook follows best practices",
+    "Generated hook is well-documented"
+  ],
+  "effort": "Medium"
+}

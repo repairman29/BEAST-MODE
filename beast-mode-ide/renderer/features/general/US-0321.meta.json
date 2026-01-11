@@ -1,0 +1,17 @@
+{
+  "id": "US-0321",
+  "title": "Git pull (basic)",
+  "category": "Core Coding - Git Integration",
+  "priority": "P0",
+  "userType": "Beginner",
+  "platform": "All",
+  "as": "a developer",
+  "want": "to perform git pull operations",
+  "soThat": "so that I can manage version control",
+  "criteria": [
+    "Git pull works correctly",
+    "Git pull shows clear feedback",
+    "Git pull handles errors gracefully"
+  ],
+  "effort": "Small"
+}
