@@ -391,7 +391,7 @@ async function handlePaymentSucceeded(
   console.log(`[Stripe Webhook] Payment succeeded: ${invoice.id}`);
 
   const customerId = invoice.customer as string;
-  const subscriptionId = invoice.subscription as string;
+  const subscriptionId = (invoice as any).subscription as string;
 
   if (!subscriptionId) {
     return; // One-time payment, not subscription
