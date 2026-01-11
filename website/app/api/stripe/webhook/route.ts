@@ -62,7 +62,22 @@ export async function POST(request: NextRequest) {
   try {
     switch (event.type) {
       case 'checkout.session.completed':
-        await handleCheckoutSessionCompleted(event.data.object as Stripe.Checkout.Session, supabase);
+        // Check if this is a credit purchase (one-time payment)
+        const session = event.data.object as Stripe.Checkout.Session;
+        if (session.mode === 'payment' && session.metadata?.type === 'credit_purchase') {
+          await handleCreditPurchase(session, supabase);
+        } else {
+          // Regular subscription checkout
+          await handleCheckoutSessionCompleted(session, supabase);
+        }
+        break;
+
+      case 'payment_intent.succeeded':
+        // Handle successful one-time payment (credit purchase)
+        const paymentIntent = event.data.object as Stripe.PaymentIntent;
+        if (paymentIntent.metadata?.type === 'credit_purchase') {
+          await handleCreditPurchasePaymentIntent(paymentIntent, supabase);
+        }
         break;
 
       case 'customer.subscription.updated':
@@ -79,6 +94,25 @@ export async function POST(request: NextRequest) {
 
       case 'invoice.payment_failed':
         await handlePaymentFailed(event.data.object as Stripe.Invoice, supabase);
+        break;
+
+      case 'checkout.session.completed':
+        // Check if this is a credit purchase (one-time payment)
+        const session = event.data.object as Stripe.Checkout.Session;
+        if (session.mode === 'payment' && session.metadata?.type === 'credit_purchase') {
+          await handleCreditPurchase(session, supabase);
+        } else {
+          // Regular subscription checkout
+          await handleCheckoutSessionCompleted(session, supabase);
+        }
+        break;
+
+      case 'payment_intent.succeeded':
+        // Handle successful one-time payment (credit purchase)
+        const paymentIntent = event.data.object as Stripe.PaymentIntent;
+        if (paymentIntent.metadata?.type === 'credit_purchase') {
+          await handleCreditPurchasePaymentIntent(paymentIntent, supabase);
+        }
         break;
 
       default:
