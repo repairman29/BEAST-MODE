@@ -111,6 +111,50 @@ export async function POST(request: NextRequest) {
 }
 
 /**
+ * Handle credit purchase (one-time payment)
+ */
+async function handleCreditPurchase(
+  session: Stripe.Checkout.Session,
+  supabase: any
+) {
+  console.log(`[Stripe Webhook] Credit purchase completed: ${session.id}`);
+
+  const userId = session.metadata?.userId;
+  const credits = parseInt(session.metadata?.credits || '0', 10);
+
+  if (!userId || !credits) {
+    console.error('[Stripe Webhook] Missing userId or credits in credit purchase');
+    return;
+  }
+
+  // Add credits to user's balance using the database function
+  const { error } = await supabase.rpc('add_credits_to_user', {
+    p_user_id: userId,
+    p_credits: credits
+  });
+
+  if (error) {
+    console.error('[Stripe Webhook] Error adding credits:', error);
+    return;
+  }
+
+  // Record the purchase
+  await supabase
+    .from('credit_purchases')
+    .insert({
+      user_id: userId,
+      credits: credits,
+      amount: session.amount_total ? session.amount_total / 100 : 0,
+      stripe_payment_intent_id: session.payment_intent as string,
+      stripe_checkout_session_id: session.id,
+      status: 'completed',
+      purchased_at: new Date().toISOString()
+    });
+
+  console.log(`[Stripe Webhook] Added ${credits} credits to user ${userId}`);
+}
+
+/**
  * Handle checkout.session.completed
  * New subscription created - activate user's subscription
  */
