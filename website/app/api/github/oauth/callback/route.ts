@@ -171,19 +171,8 @@ export async function GET(request: NextRequest) {
     const githubClientSecretDev = await getConfigValue('GITHUB_CLIENT_SECRET_DEV', null);
     const secret = await getConfigValue('SECRET', null);
     
-    // Use environment variable with fallback - architecture enforcer safe
-    // Production secret: Check GITHUB_CLIENT_SECRET_PROD first, then check if GITHUB_CLIENT_SECRET matches prod hash
-    // The hash '014c7fab1ba6cc6a7398b5bde04e26463f16f4e9' is just an identifier - we need the actual secret
-    const expectedProdClientSecret = githubClientSecretProd || 
-      (githubClientSecret && githubClientSecret.length > 20 && githubClientSecret !== '014c7fab1ba6cc6a7398b5bde04e26463f16f4e9'
-        ? githubClientSecret 
-        : (secret && secret.length > 20 ? secret : null));
-    // Development secret: Check GITHUB_CLIENT_SECRET_DEV first, then check if GITHUB_CLIENT_SECRET matches dev hash
-    // The hash 'df4c598018de45ce8cb90313489eeb21448aedcf' is just an identifier - we need the actual secret
-    const expectedDevClientSecret = githubClientSecretDev || 
-      (githubClientSecret && githubClientSecret.length > 20 && githubClientSecret !== 'df4c598018de45ce8cb90313489eeb21448aedcf'
-        ? githubClientSecret
-        : (secret && secret.length > 20 ? secret : null));
+    // Note: The hashes '014c7fab1ba6cc6a7398b5bde04e26463f16f4e9' and 'df4c598018de45ce8cb90313489eeb21448aedcf'
+    // are just identifiers, not the actual secrets. We need the real GitHub OAuth client secrets from env vars.
     
     let clientId: string;
     let clientSecret: string;
