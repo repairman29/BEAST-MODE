@@ -30,6 +30,8 @@
     "test:final": "node scripts/test-final-mvp.js",
     "test:all": "npm run test:ui && npm run test:experience && npm run test:api && npm run test:e2e",
     "test:build": "npm run lint && npm run build",
+    "ide:generate": "node scripts/build-ide-with-beast-mode.js",
+    "ide:generate:all": "node scripts/generate-all-p0-features.js",
     "deploy": "bash ../scripts/deploy-vercel.sh",
     "deploy:auto": "bash ../scripts/deploy-vercel.sh \"fix: Automated deployment\"",
     "deploy:manual": "cd .. && git add -A && git commit -m \"fix: Automated deployment\" && git push origin main && cd website && vercel --prod --yes",
