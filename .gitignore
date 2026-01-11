@@ -99,6 +99,19 @@ docs/PLG_FAST_DELIVERY*.md
 docs/REAL_WORLD_OPTIMIZATION_STRATEGY.md
 docs/AI_JANITOR_MARKETING*.md
 
+# Content & Social Media Documents
+docs/*SOCIAL*.md
+docs/*CONTENT*.md
+docs/*PRESS*.md
+docs/*BRAND*.md
+docs/*LAUNCH*.md
+docs/*STORY*.md
+docs/*EXECUTION*.md
+docs/*EXECUTION*.md
+docs/SENTINEL_BRAND_GUIDE.md
+docs/NO_FAKE_CONTENT_POLICY.md
+website/COMMIT_STRATEGY.md
+
 # ML Model Files (Large, may contain proprietary data)
 .beast-mode/models/
 *.model
