@@ -427,7 +427,7 @@ async function handlePaymentFailed(
   console.log(`[Stripe Webhook] Payment failed: ${invoice.id}`);
 
   const customerId = invoice.customer as string;
-  const subscriptionId = invoice.subscription as string;
+  const subscriptionId = (invoice as any).subscription as string;
 
   if (!subscriptionId) {
     return;
