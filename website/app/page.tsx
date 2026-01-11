@@ -1,5 +1,6 @@
 'use client';
 
+import { Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import HeroSectionEnhanced from '../components/landing/HeroSectionEnhanced'
 import Day2OperationsSection from '../components/landing/Day2OperationsSection'
@@ -10,7 +11,7 @@ import TestimonialsSection from '../components/landing/TestimonialsSection'
 import CallToAction from '../components/landing/CallToAction'
 import { AuthSection } from '../components/beast-mode/AuthSection'
 
-export default function Home() {
+function HomeContent() {
   const searchParams = useSearchParams();
   const auth = searchParams.get('auth');
   const action = searchParams.get('action');
@@ -38,5 +39,17 @@ export default function Home() {
       <TestimonialsSection />
       <CallToAction />
     </>
+  )
+}
+
+export default function Home() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-slate-950 flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-cyan-400"></div>
+      </div>
+    }>
+      <HomeContent />
+    </Suspense>
   )
 }
