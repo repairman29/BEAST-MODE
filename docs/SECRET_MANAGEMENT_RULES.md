@@ -100,7 +100,7 @@ GITHUB_CLIENT_SECRET=[STORED_IN_DB]
 
 ### Production Credentials
 - **Client ID**: `Ov23liDKFkIrnPneWwny`
-- **Client Secret**: `014c7fab1ba6cc6a7398b5bde04e26463f16f4e9` ❌ NEVER DO THIS
+- **Client Secret**: `[STORED_IN_DB]` ✅ CORRECT (actual secret stored in Supabase)
 - **Webhook Secret**: `[EXAMPLE_SECRET_HASH]` ❌ NEVER DO THIS (use [STORED_IN_DB] instead)
 ```
 

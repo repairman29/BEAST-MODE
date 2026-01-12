@@ -10,10 +10,10 @@
 
 The following secrets were committed to git and are visible in git history:
 
-1. **GITHUB_CLIENT_SECRET** - `014c7fab1ba6cc6a7398b5bde04e26463f16f4e9`
-2. **GITHUB_TOKEN_ENCRYPTION_KEY** - `20abb6f3b973e2fdeea6e2c417ce93824e7b64962f9fee4bfd6339264c8e792c`
-3. **STRIPE_WEBHOOK_SECRET** - `whsec_rKUFl59BlCKm3PXKK86W2tImFxqUV5zB` ⚠️ CRITICAL
-4. **SUPABASE_SERVICE_ROLE_KEY** - `sb_secret_QHGa9Odl9BAXdF0YkBxaOA_TTVO2l1s` ⚠️ CRITICAL
+1. **GITHUB_CLIENT_SECRET** - `[STORED_IN_DB]` (rotated 2026-01-12)
+2. **GITHUB_TOKEN_ENCRYPTION_KEY** - `[STORED_IN_DB]` (rotated 2026-01-12)
+3. **STRIPE_WEBHOOK_SECRET** - `[STORED_IN_DB]` (rotated 2026-01-12) ⚠️ CRITICAL
+4. **SUPABASE_SERVICE_ROLE_KEY** - `[STORED_IN_DB]` (rotated 2026-01-12) ⚠️ CRITICAL
 
 ## Immediate Actions Taken
 

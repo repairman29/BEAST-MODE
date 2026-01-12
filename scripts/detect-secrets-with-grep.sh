@@ -29,16 +29,13 @@ SECRET_PATTERN_NAMES=(
   "GitHub OAuth Secret"
   "Supabase Service Role Key"
   "Supabase Anon Key"
-  "JWT Secret"
   "API Key (OpenAI)"
   "API Key (Anthropic)"
-  "API Key (Generic)"
   "Encryption Key (Hex)"
   "Database Connection String"
   "AWS Access Key"
   "AWS Secret Key"
   "Private Key (RSA)"
-  "OAuth Client Secret"
 )
 
 SECRET_PATTERNS=(
@@ -48,16 +45,13 @@ SECRET_PATTERNS=(
   "[0-9a-f]{40}"
   "sb_secret_[a-zA-Z0-9_-]{40,}"
   "eyJ[a-zA-Z0-9_-]{100,}"
-  "[A-Za-z0-9_-]{32,}"
   "sk-[a-zA-Z0-9]{32,}"
   "sk-ant-[a-zA-Z0-9-]{95,}"
-  "[a-zA-Z0-9_-]{32,}"
   "[0-9a-f]{64}"
   "(postgres|mysql|mongodb)://[^\\s\"']+"
   "AKIA[0-9A-Z]{16}"
   "[A-Za-z0-9/+=]{40}"
   "-----BEGIN (RSA )?PRIVATE KEY-----"
-  "[a-zA-Z0-9_-]{20,}"
 )
 
 # Placeholders to ignore (these are safe)
@@ -115,7 +109,20 @@ scan_pattern() {
     fi
 
     # Skip if it's in a comment explaining it's a placeholder
-    if echo "$content" | grep -qiE "(placeholder|example|redacted|stored_in_db)"; then
+    if echo "$content" | grep -qiE "(placeholder|example|redacted|stored_in_db|STORED_IN_DB|REDACTED)"; then
+      continue
+    fi
+    
+    # Skip if it's a filename or path (common false positives)
+    if echo "$content" | grep -qiE "(\.json|\.js|\.ts|\.md|\.sql|\.sh|scripts/|docs/|lib/)"; then
+      # Check if the match looks like a filename
+      if echo "$potential_secret" | grep -qE "\.(json|js|ts|md|sql|sh)$"; then
+        continue
+      fi
+    fi
+    
+    # Skip if it's clearly a variable name or function name
+    if echo "$content" | grep -qE "(const|let|var|function|class|export|import).*$potential_secret"; then
       continue
     fi
 

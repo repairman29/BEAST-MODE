@@ -38,12 +38,12 @@ grep -rnE "sk_(live|test)_[a-zA-Z0-9]{24,}|whsec_[a-zA-Z0-9]{32,}|ghp_[a-zA-Z0-9
 | Stripe Secret Key | `sk_(live\|test)_[a-zA-Z0-9]{24,}` | `sk_live_51...` |
 | Stripe Webhook Secret | `whsec_[a-zA-Z0-9]{32,}` | `whsec_...` |
 | GitHub Token | `ghp_[a-zA-Z0-9]{36,}` | `ghp_...` |
-| GitHub OAuth Secret | `[0-9a-f]{40}` | `5aa15f76ca0300cc932ad6a988cfd79bd72f35fd` |
+| GitHub OAuth Secret | `[0-9a-f]{40}` | `[STORED_IN_DB]` |
 | Supabase Service Role | `sb_secret_[a-zA-Z0-9_-]{40,}` | `sb_secret_...` |
 | OpenAI API Key | `sk-[a-zA-Z0-9]{32,}` | `sk-...` |
 | Anthropic API Key | `sk-ant-[a-zA-Z0-9-]{95,}` | `sk-ant-...` |
 | JWT Secret | `[A-Za-z0-9_-]{32,}` | `...` |
-| Encryption Key (Hex) | `[0-9a-f]{64}` | `bf2a41e444299868737fe08554a655170ee99dd36c06ed666b0d54b2443ea8e2` |
+| Encryption Key (Hex) | `[0-9a-f]{64}` | `[STORED_IN_DB]` |
 | Database Connection | `(postgres\|mysql\|mongodb)://[^\s"']+` | `postgres://...` |
 
 ### Grep Pattern Syntax
@@ -291,7 +291,7 @@ const key = process.env.STRIPE_KEY || '[STORED_IN_DB]';
 
 ```markdown
 <!-- This is OK - it's a hash identifier, not a secret -->
-Secret ID: `014c7fab1ba6cc6a7398b5bde04e26463f16f4e9`
+Secret ID: `[STORED_IN_DB]` (example - actual secrets stored in Supabase)
 ```
 
 ## Troubleshooting
