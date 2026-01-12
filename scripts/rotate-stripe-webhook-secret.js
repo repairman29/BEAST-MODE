@@ -9,10 +9,6 @@ require('dotenv').config({ path: require('path').join(__dirname, '../website/.en
 
 const Stripe = require('stripe');
 
-const stripe = new Stripe(process.env.STRIPE_WEBHOOK_SECRET || process.env.STRIPE_SECRET_KEY, {
-  apiVersion: '2025-12-15.clover',
-});
-
 async function rotateWebhookSecret() {
   console.log('🔄 Rotating Stripe Webhook Secret\n');
   console.log('======================================================================\n');

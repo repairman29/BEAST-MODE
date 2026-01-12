@@ -24,6 +24,33 @@ The following secrets were committed to git and are visible in git history:
 
 ## Required: Rotate All Secrets
 
+### Quick Start: Automated Rotation
+
+**Option 1: Interactive Script (Recommended)**
+```bash
+node scripts/rotate-all-secrets-interactive.js
+```
+This script guides you through rotating all secrets interactively.
+
+**Option 2: Stripe Webhook (Automated)**
+```bash
+node scripts/rotate-stripe-webhook-secret.js
+```
+This script automatically creates a new Stripe webhook and provides the new secret.
+
+**Option 3: Full API Automation**
+```bash
+# Set required tokens
+export STRIPE_SECRET_KEY="sk_..."
+export SUPABASE_ACCESS_TOKEN="..."
+export GITHUB_TOKEN="..."
+export VERCEL_TOKEN="..."
+
+node scripts/rotate-exposed-secrets.js
+```
+
+### Manual Rotation (If Scripts Don't Work)
+
 ### 1. GitHub OAuth Client Secret
 
 **Location:** GitHub Developer Settings  
