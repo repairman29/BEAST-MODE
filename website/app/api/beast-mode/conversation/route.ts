@@ -179,9 +179,9 @@ Return ONLY valid JSON with the files array containing REAL implementation code.
             detailedPrompt,
             {
               userId,
-              model: 'anthropic:claude-3-haiku-20240307', // Use Anthropic (we have keys for this)
-              temperature: 0.3, // Lower temperature for more focused output
-              maxTokens: 8000, // Increase token limit for longer code
+              model: 'anthropic:claude-3-5-sonnet-20241022', // Use Sonnet for better code generation (more capable)
+              temperature: 0.2, // Lower temperature for more focused, deterministic output
+              maxTokens: 16000, // Increase token limit for longer, complete code
               systemPrompt: `You are an expert software developer specializing in ${bounty.tech_stack?.[0] || 'software development'}. 
 
 Your task is to generate COMPLETE, PRODUCTION-READY code that solves a specific problem.
@@ -207,6 +207,15 @@ The user will provide a detailed description of the problem. Generate code that 
             }
           );
           console.log('[BEAST MODE] Code generation successful, result type:', typeof generatedResult);
+          console.log('[BEAST MODE] Raw LLM response (first 1000 chars):', typeof generatedResult === 'string' ? generatedResult.substring(0, 1000) : JSON.stringify(generatedResult).substring(0, 1000));
+          
+          // Check if response is placeholder code BEFORE parsing
+          if (typeof generatedResult === 'string') {
+            if (generatedResult.includes('function add(a') || generatedResult.includes('return a + b')) {
+              console.error('[BEAST MODE] ERROR: LLM returned placeholder code in raw response!');
+              throw new Error('LLM returned placeholder code. This is not acceptable. The model must generate real code that solves the specific bounty problem.');
+            }
+          }
         } catch (genError: any) {
           console.error('[BEAST MODE] Code generation error:', genError.message);
           console.error('[BEAST MODE] Error stack:', genError.stack);
