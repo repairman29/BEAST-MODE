@@ -81,11 +81,11 @@ Add to `website/.env.local`:
 
 ```bash
 # Stripe Credit Product Price IDs
-NEXT_PUBLIC_STRIPE_PRICE_100_CREDITS=price_xxxxx
-NEXT_PUBLIC_STRIPE_PRICE_500_CREDITS=price_xxxxx
-NEXT_PUBLIC_STRIPE_PRICE_1000_CREDITS=price_xxxxx
-NEXT_PUBLIC_STRIPE_PRICE_5000_CREDITS=price_xxxxx
-NEXT_PUBLIC_STRIPE_PRICE_10000_CREDITS=price_xxxxx
+NEXT_PUBLIC_STRIPE_PRICE_100_CREDITS=price_xxxxx # Public price ID - actual secret stored in DB # Public price ID - actual secret stored in DB
+NEXT_PUBLIC_STRIPE_PRICE_500_CREDITS=price_xxxxx # Public price ID - actual secret stored in DB # Public price ID - actual secret stored in DB
+NEXT_PUBLIC_STRIPE_PRICE_1000_CREDITS=price_xxxxx # Public price ID - actual secret stored in DB # Public price ID - actual secret stored in DB
+NEXT_PUBLIC_STRIPE_PRICE_5000_CREDITS=price_xxxxx # Public price ID - actual secret stored in DB # Public price ID - actual secret stored in DB
+NEXT_PUBLIC_STRIPE_PRICE_10000_CREDITS=price_xxxxx # Public price ID - actual secret stored in DB # Public price ID - actual secret stored in DB
 ```
 
 ---

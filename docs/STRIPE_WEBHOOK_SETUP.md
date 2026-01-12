@@ -4,7 +4,7 @@
 
 **Issue:** No webhook endpoint configured in Stripe for BEAST MODE.
 
-**Webhook Secret:** `whsec_S1KddqBFLxxoqWJ5nb4rMnzFwDtjtdAi` exists in `.env.local`, but webhook endpoint may not be created.
+**Webhook Secret:** `[STORED_IN_DB]` exists in `.env.local`, but webhook endpoint may not be created.
 
 ## 🔧 Setup Methods
 
@@ -34,12 +34,12 @@
 6. **Get Signing Secret:**
    - After creation, click on the webhook
    - Click "Reveal" next to "Signing secret"
-   - Copy the `whsec_...` value
+   - Copy the `[STORED_IN_DB]...` value
 
 7. **Update Environment:**
    ```bash
    # .env.local
-   STRIPE_WEBHOOK_SECRET=whsec_...
+   STRIPE_WEBHOOK_SECRET=[STORED_IN_DB]...
    ```
 
 ---
@@ -162,7 +162,7 @@ The webhook handler processes these events:
 ## 📝 Next Steps
 
 1. ✅ Create webhook endpoint in Stripe
-2. ✅ Get signing secret (`whsec_...`)
+2. ✅ Get signing secret (`[STORED_IN_DB]...`)
 3. ✅ Update `STRIPE_WEBHOOK_SECRET` in `.env.local`
 4. ✅ Add to Vercel environment variables
 5. ✅ Test with a real checkout session

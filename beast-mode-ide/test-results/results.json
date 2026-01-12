@@ -1,0 +1,1811 @@
+{
+  "config": {
+    "configFile": "/Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/beast-mode-ide/playwright.config.js",
+    "rootDir": "/Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/beast-mode-ide/tests/frontend",
+    "forbidOnly": false,
+    "fullyParallel": true,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 5
+    },
+    "preserveOutput": "always",
+    "reporter": [
+      [
+        "html",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "test-results/results.json"
+        }
+      ],
+      [
+        "list",
+        null
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "quiet": false,
+    "projects": [
+      {
+        "outputDir": "/Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/beast-mode-ide/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 5
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "/Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/beast-mode-ide/tests/frontend",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.57.0",
+    "workers": 5,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "accessibility.spec.js",
+      "file": "accessibility.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Accessibility Tests",
+          "file": "accessibility.spec.js",
+          "line": 10,
+          "column": 6,
+          "specs": [
+            {
+              "title": "Page has proper heading structure @a11y",
+              "ok": true,
+              "tags": [
+                "a11y"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2686,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-11T19:41:16.938Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "d316df4bad39fab891ed-876e2441cb9828db51ce",
+              "file": "accessibility.spec.js",
+              "line": 25,
+              "column": 3
+            },
+            {
+              "title": "Images have alt text @a11y",
+              "ok": true,
+              "tags": [
+                "a11y"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 2673,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-11T19:41:16.937Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "d316df4bad39fab891ed-909b6648aef97c70dad1",
+              "file": "accessibility.spec.js",
+              "line": 31,
+              "column": 3
+            },
+            {
+              "title": "Interactive elements are keyboard accessible @a11y",
+              "ok": true,
+              "tags": [
+                "a11y"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 2,
+                      "status": "passed",
+                      "duration": 2668,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-11T19:41:16.964Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "d316df4bad39fab891ed-239152b7cdbd7278f956",
+              "file": "accessibility.spec.js",
+              "line": 43,
+              "column": 3
+            },
+            {
+              "title": "Color contrast meets WCAG standards @a11y",
+              "ok": true,
+              "tags": [
+                "a11y"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 3,
+                      "parallelIndex": 3,
+                      "status": "passed",
+                      "duration": 2685,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-11T19:41:16.960Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "d316df4bad39fab891ed-18ee49db86d1030a5b3c",
+              "file": "accessibility.spec.js",
+              "line": 56,
+              "column": 3
+            },
+            {
+              "title": "Focus indicators are visible @a11y",
+              "ok": true,
+              "tags": [
+                "a11y"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 4,
+                      "parallelIndex": 4,
+                      "status": "passed",
+                      "duration": 2679,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-11T19:41:16.978Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "d316df4bad39fab891ed-a6cf68086aa5515a8959",
+              "file": "accessibility.spec.js",
+              "line": 72,
+              "column": 3
+            },
+            {
+              "title": "ARIA labels are present where needed @a11y",
+              "ok": true,
+              "tags": [
+                "a11y"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 2949,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-11T19:41:19.839Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "d316df4bad39fab891ed-54ebf1797e0af7ff956a",
+              "file": "accessibility.spec.js",
+              "line": 87,
+              "column": 3
+            },
+            {
+              "title": "Page is navigable with keyboard only @a11y",
+              "ok": true,
+              "tags": [
+                "a11y"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 2,
+                      "status": "passed",
+                      "duration": 2939,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-11T19:41:19.839Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "d316df4bad39fab891ed-56065c54a6cb8b21636b",
+              "file": "accessibility.spec.js",
+              "line": 95,
+              "column": 3
+            },
+            {
+              "title": "No keyboard traps @a11y",
+              "ok": true,
+              "tags": [
+                "a11y"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 4,
+                      "parallelIndex": 4,
+                      "status": "passed",
+                      "duration": 3209,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-11T19:41:19.841Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "d316df4bad39fab891ed-8d23644fad951ff5cc92",
+              "file": "accessibility.spec.js",
+              "line": 108,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "ui-visual.spec.js",
+      "file": "ui-visual.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "UI Visual Tests",
+          "file": "ui-visual.spec.js",
+          "line": 9,
+          "column": 6,
+          "specs": [
+            {
+              "title": "Title bar is visible and styled correctly @ui",
+              "ok": true,
+              "tags": [
+                "ui"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 3,
+                      "parallelIndex": 3,
+                      "status": "passed",
+                      "duration": 2896,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-11T19:41:19.857Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "6a9ee8cb61a017fee6aa-1ed1ede8efeaf4619e27",
+              "file": "ui-visual.spec.js",
+              "line": 18,
+              "column": 3
+            },
+            {
+              "title": "Status bar is visible and styled correctly @ui",
+              "ok": true,
+              "tags": [
+                "ui"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2883,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-11T19:41:19.859Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "6a9ee8cb61a017fee6aa-a1e0fbb3bcccdf9d2906",
+              "file": "ui-visual.spec.js",
+              "line": 36,
+              "column": 3
+            },
+            {
+              "title": "Monaco Editor container exists @ui",
+              "ok": true,
+              "tags": [
+                "ui"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3058,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-11T19:41:22.764Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "6a9ee8cb61a017fee6aa-ab3412f90dca7f8975a0",
+              "file": "ui-visual.spec.js",
+              "line": 52,
+              "column": 3
+            },
+            {
+              "title": "Design system colors are applied @visual",
+              "ok": true,
+              "tags": [
+                "visual"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 3,
+                      "parallelIndex": 3,
+                      "status": "passed",
+                      "duration": 3040,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-11T19:41:22.778Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "6a9ee8cb61a017fee6aa-df36f50cdba504ec5dc9",
+              "file": "ui-visual.spec.js",
+              "line": 68,
+              "column": 3
+            },
+            {
+              "title": "Typography system is applied @visual",
+              "ok": true,
+              "tags": [
+                "visual"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 2,
+                      "status": "passed",
+                      "duration": 3017,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-11T19:41:22.797Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "6a9ee8cb61a017fee6aa-663efc37704cd56408cd",
+              "file": "ui-visual.spec.js",
+              "line": 84,
+              "column": 3
+            },
+            {
+              "title": "UI elements have proper spacing @ui",
+              "ok": true,
+              "tags": [
+                "ui"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 2964,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-11T19:41:22.837Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "6a9ee8cb61a017fee6aa-81b230de6bb110052df6",
+              "file": "ui-visual.spec.js",
+              "line": 99,
+              "column": 3
+            },
+            {
+              "title": "Focus mode toggle works @ui",
+              "ok": true,
+              "tags": [
+                "ui"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 4,
+                      "parallelIndex": 4,
+                      "status": "passed",
+                      "duration": 2737,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-11T19:41:23.067Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "6a9ee8cb61a017fee6aa-bfffbcd81341faf3b802",
+              "file": "ui-visual.spec.js",
+              "line": 113,
+              "column": 3
+            },
+            {
+              "title": "UI auto-hides after inactivity @ui",
+              "ok": true,
+              "tags": [
+                "ui"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 4,
+                      "parallelIndex": 4,
+                      "status": "passed",
+                      "duration": 5914,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-11T19:41:25.813Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "6a9ee8cb61a017fee6aa-7e0479d27e496dad9005",
+              "file": "ui-visual.spec.js",
+              "line": 127,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "ux-flows.spec.js",
+      "file": "ux-flows.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "UX Flow Tests",
+          "file": "ux-flows.spec.js",
+          "line": 9,
+          "column": 6,
+          "specs": [
+            {
+              "title": "Complete coding workflow @ux",
+              "ok": false,
+              "tags": [
+                "ux"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "failed",
+                      "duration": 2422,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mundefined\u001b[39m",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mundefined\u001b[39m\n    at /Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/beast-mode-ide/tests/frontend/ux-flows.spec.js:35:21",
+                        "location": {
+                          "file": "/Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/beast-mode-ide/tests/frontend/ux-flows.spec.js",
+                          "column": 21,
+                          "line": 35
+                        },
+                        "snippet": "  33 |     });\n  34 |     \n> 35 |     expect(hasCode).toBe(true);\n     |                     ^\n  36 |   });\n  37 |\n  38 |   test('File operations workflow @ux', async ({ page }) => {"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/beast-mode-ide/tests/frontend/ux-flows.spec.js",
+                            "column": 21,
+                            "line": 35
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mundefined\u001b[39m\n\n  33 |     });\n  34 |     \n> 35 |     expect(hasCode).toBe(true);\n     |                     ^\n  36 |   });\n  37 |\n  38 |   test('File operations workflow @ux', async ({ page }) => {\n    at /Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/beast-mode-ide/tests/frontend/ux-flows.spec.js:35:21"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-11T19:41:25.818Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/beast-mode-ide/test-results/ux-flows-UX-Flow-Tests-Complete-coding-workflow-ux-chromium/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/beast-mode-ide/test-results/ux-flows-UX-Flow-Tests-Complete-coding-workflow-ux-chromium/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/beast-mode-ide/test-results/ux-flows-UX-Flow-Tests-Complete-coding-workflow-ux-chromium/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/beast-mode-ide/tests/frontend/ux-flows.spec.js",
+                        "column": 21,
+                        "line": 35
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "0d9491a6a9367848483a-9f027a44bd443117d369",
+              "file": "ux-flows.spec.js",
+              "line": 17,
+              "column": 3
+            },
+            {
+              "title": "File operations workflow @ux",
+              "ok": true,
+              "tags": [
+                "ux"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 2,
+                      "status": "passed",
+                      "duration": 2440,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-11T19:41:25.843Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "0d9491a6a9367848483a-5b556b0ab04b67d54b6b",
+              "file": "ux-flows.spec.js",
+              "line": 38,
+              "column": 3
+            },
+            {
+              "title": "AI assistance workflow @ux",
+              "ok": false,
+              "tags": [
+                "ux"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 3,
+                      "parallelIndex": 3,
+                      "status": "failed",
+                      "duration": 2419,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n    at /Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/beast-mode-ide/tests/frontend/ux-flows.spec.js:55:24",
+                        "location": {
+                          "file": "/Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/beast-mode-ide/tests/frontend/ux-flows.spec.js",
+                          "column": 24,
+                          "line": 55
+                        },
+                        "snippet": "  53 |     });\n  54 |     \n> 55 |     expect(aiFeatures).toBe(true);\n     |                        ^\n  56 |   });\n  57 |\n  58 |   test('Quality check workflow @ux', async ({ page }) => {"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/beast-mode-ide/tests/frontend/ux-flows.spec.js",
+                            "column": 24,
+                            "line": 55
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n\n  53 |     });\n  54 |     \n> 55 |     expect(aiFeatures).toBe(true);\n     |                        ^\n  56 |   });\n  57 |\n  58 |   test('Quality check workflow @ux', async ({ page }) => {\n    at /Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/beast-mode-ide/tests/frontend/ux-flows.spec.js:55:24"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-11T19:41:25.845Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/beast-mode-ide/test-results/ux-flows-UX-Flow-Tests-AI-assistance-workflow-ux-chromium/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/beast-mode-ide/test-results/ux-flows-UX-Flow-Tests-AI-assistance-workflow-ux-chromium/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/beast-mode-ide/test-results/ux-flows-UX-Flow-Tests-AI-assistance-workflow-ux-chromium/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/beast-mode-ide/tests/frontend/ux-flows.spec.js",
+                        "column": 24,
+                        "line": 55
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "0d9491a6a9367848483a-1f28602705b8c13b588d",
+              "file": "ux-flows.spec.js",
+              "line": 47,
+              "column": 3
+            },
+            {
+              "title": "Quality check workflow @ux",
+              "ok": false,
+              "tags": [
+                "ux"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 2370,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n    at /Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/beast-mode-ide/tests/frontend/ux-flows.spec.js:66:29",
+                        "location": {
+                          "file": "/Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/beast-mode-ide/tests/frontend/ux-flows.spec.js",
+                          "column": 29,
+                          "line": 66
+                        },
+                        "snippet": "  64 |     });\n  65 |     \n> 66 |     expect(qualityFeatures).toBe(true);\n     |                             ^\n  67 |   });\n  68 |\n  69 |   test('Navigation workflow @ux', async ({ page }) => {"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/beast-mode-ide/tests/frontend/ux-flows.spec.js",
+                            "column": 29,
+                            "line": 66
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n\n  64 |     });\n  65 |     \n> 66 |     expect(qualityFeatures).toBe(true);\n     |                             ^\n  67 |   });\n  68 |\n  69 |   test('Navigation workflow @ux', async ({ page }) => {\n    at /Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/beast-mode-ide/tests/frontend/ux-flows.spec.js:66:29"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-11T19:41:25.850Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/beast-mode-ide/test-results/ux-flows-UX-Flow-Tests-Quality-check-workflow-ux-chromium/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/beast-mode-ide/test-results/ux-flows-UX-Flow-Tests-Quality-check-workflow-ux-chromium/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/beast-mode-ide/test-results/ux-flows-UX-Flow-Tests-Quality-check-workflow-ux-chromium/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/beast-mode-ide/tests/frontend/ux-flows.spec.js",
+                        "column": 29,
+                        "line": 66
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "0d9491a6a9367848483a-71faa558f598065f1e2d",
+              "file": "ux-flows.spec.js",
+              "line": 58,
+              "column": 3
+            },
+            {
+              "title": "Navigation workflow @ux",
+              "ok": false,
+              "tags": [
+                "ux"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 5,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 2370,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n    at /Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/beast-mode-ide/tests/frontend/ux-flows.spec.js:77:25",
+                        "location": {
+                          "file": "/Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/beast-mode-ide/tests/frontend/ux-flows.spec.js",
+                          "column": 25,
+                          "line": 77
+                        },
+                        "snippet": "  75 |     });\n  76 |     \n> 77 |     expect(navFeatures).toBe(true);\n     |                         ^\n  78 |   });\n  79 |\n  80 |   test('Error handling workflow @ux', async ({ page }) => {"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/beast-mode-ide/tests/frontend/ux-flows.spec.js",
+                            "column": 25,
+                            "line": 77
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n\n  75 |     });\n  76 |     \n> 77 |     expect(navFeatures).toBe(true);\n     |                         ^\n  78 |   });\n  79 |\n  80 |   test('Error handling workflow @ux', async ({ page }) => {\n    at /Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/beast-mode-ide/tests/frontend/ux-flows.spec.js:77:25"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-11T19:41:28.723Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/beast-mode-ide/test-results/ux-flows-UX-Flow-Tests-Navigation-workflow-ux-chromium/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/beast-mode-ide/test-results/ux-flows-UX-Flow-Tests-Navigation-workflow-ux-chromium/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/beast-mode-ide/test-results/ux-flows-UX-Flow-Tests-Navigation-workflow-ux-chromium/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/beast-mode-ide/tests/frontend/ux-flows.spec.js",
+                        "column": 25,
+                        "line": 77
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "0d9491a6a9367848483a-27a5598aed805a20e4d7",
+              "file": "ux-flows.spec.js",
+              "line": 69,
+              "column": 3
+            },
+            {
+              "title": "Error handling workflow @ux",
+              "ok": true,
+              "tags": [
+                "ux"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 6,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 2375,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-11T19:41:28.722Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "0d9491a6a9367848483a-8b581bdf680bca7c92f9",
+              "file": "ux-flows.spec.js",
+              "line": 80,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "ux-interactions.spec.js",
+      "file": "ux-interactions.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "UX Interaction Tests",
+          "file": "ux-interactions.spec.js",
+          "line": 9,
+          "column": 6,
+          "specs": [
+            {
+              "title": "Editor is interactive and accepts input @ux",
+              "ok": false,
+              "tags": [
+                "ux"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 7,
+                      "parallelIndex": 3,
+                      "status": "failed",
+                      "duration": 2427,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mundefined\u001b[39m",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mundefined\u001b[39m\n    at /Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/beast-mode-ide/tests/frontend/ux-interactions.spec.js:32:24",
+                        "location": {
+                          "file": "/Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/beast-mode-ide/tests/frontend/ux-interactions.spec.js",
+                          "column": 24,
+                          "line": 32
+                        },
+                        "snippet": "  30 |     });\n  31 |     \n> 32 |     expect(hasContent).toBe(true);\n     |                        ^\n  33 |   });\n  34 |\n  35 |   test('Keyboard shortcuts work @ux', async ({ page }) => {"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/beast-mode-ide/tests/frontend/ux-interactions.spec.js",
+                            "column": 24,
+                            "line": 32
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mundefined\u001b[39m\n\n  30 |     });\n  31 |     \n> 32 |     expect(hasContent).toBe(true);\n     |                        ^\n  33 |   });\n  34 |\n  35 |   test('Keyboard shortcuts work @ux', async ({ page }) => {\n    at /Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/beast-mode-ide/tests/frontend/ux-interactions.spec.js:32:24"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-11T19:41:28.723Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/beast-mode-ide/test-results/ux-interactions-UX-Interac-5d671-active-and-accepts-input-ux-chromium/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/beast-mode-ide/test-results/ux-interactions-UX-Interac-5d671-active-and-accepts-input-ux-chromium/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/beast-mode-ide/test-results/ux-interactions-UX-Interac-5d671-active-and-accepts-input-ux-chromium/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/beast-mode-ide/tests/frontend/ux-interactions.spec.js",
+                        "column": 24,
+                        "line": 32
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "881d60992d7aeedf2ebf-6c413beb477140a20dba",
+              "file": "ux-interactions.spec.js",
+              "line": 17,
+              "column": 3
+            },
+            {
+              "title": "Keyboard shortcuts work @ux",
+              "ok": false,
+              "tags": [
+                "ux"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 2,
+                      "status": "failed",
+                      "duration": 2652,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n    at /Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/beast-mode-ide/tests/frontend/ux-interactions.spec.js:45:25",
+                        "location": {
+                          "file": "/Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/beast-mode-ide/tests/frontend/ux-interactions.spec.js",
+                          "column": 25,
+                          "line": 45
+                        },
+                        "snippet": "  43 |     });\n  44 |     \n> 45 |     expect(hasResponse).toBe(true);\n     |                         ^\n  46 |   });\n  47 |\n  48 |   test('Terminal is accessible and functional @ux', async ({ page }) => {"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/beast-mode-ide/tests/frontend/ux-interactions.spec.js",
+                            "column": 25,
+                            "line": 45
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n\n  43 |     });\n  44 |     \n> 45 |     expect(hasResponse).toBe(true);\n     |                         ^\n  46 |   });\n  47 |\n  48 |   test('Terminal is accessible and functional @ux', async ({ page }) => {\n    at /Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/beast-mode-ide/tests/frontend/ux-interactions.spec.js:45:25"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-11T19:41:28.297Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/beast-mode-ide/test-results/ux-interactions-UX-Interac-fc437--Keyboard-shortcuts-work-ux-chromium/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/beast-mode-ide/test-results/ux-interactions-UX-Interac-fc437--Keyboard-shortcuts-work-ux-chromium/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/beast-mode-ide/test-results/ux-interactions-UX-Interac-fc437--Keyboard-shortcuts-work-ux-chromium/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/beast-mode-ide/tests/frontend/ux-interactions.spec.js",
+                        "column": 25,
+                        "line": 45
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "881d60992d7aeedf2ebf-9cadc67ea7c8b2f242ae",
+              "file": "ux-interactions.spec.js",
+              "line": 35,
+              "column": 3
+            },
+            {
+              "title": "Terminal is accessible and functional @ux",
+              "ok": false,
+              "tags": [
+                "ux"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 8,
+                      "parallelIndex": 2,
+                      "status": "failed",
+                      "duration": 2971,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n    at /Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/beast-mode-ide/tests/frontend/ux-interactions.spec.js:57:27",
+                        "location": {
+                          "file": "/Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/beast-mode-ide/tests/frontend/ux-interactions.spec.js",
+                          "column": 27,
+                          "line": 57
+                        },
+                        "snippet": "  55 |     });\n  56 |     \n> 57 |     expect(isInteractive).toBe(true);\n     |                           ^\n  58 |   });\n  59 |\n  60 |   test('Panels can be toggled @ux', async ({ page }) => {"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/beast-mode-ide/tests/frontend/ux-interactions.spec.js",
+                            "column": 27,
+                            "line": 57
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n\n  55 |     });\n  56 |     \n> 57 |     expect(isInteractive).toBe(true);\n     |                           ^\n  58 |   });\n  59 |\n  60 |   test('Panels can be toggled @ux', async ({ page }) => {\n    at /Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/beast-mode-ide/tests/frontend/ux-interactions.spec.js:57:27"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-11T19:41:31.393Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/beast-mode-ide/test-results/ux-interactions-UX-Interac-19dd8-ccessible-and-functional-ux-chromium/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/beast-mode-ide/test-results/ux-interactions-UX-Interac-19dd8-ccessible-and-functional-ux-chromium/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/beast-mode-ide/test-results/ux-interactions-UX-Interac-19dd8-ccessible-and-functional-ux-chromium/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/beast-mode-ide/tests/frontend/ux-interactions.spec.js",
+                        "column": 27,
+                        "line": 57
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "881d60992d7aeedf2ebf-3925c40adc0db8eb52c8",
+              "file": "ux-interactions.spec.js",
+              "line": 48,
+              "column": 3
+            },
+            {
+              "title": "Panels can be toggled @ux",
+              "ok": true,
+              "tags": [
+                "ux"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 6,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 3255,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-11T19:41:31.277Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "881d60992d7aeedf2ebf-21920f124b5f18df510c",
+              "file": "ux-interactions.spec.js",
+              "line": 60,
+              "column": 3
+            },
+            {
+              "title": "Error boundary displays errors gracefully @ux",
+              "ok": false,
+              "tags": [
+                "ux"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 9,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 2704,
+                      "error": {
+                        "message": "Error: page.evaluate: Error: Test error\n    at eval (eval at evaluate (:290:30), <anonymous>:2:13)\n    at UtilityScript.evaluate (<anonymous>:292:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)",
+                        "stack": "Error: page.evaluate: Error: Test error\n    at eval (eval at evaluate (:290:30), <anonymous>:2:13)\n    at UtilityScript.evaluate (<anonymous>:292:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at eval (eval at evaluate (:290:30), <anonymous>:2:13)\n    at UtilityScript.evaluate (<anonymous>:292:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at /Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/beast-mode-ide/tests/frontend/ux-interactions.spec.js:71:16",
+                        "location": {
+                          "file": "eval at evaluate (:290:30), <anonymous>",
+                          "column": 13,
+                          "line": 2
+                        }
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "eval at evaluate (:290:30), <anonymous>",
+                            "column": 13,
+                            "line": 2
+                          },
+                          "message": "Error: page.evaluate: Error: Test error\n    at eval (eval at evaluate (:290:30), <anonymous>:2:13)\n    at UtilityScript.evaluate (<anonymous>:292:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at eval (eval at evaluate (:290:30), <anonymous>:2:13)\n    at UtilityScript.evaluate (<anonymous>:292:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at /Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/beast-mode-ide/tests/frontend/ux-interactions.spec.js:71:16"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-11T19:41:31.725Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/beast-mode-ide/test-results/ux-interactions-UX-Interac-ee160-splays-errors-gracefully-ux-chromium/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/beast-mode-ide/test-results/ux-interactions-UX-Interac-ee160-splays-errors-gracefully-ux-chromium/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/Users/jeffadkins/Smugglers/BEAST-MODE-PRODUCT/beast-mode-ide/test-results/ux-interactions-UX-Interac-ee160-splays-errors-gracefully-ux-chromium/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "eval at evaluate (:290:30), <anonymous>",
+                        "column": 13,
+                        "line": 2
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "881d60992d7aeedf2ebf-67312f5642ed942f0338",
+              "file": "ux-interactions.spec.js",
+              "line": 69,
+              "column": 3
+            },
+            {
+              "title": "Copy functionality works @ux",
+              "ok": true,
+              "tags": [
+                "ux"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 10,
+                      "parallelIndex": 3,
+                      "status": "passed",
+                      "duration": 3256,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-11T19:41:31.780Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "881d60992d7aeedf2ebf-5471a9408ef5d4d94cb7",
+              "file": "ux-interactions.spec.js",
+              "line": 85,
+              "column": 3
+            },
+            {
+              "title": "Responsive layout works @ux",
+              "ok": true,
+              "tags": [
+                "ux"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 4,
+                      "parallelIndex": 4,
+                      "status": "passed",
+                      "duration": 3794,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-11T19:41:31.739Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "881d60992d7aeedf2ebf-8c4ad886140b80129e47",
+              "file": "ux-interactions.spec.js",
+              "line": 107,
+              "column": 3
+            },
+            {
+              "title": "Smooth animations and transitions @ux",
+              "ok": true,
+              "tags": [
+                "ux"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 6,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 2220,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-11T19:41:34.543Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "881d60992d7aeedf2ebf-6c82bc785f26b67f0c02",
+              "file": "ux-interactions.spec.js",
+              "line": 128,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "visual-regression.spec.js",
+      "file": "visual-regression.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Visual Regression Tests",
+          "file": "visual-regression.spec.js",
+          "line": 9,
+          "column": 6,
+          "specs": [
+            {
+              "title": "Full page screenshot matches baseline @visual",
+              "ok": true,
+              "tags": [
+                "visual"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 12,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2365,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-11T19:41:35.466Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "614534ba5c1e0a84453e-a8bd0604c99c1cf2166d",
+              "file": "visual-regression.spec.js",
+              "line": 17,
+              "column": 3
+            },
+            {
+              "title": "Title bar matches baseline @visual",
+              "ok": true,
+              "tags": [
+                "visual"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 11,
+                      "parallelIndex": 2,
+                      "status": "passed",
+                      "duration": 2351,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-11T19:41:35.467Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "614534ba5c1e0a84453e-3b6c5a825cc73314976a",
+              "file": "visual-regression.spec.js",
+              "line": 24,
+              "column": 3
+            },
+            {
+              "title": "Status bar matches baseline @visual",
+              "ok": true,
+              "tags": [
+                "visual"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 10,
+                      "parallelIndex": 3,
+                      "status": "passed",
+                      "duration": 2264,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-11T19:41:35.203Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "614534ba5c1e0a84453e-75f00cb3036705dc4a84",
+              "file": "visual-regression.spec.js",
+              "line": 31,
+              "column": 3
+            },
+            {
+              "title": "Editor area matches baseline @visual",
+              "ok": true,
+              "tags": [
+                "visual"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 4,
+                      "parallelIndex": 4,
+                      "status": "passed",
+                      "duration": 2327,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-11T19:41:35.545Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "614534ba5c1e0a84453e-8c62f295735048eab542",
+              "file": "visual-regression.spec.js",
+              "line": 38,
+              "column": 3
+            },
+            {
+              "title": "Design system colors are consistent @visual",
+              "ok": true,
+              "tags": [
+                "visual"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 6,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 2198,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-11T19:41:36.771Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "614534ba5c1e0a84453e-f1da420ef1eee467ea12",
+              "file": "visual-regression.spec.js",
+              "line": 45,
+              "column": 3
+            },
+            {
+              "title": "Typography is consistent @visual",
+              "ok": true,
+              "tags": [
+                "visual"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 10,
+                      "parallelIndex": 3,
+                      "status": "passed",
+                      "duration": 2176,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-11T19:41:37.478Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "614534ba5c1e0a84453e-d8474c3e516aaede9a1b",
+              "file": "visual-regression.spec.js",
+              "line": 65,
+              "column": 3
+            },
+            {
+              "title": "Spacing is consistent @visual",
+              "ok": true,
+              "tags": [
+                "visual"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 4,
+                      "parallelIndex": 4,
+                      "status": "passed",
+                      "duration": 2206,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-01-11T19:41:37.882Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "614534ba5c1e0a84453e-eff4b3a8d69afe52c0f9",
+              "file": "visual-regression.spec.js",
+              "line": 74,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-01-11T19:41:16.421Z",
+    "duration": 23706.733,
+    "expected": 29,
+    "skipped": 0,
+    "unexpected": 8,
+    "flaky": 0
+  }
+}

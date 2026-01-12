@@ -31,6 +31,14 @@ function createWindow() {
     const htmlPath = path.join(__dirname, '../renderer/index.html');
     mainWindow.loadFile(htmlPath);
     
+    // In production, serve bundled files from dist/
+    if (!isDev) {
+        mainWindow.webContents.on('did-fail-load', (event, errorCode, errorDescription, validatedURL) => {
+            // Handle bundle loading failures gracefully
+            console.warn('Failed to load resource:', validatedURL);
+        });
+    }
+    
     // Open dev tools in dev mode
     if (isDev) {
         mainWindow.webContents.openDevTools();

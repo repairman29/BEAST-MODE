@@ -32,34 +32,48 @@ export async function POST(request: NextRequest) {
         }
         
         // Get improved prompt based on error analysis
-        let basePrompt = `Generate code solution for this bounty:
+        // CRITICAL: Make the prompt extremely explicit about generating REAL code, not placeholders
+        let basePrompt = `You are an expert software developer. Generate a COMPLETE, PRODUCTION-READY code solution for this specific bounty.
 
+BOUNTY DETAILS:
 ${bounty.title ? `Title: ${bounty.title}` : ''}
 ${bounty.description ? `Description: ${bounty.description}` : ''}
 ${bounty.tech_stack ? `Tech Stack: ${bounty.tech_stack.join(', ')}` : ''}
 
 ${codePrompt}
 
-CRITICAL: Return ONLY valid JSON in this exact format:
+CRITICAL REQUIREMENTS:
+1. Generate ACTUAL, COMPLETE implementation code - NOT placeholders, NOT examples, NOT templates
+2. The code must solve the SPECIFIC problem described in the bounty
+3. Include error handling, type safety, and proper structure
+4. Use the specified tech stack
+5. Return ONLY valid JSON - no markdown, no explanations, no code blocks
+
+REQUIRED JSON FORMAT:
 {
   "files": [
     {
-      "path": "src/path/to/file.ts",
-      "content": "export function solveBounty() { /* full implementation */ }",
+      "path": "src/path/to/actual-solution.ts",
+      "content": "// Complete implementation that solves: ${bounty.title || 'the bounty'}\nexport function solveBounty() {\n  // REAL implementation code here - not placeholder\n  // Must actually solve the problem\n}",
       "language": "typescript"
     }
   ],
-  "summary": "Brief description",
+  "summary": "Brief description of what this solution does",
   "test_files": [
     {
       "path": "tests/path/to/test.ts",
-      "content": "describe('solution', () => { /* tests */ })",
+      "content": "describe('solution', () => {\n  it('should solve the bounty', () => {\n    // Real test code\n  });\n});",
       "language": "typescript"
     }
   ]
 }
 
-Return ONLY the JSON, no markdown, no explanations. The "content" field must contain actual, complete, working code.`;
+IMPORTANT: 
+- The "content" field MUST contain REAL, COMPLETE code that solves "${bounty.title || 'this bounty'}"
+- DO NOT return placeholder code like "export function add(a, b) { return a + b; }"
+- DO NOT return example code
+- Generate code that SPECIFICALLY addresses: ${bounty.description?.substring(0, 200) || codePrompt.substring(0, 200)}
+- The code must be production-ready and complete`;
 
         // Get improved prompt from error analysis (learns from failures)
         let enhancedPrompt = basePrompt;
@@ -115,37 +129,124 @@ Return ONLY the JSON, no markdown, no explanations. The "content" field must con
         const userId = request.headers.get('x-user-id') || 'system';
         
         // Generate code using model router
-        const generatedResult = await generator.generateWithModelRouter(
-          enhancedPrompt,
-          {
-            userId,
-            repo: repo.owner && repo.repo ? `${repo.owner}/${repo.repo}` : null,
-            techStack: bounty.tech_stack || [],
-            context: {
-              type: 'code_generation',
-              task: 'generate_code',
-              bounty: bounty.title || 'Unknown',
-            },
-          }
-        );
+        // Ensure all parameters are properly formatted
+        const techStack = Array.isArray(bounty.tech_stack) ? bounty.tech_stack : (bounty.tech_stack ? [bounty.tech_stack] : []);
+        const repoString = repo.owner && repo.repo ? `${repo.owner}/${repo.repo}` : null;
+        
+        console.log('[BEAST MODE] Generating code with params:', {
+          userId,
+          repo: repoString,
+          techStack,
+          hasPrompt: !!enhancedPrompt,
+          promptLength: enhancedPrompt?.length,
+        });
+        
+        let generatedResult: any;
+        try {
+          // Build a much more explicit and detailed prompt
+          const detailedPrompt = `${enhancedPrompt}
+
+YOU MUST GENERATE REAL CODE THAT SOLVES THIS SPECIFIC PROBLEM:
+"${bounty.title || 'the bounty'}"
+
+PROBLEM DESCRIPTION:
+${bounty.description || 'See above'}
+
+TECHNICAL REQUIREMENTS:
+${bounty.tech_stack ? `- Use these technologies: ${bounty.tech_stack.join(', ')}` : ''}
+- Generate COMPLETE, WORKING implementation
+- Include proper error handling
+- Use appropriate design patterns
+- Follow best practices for ${bounty.tech_stack?.[0] || 'the language'}
+
+ABSOLUTELY FORBIDDEN:
+- DO NOT return "export function add(a: number, b: number) { return a + b; }"
+- DO NOT return placeholder code
+- DO NOT return example code
+- DO NOT return template code
+- DO NOT return TODO comments as implementation
+
+YOU MUST:
+- Generate code that SPECIFICALLY solves "${bounty.title || 'this bounty'}"
+- Make the code production-ready and complete
+- Include all necessary imports, types, and error handling
+- The code must be at least 200+ lines if it's a complex solution
+- The code must actually implement the functionality described
+
+Return ONLY valid JSON with the files array containing REAL implementation code.`;
+
+          generatedResult = await generator.generateWithModelRouter(
+            detailedPrompt,
+            {
+              userId,
+              model: 'anthropic:claude-3-haiku-20240307', // Use Anthropic (we have keys for this)
+              temperature: 0.3, // Lower temperature for more focused output
+              maxTokens: 8000, // Increase token limit for longer code
+              systemPrompt: `You are an expert software developer specializing in ${bounty.tech_stack?.[0] || 'software development'}. 
+
+Your task is to generate COMPLETE, PRODUCTION-READY code that solves a specific problem.
+
+CRITICAL REQUIREMENTS:
+1. Generate REAL, COMPLETE implementation code - NOT placeholders, NOT examples, NOT templates
+2. The code MUST solve the SPECIFIC problem provided in the user's request
+3. Include proper error handling, type safety, imports, and structure
+4. Return ONLY valid JSON format with a "files" array
+5. Each file's "content" field MUST contain COMPLETE, WORKING code (minimum 200+ lines for complex solutions)
+6. DO NOT return placeholder code like "export function add(a, b) { return a + b; }"
+7. DO NOT return example code or templates
+8. The code must be specific to the problem described
+
+The user will provide a detailed description of the problem. Generate code that actually solves that problem.`,
+              repo: repoString,
+              techStack: techStack,
+              context: {
+                type: 'code_generation',
+                task: 'generate_code',
+                bounty: bounty.title || 'Unknown',
+              },
+            }
+          );
+          console.log('[BEAST MODE] Code generation successful, result type:', typeof generatedResult);
+        } catch (genError: any) {
+          console.error('[BEAST MODE] Code generation error:', genError.message);
+          console.error('[BEAST MODE] Error stack:', genError.stack);
+          // Re-throw with more context
+          throw new Error(`Code generation failed: ${genError.message}. Stack: ${genError.stack?.substring(0, 500)}`);
+        }
         
         // Parse the generated result
         // generateWithModelRouter returns a string (the LLM response)
         // We need to parse it to extract the JSON structure
         let generatedCode: any;
         
+        console.log('[BEAST MODE] Raw LLM response type:', typeof generatedResult);
+        console.log('[BEAST MODE] Raw LLM response length:', typeof generatedResult === 'string' ? generatedResult.length : 'N/A');
+        console.log('[BEAST MODE] Raw LLM response preview:', typeof generatedResult === 'string' ? generatedResult.substring(0, 500) : JSON.stringify(generatedResult).substring(0, 500));
+        
         if (typeof generatedResult === 'string') {
           // Try to parse as JSON first
           try {
             generatedCode = JSON.parse(generatedResult);
+            console.log('[BEAST MODE] Successfully parsed as JSON');
           } catch (e) {
             // If not JSON, try to extract JSON from markdown code blocks
             const jsonMatch = generatedResult.match(/\{[\s\S]*"files"[\s\S]*\}/);
             if (jsonMatch) {
               try {
                 generatedCode = JSON.parse(jsonMatch[0]);
+                console.log('[BEAST MODE] Extracted JSON from markdown');
               } catch (e2) {
-                // If JSON extraction fails, create structure from raw response
+                console.error('[BEAST MODE] Failed to parse extracted JSON:', e2.message);
+                // If JSON extraction fails, check if it's placeholder code
+                if (generatedResult.includes('function add(a') || generatedResult.includes('return a + b')) {
+                  console.error('[BEAST MODE] ERROR: LLM returned placeholder code! Rejecting...');
+                  throw new Error('LLM returned placeholder code instead of real solution. This is not acceptable.');
+                }
+                // Create structure from raw response only if it's substantial
+                if (generatedResult.length < 200) {
+                  console.error('[BEAST MODE] ERROR: Response too short, likely placeholder. Rejecting...');
+                  throw new Error('LLM response too short, likely placeholder code. This is not acceptable.');
+                }
                 const techStack = Array.isArray(bounty.tech_stack) ? bounty.tech_stack : [];
                 const primaryLang = techStack[0] || 'typescript';
                 generatedCode = {
@@ -159,7 +260,16 @@ Return ONLY the JSON, no markdown, no explanations. The "content" field must con
                 };
               }
             } else {
-              // No JSON found, create structure from raw response
+              // No JSON found - check if it's placeholder
+              if (generatedResult.includes('function add(a') || generatedResult.includes('return a + b')) {
+                console.error('[BEAST MODE] ERROR: LLM returned placeholder code! Rejecting...');
+                throw new Error('LLM returned placeholder code instead of real solution. This is not acceptable.');
+              }
+              if (generatedResult.length < 200) {
+                console.error('[BEAST MODE] ERROR: Response too short, likely placeholder. Rejecting...');
+                throw new Error('LLM response too short, likely placeholder code. This is not acceptable.');
+              }
+              // Create structure from raw response
               const techStack = Array.isArray(bounty.tech_stack) ? bounty.tech_stack : [];
               const primaryLang = techStack[0] || 'typescript';
               generatedCode = {
@@ -178,19 +288,22 @@ Return ONLY the JSON, no markdown, no explanations. The "content" field must con
           generatedCode = generatedResult;
         }
         
+        // Validate the generated code - reject placeholders
+        if (generatedCode.files && Array.isArray(generatedCode.files)) {
+          for (const file of generatedCode.files) {
+            const content = file.content || '';
+            if (content.includes('function add(a') || content.includes('return a + b') || content.length < 100) {
+              console.error('[BEAST MODE] ERROR: Generated file contains placeholder code!');
+              console.error('[BEAST MODE] File content:', content.substring(0, 200));
+              throw new Error(`Generated file "${file.path}" contains placeholder code. This is not acceptable.`);
+            }
+          }
+        }
+        
         // Ensure generatedCode has the expected structure
         if (!generatedCode.files || !Array.isArray(generatedCode.files)) {
-          const techStack = Array.isArray(bounty.tech_stack) ? bounty.tech_stack : [];
-          const primaryLang = techStack[0] || 'typescript';
-          generatedCode = {
-            files: [{
-              path: `solution.${primaryLang === 'typescript' ? 'ts' : primaryLang === 'python' ? 'py' : 'js'}`,
-              language: primaryLang,
-              content: typeof generatedResult === 'string' ? generatedResult : JSON.stringify(generatedResult),
-            }],
-            summary: generatedCode.summary || 'Generated code solution',
-            test_files: generatedCode.test_files || [],
-          };
+          console.error('[BEAST MODE] ERROR: Generated code missing files array');
+          throw new Error('Generated code missing files array. This is not acceptable.');
         }
         
         // Log successful generation for learning

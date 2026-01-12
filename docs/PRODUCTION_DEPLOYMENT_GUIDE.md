@@ -77,7 +77,7 @@ JWT_SECRET=your-jwt-secret
 
 # Stripe
 STRIPE_SECRET_KEY=sk_live_...
-NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_live_...
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=[STORED_IN_DB] # Public key - retrieve from Supabase 'secrets' table
 
 # App
 NEXT_PUBLIC_URL=https://your-domain.com

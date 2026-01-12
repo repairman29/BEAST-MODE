@@ -135,10 +135,11 @@
     "fix:lint": "npm run lint -- --fix",
     "fix:format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\"",
     "release:notes": "node scripts/automate/generate-release-notes.js",
-    "release:create": "node scripts/automate/create-release.js",
     "deploy:staging": "node scripts/automate/auto-deploy.js staging",
     "deploy:prod": "node scripts/automate/auto-deploy.js production",
-    "automate:all": "npm run fix:all && npm run test && npm run deploy:staging"
+    "automate:all": "npm run fix:all && npm run test && npm run deploy:staging",
+    "check:secrets:docs": "node scripts/check-secrets-in-docs.js",
+    "scan:secrets:docs": "node scripts/scan-docs-for-secrets.js"
   },
   "keywords": [
     "ai",

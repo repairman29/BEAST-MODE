@@ -26,7 +26,7 @@
 - ✅ `GITHUB_APP_ID` - Set (2628268)
 - ✅ `GITHUB_APP_PRIVATE_KEY` - Set
 - ❌ `GITHUB_WEBHOOK_SECRET` - **Missing**
-- ⚠️  Note: `GITHUB_APP_WEBHOOK_SECRET` exists (30bb02c253af11af81a53467043d5944bd5967c5)
+- ⚠️  Note: `GITHUB_APP_WEBHOOK_SECRET` exists ([STORED_IN_DB])
   - May be the same value, check if code uses `GITHUB_APP_WEBHOOK_SECRET` instead
 
 ### App (2/2 - 100%)
@@ -81,7 +81,7 @@ supabase db push --linked --include-all
 
 **Option B:** Add `GITHUB_WEBHOOK_SECRET` to `.env.local`
 ```bash
-GITHUB_WEBHOOK_SECRET=30bb02c253af11af81a53467043d5944bd5967c5
+GITHUB_WEBHOOK_SECRET=[STORED_IN_DB]
 ```
 
 ---

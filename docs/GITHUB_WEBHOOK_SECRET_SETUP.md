@@ -8,7 +8,7 @@
 ## 🔍 Current Status
 
 **Found in `.env.local`:**
-- ✅ `GITHUB_APP_WEBHOOK_SECRET=30bb02c253af11af81a53467043d5944bd5967c5`
+- ✅ `GITHUB_APP_WEBHOOK_SECRET=[STORED_IN_DB]`
 - ❌ `GITHUB_WEBHOOK_SECRET` - Missing
 
 **Code Usage:**
@@ -33,7 +33,7 @@
    - Click "Reveal" or "Generate new secret" if needed
 
 3. **Copy the Secret**
-   - The secret is a long hexadecimal string (e.g., `30bb02c253af11af81a53467043d5944bd5967c5`)
+   - The secret is a long hexadecimal string (e.g., `[STORED_IN_DB]`)
    - **DO NOT** share this secret publicly
 
 4. **Add to `.env.local`**
@@ -88,7 +88,7 @@ If you need to generate a new secret:
 
 ```bash
 # GitHub App Webhook Secret
-GITHUB_APP_WEBHOOK_SECRET=30bb02c253af11af81a53467043d5944bd5967c5
+GITHUB_APP_WEBHOOK_SECRET=[STORED_IN_DB]
 ```
 
 **Verify:**

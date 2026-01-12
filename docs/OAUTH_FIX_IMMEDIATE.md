@@ -43,14 +43,14 @@ While the code now auto-fixes this, you should still set the correct values:
 **Production Environment in Vercel:**
 ```bash
 GITHUB_CLIENT_ID=Ov23liDKFkIrnPneWwny
-GITHUB_CLIENT_SECRET=014c7fab1ba6cc6a7398b5bde04e26463f16f4e9
+GITHUB_CLIENT_SECRET=[STORED_IN_DB]
 GITHUB_REDIRECT_URI=https://beast-mode.dev/api/github/oauth/callback
 ```
 
 **Development (.env.local):**
 ```bash
 GITHUB_CLIENT_ID=Ov23lidLvmp68FVMEqEB
-GITHUB_CLIENT_SECRET=df4c598018de45ce8cb90313489eeb21448aedcf
+GITHUB_CLIENT_SECRET=[STORED_IN_DB]
 GITHUB_REDIRECT_URI=http://localhost:7777/api/github/oauth/callback
 ```
 

@@ -51,6 +51,10 @@ class LLMCache {
   async generateEmbedding(text) {
     // Simplified: Use normalized hash-based similarity for now
     // TODO: Replace with actual embedding model (OpenAI, etc.)
+    if (!text || typeof text !== 'string') {
+      // Return a default hash for undefined/null/empty text
+      return crypto.createHash('sha256').update('').digest('hex');
+    }
     const normalized = text.toLowerCase().trim();
     // Remove extra whitespace and normalize
     const cleaned = normalized.replace(/\s+/g, ' ');

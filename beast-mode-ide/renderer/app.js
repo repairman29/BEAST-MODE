@@ -41,6 +41,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 /**
  * Initialize Monaco Editor
+ * Uses bundled Monaco Editor (offline support) with CDN fallback
  */
 async function initializeMonacoEditor() {
     try {
@@ -49,66 +50,28 @@ async function initializeMonacoEditor() {
             throw new Error('monaco-editor container not found');
         }
         
-        // Wait for Monaco loader to be available
-        let attempts = 0;
-        while (typeof require === 'undefined' && attempts < 50) {
-            await new Promise(resolve => setTimeout(resolve, 100));
-            attempts++;
-        }
+        // Try to load Monaco - webpack will bundle it, or use CDN fallback
+        let monaco;
         
-        if (typeof require === 'undefined' || !require.config) {
-            throw new Error('Monaco Editor loader not found. CDN may not have loaded.');
-        }
-        
-        // Configure Monaco loader to use CDN
-        require.config({ 
-            paths: { 
-                vs: 'https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs' 
-            } 
-        });
-        
-        // Load Monaco Editor
-        const monaco = await new Promise((resolve, reject) => {
+        // Check if Monaco is already available (bundled by webpack)
+        if (window.monaco) {
+            monaco = window.monaco;
+        } else {
+            // Try to import Monaco (webpack will handle this)
             try {
-                require(['vs/editor/editor.main'], () => {
-                    // Monaco is now available globally
-                    if (window.monaco) {
-                        resolve(window.monaco);
-                    } else {
-                        reject(new Error('Monaco Editor failed to initialize'));
-                    }
-                }, (error) => {
-                    reject(error);
-                });
-            } catch (e) {
-                reject(e);
+                // Dynamic import for webpack bundling
+                const monacoModule = await import('monaco-editor');
+                monaco = monacoModule.default || monacoModule;
+            } catch (importError) {
+                // Fallback to CDN if webpack bundle not available
+                console.warn('Bundled Monaco not available, using CDN fallback');
+                monaco = await loadMonacoFromCDN();
             }
-        });
+        }
         
         // Create editor
-        editor = monaco.editor.create(container, {
-            value: '// Welcome to BEAST MODE IDE\n// Start coding with enterprise-grade quality intelligence\n\n',
-            language: 'typescript',
-            theme: 'vs-dark',
-            automaticLayout: true,
-            minimap: { enabled: true },
-            fontSize: 14,
-            fontFamily: "'JetBrains Mono', 'Fira Code', monospace",
-            lineNumbers: 'on',
-            wordWrap: 'on',
-            cursorStyle: 'line'
-        });
-
-        // Add BEAST MODE commands
-        editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyS, () => {
-            checkSecrets();
-        });
-
-        editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyA, () => {
-            checkArchitecture();
-        });
-
-        console.log('✅ Monaco Editor initialized');
+        createEditor(monaco, container);
+        
     } catch (error) {
         console.error('❌ Failed to initialize Monaco Editor:', error);
         const errorMsg = `❌ Failed to initialize Monaco Editor: ${error.message}\nStack: ${error.stack || 'N/A'}`;
@@ -121,11 +84,11 @@ async function initializeMonacoEditor() {
                     <button class="copy-error-btn" onclick="copyError('${escapeHtml(error.message)}', '${escapeHtml(error.stack || 'N/A')}')">📋 Copy</button>
                     <h2>⚠️ Monaco Editor Failed to Load</h2>
                     <p>Error: ${error.message}</p>
-                    <p>Monaco Editor is loading from CDN. If this persists:</p>
+                    <p>Monaco Editor is loading from bundle (offline support). If this persists:</p>
                     <ul style="margin-top: 10px; padding-left: 20px;">
-                        <li>Check your internet connection</li>
+                        <li>Run: npm run build:webpack</li>
+                        <li>Check webpack configuration</li>
                         <li>Try reloading the IDE (Cmd+R or Ctrl+R)</li>
-                        <li>Check browser console for network errors</li>
                     </ul>
                     <details style="margin-top: 10px;">
                         <summary style="cursor: pointer; color: #888;">Stack Trace</summary>
@@ -136,6 +99,64 @@ async function initializeMonacoEditor() {
             container.innerHTML = errorHtml;
         }
     }
+}
+
+/**
+ * Load Monaco Editor from CDN (fallback)
+ * Only used when webpack bundle is not available
+ */
+async function loadMonacoFromCDN() {
+    return new Promise((resolve, reject) => {
+        // Load loader script from CDN
+        const loaderScript = document.createElement('script');
+        loaderScript.src = 'https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs/loader.js';
+        loaderScript.onload = () => {
+            // Use global require from loader
+            if (window.require && window.require.config) {
+                window.require.config({ 
+                    paths: { 
+                        vs: 'https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs' 
+                    } 
+                });
+                window.require(['vs/editor/editor.main'], () => {
+                    resolve(window.monaco);
+                }, reject);
+            } else {
+                reject(new Error('Monaco loader not available'));
+            }
+        };
+        loaderScript.onerror = reject;
+        document.head.appendChild(loaderScript);
+    });
+}
+
+/**
+ * Create Monaco Editor instance
+ */
+function createEditor(monaco, container) {
+    editor = monaco.editor.create(container, {
+        value: '// Welcome to BEAST MODE IDE\n// Start coding with enterprise-grade quality intelligence\n\n',
+        language: 'typescript',
+        theme: 'vs-dark',
+        automaticLayout: true,
+        minimap: { enabled: true },
+        fontSize: 14,
+        fontFamily: "'JetBrains Mono', 'Fira Code', monospace",
+        lineNumbers: 'on',
+        wordWrap: 'on',
+        cursorStyle: 'line'
+    });
+
+    // Add BEAST MODE commands
+    editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyS, () => {
+        checkSecrets();
+    });
+
+    editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyA, () => {
+        checkArchitecture();
+    });
+
+    console.log('✅ Monaco Editor initialized');
 }
 
 /**

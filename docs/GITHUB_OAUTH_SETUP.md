@@ -5,7 +5,7 @@
 ## ✅ Credentials Configured
 
 - **Client ID**: `Ov23lidLvmp68FVMEqEB`
-- **Client Secret**: `df4c598018de45ce8cb90313489eeb21448aedcf`
+- **Client Secret**: `[STORED_IN_DB]` (retrieve from Supabase `secrets` table, key: `github_clientSecret`)
 
 ## 🔧 Environment Variables
 
@@ -14,7 +14,7 @@ Your `.env.local` file should contain:
 ```bash
 # GitHub OAuth
 GITHUB_CLIENT_ID=Ov23lidLvmp68FVMEqEB
-GITHUB_CLIENT_SECRET=df4c598018de45ce8cb90313489eeb21448aedcf
+GITHUB_CLIENT_SECRET=[STORED_IN_DB]
 GITHUB_REDIRECT_URI=http://localhost:7777/api/github/oauth/callback
 
 # Token Encryption (generate with: openssl rand -hex 32)

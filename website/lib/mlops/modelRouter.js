@@ -481,13 +481,34 @@ class ModelRouter {
    */
   async routeToProvider(modelId, request, userId) {
     // Check if user can use provider models (paid tier only)
-    const canUse = await this.canUseProviderModels(userId);
+    // Allow system/internal users to bypass tier check
+    const isSystemUser = userId === 'system' || userId === 'internal' || !userId;
+    let canUse = isSystemUser;
+    
+    if (!canUse) {
+      canUse = await this.canUseProviderModels(userId);
+    }
+    
     if (!canUse) {
       throw new Error('Provider models (OpenAI, Anthropic, etc.) are only available for paid tier users. Please upgrade or use a custom model.');
     }
 
     // Extract provider and model from modelId (e.g., "openai:gpt-4")
-    const [provider, model] = modelId.split(':');
+    if (!modelId || typeof modelId !== 'string') {
+      throw new Error(`Invalid modelId: ${modelId}`);
+    }
+    
+    const parts = modelId.split(':');
+    if (parts.length < 2) {
+      throw new Error(`Invalid modelId format. Expected "provider:model", got: ${modelId}`);
+    }
+    
+    const provider = parts[0];
+    const model = parts.slice(1).join(':'); // Handle models with colons in name
+    
+    if (!provider || !model) {
+      throw new Error(`Invalid modelId format. Provider or model is missing. Got: ${modelId}`);
+    }
     
     if (provider === 'openai') {
       return this.routeToOpenAI(model, request, userId);
@@ -504,25 +525,104 @@ class ModelRouter {
   async routeToOpenAI(model, request, userId) {
     // Get user's OpenAI API key
     if (!this.initialized) await this.initialize();
-    if (!this.supabase) {
-      throw new Error('Database not available');
+    
+    let apiKey = null;
+    
+    // For system/internal users, try environment variables first
+    const isSystemUser = userId === 'system' || userId === 'internal' || !userId;
+    if (isSystemUser) {
+      apiKey = process.env.OPENAI_API_KEY || process.env.NEXT_PUBLIC_OPENAI_API_KEY;
+    }
+    
+    // If no env key or not system user, try database
+    if (!apiKey && this.supabase) {
+      // For system users, try to get any active OpenAI key (decrypt it)
+      // For regular users, try their specific key
+      let query;
+      if (isSystemUser) {
+        // System users can use any active key - get the first one
+        query = this.supabase
+          .from('user_api_keys')
+          .select('encrypted_key, user_id')
+          .eq('provider', 'openai')
+          .eq('is_active', true)
+          .limit(1);
+      } else {
+        query = this.supabase
+          .from('user_api_keys')
+          .select('encrypted_key, user_id')
+          .eq('user_id', userId)
+          .eq('provider', 'openai')
+          .eq('is_active', true)
+          .limit(1);
+      }
+      
+      const { data, error } = await query.maybeSingle();
+      
+      if (error && error.code !== 'PGRST116') {
+        log.warn('Error fetching OpenAI key:', error.message);
+      }
+      
+      if (data?.encrypted_key) {
+        // Decrypt the key using system decryption key
+        try {
+          const parts = data.encrypted_key.split(':');
+          if (parts.length === 3) {
+            const encryptionKey = process.env.API_KEYS_ENCRYPTION_KEY || 
+                                 process.env.SUPABASE_SERVICE_ROLE_KEY || 
+                                 process.env.ENCRYPTION_KEY;
+            if (!encryptionKey) {
+              log.warn('No encryption key found for decrypting API key. Check API_KEYS_ENCRYPTION_KEY or SUPABASE_SERVICE_ROLE_KEY env vars.');
+            } else {
+              log.debug(`Decrypting API key using system decryption key (length: ${encryptionKey.length})`);
+              const key = crypto.createHash('sha256').update(encryptionKey).digest();
+              const iv = Buffer.from(parts[0], 'hex');
+              const authTag = Buffer.from(parts[1], 'hex');
+              const encrypted = Buffer.from(parts[2], 'hex');
+              
+              const decipher = crypto.createDecipheriv('aes-256-gcm', key, iv);
+              decipher.setAuthTag(authTag);
+              let decrypted = decipher.update(encrypted);
+              decrypted = Buffer.concat([decrypted, decipher.final()]);
+              apiKey = decrypted.toString('utf8');
+              log.debug('Successfully decrypted API key');
+            }
+          } else {
+            log.warn(`Invalid encrypted key format. Expected 3 parts, got ${parts.length}`);
+          }
+        } catch (decryptError) {
+          log.error('Failed to decrypt OpenAI API key:', decryptError.message);
+          log.error('Decryption error stack:', decryptError.stack);
+        }
+      } else if (data?.decrypted_key) {
+        // Fallback: if decrypted_key column exists (shouldn't, but handle it)
+        apiKey = data.decrypted_key;
+        log.debug('Using decrypted_key column (fallback)');
+      } else {
+        log.warn('No encrypted_key or decrypted_key found in database result');
+      }
+    }
+    
+    // For system users, also try app_config table
+    if (!apiKey && isSystemUser && this.supabase) {
+      const { data } = await this.supabase
+        .from('app_config')
+        .select('value')
+        .eq('key', 'openai_api_key')
+        .single();
+      
+      if (data?.value) {
+        apiKey = data.value;
+      }
     }
 
-    const { data } = await this.supabase
-      .from('user_api_keys')
-      .select('decrypted_key')
-      .eq('user_id', userId)
-      .eq('provider', 'openai')
-      .eq('is_active', true)
-      .single();
-
-    if (!data?.decrypted_key) {
+    if (!apiKey) {
       throw new Error('OpenAI API key not found');
     }
 
     try {
       const OpenAI = require('openai');
-      const openai = new OpenAI({ apiKey: data.decrypted_key });
+      const openai = new OpenAI({ apiKey });
 
       const response = await openai.chat.completions.create({
         model,
@@ -550,31 +650,145 @@ class ModelRouter {
   async routeToAnthropic(model, request, userId) {
     // Get user's Anthropic API key
     if (!this.initialized) await this.initialize();
+    
+    // Log initialization status
     if (!this.supabase) {
-      throw new Error('Database not available');
+      log.error('Supabase client not initialized! Cannot fetch API keys from database.');
+      throw new Error('Database not available - Supabase client not initialized');
+    }
+    
+    let apiKey = null;
+    
+    // For system/internal users, try environment variables first
+    const isSystemUser = userId === 'system' || userId === 'internal' || !userId;
+    log.info(`Fetching Anthropic key for user: ${userId} (system: ${isSystemUser})`);
+    
+    if (isSystemUser) {
+      apiKey = process.env.ANTHROPIC_API_KEY || process.env.NEXT_PUBLIC_ANTHROPIC_API_KEY;
+      if (apiKey) {
+        log.info('Using Anthropic key from environment variable');
+      }
+    }
+    
+    // If no env key or not system user, try database
+    if (!apiKey && this.supabase) {
+      // For system users, try to get any active Anthropic key (decrypt it)
+      // For regular users, try their specific key
+      let query;
+      if (isSystemUser) {
+        // System users can use any active key - get the first one
+        query = this.supabase
+          .from('user_api_keys')
+          .select('encrypted_key, user_id')
+          .eq('provider', 'anthropic')
+          .eq('is_active', true)
+          .limit(1);
+      } else {
+        query = this.supabase
+          .from('user_api_keys')
+          .select('encrypted_key, user_id')
+          .eq('user_id', userId)
+          .eq('provider', 'anthropic')
+          .eq('is_active', true)
+          .limit(1);
+      }
+      
+      const { data, error } = await query.maybeSingle();
+      
+      if (error) {
+        if (error.code === 'PGRST116') {
+          log.warn('No Anthropic key found in database (PGRST116)');
+        } else {
+          log.error('Error fetching Anthropic key:', error.message, error.code);
+        }
+      } else if (!data) {
+        log.warn('Query returned no data (no active Anthropic keys found)');
+      } else {
+        log.info(`Found Anthropic key in database (user: ${data.user_id || 'N/A'})`);
+      }
+      
+      if (data?.encrypted_key) {
+        // Decrypt the key using system decryption key
+        try {
+          const parts = data.encrypted_key.split(':');
+          if (parts.length === 3) {
+            const encryptionKey = process.env.API_KEYS_ENCRYPTION_KEY || 
+                                 process.env.SUPABASE_SERVICE_ROLE_KEY || 
+                                 process.env.ENCRYPTION_KEY;
+            if (!encryptionKey) {
+              log.warn('No encryption key found for decrypting API key. Check API_KEYS_ENCRYPTION_KEY or SUPABASE_SERVICE_ROLE_KEY env vars.');
+            } else {
+              log.debug(`Decrypting API key using system decryption key (length: ${encryptionKey.length})`);
+              const key = crypto.createHash('sha256').update(encryptionKey).digest();
+              const iv = Buffer.from(parts[0], 'hex');
+              const authTag = Buffer.from(parts[1], 'hex');
+              const encrypted = Buffer.from(parts[2], 'hex');
+              
+              const decipher = crypto.createDecipheriv('aes-256-gcm', key, iv);
+              decipher.setAuthTag(authTag);
+              let decrypted = decipher.update(encrypted);
+              decrypted = Buffer.concat([decrypted, decipher.final()]);
+              apiKey = decrypted.toString('utf8');
+              log.debug('Successfully decrypted API key');
+            }
+          } else {
+            log.warn(`Invalid encrypted key format. Expected 3 parts, got ${parts.length}`);
+          }
+        } catch (decryptError) {
+          log.error('Failed to decrypt Anthropic API key:', decryptError.message);
+          log.error('Decryption error details:', {
+            error: decryptError.message,
+            stack: decryptError.stack?.substring(0, 200),
+            hasEncryptionKey: !!(process.env.API_KEYS_ENCRYPTION_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY),
+            hasData: !!data,
+            hasEncryptedKey: !!data?.encrypted_key,
+          });
+          apiKey = null;
+        }
+      } else if (data?.decrypted_key) {
+        // Fallback: if decrypted_key column exists (shouldn't, but handle it)
+        apiKey = data.decrypted_key;
+        log.debug('Using decrypted_key column (fallback)');
+      } else {
+        log.warn('No encrypted_key or decrypted_key found in database result');
+      }
+    }
+    
+    // For system users, also try app_config table
+    if (!apiKey && isSystemUser && this.supabase) {
+      const { data } = await this.supabase
+        .from('app_config')
+        .select('value')
+        .eq('key', 'anthropic_api_key')
+        .single();
+      
+      if (data?.value) {
+        apiKey = data.value;
+      }
     }
 
-    const { data } = await this.supabase
-      .from('user_api_keys')
-      .select('decrypted_key')
-      .eq('user_id', userId)
-      .eq('provider', 'anthropic')
-      .eq('is_active', true)
-      .single();
-
-    if (!data?.decrypted_key) {
+    if (!apiKey) {
       throw new Error('Anthropic API key not found');
     }
 
     try {
       const Anthropic = require('@anthropic-ai/sdk');
-      const anthropic = new Anthropic({ apiKey: data.decrypted_key });
+      const anthropic = new Anthropic({ apiKey });
 
+      // Anthropic API requires system prompt as top-level parameter, not in messages
+      // Extract system message if present
+      const systemMessages = request.messages.filter(m => m.role === 'system');
+      const userMessages = request.messages.filter(m => m.role !== 'system');
+      const systemPrompt = systemMessages.length > 0 
+        ? systemMessages.map(m => m.content).join('\n')
+        : undefined;
+      
       const response = await anthropic.messages.create({
         model,
         max_tokens: request.maxTokens || 4000,
         temperature: request.temperature || 0.7,
-        messages: request.messages
+        system: systemPrompt,
+        messages: userMessages
       });
 
       return {
@@ -662,7 +876,14 @@ class ModelRouter {
         usage = result?.usage || null;
       } else {
         // Check if user can use provider models (paid tier only)
-        const canUseProvider = await this.canUseProviderModels(userId);
+        // Allow system/internal users to bypass tier check
+        const isSystemUser = userId === 'system' || userId === 'internal' || !userId;
+        let canUseProvider = isSystemUser;
+        
+        if (!canUseProvider) {
+          canUseProvider = await this.canUseProviderModels(userId);
+        }
+        
         if (!canUseProvider) {
           const latency = Date.now() - startTime;
           error = new Error('Provider models (OpenAI, Anthropic, etc.) are only available for paid tier users. Free tier users must use custom models. Please upgrade your subscription or register a custom model.');
