@@ -219,4 +219,1295 @@ export { default as US_0670 } from './US_0670';
 export { default as US_0671 } from './US_0671';
 
 // Feature metadata - update manually or regenerate
-export const features: Array<{ id: string; title: string; category: string; file: string }> = [];
+export const features: Array<{ id: string; title: string; category: string; file: string }> = [
+  {
+    "id": "US-0001",
+    "title": "US 0001",
+    "category": "Core Coding - File Management",
+    "file": "US_0001.tsx"
+  },
+  {
+    "id": "US-0002",
+    "title": "US 0002",
+    "category": "Core Coding - File Management",
+    "file": "US_0002.tsx"
+  },
+  {
+    "id": "US-0003",
+    "title": "US 0003",
+    "category": "Core Coding - File Management",
+    "file": "US_0003.tsx"
+  },
+  {
+    "id": "US-0004",
+    "title": "US 0004",
+    "category": "Core Coding - File Management",
+    "file": "US_0004.tsx"
+  },
+  {
+    "id": "US-0005",
+    "title": "US 0005",
+    "category": "Core Coding - File Management",
+    "file": "US_0005.tsx"
+  },
+  {
+    "id": "US-0006",
+    "title": "US 0006",
+    "category": "Core Coding - File Management",
+    "file": "US_0006.tsx"
+  },
+  {
+    "id": "US-0007",
+    "title": "US 0007",
+    "category": "Core Coding - File Management",
+    "file": "US_0007.tsx"
+  },
+  {
+    "id": "US-0008",
+    "title": "US 0008",
+    "category": "Core Coding - File Management",
+    "file": "US_0008.tsx"
+  },
+  {
+    "id": "US-0009",
+    "title": "US 0009",
+    "category": "Core Coding - File Management",
+    "file": "US_0009.tsx"
+  },
+  {
+    "id": "US-0010",
+    "title": "US 0010",
+    "category": "Core Coding - File Management",
+    "file": "US_0010.tsx"
+  },
+  {
+    "id": "US-0011",
+    "title": "US 0011",
+    "category": "Core Coding - File Management",
+    "file": "US_0011.tsx"
+  },
+  {
+    "id": "US-0012",
+    "title": "US 0012",
+    "category": "Core Coding - File Management",
+    "file": "US_0012.tsx"
+  },
+  {
+    "id": "US-0013",
+    "title": "US 0013",
+    "category": "Core Coding - File Management",
+    "file": "US_0013.tsx"
+  },
+  {
+    "id": "US-0014",
+    "title": "US 0014",
+    "category": "Core Coding - File Management",
+    "file": "US_0014.tsx"
+  },
+  {
+    "id": "US-0015",
+    "title": "US 0015",
+    "category": "Core Coding - File Management",
+    "file": "US_0015.tsx"
+  },
+  {
+    "id": "US-0016",
+    "title": "US 0016",
+    "category": "Core Coding - File Management",
+    "file": "US_0016.tsx"
+  },
+  {
+    "id": "US-0017",
+    "title": "US 0017",
+    "category": "Core Coding - File Management",
+    "file": "US_0017.tsx"
+  },
+  {
+    "id": "US-0018",
+    "title": "US 0018",
+    "category": "Core Coding - File Management",
+    "file": "US_0018.tsx"
+  },
+  {
+    "id": "US-0019",
+    "title": "US 0019",
+    "category": "Core Coding - File Management",
+    "file": "US_0019.tsx"
+  },
+  {
+    "id": "US-0020",
+    "title": "US 0020",
+    "category": "Core Coding - File Management",
+    "file": "US_0020.tsx"
+  },
+  {
+    "id": "US-0021",
+    "title": "US 0021",
+    "category": "Core Coding - File Management",
+    "file": "US_0021.tsx"
+  },
+  {
+    "id": "US-0022",
+    "title": "US 0022",
+    "category": "Core Coding - File Management",
+    "file": "US_0022.tsx"
+  },
+  {
+    "id": "US-0023",
+    "title": "US 0023",
+    "category": "Core Coding - File Management",
+    "file": "US_0023.tsx"
+  },
+  {
+    "id": "US-0024",
+    "title": "US 0024",
+    "category": "Core Coding - File Management",
+    "file": "US_0024.tsx"
+  },
+  {
+    "id": "US-0025",
+    "title": "US 0025",
+    "category": "Core Coding - File Management",
+    "file": "US_0025.tsx"
+  },
+  {
+    "id": "US-0026",
+    "title": "US 0026",
+    "category": "Core Coding - File Management",
+    "file": "US_0026.tsx"
+  },
+  {
+    "id": "US-0027",
+    "title": "US 0027",
+    "category": "Core Coding - File Management",
+    "file": "US_0027.tsx"
+  },
+  {
+    "id": "US-0028",
+    "title": "US 0028",
+    "category": "Core Coding - File Management",
+    "file": "US_0028.tsx"
+  },
+  {
+    "id": "US-0029",
+    "title": "US 0029",
+    "category": "Core Coding - File Management",
+    "file": "US_0029.tsx"
+  },
+  {
+    "id": "US-0030",
+    "title": "US 0030",
+    "category": "Core Coding - File Management",
+    "file": "US_0030.tsx"
+  },
+  {
+    "id": "US-0031",
+    "title": "US 0031",
+    "category": "Core Coding - File Management",
+    "file": "US_0031.tsx"
+  },
+  {
+    "id": "US-0032",
+    "title": "US 0032",
+    "category": "Core Coding - File Management",
+    "file": "US_0032.tsx"
+  },
+  {
+    "id": "US-0033",
+    "title": "US 0033",
+    "category": "Core Coding - File Management",
+    "file": "US_0033.tsx"
+  },
+  {
+    "id": "US-0034",
+    "title": "US 0034",
+    "category": "Core Coding - File Management",
+    "file": "US_0034.tsx"
+  },
+  {
+    "id": "US-0035",
+    "title": "US 0035",
+    "category": "Core Coding - File Management",
+    "file": "US_0035.tsx"
+  },
+  {
+    "id": "US-0036",
+    "title": "US 0036",
+    "category": "Core Coding - File Management",
+    "file": "US_0036.tsx"
+  },
+  {
+    "id": "US-0037",
+    "title": "US 0037",
+    "category": "Core Coding - File Management",
+    "file": "US_0037.tsx"
+  },
+  {
+    "id": "US-0038",
+    "title": "US 0038",
+    "category": "Core Coding - File Management",
+    "file": "US_0038.tsx"
+  },
+  {
+    "id": "US-0039",
+    "title": "US 0039",
+    "category": "Core Coding - File Management",
+    "file": "US_0039.tsx"
+  },
+  {
+    "id": "US-0040",
+    "title": "US 0040",
+    "category": "Core Coding - File Management",
+    "file": "US_0040.tsx"
+  },
+  {
+    "id": "US-0041",
+    "title": "US 0041",
+    "category": "Core Coding - File Management",
+    "file": "US_0041.tsx"
+  },
+  {
+    "id": "US-0042",
+    "title": "US 0042",
+    "category": "Core Coding - File Management",
+    "file": "US_0042.tsx"
+  },
+  {
+    "id": "US-0043",
+    "title": "US 0043",
+    "category": "Core Coding - File Management",
+    "file": "US_0043.tsx"
+  },
+  {
+    "id": "US-0044",
+    "title": "US 0044",
+    "category": "Core Coding - File Management",
+    "file": "US_0044.tsx"
+  },
+  {
+    "id": "US-0045",
+    "title": "US 0045",
+    "category": "Core Coding - File Management",
+    "file": "US_0045.tsx"
+  },
+  {
+    "id": "US-0046",
+    "title": "US 0046",
+    "category": "Core Coding - File Management",
+    "file": "US_0046.tsx"
+  },
+  {
+    "id": "US-0047",
+    "title": "US 0047",
+    "category": "Core Coding - File Management",
+    "file": "US_0047.tsx"
+  },
+  {
+    "id": "US-0048",
+    "title": "US 0048",
+    "category": "Core Coding - File Management",
+    "file": "US_0048.tsx"
+  },
+  {
+    "id": "US-0049",
+    "title": "US 0049",
+    "category": "Core Coding - File Management",
+    "file": "US_0049.tsx"
+  },
+  {
+    "id": "US-0050",
+    "title": "US 0050",
+    "category": "Core Coding - File Management",
+    "file": "US_0050.tsx"
+  },
+  {
+    "id": "US-0099",
+    "title": "US 0099",
+    "category": "Core Coding - File Management",
+    "file": "US_0099.tsx"
+  },
+  {
+    "id": "US-0102",
+    "title": "US 0102",
+    "category": "Core Coding - File Management",
+    "file": "US_0102.tsx"
+  },
+  {
+    "id": "US-0105",
+    "title": "US 0105",
+    "category": "Core Coding - File Management",
+    "file": "US_0105.tsx"
+  },
+  {
+    "id": "US-0108",
+    "title": "US 0108",
+    "category": "Core Coding - File Management",
+    "file": "US_0108.tsx"
+  },
+  {
+    "id": "US-0111",
+    "title": "US 0111",
+    "category": "Core Coding - File Management",
+    "file": "US_0111.tsx"
+  },
+  {
+    "id": "US-0114",
+    "title": "US 0114",
+    "category": "Core Coding - File Management",
+    "file": "US_0114.tsx"
+  },
+  {
+    "id": "US-0117",
+    "title": "US 0117",
+    "category": "Core Coding - File Management",
+    "file": "US_0117.tsx"
+  },
+  {
+    "id": "US-0120",
+    "title": "US 0120",
+    "category": "Core Coding - File Management",
+    "file": "US_0120.tsx"
+  },
+  {
+    "id": "US-0123",
+    "title": "US 0123",
+    "category": "Core Coding - File Management",
+    "file": "US_0123.tsx"
+  },
+  {
+    "id": "US-0126",
+    "title": "US 0126",
+    "category": "Core Coding - File Management",
+    "file": "US_0126.tsx"
+  },
+  {
+    "id": "US-0129",
+    "title": "US 0129",
+    "category": "Core Coding - File Management",
+    "file": "US_0129.tsx"
+  },
+  {
+    "id": "US-0132",
+    "title": "US 0132",
+    "category": "Core Coding - File Management",
+    "file": "US_0132.tsx"
+  },
+  {
+    "id": "US-0135",
+    "title": "US 0135",
+    "category": "Core Coding - File Management",
+    "file": "US_0135.tsx"
+  },
+  {
+    "id": "US-0138",
+    "title": "US 0138",
+    "category": "Core Coding - File Management",
+    "file": "US_0138.tsx"
+  },
+  {
+    "id": "US-0141",
+    "title": "US 0141",
+    "category": "Core Coding - File Management",
+    "file": "US_0141.tsx"
+  },
+  {
+    "id": "US-0144",
+    "title": "US 0144",
+    "category": "Core Coding - File Management",
+    "file": "US_0144.tsx"
+  },
+  {
+    "id": "US-0147",
+    "title": "US 0147",
+    "category": "Core Coding - File Management",
+    "file": "US_0147.tsx"
+  },
+  {
+    "id": "US-0150",
+    "title": "US 0150",
+    "category": "Core Coding - File Management",
+    "file": "US_0150.tsx"
+  },
+  {
+    "id": "US-0153",
+    "title": "US 0153",
+    "category": "Core Coding - File Management",
+    "file": "US_0153.tsx"
+  },
+  {
+    "id": "US-0156",
+    "title": "US 0156",
+    "category": "Core Coding - File Management",
+    "file": "US_0156.tsx"
+  },
+  {
+    "id": "US-0159",
+    "title": "US 0159",
+    "category": "Core Coding - File Management",
+    "file": "US_0159.tsx"
+  },
+  {
+    "id": "US-0162",
+    "title": "US 0162",
+    "category": "Core Coding - File Management",
+    "file": "US_0162.tsx"
+  },
+  {
+    "id": "US-0165",
+    "title": "US 0165",
+    "category": "Core Coding - File Management",
+    "file": "US_0165.tsx"
+  },
+  {
+    "id": "US-0168",
+    "title": "US 0168",
+    "category": "Core Coding - File Management",
+    "file": "US_0168.tsx"
+  },
+  {
+    "id": "US-0171",
+    "title": "US 0171",
+    "category": "Core Coding - File Management",
+    "file": "US_0171.tsx"
+  },
+  {
+    "id": "US-0174",
+    "title": "US 0174",
+    "category": "Core Coding - File Management",
+    "file": "US_0174.tsx"
+  },
+  {
+    "id": "US-0177",
+    "title": "US 0177",
+    "category": "Core Coding - File Management",
+    "file": "US_0177.tsx"
+  },
+  {
+    "id": "US-0178",
+    "title": "US 0178",
+    "category": "Core Coding - File Management",
+    "file": "US_0178.tsx"
+  },
+  {
+    "id": "US-0179",
+    "title": "US 0179",
+    "category": "Core Coding - File Management",
+    "file": "US_0179.tsx"
+  },
+  {
+    "id": "US-0180",
+    "title": "US 0180",
+    "category": "Core Coding - File Management",
+    "file": "US_0180.tsx"
+  },
+  {
+    "id": "US-0181",
+    "title": "US 0181",
+    "category": "Core Coding - File Management",
+    "file": "US_0181.tsx"
+  },
+  {
+    "id": "US-0182",
+    "title": "US 0182",
+    "category": "Core Coding - File Management",
+    "file": "US_0182.tsx"
+  },
+  {
+    "id": "US-0183",
+    "title": "US 0183",
+    "category": "Core Coding - File Management",
+    "file": "US_0183.tsx"
+  },
+  {
+    "id": "US-0184",
+    "title": "US 0184",
+    "category": "Core Coding - File Management",
+    "file": "US_0184.tsx"
+  },
+  {
+    "id": "US-0185",
+    "title": "US 0185",
+    "category": "Core Coding - File Management",
+    "file": "US_0185.tsx"
+  },
+  {
+    "id": "US-0186",
+    "title": "US 0186",
+    "category": "Core Coding - File Management",
+    "file": "US_0186.tsx"
+  },
+  {
+    "id": "US-0187",
+    "title": "US 0187",
+    "category": "Core Coding - File Management",
+    "file": "US_0187.tsx"
+  },
+  {
+    "id": "US-0188",
+    "title": "US 0188",
+    "category": "Core Coding - File Management",
+    "file": "US_0188.tsx"
+  },
+  {
+    "id": "US-0189",
+    "title": "US 0189",
+    "category": "Core Coding - File Management",
+    "file": "US_0189.tsx"
+  },
+  {
+    "id": "US-0190",
+    "title": "US 0190",
+    "category": "Core Coding - File Management",
+    "file": "US_0190.tsx"
+  },
+  {
+    "id": "US-0191",
+    "title": "US 0191",
+    "category": "Core Coding - File Management",
+    "file": "US_0191.tsx"
+  },
+  {
+    "id": "US-0192",
+    "title": "US 0192",
+    "category": "Core Coding - File Management",
+    "file": "US_0192.tsx"
+  },
+  {
+    "id": "US-0193",
+    "title": "US 0193",
+    "category": "Core Coding - File Management",
+    "file": "US_0193.tsx"
+  },
+  {
+    "id": "US-0194",
+    "title": "US 0194",
+    "category": "Core Coding - File Management",
+    "file": "US_0194.tsx"
+  },
+  {
+    "id": "US-0195",
+    "title": "US 0195",
+    "category": "Core Coding - File Management",
+    "file": "US_0195.tsx"
+  },
+  {
+    "id": "US-0196",
+    "title": "US 0196",
+    "category": "Core Coding - File Management",
+    "file": "US_0196.tsx"
+  },
+  {
+    "id": "US-0197",
+    "title": "US 0197",
+    "category": "Core Coding - File Management",
+    "file": "US_0197.tsx"
+  },
+  {
+    "id": "US-0198",
+    "title": "US 0198",
+    "category": "Core Coding - File Management",
+    "file": "US_0198.tsx"
+  },
+  {
+    "id": "US-0199",
+    "title": "US 0199",
+    "category": "Core Coding - File Management",
+    "file": "US_0199.tsx"
+  },
+  {
+    "id": "US-0200",
+    "title": "US 0200",
+    "category": "Core Coding - File Management",
+    "file": "US_0200.tsx"
+  },
+  {
+    "id": "US-0201",
+    "title": "US 0201",
+    "category": "Core Coding - File Management",
+    "file": "US_0201.tsx"
+  },
+  {
+    "id": "US-0202",
+    "title": "US 0202",
+    "category": "Core Coding - File Management",
+    "file": "US_0202.tsx"
+  },
+  {
+    "id": "US-0203",
+    "title": "US 0203",
+    "category": "Core Coding - File Management",
+    "file": "US_0203.tsx"
+  },
+  {
+    "id": "US-0204",
+    "title": "US 0204",
+    "category": "Core Coding - File Management",
+    "file": "US_0204.tsx"
+  },
+  {
+    "id": "US-0205",
+    "title": "US 0205",
+    "category": "Core Coding - File Management",
+    "file": "US_0205.tsx"
+  },
+  {
+    "id": "US-0206",
+    "title": "US 0206",
+    "category": "Core Coding - File Management",
+    "file": "US_0206.tsx"
+  },
+  {
+    "id": "US-0207",
+    "title": "US 0207",
+    "category": "Core Coding - File Management",
+    "file": "US_0207.tsx"
+  },
+  {
+    "id": "US-0208",
+    "title": "US 0208",
+    "category": "Core Coding - File Management",
+    "file": "US_0208.tsx"
+  },
+  {
+    "id": "US-0209",
+    "title": "US 0209",
+    "category": "Core Coding - File Management",
+    "file": "US_0209.tsx"
+  },
+  {
+    "id": "US-0210",
+    "title": "US 0210",
+    "category": "Core Coding - File Management",
+    "file": "US_0210.tsx"
+  },
+  {
+    "id": "US-0211",
+    "title": "US 0211",
+    "category": "Core Coding - File Management",
+    "file": "US_0211.tsx"
+  },
+  {
+    "id": "US-0212",
+    "title": "US 0212",
+    "category": "Core Coding - File Management",
+    "file": "US_0212.tsx"
+  },
+  {
+    "id": "US-0213",
+    "title": "US 0213",
+    "category": "Core Coding - File Management",
+    "file": "US_0213.tsx"
+  },
+  {
+    "id": "US-0214",
+    "title": "US 0214",
+    "category": "Core Coding - File Management",
+    "file": "US_0214.tsx"
+  },
+  {
+    "id": "US-0215",
+    "title": "US 0215",
+    "category": "Core Coding - File Management",
+    "file": "US_0215.tsx"
+  },
+  {
+    "id": "US-0216",
+    "title": "US 0216",
+    "category": "Core Coding - File Management",
+    "file": "US_0216.tsx"
+  },
+  {
+    "id": "US-0217",
+    "title": "US 0217",
+    "category": "Core Coding - File Management",
+    "file": "US_0217.tsx"
+  },
+  {
+    "id": "US-0218",
+    "title": "US 0218",
+    "category": "Core Coding - File Management",
+    "file": "US_0218.tsx"
+  },
+  {
+    "id": "US-0219",
+    "title": "US 0219",
+    "category": "Core Coding - File Management",
+    "file": "US_0219.tsx"
+  },
+  {
+    "id": "US-0220",
+    "title": "US 0220",
+    "category": "Core Coding - File Management",
+    "file": "US_0220.tsx"
+  },
+  {
+    "id": "US-0221",
+    "title": "US 0221",
+    "category": "Core Coding - File Management",
+    "file": "US_0221.tsx"
+  },
+  {
+    "id": "US-0222",
+    "title": "US 0222",
+    "category": "Core Coding - File Management",
+    "file": "US_0222.tsx"
+  },
+  {
+    "id": "US-0223",
+    "title": "US 0223",
+    "category": "Core Coding - File Management",
+    "file": "US_0223.tsx"
+  },
+  {
+    "id": "US-0224",
+    "title": "US 0224",
+    "category": "Core Coding - File Management",
+    "file": "US_0224.tsx"
+  },
+  {
+    "id": "US-0225",
+    "title": "US 0225",
+    "category": "Core Coding - File Management",
+    "file": "US_0225.tsx"
+  },
+  {
+    "id": "US-0226",
+    "title": "US 0226",
+    "category": "Core Coding - File Management",
+    "file": "US_0226.tsx"
+  },
+  {
+    "id": "US-0227",
+    "title": "US 0227",
+    "category": "Core Coding - File Management",
+    "file": "US_0227.tsx"
+  },
+  {
+    "id": "US-0228",
+    "title": "US 0228",
+    "category": "Core Coding - File Management",
+    "file": "US_0228.tsx"
+  },
+  {
+    "id": "US-0229",
+    "title": "US 0229",
+    "category": "Core Coding - File Management",
+    "file": "US_0229.tsx"
+  },
+  {
+    "id": "US-0230",
+    "title": "US 0230",
+    "category": "Core Coding - File Management",
+    "file": "US_0230.tsx"
+  },
+  {
+    "id": "US-0231",
+    "title": "US 0231",
+    "category": "Core Coding - File Management",
+    "file": "US_0231.tsx"
+  },
+  {
+    "id": "US-0232",
+    "title": "US 0232",
+    "category": "Core Coding - File Management",
+    "file": "US_0232.tsx"
+  },
+  {
+    "id": "US-0233",
+    "title": "US 0233",
+    "category": "Core Coding - File Management",
+    "file": "US_0233.tsx"
+  },
+  {
+    "id": "US-0234",
+    "title": "US 0234",
+    "category": "Core Coding - File Management",
+    "file": "US_0234.tsx"
+  },
+  {
+    "id": "US-0235",
+    "title": "US 0235",
+    "category": "Core Coding - File Management",
+    "file": "US_0235.tsx"
+  },
+  {
+    "id": "US-0236",
+    "title": "US 0236",
+    "category": "Core Coding - File Management",
+    "file": "US_0236.tsx"
+  },
+  {
+    "id": "US-0237",
+    "title": "US 0237",
+    "category": "Core Coding - File Management",
+    "file": "US_0237.tsx"
+  },
+  {
+    "id": "US-0238",
+    "title": "US 0238",
+    "category": "Core Coding - File Management",
+    "file": "US_0238.tsx"
+  },
+  {
+    "id": "US-0239",
+    "title": "US 0239",
+    "category": "Core Coding - File Management",
+    "file": "US_0239.tsx"
+  },
+  {
+    "id": "US-0240",
+    "title": "US 0240",
+    "category": "Core Coding - File Management",
+    "file": "US_0240.tsx"
+  },
+  {
+    "id": "US-0241",
+    "title": "US 0241",
+    "category": "Core Coding - File Management",
+    "file": "US_0241.tsx"
+  },
+  {
+    "id": "US-0242",
+    "title": "US 0242",
+    "category": "Core Coding - File Management",
+    "file": "US_0242.tsx"
+  },
+  {
+    "id": "US-0243",
+    "title": "US 0243",
+    "category": "Core Coding - File Management",
+    "file": "US_0243.tsx"
+  },
+  {
+    "id": "US-0244",
+    "title": "US 0244",
+    "category": "Core Coding - File Management",
+    "file": "US_0244.tsx"
+  },
+  {
+    "id": "US-0245",
+    "title": "US 0245",
+    "category": "Core Coding - File Management",
+    "file": "US_0245.tsx"
+  },
+  {
+    "id": "US-0246",
+    "title": "US 0246",
+    "category": "Core Coding - File Management",
+    "file": "US_0246.tsx"
+  },
+  {
+    "id": "US-0247",
+    "title": "US 0247",
+    "category": "Core Coding - File Management",
+    "file": "US_0247.tsx"
+  },
+  {
+    "id": "US-0248",
+    "title": "US 0248",
+    "category": "Core Coding - File Management",
+    "file": "US_0248.tsx"
+  },
+  {
+    "id": "US-0249",
+    "title": "US 0249",
+    "category": "Core Coding - File Management",
+    "file": "US_0249.tsx"
+  },
+  {
+    "id": "US-0250",
+    "title": "US 0250",
+    "category": "Core Coding - File Management",
+    "file": "US_0250.tsx"
+  },
+  {
+    "id": "US-0251",
+    "title": "US 0251",
+    "category": "Core Coding - File Management",
+    "file": "US_0251.tsx"
+  },
+  {
+    "id": "US-0252",
+    "title": "US 0252",
+    "category": "Core Coding - File Management",
+    "file": "US_0252.tsx"
+  },
+  {
+    "id": "US-0253",
+    "title": "US 0253",
+    "category": "Core Coding - File Management",
+    "file": "US_0253.tsx"
+  },
+  {
+    "id": "US-0254",
+    "title": "US 0254",
+    "category": "Core Coding - File Management",
+    "file": "US_0254.tsx"
+  },
+  {
+    "id": "US-0255",
+    "title": "US 0255",
+    "category": "Core Coding - File Management",
+    "file": "US_0255.tsx"
+  },
+  {
+    "id": "US-0256",
+    "title": "US 0256",
+    "category": "Core Coding - File Management",
+    "file": "US_0256.tsx"
+  },
+  {
+    "id": "US-0257",
+    "title": "US 0257",
+    "category": "Core Coding - File Management",
+    "file": "US_0257.tsx"
+  },
+  {
+    "id": "US-0258",
+    "title": "US 0258",
+    "category": "Core Coding - File Management",
+    "file": "US_0258.tsx"
+  },
+  {
+    "id": "US-0259",
+    "title": "US 0259",
+    "category": "Core Coding - File Management",
+    "file": "US_0259.tsx"
+  },
+  {
+    "id": "US-0260",
+    "title": "US 0260",
+    "category": "Core Coding - File Management",
+    "file": "US_0260.tsx"
+  },
+  {
+    "id": "US-0265",
+    "title": "US 0265",
+    "category": "Core Coding - File Management",
+    "file": "US_0265.tsx"
+  },
+  {
+    "id": "US-0266",
+    "title": "US 0266",
+    "category": "Core Coding - File Management",
+    "file": "US_0266.tsx"
+  },
+  {
+    "id": "US-0277",
+    "title": "US 0277",
+    "category": "Core Coding - File Management",
+    "file": "US_0277.tsx"
+  },
+  {
+    "id": "US-0278",
+    "title": "US 0278",
+    "category": "Core Coding - File Management",
+    "file": "US_0278.tsx"
+  },
+  {
+    "id": "US-0289",
+    "title": "US 0289",
+    "category": "Core Coding - File Management",
+    "file": "US_0289.tsx"
+  },
+  {
+    "id": "US-0290",
+    "title": "US 0290",
+    "category": "Core Coding - File Management",
+    "file": "US_0290.tsx"
+  },
+  {
+    "id": "US-0301",
+    "title": "US 0301",
+    "category": "Core Coding - File Management",
+    "file": "US_0301.tsx"
+  },
+  {
+    "id": "US-0303",
+    "title": "US 0303",
+    "category": "Core Coding - File Management",
+    "file": "US_0303.tsx"
+  },
+  {
+    "id": "US-0305",
+    "title": "US 0305",
+    "category": "Core Coding - File Management",
+    "file": "US_0305.tsx"
+  },
+  {
+    "id": "US-0307",
+    "title": "US 0307",
+    "category": "Core Coding - File Management",
+    "file": "US_0307.tsx"
+  },
+  {
+    "id": "US-0309",
+    "title": "US 0309",
+    "category": "Core Coding - File Management",
+    "file": "US_0309.tsx"
+  },
+  {
+    "id": "US-0311",
+    "title": "US 0311",
+    "category": "Core Coding - File Management",
+    "file": "US_0311.tsx"
+  },
+  {
+    "id": "US-0313",
+    "title": "US 0313",
+    "category": "Core Coding - File Management",
+    "file": "US_0313.tsx"
+  },
+  {
+    "id": "US-0315",
+    "title": "US 0315",
+    "category": "Core Coding - File Management",
+    "file": "US_0315.tsx"
+  },
+  {
+    "id": "US-0317",
+    "title": "US 0317",
+    "category": "Core Coding - File Management",
+    "file": "US_0317.tsx"
+  },
+  {
+    "id": "US-0319",
+    "title": "US 0319",
+    "category": "Core Coding - File Management",
+    "file": "US_0319.tsx"
+  },
+  {
+    "id": "US-0321",
+    "title": "US 0321",
+    "category": "Core Coding - File Management",
+    "file": "US_0321.tsx"
+  },
+  {
+    "id": "US-0323",
+    "title": "US 0323",
+    "category": "Core Coding - File Management",
+    "file": "US_0323.tsx"
+  },
+  {
+    "id": "US-0325",
+    "title": "US 0325",
+    "category": "Core Coding - File Management",
+    "file": "US_0325.tsx"
+  },
+  {
+    "id": "US-0327",
+    "title": "US 0327",
+    "category": "Core Coding - File Management",
+    "file": "US_0327.tsx"
+  },
+  {
+    "id": "US-0329",
+    "title": "US 0329",
+    "category": "Core Coding - File Management",
+    "file": "US_0329.tsx"
+  },
+  {
+    "id": "US-0331",
+    "title": "US 0331",
+    "category": "Core Coding - File Management",
+    "file": "US_0331.tsx"
+  },
+  {
+    "id": "US-0333",
+    "title": "US 0333",
+    "category": "Core Coding - File Management",
+    "file": "US_0333.tsx"
+  },
+  {
+    "id": "US-0334",
+    "title": "US 0334",
+    "category": "Core Coding - File Management",
+    "file": "US_0334.tsx"
+  },
+  {
+    "id": "US-0335",
+    "title": "US 0335",
+    "category": "Core Coding - File Management",
+    "file": "US_0335.tsx"
+  },
+  {
+    "id": "US-0401",
+    "title": "US 0401",
+    "category": "Core Coding - File Management",
+    "file": "US_0401.tsx"
+  },
+  {
+    "id": "US-0402",
+    "title": "US 0402",
+    "category": "Core Coding - File Management",
+    "file": "US_0402.tsx"
+  },
+  {
+    "id": "US-0403",
+    "title": "US 0403",
+    "category": "Core Coding - File Management",
+    "file": "US_0403.tsx"
+  },
+  {
+    "id": "US-0404",
+    "title": "US 0404",
+    "category": "Core Coding - File Management",
+    "file": "US_0404.tsx"
+  },
+  {
+    "id": "US-0421",
+    "title": "US 0421",
+    "category": "Core Coding - File Management",
+    "file": "US_0421.tsx"
+  },
+  {
+    "id": "US-0422",
+    "title": "US 0422",
+    "category": "Core Coding - File Management",
+    "file": "US_0422.tsx"
+  },
+  {
+    "id": "US-0423",
+    "title": "US 0423",
+    "category": "Core Coding - File Management",
+    "file": "US_0423.tsx"
+  },
+  {
+    "id": "US-0424",
+    "title": "US 0424",
+    "category": "Core Coding - File Management",
+    "file": "US_0424.tsx"
+  },
+  {
+    "id": "US-0441",
+    "title": "US 0441",
+    "category": "Core Coding - File Management",
+    "file": "US_0441.tsx"
+  },
+  {
+    "id": "US-0442",
+    "title": "US 0442",
+    "category": "Core Coding - File Management",
+    "file": "US_0442.tsx"
+  },
+  {
+    "id": "US-0443",
+    "title": "US 0443",
+    "category": "Core Coding - File Management",
+    "file": "US_0443.tsx"
+  },
+  {
+    "id": "US-0456",
+    "title": "US 0456",
+    "category": "Core Coding - File Management",
+    "file": "US_0456.tsx"
+  },
+  {
+    "id": "US-0457",
+    "title": "US 0457",
+    "category": "Core Coding - File Management",
+    "file": "US_0457.tsx"
+  },
+  {
+    "id": "US-0458",
+    "title": "US 0458",
+    "category": "Core Coding - File Management",
+    "file": "US_0458.tsx"
+  },
+  {
+    "id": "US-0477",
+    "title": "US 0477",
+    "category": "Core Coding - File Management",
+    "file": "US_0477.tsx"
+  },
+  {
+    "id": "US-0478",
+    "title": "US 0478",
+    "category": "Core Coding - File Management",
+    "file": "US_0478.tsx"
+  },
+  {
+    "id": "US-0479",
+    "title": "US 0479",
+    "category": "Core Coding - File Management",
+    "file": "US_0479.tsx"
+  },
+  {
+    "id": "US-0501",
+    "title": "US 0501",
+    "category": "Core Coding - File Management",
+    "file": "US_0501.tsx"
+  },
+  {
+    "id": "US-0504",
+    "title": "US 0504",
+    "category": "Core Coding - File Management",
+    "file": "US_0504.tsx"
+  },
+  {
+    "id": "US-0621",
+    "title": "US 0621",
+    "category": "Core Coding - File Management",
+    "file": "US_0621.tsx"
+  },
+  {
+    "id": "US-0622",
+    "title": "US 0622",
+    "category": "Core Coding - File Management",
+    "file": "US_0622.tsx"
+  },
+  {
+    "id": "US-0623",
+    "title": "US 0623",
+    "category": "Core Coding - File Management",
+    "file": "US_0623.tsx"
+  },
+  {
+    "id": "US-0624",
+    "title": "US 0624",
+    "category": "Core Coding - File Management",
+    "file": "US_0624.tsx"
+  },
+  {
+    "id": "US-0644",
+    "title": "US 0644",
+    "category": "Core Coding - File Management",
+    "file": "US_0644.tsx"
+  },
+  {
+    "id": "US-0645",
+    "title": "US 0645",
+    "category": "Core Coding - File Management",
+    "file": "US_0645.tsx"
+  },
+  {
+    "id": "US-0646",
+    "title": "US 0646",
+    "category": "Core Coding - File Management",
+    "file": "US_0646.tsx"
+  },
+  {
+    "id": "US-0668",
+    "title": "US 0668",
+    "category": "Core Coding - File Management",
+    "file": "US_0668.tsx"
+  },
+  {
+    "id": "US-0669",
+    "title": "US 0669",
+    "category": "Core Coding - File Management",
+    "file": "US_0669.tsx"
+  },
+  {
+    "id": "US-0670",
+    "title": "US 0670",
+    "category": "Core Coding - File Management",
+    "file": "US_0670.tsx"
+  },
+  {
+    "id": "US-0671",
+    "title": "US 0671",
+    "category": "Core Coding - File Management",
+    "file": "US_0671.tsx"
+  }
+];
