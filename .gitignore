@@ -60,3 +60,6 @@ coverage/
 *.tgz
 .vercel
 .rotated-secrets.json
+.rotated-secrets.json
+scripts/update-vercel-secrets*.js
+scripts/update-vercel-env-batch.sh
