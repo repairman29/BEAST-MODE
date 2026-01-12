@@ -21,23 +21,43 @@ echo -e "${CYAN}🔍 Secret Detection with Grep${NC}\n"
 echo "======================================================================\n"
 
 # Secret patterns (common formats)
-declare -A SECRET_PATTERNS=(
-  ["Stripe Secret Key"]="sk_(live|test)_[a-zA-Z0-9]{24,}"
-  ["Stripe Webhook Secret"]="whsec_[a-zA-Z0-9]{32,}"
-  ["GitHub Token"]="ghp_[a-zA-Z0-9]{36,}"
-  ["GitHub OAuth Secret"]="[0-9a-f]{40}"
-  ["Supabase Service Role Key"]="sb_secret_[a-zA-Z0-9_-]{40,}"
-  ["Supabase Anon Key"]="eyJ[a-zA-Z0-9_-]{100,}"
-  ["JWT Secret"]="[A-Za-z0-9_-]{32,}"
-  ["API Key (OpenAI)"]="sk-[a-zA-Z0-9]{32,}"
-  ["API Key (Anthropic)"]="sk-ant-[a-zA-Z0-9-]{95,}"
-  ["API Key (Generic)"]="[a-zA-Z0-9_-]{32,}"
-  ["Encryption Key (Hex)"]="[0-9a-f]{64}"
-  ["Database Connection String"]="(postgres|mysql|mongodb)://[^\\s\"']+"
-  ["AWS Access Key"]="AKIA[0-9A-Z]{16}"
-  ["AWS Secret Key"]="[A-Za-z0-9/+=]{40}"
-  ["Private Key (RSA)"]="-----BEGIN (RSA )?PRIVATE KEY-----"
-  ["OAuth Client Secret"]="[a-zA-Z0-9_-]{20,}"
+# Using arrays instead of associative arrays for better compatibility
+SECRET_PATTERN_NAMES=(
+  "Stripe Secret Key"
+  "Stripe Webhook Secret"
+  "GitHub Token"
+  "GitHub OAuth Secret"
+  "Supabase Service Role Key"
+  "Supabase Anon Key"
+  "JWT Secret"
+  "API Key (OpenAI)"
+  "API Key (Anthropic)"
+  "API Key (Generic)"
+  "Encryption Key (Hex)"
+  "Database Connection String"
+  "AWS Access Key"
+  "AWS Secret Key"
+  "Private Key (RSA)"
+  "OAuth Client Secret"
+)
+
+SECRET_PATTERNS=(
+  "sk_(live|test)_[a-zA-Z0-9]{24,}"
+  "whsec_[a-zA-Z0-9]{32,}"
+  "ghp_[a-zA-Z0-9]{36,}"
+  "[0-9a-f]{40}"
+  "sb_secret_[a-zA-Z0-9_-]{40,}"
+  "eyJ[a-zA-Z0-9_-]{100,}"
+  "[A-Za-z0-9_-]{32,}"
+  "sk-[a-zA-Z0-9]{32,}"
+  "sk-ant-[a-zA-Z0-9-]{95,}"
+  "[a-zA-Z0-9_-]{32,}"
+  "[0-9a-f]{64}"
+  "(postgres|mysql|mongodb)://[^\\s\"']+"
+  "AKIA[0-9A-Z]{16}"
+  "[A-Za-z0-9/+=]{40}"
+  "-----BEGIN (RSA )?PRIVATE KEY-----"
+  "[a-zA-Z0-9_-]{20,}"
 )
 
 # Placeholders to ignore (these are safe)
@@ -128,8 +148,9 @@ scan_pattern() {
 }
 
 # Scan each pattern
-for pattern_name in "${!SECRET_PATTERNS[@]}"; do
-  pattern="${SECRET_PATTERNS[$pattern_name]}"
+for i in "${!SECRET_PATTERN_NAMES[@]}"; do
+  pattern_name="${SECRET_PATTERN_NAMES[$i]}"
+  pattern="${SECRET_PATTERNS[$i]}"
   scan_pattern "$pattern_name" "$pattern"
 done
 
