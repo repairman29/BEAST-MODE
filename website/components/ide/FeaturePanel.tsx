@@ -16,6 +16,7 @@ interface FeaturePanelProps {
 export default function FeaturePanel({ onFeatureSelect }: FeaturePanelProps) {
   const [features, setFeatures] = useState<Feature[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
+  const [searchQuery, setSearchQuery] = useState('');
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -46,9 +47,13 @@ export default function FeaturePanel({ onFeatureSelect }: FeaturePanelProps) {
 
   const categories = ['All', 'File Management', 'Code Editing', 'Terminal', 'AI Assistance', 'Quality Assurance', 'Code Completion'];
   
-  const filteredFeatures = selectedCategory === 'All'
-    ? features
-    : features.filter(f => f.category.includes(selectedCategory));
+  const filteredFeatures = features.filter(f => {
+    const matchesCategory = selectedCategory === 'All' || f.category.includes(selectedCategory);
+    const matchesSearch = searchQuery === '' || 
+      f.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      f.category.toLowerCase().includes(searchQuery.toLowerCase());
+    return matchesCategory && matchesSearch;
+  });
 
   if (loading) {
     return (
@@ -62,8 +67,15 @@ export default function FeaturePanel({ onFeatureSelect }: FeaturePanelProps) {
         <h2 className="text-lg font-semibold">Features ({features.length})</h2>
       </div>
 
-      {/* Category Filter */}
-      <div className="p-2 border-b border-slate-700">
+      {/* Search and Filter */}
+      <div className="p-2 border-b border-slate-700 space-y-2">
+        <input
+          type="text"
+          placeholder="Search features..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded text-sm text-slate-200 placeholder-slate-500 focus:outline-none focus:border-blue-500"
+        />
         <select
           value={selectedCategory}
           onChange={(e) => setSelectedCategory(e.target.value)}
@@ -79,9 +91,13 @@ export default function FeaturePanel({ onFeatureSelect }: FeaturePanelProps) {
       <div className="flex-1 overflow-y-auto p-2">
         {filteredFeatures.length === 0 ? (
           <div className="text-center text-slate-500 text-sm py-8">
-            No features found
+            {searchQuery ? `No features match "${searchQuery}"` : 'No features found'}
           </div>
         ) : (
+          <>
+            <div className="text-xs text-slate-500 mb-2 px-2">
+              {filteredFeatures.length} feature{filteredFeatures.length !== 1 ? 's' : ''} found
+            </div>
           <div className="space-y-1">
             {filteredFeatures.map((feature) => (
               <button
@@ -94,6 +110,7 @@ export default function FeaturePanel({ onFeatureSelect }: FeaturePanelProps) {
               </button>
             ))}
           </div>
+          </>
         )}
       </div>
     </div>

@@ -17,14 +17,18 @@ import { useEffect, useRef, useCallback, useState } from 'react';
 import Editor from '@monaco-editor/react';
 import type { editor } from 'monaco-editor';
 import { featureRegistry } from '@/lib/ide/featureRegistry';
+import { codeNavigation } from '@/lib/ide/codeNavigation';
+import { showToast } from './Toast';
 
 interface EditorProps {
   file: string;
   content: string;
   onChange: (content: string) => void;
+  onCursorChange?: (position: { line: number; column: number }) => void;
+  onFileOpen?: (file: string, line?: number, column?: number) => void;
 }
 
-export default function CodeEditor({ file, content, onChange }: EditorProps) {
+export default function CodeEditor({ file, content, onChange, onCursorChange, onFileOpen }: EditorProps) {
   const editorRef = useRef<editor.IStandaloneCodeEditor | null>(null);
   const [featuresLoaded, setFeaturesLoaded] = useState(false);
 
@@ -39,9 +43,76 @@ export default function CodeEditor({ file, content, onChange }: EditorProps) {
   const handleEditorDidMount = useCallback((editor: editor.IStandaloneCodeEditor) => {
     editorRef.current = editor;
     
+    // Track cursor position
+    editor.onDidChangeCursorPosition((e) => {
+      onCursorChange?.({
+        line: e.position.lineNumber,
+        column: e.position.column,
+      });
+    });
+    
+    // Go to Definition (Cmd/Ctrl+Click or F12)
+    editor.onMouseDown(async (e) => {
+      if (e.event.ctrlKey || e.event.metaKey) {
+        const position = e.target.position;
+        if (position) {
+          const definition = await codeNavigation.goToDefinition(
+            file,
+            position.lineNumber,
+            position.column
+          );
+          
+          if (definition && onFileOpen) {
+            onFileOpen(definition.file, definition.line, definition.column);
+            showToast(`Jumped to definition: ${definition.name}`, 'info');
+          } else {
+            showToast('Definition not found', 'warning');
+          }
+        }
+      }
+    });
+    
+    // Register keyboard shortcuts
+    editor.addCommand(monaco.KeyCode.F12, async () => {
+      const position = editor.getPosition();
+      if (position) {
+        const definition = await codeNavigation.goToDefinition(
+          file,
+          position.lineNumber,
+          position.column
+        );
+        
+        if (definition && onFileOpen) {
+          onFileOpen(definition.file, definition.line, definition.column);
+          showToast(`Jumped to definition: ${definition.name}`, 'info');
+        } else {
+          showToast('Definition not found', 'warning');
+        }
+      }
+    });
+    
+    // Find References (Shift+F12)
+    editor.addCommand(monaco.KeyMod.Shift | monaco.KeyCode.F12, async () => {
+      const position = editor.getPosition();
+      if (position) {
+        const references = await codeNavigation.findReferences(
+          file,
+          position.lineNumber,
+          position.column
+        );
+        
+        if (references.length > 0) {
+          showToast(`Found ${references.length} reference${references.length !== 1 ? 's' : ''}`, 'info');
+          // TODO: Show references panel
+        } else {
+          showToast('No references found', 'warning');
+        }
+      }
+    });
+    
     // Register keyboard shortcuts from features
     // This would integrate with generated features
-  }, []);
+  }, [onCursorChange, file, onFileOpen]);
 
   const handleEditorChange = useCallback((value: string | undefined) => {
     if (value !== undefined) {

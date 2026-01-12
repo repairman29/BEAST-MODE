@@ -1,234 +1,145 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getDecryptedToken } from '@/lib/github-token';
+import { exec } from 'child_process';
+import { promisify } from 'util';
+import { readFileSync, readdirSync, statSync } from 'fs';
+import { join, extname } from 'path';
 
-// Dynamic require for Node.js modules
-let codebaseIndexer: any;
-let githubFileFetcher: any;
-try {
-  // Path: website/app/api/codebase/index -> BEAST-MODE-PRODUCT/lib/mlops
-  codebaseIndexer = require('@/lib/mlops/codebaseIndexer');
-  githubFileFetcher = require('../../../../../lib/github/fileFetcher');
-} catch (error) {
-  console.error('[Codebase Index API] Failed to load modules:', error);
-}
+const execAsync = promisify(exec);
 
 /**
  * Codebase Indexing API
  * 
- * Indexes a repository for fast search and context.
+ * Indexes the codebase structure, files, dependencies, and architecture
  */
 export async function POST(request: NextRequest) {
   try {
-    const body = await request.json();
-    const { repo } = body;
+    const { repoPath } = await request.json();
+    const cwd = repoPath || process.cwd();
 
-    if (!repo) {
-      return NextResponse.json(
-        { error: 'Repository name is required (format: owner/repo)' },
-        { status: 400 }
-      );
+    const files: any[] = [];
+    const dependencies: Record<string, string[]> = {};
+    const imports: Record<string, string[]> = {};
+    const exports: Record<string, string[]> = {};
+    const patterns: string[] = [];
+    const frameworks: string[] = [];
+
+    // Detect structure type
+    let structure: 'monorepo' | 'monolith' | 'microservices' | 'unknown' = 'unknown';
+    if (readdirSync(cwd).includes('packages') || readdirSync(cwd).includes('apps')) {
+      structure = 'monorepo';
     }
 
-    if (!codebaseIndexer) {
-      return NextResponse.json(
-        { error: 'Codebase indexer not available' },
-        { status: 500 }
-      );
-    }
-
-    // Get user's GitHub token
-    let userToken = null;
-    const userId = request.cookies.get('github_oauth_user_id')?.value;
-    if (userId) {
-      try {
-        userToken = await getDecryptedToken(userId);
-        if (userToken) {
-          githubFileFetcher.initializeUserToken(userToken);
-        }
-        } catch (error) {
-          console.warn('[Codebase Index API] Could not get user token:', error);
-        }
-      }
-
-      githubFileFetcher.initialize();
-
-      const [owner, repoName] = repo.split('/');
-      if (!owner || !repoName) {
-        return NextResponse.json(
-          { error: 'Invalid repository format. Use: owner/repo' },
-          { status: 400 }
-        );
-      }
-
-      // For VS Code extension, we need to handle local workspace indexing
-    // If repo is in format "user/workspace-name", treat as local workspace
-    // Otherwise, fetch from GitHub
-    
-    let results;
-    if (repo.startsWith('user/')) {
-      // Local workspace - extension will provide workspace path
-      // For now, return a simple response indicating indexing would happen
-      // In production, this could accept a file list or workspace path
-      return NextResponse.json({
-        success: true,
-        repo,
-        indexing: {
-          filesIndexed: 0,
-          symbolsIndexed: 0,
-          dependenciesFound: 0,
-          errors: 0,
-        },
-        stats: {
-          totalFiles: 0,
-          totalSymbols: 0,
-          languages: {},
-          lastIndexed: null,
-        },
-        message: 'Local workspace indexing - use GitHub repo format (owner/repo) for remote indexing',
-      });
-    }
-
-    // Fetch repository files from GitHub
-    if (!githubFileFetcher) {
-      return NextResponse.json(
-        { error: 'GitHub file fetcher not available' },
-        { status: 500 }
-      );
-    }
-
-    const files = await githubFileFetcher.fetchRepositoryFiles(owner, repoName, {
-      maxFiles: 500,
-      maxFileSize: 100000,
-    });
-
-    if (!files || files.length === 0) {
-      return NextResponse.json(
-        { error: 'No code files found in repository' },
-        { status: 404 }
-      );
-    }
-
-    // Use the singleton CodebaseIndexer instance
-    // codebaseIndexer is already an instance (module.exports = new CodebaseIndexer())
-    const indexer = codebaseIndexer;
-    
-    // For GitHub repos, we need to create a temp directory and write files
-    // Then index that directory
-    const fs = require('fs');
-    const path = require('path');
-    const os = require('os');
-    const tempDir = path.join(os.tmpdir(), `beast-mode-index-${Date.now()}`);
-    
-    // Create temp directory
-    fs.mkdirSync(tempDir, { recursive: true });
-    
+    // Detect frameworks
+    const packageJsonPath = join(cwd, 'package.json');
     try {
-      // Write files to temp directory
-      for (const file of files) {
-        if (file.path && file.content) {
-          const filePath = path.join(tempDir, file.path);
-          const dir = path.dirname(filePath);
-          fs.mkdirSync(dir, { recursive: true });
-          fs.writeFileSync(filePath, file.content);
-        }
-      }
+      const packageJson = JSON.parse(readFileSync(packageJsonPath, 'utf8'));
+      const deps = { ...packageJson.dependencies, ...packageJson.devDependencies };
       
-      // Index the temporary directory
-      results = await indexer.indexCodebase(tempDir, {
-        maxFiles: 500,
-        excludePatterns: ['node_modules', '.git', 'dist', 'build'],
-        includeExtensions: ['.js', '.ts', '.jsx', '.tsx', '.py', '.rs', '.go'],
-      });
-      
-      // Clean up temp directory
-      fs.rmSync(tempDir, { recursive: true, force: true });
-    } catch (indexError: any) {
-      // Clean up on error
+      if (deps['next']) frameworks.push('Next.js');
+      if (deps['react']) frameworks.push('React');
+      if (deps['vue']) frameworks.push('Vue');
+      if (deps['angular']) frameworks.push('Angular');
+      if (deps['express']) frameworks.push('Express');
+      if (deps['fastify']) frameworks.push('Fastify');
+      if (deps['nestjs']) frameworks.push('NestJS');
+    } catch (e) {
+      // No package.json
+    }
+
+    // Index files
+    function indexDirectory(dir: string, basePath: string = '') {
       try {
-        fs.rmSync(tempDir, { recursive: true, force: true });
-      } catch (cleanupError) {
-        // Ignore cleanup errors
+        const entries = readdirSync(dir);
+        
+        for (const entry of entries) {
+          // Skip common ignore patterns
+          if (entry.startsWith('.') || 
+              entry === 'node_modules' || 
+              entry === 'dist' || 
+              entry === 'build' ||
+              entry === '.next' ||
+              entry === '.git') {
+            continue;
+          }
+
+          const fullPath = join(dir, entry);
+          const relativePath = basePath ? `${basePath}/${entry}` : entry;
+          const stat = statSync(fullPath);
+
+          if (stat.isDirectory()) {
+            indexDirectory(fullPath, relativePath);
+          } else if (stat.isFile()) {
+            const ext = extname(entry).toLowerCase();
+            const codeExtensions = ['.ts', '.tsx', '.js', '.jsx', '.py', '.java', '.go', '.rs', '.cpp', '.c'];
+            
+            if (codeExtensions.includes(ext)) {
+              try {
+                const content = readFileSync(fullPath, 'utf8');
+                const language = ext.substring(1);
+                
+                files.push({
+                  path: relativePath,
+                  content: content.substring(0, 10000), // Limit content size
+                  language,
+                  size: stat.size,
+                  lastModified: stat.mtime,
+                });
+
+                // Extract imports/exports
+                if (['.ts', '.tsx', '.js', '.jsx'].includes(ext)) {
+                  const importMatches = content.matchAll(/import\s+.*?\s+from\s+['"](.+?)['"]/g);
+                  const importList: string[] = [];
+                  for (const match of importMatches) {
+                    importList.push(match[1]);
+                  }
+                  if (importList.length > 0) {
+                    imports[relativePath] = importList;
+                  }
+
+                  const exportMatches = content.matchAll(/export\s+(?:default\s+)?(?:function|class|const|let|var)\s+(\w+)/g);
+                  const exportList: string[] = [];
+                  for (const match of exportMatches) {
+                    exportList.push(match[1]);
+                  }
+                  if (exportList.length > 0) {
+                    exports[relativePath] = exportList;
+                  }
+                }
+              } catch (e) {
+                // Skip files that can't be read
+              }
+            }
+          }
+        }
+      } catch (e) {
+        // Skip directories that can't be accessed
       }
-      throw indexError;
     }
 
-    // Get statistics
-    const stats = codebaseIndexer.getStats();
+    indexDirectory(cwd);
+
+    // Detect patterns
+    if (files.some(f => f.path.includes('components'))) patterns.push('Component-based');
+    if (files.some(f => f.path.includes('hooks'))) patterns.push('Custom Hooks');
+    if (files.some(f => f.path.includes('utils'))) patterns.push('Utility Functions');
+    if (files.some(f => f.path.includes('api'))) patterns.push('API Routes');
+    if (files.some(f => f.path.includes('middleware'))) patterns.push('Middleware');
 
     return NextResponse.json({
-      success: true,
-      repo,
-      indexing: {
-        filesIndexed: results.filesIndexed,
-        symbolsIndexed: results.symbolsIndexed,
-        dependenciesFound: results.dependenciesFound,
-        errors: results.errors.length,
-      },
-      stats: {
-        totalFiles: stats.filesIndexed,
-        totalSymbols: stats.symbolsIndexed,
-        languages: stats.languages,
-        lastIndexed: stats.lastIndexed,
+      files: files.slice(0, 1000), // Limit to 1000 files
+      dependencies,
+      imports,
+      exports,
+      architecture: {
+        patterns,
+        frameworks,
+        structure,
       },
     });
-
   } catch (error: any) {
-    console.error('[Codebase Index API] Error:', error);
     return NextResponse.json(
-      { error: 'Failed to index codebase', details: error.message },
+      { error: error.message || 'Failed to index codebase' },
       { status: 500 }
     );
   }
 }
-
-/**
- * Search codebase
- */
-export async function GET(request: NextRequest) {
-  try {
-    const searchParams = request.nextUrl.searchParams;
-    const query = searchParams.get('q');
-    const type = searchParams.get('type') || 'semantic';
-    const limit = parseInt(searchParams.get('limit') || '10');
-
-    if (!query) {
-      return NextResponse.json(
-        { error: 'Search query is required' },
-        { status: 400 }
-      );
-    }
-
-    if (!codebaseIndexer) {
-      return NextResponse.json(
-        { error: 'Codebase indexer not available' },
-        { status: 500 }
-      );
-    }
-
-    // Search codebase
-    const results = await codebaseIndexer.search(query, {
-      type,
-      limit,
-    });
-
-    return NextResponse.json({
-      success: true,
-      query,
-      results: results.map(r => ({
-        type: r.type,
-        path: r.path || r.name,
-        score: r.score,
-        metadata: r.metadata || r.locations,
-      })),
-      count: results.length,
-    });
-
-  } catch (error: any) {
-    console.error('[Codebase Search API] Error:', error);
-    return NextResponse.json(
-      { error: 'Failed to search codebase', details: error.message },
-      { status: 500 }
-    );
-  }
-}
-

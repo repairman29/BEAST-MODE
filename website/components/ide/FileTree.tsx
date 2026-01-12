@@ -11,7 +11,9 @@
  * - File rename
  */
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { getFileIcon } from '@/lib/ide/fileIcons';
+import { gitService, GitStatus } from '@/lib/ide/gitService';
 
 interface FileTreeProps {
   files: Record<string, string>;
@@ -30,6 +32,46 @@ export default function FileTree({
 }: FileTreeProps) {
   const [showCreateInput, setShowCreateInput] = useState(false);
   const [newFileName, setNewFileName] = useState('');
+  const [gitStatus, setGitStatus] = useState<GitStatus | null>(null);
+
+  useEffect(() => {
+    // Load Git status for file indicators
+    gitService.getStatus().then(setGitStatus).catch(() => {
+      // Git not available, continue without status
+    });
+    
+    const interval = setInterval(() => {
+      gitService.getStatus().then(setGitStatus).catch(() => {});
+    }, 5000);
+    
+    return () => clearInterval(interval);
+  }, []);
+
+  const getFileStatus = (file: string): 'modified' | 'staged' | 'untracked' | null => {
+    if (!gitStatus) return null;
+    if (gitStatus.staged.includes(file)) return 'staged';
+    if (gitStatus.modified.includes(file)) return 'modified';
+    if (gitStatus.untracked.includes(file)) return 'untracked';
+    return null;
+  };
+
+  const getStatusIcon = (status: string | null): string => {
+    switch (status) {
+      case 'modified': return '●';
+      case 'staged': return '✓';
+      case 'untracked': return '?';
+      default: return '';
+    }
+  };
+
+  const getStatusColor = (status: string | null): string => {
+    switch (status) {
+      case 'modified': return 'text-yellow-400';
+      case 'staged': return 'text-green-400';
+      case 'untracked': return 'text-slate-400';
+      default: return '';
+    }
+  };
 
   const handleCreate = () => {
     if (newFileName.trim()) {
@@ -81,31 +123,40 @@ export default function FileTree({
           </div>
         ) : (
           <div className="space-y-1">
-            {Object.keys(files).map((file) => (
-              <div
-                key={file}
-                className={`flex items-center justify-between group px-2 py-1 rounded cursor-pointer ${
-                  activeFile === file
-                    ? 'bg-blue-600 text-white'
-                    : 'hover:bg-slate-800 text-slate-300'
-                }`}
-                onClick={() => onFileSelect(file)}
-              >
-                <span className="text-sm truncate flex-1">{file}</span>
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    if (confirm(`Delete ${file}?`)) {
-                      onFileDelete(file);
-                    }
-                  }}
-                  className="opacity-0 group-hover:opacity-100 text-red-400 hover:text-red-300 ml-2"
-                  title="Delete file"
+            {Object.keys(files).map((file) => {
+              const fileStatus = getFileStatus(file);
+              return (
+                <div
+                  key={file}
+                  className={`flex items-center justify-between group px-2 py-1 rounded cursor-pointer ${
+                    activeFile === file
+                      ? 'bg-blue-600 text-white'
+                      : 'hover:bg-slate-800 text-slate-300'
+                  }`}
+                  onClick={() => onFileSelect(file)}
                 >
-                  ×
-                </button>
-              </div>
-            ))}
+                  <span className="mr-2">{getFileIcon(file)}</span>
+                  <span className="text-sm truncate flex-1">{file}</span>
+                  {fileStatus && (
+                    <span className={`ml-2 text-xs ${getStatusColor(fileStatus)}`} title={fileStatus}>
+                      {getStatusIcon(fileStatus)}
+                    </span>
+                  )}
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      if (confirm(`Delete ${file}?`)) {
+                        onFileDelete(file);
+                      }
+                    }}
+                    className="opacity-0 group-hover:opacity-100 text-red-400 hover:text-red-300 ml-2"
+                    title="Delete file"
+                  >
+                    ×
+                  </button>
+                </div>
+              );
+            })}
           </div>
         )}
       </div>
