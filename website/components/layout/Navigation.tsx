@@ -26,10 +26,11 @@ function Navigation() {
     window.location.href = '/api/github/oauth/authorize';
   };
 
-  // Hide navigation on dashboard page
+  // Hide navigation on dashboard and IDE pages
   const isDashboard = typeof window !== 'undefined' && window.location.pathname === '/dashboard';
+  const isIDE = typeof window !== 'undefined' && window.location.pathname === '/ide';
   
-  if (isDashboard) {
+  if (isDashboard || isIDE) {
     return null;
   }
 

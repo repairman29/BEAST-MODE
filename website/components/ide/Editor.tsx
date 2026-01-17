@@ -16,6 +16,7 @@
 import { useEffect, useRef, useCallback, useState } from 'react';
 import Editor from '@monaco-editor/react';
 import type { editor } from 'monaco-editor';
+import * as monaco from 'monaco-editor';
 import { featureRegistry } from '@/lib/ide/featureRegistry';
 import { codeNavigation } from '@/lib/ide/codeNavigation';
 import { showToast } from './Toast';
@@ -26,9 +27,10 @@ interface EditorProps {
   onChange: (content: string) => void;
   onCursorChange?: (position: { line: number; column: number }) => void;
   onFileOpen?: (file: string, line?: number, column?: number) => void;
+  onReferencesFound?: (references: any[]) => void;
 }
 
-export default function CodeEditor({ file, content, onChange, onCursorChange, onFileOpen }: EditorProps) {
+export default function CodeEditor({ file, content, onChange, onCursorChange, onFileOpen, onReferencesFound }: EditorProps) {
   const editorRef = useRef<editor.IStandaloneCodeEditor | null>(null);
   const [featuresLoaded, setFeaturesLoaded] = useState(false);
 
@@ -103,7 +105,7 @@ export default function CodeEditor({ file, content, onChange, onCursorChange, on
         
         if (references.length > 0) {
           showToast(`Found ${references.length} reference${references.length !== 1 ? 's' : ''}`, 'info');
-          // TODO: Show references panel
+          onReferencesFound?.(references);
         } else {
           showToast('No references found', 'warning');
         }
@@ -112,7 +114,7 @@ export default function CodeEditor({ file, content, onChange, onCursorChange, on
     
     // Register keyboard shortcuts from features
     // This would integrate with generated features
-  }, [onCursorChange, file, onFileOpen]);
+  }, [onCursorChange, file, onFileOpen, onReferencesFound]);
 
   const handleEditorChange = useCallback((value: string | undefined) => {
     if (value !== undefined) {

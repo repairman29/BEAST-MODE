@@ -7,7 +7,7 @@ import { NextRequest, NextResponse } from 'next/server';
  */
 export async function POST(request: NextRequest) {
   try {
-    const { message, context } = await request.json();
+    const { message, context, task } = await request.json();
 
     if (!message) {
       return NextResponse.json(
@@ -17,7 +17,15 @@ export async function POST(request: NextRequest) {
     }
 
     // Check if this is a code generation request
-    if (context?.type === 'code_generation' || context?.task === 'generate_code') {
+    // Check both top-level task and context.task/type
+    const isCodeGeneration = 
+      task === 'generate_code' || 
+      context?.type === 'code_generation' || 
+      context?.task === 'generate_code' ||
+      // Also check if message sounds like code generation
+      /^(make|create|build|generate|write|code|implement|develop)/i.test(message.trim());
+
+    if (isCodeGeneration) {
       try {
         console.log('[BEAST MODE] Code generation request detected');
         // Use the existing /api/codebase/chat endpoint which already works
@@ -31,49 +39,59 @@ export async function POST(request: NextRequest) {
           codePrompt = message.substring('CODE GENERATION TASK: '.length);
         }
         
+        // Build enhanced prompt with context
+        const enhancedContext = context?.formattedContext || '';
+        const openFilesContext = context?.openFiles?.length > 0 
+          ? `\n\nOPEN FILES:\n${context.openFiles.slice(0, 3).map((f: any) => `- ${f.path} (${f.language})`).join('\n')}`
+          : '';
+        
         // Get improved prompt based on error analysis
         // CRITICAL: Make the prompt extremely explicit about generating REAL code, not placeholders
-        let basePrompt = `You are an expert software developer. Generate a COMPLETE, PRODUCTION-READY code solution for this specific bounty.
+        let basePrompt = `You are an expert software developer. Generate a COMPLETE, PRODUCTION-READY code solution.
 
-BOUNTY DETAILS:
-${bounty.title ? `Title: ${bounty.title}` : ''}
-${bounty.description ? `Description: ${bounty.description}` : ''}
-${bounty.tech_stack ? `Tech Stack: ${bounty.tech_stack.join(', ')}` : ''}
-
+USER REQUEST:
 ${codePrompt}
+
+${enhancedContext ? `CONTEXT:\n${enhancedContext}` : ''}
+${openFilesContext}
+
+${bounty.title ? `BOUNTY DETAILS:\nTitle: ${bounty.title}\n${bounty.description ? `Description: ${bounty.description}` : ''}\n${bounty.tech_stack ? `Tech Stack: ${bounty.tech_stack.join(', ')}` : ''}` : ''}
 
 CRITICAL REQUIREMENTS:
 1. Generate ACTUAL, COMPLETE implementation code - NOT placeholders, NOT examples, NOT templates
-2. The code must solve the SPECIFIC problem described in the bounty
+2. The code must solve the SPECIFIC problem described in the user's request
 3. Include error handling, type safety, and proper structure
-4. Use the specified tech stack
-5. Return ONLY valid JSON - no markdown, no explanations, no code blocks
+4. Use modern best practices and appropriate tech stack
+5. Return the code directly in your response, or as JSON if multiple files are needed
 
-REQUIRED JSON FORMAT:
+RESPONSE FORMAT:
+- For single file: Return the complete code directly, wrapped in markdown code blocks
+- For multiple files: Return JSON with files array
+- Example single file response:
+\`\`\`typescript
+// Complete implementation
+export function myFunction() {
+  // Real implementation here
+}
+\`\`\`
+
+- Example multiple files response:
 {
   "files": [
     {
-      "path": "src/path/to/actual-solution.ts",
-      "content": "// Complete implementation that solves: ${bounty.title || 'the bounty'}\nexport function solveBounty() {\n  // REAL implementation code here - not placeholder\n  // Must actually solve the problem\n}",
-      "language": "typescript"
-    }
-  ],
-  "summary": "Brief description of what this solution does",
-  "test_files": [
-    {
-      "path": "tests/path/to/test.ts",
-      "content": "describe('solution', () => {\n  it('should solve the bounty', () => {\n    // Real test code\n  });\n});",
+      "path": "src/Component.tsx",
+      "content": "// Complete code here",
       "language": "typescript"
     }
   ]
 }
 
 IMPORTANT: 
-- The "content" field MUST contain REAL, COMPLETE code that solves "${bounty.title || 'this bounty'}"
+- Generate REAL, COMPLETE code that solves: "${codePrompt.substring(0, 200)}"
 - DO NOT return placeholder code like "export function add(a, b) { return a + b; }"
-- DO NOT return example code
-- Generate code that SPECIFICALLY addresses: ${bounty.description?.substring(0, 200) || codePrompt.substring(0, 200)}
-- The code must be production-ready and complete`;
+- DO NOT return example code or templates
+- The code must be production-ready and complete
+- Include all necessary imports, error handling, and structure`;
 
         // Get improved prompt from error analysis (learns from failures)
         let enhancedPrompt = basePrompt;
@@ -123,7 +141,15 @@ IMPORTANT:
         } catch (importError: any) {
           console.error('[BEAST MODE] Failed to import LLMCodeGenerator:', importError.message);
           console.error('[BEAST MODE] Import error stack:', importError.stack);
-          throw new Error(`Failed to load code generator: ${importError.message}`);
+          // Don't throw - fall through to simpler code generation
+          console.warn('[BEAST MODE] Falling back to simpler code generation method');
+          generator = null;
+        }
+        
+        // If generator failed to load, use fallback
+        if (!generator) {
+          // Fall through to simpler code generation below
+          throw new Error('Generator not available, using fallback');
         }
         
         const userId = request.headers.get('x-user-id') || 'system';
@@ -396,22 +422,56 @@ The user will provide a detailed description of the problem. Generate code that 
           console.warn('[BEAST MODE] Failed to log error to database:', dbError.message);
         }
         
-        // Return error but don't fall through - let caller know code generation failed
-        return NextResponse.json({
-          response: `Code generation failed: ${error.message}. Falling back to conversation mode.`,
-          intent: 'code_generation_error',
-          sentiment: 'neutral',
-          timestamp: new Date().toISOString(),
-          error: error.message,
-          context: {
-            type: 'code_generation',
-            task: 'generate_code',
-            failed: true
-          }
-        }, { status: 500 });
+        // Don't return error - fall through to fallback code generation below
+        console.warn('[BEAST MODE] Code generation failed, will try fallback:', error.message);
       }
     }
     
+    // If we get here and it was a code generation request, use BEAST MODE's code generation
+    if (isCodeGeneration && task === 'generate_code') {
+      // Use BEAST MODE's dedicated code generation endpoint (no external providers!)
+      try {
+        console.log('[BEAST MODE] Using BEAST MODE code generation endpoint');
+        
+        // Get BEAST MODE API key from headers or environment
+        const beastModeApiKey = request.headers.get('x-beast-mode-api-key') || 
+                               request.headers.get('authorization')?.replace('Bearer ', '') ||
+                               process.env.BEAST_MODE_API_KEY ||
+                               process.env.BM_LIVE_API_KEY;
+        
+        const generateCodeResponse = await fetch(`${request.nextUrl.origin}/api/beast-mode/generate-code`, {
+          method: 'POST',
+          headers: { 
+            'Content-Type': 'application/json',
+            'X-BEAST-MODE-API-KEY': beastModeApiKey || '',
+          },
+          body: JSON.stringify({
+            prompt: message,
+            language: context?.language || 'typescript',
+            context: {
+              description: context?.formattedContext || '',
+              techStack: context?.techStack || [],
+            },
+          }),
+        });
+        
+        if (generateCodeResponse.ok) {
+          const codeData = await generateCodeResponse.json();
+          if (codeData.success && codeData.code) {
+            return NextResponse.json({
+              response: `✅ BEAST MODE generated code for: ${message}`,
+              code: codeData.code,
+              language: codeData.language || 'typescript',
+              intent: 'code_generation',
+              source: codeData.source || 'beast-mode',
+              timestamp: new Date().toISOString(),
+            });
+          }
+        }
+      } catch (fallbackError) {
+        console.error('[BEAST MODE] Code generation endpoint failed:', fallbackError);
+      }
+    }
 
     // Get recent scan data for context
     let recentScans: any[] = [];
@@ -514,6 +574,10 @@ The user will provide a detailed description of the problem. Generate code that 
       response = `🔍 **Ready to scan!**\n\nYou can scan repositories in two ways:\n\n1. **Quick Scan** (Quality Tab)\n   • Enter owner/repo (e.g., facebook/react)\n   • Get instant results\n\n2. **Advanced Scan** (Scan Repo Tab)\n   • Full repository analysis\n   • Detailed issue detection\n   • Export reports\n\n**To get started:**\n• Go to the Quality tab and use Quick Scan\n• Or visit the Scan Repo tab for advanced options\n\nWhat repository would you like to analyze?`;
       intent = 'scan_request';
       actionableItems = ['Go to Quality Tab', 'Go to Scan Repo'];
+    } else if (lowerMessage.includes('github') || lowerMessage.includes('connect') || lowerMessage.includes('repository') || lowerMessage.includes('repo')) {
+      response = `🔗 **GitHub Integration**\n\nI can help you connect to GitHub and work with repositories!\n\n**Available Features:**\n• Connect to GitHub repositories\n• Scan repositories for code quality\n• Generate code based on repository context\n• Analyze code patterns\n\n**To connect:**\n1. Go to Settings and connect your GitHub account\n2. Or use the Git panel in the IDE to connect\n3. Once connected, I can access your repositories for context\n\nWould you like me to help you connect, or do you have a specific repository in mind?`;
+      intent = 'github_connection';
+      actionableItems = ['Go to Settings', 'Open Git Panel', 'Scan Repository'];
     } else {
       // Use conversation history for better context
       const lastIntent = conversationHistory[conversationHistory.length - 1]?.intent;

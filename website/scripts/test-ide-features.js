@@ -8,7 +8,7 @@
 const http = require('http');
 const { execSync } = require('child_process');
 
-const PORT = 3000;
+const PORT = 7777;
 const BASE_URL = `http://localhost:${PORT}`;
 
 console.log('🧪 Testing IDE Features\n');

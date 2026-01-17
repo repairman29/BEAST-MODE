@@ -21,10 +21,20 @@ interface Message {
 interface AIChatProps {
   activeFile?: string | null;
   fileContent?: string;
+  selectedText?: string | null;
+  openFiles?: Array<{ path: string; content: string; language: string; isDirty: boolean }>;
   onCodeGenerated?: (code: string, file?: string) => void;
+  onCodePreview?: (code: string, originalCode?: string, file?: string) => void;
 }
 
-export default function AIChat({ activeFile, fileContent, onCodeGenerated }: AIChatProps) {
+export default function AIChat({ 
+  activeFile, 
+  fileContent, 
+  selectedText,
+  openFiles = [],
+  onCodeGenerated,
+  onCodePreview,
+}: AIChatProps) {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: '1',
@@ -62,28 +72,23 @@ export default function AIChat({ activeFile, fileContent, onCodeGenerated }: AIC
 
     try {
       // Build enhanced context for BEAST MODE
-      const { codebaseContext } = await import('@/lib/ide/codebaseContext');
+      const { enhancedContextBuilder } = await import('@/lib/ide/enhancedContext');
       
-      let codebaseInfo = null;
-      try {
-        const context = await codebaseContext.getContext(activeFile || '', undefined);
-        codebaseInfo = {
-          relatedFiles: context.relatedFiles.slice(0, 5),
-          dependencies: context.dependencies.slice(0, 5),
-          architecture: context.structure.architecture,
-        };
-      } catch (error) {
-        console.warn('Failed to load codebase context:', error);
-      }
-
-      const context = {
-        activeFile: activeFile || null,
-        fileContent: fileContent || null,
+      const enhancedContext = await enhancedContextBuilder.buildContext({
+        activeFile,
+        activeFileContent: fileContent || undefined,
+        selectedText: selectedText || undefined,
+        openFiles,
         conversationHistory: messages.slice(-5).map(m => ({
           role: m.role,
           content: m.content,
         })),
-        codebase: codebaseInfo,
+      });
+
+      const context = {
+        ...enhancedContext,
+        // Format for API
+        formattedContext: enhancedContextBuilder.formatContextForPrompt(enhancedContext),
       };
 
       // Call BEAST MODE conversation API
@@ -130,10 +135,17 @@ export default function AIChat({ activeFile, fileContent, onCodeGenerated }: AIC
 
       setMessages(prev => [...prev, assistantMessage]);
 
-      // If code was generated, notify parent
-      if (code && onCodeGenerated) {
-        onCodeGenerated(code, activeFile || undefined);
-        showToast('Code generated! Click to insert.', 'success');
+      // If code was generated, show preview or insert
+      if (code) {
+        if (onCodePreview) {
+          // Show preview with diff
+          onCodePreview(code, fileContent || undefined, activeFile || undefined);
+          showToast('Code generated! Review the preview.', 'success');
+        } else if (onCodeGenerated) {
+          // Direct insert (backward compatibility)
+          onCodeGenerated(code, activeFile || undefined);
+          showToast('Code generated! Click to insert.', 'success');
+        }
       }
     } catch (error: any) {
       console.error('Chat error:', error);
@@ -162,6 +174,14 @@ export default function AIChat({ activeFile, fileContent, onCodeGenerated }: AIC
       onCodeGenerated(code, activeFile || undefined);
       showToast('Code inserted!', 'success');
     }
+  };
+
+  const handlePreviewAccept = (code: string) => {
+    insertCode(code);
+  };
+
+  const handlePreviewReject = () => {
+    showToast('Code preview rejected', 'info');
   };
 
   return (

@@ -18,32 +18,32 @@ class MonitoringService {
 
   constructor() {
     // Initialize Sentry if available
-    if (typeof window !== 'undefined') {
-      // Client-side: Check for Sentry
-      try {
-        if (process.env.NEXT_PUBLIC_SENTRY_DSN) {
-          const Sentry = require('@sentry/nextjs');
-          if (Sentry) {
-            this.sentry = Sentry;
-            this.sentryEnabled = true;
-          }
-        }
-      } catch (e) {
-        // Sentry not installed - that's okay, we'll use console fallback
+    // Sentry is optional - if not installed, we'll use console fallback
+    this.sentryEnabled = false;
+    this.sentry = null;
+    
+    // Don't try to load Sentry at all if DSN is not set
+    // This prevents webpack from trying to resolve the module
+    const hasClientDSN = typeof window !== 'undefined' && process.env.NEXT_PUBLIC_SENTRY_DSN;
+    const hasServerDSN = typeof window === 'undefined' && process.env.SENTRY_DSN;
+    
+    if (!hasClientDSN && !hasServerDSN) {
+      // No Sentry DSN configured, skip initialization
+      return;
+    }
+    
+    // Only try to load if DSN is configured
+    try {
+      // Use eval to prevent webpack from analyzing this require
+      // This is safe because we're only doing it if DSN is configured
+      const sentryModule = eval('require')('@sentry/nextjs');
+      if (sentryModule) {
+        this.sentry = sentryModule;
+        this.sentryEnabled = true;
       }
-    } else {
-      // Server-side: Check for Sentry
-      try {
-        if (process.env.SENTRY_DSN) {
-          const Sentry = require('@sentry/nextjs');
-          if (Sentry) {
-            this.sentry = Sentry;
-            this.sentryEnabled = true;
-          }
-        }
-      } catch (e) {
-        // Sentry not installed - that's okay, we'll use console fallback
-      }
+    } catch (e) {
+      // Sentry not installed - that's okay, we'll use console fallback
+      this.sentryEnabled = false;
     }
   }
 

@@ -9,6 +9,7 @@
  * Features: 269 P0 features integrated
  */
 
+import '../globals.css';
 import { useState, useEffect, useCallback } from 'react';
 import dynamic from 'next/dynamic';
 import { featureRegistry } from '@/lib/ide/featureRegistry';
@@ -26,6 +27,9 @@ const AIChat = dynamic(() => import('@/components/ide/AIChat'), { ssr: false });
 const GitPanel = dynamic(() => import('@/components/ide/GitPanel'), { ssr: false });
 const CodebaseExplorer = dynamic(() => import('@/components/ide/CodebaseExplorer'), { ssr: false });
 const ReferencesPanel = dynamic(() => import('@/components/ide/ReferencesPanel'), { ssr: false });
+const SymbolSearch = dynamic(() => import('@/components/ide/symbol-search'), { ssr: false });
+const DiffViewer = dynamic(() => import('@/components/ide/inline-diff-viewer'), { ssr: false });
+const CodePreview = dynamic(() => import('@/components/ide/CodePreview'), { ssr: false });
 
 export default function IDEPage() {
   const [files, setFiles] = useState<Record<string, string>>({});
@@ -33,12 +37,18 @@ export default function IDEPage() {
   const [openFiles, setOpenFiles] = useState<string[]>([]); // Multi-file editing
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [rightPanelOpen, setRightPanelOpen] = useState(true);
-  const [activePanel, setActivePanel] = useState<'terminal' | 'features' | 'ai' | 'git'>('ai');
+  const [activePanel, setActivePanel] = useState<'terminal' | 'features' | 'ai' | 'git' | 'references' | 'preview'>('ai');
   const [featureCount, setFeatureCount] = useState(0);
   const [cursorPosition, setCursorPosition] = useState({ line: 1, column: 1 });
   const [isDirty, setIsDirty] = useState(false);
   const [references, setReferences] = useState<any[]>([]);
   const [showReferences, setShowReferences] = useState(false);
+  const [showSymbolSearch, setShowSymbolSearch] = useState(false);
+  const [showDiffViewer, setShowDiffViewer] = useState(false);
+  const [diffData, setDiffData] = useState<{ file: string; old: string; new: string } | null>(null);
+  const [codePreview, setCodePreview] = useState<{ code: string; originalCode?: string; file?: string } | null>(null);
+  const [selectedText, setSelectedText] = useState<string | null>(null);
+  const [recentChanges, setRecentChanges] = useState<Array<{ file: string; change: 'created' | 'modified' | 'deleted'; timestamp: Date }>>([]);
 
   useEffect(() => {
     // Load feature count
@@ -103,14 +113,38 @@ export default function IDEPage() {
     keyboardShortcuts.register({ key: 'p', meta: true, shift: true, action: toggleAI, description: 'Show AI Chat' });
     keyboardShortcuts.register({ key: 'f', meta: true, shift: true, action: toggleFeatures, description: 'Show Features' });
     keyboardShortcuts.register({ key: 'g', meta: true, shift: true, action: toggleGit, description: 'Show Git Panel' });
+    
+    // Symbol Search (Cmd+T)
+    keyboardShortcuts.register({ 
+      key: 't', 
+      meta: true, 
+      action: () => setShowSymbolSearch(true), 
+      description: 'Symbol Search' 
+    });
 
     return () => {
       // Cleanup would happen here if needed
     };
   }, [activeFile]);
 
+  // Hide navigation on IDE page
+  useEffect(() => {
+    const nav = document.querySelector('nav');
+    if (nav) {
+      nav.style.display = 'none';
+    }
+    document.body.style.overflow = 'hidden';
+    
+    return () => {
+      if (nav) {
+        nav.style.display = '';
+      }
+      document.body.style.overflow = '';
+    };
+  }, []);
+
   return (
-    <div className="h-screen flex flex-col bg-slate-950 text-slate-100">
+    <div className="fixed inset-0 h-screen w-screen flex flex-col bg-slate-950 text-slate-100 z-50">
       {/* Header */}
       <header className="h-12 bg-slate-900 border-b border-slate-800 flex items-center justify-between px-4">
         <div className="flex items-center">
@@ -221,8 +255,17 @@ export default function IDEPage() {
                   file={activeFile}
                   content={files[activeFile] || ''}
                   onChange={(content) => {
+                    const oldContent = files[activeFile] || '';
                     setFiles(prev => ({ ...prev, [activeFile]: content }));
                     setIsDirty(true);
+                    
+                    // Track recent changes
+                    if (oldContent !== content) {
+                      setRecentChanges(prev => [
+                        { file: activeFile, change: 'modified', timestamp: new Date() },
+                        ...prev.slice(0, 9), // Keep last 10 changes
+                      ]);
+                    }
                   }}
                   onCursorChange={setCursorPosition}
                   onFileOpen={async (file, line, column) => {
@@ -251,6 +294,12 @@ export default function IDEPage() {
                         showToast(`Failed to load: ${file}`, 'error');
                       }
                     }
+                  }}
+                  onReferencesFound={async (refs) => {
+                    setReferences(refs);
+                    setShowReferences(true);
+                    setRightPanelOpen(true);
+                    setActivePanel('references');
                   }}
                 />
               )}
@@ -318,6 +367,32 @@ export default function IDEPage() {
               >
                 Git
               </button>
+              {showReferences && references.length > 0 && (
+                <button
+                  onClick={() => setActivePanel('references')}
+                  className={`px-4 text-sm font-medium ${
+                    activePanel === 'references'
+                      ? 'bg-slate-900 text-slate-100 border-b-2 border-blue-500'
+                      : 'text-slate-400 hover:text-slate-200'
+                  }`}
+                  title="References"
+                >
+                  Refs ({references.length})
+                </button>
+              )}
+              {codePreview && (
+                <button
+                  onClick={() => setActivePanel('preview')}
+                  className={`px-4 text-sm font-medium ${
+                    activePanel === 'preview'
+                      ? 'bg-slate-900 text-slate-100 border-b-2 border-blue-500'
+                      : 'text-slate-400 hover:text-slate-200'
+                  }`}
+                  title="Code Preview"
+                >
+                  Preview
+                </button>
+              )}
             </div>
 
             {/* Panel Content */}
@@ -326,6 +401,13 @@ export default function IDEPage() {
                 <AIChat
                   activeFile={activeFile}
                   fileContent={activeFile ? files[activeFile] : undefined}
+                  selectedText={selectedText}
+                  openFiles={openFiles.map(file => ({
+                    path: file,
+                    content: files[file] || '',
+                    language: file.split('.').pop() || 'text',
+                    isDirty: isDirty,
+                  }))}
                   onCodeGenerated={(code, file) => {
                     if (file && files[file]) {
                       // Insert code into existing file
@@ -346,6 +428,11 @@ export default function IDEPage() {
                       setActiveFile(fileName);
                     }
                   }}
+                  onCodePreview={(code, originalCode, file) => {
+                    setCodePreview({ code, originalCode, file: file || activeFile || undefined });
+                    setRightPanelOpen(true);
+                    setActivePanel('preview');
+                  }}
                 />
               ) : activePanel === 'terminal' ? (
                 <Terminal />
@@ -356,6 +443,77 @@ export default function IDEPage() {
                     if (files[file]) {
                       setActiveFile(file);
                     }
+                  }}
+                />
+              ) : activePanel === 'references' ? (
+                <ReferencesPanel
+                  references={references}
+                  onFileSelect={(file, line, column) => {
+                    // Open file in editor
+                    if (files[file] !== undefined) {
+                      setActiveFile(file);
+                      if (!openFiles.includes(file)) {
+                        setOpenFiles(prev => [...prev, file]);
+                      }
+                    } else {
+                      // Load file from codebase
+                      codebaseContext.getFileContent(file).then(content => {
+                        if (content) {
+                          setFiles(prev => ({ ...prev, [file]: content }));
+                          setActiveFile(file);
+                          if (!openFiles.includes(file)) {
+                            setOpenFiles(prev => [...prev, file]);
+                          }
+                        }
+                      });
+                    }
+                  }}
+                  onClose={() => {
+                    setShowReferences(false);
+                    setReferences([]);
+                    if (activePanel === 'references') {
+                      setActivePanel('ai');
+                    }
+                  }}
+                />
+              ) : activePanel === 'preview' && codePreview ? (
+                <CodePreview
+                  originalCode={codePreview.originalCode}
+                  newCode={codePreview.code}
+                  file={codePreview.file}
+                  onAccept={(code) => {
+                    const targetFile = codePreview.file || activeFile;
+                    if (targetFile && files[targetFile]) {
+                      // Replace or insert code
+                      if (codePreview.originalCode) {
+                        // Replace original with new
+                        setFiles(prev => ({
+                          ...prev,
+                          [targetFile]: code,
+                        }));
+                      } else {
+                        // Append to existing
+                        setFiles(prev => ({
+                          ...prev,
+                          [targetFile]: (prev[targetFile] || '') + '\n\n' + code,
+                        }));
+                      }
+                    } else if (targetFile) {
+                      // Create new file
+                      setFiles(prev => ({ ...prev, [targetFile]: code }));
+                      setActiveFile(targetFile);
+                      if (!openFiles.includes(targetFile)) {
+                        setOpenFiles(prev => [...prev, targetFile]);
+                      }
+                    }
+                    setCodePreview(null);
+                    setActivePanel('ai');
+                    showToast('Code inserted!', 'success');
+                  }}
+                  onReject={() => {
+                    setCodePreview(null);
+                    setActivePanel('ai');
+                    showToast('Code preview rejected', 'info');
                   }}
                 />
               ) : (
@@ -383,6 +541,47 @@ export default function IDEPage() {
 
       {/* Toast Notifications */}
       <ToastContainer />
+
+      {/* Symbol Search Modal */}
+      {showSymbolSearch && (
+        <SymbolSearch
+          onFileSelect={(file, line, column) => {
+            // Open file in editor
+            if (files[file] !== undefined) {
+              setActiveFile(file);
+              if (!openFiles.includes(file)) {
+                setOpenFiles(prev => [...prev, file]);
+              }
+            } else {
+              codebaseContext.getFileContent(file).then(content => {
+                if (content) {
+                  setFiles(prev => ({ ...prev, [file]: content }));
+                  setActiveFile(file);
+                  if (!openFiles.includes(file)) {
+                    setOpenFiles(prev => [...prev, file]);
+                  }
+                }
+              });
+            }
+          }}
+          onClose={() => setShowSymbolSearch(false)}
+        />
+      )}
+
+      {/* Diff Viewer */}
+      {showDiffViewer && diffData && (
+        <div className="fixed inset-0 z-50 bg-slate-950">
+          <DiffViewer
+            file={diffData.file}
+            oldContent={diffData.old}
+            newContent={diffData.new}
+            onClose={() => {
+              setShowDiffViewer(false);
+              setDiffData(null);
+            }}
+          />
+        </div>
+      )}
     </div>
   );
 }
